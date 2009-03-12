@@ -1,4 +1,4 @@
-;;; examples.clj -- Example usage of Incanter Statistical environment
+;;; demo.clj -- Example usage of Incanter Statistical environment
 
 ;; by David Edgar Liebke http://incanter.org
 ;; March 11, 2009
@@ -14,7 +14,9 @@
 ;; CHANGE LOG
 ;; March 11, 2009: First version
 
-(ns incanter.tests.examples
+
+
+(ns incanter.examples.demo
   (:gen-class))
 
 
@@ -92,24 +94,24 @@ foo
 (println (plus 3 [1 2 3 4]))
 (println (plus [1 2 3 4] 3))
 
-(def test-data (read-matrix "../data/test.dat"))
-(def iris-data (read-matrix "../data/iris.dat"))
-(def test-csv (matrix (rest (read-dataset "../data/test.csv" :delim \,))))
-(read-dataset "../data/test.dat") ; default delimiter: \space
-(read-dataset "../data/test.csv" :delim \,) 
-(read-dataset "../data/test.tsv" :delim \tab) 
+(def test-mat (read-matrix (str (System/getProperty "incanter.home") "/data/test.dat")))
+(def iris-mat (read-matrix (str (System/getProperty "incanter.home") "/data/iris.dat")))
+(def test-csv-mat (matrix (rest (read-dataset (str (System/getProperty "incanter.home") "/data/test.csv") :delim \,))))
+(def test-data (read-dataset (str (System/getProperty "incanter.home") "/data/test.dat"))) ; default delimiter: \space
+(def test-csv-data (read-dataset (str (System/getProperty "incanter.home") "/data/test.csv") :delim \,))
+(def test-tdd-data (read-dataset (str (System/getProperty "incanter.home") "/data/test.tdd") :delim \tab)) 
 
-(println (sel test-data true [0]))
-(println (sel test-data [0] true ))
+(println (sel test-mat true [0]))
+(println (sel test-mat [0] true ))
 
 ;; TEST STAT FUNS
 
-(def data (read-matrix "../lynchbook/olsexamp.dat"))
-(def x (sel data (range 0 2313) (range 1 10)))
-(def y (sel data (range 0 2313) 10))
+(def ols-data (read-matrix (str (System/getProperty "incanter.home") "/data/olsexamp.dat")))
+(def x (sel ols-data (range 0 2313) (range 1 10)))
+(def y (sel ols-data (range 0 2313) 10))
 
 
-(println (covariance test-data))
+(println (covariance test-mat))
 (println (covariance (sel x true 4) (sel x true 5)))
 (println (sum-of-squares (sel x true 4)))
 (println (sum (sel x true 4)))
@@ -126,10 +128,6 @@ foo
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use 'incanter.bayes)
-
-(def data (read-matrix "../lynchbook/olsexamp.dat"))
-(def x (sel data (range 0 2313) (range 1 10)))
-(def y (sel data (range 0 2313) 10))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (time (def b-reg-noref (bayes-regression-noref 5000 x y)))
@@ -173,8 +171,8 @@ foo
 
 
 (plot (scatter 
-        (sel test-data true 1) 
-        (sel test-data true 2) 
+        (sel test-mat true 1) 
+        (sel test-mat true 2) 
         :series-lab "Test data col 1 versus col 2"))
 
 
