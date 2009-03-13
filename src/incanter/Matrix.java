@@ -24,12 +24,13 @@ package incanter;
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix2D;
 import clojure.lang.ISeq;
+import clojure.lang.Counted;
 import clojure.lang.IPersistentCollection;
 import clojure.lang.IPersistentVector;
 
-public class Matrix extends DenseDoubleMatrix2D implements ISeq {
+public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
 
-        protected boolean oneDimensional = false;
+        public boolean oneDimensional = false;
 
         public Matrix(int nrow, int ncol) {
                 this(nrow, ncol, 0);
@@ -69,6 +70,11 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq {
                 this(mat.toArray());
         }
 
+        public Matrix(int rows, int columns, double[] elements, boolean oneDimensional) {
+                super(rows, columns, elements, 0, 0, columns, 1);
+                this.oneDimensional = oneDimensional;
+        }
+
         public Matrix viewSelection(int[] rows, int[] columns) {
                 Matrix mat = new Matrix(super.viewSelection(rows, columns));
                 if(rows.length == 1 || columns.length == 1)
@@ -80,49 +86,47 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq {
         public Object first() {
                 if(this.rows == 0 || this.columns == 0) return(null);
 
-                int[] rows = {0};
-                int[] cols = new int[this.columns];
-                for(int i = 0; i < cols.length; i++) 
-                        cols[i] = i;
-
                 if(this.oneDimensional && (this.columns == 1 || this.rows == 1))
                         return(this.get(0, 0));
-                else
-                        return(this.viewSelection(rows, cols));
+                else {
+                        double[] subset = new double[this.columns];
+                        int idx=0;
+                        for(int i=0; i < subset.length; i++) {
+                                subset[i] = getQuick(0, idx++);
+                        }
+                        return new Matrix(1, this.columns, subset, true);
+                }
         }
 
-        public ISeq next() {
-                int initialRow = 1;
-                int initialColumn = 0;
 
-                if(!this.oneDimensional && this.rows == 1) {
+        public ISeq next() {
+                if(this.rows == 0 || this.columns == 0) 
+                        return(null);
+                else if(!this.oneDimensional && this.rows == 1) {
                         return(null);
                 }
-                else if(this.oneDimensional && this.rows == 1) {
-                        if(this.columns == 1)
-                                return(null);
-                        else {
-                                initialRow = 0;
-                                initialColumn = 1;
+                else if(this.oneDimensional && (this.columns == 1 || this.rows == 1)) {
+                        double[] subset = new double[(this.rows*this.columns)-1];
+                        int idx=0;
+                        for(int i=1; i < this.elements.length; i++)
+                                subset[idx++] = this.elements[i];
+                        if(this.rows > 1)
+                                return new Matrix(this.rows-1, this.columns, subset, true);
+                        else if(this.columns > 1)
+                                return new Matrix(this.rows, this.columns-1, subset, true);
+                        else
+                                return null;
+                }
+                else {
+                        double[] subset = new double[(this.rows-1)*this.columns];
+                        int idx = 0;
+                        for(int i=1; i < this.rows; i++) {
+                                for(int j=0; j < this.columns; j++) {
+                                        subset[idx++] = getQuick(i, j);
+                                }
                         }
+                        return new Matrix(this.rows-1, this.columns, subset, false);
                 }
-                else if(this.oneDimensional && this.columns == 1) {
-                        initialRow = 1;
-                        initialColumn = 0;
-                }
-
-                int[] rows = new int[this.rows - initialRow];
-                int[] cols = new int[this.columns - initialColumn];
-                int idx = 0;
-                for(int i = initialRow; i < rows.length; i++) 
-                        rows[idx++] = i;
-                idx = 0;
-                for(int j = initialColumn; j < cols.length; j++) 
-                        cols[idx++] = j;
-
-                Matrix mat = new Matrix(this.viewSelection(rows, cols));
-                mat.oneDimensional = false;
-                return(mat);
         }
 
         public ISeq more() {
@@ -165,20 +169,17 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq {
         }
 
         public int count() { 
-                if(this.oneDimensional) {
-                        if(this.rows == 1)
-                                return(this.columns);
-                        else if(this.columns == 1)
-                                return(this.rows);
-                }
-                return(this.rows); 
+                if(this.oneDimensional) 
+                        return this.elements.length;
+                else
+                        return this.rows; 
         }
 
         public Matrix seq() { 
-                if(this.columns == 0 | this.columns == 0)
-                        return null;
+                if(this.elements.length > 0)
+                        return this;
                 else
-                        return this; 
+                        return null; 
         }
 
         public IPersistentCollection empty() {

@@ -7,5 +7,5 @@ CLASSES_DIR=$INCANTER_DIR/classes
 CLOJURE_JARS=$INCANTER_LIB_DIR/clojure.jar
 COLT_JARS=$INCANTER_LIB_DIR/colt.jar
 
-javac -cp .:$COLT_JARS:$CLOJURE_JARS -d $CLASSES_DIR -verbose $INCANTER_SRC/incanter/Matrix.java
+javac -cp .:$COLT_JARS:$CLOJURE_JARS -d $CLASSES_DIR $INCANTER_SRC/incanter/Matrix.java
 

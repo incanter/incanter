@@ -97,7 +97,9 @@
       (and (coll? rws) (true? cols))
         (.viewSelection mat (int-array rws) (int-array (range (.columns mat))))
       (and (coll? rws) (coll? cols))
-        (.viewSelection mat (int-array rws) (int-array cols)))))
+        (.viewSelection mat (int-array rws) (int-array cols))
+      (and (true? rws) (true? cols))
+        mat)))
 
 
 (defn to-vect [#^Matrix mat]
