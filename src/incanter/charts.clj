@@ -17,9 +17,7 @@
 
 
 (ns incanter.charts 
-  (:gen-class))
-
-(use 'incanter.matrix)
+  (:use (incanter matrix)))
 
 (defn histogram [x & options]
   (let [opts (if options (apply assoc {} options) nil)

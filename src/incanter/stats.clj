@@ -27,14 +27,11 @@
 
 
 (ns incanter.stats 
-  (:gen-class))
-
-(import '(cern.colt.list DoubleArrayList)
-        '(cern.jet.random Gamma)
-        '(cern.jet.random.engine MersenneTwister)
-        '(cern.jet.stat Descriptive))
-
-(use 'incanter.matrix)
+  (:import (cern.colt.list DoubleArrayList)
+           (cern.jet.random Gamma)
+           (cern.jet.random.engine MersenneTwister)
+           (cern.jet.stat Descriptive))
+  (:use (incanter matrix)))
 
 
 ;;------------------------------------------------------------------------------

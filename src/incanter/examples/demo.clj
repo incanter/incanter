@@ -17,12 +17,7 @@
 
 
 (ns incanter.examples.demo
-  (:gen-class))
-
-
-(use 'incanter.matrix)
-(use 'incanter.stats)
-(use 'incanter.io)
+  (:use (incanter matrix stats io bayes charts)))
 
 (def foo (matrix [[1 2 3] [4 5 6] [7 8 9] [10 11 12]]))
 foo
@@ -94,12 +89,12 @@ foo
 (println (plus 3 [1 2 3 4]))
 (println (plus [1 2 3 4] 3))
 
-(def test-mat (read-matrix (str (System/getProperty "incanter.home") "/data/test.dat")))
-(def iris-mat (read-matrix (str (System/getProperty "incanter.home") "/data/iris.dat")))
 (def test-csv-mat (matrix (rest (read-dataset (str (System/getProperty "incanter.home") "/data/test.csv") :delim \,))))
 (def test-data (read-dataset (str (System/getProperty "incanter.home") "/data/test.dat"))) ; default delimiter: \space
 (def test-csv-data (read-dataset (str (System/getProperty "incanter.home") "/data/test.csv") :delim \,))
 (def test-tdd-data (read-dataset (str (System/getProperty "incanter.home") "/data/test.tdd") :delim \tab)) 
+(def test-mat (as-matrix test-data))
+(def iris-mat (as-matrix (read-dataset (str (System/getProperty "incanter.home") "/data/iris.dat") :header true)))
 
 (println (sel test-mat true [0]))
 (println (sel test-mat [0] true ))
@@ -127,7 +122,7 @@ foo
 ;; BAYES EXAMPLES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use 'incanter.bayes)
+;(use 'incanter.bayes)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (time (def b-reg-noref (bayes-regression-noref 5000 x y)))
@@ -156,7 +151,7 @@ foo
 ;; CHARTING TESTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use 'incanter.charts)
+;(use 'incanter.charts)
 
 ; test plots
 (plot (histogram (rnorm 1000)))

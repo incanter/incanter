@@ -17,10 +17,7 @@
 
 
 (ns incanter.bayes 
-  (:gen-class))
-
-(use 'incanter.matrix)
-(use 'incanter.stats)
+  (:use (incanter matrix stats)))
 
 
 

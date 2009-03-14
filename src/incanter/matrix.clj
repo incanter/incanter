@@ -17,17 +17,15 @@
 
 
 (ns incanter.matrix 
-  (:gen-class))
-
-(import '(incanter Matrix)
-        '(cern.colt.matrix DoubleMatrix2D 
-                           DoubleFactory2D 
-                           DoubleFactory1D)
-        '(cern.colt.matrix.linalg CholeskyDecomposition
-                                  Algebra)
-        '(cern.colt.matrix.doublealgo Formatter)
-        '(cern.jet.math Functions)
-        '(cern.colt.function DoubleDoubleFunction DoubleFunction))
+  (:import (incanter Matrix)
+           (cern.colt.matrix DoubleMatrix2D 
+                             DoubleFactory2D 
+                             DoubleFactory1D)
+           (cern.colt.matrix.linalg CholeskyDecomposition
+                                    Algebra)
+           (cern.colt.matrix.doublealgo Formatter)
+           (cern.jet.math Functions)
+           (cern.colt.function DoubleDoubleFunction DoubleFunction)))
 
 (derive DoubleMatrix2D ::matrix)
 

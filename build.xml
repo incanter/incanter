@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<project name="incanter" default="jar">
+
+  <description>
+    Compile Incanter into a Java JAR.
+  </description>
+
+  <property name="src" location="src" />
+  <property name="build" location="build" />
+  <property name="lib" location="lib" />
+  <property name="clojure.jar" location="${lib}/clojure.jar" />
+  <property name="colt.jar" location="${lib}/colt.jar" />
+  <property name="jarfile" location="incanter.jar" />
+  <property name="LICENSE" location="epl-v10.html" />
+
+  <target name="init">
+    <mkdir dir="${build}" />
+  </target>
+  
+  <target name="compile-java" depends="init"
+          description="Compile Java sources.">
+    <javac srcdir="${src}" destdir="${build}" includeJavaRuntime="yes"
+           debug="true" target="1.5">
+      <classpath>
+        <path location="${src}"/>
+        <path location="${clojure.jar}"/>
+        <path location="${colt.jar}"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="compile-clojure" depends="compile-java" 
+          description="Compile Clojure sources.">
+    <java classname="clojure.lang.Compile" failonerror="true">
+      <classpath>
+        <path location="${src}"/>
+        <path location="${clojure.jar}"/>
+        <path location="${colt.jar}"/>
+      </classpath>
+      <sysproperty key="clojure.compile.path" value="${build}"/>
+    </java>
+  </target>
+
+  <target name="jar" depends="compile-clojure">
+    <jar jarfile="${jarfile}" >
+      <fileset dir="${build}" includes="**/*.class"/>
+      <fileset dir="${src}" includes="**/*.clj"/>
+      <fileset dir="${src}" includes="**/*.java"/>
+      <manifest>
+        <attribute name="Class-Path" value="."/>
+      </manifest>
+    </jar>
+  </target>
+  
+  <target name="clean">
+    <delete file="${jarfile}"/>
+    <delete dir="${build}" />
+  </target>
+  
+</project>
+
