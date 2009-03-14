@@ -386,6 +386,9 @@
 ;; UNIT TESTS FOR incanter.bayes.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; These tests will fail periodically due to the stochastic nature of the,
+;; simulations. Examine the failure report to determine if it's a "normal" failure.
+
 (deftest bayes-simulations
   
   ;-------------------------------------------------------------------------------
@@ -418,11 +421,11 @@
 
 
 (deftest charts
-  ; test plots
+  
   (plot (histogram (rnorm 1000)))
   (plot (histogram (rgamma 1000)))
   (plot (histogram (runif 1000)))
-  (save-png (histogram (rnorm 1000)) "/Users/dliebke/Desktop/histogram.png")
+  (save-png (histogram (rnorm 1000)) "/tmp/norm_hist.png")
   
   (plot (histogram (rgamma 1000) 
                    :nbins 30 
