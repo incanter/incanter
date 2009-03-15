@@ -1,0 +1,31 @@
+*Incanter: _Statistical Programming in Clojure_*
+
+*BUILD incanter.jar*
+<pre><code>   $ ant</pre></code>
+
+*RUN tests*
+<pre><code>   $ tests/runtests.clj</pre></code>
+
+*BUILD docs*
+<pre><code>   $ bin/generate_docs.clj</pre></code>
+
+*START Clojure*
+<pre><code>   $ bin/clj</pre></code>
+  
+*EXAMPLES*
+See examples/ directory
+
+
+*INCLUDED DEPENDENCIES*
+"Clojure":http://code.google.com/p/clojure/
+"Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs)
+"JLine":http://jline.sourceforge.net/
+"Colt":http://acs.lbl.gov/~hoschek/colt/
+"JFreeChart":http://www.jfree.org/jfreechart/
+"JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
+"GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
+"OpenCSV":http://opencsv.sourceforge.net/
+"JGraph":http://www.jgraph.com/ (for future development)
+
+
+

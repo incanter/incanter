@@ -271,3 +271,89 @@
 ;(prefer-method print-method Matrix clojure.lang.ISeq)
 
 
+(defn svd 
+" Calculates the Singular Value Decomposition (SVD) of the given matrix.
+  Returns:
+    a map containing:
+      :S -- the diagonal matrix of singular values
+      :U -- the left singular vectors U
+      :V -- the right singular vectors V
+  References:
+    http://en.wikipedia.org/wiki/Singular_value_decomposition
+    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/SingularValueDecomposition.html
+"
+  ([mat]
+    (let [result (cern.colt.matrix.linalg.SingularValueDecomposition. mat)]
+      {:S (.getS result)
+       :U (.getU result)
+       :V (.getV result)})))
+
+
+
+(defn eigenvalue-decomp 
+" Calculates the Eigenvalue Decomposition of the given matrix.
+  Returns:
+    a map containing:
+      :eigenvalues -- vector of eigenvalues
+      :V -- the matrix of eigenvectors
+  References:
+    http://en.wikipedia.org/wiki/Eigenvalue_decomposition
+    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/EigenvalueDecomposition.html
+"
+  ([mat]
+    (let [result (cern.colt.matrix.linalg.EigenvalueDecomposition. mat)]
+      {:eigenvalues (diag (.getD result))
+       :V (.getV result)})))
+
+
+(defn lu-decomp 
+" Calculates the LU decomposition of the given matrix.
+  Returns:
+    a map containing:
+      :L -- the lower triangular factor
+      :U -- the upper triangular factor
+  References:
+    http://en.wikipedia.org/wiki/LU_decomposition
+    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html
+"
+  ([mat]
+    (let [result (cern.colt.matrix.linalg.LUDecomposition. mat)]
+      {:L (.getL result)
+       :U (.getU result)})))
+
+
+(defn qr-decomp 
+" Calculates the QR decomposition of the given matrix.
+  Returns:
+    a map containing:
+      :Q -- orthogonal factor
+      :R -- the upper triangular factor
+  References:
+    http://en.wikipedia.org/wiki/QR_decomposition
+    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/QRDecomposition.html
+"
+  ([mat]
+    (let [result (cern.colt.matrix.linalg.QRDecomposition. mat)]
+      {:Q (.getQ result)
+       :R (.getR result)})))
+
+
+(defn det 
+" Returns the determinant of the given matrix using LU decomposition.
+  References:
+    http://en.wikipedia.org/wiki/LU_decomposition
+    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html
+"
+  ;([mat] (.det (cern.colt.matrix.linalg.LUDecomposition. mat))))
+  ([mat] (.det cern.colt.matrix.linalg.Algebra/DEFAULT mat)))
+
+
+(defn trace 
+" Returns the trace of the given matrix.
+  References:
+    http://en.wikipedia.org/wiki/Matrix_trace
+    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/Algebra.html
+"
+  ([mat] (.trace cern.colt.matrix.linalg.Algebra/DEFAULT mat)))
+
+

@@ -1,3 +1,6 @@
+#!/usr/bin/env bin/clj
+
+
 ;;; test-incanter.clj -- Unit tests of Incanter functions 
 
 ;; by David Edgar Liebke http://incanter.org
@@ -21,7 +24,7 @@
 ;; then run tests
 ;; (run-tests 'incanter.tests.test-incanter)
 
-(ns incanter.tests.test-incanter
+(ns tests.runtests
   (:use (clojure.contrib test-is) 
         (incanter matrix io stats charts bayes)))
 
@@ -482,4 +485,5 @@
 ) ;; end of charts tests
 
 
+(run-tests 'tests.runtests)
 

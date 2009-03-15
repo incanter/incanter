@@ -26,8 +26,8 @@
         main-title (if (:title opts) (:title opts) "Histogram")
         x-lab (if (:x-label opts) (:x-label opts) "X")
         y-lab (if (:y-label opts) (:y-label opts) "Frequency")
-        series-lab (if (:series-lab opts) (:series-lab opts) "Data")
-        legend? (if (:series-lab opts) true false)
+        series-lab (if (:series-label opts) (:series-label opts) "Data")
+        legend? (if (:series-label opts) true false)
         dataset (org.jfree.data.statistics.HistogramDataset.)
        ]
     (do
@@ -51,8 +51,8 @@
         main-title (if (:title opts) (:title opts) "Scatter Plot")
         x-lab (if (:x-label opts) (:x-label opts) "x")
         y-lab (if (:y-label opts) (:y-label opts) "y")
-        series-lab (if (:series-lab opts) (:series-lab opts) "Data")
-        legend? (if (:series-lab opts) true false)
+        series-lab (if (:series-label opts) (:series-label opts) "Data")
+        legend? (if (:series-label opts) true false)
         data-series (org.jfree.data.xy.XYSeries. series-lab)
         dataset (org.jfree.data.xy.XYSeriesCollection.)
        ]
@@ -78,8 +78,8 @@
         main-title (if (:title opts) (:title opts) "XY Plot")
         x-lab (if (:x-label opts) (:x-label opts) "x")
         y-lab (if (:y-label opts) (:y-label opts) "y")
-        series-lab (if (:series-lab opts) (:series-lab opts) "Data")
-        legend? (if (:series-lab opts) true false)
+        series-lab (if (:series-label opts) (:series-label opts) "Data")
+        legend? (if (:series-label opts) true false)
         data-series (org.jfree.data.xy.XYSeries. series-lab)
         dataset (org.jfree.data.xy.XYSeriesCollection.)
        ]
@@ -105,7 +105,7 @@
         y-label (if (:y-label opts) (:y-label opts) "Values")
         series-label (if (:series-label opts) (:series-label opts) "X1")
         category-label (if (:series-label opts) (:series-label opts) "Category 1")
-        legend? (if (false? (:series-label opts)) true false)
+        legend? (if (:series-label opts) true false)
         dataset (org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset.)
         chart (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart 
                   main-title
@@ -151,8 +151,8 @@
         _y (if (matrix? y) (to-vect y) y)
         data-plot (.getPlot chart)
         n (.getDatasetCount data-plot)
-        series-lab (if (:series-lab opts) (:series-lab opts) (str "Data " n))
-        legend? (if (:series-lab opts) true false)
+        series-lab (if (:series-label opts) (:series-label opts) (str "Data " n))
+        legend? (if (:series-label opts) true false)
         data-series (org.jfree.data.xy.XYSeries. series-lab)
        ]
     (do
@@ -166,8 +166,8 @@
         data-plot (.getPlot chart)
         n (.getDatasetCount data-plot)
         nbins (if (:nbins opts) (:nbins opts) 10)
-        series-lab (if (:series-lab opts) (:series-lab opts) (str "Data " n))
-        legend? (if (:series-lab opts) true false)
+        series-lab (if (:series-label opts) (:series-label opts) (str "Data " n))
+        legend? (if (:series-label opts) true false)
        ]
     (do
       (.addSeries (.getDataset data-plot) series-lab (double-array _x) nbins)
@@ -181,10 +181,10 @@
         n-col (.getColumnCount (.getDataset data-plot)) 
         n-row (.getRowCount (.getDataset data-plot))
         series-label (if (:series-label opts) (:series-label opts) (str "X" (inc n-row)))
-        category-label (if (:category-label opts) 
-                         (:category-label opts) 
+        category-label (if (:series-label opts) 
+                         (:series-label opts) 
                          (str "Category " n-col))
-        legend? (if (:category-label opts) true false)
+        legend? (if (:series-label opts) true false)
        ]
     (do
       (.add (.getDataset data-plot) _x series-label category-label))))
