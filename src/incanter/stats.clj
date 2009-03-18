@@ -783,8 +783,8 @@
   of values, if x is a sequence. Same as R's dbinom
 
   Options: 
-    :n (default 1) 
-    :p (default 1/2)
+    :size (default 1) 
+    :prob (default 1/2)
 
   See also: 
       cdf-binomial and sample-binomial
@@ -795,12 +795,12 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example: 
-      (pdf-binomial 10 :p 1/4 :n 20)
+      (pdf-binomial 10 :prob 1/4 :size 20)
 "
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:n opts)) (:n opts) 1)
-          p (if (number? (:p opts)) (:p opts) 1/2)
+          n (if (number? (:size opts)) (:size opts) 1)
+          p (if (number? (:prob opts)) (:prob opts) 1/2)
           dist (cern.jet.random.Binomial. n p (cern.jet.random.engine.MersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -813,8 +813,8 @@
   of values, if x is a sequence. Same as R's pbinom
 
   Options: 
-    :n (default 1) 
-    :p (default 1/2)
+    :size (default 1) 
+    :prob (default 1/2)
     :lower-tail (default true)
 
   See also: 
@@ -826,12 +826,12 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example: 
-      (cdf-binomial 10 :p 1/4 :n 20)
+      (cdf-binomial 10 :prob 1/4 :size 20)
 "
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:n opts)) (:n opts) 1)
-          p (if (number? (:p opts)) (:p opts) 1/2)
+          n (if (number? (:size opts)) (:size opts) 1)
+          p (if (number? (:prob opts)) (:prob opts) 1/2)
           lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/binomial x1 n p))
@@ -847,8 +847,8 @@
   Same as R's rbinom
 
   Options: 
-    :n (default 1) 
-    :p (default 1/2)
+    :size (default 1) 
+    :prob (default 1/2)
 
   See also: 
       cdf-binomial and sample-binomial
@@ -858,12 +858,12 @@
       http://en.wikipedia.org/wiki/Binomial_distribution
 
   Example: 
-      (sample-binomial 1000 :p 1/4 :n 20)
+      (sample-binomial 1000 :prob 1/4 :size 20)
 "
   ([size & options]
     (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:n opts)) (:n opts) 1)
-          p (if (number? (:p opts)) (:p opts) 1/2)]
+          n (if (number? (:size opts)) (:size opts) 1)
+          p (if (number? (:prob opts)) (:prob opts) 1/2)]
       (if (= size 1)
         (cern.jet.random.Binomial/staticNextInt n p)
         (for [_ (range size)] (cern.jet.random.Binomial/staticNextInt n p))))))

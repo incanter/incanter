@@ -467,31 +467,31 @@
 ;; Wikipedia (http://en.wikipedia.org/wiki/Binomial_distribution)
 (def x1 (range 0 20))
 (def x2 (range 0 40))
-(def binomial-plot (scatter x1 (pdf-binomial x1 :p 1/2 :n 20) :title "Binomial PDF (p,n)"))
+(def binomial-plot (scatter x1 (pdf-binomial x1 :prob 1/2 :size 20) :title "Binomial PDF (p,n)"))
 (plot binomial-plot)
-(add-series binomial-plot x1 (pdf-binomial x1 :p 0.7 :n 20))
-(add-series binomial-plot x2 (pdf-binomial x2 :p 1/2 :n 40))
+(add-series binomial-plot x1 (pdf-binomial x1 :prob 0.7 :size 20))
+(add-series binomial-plot x2 (pdf-binomial x2 :prob 1/2 :size 40))
 
-(def binomial-cdf-plot (scatter x1 (cdf-binomial x1 :p 1/2 :n 20) :title "Binomial CDF (p,n)"))
+(def binomial-cdf-plot (scatter x1 (cdf-binomial x1 :prob 1/2 :size 20) :title "Binomial CDF (p,n)"))
 (plot binomial-cdf-plot)
-(add-series binomial-cdf-plot x1 (cdf-binomial x1 :p 0.7 :n 20))
-(add-series binomial-cdf-plot x2 (cdf-binomial x2 :p 1/2 :n 40))
+(add-series binomial-cdf-plot x1 (cdf-binomial x1 :prob 0.7 :size 20))
+(add-series binomial-cdf-plot x2 (cdf-binomial x2 :prob 1/2 :size 40))
 
 
 
 ;; make boxplots for each of the Binomial distributions
-(def binomial-box-plot (boxplot (sample-binomial 1000 :p 1/2 :n 20) 
+(def binomial-box-plot (boxplot (sample-binomial 1000 :prob 1/2 :size 20) 
                            :title "Binomial Boxplot (p,n)"
                            :series-label "(0.5,20)"))
 (plot binomial-box-plot)
-(add-series binomial-box-plot (sample-binomial 1000 :p 0.7 :n 20)
+(add-series binomial-box-plot (sample-binomial 1000 :prob 0.7 :size 20)
             :series-label "(0.7,20)")
-(add-series binomial-box-plot (sample-binomial 1000 :p 1/2 :n 40)
+(add-series binomial-box-plot (sample-binomial 1000 :prob 1/2 :size 40)
             :series-label "(0.5,40)")
 
 
 ;; make a histogram of a sample of 1000 Exponential deviates
-(plot (histogram (sample-binomial 1000 :p 1/2 :n 20)
+(plot (histogram (sample-binomial 1000 :prob 1/2 :size 20)
         :title "Binomial Histogram (p,n)"
         :series-label "(0.5,20)"
         :nbins 10))
@@ -509,7 +509,7 @@
 (def x1 (range 0 100))
 (def x2 (range 0 50))
 (def x3 (range 0 100))
-(def neg-binomial-plot (scatter x2 (pdf-neg-binomial x2 :prob 1/10 :size 30) :title "Negative Binomial PDF (prob,size)"))
+(def neg-binomial-plot (scatter x2 (pdf-neg-binomial x2 :prob 1/10 :size 50) :title "Negative Binomial PDF (prob,size)"))
 (plot neg-binomial-plot)
 (add-series neg-binomial-plot x2 (pdf-neg-binomial x2 :prob 1/8 :size 75))
 (add-series neg-binomial-plot x3 (pdf-neg-binomial x3 :prob 1/4 :size 150))
@@ -521,18 +521,18 @@
 (add-series neg-binomial-cdf-plot x1 (cdf-neg-binomial x1 :prob 3/4 :size 25))
 
 ;; make boxplots for each of the Negative Binomial distributions
-(def neg-binomial-box-plot (boxplot (sample-neg-binomial 1000 :p 1/2 :n 20) 
+(def neg-binomial-box-plot (boxplot (sample-neg-binomial 1000 :prob 1/2 :size 20) 
                            :title "Negative Binomial Boxplot (p,n)"
                            :series-label "(0.5,20)"))
 (plot neg-binomial-box-plot)
-(add-series neg-binomial-box-plot (sample-neg-binomial 1000 :p 0.7 :n 20)
+(add-series neg-binomial-box-plot (sample-neg-binomial 1000 :prob 0.7 :size 20)
             :series-label "(0.7,20)")
-(add-series neg-binomial-box-plot (sample-neg-binomial 1000 :p 1/2 :n 40)
+(add-series neg-binomial-box-plot (sample-neg-binomial 1000 :prob 1/2 :size 40)
             :series-label "(0.5,40)")
 
 
 ;; make a histogram of a sample of 1000 Exponential deviates
-(plot (histogram (sample-neg-binomial 1000 :p 1/4 :n 500)
+(plot (histogram (sample-neg-binomial 1000 :prob 1/4 :size 500)
         :title "Negative Binomial Histogram (p,n)"
         :series-label "(0.5,20)"
         :nbins 10))
