@@ -371,13 +371,13 @@
   (is (= (prod [1 2 3 4 5 6]) 720))
   
   ;; generate a sample of standard normal data
-  (def std-normal-data (rnorm 1000))
+  (def std-normal-data (sample-normal 1000))
   (is (= (count std-normal-data) 1000))
   (is (= (Math/round (mean std-normal-data)) 0))
   (is (= (Math/round (sd std-normal-data)) 1))
   
   ;; generate a sample of normal data with mean = 10 and sd = 5
-  (def nonstd-normal-data (rnorm 1000 :mean 10 :sd 5))
+  (def nonstd-normal-data (sample-normal 1000 :mean 10 :sd 5))
   (is (= (count nonstd-normal-data) 1000))
   (is (= (Math/round (mean nonstd-normal-data)) 10))
   (is (= (Math/round (sd nonstd-normal-data)) 5))
@@ -411,6 +411,7 @@
   
   ;-------------------------------------------------------------------------------
   ;(time (def b-reg-mh (bayes-regression-mh 20000 x y))) ; takes too long to do every time
+  (time (def b-reg-mh (bayes-regression-mh 5000 x y))) ; takes too long to do every time
   ;(is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef b-reg-mh)))) [196 0 -24 5 1 0 7 4 3]))
   ;(is (= (Math/round (mean (:var b-reg-mh))) 21))
 
@@ -425,12 +426,12 @@
 
 (deftest charts
   
-  (plot (histogram (rnorm 1000)))
-  (plot (histogram (rgamma 1000)))
-  (plot (histogram (runif 1000)))
-  (save-png (histogram (rnorm 1000)) "/tmp/norm_hist.png")
+  (plot (histogram (sample-normal 1000)))
+  (plot (histogram (sample-gamma 1000)))
+  (plot (histogram (sample-uniform 1000)))
+  (save-png (histogram (sample-normal 1000)) "/tmp/norm_hist.png")
   
-  (plot (histogram (rgamma 1000) 
+  (plot (histogram (sample-gamma 1000) 
                    :nbins 30 
                    :title "Gamma Distribution" 
                    :x-label "Value"))
@@ -442,29 +443,29 @@
           :series-lab "Test data col 1 versus col 2"))
   
   
-  (def plot1 (scatter (rnorm 100) (rnorm 100)))
+  (def plot1 (scatter (sample-normal 100) (sample-normal 100)))
   (plot plot1)
-  (add-series plot1 (rnorm 100) (rnorm 100))
-  (add-series plot1 (rnorm 100) (rnorm 100))
-  (add-series plot1 (rnorm 100) (rnorm 100))
-  (add-series plot1 (rnorm 100) (rnorm 100))
+  (add-series plot1 (sample-normal 100) (sample-normal 100))
+  (add-series plot1 (sample-normal 100) (sample-normal 100))
+  (add-series plot1 (sample-normal 100) (sample-normal 100))
+  (add-series plot1 (sample-normal 100) (sample-normal 100))
   
   (set-title plot1 "new title") 
   (set-x-label plot1 "new x label")
   (set-y-label plot1 "new y label")
   
   
-  (def hist0 (histogram (rnorm 100)))
+  (def hist0 (histogram (sample-normal 100)))
   (plot hist0)
-  (add-series hist0 (rgamma 100))
+  (add-series hist0 (sample-gamma 100))
   (set-alpha hist0 0.5)
   
-  (def boxplt (boxplot (rgamma 1000))) 
+  (def boxplt (boxplot (sample-gamma 1000))) 
   (plot boxplt)
-  (add-series boxplt (rgamma 1000))
-  (add-series boxplt (rgamma 1000))
-  (add-series boxplt (rgamma 1000))
-  (add-series boxplt (rgamma 1000))
+  (add-series boxplt (sample-gamma 1000))
+  (add-series boxplt (sample-gamma 1000))
+  (add-series boxplt (sample-gamma 1000))
+  (add-series boxplt (sample-gamma 1000))
   
   
   (def chart1 (xyplot (range 100) (range 100))) 

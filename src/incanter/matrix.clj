@@ -27,7 +27,8 @@
            (cern.jet.math Functions)
            (cern.colt.function DoubleDoubleFunction DoubleFunction)))
 
-(derive DoubleMatrix2D ::matrix)
+;;(derive DoubleMatrix2D ::matrix) ; commented out to track down non-ISeq matrices
+(derive Matrix ::matrix)
 
 
 (defn matrix 
@@ -36,10 +37,12 @@
      (coll? (first data)) 
       (Matrix. (into-array (map double-array data)))
      (number? (first data)) 
+      ;;(Matrix. data (count data) 1)))
       (Matrix. (double-array data))))
   ([data ncol]
    (cond
      (coll? data)
+      ;;(Matrix. data (/ (count data) ncol) ncol)
       (Matrix. (double-array data) ncol)
      (number? data)
       (Matrix. data ncol))) ; data is the number of rows in this case
@@ -72,7 +75,7 @@
    (cond 
      (matrix? m)
       (into [] (seq (.toArray (.diagonal DoubleFactory2D/dense m))))
-     (vector? m)
+     (coll? m)
       (Matrix. (.diagonal DoubleFactory2D/dense (.make DoubleFactory1D/dense (double-array m))))))
 
 
@@ -80,7 +83,7 @@
   (cond 
     (matrix? mat)
       (.viewDice #^Matrix mat)
-    (vector? mat)
+    (coll? mat)
       (.viewDice #^Matrix (matrix #^double-array mat))))
 
 
@@ -150,10 +153,6 @@
             args))
 
 
-(defn #^Matrix chol [#^Matrix mat]
-  (Matrix. (.viewDice (.getL (CholeskyDecomposition. mat))))) 
-
-
 (defn #^Matrix copy [#^Matrix mat] (.copy mat))
 
 
@@ -162,16 +161,14 @@
     (matrix? ~A)
       (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleFunction (. Functions ~fun))
     (coll? ~A)
-      (.assign #^Matrix (matrix ~A) #^DoubleFunction (. Functions ~fun))
+      (map ~op ~A)
     (number? ~A)
-      (. Math ~op ~A)))
+      (~op ~A)))
     
 
 (defmacro combine-with [A B op fun]
   `(if (and (number? ~A) (number? ~B))
     (~op ~A ~B)
-    (Matrix.
-      #^DoubleMatrix2D
       (cond 
        (and (matrix? ~A) (matrix? ~B))
          (.assign #^Matrix (.copy #^Matrix ~A) #^Matrix ~B #^DoubleDoubleFunction (. Functions ~fun))
@@ -183,33 +180,33 @@
          (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
        (and (matrix? ~A) (coll? ~B))
          (.assign #^Matrix (.copy ~A) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
-       (and (coll? ~A) (coll? ~B))
-         (.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
-       (and (number? ~A) (coll? ~B))
+       (and (coll? ~A) (coll? ~B)) 
+         (map ~op ~A ~B) 
+       (and (number? ~A) (coll? ~B)) 
          (.assign #^Matrix (matrix ~A (nrow ~B) (ncol ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
-       (and (coll? ~A) (number? ~B))
-         (.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. Functions ~fun))))))
+       (and (coll? ~A) (number? ~B)) 
+         (.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. Functions ~fun)))))
     
 
 
 (defn plus [& args]
-   (reduce (fn [A B] (combine-with A B + plus)) args))
+   (reduce (fn [A B] (combine-with A B clojure.core/+ plus)) args))
 
 
 (defn minus [& args]
-   (reduce (fn [A B] (combine-with A B - minus)) args))
+   (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args))
 
 
 (defn mult [& args]
-   (reduce (fn [A B] (combine-with A B * mult)) args))
+   (reduce (fn [A B] (combine-with A B clojure.core/* mult)) args))
 
 
 (defn div [& args]
-   (reduce (fn [A B] (combine-with A B / div)) args))
+   (reduce (fn [A B] (combine-with A B clojure.core// div)) args))
 
 
 (defn pow [& args]
-   (reduce (fn [A B] (combine-with A B Math/pow pow)) args))
+   (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args))
 
 
 (defn sqrt [A]
@@ -217,11 +214,11 @@
 
 
 (defn log [A]
-   (transform-with A log log))
+   (transform-with A #(Math/log %) log))
 
 
 (defn exp [A]
-   (transform-with A exp exp))
+   (transform-with A #(Math/exp %) exp))
 
 
 (defn solve [#^Matrix A & B]
@@ -268,78 +265,91 @@
       (.write w "]\n"))))
 
 
-;(prefer-method print-method Matrix clojure.lang.ISeq)
+
+(defn #^Matrix chol [#^Matrix mat]
+  (.viewDice (.getL (CholeskyDecomposition. mat))))
+  ;(Matrix. (.viewDice (.getL (CholeskyDecomposition. mat))))) 
+
 
 
 (defn svd 
-" Calculates the Singular Value Decomposition (SVD) of the given matrix.
+" Returns the Singular Value Decomposition (SVD) of the given matrix.
+
   Returns:
     a map containing:
       :S -- the diagonal matrix of singular values
       :U -- the left singular vectors U
       :V -- the right singular vectors V
+
   References:
     http://en.wikipedia.org/wiki/Singular_value_decomposition
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/SingularValueDecomposition.html
 "
   ([mat]
     (let [result (cern.colt.matrix.linalg.SingularValueDecomposition. mat)]
-      {:S (.getS result)
-       :U (.getU result)
-       :V (.getV result)})))
+      {:S (Matrix. (.getS result))
+       :U (Matrix. (.getU result))
+       :V (Matrix. (.getV result))})))
 
 
 
 (defn eigenvalue-decomp 
-" Calculates the Eigenvalue Decomposition of the given matrix.
+" Returns the Eigenvalue Decomposition of the given matrix.
+
   Returns:
     a map containing:
       :eigenvalues -- vector of eigenvalues
       :V -- the matrix of eigenvectors
+
   References:
     http://en.wikipedia.org/wiki/Eigenvalue_decomposition
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/EigenvalueDecomposition.html
 "
   ([mat]
     (let [result (cern.colt.matrix.linalg.EigenvalueDecomposition. mat)]
-      {:eigenvalues (diag (.getD result))
-       :V (.getV result)})))
+      {:eigenvalues (diag (Matrix. (.getD result)))
+       :V (Matrix. (.getV result))})))
 
 
 (defn lu-decomp 
-" Calculates the LU decomposition of the given matrix.
+" Returns the LU decomposition of the given matrix.
+
   Returns:
     a map containing:
       :L -- the lower triangular factor
       :U -- the upper triangular factor
+
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html
 "
   ([mat]
     (let [result (cern.colt.matrix.linalg.LUDecomposition. mat)]
-      {:L (.getL result)
-       :U (.getU result)})))
+      {:L (Matrix. (.getL result))
+       :U (Matrix. (.getU result))})))
 
 
 (defn qr-decomp 
-" Calculates the QR decomposition of the given matrix.
+" Returns the QR decomposition of the given matrix.
+
   Returns:
     a map containing:
       :Q -- orthogonal factor
       :R -- the upper triangular factor
+
   References:
     http://en.wikipedia.org/wiki/QR_decomposition
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/QRDecomposition.html
 "
   ([mat]
     (let [result (cern.colt.matrix.linalg.QRDecomposition. mat)]
-      {:Q (.getQ result)
-       :R (.getR result)})))
+      {:Q (Matrix. (.getQ result))
+       :R (Matrix. (.getR result))})))
 
 
 (defn det 
 " Returns the determinant of the given matrix using LU decomposition.
+
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html
@@ -350,6 +360,7 @@
 
 (defn trace 
 " Returns the trace of the given matrix.
+
   References:
     http://en.wikipedia.org/wiki/Matrix_trace
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/Algebra.html

@@ -23,14 +23,21 @@ package incanter;
 
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix2D;
+import cern.colt.function.DoubleDoubleFunction;
+import cern.colt.function.DoubleFunction;
+
 import clojure.lang.ISeq;
 import clojure.lang.Counted;
 import clojure.lang.IPersistentCollection;
-import clojure.lang.IPersistentVector;
+import clojure.lang.Seqable;
 
 public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
 
         public boolean oneDimensional = false;
+
+        /**************************************
+         * MATRIX CONSTRUCTORS
+        **************************************/
 
         public Matrix(int nrow, int ncol) {
                 this(nrow, ncol, 0);
@@ -67,7 +74,8 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
         }
 
         public Matrix(DoubleMatrix2D mat) {
-                this(mat.toArray());
+                this(mat.rows(), mat.columns());
+                this.assign(mat);
         }
 
         public Matrix(int rows, int columns, double[] elements, boolean oneDimensional) {
@@ -75,6 +83,21 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
                 this.oneDimensional = oneDimensional;
         }
 
+
+        public Matrix(Seqable coll, int rows, int columns) {
+                super(rows, columns);
+                ISeq seq = coll.seq();
+                for(int i = 0; i < (rows); i++) {
+                        for(int j = 0; j < (columns); j++) {
+                                this.set(i, j, ((Number)(seq.first())).doubleValue());
+                                seq = seq.next();
+                        }
+                }
+        }
+
+        /**************************************
+         * MATRIX METHODS
+        **************************************/
         public Matrix viewSelection(int[] rows, int[] columns) {
                 Matrix mat = new Matrix(super.viewSelection(rows, columns));
                 if(rows.length == 1 || columns.length == 1)
@@ -82,6 +105,14 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
 
                 return(mat);
         }
+        
+        public Matrix like(int rows, int columns) {
+	        return new Matrix(rows, columns);
+        }
+        
+        /**************************************
+         * ISeq METHODS
+        **************************************/
 
         public Object first() {
                 if(this.rows == 0 || this.columns == 0) return(null);
@@ -138,29 +169,33 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
         }
 
         public Matrix cons(Object o) {
-                double[][] origData = this.toArray();
 
-                if(o instanceof IPersistentVector) {
-                        IPersistentVector v = (IPersistentVector)o;
-                        double[][] newData = new double[this.rows + 1][this.columns];
-                        for(int i = 0; i < (this.rows); i++)
-                                for(int j = 0; j < (this.columns); j++)
-                                        newData[i][j] = origData[i][j];
-                        for(int j = 0; j < (this.columns); j++)
-                                newData[this.rows][j] = ((Number)v.valAt(j)).doubleValue();
-
-                        return(new Matrix(newData));
-                }
-                else if(o instanceof Matrix) {
+                if(o instanceof Matrix) {
                         Matrix m = (Matrix)o;
                         double[][] newData = new double[this.rows + m.rows][this.columns];
                         for(int i = 0; i < (this.rows); i++)
                                 for(int j = 0; j < (this.columns); j++)
-                                        newData[i][j] = origData[i][j];
+                                        newData[i][j] = this.getQuick(i, j);
 
                         for(int i = 0; i < m.rows; i++)
                                 for(int j = 0; j < (this.columns); j++)
                                         newData[this.rows + i][j] = m.getQuick(i, j);
+
+                        return(new Matrix(newData));
+                }
+                else if(o instanceof Seqable) {
+                        ISeq v = ((Seqable)o).seq();
+                        double[][] newData = new double[this.rows + 1][this.columns];
+                        for(int i = 0; i < (this.rows); i++)
+                                for(int j = 0; j < (this.columns); j++)
+                                        newData[i][j] = this.getQuick(i, j);
+                        ISeq restObj = v;
+                        int cols = 0;
+                        while(cols < this.columns) {
+                                newData[this.rows][cols] = ((Number)(restObj.first())).doubleValue();
+                                restObj = restObj.next();
+                                cols++;
+                        }
 
                         return(new Matrix(newData));
                 }
@@ -202,25 +237,6 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
                 }
                 return(buf.toString());
         }
-        
-        //public int length(){ return(this.rows); }
-
-        //public IPersistentVector assocN(int i, Object val) { return(null); }
-
-        //public IPersistentVector nth(int i) { return(null); }
-
-        //public IPersistentVector valueAt(int i) { return(null); }
-
-        //boolean containsKey(Object key);
-
-        //public IMapEntry entryAt(Object key) {return null;}
-
-        //public Associative assoc(Object key, Object val) {return null;}
-
-        //public Object valAt(Object key) {return null;}
-
-        //public Object valAt(Object key, Object notFound) {return null;}
-
 }
 
 

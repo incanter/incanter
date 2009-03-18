@@ -34,394 +34,97 @@
   (:use (incanter matrix)))
 
 
-;;------------------------------------------------------------------------------
-;; DATASET FUNCTIONS
-;;------------------------------------------------------------------------------
-
-(defn colnames 
-  ([mat] (keys (:colnames ^mat)))
-  ([mat col-names] 
-   (if col-names 
-    (with-meta mat 
-              (assoc ^mat :colnames 
-                (into {} (map vector col-names (range (count col-names)))))))))
-
-;;;;;;;;;;;;;;; RANDOM DIST FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn runif [n & options]
-  (let [opts (if options (apply assoc {} options) nil) 
-        rnd (new java.util.Random)
-       ]
-    (loop [v [] i 0]
-      (if (< i n)
-        (recur (conj v (.nextDouble rnd)) (inc i))
-        v))))
-
-
-(defn rnorm [n & options]
-   (let [opts (if options (apply assoc {} options) nil) 
-          rnd (new java.util.Random)
-          m (if (number? (:mean opts)) (:mean opts) 0)
-          s (if (number? (:sd opts)) (:sd opts) 1)]
-          (loop [v [] i (int 0)]
-            (if (< i n)
-              (recur 
-                (conj v (if (and (= m 0) (= 1)) 
-                          (.nextGaussian rnd) 
-                          (+ (* (.nextGaussian rnd) s) m)))
-                (inc i))
-              v))))
-
-
-(defn normal-generator []
-  (let [rnd (java.util.Random.)]
-    (fn [mean sd] 
-      (+ (* (.nextGaussian rnd) sd) mean))))
-
-
-(defn rand-gamma [shape rate]
-  (Gamma/staticNextDouble shape rate))
-
-
-(defn gamma-generator []
-  (let [rnd (Gamma. 1 1 
-                 (MersenneTwister. (java.util.Date.)))]
-    (fn [shape rate] 
-      (.nextDouble rnd shape rate))))
-
-
-(defn rgamma [n & options]
-   (let [opts (if options (apply assoc {} options) nil) 
-          rnd (gamma-generator)
-          shape (if (number? (:shape opts)) (:shape opts) 1)
-          rate (if (number? (:rate opts)) (:rate opts) 1)
-        ]
-          (loop [v [] i 0]
-            (if (< i n)
-              (recur 
-                (conj v (rnd shape rate)) 
-                (inc i))
-              v))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; CONTINOUS DISTRIBUTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
-;; functions that return Colt distribution objects
+;; NORMAL DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 
-;; CONTINOUS DISTRIBUTIONS
+(defn pdf-normal
+" Returns the Normal pdf of the given value, x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's dnorm function. 
 
-(defn normal-dist 
-" Creates a normal distribution.
   Options: 
-    :mean (default value 0) 
-    :sd (default value 1)
-  Returns: 
-    a distribution object of type cern.jet.random.Normal
+    :mean (default 0) 
+    :sd (default 1)
+
   See also: 
-      pdf cdf sample
+      cdf-normal, quantile-normal, sample-normal
+
   References: 
       http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
   Example: 
-      (normal-dist :mean 10 :sd 5)
+      (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
-  ([& options]
+  ([x & options]
     (let [opts (if options (apply assoc {} options) nil)
           mean (if (:mean opts) (:mean opts) 0)
-          sd (if (:sd opts) (:sd opts) 1)]
-      (cern.jet.random.Normal. mean sd (cern.jet.random.engine.MersenneTwister.)))))
+          sd (if (:sd opts) (:sd opts) 1)
+          dist (cern.jet.random.Normal. mean sd (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
 
 
-(defn uniform-dist 
-" Creates a uniform distribution.
+
+(defn cdf-normal
+" Returns the Normal cdf of the given value, x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's pnorm function. 
+
   Options: 
-    :min (default value 0) 
-    :max (default value 1)
-  Returns: 
-    a distribution object of type cern.jet.random.Uniform
+    :mean (default 0) 
+    :sd (default 1)
+
   See also: 
-      pdf cdf sample
+      pdf-normal, quantile-normal, sample-normal
+
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
-      http://en.wikipedia.org/wiki/Uniform_distribution
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Normal.html
+      http://en.wikipedia.org/wiki/Normal_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
   Example: 
-      (normal-dist)
-      (normal-dist :min 1 :max 10)
+      (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
-  ([& options]
+  ([x & options]
     (let [opts (if options (apply assoc {} options) nil)
-          min (double (if (:min opts) (:min opts) 0.0))
-          max (double (if (:max opts) (:max opts) 1.0))]
-      (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.)))))
+          mean (if (:mean opts) (:mean opts) 0)
+          sd (if (:sd opts) (:sd opts) 1)
+          dist (cern.jet.random.Normal. mean sd (cern.jet.random.engine.MersenneTwister.))] 
+      (if (coll? x)
+        (map #(.cdf dist %) x)
+        (.cdf dist x)))))
 
 
-(defn beta-dist
-" Creates a Beta distribution.
+(defn quantile-normal 
+" Returns the inverse of the Normal CDF for the given probability. 
+  It will return a sequence of values, if given a sequence of 
+  probabilities. This is equivalent to R's qnorm function.
+
   Options: 
-    :alpha (default value 1) 
-    :beta (default value 1)
+    :mean (default 0) 
+    :sd (default 1)
+
   Returns: 
-    a distribution object of type cern.jet.random.Beta
+    a value x, where (cdf-normal x) = probability
+
   See also: 
-      pdf cdf sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
-      http://en.wikipedia.org/wiki/Beta_distribution
-  Example: 
-      (beta-dist :alpha 1 :beta 2)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil)
-          alpha (if (:alpha opts) (:alpha opts) 1)
-          beta (if (:beta opts) (:beta opts) 1)]
-      (cern.jet.random.Beta. alpha beta (cern.jet.random.engine.MersenneTwister.)))))
+      pdf-normal, cdf-normal, and sample-normal
 
-
-(defn gamma-dist
-" Creates a Gamma distribution.
-  Options: 
-    :shape (default value 1) 
-    :rate (default value 1)
-  Returns: 
-    a distribution object of type cern.jet.random.Gamma
-  See also: 
-      pdf cdf sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
-      http://en.wikipedia.org/wiki/Gamma_distribution
-  Example: 
-      (gamma-dist :shape 1 :rate 2)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          shape (if (number? (:shape opts)) (:shape opts) 1)
-          rate (if (number? (:rate opts)) (:rate opts) 1)
-        ]
-      (cern.jet.random.Gamma. shape rate (cern.jet.random.engine.MersenneTwister.)))))
-
-
-
-(defn chisq-dist
-" Creates a Chi Square distribution.
-  Options: 
-    :df (default value 1) 
-  Returns: 
-    a distribution object of type cern.jet.random.ChiSquare
-  See also: 
-      pdf, cdf, sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
-      http://en.wikipedia.org/wiki/Chi_square_distribution
-  Example: 
-      (chisq-dist :df 2)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)
-         ]
-      (cern.jet.random.ChiSquare. df (cern.jet.random.engine.MersenneTwister.)))))
-
-
-
-(defn t-dist
-" Creates a Student's t-distribution.
-  Options: 
-    :df (default value 1) 
-  Returns: 
-    a distribution object of type cern.jet.random.StudentT
-  See also: 
-      pdf, cdf, sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
-      http://en.wikipedia.org/wiki/Student-t_distribution
-  Example: 
-      (t-dist :df 2)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)
-         ]
-      (cern.jet.random.StudentT. df (cern.jet.random.engine.MersenneTwister.)))))
-
-
-
-(defn exp-dist
-" Creates a Exponential distribution.
-  Options: 
-    :lambda (default value 1) 
-  Returns: 
-    a distribution object of type cern.jet.random.Exponential
-  See also: 
-      pdf, cdf, sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
-      http://en.wikipedia.org/wiki/Exponential_distribution
-  Example: 
-      (exp-dist :lambda 1/2)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          lambda (if (number? (:lambda opts)) (:lambda opts) 1)
-         ]
-      (cern.jet.random.Exponential. lambda (cern.jet.random.engine.MersenneTwister.)))))
-
-
-
-
-;; DISCRETE DISTRIBUTIONS
-
-
-(defn binomial-dist
-" Creates a Binomial distribution.
-  Options: 
-    :n (default value 1) 
-    :p (default value 1/2)
-  Returns: 
-    a distribution object of type cern.jet.random.Binomial
-  See also: 
-      pdf cdf sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
-      http://en.wikipedia.org/wiki/Binomial_distribution
-  Example: 
-      (binomial-dist :p 1/4 :n 20)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:n opts)) (:n opts) 1)
-          p (if (number? (:p opts)) (:p opts) 1/2)
-        ]
-      (cern.jet.random.Binomial. n p (cern.jet.random.engine.MersenneTwister.)))))
-
-
-
-(defn poisson-dist
-" Creates a Poisson distribution.
-  Options: 
-    :mean (default value 1) 
-  Returns: 
-    a distribution object of type cern.jet.random.Poisson
-  See also: 
-      pdf cdf sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
-      http://en.wikipedia.org/wiki/Poisson_distribution
-  Example: 
-      (poisson-dist :mean 10)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          mean (if (number? (:mean opts)) (:mean opts) 1)
-        ]
-      (cern.jet.random.Poisson. mean (cern.jet.random.engine.MersenneTwister.)))))
-
-
-(defn neg-binomial-dist
-" Creates a Negative Binomial distribution.
-  Options: 
-    :n (default value 10) 
-    :p (default value 1/2)
-  Returns: 
-    a distribution object of type cern.jet.random.NegativeBinomial
-  See also: 
-      pdf cdf sample
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
-      http://en.wikipedia.org/wiki/Negative_binomial_distribution
-  Example: 
-      (neg-binomial-dist :p 1/2 :n 10)
-"
-  ([& options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:n opts)) (:n opts) 10)
-          p (if (number? (:p opts)) (:p opts) 1/2)
-        ]
-      (cern.jet.random.NegativeBinomial. n p (cern.jet.random.engine.MersenneTwister.)))))
-
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
-;; functions that operate on distribution objects
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-  
-(defn continuous-dist? [dist]
-  (isa? (class dist) cern.jet.random.AbstractContinousDistribution))
-
-
-(defn pdf 
-" Calculates the pdf (the density) of the given value, x, for the given 
-  distribution. This is equivalent to R's d{dist} functions 
-  (e.g. dnorm, dgamma, etc).
-"
-  ([dist x]
-    (if (coll? x)
-      (map #(.pdf dist %) x)
-    (if (number? x)
-      (.pdf dist x)))))
-
-
-(defn cdf 
-" Calculates the cdf (the distribution function) of the given value, x, 
-  for the given distribution. This is equivalent to R's p{dist} functions 
-  (e.g. pnorm, pgamma, etc).
-"
-  ([dist x]
-    (if (coll? x)
-      (map #(.cdf dist %) x)
-    (if (number? x)
-      (.cdf dist x)))))
-
-
-(defmulti sample 
-" Draws a sample from the given distribution.
-  Arguments:
-    dist -- a distribution object (e.g. normal-dist, beta-dist, gamma-dist, etc
-  Options:
-    size -- the size of the sample to draw
-  Example:
-    (sample (normal-dist :mean 10 :sd 5))
-    (sample (beta-dist :alpha 1 :beta 2) 100)
-"
-  (fn [dist & size] (continuous-dist? dist)))
-
-
-(defmethod sample true
-  ([dist]
-    (.nextDouble dist))
-  ([dist size]
-    (for [_ (range size)] (.nextDouble dist))))
-
-
-(defmethod sample false
-  ([dist]
-    (.nextInt dist))
-  ([dist size]
-    (for [_ (range size)] (.nextInt dist))))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
-;; Inverse Distributions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-
-
-(defn normal-inv 
-" Calculates the inverse of the Normal CDF for the given probability
-  (i.e. the quantile). This is equivalent to R's qnorm function.
-  Options: 
-    :mean (default value 0) 
-    :sd (default value 1)
-  Returns: 
-    a value x, where (cdf (normal-dist) x) = probability
-  See also: 
-      normal-dist pdf cdf sample
   References: 
       http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
       http://en.wikipedia.org/wiki/Normal_distribution
+      http://en.wikipedia.org/wiki/Quantile
+
   Example: 
-      (normal-inv 0.975)
-      (normal-inv [0.025 0.975] :mean -2 :sd (sqrt 0.5))
+      (quantile-normal 0.975)
+      (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))
 "
   ([probability & options]
     (let [opts (if options (apply assoc {} options) nil)
@@ -434,110 +137,922 @@
 
 
 
-(defn chisq-inv 
-" Calculates the inverse of the Chi Square CDF for the given probability
-  (i.e. the quantile). This is equivalent to R's qchisq function.
+(defn sample-normal
+" Returns a sample of the given size from a Normal distribution
+  This is equivalent to R's rnorm function. 
+
   Options: 
-    :df (default value 1) 
-  Returns: 
-    a value x, where (cdf (chisq-dist) x) = probability
+    :mean (default 0) 
+    :sd (default 1)
+
   See also: 
-      chisq-dist pdf cdf sample
+      pdf-normal, cdf-normal, quantile-normal
+
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
-      http://en.wikipedia.org/wiki/Chi_square_distribution
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Normal.html
+      http://en.wikipedia.org/wiki/Normal_distribution
+
   Example: 
-      (chisq-inv 0.975)
-      (chisq-inv [0.025 0.975] :df 2)
+      (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
 "
-  ([probability & options]
+  ([size & options]
     (let [opts (if options (apply assoc {} options) nil)
-          df (if (:df opts) (:df opts) 1)
-          x (if (coll? probability) 
-              (map #(cern.jet.stat.Probability/chiSquareComplemented df %) probability)
-              (cern.jet.stat.Probability/chiSquareComplemented df probability))]
-      x)))
+          mean (if (:mean opts) (:mean opts) 0)
+          sd (if (:sd opts) (:sd opts) 1)]
+      (if (= size 1)
+        (cern.jet.random.Normal/staticNextDouble mean sd)
+        (for [_ (range size)] (cern.jet.random.Normal/staticNextDouble mean sd))))))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; UNIFORM DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn gamma-inv 
-" Calculates the inverse of the Gamma CDF for the given probability
-  (i.e. the quantile). This is equivalent to R's qgamma function.
+
+(defn pdf-uniform 
+" Returns the Uniform pdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's dunif function. 
+
   Options: 
-    :shape (default value 1) 
-    :rate (default value 1)
-  Returns: 
-    a value x, where (cdf (gamma-dist) x) = probability
+    :min (default 0) 
+    :max (default 1)
+
   See also: 
-      gamma-dist pdf cdf sample
+      cdf-uniform and sample-uniform
+
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
-      http://en.wikipedia.org/wiki/Gamma_distribution
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
+      http://en.wikipedia.org/wiki/Uniform_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
   Example: 
-      (gamma-inv 0.975)
-      (gamma-inv [0.025 0.975] :shape 2 :rate 2)
+      (pdf-uniform 5)
+      (pdf-uniform 5 :min 1 :max 10)
 "
-  ([probability & options]
+  ([x & options]
     (let [opts (if options (apply assoc {} options) nil)
-          shape (if (:shape opts) (:shape opts) 1)
-          rate (if (:rate opts) (:rate opts) 1)
-          x (if (coll? probability) 
-              (map #(cern.jet.stat.Probability/gammaComplemented shape rate %) probability)
-              (cern.jet.stat.Probability/gammaComplemented shape rate probability))]
-        x)))
+          min (double (if (:min opts) (:min opts) 0.0))
+          max (double (if (:max opts) (:max opts) 1.0))
+          dist (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
 
 
-(defn beta-inv 
-" Calculates the inverse of the Beta CDF for the given probability
-  (i.e. the quantile). This is equivalent to R's qbeta function.
+(defn cdf-uniform 
+" Returns the Uniform cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's punif function. 
+
   Options: 
-    :alpha (default value 1) 
-    :alpha (default value 1)
-  Returns: 
-    a value x, where (cdf (beta-dist) x) = probability
+    :min (default 0) 
+    :max (default 1)
+
   See also: 
-      beta-dist pdf cdf sample
+      pdf-uniform and sample-uniform
+
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
-      http://en.wikipedia.org/wiki/Gamma_distribution
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
+      http://en.wikipedia.org/wiki/Uniform_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
   Example: 
-      (beta-inv 0.975)
-      (beta-inv [0.025 0.975] :alpha 2 :beta 2)
+      (cdf-uniform 5)
+      (cdf-uniform 5 :min 1 :max 10)
 "
-  ([probability & options]
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          min (double (if (:min opts) (:min opts) 0.0))
+          max (double (if (:max opts) (:max opts) 1.0))
+          dist (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.cdf dist %) x)
+        (.cdf dist x)))))
+
+
+(defn sample-uniform 
+" Returns a sample of the given size from a Uniform distribution.
+  This is equivalent to R's runif function. 
+
+  Options: 
+    :min (default 0) 
+    :max (default 1)
+    :integers (default false)
+
+  See also: 
+      pdf-uniform and cdf-uniform
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
+      http://en.wikipedia.org/wiki/Uniform_distribution
+
+  Example: 
+      (sample-uniform 1000)
+      (sample-uniform 1000 :min 1 :max 10)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          min (double (if (:min opts) (:min opts) 0.0))
+          max (double (if (:max opts) (:max opts) 1.0))
+          ints? (if (true? (:integers opts)) true false)
+          dist (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.))]
+      (if (= size 1)
+        (if ints? 
+          (cern.jet.random.Uniform/staticNextIntFromTo min max)
+          (cern.jet.random.Uniform/staticNextDoubleFromTo min max))
+        (if ints? 
+          (for [_ (range size)] (cern.jet.random.Uniform/staticNextIntFromTo min max))
+          (for [_ (range size)] (cern.jet.random.Uniform/staticNextDoubleFromTo min max)))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; BETA DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-beta
+" Returns the Beta pdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's dbeta function. 
+
+  Options: 
+    :alpha (default 1) 
+    :beta (default 1)
+
+  See also: 
+      cdf-beta and sample-beta
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
+      http://en.wikipedia.org/wiki/Beta_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-beta 0.5 :alpha 1 :beta 2)
+"
+  ([x & options]
     (let [opts (if options (apply assoc {} options) nil)
           alpha (if (:alpha opts) (:alpha opts) 1)
           beta (if (:beta opts) (:beta opts) 1)
-          x (if (coll? probability) 
-              (map #(cern.jet.stat.Probability/betaComplemented alpha beta %) probability)
-              (cern.jet.stat.Probability/betaComplemented alpha beta probability))]
-        x)))
+          dist (cern.jet.random.Beta. alpha beta (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
 
 
-(defn t-inv 
-" Calculates the inverse of the Student's t CDF for the given probability
-  (i.e. the quantile). This is equivalent to R's qt function.
+(defn cdf-beta
+" Returns the Beta cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's pbeta function. 
+
   Options: 
-    :df (default value 1) 
-  Returns: 
-    a value x, where (cdf (t-dist) x) = probability
+    :alpha (default 1) 
+    :beta (default 1)
+    :lower-tail (default true)
+
   See also: 
-      t-dist pdf cdf sample
+      pdf-beta and sample-beta
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
+      http://en.wikipedia.org/wiki/Beta_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-beta 0.5 :alpha 1 :beta 2)
+      (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          alpha (if (:alpha opts) (:alpha opts) 1)
+          beta (if (:beta opts) (:beta opts) 1)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/beta alpha beta x1))
+                  (fn [x1] (- 1 (cern.jet.stat.Probability/betaComplemented alpha beta x1))))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+
+
+
+(defn sample-beta
+" Returns a sample of the given size from a Beta distribution.
+  This is equivalent to R's rbeta function.
+
+  Options: 
+    :alpha (default 1) 
+    :beta (default 1)
+    These default values produce a Uniform distribution.
+
+  See also: 
+      pdf-beta and cdf-beta
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
+      http://en.wikipedia.org/wiki/Beta_distribution
+
+  Example: 
+      (sample-beta 1000 :alpha 1 :beta 2)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          alpha (if (:alpha opts) (:alpha opts) 1)
+          beta (if (:beta opts) (:beta opts) 1)]
+      (if (= size 1)
+        (cern.jet.random.Beta/staticNextDouble alpha beta)
+        (for [_ (range size)] (cern.jet.random.Beta/staticNextDouble alpha beta))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; GAMMA DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-gamma
+" Returns the Gamma pdf for the given value of x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's dgamma function.
+
+  Options: 
+    :shape (default 1) 
+    :rate (default 1)
+
+  See also: 
+      cdf-gamma and sample-gamma
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
+      http://en.wikipedia.org/wiki/Gamma_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-gamma 10 :shape 1 :rate 2)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          shape (if (number? (:shape opts)) (:shape opts) 1)
+          rate (if (number? (:rate opts)) (:rate opts) 1)
+          dist (cern.jet.random.Gamma. shape rate (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+
+(defn cdf-gamma
+" Returns the Gamma cdf for the given value of x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's pgamma function.
+
+  Options: 
+    :shape (default 1) 
+    :rate (default 1)
+    :lower-tail (default true)
+
+  See also: 
+      pdf-gamma and sample-gamma
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
+      http://en.wikipedia.org/wiki/Gamma_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-gamma 10 :shape 1 :rate 2)
+      (cdf-gamma 3 :shape 1 :lower-tail false)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          shape (if (number? (:shape opts)) (:shape opts) 1)
+          rate (if (number? (:rate opts)) (:rate opts) 1)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/gamma rate shape x1))
+                  (fn [x1] (cern.jet.stat.Probability/gammaComplemented rate shape x1)))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+
+(defn sample-gamma
+" Returns a sample of the given size from a Gamma distribution.
+  This is equivalent to R's rgamma function.
+
+  Options: 
+    :shape (default 1) 
+    :rate (default 1)
+
+  See also: 
+      pdf-gamma, cdf-gamma, and quantile-gamma
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
+      http://en.wikipedia.org/wiki/Gamma_distribution
+
+  Example: 
+      (sample-gamma 1000 :shape 1 :rate 2)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          shape (if (number? (:shape opts)) (:shape opts) 1)
+          rate (if (number? (:rate opts)) (:rate opts) 1)]
+      (if (= size 1)
+        (cern.jet.random.Gamma/staticNextDouble shape rate)
+        (for [_ (range size)] (cern.jet.random.Gamma/staticNextDouble shape rate))))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; CHI SQUARE DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-chisq
+" Returns the Chi Square pdf of the given value of x.  It will return a sequence 
+  of values, if x is a sequence. Same as R's dchisq function.
+
+  Options: 
+    :df (default 1) 
+
+  See also: 
+      cdf-chisq and sample-chisq
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
+      http://en.wikipedia.org/wiki/Chi_square_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-chisq 5.0 :df 2)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          df (if (number? (:df opts)) (:df opts) 1)
+          dist (cern.jet.random.ChiSquare. df (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+
+(defn cdf-chisq
+" Returns the Chi Square cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's pchisq function.
+
+  Options: 
+    :df (default 1) 
+    :lower-tail (default true) 
+
+  See also: 
+      pdf-chisq and sample-chisq
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
+      http://en.wikipedia.org/wiki/Chi_square_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-chisq 5.0 :df 2)
+      (cdf-chisq 5.0 :df 2 :lower-tail false)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          df (if (number? (:df opts)) (:df opts) 1)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/chiSquare df x1))
+                  (fn [x1] (cern.jet.stat.Probability/chiSquareComplemented df x1)))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+
+(defn sample-chisq
+" Returns a sample of the given size from a Chi Square distribution
+  Same as R's rchisq function.
+
+  Options: 
+    :df (default 1) 
+
+  See also: 
+      pdf-chisq and cdf-chisq
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
+      http://en.wikipedia.org/wiki/Chi_square_distribution
+
+  Example: 
+      (sample-chisq 1000 :df 2)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          df (if (number? (:df opts)) (:df opts) 1)]
+      (if (= size 1)
+        (cern.jet.random.ChiSquare/staticNextDouble df)
+        (for [_ (range size)] (cern.jet.random.ChiSquare/staticNextDouble df))))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; STUDENT'S T DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-t
+" Returns the Student's t pdf for the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's dt function.
+
+  Options: 
+    :df (default 1) 
+
+  See also: 
+      cdf-t, quantile-t, and sample-t
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
+      http://en.wikipedia.org/wiki/Student-t_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-t 1.2 :df 10)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          df (if (number? (:df opts)) (:df opts) 1)
+          dist (cern.jet.random.StudentT. df (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+(defn cdf-t
+" Returns the Student's t cdf for the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's pt function.
+
+  Options: 
+    :df (default 1) 
+
+  See also: 
+      pdf-t, quantile-t, and sample-t
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
+      http://en.wikipedia.org/wiki/Student-t_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-t 1.2 :df 10)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          df (if (number? (:df opts)) (:df opts) 1)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/studentT df x1))
+                  (fn [x1] (- 1 (cern.jet.stat.Probability/studentT df x1))))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+(defn quantile-t 
+" Returns the inverse of the Student's t CDF for the given probability
+  (i.e. the quantile).  It will return a sequence of values, if x is 
+  a sequence of probabilities. This is equivalent to R's qt function.
+
+  Options: 
+    :df (default 1) 
+
+  Returns: 
+    a value x, where (cdf-t x) = probability
+
+  See also: 
+     pdf-t, cdf-t, and sample-t 
+
   References: 
       http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
       http://en.wikipedia.org/wiki/Student-t_distribution
+      http://en.wikipedia.org/wiki/Quantile
+
   Example: 
-      (t-inv 0.975)
-      (t-inv [0.025 0.975] :df 25)
+      (quantile-t 0.975)
+      (quantile-t [0.025 0.975] :df 25)
+      (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])
+      (map #(quantile-t 0.025 :df %) df)
 "
   ([probability & options]
     (let [opts (if options (apply assoc {} options) nil)
           df (if (:df opts) (:df opts) 1)
+          to-alpha (fn [prob] ;; need to convert the probability to an alpha value
+                     (if (< prob 1/2) 
+                      (* 2 prob)
+                      (* 2 (- 1 prob))))
+          sign-fx (fn [x1 prob] (if (< prob 1/2) (* -1 x1) x1))
           x (if (coll? probability) 
-              (map #(cern.jet.stat.Probability/studentTInverse % df) probability)
-              (cern.jet.stat.Probability/studentTInverse probability df))]
+              (map #(sign-fx (cern.jet.stat.Probability/studentTInverse (to-alpha %) df) %) probability)
+              (sign-fx (cern.jet.stat.Probability/studentTInverse (to-alpha probability) df) probability))]
         x)))
 
+
+
+(defn sample-t
+" Returns a sample of the given size from a Student's t distribution.
+  Same as R's rt function.
+
+  Options: 
+    :df (default 1) 
+
+  See also: 
+      pdf-t, cdf-t, and quantile-t
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
+      http://en.wikipedia.org/wiki/Student-t_distribution
+
+  Example: 
+      (cdf-t 1000 :df 10)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          df (if (number? (:df opts)) (:df opts) 1)]
+      (if (= size 1)
+        (cern.jet.random.StudentT/staticNextDouble df)
+        (for [_ (range size)] (cern.jet.random.StudentT/staticNextDouble df))))))
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; EXPONENTIAL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-exp
+" Returns the Exponential pdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's dexp
+
+  Options: 
+    :rate (default 1) 
+
+  See also: 
+      cdf-exp and sample-exp
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
+      http://en.wikipedia.org/wiki/Exponential_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-exp 2.0 :rate 1/2)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          rate (if (number? (:rate opts)) (:rate opts) 1)
+          dist (cern.jet.random.Exponential. rate (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+(defn cdf-exp
+" Returns the Exponential cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's pexp
+
+  Options: 
+    :rate (default 1) 
+
+  See also: 
+      pdf-exp and sample-exp
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
+      http://en.wikipedia.org/wiki/Exponential_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-exp 2.0 :rate 1/2)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          rate (if (number? (:rate opts)) (:rate opts) 1)
+          dist (cern.jet.random.Exponential. rate (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.cdf dist %) x)
+        (.cdf dist x)))))
+
+
+(defn sample-exp
+" Returns a sample of the given size from a Exponential distribution.
+  Same as R's rexp
+
+  Options: 
+    :rate (default 1) 
+
+  See also: 
+      pdf-exp, and cdf-exp
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
+      http://en.wikipedia.org/wiki/Exponential_distribution
+
+  Example: 
+      (sample-exp 1000 :rate 1/2)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          rate (if (number? (:rate opts)) (:rate opts) 1)]
+      (if (= size 1)
+        (cern.jet.random.Exponential/staticNextDouble rate)
+        (for [_ (range size)] (cern.jet.random.Exponential/staticNextDouble rate))))))
+
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; DISCRETE DISTRIBUTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; BINOMIAL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-binomial
+" Returns the Bionomial pdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's dbinom
+
+  Options: 
+    :n (default 1) 
+    :p (default 1/2)
+
+  See also: 
+      cdf-binomial and sample-binomial
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
+      http://en.wikipedia.org/wiki/Binomial_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-binomial 10 :p 1/4 :n 20)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          n (if (number? (:n opts)) (:n opts) 1)
+          p (if (number? (:p opts)) (:p opts) 1/2)
+          dist (cern.jet.random.Binomial. n p (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+
+(defn cdf-binomial
+" Returns the Bionomial cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's pbinom
+
+  Options: 
+    :n (default 1) 
+    :p (default 1/2)
+    :lower-tail (default true)
+
+  See also: 
+      pdf-binomial and sample-binomial
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
+      http://en.wikipedia.org/wiki/Binomial_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-binomial 10 :p 1/4 :n 20)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          n (if (number? (:n opts)) (:n opts) 1)
+          p (if (number? (:p opts)) (:p opts) 1/2)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/binomial x1 n p))
+                  (fn [x1] (cern.jet.stat.Probability/binomialComplemented x1 n p)))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+
+(defn sample-binomial
+" Returns a sample of the given size from a Binomial distribution.
+  Same as R's rbinom
+
+  Options: 
+    :n (default 1) 
+    :p (default 1/2)
+
+  See also: 
+      cdf-binomial and sample-binomial
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
+      http://en.wikipedia.org/wiki/Binomial_distribution
+
+  Example: 
+      (sample-binomial 1000 :p 1/4 :n 20)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          n (if (number? (:n opts)) (:n opts) 1)
+          p (if (number? (:p opts)) (:p opts) 1/2)]
+      (if (= size 1)
+        (cern.jet.random.Binomial/staticNextInt n p)
+        (for [_ (range size)] (cern.jet.random.Binomial/staticNextInt n p))))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; POISSON DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-poisson
+" Returns the Poisson pdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's dpois
+
+  Options: 
+    :lambda (default 1) 
+
+  See also: 
+      cdf-poisson and sample-poisson
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
+      http://en.wikipedia.org/wiki/Poisson_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-poisson 5 :lambda 10)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          lambda (if (number? (:lambda opts)) (:lambda opts) 1)
+          dist (cern.jet.random.Poisson. lambda (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+
+(defn cdf-poisson
+" Returns the Poisson cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's ppois
+
+  Options: 
+    :lambda (default 1) 
+    :lower-tail (default true)
+
+  See also: 
+      cdf-poisson and sample-poisson
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
+      http://en.wikipedia.org/wiki/Poisson_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-poisson 5 :lambda 10)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          lambda (if (number? (:lambda opts)) (:lambda opts) 1)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/poisson x1 lambda))
+                  (fn [x1] (cern.jet.stat.Probability/poissonComplemented x1 lambda)))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+
+(defn sample-poisson
+" Returns a sample of the given size from a Poisson distribution.
+  Same as R's rpois
+
+  Options: 
+    :lambda (default 1) 
+
+  See also: 
+      pdf-poisson and cdf-poisson
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
+      http://en.wikipedia.org/wiki/Poisson_distribution
+
+  Example: 
+      (sample-poisson 1000 :lambda 10)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          lambda (if (number? (:lambda opts)) (:lambda opts) 1)]
+     (if (= size 1)
+        (cern.jet.random.Poisson/staticNextInt lambda)
+        (for [_ (range size)] (cern.jet.random.Poisson/staticNextInt lambda))))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; NEGATIVE BINOMIAL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+(defn pdf-neg-binomial
+" Returns the Negative Binomial pdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's dnbinom
+
+  Options: 
+    :size (default 10) 
+    :prob (default 1/2)
+
+  See also: 
+      cdf-neg-binomial and sample-neg-binomial
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
+      http://en.wikipedia.org/wiki/Negative_binomial_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-neg-binomial 10 :prob 1/2 :size 20)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          size (if (number? (:size opts)) (:size opts) 10)
+          prob (if (number? (:prob opts)) (:prob opts) 1/2)
+          dist (cern.jet.random.NegativeBinomial. size prob (cern.jet.random.engine.MersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
+
+
+
+
+(defn cdf-neg-binomial
+" Returns the Negative Binomial cdf of the given value of x. It will return a sequence 
+  of values, if x is a sequence. Same as R's dnbinom
+
+  Options: 
+    :size (default 10) 
+    :prob (default 1/2)
+
+  See also: 
+      cdf-neg-binomial and sample-neg-binomial
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
+      http://en.wikipedia.org/wiki/Negative_binomial_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-neg-binomial 10 :prob 1/2 :size 20)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          size (if (number? (:size opts)) (:size opts) 10)
+          prob (if (number? (:prob opts)) (:prob opts) 1/2)
+          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          cdf-fx (if lower-tail?
+                  (fn [x1] (cern.jet.stat.Probability/negativeBinomial x1 size prob))
+                  (fn [x1] (cern.jet.stat.Probability/negativeBinomialComplemented x1 size prob)))]
+      (if (coll? x)
+        (map cdf-fx x)
+        (cdf-fx x)))))
+
+
+
+(defn sample-neg-binomial
+" Returns a sample of the given size from a Negative Binomial distribution.
+  Same as R's rnbinom
+
+  Options: 
+    :size (default 10) 
+    :prob (default 1/2)
+
+  See also: 
+      pdf-neg-binomial and cdf-neg-binomial
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
+      http://en.wikipedia.org/wiki/Negative_binomial_distribution
+
+  Example: 
+      (sample-neg-binomial 1000 :prob 1/2 :size 20)
+"
+  ([size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          size (if (number? (:size opts)) (:size opts) 10)
+          prob (if (number? (:prob opts)) (:prob opts) 1/2)]
+     (if (= size 1)
+        (cern.jet.random.NegativeBinomial/staticNextInt size prob)
+        (for [_ (range size)] (cern.jet.random.NegativeBinomial/staticNextInt size prob))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -554,6 +1069,7 @@
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
+    ;(incanter.Matrix. (cern.colt.matrix.doublealgo.Statistic/covariance mat))))
         (let [n (ncol mat)]
           (matrix 
             (for [i (range n) j (range n)] 
@@ -591,42 +1107,6 @@
 (defn prod [x]
   (let [xx (to-1D-vect x)]
     (Descriptive/product (DoubleArrayList. (double-array xx)))))
-
-
-(defn hist [x & options]
-  (let [opts (if options (apply assoc {} options) nil)
-        xx (to-1D-vect x)
-        nbin (if (:nbin opts) 
-               (:nbin opts) 
-               (if (< (count xx) 10) (count xx) 10))
-        min-val (reduce min xx)
-        max-val (reduce max xx)
-        bin-size (/ (- max-val min-val) nbin)
-        bin-edges (into [] (for [i (range nbin)] (+ min-val (* (inc i) bin-size))))
-        cumm-counts (into [] (for [b bin-edges] (reduce + (map #(if (<= % b) 1 0) xx))))
-        bin-counts (into [(first cumm-counts)] (map #(- %2 %1) cumm-counts (into [] (next cumm-counts))))
-       ]
-    {:min-val min-val 
-     :max-val max-val 
-     :bin-size bin-size
-     :nbin nbin
-     :bin-edges bin-edges 
-     :cumm-counts cumm-counts 
-     :bin-counts bin-counts}))
-
-
-(defn print-hist [x & options]
-  (let [opts (if options (apply assoc {} options) nil)
-        nbin (if (:nbin opts) (:nbin opts) 10)
-        hist-width (if (:hist-width opts) (:hist-width opts) 80)
-        h (if (:nbin opts) (hist x :nbin (:nbin opts)) (hist x))
-        max-count (reduce max (:bin-counts h))
-       ]
-    (dotimes [i (:nbin h)]
-      (dotimes [_ (* hist-width (/ ((:bin-counts h) i) max-count))] (print \*))
-      (print (format " %.2f " ((:bin-edges h) i)))
-      (print [((:bin-counts h) i)])
-      (println))))
 
 
 
