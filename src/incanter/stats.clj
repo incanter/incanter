@@ -15,16 +15,6 @@
 ;; March 11, 2009: First version
 
 
-;NOTE
-;(time (let [arr  (make-array Float/TYPE 1 1)] 
-;(dotimes [_ 100000] 
-;  (let [#^floats sub-arr (aget arr 0)] 
-;    (aset-float sub-arr 0 0.0))))) 
-;
-
-; to compile (compile 'incanter.stats)
-; to use (use incanter.stats)
-
 
 (ns incanter.stats 
   (:import (cern.colt.list DoubleArrayList)
@@ -35,7 +25,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
-;; CONTINOUS DISTRIBUTIONS
+;; CONTINOUS DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 
 
@@ -1059,7 +1049,79 @@
 ;; STATISTICAL FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+(defn sum-of-squares 
+  "Returns the sum-of-squares of the given sequence."
+  ([x]
+    (let [xx (to-1D-vect x)]
+      (Descriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
+
+
+(defn sum 
+  "Returns the sum of the given sequence."
+  ([x]
+    (let [xx (to-1D-vect x)]
+      (Descriptive/sum (DoubleArrayList. (double-array xx))))))
+
+
+(defn prod 
+  "Returns the product of the given sequence."
+  ([x]
+    (let [xx (to-1D-vect x)]
+      (Descriptive/product (DoubleArrayList. (double-array xx))))))
+
+
+
+(defn mean
+"
+  Returns the mean of the data, x. 
+
+  Examples:
+    (mean (sample-normal 100))
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Mean
+
+" 
+([x]
+  (let [xx (to-1D-vect x)]
+    (Descriptive/mean (DoubleArrayList. (double-array xx))))))
+
+
+
+(defn variance 
+"
+  Returns the sample variance of the data, x. 
+
+  Examples:
+    (variance (sample-normal 100))
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance
+
+"
+  ([x] (Descriptive/sampleVariance (length x) (sum x) (sum-of-squares x))))
+
+
+
 (defn covariance 
+"
+  Returns the sample covariance of x and y. 
+
+  Examples:
+    ;; create some data that covaries
+    (def x (sample-normal 100))
+    (def err (sample-normal 100))
+    (def y (plus (mult 5 x) err))
+    ;; estimate the covariance of x and y
+    (covariance x y)
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Covariance
+"
   ([x y]
     (let [
           xx (to-1D-vect x)
@@ -1076,37 +1138,72 @@
               (covariance (sel mat true i) (sel mat true j))) n))))
 
 
-(defn sum-of-squares [x]
-  (let [xx (to-1D-vect x)]
-    (Descriptive/sumOfSquares (DoubleArrayList. (double-array xx)))))
+
+(defn median 
+"
+  Returns the median of the data, x. 
+
+  Examples:
+    (median (sample-normal 100))
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Median
+
+" 
+  ([x]
+    (let [xx (to-1D-vect x)]
+      (Descriptive/median (DoubleArrayList. (double-array xx))))))
 
 
-(defn sum [x]
-  (let [xx (to-1D-vect x)]
-    (Descriptive/sum (DoubleArrayList. (double-array xx)))))
+(defn sd 
+"
+  Returns the standard deviation of the data, x. 
+
+  Examples:
+    (sd (sample-normal 100))
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Standard_deviation
+" 
+  ([x]
+    (Descriptive/sampleStandardDeviation (length x) (variance x))))
 
 
-(defn variance [x]
-  (Descriptive/sampleVariance (length x) (sum x) (sum-of-squares x)))
+(defn quantile 
+"
+  Returns the quantiles of the data, x. By default it returns the min, 
+  25th-percentile, 50th-percentile, 75th-percentile, and max value.
+
+  Options:
+    :probs (default [0.0 0.25 0.5 0.75 1.0])
+
+  Examples:
+    (quantile (sample-normal 100))
+    (quantile (sample-normal 100) :probs [0.025 0.975])
+    (quantile (sample-normal 100) :probs 0.975)
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Quantile
+
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          data (cern.colt.list.DoubleArrayList. (double-array (sort x)))
+          probs (cond 
+                  (number? (:probs opts))
+                    (:probs opts)
+                  (coll? (:probs opts))
+                    (cern.colt.list.DoubleArrayList. (double-array (:probs opts)))
+                  :default
+                    (cern.colt.list.DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0])))]
+        (if (number? probs)
+          (cern.jet.stat.Descriptive/quantile data probs)
+          (seq (.elements (cern.jet.stat.Descriptive/quantiles data probs)))))))
 
 
-(defn mean [x]
-  (let [xx (to-1D-vect x)]
-    (Descriptive/mean (DoubleArrayList. (double-array xx)))))
-
-
-(defn median [x]
-  (let [xx (to-1D-vect x)]
-    (Descriptive/median (DoubleArrayList. (double-array xx)))))
-
-
-(defn sd [x]
-  (Descriptive/sampleStandardDeviation (length x) (variance x)))
-
-
-(defn prod [x]
-  (let [xx (to-1D-vect x)]
-    (Descriptive/product (DoubleArrayList. (double-array xx)))))
 
 
 

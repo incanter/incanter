@@ -26,7 +26,7 @@
         (clojure set)))
 
 
-(defn parse-string [value] 
+(defn -parse-string [value] 
   (try (Integer/parseInt value) 
     (catch NumberFormatException _ 
       (try (Double/parseDouble value)
@@ -39,22 +39,32 @@
 
 
 
-(defn read-dataset [filename & options] 
-  (let [opts (if options (apply assoc {} options) nil)
-        delim (if (:delim opts) (:delim opts) \space) ; space delim default
-        quote-char (if (:quote opts) (:quote opts) \")
-        skip (if (:skip opts) (:skip opts) 0)
-        header? (if (:header opts) (:header opts) false)
-        reader (au.com.bytecode.opencsv.CSVReader. 
+(defn read-dataset 
+  "
+    Returns a dataset read from a file.
+
+    Options:
+      :delim (default space), other options (tab ,  etc)
+      :quote (default \") character used for quoting strings
+      :skip (default 0) the number of lines to skip at the top of the file.
+      :header (default false) indicates the file has a header line
+  "
+  ([filename & options] 
+   (let [opts (if options (apply assoc {} options) nil)
+         delim (if (:delim opts) (:delim opts) \space) ; space delim default
+         quote-char (if (:quote opts) (:quote opts) \")
+         skip (if (:skip opts) (:skip opts) 0)
+         header? (if (:header opts) (:header opts) false)
+         reader (au.com.bytecode.opencsv.CSVReader. 
                     (java.io.FileReader. filename) 
                     delim
                     quote-char
                     skip)
-        data-lines (map seq (seq (.readAll reader)))
-        raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
-        parsed-data (into [] (map (fn [row] (into [] (map #(parse-string %) row))) raw-data))
+         data-lines (map seq (seq (.readAll reader)))
+         raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
+         parsed-data (into [] (map (fn [row] (into [] (map #(-parse-string %) row))) raw-data))
        ]
-    (if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data)))))
+    (if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data))))))
   
 
 (defn get-column-id [dataset column-key]
@@ -112,8 +122,12 @@
       (matrix col))))
 
 
-(defn as-matrix [dataset]
-  (reduce cbind (map #(bit-encode-column dataset %) (range (count (keys (:column-names dataset)))))))
+(defn as-matrix 
+  "Converts a dataset into a matrix."
+  ([dataset]
+   (reduce bind-columns 
+           (map #(bit-encode-column dataset %) 
+                (range (count (keys (:column-names dataset))))))))
 
 
 

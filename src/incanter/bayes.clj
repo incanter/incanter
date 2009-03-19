@@ -36,8 +36,8 @@
         (if (= i N)
           {:coef (matrix coefs) :var variances}
           (let [
-                ;;b (to-vect (plus pars (mmult (trans (rnorm nx)) (chol (mult xtxi (variances i))))))
-                b (to-vect (plus pars (mmult (trans (sample-normal nx)) (chol (mult xtxi (variances i))))))
+                ;;b (to-vect (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (variances i))))))
+                b (to-vect (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (variances i))))))
                 resid (minus y (mmult x b))
                 ;;s2 (/ 1 (gamma-rnd shape (mult (mmult (trans resid) resid) 0.5) ))
                 s2 (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans resid) resid) 0.5) ))
@@ -59,8 +59,8 @@
       (dotimes [i N]
         (dosync
           (alter b conj 
-            ;;(to-vect (plus pars (mmult (trans (rnorm nx)) (chol (mult xtxi (@s2 i)))))))
-            (to-vect (plus pars (mmult (trans (sample-normal nx)) (chol (mult xtxi (@s2 i)))))))
+            ;;(to-vect (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
+            (to-vect (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
           (ref-set resid (minus y (mmult x (@b (inc i)))))
           ;;(alter s2 conj (/ 1 (gamma-rnd shape (mult (mmult (trans @resid) @resid) 0.5) )))))
           (alter s2 conj (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans @resid) @resid) 0.5) )))))
@@ -87,7 +87,7 @@
             (to-vect (plus (trans pars)
                 ;;(mmult (trans (rnorm (ncol x))) 
                 (mmult (trans (sample-normal (ncol x))) 
-                  (chol (mult s2 xtxi))))))
+                  (decomp-cholesky (mult s2 xtxi))))))
           (to-vect (trans s-sq)))) 
      :var s-sq}))
 

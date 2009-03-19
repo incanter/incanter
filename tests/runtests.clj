@@ -82,34 +82,34 @@
   (is (= (first (trans A)) (matrix [1 4 7 10] 4)))
   
   ;; combining matrices/vectors by row
-  (is (= (rbind (first A) (rest A)) A))
-  (is (= (rbind A A A) (rbind A (rbind A A))))
-  (is (= (rbind [1 2 3] [4 5 6]) (matrix [[1 2 3] 
+  (is (= (bind-rows (first A) (rest A)) A))
+  (is (= (bind-rows A A A) (bind-rows A (bind-rows A A))))
+  (is (= (bind-rows [1 2 3] [4 5 6]) (matrix [[1 2 3] 
                                           [4 5 6]])))
-  (is (= (rbind A [13 14 15]) (matrix [[1 2 3] 
+  (is (= (bind-rows A [13 14 15]) (matrix [[1 2 3] 
                                        [4 5 6] 
                                        [7 8 9] 
                                        [10 11 12] 
                                        [13 14 15]])))
-  (is (= (rbind [13 14 15] A) (matrix [[13 14 15] 
+  (is (= (bind-rows [13 14 15] A) (matrix [[13 14 15] 
                                        [1 2 3] 
                                        [4 5 6] 
                                        [7 8 9] 
                                        [10 11 12]])))
   
   ;; combining matrices/vectors by column
-  (is (= (cbind (trans (nth (trans A) 0)) (trans (nth (trans A) 2))) (matrix [[1 3] 
+  (is (= (bind-columns (trans (nth (trans A) 0)) (trans (nth (trans A) 2))) (matrix [[1 3] 
                                                                               [4 6] 
                                                                               [7 9] 
                                                                               [10 12]])))
-  (is (= (cbind [[1] [2] [3]] [[4] [5] [6]] [[7] [8] [9]]) (matrix [[1 4 7] 
+  (is (= (bind-columns [[1] [2] [3]] [[4] [5] [6]] [[7] [8] [9]]) (matrix [[1 4 7] 
                                                                     [2 5 8] 
                                                                     [3 6 9]])))
-  (is (= (cbind [13 14 15 16] A) (matrix [[13 1 2 3] 
+  (is (= (bind-columns [13 14 15 16] A) (matrix [[13 1 2 3] 
                                           [14 4 5 6] 
                                           [15 7 8 9] 
                                           [16 10 11 12]])))
-  (is (= (cbind A [13 14 15 16]) (matrix [[1 2 3 13] 
+  (is (= (bind-columns A [13 14 15 16]) (matrix [[1 2 3 13] 
                                           [4 5 6 14] 
                                           [7 8 9 15] 
                                           [10 11 12 16]])))
@@ -345,7 +345,7 @@
   ;; calculate the inverse of a matrix
   (is (= (solve (matrix [[2 0 0] [0 2 0] [0 0 2]])) (diag [1/2 1/2 1/2])))
   ;; calculate the Cholesky decomposition of a matrix
-  (is (= (chol (covariance test-mat))
+  (is (= (decomp-cholesky (covariance test-mat))
          (matrix [[14.577379737113251 5.2107570114319826 21.07052616887616] 
                   [0.0 0.8984403381871381 0.17090373166850123] 
                   [0.0 0.0 14.834572296083813]])))

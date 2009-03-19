@@ -24,7 +24,7 @@
 (cern.colt.matrix.doublealgo.Statistic/distance A cern.colt.matrix.doublealgo.Statistic/MAXIMUM)
 
 (eigenvalue-decomp (mmult (trans A) A))
-(svd A)
+(svd-decomp A)
 (lu-decomp (mmult (trans A) A))
 (qr-decomp A)
 (det (mmult (trans A) A))
