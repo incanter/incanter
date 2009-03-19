@@ -13,19 +13,21 @@
 <pre><code>   $ bin/clj</pre></code>
   
 *EXAMPLES*
-See examples/ directory
+See @examples/@ directory
 
+*DOCS*
+* "API":http://incanter.org/docs/api/
 
 *INCLUDED DEPENDENCIES*
-"Clojure":http://code.google.com/p/clojure/
-"Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs)
-"JLine":http://jline.sourceforge.net/
-"Colt":http://acs.lbl.gov/~hoschek/colt/
-"JFreeChart":http://www.jfree.org/jfreechart/
-"JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
-"GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
-"OpenCSV":http://opencsv.sourceforge.net/
-"JGraph":http://www.jgraph.com/ (for future development)
+* "Clojure":http://code.google.com/p/clojure/
+* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs)
+* "JLine":http://jline.sourceforge.net/
+* "Colt":http://acs.lbl.gov/~hoschek/colt/
+* "JFreeChart":http://www.jfree.org/jfreechart/
+* "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
+* "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
+* "OpenCSV":http://opencsv.sourceforge.net/
+* "JGraph":http://www.jgraph.com/ (for future development)
 
 
 
