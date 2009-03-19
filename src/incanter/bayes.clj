@@ -17,12 +17,12 @@
 
 
 (ns incanter.bayes 
-  (:use (incanter matrix stats)))
+  (:use (incanter core stats)))
 
 
 
 (defn bayes-regression-noref [N x y]
-  (let [pars (trans (lm-coef x y))
+  (let [pars (trans (lm-coef y x))
         xtxi (solve (mmult (trans x) x))
         nx (ncol x)
         shape (/ (- (nrow x) (ncol x)) 2)
@@ -36,8 +36,8 @@
         (if (= i N)
           {:coef (matrix coefs) :var variances}
           (let [
-                ;;b (to-vect (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (variances i))))))
-                b (to-vect (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (variances i))))))
+                ;;b (to-list (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (variances i))))))
+                b (to-list (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (variances i))))))
                 resid (minus y (mmult x b))
                 ;;s2 (/ 1 (gamma-rnd shape (mult (mmult (trans resid) resid) 0.5) ))
                 s2 (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans resid) resid) 0.5) ))
@@ -46,7 +46,7 @@
 
 
 (defn bayes-regression-full [N x y]
-  (let [pars (trans (lm-coef x y))
+  (let [pars (trans (lm-coef y x))
         xtxi (solve (mmult (trans x) x))
         nx (ncol x)
         b (ref [[0 0 0 0 0 0 0 0 0]])
@@ -59,8 +59,8 @@
       (dotimes [i N]
         (dosync
           (alter b conj 
-            ;;(to-vect (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
-            (to-vect (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
+            ;;(to-list (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
+            (to-list (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
           (ref-set resid (minus y (mmult x (@b (inc i)))))
           ;;(alter s2 conj (/ 1 (gamma-rnd shape (mult (mmult (trans @resid) @resid) 0.5) )))))
           (alter s2 conj (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans @resid) @resid) 0.5) )))))
@@ -70,9 +70,9 @@
 
 
 (defn bayes-regression [N x y]
-  (let [pars (lm-coef x y)
+  (let [pars (lm-coef y x)
         xtxi (solve (mmult (trans x) x))
-        resid (lm-resid x y)
+        resid (lm-resid y x)
         shape (/ (- (nrow x) (ncol x)) 2)
         rate (mult 1/2 (mmult (trans resid) resid))
         ;;s-sq (div 1 (rgamma N :shape shape :rate rate))
@@ -84,19 +84,19 @@
         ;(pmap ;; run a parallel map over the values of s-sq
         (map
           (fn [s2] 
-            (to-vect (plus (trans pars)
+            (to-list (plus (trans pars)
                 ;;(mmult (trans (rnorm (ncol x))) 
                 (mmult (trans (sample-normal (ncol x))) 
                   (decomp-cholesky (mult s2 xtxi))))))
-          (to-vect (trans s-sq)))) 
+          (to-list (trans s-sq)))) 
      :var s-sq}))
 
 
 
 (defn bayes-regression-mh [N x y]
   (let [
-         b-scale (to-vect (div (sqrt (lm-se x y)) 2))
-         s2-scale (/ (sd (mult (lm-resid x y) (div (dec (nrow x)) (- (nrow x) (ncol x))))) 2)
+         b-scale (to-list (div (sqrt (lm-se y x)) 2))
+         s2-scale (/ (sd (mult (lm-resid y x) (div (dec (nrow x)) (- (nrow x) (ncol x))))) 2)
          post-fn (fn [x y b s-sq] 
                   (let [resid (minus y (mmult x b))]
                     (plus (mult -1157.5 (log s-sq)) 

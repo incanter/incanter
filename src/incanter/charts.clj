@@ -17,11 +17,16 @@
 
 
 (ns incanter.charts 
-  (:use (incanter matrix)))
+  (:use (incanter core)
+        (clojure inspector)))
+
+
+
+
 
 (defn histogram [x & options]
   (let [opts (if options (apply assoc {} options) nil)
-        data (if (matrix? x) (to-vect x) x)
+        data (if (matrix? x) (to-list x) x)
         nbins (if (:nbins opts) (:nbins opts) 10)
         main-title (if (:title opts) (:title opts) "Histogram")
         x-lab (if (:x-label opts) (:x-label opts) "X")
@@ -46,8 +51,8 @@
 
 (defn scatter [x y & options]
   (let [opts (if options (apply assoc {} options) nil)
-        _x (if (matrix? x) (to-vect x) x)
-        _y (if (matrix? y) (to-vect y) y)
+        _x (if (matrix? x) (to-list x) x)
+        _y (if (matrix? y) (to-list y) y)
         main-title (if (:title opts) (:title opts) "Scatter Plot")
         x-lab (if (:x-label opts) (:x-label opts) "x")
         y-lab (if (:y-label opts) (:y-label opts) "y")
@@ -71,10 +76,10 @@
 
 
 
-(defn xyplot [x y & options]
+(defn xy-plot [x y & options]
   (let [opts (if options (apply assoc {} options) nil)
-        _x (if (matrix? x) (to-vect x) x)
-        _y (if (matrix? y) (to-vect y) y)
+        _x (if (matrix? x) (to-list x) x)
+        _y (if (matrix? y) (to-list y) y)
         main-title (if (:title opts) (:title opts) "XY Plot")
         x-lab (if (:x-label opts) (:x-label opts) "x")
         y-lab (if (:y-label opts) (:y-label opts) "y")
@@ -97,9 +102,9 @@
           false))))
 
 
-(defn boxplot [x & options]
+(defn box-plot [x & options]
   (let [opts (if options (apply assoc {} options) nil)
-        data (if (matrix? x) (to-vect x) x)
+        data (if (matrix? x) (to-list x) x)
         main-title (if (:title opts) (:title opts) "Boxplot")
         x-label (if (:x-label opts) (:x-label opts) "Series")
         y-label (if (:y-label opts) (:y-label opts) "Values")
@@ -121,8 +126,20 @@
 
 
 
+;; view multi-method for matrices, charts, etc.
+(defmulti view 
+  " This is a general 'view' function. If given a matrix, it will
+    display it in a Java Swing table (using clojure.inspector/inspect-table).
+    If given a chart object from incanter.charts, it will display it in a
+    new window."
+  (fn [obj & args] (class obj)))
 
-(defn plot [chart & options]
+
+(defmethod view incanter.Matrix [obj & args]
+  (inspect-table obj))
+
+
+(defmethod view org.jfree.chart.JFreeChart [chart & options]
   (let [opts (if options (apply assoc {} options) nil)
         window-title (if (:window-title opts) (:window-title opts) "Incanter Plot")
         width (if (:width opts) (:width opts) 500)
@@ -147,8 +164,8 @@
 
 (defmethod add-series org.jfree.data.xy.XYSeriesCollection [chart x y & options]
   (let [opts (if options (apply assoc {} options) nil)
-        _x (if (matrix? x) (to-vect x) x)
-        _y (if (matrix? y) (to-vect y) y)
+        _x (if (matrix? x) (to-list x) x)
+        _y (if (matrix? y) (to-list y) y)
         data-plot (.getPlot chart)
         n (.getDatasetCount data-plot)
         series-lab (if (:series-label opts) (:series-label opts) (str "Data " n))
@@ -162,7 +179,7 @@
 
 (defmethod add-series org.jfree.data.statistics.HistogramDataset [chart x & options]
   (let [opts (if options (apply assoc {} options) nil)
-        _x (if (matrix? x) (to-vect x) x)
+        _x (if (matrix? x) (to-list x) x)
         data-plot (.getPlot chart)
         n (.getDatasetCount data-plot)
         nbins (if (:nbins opts) (:nbins opts) 10)
@@ -176,7 +193,7 @@
 
 (defmethod add-series org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset [chart x & options]
   (let [opts (if options (apply assoc {} options) nil)
-        _x (if (matrix? x) (to-vect x) x)
+        _x (if (matrix? x) (to-list x) x)
         data-plot (.getCategoryPlot chart)
         n-col (.getColumnCount (.getDataset data-plot)) 
         n-row (.getRowCount (.getDataset data-plot))

@@ -22,7 +22,7 @@
 (ns incanter.io 
   (:import (java.io FileReader)
            (au.com.bytecode.opencsv CSVReader))
-  (:use (incanter matrix)
+  (:use (incanter core)
         (clojure set)))
 
 
@@ -92,8 +92,8 @@
   (let [levels (get-factors coll)]
     (for [value coll] (levels value))))
 
-(defn log2 [a]
-  (/ (Math/log a) (Math/log 2)))
+;(defn log2 [a]
+;  (/ (Math/log a) (Math/log 2)))
 
 
 (defn bit-encode [n]
@@ -122,7 +122,7 @@
       (matrix col))))
 
 
-(defn as-matrix 
+(defn to-matrix 
   "Converts a dataset into a matrix."
   ([dataset]
    (reduce bind-columns 

@@ -16,7 +16,7 @@
 
 
 
-(ns incanter.matrix 
+(ns incanter.core 
   (:import (incanter Matrix)
            (cern.colt.matrix DoubleMatrix2D 
                              DoubleFactory2D 
@@ -261,6 +261,16 @@
    ([A] (-transform-with A #(Math/log %) log)))
 
 
+(defn log2 
+  "Returns the log base 2 of the elements in the given matrix, sequence or number."
+   ([A] (-transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
+
+
+(defn log10 
+  "Returns the log base 10 of the elements in the given matrix, sequence or number."
+   ([A] (-transform-with A #(Math/log10 %) (lg 10.0))))
+
+
 (defn exp 
   "Returns the exponential of the elements in the given matrix, sequence or number."
    ([A] (-transform-with A #(Math/exp %) exp)))
@@ -303,6 +313,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MATRIX FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn to-list 
+  " Returns a list-of-lists if the given matrix is two-dimensional,
+    and a flat list if the matrix is one-dimensional."
+ ([#^Matrix mat] 
+  (cond
+    (and (coll? mat) (not (matrix? mat)))
+      mat 
+    (= (.columns mat) 1)
+      (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
+    (= (.rows mat) 1)
+      (first (map #(seq %) (seq (.toArray mat))))
+    :else
+      (map #(seq %) (seq (.toArray mat))))))
 
 
 (defn #^Matrix copy 
@@ -353,6 +378,48 @@
     http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/Algebra.html
 "
   ([mat] (.trace cern.colt.matrix.linalg.Algebra/DEFAULT mat)))
+
+
+
+(defn vectorize 
+  " Returns the vectorization (i.e. vec) of the given matrix.
+    The vectorization of an m×n matrix A, denoted by vec(A), 
+    is the mn × 1 column vector obtain by stacking the columns 
+    of the matrix A on top of one another.
+
+    For instance:
+      (= (vectorize (matrix [[a b] [c d]])) (matrix [a c b d]))
+
+    Examples:
+      (def A (matrix [[1 2] [3 4]])) 
+      (vectorize A)
+
+    References:
+      http://en.wikipedia.org/wiki/Vectorization_(mathematics)
+  "
+  ([mat]
+   (reduce #(concat %1 (to-list %2)) '() (trans mat))))
+
+
+(defn half-vectorize 
+  " Returns the half-vectorization (i.e. vech) of the given matrix.
+    The half-vectorization, vech(A), of a symmetric nxn matrix A 
+    is the n(n+1)/2 x 1 column vector obtained by vectorizing only 
+    the lower triangular part of A.
+
+    For instance:
+      (= (half-vectorize (matrix [[a b] [b d]])) (matrix [a b d]))
+
+    Examples:
+      (def A (matrix [[1 2] [2 4]])) 
+      (half-vectorize A)
+
+    References:
+      http://en.wikipedia.org/wiki/Vectorization_(mathematics)
+  "
+  ([mat]
+   (for [j (range (nrow mat)) i (range j (nrow mat))] (sel mat i j))))
+
 
 
 
@@ -460,6 +527,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, #^java.io.Writer w]
   (let [formatter (Formatter. "%1.2f")]
@@ -471,39 +539,35 @@
 
 
 
-(defn to-vect [#^Matrix mat]
+(defn to-vect  
+  " Returns a vector-of-vectors if the given matrix is two-dimensional,
+    and a flat vector if the matrix is one-dimensional. This is a bit
+    slower than the to-list function. "
+ ([#^Matrix mat]
   (into [] (cond
              (= (.columns mat) 1)
               (first (map #(into [] (seq %)) (seq (.toArray (.viewDice mat)))))
              (= (.rows mat) 1)
               (first (map #(into [] (seq %)) (seq (.toArray mat))))
              :else
-              (map #(into [] (seq %)) (seq (.toArray mat))))))
+              (map #(into [] (seq %)) (seq (.toArray mat)))))))
 
 
-
-(defn to-1D-vect [mat]
-  (cond 
-    (and (coll? mat) (not (matrix? mat)))
-      mat 
-    (and (matrix? mat) (= (.columns mat) 1))
-      (to-vect (.viewDice #^Matrix mat))
-    (and (matrix? mat) (= (.rows mat) 1))
-      (to-vect #^Matrix mat)
-    (matrix? mat)
-      (throw (Exception. "Argument must be a column or row matrix!"))))
-
-
-(defn length [coll]
-  (cond
-    (number? coll) 
-      1
-    (coll? coll)
-      (count coll)
-    (matrix? coll)
-      (* (.rows #^Matrix coll) (.columns #^Matrix coll))
-    :else
-      (throw (Exception. "Argument must be a collection or matrix!"))))
+(defn length 
+  " A version of count that works on collections, matrices, and numbers. 
+    The length of a number is one, the length of a collection is its count,
+    and the length of a matrix is the number of elements it contains (nrow*ncol).
+  "
+  ([coll]
+    (cond
+      (number? coll) 
+        1
+      (matrix? coll)
+        (* (.rows #^Matrix coll) (.columns #^Matrix coll))
+      (coll? coll)
+        (count coll)
+      :else
+        (throw (Exception. "Argument must be a collection or matrix!")))))
       
 
 

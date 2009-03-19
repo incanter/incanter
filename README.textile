@@ -11,12 +11,15 @@
 
 *START Clojure*
 <pre><code>   $ bin/clj</pre></code>
-  
+
+
 *EXAMPLES*
-See @examples/@ directory
+* See @examples/@ directory
+
 
 *DOCS*
 * "API":http://incanter.org/docs/api/
+
 
 *INCLUDED DEPENDENCIES*
 * "Clojure":http://code.google.com/p/clojure/

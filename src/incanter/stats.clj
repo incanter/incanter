@@ -21,7 +21,7 @@
            (cern.jet.random Gamma)
            (cern.jet.random.engine MersenneTwister)
            (cern.jet.stat Descriptive))
-  (:use (incanter matrix)))
+  (:use (incanter core)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
@@ -1053,21 +1053,21 @@
 (defn sum-of-squares 
   "Returns the sum-of-squares of the given sequence."
   ([x]
-    (let [xx (to-1D-vect x)]
+    (let [xx (to-list x)]
       (Descriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
 
 
 (defn sum 
   "Returns the sum of the given sequence."
   ([x]
-    (let [xx (to-1D-vect x)]
+    (let [xx (to-list x)]
       (Descriptive/sum (DoubleArrayList. (double-array xx))))))
 
 
 (defn prod 
   "Returns the product of the given sequence."
   ([x]
-    (let [xx (to-1D-vect x)]
+    (let [xx (to-list x)]
       (Descriptive/product (DoubleArrayList. (double-array xx))))))
 
 
@@ -1085,7 +1085,7 @@
 
 " 
 ([x]
-  (let [xx (to-1D-vect x)]
+  (let [xx (to-list x)]
     (Descriptive/mean (DoubleArrayList. (double-array xx))))))
 
 
@@ -1124,8 +1124,8 @@
 "
   ([x y]
     (let [
-          xx (to-1D-vect x)
-          yy (to-1D-vect y)
+          xx (to-list x)
+          yy (to-list y)
         ]
       (Descriptive/covariance 
         (DoubleArrayList. (double-array xx))
@@ -1152,7 +1152,7 @@
 
 " 
   ([x]
-    (let [xx (to-1D-vect x)]
+    (let [xx (to-list x)]
       (Descriptive/median (DoubleArrayList. (double-array xx))))))
 
 
@@ -1207,24 +1207,78 @@
 
 
 
-;;;;;;;;;;;;;;; OLS FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;; OLS REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn lm-coef [x y]
-  (mmult (solve (mmult (trans x) x)) (mmult (trans x) y)))
+(defn lm-coef [y x]
+  (let [xtx (mmult (trans x) x)
+        xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
+        xty (mmult (trans x) y)]
+  (if (or (number? xtxi) (number? xty)) 
+    (mult xtxi xty)
+    (mmult xtxi xty))))
 
 
-(defn lm-resid [x y]
-  (minus y (mmult x (lm-coef x y))))
+(defn lm-pred [y x]
+  (let [coefs (lm-coef y x)]
+    (if (number? coefs)
+      (mult x coefs)
+      (mmult x coefs))))
 
 
-(defn lm-se [x y]
-  (let [S (sum-of-squares (lm-resid x y))
+(defn lm-resid [y x]
+  (minus y (lm-pred y x)))
+
+
+
+(defn lm-se [y x]
+  (let [S (sum-of-squares (lm-resid y x))
         n (nrow y)
         p (ncol x)
-        xtxi (solve (mmult (trans x) x))
+        xtx (mmult (trans x) x)
+        xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
        ]
-    (into [] (for [i (range p)] (* (/ S (- n p 1)) (sel xtxi i i))))))
+    (if (number? xtxi)
+      (* (/ S (- n p 1)) xtxi)
+      (for [i (range p)] (* (/ S (- n p 1)) (sel xtxi i i))))))
 
 
+
+
+(defn linear-model 
+  " 
+  Returns the results of performing a OLS linear regression of y on x.
+
+  Arguments:
+    y is a vector (or sequence) of values for the dependent variable
+    x is a vector or matrix of values for the independent variables
+
+  Options:
+    :intercept (default true) indicates weather an intercept term should be included
+
+  Returns:
+    a map containing:
+      :coefs -- the regression coefficients
+      :residuals -- the residuals of each observation
+      :standard-errors -- the standard errors of the coeffients
+
+  Examples:
+    (use '(incanter core stats io))
+    (def test-data (to-matrix (read-dataset \"data/test.dat\" :header true)))
+    (def y (sel test-data true 1))
+    (def x (sel test-data true 2))
+    (linear-model y x) ; with intercept term
+    (linear-model y x :intercept false) ; without intercept term
+
+  References:
+    http://en.wikipedia.org/wiki/OLS_Regression
+
+  "
+  ([y x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          intercept? (if (false? (:intercept opts)) false true)
+          indep-vars (if intercept? (bind-columns (replicate (nrow x) 1) x) x)] 
+      {:coefs (lm-coef y indep-vars)
+       :residuals (lm-resid y indep-vars)
+       :standard-errors (lm-se y indep-vars)})))
 
 

@@ -26,11 +26,11 @@
 
 (ns tests.runtests
   (:use (clojure.contrib test-is) 
-        (incanter matrix io stats charts bayes)))
+        (incanter core io stats charts bayes)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; UNIT TESTS FOR incanter.matrix.clj
+;; UNIT TESTS FOR incanter.core.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; define a simple matrix for testing
@@ -139,13 +139,13 @@
                                       [0 0 1]])))
   
   ;; convert a matrix to clojure vectors
-  (is (= (to-vect A) [[1 2 3] 
+  (is (= (to-list A) [[1 2 3] 
                       [4 5 6] 
                       [7 8 9] 
                       [10 11 12]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
-  (is (= (to-vect (matrix [1 2 3 4 5 6])) [1 2 3 4 5 6]))
-  (is (= (to-vect (trans (matrix [1 2 3 4 5 6]))) [1 2 3 4 5 6]))
+  (is (= (to-list (matrix [1 2 3 4 5 6])) [1 2 3 4 5 6]))
+  (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1 2 3 4 5 6]))
   
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
   (is (= (sel A 3 2) 12))
@@ -293,18 +293,18 @@
                  (str (System/getProperty "incanter.home") "/data/iris.dat") 
                  :header true))
 ;; read in the social science survey dataset from a space delimited file 
-(def ols-data (as-matrix (read-dataset 
+(def ols-data (to-matrix (read-dataset 
                            (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
                            :header true)))
 
 ;; convert the space-delimited dataset into a matrix
-(def test-mat (as-matrix test-data))
+(def test-mat (to-matrix test-data))
 ;; convert the csv dataset into a matrix
-(def test-csv-mat (as-matrix test-csv-data)) 
+(def test-csv-mat (to-matrix test-csv-data)) 
 ;; convert the tab-delimited dataset into a matrix
-(def test-tdd-mat (as-matrix test-tdd-data))
+(def test-tdd-mat (to-matrix test-tdd-data))
 ;; convert the iris-data into a matrix, encoding strings into multiple dummy variables
-(def iris-mat (as-matrix iris-data))
+(def iris-mat (to-matrix iris-data))
 
 (deftest io-validation
 
@@ -426,25 +426,25 @@
 
 (deftest charts
   
-  (plot (histogram (sample-normal 1000)))
-  (plot (histogram (sample-gamma 1000)))
-  (plot (histogram (sample-uniform 1000)))
+  (view (histogram (sample-normal 1000)))
+  (view (histogram (sample-gamma 1000)))
+  (view (histogram (sample-uniform 1000)))
   (save-png (histogram (sample-normal 1000)) "/tmp/norm_hist.png")
   
-  (plot (histogram (sample-gamma 1000) 
+  (view (histogram (sample-gamma 1000) 
                    :nbins 30 
                    :title "Gamma Distribution" 
                    :x-label "Value"))
   
   
-  (plot (scatter 
+  (view (scatter 
           (sel test-mat true 1) 
           (sel test-mat true 2) 
           :series-lab "Test data col 1 versus col 2"))
   
   
   (def plot1 (scatter (sample-normal 100) (sample-normal 100)))
-  (plot plot1)
+  (view plot1)
   (add-series plot1 (sample-normal 100) (sample-normal 100))
   (add-series plot1 (sample-normal 100) (sample-normal 100))
   (add-series plot1 (sample-normal 100) (sample-normal 100))
@@ -456,32 +456,32 @@
   
   
   (def hist0 (histogram (sample-normal 100)))
-  (plot hist0)
+  (view hist0)
   (add-series hist0 (sample-gamma 100))
   (set-alpha hist0 0.5)
   
-  (def boxplt (boxplot (sample-gamma 1000))) 
-  (plot boxplt)
+  (def boxplt (box-plot (sample-gamma 1000))) 
+  (view boxplt)
   (add-series boxplt (sample-gamma 1000))
   (add-series boxplt (sample-gamma 1000))
   (add-series boxplt (sample-gamma 1000))
   (add-series boxplt (sample-gamma 1000))
   
   
-  (def chart1 (xyplot (range 100) (range 100))) 
-  (plot chart1) 
+  (def chart1 (xy-plot (range 100) (range 100))) 
+  (view chart1) 
   (add-series chart1 (range 100) (mult 1/2 (range 100)))
   
   
   (def x1 (range -10 10 0.01))
-  (def chart2 (xyplot x1 (pow x1 2)))
-  (plot chart2) 
+  (def chart2 (xy-plot x1 (pow x1 2)))
+  (view chart2) 
   (add-series chart2 x1 (mult 1/2 (pow x1 2)))
   
   
   (def x2 (range 0 4 0.01))
-  (def chart2 (xyplot x2 (exp x1)))
-  (plot chart2)
+  (def chart2 (xy-plot x2 (exp x1)))
+  (view chart2)
  
 ) ;; end of charts tests
 
