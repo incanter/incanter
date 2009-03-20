@@ -220,5 +220,46 @@
 (defn set-y-label [chart label]
   (.setLabel (.getRangeAxis (.getPlot chart)) label))
 
-  
+ 
+;; FUNCTION TO ADD LINES TO SCATTER PLOT
+;;
+
+
+(defn add-line 
+" Plots a line on the given scatter chart of the (x,y) points.
+
+  Examples:
+    (use '(incanter core stats io))
+    (def test-data (to-matrix (read-dataset \"data/test.dat\" :header true)))
+    (def y (sel test-data true 1))
+    (def x (sel test-data true 2))
+    (def lm1 (linear-model y x :intercept false))
+    (def y-hat (mult (:coefs lm1) x))
+    (def plot1 (scatter x y))
+    (view plot1)
+    (add-line plot1 x y-hat)
+
+
+"
+  ([chart x y & options]
+  (let [opts (if options (apply assoc {} options) nil)
+        _x (if (matrix? x) (to-list x) x)
+        _y (if (matrix? y) (to-list y) y)
+        data-plot (.getPlot chart)
+        n (.getDatasetCount data-plot)
+        series-lab (if (:series-label opts) (:series-label opts) (str "Data " n))
+        legend? (if (:series-label opts) true false)
+        data-series (org.jfree.data.xy.XYSeries. series-lab)
+        line-renderer (org.jfree.chart.renderer.xy.XYLineAndShapeRenderer. true false)
+        reg-dataset (org.jfree.data.xy.XYSeriesCollection.)
+       ]
+    (do
+      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+      ;(.addSeries (.getDataset data-plot) data-series)
+      (.addSeries reg-dataset data-series)
+      (.setDataset data-plot 1 reg-dataset)
+      (.setSeriesPaint line-renderer 1 java.awt.Color/blue)
+      (.setRenderer data-plot 1 line-renderer)))))
+
+
 

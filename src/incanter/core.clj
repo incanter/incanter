@@ -129,13 +129,42 @@
       (.viewDice #^Matrix (matrix #^double-array mat)))))
 
 
-(defn sel 
-  "If rows and columns are numbers, sel (i.e. select) returns the corresponding element 
-  of the given matrix. If rows and/or columns are sequences, sel returns the corresponding
-  submatrix of mat. If rows is the value 'true', all the rows corresponding to the values
-  of columns are returned. If columns is the value 'true', all the columns corresponding to
-  the values of rows are returned.
-  "
+(defn mget 
+  " Returns the element of the matrix at the given row and column."
+ ([#^Matrix mat row column] (.getQuick mat row column)))
+
+
+(defmulti sel 
+"
+  Returns an element or subset of the given matrix. 
+
+  Argument:
+    a matrix object
+
+  Options:
+    :rows (default true) 
+      returns all rows by default, can pass a row index or sequence of row indices
+    :columns (default true) 
+      returns all columns by default, can pass a column index or sequence of column indices
+    :filter (default nil) 
+      a function can be provided to filter the rows of the matrix
+
+  Examples:
+    (def test-data (to-matrix (read-dataset \"data/test.dat\" :header true)))
+    (sel test-data 0 0) ; first element
+    (sel test-data :rows 0 :columns 0) ; also first element
+    (sel test-data :columns 0) ; first column of all rows
+    (sel test-data :columns [0 2]) ; first and third column of all rows
+    (sel test-data :rows (range 10) :columns (range 2)) ; first two rows of the first 10 columns
+    (sel test-data :rows (range 10)) ; all columns of the first 10 rows
+    ;; return only the first 10 even rows
+    (sel test-data :rows (range 10) :filter #(even? (int (nth % 0))))
+"
+(fn [mat & options] (keyword? (first options))))
+
+
+
+(defmethod sel false
   ([#^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
         cols (if (number? columns) [columns] columns)]
@@ -150,6 +179,34 @@
         (.viewSelection mat (int-array rws) (int-array cols))
       (and (true? rws) (true? cols))
         mat))))
+
+
+
+(defmethod sel true
+  ([#^Matrix mat & options]
+   (let [opts (if options (apply assoc {} options) nil)
+         rows (if (:rows opts) (:rows opts) true)
+         cols (if (:columns opts) (:columns opts) true)
+         row-filter (if (:filter opts) (:filter opts) nil)
+         result (cond
+                  (and (number? rows) (number? cols))
+                    (.getQuick mat rows cols)
+                  (and (true? rows) (coll? cols))
+                    (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
+                  (and (true? rows) (number? cols))
+                    (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
+                  (and (coll? rows) (true? cols))
+                    (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
+                  (and (number? rows) (true? cols))
+                    (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
+                  (and (coll? rows) (coll? cols))
+                    (.viewSelection mat (int-array rows) (int-array cols))
+                  (and (true? rows) (true? cols))
+                    mat)
+          ]
+     (if (nil? row-filter)
+       result
+       (matrix (filter row-filter result))))))
 
 
 
@@ -383,8 +440,8 @@
 
 (defn vectorize 
   " Returns the vectorization (i.e. vec) of the given matrix.
-    The vectorization of an m×n matrix A, denoted by vec(A), 
-    is the mn × 1 column vector obtain by stacking the columns 
+    The vectorization of an m-by-n matrix A, denoted by vec(A), 
+    is the m*n-by-1 column vector obtain by stacking the columns 
     of the matrix A on top of one another.
 
     For instance:

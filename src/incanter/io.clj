@@ -22,8 +22,8 @@
 (ns incanter.io 
   (:import (java.io FileReader)
            (au.com.bytecode.opencsv CSVReader))
-  (:use (incanter core)
-        (clojure set)))
+  (:use (incanter core) ))
+        ;(clojure set)))
 
 
 (defn -parse-string [value] 
@@ -92,8 +92,6 @@
   (let [levels (get-factors coll)]
     (for [value coll] (levels value))))
 
-;(defn log2 [a]
-;  (/ (Math/log a) (Math/log 2)))
 
 
 (defn bit-encode [n]

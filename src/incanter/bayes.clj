@@ -22,11 +22,11 @@
 
 
 (defn bayes-regression-noref [N x y]
-  (let [pars (trans (lm-coef y x))
+  (let [lm (linear-model y x :intercept false)
+        pars (trans (:coefs lm))
         xtxi (solve (mmult (trans x) x))
         nx (ncol x)
         shape (/ (- (nrow x) (ncol x)) 2)
-        ;;gamma-rnd (gamma-generator)
        ]
       (loop [
              coefs [[0 0 0 0 0 0 0 0 0]]
@@ -36,33 +36,29 @@
         (if (= i N)
           {:coef (matrix coefs) :var variances}
           (let [
-                ;;b (to-list (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (variances i))))))
                 b (to-list (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (variances i))))))
                 resid (minus y (mmult x b))
-                ;;s2 (/ 1 (gamma-rnd shape (mult (mmult (trans resid) resid) 0.5) ))
                 s2 (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans resid) resid) 0.5) ))
                ]
             (recur (conj coefs b) (conj variances s2) (inc i)))))))
 
 
 (defn bayes-regression-full [N x y]
-  (let [pars (trans (lm-coef y x))
+  (let [lm (linear-model y x :intercept false)
+        pars (trans (:coefs lm))        
         xtxi (solve (mmult (trans x) x))
         nx (ncol x)
         b (ref [[0 0 0 0 0 0 0 0 0]])
         s2 (ref [1])
         resid (ref 0)
         shape (/ (- (nrow x) (ncol x)) 2)
-        ;;gamma-rnd (gamma-generator)
        ]
     (do
       (dotimes [i N]
         (dosync
           (alter b conj 
-            ;;(to-list (plus pars (mmult (trans (rnorm nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
             (to-list (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (@s2 i)))))))
           (ref-set resid (minus y (mmult x (@b (inc i)))))
-          ;;(alter s2 conj (/ 1 (gamma-rnd shape (mult (mmult (trans @resid) @resid) 0.5) )))))
           (alter s2 conj (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans @resid) @resid) 0.5) )))))
         ;; return a map with the estimated coefficients and variances
        {:coef (matrix @b) :var @s2})))
@@ -70,12 +66,12 @@
 
 
 (defn bayes-regression [N x y]
-  (let [pars (lm-coef y x)
+  (let [lm (linear-model y x :intercept false)
+        pars (:coefs lm)
         xtxi (solve (mmult (trans x) x))
-        resid (lm-resid y x)
+        resid (:residuals lm)
         shape (/ (- (nrow x) (ncol x)) 2)
         rate (mult 1/2 (mmult (trans resid) resid))
-        ;;s-sq (div 1 (rgamma N :shape shape :rate rate))
         s-sq (div 1 (sample-gamma N :shape shape :rate rate))
        ]
     ;; return a map with the estimated coefficients and variances
@@ -85,7 +81,6 @@
         (map
           (fn [s2] 
             (to-list (plus (trans pars)
-                ;;(mmult (trans (rnorm (ncol x))) 
                 (mmult (trans (sample-normal (ncol x))) 
                   (decomp-cholesky (mult s2 xtxi))))))
           (to-list (trans s-sq)))) 
@@ -94,9 +89,9 @@
 
 
 (defn bayes-regression-mh [N x y]
-  (let [
-         b-scale (to-list (div (sqrt (lm-se y x)) 2))
-         s2-scale (/ (sd (mult (lm-resid y x) (div (dec (nrow x)) (- (nrow x) (ncol x))))) 2)
+  (let [ lm (linear-model y x :intercept false)
+         b-scale (to-list (div (sqrt (:std-errors lm)) 2))
+         s2-scale (/ (sd (mult (:residuals lm) (div (dec (nrow x)) (- (nrow x) (ncol x))))) 2)
          post-fn (fn [x y b s-sq] 
                   (let [resid (minus y (mmult x b))]
                     (plus (mult -1157.5 (log s-sq)) 
@@ -105,7 +100,6 @@
                   (< (- (post-fn x y cand-b cand-s2) 
                         (post-fn x y old-b old-s2))
                      (log (rand))))
-        ;;norm-rand (normal-generator)
         ncol-x (ncol x)
        ]
     (loop [
@@ -118,7 +112,6 @@
           (let [
                 old-b (coefs i)
                 old-s2 (variances i)
-                ;;cand-b (into [] (map #(+ (norm-rand 0 %1) %2) b-scale old-b))
                 cand-b (into [] (map #(+ (sample-normal 1 :mean 0 :sd %1) %2) b-scale old-b))
                 new-b (loop [b old-b j 0]
                           (if (= j ncol-x)
@@ -128,7 +121,6 @@
                                 b
                                 (assoc b j (cand-b j)))
                               (inc j)))) 
-                ;;cand-s2 (+ (norm-rand 0 s2-scale) old-s2)
                 cand-s2 (+ (sample-normal 1 :mean 0 :sd s2-scale) old-s2)
                 new-s2 (if (or (< cand-s2 0) (reject? x y new-b cand-s2 new-b old-s2)) 
                          old-s2 

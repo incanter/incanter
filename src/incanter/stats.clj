@@ -1209,43 +1209,10 @@
 
 ;;;;;;;;;;;;;;; OLS REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn lm-coef [y x]
-  (let [xtx (mmult (trans x) x)
-        xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
-        xty (mmult (trans x) y)]
-  (if (or (number? xtxi) (number? xty)) 
-    (mult xtxi xty)
-    (mmult xtxi xty))))
 
 
-(defn lm-pred [y x]
-  (let [coefs (lm-coef y x)]
-    (if (number? coefs)
-      (mult x coefs)
-      (mmult x coefs))))
-
-
-(defn lm-resid [y x]
-  (minus y (lm-pred y x)))
-
-
-
-(defn lm-se [y x]
-  (let [S (sum-of-squares (lm-resid y x))
-        n (nrow y)
-        p (ncol x)
-        xtx (mmult (trans x) x)
-        xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
-       ]
-    (if (number? xtxi)
-      (* (/ S (- n p 1)) xtxi)
-      (for [i (range p)] (* (/ S (- n p 1)) (sel xtxi i i))))))
-
-
-
-
-(defn linear-model 
-  " 
+(defn linear-model
+" 
   Returns the results of performing a OLS linear regression of y on x.
 
   Arguments:
@@ -1259,7 +1226,7 @@
     a map containing:
       :coefs -- the regression coefficients
       :residuals -- the residuals of each observation
-      :standard-errors -- the standard errors of the coeffients
+      :std-errors -- the standard errors of the coeffients
 
   Examples:
     (use '(incanter core stats io))
@@ -1272,13 +1239,33 @@
   References:
     http://en.wikipedia.org/wiki/OLS_Regression
 
-  "
+"
   ([y x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           intercept? (if (false? (:intercept opts)) false true)
-          indep-vars (if intercept? (bind-columns (replicate (nrow x) 1) x) x)] 
-      {:coefs (lm-coef y indep-vars)
-       :residuals (lm-resid y indep-vars)
-       :standard-errors (lm-se y indep-vars)})))
+          _x (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
+          xtx (mmult (trans _x) _x)
+          xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
+          xty (mmult (trans _x) y)
+          coefs (if (or (number? xtxi) (number? xty)) 
+                  (mult xtxi xty)
+                  (mmult xtxi xty))
+          y-hat (if (number? coefs)
+                  (mult _x coefs)
+                  (mmult _x coefs))
+          resid (minus y y-hat)
+          S (sum-of-squares resid)
+          n (nrow y)
+          p (ncol _x)
+          std-errors (if (number? xtxi)
+                       (* (/ S (- n p 1)) xtxi)
+                       (for [i (range p)] (* (/ S (- n p 1)) (sel xtxi i i))))
+         ]
+      {:coefs coefs
+       :residuals resid
+       :std-errors std-errors})))
+;      {:coefs (if (number? coefs) coefs (to-list coefs))
+;       :residuals (if (number? resid) resid (to-list resid))
+;       :std-errors (if (number? std-errors) std-errors (to-list std-errors))})))
 
 
