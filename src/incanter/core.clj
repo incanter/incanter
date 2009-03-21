@@ -628,3 +628,29 @@
       
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; DATASET FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn dataset [column-names & data] 
+  {:type ::dataset
+   :column-names column-names
+   :rows (into [] (map #(apply assoc {} (interleave column-names %)) (first data)))})
+
+
+
+(defn get-column-id [dataset column-key]
+  (let [headers (:column-names dataset)
+        id (if (number? column-key)
+             (if (some #(= column-key %) headers)
+               column-key
+               (nth headers column-key))
+             column-key)]
+    id))
+
+
+(defn get-columns [dataset column-keys]
+  (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
+

@@ -1171,6 +1171,7 @@
     (Descriptive/sampleStandardDeviation (length x) (variance x))))
 
 
+
 (defn quantile 
 "
   Returns the quantiles of the data, x. By default it returns the min, 
@@ -1203,6 +1204,70 @@
           (cern.jet.stat.Descriptive/quantile data probs)
           (seq (.elements (cern.jet.stat.Descriptive/quantiles data probs)))))))
 
+
+
+(defn sample 
+" Returns a sample of the given size from the given collection. If replacement 
+  is set to false it returns a set, otherwise it returns a list.
+
+  Arguments:
+    coll -- collection to be sampled from
+    size -- sample size
+
+  Options:
+    :replacement (default true) -- sample with replacement
+
+
+  Examples:
+    (sample [:red :green :blue] 10) ; choose 10 items that are either :red, :green, or :blue.
+    (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  4 :replacement false) ; choose 4 random letters.
+
+"
+  ([coll size & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          replacement? (if (false? (:replacement opts)) false true)
+          max-idx (dec (count coll))]
+      (if replacement?
+        (map #(nth coll %) (sample-uniform size :min 0 :max max-idx :integers true))
+        (if (> size (count coll))
+          (throw (Exception. "'size' can't be larger than (count coll) without replacement!"))
+          (loop [samp #{}]
+            (if (= (count samp) size)
+              samp
+            (recur (conj samp (nth coll (sample-uniform 1 :min 0 :max max-idx :integers true)))))))))))
+
+
+
+
+(defn cumulative-sum 
+  " Returns a sequence of cumulative sum for the given collection. For instance 
+    The first value equals the first value of the argument, the second value is
+    the sum of the first two arguments, the third is the sum of the first three
+    arguments, etc.
+
+    Examples:
+      (cumulative-sum (range 100))
+  "
+  ([coll] 
+   (let [n (count coll)]
+    (loop [in-coll (rest coll)
+           cumu-sum [(first coll)]]
+      (if (empty? in-coll)
+        cumu-sum
+        (recur (rest in-coll) (conj cumu-sum (+ (last cumu-sum) (first in-coll)))))))))
+
+
+
+(defn cumulative-mean 
+  " Returns a sequence of cumulative means for the given collection. For instance 
+    The first value equals the first value of the argument, the second value is
+    the mean of the first two arguments, the third is the mean of the first three
+    arguments, etc.
+
+    Examples:
+      (cumulative-mean (sample-normal 100))
+  "
+  ([coll] (map / (cumulative-sum coll) (range 1 (inc (count coll))))))
 
 
 
@@ -1268,4 +1333,100 @@
 ;       :residuals (if (number? resid) resid (to-list resid))
 ;       :std-errors (if (number? std-errors) std-errors (to-list std-errors))})))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CATEGORICAL VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn categorical-var
+" Returns a categorical variable based on the values in the given collection.
+
+  Options:
+    :data (default nil) factors will be extracted from the given data.
+    :ordered? (default false) indicates that the variable is ordinal.
+    :labels (default (sort (into #{} data)))
+    :levels (range (count labels))
+
+  Examples:
+    (categorical-var :data [:a :a :c :b :a :c :c])
+    (categorical-var :labels [:a :b :c])
+    (categorical-var :labels [:a :b :c] :levels [10 20 30])
+    (categorical-var :levels [1 2 3])
+
+"
+  ([& args]
+   (let [opts (if args (apply assoc {} args) nil)
+         data (if (:data opts) (:data opts) nil)
+         ordered? (if (false? (:ordered? opts)) true false)
+         labels (if (:labels opts) 
+                  (:labels opts) 
+                  (if (nil? data)
+                    (:levels opts)
+                    (sort (into #{} data))))
+         levels (if (:levels opts) (:levels opts) (range (count labels)))]
+    {:ordered? ordered?
+     :labels labels
+     :levels levels
+     :to-labels (apply assoc {} (interleave levels labels))
+     :to-levels (apply assoc {} (interleave labels levels))})))
+
+
+(defn to-levels 
+"
+"
+  ([coll & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          cat-var (if (:categorical-var opts) (:categorical-var opts) (categorical-var :data coll))
+          to-levels (:to-levels cat-var)]
+      (for [label coll] (to-levels label)))))
+
+
+(defn to-labels 
+"
+"
+  ([coll cat-var] 
+    (let [to-labels (:to-labels cat-var)]
+      (for [level coll] (to-labels level)))))
+
+
+
+(defn get-dummy-vars [n]
+  (let [nbits (dec (Math/ceil (log2 n)))]
+    (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
+         (range n))))
+
+
+(defn to-dummy-vars [coll]
+  (let [cat-var (categorical-var :data coll)
+        levels (:levels cat-var)
+        encoded-data (to-levels coll :categorical-var cat-var)
+        bit-map (get-dummy-vars (count levels))]
+    (for [item encoded-data] (nth bit-map item))))
+
+
+
+(defn cat-to-dummy-vars [dataset column-key]
+  (let [col (first (get-columns dataset [column-key]))]
+    (if (some string? col) 
+      (matrix (to-dummy-vars col))
+      (matrix col))))
+
+
+(defn to-matrix 
+  "Converts a dataset into a matrix."
+  ([dataset & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          dummy-vars (if (:dummy-vars opts) (:dummy-vars opts) nil)]
+      (reduce bind-columns 
+              (map #(cat-to-dummy-vars dataset %) 
+                    (range (count (keys (:column-names dataset)))))))))
+
+
+(defn transpose-seq [coll]
+  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
+
+;(transpose-seq (to-dummy (first (get-columns iris-map [4]))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -313,7 +313,7 @@
   (is (= (reduce plus test-csv-mat) (matrix [1275 770 2149] 3)))
   (is (= (reduce plus test-tdd-mat) (matrix [1275 770 2149] 3)))
   ;; confirm that iris species factor was converted to two dummy variables
-  (is (= (first iris-mat) (matrix [5.10 3.50 1.40 0.20 1 0] 6)))
+  (is (= (first iris-mat) (matrix [5.10 3.50 1.40 0.20 0 0] 6)))
 
 ) ;; end of io-validation tests
 
@@ -405,7 +405,8 @@
   (is (= (Math/round (mean (:var b-reg-full))) 21))
   
   ;-------------------------------------------------------------------------------
-  (time (def b-reg (bayes-regression 20000 x y)))
+  ;(time (def b-reg (bayes-regression 20000 x y)))
+  (time (def b-reg (bayes-regression 5000 x y)))
   (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef b-reg)))) [196 0 -24 5 1 0 7 4 3]))
   (is (= (Math/round (mean (:var b-reg))) 21))
   
@@ -437,13 +438,13 @@
                    :x-label "Value"))
   
   
-  (view (scatter 
+  (view (scatter-plot 
           (sel test-mat true 1) 
           (sel test-mat true 2) 
           :series-lab "Test data col 1 versus col 2"))
   
   
-  (def plot1 (scatter (sample-normal 100) (sample-normal 100)))
+  (def plot1 (scatter-plot (sample-normal 100) (sample-normal 100)))
   (view plot1)
   (add-series plot1 (sample-normal 100) (sample-normal 100))
   (add-series plot1 (sample-normal 100) (sample-normal 100))

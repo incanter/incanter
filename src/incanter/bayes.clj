@@ -72,8 +72,7 @@
         resid (:residuals lm)
         shape (/ (- (nrow x) (ncol x)) 2)
         rate (mult 1/2 (mmult (trans resid) resid))
-        s-sq (div 1 (sample-gamma N :shape shape :rate rate))
-       ]
+        s-sq (div 1 (sample-gamma N :shape shape :rate rate))]
     ;; return a map with the estimated coefficients and variances
     {:coef 
       (matrix 
@@ -85,7 +84,6 @@
                   (decomp-cholesky (mult s2 xtxi))))))
           (to-list (trans s-sq)))) 
      :var s-sq}))
-
 
 
 (defn bayes-regression-mh [N x y]
@@ -128,5 +126,40 @@
                ]
         (recur (conj coefs new-b) (conj variances new-s2) (inc i)))))))
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MCMC Sampling
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn sample-linear-model-params 
+" Returns a sample of size N of the linear-model parameters 
+  (coefficients, variances), estimated from the given data
+  using Gibbs sampling.
+
+  Examples:
+    (use '(incanter core io stats charts bayes))
+
+    (def ols-data (to-matrix (read-dataset \"data/olsexamp.dat\" :header true)))
+    (def x (sel ols-data (range 0 2313) (range 1 10)))
+    (def y (sel ols-data (range 0 2313) 10))
+    (def sample-params (sample-linear-model-params 5000 y x))
+    
+    ;; view trace plots
+    (view (trace-plot (:var sample-params))) 
+    (view (trace-plot (sel (:coef sample-params) :columns 0)))
+
+    ;; view histograms
+    (view (histogram (:var sample-params))) 
+    (view (histogram (sel (:coef sample-params) :columns 0)))
+
+    ;; calculate statistics
+    (median (sel (:coef sample-params) :columns 0))
+    (mean (sel (:coef sample-params) :columns 0))
+    (sd (sel (:coef sample-params) :columns 0))
+
+"
+  ([N y x]
+    (bayes-regression N x y)))
 
 

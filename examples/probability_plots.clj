@@ -43,7 +43,26 @@
 ;; rhickey: user=> ^f
 ;; rhickey: {:my :meta}
 
+(def ols-data (to-matrix (read-dataset 
+                           (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
+                           :header true)))
 
+(def x (sel ols-data (range 0 2313) (range 1 10)))
+(def y (sel ols-data (range 0 2313) 10))
+
+(time (def b-reg-full (bayes-regression-full 5000 x y)))
+
+
+;; cumulative-mean function
+(defn cumulative-mean [coll] (map mean (for [i (range (dec (count coll)) -1 -1)] (drop-last i coll))))
+;; trace plots
+(def traceplot (xy-plot (range (count (:var b-reg-full))) (:var b-reg-full) 
+                        :title "Trace Plot" 
+                        :x-label "Iteration" 
+                        :y-label "Value"))
+(add-series traceplot (range (count (:var b-reg-full))) (cumulative-mean (:var b-reg-full)))
+
+(view traceplot)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NORMAL DISTRIBUTION
@@ -477,12 +496,12 @@
 ;; Wikipedia (http://en.wikipedia.org/wiki/Binomial_distribution)
 (def x1 (range 0 20))
 (def x2 (range 0 40))
-(def binomial-plot (scatter x1 (pdf-binomial x1 :prob 1/2 :size 20) :title "Binomial PDF (p,n)"))
+(def binomial-plot (scatter-plot x1 (pdf-binomial x1 :prob 1/2 :size 20) :title "Binomial PDF (p,n)"))
 (view binomial-plot)
 (add-series binomial-plot x1 (pdf-binomial x1 :prob 0.7 :size 20))
 (add-series binomial-plot x2 (pdf-binomial x2 :prob 1/2 :size 40))
 
-(def binomial-cdf-plot (scatter x1 (cdf-binomial x1 :prob 1/2 :size 20) :title "Binomial CDF (p,n)"))
+(def binomial-cdf-plot (scatter-plot x1 (cdf-binomial x1 :prob 1/2 :size 20) :title "Binomial CDF (p,n)"))
 (view binomial-cdf-plot)
 (add-series binomial-cdf-plot x1 (cdf-binomial x1 :prob 0.7 :size 20))
 (add-series binomial-cdf-plot x2 (cdf-binomial x2 :prob 1/2 :size 40))
@@ -519,13 +538,13 @@
 (def x1 (range 0 100))
 (def x2 (range 0 50))
 (def x3 (range 0 100))
-(def neg-binomial-plot (scatter x2 (pdf-neg-binomial x2 :prob 1/10 :size 50) :title "Negative Binomial PDF (prob,size)"))
+(def neg-binomial-plot (scatter-plot x2 (pdf-neg-binomial x2 :prob 1/10 :size 50) :title "Negative Binomial PDF (prob,size)"))
 (view neg-binomial-plot)
 (add-series neg-binomial-plot x2 (pdf-neg-binomial x2 :prob 1/8 :size 75))
 (add-series neg-binomial-plot x3 (pdf-neg-binomial x3 :prob 1/4 :size 150))
 
 
-(def neg-binomial-cdf-plot (scatter x1 (cdf-neg-binomial x1 :prob 1/2 :size 25) :title "Negative Binomial CDF (prob,size)"))
+(def neg-binomial-cdf-plot (scatter-plot x1 (cdf-neg-binomial x1 :prob 1/2 :size 25) :title "Negative Binomial CDF (prob,size)"))
 (view neg-binomial-cdf-plot)
 (add-series neg-binomial-cdf-plot x1 (cdf-neg-binomial x1 :prob 2/3 :size 25))
 (add-series neg-binomial-cdf-plot x1 (cdf-neg-binomial x1 :prob 3/4 :size 25))
@@ -558,13 +577,13 @@
 ; Examples of plots from the Poisson Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Poisson_distribution)
 (def x1 (range 0 20))
-(def poisson-plot (scatter x1 (pdf-poisson x1 :lambda 1) :title "Poisson PDF (lambda)"))
+(def poisson-plot (scatter-plot x1 (pdf-poisson x1 :lambda 1) :title "Poisson PDF (lambda)"))
 (view poisson-plot)
 (add-series poisson-plot x1 (pdf-poisson x1 :lambda 4))
 (add-series poisson-plot x1 (pdf-poisson x1 :lambda 10))
 
 
-(def poisson-cdf-plot (scatter x1 (cdf-poisson x1 :lambda 1) :title "Poisson CDF (lambda)"))
+(def poisson-cdf-plot (scatter-plot x1 (cdf-poisson x1 :lambda 1) :title "Poisson CDF (lambda)"))
 (view poisson-cdf-plot)
 (add-series poisson-cdf-plot x1 (cdf-poisson x1 :lambda 4))
 (add-series poisson-cdf-plot x1 (cdf-poisson x1 :lambda 10))
