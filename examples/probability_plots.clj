@@ -609,3 +609,24 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; F DISTRIBUTION
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Examples of plots from the F Distribution page at
+;; Wikipedia (http://en.wikipedia.org/wiki/F_distribution)
+(def x (range 0 5 0.01))
+(def f-plot (xy-plot x (pdf-f x :df1 2 :df2 1) :title "Beta PDF (df1,df2)"))
+(view f-plot)
+(add-series f-plot x (pdf-f x :df1 5 :df2 2))
+(add-series f-plot x (pdf-f x :df1 100 :df2 1))
+(add-series f-plot x (pdf-f x :df1 100 :df2 100))
+
+(def f-cdf-plot (xy-plot x (cdf-f x :df1 1 :df2 1) :title "Beta CDF (df1,df2)"))
+(view f-cdf-plot)
+(add-series f-cdf-plot x (cdf-f x :df1 2 :df2 1))
+(add-series f-cdf-plot x (cdf-f x :df1 5 :df2 2))
+(add-series f-cdf-plot x (cdf-f x :df1 100 :df2 1))
+(add-series f-cdf-plot x (cdf-f x :df1 100 :df2 100))
+
+

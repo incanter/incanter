@@ -21,6 +21,68 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MCMC Sampling
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn sample-model-params 
+" Returns a sample of the given size of the given linear-model parameters 
+  (coefficients, variances), estimated from the given data
+  using Gibbs sampling.
+
+  Examples:
+    (use '(incanter core io stats charts bayes))
+
+    (def ols-data (to-matrix (read-dataset \"data/olsexamp.dat\" :header true)))
+    (def x (sel ols-data (range 0 2313) (range 1 10)))
+    (def y (sel ols-data (range 0 2313) 10))
+    (def lm (linear-model y x :intercept false))
+    (def param-samp (sample-model-params 5000 lm))
+    
+    ;; view trace plots
+    (view (trace-plot (:var param-samp ))) 
+    (view (trace-plot (sel (:coefs param-samp) :columns 0)))
+
+    ;; view histograms
+    (view (histogram (:var param-samp))) 
+    (view (histogram (sel (:coefs param-samp) :columns 0)))
+
+    ;; calculate statistics
+    (map mean (trans (:coefs param-samp)))
+    (map median (trans (:coefs param-samp)))
+    (map sd (trans (:coefs param-samp)))
+
+"
+  ([size linear-model]
+    (let [x (:x linear-model)
+          y (:y linear-model)
+          pars (:coefs linear-model)
+          xtxi (solve (mmult (trans x) x))
+          resid (:residuals linear-model)
+          shape (/ (- (nrow x) (ncol x)) 2)
+          rate (mult 1/2 (mmult (trans resid) resid))
+          s-sq (div 1 (sample-gamma size :shape shape :rate rate))]
+      {:coefs 
+        (matrix 
+          ;(pmap ;; run a parallel map over the values of s-sq
+          (map
+            (fn [s2] 
+              (to-list (plus (trans pars)
+                  (mmult (trans (sample-normal (ncol x))) 
+                    (decomp-cholesky (mult s2 xtxi))))))
+            (to-list (trans s-sq)))) 
+      :var s-sq})))
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Alternative MCMC Sampling Techniques
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn bayes-regression-noref [N x y]
   (let [lm (linear-model y x :intercept false)
         pars (trans (:coefs lm))
@@ -125,41 +187,5 @@
                          cand-s2)
                ]
         (recur (conj coefs new-b) (conj variances new-s2) (inc i)))))))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MCMC Sampling
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn sample-linear-model-params 
-" Returns a sample of size N of the linear-model parameters 
-  (coefficients, variances), estimated from the given data
-  using Gibbs sampling.
-
-  Examples:
-    (use '(incanter core io stats charts bayes))
-
-    (def ols-data (to-matrix (read-dataset \"data/olsexamp.dat\" :header true)))
-    (def x (sel ols-data (range 0 2313) (range 1 10)))
-    (def y (sel ols-data (range 0 2313) 10))
-    (def sample-params (sample-linear-model-params 5000 y x))
-    
-    ;; view trace plots
-    (view (trace-plot (:var sample-params))) 
-    (view (trace-plot (sel (:coef sample-params) :columns 0)))
-
-    ;; view histograms
-    (view (histogram (:var sample-params))) 
-    (view (histogram (sel (:coef sample-params) :columns 0)))
-
-    ;; calculate statistics
-    (median (sel (:coef sample-params) :columns 0))
-    (mean (sel (:coef sample-params) :columns 0))
-    (sd (sel (:coef sample-params) :columns 0))
-
-"
-  ([N y x]
-    (bayes-regression N x y)))
 
 

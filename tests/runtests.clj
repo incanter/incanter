@@ -395,22 +395,33 @@
 (deftest bayes-simulations
   
   ;-------------------------------------------------------------------------------
+  (println "bayes-regression-noref 5000")
   (time (def b-reg-noref (bayes-regression-noref 5000 x y)))
   (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef b-reg-noref)))) [196 0 -24 5 1 0 7 4 3]))
   (is (= (Math/round (mean (:var b-reg-noref))) 21))
   
   ;-------------------------------------------------------------------------------
+  (println "bayes-regression-full 5000")
   (time (def b-reg-full (bayes-regression-full 5000 x y)))
   (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef b-reg-full)))) [196 0 -24 5 1 0 7 4 3]))
   (is (= (Math/round (mean (:var b-reg-full))) 21))
   
   ;-------------------------------------------------------------------------------
+  (println "bayes-regression 5000")
   ;(time (def b-reg (bayes-regression 20000 x y)))
   (time (def b-reg (bayes-regression 5000 x y)))
   (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef b-reg)))) [196 0 -24 5 1 0 7 4 3]))
   (is (= (Math/round (mean (:var b-reg))) 21))
   
   ;-------------------------------------------------------------------------------
+  (println "sample-model-params 5000")
+  (def lm (linear-model y x :intercept false))
+  (time (def param-samp (sample-model-params 5000 lm)))
+  (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef param-samp)))) [196 0 -24 5 1 0 7 4 3]))
+  (is (= (Math/round (mean (:var param-samp))) 21))
+
+  ;-------------------------------------------------------------------------------
+  (println "bayes-regression-mh 5000")
   ;(time (def b-reg-mh (bayes-regression-mh 20000 x y))) ; takes too long to do every time
   (time (def b-reg-mh (bayes-regression-mh 5000 x y))) ; takes too long to do every time
   ;(is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef b-reg-mh)))) [196 0 -24 5 1 0 7 4 3]))

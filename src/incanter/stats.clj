@@ -24,9 +24,156 @@
   (:use (incanter core)))
 
 
+
+
+
+(defn gamma 
+  ([x]  (cern.jet.stat.Gamma/gamma x)))
+
+
+(defn beta 
+  ([a b]  (cern.jet.stat.Gamma/beta a b)))
+
+(defn incomplete-beta 
+"
+  References:
+    http://www.boost.org/doc/libs/1_38_0/libs/math/doc/sf_and_dist/html/math_toolkit/special/sf_beta/ibeta_function.html
+"
+
+  ([x a b]  (cern.jet.stat.Gamma/incompleteBeta a b x)))
+
+
+
+(defn regularized-beta 
+"
+  References:
+    http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
+    http://mathworld.wolfram.com/RegularizedBetaFunction.html
+"
+  ([x a b] (/ (incomplete-beta x a b) 
+              (beta a b))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 ;; CONTINOUS DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; F DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+
+  
+(defn pdf-f
+" Returns the F pdf of the given value, x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's df function. 
+
+  Options: 
+    :df1 (default 1) 
+    :df2 (default 1)
+
+  See also: 
+      cdf-f and quantile-f
+
+  References: 
+      http://en.wikipedia.org/wiki/F_distribution
+      http://mathworld.wolfram.com/F-Distribution.html
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example: 
+      (pdf-f 1.0 :df1 5 :df2 2)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          df1 (if (:df1 opts) (:df1 opts) 0)
+          df2 (if (:df2 opts) (:df2 opts) 1)
+          pdf-fx (fn [x]
+                   (* (/ (gamma (/ (+ df1 df2) 2)) 
+                         (* (gamma (/ df1 2)) (gamma (/ df2 2))))
+                       (pow (/ df1 df2) (/ df1 2))
+                       (pow x (- (/ df1 2) 1))
+                       (pow (+ 1 (* (/ df1 df2) x))
+                           (- 0 (/ (+ df1 df2) 2)))))
+         ]
+      (if (coll? x)
+        (map pdf-fx x)
+        (pdf-fx x)))))
+
+
+
+
+(defn cdf-f
+" Returns the F-distribution cdf of the given value, x. It will return a sequence 
+  of values, if x is a sequence. This is equivalent to R's pf function. 
+
+  Options: 
+    :df1 (default 1) 
+    :df2 (default 1)
+
+  See also: 
+      pdf-f and quantile-f
+
+  References: 
+      http://commons.apache.org/math/apidocs/org/apache/commons/math/distribution/FDistributionImpl.html
+      http://en.wikipedia.org/wiki/F_distribution
+      http://mathworld.wolfram.com/F-Distribution.html
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example: 
+      (cdf-f 1.0 :df1 5 :df2 2)
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          lower-tail? (if (false? (:lower-tail opts)) false true)
+          df1 (if (:df1 opts) (:df1 opts) 1)
+          df2 (if (:df2 opts) (:df2 opts) 1)
+          dist (org.apache.commons.math.distribution.FDistributionImpl. df1 df2)
+          cdf-fx (if lower-tail?
+                  (fn [x1] (.cumulativeProbability dist x1))
+                  (fn [x1] (- 1 (.cumulativeProbability dist x1))))
+         ]
+      (if (coll? x)
+        (map cdf-fx x)
+        ;(map #(.cumulativeProbability dist %) x)
+        ;(.cumulativeProbability dist x)))))
+        (cdf-fx x)))))
+
+
+(defn quantile-f 
+" Returns the inverse of the F-distribution CDF for the given probability. 
+  It will return a sequence of values, if given a sequence of 
+  probabilities. This is equivalent to R's qf function.
+
+  Options: 
+    :df1 (default 1) 
+    :df2 (default 1)
+
+  Returns: 
+    a value x, where (cdf-f x) = probability
+
+  See also: 
+      pdf-f, cdf-f
+
+  References: 
+      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
+      http://en.wikipedia.org/wiki/F_distribution
+      http://mathworld.wolfram.com/F-Distribution.html
+      http://en.wikipedia.org/wiki/Quantile
+
+  Example: 
+      (quantile-f 0.975)
+      (quantile-f [0.025 0.975] :df1 5 :df2 2)
+"
+  ([probability & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          df1 (if (:df1 opts) (:df1 opts) 1)
+          df2 (if (:df2 opts) (:df2 opts) 1)
+          dist (org.apache.commons.math.distribution.FDistributionImpl. df1 df2)]
+      (if (coll? probability)
+        (map #(.inverseCumulativeProbability dist %) probability)
+        (.inverseCumulativeProbability dist probability)))))
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
@@ -312,7 +459,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           alpha (if (:alpha opts) (:alpha opts) 1)
           beta (if (:beta opts) (:beta opts) 1)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/beta alpha beta x1))
                   (fn [x1] (- 1 (cern.jet.stat.Probability/betaComplemented alpha beta x1))))]
@@ -411,7 +558,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           shape (if (number? (:shape opts)) (:shape opts) 1)
           rate (if (number? (:rate opts)) (:rate opts) 1)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false (:lower-tail opts)) false true) 
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/gamma rate shape x1))
                   (fn [x1] (cern.jet.stat.Probability/gammaComplemented rate shape x1)))]
@@ -505,7 +652,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           df (if (number? (:df opts)) (:df opts) 1)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/chiSquare df x1))
                   (fn [x1] (cern.jet.stat.Probability/chiSquareComplemented df x1)))]
@@ -593,7 +740,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           df (if (number? (:df opts)) (:df opts) 1)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/studentT df x1))
                   (fn [x1] (- 1 (cern.jet.stat.Probability/studentT df x1))))]
@@ -757,8 +904,6 @@
 
 
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 ;; DISCRETE DISTRIBUTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
@@ -822,7 +967,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           n (if (number? (:size opts)) (:size opts) 1)
           p (if (number? (:prob opts)) (:prob opts) 1/2)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/binomial x1 n p))
                   (fn [x1] (cern.jet.stat.Probability/binomialComplemented x1 n p)))]
@@ -914,7 +1059,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           lambda (if (number? (:lambda opts)) (:lambda opts) 1)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/poisson x1 lambda))
                   (fn [x1] (cern.jet.stat.Probability/poissonComplemented x1 lambda)))]
@@ -1008,7 +1153,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           size (if (number? (:size opts)) (:size opts) 10)
           prob (if (number? (:prob opts)) (:prob opts) 1/2)
-          lower-tail? (if (nil? (:lower-tail opts)) true (:lower-tail opts))
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/negativeBinomial x1 size prob))
                   (fn [x1] (cern.jet.stat.Probability/negativeBinomialComplemented x1 size prob)))]
@@ -1192,7 +1337,8 @@
 "
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
-          data (cern.colt.list.DoubleArrayList. (double-array (sort x)))
+          _x (if (matrix? x) (to-list x) x)
+          data (cern.colt.list.DoubleArrayList. (double-array (sort _x)))
           probs (cond 
                   (number? (:probs opts))
                     (:probs opts)
@@ -1275,6 +1421,40 @@
 ;;;;;;;;;;;;;;; OLS REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(defn linear-model-ols
+"
+"
+([y x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          intercept? (if (false? (:intercept opts)) false true)
+          design-mat (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
+          ols (org.apache.commons.math.stat.regression.OLSMultipleLinearRegression.)
+          _x (into-array (map double-array (to-list design-mat)))  
+          _y (if (matrix? y) (double-array (to-list y)) (double-array y))  
+          _ (.newSampleData ols _y _x)
+          coefs (seq (.estimateRegressionParameters ols))
+          beta-var (map #(seq %) (seq (.estimateRegressionParametersVariance ols)))
+          y-var (.estimateRegressandVariance ols)
+          resid (seq (.estimateResiduals ols))
+          std-errors (seq (.estimateRegressionParametersStandardErrors ols))
+         ]
+      (with-meta
+        {;:fitted fitted
+         ;:design-matrix _x
+         :coefs coefs
+         :residuals resid
+         :std-errors std-errors
+         :beta-var beta-var
+         :y-var y-var
+         ;:sse sse
+         ;:ssr ssr
+         ;:sst sst
+         ;:r-square r-square
+         ;:adj-r-square adj-r-square
+        } 
+        {:type ::linear-model}))))
+
+
 
 (defn linear-model
 " 
@@ -1288,21 +1468,42 @@
     :intercept (default true) indicates weather an intercept term should be included
 
   Returns:
-    a map containing:
+    a map, of type ::linear-model, containing:
+      :design-matrix -- a matrix containing the independent variables, and an intercept columns
       :coefs -- the regression coefficients
+      :fitted -- the predicted values of y
       :residuals -- the residuals of each observation
       :std-errors -- the standard errors of the coeffients
+      :sse -- the sum of squared errors, also called the residual sum of squares
+      :ssr -- the regression sum of squares, also called the explained sum of squares
+      :sst -- the total sum of squares (proportional to the sample variance)
+      :r-square -- coefficient of determination
 
   Examples:
     (use '(incanter core stats io))
-    (def test-data (to-matrix (read-dataset \"data/test.dat\" :header true)))
-    (def y (sel test-data true 1))
-    (def x (sel test-data true 2))
-    (linear-model y x) ; with intercept term
-    (linear-model y x :intercept false) ; without intercept term
+    (def iris (to-matrix (read-dataset \"data/iris.dat\" :header true)))
+    (def y (sel iris :columns 0))
+    (def x (sel iris :columns (range 1 6)))
+    (def iris-lm (linear-model y x)) ; with intercept term
+
+    (keys iris-lm) ; see what fields are included
+    (:coefs iris-lm)
+    (:sse iris-lm)
+    (quantile (:residuals iris-lm))
+    (:r-square iris-lm)
+    (:adj-r-square iris-lm)
+    (:f-stat iris-lm)
+    (:f-prob iris-lm)
+    (:df iris-lm)
+
+    (def x1 (range 0.0 3 0.1))
+    (view (xy-plot x1 (pdf-f x1 :df1 4 :df2 144)))
+    (view (xy-plot x1 (cdf-f x1 :df1 4 :df2 144)))
+  
 
   References:
     http://en.wikipedia.org/wiki/OLS_Regression
+    http://en.wikipedia.org/wiki/Coefficient_of_determination
 
 "
   ([y x & options]
@@ -1312,26 +1513,52 @@
           xtx (mmult (trans _x) _x)
           xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
           xty (mmult (trans _x) y)
-          coefs (if (or (number? xtxi) (number? xty)) 
+          coefs (to-list (if (or (number? xtxi) (number? xty)) 
                   (mult xtxi xty)
-                  (mmult xtxi xty))
-          y-hat (if (number? coefs)
+                  (mmult xtxi xty)))
+          fitted (to-list (if (number? coefs)
                   (mult _x coefs)
-                  (mmult _x coefs))
-          resid (minus y y-hat)
-          S (sum-of-squares resid)
+                  (mmult _x coefs)))
+          resid (to-list (minus y fitted))
+          sse (sum-of-squares resid)
+          ssr (sum-of-squares (minus fitted (mean fitted)))
+          sst (+ sse ssr)
+          r-square (/ ssr sst)
           n (nrow y)
           p (ncol _x)
+          adj-r-square (- 1 (* (- 1 r-square) (/ (- n 1) (- n p 1))))
+          mse (/ sse (- n p))
+          msr (/ ssr (- p 1))
+          f-stat (/ msr mse)
+          df1 (- (ncol _x) 1)
+          df2 (- (nrow _x) (ncol _x))
+          f-prob (cdf-f f-stat :df1 df1 :df2 df2 :lower-tail false)
+          coef-var (mult mse xtxi)
           std-errors (if (number? xtxi)
-                       (* (/ S (- n p 1)) xtxi)
-                       (for [i (range p)] (* (/ S (- n p 1)) (sel xtxi i i))))
+                       (* (/ sse (- n p 1)) xtxi)
+                       (for [i (range p)] (* (/ sse (- n p 1)) (sel xtxi i i))))
          ]
-      {:coefs coefs
-       :residuals resid
-       :std-errors std-errors})))
-;      {:coefs (if (number? coefs) coefs (to-list coefs))
-;       :residuals (if (number? resid) resid (to-list resid))
-;       :std-errors (if (number? std-errors) std-errors (to-list std-errors))})))
+      (with-meta
+        {:x _x
+         :y y
+         :fitted fitted
+         :design-matrix _x
+         :coefs coefs
+         :residuals resid
+         :std-errors std-errors
+         :sse sse
+         :ssr ssr
+         :sst sst
+         :mse mse
+         :msr msr
+         :f-stat f-stat
+         :f-prob f-prob
+         :df [df1 df2]
+         :coef-var coef-var
+         :r-square r-square
+         :adj-r-square adj-r-square
+        } 
+        {:type ::linear-model}))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

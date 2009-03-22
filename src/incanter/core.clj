@@ -68,12 +68,10 @@
      (coll? (first data)) 
       (Matrix. (into-array (map double-array data)))
      (number? (first data)) 
-      ;;(Matrix. data (count data) 1)))
       (Matrix. (double-array data))))
   ([data ncol]
     (cond
       (coll? data)
-        ;;(Matrix. data (/ (count data) ncol) ncol)
         (Matrix. (double-array data) ncol)
        (number? data)
         (Matrix. data ncol))) ; data is the number of rows in this case
@@ -635,9 +633,10 @@
 
 
 (defn dataset [column-names & data] 
-  {:type ::dataset
-   :column-names column-names
-   :rows (into [] (map #(apply assoc {} (interleave column-names %)) (first data)))})
+  (with-meta 
+    {:column-names column-names
+     :rows (into [] (map #(apply assoc {} (interleave column-names %)) (first data)))}
+    {:type ::dataset}))
 
 
 

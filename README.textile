@@ -24,13 +24,14 @@
 *INCLUDED DEPENDENCIES*
 * "Clojure":http://code.google.com/p/clojure/
 * "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs)
-* "JLine":http://jline.sourceforge.net/
 * "Colt":http://acs.lbl.gov/~hoschek/colt/
+* "Apache Commons Math":http://commons.apache.org/math/
 * "JFreeChart":http://www.jfree.org/jfreechart/
 * "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
 * "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
 * "JGraph":http://www.jgraph.com/ (for future development)
+* "JLine":http://jline.sourceforge.net/
 
 
 
