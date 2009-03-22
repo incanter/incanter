@@ -417,7 +417,7 @@
   (println "sample-model-params 5000")
   (def lm (linear-model y x :intercept false))
   (time (def param-samp (sample-model-params 5000 lm)))
-  (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coef param-samp)))) [196 0 -24 5 1 0 7 4 3]))
+  (is (= (map #(Math/round (* 10 %)) (map mean (trans (:coefs param-samp)))) [196 0 -24 5 1 0 7 4 3]))
   (is (= (Math/round (mean (:var param-samp))) 21))
 
   ;-------------------------------------------------------------------------------

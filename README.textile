@@ -1,5 +1,7 @@
 *Incanter: _Statistical Programming in Clojure_*
 
+*Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. Motivation for a JVM-based lisp can be found at the "Clojure website":http://clojure.org and screencasts of the excellent Clojure presentations by Rich Hickey can be found "here":http://clojure.blip.tv
+
 *BUILD incanter.jar*
 <pre><code>   $ ant</pre></code>
 

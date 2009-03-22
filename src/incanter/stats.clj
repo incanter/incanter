@@ -28,30 +28,41 @@
 
 
 (defn gamma 
+"
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+"
   ([x]  (cern.jet.stat.Gamma/gamma x)))
 
 
 (defn beta 
+"
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+"
   ([a b]  (cern.jet.stat.Gamma/beta a b)))
+
 
 (defn incomplete-beta 
 "
   References:
-    http://www.boost.org/doc/libs/1_38_0/libs/math/doc/sf_and_dist/html/math_toolkit/special/sf_beta/ibeta_function.html
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
 "
 
-  ([x a b]  (cern.jet.stat.Gamma/incompleteBeta a b x)))
+  ([x a b]  (* (cern.jet.stat.Gamma/incompleteBeta a b x) (cern.jet.stat.Gamma/beta a b))))
 
 
 
 (defn regularized-beta 
 "
   References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
     http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
     http://mathworld.wolfram.com/RegularizedBetaFunction.html
 "
-  ([x a b] (/ (incomplete-beta x a b) 
-              (beta a b))))
+  ([x a b] 
+    (cern.jet.stat.Gamma/incompleteBeta a b x)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 ;; CONTINOUS DISTRIBUTION FUNCTIONS
@@ -100,9 +111,7 @@
         (pdf-fx x)))))
 
 
-
-
-(defn cdf-f
+(defn cdf-f 
 " Returns the F-distribution cdf of the given value, x. It will return a sequence 
   of values, if x is a sequence. This is equivalent to R's pf function. 
 
@@ -114,7 +123,6 @@
       pdf-f and quantile-f
 
   References: 
-      http://commons.apache.org/math/apidocs/org/apache/commons/math/distribution/FDistributionImpl.html
       http://en.wikipedia.org/wiki/F_distribution
       http://mathworld.wolfram.com/F-Distribution.html
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
@@ -127,52 +135,17 @@
           lower-tail? (if (false? (:lower-tail opts)) false true)
           df1 (if (:df1 opts) (:df1 opts) 1)
           df2 (if (:df2 opts) (:df2 opts) 1)
-          dist (org.apache.commons.math.distribution.FDistributionImpl. df1 df2)
           cdf-fx (if lower-tail?
-                  (fn [x1] (.cumulativeProbability dist x1))
-                  (fn [x1] (- 1 (.cumulativeProbability dist x1))))
+                   (fn [x1] (regularized-beta (/ (* df1 x1) (+ df2 (* df1 x1)))
+                                     (/ df1 2)
+                                     (/ df2 2)))
+                   (fn [x1] (- 1 (regularized-beta (/ (* df1 x1) (+ df2 (* df1 x1)))
+                                                   (/ df1 2)
+                                                   (/ df2 2)))))
          ]
       (if (coll? x)
         (map cdf-fx x)
-        ;(map #(.cumulativeProbability dist %) x)
-        ;(.cumulativeProbability dist x)))))
         (cdf-fx x)))))
-
-
-(defn quantile-f 
-" Returns the inverse of the F-distribution CDF for the given probability. 
-  It will return a sequence of values, if given a sequence of 
-  probabilities. This is equivalent to R's qf function.
-
-  Options: 
-    :df1 (default 1) 
-    :df2 (default 1)
-
-  Returns: 
-    a value x, where (cdf-f x) = probability
-
-  See also: 
-      pdf-f, cdf-f
-
-  References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
-      http://en.wikipedia.org/wiki/F_distribution
-      http://mathworld.wolfram.com/F-Distribution.html
-      http://en.wikipedia.org/wiki/Quantile
-
-  Example: 
-      (quantile-f 0.975)
-      (quantile-f [0.025 0.975] :df1 5 :df2 2)
-"
-  ([probability & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          df1 (if (:df1 opts) (:df1 opts) 1)
-          df2 (if (:df2 opts) (:df2 opts) 1)
-          dist (org.apache.commons.math.distribution.FDistributionImpl. df1 df2)]
-      (if (coll? probability)
-        (map #(.inverseCumulativeProbability dist %) probability)
-        (.inverseCumulativeProbability dist probability)))))
-
 
 
 
@@ -1419,40 +1392,6 @@
 
 
 ;;;;;;;;;;;;;;; OLS REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(defn linear-model-ols
-"
-"
-([y x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          intercept? (if (false? (:intercept opts)) false true)
-          design-mat (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
-          ols (org.apache.commons.math.stat.regression.OLSMultipleLinearRegression.)
-          _x (into-array (map double-array (to-list design-mat)))  
-          _y (if (matrix? y) (double-array (to-list y)) (double-array y))  
-          _ (.newSampleData ols _y _x)
-          coefs (seq (.estimateRegressionParameters ols))
-          beta-var (map #(seq %) (seq (.estimateRegressionParametersVariance ols)))
-          y-var (.estimateRegressandVariance ols)
-          resid (seq (.estimateResiduals ols))
-          std-errors (seq (.estimateRegressionParametersStandardErrors ols))
-         ]
-      (with-meta
-        {;:fitted fitted
-         ;:design-matrix _x
-         :coefs coefs
-         :residuals resid
-         :std-errors std-errors
-         :beta-var beta-var
-         :y-var y-var
-         ;:sse sse
-         ;:ssr ssr
-         ;:sst sst
-         ;:r-square r-square
-         ;:adj-r-square adj-r-square
-        } 
-        {:type ::linear-model}))))
 
 
 

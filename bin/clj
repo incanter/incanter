@@ -12,15 +12,14 @@ CLOJURE_JARS=$INCANTER_LIB_DIR/clojure.jar:$INCANTER_LIB_DIR/clojure-contrib.jar
 
 JLINE_JARS=$INCANTER_LIB_DIR/jline-0.9.94.jar
 COLT_JARS=$INCANTER_LIB_DIR/colt.jar
-COMMONS_MATH_JARS=$INCANTER_LIB_DIR/commons-math-2.0-SNAPSHOT.jar
 JFREECHART_JARS=$INCANTER_LIB_DIR/jfreechart-1.0.12.jar:$INCANTER_LIB_DIR/jcommon-1.0.15.jar:$INCANTER_LIB_DIR/gnujaxp.jar
 OPENCSV_JARS=$INCANTER_LIB_DIR/opencsv-1.8.jar
 JGRAPH_JARS=$INCANTER_LIB_DIR/jgraph.jar
 
 if [ -z "$1" ]; then
-        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$COMMONS_MATH_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.lang.Repl
+        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.lang.Repl
 else
         scriptname=$1
-        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$COMMONS_MATH_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME clojure.lang.Script $scriptname -- $*
+        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME clojure.lang.Script $scriptname -- $*
 fi
 

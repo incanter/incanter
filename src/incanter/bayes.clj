@@ -27,9 +27,12 @@
 
 
 (defn sample-model-params 
-" Returns a sample of the given size of the given linear-model parameters 
-  (coefficients, variances), estimated from the given data
-  using Gibbs sampling.
+" Returns a sample of the given size of the the parameters (coefficients and
+  error variance) of the given linear-model. The sample is generated using 
+  Gibbs sampling.
+
+  See also:
+    incanter.stats/linear-model
 
   Examples:
     (use '(incanter core io stats charts bayes))
