@@ -1,38 +1,53 @@
-*Incanter: _Statistical Programming in Clojure_*
+h2. Incanter
 
-*Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. Motivation for a JVM-based lisp can be found at the "Clojure website":http://clojure.org and screencasts of the excellent Clojure presentations by Rich Hickey can be found "here":http://clojure.blip.tv
+_Incanter is a Clojure-based, R-like statistical computing and graphics environment for the JVM._
 
-*BUILD incanter.jar*
-<pre><code>   $ ant</pre></code>
-
-*RUN tests*
-<pre><code>   $ tests/runtests.clj</pre></code>
-
-*BUILD docs*
-<pre><code>   $ bin/generate_docs.clj</pre></code>
-
-*START Clojure*
-<pre><code>   $ bin/clj</pre></code>
+Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. Motivation for a JVM-based Lisp can be found at the "Clojure website":http://clojure.org, and screencasts of several excellent Clojure talks by the language's creator, Rich Hickey, can be found at "clojure.blip.tv":http://clojure.blip.tv.
 
 
-*EXAMPLES*
+*Additional Clojure resources*
+
+* For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/jnb/jnbMar2009.html by R. Mark Volkmann.
+* For an even more extensive introduction, get the beta version of the book "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway.
+
+
+*To build and use Incanter, run the following commands from the Incanter directory:* 
+
+* Build incanter.jar: @ant@
+* Run unit tests: @tests/runtests.clj@ 
+* Generate API docs: @bin/generate_docs.clj@
+* Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@
+* From the Clojure shell, load the Incanter libraries: @(use '(incanter core stats datasets charts))@
+* Generate some random data and plot a histogram: @(view (histogram (sample-normal 1000)))@
+* See the next section for more examples
+
+(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
+
+
+*Incanter examples*
+
+* The online documentation for most functions contain usage examples. The documentation can be accessed using Clojure's @doc@ function. For example, to view the documentation for the @linear-model@ function, use @(doc linear-model)@ from the Clojure shell. The API documentation is also available in @docs/api/index.html@ and online at "incanter.org/docs/api/.":http://incanter.org/docs/api Use @(find-doc "search term")@ to search the online documentation from the Clojure shell.
 * See @examples/@ directory
+* See @tests/test-cases.clj@ 
 
 
-*DOCS*
+
+*Documentation*
+
 * "API":http://incanter.org/docs/api/
 
 
-*INCLUDED DEPENDENCIES*
+
+*Included dependencies*
+
 * "Clojure":http://code.google.com/p/clojure/
-* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs)
 * "Colt":http://acs.lbl.gov/~hoschek/colt/
-* "Apache Commons Math":http://commons.apache.org/math/
 * "JFreeChart":http://www.jfree.org/jfreechart/
-* "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
-* "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
+** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
+** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
 * "JGraph":http://www.jgraph.com/ (for future development)
+* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs, repl-utils)
 * "JLine":http://jline.sourceforge.net/
 
 

@@ -56,6 +56,9 @@
     (map median (trans (:coefs param-samp)))
     (map sd (trans (:coefs param-samp)))
 
+    ;; show the 95% bayesian confidence interval for the firt coefficient
+    (quantile (sel (:coefs param-samp) :columns 0) :probs [0.025 0.975])
+
 "
   ([size linear-model]
     (let [x (:x linear-model)

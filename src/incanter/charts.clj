@@ -282,12 +282,14 @@
 " Plots a line on the given scatter-plot of the (x,y) points.
 
   Examples:
-    (use '(incanter core stats io))
-    (def test-data (to-matrix (read-dataset \"data/test.dat\" :header true)))
-    (def y (sel test-data true 1))
-    (def x (sel test-data true 2))
-    (def lm1 (linear-model y x :intercept false))
-    (def y-hat (mult (:coefs lm1) x))
+    (use '(incanter core stats io datasets charts))
+    (def speed (to-matrix (get-dataset :speed)))
+    (def y (sel speed true 1))
+    (def x (sel speed true 2))
+    ;(def lm1 (linear-model y x :intercept false))
+    (def lm1 (linear-model y x))
+    (def y-hat (plus (first (:coefs lm1)) (mult (second (:coefs lm1)) x)))
+    ;(def y-hat (mult (:coefs lm1) x))
     (def plot1 (scatter-plot x y))
     (view plot1)
     (add-line plot1 x y-hat)

@@ -1,4 +1,4 @@
-;;; matrix.clj -- Matrix library for Clojure built on the CERN Colt Library
+;;; core.clj -- Core functions built on the CERN Colt Library
 
 ;; by David Edgar Liebke http://incanter.org
 ;; March 11, 2009
@@ -38,7 +38,7 @@
   interface clojure.lang.ISeq. Therefore Clojure sequence operations can
   be applied to matrices. A matrix consists of a sequence of rows, where
   each row is a one-dimensional row matrix. One-dimensional matrices are,
-  in turn, sequences of numbers.
+  in turn, sequences of numbers. Equivalent to R's matrix function.
 
   Examples:
     (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix
@@ -85,7 +85,7 @@
 
 
 (defn nrow 
-  " Returns the number of rows in the given matrix"
+  " Returns the number of rows in the given matrix. Equivalent to R's nrow function."
   ([mat]
    (cond 
     (matrix? mat) (.rows #^Matrix mat)
@@ -93,7 +93,7 @@
 
 
 (defn ncol 
-  " Returns the number of columns in the given matrix"
+  " Returns the number of columns in the given matrix. Equivalent to R's ncol function."
   ([mat]
    (cond 
     (matrix? mat) (.columns #^Matrix mat)
@@ -108,7 +108,7 @@
 (defn diag 
   " If given a matrix, diag returns a sequence of its diagonal elements.
     If given a sequence, it returns a matrix with the sequence's elements 
-    on its diagonal. "
+    on its diagonal. Equivalent to R's diag function."
    ([m]
     (cond 
      (matrix? m)
@@ -118,7 +118,7 @@
 
 
 (defn #^Matrix trans 
-  "Returns the transpose of the given matrix."
+  "Returns the transpose of the given matrix. Equivalent to R's t function"
   ([mat]
    (cond 
     (matrix? mat)
@@ -148,15 +148,17 @@
       a function can be provided to filter the rows of the matrix
 
   Examples:
-    (def test-data (to-matrix (read-dataset \"data/test.dat\" :header true)))
-    (sel test-data 0 0) ; first element
-    (sel test-data :rows 0 :columns 0) ; also first element
-    (sel test-data :columns 0) ; first column of all rows
-    (sel test-data :columns [0 2]) ; first and third column of all rows
-    (sel test-data :rows (range 10) :columns (range 2)) ; first two rows of the first 10 columns
-    (sel test-data :rows (range 10)) ; all columns of the first 10 rows
+    (use 'incanter.datasets)
+    (def speed (to-matrix (get-dataset :speed)))
+    (sel speed 0 0) ; first element
+    (sel speed :rows 0 :columns 0) ; also first element
+    (sel speed :columns 0) ; first column of all rows
+    (sel speed :columns [0 2]) ; first and third column of all rows
+    (sel speed :rows (range 10) :columns (range 2)) ; first two rows of the first 10 columns
+    (sel speed :rows (range 10)) ; all columns of the first 10 rows
     ;; return only the first 10 even rows
-    (sel test-data :rows (range 10) :filter #(even? (int (nth % 0))))
+    (sel speed :rows (range 10) :filter #(even? (int (nth % 0))))
+
 "
 (fn [mat & options] (keyword? (first options))))
 
@@ -210,7 +212,7 @@
 
 (defn bind-rows 
   " Returns the matrix resulting from concatenating the given matrices 
-    and/or sequences by their rows"
+    and/or sequences by their rows. Equivalent to R's rbind."
   ([& args]
    (reduce
     (fn [A B] 
@@ -230,7 +232,7 @@
 
 (defn bind-columns 
   " Returns the matrix resulting from concatenating the given matrices 
-    and/or sequences by their columns"
+    and/or sequences by their columns. Equivalent to R's cbind."
   ([& args]
    (reduce 
     (fn [A B] (.viewDice (bind-rows (trans A) (trans B))))
@@ -281,59 +283,69 @@
 
 
 (defn plus 
-  " Performs element-by-element addition on multiple matrices, sequences, and/or numbers."
+  " Performs element-by-element addition on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's + operator."
    ([& args] (reduce (fn [A B] (-combine-with A B clojure.core/+ plus)) args)))
 
 
 (defn minus 
-  " Performs element-by-element subtraction on multiple matrices, sequences, and/or numbers."
+  " Performs element-by-element subtraction on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's - operator."
    ([& args] (reduce (fn [A B] (-combine-with A B clojure.core/- minus)) args)))
 
 
 (defn mult 
-  " Performs element-by-element multiplication on multiple matrices, sequences, and/or numbers."
+  " Performs element-by-element multiplication on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's * operator."
    ([& args] (reduce (fn [A B] (-combine-with A B clojure.core/* mult)) args)))
 
 
 (defn div 
-  " Performs element-by-element division on multiple matrices, sequences, and/or numbers."
+  " Performs element-by-element division on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's / operator."
    ([& args] (reduce (fn [A B] (-combine-with A B clojure.core// div)) args)))
 
 
 (defn pow 
   " This is an element-by-element exponent function, raising the first argument,
-    by the exponents in the remaining arguments."
+    by the exponents in the remaining arguments. Equivalent to R's ^ operator."
    ([& args] (reduce (fn [A B] (-combine-with A B #(Math/pow %1 %2) pow)) args)))
 
 
 (defn sqrt 
-  "Returns the square-root of the elements in the given matrix, sequence or number."
+  "Returns the square-root of the elements in the given matrix, sequence or number.
+   Equivalent to R's sqrt function."
    ([A] (pow A 1/2)))
 
 
 (defn log 
-  "Returns the natural log of the elements in the given matrix, sequence or number."
+  "Returns the natural log of the elements in the given matrix, sequence or number.
+   Equvalent to R's log function."
    ([A] (-transform-with A #(Math/log %) log)))
 
 
 (defn log2 
-  "Returns the log base 2 of the elements in the given matrix, sequence or number."
+  "Returns the log base 2 of the elements in the given matrix, sequence or number.
+   Equivalent to R's log2 function."
    ([A] (-transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
 
 
 (defn log10 
-  "Returns the log base 10 of the elements in the given matrix, sequence or number."
+  "Returns the log base 10 of the elements in the given matrix, sequence or number.
+   Equivalent to R's log10 function."
    ([A] (-transform-with A #(Math/log10 %) (lg 10.0))))
 
 
 (defn exp 
-  "Returns the exponential of the elements in the given matrix, sequence or number."
+  "Returns the exponential of the elements in the given matrix, sequence or number.
+   Equivalent to R's exp function."
    ([A] (-transform-with A #(Math/exp %) exp)))
 
 
 (defn factorial 
 "
-  Returns the factorial of k (k must be a positive integer).
+  Returns the factorial of k (k must be a positive integer). Equivalent to R's
+  factorial function.
 
   Examples:
     (factorial 6)
@@ -347,15 +359,17 @@
 
 
 
-(defn n-choose-k 
+(defn choose 
 "
   Returns number of k-combinations (each of size k) from a set S with 
   n elements (size n), which is the binomial coefficient (also known 
   as the 'choose function') [wikipedia]
-        n-choose-k = n!/(k!(n - k)!)
+        choose = n!/(k!(n - k)!)
+
+  Equivalent to R's choose function.
 
   Examples:
-    (n-choose-k 25 6) ; => 2,598,960
+    (choose 25 6) ; => 2,598,960
 
   References:
     http://acs.lbl.gov/~hoschek/colt/api/cern/jet/math/Arithmetic.html
@@ -392,7 +406,7 @@
 
 (defn mmult 
   " Returns the matrix resulting from the matrix multiplication of the
-    the given arguments.
+    the given arguments. Equivalent to R's %*% operator.
   "
     ([& args]
      (reduce (fn [A B]
@@ -406,7 +420,8 @@
 
 
 (defn solve 
-  "Returns a matrix solution if A is square, least squares solution otherwise."
+  "Returns a matrix solution if A is square, least squares solution otherwise.
+   Equivalent to R's solve function."
   ([#^Matrix A & B]
    (if B
     (Matrix. (.solve (Algebra.) A (first B)))
@@ -415,7 +430,8 @@
 
 
 (defn det 
-" Returns the determinant of the given matrix using LU decomposition.
+" Returns the determinant of the given matrix using LU decomposition. Equivalent
+  to R's det function.
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
@@ -484,7 +500,8 @@
 
 
 (defn #^Matrix decomp-cholesky
-" Returns the Cholesky decomposition of the given matrix.
+" Returns the Cholesky decomposition of the given matrix. Equivalent to R's
+  chol function.
 
   Returns:
     a matrix of the triangular factor (note: the result from
@@ -502,7 +519,8 @@
 
 
 (defn decomp-svd
-" Returns the Singular Value Decomposition (SVD) of the given matrix.
+" Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
+  R's svd function.
 
   Returns:
     a map containing:
@@ -523,12 +541,12 @@
 
 
 (defn decomp-eigenvalue
-" Returns the Eigenvalue Decomposition of the given matrix.
+" Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
 
   Returns:
     a map containing:
-      :eigenvalues -- vector of eigenvalues
-      :V -- the matrix of eigenvectors
+      :values -- vector of eigenvalues
+      :vectors -- the matrix of eigenvectors
 
   References:
     http://en.wikipedia.org/wiki/Eigenvalue_decomposition
@@ -536,8 +554,8 @@
 "
   ([mat]
     (let [result (cern.colt.matrix.linalg.EigenvalueDecomposition. mat)]
-      {:eigenvalues (diag (Matrix. (.getD result)))
-       :V (Matrix. (.getV result))})))
+      {:values (diag (Matrix. (.getD result)))
+       :vectors (Matrix. (.getV result))})))
 
 
 (defn decomp-lu
@@ -559,7 +577,7 @@
 
 
 (defn decomp-qr
-" Returns the QR decomposition of the given matrix.
+" Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
   Returns:
     a map containing:
@@ -612,6 +630,7 @@
   " A version of count that works on collections, matrices, and numbers. 
     The length of a number is one, the length of a collection is its count,
     and the length of a matrix is the number of elements it contains (nrow*ncol).
+    Equivalent to R's length function.
   "
   ([coll]
     (cond
@@ -652,4 +671,155 @@
 
 (defn get-columns [dataset column-keys]
   (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CATEGORICAL VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn categorical-var
+" Returns a categorical variable based on the values in the given collection.
+  Equivalent to R's factor function.
+
+  Options:
+    :data (default nil) factors will be extracted from the given data.
+    :ordered? (default false) indicates that the variable is ordinal.
+    :labels (default (sort (into #{} data)))
+    :levels (range (count labels))
+
+  Examples:
+    (categorical-var :data [:a :a :c :b :a :c :c])
+    (categorical-var :labels [:a :b :c])
+    (categorical-var :labels [:a :b :c] :levels [10 20 30])
+    (categorical-var :levels [1 2 3])
+
+"
+  ([& args]
+   (let [opts (if args (apply assoc {} args) nil)
+         data (if (:data opts) (:data opts) nil)
+         ordered? (if (false? (:ordered? opts)) true false)
+         labels (if (:labels opts) 
+                  (:labels opts) 
+                  (if (nil? data)
+                    (:levels opts)
+                    (sort (into #{} data))))
+         levels (if (:levels opts) (:levels opts) (range (count labels)))]
+    {:ordered? ordered?
+     :labels labels
+     :levels levels
+     :to-labels (apply assoc {} (interleave levels labels))
+     :to-levels (apply assoc {} (interleave labels levels))})))
+
+
+(defn to-levels 
+"
+"
+  ([coll & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          cat-var (if (:categorical-var opts) (:categorical-var opts) (categorical-var :data coll))
+          to-levels (:to-levels cat-var)]
+      (for [label coll] (to-levels label)))))
+
+
+(defn to-labels 
+"
+"
+  ([coll cat-var] 
+    (let [to-labels (:to-labels cat-var)]
+      (for [level coll] (to-labels level)))))
+
+
+
+(defn get-dummy-vars [n]
+  (let [nbits (dec (Math/ceil (log2 n)))]
+    (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
+         (range n))))
+
+
+(defn to-dummy-vars [coll]
+  (let [cat-var (categorical-var :data coll)
+        levels (:levels cat-var)
+        encoded-data (to-levels coll :categorical-var cat-var)
+        bit-map (get-dummy-vars (count levels))]
+    (for [item encoded-data] (nth bit-map item))))
+
+
+
+(defn cat-to-dummy-vars [dataset column-key]
+  (let [col (first (get-columns dataset [column-key]))]
+    (if (some string? col) 
+      (matrix (to-dummy-vars col))
+      (matrix col))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn to-matrix 
+"  Converts a dataset into a matrix. Equivalent to R's as.matrix function
+   for datasets.
+"
+  ([dataset & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          dummy-vars (if (:dummy-vars opts) (:dummy-vars opts) nil)]
+      (reduce bind-columns 
+              (map #(cat-to-dummy-vars dataset %) 
+                    (range (count (keys (:column-names dataset)))))))))
+
+
+(defn transpose-seq [coll]
+  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
+
+;(transpose-seq (to-dummy (first (get-columns iris-map [4]))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GAMMA BASED FUNCTIONS FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn gamma 
+"
+  Equivalent to R's gamma function.
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+"
+  ([x]  (cern.jet.stat.Gamma/gamma x)))
+
+
+(defn beta 
+"
+  Equivalent to R's beta function.
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+"
+  ([a b]  (cern.jet.stat.Gamma/beta a b)))
+
+
+(defn incomplete-beta 
+"
+  Returns the non-regularized incomplete beta value.
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+"
+
+  ([x a b]  (* (cern.jet.stat.Gamma/incompleteBeta a b x) (cern.jet.stat.Gamma/beta a b))))
+
+
+
+(defn regularized-beta 
+"
+  Returns the regularized incomplete beta value. Equivalent to R's pbeta function.
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+    http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
+    http://mathworld.wolfram.com/RegularizedBetaFunction.html
+"
+  ([x a b] 
+    (cern.jet.stat.Gamma/incompleteBeta a b x)))
+
 

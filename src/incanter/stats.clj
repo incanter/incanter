@@ -26,44 +26,6 @@
 
 
 
-
-(defn gamma 
-"
-  References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
-"
-  ([x]  (cern.jet.stat.Gamma/gamma x)))
-
-
-(defn beta 
-"
-  References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
-"
-  ([a b]  (cern.jet.stat.Gamma/beta a b)))
-
-
-(defn incomplete-beta 
-"
-  References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
-"
-
-  ([x a b]  (* (cern.jet.stat.Gamma/incompleteBeta a b x) (cern.jet.stat.Gamma/beta a b))))
-
-
-
-(defn regularized-beta 
-"
-  References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
-    http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
-    http://mathworld.wolfram.com/RegularizedBetaFunction.html
-"
-  ([x a b] 
-    (cern.jet.stat.Gamma/incompleteBeta a b x)))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 ;; CONTINOUS DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
@@ -111,6 +73,7 @@
         (pdf-fx x)))))
 
 
+
 (defn cdf-f 
 " Returns the F-distribution cdf of the given value, x. It will return a sequence 
   of values, if x is a sequence. This is equivalent to R's pf function. 
@@ -136,12 +99,14 @@
           df1 (if (:df1 opts) (:df1 opts) 1)
           df2 (if (:df2 opts) (:df2 opts) 1)
           cdf-fx (if lower-tail?
-                   (fn [x1] (regularized-beta (/ (* df1 x1) (+ df2 (* df1 x1)))
-                                     (/ df1 2)
-                                     (/ df2 2)))
-                   (fn [x1] (- 1 (regularized-beta (/ (* df1 x1) (+ df2 (* df1 x1)))
-                                                   (/ df1 2)
-                                                   (/ df2 2)))))
+                   (fn [x1] (regularized-beta 
+                              (/ (* df1 x1) (+ df2 (* df1 x1)))
+                              (/ df1 2)
+                              (/ df2 2)))
+                   (fn [x1] (- 1 (regularized-beta 
+                                   (/ (* df1 x1) (+ df2 (* df1 x1)))
+                                   (/ df1 2)
+                                   (/ df2 2)))))
          ]
       (if (coll? x)
         (map cdf-fx x)
@@ -361,17 +326,17 @@
 "
   ([size & options]
     (let [opts (if options (apply assoc {} options) nil)
-          min (double (if (:min opts) (:min opts) 0.0))
-          max (double (if (:max opts) (:max opts) 1.0))
+          min-val (double (if (:min opts) (:min opts) 0.0))
+          max-val (double (if (:max opts) (:max opts) 1.0))
           ints? (if (true? (:integers opts)) true false)
-          dist (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.))]
+          dist (cern.jet.random.Uniform. min-val max-val (cern.jet.random.engine.MersenneTwister.))]
       (if (= size 1)
         (if ints? 
-          (cern.jet.random.Uniform/staticNextIntFromTo min max)
-          (cern.jet.random.Uniform/staticNextDoubleFromTo min max))
+          (cern.jet.random.Uniform/staticNextIntFromTo min-val max-val)
+          (cern.jet.random.Uniform/staticNextDoubleFromTo min-val max-val))
         (if ints? 
-          (for [_ (range size)] (cern.jet.random.Uniform/staticNextIntFromTo min max))
-          (for [_ (range size)] (cern.jet.random.Uniform/staticNextDoubleFromTo min max)))))))
+          (for [_ (range size)] (cern.jet.random.Uniform/staticNextIntFromTo min-val max-val))
+          (for [_ (range size)] (cern.jet.random.Uniform/staticNextDoubleFromTo min-val max-val)))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
@@ -1419,8 +1384,8 @@
       :r-square -- coefficient of determination
 
   Examples:
-    (use '(incanter core stats io))
-    (def iris (to-matrix (read-dataset \"data/iris.dat\" :header true)))
+    (use '(incanter core stats datasets charts))
+    (def iris (to-matrix (get-dataset :iris)))
     (def y (sel iris :columns 0))
     (def x (sel iris :columns (range 1 6)))
     (def iris-lm (linear-model y x)) ; with intercept term
@@ -1452,9 +1417,11 @@
           xtx (mmult (trans _x) _x)
           xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
           xty (mmult (trans _x) y)
-          coefs (to-list (if (or (number? xtxi) (number? xty)) 
-                  (mult xtxi xty)
-                  (mmult xtxi xty)))
+          coefs (if (and (number? xtxi) (number? xty))
+                  (* xtxi xty)
+                  (to-list (if (or (number? xtxi) (number? xty)) 
+                    (mult xtxi xty)
+                    (mmult xtxi xty))))
           fitted (to-list (if (number? coefs)
                   (mult _x coefs)
                   (mmult _x coefs)))
@@ -1465,17 +1432,18 @@
           r-square (/ ssr sst)
           n (nrow y)
           p (ncol _x)
+          p-1 (if intercept? (- p 1) p)
           adj-r-square (- 1 (* (- 1 r-square) (/ (- n 1) (- n p 1))))
           mse (/ sse (- n p))
-          msr (/ ssr (- p 1))
+          msr (/ ssr p-1)
           f-stat (/ msr mse)
-          df1 (- (ncol _x) 1)
-          df2 (- (nrow _x) (ncol _x))
+          df1 p-1
+          df2 (- n p)
           f-prob (cdf-f f-stat :df1 df1 :df2 df2 :lower-tail false)
           coef-var (mult mse xtxi)
           std-errors (if (number? xtxi)
-                       (* (/ sse (- n p 1)) xtxi)
-                       (for [i (range p)] (* (/ sse (- n p 1)) (sel xtxi i i))))
+                       (* (/ sse (- n p-1)) xtxi)
+                       (for [i (range p)] (* (/ sse (- n p-1)) (sel xtxi i i))))
          ]
       (with-meta
         {:x _x
@@ -1498,101 +1466,4 @@
          :adj-r-square adj-r-square
         } 
         {:type ::linear-model}))))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CATEGORICAL VARIABLES
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn categorical-var
-" Returns a categorical variable based on the values in the given collection.
-
-  Options:
-    :data (default nil) factors will be extracted from the given data.
-    :ordered? (default false) indicates that the variable is ordinal.
-    :labels (default (sort (into #{} data)))
-    :levels (range (count labels))
-
-  Examples:
-    (categorical-var :data [:a :a :c :b :a :c :c])
-    (categorical-var :labels [:a :b :c])
-    (categorical-var :labels [:a :b :c] :levels [10 20 30])
-    (categorical-var :levels [1 2 3])
-
-"
-  ([& args]
-   (let [opts (if args (apply assoc {} args) nil)
-         data (if (:data opts) (:data opts) nil)
-         ordered? (if (false? (:ordered? opts)) true false)
-         labels (if (:labels opts) 
-                  (:labels opts) 
-                  (if (nil? data)
-                    (:levels opts)
-                    (sort (into #{} data))))
-         levels (if (:levels opts) (:levels opts) (range (count labels)))]
-    {:ordered? ordered?
-     :labels labels
-     :levels levels
-     :to-labels (apply assoc {} (interleave levels labels))
-     :to-levels (apply assoc {} (interleave labels levels))})))
-
-
-(defn to-levels 
-"
-"
-  ([coll & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          cat-var (if (:categorical-var opts) (:categorical-var opts) (categorical-var :data coll))
-          to-levels (:to-levels cat-var)]
-      (for [label coll] (to-levels label)))))
-
-
-(defn to-labels 
-"
-"
-  ([coll cat-var] 
-    (let [to-labels (:to-labels cat-var)]
-      (for [level coll] (to-labels level)))))
-
-
-
-(defn get-dummy-vars [n]
-  (let [nbits (dec (Math/ceil (log2 n)))]
-    (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
-         (range n))))
-
-
-(defn to-dummy-vars [coll]
-  (let [cat-var (categorical-var :data coll)
-        levels (:levels cat-var)
-        encoded-data (to-levels coll :categorical-var cat-var)
-        bit-map (get-dummy-vars (count levels))]
-    (for [item encoded-data] (nth bit-map item))))
-
-
-
-(defn cat-to-dummy-vars [dataset column-key]
-  (let [col (first (get-columns dataset [column-key]))]
-    (if (some string? col) 
-      (matrix (to-dummy-vars col))
-      (matrix col))))
-
-
-(defn to-matrix 
-  "Converts a dataset into a matrix."
-  ([dataset & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          dummy-vars (if (:dummy-vars opts) (:dummy-vars opts) nil)]
-      (reduce bind-columns 
-              (map #(cat-to-dummy-vars dataset %) 
-                    (range (count (keys (:column-names dataset)))))))))
-
-
-(defn transpose-seq [coll]
-  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
-
-;(transpose-seq (to-dummy (first (get-columns iris-map [4]))))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
