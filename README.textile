@@ -1,13 +1,17 @@
 h2. Incanter
 
-_Incanter is a Clojure-based, R-like statistical computing and graphics environment for the JVM._
+_Incanter is a "Clojure":http://clojure.org based, "R":http://www.r-project.org/ like statistical computing and graphics environment for the JVM._
 
-Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. Motivation for a JVM-based Lisp can be found at the "Clojure website":http://clojure.org, and screencasts of several excellent Clojure talks by the language's creator, Rich Hickey, can be found at "clojure.blip.tv":http://clojure.blip.tv.
+Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. 
+
+Motivation for a JVM-based Lisp can be found at the "Clojure website":http://clojure.org, and screencasts of several excellent Clojure talks by the language's creator, Rich Hickey, can be found at "clojure.blip.tv":http://clojure.blip.tv. 
+
+Finally, the motivation for creating Incanter is to provide R-like semantics (if not always syntax) to the development of standalone statistical applications (with web or gui front-ends), as well as to the development of statistical applications that need to plug into an existing software infrastructure in order to consume data (from databases or other information systems) or drive other processes. Clojure's seemless integration with Java makes this kind of development much simplier than is possible in R, and Incanter's R-like semantics makes it much simplier than is possible in pure Java.
 
 
 *Additional Clojure resources*
 
-* For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/jnb/jnbMar2009.html by R. Mark Volkmann.
+* For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann.
 * For an even more extensive introduction, get the beta version of the book "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway.
 
 
