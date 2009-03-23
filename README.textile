@@ -18,7 +18,7 @@ Motivation for a Lisp-based R-like statistical environment can be found in the p
 * Generate API docs: @bin/generate_docs.clj@
 * Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@
 * From the Clojure shell, load the Incanter libraries: @(use '(incanter core stats datasets charts))@
-* Generate some random data and plot a histogram: @(view (histogram (sample-normal 1000)))@
+* Generate some random data and plot a histogram of it: @(view (histogram (sample-normal 1000)))@
 * See the next section for more examples
 
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)

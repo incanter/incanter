@@ -280,19 +280,23 @@
 
 (defn add-line 
 " Plots a line on the given scatter-plot of the (x,y) points.
+  Equivalent to R's lines function.
 
   Examples:
     (use '(incanter core stats io datasets charts))
     (def speed (to-matrix (get-dataset :speed)))
-    (def y (sel speed true 1))
-    (def x (sel speed true 2))
-    ;(def lm1 (linear-model y x :intercept false))
-    (def lm1 (linear-model y x))
-    (def y-hat (plus (first (:coefs lm1)) (mult (second (:coefs lm1)) x)))
-    ;(def y-hat (mult (:coefs lm1) x))
+    (def y (sel speed :columns 1))
+    (def x (sel speed :columns 2))
     (def plot1 (scatter-plot x y))
     (view plot1)
-    (add-line plot1 x y-hat)
+    
+    ;; add regression line to scatter plot
+    (def lm1 (linear-model y x))
+    (add-line plot1 x (:fitted lm1))
+
+    ;; model the data without an intercept
+    (def lm2 (linear-model y x :intercept false))
+    (add-line plot1 x (:fitted lm2))
 
 
 "
@@ -314,9 +318,9 @@
       ;(.addSeries (.getDataset data-plot) data-series)
       (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
       (.addSeries data-set data-series)
-      (.setDataset data-plot 1 data-set)
+      (.setDataset data-plot (.getDatasetCount data-plot) data-set)
       ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
-      (.setRenderer data-plot 1 line-renderer)))))
+      (.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)))))
 
 
 
