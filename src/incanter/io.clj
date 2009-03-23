@@ -38,8 +38,8 @@
     Returns a dataset read from a file.
 
     Options:
-      :delim (default space), other options (tab ,  etc)
-      :quote (default \") character used for quoting strings
+      :delim (default \\space), other options (\\tab \\,  etc)
+      :quote (default \\\") character used for quoting strings
       :skip (default 0) the number of lines to skip at the top of the file.
       :header (default false) indicates the file has a header line
   "
