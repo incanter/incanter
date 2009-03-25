@@ -2,68 +2,6 @@
 (ns examples.probability-plots
   (:use (incanter core stats charts)))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SCRATCH SPACE
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn to-binary [n] (for [bit (Integer/toBinaryString n)] (if (= bit \1) 1 0)))
-
-(def A (matrix [[1 2 3]
-                [2 4 6]
-                [3 6 9]
-                [4 -8 -10]]))
-
-;; http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/doublealgo/Statistic.html
-(cern.colt.matrix.doublealgo.Statistic/covariance A)
-(cern.colt.matrix.doublealgo.Statistic/correlation (cern.colt.matrix.doublealgo.Statistic/covariance A))
-(cern.colt.matrix.doublealgo.Statistic/distance A cern.colt.matrix.doublealgo.Statistic/EUCLID)
-(cern.colt.matrix.doublealgo.Statistic/distance A cern.colt.matrix.doublealgo.Statistic/CANBERRA)
-(cern.colt.matrix.doublealgo.Statistic/distance A cern.colt.matrix.doublealgo.Statistic/BRAY_CURTIS)
-(cern.colt.matrix.doublealgo.Statistic/distance A cern.colt.matrix.doublealgo.Statistic/MANHATTAN)
-(cern.colt.matrix.doublealgo.Statistic/distance A cern.colt.matrix.doublealgo.Statistic/MAXIMUM)
-
-(eigenvalue-decomp (mmult (trans A) A))
-(svd-decomp A)
-(lu-decomp (mmult (trans A) A))
-(qr-decomp A)
-(det (mmult (trans A) A))
-(trace A)
-
-;; should create a multi-method called 'view' for viewing matrices, like 
-;; inspect-table, and datasets (with column names), and plots (instead
-;; of calling the command 'plot' which seems redundant.
-(inspect-table (to-matrix (read-dataset "./data/test.dat" :header true)))
-
-;; adding meta data to functions: from #clojure irc
-;; rhickey: user=> (def f (proxy [clojure.lang.AFn] [{:my :meta}] (invoke [] 42)))
-;; rhickey: #'user/f
-;; rhickey: user=> (f)
-;; rhickey: 42
-;; rhickey: user=> ^f
-;; rhickey: {:my :meta}
-
-(def ols-data (to-matrix (read-dataset 
-                           (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
-                           :header true)))
-
-(def x (sel ols-data (range 0 2313) (range 1 10)))
-(def y (sel ols-data (range 0 2313) 10))
-
-(time (def b-reg-full (bayes-regression-full 5000 x y)))
-
-
-;; cumulative-mean function
-(defn cumulative-mean [coll] (map mean (for [i (range (dec (count coll)) -1 -1)] (drop-last i coll))))
-;; trace plots
-(def traceplot (line-plot (range (count (:var b-reg-full))) (:var b-reg-full) 
-                        :title "Trace Plot" 
-                        :x-label "Iteration" 
-                        :y-label "Value"))
-(add-series traceplot (range (count (:var b-reg-full))) (cumulative-mean (:var b-reg-full)))
-
-(view traceplot)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NORMAL DISTRIBUTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
