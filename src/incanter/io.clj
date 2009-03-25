@@ -26,7 +26,7 @@
         ;(clojure set)))
 
 
-(defn -parse-string [value] 
+(defn- parse-string [value] 
   (try (Integer/parseInt value) 
     (catch NumberFormatException _ 
       (try (Double/parseDouble value)
@@ -56,7 +56,7 @@
                     skip)
          data-lines (map seq (seq (.readAll reader)))
          raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
-         parsed-data (into [] (map (fn [row] (into [] (map #(-parse-string %) row))) raw-data))
+         parsed-data (into [] (map (fn [row] (into [] (map #(parse-string %) row))) raw-data))
        ]
     (if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data))))))
   

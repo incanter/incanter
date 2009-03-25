@@ -35,9 +35,9 @@
     incanter.stats/linear-model
 
   Examples:
-    (use '(incanter core io stats charts bayes))
+    (use '(incanter core datasets stats charts bayes))
 
-    (def ols-data (to-matrix (read-dataset \"data/olsexamp.dat\" :header true)))
+    (def ols-data (to-matrix (get-dataset :survey)))
     (def x (sel ols-data (range 0 2313) (range 1 10)))
     (def y (sel ols-data (range 0 2313) 10))
     (def lm (linear-model y x :intercept false))

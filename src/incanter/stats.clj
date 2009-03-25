@@ -496,7 +496,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           shape (if (number? (:shape opts)) (:shape opts) 1)
           rate (if (number? (:rate opts)) (:rate opts) 1)
-          lower-tail? (if (false (:lower-tail opts)) false true) 
+          lower-tail? (if (false? (:lower-tail opts)) false true) 
           cdf-fx (if lower-tail?
                   (fn [x1] (cern.jet.stat.Probability/gamma rate shape x1))
                   (fn [x1] (cern.jet.stat.Probability/gammaComplemented rate shape x1)))]
@@ -1401,8 +1401,8 @@
     (:df iris-lm)
 
     (def x1 (range 0.0 3 0.1))
-    (view (xy-plot x1 (pdf-f x1 :df1 4 :df2 144)))
-    (view (xy-plot x1 (cdf-f x1 :df1 4 :df2 144)))
+    (view (line-plot x1 (pdf-f x1 :df1 4 :df2 144)))
+    (view (line-plot x1 (cdf-f x1 :df1 4 :df2 144)))
   
 
   References:
