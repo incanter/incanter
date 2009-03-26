@@ -383,6 +383,37 @@
 
 
 
+(defn qq-plot
+"
+  Returns a QQ-Plot object. Use the 'view' function to display it.
+
+  References:
+    http://en.wikipedia.org/wiki/QQ_plot
+
+  Examples:
+    
+    (use '(incanter stats charts))
+    (view (qq-plot (sample-normal 100)))
+    (view (qq-plot (sample-exp 100)))
+    (view (qq-plot (sample-gamma 100)))
+
+
+"
+  ([x & options]
+   (let [n (count x)
+         quants (for [k (range 1 n)] (/ k (inc n)))
+         norm-quants (quantile-normal quants)
+         y (quantile x :probs quants)]
+         (scatter-plot norm-quants y 
+                   :title "QQ-Plot"
+                   :x-label "Normal theoretical quantiles"
+                   :y-label "Data quantiles"
+                   :series-label "Theoretical Normal"))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; view multi-method for matrices, charts, etc.
 (defmulti view 

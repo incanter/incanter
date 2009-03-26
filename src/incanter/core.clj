@@ -276,9 +276,11 @@
        (and (coll? ~A) (coll? ~B)) 
          (map ~op ~A ~B) 
        (and (number? ~A) (coll? ~B)) 
-         (.assign #^Matrix (matrix ~A (nrow ~B) (ncol ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
+         ;(.assign #^Matrix (matrix ~A (nrow ~B) (ncol ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
+         (map (fn [b#] (~op ~A b#)) ~B)
        (and (coll? ~A) (number? ~B)) 
-         (.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. Functions ~fun)))))
+         ;(.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. Functions ~fun)))))
+         (map (fn [a#] (~op a# ~B)) ~A))))
     
 
 
