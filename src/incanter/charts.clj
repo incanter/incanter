@@ -28,6 +28,16 @@
   Use the 'view' function to display the chart, or the 'save-png' function
   to write it to a file.
 
+  Options:
+    :nbins (default 10) number of bins
+    :density (default false) if false, plots frequency, otherwise density
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+
+
   See also:
     view, save-png, add-histogram
 
@@ -35,6 +45,19 @@
 
     (use '(incanter charts stats))
     (view (histogram (sample-normal 1000)))
+
+    # plot a density histogram
+    (def hist (histogram (sample-normal 1000) :density true))
+    (view hist)
+    # add a normal density line to the plot
+    (def x (range -4 4 0.01))
+    (add-lines hist x (pdf-normal x))
+
+    # plot some gamma data
+    (def gam-hist (histogram (sample-gamma 1000) :density true :nbins 30))
+    (view gam-hist) 
+    (def x (range 0 8 0.01))
+    (add-lines gam-hist x (pdf-gamma x))
 
 
   References:
@@ -49,7 +72,8 @@
           density?# (true? (:density opts#))
           main-title# (if (:title opts#) (:title opts#) "Histogram")
           x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
-          y-lab# (if (:y-label opts#) (:y-label opts#) "Frequency")
+          y-lab# (if (:y-label opts#) (:y-label opts#) 
+                   (if density?# "Density" "Frequency"))
           series-lab# (if (:series-label opts#) (:series-label opts#) (str '~x))
           legend?# (true? (:legend opts#))
           dataset# (org.jfree.data.statistics.HistogramDataset.)
