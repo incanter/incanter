@@ -240,6 +240,34 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MULTIVARIATE NORMAL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn sample-multivariate-normal 
+"
+  Examples:
+
+    (use '(incanter core stats))
+    (def mvn-samp (sample-multivariate-normal 1000 :means [7 5] :cov (matrix [[2 0.75] [0.75 3]])))
+    (covariance mvn-samp)
+    (map mean (trans mvn-samp))
+
+"
+  ([size & options]
+   (let [opts (if options (apply assoc {} options) nil)
+         means (if (:means opts) (:means opts) [0])
+         cov (if (:cov opts) (:cov opts) (matrix [1]))
+         p (count means)
+         chol (decomp-cholesky cov)
+         norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
+        ]
+     (matrix (map #(plus % (trans means)) norm-samp)))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIFORM DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
