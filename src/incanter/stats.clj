@@ -1492,3 +1492,36 @@
         } 
         {:type ::linear-model}))))
 
+
+
+
+(defn principal-components 
+"
+  Performs a principal components analysis on the given data matrix.
+  Equivalent to R's prcomp function.
+  
+  Returns:
+    A map with the following fields:
+    :std-dev -- the standard deviations of the principal compoenents
+        (i.e. the square roots of the eigenvalues of the correlation
+        matrix, though the calculation is actually done with the
+        singular values of the data matrix.
+    :rotation -- the matrix of variable loadings (i.e. a matrix
+        whose columns contain the eigenvectors).
+
+  Examples:
+   
+    (use '(incanter core stats datasets))
+    (def us-arrests (sel (to-matrix (get-dataset :us-arrests)) :columns [6 7 9]))
+    (principal-components us-arrests)
+
+"
+  ([x & options]
+   (let [svd (decomp-svd (correlation x))
+         rotation (:V svd)
+         std-dev (sqrt (:S svd))]
+     {:std-dev std-dev
+      :rotation rotation})))
+
+
+

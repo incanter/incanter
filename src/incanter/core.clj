@@ -536,7 +536,7 @@
 "
   ([mat]
     (let [result (cern.colt.matrix.linalg.SingularValueDecomposition. mat)]
-      {:S (Matrix. (.getS result))
+      {:S (diag (Matrix. (.getS result)))
        :U (Matrix. (.getU result))
        :V (Matrix. (.getV result))})))
 
@@ -605,7 +605,7 @@
 
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, #^java.io.Writer w]
-  (let [formatter (Formatter. "%1.2f")]
+  (let [formatter (Formatter. "%1.4f")]
     (do 
       (.setPrintShape formatter false)
       (.write w "[")

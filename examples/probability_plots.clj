@@ -276,7 +276,7 @@
 (def exp-plot (line-plot x (pdf-exp x :rate 1/2) 
                       :title "Exponential PDF"
                       :x-label "X" 
-                      :y-label "Probability"
+                      :y-label "Density"
                       :legend true))
 (view exp-plot)
 (add-lines exp-plot x (pdf-exp x :rate 1))
@@ -305,7 +305,6 @@
 ;; make a histogram of a sample of 1000 Exponential deviates
 (view (histogram (sample-exp 1000 :rate 1.5) 
         :title "Exponential Histogram (rate)"
-        :series-label "(1.5)"
         :nbins 20))
 
 
@@ -318,10 +317,14 @@
 ;;; Examples of plots from the Continuous Uniform Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Uniform_distribution)
 (def x (range 1 10.01 0.01))
-(def uniform-plot (line-plot x (pdf-uniform x :min 1 :max 10) :title "Uniform PDF"))
+(def uniform-plot (line-plot x (pdf-uniform x :min 1 :max 10) 
+                             :title "Uniform PDF" 
+                             :y-label "Density"))
 (view uniform-plot)
 
-(def uniform-cdf-plot (line-plot x (cdf-uniform x :min 1 :max 10) :title "Uniform CDF"))
+(def uniform-cdf-plot (line-plot x (cdf-uniform x :min 1 :max 10) 
+                                 :title "Uniform CDF" 
+                                 :y-label "Probability"))
 (view uniform-cdf-plot)
 
 
@@ -346,6 +349,7 @@
 (def x2 (range 0 40))
 (def binomial-plot (scatter-plot x1 (pdf-binomial x1 :prob 1/2 :size 20) 
                                  :title "Binomial PDF"
+                                 :y-label "Density"
                                  :legend true))
 (view binomial-plot)
 (add-points binomial-plot x1 (pdf-binomial x1 :prob 0.7 :size 20))
@@ -355,6 +359,7 @@
 
 (def binomial-cdf-plot (scatter-plot x1 (cdf-binomial x1 :prob 1/2 :size 20) 
                                      :title "Binomial CDF"
+                                     :y-label "Probability"
                                      :legend true))
 (view binomial-cdf-plot)
 (add-points binomial-cdf-plot x1 (cdf-binomial x1 :prob 0.7 :size 20))
@@ -391,6 +396,7 @@
 (def x3 (range 0 100))
 (def neg-binomial-plot (scatter-plot x2 (pdf-neg-binomial x2 :prob 1/10 :size 50) 
                                      :title "Negative Binomial PDF"
+                                     :y-label "Density"
                                      :legend true))
 (view neg-binomial-plot)
 (add-points neg-binomial-plot x2 (pdf-neg-binomial x2 :prob 1/8 :size 75))
@@ -399,6 +405,7 @@
 
 (def neg-binomial-cdf-plot (scatter-plot x1 (cdf-neg-binomial x1 :prob 1/2 :size 25) 
                                          :title "Negative Binomial CDF"
+                                         :y-label "Probability"
                                          :legend true))
 (view neg-binomial-cdf-plot)
 (add-points neg-binomial-cdf-plot x1 (cdf-neg-binomial x1 :prob 2/3 :size 25))
@@ -472,7 +479,8 @@
 ;; Wikipedia (http://en.wikipedia.org/wiki/F_distribution)
 (def x (range 0 5 0.01))
 (def f-plot (line-plot x (pdf-f x :df1 2 :df2 1) 
-                       :title "Beta PDF"
+                       :title "F PDF"
+                       :y-label "Density"
                        :legend true))
 (view f-plot)
 (add-lines f-plot x (pdf-f x :df1 5 :df2 2))
@@ -480,7 +488,8 @@
 (add-lines f-plot x (pdf-f x :df1 100 :df2 100))
 
 (def f-cdf-plot (line-plot x (cdf-f x :df1 1 :df2 1) 
-                           :title "Beta CDF"
+                           :title "F CDF"
+                           :y-label "Probability"
                            :legend true))
 (view f-cdf-plot)
 (add-lines f-cdf-plot x (cdf-f x :df1 2 :df2 1))
