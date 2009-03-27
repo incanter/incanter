@@ -38,6 +38,9 @@
    :survey {:filename (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
             :delim \space
             :header true}
+   :us-arrests {:filename (str (System/getProperty "incanter.home") "/data/us_arrests.dat")
+            :delim \,
+            :header true}
   })
 
 

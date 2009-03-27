@@ -112,7 +112,7 @@
    ([m]
     (cond 
      (matrix? m)
-      (into [] (seq (.toArray (.diagonal DoubleFactory2D/dense m))))
+      (seq (.toArray (.diagonal DoubleFactory2D/dense m)))
      (coll? m)
       (Matrix. (.diagonal DoubleFactory2D/dense (.make DoubleFactory1D/dense (double-array m)))))))
 
@@ -656,7 +656,7 @@
 (defn dataset [column-names & data] 
   (with-meta 
     {:column-names column-names
-     :rows (into [] (map #(apply assoc {} (interleave column-names %)) (first data)))}
+     :rows (map #(apply assoc {} (interleave column-names %)) (first data))}
     {:type ::dataset}))
 
 

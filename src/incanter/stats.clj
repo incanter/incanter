@@ -1222,6 +1222,47 @@
 
 
 
+(defn sd 
+"
+  Returns the standard deviation of the data, x. 
+
+  Examples:
+    (sd (sample-normal 100))
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Standard_deviation
+" 
+  ([x]
+    (Descriptive/sampleStandardDeviation (length x) (variance x))))
+
+
+
+(defn correlation
+"
+  Returns the sample correlation of x and y, or the correlation 
+  matrix of the given matrix. 
+
+  Examples:
+
+  References:
+    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://en.wikipedia.org/wiki/Correlation
+"
+  ([x y]
+    (let [
+          xx (to-list x)
+          yy (to-list y)
+        ]
+      (Descriptive/correlation 
+        (DoubleArrayList. (double-array xx)) (sd x)
+        (DoubleArrayList. (double-array yy)) (sd y))))
+  ([mat]
+   (div (covariance mat) 
+        (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
+
+
+
 (defn median 
 "
   Returns the median of the data, x. 
@@ -1237,22 +1278,6 @@
   ([x]
     (let [xx (to-list x)]
       (Descriptive/median (DoubleArrayList. (double-array xx))))))
-
-
-(defn sd 
-"
-  Returns the standard deviation of the data, x. 
-
-  Examples:
-    (sd (sample-normal 100))
-
-  References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
-    http://en.wikipedia.org/wiki/Standard_deviation
-" 
-  ([x]
-    (Descriptive/sampleStandardDeviation (length x) (variance x))))
-
 
 
 (defn quantile 
