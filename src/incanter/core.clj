@@ -249,7 +249,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defmacro #^Matrix -transform-with [A op fun]
+(defmacro #^Matrix transform-with [A op fun]
   `(cond 
     (matrix? ~A)
       (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleFunction (. Functions ~fun))
@@ -259,7 +259,7 @@
       (~op ~A)))
     
 
-(defmacro -combine-with [A B op fun]
+(defmacro combine-with [A B op fun]
   `(if (and (number? ~A) (number? ~B))
     (~op ~A ~B)
       (cond 
@@ -287,31 +287,31 @@
 (defn plus 
   " Performs element-by-element addition on multiple matrices, sequences, 
     and/or numbers. Equivalent to R's + operator."
-   ([& args] (reduce (fn [A B] (-combine-with A B clojure.core/+ plus)) args)))
+   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/+ plus)) args)))
 
 
 (defn minus 
   " Performs element-by-element subtraction on multiple matrices, sequences, 
     and/or numbers. Equivalent to R's - operator."
-   ([& args] (reduce (fn [A B] (-combine-with A B clojure.core/- minus)) args)))
+   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args)))
 
 
 (defn mult 
   " Performs element-by-element multiplication on multiple matrices, sequences, 
     and/or numbers. Equivalent to R's * operator."
-   ([& args] (reduce (fn [A B] (-combine-with A B clojure.core/* mult)) args)))
+   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/* mult)) args)))
 
 
 (defn div 
   " Performs element-by-element division on multiple matrices, sequences, 
     and/or numbers. Equivalent to R's / operator."
-   ([& args] (reduce (fn [A B] (-combine-with A B clojure.core// div)) args)))
+   ([& args] (reduce (fn [A B] (combine-with A B clojure.core// div)) args)))
 
 
 (defn pow 
   " This is an element-by-element exponent function, raising the first argument,
     by the exponents in the remaining arguments. Equivalent to R's ^ operator."
-   ([& args] (reduce (fn [A B] (-combine-with A B #(Math/pow %1 %2) pow)) args)))
+   ([& args] (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args)))
 
 
 (defn sqrt 
@@ -323,25 +323,25 @@
 (defn log 
   "Returns the natural log of the elements in the given matrix, sequence or number.
    Equvalent to R's log function."
-   ([A] (-transform-with A #(Math/log %) log)))
+   ([A] (transform-with A #(Math/log %) log)))
 
 
 (defn log2 
   "Returns the log base 2 of the elements in the given matrix, sequence or number.
    Equivalent to R's log2 function."
-   ([A] (-transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
+   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
 
 
 (defn log10 
   "Returns the log base 10 of the elements in the given matrix, sequence or number.
    Equivalent to R's log10 function."
-   ([A] (-transform-with A #(Math/log10 %) (lg 10.0))))
+   ([A] (transform-with A #(Math/log10 %) (lg 10.0))))
 
 
 (defn exp 
   "Returns the exponential of the elements in the given matrix, sequence or number.
    Equivalent to R's exp function."
-   ([A] (-transform-with A #(Math/exp %) exp)))
+   ([A] (transform-with A #(Math/exp %) exp)))
 
 
 (defn factorial 
@@ -613,6 +613,16 @@
       (.write w "]\n"))))
 
 
+;; PRINT METHOD FOR INCANTER DATASETS
+(defmethod print-method :incanter.core/dataset [o, #^java.io.Writer w]
+  (do 
+    (.write w (str (:column-names o)))
+    (.write w "\n")
+    (doseq [row (:rows o)]
+      (.write w (str (vals row)))
+      (.write w "\n"))))
+
+
 
 (defn to-vect  
   " Returns a vector-of-vectors if the given matrix is two-dimensional,
@@ -653,15 +663,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn dataset [column-names & data] 
-  (with-meta 
-    {:column-names column-names
-     :rows (map #(apply assoc {} (interleave column-names %)) (first data))}
-    {:type ::dataset}))
+(defn dataset 
+" Returns a map of type ::dataset constructed from the given column-names and
+  data. The data is a collection of collections.
+"
+  ([column-names & data] 
+    (with-meta 
+      {:column-names column-names
+      :rows (map #(apply assoc {} (interleave column-names %)) (first data))}
+      {:type ::dataset})))
 
 
 
-(defn get-column-id [dataset column-key]
+(defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
         id (if (number? column-key)
              (if (some #(= column-key %) headers)
@@ -671,9 +685,39 @@
     id))
 
 
-(defn get-columns [dataset column-keys]
+(defn- get-columns [dataset column-keys]
   (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
 
+
+
+(defn select
+"
+  Arguments:
+    dataset -- an incanter dataset
+
+  Options:
+    :columns -- a single column key or vector of column keys
+    :rows -- TODO
+    :filter -- TODO
+
+  Examples:
+
+    (use 'incanter.datasets)
+    (def us-arrests (get-dataset :us-arrests))
+    (select us-arrests :columns \"State\")
+
+    (select us-arrests :columns [\"State\" \"Murder\"])
+
+"
+  ([dataset & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          rows (if (:rows opts) (:rows opts) true)
+          cols (if (:columns opts) (if (coll? (:columns opts))
+                                     (:columns opts) 
+                                     [(:columns opts)])
+                 (:column-names dataset))
+          row-filter (if (:filter opts) (:filter opts) nil)]
+      (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) cols))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -733,25 +777,25 @@
 
 
 
-(defn get-dummy-vars [n]
+(defn- get-dummies [n]
   (let [nbits (dec (Math/ceil (log2 n)))]
     (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
          (range n))))
 
 
-(defn to-dummy-vars [coll]
+(defn to-dummies [coll]
   (let [cat-var (categorical-var :data coll)
         levels (:levels cat-var)
         encoded-data (to-levels coll :categorical-var cat-var)
-        bit-map (get-dummy-vars (count levels))]
+        bit-map (get-dummies (count levels))]
     (for [item encoded-data] (nth bit-map item))))
 
 
 
-(defn cat-to-dummy-vars [dataset column-key]
+(defn- categorical-to-dummies [dataset column-key]
   (let [col (first (get-columns dataset [column-key]))]
     (if (some string? col) 
-      (matrix (to-dummy-vars col))
+      (matrix (to-dummies col))
       (matrix col))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -763,16 +807,15 @@
 "
   ([dataset & options]
     (let [opts (if options (apply assoc {} options) nil)
-          dummy-vars (if (:dummy-vars opts) (:dummy-vars opts) nil)]
+          dummies (if (:dummy opts) (:dummy opts) nil)]
       (reduce bind-columns 
-              (map #(cat-to-dummy-vars dataset %) 
+              (map #(categorical-to-dummies dataset %) 
                     (range (count (keys (:column-names dataset)))))))))
 
 
-(defn transpose-seq [coll]
+(defn- transpose-seq [coll]
   (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
 
-;(transpose-seq (to-dummy (first (get-columns iris-map [4]))))
 
 
 
