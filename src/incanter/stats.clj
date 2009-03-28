@@ -245,24 +245,49 @@
 
 
 (defn sample-multivariate-normal 
-"
+" Returns a sample of the given size from a Multivariate Normal 
+  distribution. This is equivalent to R's mvtnorm::rmvnorm function. 
+
+  Arguments:
+    size -- the size of the sample to return
+
+  Options: 
+    :mean (default (repeat (ncol sigma) 0)) 
+    :sigma (default (identity-matrix (count mean)))
+
+
   Examples:
 
-    (use '(incanter core stats))
-    (def mvn-samp (sample-multivariate-normal 1000 :means [7 5] :cov (matrix [[2 0.75] [0.75 3]])))
+    (use '(incanter core stats charts))
+    (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
     (covariance mvn-samp)
-    (map mean (trans mvn-samp))
+    (def means (map mean (trans mvn-samp)))
+
+    ;; plot scatter-plot of points
+    (def mvn-plot (scatter-plot (sel mvn-samp :columns 0) (sel mvn-samp :columns 1)))
+    (view mvn-plot)
+    ;; add centroid to plot
+    (add-points mvn-plot [(first means)] [(second means)])
+
+  References:
+    http://en.wikipedia.org/wiki/Multivariate_normal
 
 "
   ([size & options]
    (let [opts (if options (apply assoc {} options) nil)
-         means (if (:means opts) (:means opts) [0])
-         cov (if (:cov opts) (:cov opts) (matrix [1]))
-         p (count means)
-         chol (decomp-cholesky cov)
+         mean (if (:mean opts) 
+                (:mean opts) 
+                (if (:sigma opts) 
+                  (repeat (ncol (:sigma opts)) 0)
+                  [0]))
+         sigma (if (:sigma opts) 
+                 (:sigma opts) 
+                 (identity-matrix (count mean)))
+         p (count mean)
+         chol (decomp-cholesky sigma)
          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
         ]
-     (matrix (map #(plus % (trans means)) norm-samp)))))
+     (matrix (map #(plus % (trans mean)) norm-samp)))))
 
 
 

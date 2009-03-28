@@ -362,6 +362,7 @@
       (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
       ;(.addSeries (.getDataset data-plot) data-series)
       (.setSeriesRenderingOrder (.getPlot ~chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+      (.setDatasetRenderingOrder (.getPlot ~chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
       (.addSeries data-set# data-series#)
       (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
       ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
