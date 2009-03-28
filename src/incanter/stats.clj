@@ -269,6 +269,13 @@
     ;; add centroid to plot
     (add-points mvn-plot [(first means)] [(second means)])
 
+    ;; add regression line to scatter plot
+    (def x (sel mvn-samp :columns 0))
+    (def y (sel mvn-samp :columns 1))
+    (def lm (linear-model y x))
+    (add-lines mvn-plot x (:fitted lm))
+
+
   References:
     http://en.wikipedia.org/wiki/Multivariate_normal
 
@@ -1228,7 +1235,7 @@
 
 (defn variance 
 "
-  Returns the sample variance of the data, x. 
+  Returns the sample variance of the data, x. Equivalent to R's var function.
 
   Examples:
     (variance (sample-normal 100))
@@ -1277,7 +1284,8 @@
 
 (defn sd 
 "
-  Returns the standard deviation of the data, x. 
+  Returns the sample standard deviation of the data, x. Equivalent to 
+  R's sd function.
 
   Examples:
     (sd (sample-normal 100))
@@ -1287,7 +1295,10 @@
     http://en.wikipedia.org/wiki/Standard_deviation
 " 
   ([x]
-    (Descriptive/sampleStandardDeviation (length x) (variance x))))
+    ;; population sd, not the sample sd
+    ;(Descriptive/sampleStandardDeviation (length x) (variance x))))
+    ;; return the sample standard deviation
+    (sqrt (variance x))))
 
 
 
@@ -1547,6 +1558,104 @@
 
 
 
+(defn t-test
+"
+  Argument:
+    x : sample to test
+
+  Options:
+    :y (default nil)
+    :mu (default (mean y) or 0) population mean
+    :alternative (default :two-sided) other choices :less :greater
+    :var-equal TODO (default false) variance equal
+    :paired TODO (default false) paired test
+    :conf-level (default 0.95) for returned confidence interval
+
+  Examples:
+  
+    (t-test (range 1 11) :mu 0) 
+    (t-test (range 1 11) :mu 0 :alternative :less)
+    (t-test (range 1 11) :mu 0 :alternative :greater)
+
+    (t-test (range 1 11) :y (range 7 21))
+    (t-test (range 1 11) :y (range 7 21) :alternative :less)
+    (t-test (range 1 11) :y (range 7 21) :alternative :greater)
+    (t-test (range 1 11) :y (conj (range 7 21) 200))
+
+  References:
+    http://en.wikipedia.org/wiki/T_test
+    http://www.socialresearchmethods.net/kb/stat_t.php
+
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          y (if (:y opts) (:y opts) nil)   
+          one-sample? (nil? y)
+          mu (if (:mu opts) (:mu opts) 
+               (if y (mean y) 0))
+          paired? (if (true? (:paired opts)) true false)
+          var-equal? (if (true? (:var-equal opts)) true false)
+          conf-level (if (:conf-level opts) (:conf-level opts) 0.95)
+          alternative (if (:alternative opts) (:alternative opts) :two-sided)
+          x-mean (mean x)
+          x-var (variance x)
+          n1 (count x)
+          y-mean (if one-sample? nil (mean y))
+          y-var (if one-sample? nil (variance y))
+          n2 (if one-sample? nil (count y))
+          t-stat (if one-sample?
+                   (/ (- x-mean mu) (/ (sqrt x-var) (sqrt n1)))
+                   ;; calculate Welch's t test
+                   (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2)))))
+          df (if one-sample?
+               (dec n1)
+               ;; calculate Welch-Satterthwaite equation
+               (/ (pow (+ (/ x-var n1) (/ y-var n2)) 2)
+                  (+ (/ (pow (/ x-var n1) 2) (dec n1))
+                     (/ (pow (/ y-var n2) 2) (dec n2)))))
+          lower-tail? (cond
+                        (= alternative :two-sided)
+                          (if (neg? t-stat) true false)
+                        (= alternative :lower)
+                          (if (neg? t-stat) false true)
+                        (= alternative :greater)
+                          (if one-sample?
+                            (if (neg? t-stat) true false)
+                            (if (neg? t-stat) false true)))
+          one-sided-p (cdf-t t-stat :df df :lower-tail lower-tail?)
+          qt (if (= alternative :two-sided)
+               (quantile-t (/ (- 1 conf-level) 2) :df df)
+               (quantile-t (- 1 conf-level) :df df))]
+      {:t-stat t-stat
+       :df df
+       :x-mean x-mean
+       :x-var x-var
+       :n1 n1
+       :y-mean y-mean
+       :y-var y-var
+       :n2 n2
+       :p-value (if (= alternative :two-sided) (* 2 one-sided-p) one-sided-p)
+       :conf-int (if one-sample?
+                   ;; one-sample confidence interval
+                   [(if (= alternative :less)
+                      Double/NEGATIVE_INFINITY
+                      (+ x-mean (/ (* qt (sqrt x-var)) (sqrt n1))))
+                    (if (= alternative :greater) 
+                      Double/POSITIVE_INFINITY
+                      (- x-mean (/ (* qt (sqrt x-var)) (sqrt n1))))]
+                   ;; two-sample confidence interval
+                   [(if (= alternative :less)
+                      Double/NEGATIVE_INFINITY 
+                      (+ (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))
+                    (if (= alternative :greater) 
+                      Double/POSITIVE_INFINITY
+                      (- (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))])
+      })))
+
+
+
+
+
 
 (defn principal-components 
 "
@@ -1567,6 +1676,9 @@
     (use '(incanter core stats datasets))
     (def us-arrests (sel (to-matrix (get-dataset :us-arrests)) :columns [6 7 9]))
     (principal-components us-arrests)
+
+  References:
+    http://en.wikipedia.org/wiki/Principal_component_analysis
 
 "
   ([x & options]
