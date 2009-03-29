@@ -916,7 +916,7 @@
 
   Examples:
     (use 'incanter.stats)
-    (sample-wishart 10 :df 10  :p 4)
+    (sample-wishart :df 10  :p 4)
 
     ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)
     (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)

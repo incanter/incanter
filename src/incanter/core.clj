@@ -868,3 +868,63 @@
     (cern.jet.stat.Gamma/incompleteBeta a b x)))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SYMMETRIC MATRIX 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn solve-quadratic
+" 
+  Returns a vector with the solution to x from the quadratic
+  equation, a*x^2 + b*x + c.
+
+  Arguments:
+    a, b, c: coefficients of a qaudratic equation.
+
+  Examples:
+    ;; -2*x^2 + 7*x + 15
+    (quadratic-formula -2 7 15)
+    ;; x^2 + -2*x + 1
+    (quadratic-formula 1 -2 1)
+
+"
+  ([a b c] 
+   (let [t1 (- 0 b)
+         t2 (sqrt (- (* b b) (* 4 a c)))
+         t3 (* 2 a)]
+     [(/ (- t1 t2) t3)
+      (/ (+ t1 t2) t3)])))
+
+
+
+(defn symmetric-matrix
+"
+  Returns a symmetric matrix from the given data,
+  which represents the lower triangular elements
+  ordered by row. This is not the inverse of
+  half-vectorize which returns a vector ordered
+  by columns.
+
+  Examples:
+    
+    (use 'incanter.core)
+    (symmetric-matrix [1
+                       2 3
+                       4 5 6
+                       7 8 9 10])
+
+
+"
+  ([data]
+   (let [n (count data)
+         p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
+         mat (incanter.Matrix. p p 0)
+         indices (for [i (range p) j (range p) :when (<= j i)] [i j])]
+     (doseq [idx (range n)]
+      (let [[i j] (nth indices idx)]
+        (.set mat i j (nth data idx))
+        (.set mat j i (nth data idx))))
+     mat))) 
+
+
+
