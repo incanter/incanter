@@ -17,8 +17,8 @@
 
 
 (ns incanter.charts 
-  (:use (incanter core stats)
-        (clojure inspector)))
+  (:use (incanter core stats))
+  (:import  (javax.swing JTable JScrollPane JFrame)))
 
 
 
@@ -485,17 +485,46 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; view multi-method for matrices, charts, etc.
+
 (defmulti view 
-  " This is a general 'view' function. If given a matrix, it will
-    display it in a Java Swing table (using clojure.inspector/inspect-table).
-    If given a chart object from incanter.charts, it will display it in a
-    new window."
-  (fn [obj & args] (class obj)))
+  " This is a general 'view' function. If given an Incanter matrix or
+    dataset, it will display it in a Java Swing JTable. If given an
+    Incanter chart object, it will display it in a new window.
+
+    Examples:
+      (use '(incanter core stats datasets charts))
+      (view (get-dataset :iris))
+      (view (to-matrix (get-dataset :iris)))
+
+      (view (histogram (sample-normal 1000)))
 
 
-(defmethod view incanter.Matrix 
-  ([obj & args] (inspect-table obj)))
+"
+  (fn [obj & options] (type obj)))
+
+
+
+(defmethod view incanter.Matrix
+  ([obj & options] 
+    (let [opts (if options (apply assoc {} options) nil)
+          column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))]
+      (doto (JFrame. "Incanter Matrix")
+        (.add (JScrollPane. (JTable. (java.util.Vector. (map #(java.util.Vector. %) (to-list obj)))
+                                     (java.util.Vector. column-names))))
+        (.setSize 400 600)
+        (.setVisible true)))))
+
+
+(defmethod view :incanter.core/dataset
+  ([obj & options] 
+   (let [column-names (:column-names obj)
+         column-vals (map (fn [row] (map #(row %) column-names)) (:rows obj))]
+     (doto (JFrame. "Incanter Dataset")
+       (.add (JScrollPane. (JTable. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
+                                    (java.util.Vector. column-names))))
+       (.setSize 400 600)
+       (.setVisible true)))))
+
 
 
 (defmethod view org.jfree.chart.JFreeChart 
