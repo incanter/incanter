@@ -900,6 +900,48 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;; WISHART DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+
+
+(defn sample-wishart
+"
+  Returns a p-by-p symmetric distribution drawn from a Wishart distribution
+
+  Options:
+    :p (default 2) -- number of dimensions of resulting matrix
+    :df (default p) -- degree of freedoms (aka n), df <= p
+    :scale (default (identity-matrix p)) -- positive definite matrix (aka V)
+
+  Examples:
+    (use 'incanter.stats)
+    (sample-wishart 10 :df 10  :p 4)
+
+    ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)
+    (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)
+
+
+  References:
+    http://en.wikipedia.org/wiki/Wishart_distribution#
+
+"
+  ([& options]
+    (let [opts (if options (apply assoc {} options) nil)
+          p (if (:p opts) (:p opts) 2)
+          df (if (:df opts) (:df opts) p)
+          scale (if (:scale opts) (:scale opts) (identity-matrix p))
+          diagonal (for [i (range 1 (inc p))] 
+                     (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
+          mat (diag diagonal)
+          indices (for [i (range p) j (range p) :when (< j i)] [i j])
+          _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
+          chol (decomp-cholesky scale)
+          x (mmult chol mat (trans mat) (trans chol))]
+        x)))
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
@@ -1687,6 +1729,27 @@
          std-dev (sqrt (:S svd))]
      {:std-dev std-dev
       :rotation rotation})))
+
+
+(defn indicator-function 
+"
+  Returns a sequence of ones and zeros, where ones
+  are returned when the given predicate is true for
+  corresponding element in the given collection, and
+  zero otherwise.
+
+  Examples:
+    (use 'incanter.stats)
+    
+    (indicator-function #(neg? %) (sample-normal 10))
+
+    ;; return the sum of the positive values in a normal sample
+    (def x (sample-normal 100))
+    (sum (mult x (indicator-function #(pos? %) x)))
+
+"
+  ([pred coll] 
+    (for [el coll] (if (pred el) 1 0))))
 
 
 
