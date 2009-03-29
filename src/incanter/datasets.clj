@@ -55,6 +55,8 @@
     :speed -- a simple dataset with speed and distance data, there are also csv
               and tab-delimited versions of it for testing (:speed-csv :speed-tdd).
     :survey -- survey data from Lynch book.
+    :us-arrests -- arrest data
+    :flow-meter -- flow meter data used in Bland Altman Lancet paper
 "
   ([dataset-key]
    (let [ds (**datasets** dataset-key)
