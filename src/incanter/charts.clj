@@ -253,6 +253,15 @@
   ([chart alpha] (.setForegroundAlpha (.getPlot chart) alpha)))
 
 
+(defn set-background-alpha 
+  ([chart alpha] (.setBackgroundAlpha (.getPlot chart) alpha)))
+
+
+(defn clear-background 
+  ([chart] (.setBackgroundAlpha (.getPlot chart) 0.0)))
+
+
+
 (defn set-title 
   ([chart title] (.setTitle chart title)))
 
@@ -434,6 +443,42 @@
                    :x-label "Normal theoretical quantiles"
                    :y-label "Data quantiles"
                    :series-label "Theoretical Normal"))))
+
+
+
+
+(defn bland-altman-plot
+"
+
+  Examples:
+
+    (use '(incanter core datasets charts))
+    (def flow-meter (to-matrix (get-dataset :flow-meter)))
+    (def x1 (sel flow-meter :columns 1))
+    (def x2 (sel flow-meter :columns 3))
+    (view (bland-altman-plot x1 x2))
+
+
+  References:
+    http://en.wikipedia.org/wiki/Bland-Altman_plot
+    http://www-users.york.ac.uk/~mb55/meas/ba.htm
+
+"
+  ([x1 x2]
+      (let [plot (scatter-plot (div (plus x1 x2) 2) (minus x1 x2) 
+                               :title "Bland Altman Plot"
+                               :legend false)
+            x-axis (div (plus x1 x2) 2)
+            y-axis (minus x1 x2)
+            min-x (reduce min x-axis)
+            max-x (reduce max x-axis)
+            x (range min-x max-x (/ (- max-x min-x) 100))
+            y-sd (* (sd y-axis) 2)]
+        (do
+          (add-lines plot x (repeat (count x) 0) :series-label "mean")
+          (add-lines plot x (repeat (count x) y-sd) :series-label "mean + sd")
+          (add-lines plot x (repeat (count x) (- 0 y-sd)) :series-label "mean - sd")
+          plot))))
 
 
 

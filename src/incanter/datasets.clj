@@ -41,6 +41,9 @@
    :us-arrests {:filename (str (System/getProperty "incanter.home") "/data/us_arrests.dat")
             :delim \,
             :header true}
+   :flow-meter {:filename (str (System/getProperty "incanter.home") "/data/flow_meter.dat")
+            :delim \space
+            :header true}
   })
 
 
