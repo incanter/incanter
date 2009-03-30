@@ -888,12 +888,12 @@
 
 (defn symmetric-matrix
 "
-  Returns a symmetric matrix from the given data,
-  which represents the lower triangular elements
-  ordered by row. This is not the inverse of
-  half-vectorize which returns a vector ordered
-  by columns.
+  Returns a symmetric matrix from the given data, which represents the lower triangular elements
+  ordered by row. This is not the inverse of half-vectorize which returns a vector ordered
+  by columns, unless the :by-row option is set to false.
 
+  Options:
+    :by-row (default true) -- if false, make symmetric-behavior the inverse of half-vectorize.
   Examples:
     
     (use 'incanter.core)
@@ -901,14 +901,24 @@
                        2 3
                        4 5 6
                        7 8 9 10])
+    
+    (half-vectorize 
+      (symmetric-matrix [1
+                         2 3
+                         4 5 6
+                         7 8 9 10] :by-row false))
 
 
 "
-  ([data]
-   (let [n (count data)
+  ([data & options]
+   (let [opts (if options (apply assoc {} options) nil)
+         by-row? (if (false? (:by-row opts)) false true)
+         n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
          mat (incanter.Matrix. p p 0)
-         indices (for [i (range p) j (range p) :when (<= j i)] [i j])]
+         indices (if by-row?
+                   (for [i (range p) j (range p) :when (<= j i)] [i j])
+                   (for [i (range p) j (range p) :when (<= i j)] [j i]))]
      (doseq [idx (range n)]
       (let [[i j] (nth indices idx)]
         (.set mat i j (nth data idx))
@@ -942,13 +952,14 @@
     ;; get the second derivative function
     (def cube-deriv2 (derivative cube-deriv))
     (add-lines plot x (map cube-deriv2 x))
-    
+   
+    ;; plot the normal pdf and its derivatives
     (def plot (line-plot x (pdf-normal x)))
     (view plot)
     (def pdf-deriv (derivative pdf-normal))
     (add-lines plot x (pdf-deriv x))
 
-    ;; get the second derivative function
+    ;; plot the second derivative function
     (def pdf-deriv2 (derivative pdf-deriv))
     (add-lines plot x (pdf-deriv2 x))
 
