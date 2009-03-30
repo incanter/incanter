@@ -127,17 +127,14 @@
       (.viewDice #^Matrix (matrix #^double-array mat)))))
 
 
-(defn mget 
-  " Returns the element of the matrix at the given row and column."
- ([#^Matrix mat row column] (.getQuick mat row column)))
 
 
 (defmulti sel 
 "
-  Returns an element or subset of the given matrix. 
+  Returns an element or subset of the given matrix, or dataset. 
 
   Argument:
-    a matrix object
+    a matrix object or dataset.
 
   Options:
     :rows (default true) 
@@ -159,12 +156,19 @@
     ;; return only the first 10 even rows
     (sel speed :rows (range 10) :filter #(even? (int (nth % 0))))
 
+    ;; examples with datasets
+    (use 'incanter.datasets)
+    (def us-arrests (get-dataset :us-arrests))
+    (sel us-arrests :columns \"State\")
+
+    (sel us-arrests :columns [\"State\" \"Murder\"])
+
 "
-(fn [mat & options] (keyword? (first options))))
+(fn [mat & options] [(type mat) (keyword? (first options))]))
 
 
 
-(defmethod sel false
+(defmethod sel [incanter.Matrix false]
   ([#^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
         cols (if (number? columns) [columns] columns)]
@@ -182,7 +186,7 @@
 
 
 
-(defmethod sel true
+(defmethod sel [incanter.Matrix true]
   ([#^Matrix mat & options]
    (let [opts (if options (apply assoc {} options) nil)
          rows (if (:rows opts) (:rows opts) true)
@@ -690,25 +694,7 @@
 
 
 
-(defn select
-"
-  Arguments:
-    dataset -- an incanter dataset
-
-  Options:
-    :columns -- a single column key or vector of column keys
-    :rows -- TODO
-    :filter -- TODO
-
-  Examples:
-
-    (use 'incanter.datasets)
-    (def us-arrests (get-dataset :us-arrests))
-    (select us-arrests :columns \"State\")
-
-    (select us-arrests :columns [\"State\" \"Murder\"])
-
-"
+(defmethod sel [::dataset true]
   ([dataset & options]
     (let [opts (if options (apply assoc {} options) nil)
           rows (if (:rows opts) (:rows opts) true)
@@ -887,6 +873,9 @@
     ;; x^2 + -2*x + 1
     (quadratic-formula 1 -2 1)
 
+  References:
+    http://en.wikipedia.org/wiki/Quadratic_formula
+
 "
   ([a b c] 
    (let [t1 (- 0 b)
@@ -925,6 +914,50 @@
         (.set mat i j (nth data idx))
         (.set mat j i (nth data idx))))
      mat))) 
+
+
+
+
+(defn derivative 
+"
+  Returns a function that approximates the derivative of the given function.
+
+  Options:
+    :dx (default 0.0001)
+
+  Examples:
+
+    (use '(incanter core charts stats))
+    (defn cube [x] (* x x x))
+    (def cube-deriv (derivative cube))
+    (cube-deriv 2) ; value: 12.000600010022566
+    (cube-deriv 3) ; value: 27.00090001006572
+    (cube-deriv 4) ; value: 48.00120000993502
+
+    (def x (range -3 3 0.1))
+    (def plot (line-plot x (map cube x)))
+    (view plot)
+    (add-lines plot x (map cube-deriv x))
+
+    ;; get the second derivative function
+    (def cube-deriv2 (derivative cube-deriv))
+    (add-lines plot x (map cube-deriv2 x))
+    
+    (def plot (line-plot x (map pdf-normal x)))
+    (view plot)
+    (def pdf-deriv (derivative pdf-normal))
+    (add-lines plot x (map pdf-deriv x))
+
+    ;; get the second derivative function
+    (def pdf-deriv2 (derivative pdf-deriv))
+    (add-lines plot x (map pdf-deriv2 x))
+
+"
+  ([f & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          dx (if (:dx opts) (:dx opts) 0.0001)
+          f-prime (fn [x] (/ (- (f (+ x dx)) (f x)) dx))]
+      f-prime)))
 
 
 
