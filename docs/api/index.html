@@ -532,7 +532,7 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.bayes&apos;, &apos;+&ap
   ([f &amp; options]
     (let [opts (if options (apply assoc {} options) nil)
           dx (if (:dx opts) (:dx opts) 0.0001)
-          f-prime (fn [x] (/ (- (f (+ x dx)) (f x)) dx))]
+          f-prime (fn [x] (div (minus (f (plus x dx)) (f x)) dx))]
       f-prime)))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.core-det"/><dl class="library-member-table"><dt class="library-member-name">det</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([mat])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Returns the determinant of the given matrix using LU decomposition. Equivalent</div><div class="library-member-doc-line">  to R&apos;s det function.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://en.wikipedia.org/wiki/LU_decomposition</div><div class="library-member-doc-line">    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.core-det&apos;)" id="linkto-membersource-incanter.core-det">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.core-det"><pre>(defn det 
 &quot; Returns the determinant of the given matrix using LU decomposition. Equivalent...&quot;
   ;([mat] (.det (cern.colt.matrix.linalg.LUDecomposition. mat))))

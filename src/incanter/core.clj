@@ -943,20 +943,20 @@
     (def cube-deriv2 (derivative cube-deriv))
     (add-lines plot x (map cube-deriv2 x))
     
-    (def plot (line-plot x (map pdf-normal x)))
+    (def plot (line-plot x (pdf-normal x)))
     (view plot)
     (def pdf-deriv (derivative pdf-normal))
-    (add-lines plot x (map pdf-deriv x))
+    (add-lines plot x (pdf-deriv x))
 
     ;; get the second derivative function
     (def pdf-deriv2 (derivative pdf-deriv))
-    (add-lines plot x (map pdf-deriv2 x))
+    (add-lines plot x (pdf-deriv2 x))
 
 "
   ([f & options]
     (let [opts (if options (apply assoc {} options) nil)
           dx (if (:dx opts) (:dx opts) 0.0001)
-          f-prime (fn [x] (/ (- (f (+ x dx)) (f x)) dx))]
+          f-prime (fn [x] (div (minus (f (plus x dx)) (f x)) dx))]
       f-prime)))
 
 
