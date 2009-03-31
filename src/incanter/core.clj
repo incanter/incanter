@@ -894,6 +894,7 @@
 
   Options:
     :by-row (default true) -- if false, make symmetric-behavior the inverse of half-vectorize.
+
   Examples:
     
     (use 'incanter.core)
@@ -901,7 +902,8 @@
                        2 3
                        4 5 6
                        7 8 9 10])
-    
+   
+
     (half-vectorize 
       (symmetric-matrix [1
                          2 3
@@ -925,50 +927,6 @@
         (.set mat j i (nth data idx))))
      mat))) 
 
-
-
-
-(defn derivative 
-"
-  Returns a function that approximates the derivative of the given function.
-
-  Options:
-    :dx (default 0.0001)
-
-  Examples:
-
-    (use '(incanter core charts stats))
-    (defn cube [x] (* x x x))
-    (def cube-deriv (derivative cube))
-    (cube-deriv 2) ; value: 12.000600010022566
-    (cube-deriv 3) ; value: 27.00090001006572
-    (cube-deriv 4) ; value: 48.00120000993502
-
-    (def x (range -3 3 0.1))
-    (def plot (line-plot x (map cube x)))
-    (view plot)
-    (add-lines plot x (map cube-deriv x))
-
-    ;; get the second derivative function
-    (def cube-deriv2 (derivative cube-deriv))
-    (add-lines plot x (map cube-deriv2 x))
-   
-    ;; plot the normal pdf and its derivatives
-    (def plot (line-plot x (pdf-normal x)))
-    (view plot)
-    (def pdf-deriv (derivative pdf-normal))
-    (add-lines plot x (pdf-deriv x))
-
-    ;; plot the second derivative function
-    (def pdf-deriv2 (derivative pdf-deriv))
-    (add-lines plot x (pdf-deriv2 x))
-
-"
-  ([f & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          dx (if (:dx opts) (:dx opts) 0.0001)
-          f-prime (fn [x] (div (minus (f (plus x dx)) (f x)) dx))]
-      f-prime)))
 
 
 
