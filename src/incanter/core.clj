@@ -348,6 +348,48 @@
    ([A] (transform-with A #(Math/exp %) exp)))
 
 
+(defn abs 
+  "Returns the absolute value of the elements in the given matrix, sequence or number.
+   Equivalent to R's abs function."
+   ([A] (transform-with A #(Math/abs %) abs)))
+
+
+(defn sin 
+  "Returns the sine of the elements in the given matrix, sequence or number.
+   Equivalent to R's sin function."
+   ([A] (transform-with A #(Math/sin %) sin)))
+
+
+(defn asin 
+  "Returns the arc sine of the elements in the given matrix, sequence or number.
+   Equivalent to R's asin function."
+   ([A] (transform-with A #(Math/asin %) asin)))
+
+
+(defn cos 
+  "Returns the cosine of the elements in the given matrix, sequence or number.
+   Equivalent to R's cos function."
+   ([A] (transform-with A #(Math/cos %) cos)))
+
+
+(defn acos 
+  "Returns the arc cosine of the elements in the given matrix, sequence or number.
+   Equivalent to R's acos function."
+   ([A] (transform-with A #(Math/acos %) acos)))
+
+
+(defn tan 
+  "Returns the tangent of the elements in the given matrix, sequence or number.
+   Equivalent to R's tan function."
+   ([A] (transform-with A #(Math/tan %) tan)))
+
+
+(defn atan 
+  "Returns the arc tangent of the elements in the given matrix, sequence or number.
+   Equivalent to R's atan function."
+   ([A] (transform-with A #(Math/atan %) atan)))
+
+
 (defn factorial 
 "
   Returns the factorial of k (k must be a positive integer). Equivalent to R's
