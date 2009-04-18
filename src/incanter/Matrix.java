@@ -21,10 +21,10 @@ March 11, 2009: First version
 
 package incanter;
 
-import cern.colt.matrix.impl.DenseDoubleMatrix2D;
-import cern.colt.matrix.DoubleMatrix2D;
-import cern.colt.function.DoubleDoubleFunction;
-import cern.colt.function.DoubleFunction;
+import cern.colt.matrix.tdouble.impl.DenseDoubleMatrix2D;
+import cern.colt.matrix.tdouble.DoubleMatrix2D;
+import cern.colt.function.tdouble.DoubleDoubleFunction;
+import cern.colt.function.tdouble.DoubleFunction;
 
 import clojure.lang.ISeq;
 import clojure.lang.Counted;
@@ -79,7 +79,7 @@ public class Matrix extends DenseDoubleMatrix2D implements ISeq, Counted {
         }
 
         public Matrix(int rows, int columns, double[] elements, boolean oneDimensional) {
-                super(rows, columns, elements, 0, 0, columns, 1);
+                super(rows, columns, elements, 0, 0, columns, 1, false);
                 this.oneDimensional = oneDimensional;
         }
 

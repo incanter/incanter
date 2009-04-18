@@ -18,15 +18,19 @@
 
 (ns incanter.core 
   (:import (incanter Matrix)
-           (cern.colt.matrix DoubleMatrix2D 
-                             DoubleFactory2D 
-                             DoubleFactory1D)
-           (cern.colt.matrix.linalg CholeskyDecomposition
-                                    Algebra)
-           (cern.colt.matrix.doublealgo Formatter)
-           (cern.jet.math Functions Arithmetic)
-           (cern.colt.function DoubleDoubleFunction DoubleFunction)))
-
+           (cern.colt.matrix.tdouble DoubleMatrix2D 
+                                     DoubleFactory2D 
+                                     DoubleFactory1D)
+           (cern.colt.matrix.tdouble.algo DoubleAlgebra
+                                          DoubleFormatter)
+           (cern.colt.matrix.tdouble.algo.decomposition DoubleCholeskyDecomposition
+                                                        DoubleSingularValueDecomposition
+                                                        DoubleEigenvalueDecomposition
+                                                        DoubleLUDecomposition 
+                                                        DoubleQRDecomposition)
+           (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
+           (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
+           (cern.jet.stat.tdouble Gamma)))
 ;;(derive DoubleMatrix2D ::matrix) ; commented out to track down non-ISeq matrices
 (derive Matrix ::matrix)
 
@@ -34,7 +38,7 @@
 (defn matrix 
 "
   Returns an instance of an incanter.Matrix, which is an extension of
-  cern.colt.matrix.impl.DenseDoubleMatrix2D that implements the Clojure
+  cern.colt.matrix.tdouble.impl.DenseDoubleMatrix2D that implements the Clojure
   interface clojure.lang.ISeq. Therefore Clojure sequence operations can
   be applied to matrices. A matrix consists of a sequence of rows, where
   each row is a one-dimensional row matrix. One-dimensional matrices are,
@@ -60,7 +64,7 @@
     (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/DoubleMatrix2D.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html
     
 "
   ([data]
@@ -256,7 +260,7 @@
 (defmacro #^Matrix transform-with [A op fun]
   `(cond 
     (matrix? ~A)
-      (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleFunction (. Functions ~fun))
+      (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleFunction (. DoubleFunctions ~fun))
     (coll? ~A)
       (map ~op ~A)
     (number? ~A)
@@ -268,22 +272,22 @@
     (~op ~A ~B)
       (cond 
        (and (matrix? ~A) (matrix? ~B))
-         (.assign #^Matrix (.copy #^Matrix ~A) #^Matrix ~B #^DoubleDoubleFunction (. Functions ~fun))
+         (.assign #^Matrix (.copy #^Matrix ~A) #^Matrix ~B #^DoubleDoubleFunction (. DoubleFunctions ~fun))
        (and (matrix? ~A) (number? ~B))
-         (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleDoubleFunction (. Functions (~fun ~B)))
+         (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleDoubleFunction (. DoubleFunctions (~fun ~B)))
        (and (number? ~A) (matrix? ~B))
-         (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix ~B #^DoubleDoubleFunction (. Functions ~fun))
+         (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix ~B #^DoubleDoubleFunction (. DoubleFunctions ~fun))
        (and (coll? ~A) (matrix? ~B))
-         (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
+         (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. DoubleFunctions ~fun))
        (and (matrix? ~A) (coll? ~B))
-         (.assign #^Matrix (.copy ~A) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
+         (.assign #^Matrix (.copy ~A) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. DoubleFunctions ~fun))
        (and (coll? ~A) (coll? ~B)) 
          (map ~op ~A ~B) 
        (and (number? ~A) (coll? ~B)) 
-         ;(.assign #^Matrix (matrix ~A (nrow ~B) (ncol ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. Functions ~fun))
+         ;(.assign #^Matrix (matrix ~A (nrow ~B) (ncol ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. DoubleFunctions ~fun))
          (map (fn [b#] (~op ~A b#)) ~B)
        (and (coll? ~A) (number? ~B)) 
-         ;(.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. Functions ~fun)))))
+         ;(.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. DoubleFunctions ~fun)))))
          (map (fn [a#] (~op a# ~B)) ~A))))
     
 
@@ -399,11 +403,11 @@
     (factorial 6)
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/math/Arithmetic.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html
     http://en.wikipedia.org/wiki/Factorial
 
 "
-  ([k] (cern.jet.math.Arithmetic/factorial k)))
+  ([k] (DoubleArithmetic/factorial k)))
 
 
 
@@ -420,11 +424,11 @@
     (choose 25 6) ; => 2,598,960
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/math/Arithmetic.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html
     http://en.wikipedia.org/wiki/Combination
 
 "
-  ([n k] (Arithmetic/binomial (double n) (long k))))
+  ([n k] (DoubleArithmetic/binomial (double n) (long k))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -472,8 +476,8 @@
    Equivalent to R's solve function."
   ([#^Matrix A & B]
    (if B
-    (Matrix. (.solve (Algebra.) A (first B)))
-    (Matrix. (.inverse (Algebra.) A)))))
+    (Matrix. (.solve (DoubleAlgebra.) A (first B)))
+    (Matrix. (.inverse (DoubleAlgebra.) A)))))
 
 
 
@@ -483,10 +487,10 @@
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
   ;([mat] (.det (cern.colt.matrix.linalg.LUDecomposition. mat))))
-  ([mat] (.det cern.colt.matrix.linalg.Algebra/DEFAULT mat)))
+  ([mat] (.det DoubleAlgebra/DEFAULT mat)))
 
 
 (defn trace 
@@ -494,9 +498,9 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_trace
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/Algebra.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DoubleAlgebra.html
 "
-  ([mat] (.trace cern.colt.matrix.linalg.Algebra/DEFAULT mat)))
+  ([mat] (.trace DoubleAlgebra/DEFAULT mat)))
 
 
 
@@ -557,11 +561,11 @@
     that it matches the result return from R's chol function.
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/CholeskyDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
     http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
   ([#^Matrix mat]
-    (.viewDice (.getL (CholeskyDecomposition. mat)))))
+    (.viewDice (.getL (DoubleCholeskyDecomposition. mat)))))
     ;(Matrix. (.viewDice (.getL (CholeskyDecomposition. mat))))) 
 
 
@@ -578,10 +582,10 @@
 
   References:
     http://en.wikipedia.org/wiki/Singular_value_decomposition
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/SingularValueDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecomposition.html
 "
   ([mat]
-    (let [result (cern.colt.matrix.linalg.SingularValueDecomposition. mat)]
+    (let [result (DoubleSingularValueDecomposition. mat)]
       {:S (diag (Matrix. (.getS result)))
        :U (Matrix. (.getU result))
        :V (Matrix. (.getV result))})))
@@ -598,10 +602,10 @@
 
   References:
     http://en.wikipedia.org/wiki/Eigenvalue_decomposition
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/EigenvalueDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
 "
   ([mat]
-    (let [result (cern.colt.matrix.linalg.EigenvalueDecomposition. mat)]
+    (let [result (DoubleEigenvalueDecomposition. mat)]
       {:values (diag (Matrix. (.getD result)))
        :vectors (Matrix. (.getV result))})))
 
@@ -616,10 +620,10 @@
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/LUDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
   ([mat]
-    (let [result (cern.colt.matrix.linalg.LUDecomposition. mat)]
+    (let [result (DoubleLUDecomposition. mat)]
       {:L (Matrix. (.getL result))
        :U (Matrix. (.getU result))})))
 
@@ -634,10 +638,10 @@
 
   References:
     http://en.wikipedia.org/wiki/QR_decomposition
-    http://acs.lbl.gov/~hoschek/colt/api/cern/colt/matrix/linalg/QRDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleQRDecomposition.html
 "
   ([mat]
-    (let [result (cern.colt.matrix.linalg.QRDecomposition. mat)]
+    (let [result (DoubleQRDecomposition. mat)]
       {:Q (Matrix. (.getQ result))
        :R (Matrix. (.getR result))})))
 
@@ -651,7 +655,7 @@
 
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, #^java.io.Writer w]
-  (let [formatter (Formatter. "%1.4f")]
+  (let [formatter (DoubleFormatter. "%1.4f")]
     (do 
       (.setPrintShape formatter false)
       (.write w "[")
@@ -856,9 +860,9 @@
   Equivalent to R's gamma function.
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html
 "
-  ([x]  (cern.jet.stat.Gamma/gamma x)))
+  ([x]  (Gamma/gamma x)))
 
 
 (defn beta 
@@ -866,9 +870,9 @@
   Equivalent to R's beta function.
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html
 "
-  ([a b]  (cern.jet.stat.Gamma/beta a b)))
+  ([a b]  (Gamma/beta a b)))
 
 
 (defn incomplete-beta 
@@ -876,10 +880,10 @@
   Returns the non-regularized incomplete beta value.
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html
 "
 
-  ([x a b]  (* (cern.jet.stat.Gamma/incompleteBeta a b x) (cern.jet.stat.Gamma/beta a b))))
+  ([x a b]  (* (Gamma/incompleteBeta a b x) (Gamma/beta a b))))
 
 
 
@@ -888,12 +892,12 @@
   Returns the regularized incomplete beta value. Equivalent to R's pbeta function.
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Gamma.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html
     http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
     http://mathworld.wolfram.com/RegularizedBetaFunction.html
 "
   ([x a b] 
-    (cern.jet.stat.Gamma/incompleteBeta a b x)))
+    (Gamma/incompleteBeta a b x)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

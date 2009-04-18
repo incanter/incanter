@@ -17,10 +17,20 @@
 
 
 (ns incanter.stats 
-  (:import (cern.colt.list DoubleArrayList)
-           (cern.jet.random Gamma)
-           (cern.jet.random.engine MersenneTwister)
-           (cern.jet.stat Descriptive))
+  (:import (cern.colt.list.tdouble DoubleArrayList)
+           (cern.jet.random.tdouble Gamma
+                                    Beta
+                                    Binomial
+                                    ChiSquare
+                                    DoubleUniform
+                                    Exponential
+                                    NegativeBinomial
+                                    Normal
+                                    Poisson
+                                    StudentT)
+           (cern.jet.random.tdouble.engine DoubleMersenneTwister)
+           (cern.jet.stat.tdouble DoubleDescriptive
+                                  Probability))
   (:use (incanter core)))
 
 
@@ -130,7 +140,7 @@
       cdf-normal, quantile-normal, sample-normal
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Normal.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -141,7 +151,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           mean (if (:mean opts) (:mean opts) 0)
           sd (if (:sd opts) (:sd opts) 1)
-          dist (cern.jet.random.Normal. mean sd (cern.jet.random.engine.MersenneTwister.))]
+          dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -160,7 +170,7 @@
       pdf-normal, quantile-normal, sample-normal
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Normal.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -171,7 +181,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           mean (if (:mean opts) (:mean opts) 0)
           sd (if (:sd opts) (:sd opts) 1)
-          dist (cern.jet.random.Normal. mean sd (cern.jet.random.engine.MersenneTwister.))] 
+          dist (Normal. mean sd (DoubleMersenneTwister.))] 
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -193,7 +203,7 @@
       pdf-normal, cdf-normal, and sample-normal
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html
       http://en.wikipedia.org/wiki/Normal_distribution
       http://en.wikipedia.org/wiki/Quantile
 
@@ -206,8 +216,8 @@
           mean (if (:mean opts) (:mean opts) 0)
           sd (if (:sd opts) (:sd opts) 1)
           x (if (coll? probability) 
-              (map #(cern.jet.stat.Probability/normalInverse %) probability)
-              (cern.jet.stat.Probability/normalInverse probability))]
+              (map #(Probability/normalInverse %) probability)
+              (Probability/normalInverse probability))]
       (plus mean (mult sd x)))))
 
 
@@ -224,7 +234,7 @@
       pdf-normal, cdf-normal, quantile-normal
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Normal.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
 
   Example: 
@@ -235,8 +245,8 @@
           mean (if (:mean opts) (:mean opts) 0)
           sd (if (:sd opts) (:sd opts) 1)]
       (if (= size 1)
-        (cern.jet.random.Normal/staticNextDouble mean sd)
-        (for [_ (range size)] (cern.jet.random.Normal/staticNextDouble mean sd))))))
+        (Normal/staticNextDouble mean sd)
+        (for [_ (range size)] (Normal/staticNextDouble mean sd))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -316,7 +326,7 @@
       cdf-uniform and sample-uniform
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
       http://en.wikipedia.org/wiki/Uniform_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -328,7 +338,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           min (double (if (:min opts) (:min opts) 0.0))
           max (double (if (:max opts) (:max opts) 1.0))
-          dist (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.))]
+          dist (DoubleUniform. min max (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -346,7 +356,7 @@
       pdf-uniform and sample-uniform
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
       http://en.wikipedia.org/wiki/Uniform_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -358,7 +368,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           min (double (if (:min opts) (:min opts) 0.0))
           max (double (if (:max opts) (:max opts) 1.0))
-          dist (cern.jet.random.Uniform. min max (cern.jet.random.engine.MersenneTwister.))]
+          dist (DoubleUniform. min max (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -377,7 +387,7 @@
       pdf-uniform and cdf-uniform
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Uniform.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
       http://en.wikipedia.org/wiki/Uniform_distribution
 
   Example: 
@@ -389,14 +399,14 @@
           min-val (double (if (:min opts) (:min opts) 0.0))
           max-val (double (if (:max opts) (:max opts) 1.0))
           ints? (if (true? (:integers opts)) true false)
-          dist (cern.jet.random.Uniform. min-val max-val (cern.jet.random.engine.MersenneTwister.))]
+          dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
       (if (= size 1)
         (if ints? 
-          (cern.jet.random.Uniform/staticNextIntFromTo min-val max-val)
-          (cern.jet.random.Uniform/staticNextDoubleFromTo min-val max-val))
+          (DoubleUniform/staticNextIntFromTo min-val max-val)
+          (DoubleUniform/staticNextDoubleFromTo min-val max-val))
         (if ints? 
-          (for [_ (range size)] (cern.jet.random.Uniform/staticNextIntFromTo min-val max-val))
-          (for [_ (range size)] (cern.jet.random.Uniform/staticNextDoubleFromTo min-val max-val)))))))
+          (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
+          (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val)))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
@@ -415,7 +425,7 @@
       cdf-beta and sample-beta
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
       http://en.wikipedia.org/wiki/Beta_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -426,7 +436,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           alpha (if (:alpha opts) (:alpha opts) 1)
           beta (if (:beta opts) (:beta opts) 1)
-          dist (cern.jet.random.Beta. alpha beta (cern.jet.random.engine.MersenneTwister.))]
+          dist (Beta. alpha beta (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -445,7 +455,7 @@
       pdf-beta and sample-beta
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
       http://en.wikipedia.org/wiki/Beta_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -459,8 +469,8 @@
           beta (if (:beta opts) (:beta opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/beta alpha beta x1))
-                  (fn [x1] (- 1 (cern.jet.stat.Probability/betaComplemented alpha beta x1))))]
+                  (fn [x1] (Probability/beta alpha beta x1))
+                  (fn [x1] (- 1 (Probability/betaComplemented alpha beta x1))))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -482,7 +492,7 @@
       pdf-beta and cdf-beta
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Beta.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
       http://en.wikipedia.org/wiki/Beta_distribution
 
   Example: 
@@ -493,8 +503,8 @@
           alpha (if (:alpha opts) (:alpha opts) 1)
           beta (if (:beta opts) (:beta opts) 1)]
       (if (= size 1)
-        (cern.jet.random.Beta/staticNextDouble alpha beta)
-        (for [_ (range size)] (cern.jet.random.Beta/staticNextDouble alpha beta))))))
+        (Beta/staticNextDouble alpha beta)
+        (for [_ (range size)] (Beta/staticNextDouble alpha beta))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
@@ -513,7 +523,7 @@
       cdf-gamma and sample-gamma
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
       http://en.wikipedia.org/wiki/Gamma_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -524,7 +534,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           shape (if (number? (:shape opts)) (:shape opts) 1)
           rate (if (number? (:rate opts)) (:rate opts) 1)
-          dist (cern.jet.random.Gamma. shape rate (cern.jet.random.engine.MersenneTwister.))]
+          dist (Gamma. shape rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -544,7 +554,7 @@
       pdf-gamma and sample-gamma
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
       http://en.wikipedia.org/wiki/Gamma_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -558,8 +568,8 @@
           rate (if (number? (:rate opts)) (:rate opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true) 
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/gamma rate shape x1))
-                  (fn [x1] (cern.jet.stat.Probability/gammaComplemented rate shape x1)))]
+                  (fn [x1] (Probability/gamma rate shape x1))
+                  (fn [x1] (Probability/gammaComplemented rate shape x1)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -578,7 +588,7 @@
       pdf-gamma, cdf-gamma, and quantile-gamma
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Gamma.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
       http://en.wikipedia.org/wiki/Gamma_distribution
 
   Example: 
@@ -589,8 +599,8 @@
           shape (if (number? (:shape opts)) (:shape opts) 1)
           rate (if (number? (:rate opts)) (:rate opts) 1)]
       (if (= size 1)
-        (cern.jet.random.Gamma/staticNextDouble shape rate)
-        (for [_ (range size)] (cern.jet.random.Gamma/staticNextDouble shape rate))))))
+        (Gamma/staticNextDouble shape rate)
+        (for [_ (range size)] (Gamma/staticNextDouble shape rate))))))
 
 
 
@@ -610,7 +620,7 @@
       cdf-chisq and sample-chisq
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
       http://en.wikipedia.org/wiki/Chi_square_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -620,7 +630,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           df (if (number? (:df opts)) (:df opts) 1)
-          dist (cern.jet.random.ChiSquare. df (cern.jet.random.engine.MersenneTwister.))]
+          dist (ChiSquare. df (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -639,7 +649,7 @@
       pdf-chisq and sample-chisq
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
       http://en.wikipedia.org/wiki/Chi_square_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -652,8 +662,8 @@
           df (if (number? (:df opts)) (:df opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/chiSquare df x1))
-                  (fn [x1] (cern.jet.stat.Probability/chiSquareComplemented df x1)))]
+                  (fn [x1] (Probability/chiSquare df x1))
+                  (fn [x1] (Probability/chiSquareComplemented df x1)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -671,7 +681,7 @@
       pdf-chisq and cdf-chisq
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/ChiSquare.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
       http://en.wikipedia.org/wiki/Chi_square_distribution
 
   Example: 
@@ -681,8 +691,8 @@
     (let [opts (if options (apply assoc {} options) nil) 
           df (if (number? (:df opts)) (:df opts) 1)]
       (if (= size 1)
-        (cern.jet.random.ChiSquare/staticNextDouble df)
-        (for [_ (range size)] (cern.jet.random.ChiSquare/staticNextDouble df))))))
+        (ChiSquare/staticNextDouble df)
+        (for [_ (range size)] (ChiSquare/staticNextDouble df))))))
 
 
 
@@ -701,7 +711,7 @@
       cdf-t, quantile-t, and sample-t
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
       http://en.wikipedia.org/wiki/Student-t_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -711,7 +721,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           df (if (number? (:df opts)) (:df opts) 1)
-          dist (cern.jet.random.StudentT. df (cern.jet.random.engine.MersenneTwister.))]
+          dist (StudentT. df (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -728,7 +738,7 @@
       pdf-t, quantile-t, and sample-t
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
       http://en.wikipedia.org/wiki/Student-t_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -740,8 +750,8 @@
           df (if (number? (:df opts)) (:df opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/studentT df x1))
-                  (fn [x1] (- 1 (cern.jet.stat.Probability/studentT df x1))))]
+                  (fn [x1] (Probability/studentT df x1))
+                  (fn [x1] (- 1 (Probability/studentT df x1))))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -762,7 +772,7 @@
      pdf-t, cdf-t, and sample-t 
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Probability.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html
       http://en.wikipedia.org/wiki/Student-t_distribution
       http://en.wikipedia.org/wiki/Quantile
 
@@ -781,8 +791,8 @@
                       (* 2 (- 1 prob))))
           sign-fx (fn [x1 prob] (if (< prob 1/2) (* -1 x1) x1))
           x (if (coll? probability) 
-              (map #(sign-fx (cern.jet.stat.Probability/studentTInverse (to-alpha %) df) %) probability)
-              (sign-fx (cern.jet.stat.Probability/studentTInverse (to-alpha probability) df) probability))]
+              (map #(sign-fx (Probability/studentTInverse (to-alpha %) df) %) probability)
+              (sign-fx (Probability/studentTInverse (to-alpha probability) df) probability))]
         x)))
 
 
@@ -798,7 +808,7 @@
       pdf-t, cdf-t, and quantile-t
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/StudentT.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
       http://en.wikipedia.org/wiki/Student-t_distribution
 
   Example: 
@@ -808,8 +818,8 @@
     (let [opts (if options (apply assoc {} options) nil) 
           df (if (number? (:df opts)) (:df opts) 1)]
       (if (= size 1)
-        (cern.jet.random.StudentT/staticNextDouble df)
-        (for [_ (range size)] (cern.jet.random.StudentT/staticNextDouble df))))))
+        (StudentT/staticNextDouble df)
+        (for [_ (range size)] (StudentT/staticNextDouble df))))))
 
 
 
@@ -830,7 +840,7 @@
       cdf-exp and sample-exp
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
       http://en.wikipedia.org/wiki/Exponential_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -840,7 +850,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           rate (if (number? (:rate opts)) (:rate opts) 1)
-          dist (cern.jet.random.Exponential. rate (cern.jet.random.engine.MersenneTwister.))]
+          dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -857,7 +867,7 @@
       pdf-exp and sample-exp
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
       http://en.wikipedia.org/wiki/Exponential_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -867,7 +877,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           rate (if (number? (:rate opts)) (:rate opts) 1)
-          dist (cern.jet.random.Exponential. rate (cern.jet.random.engine.MersenneTwister.))]
+          dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -884,7 +894,7 @@
       pdf-exp, and cdf-exp
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Exponential.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
       http://en.wikipedia.org/wiki/Exponential_distribution
 
   Example: 
@@ -894,8 +904,8 @@
     (let [opts (if options (apply assoc {} options) nil) 
           rate (if (number? (:rate opts)) (:rate opts) 1)]
       (if (= size 1)
-        (cern.jet.random.Exponential/staticNextDouble rate)
-        (for [_ (range size)] (cern.jet.random.Exponential/staticNextDouble rate))))))
+        (Exponential/staticNextDouble rate)
+        (for [_ (range size)] (Exponential/staticNextDouble rate))))))
 
 
 
@@ -965,7 +975,7 @@
       cdf-binomial and sample-binomial
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
       http://en.wikipedia.org/wiki/Binomial_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -976,7 +986,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           n (if (number? (:size opts)) (:size opts) 1)
           p (if (number? (:prob opts)) (:prob opts) 1/2)
-          dist (cern.jet.random.Binomial. n p (cern.jet.random.engine.MersenneTwister.))]
+          dist (Binomial. n p (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -996,7 +1006,7 @@
       pdf-binomial and sample-binomial
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
       http://en.wikipedia.org/wiki/Binomial_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -1009,8 +1019,8 @@
           p (if (number? (:prob opts)) (:prob opts) 1/2)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/binomial x1 n p))
-                  (fn [x1] (cern.jet.stat.Probability/binomialComplemented x1 n p)))]
+                  (fn [x1] (Probability/binomial x1 n p))
+                  (fn [x1] (Probability/binomialComplemented x1 n p)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1029,7 +1039,7 @@
       cdf-binomial and sample-binomial
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Binomial.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
       http://en.wikipedia.org/wiki/Binomial_distribution
 
   Example: 
@@ -1040,8 +1050,8 @@
           n (if (number? (:size opts)) (:size opts) 1)
           p (if (number? (:prob opts)) (:prob opts) 1/2)]
       (if (= size 1)
-        (cern.jet.random.Binomial/staticNextInt n p)
-        (for [_ (range size)] (cern.jet.random.Binomial/staticNextInt n p))))))
+        (Binomial/staticNextInt n p)
+        (for [_ (range size)] (Binomial/staticNextInt n p))))))
 
 
 
@@ -1060,7 +1070,7 @@
       cdf-poisson and sample-poisson
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
       http://en.wikipedia.org/wiki/Poisson_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -1070,7 +1080,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           lambda (if (number? (:lambda opts)) (:lambda opts) 1)
-          dist (cern.jet.random.Poisson. lambda (cern.jet.random.engine.MersenneTwister.))]
+          dist (Poisson. lambda (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1089,7 +1099,7 @@
       cdf-poisson and sample-poisson
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
       http://en.wikipedia.org/wiki/Poisson_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -1101,8 +1111,8 @@
           lambda (if (number? (:lambda opts)) (:lambda opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/poisson x1 lambda))
-                  (fn [x1] (cern.jet.stat.Probability/poissonComplemented x1 lambda)))]
+                  (fn [x1] (Probability/poisson x1 lambda))
+                  (fn [x1] (Probability/poissonComplemented x1 lambda)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1120,7 +1130,7 @@
       pdf-poisson and cdf-poisson
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/Poisson.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
       http://en.wikipedia.org/wiki/Poisson_distribution
 
   Example: 
@@ -1130,8 +1140,8 @@
     (let [opts (if options (apply assoc {} options) nil) 
           lambda (if (number? (:lambda opts)) (:lambda opts) 1)]
      (if (= size 1)
-        (cern.jet.random.Poisson/staticNextInt lambda)
-        (for [_ (range size)] (cern.jet.random.Poisson/staticNextInt lambda))))))
+        (Poisson/staticNextInt lambda)
+        (for [_ (range size)] (Poisson/staticNextInt lambda))))))
 
 
 
@@ -1151,7 +1161,7 @@
       cdf-neg-binomial and sample-neg-binomial
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
@@ -1162,7 +1172,7 @@
     (let [opts (if options (apply assoc {} options) nil) 
           size (if (number? (:size opts)) (:size opts) 10)
           prob (if (number? (:prob opts)) (:prob opts) 1/2)
-          dist (cern.jet.random.NegativeBinomial. size prob (cern.jet.random.engine.MersenneTwister.))]
+          dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1182,7 +1192,7 @@
       cdf-neg-binomial and sample-neg-binomial
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
@@ -1195,8 +1205,8 @@
           prob (if (number? (:prob opts)) (:prob opts) 1/2)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
-                  (fn [x1] (cern.jet.stat.Probability/negativeBinomial x1 size prob))
-                  (fn [x1] (cern.jet.stat.Probability/negativeBinomialComplemented x1 size prob)))]
+                  (fn [x1] (Probability/negativeBinomial x1 size prob))
+                  (fn [x1] (Probability/negativeBinomialComplemented x1 size prob)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1215,7 +1225,7 @@
       pdf-neg-binomial and cdf-neg-binomial
 
   References: 
-      http://acs.lbl.gov/~hoschek/colt/api/cern/jet/random/NegativeBinomial.html
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
 
   Example: 
@@ -1226,8 +1236,8 @@
           size (if (number? (:size opts)) (:size opts) 10)
           prob (if (number? (:prob opts)) (:prob opts) 1/2)]
      (if (= size 1)
-        (cern.jet.random.NegativeBinomial/staticNextInt size prob)
-        (for [_ (range size)] (cern.jet.random.NegativeBinomial/staticNextInt size prob))))))
+        (NegativeBinomial/staticNextInt size prob)
+        (for [_ (range size)] (NegativeBinomial/staticNextInt size prob))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1239,21 +1249,21 @@
   "Returns the sum-of-squares of the given sequence."
   ([x]
     (let [xx (to-list x)]
-      (Descriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
+      (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
 
 
 (defn sum 
   "Returns the sum of the given sequence."
   ([x]
     (let [xx (to-list x)]
-      (Descriptive/sum (DoubleArrayList. (double-array xx))))))
+      (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
 
 
 (defn prod 
   "Returns the product of the given sequence."
   ([x]
     (let [xx (to-list x)]
-      (Descriptive/product (DoubleArrayList. (double-array xx))))))
+      (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
 
 
 
@@ -1265,13 +1275,13 @@
     (mean (sample-normal 100))
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Mean
 
 " 
 ([x]
   (let [xx (to-list x)]
-    (Descriptive/mean (DoubleArrayList. (double-array xx))))))
+    (DoubleDescriptive/mean (DoubleArrayList. (double-array xx))))))
 
 
 
@@ -1283,11 +1293,11 @@
     (variance (sample-normal 100))
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance
 
 "
-  ([x] (Descriptive/sampleVariance (length x) (sum x) (sum-of-squares x))))
+  ([x] (DoubleDescriptive/sampleVariance (length x) (sum x) (sum-of-squares x))))
 
 
 
@@ -1304,7 +1314,7 @@
     (covariance x y)
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Covariance
 "
   ([x y]
@@ -1312,11 +1322,10 @@
           xx (to-list x)
           yy (to-list y)
         ]
-      (Descriptive/covariance 
+      (DoubleDescriptive/covariance 
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
-    ;(incanter.Matrix. (cern.colt.matrix.doublealgo.Statistic/covariance mat))))
         (let [n (ncol mat)]
           (matrix 
             (for [i (range n) j (range n)] 
@@ -1333,12 +1342,12 @@
     (sd (sample-normal 100))
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Standard_deviation
 " 
   ([x]
     ;; population sd, not the sample sd
-    ;(Descriptive/sampleStandardDeviation (length x) (variance x))))
+    ;(DoubleDescriptive/sampleStandardDeviation (length x) (variance x))))
     ;; return the sample standard deviation
     (sqrt (variance x))))
 
@@ -1352,7 +1361,7 @@
   Examples:
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Correlation
 "
   ([x y]
@@ -1360,7 +1369,7 @@
           xx (to-list x)
           yy (to-list y)
         ]
-      (Descriptive/correlation 
+      (DoubleDescriptive/correlation 
         (DoubleArrayList. (double-array xx)) (sd x)
         (DoubleArrayList. (double-array yy)) (sd y))))
   ([mat]
@@ -1377,13 +1386,13 @@
     (median (sample-normal 100))
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Median
 
 " 
   ([x]
     (let [xx (to-list x)]
-      (Descriptive/median (DoubleArrayList. (double-array xx))))))
+      (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
 
 
 (defn quantile 
@@ -1400,24 +1409,24 @@
     (quantile (sample-normal 100) :probs 0.975)
 
   References:
-    http://acs.lbl.gov/~hoschek/colt/api/cern/jet/stat/Descriptive.html
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Quantile
 
 "
   ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
           _x (if (matrix? x) (to-list x) x)
-          data (cern.colt.list.DoubleArrayList. (double-array (sort _x)))
+          data (DoubleArrayList. (double-array (sort _x)))
           probs (cond 
                   (number? (:probs opts))
                     (:probs opts)
                   (coll? (:probs opts))
-                    (cern.colt.list.DoubleArrayList. (double-array (:probs opts)))
+                    (DoubleArrayList. (double-array (:probs opts)))
                   :default
-                    (cern.colt.list.DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0])))]
+                    (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0])))]
         (if (number? probs)
-          (cern.jet.stat.Descriptive/quantile data probs)
-          (seq (.elements (cern.jet.stat.Descriptive/quantiles data probs)))))))
+          (DoubleDescriptive/quantile data probs)
+          (seq (.elements (DoubleDescriptive/quantiles data probs)))))))
 
 
 
