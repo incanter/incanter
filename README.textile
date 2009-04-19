@@ -1,4 +1,4 @@
-<img src="http://incanter.org/images/incanter.png" alt="Incanter" />
+<a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.png" alt="Incanter" /></a>
 
 _Incanter is a "Clojure":http://clojure.org based, "R":http://www.r-project.org/ like statistical computing and graphics environment for the JVM._
 
