@@ -38,7 +38,7 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 
 *Documentation*
 
-* "API":http://incanter.org/docs/api/
+* "Incanter API":http://incanter.org/docs/api/
 * "Parallel Colt API":http://incanter.org/docs/parallelcolt/api/
 
 
@@ -47,6 +47,7 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 
 * "Clojure":http://code.google.com/p/clojure/
 * "Parallel Colt":http://piotr.wendykier.googlepages.com/parallelcolt
+** "Netlib-Java":http://code.google.com/p/netlib-java/ (included with Parallel Colt)
 * "JFreeChart":http://www.jfree.org/jfreechart/
 ** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)

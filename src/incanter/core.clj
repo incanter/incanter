@@ -24,7 +24,7 @@
            (cern.colt.matrix.tdouble.algo DoubleAlgebra
                                           DoubleFormatter)
            (cern.colt.matrix.tdouble.algo.decomposition DoubleCholeskyDecomposition
-                                                        DoubleSingularValueDecomposition
+                                                        DoubleSingularValueDecompositionDC
                                                         DoubleEigenvalueDecomposition
                                                         DoubleLUDecomposition 
                                                         DoubleQRDecomposition)
@@ -38,7 +38,7 @@
 (defn matrix 
 "
   Returns an instance of an incanter.Matrix, which is an extension of
-  cern.colt.matrix.tdouble.impl.DenseDoubleMatrix2D that implements the Clojure
+  cern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure
   interface clojure.lang.ISeq. Therefore Clojure sequence operations can
   be applied to matrices. A matrix consists of a sequence of rows, where
   each row is a one-dimensional row matrix. One-dimensional matrices are,
@@ -582,10 +582,10 @@
 
   References:
     http://en.wikipedia.org/wiki/Singular_value_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
-    (let [result (DoubleSingularValueDecomposition. mat)]
+    (let [result (DoubleSingularValueDecompositionDC. mat, true, true)]
       {:S (diag (Matrix. (.getS result)))
        :U (Matrix. (.getU result))
        :V (Matrix. (.getV result))})))
