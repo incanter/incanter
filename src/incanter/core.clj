@@ -17,6 +17,7 @@
 
 
 (ns incanter.core 
+  (:use (incanter internal))
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D 
                                      DoubleFactory2D 
@@ -31,8 +32,6 @@
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
            (cern.jet.stat.tdouble Gamma)))
-;;(derive DoubleMatrix2D ::matrix) ; commented out to track down non-ISeq matrices
-(derive Matrix ::matrix)
 
 
 (defn matrix 
@@ -68,24 +67,18 @@
     
 "
   ([data]
-   (cond 
-     (coll? (first data)) 
-      (Matrix. (into-array (map double-array data)))
-     (number? (first data)) 
-      (Matrix. (double-array data))))
+   (make-matrix data))
+
   ([data ncol]
-    (cond
-      (coll? data)
-        (Matrix. (double-array data) ncol)
-       (number? data)
-        (Matrix. data ncol))) ; data is the number of rows in this case
+   (make-matrix data ncol))
+
   ([init-val rows cols]
-    (Matrix. rows cols init-val)))
+   (make-matrix init-val rows cols)))
 
 
 (defn matrix? 
-  " Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
-  ([obj] (isa? (class obj) ::matrix)))
+  " Test if obj is 'derived' incanter.Matrix."
+  ([obj] (is-matrix obj)))
 
 
 (defn nrow 
@@ -105,14 +98,30 @@
 
 
 (defn identity-matrix 
-  "Returns an n-by-n identity matrix."
+"   Returns an n-by-n identity matrix.
+    
+    Examples:
+      (identity-matrix 4)
+
+"
    ([n] (Matrix. (.identity DoubleFactory2D/dense n))))
 
 
 (defn diag 
-  " If given a matrix, diag returns a sequence of its diagonal elements.
+"   If given a matrix, diag returns a sequence of its diagonal elements.
     If given a sequence, it returns a matrix with the sequence's elements 
-    on its diagonal. Equivalent to R's diag function."
+    on its diagonal. Equivalent to R's diag function.
+  
+    Examples:
+      (diag [1 2 3 4])
+
+      (def A (matrix [[1 2 3]
+                      [4 5 6]
+                      [7 8 9]]))
+      (diag A)
+
+
+"
    ([m]
     (cond 
      (matrix? m)
@@ -122,7 +131,16 @@
 
 
 (defn #^Matrix trans 
-  "Returns the transpose of the given matrix. Equivalent to R's t function"
+"   Returns the transpose of the given matrix. Equivalent to R's t function
+
+    Examples:
+      (def A (matrix [[1 2 3] 
+                     [4 5 6] 
+                     [7 8 9]]))
+
+      (trans A)
+  
+"
   ([mat]
    (cond 
     (matrix? mat)
@@ -219,8 +237,22 @@
 
 
 (defn bind-rows 
-  " Returns the matrix resulting from concatenating the given matrices 
-    and/or sequences by their rows. Equivalent to R's rbind."
+"   Returns the matrix resulting from concatenating the given matrices 
+    and/or sequences by their rows. Equivalent to R's rbind.
+
+    Examples:
+      (def A (matrix [[1 2 3] 
+                     [4 5 6] 
+                     [7 8 9]]))
+
+      (def B (matrix [[10 11 12]
+                      [13 14 15]]))
+
+      (bind-rows A B)
+
+      (bind-rows [1 2 3 4] [5 6 7 8])
+
+"
   ([& args]
    (reduce
     (fn [A B] 
@@ -239,8 +271,22 @@
 
 
 (defn bind-columns 
-  " Returns the matrix resulting from concatenating the given matrices 
-    and/or sequences by their columns. Equivalent to R's cbind."
+"   Returns the matrix resulting from concatenating the given matrices 
+    and/or sequences by their columns. Equivalent to R's cbind.
+
+    Examples:
+      (def A (matrix [[1 2 3] 
+                     [4 5 6] 
+                     [7 8 9]]))
+
+      (def B (matrix [10 11 12]))
+
+      (bind-columns A B)
+
+      (bind-columns [1 2 3 4] [5 6 7 8])
+
+
+"
   ([& args]
    (reduce 
     (fn [A B] (.viewDice (bind-rows (trans A) (trans B))))
@@ -257,62 +303,86 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defmacro #^Matrix transform-with [A op fun]
-  `(cond 
-    (matrix? ~A)
-      (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleFunction (. DoubleFunctions ~fun))
-    (coll? ~A)
-      (map ~op ~A)
-    (number? ~A)
-      (~op ~A)))
-    
-
-(defmacro combine-with [A B op fun]
-  `(if (and (number? ~A) (number? ~B))
-    (~op ~A ~B)
-      (cond 
-       (and (matrix? ~A) (matrix? ~B))
-         (.assign #^Matrix (.copy #^Matrix ~A) #^Matrix ~B #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (matrix? ~A) (number? ~B))
-         (.assign #^Matrix (.copy #^Matrix ~A) #^DoubleDoubleFunction (. DoubleFunctions (~fun ~B)))
-       (and (number? ~A) (matrix? ~B))
-         (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix ~B #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (coll? ~A) (matrix? ~B))
-         (.assign #^Matrix (matrix ~A (.rows ~B) (.columns ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (matrix? ~A) (coll? ~B))
-         (.assign #^Matrix (.copy ~A) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (coll? ~A) (coll? ~B)) 
-         (map ~op ~A ~B) 
-       (and (number? ~A) (coll? ~B)) 
-         ;(.assign #^Matrix (matrix ~A (nrow ~B) (ncol ~B)) #^Matrix (matrix ~B) #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-         (map (fn [b#] (~op ~A b#)) ~B)
-       (and (coll? ~A) (number? ~B)) 
-         ;(.assign #^Matrix (matrix ~A) #^Matrix (matrix ~B (nrow ~A) (ncol ~A)) #^DoubleDoubleFunction (. DoubleFunctions ~fun)))))
-         (map (fn [a#] (~op a# ~B)) ~A))))
-    
-
 
 (defn plus 
-  " Performs element-by-element addition on multiple matrices, sequences, 
-    and/or numbers. Equivalent to R's + operator."
+"   Performs element-by-element addition on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's + operator.
+ 
+    Examples:
+
+      (def A (matrix [[1 2 3] 
+                      [4 5 6] 
+                      [7 8 9]]))
+      (plus A A A) 
+      (plus A 2)
+      (plus 2 A)
+      (plus [1 2 3] [1 2 3])
+      (plus [1 2 3] 2)
+      (plus 2 [1 2 3])
+
+
+"
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core/+ plus)) args)))
 
 
 (defn minus 
-  " Performs element-by-element subtraction on multiple matrices, sequences, 
-    and/or numbers. Equivalent to R's - operator."
+"   Performs element-by-element subtraction on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's - operator.
+       
+    Examples:
+
+      (def A (matrix [[1 2 3] 
+                      [4 5 6] 
+                      [7 8 9]]))
+      (minus A A A) 
+      (minus A 2)
+      (minus 2 A)
+      (minus [1 2 3] [1 2 3])
+      (minus [1 2 3] 2)
+      (minus 2 [1 2 3])
+
+"
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args)))
 
 
 (defn mult 
-  " Performs element-by-element multiplication on multiple matrices, sequences, 
-    and/or numbers. Equivalent to R's * operator."
+"   Performs element-by-element multiplication on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's * operator.
+      
+    Examples:
+
+      (def A (matrix [[1 2 3] 
+                      [4 5 6] 
+                      [7 8 9]]))
+      (mult A A A) 
+      (mult A 2)
+      (mult 2 A)
+      (mult [1 2 3] [1 2 3])
+      (mult [1 2 3] 2)
+      (mult 2 [1 2 3])
+
+  
+"
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core/* mult)) args)))
 
 
 (defn div 
-  " Performs element-by-element division on multiple matrices, sequences, 
-    and/or numbers. Equivalent to R's / operator."
+"   Performs element-by-element division on multiple matrices, sequences, 
+    and/or numbers. Equivalent to R's / operator.
+      
+    Examples:
+
+      (def A (matrix [[1 2 3] 
+                      [4 5 6] 
+                      [7 8 9]]))
+      (div A A A) 
+      (div A 2)
+      (div 2 A)
+      (div [1 2 3] [1 2 3])
+      (div [1 2 3] 2)
+      (div 2 [1 2 3])
+
+"
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core// div)) args)))
 
 
@@ -459,6 +529,19 @@
 (defn mmult 
   " Returns the matrix resulting from the matrix multiplication of the
     the given arguments. Equivalent to R's %*% operator.
+
+    Examples:
+  
+      (def A (matrix [[1 2 3] 
+                      [4 5 6] 
+                      [7 8 9]]))
+      (mmult A (trans A))
+      (mmult A (trans A) A)
+
+    References:
+      http://en.wikipedia.org/wiki/Matrix_multiplication
+      http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html
+
   "
     ([& args]
      (reduce (fn [A B]
@@ -472,8 +555,17 @@
 
 
 (defn solve 
-  "Returns a matrix solution if A is square, least squares solution otherwise.
-   Equivalent to R's solve function."
+" Returns a matrix solution if A is square, least squares solution otherwise.
+  Equivalent to R's solve function.
+  
+  Examples:
+    (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))
+
+  References:
+    http://en.wikipedia.org/wiki/Matrix_inverse
+    
+
+"
   ([#^Matrix A & B]
    (if B
     (Matrix. (.solve (DoubleAlgebra.) A (first B)))
@@ -650,28 +742,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-
-;; PRINT METHOD FOR COLT MATRICES
-(defmethod print-method Matrix [o, #^java.io.Writer w]
-  (let [formatter (DoubleFormatter. "%1.4f")]
-    (do 
-      (.setPrintShape formatter false)
-      (.write w "[")
-      (.write w (.toString formatter o))
-      (.write w "]\n"))))
-
-
-;; PRINT METHOD FOR INCANTER DATASETS
-(defmethod print-method :incanter.core/dataset [o, #^java.io.Writer w]
-  (do 
-    (.write w (str (:column-names o)))
-    (.write w "\n")
-    (doseq [row (:rows o)]
-      (.write w (str (vals row)))
-      (.write w "\n"))))
-
 
 
 (defn to-vect  

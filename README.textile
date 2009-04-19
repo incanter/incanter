@@ -13,6 +13,8 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 
 * For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann.
 * For an even more extensive introduction, get the beta version of the book "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway.
+* "Clojure Programming Wikibook":http://en.wikibooks.org/wiki/Clojure_Programming
+* "Learning Clojure Wikibook":http://en.wikibooks.org/wiki/Learning_Clojure
 
 
 *To build and use Incanter, run the following commands from the Incanter directory:* 
@@ -32,13 +34,16 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 
 * The online documentation for most functions contain usage examples. The documentation can be accessed using Clojure's @doc@ function. For example, to view the documentation for the @linear-model@ function, use @(doc linear-model)@ from the Clojure shell. The API documentation is also available in @docs/api/index.html@ and online at "incanter.org/docs/api/.":http://incanter.org/docs/api Use @(find-doc "search term")@ to search the online documentation from the Clojure shell.
 * See @examples/@ directory
+** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
 * See @tests/test-cases.clj@ 
+** Run @tests/runtests.clj@ to run test cases
 
 
 
 *Documentation*
 
 * "Incanter API":http://incanter.org/docs/api/
+* "Clojure API":http://clojure.org/api
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
 
