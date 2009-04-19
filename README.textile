@@ -1,7 +1,5 @@
 <img src="http://incanter.org/images/incanter.png" alt="Incanter" />
 
-h2. Incanter
-
 _Incanter is a "Clojure":http://clojure.org based, "R":http://www.r-project.org/ like statistical computing and graphics environment for the JVM._
 
 Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. 
