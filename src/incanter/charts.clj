@@ -59,6 +59,7 @@
     (def x (range 0 8 0.01))
     (add-lines gam-hist x (pdf-gamma x))
 
+    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -100,14 +101,33 @@
   Use the 'view' function to display the chart, or the 'save-png' function
   to write it to a file.
 
+  Options:
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+
   See also:
     view, save-png, add-points, add-lines
 
   Examples:
-    (def x (sample-normal 100))
-    (def err (sample-normal 100))
-    (def y (plus (mult 1.5 x) err))
-    (view (scatter-plot x y))
+
+    (use '(incanter core stats charts))
+    ;; create some data
+    (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
+
+    ;; create scatter-plot of points
+    (def mvn-plot (scatter-plot (sel mvn-samp :columns 0) (sel mvn-samp :columns 1)))
+    (view mvn-plot)
+
+    ;; add regression line to scatter plot
+    (def x (sel mvn-samp :columns 0))
+    (def y (sel mvn-samp :columns 1))
+    (def lm (linear-model y x))
+    (add-lines mvn-plot x (:fitted lm))
+
+    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -141,6 +161,48 @@
 
 
 (defmacro line-plot 
+" Returns a JFreeChart object representing a line-plot of the given data.
+  Use the 'view' function to display the chart, or the 'save-png' function
+  to write it to a file.
+
+  Options:
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+
+  See also:
+    view, save-png, add-points, add-lines
+
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    ;; plot the cosine function
+    (def x (range -1 5 0.01))  
+    (def y (cos (mult 2 Math/PI x)))
+    (view (line-plot x y))
+
+    ;; plot gamma pdf with different parameters
+    (def x2 (range 0 20 0.1))
+    (def gamma-plot (line-plot x2 (pdf-gamma x2 :shape 1 :rate 2) 
+                               :legend true
+                               :title \"Gamma PDF\"
+                               :y-label \"Density\"))
+    (view gamma-plot)
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))
+
+    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
+                                                
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
+"
   ([x y & options]
     `(let [opts# (if '~options (assoc {} ~@options))
           _x# (if (matrix? ~x) (to-list ~x) ~x)
@@ -168,6 +230,37 @@
 
 
 (defmacro box-plot 
+" Returns a JFreeChart object representing a box-plot of the given data.
+  Use the 'view' function to display the chart, or the 'save-png' function
+  to write it to a file.
+
+  Options:
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+
+  See also:
+    view and save-png
+
+  Examples:
+
+    (use '(incanter stats charts))
+    (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2) 
+                          :title \"Gamma Boxplot\"
+                          :legend true)) 
+    (view gamma-box-plot)
+    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+
+    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
+           
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
+"
   ([x & options]
     `(let [opts# (if '~options (assoc {} ~@options))
           data# (if (matrix? ~x) (to-list ~x) ~x)
@@ -195,6 +288,11 @@
 
 (defmacro add-histogram 
 "
+  Adds a histogram to an existing histogram plot.
+
+  Options:
+    :nbins (default 10) number of bins for histogram
+    :series-label (default x expression)
 
   Examples:
 
@@ -222,7 +320,12 @@
 
 (defmacro add-box-plot 
 "
-    Examples:
+  Adds an additional box to an existing box-plot.
+
+  Options:
+    :series-label (default x expression)
+
+  Examples:
 
       (use '(incanter charts stats))
       (def boxplt (box-plot (sample-normal 1000) :legend true))
@@ -250,27 +353,40 @@
 
 
 (defn set-alpha 
+" Sets the alpha level (transparancy) of the plot's foreground
+"
   ([chart alpha] (.setForegroundAlpha (.getPlot chart) alpha)))
 
 
 (defn set-background-alpha 
+" Sets the alpha level (transparancy) of the plot's background
+"
   ([chart alpha] (.setBackgroundAlpha (.getPlot chart) alpha)))
 
 
 (defn clear-background 
+" Sets the alpha level (transparancy) of the plot's background to zero, 
+  removing the default grid
+"
   ([chart] (.setBackgroundAlpha (.getPlot chart) 0.0)))
 
 
 
 (defn set-title 
+" Sets the main title of the plot.
+"
   ([chart title] (.setTitle chart title)))
 
 
 (defn set-x-label 
+" Sets the label of the x-axis
+"
   ([chart label] (.setLabel (.getDomainAxis (.getPlot chart)) label)))
 
 
 (defn set-y-label 
+" Sets the label of the y-axis
+"
   ([chart label] (.setLabel (.getRangeAxis (.getPlot chart)) label)))
 
 
@@ -284,6 +400,9 @@
 (defmacro add-lines
 " Plots lines on the given scatter-plot of the (x,y) points.
   Equivalent to R's lines function.
+
+  Options:
+    :series-label (default x expression)
 
   Examples:
 
@@ -333,6 +452,9 @@
 (defmacro add-points
 " Plots points on the given scatter-plot or line-plot of the (x,y) points.
   Equivalent to R's lines function.
+
+  Options:
+    :series-label (default x expression)
 
   Examples:
 
@@ -541,6 +663,7 @@
 
 
 (defn save-png 
+" Saves chart object as a PNG file."
   ([chart filename & options]
     (let [opts (if options (apply assoc {} options) nil)
           width (if (:width opts) (:width opts) 500)

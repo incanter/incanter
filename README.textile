@@ -1,8 +1,8 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.png" alt="Incanter" /></a>
 
-_Incanter is a "Clojure":http://clojure.org based, "R":http://www.r-project.org/ like statistical computing and graphics environment for the JVM._
+_Incanter is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._
 
-Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang. 
+Motivation for a Lisp-based R-like statistical environment can be found in the paper "Back to the Future: Lisp as a Base for a Statistical Computing System":http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21 by Ihaka and Lang (2008). 
 
 Motivation for a JVM-based Lisp can be found at the "Clojure website":http://clojure.org, and screencasts of several excellent Clojure talks by the language's creator, Rich Hickey, can be found at "clojure.blip.tv":http://clojure.blip.tv. 
 
@@ -37,7 +37,8 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 ** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
 * See @tests/test-cases.clj@ 
 ** Run @tests/runtests.clj@ to run test cases
-
+* See Incanter wiki
+** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
 
 
 *Documentation*

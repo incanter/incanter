@@ -1541,7 +1541,6 @@
     (:df iris-lm)
 
     (def x1 (range 0.0 3 0.1))
-    (view (line-plot x1 (pdf-f x1 :df1 4 :df2 144)))
     (view (line-plot x1 (cdf-f x1 :df1 4 :df2 144)))
   
 
