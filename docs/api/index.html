@@ -767,43 +767,15 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.optimize&apos;, &apos;+
   ([fx n &amp; options]
     (let [funs (for [i (range n) j (range n) :when (&lt;= j i)] 
                  (second-partial-derivative fx i j))]
-      (fn [theta] (symmetric-matrix (map #(% theta) funs))))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.optimize-integrate"/><dl class="library-member-table"><dt class="library-member-name">integrate</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([f a b])</span></div><div class="library-member-docs"/><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.optimize-integrate&apos;)" id="linkto-membersource-incanter.optimize-integrate">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.optimize-integrate"><pre>(defn integrate [f a b]
-&quot; Integrate a function f from a to b
-
-
-  Examples:
-    (defn f1 [x] 1)
-    (defn f2 [x] (Math/pow x 2))
-    (defn f3 [x] (* x (Math/exp (Math/pow x 2))))
-
-    (integrate f1 0 5)
-    (integrate f2 0 1)
-    (integrate f3 0 1)
-
-    ;; normal distribution
-    (def std 1)
-    (def mu 0)
-    (defn normal [x]
-      (/ 1                   
-        (* (* std (Math/sqrt (* 2 Math/PI)))
-          (Math/exp (/ (Math/pow (- (- x mu)) 2)
-          (* 2 (Math/pow std 2)))))))
-
-    (integrate normal 1.96 10)
-
-
-  Reference:
-    http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html
-    http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/
-
-
-&quot;
-  (let [small-dx 0.0001
-        integrate-gen (fn [f x b dx sum]
-                        (if (&gt; x b)
-                          sum
-                          (recur f (+ x dx) b dx (+ sum (* (f x) dx)))))]
-    (integrate-gen f a b small-dx 0)))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.optimize-partial-derivative"/><dl class="library-member-table"><dt class="library-member-name">partial-derivative</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([fx i &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (defn quad-fx [[x y]] (+ (* x x) (* x y) (* y y)))</div><div class="library-member-doc-line">    (def quad-dfx0 (partial-derivative quad-fx 0)) </div><div class="library-member-doc-line">    (def quad-dfx1 (partial-derivative quad-fx 1))</div><div class="library-member-doc-line">    (quad-dfx0 [1 1]) </div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core optimize charts))</div><div class="library-member-doc-line">    (def x (range -3 3 0.1))</div><div class="library-member-doc-line">    (def plot (line-plot x (map #(quad-fx [% 1]) x)))</div><div class="library-member-doc-line">    (view plot)</div><div class="library-member-doc-line">    (add-lines plot x (map #(quad-dfx0 [% 1]) x))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://en.wikipedia.org/wiki/Partial_derivative</div><div class="library-member-doc-line">    </div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.optimize-partial-derivative&apos;)" id="linkto-membersource-incanter.optimize-partial-derivative">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.optimize-partial-derivative"><pre>(defn partial-derivative
+      (fn [theta] (symmetric-matrix (map #(% theta) funs))))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.optimize-integrate"/><dl class="library-member-table"><dt class="library-member-name">integrate</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([f a b])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Integrate a function f from a to b</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line">    (defn f1 [x] 1)</div><div class="library-member-doc-line">    (defn f2 [x] (Math/pow x 2))</div><div class="library-member-doc-line">    (defn f3 [x] (* x (Math/exp (Math/pow x 2))))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (integrate f1 0 5)</div><div class="library-member-doc-line">    (integrate f2 0 1)</div><div class="library-member-doc-line">    (integrate f3 0 1)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    ;; normal distribution</div><div class="library-member-doc-line">    (def std 1)</div><div class="library-member-doc-line">    (def mu 0)</div><div class="library-member-doc-line">    (defn normal [x]</div><div class="library-member-doc-line">      (/ 1                   </div><div class="library-member-doc-line">        (* (* std (Math/sqrt (* 2 Math/PI)))</div><div class="library-member-doc-line">          (Math/exp (/ (Math/pow (- (- x mu)) 2)</div><div class="library-member-doc-line">          (* 2 (Math/pow std 2)))))))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (integrate normal 1.96 10)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Reference:</div><div class="library-member-doc-line">    http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html</div><div class="library-member-doc-line">    http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.optimize-integrate&apos;)" id="linkto-membersource-incanter.optimize-integrate">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.optimize-integrate"><pre>(defn integrate 
+&quot; Integrate a function f from a to b...&quot;
+  ([f a b]
+    (let [small-dx 0.0001
+          integrate-gen (fn [f x b dx sum]
+                          (if (&gt; x b)
+                            sum
+                            (recur f (+ x dx) b dx (+ sum (* (f x) dx)))))]
+      (integrate-gen f a b small-dx 0))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.optimize-partial-derivative"/><dl class="library-member-table"><dt class="library-member-name">partial-derivative</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([fx i &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (defn quad-fx [[x y]] (+ (* x x) (* x y) (* y y)))</div><div class="library-member-doc-line">    (def quad-dfx0 (partial-derivative quad-fx 0)) </div><div class="library-member-doc-line">    (def quad-dfx1 (partial-derivative quad-fx 1))</div><div class="library-member-doc-line">    (quad-dfx0 [1 1]) </div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core optimize charts))</div><div class="library-member-doc-line">    (def x (range -3 3 0.1))</div><div class="library-member-doc-line">    (def plot (line-plot x (map #(quad-fx [% 1]) x)))</div><div class="library-member-doc-line">    (view plot)</div><div class="library-member-doc-line">    (add-lines plot x (map #(quad-dfx0 [% 1]) x))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://en.wikipedia.org/wiki/Partial_derivative</div><div class="library-member-doc-line">    </div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.optimize-partial-derivative&apos;)" id="linkto-membersource-incanter.optimize-partial-derivative">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.optimize-partial-derivative"><pre>(defn partial-derivative
 &quot;...&quot;
   ([fx i &amp; options]
     (let [opts (if options (apply assoc {} options) nil)
