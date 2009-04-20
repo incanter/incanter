@@ -525,11 +525,11 @@
           ;legend? (if (:series-label opts) (:series-label opts) true)
           n (count x)
           chart (line-plot (range n) 
-                         x )]
-                         ;:title title 
-                         ;:x-label x-label 
-                         ;:y-label y-label
-                         ;:series-label series-lab)]
+                         x ;)]
+                         :title title 
+                         :x-label x-label 
+                         :y-label y-label
+                         :series-label series-lab)]
       (do
         (add-lines chart (range n) (cumulative-mean x) :series-label "running mean")
         (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)

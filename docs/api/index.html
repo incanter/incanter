@@ -454,7 +454,8 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.optimize&apos;, &apos;+
                    :title &quot;QQ-Plot&quot;
                    :x-label &quot;Normal theoretical quantiles&quot;
                    :y-label &quot;Data quantiles&quot;
-                   :series-label &quot;Theoretical Normal&quot;))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-save-png"/><dl class="library-member-table"><dt class="library-member-name">save-png</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([chart filename &amp; options])</span></div><div class="library-member-docs"/><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-save-png&apos;)" id="linkto-membersource-incanter.charts-save-png">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-save-png"><pre>(defn save-png 
+                   :series-label &quot;Theoretical Normal&quot;))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-save-png"/><dl class="library-member-table"><dt class="library-member-name">save-png</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([chart filename &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Saves chart object as a PNG file.</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-save-png&apos;)" id="linkto-membersource-incanter.charts-save-png">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-save-png"><pre>(defn save-png 
+&quot; Saves chart object as a PNG file.&quot;
   ([chart filename &amp; options]
     (let [opts (if options (apply assoc {} options) nil)
           width (if (:width opts) (:width opts) 500)
@@ -505,11 +506,11 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.optimize&apos;, &apos;+
           ;legend? (if (:series-label opts) (:series-label opts) true)
           n (count x)
           chart (line-plot (range n) 
-                         x )]
-                         ;:title title 
-                         ;:x-label x-label 
-                         ;:y-label y-label
-                         ;:series-label series-lab)]
+                         x ;)]
+                         :title title 
+                         :x-label x-label 
+                         :y-label y-label
+                         :series-label series-lab)]
       (do
         (add-lines chart (range n) (cumulative-mean x) :series-label &quot;running mean&quot;)
         (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)

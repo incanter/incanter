@@ -33,12 +33,12 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 *Incanter examples*
 
 * The online documentation for most functions contain usage examples. The documentation can be accessed using Clojure's @doc@ function. For example, to view the documentation for the @linear-model@ function, use @(doc linear-model)@ from the Clojure shell. The API documentation is also available in @docs/api/index.html@ and online at "incanter.org/docs/api/.":http://incanter.org/docs/api Use @(find-doc "search term")@ to search the online documentation from the Clojure shell.
+* See Incanter wiki
+** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
 * See @examples/@ directory
 ** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
 * See @tests/test-cases.clj@ 
 ** Run @tests/runtests.clj@ to run test cases
-* See Incanter wiki
-** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
 
 
 *Documentation*
