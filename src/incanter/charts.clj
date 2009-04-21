@@ -18,8 +18,22 @@
 
 (ns incanter.charts 
   (:use (incanter core stats))
-  (:import  (javax.swing JTable JScrollPane JFrame)))
-
+  (:import  (javax.swing JTable JScrollPane JFrame)
+            (java.util Vector)
+            (java.io File)
+            (org.jfree.data.statistics HistogramDataset
+                                       HistogramType
+                                       DefaultBoxAndWhiskerCategoryDataset)
+            (org.jfree.chart ChartFactory
+                             ChartUtilities
+                             ChartFrame)
+            (org.jfree.chart.plot PlotOrientation
+                                  DatasetRenderingOrder
+                                  SeriesRenderingOrder)
+            (org.jfree.data.xy XYSeries
+                               XYSeriesCollection)
+            (org.jfree.chart.renderer.xy XYLineAndShapeRenderer)
+     ))
 
 
 
@@ -77,11 +91,11 @@
                    (if density?# "Density" "Frequency"))
           series-lab# (if (:series-label opts#) (:series-label opts#) (str '~x))
           legend?# (true? (:legend opts#))
-          dataset# (org.jfree.data.statistics.HistogramDataset.)
+          dataset# (HistogramDataset.)
         ]
       (do
         (.addSeries dataset# series-lab# (double-array data#) nbins#)
-        (when density?# (.setType dataset# org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1 ))
+        (when density?# (.setType dataset# org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1))
         (org.jfree.chart.ChartFactory/createHistogram 
             main-title#
             x-lab#
@@ -143,8 +157,8 @@
           y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
           legend?# (true? (:legend opts#))
-          data-series# (org.jfree.data.xy.XYSeries. series-lab#)
-          dataset# (org.jfree.data.xy.XYSeriesCollection.)]
+          data-series# (XYSeries. series-lab#)
+          dataset# (XYSeriesCollection.)]
       (do
         (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
         (.addSeries dataset# data-series#)
@@ -212,8 +226,8 @@
           y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
           legend?# (true? (:legend opts#))
-          data-series# (org.jfree.data.xy.XYSeries. series-lab#)
-          dataset# (org.jfree.data.xy.XYSeriesCollection.)]
+          data-series# (XYSeries. series-lab#)
+          dataset# (XYSeriesCollection.)]
       (do
         (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
         (.addSeries dataset# data-series#)
@@ -272,7 +286,7 @@
           category-label# (if (:category-label opts#) (:category-label opts#) 0)
           ;category-label# (if (:category-label opts#) (:category-label opts#) (str '~x))
           legend?# (true? (:legend opts#))
-          dataset# (org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset.)
+          dataset# (DefaultBoxAndWhiskerCategoryDataset.)
           chart# (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart 
                     main-title#
                     x-label#
@@ -298,10 +312,10 @@
   Examples:
 
     (use '(incanter charts stats))
-    (def hist (histogram (sample-normal 1000) 
-                :legend true))
-    (view hist)
-    (add-histogram hist (sample-normal 1000 :sd 0.5))
+    (doto (histogram (sample-normal 1000) 
+                     :legend true)
+          view 
+          (add-histogram (sample-normal 1000 :sd 0.5)))
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -335,10 +349,10 @@
   Examples:
 
       (use '(incanter charts stats))
-      (def boxplt (box-plot (sample-normal 1000) :legend true))
-      (view boxplt)
-      (add-box-plot boxplt (sample-normal 1000 :sd 2))
-      (add-box-plot boxplt (sample-gamma 1000))
+      (doto (box-plot (sample-normal 1000) :legend true)
+            view
+            (add-box-plot (sample-normal 1000 :sd 2))
+            (add-box-plot (sample-gamma 1000)))
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -473,17 +487,12 @@
     (add-lines plot1 x (:fitted lm2))
 
 
-    ;; since add-lines returns the modified chart, you can chain calls together
-    (def x1 (range -3 3 0.01))
-    (view 
-      (clear-background
-        (add-lines 
-          (add-lines 
-            (line-plot 
-              x1 (pdf-normal x1)) 
-            x1 (pdf-normal x1 :sd 0.5)) 
-          x1 (pdf-normal x1 :sd 1.5))))
-
+    ;; Clojure's doto macro can be used to build a chart
+    (doto (line-plot x (pdf-normal x))
+          view
+          clear-background
+          (add-lines x (pdf-normal x :sd 1.5))
+          (add-lines x (pdf-normal x :sd 0.5)))
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -501,9 +510,9 @@
            series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
            ;legend?# (if (false? (:legend opts#)) false true)
            ;points?# (if (false? (:points opts#)) false true) ;; TODO
-           data-series# (org.jfree.data.xy.XYSeries. series-lab#)
-           line-renderer# (org.jfree.chart.renderer.xy.XYLineAndShapeRenderer. true false)
-           data-set# (org.jfree.data.xy.XYSeriesCollection.)
+           data-series# (XYSeries. series-lab#)
+           line-renderer# (XYLineAndShapeRenderer. true false)
+           data-set# (XYSeriesCollection.)
           ]
     (do
       (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
@@ -535,14 +544,13 @@
     
     ;; add regression line to scatter plot
     (def lm1 (linear-model y x))
-    (def plot1 (line-plot x (:fitted lm1) :legend true))
-    (view plot1)
-
-    (add-points plot1 x y)
-
     ;; model the data without an intercept
     (def lm2 (linear-model y x :intercept false))
-    (add-lines plot1 x (:fitted lm2))
+
+    (doto (line-plot x (:fitted lm1) :legend true)
+          view
+          (add-points x y)
+          (add-lines x (:fitted lm2)))
 
 
   References:
@@ -561,9 +569,9 @@
         series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
         ;legend?# (if (false? (:legend opts#)) false true)
         ;points?# (if (false? (:points opts#)) false true) ;; TODO
-        data-series# (org.jfree.data.xy.XYSeries. series-lab#)
-        line-renderer# (org.jfree.chart.renderer.xy.XYLineAndShapeRenderer. false true)
-        data-set# (org.jfree.data.xy.XYSeriesCollection.)
+        data-series# (XYSeries. series-lab#)
+        line-renderer# (XYLineAndShapeRenderer. false true)
+        data-set# (XYSeriesCollection.)
        ]
     (do
       (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
@@ -708,8 +716,8 @@
     (let [opts (if options (apply assoc {} options) nil)
           column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))]
       (doto (JFrame. "Incanter Matrix")
-        (.add (JScrollPane. (JTable. (java.util.Vector. (map #(java.util.Vector. %) (to-list obj)))
-                                     (java.util.Vector. column-names))))
+        (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) (to-list obj)))
+                                     (Vector. column-names))))
         (.setSize 400 600)
         (.setVisible true)))))
 
@@ -719,8 +727,8 @@
    (let [column-names (:column-names obj)
          column-vals (map (fn [row] (map #(row %) column-names)) (:rows obj))]
      (doto (JFrame. "Incanter Dataset")
-       (.add (JScrollPane. (JTable. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
-                                    (java.util.Vector. column-names))))
+       (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals)) 
+                                    (Vector. column-names))))
        (.setSize 400 600)
        (.setVisible true)))))
 
@@ -732,7 +740,7 @@
           window-title (if (:window-title opts) (:window-title opts) "Incanter Plot")
           width (if (:width opts) (:width opts) 500)
           height (if (:height opts) (:height opts) 400)
-          frame (org.jfree.chart.ChartFrame. window-title chart)]
+          frame (ChartFrame. window-title chart)]
       (doto frame
         (.setSize width height)
         (.setVisible true))
@@ -745,7 +753,7 @@
     (let [opts (if options (apply assoc {} options) nil)
           width (if (:width opts) (:width opts) 500)
           height (if (:height opts) (:height opts) 400)]
-      (org.jfree.chart.ChartUtilities/saveChartAsPNG (java.io.File. filename) chart width height)
+      (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
       nil)))
 
 
