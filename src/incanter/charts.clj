@@ -288,7 +288,8 @@
 
 (defmacro add-histogram 
 "
-  Adds a histogram to an existing histogram plot.
+  Adds a histogram to an existing histogram plot, returns the modified
+  chart object.
 
   Options:
     :nbins (default 10) number of bins for histogram
@@ -302,11 +303,16 @@
     (view hist)
     (add-histogram hist (sample-normal 1000 :sd 0.5))
 
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
   ([chart x & options]
     `(let [opts# (if '~options (assoc {} ~@options))
           _x# (if (matrix? ~x) (to-list ~x) ~x)
-          data-plot# (.getPlot ~chart)
+          chart# ~chart
+          data-plot# (.getPlot chart#)
           n# (.getDatasetCount data-plot#)
           nbins# (if (:nbins opts#) (:nbins opts#) 10)
           series-lab# (if (:series-label opts#) (:series-label opts#) (str '~x))
@@ -314,13 +320,14 @@
       (do
         (.addSeries (.getDataset data-plot#) series-lab# (double-array _x#) nbins#)
         (.setSeriesRenderingOrder data-plot# org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-        (.fireChartChanged ~chart)))))
+        (.fireChartChanged chart#)
+        chart#))))
 
 
 
 (defmacro add-box-plot 
 "
-  Adds an additional box to an existing box-plot.
+  Adds an additional box to an existing box-plot, returns the modified chart object.
 
   Options:
     :series-label (default x expression)
@@ -333,73 +340,117 @@
       (add-box-plot boxplt (sample-normal 1000 :sd 2))
       (add-box-plot boxplt (sample-gamma 1000))
 
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
   ([chart x & options]
     `(let [opts# (if '~options (assoc {} ~@options))
           _x# (if (matrix? ~x) (to-list ~x) ~x)
-          data-plot# (.getCategoryPlot ~chart)
+          chart# ~chart
+          data-plot# (.getCategoryPlot chart#)
           n-col# (.getColumnCount (.getDataset data-plot#)) 
           n-row# (.getRowCount (.getDataset data-plot#))
           series-label# (if (:series-label opts#) (:series-label opts#) (str '~x))
           category-label# (if (:category-label opts#) 
                             (:category-label opts#) 
-                            ;(str '~x))
                             (str n-col#))
         ]
       (do
-        (.add (.getDataset data-plot#) _x# series-label# category-label#)))))
+        (.add (.getDataset data-plot#) _x# series-label# category-label#)
+        chart#))))
 
 
 
 
 (defn set-alpha 
-" Sets the alpha level (transparancy) of the plot's foreground
+" Sets the alpha level (transparancy) of the plot's foreground, 
+  returns the modified chart object.
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
-  ([chart alpha] (.setForegroundAlpha (.getPlot chart) alpha)))
+  ([chart alpha] 
+    (.setForegroundAlpha (.getPlot chart) alpha)
+    chart))
 
 
 (defn set-background-alpha 
-" Sets the alpha level (transparancy) of the plot's background
+" Sets the alpha level (transparancy) of the plot's background, 
+  returns the modified chart object.
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
-  ([chart alpha] (.setBackgroundAlpha (.getPlot chart) alpha)))
+  ([chart alpha] 
+    (.setBackgroundAlpha (.getPlot chart) alpha)
+    chart))
 
 
 (defn clear-background 
 " Sets the alpha level (transparancy) of the plot's background to zero, 
-  removing the default grid
+  removing the default grid, returns the modified chart object.
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
-  ([chart] (.setBackgroundAlpha (.getPlot chart) 0.0)))
+  ([chart] 
+    (.setBackgroundAlpha (.getPlot chart) 0.0)
+    chart))
 
 
 
 (defn set-title 
-" Sets the main title of the plot.
+" Sets the main title of the plot, returns the modified chart object.
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
-  ([chart title] (.setTitle chart title)))
+  ([chart title] 
+    (.setTitle chart title)
+    chart))
 
 
 (defn set-x-label 
-" Sets the label of the x-axis
+" Sets the label of the x-axis, returns the modified chart object.
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
-  ([chart label] (.setLabel (.getDomainAxis (.getPlot chart)) label)))
+  ([chart label] 
+    (.setLabel (.getDomainAxis (.getPlot chart)) label)
+    chart))
 
 
 (defn set-y-label 
-" Sets the label of the y-axis
+" Sets the label of the y-axis, returns the modified chart object.
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
 "
-  ([chart label] (.setLabel (.getRangeAxis (.getPlot chart)) label)))
+  ([chart label] 
+    (.setLabel (.getRangeAxis (.getPlot chart)) label)
+    chart))
 
 
 
  
-;; FUNCTION TO ADD LINES TO SCATTER PLOT
-;;
-
-
-
 (defmacro add-lines
-" Plots lines on the given scatter-plot of the (x,y) points.
-  Equivalent to R's lines function.
+" Plots lines on the given scatter or line plot of the (x,y) points.
+  Equivalent to R's lines function, returns the modified chart object.
 
   Options:
     :series-label (default x expression)
@@ -422,36 +473,55 @@
     (add-lines plot1 x (:fitted lm2))
 
 
+    ;; since add-lines returns the modified chart, you can chain calls together
+    (def x1 (range -3 3 0.01))
+    (view 
+      (clear-background
+        (add-lines 
+          (add-lines 
+            (line-plot 
+              x1 (pdf-normal x1)) 
+            x1 (pdf-normal x1 :sd 0.5)) 
+          x1 (pdf-normal x1 :sd 1.5))))
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
+
 "
   ([chart x y & options]
     `(let [opts# (if '~options (assoc {} ~@options))
-        _x# (if (matrix? ~x) (to-list ~x) ~x)
-        _y# (if (matrix? ~y) (to-list ~y) ~y)
-        data-plot# (.getPlot ~chart)
-        n# (.getDatasetCount data-plot#)
-        series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
-        ;legend?# (if (false? (:legend opts#)) false true)
-        ;points?# (if (false? (:points opts#)) false true) ;; TODO
-        data-series# (org.jfree.data.xy.XYSeries. series-lab#)
-        line-renderer# (org.jfree.chart.renderer.xy.XYLineAndShapeRenderer. true false)
-        data-set# (org.jfree.data.xy.XYSeriesCollection.)
-       ]
+           _x# (if (matrix? ~x) (to-list ~x) ~x)
+           _y# (if (matrix? ~y) (to-list ~y) ~y)
+           chart# ~chart
+           data-plot# (.getPlot chart#)
+           n# (.getDatasetCount data-plot#)
+           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
+           ;legend?# (if (false? (:legend opts#)) false true)
+           ;points?# (if (false? (:points opts#)) false true) ;; TODO
+           data-series# (org.jfree.data.xy.XYSeries. series-lab#)
+           line-renderer# (org.jfree.chart.renderer.xy.XYLineAndShapeRenderer. true false)
+           data-set# (org.jfree.data.xy.XYSeriesCollection.)
+          ]
     (do
       (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
       ;(.addSeries (.getDataset data-plot) data-series)
-      (.setSeriesRenderingOrder (.getPlot ~chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+      (.setSeriesRenderingOrder (.getPlot chart#) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
       (.setDatasetRenderingOrder data-plot# org.jfree.chart.plot.DatasetRenderingOrder/FORWARD) 
       (.addSeries data-set# data-series#)
       (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
       ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
-      (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)))))
+      (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
+      chart#))))
 
 
 
 
 (defmacro add-points
 " Plots points on the given scatter-plot or line-plot of the (x,y) points.
-  Equivalent to R's lines function.
+  Equivalent to R's lines function, returns the modified chart object.
 
   Options:
     :series-label (default x expression)
@@ -475,12 +545,18 @@
     (add-lines plot1 x (:fitted lm2))
 
 
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    
+
 "
   ([chart x y & options]
     `(let [opts# (if '~options (assoc {} ~@options))
         _x# (if (matrix? ~x) (to-list ~x) ~x)
         _y# (if (matrix? ~y) (to-list ~y) ~y)
-        data-plot# (.getPlot ~chart)
+        chart# ~chart
+        data-plot# (.getPlot chart#)
         n# (.getDatasetCount data-plot#)
         series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
         ;legend?# (if (false? (:legend opts#)) false true)
@@ -492,12 +568,13 @@
     (do
       (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
       ;(.addSeries (.getDataset data-plot) data-series)
-      (.setSeriesRenderingOrder (.getPlot ~chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-      (.setDatasetRenderingOrder (.getPlot ~chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+      (.setSeriesRenderingOrder (.getPlot chart#) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+      (.setDatasetRenderingOrder (.getPlot chart#) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
       (.addSeries data-set# data-series#)
       (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
       ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
-      (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)))))
+      (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
+      chart#))))
 
 
 
