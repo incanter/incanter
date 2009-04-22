@@ -13,7 +13,7 @@ CLOJURE_JARS=$INCANTER_LIB_DIR/clojure.jar:$INCANTER_LIB_DIR/clojure-contrib.jar
 
 JLINE_JARS=$INCANTER_LIB_DIR/jline-0.9.94.jar
 COLT_JARS=$INCANTER_LIB_DIR/parallelcolt-0.7.2.jar:$INCANTER_LIB_DIR/netlib-java-0.9.1.jar:$INCANTER_LIB_DIR/arpack-combo-0.1.jar
-JFREECHART_JARS=$INCANTER_LIB_DIR/jfreechart-1.0.12.jar:$INCANTER_LIB_DIR/jcommon-1.0.15.jar:$INCANTER_LIB_DIR/gnujaxp.jar
+JFREECHART_JARS=$INCANTER_LIB_DIR/jfreechart-1.0.13.jar:$INCANTER_LIB_DIR/jcommon-1.0.16.jar:$INCANTER_LIB_DIR/gnujaxp.jar
 OPENCSV_JARS=$INCANTER_LIB_DIR/opencsv-1.8.jar
 JGRAPH_JARS=$INCANTER_LIB_DIR/jgraph.jar
 
