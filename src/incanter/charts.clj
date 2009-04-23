@@ -150,15 +150,15 @@
 "
   ([x y & options]
     `(let [opts# (if '~options (assoc {} ~@options))
-          _x# (if (matrix? ~x) (to-list ~x) ~x)
-          _y# (if (matrix? ~y) (to-list ~y) ~y)
-          main-title# (if (:title opts#) (:title opts#) "Scatter Plot")
-          x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
-          y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
-          series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
-          legend?# (true? (:legend opts#))
-          data-series# (XYSeries. series-lab#)
-          dataset# (XYSeriesCollection.)]
+           _x# (if (matrix? ~x) (to-list ~x) ~x)
+           _y# (if (matrix? ~y) (to-list ~y) ~y)
+           main-title# (if (:title opts#) (:title opts#) "Scatter Plot")
+           x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
+           y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
+           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
+           legend?# (true? (:legend opts#))
+           data-series# (XYSeries. series-lab#)
+           dataset# (XYSeriesCollection.)]
       (do
         (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
         (.addSeries dataset# data-series#)

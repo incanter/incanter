@@ -76,7 +76,7 @@
                   #^Matrix ~B 
                   #^DoubleDoubleFunction (. DoubleFunctions ~fun))
        (and (coll? ~A) (is-matrix ~B))
-         (.assign #^Matrix (make-matrix ~A (.rows ~B) (.columns ~B)) 
+         (.assign #^Matrix (make-matrix ~A (.columns ~B)) 
                   #^Matrix (make-matrix ~B) 
                   #^DoubleDoubleFunction (. DoubleFunctions ~fun))
        (and (is-matrix ~A) (coll? ~B))
