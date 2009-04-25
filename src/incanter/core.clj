@@ -193,7 +193,7 @@
 (defmethod sel [incanter.Matrix false]
   ([#^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
-        cols (if (number? columns) [columns] columns)]
+         cols (if (number? columns) [columns] columns)]
     (cond
       (and (number? rows) (number? columns))
         (.getQuick mat rows columns)
@@ -818,8 +818,13 @@
                                      (:columns opts) 
                                      [(:columns opts)])
                  (:column-names dataset))
-          row-filter (if (:filter opts) (:filter opts) nil)]
-      (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) cols))))
+          row-filter (if (:filter opts) (:filter opts) nil)
+          selected-rows (cond 
+                          (true? rows) (:rows dataset) 
+                          (number? rows) (list (nth (:rows dataset) rows))
+                          (coll? rows) (map #(nth (:rows dataset) %) rows)) ]
+      ;(map (fn [col-key] (map #(% (get-column-id dataset col-key)) selected-rows)) cols))))
+      (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

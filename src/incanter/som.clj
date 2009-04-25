@@ -154,16 +154,13 @@
   Examples:
 
     (use '(incanter core som charts datasets))
-    (def data (trans (matrix (sel (get-dataset :iris) 
-                                  :columns [\"Sepal.Length\" 
-                                            \"Sepal.Width\" 
-                                            \"Petal.Length\" 
-                                            \"Petal.Width\"]))))
+    (def data (matrix (sel (get-dataset :iris) 
+                           :columns [\"Sepal.Length\" \"Sepal.Width\" \"Petal.Length\" \"Petal.Width\"])))
 
     (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
     (view (line-plot (range (count (:fit som))) (:fit som)))
     (:sets som)
-    (map #(sel (to-matrix (get-dataset :iris)) :rows %) (vals (:sets som)))
+    (doseq [rws (vals (:sets som))] (println (sel (get-dataset :iris) :columns \"Species\" :rows rws)) (println)) 
 
 
   References:
