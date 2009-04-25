@@ -11,30 +11,30 @@
       [dim-1 dim-2])))
 
 
-(defn som-initialize
+(defn- som-initialize-linear
   ([data]
    (let [pc (principal-components (covariance data))
          pc1-sd (nth (:std-dev pc) 0)
          pc2-sd (nth (:std-dev pc) 1)
-         b1 (sel (:rotation pc) :columns 0)
-         b2 (sel (:rotation pc) :columns 1)
+         pc1 (sel (:rotation pc) :columns 0)
+         pc2 (sel (:rotation pc) :columns 1)
          [dim-1 dim-2] (map #(Math/ceil %) (som-dimensions pc1-sd pc2-sd))
          data-mean (map mean (trans data))
-         weight-fn (fn [i j data-mean pc1-sd dim-1 dim-2 b1 b2] 
+         weight-fn (fn [i j data-mean pc1-sd dim-1 dim-2 pc1 pc2] 
                      (to-vect
                        (plus data-mean
                         (mult (mult 5 pc1-sd)
-                              (plus (mult b1 (minus i (div dim-1 2)))
-                                    (mult b2 (minus j (div dim-2 2))))))))
+                              (plus (mult pc1 (minus i (div dim-1 2)))
+                                    (mult pc2 (minus j (div dim-2 2))))))))
          weights (reduce conj {}
                          (for [i (range dim-1) j (range dim-2)] 
-                           {[i j] (weight-fn i j data-mean pc1-sd dim-1 dim-2 b1 b2)} ))
+                           {[i j] (weight-fn i j data-mean pc1-sd dim-1 dim-2 pc1 pc2)} ))
          sets (reduce conj {}
                       (for [i (range dim-1) j (range dim-2)] 
                         {[i j] #{}} ))
         ]
-      {:b1 b1
-       :b2 b2
+      {:pc1 pc1
+       :pc2 pc2
        :pc1-sd pc1-sd
        :pc2-sd pc2-sd
        :dims [dim-1 dim-2]
@@ -43,7 +43,7 @@
        :data-means data-mean})))
 
 
-(defn dist-euclidean [x y] (sqrt (sum (pow (minus x y) 2))))
+(defn- dist-euclidean [x y] (sqrt (sum (pow (minus x y) 2))))
 
 (defn- get-distances 
   ([x som] 
@@ -92,10 +92,8 @@
 
 
 
-(defn- som-update-weights [r total-cycles som]
+(defn- som-update-weights [r total-cycles som alpha-init beta-init]
     (let [
-          alpha-init 0.5
-          beta-init 3
           sets (:sets som) 
           weights (:weights som) 
           indices (keys weights)
@@ -104,18 +102,18 @@
          ]
       (assoc som :weights
              (reduce conj {}
-              (for [indx indices]
-                {indx
-                  (plus (weights indx) 
-                        (mult (alpha-fn r total-cycles alpha-init)
-                              (minus (if (pos? (count (sets indx)))
-                                      (div (sum (sets indx))
-                                            (count (sets indx)))
-                                      0)
-                                    (weights indx))))} )))))
+              (pmap (fn [indx]
+                      {indx
+                        (plus (weights indx) 
+                              (mult (alpha-fn r total-cycles alpha-init)
+                                    (minus (if (pos? (count (sets indx)))
+                                            (div (sum (sets indx))
+                                                  (count (sets indx)))
+                                            0)
+                                          (weights indx))))} ) indices)))))
 
 
-(defn som-fitness 
+(defn- som-fitness 
   ([data som]
     (/ (sum (for [indx (keys (:weights som))]
             (reduce + (map #(dist-euclidean ((:weights som) indx) 
@@ -124,30 +122,31 @@
        (nrow data))))
 
 
-(defn som-learn 
-" Performs SOM learning on the given data, returning a hashmap containing
-  resulting SOM values.
+(defn som-batch-train 
+" Performs BL-SOM (batch-learning self organizing map) learning on 
+  the given data, returning a hashmap containing resulting BL-SOM 
+  values.
 
 
   Arguments:
     data -- data matrix
-    total-cycles -- number of cycles of learning
-
 
   Options:
-    alpha -- initial value of alpha learning parameter
-    beta -- initial value of beta learning parameter
+    :cycles -- number of cycles of learning
+    :alpha -- initial value of alpha learning parameter
+    :beta -- initial value of beta learning parameter
 
 
   Returns: A hashmap containing the following fields:
-    :dims -- dimensions of SOM lattice
+
+    :fit -- array of fitness values for each cycle of SOM learning
     :weights -- hashmap of weight vectors, keyed by lattice indices
     :sets -- hashmap mapping data elements to lattice nodes
              (key lattice index) (value list of row indices from data)
+    :dims -- dimensions of SOM lattice
     :data-means -- column means of input data matrix
-    :fit -- array of fitness values for each cycle of SOM learning
-    :b1 -- eigenvector for first principal component
-    :b2 -- eigenvector for second principal component
+    :pc1 -- eigenvector for first principal component
+    :pc2 -- eigenvector for second principal component
     :pc1-sd -- standard deviation of first principal component
     :pc2-sd -- standard deviation of first principal component
 
@@ -161,19 +160,28 @@
                                             \"Petal.Length\" 
                                             \"Petal.Width\"]))))
 
-    ;; three clusters
-    (def som (som-learn data 10))
+    (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
     (view (line-plot (range (count (:fit som))) (:fit som)))
     (:sets som)
+    (map #(sel (to-matrix (get-dataset :iris)) :rows %) (vals (:sets som)))
 
+
+  References:
+
+    http://en.wikipedia.org/wiki/Self-organizing_map
 
 "
-  ([data total-cycles]
-    (loop [r 1 som (som-initialize data) fit []]
+  ([data & options]
+   (let [opts (if options (apply assoc {} options) nil)
+         alpha-init (if (:alpha opts) (:alpha opts) 0.5)
+         beta-init (if (:beta opts) (:beta opts) 3)
+         total-cycles (if (:cycles opts) (:cycles opts) 10)]
+    (loop [r 1 som (som-initialize-linear data) fit []]
       (if (= r total-cycles)
         (assoc som :fit fit)
-        (let [new-som (som-update-weights r total-cycles (som-update-cells data som))]
-          (recur (inc r) new-som (conj fit (som-fitness data new-som))))))))
+        (let [new-som (som-update-weights r total-cycles (som-update-cells data som)
+                                          alpha-init beta-init)]
+          (recur (inc r) new-som (conj fit (som-fitness data new-som)))))))))
 
 
 
