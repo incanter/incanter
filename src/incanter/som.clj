@@ -33,11 +33,7 @@
                       (for [i (range dim-1) j (range dim-2)] 
                         {[i j] #{}} ))
         ]
-      {:pc1 pc1
-       :pc2 pc2
-       :pc1-sd pc1-sd
-       :pc2-sd pc2-sd
-       :dims [dim-1 dim-2]
+      {:dims [dim-1 dim-2]
        :weights weights
        :sets sets
        :data-means data-mean})))
@@ -45,11 +41,13 @@
 
 (defn- dist-euclidean [x y] (sqrt (sum (pow (minus x y) 2))))
 
+
 (defn- get-distances 
   ([x som] 
    (reduce conj {}
            (pmap #(hash-map % (dist-euclidean x ((:weights som) %))) 
              (keys (:weights som))))))
+
 
 (defn- get-min-dist
   ([x som]
@@ -67,16 +65,16 @@
                   (let [{idx :index min-dist :dist} (get-min-dist (trans (nth data i)) som)]
                     (recur (inc i) (assoc sets idx (conj (sets idx) i))))))]
      (assoc som :sets sets))))
-   
+  
+
 (defn- alpha-fn 
   ([r total-cycles alpha-init]
-   ;(let [alpha-init 0.6]
-    (max 0.01 (* alpha-init (- 1 (/ r total-cycles))))));)
+    (max 0.01 (* alpha-init (- 1 (/ r total-cycles))))))
+
 
 (defn- beta-fn 
   ([r beta-init]
-   ;(let [beta-init 20]
-    (max 0 (- beta-init r))));)
+    (max 0 (- beta-init r))))
 
 
 (defn- som-neighborhoods
@@ -116,9 +114,8 @@
 (defn- som-fitness 
   ([data som]
     (/ (sum (for [indx (keys (:weights som))]
-            (reduce + (map #(dist-euclidean ((:weights som) indx) 
-                                            (trans (nth data %))) 
-                            ((:sets som) indx)))))
+            (sum (map #(dist-euclidean ((:weights som) indx) (trans (nth data %))) 
+                      ((:sets som) indx)))))
        (nrow data))))
 
 
@@ -145,10 +142,6 @@
              (key lattice index) (value list of row indices from data)
     :dims -- dimensions of SOM lattice
     :data-means -- column means of input data matrix
-    :pc1 -- eigenvector for first principal component
-    :pc2 -- eigenvector for second principal component
-    :pc1-sd -- standard deviation of first principal component
-    :pc2-sd -- standard deviation of first principal component
 
 
   Examples:
@@ -160,8 +153,16 @@
     (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
     (view (line-plot (range (count (:fit som))) (:fit som)))
     (:sets som)
-    (doseq [rws (vals (:sets som))] (println (sel (get-dataset :iris) :columns \"Species\" :rows rws)) (println)) 
+    (doseq [rws (vals (:sets som))] 
+      (println (sel (get-dataset :iris) :columns \"Species\" :rows rws) \\newline)) 
 
+    ;; plot the means of the data in each cell/cluster
+    (def cell-means (map #(map mean (trans (sel data :rows ((:sets som) %)))) (keys (:sets som))))
+    (def x (range (ncol data)))
+    (doto (line-plot x (first cell-means))
+          view
+          (add-lines x (nth cell-means 1))
+          (add-lines x (nth cell-means 2)))
 
   References:
 
