@@ -659,6 +659,25 @@
 
 
 
+(defn cumulative-sum 
+  " Returns a sequence of cumulative sum for the given collection. For instance 
+    The first value equals the first value of the argument, the second value is
+    the sum of the first two arguments, the third is the sum of the first three
+    arguments, etc.
+
+    Examples:
+      (cumulative-sum (range 100))
+  "
+  ([coll] 
+   (let [n (count coll)]
+    (loop [in-coll (rest coll)
+           cumu-sum [(first coll)]]
+      (if (empty? in-coll)
+        cumu-sum
+        (recur (rest in-coll) (conj cumu-sum (+ (last cumu-sum) (first in-coll)))))))))
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

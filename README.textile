@@ -1,4 +1,7 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.png" alt="Incanter" /></a>
+<br/>
+
+*Overview and motivation*
 
 _Incanter is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._
 
@@ -8,8 +11,8 @@ Motivation for a JVM-based Lisp can be found at the "Clojure website":http://clo
 
 Finally, the motivation for creating Incanter is to provide R-like semantics (if not always syntax) to the development of standalone statistical applications (with web or gui front-ends), as well as to the development of statistical applications that need to plug into an existing software infrastructure in order to consume data (from databases or other information systems) or drive other processes. Clojure's seemless integration with Java makes this kind of development much simplier than is possible in R, and Incanter's R-like semantics makes it much simplier than is possible in pure Java.
 
-
-*Additional Clojure resources*
+<br/>
+*Getting started with Clojure*
 
 * For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann.
 * For an even more extensive introduction, get the beta version of the book "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway.
@@ -17,31 +20,22 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 * "Learning Clojure Wikibook":http://en.wikibooks.org/wiki/Learning_Clojure
 
 
-*To build and use Incanter, run the following commands from the Incanter directory:* 
+<br/>
+*Getting started with Incanter*
 
-* Build incanter.jar: @ant@
-* Run unit tests: @tests/runtests.clj@ 
-* Generate API docs: @bin/generate_docs.clj@
-* Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@
-* From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats datasets charts)) </code></pre>
-* Sample 1,000 values from a standard-normal distribution and view a histogram: <pre><code>(view (histogram (sample-normal 1000))) </code></pre>
-* See the next section for more examples
-
-(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
-
-
-*Incanter examples*
-
-* The online documentation for most functions contain usage examples. The documentation can be accessed using Clojure's @doc@ function. For example, to view the documentation for the @linear-model@ function, use @(doc linear-model)@ from the Clojure shell. The API documentation is also available in @docs/api/index.html@ and online at "incanter.org/docs/api/.":http://incanter.org/docs/api Use @(find-doc "search term")@ to search the online documentation from the Clojure shell.
+* Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@. (Note: @bin/clj@ is a _bash_ script, and won't run on Windows systems as is.)
+* From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats datasets charts))</code></pre>
+* Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: <pre><code>(view (histogram (sample-normal 1000)))</code></pre>
+* The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found in the @docs/api/@ directory and online at <a href="http://incanter.org/docs/api">http://incanter.org/docs/api/</a>. 
 * See Incanter wiki
 ** "Matrices":http://wiki.github.com/liebke/incanter/matrices
 ** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
-* See @examples/@ directory
+* See the @examples/@ directory and @tests/test-cases.clj@ for additional usage examples
 ** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
-* See @tests/test-cases.clj@ 
 ** Run @tests/runtests.clj@ to run test cases
 
 
+<br/>
 *Documentation*
 
 * "Incanter Wiki":http://wiki.github.com/liebke/incanter
@@ -51,7 +45,18 @@ Finally, the motivation for creating Incanter is to provide R-like semantics (if
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
 
 
+<br/>
+*Building Incanter*
 
+The Incanter distribution includes a pre-built jar file, but if you would like to build it, test it, and generated the api documentation yourself, run the following commands from the Incanter directory:
+* Build incanter.jar: @ant@
+* Run unit tests: @tests/runtests.clj@ 
+* Generate API docs: @bin/generate_docs.clj@
+
+(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
+
+
+<br/>
 *Included dependencies*
 
 * "Clojure":http://code.google.com/p/clojure/
