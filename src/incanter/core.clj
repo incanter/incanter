@@ -31,7 +31,8 @@
                                                         DoubleQRDecomposition)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
-           (cern.jet.stat.tdouble Gamma)))
+           (cern.colt.list.tdouble DoubleArrayList)
+           (cern.jet.stat.tdouble DoubleDescriptive Gamma)))
 
 
 (defn matrix 
@@ -633,6 +634,29 @@
   "
   ([mat]
    (for [j (range (nrow mat)) i (range j (nrow mat))] (sel mat i j))))
+
+
+
+(defn sum-of-squares 
+  "Returns the sum-of-squares of the given sequence."
+  ([x]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+      (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
+
+
+(defn sum 
+  "Returns the sum of the given sequence."
+  ([x]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+      (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
+
+
+(defn prod 
+  "Returns the product of the given sequence."
+  ([x]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+      (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
+
 
 
 
