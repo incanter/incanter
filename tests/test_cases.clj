@@ -308,6 +308,7 @@
 (def test-tdd-mat (to-matrix test-tdd-data))
 ;; convert the iris-data into a matrix, encoding strings into multiple dummy variables
 (def iris-mat (to-matrix iris-data))
+(def iris-mat-dummies (to-matrix iris-data :dummies true))
 
 (deftest io-validation
 
@@ -316,7 +317,8 @@
   (is (= (reduce plus test-csv-mat) (matrix [1275 770 2149] 3)))
   (is (= (reduce plus test-tdd-mat) (matrix [1275 770 2149] 3)))
   ;; confirm that iris species factor was converted to two dummy variables
-  (is (= (first iris-mat) (matrix [5.10 3.50 1.40 0.20 0 0] 6)))
+  (is (= (first iris-mat) (matrix [5.10 3.50 1.40 0.20 0] 5)))
+  (is (= (first iris-mat-dummies) (matrix [5.10 3.50 1.40 0.20 0 0] 6)))
 
 ) ;; end of io-validation tests
 

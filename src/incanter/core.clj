@@ -150,7 +150,6 @@
 
 
 
-
 (defmulti sel 
 "
   Returns an element or subset of the given matrix, or dataset. 
@@ -805,10 +804,6 @@
     id))
 
 
-(defn- get-columns [dataset column-keys]
-  (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
-
-
 
 (defmethod sel [::dataset true]
   ([dataset & options]
@@ -898,11 +893,15 @@
     (for [item encoded-data] (nth bit-map item))))
 
 
+(defn- get-columns [dataset column-keys]
+  (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
 
-(defn- categorical-to-dummies [dataset column-key]
+
+
+(defn- string-to-categorical [dataset column-key dummies?]
   (let [col (first (get-columns dataset [column-key]))]
     (if (some string? col) 
-      (matrix (to-dummies col))
+      (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -914,14 +913,14 @@
 "
   ([dataset & options]
     (let [opts (if options (apply assoc {} options) nil)
-          dummies (if (:dummy opts) (:dummy opts) nil)]
+          dummies? (if (true? (:dummies opts)) true false)]
       (reduce bind-columns 
-              (map #(categorical-to-dummies dataset %) 
+              (map #(string-to-categorical dataset % dummies?) 
                     (range (count (keys (:column-names dataset)))))))))
 
 
-(defn- transpose-seq [coll]
-  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
+;(defn- transpose-seq [coll]
+;  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
 
 
 

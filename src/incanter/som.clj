@@ -151,12 +151,16 @@
                            :columns [\"Sepal.Length\" \"Sepal.Width\" \"Petal.Length\" \"Petal.Width\"])))
 
     (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
+
+    ;; plot the fitness for each cycle of training
     (view (line-plot (range (count (:fit som))) (:fit som)))
+    ;; view indices of data items in each cell
     (:sets som)
+    ;; view the species in each cell
     (doseq [rws (vals (:sets som))] 
       (println (sel (get-dataset :iris) :columns \"Species\" :rows rws) \\newline)) 
 
-    ;; plot the means of the data in each cell/cluster
+    ;; plot the means of the data vectors in each cell/cluster
     (def cell-means (map #(map mean (trans (sel data :rows ((:sets som) %)))) (keys (:sets som))))
     (def x (range (ncol data)))
     (doto (line-plot x (first cell-means))
