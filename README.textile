@@ -28,9 +28,10 @@ h2. Getting started with Incanter
 
 Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@. (Note: @bin/clj@ is a _bash_ script, and won't run on Windows systems as is.)
 
-From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats datasets charts))</code></pre>
+From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats charts))</code></pre>
 
 Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: <pre><code>(view (histogram (sample-normal 1000)))</code></pre>
+<img src="http://incanter.org/images/examples/normal_hist.png" />
 
 The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found in the @docs/api/@ directory and online at <a href="http://incanter.org/docs/api">http://incanter.org/docs/api/</a>. 
 
