@@ -86,9 +86,11 @@
        (and (coll? ~A) (coll? ~B)) 
          (map ~op ~A ~B) 
        (and (number? ~A) (coll? ~B)) 
-         (map (fn [b#] (~op ~A b#)) ~B)
+         ;(map (fn [b#] (~op ~A b#)) ~B)
+         (map ~op (replicate (count ~B) ~A)  ~B)
        (and (coll? ~A) (number? ~B)) 
-         (map (fn [a#] (~op a# ~B)) ~A))))
+         ;(map (fn [a#] (~op a# ~B)) ~A))))
+         (map ~op ~A (replicate (count ~A) ~B)))))
     
 
 
