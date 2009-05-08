@@ -61,37 +61,37 @@
     
 
 (defmacro combine-with [A B op fun]
-  `(if (and (number? ~A) (number? ~B))
-    (~op ~A ~B)
-      (cond 
-       (and (is-matrix ~A) (is-matrix ~B))
-         (.assign #^Matrix (.copy #^Matrix ~A) 
-                  #^Matrix ~B 
-                  #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (is-matrix ~A) (number? ~B))
-         (.assign #^Matrix (.copy #^Matrix ~A) 
-                  #^DoubleDoubleFunction (. DoubleFunctions (~fun ~B)))
-       (and (number? ~A) (is-matrix ~B))
-         (.assign #^Matrix (make-matrix ~A (.rows ~B) (.columns ~B)) 
-                  #^Matrix ~B 
-                  #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (coll? ~A) (is-matrix ~B))
-         (.assign #^Matrix (make-matrix ~A (.columns ~B)) 
-                  #^Matrix (make-matrix ~B) 
-                  #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (is-matrix ~A) (coll? ~B))
-         (.assign #^Matrix (.copy ~A)
-                  #^Matrix (make-matrix ~B) 
-                  #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-       (and (coll? ~A) (coll? ~B)) 
-         (map ~op ~A ~B) 
-       (and (number? ~A) (coll? ~B)) 
-         ;(map (fn [b#] (~op ~A b#)) ~B)
-         (map ~op (replicate (count ~B) ~A)  ~B)
-       (and (coll? ~A) (number? ~B)) 
-         ;(map (fn [a#] (~op a# ~B)) ~A))))
-         (map ~op ~A (replicate (count ~A) ~B)))))
-    
+  `(cond 
+    (and (number? ~A) (number? ~B))
+       (~op ~A ~B)
+    (and (is-matrix ~A) (is-matrix ~B))
+      (.assign #^Matrix (.copy #^Matrix ~A) 
+               #^Matrix ~B 
+               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+    (and (is-matrix ~A) (number? ~B))
+      (.assign #^Matrix (.copy #^Matrix ~A) 
+               #^DoubleDoubleFunction (. DoubleFunctions (~fun ~B)))
+    (and (number? ~A) (is-matrix ~B))
+      (.assign #^Matrix (make-matrix ~A (.rows ~B) (.columns ~B)) 
+               #^Matrix ~B 
+               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+    (and (coll? ~A) (is-matrix ~B))
+      (.assign #^Matrix (make-matrix ~A (.columns ~B)) 
+               #^Matrix (make-matrix ~B) 
+               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+    (and (is-matrix ~A) (coll? ~B))
+      (.assign #^Matrix (.copy ~A)
+               #^Matrix (make-matrix ~B) 
+               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+    (and (coll? ~A) (coll? ~B)) 
+      (map ~op ~A ~B) 
+    (and (number? ~A) (coll? ~B)) 
+      ;(map (fn [b#] (~op ~A b#)) ~B)
+      (map ~op (replicate (count ~B) ~A)  ~B)
+    (and (coll? ~A) (number? ~B)) 
+      ;(map (fn [a#] (~op a# ~B)) ~A))))
+      (map ~op ~A (replicate (count ~A) ~B))))
+  
 
 
 ;; PRINT METHOD FOR COLT MATRICES
