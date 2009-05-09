@@ -49,8 +49,12 @@ h2. Documentation
 
 The following documentation covers the Incanter and Clojure APIs and the APIs of the underlying java libraries.
 
+*Incanter documentation*
 * "Incanter Wiki":http://wiki.github.com/liebke/incanter
 * "Incanter API":http://incanter.org/docs/api/
+
+
+*Related API documentation*
 * "Clojure API":http://clojure.org/api
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html

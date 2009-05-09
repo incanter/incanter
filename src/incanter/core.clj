@@ -345,6 +345,23 @@
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args)))
 
 
+(defn neg 
+"   Returns the negative of the given matrix, sequence, 
+    or number. 
+       
+    Examples:
+
+      (def A (matrix [[1 2 3] 
+                      [4 5 6] 
+                      [7 8 9]]))
+      (neg A) 
+      (neg 2)
+      (neg [1 2 3])
+
+"
+   ([value] (minus 0 value)))
+
+
 (defn mult 
 "   Performs element-by-element multiplication on multiple matrices, sequences, 
     and/or numbers. Equivalent to R's * operator.

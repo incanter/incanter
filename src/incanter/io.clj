@@ -64,7 +64,7 @@
 
 (defmulti save 
 " Save is a multi-function that is used to write matrices, datasets and 
-  charts to a file.
+  charts (in png format) to a file.
 
   Arguments:
     obj -- is a matrix, dataset, or chart object
