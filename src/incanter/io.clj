@@ -38,14 +38,14 @@
     Returns a dataset read from a file.
 
     Options:
-      :delim (default \\space), other options (\\tab \\,  etc)
+      :delim (default \\,), other options (\\tab \\space \\|  etc)
       :quote (default \\\") character used for quoting strings
       :skip (default 0) the number of lines to skip at the top of the file.
       :header (default false) indicates the file has a header line
   "
   ([filename & options] 
    (let [opts (if options (apply assoc {} options) nil)
-         delim (if (:delim opts) (:delim opts) \space) ; space delim default
+         delim (if (:delim opts) (:delim opts) \,) ; space delim default
          quote-char (if (:quote opts) (:quote opts) \")
          skip (if (:skip opts) (:skip opts) 0)
          header? (if (:header opts) (:header opts) false)
@@ -71,7 +71,7 @@
     filename -- the filename to create.
 
   Matrix and dataset options:
-    :delim (default \\space) column delimiter 
+    :delim (default \\,) column delimiter 
     :header (default nil) an sequence of strings to be used as header line,
         for matrices the default value is nil, for datasets, the default is
         the dataset's column-names array.
@@ -87,9 +87,10 @@
 
     (use '(incanter core io))
     (def A (matrix (range 12) 3)) ; creates a 3x4 matrix
-    (save A \"A.dat\") ; writes A to the file A.dat, with no header and space delimited
+    (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited
+    (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited
    
-    ;; writes A to the file A.dat, with a header and comma delimited
+    ;; writes A to the file A.dat, with a header and tab delimited
     (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"]) 
 
 
@@ -98,7 +99,7 @@
     (use '(incanter core io datasets))
     ;; read the iris sample dataset, and save it to a file.
     (def iris (get-dataset :iris))
-    (save iris \"iris.dat\" :delim \\,)
+    (save iris \"iris.dat\")
 
 
   Chart Example:
@@ -114,7 +115,7 @@
 
 (defmethod save incanter.Matrix [mat filename & options]
   (let [opts (if options (apply assoc {} options) nil)
-        delim (if (:delim opts) (:delim opts) \space) 
+        delim (if (:delim opts) (:delim opts) \,) 
         header (if (:header opts) (:header opts) nil) 
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)]
@@ -140,7 +141,7 @@
 
 (defmethod save :incanter.core/dataset [dataset filename & options]
   (let [opts (if options (apply assoc {} options) nil)
-        delim (if (:delim opts) (:delim opts) \space) 
+        delim (if (:delim opts) (:delim opts) \,) 
         header (if (:header opts) (:header opts) (:column-names dataset))
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)

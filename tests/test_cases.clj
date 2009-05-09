@@ -280,12 +280,12 @@
 ;; read in a dataset from a space delimited file 
 (def test-data (read-dataset 
                  (str (System/getProperty "incanter.home") "/data/test.dat") 
-                 :header true)) ; default delimiter: \space
+                 :delim \space
+                 :header true)) ; default delimiter: \,
 ;; read in a dataset from a comma delimited file 
 (def test-csv-data (read-dataset 
                      (str (System/getProperty "incanter.home") "/data/test.csv") 
-                     :header true 
-                     :delim \,))
+                     :header true))
 ;; read in a dataset from a tab delimited file 
 (def test-tdd-data (read-dataset 
                      (str (System/getProperty "incanter.home") "/data/test.tdd") 
@@ -294,10 +294,12 @@
 ;; read in the iris dataset from a space delimited file 
 (def iris-data (read-dataset 
                  (str (System/getProperty "incanter.home") "/data/iris.dat") 
+                 :delim \space
                  :header true))
 ;; read in the social science survey dataset from a space delimited file 
 (def ols-data (to-matrix (read-dataset 
                            (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
+                           :delim \space
                            :header true)))
 
 ;; convert the space-delimited dataset into a matrix
