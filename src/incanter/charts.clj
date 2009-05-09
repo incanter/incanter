@@ -17,7 +17,7 @@
 
 
 (ns incanter.charts 
-  (:use (incanter core stats))
+  (:use (incanter core stats io))
   (:import  (javax.swing JTable JScrollPane JFrame)
             (java.util Vector)
             (java.io File)
@@ -39,7 +39,7 @@
 
 (defmacro histogram 
 " Returns a JFreeChart object representing the histogram of the given data.
-  Use the 'view' function to display the chart, or the 'save-png' function
+  Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
   Options:
@@ -53,7 +53,7 @@
 
 
   See also:
-    view, save-png, add-histogram
+    view, save, add-histogram
 
   Examples:
 
@@ -112,7 +112,7 @@
 
 (defmacro scatter-plot 
 " Returns a JFreeChart object representing a scatter-plot of the given data.
-  Use the 'view' function to display the chart, or the 'save-png' function
+  Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
   Options:
@@ -123,7 +123,7 @@
     :series-label (default x expression)
 
   See also:
-    view, save-png, add-points, add-lines
+    view, save, add-points, add-lines
 
   Examples:
 
@@ -176,7 +176,7 @@
 
 (defmacro line-plot 
 " Returns a JFreeChart object representing a line-plot of the given data.
-  Use the 'view' function to display the chart, or the 'save-png' function
+  Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
   Options:
@@ -187,7 +187,7 @@
     :series-label (default x expression)
 
   See also:
-    view, save-png, add-points, add-lines
+    view, save, add-points, add-lines
 
   Examples:
 
@@ -245,7 +245,7 @@
 
 (defmacro box-plot 
 " Returns a JFreeChart object representing a box-plot of the given data.
-  Use the 'view' function to display the chart, or the 'save-png' function
+  Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
   Options:
@@ -256,7 +256,7 @@
     :series-label (default x expression)
 
   See also:
-    view and save-png
+    view and save
 
   Examples:
 
@@ -747,8 +747,7 @@
       nil)))
 
 
-(defn save-png 
-" Saves chart object as a PNG file."
+(defmethod save org.jfree.chart.JFreeChart
   ([chart filename & options]
     (let [opts (if options (apply assoc {} options) nil)
           width (if (:width opts) (:width opts) 500)

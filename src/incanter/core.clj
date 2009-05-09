@@ -827,7 +827,7 @@
 
 (defn dataset 
 " Returns a map of type ::dataset constructed from the given column-names and
-  data. The data is a collection of collections.
+  data. The data is a sequence of sequences.
 "
   ([column-names & data] 
     (with-meta 
