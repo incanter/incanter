@@ -327,39 +327,30 @@
 
 (defn minus 
 "   Performs element-by-element subtraction on multiple matrices, sequences, 
-    and/or numbers. Equivalent to R's - operator.
-       
+    and/or numbers. If only a single argument is provided, returns the 
+    negative of the given matrix, sequence, or number. Equivalent to R's - operator.
+
+
     Examples:
 
       (def A (matrix [[1 2 3] 
                       [4 5 6] 
                       [7 8 9]]))
+      (minus A)
       (minus A A A) 
       (minus A 2)
       (minus 2 A)
       (minus [1 2 3] [1 2 3])
       (minus [1 2 3] 2)
       (minus 2 [1 2 3])
+      (minus [1 2 3])
 
 "
-   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args)))
+   ;([& args] (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args)))
+   ([& args] (if (= (count args) 1)
+               (combine-with 0 (first args) clojure.core/- minus)
+               (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args))))
 
-
-(defn neg 
-"   Returns the negative of the given matrix, sequence, 
-    or number. 
-       
-    Examples:
-
-      (def A (matrix [[1 2 3] 
-                      [4 5 6] 
-                      [7 8 9]]))
-      (neg A) 
-      (neg 2)
-      (neg [1 2 3])
-
-"
-   ([value] (minus 0 value)))
 
 
 (defn mult 

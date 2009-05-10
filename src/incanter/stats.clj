@@ -1455,6 +1455,38 @@
 
 
 
+(defn sweep
+" Return an array obtained from an input array by sweeping out a
+  summary statistic. Based to R's sweep function.
+
+    Arguments:
+      x is an sequence
+
+
+    Options:
+          :stat (default mean) the statistic to sweep out
+          :fun (defaul minus) the function used to sweep the stat out
+
+    Example:
+    
+      (use '(incanter core stats))
+  
+      (def x (sample-normal 30 :mean 10 :sd 5))
+      (sweep x) ;; center the data around mean
+      (sweep x :stat sd :fun div) ;; divide data by its sd
+
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          stat-fn (if (:stat opts) (:stat opts) mean)
+          fun (if (:fun opts) (:fun opts) minus)
+          stat (stat-fn x)]
+      (fun x stat))))
+
+    
+
+
+
 
 ;;;;;;;;;;;;;;; OLS REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
