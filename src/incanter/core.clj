@@ -32,7 +32,9 @@
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
            (cern.colt.list.tdouble DoubleArrayList)
-           (cern.jet.stat.tdouble DoubleDescriptive Gamma)))
+           (cern.jet.stat.tdouble DoubleDescriptive Gamma)
+           (javax.swing JTable JScrollPane JFrame)
+           (java.util Vector)))
 
 
 (defn matrix 
@@ -1102,6 +1104,104 @@
         (.set mat j i (nth data idx))))
      mat))) 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VIEW METHODS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmulti view 
+  " This is a general 'view' function. When given an Incanter matrix/dataset 
+    or a Clojure numeric collection, it will display it in a Java Swing 
+    JTable. When given an Incanter chart object, it will display it in a new 
+    window. When given a URL string, it will open the location with the 
+    platform's default web browser.
+
+    Examples:
+
+      (use '(incanter core stats datasets charts))
+
+      ;; view matrices
+      (def rand-mat (matrix (sample-normal 100) 4))
+      (view rand-mat)
+
+      ;; view numeric collections
+      (view [1 2 3 4 5])
+      (view (sample-normal 100))
+
+      ;; view Incanter datasets
+      (view (get-dataset :iris))
+
+      ;; convert dataset to matrix, changing Species names to numeric codes
+      (view (to-matrix (get-dataset :iris)))
+
+      ;; convert dataset to matrix, changing Species names to dummy variables
+      (view (to-matrix (get-dataset :iris) :dummies true))
+
+      ;; view a chart
+      (view (histogram (sample-normal 1000)))
+
+      ;; view a URL
+      (view \"http://incanter.org\")
+
+      ;; view a PNG file
+      (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")
+      (view \"file:///tmp/norm_hist.png\")
+
+
+"
+  (fn [obj & options] (if (and (not (matrix? obj)) 
+                               (not (dataset? obj))
+                               (coll? obj))
+                        ::coll 
+                        (type obj))))
+
+
+(defmethod view ::coll ([obj & options] (view (matrix obj))))
+
+
+(defmethod view incanter.Matrix
+  ([obj & options] 
+    (let [opts (if options (apply assoc {} options) nil)
+          column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))
+          m (ncol obj)
+          n (nrow obj)]
+      (doto (JFrame. "Incanter Matrix")
+        (.add (JScrollPane. 
+                (JTable. 
+                  (cond
+                    (and (> m 1) (> n 1)) 
+                      (Vector. (map #(Vector. %) (to-list obj)))
+                    (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
+                      (Vector. (map #(Vector. %) [(to-list obj) []]))
+                    (and (= m 1) (> n 1))
+                      (Vector. (map #(Vector. [%]) (to-list obj))))
+                                     (Vector. column-names))))
+        (.setSize 400 600)
+        (.setVisible true)))))
+
+
+(defmethod view :incanter.core/dataset
+  ([obj & options] 
+   (let [column-names (:column-names obj)
+         column-vals (map (fn [row] (map #(row %) column-names)) (:rows obj))]
+     (doto (JFrame. "Incanter Dataset")
+       (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals)) 
+                                    (Vector. column-names))))
+       (.setSize 400 600)
+       (.setVisible true)))))
+
+
+
+
+;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser 
+(defmethod view java.lang.String
+  ([url]
+    (try 
+      (when (clojure.lang.Reflector/invokeStaticMethod "java.awt.Desktop" "isDesktopSupported" (to-array nil))
+        (-> (clojure.lang.Reflector/invokeStaticMethod "java.awt.Desktop" "getDesktop" (to-array nil))
+            (.browse (java.net.URI. url)))
+        url)
+      (catch ClassNotFoundException e nil))))    
 
 
 

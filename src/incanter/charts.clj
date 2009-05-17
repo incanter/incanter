@@ -18,9 +18,7 @@
 
 (ns incanter.charts 
   (:use (incanter core stats io))
-  (:import  (javax.swing JTable JScrollPane JFrame)
-            (java.util Vector)
-            (java.io File)
+  (:import  (java.io File)
             (org.jfree.data.statistics HistogramDataset
                                        HistogramType
                                        DefaultBoxAndWhiskerCategoryDataset)
@@ -691,64 +689,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(defmulti view 
-  " This is a general 'view' function. If given an Incanter matrix or
-    dataset, it will display it in a Java Swing JTable. If given an
-    Incanter chart object, it will display it in a new window.
-
-    Examples:
-      (use '(incanter core stats datasets charts))
-      (view (get-dataset :iris))
-      (view (to-matrix (get-dataset :iris)))
-      (view [1 2 3 4 5])
-
-      (view (histogram (sample-normal 1000)))
-
-
-"
-  (fn [obj & options] (if (and (not (matrix? obj)) 
-                               (not (dataset? obj))
-                               (coll? obj))
-                        ::coll 
-                        (type obj))))
-
-
-(defmethod view ::coll ([obj & options] (view (matrix obj))))
-
-
-(defmethod view incanter.Matrix
-  ([obj & options] 
-    (let [opts (if options (apply assoc {} options) nil)
-          column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))
-          m (ncol obj)
-          n (nrow obj)]
-      (doto (JFrame. "Incanter Matrix")
-        (.add (JScrollPane. 
-                (JTable. 
-                  (cond
-                    (and (> m 1) (> n 1)) 
-                      (Vector. (map #(Vector. %) (to-list obj)))
-                    (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
-                      (Vector. (map #(Vector. %) [(to-list obj) []]))
-                    (and (= m 1) (> n 1))
-                      (Vector. (map #(Vector. [%]) (to-list obj))))
-                                     (Vector. column-names))))
-        (.setSize 400 600)
-        (.setVisible true)))))
-
-
-(defmethod view :incanter.core/dataset
-  ([obj & options] 
-   (let [column-names (:column-names obj)
-         column-vals (map (fn [row] (map #(row %) column-names)) (:rows obj))]
-     (doto (JFrame. "Incanter Dataset")
-       (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals)) 
-                                    (Vector. column-names))))
-       (.setSize 400 600)
-       (.setVisible true)))))
-
 
 
 (defmethod view org.jfree.chart.JFreeChart 
