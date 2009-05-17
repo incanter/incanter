@@ -844,6 +844,10 @@
       {:type ::dataset})))
 
 
+(defn dataset?
+" Determines if obj is of type ::dataset."
+  ([obj] (= (type obj) ::dataset)))
+
 
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)

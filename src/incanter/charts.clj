@@ -702,21 +702,38 @@
       (use '(incanter core stats datasets charts))
       (view (get-dataset :iris))
       (view (to-matrix (get-dataset :iris)))
+      (view [1 2 3 4 5])
 
       (view (histogram (sample-normal 1000)))
 
 
 "
-  (fn [obj & options] (type obj)))
+  (fn [obj & options] (if (and (not (matrix? obj)) 
+                               (not (dataset? obj))
+                               (coll? obj))
+                        ::coll 
+                        (type obj))))
 
+
+(defmethod view ::coll ([obj & options] (view (matrix obj))))
 
 
 (defmethod view incanter.Matrix
   ([obj & options] 
     (let [opts (if options (apply assoc {} options) nil)
-          column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))]
+          column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))
+          m (ncol obj)
+          n (nrow obj)]
       (doto (JFrame. "Incanter Matrix")
-        (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) (to-list obj)))
+        (.add (JScrollPane. 
+                (JTable. 
+                  (cond
+                    (and (> m 1) (> n 1)) 
+                      (Vector. (map #(Vector. %) (to-list obj)))
+                    (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
+                      (Vector. (map #(Vector. %) [(to-list obj) []]))
+                    (and (= m 1) (> n 1))
+                      (Vector. (map #(Vector. [%]) (to-list obj))))
                                      (Vector. column-names))))
         (.setSize 400 600)
         (.setVisible true)))))
