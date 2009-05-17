@@ -1205,3 +1205,8 @@
 
 
 
+(defn quit
+" Exits the Clojure shell." 
+  ([] (System/exit 0)))
+
+
