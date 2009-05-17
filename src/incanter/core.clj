@@ -623,7 +623,8 @@
       http://en.wikipedia.org/wiki/Vectorization_(mathematics)
   "
   ([mat]
-   (reduce #(concat %1 (to-list %2)) '() (trans mat))))
+   (mapcat identity (trans mat))))
+   ;(reduce #(concat %1 (to-list %2)) '() (trans mat))))
 
 
 (defn half-vectorize 
