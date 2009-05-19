@@ -216,25 +216,22 @@
          rows (if (:rows opts) (:rows opts) true)
          cols (if (:columns opts) (:columns opts) true)
          row-filter (if (:filter opts) (:filter opts) nil)
-         result (cond
-                  (and (number? rows) (number? cols))
-                    (.getQuick mat rows cols)
-                  (and (true? rows) (coll? cols))
-                    (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
-                  (and (true? rows) (number? cols))
-                    (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
-                  (and (coll? rows) (true? cols))
-                    (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
-                  (and (number? rows) (true? cols))
-                    (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
-                  (and (coll? rows) (coll? cols))
-                    (.viewSelection mat (int-array rows) (int-array cols))
-                  (and (true? rows) (true? cols))
-                    mat)
-          ]
-     (if (nil? row-filter)
-       result
-       (matrix (filter row-filter result))))))
+         mat (if (nil? row-filter) mat (matrix (filter row-filter mat)))]
+     (cond
+       (and (number? rows) (number? cols))
+         (.getQuick mat rows cols)
+       (and (true? rows) (coll? cols))
+         (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
+       (and (true? rows) (number? cols))
+         (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
+       (and (coll? rows) (true? cols))
+         (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
+       (and (number? rows) (true? cols))
+         (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
+       (and (coll? rows) (coll? cols))
+         (.viewSelection mat (int-array rows) (int-array cols))
+       (and (true? rows) (true? cols))
+         mat))))
 
 
 
