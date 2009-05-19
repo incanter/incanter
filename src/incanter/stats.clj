@@ -1713,11 +1713,30 @@
     :rotation -- the matrix of variable loadings (i.e. a matrix
         whose columns contain the eigenvectors).
 
+
   Examples:
    
-    (use '(incanter core stats datasets))
-    (def us-arrests (sel (to-matrix (get-dataset :us-arrests)) :columns [6 7 9]))
-    (principal-components us-arrests)
+    (use '(incanter core stats charts datasets))
+    ;; load the iris dataset
+    (def iris (to-matrix (get-dataset :iris)))
+    ;; run the pca
+    (def pca (principal-components (sel iris :columns (range 4))))
+    ;; extract the first two principal components
+    (def pc1 (sel (:rotation pca) :columns 0))
+    (def pc2 (sel (:rotation pca) :columns 1))
+
+    ;; project the first four dimension of the iris data onto the first
+    ;; two principal components
+    (def x1 (mmult (sel iris :columns (range 4)) pc1)) 
+    (def x2 (mmult (sel iris :columns (range 4)) pc2)) 
+   
+    ;; now plot the transformed data, coloring each species a different color
+    (doto (scatter-plot (sel x1 :rows (range 50)) (sel x2 :rows (range 50))
+                        :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\")
+          (add-points (sel x1 :rows (range 50 100)) (sel x2 :rows (range 50 100)))
+          (add-points (sel x1 :rows (range 100 150)) (sel x2 :rows (range 100 150)))
+          view)
+
 
   References:
     http://en.wikipedia.org/wiki/Principal_component_analysis

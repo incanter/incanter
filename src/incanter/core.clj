@@ -1211,3 +1211,55 @@
   ([] (System/exit 0)))
 
 
+
+(defmulti save 
+" Save is a multi-function that is used to write matrices, datasets and 
+  charts (in png format) to a file.
+
+  Arguments:
+    obj -- is a matrix, dataset, or chart object
+    filename -- the filename to create.
+
+  Matrix and dataset options:
+    :delim (default \\,) column delimiter 
+    :header (default nil) an sequence of strings to be used as header line,
+        for matrices the default value is nil, for datasets, the default is
+        the dataset's column-names array.
+    :append (default false) determines whether this given file should be 
+        appended to. If true, a header will not be written to the file again.
+
+  Chart options:
+    :width (default 500)
+    :height (default 400)
+
+
+  Matrix Examples:
+
+    (use '(incanter core io))
+    (def A (matrix (range 12) 3)) ; creates a 3x4 matrix
+    (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited
+    (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited
+   
+    ;; writes A to the file A.dat, with a header and tab delimited
+    (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"]) 
+
+
+  Dataset Example:
+
+    (use '(incanter core io datasets))
+    ;; read the iris sample dataset, and save it to a file.
+    (def iris (get-dataset :iris))
+    (save iris \"iris.dat\")
+
+
+  Chart Example:
+
+    (use '(incanter core io stats charts))
+    (save (histogram (sample-normal 1000)) \"hist.png\")
+  
+
+"
+  (fn [obj filename & options] (type obj)))
+
+
+
