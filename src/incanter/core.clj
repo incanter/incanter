@@ -179,6 +179,8 @@
     (sel speed :rows (range 10)) ; all columns of the first 10 rows
     ;; return only the first 10 even rows
     (sel speed :rows (range 10) :filter #(even? (int (nth % 0))))
+    ;; select rows where distance (third column) is greater than 50
+    (sel speed :filter #(> (nth % 2) 50))
 
     ;; examples with datasets
     (use 'incanter.datasets)

@@ -38,8 +38,11 @@ The online documentation for most Incanter functions contain usage examples. The
 *More Incanter examples*
 
 * See Incanter wiki
-** "Matrices":http://wiki.github.com/liebke/incanter/matrices
 ** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
+** "Matrices":http://wiki.github.com/liebke/incanter/matrices
+** "Datasets":http://wiki.github.com/liebke/incanter/datasets
+** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
+** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
 * See the @examples/@ directory and @tests/test-cases.clj@ for additional usage examples
 ** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
 ** Run @tests/runtests.clj@ to run test cases
