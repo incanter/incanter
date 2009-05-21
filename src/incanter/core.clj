@@ -153,6 +153,21 @@
 
 
 
+(defn- except-for 
+" Returns a lazy list of numbers ranging from 0 to n, except for the given exceptions.
+
+  Examples:
+
+    (except-for 10 3)
+    (except-for 10 [5 7])
+
+"
+  ([n exceptions] 
+    (let [except (if (coll? exceptions) exceptions [exceptions])]
+      (for [i (range n) :when (reduce #(and %1 %2) (map #(not= i %) except))] i))))
+
+
+
 (defmulti sel 
 "
   Returns an element or subset of the given matrix, or dataset. 
@@ -165,6 +180,8 @@
       returns all rows by default, can pass a row index or sequence of row indices
     :columns (default true) 
       returns all columns by default, can pass a column index or sequence of column indices
+    :except-rows (default nil) can pass a row index or sequence of row indices to exclude
+    :except-columns (default nil) can pass a column index or sequence of column indices to exclude
     :filter (default nil) 
       a function can be provided to filter the rows of the matrix
 
@@ -177,6 +194,11 @@
     (sel speed :columns [0 2]) ; first and third column of all rows
     (sel speed :rows (range 10) :columns (range 2)) ; first two rows of the first 10 columns
     (sel speed :rows (range 10)) ; all columns of the first 10 rows
+
+    ;; exclude rows or columns
+    (sel speed :except-rows (range 10)) ; all columns of all but the first 10 rows
+    (sel speed :except-columns 1) ; all columns except the second
+
     ;; return only the first 10 even rows
     (sel speed :rows (range 10) :filter #(even? (int (nth % 0))))
     ;; select rows where distance (third column) is greater than 50
@@ -191,6 +213,7 @@
 
 "
 (fn [mat & options] [(type mat) (keyword? (first options))]))
+
 
 
 
@@ -211,12 +234,26 @@
         mat))))
 
 
-
 (defmethod sel [incanter.Matrix true]
   ([#^Matrix mat & options]
    (let [opts (if options (apply assoc {} options) nil)
-         rows (if (:rows opts) (:rows opts) true)
-         cols (if (:columns opts) (:columns opts) true)
+         except-rows (when (:except-rows opts) (:except-rows opts))
+         except-columns (when (:except-columns opts) (:except-columns opts))
+         ;rows (if (:rows opts) (:rows opts) true)
+         rows (cond 
+                (:rows opts) 
+                  (:rows opts) 
+                except-rows
+                  (except-for (.rows mat) except-rows)
+                :else
+                  true)
+         cols (cond 
+                (:columns opts) 
+                  (:columns opts) 
+                except-columns
+                  (except-for (.columns mat) except-columns)
+                :else
+                  true)
          row-filter (if (:filter opts) (:filter opts) nil)
          mat (if (nil? row-filter) mat (matrix (filter row-filter mat)))]
      (cond
