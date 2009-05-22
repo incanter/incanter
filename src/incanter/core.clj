@@ -276,7 +276,7 @@
        (and (true? rows) (true? cols))
          mat))))
 
-
+    
 
 (defn bind-rows 
 "   Returns the matrix resulting from concatenating the given matrices 
@@ -868,6 +868,69 @@
       :else
         (throw (Exception. "Argument must be a collection or matrix!")))))
       
+
+
+(defn group-by
+" Groups the given matrix by the values in the columns indicated by the 
+  'on-cols' argument, returning a sequence of matrices. The returned
+  matrices are sorted by the value of the group column ONLY when there
+  is only a single (non-vector) on-col argument.
+
+  Examples:
+
+    (use '(incanter core datasets))
+    (def plant-growth (to-matrix (get-dataset :plant-growth)))
+    (group-by plant-growth 1)
+    ;; only return the first column
+    (group-by plant-growth 1 :cols 0)
+    ;; don't return the second column
+    (group-by plant-growth 1 :except-cols 1)
+
+    (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))
+    (group-by plant-growth-dummies [1 2])
+    ;; return only the first column
+    (group-by plant-growth-dummies [1 2] :cols 0) 
+    ;; don't return the last two columns
+    (group-by plant-growth-dummies [1 2] :except-cols [1 2])
+
+    ;; plot the plant groups
+    (use 'incanter.charts)
+    ;; can use destructuring if you know the number of groups,
+    ;; groups are sorted only if the group is based on a single column value
+    (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]
+      (doto (box-plot ctrl)
+            (add-box-plot trt1)
+            (add-box-plot trt2)
+            view))
+
+"
+  ([mat on-cols & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          cols (when (:cols opts) (:cols opts))
+          except-cols (when (:except-cols opts) (:except-cols opts))
+          groups (if (coll? on-cols)
+                   (into #{} (to-list (sel mat :cols on-cols)))
+                   (sort (into #{} (to-list (sel mat :cols on-cols)))))
+          filter-fn (fn [group] 
+                      (cond 
+                        (and (coll? on-cols) (> (count on-cols) 1))
+                          (fn [row] 
+                            (reduce #(and %1 %2) 
+                                    (map (fn [i g] (= (nth row i) g)) on-cols group)))
+                        (and (coll? on-cols) (= (count on-cols) 1))
+                          (fn [row] 
+                            (= (nth row (first on-cols)) group))
+                        :else
+                          (fn [row] 
+                            (= (nth row on-cols) group))))
+         ]
+      (cond
+        cols
+          (map #(sel mat :cols cols :filter (filter-fn %)) groups)
+        except-cols
+          (map #(sel mat :except-cols except-cols :filter (filter-fn %)) groups)
+        :else
+          (map #(sel mat :filter (filter-fn %)) groups)))))
 
 
 
