@@ -44,19 +44,52 @@
    :flow-meter {:filename (str (System/getProperty "incanter.home") "/data/flow_meter.dat")
             :delim \space
             :header true}
+   :co2 {:filename (str (System/getProperty "incanter.home") "/data/co2.csv")
+            :delim \,
+            :header true}
+   :chick-weight {:filename (str (System/getProperty "incanter.home") "/data/chick_weight.csv")
+            :delim \,
+            :header true}
+   :plant-growth {:filename (str (System/getProperty "incanter.home") "/data/plant_growth.csv")
+            :delim \,
+            :header true}
   })
 
 
 (defn get-dataset
-" Returns the sample dataset associated with the given key.
+" Returns the sample dataset associated with the given key. Most datasets
+  are from R's sample data sets, as are the descriptions below.
 
   Datasets:
-    :iris -- the Fisher Iris dataset
-    :speed -- a simple dataset with speed and distance data, there are also csv
-              and tab-delimited versions of it for testing (:speed-csv :speed-tdd).
-    :survey -- survey data from Lynch book.
-    :us-arrests -- arrest data
-    :flow-meter -- flow meter data used in Bland Altman Lancet paper
+
+    :iris -- the Fisher's or Anderson's Iris data set gives the
+             measurements in centimeters of the variables sepal 
+             length and width and petal length and width, 
+             respectively, for 50 flowers from each of 3 species 
+             of iris.
+
+    :speed -- The data give the speed of cars and the distances taken 
+              to stop. Note that the data were recorded in the 1920s.
+
+    :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics 
+               and Estimation for Social Scientists'
+
+    :us-arrests -- This data set contains statistics, in arrests per 100,000
+                   residents for assault, murder, and rape in each of the 50 US
+                   states in 1973. Also given is the percent of the population living
+                   in urban areas.
+
+    :flow-meter -- flow meter data used in Bland Altman Lancet paper.
+
+    :co2 -- has 84 rows and 5 columns of data from an experiment on the cold tolerance 
+            of the grass species _Echinochloa crus-galli_.
+
+    :chick-weight -- has 578 rows and 4 columns from an experiment on the effect of diet 
+                     on early growth of chicks.
+
+    :plant-growth -- Results from an experiment to compare yields (as measured by dried
+                     weight of plants) obtained under a control and two different
+                     treatment conditions.
 "
   ([dataset-key]
    (let [ds (**datasets** dataset-key)

@@ -1,0 +1,86 @@
+Plant,Type,Treatment,conc,uptake
+Qn1,Quebec,nonchilled,  95,  16.0
+Qn1,Quebec,nonchilled, 175,  30.4
+Qn1,Quebec,nonchilled, 250,  34.8
+Qn1,Quebec,nonchilled, 350,  37.2
+Qn1,Quebec,nonchilled, 500,  35.3
+Qn1,Quebec,nonchilled, 675,  39.2
+Qn1,Quebec,nonchilled,1000,  39.7
+Qn2,Quebec,nonchilled,  95,  13.6
+Qn2,Quebec,nonchilled, 175,  27.3
+Qn2,Quebec,nonchilled, 250,  37.1
+Qn2,Quebec,nonchilled, 350,  41.8
+Qn2,Quebec,nonchilled, 500,  40.6
+Qn2,Quebec,nonchilled, 675,  41.4
+Qn2,Quebec,nonchilled,1000,  44.3
+Qn3,Quebec,nonchilled,  95,  16.2
+Qn3,Quebec,nonchilled, 175,  32.4
+Qn3,Quebec,nonchilled, 250,  40.3
+Qn3,Quebec,nonchilled, 350,  42.1
+Qn3,Quebec,nonchilled, 500,  42.9
+Qn3,Quebec,nonchilled, 675,  43.9
+Qn3,Quebec,nonchilled,1000,  45.5
+Qc1,Quebec,   chilled,  95,  14.2
+Qc1,Quebec,   chilled, 175,  24.1
+Qc1,Quebec,   chilled, 250,  30.3
+Qc1,Quebec,   chilled, 350,  34.6
+Qc1,Quebec,   chilled, 500,  32.5
+Qc1,Quebec,   chilled, 675,  35.4
+Qc1,Quebec,   chilled,1000,  38.7
+Qc2,Quebec,   chilled,  95,   9.3
+Qc2,Quebec,   chilled, 175,  27.3
+Qc2,Quebec,   chilled, 250,  35.0
+Qc2,Quebec,   chilled, 350,  38.8
+Qc2,Quebec,   chilled, 500,  38.6
+Qc2,Quebec,   chilled, 675,  37.5
+Qc2,Quebec,   chilled,1000,  42.4
+Qc3,Quebec,   chilled,  95,  15.1
+Qc3,Quebec,   chilled, 175,  21.0
+Qc3,Quebec,   chilled, 250,  38.1
+Qc3,Quebec,   chilled, 350,  34.0
+Qc3,Quebec,   chilled, 500,  38.9
+Qc3,Quebec,   chilled, 675,  39.6
+Qc3,Quebec,   chilled,1000,  41.4
+Mn1,Mississippi,nonchilled,  95,  10.6
+Mn1,Mississippi,nonchilled, 175,  19.2
+Mn1,Mississippi,nonchilled, 250,  26.2
+Mn1,Mississippi,nonchilled, 350,  30.0
+Mn1,Mississippi,nonchilled, 500,  30.9
+Mn1,Mississippi,nonchilled, 675,  32.4
+Mn1,Mississippi,nonchilled,1000,  35.5
+Mn2,Mississippi,nonchilled,  95,  12.0
+Mn2,Mississippi,nonchilled, 175,  22.0
+Mn2,Mississippi,nonchilled, 250,  30.6
+Mn2,Mississippi,nonchilled, 350,  31.8
+Mn2,Mississippi,nonchilled, 500,  32.4
+Mn2,Mississippi,nonchilled, 675,  31.1
+Mn2,Mississippi,nonchilled,1000,  31.5
+Mn3,Mississippi,nonchilled,  95,  11.3
+Mn3,Mississippi,nonchilled, 175,  19.4
+Mn3,Mississippi,nonchilled, 250,  25.8
+Mn3,Mississippi,nonchilled, 350,  27.9
+Mn3,Mississippi,nonchilled, 500,  28.5
+Mn3,Mississippi,nonchilled, 675,  28.1
+Mn3,Mississippi,nonchilled,1000,  27.8
+Mc1,Mississippi,   chilled,  95,  10.5
+Mc1,Mississippi,   chilled, 175,  14.9
+Mc1,Mississippi,   chilled, 250,  18.1
+Mc1,Mississippi,   chilled, 350,  18.9
+Mc1,Mississippi,   chilled, 500,  19.5
+Mc1,Mississippi,   chilled, 675,  22.2
+Mc1,Mississippi,   chilled,1000,  21.9
+Mc2,Mississippi,   chilled,  95,   7.7
+Mc2,Mississippi,   chilled, 175,  11.4
+Mc2,Mississippi,   chilled, 250,  12.3
+Mc2,Mississippi,   chilled, 350,  13.0
+Mc2,Mississippi,   chilled, 500,  12.5
+Mc2,Mississippi,   chilled, 675,  13.7
+Mc2,Mississippi,   chilled,1000,  14.4
+Mc3,Mississippi,   chilled,  95,  10.6
+Mc3,Mississippi,   chilled, 175,  18.0
+Mc3,Mississippi,   chilled, 250,  17.9
+Mc3,Mississippi,   chilled, 350,  17.9
+Mc3,Mississippi,   chilled, 500,  17.9
+Mc3,Mississippi,   chilled, 675,  18.9
+Mc3,Mississippi,   chilled,1000,  19.9
+
