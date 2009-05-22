@@ -16,8 +16,8 @@
    (let [pc (principal-components (covariance data))
          pc1-sd (nth (:std-dev pc) 0)
          pc2-sd (nth (:std-dev pc) 1)
-         pc1 (sel (:rotation pc) :columns 0)
-         pc2 (sel (:rotation pc) :columns 1)
+         pc1 (sel (:rotation pc) :cols 0)
+         pc2 (sel (:rotation pc) :cols 1)
          [dim-1 dim-2] (map #(Math/ceil %) (som-dimensions pc1-sd pc2-sd))
          data-mean (map mean (trans data))
          weight-fn (fn [i j data-mean pc1-sd dim-1 dim-2 pc1 pc2] 
@@ -148,7 +148,7 @@
 
     (use '(incanter core som charts datasets))
     (def data (matrix (sel (get-dataset :iris) 
-                           :columns [\"Sepal.Length\" \"Sepal.Width\" \"Petal.Length\" \"Petal.Width\"])))
+                           :cols [\"Sepal.Length\" \"Sepal.Width\" \"Petal.Length\" \"Petal.Width\"])))
 
     (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
 
@@ -158,7 +158,7 @@
     (:sets som)
     ;; view the species in each cell
     (doseq [rws (vals (:sets som))] 
-      (println (sel (get-dataset :iris) :columns \"Species\" :rows rws) \\newline)) 
+      (println (sel (get-dataset :iris) :cols \"Species\" :rows rws) \\newline)) 
 
     ;; plot the means of the data vectors in each cell/cluster
     (def cell-means (map #(map mean (trans (sel data :rows ((:sets som) %)))) (keys (:sets som))))

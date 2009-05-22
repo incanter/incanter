@@ -274,14 +274,14 @@
     (def means (map mean (trans mvn-samp)))
 
     ;; plot scatter-plot of points
-    (def mvn-plot (scatter-plot (sel mvn-samp :columns 0) (sel mvn-samp :columns 1)))
+    (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))
     (view mvn-plot)
     ;; add centroid to plot
     (add-points mvn-plot [(first means)] [(second means)])
 
     ;; add regression line to scatter plot
-    (def x (sel mvn-samp :columns 0))
-    (def y (sel mvn-samp :columns 1))
+    (def x (sel mvn-samp :cols 0))
+    (def y (sel mvn-samp :cols 1))
     (def lm (linear-model y x))
     (add-lines mvn-plot x (:fitted lm))
 
@@ -1518,8 +1518,8 @@
   Examples:
     (use '(incanter core stats datasets charts))
     (def iris (to-matrix (get-dataset :iris)))
-    (def y (sel iris :columns 0))
-    (def x (sel iris :columns (range 1 6)))
+    (def y (sel iris :cols 0))
+    (def x (sel iris :cols (range 1 6)))
     (def iris-lm (linear-model y x)) ; with intercept term
 
     (keys iris-lm) ; see what fields are included
@@ -1720,15 +1720,15 @@
     ;; load the iris dataset
     (def iris (to-matrix (get-dataset :iris)))
     ;; run the pca
-    (def pca (principal-components (sel iris :columns (range 4))))
+    (def pca (principal-components (sel iris :cols (range 4))))
     ;; extract the first two principal components
-    (def pc1 (sel (:rotation pca) :columns 0))
-    (def pc2 (sel (:rotation pca) :columns 1))
+    (def pc1 (sel (:rotation pca) :cols 0))
+    (def pc2 (sel (:rotation pca) :cols 1))
 
     ;; project the first four dimension of the iris data onto the first
     ;; two principal components
-    (def x1 (mmult (sel iris :columns (range 4)) pc1)) 
-    (def x2 (mmult (sel iris :columns (range 4)) pc2)) 
+    (def x1 (mmult (sel iris :cols (range 4)) pc1)) 
+    (def x2 (mmult (sel iris :cols (range 4)) pc2)) 
    
     ;; now plot the transformed data, coloring each species a different color
     (doto (scatter-plot (sel x1 :rows (range 50)) (sel x2 :rows (range 50))

@@ -45,11 +45,11 @@
     
     ;; view trace plots
     (view (trace-plot (:var param-samp ))) 
-    (view (trace-plot (sel (:coefs param-samp) :columns 0)))
+    (view (trace-plot (sel (:coefs param-samp) :cols 0)))
 
     ;; view histograms
     (view (histogram (:var param-samp))) 
-    (view (histogram (sel (:coefs param-samp) :columns 0)))
+    (view (histogram (sel (:coefs param-samp) :cols 0)))
 
     ;; calculate statistics
     (map mean (trans (:coefs param-samp)))
@@ -57,7 +57,7 @@
     (map sd (trans (:coefs param-samp)))
 
     ;; show the 95% bayesian confidence interval for the firt coefficient
-    (quantile (sel (:coefs param-samp) :columns 0) :probs [0.025 0.975])
+    (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 
 "
   ([size linear-model]

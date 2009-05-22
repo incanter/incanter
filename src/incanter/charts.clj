@@ -130,12 +130,12 @@
     (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
 
     ;; create scatter-plot of points
-    (def mvn-plot (scatter-plot (sel mvn-samp :columns 0) (sel mvn-samp :columns 1)))
+    (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))
     (view mvn-plot)
 
     ;; add regression line to scatter plot
-    (def x (sel mvn-samp :columns 0))
-    (def y (sel mvn-samp :columns 1))
+    (def x (sel mvn-samp :cols 0))
+    (def y (sel mvn-samp :cols 1))
     (def lm (linear-model y x))
     (add-lines mvn-plot x (:fitted lm))
 
@@ -471,8 +471,8 @@
 
     (use '(incanter core stats io datasets charts))
     (def speed (to-matrix (get-dataset :speed)))
-    (def y (sel speed :columns 1))
-    (def x (sel speed :columns 2))
+    (def y (sel speed :cols 1))
+    (def x (sel speed :cols 2))
     (def plot1 (scatter-plot x y :legend true))
     (view plot1)
     
@@ -537,8 +537,8 @@
 
     (use '(incanter core stats io datasets charts))
     (def speed (to-matrix (get-dataset :speed)))
-    (def y (sel speed :columns 1))
-    (def x (sel speed :columns 2))
+    (def y (sel speed :cols 1))
+    (def x (sel speed :cols 2))
     
     ;; add regression line to scatter plot
     (def lm1 (linear-model y x))
@@ -596,7 +596,7 @@
       (def sample-params (sample-model-params 5000 (linear-model y x :intercept false)))
       (view (trace-plot (:var sample-params))) 
 
-      (view (trace-plot (sel (:coefs sample-params) :columns 0)))
+      (view (trace-plot (sel (:coefs sample-params) :cols 0)))
 
 "
   ([x & options]
@@ -659,8 +659,8 @@
 
     (use '(incanter core datasets charts))
     (def flow-meter (to-matrix (get-dataset :flow-meter)))
-    (def x1 (sel flow-meter :columns 1))
-    (def x2 (sel flow-meter :columns 3))
+    (def x1 (sel flow-meter :cols 1))
+    (def x2 (sel flow-meter :cols 3))
     (view (bland-altman-plot x1 x2))
 
 

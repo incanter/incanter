@@ -178,10 +178,10 @@
   Options:
     :rows (default true) 
       returns all rows by default, can pass a row index or sequence of row indices
-    :columns (default true) 
+    :cols (default true) 
       returns all columns by default, can pass a column index or sequence of column indices
     :except-rows (default nil) can pass a row index or sequence of row indices to exclude
-    :except-columns (default nil) can pass a column index or sequence of column indices to exclude
+    :except-cols (default nil) can pass a column index or sequence of column indices to exclude
     :filter (default nil) 
       a function can be provided to filter the rows of the matrix
 
@@ -189,15 +189,15 @@
     (use 'incanter.datasets)
     (def speed (to-matrix (get-dataset :speed)))
     (sel speed 0 0) ; first element
-    (sel speed :rows 0 :columns 0) ; also first element
-    (sel speed :columns 0) ; first column of all rows
-    (sel speed :columns [0 2]) ; first and third column of all rows
-    (sel speed :rows (range 10) :columns (range 2)) ; first two rows of the first 10 columns
+    (sel speed :rows 0 :cols 0) ; also first element
+    (sel speed :cols 0) ; first column of all rows
+    (sel speed :cols [0 2]) ; first and third column of all rows
+    (sel speed :rows (range 10) :cols (range 2)) ; first two rows of the first 10 columns
     (sel speed :rows (range 10)) ; all columns of the first 10 rows
 
     ;; exclude rows or columns
     (sel speed :except-rows (range 10)) ; all columns of all but the first 10 rows
-    (sel speed :except-columns 1) ; all columns except the second
+    (sel speed :except-cols 1) ; all columns except the second
 
     ;; return only the first 10 even rows
     (sel speed :rows (range 10) :filter #(even? (int (nth % 0))))
@@ -207,9 +207,9 @@
     ;; examples with datasets
     (use 'incanter.datasets)
     (def us-arrests (get-dataset :us-arrests))
-    (sel us-arrests :columns \"State\")
+    (sel us-arrests :cols \"State\")
 
-    (sel us-arrests :columns [\"State\" \"Murder\"])
+    (sel us-arrests :cols [\"State\" \"Murder\"])
 
 "
 (fn [mat & options] [(type mat) (keyword? (first options))]))
@@ -238,7 +238,7 @@
   ([#^Matrix mat & options]
    (let [opts (if options (apply assoc {} options) nil)
          except-rows (when (:except-rows opts) (:except-rows opts))
-         except-columns (when (:except-columns opts) (:except-columns opts))
+         except-columns (when (:except-cols opts) (:except-cols opts))
          ;rows (if (:rows opts) (:rows opts) true)
          rows (cond 
                 (:rows opts) 
@@ -248,8 +248,8 @@
                 :else
                   true)
          cols (cond 
-                (:columns opts) 
-                  (:columns opts) 
+                (:cols opts) 
+                  (:cols opts) 
                 except-columns
                   (except-for (.columns mat) except-columns)
                 :else
@@ -907,9 +907,9 @@
   ([dataset & options]
     (let [opts (if options (apply assoc {} options) nil)
           rows (if (:rows opts) (:rows opts) true)
-          cols (if (:columns opts) (if (coll? (:columns opts))
-                                     (:columns opts) 
-                                     [(:columns opts)])
+          cols (if (:cols opts) (if (coll? (:cols opts))
+                                     (:cols opts) 
+                                     [(:cols opts)])
                  (:column-names dataset))
           row-filter (if (:filter opts) (:filter opts) nil)
           selected-rows (cond 

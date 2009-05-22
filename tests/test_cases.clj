@@ -149,11 +149,11 @@
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
   (is (= (sel A 3 2) 12))
   ;; use 'true' to select an entire row or column
-  (is (= (sel A :columns 2) (matrix [3 6 9 12])))
+  (is (= (sel A :cols 2) (matrix [3 6 9 12])))
   (is (= (sel A :rows 1) (matrix [[4 5 6]])))
   (is (= (sel A true true) A))
   ;; pass a vector of indices to select a set of rows and/or columns
-  (is (= (sel A :columns [0 2]) (matrix [[1 3] 
+  (is (= (sel A :cols [0 2]) (matrix [[1 3] 
                                      [4 6] 
                                      [7 9] 
                                      [10 12]])))
@@ -457,8 +457,8 @@
   
   
   (view (scatter-plot 
-          (sel test-mat :columns 1) 
-          (sel test-mat :columns 2) 
+          (sel test-mat :cols 1) 
+          (sel test-mat :cols 2) 
           :series-lab "Test data col 1 versus col 2"))
   
   
