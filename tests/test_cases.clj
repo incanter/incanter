@@ -279,16 +279,16 @@
 
 ;; read in a dataset from a space delimited file 
 (def test-data (read-dataset 
-                 (str (System/getProperty "incanter.home") "/data/test.dat") 
+                 (str (System/getProperty "incanter.home") "/data/cars.dat") 
                  :delim \space
                  :header true)) ; default delimiter: \,
 ;; read in a dataset from a comma delimited file 
 (def test-csv-data (read-dataset 
-                     (str (System/getProperty "incanter.home") "/data/test.csv") 
+                     (str (System/getProperty "incanter.home") "/data/cars.csv") 
                      :header true))
 ;; read in a dataset from a tab delimited file 
 (def test-tdd-data (read-dataset 
-                     (str (System/getProperty "incanter.home") "/data/test.tdd") 
+                     (str (System/getProperty "incanter.home") "/data/cars.tdd") 
                      :header true 
                      :delim \tab)) 
 ;; read in the iris dataset from a space delimited file 
@@ -315,9 +315,9 @@
 (deftest io-validation
 
   ;; validate matrices read from files
-  (is (= (reduce plus test-mat) (matrix [1275 770 2149] 3)))
-  (is (= (reduce plus test-csv-mat) (matrix [1275 770 2149] 3)))
-  (is (= (reduce plus test-tdd-mat) (matrix [1275 770 2149] 3)))
+  (is (= (reduce plus test-mat) (matrix [770 2149] 2)))
+  (is (= (reduce plus test-csv-mat) (matrix [770 2149] 2)))
+  (is (= (reduce plus test-tdd-mat) (matrix [770 2149] 2)))
   ;; confirm that iris species factor was converted to two dummy variables
   (is (= (first iris-mat) (matrix [5.10 3.50 1.40 0.20 0] 5)))
   (is (= (first iris-mat-dummies) (matrix [5.10 3.50 1.40 0.20 0 0] 6)))
@@ -334,9 +334,9 @@
 (deftest stats-functions
 
   
-  (is (= (map mean (trans test-mat)) [25.5 15.4 42.98]))
-  (is (= (map mean (trans test-csv-mat)) [25.5 15.4 42.98]))
-  (is (= (map mean (trans test-tdd-mat)) [25.5 15.4 42.98]))
+  (is (= (map mean (trans test-mat)) [15.4 42.98]))
+  (is (= (map mean (trans test-csv-mat)) [15.4 42.98]))
+  (is (= (map mean (trans test-tdd-mat)) [15.4 42.98]))
   (is (= (map sd A) [1.0 1.0 1.0 1.0]))
   ;; perform matrix multiplication
   (is (= (mmult A (trans A)) (matrix [[14  32  50  68] 
@@ -353,9 +353,7 @@
   (is (= (solve (matrix [[2 0 0] [0 2 0] [0 0 2]])) (diag [1/2 1/2 1/2])))
   ;; calculate the Cholesky decomposition of a matrix
   (is (= (decomp-cholesky (covariance test-mat))
-         (matrix [[14.577379737113251 5.2107570114319826 21.07052616887616] 
-                  [0.0 0.8984403381871381 0.17090373166850123] 
-                  [0.0 0.0 14.834572296083813]])))
+         (matrix [[5.2876444352347844 20.79317929225101] [0.0 15.221843227639498]])))
   
   ;; calculate the mean of the elements of a one-dimensional matrix
   (is (= (mean (sel x true 4)) 13.588413316039775))
@@ -363,7 +361,7 @@
   (is (= (variance (sel x true 4)) 8.534675379268974))
   ;; get the covariance matrix based on the columns of a data matrix
   (is (= (covariance test-mat)) 
-      (matrix [212.50  75.96 307.15 75.96  27.96 109.95 307.15 109.95 664.06] 4))
+      (matrix [[27.959183673469386 109.94693877551022] [109.94693877551022 664.0608163265307]]))
   ;; get the covariance between two variables
   (is (= (covariance (sel x true 4) (sel x true 5)) 37.8696379778356160))
   ;; calculate the standard deviation of a variable
@@ -457,8 +455,8 @@
   
   
   (view (scatter-plot 
-          (sel test-mat :cols 1) 
-          (sel test-mat :cols 2) 
+          (sel test-mat :cols 0) 
+          (sel test-mat :cols 0) 
           :series-lab "Test data col 1 versus col 2"))
   
   

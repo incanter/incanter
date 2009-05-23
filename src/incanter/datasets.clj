@@ -26,13 +26,13 @@
    :iris {:filename (str (System/getProperty "incanter.home") "/data/iris.dat")
           :delim \space
           :header true}
-   :speed {:filename (str (System/getProperty "incanter.home") "/data/test.dat")
+   :cars {:filename (str (System/getProperty "incanter.home") "/data/cars.dat")
            :delim \space
            :header true}
-   :speed-csv {:filename (str (System/getProperty "incanter.home") "/data/test.csv")
+   :cars-csv {:filename (str (System/getProperty "incanter.home") "/data/cars.dat")
                :delim \,
                :header true}
-   :speed-tdd {:filename (str (System/getProperty "incanter.home") "/data/test.tdd")
+   :cars-tdd {:filename (str (System/getProperty "incanter.home") "/data/cars.dat")
                :delim \tab
                :header true}
    :survey {:filename (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
@@ -68,7 +68,7 @@
              respectively, for 50 flowers from each of 3 species 
              of iris.
 
-    :speed -- The data give the speed of cars and the distances taken 
+    :cars -- The data give the speed of cars and the distances taken 
               to stop. Note that the data were recorded in the 1920s.
 
     :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics 

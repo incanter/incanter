@@ -130,7 +130,9 @@
      (matrix? m)
       (seq (.toArray (.diagonal DoubleFactory2D/dense m)))
      (coll? m)
-      (Matrix. (.diagonal DoubleFactory2D/dense (.make DoubleFactory1D/dense (double-array m)))))))
+      (Matrix. (.diagonal DoubleFactory2D/dense (.make DoubleFactory1D/dense (double-array m))))
+     (number? m)
+      m)))
 
 
 (defn #^Matrix trans 
@@ -187,22 +189,22 @@
 
   Examples:
     (use 'incanter.datasets)
-    (def speed (to-matrix (get-dataset :speed)))
-    (sel speed 0 0) ; first element
-    (sel speed :rows 0 :cols 0) ; also first element
-    (sel speed :cols 0) ; first column of all rows
-    (sel speed :cols [0 2]) ; first and third column of all rows
-    (sel speed :rows (range 10) :cols (range 2)) ; first two rows of the first 10 columns
-    (sel speed :rows (range 10)) ; all columns of the first 10 rows
+    (def iris (to-matrix (get-dataset :iris)))
+    (sel iris 0 0) ; first element
+    (sel iris :rows 0 :cols 0) ; also first element
+    (sel iris :cols 0) ; first column of all rows
+    (sel iris :cols [0 2]) ; first and third column of all rows
+    (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows
+    (sel iris :rows (range 10)) ; all columns of the first 10 rows
 
     ;; exclude rows or columns
-    (sel speed :except-rows (range 10)) ; all columns of all but the first 10 rows
-    (sel speed :except-cols 1) ; all columns except the second
+    (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows
+    (sel iris :except-cols 1) ; all columns except the second
 
     ;; return only the first 10 even rows
-    (sel speed :rows (range 10) :filter #(even? (int (nth % 0))))
+    (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))
     ;; select rows where distance (third column) is greater than 50
-    (sel speed :filter #(> (nth % 2) 50))
+    (sel iris :filter #(> (nth % 2) 4))
 
     ;; examples with datasets
     (use 'incanter.datasets)

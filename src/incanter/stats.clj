@@ -1507,6 +1507,9 @@
     a map, of type ::linear-model, containing:
       :design-matrix -- a matrix containing the independent variables, and an intercept columns
       :coefs -- the regression coefficients
+      :t-tests -- t-test values of coefficients
+      :t-probs -- p-values for t-test values of coefficients
+      :coefs-95ci -- 95% percentile confidence interval
       :fitted -- the predicted values of y
       :residuals -- the residuals of each observation
       :std-errors -- the standard errors of the coeffients
@@ -1572,9 +1575,17 @@
           df2 (- n p)
           f-prob (cdf-f f-stat :df1 df1 :df2 df2 :lower-tail false)
           coef-var (mult mse xtxi)
-          std-errors (if (number? xtxi)
-                       (* (/ sse (- n p-1)) xtxi)
-                       (for [i (range p)] (* (/ sse (- n p-1)) (sel xtxi i i))))
+          std-errors (sqrt (diag coef-var))
+          t-tests (div coefs std-errors)
+          t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
+          t-95 (mult (quantile-t 0.975 :df df2) std-errors)
+          coefs-95ci (matrix (if (number? std-errors)
+                               [(plus coefs t-95) 
+                                (minus coefs t-95)]
+                               (partition 2 
+                                 (interleave 
+                                   (plus coefs t-95) 
+                                   (minus coefs t-95)))))
          ]
       (with-meta
         {:x _x
@@ -1582,6 +1593,9 @@
          :fitted fitted
          :design-matrix _x
          :coefs coefs
+         :t-tests t-tests
+         :t-probs t-probs
+         :coefs-95ci coefs-95ci
          :residuals resid
          :std-errors std-errors
          :sse sse

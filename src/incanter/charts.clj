@@ -470,9 +470,9 @@
   Examples:
 
     (use '(incanter core stats io datasets charts))
-    (def speed (to-matrix (get-dataset :speed)))
-    (def y (sel speed :cols 1))
-    (def x (sel speed :cols 2))
+    (def cars (to-matrix (get-dataset :cars)))
+    (def y (sel cars :cols 0))
+    (def x (sel cars :cols 1))
     (def plot1 (scatter-plot x y :legend true))
     (view plot1)
     
@@ -536,9 +536,9 @@
   Examples:
 
     (use '(incanter core stats io datasets charts))
-    (def speed (to-matrix (get-dataset :speed)))
-    (def y (sel speed :cols 1))
-    (def x (sel speed :cols 2))
+    (def cars (to-matrix (get-dataset :cars)))
+    (def y (sel cars :cols 0))
+    (def x (sel cars :cols 1))
     
     ;; add regression line to scatter plot
     (def lm1 (linear-model y x))
