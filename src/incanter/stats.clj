@@ -1579,13 +1579,13 @@
           t-tests (div coefs std-errors)
           t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
-          coefs-95ci (matrix (if (number? std-errors)
-                               [(plus coefs t-95) 
-                                (minus coefs t-95)]
-                               (partition 2 
-                                 (interleave 
-                                   (plus coefs t-95) 
-                                   (minus coefs t-95)))))
+          coefs-95ci (if (number? std-errors)
+                       [(plus coefs t-95) 
+                        (minus coefs t-95)]
+                       (partition 2 
+                         (interleave 
+                           (minus coefs t-95) 
+                           (play coefs t-95))))
          ]
       (with-meta
         {:x _x
