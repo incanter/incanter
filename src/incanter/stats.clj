@@ -1585,7 +1585,7 @@
                        (partition 2 
                          (interleave 
                            (minus coefs t-95) 
-                           (play coefs t-95))))
+                           (plus coefs t-95))))
          ]
       (with-meta
         {:x _x
