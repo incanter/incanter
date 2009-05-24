@@ -1509,7 +1509,7 @@
       :coefs -- the regression coefficients
       :t-tests -- t-test values of coefficients
       :t-probs -- p-values for t-test values of coefficients
-      :coefs-95ci -- 95% percentile confidence interval
+      :coefs-ci -- 95% percentile confidence interval
       :fitted -- the predicted values of y
       :residuals -- the residuals of each observation
       :std-errors -- the standard errors of the coeffients
@@ -1579,7 +1579,7 @@
           t-tests (div coefs std-errors)
           t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
-          coefs-95ci (if (number? std-errors)
+          coefs-ci (if (number? std-errors)
                        [(plus coefs t-95) 
                         (minus coefs t-95)]
                        (partition 2 
@@ -1595,7 +1595,7 @@
          :coefs coefs
          :t-tests t-tests
          :t-probs t-probs
-         :coefs-95ci coefs-95ci
+         :coefs-ci coefs-ci
          :residuals resid
          :std-errors std-errors
          :sse sse

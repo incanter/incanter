@@ -1,4 +1,4 @@
-<a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.png" alt="Incanter" /></a>
+<a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.jpg" alt="Incanter" /></a>
 
 h2. Overview and motivation
 
