@@ -747,6 +747,18 @@
     cern.colt.matrix.linalg.CholeskyDecomposition is transposed so 
     that it matches the result return from R's chol function.
 
+                                            
+
+  Examples:
+
+  (use '(incanter core stats charts datasets))
+  ;; load the iris dataset
+  (def iris (to-matrix (get-dataset :iris)))
+  ;; take the Cholesky decompostion of the correlation matrix of the iris data.
+  (decomp-cholesky (correlation iris))
+
+
+
   References:
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
     http://en.wikipedia.org/wiki/Cholesky_decomposition
@@ -766,6 +778,14 @@
       :S -- the diagonal matrix of singular values
       :U -- the left singular vectors U
       :V -- the right singular vectors V
+
+
+  Examples:
+
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (decomp-foo foo)
+  
 
   References:
     http://en.wikipedia.org/wiki/Singular_value_decomposition
@@ -787,6 +807,14 @@
       :values -- vector of eigenvalues
       :vectors -- the matrix of eigenvectors
 
+
+  Examples:
+
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (decomp-eigenvalue foo)
+
+
   References:
     http://en.wikipedia.org/wiki/Eigenvalue_decomposition
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
@@ -799,6 +827,14 @@
 
 (defn decomp-lu
 " Returns the LU decomposition of the given matrix.
+
+
+  Examples:
+
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (decomp-lu foo)
+
 
   Returns:
     a map containing:
@@ -818,6 +854,15 @@
 (defn decomp-qr
 " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
+
+  Examples:
+
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (decomp-qr foo)
+
+
+
   Returns:
     a map containing:
       :Q -- orthogonal factor
@@ -831,6 +876,45 @@
     (let [result (DoubleQRDecomposition. mat)]
       {:Q (Matrix. (.getQ result))
        :R (Matrix. (.getR result))})))
+
+
+(defn condition
+" Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.
+
+
+  Examples:
+
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (condition foo)
+  
+
+  References:
+    http://en.wikipedia.org/wiki/Condition_number
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
+"
+  ([mat]
+    (.cond (DoubleSingularValueDecompositionDC. mat, true, true))))
+
+
+(defn rank
+" Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
+
+
+  Examples:
+
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (rank foo)
+  
+
+
+  References:
+    http://en.wikipedia.org/wiki/Matrix_rank
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
+"
+  ([mat]
+    (.rank (DoubleSingularValueDecompositionDC. mat, true, true))))
 
 
 
