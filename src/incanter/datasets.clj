@@ -23,34 +23,34 @@
 
 (def **datasets** 
   { 
-   :iris {:filename (str (System/getProperty "incanter.home") "/data/iris.dat")
+   :iris {:filename "data/iris.dat"
           :delim \space
           :header true}
-   :cars {:filename (str (System/getProperty "incanter.home") "/data/cars.dat")
+   :cars {:filename "data/cars.dat"
            :delim \space
            :header true}
-   :cars-csv {:filename (str (System/getProperty "incanter.home") "/data/cars.dat")
+   :cars-csv {:filename "data/cars.dat"
                :delim \,
                :header true}
-   :cars-tdd {:filename (str (System/getProperty "incanter.home") "/data/cars.dat")
+   :cars-tdd {:filename "data/cars.dat"
                :delim \tab
                :header true}
-   :survey {:filename (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
+   :survey {:filename "data/olsexamp.dat"
             :delim \space
             :header true}
-   :us-arrests {:filename (str (System/getProperty "incanter.home") "/data/us_arrests.dat")
+   :us-arrests {:filename "data/us_arrests.dat"
             :delim \,
             :header true}
-   :flow-meter {:filename (str (System/getProperty "incanter.home") "/data/flow_meter.dat")
+   :flow-meter {:filename "data/flow_meter.dat"
             :delim \space
             :header true}
-   :co2 {:filename (str (System/getProperty "incanter.home") "/data/co2.csv")
+   :co2 {:filename "data/co2.csv"
             :delim \,
             :header true}
-   :chick-weight {:filename (str (System/getProperty "incanter.home") "/data/chick_weight.csv")
+   :chick-weight {:filename "data/chick_weight.csv"
             :delim \,
             :header true}
-   :plant-growth {:filename (str (System/getProperty "incanter.home") "/data/plant_growth.csv")
+   :plant-growth {:filename "data/plant_growth.csv"
             :delim \,
             :header true}
   })
@@ -59,6 +59,13 @@
 (defn get-dataset
 " Returns the sample dataset associated with the given key. Most datasets
   are from R's sample data sets, as are the descriptions below.
+
+  Options:
+
+    :incanter-home -- if the incanter.home property is not set when the JVM is
+                      started, use the :incanter-home options to provide the
+                      parent directory of the sample data directory.
+
 
   Datasets:
 
@@ -91,11 +98,13 @@
                      weight of plants) obtained under a control and two different
                      treatment conditions.
 "
-  ([dataset-key]
-   (let [ds (**datasets** dataset-key)
-         filename (ds :filename)
-         delim (ds :delim)
-         header (ds :header)]
+  ([dataset-key & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          incanter-home (if (:incanter-home opts) (:incanter-home opts) (System/getProperty "incanter.home"))
+          ds (**datasets** dataset-key)
+          filename (if (nil? incanter-home) (ds :filename) (str incanter-home "/" (ds :filename)))
+          delim (ds :delim)
+          header (ds :header)]
    (read-dataset filename :delim delim :header header))))
 
 
