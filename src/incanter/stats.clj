@@ -1413,30 +1413,34 @@
   is set to false it returns a set, otherwise it returns a list.
 
   Arguments:
-    coll -- collection to be sampled from
-    size -- sample size
+    x -- collection to be sampled from
 
   Options:
+    :size -- (default (count x) sample size
     :replacement (default true) -- sample with replacement
 
 
   Examples:
-    (sample [:red :green :blue] 10) ; choose 10 items that are either :red, :green, or :blue.
-    (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  4 :replacement false) ; choose 4 random letters.
+    (sample (range 10)) ; permutation of numbers zero through ten
+    (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.
+    (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.
 
 "
-  ([coll size & options]
+  ([x & options]
     (let [opts (if options (apply assoc {} options) nil) 
+          size (if (:size opts) (:size opts) (count x))
           replacement? (if (false? (:replacement opts)) false true)
-          max-idx (dec (count coll))]
+          max-idx (dec (count x))]
       (if replacement?
-        (map #(nth coll %) (sample-uniform size :min 0 :max max-idx :integers true))
-        (if (> size (count coll))
-          (throw (Exception. "'size' can't be larger than (count coll) without replacement!"))
-          (loop [samp #{}]
-            (if (= (count samp) size)
-              samp
-            (recur (conj samp (nth coll (sample-uniform 1 :min 0 :max max-idx :integers true)))))))))))
+        (map #(nth x %) (sample-uniform size :min 0 :max max-idx :integers true))
+        (if (> size (count x))
+          (throw (Exception. "'size' can't be larger than (count x) without replacement!"))
+          (map #(nth x %)
+               (loop [samp-indices #{}]
+                 (if (= (count samp-indices) size)
+                   samp-indices
+                   (recur (conj samp-indices (sample-uniform 1 :min 0 :max max-idx :integers true)))))) )))))
+            ;(recur (conj samp-indices (nth x (sample-uniform 1 :min 0 :max max-idx :integers true)))))))))))
 
 
 
