@@ -1494,6 +1494,122 @@
     
 
 
+(defn permute
+" If provided a single argument, returns a permuted version of the 
+  given collection. (perm x) is the same as (sample x).
+
+  If provided two arguments, returns two lists that are permutations 
+  across the given collections. In other words, each of the new collections
+  will contain elements from both of the given collections. Useful for
+  permutation tests or randomization tests.
+
+  Examples:
+
+    (permute (range 10))
+    (permute (range 10) (range 10 20))
+    
+
+"
+  ([x]
+   (let [n (count x)
+         perm-indices (into [] (cern.colt.GenericPermuting/permutation 
+                                 (sample-uniform 1 :max (factorial n) :integers true) n))]
+     (for [i perm-indices] (nth x i))))
+
+  ([x y]
+   (let [n1 (count x)
+         samp (sample (concat x y) :replacement false)
+         new-x (take n1 samp)
+         new-y (drop n1 samp)]
+     (list new-x new-y))))
+
+
+
+(defn sample-permutations 
+" If provided a two arguments (n x), it returns a matrix with n rows of the permutations
+  of x. If provided three (n x y) arguments, returns a list with two matrices, with n rows
+  each, where each row of the two matrices contain a randomized version from the pooled groups.
+
+  Arguments:
+    n -- number of randomized versions of the original two groups to return
+    x -- group 1
+    y -- (default nil) group 2
+
+
+  Examples:
+
+    (use '(incanter core stats))
+    (sample-permutations 10 (range 10))
+    (sample-permutations 10 (range 10) (range 10 20))
+
+    ;; extended example with plant-growth data
+    (use '(incanter core stats datasets charts))
+    
+    ;; load the plant-growth dataset
+    (def data (to-matrix (get-dataset :plant-growth)))
+    
+    ;; break the first column of the data into groups based on treatment (second column).
+    (def groups (group-by data 1 :cols 0))
+    
+    ;; define a function for the statistic of interest
+    (defn means-diff [x y] (minus (mean x) (mean y)))
+    
+    ;; calculate the difference in sample means between the two groups
+    (def samp-mean-diff (means-diff (first groups) (second groups))) ;; 0.371
+    
+    ;; create 500 permuted versions of the original two groups
+    (def permuted-groups (sample-permutations 1000 (first groups) (second groups)))
+    
+    ;; calculate the difference of means of the 500 samples
+    (def permuted-means-diffs1 (map means-diff (first permuted-groups) (second permuted-groups)))
+    
+    ;; use an indicator function that returns 1 when the randomized means diff is greater
+    ;; than the original sample mean, and zero otherwise. Then take the mean of this sequence
+    ;; of ones and zeros. That is the proportion of times you would see a value more extreme
+    ;; than the sample mean (i.e. the p-value).
+    (mean (indicator #(> % samp-mean-diff) permuted-means-diffs1)) ;; 0.088
+    
+    ;; calculate the 95% confidence interval of the null hypothesis. If the
+    ;; sample difference in means is outside of this range, that is evidence 
+    ;; that the two means are statistically significantly different.
+    (quantile permuted-means-diffs1 :probs [0.025 0.975]) ;; (-0.606 0.595)
+    (view (histogram permuted-means-diffs1))
+   
+    ;; compare the means of treatment 2 and control
+    (def permuted-groups (sample-permutations 1000 (first groups) (last groups)))
+    (def permuted-means-diffs2 (map means-diff (first permuted-groups) (second permuted-groups)))
+    (def samp-mean-diff (means-diff (first groups) (last groups))) ;; -0.4939
+    (mean (indicator #(< % samp-mean-diff) permuted-means-diffs2)) ;; 0.022
+    (quantile permuted-means-diffs2 :probs [0.025 0.975]) ;; (-0.478 0.466)
+    
+    ;; compare the means of treatment 1 and treatment 2
+    (def permuted-groups (sample-permutations 1000 (second groups) (last groups)))
+    (def permuted-means-diffs3 (map means-diff (first permuted-groups) (second permuted-groups)))
+    (def samp-mean-diff (means-diff (second groups) (last groups))) ;; -0.865
+    (mean (indicator #(< % samp-mean-diff) permuted-means-diffs3)) ;;  0.002
+    (quantile permuted-means-diffs3 :probs [0.025 0.975]) ;; (-0.676 0.646)
+    
+    (doto (box-plot permuted-means-diffs1)
+          (add-box-plot permuted-means-diffs2)
+          (add-box-plot permuted-means-diffs3)
+          view)
+    
+
+
+"
+  ([n x]
+   (loop [samp (permute x) i 0]
+     (if (= i (dec n))
+       samp
+       (recur (bind-rows samp (permute x)) (inc i)))))
+
+  ([n x y]
+   (loop [samp (permute x y) i 0]
+     (if (= i (dec n))
+       samp
+       (recur (map bind-rows samp (permute x y)) (inc i))))))
+
+
 
 
 ;;;;;;;;;;;;;;; OLS REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
