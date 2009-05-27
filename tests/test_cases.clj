@@ -439,7 +439,15 @@
   (is (= (count nonstd-normal-data) 1000))
   (is (= (Math/round (mean nonstd-normal-data)) 10))
   (is (= (Math/round (sd nonstd-normal-data)) 5))
-  
+ 
+  ;; test sample function
+  (is (not= (sample (range 10) :replacement false) (range 10)))
+  (is (= (count (sample (range 10))) 10))
+  (is (= (count (sample (range 10) :size 5)) 5))
+  (is (= (count (sample (range 10) :size 5 :replacement false)) 5))
+  (is (= (count (sample (range 10) :replacement false)) (count (range 10))))
+  (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))
+
 ) ;; end of stats-functions tests
 
 

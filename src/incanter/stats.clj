@@ -1436,10 +1436,14 @@
         (if (> size (count x))
           (throw (Exception. "'size' can't be larger than (count x) without replacement!"))
           (map #(nth x %)
-               (loop [samp-indices #{}]
+               (loop [samp-indices [] indices-set #{}]
                  (if (= (count samp-indices) size)
                    samp-indices
-                   (recur (conj samp-indices (sample-uniform 1 :min 0 :max max-idx :integers true)))))) )))))
+                   (let [i (sample-uniform 1 :min 0 :max max-idx :integers true)]
+                     (if (contains? indices-set i)
+                       (recur samp-indices indices-set)
+                       (recur (conj samp-indices i) (conj indices-set i))))))))))))
+
             ;(recur (conj samp-indices (nth x (sample-uniform 1 :min 0 :max max-idx :integers true)))))))))))
 
 
