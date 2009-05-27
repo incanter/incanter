@@ -1772,7 +1772,7 @@
       :rotation rotation})))
 
 
-(defn indicator-function 
+(defn indicator 
 "
   Returns a sequence of ones and zeros, where ones
   are returned when the given predicate is true for
@@ -1782,11 +1782,11 @@
   Examples:
     (use 'incanter.stats)
     
-    (indicator-function #(neg? %) (sample-normal 10))
+    (indicator #(neg? %) (sample-normal 10))
 
     ;; return the sum of the positive values in a normal sample
     (def x (sample-normal 100))
-    (sum (mult x (indicator-function #(pos? %) x)))
+    (sum (mult x (indicator #(pos? %) x)))
 
 "
   ([pred coll] 

@@ -133,7 +133,7 @@
 
     (def samp (sample-normal 10000))
     (add-lines plot x (map #(variance (filter (fn [s] (> s %)) samp)) x))
-    (add-lines plot x (map #(variance (mult samp (indicator-function (fn [s] (> s %)) samp))) x))
+    (add-lines plot x (map #(variance (mult samp (indicator (fn [s] (> s %)) samp))) x))
 
 
   References:
