@@ -18,7 +18,8 @@ OPENCSV_JARS=$INCANTER_LIB_DIR/opencsv-1.8.jar
 JGRAPH_JARS=$INCANTER_LIB_DIR/jgraph.jar
 
 if [ -z "$1" ]; then
-        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.lang.Repl
+        #java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.lang.Repl
+        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.main
 else
         scriptname=$1
         java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$JUNG_JARS:$JGRAPH_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME clojure.lang.Script $scriptname -- $*

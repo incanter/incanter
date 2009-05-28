@@ -1,5 +1,15 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.jpg" alt="Incanter" /></a>
 
+
+* <a href="#overview">Overview</a>
+* <a href="#clojure">Getting started with Clojure</a>
+* <a href="#getstarted">Getting started with Incanter</a>
+* <a href="#docs">Documentation and examples</a>
+* <a href="#build">Building Incanter</a>
+* <a href="#depends">Dependencies</a>
+
+<a name="overview"></a>
+
 h2. Overview and motivation
 
 _Incanter is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._
@@ -7,11 +17,12 @@ _Incanter is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://w
 
 The motivation for creating Incanter is to provide R-like semantics (if not always syntax) and interactive-programming environment to the development of stand-alone statistical applications, with web or gui front-ends, as well as to the development of statistical applications that need to plug into an existing software infrastructure in order to consume data, from databases or other information systems, or drive other processes. Clojure’s seamless integration with Java makes this kind of development much simpler than is possible in R, and Incanter’s R-like semantics makes it much simpler than is possible in pure Java. 
 
-Motivation for a Lisp-based R-like statistical environment can be found in the paper <i><a href="http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21">Back to the Future: Lisp as a Base for a Statistical Computing System by Ihaka and Lang (2008)</a></i>.
+Motivation for a Lisp-based R-like statistical environment can be found in the paper <i><a href="http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21">Back to the Future: Lisp as a Base for a Statistical Computing System by Ihaka and Lang (2008)</a></i>. Incanter is also inspired by the now dormant Lisp-Stat (see the special volume in the Journal of Statistical Software on <a href="http://www.jstatsoft.org/v13">Lisp-Stat: Past, Present, and Future</a> from 2005). 
 
 Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.org">Clojure website</a></u></i>, and screencasts of several excellent Clojure talks by the language’s creator, Rich Hickey, can be found at <i><a href="http://clojure.blip.tv/">clojure.blip.tv</a></i>.
 
 
+<a name="clojure"></a>
 
 h2. Getting started with Clojure
 
@@ -25,6 +36,8 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 * "Clojure Programming Wikibook":http://en.wikibooks.org/wiki/Clojure_Programming
 * "Learning Clojure Wikibook":http://en.wikibooks.org/wiki/Learning_Clojure
 
+
+<a name="getstarted"></a>
 
 h2. Getting started with Incanter
 
@@ -50,6 +63,8 @@ The online documentation for most Incanter functions contain usage examples. The
 ** Run @tests/runtests.clj@ to run test cases
 
 
+<a name="docs"></a>
+
 h2. Documentation
 
 The following documentation covers the Incanter and Clojure APIs and the APIs of the underlying java libraries.
@@ -65,6 +80,8 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
 
 
+<a name="build"></a>
+
 h2. Building Incanter
 
 The Incanter distribution includes a pre-built jar file, but if you would like to build it, test it, and generated the api documentation yourself, run the following commands from the Incanter directory:
@@ -75,6 +92,8 @@ The Incanter distribution includes a pre-built jar file, but if you would like t
 
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
 
+
+<a name="depends"></a>
 
 h2. Included dependencies
 
