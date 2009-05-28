@@ -100,7 +100,7 @@ h2. Included dependencies
 See @lib/license.txt@ file for license terms of included libraries.
 
 * "Clojure":http://code.google.com/p/clojure/
-* "Parallel Colt":http://piotr.wendykier.googlepages.com/parallelcolt
+* "Parallel Colt":http://sites.google.com/site/piotrwendykier/software/parallelcolt
 ** "Netlib-Java":http://code.google.com/p/netlib-java/ (included with Parallel Colt)
 * "JFreeChart":http://www.jfree.org/jfreechart/
 ** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)

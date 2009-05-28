@@ -1595,6 +1595,8 @@
           view)
     
 
+    Further Reading:
+      http://en.wikipedia.org/wiki/Resampling_(statistics)
 
 "
   ([n x]
