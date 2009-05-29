@@ -1372,6 +1372,47 @@
     (let [xx (to-list x)]
       (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
 
+ 
+
+(defn kurtosis 
+"
+  Returns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\" 
+  of the probability distribution of a real-valued random variable. Higher kurtosis 
+  means more of the variance is due to infrequent extreme deviations, as opposed to 
+  frequent modestly-sized deviations.\" (Wikipedia)
+
+  Examples:
+
+    (kurtosis (sample-normal 100000)) ;; approximately 0
+    (kurtosis (sample-gamma 100000)) ;; approximately 6
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
+    http://en.wikipedia.org/wiki/Kurtosis
+
+"
+  ([x] (DoubleDescriptive/kurtosis (DoubleArrayList. (double-array x)) (mean x) (variance x))))
+
+
+
+(defn skewness 
+"
+  Returns the skewness of the data, x. \"Skewness is a measure of the asymmetry 
+  of the probability distribution of a real-valued random variable.\" (Wikipedia)
+
+  Examples:
+
+    (skewness (sample-normal 100000)) ;; approximately 0
+    (skewness (sample-gamma 100000)) ;; approximately 2
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
+    http://en.wikipedia.org/wiki/Skewness
+
+"
+  ([x] (DoubleDescriptive/skew (DoubleArrayList. (double-array x)) (mean x) (sd x))))
+
+
 
 (defn quantile 
 "
@@ -1573,8 +1614,16 @@
     ;; sample difference in means is outside of this range, that is evidence 
     ;; that the two means are statistically significantly different.
     (quantile permuted-means-diffs1 :probs [0.025 0.975]) ;; (-0.606 0.595)
-    (view (histogram permuted-means-diffs1))
-   
+
+    ;; Plot a histogram of the permuted-means-diffs using the density option,
+    ;; instead of the default frequency, and then add a normal pdf curve with 
+    ;; the mean and sd of permuted-means-diffs data for a visual comparison.
+    (doto (histogram permuted-means-diffs1 :density true)
+          (add-lines (range -1 1 0.01) (pdf-normal (range -1 1 0.01) 
+                                                   :mean (mean permuted-means-diffs1) 
+                                                   :sd (sd permuted-means-diffs1)))
+          view)
+
     ;; compare the means of treatment 2 and control
     (def permuted-groups (sample-permutations 1000 (first groups) (last groups)))
     (def permuted-means-diffs2 (map means-diff (first permuted-groups) (second permuted-groups)))
