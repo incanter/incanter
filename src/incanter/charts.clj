@@ -240,6 +240,51 @@
             false)))))
 
 
+(defmacro function-plot
+" Returns a line-plot object of the given function over the range indicated 
+  by the min-range and max-range arguments. Use the 'view' function to 
+  display the chart, or the 'save' function to write it to a file.
+
+  Options:
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+    :step-size (default (/ (- max-range min-range) 500))
+
+  See also:
+    view, save, add-points, add-lines
+
+
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    (view (function-plot sin (- Math/PI) Math/PI))
+    (view (function-plot pdf-normal -3 3))
+
+    (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
+    (view (function-plot cubic -10 10))
+    
+"
+  ([function min-range max-range & options]
+   `(let [opts# (if '~options (assoc {} ~@options))
+          step-size# (if (:step-size opts#) (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
+          x# (range ~min-range ~max-range step-size#)
+          main-title# (if (:title opts#) (:title opts#) "Function Plot")
+          x-lab# (if (:x-label opts#) (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
+          y-lab# (if (:y-label opts#) (:y-label opts#) (str '~function))
+          series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s" '~function))
+          legend?# (true? (:legend opts#))]
+      (line-plot x# (map ~function x#) 
+                 :x-label x-lab# 
+                 :y-label y-lab# 
+                 :title main-title# 
+                 :series-label series-lab# 
+                 :legend legend?#))))
+
+
 
 (defmacro box-plot 
 " Returns a JFreeChart object representing a box-plot of the given data.
@@ -523,6 +568,59 @@
       (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
       chart#))))
 
+
+(defmacro add-function
+" Adds a line-plot of the given function to the given chart, returning
+  a modified version of the chart.
+
+  Options:
+    :series-label (default x expression)
+    :step-size (default (/ (- max-range min-range) 500))
+
+  See also:
+    function-plot, view, save, add-function, add-points, add-lines
+
+
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    ;; plot the sine and cosine functions
+    (doto (function-plot sin (- Math/PI) Math/PI)
+          (add-function cos (- Math/PI) Math/PI)
+          view)
+
+
+    ;; plot two normal pdf functions
+    (doto (function-plot pdf-normal -3 3 :legend true)
+          (add-function (fn [x] (pdf-normal x :mean 0.5 :sd 0.5)) -3 3)
+          view)
+
+
+    ;; plot a user defined function and its derivative
+    (use '(incanter core charts optimize))
+
+    ;; define the function, x^3 + 2x^2 + 2x + 3
+    (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
+
+    ;; use the derivative function to get a function
+    ;; that approximates its derivative
+    (def deriv-cubic (derivative cubic))
+
+    ;; plot the cubic function and its derivative
+    (doto (function-plot cubic -10 10)
+          (add-function deriv-cubic -10 10)
+          view)
+    
+"
+  ([chart function min-range max-range & options]
+    `(let [opts# (if '~options (assoc {} ~@options))
+           step-size# (if (:step-size opts#) (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
+           x# (range ~min-range ~max-range step-size#)
+           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s" '~function))
+          ]
+       (add-lines ~chart x# (map ~function x#) 
+                 :series-label series-lab#))))
 
 
 
