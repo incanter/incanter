@@ -1552,10 +1552,7 @@
 
 "
   ([x]
-   (let [n (count x)
-         perm-indices (into [] (cern.colt.GenericPermuting/permutation 
-                                 (sample-uniform 1 :max (factorial n) :integers true) n))]
-     (for [i perm-indices] (nth x i))))
+    (sample x))
 
   ([x y]
    (let [n1 (count x)
@@ -1567,9 +1564,9 @@
 
 
 (defn sample-permutations 
-" If provided a two arguments (n x), it returns a matrix with n rows of the permutations
-  of x. If provided three (n x y) arguments, returns a list with two matrices, with n rows
-  each, where each row of the two matrices contain a randomized version from the pooled groups.
+" If provided a two arguments (n x), it returns a list of n permutations
+  of x. If provided three (n x y) arguments, returns a list with two with n permutations of
+  each arguments, where each permutation is drawn from the pooled arguments.
 
   Arguments:
     n -- number of randomized versions of the original two groups to return
@@ -1649,17 +1646,22 @@
 
 "
   ([n x]
-   (loop [samp (permute x) i 0]
-     (if (= i (dec n))
-       samp
-       (recur (bind-rows samp (permute x)) (inc i)))))
+    (loop [samp '() i 0]
+      (if (= i n)
+          samp
+          (recur 
+            (conj samp (sample x)) (inc i)))))
 
   ([n x y]
-   (loop [samp (permute x y) i 0]
-     (if (= i (dec n))
-       samp
-       (recur (map bind-rows samp (permute x y)) (inc i))))))
-
+   (let [pool (concat x y)
+         m1 (count x)]
+     (loop [samp-x '() samp-y '() i 0]
+       (if (= i n)
+         (list samp-x samp-y)
+         (let [perm-samp (sample pool)
+               new-x (take m1 perm-samp)
+               new-y (drop m1 perm-samp)]
+           (recur (conj samp-x new-x) (conj samp-y new-y) (inc i))))))))
 
 
 
