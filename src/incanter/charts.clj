@@ -147,6 +147,7 @@
     ;; plot the first two columns grouped by the fifth column
     (view (scatter-plot (sel iris :cols 0) (sel iris :cols 1) :group-by (sel iris :cols 4)))
 
+  
     ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
 
   References:
@@ -158,14 +159,17 @@
     `(let [opts# (if '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
            _y# (if (matrix? ~y) (to-list ~y) ~y)
-           x-groups# (when (:group-by opts#) (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0))
-           y-groups# (when (:group-by opts#) (group-by (bind-columns _y# (:group-by opts#)) 1 :cols 0))
+           group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
+           x-groups# (when group-by# (group-by (bind-columns _x# group-by#) 1 :cols 0))
+           y-groups# (when group-by# (group-by (bind-columns _y# group-by#) 1 :cols 0))
+           ;x-groups# (when (:group-by opts#) (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0))
+           ;y-groups# (when (:group-by opts#) (group-by (bind-columns _y# (:group-by opts#)) 1 :cols 0))
            x# (if x-groups# (first x-groups#) _x#)
            y# (if y-groups# (first y-groups#) _y#)
            main-title# (if (:title opts#) (:title opts#) "Scatter Plot")
            x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
            y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
-           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
+           series-lab# (if (:series-label opts#) (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
            legend?# (true? (:legend opts#))
            data-series# (XYSeries. series-lab#)
            dataset# (XYSeriesCollection.)
@@ -182,9 +186,15 @@
                         true  ; tooltips
                         false))
            _# (when x-groups#
-                (doseq [i# (range 1 (count x-groups#))] (add-points chart# (nth x-groups# i#) (nth y-groups# i#))))]
+                (doseq [i# (range 1 (count x-groups#))] 
+                  (add-points chart# (nth x-groups# i#) 
+                              (nth y-groups# i#)
+                              :series-label (format "%s, %s (%s)" '~x '~y i#))))]
         chart#)))
 
+
+
+(declare add-lines)
 
 
 (defmacro line-plot 
@@ -198,6 +208,7 @@
     :y-label (default 'Frequency')
     :legend (default false) prints legend
     :series-label (default x expression)
+    :group-by (default nil) -- a vector of values used to group the x and y values into series.
 
   See also:
     view, save, add-points, add-lines
@@ -223,6 +234,13 @@
     (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))
     (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))
 
+    ;; use :group-by option
+    (use '(incanter core charts datasets))
+    (def data (to-matrix (get-dataset :chick-weight))) 
+    (let [[weight time chick] (trans data)]
+      (view (line-plot time weight :group-by chick)))
+
+  
     ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
                                                 
   References:
@@ -232,27 +250,40 @@
 "
   ([x y & options]
     `(let [opts# (if '~options (assoc {} ~@options))
-          _x# (if (matrix? ~x) (to-list ~x) ~x)
-          _y# (if (matrix? ~y) (to-list ~y) ~y)
-          main-title# (if (:title opts#) (:title opts#) "XY Plot")
-          x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
-          y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
-          series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
-          legend?# (true? (:legend opts#))
-          data-series# (XYSeries. series-lab#)
-          dataset# (XYSeriesCollection.)]
-      (do
-        (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
-        (.addSeries dataset# data-series#)
-        (org.jfree.chart.ChartFactory/createXYLineChart  
-            main-title#
-            x-lab#
-            y-lab#
-            dataset# 
-            org.jfree.chart.plot.PlotOrientation/VERTICAL 
-            legend?# ; legend 
-            true  ; tooltips
-            false)))))
+           _x# (if (matrix? ~x) (to-list ~x) ~x)
+           _y# (if (matrix? ~y) (to-list ~y) ~y)
+           group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
+           x-groups# (when group-by# (group-by (bind-columns _x# group-by#) 1 :cols 0))
+           y-groups# (when group-by# (group-by (bind-columns _y# group-by#) 1 :cols 0))
+           x# (if x-groups# (first x-groups#) _x#)
+           y# (if y-groups# (first y-groups#) _y#)
+           main-title# (if (:title opts#) (:title opts#) "XY Plot")
+           x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
+           y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
+           series-lab# (if (:series-label opts#) (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
+           legend?# (true? (:legend opts#))
+           data-series# (XYSeries. series-lab#)
+           dataset# (XYSeriesCollection.)
+           chart# (do
+                    (doseq [i# (range (count x#))] (.add data-series# (nth x# i#)  (nth y# i#)))
+                    (.addSeries dataset# data-series#)
+                    (org.jfree.chart.ChartFactory/createXYLineChart 
+                        main-title#
+                        x-lab#
+                        y-lab#
+                        dataset# 
+                        org.jfree.chart.plot.PlotOrientation/VERTICAL 
+                        legend?# 
+                        true  ; tooltips
+                        false))
+           _# (when x-groups#
+                (doseq [i# (range 1 (count x-groups#))] 
+                  (add-lines chart# (nth x-groups# i#) 
+                             (nth y-groups# i#)
+                             :series-label (format "%s, %s (%s)" '~x '~y i#))))]
+        chart#)))
+
+
 
 
 (defmacro function-plot
@@ -330,6 +361,7 @@
     (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
 
     ;; use the group-by options
+    (use '(incanter core stats datasets charts))
     (def iris (to-matrix (get-dataset :iris))) 
     (view (box-plot (sel iris :cols 0) :group-by (sel iris :cols 4) :legend true))
 
@@ -343,7 +375,9 @@
   ([x & options]
     `(let [opts# (if '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
-           x-groups# (when (:group-by opts#) (map to-list (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0)))
+           group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
+           x-groups# (when group-by# (map to-list (group-by (bind-columns _x# group-by#) 1 :cols 0)))
+           ;x-groups# (when (:group-by opts#) (map to-list (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0)))
            x# (if x-groups# (first x-groups#) _x#)
            main-title# (if (:title opts#) (:title opts#) "Boxplot")
            ;x-label# (if (:x-label opts#) (:x-label opts#) (str '~x))
