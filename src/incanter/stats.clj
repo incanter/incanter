@@ -1929,6 +1929,12 @@
           view)
 
 
+    ;; alternatively, the :group-by option can be used in scatter-plot
+    (view (scatter-plot x1 x2 
+                        :group-by (sel iris :cols 4)
+                        :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))
+
+
   References:
     http://en.wikipedia.org/wiki/Principal_component_analysis
 

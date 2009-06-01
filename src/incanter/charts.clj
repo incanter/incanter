@@ -106,7 +106,7 @@
 
 
 
-
+(declare add-points)
 
 (defmacro scatter-plot 
 " Returns a JFreeChart object representing a scatter-plot of the given data.
@@ -119,6 +119,7 @@
     :y-label (default 'Frequency')
     :legend (default false) prints legend
     :series-label (default x expression)
+    :group-by (default nil) -- a vector of values used to group the x and y values into series.
 
   See also:
     view, save, add-points, add-lines
@@ -139,6 +140,13 @@
     (def lm (linear-model y x))
     (add-lines mvn-plot x (:fitted lm))
 
+    ;; use :group-by option
+    (use '(incanter core stats datasets charts))
+    ;; load the :iris dataset
+    (def iris (to-matrix (get-dataset :iris)))
+    ;; plot the first two columns grouped by the fifth column
+    (view (scatter-plot (sel iris :cols 0) (sel iris :cols 1) :group-by (sel iris :cols 4)))
+
     ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
 
   References:
@@ -150,25 +158,32 @@
     `(let [opts# (if '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
            _y# (if (matrix? ~y) (to-list ~y) ~y)
+           x-groups# (when (:group-by opts#) (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0))
+           y-groups# (when (:group-by opts#) (group-by (bind-columns _y# (:group-by opts#)) 1 :cols 0))
+           x# (if x-groups# (first x-groups#) _x#)
+           y# (if y-groups# (first y-groups#) _y#)
            main-title# (if (:title opts#) (:title opts#) "Scatter Plot")
            x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
            y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
            series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
            legend?# (true? (:legend opts#))
            data-series# (XYSeries. series-lab#)
-           dataset# (XYSeriesCollection.)]
-      (do
-        (doseq [i# (range (count _x#))] (.add data-series# (nth _x# i#)  (nth _y# i#)))
-        (.addSeries dataset# data-series#)
-        (org.jfree.chart.ChartFactory/createScatterPlot 
-            main-title#
-            x-lab#
-            y-lab#
-            dataset# 
-            org.jfree.chart.plot.PlotOrientation/VERTICAL 
-            legend?# 
-            true  ; tooltips
-            false)))))
+           dataset# (XYSeriesCollection.)
+           chart# (do
+                    (doseq [i# (range (count x#))] (.add data-series# (nth x# i#)  (nth y# i#)))
+                    (.addSeries dataset# data-series#)
+                    (org.jfree.chart.ChartFactory/createScatterPlot 
+                        main-title#
+                        x-lab#
+                        y-lab#
+                        dataset# 
+                        org.jfree.chart.plot.PlotOrientation/VERTICAL 
+                        legend?# 
+                        true  ; tooltips
+                        false))
+           _# (when x-groups#
+                (doseq [i# (range 1 (count x-groups#))] (add-points chart# (nth x-groups# i#) (nth y-groups# i#))))]
+        chart#)))
 
 
 
@@ -285,6 +300,8 @@
                  :legend legend?#))))
 
 
+(declare add-box-plot)
+
 
 (defmacro box-plot 
 " Returns a JFreeChart object representing a box-plot of the given data.
@@ -297,6 +314,7 @@
     :y-label (default 'Frequency')
     :legend (default false) prints legend
     :series-label (default x expression)
+    :group-by (default nil) -- a vector of values used to group the x values into series.
 
   See also:
     view and save
@@ -311,6 +329,10 @@
     (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))
     (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
 
+    ;; use the group-by options
+    (def iris (to-matrix (get-dataset :iris))) 
+    (view (box-plot (sel iris :cols 0) :group-by (sel iris :cols 4) :legend true))
+
     ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
            
   References:
@@ -320,26 +342,31 @@
 "
   ([x & options]
     `(let [opts# (if '~options (assoc {} ~@options))
-          data# (if (matrix? ~x) (to-list ~x) ~x)
-          main-title# (if (:title opts#) (:title opts#) "Boxplot")
-          ;x-label# (if (:x-label opts#) (:x-label opts#) (str '~x))
-          x-label# (if (:x-label opts#) (:x-label opts#) "")
-          y-label# (if (:y-label opts#) (:y-label opts#) "Values")
-          series-label# (if (:series-label opts#) (:series-label opts#) (str '~x))
-          category-label# (if (:category-label opts#) (:category-label opts#) 0)
-          ;category-label# (if (:category-label opts#) (:category-label opts#) (str '~x))
-          legend?# (true? (:legend opts#))
-          dataset# (DefaultBoxAndWhiskerCategoryDataset.)
-          chart# (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart 
-                    main-title#
-                    x-label#
-                    y-label#
-                    dataset# 
-                    legend?#)]
-      (do
-        (.add dataset# data# series-label# category-label#)
-        (.. chart# getCategoryPlot getRenderer (setMaximumBarWidth 0.25))
-        chart#))))
+           _x# (if (matrix? ~x) (to-list ~x) ~x)
+           x-groups# (when (:group-by opts#) (map to-list (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0)))
+           x# (if x-groups# (first x-groups#) _x#)
+           main-title# (if (:title opts#) (:title opts#) "Boxplot")
+           ;x-label# (if (:x-label opts#) (:x-label opts#) (str '~x))
+           x-label# (if (:x-label opts#) (:x-label opts#) "")
+           y-label# (if (:y-label opts#) (:y-label opts#) "Values")
+           series-label# (if (:series-label opts#) (:series-label opts#) (if x-groups# (str '~x 0) (str '~x)))
+           category-label# (if (:category-label opts#) (:category-label opts#) 0)
+           ;category-label# (if (:category-label opts#) (:category-label opts#) (str '~x))
+           legend?# (true? (:legend opts#))
+           dataset# (DefaultBoxAndWhiskerCategoryDataset.)
+           chart# (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart 
+                     main-title#
+                     x-label#
+                     y-label#
+                     dataset# 
+                     legend?#)]
+        (do
+          (.. chart# getCategoryPlot getRenderer (setMaximumBarWidth 0.25))
+          (.add dataset# x# series-label# category-label#)
+          (when-not (empty? (rest x-groups#))
+            ;(doseq [g# (rest x-groups#)] (add-box-plot chart# g#)))
+            (doseq [i# (range 1 (count x-groups#))] (.add dataset# (nth x-groups# i#) (str '~x i#) i#)))
+          chart#))))
 
 
 
