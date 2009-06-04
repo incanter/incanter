@@ -53,6 +53,15 @@
    :plant-growth {:filename "data/plant_growth.csv"
             :delim \,
             :header true}
+   :filip {:filename "data/filip.dat"
+            :delim \space
+            :header true}
+   :pontius {:filename "data/pontius.dat"
+            :delim \space
+            :header true}
+   :longley {:filename "data/longley.dat"
+            :delim \space
+            :header true}
   })
 
 
@@ -97,6 +106,15 @@
     :plant-growth -- Results from an experiment to compare yields (as measured by dried
                      weight of plants) obtained under a control and two different
                      treatment conditions.
+
+    :pontius -- NIST data set for linear regression certification, 
+              see http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml
+
+    :filip -- NIST data set for linear regression certification, 
+              see http://www.itl.nist.gov/div898/strd/lls/data/Filip.shtml
+
+    :longely -- NIST data set for linear regression certification, 
+              see http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml
 "
   ([dataset-key & options]
     (let [opts (if options (apply assoc {} options) nil)
