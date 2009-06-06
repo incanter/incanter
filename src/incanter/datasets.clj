@@ -62,6 +62,12 @@
    :longley {:filename "data/longley.dat"
             :delim \space
             :header true}
+   :chwirut {:filename "data/Chwirut1.dat"
+            :delim \space
+            :header true}
+   :thurstone {:filename "data/thurstone.dat"
+            :delim \tab
+            :header true}
   })
 
 
@@ -107,14 +113,30 @@
                      weight of plants) obtained under a control and two different
                      treatment conditions.
 
-    :pontius -- NIST data set for linear regression certification, 
-              see http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml
+    :pontius -- These data are from a NIST study involving calibration of load cells. 
+                The response variable (y) is the deflection and the predictor variable 
+                (x) is load.
+                See http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml
 
     :filip -- NIST data set for linear regression certification, 
               see http://www.itl.nist.gov/div898/strd/lls/data/Filip.shtml
 
-    :longely -- NIST data set for linear regression certification, 
-              see http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml
+    :longely -- This classic dataset of labor statistics was one of the first used to 
+                test the accuracy of least squares computations. The response variable 
+                (y) is the Total Derived Employment and the predictor variables are GNP 
+                Implicit Price Deflator with Year 1954 = 100 (x1), Gross National Product 
+                (x2), Unemployment (x3), Size of Armed Forces (x4), Non-Institutional 
+                Population Age 14 & Over (x5), and Year (x6).
+                See http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml
+
+    :Chwirut -- These data are the result of a NIST study involving ultrasonic calibration. 
+                The response variable is ultrasonic response, and the predictor variable is 
+                metal distance.
+                See http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat
+
+    :thurstone -- test data for non-linear least squares.
+
+
 "
   ([dataset-key & options]
     (let [opts (if options (apply assoc {} options) nil)
