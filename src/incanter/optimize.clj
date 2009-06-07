@@ -367,14 +367,14 @@
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
-    (def theta-init [20 200 100])
+    (def start [20 200 100])
     (def data (to-matrix (get-dataset :thurstone)))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
     (view (scatter-plot x y))
 
-    (nls-rss f theta-init x y)
+    (nls-rss f start x y)
 
 
 
@@ -515,7 +515,11 @@
         (let [H (solve (nls-hessian f df d2f th x y))
               g (nls-gradient f df th x y)]
           (if (or (< (reduce max (abs g)) tol) (= i max-iter))
-            {:theta th :iterations i :gradient g :hessian H}
+            {:theta th 
+             :iterations i 
+             :gradient g 
+             :hessian H
+             :rss (nls-rss f th x y)}
             (recur (inc i) (map - th (mmult H g)))))))))
 
 
@@ -571,10 +575,11 @@
               g (grad th x)
               update (mmult (solve (mmult (trans g) g)) (trans g) resid)
               ]
-          ;(if (or (< (reduce max (abs g)) tol) (= i max-iter))
-          ;(if (= i max-iter)
           (if (or (< (reduce max (abs update)) tol) (= i max-iter))
-            {:theta th :iterations i :gradient g}
+            {:theta th 
+             :iterations i 
+             :gradient g
+             :rss (nls-rss f th x y)}
             (recur (inc i) (map + th update))))))))
 
 
@@ -606,6 +611,7 @@
     :hessian -- the estimated hessian, if available
     :iterations -- the number of iterations performed
     :fitted -- the fitted values of y (i.e. y-hat)
+    :rss -- the residual sum-of-squares
     :x -- the independent data values
     :y -- the dependent data values
 
@@ -679,6 +685,7 @@
        :gradient (:gradient nls)
        :hessian (:hessian nls)
        :iterations (:iterations nls)
+       :rss (:rss nls)
        :fitted fitted
        :x x
        :y y})))
