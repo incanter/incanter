@@ -310,7 +310,7 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.datasets&apos;, &apos;+
           (* sigma-sq 
             (+ 1 (/ (- (* a-std pdf-a) (* b-std pdf-b))
                     (- cdf-b cdf-a))
-              (- (pow (/ (- pdf-a pdf-b) (- cdf-b cdf-a)) 2))))))))</pre></div></div></dd></dl></li></ol></div></div><div class="library"><a name="library-incanter.charts"/><div class="library-name"><span class="library-contents-toggle">[ <a id="library-contents-toggle-incanter.charts" href="javascript:toggle(&apos;library-contents-incanter.charts&apos;, &apos;library-contents-toggle-incanter.charts&apos;, &apos;-&apos;, &apos;+&apos;)">-</a> ] </span>incanter.charts</div><div class="library-contents" id="library-contents-incanter.charts"><div class="library-member-links"><a class="lib-member-link" href="#member-incanter.charts-add-box-plot">add-box-plot</a> <a class="lib-member-link" href="#member-incanter.charts-add-function">add-function</a> <a class="lib-member-link" href="#member-incanter.charts-add-histogram">add-histogram</a> <a class="lib-member-link" href="#member-incanter.charts-add-lines">add-lines</a> <a class="lib-member-link" href="#member-incanter.charts-add-points">add-points</a> <a class="lib-member-link" href="#member-incanter.charts-bland-altman-plot">bland-altman-plot</a> <a class="lib-member-link" href="#member-incanter.charts-box-plot">box-plot</a> <a class="lib-member-link" href="#member-incanter.charts-clear-background">clear-background</a> <a class="lib-member-link" href="#member-incanter.charts-function-plot">function-plot</a> <a class="lib-member-link" href="#member-incanter.charts-histogram">histogram</a> <a class="lib-member-link" href="#member-incanter.charts-line-plot">line-plot</a> <a class="lib-member-link" href="#member-incanter.charts-qq-plot">qq-plot</a> <a class="lib-member-link" href="#member-incanter.charts-scatter-plot">scatter-plot</a> <a class="lib-member-link" href="#member-incanter.charts-set-alpha">set-alpha</a> <a class="lib-member-link" href="#member-incanter.charts-set-background-alpha">set-background-alpha</a> <a class="lib-member-link" href="#member-incanter.charts-set-title">set-title</a> <a class="lib-member-link" href="#member-incanter.charts-set-x-label">set-x-label</a> <a class="lib-member-link" href="#member-incanter.charts-set-y-label">set-y-label</a> <a class="lib-member-link" href="#member-incanter.charts-trace-plot">trace-plot</a></div><ol class="library-members"><li class="library-member"><a name="member-incanter.charts-add-box-plot"/><dl class="library-member-table"><dt class="library-member-name">add-box-plot</dt><dd><div class="library-member-info"><span class="library-member-type">macro</span> <span class="library-member-arglists">([chart x &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Adds an additional box to an existing box-plot, returns the modified chart object.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Options:</div><div class="library-member-doc-line">    :series-label (default x expression)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">      (use &apos;(incanter charts stats))</div><div class="library-member-doc-line">      (doto (box-plot (sample-normal 1000) :legend true)</div><div class="library-member-doc-line">            view</div><div class="library-member-doc-line">            (add-box-plot (sample-normal 1000 :sd 2))</div><div class="library-member-doc-line">            (add-box-plot (sample-gamma 1000)))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</div><div class="library-member-doc-line">    </div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-box-plot&apos;)" id="linkto-membersource-incanter.charts-add-box-plot">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-box-plot"><pre>(defmacro add-box-plot 
+              (- (pow (/ (- pdf-a pdf-b) (- cdf-b cdf-a)) 2))))))))</pre></div></div></dd></dl></li></ol></div></div><div class="library"><a name="library-incanter.charts"/><div class="library-name"><span class="library-contents-toggle">[ <a id="library-contents-toggle-incanter.charts" href="javascript:toggle(&apos;library-contents-incanter.charts&apos;, &apos;library-contents-toggle-incanter.charts&apos;, &apos;-&apos;, &apos;+&apos;)">-</a> ] </span>incanter.charts</div><div class="library-contents" id="library-contents-incanter.charts"><div class="library-member-links"><a class="lib-member-link" href="#member-incanter.charts-add-box-plot">add-box-plot</a> <a class="lib-member-link" href="#member-incanter.charts-add-function">add-function</a> <a class="lib-member-link" href="#member-incanter.charts-add-histogram">add-histogram</a> <a class="lib-member-link" href="#member-incanter.charts-add-lines">add-lines</a> <a class="lib-member-link" href="#member-incanter.charts-add-pointer">add-pointer</a> <a class="lib-member-link" href="#member-incanter.charts-add-points">add-points</a> <a class="lib-member-link" href="#member-incanter.charts-add-polygon">add-polygon</a> <a class="lib-member-link" href="#member-incanter.charts-add-text">add-text</a> <a class="lib-member-link" href="#member-incanter.charts-bland-altman-plot">bland-altman-plot</a> <a class="lib-member-link" href="#member-incanter.charts-box-plot">box-plot</a> <a class="lib-member-link" href="#member-incanter.charts-clear-background">clear-background</a> <a class="lib-member-link" href="#member-incanter.charts-function-plot">function-plot</a> <a class="lib-member-link" href="#member-incanter.charts-histogram">histogram</a> <a class="lib-member-link" href="#member-incanter.charts-line-plot">line-plot</a> <a class="lib-member-link" href="#member-incanter.charts-qq-plot">qq-plot</a> <a class="lib-member-link" href="#member-incanter.charts-scatter-plot">scatter-plot</a> <a class="lib-member-link" href="#member-incanter.charts-set-alpha">set-alpha</a> <a class="lib-member-link" href="#member-incanter.charts-set-background-alpha">set-background-alpha</a> <a class="lib-member-link" href="#member-incanter.charts-set-title">set-title</a> <a class="lib-member-link" href="#member-incanter.charts-set-x-label">set-x-label</a> <a class="lib-member-link" href="#member-incanter.charts-set-y-label">set-y-label</a> <a class="lib-member-link" href="#member-incanter.charts-trace-plot">trace-plot</a></div><ol class="library-members"><li class="library-member"><a name="member-incanter.charts-add-box-plot"/><dl class="library-member-table"><dt class="library-member-name">add-box-plot</dt><dd><div class="library-member-info"><span class="library-member-type">macro</span> <span class="library-member-arglists">([chart x &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Adds an additional box to an existing box-plot, returns the modified chart object.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Options:</div><div class="library-member-doc-line">    :series-label (default x expression)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">      (use &apos;(incanter charts stats))</div><div class="library-member-doc-line">      (doto (box-plot (sample-normal 1000) :legend true)</div><div class="library-member-doc-line">            view</div><div class="library-member-doc-line">            (add-box-plot (sample-normal 1000 :sd 2))</div><div class="library-member-doc-line">            (add-box-plot (sample-gamma 1000)))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</div><div class="library-member-doc-line">    </div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-box-plot&apos;)" id="linkto-membersource-incanter.charts-add-box-plot">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-box-plot"><pre>(defmacro add-box-plot 
 &quot;...&quot;
   ([chart x &amp; options]
     `(let [opts# (if &apos;~options (assoc {} ~@options))
@@ -375,7 +375,89 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.datasets&apos;, &apos;+
       (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
       ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
       (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
-      chart#))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-add-points"/><dl class="library-member-table"><dt class="library-member-name">add-points</dt><dd><div class="library-member-info"><span class="library-member-type">macro</span> <span class="library-member-arglists">([chart x y &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Plots points on the given scatter-plot or line-plot of the (x,y) points.</div><div class="library-member-doc-line">  Equivalent to R&apos;s lines function, returns the modified chart object.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Options:</div><div class="library-member-doc-line">    :series-label (default x expression)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core stats io datasets charts))</div><div class="library-member-doc-line">    (def cars (to-matrix (get-dataset :cars)))</div><div class="library-member-doc-line">    (def y (sel cars :cols 0))</div><div class="library-member-doc-line">    (def x (sel cars :cols 1))</div><div class="library-member-doc-line">    </div><div class="library-member-doc-line">    ;; add regression line to scatter plot</div><div class="library-member-doc-line">    (def lm1 (linear-model y x))</div><div class="library-member-doc-line">    ;; model the data without an intercept</div><div class="library-member-doc-line">    (def lm2 (linear-model y x :intercept false))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (doto (line-plot x (:fitted lm1) :legend true)</div><div class="library-member-doc-line">          view</div><div class="library-member-doc-line">          (add-points x y)</div><div class="library-member-doc-line">          (add-lines x (:fitted lm2)))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</div><div class="library-member-doc-line">    </div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-points&apos;)" id="linkto-membersource-incanter.charts-add-points">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-points"><pre>(defmacro add-points
+      chart#))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-add-pointer"/><dl class="library-member-table"><dt class="library-member-name">add-pointer</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([chart x y &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Adds an arrow annotation to the given chart.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Arguments:</div><div class="library-member-doc-line">    chart -- the chart to annotate</div><div class="library-member-doc-line">    x, y -- the coordinate to add the annotation</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Options:</div><div class="library-member-doc-line">      :text -- (default &quot;&quot;) text to include at the end of the arrow</div><div class="library-member-doc-line">      :angle -- (default :nw) either a number indicating the angle of the arrow, </div><div class="library-member-doc-line">                or a keyword indicating a direction (:north :nw :west :sw :south</div><div class="library-member-doc-line">                :se :east :ne)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core charts))</div><div class="library-member-doc-line">    (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))</div><div class="library-member-doc-line">    (def plot (line-plot x (sin x)))</div><div class="library-member-doc-line">    (view plot)</div><div class="library-member-doc-line">    ;; annotate the plot</div><div class="library-member-doc-line">    (doto plot</div><div class="library-member-doc-line">      (add-pointer (- Math/PI) (sin (- Math/PI)) :text &quot;(-pi, (sin -pi))&quot;)</div><div class="library-member-doc-line">      (add-pointer Math/PI (sin Math/PI) :text &quot;(pi, (sin pi))&quot; :angle :ne)</div><div class="library-member-doc-line">      (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text &quot;(pi/2, (sin pi/2))&quot; :angle :south))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    ;; try the different angle options</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;north&quot; :angle :north)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;nw&quot; :angle :nw)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;ne&quot; :angle :ne)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;west&quot; :angle :west)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;east&quot; :angle :east)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;south&quot; :angle :south)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;sw&quot; :angle :sw)</div><div class="library-member-doc-line">    (add-pointer plot 0 0 :text &quot;se&quot; :angle :se)</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-pointer&apos;)" id="linkto-membersource-incanter.charts-add-pointer">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-pointer"><pre>(defn add-pointer
+&quot; Adds an arrow annotation to the given chart.
+
+  Arguments:
+    chart -- the chart to annotate
+    x, y -- the coordinate to add the annotation
+
+
+  Options:
+      :text -- (default \&quot;\&quot;) text to include at the end of the arrow
+      :angle -- (default :nw) either a number indicating the angle of the arrow, 
+                or a keyword indicating a direction (:north :nw :west :sw :south
+                :se :east :ne)
+
+
+  Examples:
+
+    (use &apos;(incanter core charts))
+    (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))
+    (def plot (line-plot x (sin x)))
+    (view plot)
+    ;; annotate the plot
+    (doto plot
+      (add-pointer (- Math/PI) (sin (- Math/PI)) :text \&quot;(-pi, (sin -pi))\&quot;)
+      (add-pointer Math/PI (sin Math/PI) :text \&quot;(pi, (sin pi))\&quot; :angle :ne)
+      (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text \&quot;(pi/2, (sin pi/2))\&quot; :angle :south))
+
+    ;; try the different angle options
+    (add-pointer plot 0 0 :text \&quot;north\&quot; :angle :north)
+    (add-pointer plot 0 0 :text \&quot;nw\&quot; :angle :nw)
+    (add-pointer plot 0 0 :text \&quot;ne\&quot; :angle :ne)
+    (add-pointer plot 0 0 :text \&quot;west\&quot; :angle :west)
+    (add-pointer plot 0 0 :text \&quot;east\&quot; :angle :east)
+    (add-pointer plot 0 0 :text \&quot;south\&quot; :angle :south)
+    (add-pointer plot 0 0 :text \&quot;sw\&quot; :angle :sw)
+    (add-pointer plot 0 0 :text \&quot;se\&quot; :angle :se)
+
+
+&quot;
+  ([chart x y &amp; options]
+    (let [opts (if options (apply assoc {} options) nil)
+          text (if (:text opts) (:text opts) &quot;&quot;)
+          n (* -1/2 Math/PI)
+          s (* 1/2 Math/PI)
+          w Math/PI
+          e 0
+          nw (* -3/4 Math/PI)
+          ne (* -1/4 Math/PI)
+          se (* 1/4 Math/PI)
+          sw (* 3/4 Math/PI)
+          angle (if (nil? (:angle opts))
+                    nw
+                    (if (keyword? (:angle opts))
+                      (cond 
+                        (= (:angle opts) :north) n
+                        (= (:angle opts) :south) s
+                        (= (:angle opts) :west) w
+                        (= (:angle opts) :east) e
+                        (= (:angle opts) :nw) nw
+                        (= (:angle opts) :ne) ne
+                        (= (:angle opts) :sw) sw
+                        (= (:angle opts) :se) se)
+                      (:angle opts)))
+          anno (org.jfree.chart.annotations.XYPointerAnnotation. text x y angle)]
+      (do
+        (cond
+          (= angle n)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/BASELINE_CENTER)
+          (= angle s)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER)
+          (= angle w)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_RIGHT)
+          (= angle e)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_LEFT)
+          (= angle nw)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_RIGHT)
+          (= angle ne)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_LEFT)
+          (= angle sw)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_RIGHT)
+          (= angle se)
+            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_LEFT))
+        (.addAnnotation (.getPlot chart) anno)))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-add-points"/><dl class="library-member-table"><dt class="library-member-name">add-points</dt><dd><div class="library-member-info"><span class="library-member-type">macro</span> <span class="library-member-arglists">([chart x y &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Plots points on the given scatter-plot or line-plot of the (x,y) points.</div><div class="library-member-doc-line">  Equivalent to R&apos;s lines function, returns the modified chart object.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Options:</div><div class="library-member-doc-line">    :series-label (default x expression)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core stats io datasets charts))</div><div class="library-member-doc-line">    (def cars (to-matrix (get-dataset :cars)))</div><div class="library-member-doc-line">    (def y (sel cars :cols 0))</div><div class="library-member-doc-line">    (def x (sel cars :cols 1))</div><div class="library-member-doc-line">    </div><div class="library-member-doc-line">    ;; add regression line to scatter plot</div><div class="library-member-doc-line">    (def lm1 (linear-model y x))</div><div class="library-member-doc-line">    ;; model the data without an intercept</div><div class="library-member-doc-line">    (def lm2 (linear-model y x :intercept false))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (doto (line-plot x (:fitted lm1) :legend true)</div><div class="library-member-doc-line">          view</div><div class="library-member-doc-line">          (add-points x y)</div><div class="library-member-doc-line">          (add-lines x (:fitted lm2)))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/</div><div class="library-member-doc-line">    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</div><div class="library-member-doc-line">    </div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-points&apos;)" id="linkto-membersource-incanter.charts-add-points">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-points"><pre>(defmacro add-points
 &quot; Plots points on the given scatter-plot or line-plot of the (x,y) points....&quot;
   ([chart x y &amp; options]
     `(let [opts# (if &apos;~options (assoc {} ~@options))
@@ -400,7 +482,106 @@ setLinkToggleText(&apos;library-contents-toggle-incanter.datasets&apos;, &apos;+
       (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
       ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
       (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
-      chart#))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-bland-altman-plot"/><dl class="library-member-table"><dt class="library-member-name">bland-altman-plot</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([x1 x2])</span></div><div class="library-member-docs"><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core datasets charts))</div><div class="library-member-doc-line">    (def flow-meter (to-matrix (get-dataset :flow-meter)))</div><div class="library-member-doc-line">    (def x1 (sel flow-meter :cols 1))</div><div class="library-member-doc-line">    (def x2 (sel flow-meter :cols 3))</div><div class="library-member-doc-line">    (view (bland-altman-plot x1 x2))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://en.wikipedia.org/wiki/Bland-Altman_plot</div><div class="library-member-doc-line">    http://www-users.york.ac.uk/~mb55/meas/ba.htm</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-bland-altman-plot&apos;)" id="linkto-membersource-incanter.charts-bland-altman-plot">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-bland-altman-plot"><pre>(defn bland-altman-plot
+      chart#))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-add-polygon"/><dl class="library-member-table"><dt class="library-member-name">add-polygon</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([chart coords &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Adds a polygon outline defined by a given coordinates. The last coordinate will </div><div class="library-member-doc-line">  close with the first. If only two points are given, it will plot a line.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Arguments:</div><div class="library-member-doc-line">    chart -- the chart to add the polygon to.</div><div class="library-member-doc-line">    coords -- a list of coords (an n-by-2 matrix can also be used)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line">    (use &apos;(incanter core stats charts))</div><div class="library-member-doc-line">    (def x (range -3 3 0.01))</div><div class="library-member-doc-line">    (def plot (line-plot x (pdf-normal x)))</div><div class="library-member-doc-line">    (view plot)</div><div class="library-member-doc-line">   </div><div class="library-member-doc-line">    ;; add polygon to the chart</div><div class="library-member-doc-line">    (add-polygon plot [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]])</div><div class="library-member-doc-line">    ;; the coordinates can also be passed in a matrix</div><div class="library-member-doc-line">    ;; (def points (matrix [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]]))</div><div class="library-member-doc-line">    ;; (add-polygon plot points)</div><div class="library-member-doc-line">    ;; add a text annotation</div><div class="library-member-doc-line">    (add-text plot -1.25 0.35 &quot;95% Conf Interval&quot;)</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    ;; PCA chart example</div><div class="library-member-doc-line">    (use &apos;(incanter core stats charts datasets))</div><div class="library-member-doc-line">    ;; load the iris dataset</div><div class="library-member-doc-line">    (def iris (to-matrix (get-dataset :iris)))</div><div class="library-member-doc-line">    ;; run the pca</div><div class="library-member-doc-line">    (def pca (principal-components (sel iris :cols (range 4))))</div><div class="library-member-doc-line">    ;; extract the first two principal components</div><div class="library-member-doc-line">    (def pc1 (sel (:rotation pca) :cols 0))</div><div class="library-member-doc-line">    (def pc2 (sel (:rotation pca) :cols 1))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    ;; project the first four dimension of the iris data onto the first</div><div class="library-member-doc-line">    ;; two principal components</div><div class="library-member-doc-line">    (def x1 (mmult (sel iris :cols (range 4)) pc1)) </div><div class="library-member-doc-line">    (def x2 (mmult (sel iris :cols (range 4)) pc2)) </div><div class="library-member-doc-line">   </div><div class="library-member-doc-line">    ;; now plot the transformed data, coloring each species a different color</div><div class="library-member-doc-line">    (def plot (scatter-plot x1 x2 </div><div class="library-member-doc-line">                            :group-by (sel iris :cols 4)</div><div class="library-member-doc-line">                            :x-label &quot;PC1&quot; :y-label &quot;PC2&quot; :title &quot;Iris PCA&quot;))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (view plot)</div><div class="library-member-doc-line">    ;; put box around the first group</div><div class="library-member-doc-line">    (add-polygon plot [[-3.2 -6.3] [-2 -6.3] [-2 -3.78] [-3.2 -3.78]])</div><div class="library-member-doc-line">    ;; add some text annotations</div><div class="library-member-doc-line">    (add-text plot -2.5 -6.5 &quot;Setosa&quot;)</div><div class="library-member-doc-line">    (add-text plot -5 -5.5 &quot;Versicolor&quot;) </div><div class="library-member-doc-line">    (add-text plot -8 -5.5 &quot;Virginica&quot;)</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-polygon&apos;)" id="linkto-membersource-incanter.charts-add-polygon">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-polygon"><pre>(defn add-polygon
+&quot; Adds a polygon outline defined by a given coordinates. The last coordinate will 
+  close with the first. If only two points are given, it will plot a line.
+
+  Arguments:
+    chart -- the chart to add the polygon to.
+    coords -- a list of coords (an n-by-2 matrix can also be used)
+
+
+  Examples:
+    (use &apos;(incanter core stats charts))
+    (def x (range -3 3 0.01))
+    (def plot (line-plot x (pdf-normal x)))
+    (view plot)
+   
+    ;; add polygon to the chart
+    (add-polygon plot [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]])
+    ;; the coordinates can also be passed in a matrix
+    ;; (def points (matrix [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]]))
+    ;; (add-polygon plot points)
+    ;; add a text annotation
+    (add-text plot -1.25 0.35 \&quot;95% Conf Interval\&quot;)
+
+    ;; PCA chart example
+    (use &apos;(incanter core stats charts datasets))
+    ;; load the iris dataset
+    (def iris (to-matrix (get-dataset :iris)))
+    ;; run the pca
+    (def pca (principal-components (sel iris :cols (range 4))))
+    ;; extract the first two principal components
+    (def pc1 (sel (:rotation pca) :cols 0))
+    (def pc2 (sel (:rotation pca) :cols 1))
+
+    ;; project the first four dimension of the iris data onto the first
+    ;; two principal components
+    (def x1 (mmult (sel iris :cols (range 4)) pc1)) 
+    (def x2 (mmult (sel iris :cols (range 4)) pc2)) 
+   
+    ;; now plot the transformed data, coloring each species a different color
+    (def plot (scatter-plot x1 x2 
+                            :group-by (sel iris :cols 4)
+                            :x-label \&quot;PC1\&quot; :y-label \&quot;PC2\&quot; :title \&quot;Iris PCA\&quot;))
+
+    (view plot)
+    ;; put box around the first group
+    (add-polygon plot [[-3.2 -6.3] [-2 -6.3] [-2 -3.78] [-3.2 -3.78]])
+    ;; add some text annotations
+    (add-text plot -2.5 -6.5 \&quot;Setosa\&quot;)
+    (add-text plot -5 -5.5 \&quot;Versicolor\&quot;) 
+    (add-text plot -8 -5.5 \&quot;Virginica\&quot;)
+
+
+
+&quot;
+  ([chart coords &amp; options]
+    (let [opts (if options (apply assoc {} options) nil)
+          points (double-array (mapcat identity coords))
+          anno (org.jfree.chart.annotations.XYPolygonAnnotation. points)]
+      (.addAnnotation (.getPlot chart) anno))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-add-text"/><dl class="library-member-table"><dt class="library-member-name">add-text</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([chart x y text &amp; options])</span></div><div class="library-member-docs"><div class="library-member-doc-line"> Adds a text annotation centered at the given coordinates.</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Arguments:</div><div class="library-member-doc-line">    chart -- the chart to annotate</div><div class="library-member-doc-line">    x, y -- the coordinates to center the text</div><div class="library-member-doc-line">    text -- the text to add</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    ;; PCA chart example</div><div class="library-member-doc-line">    (use &apos;(incanter core stats charts datasets))</div><div class="library-member-doc-line">    ;; load the iris dataset</div><div class="library-member-doc-line">    (def iris (to-matrix (get-dataset :iris)))</div><div class="library-member-doc-line">    ;; run the pca</div><div class="library-member-doc-line">    (def pca (principal-components (sel iris :cols (range 4))))</div><div class="library-member-doc-line">    ;; extract the first two principal components</div><div class="library-member-doc-line">    (def pc1 (sel (:rotation pca) :cols 0))</div><div class="library-member-doc-line">    (def pc2 (sel (:rotation pca) :cols 1))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    ;; project the first four dimension of the iris data onto the first</div><div class="library-member-doc-line">    ;; two principal components</div><div class="library-member-doc-line">    (def x1 (mmult (sel iris :cols (range 4)) pc1)) </div><div class="library-member-doc-line">    (def x2 (mmult (sel iris :cols (range 4)) pc2)) </div><div class="library-member-doc-line">   </div><div class="library-member-doc-line">    ;; now plot the transformed data, coloring each species a different color</div><div class="library-member-doc-line">    (def plot (scatter-plot x1 x2 </div><div class="library-member-doc-line">                            :group-by (sel iris :cols 4)</div><div class="library-member-doc-line">                            :x-label &quot;PC1&quot; :y-label &quot;PC2&quot; :title &quot;Iris PCA&quot;))</div><div class="library-member-doc-line">    (view plot)</div><div class="library-member-doc-line">    ;; add some text annotations</div><div class="library-member-doc-line">    (add-text plot -2.5 -6.5 &quot;Setosa&quot;)</div><div class="library-member-doc-line">    (add-text plot -5 -5.5 &quot;Versicolor&quot;) </div><div class="library-member-doc-line">    (add-text plot -8 -5.5 &quot;Virginica&quot;)</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-add-text&apos;)" id="linkto-membersource-incanter.charts-add-text">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-add-text"><pre>(defn add-text
+&quot; Adds a text annotation centered at the given coordinates.
+
+  Arguments:
+    chart -- the chart to annotate
+    x, y -- the coordinates to center the text
+    text -- the text to add
+
+
+  Examples:
+
+    ;; PCA chart example
+    (use &apos;(incanter core stats charts datasets))
+    ;; load the iris dataset
+    (def iris (to-matrix (get-dataset :iris)))
+    ;; run the pca
+    (def pca (principal-components (sel iris :cols (range 4))))
+    ;; extract the first two principal components
+    (def pc1 (sel (:rotation pca) :cols 0))
+    (def pc2 (sel (:rotation pca) :cols 1))
+
+    ;; project the first four dimension of the iris data onto the first
+    ;; two principal components
+    (def x1 (mmult (sel iris :cols (range 4)) pc1)) 
+    (def x2 (mmult (sel iris :cols (range 4)) pc2)) 
+   
+    ;; now plot the transformed data, coloring each species a different color
+    (def plot (scatter-plot x1 x2 
+                            :group-by (sel iris :cols 4)
+                            :x-label \&quot;PC1\&quot; :y-label \&quot;PC2\&quot; :title \&quot;Iris PCA\&quot;))
+    (view plot)
+    ;; add some text annotations
+    (add-text plot -2.5 -6.5 \&quot;Setosa\&quot;)
+    (add-text plot -5 -5.5 \&quot;Versicolor\&quot;) 
+    (add-text plot -8 -5.5 \&quot;Virginica\&quot;)
+
+
+&quot;
+  ([chart x y text &amp; options]
+    (let [opts (if options (apply assoc {} options) nil)
+          anno (org.jfree.chart.annotations.XYTextAnnotation. text x y)]
+      (.addAnnotation (.getPlot chart) anno))))</pre></div></div></dd></dl></li><li class="library-member"><a name="member-incanter.charts-bland-altman-plot"/><dl class="library-member-table"><dt class="library-member-name">bland-altman-plot</dt><dd><div class="library-member-info"><span class="library-member-type">fn</span> <span class="library-member-arglists">([x1 x2])</span></div><div class="library-member-docs"><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  Examples:</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">    (use &apos;(incanter core datasets charts))</div><div class="library-member-doc-line">    (def flow-meter (to-matrix (get-dataset :flow-meter)))</div><div class="library-member-doc-line">    (def x1 (sel flow-meter :cols 1))</div><div class="library-member-doc-line">    (def x2 (sel flow-meter :cols 3))</div><div class="library-member-doc-line">    (view (bland-altman-plot x1 x2))</div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line"><span class="library-member-doc-whitespace"> </span></div><div class="library-member-doc-line">  References:</div><div class="library-member-doc-line">    http://en.wikipedia.org/wiki/Bland-Altman_plot</div><div class="library-member-doc-line">    http://www-users.york.ac.uk/~mb55/meas/ba.htm</div></div><div class="library-member-source-section"><div class="library-member-source-toggle">[ <a href="javascript:toggleSource(&apos;membersource-incanter.charts-bland-altman-plot&apos;)" id="linkto-membersource-incanter.charts-bland-altman-plot">Show Source</a> ]</div><div class="library-member-source" id="membersource-incanter.charts-bland-altman-plot"><pre>(defn bland-altman-plot
 &quot;...&quot;
   ([x1 x2]
       (let [plot (scatter-plot (div (plus x1 x2) 2) (minus x1 x2) 
