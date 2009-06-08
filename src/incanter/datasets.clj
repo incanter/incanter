@@ -17,7 +17,7 @@
 
 
 (ns incanter.datasets 
-  (:use (incanter io)))
+  (:use [incanter.io :only (read-dataset)]))
 
 
 

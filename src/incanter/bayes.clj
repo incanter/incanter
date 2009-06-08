@@ -17,7 +17,9 @@
 
 
 (ns incanter.bayes 
-  (:use (incanter core stats)))
+  (:use [incanter.core :only (matrix mmult mult div trans ncol nrow 
+                              plus to-list decomp-cholesky solve)] 
+        [incanter.stats :only (sample-normal sample-gamma)]))
 
 
 

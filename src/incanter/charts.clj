@@ -17,7 +17,10 @@
 
 
 (ns incanter.charts 
-  (:use (incanter core stats io))
+  ;(:use (incanter core stats))
+  (:use [incanter.core :only (matrix? to-list plus minus div group-by 
+                              bind-columns view save)]
+        [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
   (:import  (java.io File)
             (org.jfree.data.statistics HistogramDataset
                                        HistogramType
@@ -31,6 +34,10 @@
             (org.jfree.data.xy XYSeries
                                XYSeriesCollection)
             (org.jfree.chart.renderer.xy XYLineAndShapeRenderer)
+            (org.jfree.ui TextAnchor)
+            (org.jfree.chart.annotations XYPointerAnnotation 
+                                         XYTextAnnotation 
+                                         XYPolygonAnnotation)
      ))
 
 
@@ -811,25 +818,25 @@
                         (= (:angle opts) :sw) sw
                         (= (:angle opts) :se) se)
                       (:angle opts)))
-          anno (org.jfree.chart.annotations.XYPointerAnnotation. text x y angle)]
+          anno (XYPointerAnnotation. text x y angle)]
       (do
         (cond
           (= angle n)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/BASELINE_CENTER)
+            (.setTextAnchor TextAnchor/BASELINE_CENTER)
           (= angle s)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER)
+            (.setTextAnchor TextAnchor/CENTER)
           (= angle w)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_RIGHT)
+            (.setTextAnchor TextAnchor/CENTER_RIGHT)
           (= angle e)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_LEFT)
+            (.setTextAnchor TextAnchor/CENTER_LEFT)
           (= angle nw)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_RIGHT)
+            (.setTextAnchor TextAnchor/CENTER_RIGHT)
           (= angle ne)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_LEFT)
+            (.setTextAnchor TextAnchor/CENTER_LEFT)
           (= angle sw)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_RIGHT)
+            (.setTextAnchor TextAnchor/CENTER_RIGHT)
           (= angle se)
-            (.setTextAnchor anno org.jfree.ui.TextAnchor/CENTER_LEFT))
+            (.setTextAnchor TextAnchor/CENTER_LEFT))
         (.addAnnotation (.getPlot chart) anno)))))
 
 
@@ -877,7 +884,7 @@
 "
   ([chart x y text & options]
     (let [opts (if options (apply assoc {} options) nil)
-          anno (org.jfree.chart.annotations.XYTextAnnotation. text x y)]
+          anno (XYTextAnnotation. text x y)]
       (.addAnnotation (.getPlot chart) anno))))
 
 
@@ -939,7 +946,7 @@
   ([chart coords & options]
     (let [opts (if options (apply assoc {} options) nil)
           points (double-array (mapcat identity coords))
-          anno (org.jfree.chart.annotations.XYPolygonAnnotation. points)]
+          anno (XYPolygonAnnotation. points)]
       (.addAnnotation (.getPlot chart) anno))))
 
 
@@ -980,8 +987,8 @@
                          :series-label series-lab)]
       (do
         (add-lines chart (range n) (cumulative-mean x) :series-label "running mean")
-        (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-        (.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+        (.setSeriesRenderingOrder (.getPlot chart) SeriesRenderingOrder/FORWARD)
+        (.setDatasetRenderingOrder (.getPlot chart) DatasetRenderingOrder/FORWARD)
         chart))))
 
 

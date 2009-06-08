@@ -22,8 +22,8 @@
 (ns incanter.io 
   (:import (java.io FileReader)
            (au.com.bytecode.opencsv CSVReader))
-  (:use (incanter core) ))
-        ;(clojure set)))
+  (:use [incanter.core :only (dataset save)])
+  )
 
 
 (defn- parse-string [value] 

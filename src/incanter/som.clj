@@ -1,6 +1,7 @@
 
 (ns incanter.som 
-  (:use (incanter core stats)))
+  (:use [incanter.core :only (mult div plus minus trans to-vect sqrt
+                              sum pow)]))
 
 
 

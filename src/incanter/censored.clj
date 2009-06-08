@@ -1,7 +1,8 @@
 
 
 (ns incanter.censored 
-  (:use (incanter core stats)))
+  (:use [incanter.core :only (mult)] 
+        [incanter.stats :only (pdf-normal cdf-normal sd)]))
 
   
 (defn- lambda-two-sided 

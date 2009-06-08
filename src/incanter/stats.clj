@@ -31,7 +31,11 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability))
-  (:use (incanter core)))
+  (:use [incanter.core :only (plus minus div mult mmult to-list bind-columns 
+                              gamma pow sqrt diag trans regularized-beta ncol
+                              nrow identity-matrix decomp-cholesky decomp-svd
+                              matrix length sum sum-of-squares sel matrix?
+                              cumulative-sum solve abs)]))
 
 
 

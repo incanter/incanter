@@ -17,7 +17,8 @@
 
 
 (ns incanter.optimize 
-  (:use (incanter core)))
+  (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix
+                              identity-matrix)]))
 
 
 
