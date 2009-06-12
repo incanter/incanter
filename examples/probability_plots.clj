@@ -11,7 +11,7 @@
 (def x (range -3 3 0.01))
 
 ;; plot the PDFs of the normal distributions
-(doto (line-plot x (pdf-normal x) 
+(doto (xy-plot x (pdf-normal x) 
                  :title "Normal PDF"
                  :y-label "Density"
                  :legend true)
@@ -21,7 +21,7 @@
       view)
 
 ;; plot the CDFs of the normal distributions
-(doto (line-plot x (cdf-normal x) 
+(doto (xy-plot x (cdf-normal x) 
                  :title "Normal CDF"
                  :y-label "Probability"
                  :legend true)
@@ -48,7 +48,7 @@
 
 ;; plot the inverse of the normal distribution
 (def p (range 0.01 1 0.01))
-(doto (line-plot p (quantile-normal p) 
+(doto (xy-plot p (quantile-normal p) 
                  :title "Normal Inverse" 
                  :x-label "Probability" 
                  :y-label "X"
@@ -68,7 +68,7 @@
 ;; Examples of plots from the Gamma Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Gamma_distribution)
 (def x (range 0 20 0.1))
-(doto (line-plot x (pdf-gamma x :shape 1 :rate 2) 
+(doto (xy-plot x (pdf-gamma x :shape 1 :rate 2) 
                  :legend true
                  :title "Gamma PDF"
                  :y-label "Density")
@@ -78,7 +78,7 @@
       (add-lines x (pdf-gamma x :shape 9 :rate 0.5))
       view)
 
-(doto (line-plot x (cdf-gamma x :shape 1 :rate 2) 
+(doto (xy-plot x (cdf-gamma x :shape 1 :rate 2) 
                  :title "Gamma CDF"
                  :legend true
                  :y-label "Probability")
@@ -113,7 +113,7 @@
 ;;; Examples of plots from the Beta Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Beta_distribution)
 (def x (range 0 1 0.01))
-(doto (line-plot x (pdf-beta x :alpha 1 :beta 1) 
+(doto (xy-plot x (pdf-beta x :alpha 1 :beta 1) 
                  :title "Beta PDF"
                  :y-label "Density"
                  :legend true)
@@ -124,7 +124,7 @@
       view)
 
 
-(doto (line-plot x (cdf-beta x :alpha 1 :beta 1) 
+(doto (xy-plot x (cdf-beta x :alpha 1 :beta 1) 
                  :title "Beta CDF"
                  :y-label "Probability"
                  :legend true)
@@ -160,7 +160,7 @@
 ; Examples of plots from the Chi Square Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Chi_square_distribution)
 (def x (range 0.1 8 0.01))
-(doto (line-plot x (pdf-chisq x :df 1) 
+(doto (xy-plot x (pdf-chisq x :df 1) 
                  :title "Chi Square PDF"
                  :x-label "X" 
                  :y-label "Density"
@@ -173,7 +173,7 @@
 
 
 
-(doto (line-plot x (cdf-chisq x :df 1) 
+(doto (xy-plot x (cdf-chisq x :df 1) 
                  :title "Chi Square CDF"
                  :x-label "X" 
                  :y-label "Probability"
@@ -212,7 +212,7 @@
 ; Examples of plots from the Student's T-Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Student-t_distribution)
 (def x (range -5 5 0.01))
-(doto (line-plot x (pdf-t x :df 1) 
+(doto (xy-plot x (pdf-t x :df 1) 
                  :title "Student's T PDF"
                  :legend true
                  :x-label "X"
@@ -224,7 +224,7 @@
       view)
 
 
-(doto (line-plot x (cdf-t x :df 1) 
+(doto (xy-plot x (cdf-t x :df 1) 
                  :title "Student's T CDF"
                  :legend true
                  :x-label "X"
@@ -253,7 +253,7 @@
 
 ;; plot the quantiles of the Student's t distribution
 (def p (range 0.05 1 0.01))
-(doto (line-plot p (quantile-t p :df 1) 
+(doto (xy-plot p (quantile-t p :df 1) 
                  :title "Student's t Quantiles (df)" 
                  :x-label "Probability" 
                  :y-label "X"
@@ -274,7 +274,7 @@
 ; Examples of plots from the Exponential Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Exponential_distribution)
 (def x (range 0 5 0.01))
-(doto (line-plot x (pdf-exp x :rate 1/2) 
+(doto (xy-plot x (pdf-exp x :rate 1/2) 
                  :title "Exponential PDF"
                  :x-label "X" 
                  :y-label "Density"
@@ -284,7 +284,7 @@
       view)
 
 
-(doto (line-plot x (cdf-exp x :rate 1/2) 
+(doto (xy-plot x (cdf-exp x :rate 1/2) 
                  :title "Exponential CDF"
                  :x-label "X" 
                  :y-label "Probability"
@@ -318,13 +318,13 @@
 ;;; Examples of plots from the Continuous Uniform Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/Uniform_distribution)
 (def x (range 1 10.01 0.01))
-(doto (line-plot x (pdf-uniform x :min 1 :max 10) 
+(doto (xy-plot x (pdf-uniform x :min 1 :max 10) 
                  :title "Uniform PDF" 
                  :y-label "Density")
       view)
 
 
-(doto (line-plot x (cdf-uniform x :min 1 :max 10) 
+(doto (xy-plot x (cdf-uniform x :min 1 :max 10) 
                  :title "Uniform CDF" 
                  :y-label "Probability")
       view)
@@ -480,7 +480,7 @@
 ;;; Examples of plots from the F Distribution page at
 ;; Wikipedia (http://en.wikipedia.org/wiki/F_distribution)
 (def x (range 0 5 0.01))
-(doto (line-plot x (pdf-f x :df1 2 :df2 1) 
+(doto (xy-plot x (pdf-f x :df1 2 :df2 1) 
                  :title "F PDF"
                  :y-label "Density"
                  :legend true)
@@ -490,7 +490,7 @@
       view)
 
 
-(doto (line-plot x (cdf-f x :df1 1 :df2 1) 
+(doto (xy-plot x (cdf-f x :df1 1 :df2 1) 
                  :title "F CDF"
                  :y-label "Probability"
                  :legend true)

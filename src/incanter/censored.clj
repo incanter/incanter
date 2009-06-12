@@ -128,7 +128,7 @@
 
     (use 'incanter.charts)
     (def x (range -3 3 0.1))
-    (def plot (line-plot x (map #(truncated-variance :a %) x)))
+    (def plot (xy-plot x (map #(truncated-variance :a %) x)))
     (view plot)
     (add-lines plot x (map #(truncated-variance :b %) x))
 

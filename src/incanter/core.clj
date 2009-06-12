@@ -1064,9 +1064,9 @@
           selected-rows (cond 
                           (true? rows) (:rows dataset) 
                           (number? rows) (list (nth (:rows dataset) rows))
-                          (coll? rows) (map #(nth (:rows dataset) %) rows)) ]
-      ;(map (fn [col-key] (map #(% (get-column-id dataset col-key)) selected-rows)) cols))))
-      (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows))))
+                          (coll? rows) (map #(nth (:rows dataset) %) rows)) 
+          data (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows)] 
+      (if (> (count cols) 1) data (mapcat identity data)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

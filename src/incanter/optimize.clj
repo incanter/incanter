@@ -81,7 +81,7 @@
     (cube-deriv 4) ; value: 48.00120000993502
 
     (def x (range -3 3 0.1))
-    (def plot (line-plot x (map cube x)))
+    (def plot (xy-plot x (map cube x)))
     (view plot)
     (add-lines plot x (map cube-deriv x))
 
@@ -90,7 +90,7 @@
     (add-lines plot x (map cube-deriv2 x))
    
     ;; plot the normal pdf and its derivatives
-    (def plot (line-plot x (pdf-normal x)))
+    (def plot (xy-plot x (pdf-normal x)))
     (view plot)
     (def pdf-deriv (derivative pdf-normal))
     (add-lines plot x (pdf-deriv x))
@@ -121,7 +121,7 @@
 
     (use '(incanter core optimize charts))
     (def x (range -3 3 0.1))
-    (def plot (line-plot x (map #(quad-fx [% 1]) x)))
+    (def plot (xy-plot x (map #(quad-fx [% 1]) x)))
     (view plot)
     (add-lines plot x (map #(quad-dfx0 [% 1]) x))
 

@@ -18,15 +18,8 @@
 
 (ns incanter.stats 
   (:import (cern.colt.list.tdouble DoubleArrayList)
-           (cern.jet.random.tdouble Gamma
-                                    Beta
-                                    Binomial
-                                    ChiSquare
-                                    DoubleUniform
-                                    Exponential
-                                    NegativeBinomial
-                                    Normal
-                                    Poisson
+           (cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
+                                    Exponential NegativeBinomial Normal Poisson
                                     StudentT)
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
@@ -1717,7 +1710,7 @@
     (:df iris-lm)
 
     (def x1 (range 0.0 3 0.1))
-    (view (line-plot x1 (cdf-f x1 :df1 4 :df2 144)))
+    (view (xy-plot x1 (cdf-f x1 :df1 4 :df2 144)))
   
 
   References:
@@ -1890,6 +1883,129 @@
       })))
 
 
+
+(defn- cross-tabulate
+"
+
+  Examples:
+
+    (use '(incanter core stats))
+    (cross-tabulate [1 2 3 2 3 2 4 3 5])
+    (cross-tabulate (sample-poisson 100 :lambda 5))
+
+    (use '(incanter core stats datasets))
+    (def exams (to-matrix (get-dataset :exams)))
+    (cross-tabulate (sel exams :cols [1 2]))
+
+
+    (def data (matrix [[1 0 1] 
+                       [1 1 1] 
+                       [1 1 1] 
+                       [1 0 1] 
+                       [0 0 0] 
+                       [1 1 1] 
+                       [1 1 1] 
+                       [1 0 1] 
+                       [1 1 0]]))
+    (cross-tabulate data)
+
+
+    (def data (matrix [[1 0] 
+                       [1 1] 
+                       [1 1] 
+                       [1 0] 
+                       [0 0] 
+                       [1 1] 
+                       [1 1] 
+                       [1 0] 
+                       [1 1]]))
+    (cross-tabulate data)
+
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          _x (if (matrix? x) x (matrix x))
+          p (ncol _x)
+          n (nrow _x)
+          levels (for [i (range p)] (seq (into #{} (sel _x :cols i))))
+          margins (for [j (range p)]
+                  (loop [marg {} i (int 0)]
+                    (if (= i n)
+                      marg
+                      (let [lvl (sel _x :rows i :cols j)]
+                        (recur (let [count (marg lvl)]
+                                (if count 
+                                  (assoc marg lvl (inc count))
+                                  (assoc marg lvl 1)))
+                              (inc i))))))
+          counts (loop [tab {} i (int 0)]
+                    (if (= i n)
+                      tab
+                      (recur (let [count (tab (nth _x i))]
+                              (if count 
+                                (assoc tab (nth _x i) (inc count))
+                                (assoc tab (nth _x i) 1)))
+                            (inc i))))]
+
+      {:counts counts
+       :margins margins
+       :table (when (= p 2)
+                (matrix (for [r (first levels) 
+                              c (second levels)]  
+                          (let [c (counts (trans [r c]))]
+                            (if c c 0))) 
+                        2))
+       :n-vars p
+       :N (reduce + (vals (first margins)))
+       :n-levels (map #(count (keys %)) margins)
+       :levels levels})))
+
+         
+
+
+
+
+
+(defn- chisq-test
+"
+
+  Examples:
+    (chisq-test [1 2 3 2 3 2 4 3 5]) ;; 2.6667
+    (chisq-test [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25
+   
+    (use '(incanter core stats datasets))
+    (def exams (to-matrix (get-dataset :exams)))
+    (def x (sel exams :cols 1))
+    (def y (sel exams :cols 2))
+    (chisq-test x :y y)
+
+
+
+"
+  ([x & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          y (when (:y opts) (:y opts))
+          xtab (if y (cross-tabulate (bind-columns x y)) (cross-tabulate x))
+          table (:table xtab)
+          N (:N xtab)
+          n (when (nil? y) (first (:n-levels xtab)))
+          df (if y (* (dec (nrow table)) (dec (ncol table))) (dec n))
+          p (when (nil? y) (if (:probs opts) (:probs opts) (repeat n (/ n))))
+          E (if y
+              (for [r (first (:levels xtab)) c (second (:levels xtab))]
+                (/ (* ((first (:margins xtab)) r) ((second (:margins xtab)) c) N)))
+              (mult N p))
+          X-sq (reduce + (map (fn [o e] (/ (pow (- o e) 2) e)) (vals (:counts xtab)) E))
+         ]
+      {:X-sq X-sq
+       :df df
+       :p-value (cdf-chisq X-sq :df df :lower-tail false)
+       :p p
+       :N N
+       :table table
+       ;:n n
+       :E E}
+)))
 
 
 

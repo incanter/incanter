@@ -50,6 +50,9 @@
    :chick-weight {:filename "data/chick_weight.csv"
             :delim \,
             :header true}
+   :exams {:filename "data/exams.csv"
+            :delim \,
+            :header true}
    :plant-growth {:filename "data/plant_growth.csv"
             :delim \,
             :header true}
@@ -64,6 +67,15 @@
             :header true}
    :chwirut {:filename "data/Chwirut1.dat"
             :delim \space
+            :header true}
+   :hair-eye-color {:filename "data/hair_eye_color.csv"
+            :delim \,
+            :header true}
+   :austres {:filename "data/austres.csv"
+            :delim \,
+            :header true}
+   :airline-passengers {:filename "data/airline_passengers.csv"
+            :delim \,
             :header true}
    :thurstone {:filename "data/thurstone.dat"
             :delim \tab
@@ -136,6 +148,11 @@
 
     :thurstone -- test data for non-linear least squares.
 
+    :austres -- Quarterly Time Series of the Number of Australian Residents
+
+    :hair-eye-color -- Hair and eye color of sample of students
+
+    :airline-passengers -- Monthly Airline Passenger Numbers 1949-1960
 
 "
   ([dataset-key & options]

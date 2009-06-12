@@ -154,7 +154,7 @@
     (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
 
     ;; plot the fitness for each cycle of training
-    (view (line-plot (range (count (:fit som))) (:fit som)))
+    (view (xy-plot (range (count (:fit som))) (:fit som)))
     ;; view indices of data items in each cell
     (:sets som)
     ;; view the species in each cell
@@ -164,7 +164,7 @@
     ;; plot the means of the data vectors in each cell/cluster
     (def cell-means (map #(map mean (trans (sel data :rows ((:sets som) %)))) (keys (:sets som))))
     (def x (range (ncol data)))
-    (doto (line-plot x (first cell-means))
+    (doto (xy-plot x (first cell-means))
           view
           (add-lines x (nth cell-means 1))
           (add-lines x (nth cell-means 2)))

@@ -546,19 +546,19 @@
   (add-box-plot boxplt (sample-gamma 1000))
   
   
-  (def chart1 (line-plot (range 100) (range 100))) 
+  (def chart1 (xy-plot (range 100) (range 100))) 
   (view chart1) 
   (add-lines chart1 (range 100) (mult 1/2 (range 100)))
   
   
   (def x1 (range -10 10 0.01))
-  (def chart2 (line-plot x1 (pow x1 2)))
+  (def chart2 (xy-plot x1 (pow x1 2)))
   (view chart2) 
   (add-lines chart2 x1 (mult 1/2 (pow x1 2)))
   
   
   (def x2 (range 0 4 0.01))
-  (def chart2 (line-plot x2 (exp x1)))
+  (def chart2 (xy-plot x2 (exp x1)))
   (view chart2)
  
 ) ;; end of charts tests
