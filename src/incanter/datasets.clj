@@ -50,7 +50,7 @@
    :chick-weight {:filename "data/chick_weight.csv"
             :delim \,
             :header true}
-   :exams {:filename "data/exams.csv"
+   :math-prog {:filename "data/math_prog.csv"
             :delim \,
             :header true}
    :plant-growth {:filename "data/plant_growth.csv"
@@ -153,6 +153,9 @@
     :hair-eye-color -- Hair and eye color of sample of students
 
     :airline-passengers -- Monthly Airline Passenger Numbers 1949-1960
+
+    :math-prog -- Pass/fail results for a high school mathematics assessment test 
+                  and a freshmen college programming course.
 
 "
   ([dataset-key & options]

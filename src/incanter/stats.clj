@@ -24,11 +24,11 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability))
-  (:use [incanter.core :only (plus minus div mult mmult to-list bind-columns 
+  (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns 
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length sum sum-of-squares sel matrix?
-                              cumulative-sum solve abs)]))
+                              cumulative-sum solve vectorize)]))
 
 
 
@@ -1694,7 +1694,7 @@
 
   Examples:
     (use '(incanter core stats datasets charts))
-    (def iris (to-matrix (get-dataset :iris)))
+    (def iris (to-matrix (get-dataset :iris) :dummies true))
     (def y (sel iris :cols 0))
     (def x (sel iris :cols (range 1 6)))
     (def iris-lm (linear-model y x)) ; with intercept term
@@ -1884,8 +1884,23 @@
 
 
 
-(defn- cross-tabulate
-"
+(defn cross-tabulate
+" Cross-tabulates the values of the given numeric matrix.
+
+  Returns a hash-map with the following fields:
+    :table -- the table of counts for each combination of values,
+              this table is only returned if x has two-columns
+    :levels -- a sequence of sequences, where each sequence list
+               the levels (possible values) of the corresponding
+               column of x.
+    :margins -- a sequence of sequences, where each sequence 
+                represents the marginal total for each level 
+                of the corresponding column of x.
+    :counts -- a hash-map, where vectors of unique combinations
+               of the cross-tabulated levels are the keys and the
+               values are the total count of each combination.
+    :N  -- the grand-total for the contingency table
+    
 
   Examples:
 
@@ -1894,8 +1909,8 @@
     (cross-tabulate (sample-poisson 100 :lambda 5))
 
     (use '(incanter core stats datasets))
-    (def exams (to-matrix (get-dataset :exams)))
-    (cross-tabulate (sel exams :cols [1 2]))
+    (def math_prog (to-matrix (get-dataset :math_prog)))
+    (cross-tabulate (sel math_prog :cols [1 2]))
 
 
     (def data (matrix [[1 0 1] 
@@ -1966,46 +1981,125 @@
 
 
 
-(defn- chisq-test
-"
+(defn chisq-test
+" 
+  Performs chi-squared contingency table tests and goodness-of-fit tests.
+  
+  If the optional argument :y is not provided then a goodness-of-fit test
+  is performed. In this case, the hypothesis tested is whether the 
+  population probabilities equal those in :probs, or are all equal if 
+  :probs is not given.
+
+  If :y is provided, it must be a sequence of integers that is the
+  same length as x. A contingency table is computed from x and :y. 
+  Then, Pearson's chi-squared test of the null hypothesis that the joint
+  distribution of the cell counts in a 2-dimensional contingency
+  table is the product of the row and column marginals is performed.
+  By default the Yates' continuity correction for 2x2 contingency
+  tables is performed, this can be disabled by setting the :correct 
+  option to false.
+  
+
+  Options:
+    :x -- a sequence of numbers.
+    :y -- a sequence of numbers
+    :table -- a contigency table
+    :probs (when (nil? y) -- (repeat n-levels (/ n-levels)))
+    :correct (default true) -- use Yates' correction for continuity
+
+
+  Returns:
+    :X-sq -- the Pearson X-squared test statistics
+    :p-value -- the p-value for the test statistic
+    :df -- the degress of freedom
+
 
   Examples:
-    (chisq-test [1 2 3 2 3 2 4 3 5]) ;; 2.6667
-    (chisq-test [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25
+    (use 'incanter.stats)
+    (chisq-test :x [1 2 3 2 3 2 4 3 5]) ;; 2.6667
+    (chisq-test :x [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25
    
     (use '(incanter core stats datasets))
-    (def exams (to-matrix (get-dataset :exams)))
-    (def x (sel exams :cols 1))
-    (def y (sel exams :cols 2))
-    (chisq-test x :y y)
+    (def math_prog (to-matrix (get-dataset :math_prog)))
+    (def x (sel math_prog :cols 1))
+    (def y (sel math_prog :cols 2))
+    (chisq-test :x x :y y) ;; X-sq = 1.24145, df=1, p-value = 0.26519
+    (chisq-test :x x :y y :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617
+
+    (def table (matrix [[31 12] [9 8]]))
+    (chisq-test :table table) ;; X-sq = 1.24145, df=1, p-value = 0.26519
+    (chisq-test :table table :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617
+
+    ;; look at the hair-eye-color data
+    ;; turn the count data for males into a contigency table
+    (def male (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16)) 4))
+    (chisq-test :table male) ;; X-sq = 41.280, df = 9, p-value = 4.44E-6
+    ;; turn the count data for females into a contigency table
+    (def female (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16 32)) 4))
+    (chisq-test :table female) ;; X-sq = 106.664, df = 9, p-value = 7.014E-19,
 
 
+
+  References:
+    http://en.wikipedia.org/wiki/Pearson's_chi-square_test
+    http://en.wikipedia.org/wiki/Yates'_chi-square_test
 
 "
-  ([x & options]
+  ([& options]
     (let [opts (if options (apply assoc {} options) nil)
+          correct (if (false? (:correct opts)) false true)
+          x (when (:x opts) (:x opts))
           y (when (:y opts) (:y opts))
-          xtab (if y (cross-tabulate (bind-columns x y)) (cross-tabulate x))
-          table (:table xtab)
-          N (:N xtab)
-          n (when (nil? y) (first (:n-levels xtab)))
-          df (if y (* (dec (nrow table)) (dec (ncol table))) (dec n))
-          p (when (nil? y) (if (:probs opts) (:probs opts) (repeat n (/ n))))
-          E (if y
-              (for [r (first (:levels xtab)) c (second (:levels xtab))]
-                (/ (* ((first (:margins xtab)) r) ((second (:margins xtab)) c) N)))
-              (mult N p))
-          X-sq (reduce + (map (fn [o e] (/ (pow (- o e) 2) e)) (vals (:counts xtab)) E))
+          table? (if (:table opts) true false)
+          two-samp? (if (or (and x y) table?) true false)
+          xtab (when (or x y)
+                 (if y 
+                   (cross-tabulate (bind-columns x y)) 
+                   (cross-tabulate x)))
+          table (when two-samp? 
+                  (if table? 
+                    (:table opts) 
+                    (:table xtab)))
+          r-levels (if table?
+                     (range (nrow table)) 
+                     (first (:levels xtab)))
+          c-levels (if table? 
+                     (range (ncol table)) 
+                     (second (:levels xtab)))
+          r-margins (if table?
+                      (apply hash-map (interleave r-levels (map sum (trans table)))) 
+                      (second (:margins xtab)))
+          c-margins (if table? 
+                      (apply hash-map (interleave c-levels (map sum table)))
+                      (first (:margins xtab)))
+          counts (if table? 
+                   (vectorize table) 
+                   (vals (:counts xtab)))
+          N (if table? 
+              (sum counts) 
+              (:N xtab))
+          n (when (not two-samp?) (count r-levels))
+          df (if two-samp? (* (dec (nrow table)) (dec (ncol table))) (dec n))
+          probs (when (not two-samp?)
+                  (if (:probs opts) 
+                    (:probs opts) 
+                    (repeat n (/ n))))
+          E (if two-samp?
+              (for [r r-levels c c-levels]
+                (/ (* (c-margins c) (r-margins r)) N))
+              (mult N probs))
+          X-sq (if (and correct (and (= (count r-levels) 2) (= (count c-levels) 2)))
+                 (reduce + (map (fn [o e] (/ (pow (- (abs (- o e)) 0.5) 2) e)) counts E))
+                 (reduce + (map (fn [o e] (/ (pow (- o e) 2) e)) counts E)))
          ]
       {:X-sq X-sq
        :df df
+       :two-samp? two-samp?
        :p-value (cdf-chisq X-sq :df df :lower-tail false)
-       :p p
+       :probs probs
        :N N
        :table table
-       ;:n n
-       :E E}
-)))
+       :E E})))
 
 
 

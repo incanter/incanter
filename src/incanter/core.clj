@@ -477,7 +477,7 @@
 (defn abs 
   "Returns the absolute value of the elements in the given matrix, sequence or number.
    Equivalent to R's abs function."
-   ([A] (transform-with A #(Math/abs %) abs)))
+   ([A] (transform-with A #(Math/abs (float %)) abs)))
 
 
 (defn sin 
