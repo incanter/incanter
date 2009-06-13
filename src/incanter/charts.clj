@@ -201,7 +201,9 @@
         chart#)))
 
 
-(defn line-plot [x y & options] (throw (Exception. "line-plot has been renamed xy-plot")))
+(defn line-plot 
+  "WARNING: line-plot has been renamed xy-plot."
+  ([x y & options] (throw (Exception. "line-plot has been renamed xy-plot"))))
 
 (declare add-lines)
 
@@ -454,10 +456,11 @@
 
 
     (def data (get-dataset :airline-passengers))
-    (def year (sel data :cols 0))
-    (def month (sel data :cols 2))
+    (def years (sel data :cols 0))
+    (def months (sel data :cols 2))
     (def passengers (sel data :cols 1))
-    (view (bar-chart year passengers :group-by month :legend true))
+    (view (bar-chart years passengers :group-by months :legend true))
+    (view (bar-chart months passengers :group-by years :legend true))
 
 
     (def data (get-dataset :austres))
@@ -475,9 +478,9 @@
     (view (bar-chart years values :group-by seasons :legend true))
 
     (view (bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))
-    (view (bar-chart [\"a\" \"b\" \"c\" \"a\" \"b\" \"c\" ] [10 20 30 10 40 20]
+    (view (bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
                      :legend true 
-                     :group-by [\"I\" \"I\" \"II\" \"II\" \"III\" \"III\"]))
+                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
 
     (view (bar-chart (sample \"abcdefghij\" :size 10 :replacement true) 
                      (sample-uniform 10 :max 50) :legend true))
@@ -548,10 +551,11 @@
     (use '(incanter core stats charts datasets))
     
     (def data (get-dataset :airline-passengers))
-    (def year (sel data :cols 0))
-    (def month (sel data :cols 2))
+    (def years (sel data :cols 0))
+    (def months (sel data :cols 2))
     (def passengers (sel data :cols 1))
-    (view (line-chart year passengers :group-by month :legend true))
+    (view (line-chart years passengers :group-by months :legend true))
+    (view (line-chart months passengers :group-by years :legend true))
 
 
     (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))

@@ -1056,17 +1056,25 @@
   ([dataset & options]
     (let [opts (if options (apply assoc {} options) nil)
           rows (if (:rows opts) (:rows opts) true)
-          cols (if (:cols opts) (if (coll? (:cols opts))
-                                     (:cols opts) 
-                                     [(:cols opts)])
+          cols (if (:cols opts) 
+                 (if (coll? (:cols opts))
+                   (:cols opts) 
+                   [(:cols opts)])
                  (:column-names dataset))
           row-filter (if (:filter opts) (:filter opts) nil)
           selected-rows (cond 
                           (true? rows) (:rows dataset) 
                           (number? rows) (list (nth (:rows dataset) rows))
                           (coll? rows) (map #(nth (:rows dataset) %) rows)) 
-          data (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows)] 
-      (if (> (count cols) 1) data (mapcat identity data)))))
+          data (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows)
+          result (if (nil? row-filter) data (filter row-filter data))]
+      (if (= (count cols) 1) 
+        (mapcat identity result)
+        ;(vector cols result)))))
+        (with-meta (hash-map :column-names cols 
+                             :rows (map #(apply assoc {} (interleave cols %)) result)) 
+                   {:type ::dataset})))))
+        ;(dataset cols result)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

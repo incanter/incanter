@@ -121,7 +121,7 @@
     (.write w (str (:column-names o)))
     (.write w "\n")
     (doseq [row (:rows o)]
-      (.write w (str (vals row)))
+      (.write w (str (apply vector (map #(get row %) (:column-names o)))))
       (.write w "\n"))))
 
 
