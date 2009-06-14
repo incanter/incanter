@@ -301,6 +301,10 @@
    (reduce
     (fn [A B] 
       (cond 
+        (nil? (seq A))
+          B
+        (nil? (seq B))
+          A
         (and (matrix? A) (matrix? B))
           (conj A B)
         (and (matrix? A) (coll? B))

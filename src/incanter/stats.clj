@@ -28,7 +28,7 @@
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize)]))
+                              cumulative-sum solve vectorize bind-rows)]))
 
 
 
@@ -1909,8 +1909,8 @@
     (cross-tabulate (sample-poisson 100 :lambda 5))
 
     (use '(incanter core stats datasets))
-    (def math_prog (to-matrix (get-dataset :math_prog)))
-    (cross-tabulate (sel math_prog :cols [1 2]))
+    (def math-prog (to-matrix (get-dataset :math-prog)))
+    (cross-tabulate (sel math-prog :cols [1 2]))
 
 
     (def data (matrix [[1 0 1] 
@@ -1942,37 +1942,41 @@
           _x (if (matrix? x) x (matrix x))
           p (ncol _x)
           n (nrow _x)
-          levels (for [i (range p)] (seq (into #{} (sel _x :cols i))))
+          levels (for [i (range p)] (sort (seq (into #{} (sel _x :cols i)))))
           margins (for [j (range p)]
                   (loop [marg {} i (int 0)]
                     (if (= i n)
                       marg
                       (let [lvl (sel _x :rows i :cols j)]
-                        (recur (let [count (marg lvl)]
-                                (if count 
-                                  (assoc marg lvl (inc count))
+                        (recur (let [cnt (get marg lvl)]
+                                (if cnt 
+                                  (assoc marg lvl (inc cnt))
                                   (assoc marg lvl 1)))
                               (inc i))))))
           counts (loop [tab {} i (int 0)]
                     (if (= i n)
                       tab
-                      (recur (let [count (tab (nth _x i))]
-                              (if count 
-                                (assoc tab (nth _x i) (inc count))
-                                (assoc tab (nth _x i) 1)))
-                            (inc i))))]
+                      (recur (let [row (if (> p 1)
+                                         (to-list (nth _x i))
+                                         (nth _x i))
+                                   cnt (get tab row)]
+                              (if (nil? cnt)
+                                (assoc tab row 1)
+                                (assoc tab row (inc cnt))))
+                            (inc i))))
+          n-levels (map #(count (keys %)) margins)]
 
       {:counts counts
        :margins margins
        :table (when (= p 2)
                 (matrix (for [r (first levels) 
                               c (second levels)]  
-                          (let [c (counts (trans [r c]))]
+                          (let [c (get counts (to-list (trans [r c])))] 
                             (if c c 0))) 
-                        2))
+                        (second n-levels)))
        :n-vars p
        :N (reduce + (vals (first margins)))
-       :n-levels (map #(count (keys %)) margins)
+       :n-levels n-levels
        :levels levels})))
 
          
@@ -2015,14 +2019,14 @@
 
 
   Examples:
-    (use 'incanter.stats)
+    (use '(incanter core stats))
     (chisq-test :x [1 2 3 2 3 2 4 3 5]) ;; 2.6667
     (chisq-test :x [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25
    
     (use '(incanter core stats datasets))
-    (def math_prog (to-matrix (get-dataset :math_prog)))
-    (def x (sel math_prog :cols 1))
-    (def y (sel math_prog :cols 2))
+    (def math-prog (to-matrix (get-dataset :math-prog)))
+    (def x (sel math-prog :cols 1))
+    (def y (sel math-prog :cols 2))
     (chisq-test :x x :y y) ;; X-sq = 1.24145, df=1, p-value = 0.26519
     (chisq-test :x x :y y :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617
 
@@ -2180,6 +2184,49 @@
 "
   ([pred coll] 
     (for [el coll] (if (pred el) 1 0))))
+
+
+
+
+(defn detabulate
+" Take a contingency table of counts and returns a matrix of observations.
+
+  Examples:
+
+    (use '(incanter core stats datasets))
+
+    (def by-gender (group-by (get-dataset :hair-eye-color) 2))
+    (def table (matrix (sel (first by-gender) :cols 3) 4))
+
+    (detabulate :table table)
+    (cross-tabulate (detabulate :table table))
+
+    ;; example 2
+    (def data (matrix [[1 0] 
+                       [1 1] 
+                       [1 1] 
+                       [1 0] 
+                       [0 0] 
+                       [1 1] 
+                       [1 1] 
+                       [1 0] 
+                       [1 1]]))
+    (cross-tabulate data)
+    
+    (cross-tabulate (detabulate :table (:table (cross-tabulate data))))
+
+"
+  ([& options]
+    (let [opts (if options (apply assoc {} options) nil)
+          table (when (:table opts) (:table opts))
+          row-labels (when table (if (:row-labels opts) (:row-labels opts) (range (nrow table))))
+          col-labels (when table (if (:col-labels opts) (:col-labels opts) (range (ncol table))))
+          data (apply bind-rows 
+                      (apply concat
+                             (for [r row-labels c col-labels]
+                                  (repeat (sel table :rows r :cols c) [r c]))))]
+       data)))
+
 
 
 
