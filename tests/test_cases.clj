@@ -24,7 +24,7 @@
 
 (ns tests.test-cases
   (:use (clojure.contrib test-is) 
-        (incanter core io stats charts bayes)
+        (incanter core io stats charts bayes optimize datasets censored som)
         (examples bayes)))
 
 
