@@ -17,8 +17,8 @@
 
 
 (ns incanter.optimize 
-  (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix
-                              identity-matrix)]))
+  (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix ncol solve
+                              abs sel trans bind-columns to-list identity-matrix)]))
 
 
 

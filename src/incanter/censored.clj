@@ -1,7 +1,7 @@
 
 
 (ns incanter.censored 
-  (:use [incanter.core :only (mult)] 
+  (:use [incanter.core :only (mult pow)] 
         [incanter.stats :only (pdf-normal cdf-normal sd)]))
 
   

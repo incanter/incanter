@@ -1,7 +1,22 @@
 
+;;; som.clj -- Self-Organizing-Map Neural Network Library
+
+;; by David Edgar Liebke http://incanter.org
+;; June 13, 2009
+
+;; Copyright (c) David Edgar Liebke, 2009. All rights reserved.  The use
+;; and distribution terms for this software are covered by the Eclipse
+;; Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
+;; which can be found in the file epl-v10.html at the root of this
+;; distribution.  By using this software in any fashion, you are
+;; agreeing to be bound by the terms of this license.  You must not
+;; remove this notice, or any other, from this software.
+
+
+
 (ns incanter.som 
-  (:use [incanter.core :only (mult div plus minus trans to-vect sqrt
-                              sum pow)]))
+  (:use [incanter.core :only (sel ncol nrow mult div plus minus trans to-vect sqrt sum pow)]
+        [incanter.stats :only (mean principal-components covariance)]))
 
 
 
@@ -32,8 +47,7 @@
                            {[i j] (weight-fn i j data-mean pc1-sd dim-1 dim-2 pc1 pc2)} ))
          sets (reduce conj {}
                       (for [i (range dim-1) j (range dim-2)] 
-                        {[i j] #{}} ))
-        ]
+                        {[i j] #{}} ))]
       {:dims [dim-1 dim-2]
        :weights weights
        :sets sets
@@ -147,8 +161,8 @@
 
   Examples:
 
-    (use '(incanter core som charts datasets))
-    (def data (matrix (sel (get-dataset :iris) 
+    (use '(incanter core som stats charts datasets))
+    (def data (to-matrix (sel (get-dataset :iris) 
                            :cols [\"Sepal.Length\" \"Sepal.Width\" \"Petal.Length\" \"Petal.Width\"])))
 
     (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))
@@ -168,6 +182,7 @@
           view
           (add-lines x (nth cell-means 1))
           (add-lines x (nth cell-means 2)))
+
 
   References:
 

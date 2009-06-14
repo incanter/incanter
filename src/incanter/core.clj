@@ -1165,6 +1165,11 @@
 (defn to-matrix 
 "  Converts a dataset into a matrix. Equivalent to R's as.matrix function
    for datasets.
+
+  Options:
+    :dummies (default false) -- if true converts non-numeric variables into sets 
+                                of binary dummy variables, otherwise converts
+                                them into numeric codes.
 "
   ([dataset & options]
     (let [opts (if options (apply assoc {} options) nil)
