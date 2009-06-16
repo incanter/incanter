@@ -1884,7 +1884,7 @@
 
 
 
-(defn cross-tabulate
+(defn tabulate
 " Cross-tabulates the values of the given numeric matrix.
 
   Returns a hash-map with the following fields:
@@ -1905,12 +1905,12 @@
   Examples:
 
     (use '(incanter core stats))
-    (cross-tabulate [1 2 3 2 3 2 4 3 5])
-    (cross-tabulate (sample-poisson 100 :lambda 5))
+    (tabulate [1 2 3 2 3 2 4 3 5])
+    (tabulate (sample-poisson 100 :lambda 5))
 
     (use '(incanter core stats datasets))
     (def math-prog (to-matrix (get-dataset :math-prog)))
-    (cross-tabulate (sel math-prog :cols [1 2]))
+    (tabulate (sel math-prog :cols [1 2]))
 
 
     (def data (matrix [[1 0 1] 
@@ -1922,7 +1922,7 @@
                        [1 1 1] 
                        [1 0 1] 
                        [1 1 0]]))
-    (cross-tabulate data)
+    (tabulate data)
 
 
     (def data (matrix [[1 0] 
@@ -1934,7 +1934,7 @@
                        [1 1] 
                        [1 0] 
                        [1 1]]))
-    (cross-tabulate data)
+    (tabulate data)
 
 "
   ([x & options]
@@ -2043,6 +2043,11 @@
     (chisq-test :table female) ;; X-sq = 106.664, df = 9, p-value = 7.014E-19,
 
 
+    (def detab (detabulate :table table))
+    (chisq-test :x (sel detab :cols 0) :y (sel detab :cols 1))
+
+
+
 
   References:
     http://en.wikipedia.org/wiki/Pearson's_chi-square_test
@@ -2055,15 +2060,19 @@
           x (when (:x opts) (:x opts))
           y (when (:y opts) (:y opts))
           table? (if (:table opts) true false)
-          two-samp? (if (or (and x y) table?) true false)
           xtab (when (or x y)
                  (if y 
-                   (cross-tabulate (bind-columns x y)) 
-                   (cross-tabulate x)))
-          table (when two-samp? 
-                  (if table? 
-                    (:table opts) 
-                    (:table xtab)))
+                   (tabulate (bind-columns x y)) 
+                   (tabulate x)))
+          table (cond 
+                  table? 
+                   (:table opts) 
+                  (and x y)
+                    (:table xtab))
+          two-samp? (if (or (and x y) 
+                            (and table? 
+                                 (and (> (nrow table) 1) (> (ncol table) 1)))) 
+                      true false)
           r-levels (if table?
                      (range (nrow table)) 
                      (first (:levels xtab)))
@@ -2076,9 +2085,11 @@
           c-margins (if table? 
                       (apply hash-map (interleave c-levels (map sum table)))
                       (first (:margins xtab)))
-          counts (if table? 
-                   (vectorize table) 
-                   (vals (:counts xtab)))
+                  
+          counts (vectorize table) 
+                  ;(if table? 
+                  ; (vectorize table) 
+                   ;(vals (:counts xtab))) ;; BAD
           N (if table? 
               (sum counts) 
               (:N xtab))
@@ -2103,6 +2114,10 @@
        :probs probs
        :N N
        :table table
+       :col-levels c-levels
+       :row-levels r-levels
+       :col-margins c-margins
+       :row-margins r-margins
        :E E})))
 
 
@@ -2199,7 +2214,7 @@
     (def table (matrix (sel (first by-gender) :cols 3) 4))
 
     (detabulate :table table)
-    (cross-tabulate (detabulate :table table))
+    (tabulate (detabulate :table table))
 
     ;; example 2
     (def data (matrix [[1 0] 
@@ -2211,9 +2226,9 @@
                        [1 1] 
                        [1 0] 
                        [1 1]]))
-    (cross-tabulate data)
+    (tabulate data)
     
-    (cross-tabulate (detabulate :table (:table (cross-tabulate data))))
+    (tabulate (detabulate :table (:table (tabulate data))))
 
 "
   ([& options]
