@@ -2050,6 +2050,7 @@
 
 
   References:
+    http://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm
     http://en.wikipedia.org/wiki/Pearson's_chi-square_test
     http://en.wikipedia.org/wiki/Yates'_chi-square_test
 
