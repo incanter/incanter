@@ -1,6 +1,4 @@
-# clj.bat -- script to start Clojure REPL with libraries necessary for Incanter
-
- @echo off
+@echo off
     set INCANTER_HOME=.
     set CLOJURE_JAR=%INCANTER_HOME%\clojure.jar
     set INCANTER_LIB_DIR=%INCANTER_HOME%\lib
@@ -17,10 +15,12 @@
     set JGRAPH_JARS=%INCANTER_LIB_DIR%\jgraph.jar
 
     IF (%1)==() (
-        java -server -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%JUNG_JARS%;%JGRAPH_JARS -Dclojure.compile.path=%CLASSES_DIR -Dincanter.home=%INCANTER_HOME% jline.ConsoleRunner clojure.main
+        java -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%JUNG_JARS%;%JGRAPH_JARS% 
+-Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME%  clojure.main
     ) ELSE (
-        java -cp %CLOJURE_JAR% clojure.lang.Script %1 -- %*
-        java -server -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%JUNG_JARS%;%JGRAPH_JARS -Dclojure.compile.path=%CLASSES_DIR -Dincanter.home=%INCANTER_HOME% clojure.lang.Script %1 -- %*
+        
+        java -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%JUNG_JARS%;%JGRAPH_JARS% 
+-Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME% clojure.lang.Script %1 -- %*
     )
 
 
