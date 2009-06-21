@@ -2007,9 +2007,10 @@
   Options:
     :x -- a sequence of numbers.
     :y -- a sequence of numbers
-    :table -- a contigency table
+    :table -- a contigency table. If one dimensional, the test is a goodness-of-fit
     :probs (when (nil? y) -- (repeat n-levels (/ n-levels)))
-    :correct (default true) -- use Yates' correction for continuity
+    :freq (default nil) -- if given, these are rescaled to probabilities
+    :correct (default true) -- use Yates' correction for continuity for 2x2 contingency tables
 
 
   Returns:
@@ -2020,7 +2021,12 @@
 
   Examples:
     (use '(incanter core stats))
-    (chisq-test :x [1 2 3 2 3 2 4 3 5]) ;; 2.6667
+    (chisq-test :x [1 2 3 2 3 2 4 3 5]) ;; X-sq 2.6667
+    ;; create a one-dimensional table of this data
+    (def table (matrix [1 3 3 1 1]))
+    (chisq-test :table table) ;; X-sq 2.6667
+    (chisq-test :table (trans table)) ;; throws exception
+
     (chisq-test :x [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25
    
     (use '(incanter core stats datasets))
@@ -2033,6 +2039,9 @@
     (def table (matrix [[31 12] [9 8]]))
     (chisq-test :table table) ;; X-sq = 1.24145, df=1, p-value = 0.26519
     (chisq-test :table table :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617
+    ;; use the detabulate function to create data rows corresponding to the table
+    (def detab (detabulate :table table))
+    (chisq-test :x (sel detab :cols 0) :y (sel detab :cols 1))
 
     ;; look at the hair-eye-color data
     ;; turn the count data for males into a contigency table
@@ -2043,9 +2052,14 @@
     (chisq-test :table female) ;; X-sq = 106.664, df = 9, p-value = 7.014E-19,
 
 
-    (def detab (detabulate :table table))
-    (chisq-test :x (sel detab :cols 0) :y (sel detab :cols 1))
+    ;; supply probabilities to goodness-of-fit test
+    (def table [89 37 30 28 2])
+    (def probs [0.40 0.20 0.20 0.19 0.01])
+    (chisq-test :table table :probs probs) ;; X-sq = 5.7947, df = 4, p-value = 0.215
 
+    ;; use frequencies instead of probabilities 
+    (def freq [40 20 20 15 5])
+    (chisq-test :table table :freq freq) ;; X-sq = 9.9901, df = 4, p-value = 0.04059
 
 
 
@@ -2081,25 +2095,32 @@
                      (range (ncol table)) 
                      (second (:levels xtab)))
           r-margins (if table?
-                      (apply hash-map (interleave r-levels (map sum (trans table)))) 
+                      (if two-samp?
+                        (apply hash-map (interleave r-levels (map sum (trans table))))
+                        (if (> (nrow table) 1) 
+                          (to-list table) 
+                          (throw (Exception. "One dimensional tables must have only a single column"))))
                       (second (:margins xtab)))
           c-margins (if table? 
-                      (apply hash-map (interleave c-levels (map sum table)))
+                      (if two-samp?
+                        (apply hash-map (interleave c-levels (map sum table)))
+                        0)
                       (first (:margins xtab)))
                   
-          counts (vectorize table) 
-                  ;(if table? 
-                  ; (vectorize table) 
-                   ;(vals (:counts xtab))) ;; BAD
+          counts (if two-samp? (vectorize table) table)
           N (if table? 
               (sum counts) 
               (:N xtab))
           n (when (not two-samp?) (count r-levels))
           df (if two-samp? (* (dec (nrow table)) (dec (ncol table))) (dec n))
           probs (when (not two-samp?)
-                  (if (:probs opts) 
+                  (cond 
                     (:probs opts) 
-                    (repeat n (/ n))))
+                      (:probs opts) 
+                    (:freq opts)
+                      (div (:freq opts) (sum (:freq opts)))
+                    :else
+                      (repeat n (/ n))))
           E (if two-samp?
               (for [r r-levels c c-levels]
                 (/ (* (c-margins c) (r-margins r)) N))
