@@ -438,8 +438,12 @@
       (div [1 2 3] 2)
       (div 2 [1 2 3])
 
+      (div [1 2 3]) ; returns [1 1/2 13]
+
 "
-   ([& args] (reduce (fn [A B] (combine-with A B clojure.core// div)) args)))
+   ([& args] (if (= (count args) 1)
+               (combine-with 1 (first args) clojure.core// div)
+               (reduce (fn [A B] (combine-with A B clojure.core// div)) args))))
 
 
 (defn pow 

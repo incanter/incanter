@@ -80,6 +80,9 @@
    :thurstone {:filename "data/thurstone.dat"
             :delim \tab
             :header true}
+   :iran-election {:filename "data/iran_election_2009.csv"
+            :delim \,
+            :header true}
   })
 
 
@@ -156,6 +159,8 @@
 
     :math-prog -- Pass/fail results for a high school mathematics assessment test 
                   and a freshmen college programming course.
+
+    :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.
 
 "
   ([dataset-key & options]
