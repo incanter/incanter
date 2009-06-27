@@ -19,7 +19,7 @@
 (ns incanter.bayes 
   (:use [incanter.core :only (matrix mmult mult div trans ncol nrow 
                               plus to-list decomp-cholesky solve)] 
-        [incanter.stats :only (sample-normal sample-gamma)]))
+        [incanter.stats :only (sample-normal sample-gamma sample-dirichlet)]))
 
 
 
@@ -84,4 +84,38 @@
 
 
 
+(defn sample-proportions
+" Returns a sample of multinomial proportion parameters.
+  The counts are assumed to have a multinomial distribution.
+  A uniform prior distribution is assigned to the multinomial vector
+  theta, then the posterior distribution of theta is
+  proportional to a dirichlet distribution with parameters 
+  (plus counts 1).
+
+
+  Examples:
+    (use '(incanter core stats bayes charts))
+
+    (def  samp-props (sample-proportions 1000 [727 583 137]))
+
+    ;; view means, 95% CI, and histograms of the proportion parameters
+    (mean (sel samp-props :cols 0))
+    (quantile (sel samp-props :cols 0) :probs [0.0275 0.975])
+    (view (histogram (sel samp-props :cols 0)))
+    (mean (sel samp-props :cols 1))
+    (quantile (sel samp-props :cols 1) :probs [0.0275 0.975])
+    (view (histogram (sel samp-props :cols 1)))
+    (mean (sel samp-props :cols 2))
+    (quantile (sel samp-props :cols 2) :probs [0.0275 0.975])
+    (view (histogram (sel samp-props :cols 2)))
+    
+    ;; view  a histogram of the difference in proportions between the first
+    ;; two candidates
+    (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))
+    
+
+    
+"
+  ([size counts]
+    (sample-dirichlet size (plus counts 1))))
 

@@ -949,6 +949,46 @@
 
 
 
+(defn sample-dirichlet
+"
+  Examples:
+    (use '(incanter core stats charts))
+
+    ;; a total of 1447 adults were polled to indicate their preferences for
+    ;; candidate 1 (y1=727), candidate 2 (y2=583), or some other candidate or no
+    ;; preference (y3=137).
+
+    ;; the counts y1, y2, and y3 are assumed to have a multinomial distribution
+    ;; If a uniform prior distribution is assigned to the multinomial vector
+    ;; theta = (th1, th2, th3), then the posterior distribution of theta is
+    ;; proportional to g(theta) = th1^y1 * th2^y2 * th3^y3, which is a 
+    ;; dirichlet distribution with parameters (y1+1, y2+1, y3+1)
+    (def  theta (sample-dirichlet 1000 [(inc 727) (inc 583) (inc 137)]))
+    ;; view means, 95% CI, and histograms of the proportion parameters
+    (mean (sel theta :cols 0))
+    (quantile (sel theta :cols 0) :probs [0.0275 0.975])
+    (view (histogram (sel theta :cols 0)))
+    (mean (sel theta :cols 1))
+    (quantile (sel theta :cols 1) :probs [0.0275 0.975])
+    (view (histogram (sel theta :cols 1)))
+    (mean (sel theta :cols 2))
+    (quantile (sel theta :cols 2) :probs [0.0275 0.975])
+    (view (histogram (sel theta :cols 2)))
+
+    ;; view  a histogram of the difference in proportions between the first
+    ;; two candidates
+    (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))
+
+
+"
+  ([size alpha]
+    (let [W (trans (for [a alpha] (sample-gamma size :shape a :rate 1)))
+          T (map sum W)]
+      (matrix (map #(div %1 %2) W T)))))
+
+
+          
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
