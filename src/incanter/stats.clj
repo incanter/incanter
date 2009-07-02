@@ -1406,7 +1406,7 @@
 
 " 
   ([x]
-    (let [xx (to-list x)]
+    (let [xx (sort (to-list x))]
       (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
 
  
@@ -1524,6 +1524,46 @@
 
             ;(recur (conj samp-indices (nth x (sample-uniform 1 :min 0 :max max-idx :integers true)))))))))))
 
+
+(defn bootstrap
+" Returns a bootstrap sample of the given statistic on the given data
+
+
+  Examples:
+    (use '(incanter core stats datasets charts))
+    (def x (sel (get-dataset :flow-meter) :cols 1))
+    (view (histogram x :density true))
+    (median x)
+
+    (def boot-median (bootstrap x median))
+    (mean boot-median)
+    (median boot-median)
+    (sd boot-median)
+    (count boot-median)
+    (view (histogram boot-median :density true))
+
+
+
+"
+  ([data statistic & options]
+    (let [opts (if options (apply assoc {} options) nil) 
+          B1 100
+          B2 25
+          max-iter 10
+          D 0.01
+          n (if (:n opts) (:n opts) (count data))
+          replacement (if (false? (:replacement opts)) false true)]
+      (loop [stats (for [_ (range B1)] (statistic (sample data :size n :replacement replacement)))
+             k 0]
+        (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
+              se1 (sd stats)
+              se2 (sd stats2)]
+          (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
+            stats2
+            (recur stats2 (inc k))))))))
+
+
+        
 
 
 

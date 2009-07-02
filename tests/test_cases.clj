@@ -420,7 +420,7 @@
   ;; calculate the standard deviation of a variable
   (is (= (sd (sel x true 4)) 2.9214166733400035))
   ;; calculate the median of a variable
-  (is (= (median (sel x true 4)) 10))
+  (is (= (median (sel x true 4)) 13))
   ;; calculate the sum of values in a vector or 1D matrix
   (is (= (sum (sel x true 4)) 31430.0))
   ;; calculate the sum of squares of values in a vector or 1D matrix
