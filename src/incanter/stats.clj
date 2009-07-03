@@ -1537,74 +1537,109 @@
                     should be done with replacement
 
 
+  References:
+    1. Clifford E. Lunneborg, Data Analysis by Resampling Concepts and Applications, 2000, pages 105-117
+    2. http://en.wikipedia.org/wiki/Bootstrapping_(statistics)
+    
 
   Examples:
     
     ;; example from Data Analysis by Resampling Concepts and Applications
     ;; Clifford E. Lunneborg (pages 119-122)
 
-    (use '(incanter core stats datasets charts))
+    (use '(incanter core stats charts))
 
     ;; weights (in grams) of 50 randomly sampled bags of preztels
-    (def x [464 447 446 454 450 457 
-            450 442 433 452 449 454 
-            450 438 448 449 457 451 
-            456 452 450 463 464 453 
-            452 447 439 449 468 443
-            433 460 452 447 447 446 
-            450 459 466 433 445 453 
-            454 446 464 450 456 456 
-            447 469])
+    (def weights [464 447 446 454 450 457 450 442 
+                  433 452 449 454 450 438 448 449 
+                  457 451 456 452 450 463 464 453 
+                  452 447 439 449 468 443 433 460 
+                  452 447 447 446 450 459 466 433 
+                  445 453 454 446 464 450 456 456 
+                  447 469])
 
-    ;; calculate the sample median
-    (median x)
+    ;; calculate the sample median, 450
+    (median weights)
 
     ;; generate bootstrap sample
-    (def t* (bootstrap x median :size 2000))
+    (def t* (bootstrap weights median :size 2000))
 
     ;; view histogram of bootstrap histogram
     (view (histogram t*))
 
-    ;; calculate the mean of the bootstrap median
+    ;; calculate the mean of the bootstrap median ~ 450.644
     (mean t*)
 
-    ;; calculate the standard error
-    (sd t*)
+    ;; calculate the standard error ~ 1.083
+    (def se (sd t*))
 
-    ;; 90% standard normal CI
-    (plus (median x) (mult (quantile-normal [0.05 0.95]) (sd t*)))
+    ;; 90% standard normal CI ~ (448.219 451.781)
+    (plus (median weights) (mult (quantile-normal [0.05 0.95]) se))
 
-    ;; 90% symmetric percentile CI
+    ;; 90% symmetric percentile CI ~ (449.0 452.5)
     (quantile t* :probs [0.05 0.95])
 
 
-    ;; 90% non-symmetric percentile CI
-    (- (* 2 (median x)) (quantile t* :probs 0.95))
-    (- (* 2 (median x)) (quantile t* :probs 0.05))
+    ;; 90% non-symmetric percentile CI ~ (447.5 451.0)
+    (minus (* 2 (median weights)) (quantile t* :probs [0.95 0.05]))
 
     ;; calculate bias
-    (- (mean t*) (median x))
+    (- (mean t*) (median weights)) ;; ~ 0.644
+
+    ;; example with smoothing
+    ;; Newcomb's speed of light data
+
+    (use '(incanter core stats charts))
+    
+    ;; A numeric vector giving the Third Series of measurements of the
+    ;; passage time of light recorded by Newcomb in 1882. The given
+    ;; values divided by 1000 plus 24 give the time in millionths of a
+    ;; second for light to traverse a known distance. The 'true' value is
+    ;; now considered to be 33.02.
+
+    (def speed-of-light [28 -44  29  30  24  28  37  32  36  27  26  28  29  
+                         26  27  22  23  20  25 25  36  23  31  32  24  27  
+                         33  16  24  29  36  21  28  26  27  27  32  25 28  
+                         24  40  21  31  32  28  26  30  27  26  24  32  29  
+                         34  -2  25  19  36 29  30  22  28  33  39  25  16  23])
+
+    ;; view histogram of data to see outlier observations
+    (view (histogram speed-of-light :nbins 30))
+
+    (def samp (bootstrap speed-of-light median :size 10000))
+    (view (histogram samp :density true :nbins 30))
+    (mean samp)
+    (quantile samp :probs [0.025 0.975])
+
+    (def smooth-samp (bootstrap speed-of-light median :size 10000 :smooth true))
+    (view (histogram smooth-samp :density true :nbins 30))
+    (mean smooth-samp)
+    (quantile smooth-samp :probs [0.025 0.975])
+    
 
 "
   ([data statistic & options]
     (let [opts (if options (apply assoc {} options) nil) 
           size (when (:size opts) (:size opts))
           replacement (if (false? (:replacement opts)) false true)
+          smooth? (true? (:smooth opts))
           B1 100
           B2 25
           max-iter 10
           D 0.01
-          n (if (:n opts) (:n opts) (count data))]
-      (if (nil? size)
-        (loop [stats (for [_ (range B1)] (statistic (sample data :size n :replacement replacement)))
-               k 0]
-          (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
-                se1 (sd stats)
-                se2 (sd stats2)]
-            (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
-              stats2
-              (recur stats2 (inc k)))))
-        (for [_ (range size)] (statistic (sample data :size n :replacement replacement)))))))
+          n (if (:n opts) (:n opts) (count data))
+          samp (if (nil? size)
+                 (loop [stats (for [_ (range B1)] (statistic (sample data :size n :replacement replacement)))
+                        k 0]
+                   (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
+                         se1 (sd stats)
+                         se2 (sd stats2)]
+                     (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
+                       stats2
+                       (recur stats2 (inc k)))))
+                 (for [_ (range size)] (statistic (sample data :size n :replacement replacement))))
+          samp-size (count samp)]
+      (if smooth? (plus samp (sample-normal samp-size :sd (/ (sqrt n)))) samp))))
 
 
         

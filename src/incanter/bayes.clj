@@ -84,7 +84,15 @@
 
 
 
+
 (defn sample-proportions
+" sample-proportions has been renamed sample-multinomial-params"
+  ([size counts] 
+   (throw (Exception. "sample-proportions has been renamed sample-multinomial-params"))))
+
+
+
+(defn sample-multinomial-params
 " Returns a sample of multinomial proportion parameters.
   The counts are assumed to have a multinomial distribution.
   A uniform prior distribution is assigned to the multinomial vector
@@ -96,7 +104,7 @@
   Examples:
     (use '(incanter core stats bayes charts))
 
-    (def  samp-props (sample-proportions 1000 [727 583 137]))
+    (def  samp-props (sample-multinomial-params 1000 [727 583 137]))
 
     ;; view means, 95% CI, and histograms of the proportion parameters
     (mean (sel samp-props :cols 0))
