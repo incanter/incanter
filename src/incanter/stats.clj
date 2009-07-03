@@ -1530,37 +1530,62 @@
 
 
   Examples:
+
     (use '(incanter core stats datasets charts))
-    (def x (sel (get-dataset :flow-meter) :cols 1))
-    (view (histogram x :density true))
+    ;; example from Data Analysis by Resampling Concepts and Applications
+    ;; Clifford E. Lunneborg (pages 119-122)
+
+    ;; weights (in grams) of 50 randomly sampled bags of preztels
+    (def x [464 447 446 454 450 457 
+            450 442 433 452 449 454 
+            450 438 448 449 457 451 
+            456 452 450 463 464 453 
+            452 447 439 449 468 443
+            433 460 452 447 447 446 
+            450 459 466 433 445 453 
+            454 446 464 450 456 456 
+            447 469])
+
     (median x)
+    (def t* (bootstrap x median :size 2000))
+    (mean t*)
+    (sd t*)
 
-    (def boot-median (bootstrap x median))
-    (mean boot-median)
-    (median boot-median)
-    (sd boot-median)
-    (count boot-median)
-    (view (histogram boot-median :density true))
+    ;; 90% standard normal CI
+    (+ (median x) (* (quantile-normal 0.05) (sd t*)))
+    (+ (median x) (* (quantile-normal 0.95) (sd t*)))
+
+    ;; 90% symmetric percentile CI
+    (quantile t* :probs [0.05 0.95])
 
 
+    ;; 90% non-symmetric percentile CI
+    (- (* 2 (median x)) (quantile t* :probs 0.95))
+    (- (* 2 (median x)) (quantile t* :probs 0.05))
+
+   ;; calculate bias
+   (- (mean t*) (median x))
 
 "
   ([data statistic & options]
     (let [opts (if options (apply assoc {} options) nil) 
+          size (when (:size opts) (:size opts))
+          replacement (if (false? (:replacement opts)) false true)
           B1 100
           B2 25
           max-iter 10
           D 0.01
-          n (if (:n opts) (:n opts) (count data))
-          replacement (if (false? (:replacement opts)) false true)]
-      (loop [stats (for [_ (range B1)] (statistic (sample data :size n :replacement replacement)))
-             k 0]
-        (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
-              se1 (sd stats)
-              se2 (sd stats2)]
-          (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
-            stats2
-            (recur stats2 (inc k))))))))
+          n (if (:n opts) (:n opts) (count data))]
+      (if (nil? size)
+        (loop [stats (for [_ (range B1)] (statistic (sample data :size n :replacement replacement)))
+               k 0]
+          (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
+                se1 (sd stats)
+                se2 (sd stats2)]
+            (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
+              stats2
+              (recur stats2 (inc k)))))
+        (statistic (sample data :size n :replacement replacement))))))
 
 
         

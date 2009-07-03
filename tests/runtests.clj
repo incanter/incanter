@@ -19,7 +19,7 @@
 
 
 (ns tests.runtests
-  (:use (clojure.contrib test-is) 
+  (:use [clojure.test :only (run-tests)] 
         (tests test-cases)
         (incanter core io stats charts bayes)))
 
