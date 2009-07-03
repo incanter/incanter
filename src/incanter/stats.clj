@@ -1522,18 +1522,28 @@
                        (recur samp-indices indices-set)
                        (recur (conj samp-indices i) (conj indices-set i))))))))))))
 
-            ;(recur (conj samp-indices (nth x (sample-uniform 1 :min 0 :max max-idx :integers true)))))))))))
 
 
 (defn bootstrap
-" Returns a bootstrap sample of the given statistic on the given data
+" Returns a bootstrap sample of the given statistic on the given data.
+
+  Arguments:
+    data -- vector of data to resample from
+    statistic -- a function that returns a value given a vector of data
+
+  Options:
+    :size -- the number of bootstrap samples to return
+    :replacement -- (default true) determines if sampling of the data 
+                    should be done with replacement
+
 
 
   Examples:
-
-    (use '(incanter core stats datasets charts))
+    
     ;; example from Data Analysis by Resampling Concepts and Applications
     ;; Clifford E. Lunneborg (pages 119-122)
+
+    (use '(incanter core stats datasets charts))
 
     ;; weights (in grams) of 50 randomly sampled bags of preztels
     (def x [464 447 446 454 450 457 
@@ -1546,14 +1556,23 @@
             454 446 464 450 456 456 
             447 469])
 
+    ;; calculate the sample median
     (median x)
+
+    ;; generate bootstrap sample
     (def t* (bootstrap x median :size 2000))
+
+    ;; view histogram of bootstrap histogram
+    (view (histogram t*))
+
+    ;; calculate the mean of the bootstrap median
     (mean t*)
+
+    ;; calculate the standard error
     (sd t*)
 
     ;; 90% standard normal CI
-    (+ (median x) (* (quantile-normal 0.05) (sd t*)))
-    (+ (median x) (* (quantile-normal 0.95) (sd t*)))
+    (plus (median x) (mult (quantile-normal [0.05 0.95]) (sd t*)))
 
     ;; 90% symmetric percentile CI
     (quantile t* :probs [0.05 0.95])
@@ -1563,8 +1582,8 @@
     (- (* 2 (median x)) (quantile t* :probs 0.95))
     (- (* 2 (median x)) (quantile t* :probs 0.05))
 
-   ;; calculate bias
-   (- (mean t*) (median x))
+    ;; calculate bias
+    (- (mean t*) (median x))
 
 "
   ([data statistic & options]
@@ -1585,7 +1604,7 @@
             (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
               stats2
               (recur stats2 (inc k)))))
-        (statistic (sample data :size n :replacement replacement))))))
+        (for [_ (range size)] (statistic (sample data :size n :replacement replacement)))))))
 
 
         
