@@ -1533,6 +1533,9 @@
 
   Options:
     :size -- the number of bootstrap samples to return
+    :smooth -- (default false) smoothing option 
+    :smooth-sd -- (default (/ (sqrt (count data)))) determines the standard 
+                  deviation of the noise to use for smoothing
     :replacement -- (default true) determines if sampling of the data 
                     should be done with replacement
 
@@ -1622,12 +1625,13 @@
     (let [opts (if options (apply assoc {} options) nil) 
           size (when (:size opts) (:size opts))
           replacement (if (false? (:replacement opts)) false true)
+          n (if (:n opts) (:n opts) (count data))
           smooth? (true? (:smooth opts))
+          smooth-sd (if (:smooth-sd opts) (:smooth-sd opts) (/ (sqrt n)))
           B1 100
           B2 25
           max-iter 10
           D 0.01
-          n (if (:n opts) (:n opts) (count data))
           samp (if (nil? size)
                  (loop [stats (for [_ (range B1)] (statistic (sample data :size n :replacement replacement)))
                         k 0]
@@ -1639,7 +1643,7 @@
                        (recur stats2 (inc k)))))
                  (for [_ (range size)] (statistic (sample data :size n :replacement replacement))))
           samp-size (count samp)]
-      (if smooth? (plus samp (sample-normal samp-size :sd (/ (sqrt n)))) samp))))
+      (if smooth? (plus samp (sample-normal samp-size :sd smooth-sd)) samp))))
 
 
         
