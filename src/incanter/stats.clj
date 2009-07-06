@@ -949,6 +949,37 @@
 
 
 
+(defn sample-inv-wishart
+"
+  Returns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution
+
+  Options:
+    :p (default 2) -- number of dimensions of resulting matrix
+    :df (default p) -- degree of freedoms (aka n), df <= p
+    :scale (default (identity-matrix p)) -- positive definite matrix (aka V)
+
+  Examples:
+    (use 'incanter.stats)
+    (sample-inv-wishart :df 10  :p 4)
+
+    ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)
+    (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)
+
+
+  References:
+    http://en.wikipedia.org/wiki/Inverse-Wishart_distribution
+
+"
+  ([& options]
+    (let [opts (if options (apply assoc {} options) nil)
+          p (if (:p opts) (:p opts) 2)
+          df (if (:df opts) (:df opts) p)
+          scale (if (:scale opts) (:scale opts) (identity-matrix p))]
+      (solve (sample-wishart :p p :df df :scale scale)))))
+
+
+
+
 (defn sample-dirichlet
 "
   Examples:
