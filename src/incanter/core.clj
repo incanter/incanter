@@ -681,7 +681,7 @@
   " Returns the half-vectorization (i.e. vech) of the given matrix.
     The half-vectorization, vech(A), of a symmetric nxn matrix A 
     is the n(n+1)/2 x 1 column vector obtained by vectorizing only 
-    the lower triangular part of A.
+    the upper triangular part of A.
 
     For instance:
       (= (half-vectorize (matrix [[a b] [b d]])) (matrix [a b d]))
@@ -1281,7 +1281,7 @@
   by columns, unless the :by-row option is set to false.
 
   Options:
-    :by-row (default true) -- if false, make symmetric-behavior the inverse of half-vectorize.
+    :lower (default true) -- lower-triangular. Set :lower to false to reverse the half-vectorize function.
 
   Examples:
     
@@ -1296,7 +1296,7 @@
       (symmetric-matrix [1
                          2 3
                          4 5 6
-                         7 8 9 10] :by-row false))
+                         7 8 9 10] :lower false))
 
 
 "

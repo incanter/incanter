@@ -466,7 +466,7 @@
                   (mult 2 (mmult (trans (sel _df :cols j)) (sel _df :cols k))))
                 (for [m (range (ncol _d2f))]
                   (mult 2 (mmult (trans resid) (sel _d2f :cols m)))))
-            :by-row false))))
+            :lower false))))
 
 
 

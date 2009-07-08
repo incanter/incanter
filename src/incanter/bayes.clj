@@ -150,7 +150,7 @@
     (def samp (sample-mvn-params 1000 y))
 
     (map mean (trans (:means samp)))
-    (symmetric-matrix (map mean (trans (:sigmas samp))) :by-row false)
+    (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
 
     (view (histogram (sel (:means samp) :cols 0) :x-label \"mean 1\"))
     (view (histogram (sel (:means samp) :cols 1) :x-label \"mean 2\"))
@@ -178,7 +178,7 @@
           mu-samp (matrix (for [sigma sigma-samp]
                             (sample-mvn 1 
                                                         :mean means 
-                                                        :sigma (div (symmetric-matrix sigma :by-row false) n))))
+                                                        :sigma (div (symmetric-matrix sigma :lower false) n))))
           ]
   {:means mu-samp :sigmas sigma-samp})))
           
