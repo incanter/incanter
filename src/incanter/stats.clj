@@ -251,7 +251,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn sample-multivariate-normal 
+(defn sample-mvn 
 " Returns a sample of the given size from a Multivariate Normal 
   distribution. This is equivalent to R's mvtnorm::rmvnorm function. 
 
@@ -266,7 +266,7 @@
   Examples:
 
     (use '(incanter core stats charts))
-    (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
+    (def mvn-samp (sample-mvn 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
     (covariance mvn-samp)
     (def means (map mean (trans mvn-samp)))
 
@@ -301,7 +301,9 @@
          chol (decomp-cholesky sigma)
          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
         ]
-     (matrix (map #(plus % (trans mean)) norm-samp)))))
+     (if (> (nrow norm-samp) 1) 
+       (matrix (map #(plus % (trans mean)) norm-samp))
+       (matrix (plus norm-samp (trans mean)))))))
 
 
 

@@ -17,15 +17,14 @@
 
 
 (ns incanter.bayes 
-  (:use [incanter.core :only (matrix mmult mult div trans ncol nrow 
-                              plus to-list decomp-cholesky solve)] 
-        [incanter.stats :only (sample-normal sample-gamma sample-dirichlet)]))
+  (:use [incanter.core :only (matrix mmult mult div minus trans ncol nrow 
+                              plus to-list decomp-cholesky solve half-vectorize
+                              symmetric-matrix)] 
+        [incanter.stats :only (sample-normal sample-gamma sample-dirichlet
+                               sample-inv-wishart sample-mvn mean)]))
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MCMC Sampling
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn sample-model-params 
@@ -126,4 +125,61 @@
 "
   ([size counts]
     (sample-dirichlet size (plus counts 1))))
+
+
+
+
+(defn sample-mvn-params
+" Returns samples of means (sampled from an mvn distribution) and vectorized covariance 
+  matrices (sampled from an inverse-wishart distribution) for the given mvn data.
+
+  Arguments:
+    size -- the number of samples to return
+    y -- the data used to estimate the parameters
+
+
+  Returns map with following fields:
+    :means
+    :sigmas
+
+
+  Examples:
+
+    (use '(incanter core stats bayes charts))
+    (def y (sample-mvn 500 :sigma (identity-matrix 2)))
+    (def samp (sample-mvn-params 1000 y))
+
+    (map mean (trans (:means samp)))
+    (symmetric-matrix (map mean (trans (:sigmas samp))) :by-row false)
+
+    (view (histogram (sel (:means samp) :cols 0) :x-label \"mean 1\"))
+    (view (histogram (sel (:means samp) :cols 1) :x-label \"mean 2\"))
+    (view (histogram (sel (:sigmas samp) :cols 1) :x-label \"covariance\"))
+    (view (histogram (sel (:sigmas samp) :cols 0) :x-label \"variance 1\"))
+    (view (histogram (sel (:sigmas samp) :cols 2) :x-label \"variance 2\"))
+
+    (map #(quantile % :probs [0.025 0.0975]) (trans (:means samp)))
+    (map #(quantile % :probs [0.025 0.0975]) (trans (:sigmas samp)))
+
+
+
+
+"
+  ([size y & options]
+    (let [opts (if options (apply assoc {} options) nil)
+          means (map mean (trans y))
+          n (count y)
+          S (reduce plus 
+                    (map #(mmult (minus (to-list %) means) 
+                                 (trans (minus (to-list %) means))) 
+                         y))
+          sigma-samp (matrix (for [_ (range size)] 
+                               (half-vectorize (sample-inv-wishart :df (dec n) :scale (solve S)))))
+          mu-samp (matrix (for [sigma sigma-samp]
+                            (sample-mvn 1 
+                                                        :mean means 
+                                                        :sigma (div (symmetric-matrix sigma :by-row false) n))))
+          ]
+  {:means mu-samp :sigmas sigma-samp})))
+          
 
