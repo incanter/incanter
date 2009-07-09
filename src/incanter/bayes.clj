@@ -164,6 +164,13 @@
 
 
 
+    (use '(incanter core stats bayes charts))
+    (def y (sample-mvn 500 :sigma (symmetric-matrix [10 5 10]) :mean [5 2])) 
+    (def samp (sample-mvn-params 1000 y))
+    (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+    (map mean (trans (:means samp)))
+
+
 "
   ([size y & options]
     (let [opts (if options (apply assoc {} options) nil)
@@ -177,8 +184,8 @@
                                (half-vectorize (sample-inv-wishart :df (dec n) :scale (solve S)))))
           mu-samp (matrix (for [sigma sigma-samp]
                             (sample-mvn 1 
-                                                        :mean means 
-                                                        :sigma (div (symmetric-matrix sigma :lower false) n))))
+                                        :mean means 
+                                        :sigma (div (symmetric-matrix sigma :lower false) n))))
           ]
   {:means mu-samp :sigmas sigma-samp})))
           

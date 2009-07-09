@@ -1277,8 +1277,8 @@
 (defn symmetric-matrix
 "
   Returns a symmetric matrix from the given data, which represents the lower triangular elements
-  ordered by row. This is not the inverse of half-vectorize which returns a vector ordered
-  by columns, unless the :by-row option is set to false.
+  ordered by row. This is not the inverse of half-vectorize which returns a vector of the upper-triangular
+  values, unless the :lower option is set to false.
 
   Options:
     :lower (default true) -- lower-triangular. Set :lower to false to reverse the half-vectorize function.
@@ -1302,11 +1302,11 @@
 "
   ([data & options]
    (let [opts (if options (apply assoc {} options) nil)
-         by-row? (if (false? (:by-row opts)) false true)
+         lower? (if (false? (:lower opts)) false true)
          n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
          mat (incanter.Matrix. p p 0)
-         indices (if by-row?
+         indices (if lower?
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
      (doseq [idx (range n)]
