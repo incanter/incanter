@@ -87,15 +87,15 @@
     
 "
   ([x & options]
-    `(let [opts# (if '~options (assoc {} ~@options) nil)
+    `(let [opts# (when '~options (assoc {} ~@options))
           data# (if (matrix? ~x) (to-list ~x) ~x)
-          nbins# (if (:nbins opts#) (:nbins opts#) 10)
+          nbins# (or (:nbins opts#) 10)
           density?# (true? (:density opts#))
-          main-title# (if (:title opts#) (:title opts#) "Histogram")
-          x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
-          y-lab# (if (:y-label opts#) (:y-label opts#) 
-                   (if density?# "Density" "Frequency"))
-          series-lab# (if (:series-label opts#) (:series-label opts#) (str '~x))
+          main-title# (or (:title opts#) "Histogram")
+          x-lab# (or (:x-label opts#) (str '~x))
+          y-lab# (or (:y-label opts#) 
+                     (if density?# "Density" "Frequency"))
+          series-lab# (or (:series-label opts#) (str '~x))
           legend?# (true? (:legend opts#))
           dataset# (HistogramDataset.)
         ]
@@ -164,20 +164,18 @@
     
 "
   ([x y & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
            _y# (if (matrix? ~y) (to-list ~y) ~y)
            group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
            x-groups# (when group-by# (group-by (bind-columns _x# group-by#) 1 :cols 0))
            y-groups# (when group-by# (group-by (bind-columns _y# group-by#) 1 :cols 0))
-           ;x-groups# (when (:group-by opts#) (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0))
-           ;y-groups# (when (:group-by opts#) (group-by (bind-columns _y# (:group-by opts#)) 1 :cols 0))
            x# (if x-groups# (first x-groups#) _x#)
            y# (if y-groups# (first y-groups#) _y#)
-           main-title# (if (:title opts#) (:title opts#) "Scatter Plot")
-           x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
-           y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
-           series-lab# (if (:series-label opts#) (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
+           main-title# (or (:title opts#) "Scatter Plot")
+           x-lab# (or (:x-label opts#) (str '~x))
+           y-lab# (or (:y-label opts#) (str '~y))
+           series-lab# (or (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
            legend?# (true? (:legend opts#))
            data-series# (XYSeries. series-lab#)
            dataset# (XYSeriesCollection.)
@@ -260,7 +258,7 @@
     
 "
   ([x y & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
            _y# (if (matrix? ~y) (to-list ~y) ~y)
            group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
@@ -268,10 +266,10 @@
            y-groups# (when group-by# (group-by (bind-columns _y# group-by#) 1 :cols 0))
            x# (if x-groups# (first x-groups#) _x#)
            y# (if y-groups# (first y-groups#) _y#)
-           main-title# (if (:title opts#) (:title opts#) "XY Plot")
-           x-lab# (if (:x-label opts#) (:x-label opts#) (str '~x))
-           y-lab# (if (:y-label opts#) (:y-label opts#) (str '~y))
-           series-lab# (if (:series-label opts#) (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
+           main-title# (or (:title opts#) "XY Plot")
+           x-lab# (or (:x-label opts#) (str '~x))
+           y-lab# (or (:y-label opts#) (str '~y))
+           series-lab# (or (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
            legend?# (true? (:legend opts#))
            data-series# (XYSeries. series-lab#)
            dataset# (XYSeriesCollection.)
@@ -326,13 +324,13 @@
     
 "
   ([function min-range max-range & options]
-   `(let [opts# (if '~options (assoc {} ~@options))
-          step-size# (if (:step-size opts#) (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
+   `(let [opts# (when '~options (assoc {} ~@options))
+          step-size# (or (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
           x# (range ~min-range ~max-range step-size#)
-          main-title# (if (:title opts#) (:title opts#) "Function Plot")
-          x-lab# (if (:x-label opts#) (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
-          y-lab# (if (:y-label opts#) (:y-label opts#) (str '~function))
-          series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s" '~function))
+          main-title# (or (:title opts#) "Function Plot")
+          x-lab# (or (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
+          y-lab# (or (:y-label opts#) (str '~function))
+          series-lab# (or (:series-label opts#) (format "%s" '~function))
           legend?# (true? (:legend opts#))]
       (xy-plot x# (map ~function x#) 
                  :x-label x-lab# 
@@ -386,19 +384,16 @@
     
 "
   ([x & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
            group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
            x-groups# (when group-by# (map to-list (group-by (bind-columns _x# group-by#) 1 :cols 0)))
-           ;x-groups# (when (:group-by opts#) (map to-list (group-by (bind-columns _x# (:group-by opts#)) 1 :cols 0)))
            x# (if x-groups# (first x-groups#) _x#)
-           main-title# (if (:title opts#) (:title opts#) "Boxplot")
-           ;x-label# (if (:x-label opts#) (:x-label opts#) (str '~x))
-           x-label# (if (:x-label opts#) (:x-label opts#) "")
-           y-label# (if (:y-label opts#) (:y-label opts#) "Values")
-           series-label# (if (:series-label opts#) (:series-label opts#) (if x-groups# (str '~x 0) (str '~x)))
-           category-label# (if (:category-label opts#) (:category-label opts#) 0)
-           ;category-label# (if (:category-label opts#) (:category-label opts#) (str '~x))
+           main-title# (or (:title opts#) "Boxplot")
+           x-label# (or (:x-label opts#) "")
+           y-label# (or (:y-label opts#) "Values")
+           series-label# (or (:series-label opts#) (if x-groups# (str '~x 0) (str '~x)))
+           category-label# (or (:category-label opts#) 0)
            legend?# (true? (:legend opts#))
            dataset# (DefaultBoxAndWhiskerCategoryDataset.)
            chart# (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart 
@@ -493,13 +488,13 @@
     
 "
   ([categories values & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            values# (if (matrix? ~values) (to-list ~values) ~values)
-           main-title# (if (:title opts#) (:title opts#) "Bar Chart")
-           group-by# (when (:group-by opts#) (:group-by opts#))
-           x-label# (if (:x-label opts#) (:x-label opts#) "Categories")
-           y-label# (if (:y-label opts#) (:y-label opts#) "Value")
-           vertical?# (if (false? (:vertical opts#)) (:vertical opts#) true)
+           main-title# (or (:title opts#) "Bar Chart")
+           group-by# (:group-by opts#)
+           x-label# (or (:x-label opts#) "Categories")
+           y-label# (or (:y-label opts#) "Value")
+           vertical?# (if (false? (:vertical opts#)) false true)
            legend?# (true? (:legend opts#))
            dataset# (DefaultCategoryDataset.)
            chart# (org.jfree.chart.ChartFactory/createBarChart
@@ -576,13 +571,13 @@
     
 "
   ([categories values & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            values# (if (matrix? ~values) (to-list ~values) ~values)
-           main-title# (if (:title opts#) (:title opts#) "Line Chart")
-           group-by# (when (:group-by opts#) (:group-by opts#))
-           x-label# (if (:x-label opts#) (:x-label opts#) "Categories")
-           y-label# (if (:y-label opts#) (:y-label opts#) "Value")
-           vertical?# (if (false? (:vertical opts#)) (:vertical opts#) true)
+           main-title# (or (:title opts#) "Line Chart")
+           group-by# (:group-by opts#)
+           x-label# (or (:x-label opts#) "Categories")
+           y-label# (or (:y-label opts#) "Value")
+           vertical?# (if (false? (:vertical opts#)) false true)
            legend?# (true? (:legend opts#))
            dataset# (DefaultCategoryDataset.)
            chart# (org.jfree.chart.ChartFactory/createLineChart
@@ -630,13 +625,13 @@
     
 "
   ([chart x & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
           _x# (if (matrix? ~x) (to-list ~x) ~x)
           chart# ~chart
           data-plot# (.getPlot chart#)
           n# (.getDatasetCount data-plot#)
-          nbins# (if (:nbins opts#) (:nbins opts#) 10)
-          series-lab# (if (:series-label opts#) (:series-label opts#) (str '~x))
+          nbins# (or (:nbins opts#) 10)
+          series-lab# (or (:series-label opts#) (str '~x))
         ]
       (do
         (.addSeries (.getDataset data-plot#) series-lab# (double-array _x#) nbins#)
@@ -666,16 +661,15 @@
     
 "
   ([chart x & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
           _x# (if (matrix? ~x) (to-list ~x) ~x)
           chart# ~chart
           data-plot# (.getCategoryPlot chart#)
           n-col# (.getColumnCount (.getDataset data-plot#)) 
           n-row# (.getRowCount (.getDataset data-plot#))
-          series-label# (if (:series-label opts#) (:series-label opts#) (str '~x))
-          category-label# (if (:category-label opts#) 
-                            (:category-label opts#) 
-                            (str n-col#))
+          series-label# (or (:series-label opts#) (str '~x))
+          category-label# (or (:category-label opts#) 
+                              (str n-col#))
         ]
       (do
         (.add (.getDataset data-plot#) _x# series-label# category-label#)
@@ -711,10 +705,10 @@
     
 "
   ([chart categories values & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            values# (if (matrix? ~values) (to-list ~values) ~values)
            chart# ~chart
-           group-by# (when (:group-by opts#) (:group-by opts#))
+           group-by# (:group-by opts#)
            data-plot# (.getCategoryPlot chart#)
            n-col# (.getColumnCount (.getDataset data-plot#)) 
            n-row# (.getRowCount (.getDataset data-plot#))]
@@ -855,13 +849,13 @@
 
 "
   ([chart x y & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
            _x# (if (matrix? ~x) (to-list ~x) ~x)
            _y# (if (matrix? ~y) (to-list ~y) ~y)
            chart# ~chart
            data-plot# (.getPlot chart#)
            n# (.getDatasetCount data-plot#)
-           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
+           series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
            ;legend?# (if (false? (:legend opts#)) false true)
            ;points?# (if (false? (:points opts#)) false true) ;; TODO
            data-series# (XYSeries. series-lab#)
@@ -925,10 +919,10 @@
     
 "
   ([chart function min-range max-range & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
-           step-size# (if (:step-size opts#) (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
+    `(let [opts# (when '~options (assoc {} ~@options))
+           step-size# (or (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
            x# (range ~min-range ~max-range step-size#)
-           series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s" '~function))
+           series-lab# (or (:series-label opts#) (format "%s" '~function))
           ]
        (add-lines ~chart x# (map ~function x#) 
                  :series-label series-lab#))))
@@ -967,13 +961,13 @@
 
 "
   ([chart x y & options]
-    `(let [opts# (if '~options (assoc {} ~@options))
+    `(let [opts# (when '~options (assoc {} ~@options))
         _x# (if (matrix? ~x) (to-list ~x) ~x)
         _y# (if (matrix? ~y) (to-list ~y) ~y)
         chart# ~chart
         data-plot# (.getPlot chart#)
         n# (.getDatasetCount data-plot#)
-        series-lab# (if (:series-label opts#) (:series-label opts#) (format "%s, %s" '~x '~y))
+        series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
         ;legend?# (if (false? (:legend opts#)) false true)
         ;points?# (if (false? (:points opts#)) false true) ;; TODO
         data-series# (XYSeries. series-lab#)
@@ -1038,8 +1032,8 @@
 
 "
   ([chart x y & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          text (if (:text opts) (:text opts) "")
+    (let [opts (when options (apply assoc {} options))
+          text (or (:text opts) "")
           n (* -1/2 Math/PI)
           s (* 1/2 Math/PI)
           w Math/PI
@@ -1126,7 +1120,7 @@
 
 "
   ([chart x y text & options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           anno (XYTextAnnotation. text x y)]
       (.addAnnotation (.getPlot chart) anno))))
 
@@ -1187,7 +1181,7 @@
 
 "
   ([chart coords & options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           points (double-array (mapcat identity coords))
           anno (XYPolygonAnnotation. points)]
       (.addAnnotation (.getPlot chart) anno))))
@@ -1215,12 +1209,12 @@
 
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          title (if (:title opts) (:title opts) "Trace Plot")
-          x-label (if (:x-label opts) (:x-label opts) "Iteration")
-          y-label (if (:y-label opts) (:y-label opts) "Value")
-          series-lab (if (:series-label opts) (:series-label opts) "Value")
-          ;legend? (if (:series-label opts) (:series-label opts) true)
+    (let [opts (when options (apply assoc {} options))
+          title (or (:title opts) "Trace Plot")
+          x-label (or (:x-label opts) "Iteration")
+          y-label (or (:y-label opts) "Value")
+          series-lab (or (:series-label opts) "Value")
+          ;legend? (or (:series-label opts) true)
           n (count x)
           chart (xy-plot (range n) 
                          x ;)]
@@ -1308,10 +1302,10 @@
 
 (defmethod view org.jfree.chart.JFreeChart 
   ([chart & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          window-title (if (:window-title opts) (:window-title opts) "Incanter Plot")
-          width (if (:width opts) (:width opts) 500)
-          height (if (:height opts) (:height opts) 400)
+    (let [opts (when options (apply assoc {} options))
+          window-title (or (:window-title opts) "Incanter Plot")
+          width (or (:width opts) 500)
+          height (or (:height opts) 400)
           frame (ChartFrame. window-title chart)]
       (doto frame
         (.setSize width height)
@@ -1321,9 +1315,9 @@
 
 (defmethod save org.jfree.chart.JFreeChart
   ([chart filename & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          width (if (:width opts) (:width opts) 500)
-          height (if (:height opts) (:height opts) 400)]
+    (let [opts (when options (apply assoc {} options))
+          width (or (:width opts) 500)
+          height (or (:height opts) 400)]
       (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
       nil)))
 

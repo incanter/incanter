@@ -238,10 +238,9 @@
 
 (defmethod sel [incanter.Matrix true]
   ([#^Matrix mat & options]
-   (let [opts (if options (apply assoc {} options) nil)
-         except-rows (when (:except-rows opts) (:except-rows opts))
-         except-columns (when (:except-cols opts) (:except-cols opts))
-         ;rows (if (:rows opts) (:rows opts) true)
+   (let [opts (when options (apply assoc {} options))
+         except-rows (:except-rows opts)
+         except-columns (:except-cols opts)
          rows (cond 
                 (:rows opts) 
                   (:rows opts) 
@@ -256,7 +255,7 @@
                   (except-for (.columns mat) except-columns)
                 :else
                   true)
-         row-filter (if (:filter opts) (:filter opts) nil)
+         row-filter (:filter opts)
          mat (if (nil? row-filter) mat (matrix (filter row-filter mat)))]
      (cond
        (and (number? rows) (number? cols))
@@ -612,6 +611,39 @@
                   (.getQuick result 0 0)
                   result))) 
             args)))
+
+
+(defn kmult
+" Returns the Kronecker product of the given arguments.
+
+  Examples:
+
+    (def x (matrix (range 6) 2))
+    (def y (matrix (range 4) 2))
+    (kmult 4 x)
+    (kmult x 4)
+    (kmult x y)
+
+
+"
+  ([& args]
+    (reduce (fn [A B]
+              (let [a (cond 
+                        (matrix? A) A 
+                        (number? A) (matrix [A])
+                        :else (matrix A))
+                    b (cond 
+                        (matrix? B) B 
+                        (number? B) (matrix [B])
+                        :else (matrix B))
+                    rows (* (nrow a) (nrow b))
+                    cols (* (ncol a) (ncol b))]
+                (apply bind-rows (for [i (range (nrow a))]
+                             (apply bind-columns (for [j (range (ncol a))]
+                                             (mult (sel a i j) b)))))))
+            args)))
+
+              
 
 
 (defn solve 
@@ -999,9 +1031,9 @@
 
 "
   ([mat on-cols & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          cols (when (:cols opts) (:cols opts))
-          except-cols (when (:except-cols opts) (:except-cols opts))
+    (let [opts (when options (apply assoc {} options))
+          cols (:cols opts)
+          except-cols (:except-cols opts)
           groups (if (coll? on-cols)
                    (into #{} (to-list (sel mat :cols on-cols)))
                    (sort (into #{} (to-list (sel mat :cols on-cols)))))
@@ -1062,14 +1094,14 @@
 
 (defmethod sel [::dataset true]
   ([dataset & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          rows (if (:rows opts) (:rows opts) true)
+    (let [opts (when options (apply assoc {} options))
+          rows (or (:rows opts) true)
           cols (if (:cols opts) 
                  (if (coll? (:cols opts))
                    (:cols opts) 
                    [(:cols opts)])
                  (:column-names dataset))
-          row-filter (if (:filter opts) (:filter opts) nil)
+          row-filter (:filter opts)
           selected-rows (cond 
                           (true? rows) (:rows dataset) 
                           (number? rows) (list (nth (:rows dataset) rows))
@@ -1078,11 +1110,9 @@
           result (if (nil? row-filter) data (filter row-filter data))]
       (if (= (count cols) 1) 
         (mapcat identity result)
-        ;(vector cols result)))))
         (with-meta (hash-map :column-names cols 
                              :rows (map #(apply assoc {} (interleave cols %)) result)) 
                    {:type ::dataset})))))
-        ;(dataset cols result)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1107,15 +1137,14 @@
 
 "
   ([& args]
-   (let [opts (if args (apply assoc {} args) nil)
-         data (if (:data opts) (:data opts) nil)
+   (let [opts (when args (apply assoc {} args))
+         data (:data opts)
          ordered? (if (false? (:ordered? opts)) true false)
-         labels (if (:labels opts) 
-                  (:labels opts) 
-                  (if (nil? data)
-                    (:levels opts)
-                    (sort (into #{} data))))
-         levels (if (:levels opts) (:levels opts) (range (count labels)))]
+         labels (or (:labels opts) 
+                    (if (nil? data)
+                      (:levels opts)
+                      (sort (into #{} data))))
+         levels (or (:levels opts) (range (count labels)))]
     {:ordered? ordered?
      :labels labels
      :levels levels
@@ -1127,8 +1156,8 @@
 "
 "
   ([coll & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          cat-var (if (:categorical-var opts) (:categorical-var opts) (categorical-var :data coll))
+    (let [opts (when options (apply assoc {} options))
+          cat-var (or (:categorical-var opts) (categorical-var :data coll))
           to-levels (:to-levels cat-var)]
       (for [label coll] (to-levels label)))))
 
@@ -1180,7 +1209,7 @@
                                 them into numeric codes.
 "
   ([dataset & options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           dummies? (if (true? (:dummies opts)) true false)]
       (reduce bind-columns 
               (map #(string-to-categorical dataset % dummies?) 
@@ -1301,7 +1330,7 @@
 
 "
   ([data & options]
-   (let [opts (if options (apply assoc {} options) nil)
+   (let [opts (when options (apply assoc {} options))
          lower? (if (false? (:lower opts)) false true)
          n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
@@ -1372,8 +1401,8 @@
 
 (defmethod view incanter.Matrix
   ([obj & options] 
-    (let [opts (if options (apply assoc {} options) nil)
-          column-names (if (:column-names opts) (:column-names opts) (range (ncol obj)))
+    (let [opts (when options (apply assoc {} options))
+          column-names (or (:column-names opts) (range (ncol obj)))
           m (ncol obj)
           n (nrow obj)]
       (doto (JFrame. "Incanter Matrix")

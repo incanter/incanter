@@ -144,12 +144,12 @@
     http://en.wikipedia.org/wiki/Truncated_normal_distribution
 "
   ([& options]
-    (let [opts (if options (apply assoc {} options) nil)
-          mu (if (:mean opts) (:mean opts) 0)
-          sd (if (:sd opts) (:sd opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          mu (or (:mean opts) 0)
+          sd (or (:sd opts) 1)
           sigma-sq (* sd sd)
-          a (if (:a opts) (:a opts) Double/NEGATIVE_INFINITY)
-          b (if (:b opts) (:b opts) Double/POSITIVE_INFINITY)
+          a (or (:a opts) Double/NEGATIVE_INFINITY)
+          b (or (:b opts) Double/POSITIVE_INFINITY)
           lambda (fn [alpha] (/ (pdf-normal alpha) (- 1 (cdf-normal alpha))))
           delta (fn [alpha] (* (lambda alpha) (- (lambda alpha) alpha)))
           ;one-tail-var (fn [alpha s-sq] 

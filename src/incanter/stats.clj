@@ -64,9 +64,9 @@
       (pdf-f 1.0 :df1 5 :df2 2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          df1 (if (:df1 opts) (:df1 opts) 0)
-          df2 (if (:df2 opts) (:df2 opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          df1 (or (:df1 opts) 0)
+          df2 (or (:df2 opts) 1)
           pdf-fx (fn [x]
                    (* (/ (gamma (/ (+ df1 df2) 2)) 
                          (* (gamma (/ df1 2)) (gamma (/ df2 2))))
@@ -101,10 +101,10 @@
       (cdf-f 1.0 :df1 5 :df2 2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           lower-tail? (if (false? (:lower-tail opts)) false true)
-          df1 (if (:df1 opts) (:df1 opts) 1)
-          df2 (if (:df2 opts) (:df2 opts) 1)
+          df1 (or (:df1 opts) 1)
+          df2 (or (:df2 opts) 1)
           cdf-fx (if lower-tail?
                    (fn [x1] (regularized-beta 
                               (/ (* df1 x1) (+ df2 (* df1 x1)))
@@ -145,9 +145,9 @@
       (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          mean (if (:mean opts) (:mean opts) 0)
-          sd (if (:sd opts) (:sd opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          mean (or (:mean opts) 0)
+          sd (or (:sd opts) 1)
           dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -175,9 +175,9 @@
       (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          mean (if (:mean opts) (:mean opts) 0)
-          sd (if (:sd opts) (:sd opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          mean (or (:mean opts) 0)
+          sd (or (:sd opts) 1)
           dist (Normal. mean sd (DoubleMersenneTwister.))] 
       (if (coll? x)
         (map #(.cdf dist %) x)
@@ -209,9 +209,9 @@
       (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))
 "
   ([probability & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          mean (if (:mean opts) (:mean opts) 0)
-          sd (if (:sd opts) (:sd opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          mean (or (:mean opts) 0)
+          sd (or (:sd opts) 1)
           x (if (coll? probability) 
               (map #(Probability/normalInverse %) probability)
               (Probability/normalInverse probability))]
@@ -238,9 +238,9 @@
       (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          mean (if (:mean opts) (:mean opts) 0)
-          sd (if (:sd opts) (:sd opts) 1)]
+    (let [opts (when options (apply assoc {} options))
+          mean (or (:mean opts) 0)
+          sd (or (:sd opts) 1)]
       (if (= size 1)
         (Normal/staticNextDouble mean sd)
         (for [_ (range size)] (Normal/staticNextDouble mean sd))))))
@@ -288,15 +288,13 @@
 
 "
   ([size & options]
-   (let [opts (if options (apply assoc {} options) nil)
-         mean (if (:mean opts) 
-                (:mean opts) 
-                (if (:sigma opts) 
-                  (repeat (ncol (:sigma opts)) 0)
-                  [0]))
-         sigma (if (:sigma opts) 
-                 (:sigma opts) 
-                 (identity-matrix (count mean)))
+   (let [opts (when options (apply assoc {} options))
+         mean (or (:mean opts) 
+                  (if (:sigma opts) 
+                    (repeat (ncol (:sigma opts)) 0)
+                    [0]))
+         sigma (or (:sigma opts) 
+                   (identity-matrix (count mean)))
          p (count mean)
          chol (decomp-cholesky sigma)
          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
@@ -334,9 +332,9 @@
       (pdf-uniform 5 :min 1 :max 10)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          min (double (if (:min opts) (:min opts) 0.0))
-          max (double (if (:max opts) (:max opts) 1.0))
+    (let [opts (when options (apply assoc {} options))
+          min (double (or (:min opts) 0.0))
+          max (double (or (:max opts) 1.0))
           dist (DoubleUniform. min max (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -364,9 +362,9 @@
       (cdf-uniform 5 :min 1 :max 10)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          min (double (if (:min opts) (:min opts) 0.0))
-          max (double (if (:max opts) (:max opts) 1.0))
+    (let [opts (when options (apply assoc {} options))
+          min (double (or (:min opts) 0.0))
+          max (double (or (:max opts) 1.0))
           dist (DoubleUniform. min max (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
@@ -394,9 +392,9 @@
       (sample-uniform 1000 :min 1 :max 10)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          min-val (double (if (:min opts) (:min opts) 0.0))
-          max-val (double (if (:max opts) (:max opts) 1.0))
+    (let [opts (when options (apply assoc {} options))
+          min-val (double (or (:min opts) 0.0))
+          max-val (double (or (:max opts) 1.0))
           ints? (if (true? (:integers opts)) true false)
           dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
       (if (= size 1)
@@ -432,9 +430,9 @@
       (pdf-beta 0.5 :alpha 1 :beta 2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          alpha (if (:alpha opts) (:alpha opts) 1)
-          beta (if (:beta opts) (:beta opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          alpha (or (:alpha opts) 1)
+          beta (or (:beta opts) 1)
           dist (Beta. alpha beta (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -463,9 +461,9 @@
       (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          alpha (if (:alpha opts) (:alpha opts) 1)
-          beta (if (:beta opts) (:beta opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          alpha (or (:alpha opts) 1)
+          beta (or (:beta opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/beta alpha beta x1))
@@ -498,9 +496,9 @@
       (sample-beta 1000 :alpha 1 :beta 2)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          alpha (if (:alpha opts) (:alpha opts) 1)
-          beta (if (:beta opts) (:beta opts) 1)]
+    (let [opts (when options (apply assoc {} options))
+          alpha (or (:alpha opts) 1)
+          beta (or (:beta opts) 1)]
       (if (= size 1)
         (Beta/staticNextDouble alpha beta)
         (for [_ (range size)] (Beta/staticNextDouble alpha beta))))))
@@ -530,9 +528,9 @@
       (pdf-gamma 10 :shape 1 :rate 2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          shape (if (number? (:shape opts)) (:shape opts) 1)
-          rate (if (number? (:rate opts)) (:rate opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          shape (or (:shape opts) 1)
+          rate (or (:rate opts) 1)
           dist (Gamma. shape rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -562,9 +560,9 @@
       (cdf-gamma 3 :shape 1 :lower-tail false)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          shape (if (number? (:shape opts)) (:shape opts) 1)
-          rate (if (number? (:rate opts)) (:rate opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          shape (or (:shape opts) 1)
+          rate (or (:rate opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true) 
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/gamma rate shape x1))
@@ -594,9 +592,9 @@
       (sample-gamma 1000 :shape 1 :rate 2)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          shape (if (number? (:shape opts)) (:shape opts) 1)
-          rate (if (number? (:rate opts)) (:rate opts) 1)]
+    (let [opts (when options (apply assoc {} options)) 
+          shape (or (:shape opts) 1)
+          rate (or (:rate opts) 1)]
       (if (= size 1)
         (Gamma/staticNextDouble shape rate)
         (for [_ (range size)] (Gamma/staticNextDouble shape rate))))))
@@ -627,8 +625,8 @@
       (pdf-chisq 5.0 :df 2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          df (or (:df opts) 1)
           dist (ChiSquare. df (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -657,8 +655,8 @@
       (cdf-chisq 5.0 :df 2 :lower-tail false)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          df (or (:df opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/chiSquare df x1))
@@ -687,8 +685,8 @@
       (sample-chisq 1000 :df 2)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)]
+    (let [opts (when options (apply assoc {} options)) 
+          df (or (:df opts) 1)]
       (if (= size 1)
         (ChiSquare/staticNextDouble df)
         (for [_ (range size)] (ChiSquare/staticNextDouble df))))))
@@ -718,8 +716,8 @@
       (pdf-t 1.2 :df 10)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          df (or (:df opts) 1)
           dist (StudentT. df (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -745,8 +743,8 @@
       (cdf-t 1.2 :df 10)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          df (or (:df opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/studentT df x1))
@@ -782,8 +780,8 @@
       (map #(quantile-t 0.025 :df %) df)
 "
   ([probability & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          df (if (:df opts) (:df opts) 1)
+    (let [opts (when options (apply assoc {} options))
+          df (or (:df opts) 1)
           to-alpha (fn [prob] ;; need to convert the probability to an alpha value
                      (if (< prob 1/2) 
                       (* 2 prob)
@@ -814,8 +812,8 @@
       (cdf-t 1000 :df 10)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          df (if (number? (:df opts)) (:df opts) 1)]
+    (let [opts (when options (apply assoc {} options)) 
+          df (or (:df opts) 1)]
       (if (= size 1)
         (StudentT/staticNextDouble df)
         (for [_ (range size)] (StudentT/staticNextDouble df))))))
@@ -847,8 +845,8 @@
       (pdf-exp 2.0 :rate 1/2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          rate (if (number? (:rate opts)) (:rate opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          rate (or (:rate opts) 1)
           dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -874,8 +872,8 @@
       (cdf-exp 2.0 :rate 1/2)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          rate (if (number? (:rate opts)) (:rate opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          rate (or (:rate opts) 1)
           dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
@@ -900,8 +898,8 @@
       (sample-exp 1000 :rate 1/2)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          rate (if (number? (:rate opts)) (:rate opts) 1)]
+    (let [opts (when options (apply assoc {} options)) 
+          rate (or (:rate opts) 1)]
       (if (= size 1)
         (Exponential/staticNextDouble rate)
         (for [_ (range size)] (Exponential/staticNextDouble rate))))))
@@ -936,10 +934,10 @@
 
 "
   ([& options]
-    (let [opts (if options (apply assoc {} options) nil)
-          p (if (:p opts) (:p opts) 2)
-          df (if (:df opts) (:df opts) p)
-          scale (if (:scale opts) (:scale opts) (identity-matrix p))
+    (let [opts (when options (apply assoc {} options))
+          p (or (:p opts) 2)
+          df (or (:df opts) p)
+          scale (or (:scale opts) (identity-matrix p))
           diagonal (for [i (range 1 (inc p))] 
                      (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
           mat (diag diagonal)
@@ -973,9 +971,9 @@
 
 "
   ([& options]
-    (let [opts (if options (apply assoc {} options) nil)
-          p (if (:p opts) (:p opts) 2)
-          df (if (:df opts) (:df opts) p)
+    (let [opts (when options (apply assoc {} options))
+          p (or (:p opts) 2)
+          df (or (:df opts) p)
           scale (if (:scale opts) (:scale opts) (identity-matrix p))]
       (solve (sample-wishart :p p :df df :scale scale)))))
 
@@ -1053,9 +1051,9 @@
       (pdf-binomial 10 :prob 1/4 :size 20)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:size opts)) (:size opts) 1)
-          p (if (number? (:prob opts)) (:prob opts) 1/2)
+    (let [opts (when options (apply assoc {} options)) 
+          n (or (:size opts) 1)
+          p (or (:prob opts) 1/2)
           dist (Binomial. n p (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -1084,9 +1082,9 @@
       (cdf-binomial 10 :prob 1/4 :size 20)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:size opts)) (:size opts) 1)
-          p (if (number? (:prob opts)) (:prob opts) 1/2)
+    (let [opts (when options (apply assoc {} options)) 
+          n (or (:size opts) 1)
+          p (or (:prob opts) 1/2)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/binomial x1 n p))
@@ -1116,9 +1114,9 @@
       (sample-binomial 1000 :prob 1/4 :size 20)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          n (if (number? (:size opts)) (:size opts) 1)
-          p (if (number? (:prob opts)) (:prob opts) 1/2)]
+    (let [opts (when options (apply assoc {} options)) 
+          n (or (:size opts) 1)
+          p (or (:prob opts) 1/2)]
       (if (= size 1)
         (Binomial/staticNextInt n p)
         (for [_ (range size)] (Binomial/staticNextInt n p))))))
@@ -1148,8 +1146,8 @@
       (pdf-poisson 5 :lambda 10)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          lambda (if (number? (:lambda opts)) (:lambda opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          lambda (or (:lambda opts) 1)
           dist (Poisson. lambda (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -1177,8 +1175,8 @@
       (cdf-poisson 5 :lambda 10)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          lambda (if (number? (:lambda opts)) (:lambda opts) 1)
+    (let [opts (when options (apply assoc {} options)) 
+          lambda (or (:lambda opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/poisson x1 lambda))
@@ -1207,8 +1205,8 @@
       (sample-poisson 1000 :lambda 10)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          lambda (if (number? (:lambda opts)) (:lambda opts) 1)]
+    (let [opts (when options (apply assoc {} options)) 
+          lambda (or (:lambda opts) 1)]
      (if (= size 1)
         (Poisson/staticNextInt lambda)
         (for [_ (range size)] (Poisson/staticNextInt lambda))))))
@@ -1239,9 +1237,9 @@
       (pdf-neg-binomial 10 :prob 1/2 :size 20)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          size (if (number? (:size opts)) (:size opts) 10)
-          prob (if (number? (:prob opts)) (:prob opts) 1/2)
+    (let [opts (when options (apply assoc {} options)) 
+          size (or (:size opts) 10)
+          prob (or (:prob opts) 1/2)
           dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -1270,9 +1268,9 @@
       (cdf-neg-binomial 10 :prob 1/2 :size 20)
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          size (if (number? (:size opts)) (:size opts) 10)
-          prob (if (number? (:prob opts)) (:prob opts) 1/2)
+    (let [opts (when options (apply assoc {} options)) 
+          size (or (:size opts) 10)
+          prob (or (:prob opts) 1/2)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/negativeBinomial x1 size prob))
@@ -1302,9 +1300,9 @@
       (sample-neg-binomial 1000 :prob 1/2 :size 20)
 "
   ([size & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          size (if (number? (:size opts)) (:size opts) 10)
-          prob (if (number? (:prob opts)) (:prob opts) 1/2)]
+    (let [opts (when options (apply assoc {} options)) 
+          size (or (:size opts) 10)
+          prob (or (:prob opts) 1/2)]
      (if (= size 1)
         (NegativeBinomial/staticNextInt size prob)
         (for [_ (range size)] (NegativeBinomial/staticNextInt size prob))))))
@@ -1503,7 +1501,7 @@
 
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
+    (let [opts (when options (apply assoc {} options)) 
           _x (if (matrix? x) (to-list x) x)
           data (DoubleArrayList. (double-array (sort _x)))
           probs (cond 
@@ -1538,8 +1536,8 @@
 
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          size (if (:size opts) (:size opts) (count x))
+    (let [opts (when options (apply assoc {} options)) 
+          size (or (:size opts) (count x))
           replacement? (if (false? (:replacement opts)) false true)
           max-idx (dec (count x))]
       (if replacement?
@@ -1655,12 +1653,12 @@
 
 "
   ([data statistic & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          size (when (:size opts) (:size opts))
+    (let [opts (when options (apply assoc {} options)) 
+          size (:size opts)
           replacement (if (false? (:replacement opts)) false true)
-          n (if (:n opts) (:n opts) (count data))
+          n (or (:n opts) (count data))
           smooth? (true? (:smooth opts))
-          smooth-sd (if (:smooth-sd opts) (:smooth-sd opts) (/ (sqrt n)))
+          smooth-sd (or (:smooth-sd opts) (/ (sqrt n)))
           B1 100
           B2 25
           max-iter 10
@@ -1719,9 +1717,9 @@
 
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
-          stat-fn (if (:stat opts) (:stat opts) mean)
-          fun (if (:fun opts) (:fun opts) minus)
+    (let [opts (when options (apply assoc {} options)) 
+          stat-fn (or (:stat opts) mean)
+          fun (or (:fun opts) minus)
           stat (stat-fn x)]
       (fun x stat))))
 
@@ -1915,7 +1913,7 @@
 
 "
   ([y x & options]
-    (let [opts (if options (apply assoc {} options) nil) 
+    (let [opts (when options (apply assoc {} options)) 
           intercept? (if (false? (:intercept opts)) false true)
           _x (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
           xtx (mmult (trans _x) _x)
@@ -2014,15 +2012,15 @@
 
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          y (if (:y opts) (:y opts) nil)   
+    (let [opts (when options (apply assoc {} options))
+          y (or (:y opts) nil)   
           one-sample? (nil? y)
-          mu (if (:mu opts) (:mu opts) 
-               (if y (mean y) 0))
+          mu (or (:mu opts) 
+                 (if y (mean y) 0))
           paired? (if (true? (:paired opts)) true false)
           var-equal? (if (true? (:var-equal opts)) true false)
-          conf-level (if (:conf-level opts) (:conf-level opts) 0.95)
-          alternative (if (:alternative opts) (:alternative opts) :two-sided)
+          conf-level (or (:conf-level opts) 0.95)
+          alternative (or (:alternative opts) :two-sided)
           x-mean (mean x)
           x-var (variance x)
           n1 (count x)
@@ -2134,7 +2132,7 @@
 
 "
   ([x & options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           _x (if (matrix? x) x (matrix x))
           p (ncol _x)
           n (nrow _x)
@@ -2266,10 +2264,10 @@
 
 "
   ([& options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           correct (if (false? (:correct opts)) false true)
-          x (when (:x opts) (:x opts))
-          y (when (:y opts) (:y opts))
+          x (:x opts)
+          y (:y opts)
           table? (if (:table opts) true false)
           xtab (when (or x y)
                  (if y 
@@ -2450,10 +2448,10 @@
 
 "
   ([& options]
-    (let [opts (if options (apply assoc {} options) nil)
-          table (when (:table opts) (:table opts))
-          row-labels (when table (if (:row-labels opts) (:row-labels opts) (range (nrow table))))
-          col-labels (when table (if (:col-labels opts) (:col-labels opts) (range (ncol table))))
+    (let [opts (when options (apply assoc {} options))
+          table (:table opts)
+          row-labels (when table (or (:row-labels opts) (range (nrow table))))
+          col-labels (when table (or (:col-labels opts) (range (ncol table))))
           data (apply bind-rows 
                       (apply concat
                              (for [r row-labels c col-labels]

@@ -190,10 +190,10 @@
 
 "
   ([data & options]
-   (let [opts (if options (apply assoc {} options) nil)
-         alpha-init (if (:alpha opts) (:alpha opts) 0.5)
-         beta-init (if (:beta opts) (:beta opts) 3)
-         total-cycles (if (:cycles opts) (:cycles opts) 10)]
+   (let [opts (when options (apply assoc {} options))
+         alpha-init (or (:alpha opts) 0.5)
+         beta-init (or (:beta opts) 3)
+         total-cycles (or (:cycles opts) 10)]
     (loop [r 1 som (som-initialize-linear data) fit []]
       (if (= r total-cycles)
         (assoc som :fit fit)

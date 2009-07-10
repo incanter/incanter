@@ -164,8 +164,8 @@
 
 "
   ([dataset-key & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          incanter-home (if (:incanter-home opts) (:incanter-home opts) (System/getProperty "incanter.home"))
+    (let [opts (when options (apply assoc {} options))
+          incanter-home (or (:incanter-home opts) (System/getProperty "incanter.home"))
           ds (**datasets** dataset-key)
           filename (if (nil? incanter-home) (ds :filename) (str incanter-home "/" (ds :filename)))
           delim (ds :delim)

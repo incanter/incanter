@@ -171,9 +171,20 @@
     (map mean (trans (:means samp)))
 
 
+    (use '(incanter core stats bayes charts datasets))
+    (def cars (to-matrix (get-dataset :cars))) 
+    (def cars-std (trans (map #(sweep (sweep %) :fun div :stat sd) (trans cars))))
+    (def samp (sample-mvn-params 1000 cars-std))
+    (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+    (map mean (trans (:means samp)))
+
+    (covariance cars-std)
+
+
+
 "
   ([size y & options]
-    (let [opts (if options (apply assoc {} options) nil)
+    (let [opts (when options (apply assoc {} options))
           means (map mean (trans y))
           n (count y)
           S (reduce plus 
@@ -189,4 +200,6 @@
           ]
   {:means mu-samp :sigmas sigma-samp})))
           
+
+
 

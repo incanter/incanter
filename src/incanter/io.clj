@@ -44,11 +44,11 @@
       :header (default false) indicates the file has a header line
   "
   ([filename & options] 
-   (let [opts (if options (apply assoc {} options) nil)
-         delim (if (:delim opts) (:delim opts) \,) ; space delim default
-         quote-char (if (:quote opts) (:quote opts) \")
-         skip (if (:skip opts) (:skip opts) 0)
-         header? (if (:header opts) (:header opts) false)
+   (let [opts (when options (apply assoc {} options))
+         delim (or (:delim opts) \,) ; space delim default
+         quote-char (or (:quote opts) \")
+         skip (or (:skip opts) 0)
+         header? (or (:header opts) false)
          reader (au.com.bytecode.opencsv.CSVReader. 
                     (java.io.FileReader. filename) 
                     delim
@@ -64,9 +64,9 @@
 
 
 (defmethod save incanter.Matrix [mat filename & options]
-  (let [opts (if options (apply assoc {} options) nil)
-        delim (if (:delim opts) (:delim opts) \,) 
-        header (if (:header opts) (:header opts) nil) 
+  (let [opts (when options (apply assoc {} options))
+        delim (or (:delim opts) \,) 
+        header (or (:header opts) nil) 
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)]
     (do
@@ -90,9 +90,9 @@
 
 
 (defmethod save :incanter.core/dataset [dataset filename & options]
-  (let [opts (if options (apply assoc {} options) nil)
-        delim (if (:delim opts) (:delim opts) \,) 
-        header (if (:header opts) (:header opts) (:column-names dataset))
+  (let [opts (when options (apply assoc {} options))
+        delim (or (:delim opts) \,) 
+        header (or (:header opts) (:column-names dataset))
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)
         rows (:rows dataset)

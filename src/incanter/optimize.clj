@@ -101,8 +101,8 @@
 
 "
   ([f & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          dx (if (:dx opts) (:dx opts) 0.0001)
+    (let [opts (when options (apply assoc {} options))
+          dx (or (:dx opts) 0.0001)
           f-prime (fn [x] (div (minus (f (plus x dx)) (f x)) dx))]
       f-prime)))
 
@@ -130,8 +130,8 @@
     
 "
   ([fx i & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          dx (if (:dx opts) (:dx opts) 0.0001)]
+    (let [opts (when options (apply assoc {} options))
+          dx (or (:dx opts) 0.0001)]
       (fn [theta] 
         (let [theta-next (assoc theta i (+ (theta i) dx))]
           (/ (- (fx theta-next) (fx theta)) dx))))))
@@ -230,9 +230,9 @@
 
 "
   ([f start & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          tol (if (:tol opts) (:tol opts) 1E-4)
-          dx (if (:dx opts) (:dx opts) (mult start tol))
+    (let [opts (when options (apply assoc {} options))
+          tol (or (:tol opts) 1E-4)
+          dx (or (:dx opts) (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))
          ]
@@ -277,9 +277,9 @@
 
 "
   ([f start & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          tol (if (:tol opts) (:tol opts) 1E-4)
-          dx (if (:dx opts) (:dx opts) (mult start tol))
+    (let [opts (when options (apply assoc {} options))
+          tol (or (:tol opts) 1E-4)
+          dx (or (:dx opts) (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))]
       (fn [theta x]
@@ -326,9 +326,9 @@
 
 "
   ([f start & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          tol (if (:tol opts) (:tol opts) 1E-4)
-          dx (if (:dx opts) (:dx opts) (mult start tol))
+    (let [opts (when options (apply assoc {} options))
+          tol (or (:tol opts) 1E-4)
+          dx (or (:dx opts) (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))]
       (fn [theta x]
@@ -484,9 +484,6 @@
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
-;    (defn f [theta x] 
-;      (let [[a b c] theta]
-;        (plus a (div (mult x (minus b a)) (plus c x)))))
 
     (def start [20 200 100])
     (def data (to-matrix (get-dataset :thurstone)))
@@ -507,9 +504,9 @@
 
 " 
   ([f df d2f start x y & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          max-iter (if (:max-iter opts) (:max-iter opts) 200)
-          tol (if (:tol opts) (:tol opts) 1E-5)
+    (let [opts (when options (apply assoc {} options))
+          max-iter (or (:max-iter opts) 200)
+          tol (or (:tol opts) 1E-5)
           g (nls-gradient f df start x y)]
       (loop [i (int 0)
              th start]
@@ -564,9 +561,9 @@
 
 " 
   ([f df start x y & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          max-iter (if (:max-iter opts) (:max-iter opts) 200)
-          tol (if (:tol opts) (:tol opts) 1E-5)
+    (let [opts (when options (apply assoc {} options))
+          max-iter (or (:max-iter opts) 200)
+          tol (or (:tol opts) 1E-5)
           grad (gradient f start)
           g (grad start x)]
       (loop [i (int 0)
@@ -673,10 +670,10 @@
 
 "
   ([f y x start & options]
-    (let [opts (if options (apply assoc {} options) nil)
-          method (if (:method opts) (:method opts) :guass-newton) ;; other option is :newton-raphson
-          tol (if (:tol opts) (:tol opts) 1E-5)
-          max-iter (if (:max-iter opts) (:max-iter opts) 200)
+    (let [opts (when options (apply assoc {} options))
+          method (or (:method opts) :guass-newton) ;; other option is :newton-raphson
+          tol (or (:tol opts) 1E-5)
+          max-iter (or (:max-iter opts) 200)
           nls (if (= method :newton-raphson)
                 (nls-newton-raphson f (gradient f start) (hessian f start) start x y :tol tol :max-iter max-iter)
                 (nls-gauss-newton f (gradient f start) start x y :tol tol :max-iter max-iter))
