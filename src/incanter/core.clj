@@ -100,6 +100,14 @@
     (coll? mat) 1 )))
 
 
+
+(defn dim
+  " Returns a vector with the number of rows and columns of the given matrix. "
+  ([mat]
+   [(nrow mat) (ncol mat)]))
+
+
+
 (defn identity-matrix 
 "   Returns an n-by-n identity matrix.
     
@@ -613,16 +621,16 @@
             args)))
 
 
-(defn kmult
+(defn kronecker
 " Returns the Kronecker product of the given arguments.
 
   Examples:
 
     (def x (matrix (range 6) 2))
     (def y (matrix (range 4) 2))
-    (kmult 4 x)
-    (kmult x 4)
-    (kmult x y)
+    (kronecker 4 x)
+    (kronecker x 4)
+    (kronecker x y)
 
 
 "

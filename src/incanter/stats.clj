@@ -935,9 +935,9 @@
 "
   ([& options]
     (let [opts (when options (apply assoc {} options))
-          p (or (:p opts) 2)
+          scale (or (:scale opts) (when (:p opts) (identity-matrix (:p opts))))
+          p (count scale)
           df (or (:df opts) p)
-          scale (or (:scale opts) (identity-matrix p))
           diagonal (for [i (range 1 (inc p))] 
                      (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
           mat (diag diagonal)
@@ -972,9 +972,9 @@
 "
   ([& options]
     (let [opts (when options (apply assoc {} options))
-          p (or (:p opts) 2)
-          df (or (:df opts) p)
-          scale (if (:scale opts) (:scale opts) (identity-matrix p))]
+          scale (or (:scale opts) (when (:p opts) (identity-matrix (:p opts))))
+          p (count scale)
+          df (or (:df opts) p)]
       (solve (sample-wishart :p p :df df :scale scale)))))
 
 
