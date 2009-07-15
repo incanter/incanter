@@ -215,7 +215,7 @@
     (def y (sel survey :cols (range 10 14)))
 
     (time (def params (sample-mv-model-params 100 y x)))
-    (matrix (map mean (trans (:coefs params))) (inc (ncol x)))
+    (trans (matrix (map mean (trans (:coefs params))) (inc (ncol x))))
     (matrix (map mean (trans (:sigmas params))) (ncol y))
 
 
@@ -227,7 +227,8 @@
           d (ncol y)
           k (ncol _x)
           df (dec (nrow y))
-          y-vec (mapcat identity y)
+          ;y-vec (mapcat identity y)
+          y-vec (vectorize y)
           I-d (identity-matrix d)
           xt (trans _x)
           xtx (mmult xt _x)
@@ -236,13 +237,15 @@
       (loop [i 0 coefs nil sigmas (list (vectorize (identity-matrix d)))]
         (if (= i size)
           {:coefs (matrix coefs) :sigmas (matrix sigmas)}
-          (let [s (matrix (first sigmas) d)
+          (let [s (trans (matrix (first sigmas) d))
                 vb (solve (kronecker (solve s) xtx))
-                mn (mmult vb (mapcat identity (mmult xt y (trans (solve s)))))
+                ;mn (mmult vb (mapcat identity (mmult xt y (trans (solve s)))))
+                mn (mmult vb (vectorize (mmult xt y (trans (solve s)))))
                 b (plus mn (trans (mmult (trans (sample-normal (* d k))) (decomp-cholesky vb)))) ;; added trans to sample-normal output
                 ;_ (println b)
                 ;; draw s from inverse wishart
-                e (matrix (minus y-vec (mmult kron-I-x b)) d)
+                ;e (matrix (minus y-vec (mmult kron-I-x b)) d)
+                e (trans (matrix (minus y-vec (mmult kron-I-x b)) (nrow y)))
                 ;_ (println (incanter.core/dim e))
                 v (mmult (trans e) e)
                 s-new (sample-inv-wishart :df df :scale v)]

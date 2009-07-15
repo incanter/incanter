@@ -1541,7 +1541,9 @@
           replacement? (if (false? (:replacement opts)) false true)
           max-idx (dec (count x))]
       (if replacement?
-        (map #(nth x %) (sample-uniform size :min 0 :max max-idx :integers true))
+        (if (> size 1)
+          (map #(nth x %) (sample-uniform size :min 0 :max max-idx :integers true))
+          (nth x (rand-int max-idx)))
         (if (> size (count x))
           (throw (Exception. "'size' can't be larger than (count x) without replacement!"))
           (map #(nth x %)
