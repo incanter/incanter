@@ -33,6 +33,29 @@
 
 
 
+(defn indicator 
+"
+  Returns a sequence of ones and zeros, where ones
+  are returned when the given predicate is true for
+  corresponding element in the given collection, and
+  zero otherwise.
+
+  Examples:
+    (use 'incanter.stats)
+    
+    (indicator #(neg? %) (sample-normal 10))
+
+    ;; return the sum of the positive values in a normal sample
+    (def x (sample-normal 100))
+    (sum (mult x (indicator #(pos? %) x)))
+
+"
+  ([pred coll] 
+    (for [el coll] (if (pred el) 1 0))))
+
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 ;; CONTINOUS DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
@@ -1308,6 +1331,46 @@
         (for [_ (range size)] (NegativeBinomial/staticNextInt size prob))))))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; EMPIRICAL DISTRIBUTION
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn cdf-empirical 
+" Returns a step-function representing the empirical cdf of the given data.
+  Equivalent to R's ecdf function.
+
+  The following description is from the ecdf help in R: The e.c.d.f. 
+  (empirical cumulative distribution function) Fn is a step function 
+  with jumps i/n at observation values, where i is the number of tied 
+  observations at that value.  Missing values are ignored.
+
+  For observations 'x'= (x1,x2, ... xn), Fn is the fraction of
+  observations less or equal to t, i.e.,
+
+  Fn(t) = #{x_i <= t} / n  =  1/n sum(i=1,n) Indicator(xi <= t).
+
+
+  Examples:
+    (use '(incanter core stats charts))
+
+    (def exam1 [192 160 183 136 162 165 181 188 150 163 192 164 184 
+                189 183 181 188 191 190 184 171 177 125 192 149 188 
+                154 151 159 141 171 153 169 168 168 157 160 190 166 150])
+
+    ;; the ecdf function returns an empirical cdf function for the given data
+    (def ecdf (cdf-empirical exam1))
+
+    ;; plot the data's empircal cdf
+    (view (scatter-plot exam1 (map ecdf exam1)))
+
+
+    
+"
+  ([x] (fn [t] (div (sum (indicator #(<= % t) x)) (count x)))))
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; STATISTICAL FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2396,28 +2459,6 @@
          std-dev (sqrt (:S svd))]
      {:std-dev std-dev
       :rotation rotation})))
-
-
-(defn indicator 
-"
-  Returns a sequence of ones and zeros, where ones
-  are returned when the given predicate is true for
-  corresponding element in the given collection, and
-  zero otherwise.
-
-  Examples:
-    (use 'incanter.stats)
-    
-    (indicator #(neg? %) (sample-normal 10))
-
-    ;; return the sum of the positive values in a normal sample
-    (def x (sample-normal 100))
-    (sum (mult x (indicator #(pos? %) x)))
-
-"
-  ([pred coll] 
-    (for [el coll] (if (pred el) 1 0))))
-
 
 
 
