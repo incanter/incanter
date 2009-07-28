@@ -84,7 +84,7 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 h2. Building Incanter
 
-The Incanter distribution includes a pre-built jar file, but if you would like to build it, test it, and generated the api documentation yourself, run the following commands from the Incanter directory:
+The Incanter distribution includes a pre-built jar file, but if you would like to build it, test it, and generate the api documentation yourself, run the following commands from the Incanter directory:
 
 * Build incanter.jar: @ant@
 * Run unit tests: @tests/runtests.clj@ 

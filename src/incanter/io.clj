@@ -58,8 +58,15 @@
          raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
          parsed-data (into [] (map (fn [row] (into [] (map #(parse-string %) row))) raw-data))
        ]
-    (if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data))))))
-  
+    ;;(if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data))))))
+    (if header? 
+      ; have header row
+      (dataset (first parsed-data) (rest parsed-data)) 
+      ; no header row so build a default one
+      (let [col-count (count (first parsed-data))
+            col-names (apply vector (map str (repeat col-count "col") (iterate inc 0)))]
+        (dataset col-names parsed-data))))))
+   
 
 
 

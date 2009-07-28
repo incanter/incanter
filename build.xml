@@ -9,6 +9,7 @@
   <property name="build" location="build" />
   <property name="lib" location="lib" />
   <property name="clojure.jar" location="${lib}/clojure.jar" />
+  <property name="clojure-contrib.jar" location="${lib}/clojure-contrib.jar" />
   <property name="colt.jar" location="${lib}/parallelcolt-0.7.2.jar" />
   <property name="jarfile" location="incanter.jar" />
   <property name="LICENSE" location="epl-v10.html" />
@@ -35,6 +36,7 @@
       <classpath>
         <path location="${src}"/>
         <path location="${clojure.jar}"/>
+        <path location="${clojure-contrib.jar}"/>
         <path location="${colt.jar}"/>
       </classpath>
       <sysproperty key="clojure.compile.path" value="${build}"/>
