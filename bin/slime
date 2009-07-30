@@ -1,0 +1,3 @@
+#!/bin/sh
+
+emacs -l `dirname $0`/incanter.el -f incanter
