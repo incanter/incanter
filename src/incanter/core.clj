@@ -1397,10 +1397,14 @@
 
 
 "
-  (fn [obj & options] (if (and (not (matrix? obj)) 
-                               (not (dataset? obj))
-                               (coll? obj))
-                        ::coll 
+  (fn [obj & options] (cond 
+                        (and (not (matrix? obj)) 
+                             (not (dataset? obj))
+                             (coll? obj))
+                          ::coll
+                        (.isInstance processing.core.PApplet obj)
+                          :sketch
+                        :else
                         (type obj))))
 
 
@@ -1506,7 +1510,10 @@
   
 
 "
-  (fn [obj filename & options] (type obj)))
+  (fn [obj filename & options] 
+    (if (.isInstance processing.core.PApplet obj)
+      :sketch
+      (type obj))))
 
 
 
