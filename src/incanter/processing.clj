@@ -28,21 +28,40 @@
 
 ;; $$addListeners
 
+;; added by DEL
+(declare color)
+
+
 (defn alpha
   [sketch what] (.alpha sketch (int what)))
 
+
+;;(defn ambient
+;;  ([sketch rgb] 
+;;   (if (string? rgb)
+;;     (.ambient sketch (color sketch rgb))
+;;     (.ambient sketch (float rgb))))
+;;  ([sketch x y z] (.ambient sketch (float x) (float y) (float z))))
+
+;;(defn ambient-int
+;;  [sketch rgb] (.ambient sketch (int rgb)))
+
+;; modified by DEL
 (defn ambient
-  ([sketch gray] (.ambient sketch (float gray)))
-  ([sketch x y z] (.ambient sketch (float x) (float y) (float z))))
+  [sketch rgb] (.ambient sketch rgb))
 
-(defn ambient-int
-  [sketch rgb] (.ambient sketch (int rgb)))
-
+;; modified by DEL
 (defn ambient-light
-  ([sketch red green blue]
-	 (.ambientLight sketch (float red) (float green) (float blue)))
-  ([sketch red green blue x y z]
-	 (.ambientLight sketch (float red) (float green) (float blue) (float x) (float y) (float z))))
+  ([sketch rgb]
+	 (.ambientLight sketch rgb))
+  ([sketch rgb x y z]
+	 (.ambientLight sketch rgb (float x) (float y) (float z))))
+
+;;(defn ambient-light
+;;  ([sketch red green blue]
+;;     (.ambientLight sketch (float red) (float green) (float blue)))
+;;  ([sketch red green blue x y z]
+;;     (.ambientLight sketch (float red) (float green) (float blue) (float x) (float y) (float z))))
 
 ;; $$append
 
@@ -81,18 +100,69 @@
 ;;  ([#^PApplet sketch rgb] (.background sketch (int rgb)))
 ;;  ([#^PApplet sketch rgb alpha] (.background sketch (int rgb) (float alpha))))
 
-;; DEL
+
+;; modified by DEL
 (defn background
-  ([#^PApplet sketch color] 
-    (if (float? color) 
-      (.background sketch (float color)) 
-      (.background sketch (int color))))
-  ([#^PApplet sketch color alpha] 
-    (if (float? color) 
-      (.background sketch (float color) (float alpha)) 
-      (.background sketch (int color) (float alpha))))
-  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
-  ([#^PApplet sketch r g b alpha] (.background sketch (float r) (float g) (float b) (float alpha))))
+"
+  Examples:
+
+    (use 'incanter.processing)
+    (def sktch (sketch))
+
+    (background sktch (color 255 0 255))
+    (draw sktch)
+
+    (background sktch (color 255 0 255 255)) ;; with alpha value
+    (draw sktch)
+
+    (background sktch (color \"0xFF00FF\"))
+    (draw sktch)
+
+    (background sktch (color 0xFF00FF))
+    (draw sktch)
+
+    (background sktch (color -65281))
+    (draw sktch)
+
+    (background sktch (color 0xFFFF00FF true)) ;; with alpha? true
+    (draw sktch)
+
+    (background sktch (color 0xFF 0x00 0xFF))
+    (draw sktch)
+
+    (background sktch (color 0xFF 0x00 0xFF 0xFF)) ;; with alpha value
+    (draw sktch)
+
+    (background sktch (color 1.0 0.0 1.0))
+    (draw sktch)
+
+    (background sktch (color 1.0 0.0 1.0 1.0)) ;; with alpha value
+    (draw sktch)
+
+
+
+"
+  ([#^PApplet sketch rgb] (.background sketch rgb)))
+;;   (if (string? rgb)
+;;     (.background sketch (color sketch rgb))
+;;     (.background sketch (int rgb))))
+;;  ([#^PApplet sketch rgb alpha] (.background sketch (int rgb) (float alpha)))
+;;  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
+;;  ([#^PApplet sketch r g b a] (.background sketch (float r) (float g) (float b) (float a))))
+
+
+;; DEL
+;;(defn background
+;;  ([#^PApplet sketch color] 
+;;    (if (float? color) 
+;;      (.background sketch (float color)) 
+;;      (.background sketch (int color))))
+;;  ([#^PApplet sketch color alpha] 
+;;    (if (float? color) 
+;;      (.background sketch (float color) (float alpha)) 
+;;      (.background sketch (int color) (float alpha))))
+;;  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
+;;  ([#^PApplet sketch r g b alpha] (.background sketch (float r) (float g) (float b) (float alpha))))
 
 (defn background-image
   [#^PApplet sketch #^PImage img] (.background sketch img))
@@ -150,9 +220,13 @@
 
 (defn blend
   ([#^PApplet sketch sx1 sy1 sx2 sy2 dx1 dy1 dx2 dy2 mode]
-	 (.blend sketch (int sx1) (int sy1) (int sx2) (int sy2) (int dx1) (int dy1) (int dx2) (int dy2) (int mode)))
+	 (.blend sketch (int sx1) (int sy1) (int sx2) (int sy2) 
+                        (int dx1) (int dy1) (int dx2) (int dy2) 
+                        (int mode)))
   ([#^PApplet sketch #^PImage src sx1 sy1 sx2 sy2 dx1 dy1 dx2 dy2 mode]
-	 (.blend sketch src (int sx1) (int sy1) (int sx2) (int sy2) (int dx1) (int dy1) (int dx2) (int dy2) (int mode))))
+	 (.blend sketch src (int sx1) (int sy1) (int sx2) (int sy2) 
+                            (int dx1) (int dy1) (int dx2) (int dy2) 
+                            (int mode))))
 
 (defn blend-color
   [c1 c2 mode] (PApplet/blendColor (int c1) (int c2) (int mode)))
@@ -174,17 +248,85 @@
 
 (defn ceil [n] (PApplet/ceil (float n)))
 
-(defn color-float
-  ([#^PApplet sketch gray] (.background sketch (float gray)))
-  ([#^PApplet sketch gray alpha] (.background sketch (float gray) (float alpha)))
-  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
-  ([#^PApplet sketch r g b a] (.background sketch (float r) (float g) (float b) (float a))))
+;;(defn color-float
+;;  ([#^PApplet sketch gray] (.background sketch (float gray)))
+;;  ([#^PApplet sketch gray alpha] (.background sketch (float gray) (float alpha)))
+;;  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
+;;  ([#^PApplet sketch r g b a] (.background sketch (float r) (float g) (float b) (float a))))
 
-(defn color-int
-  ([#^PApplet sketch gray] (.background sketch (int gray)))
-  ([#^PApplet sketch gray alpha] (.background sketch (int gray) (float alpha)))
-  ([#^PApplet sketch r g b] (.background sketch (int r) (int g) (int b)))
-  ([#^PApplet sketch r g b a] (.background sketch (int r) (int g) (int b) (int a))))
+;;(defn color-int
+;;  ([#^PApplet sketch gray] (.background sketch (int gray)))
+;;  ([#^PApplet sketch gray alpha] (.background sketch (int gray) (float alpha)))
+;;  ([#^PApplet sketch r g b] (.background sketch (int r) (int g) (int b)))
+;;  ([#^PApplet sketch r g b a] (.background sketch (int r) (int g) (int b) (int a))))
+
+
+;; modified by DEL 
+(defn color
+"
+
+  Examples:
+
+    (use 'incanter.processing)
+    (color 255 0 255)
+    (color 255 0 255 255) ;; with alpha value
+    (color \"0xFF00FF\")
+    (color 0xFF00FF)
+    (color -65281)
+    (color 0xFFFF00FF true) ;; with alpha? true
+    (color 0xFF 0x00 0xFF)
+    (color 0xFF 0x00 0xFF 0xFF) ;; with alpha value
+    (color 1.0 0.0 1.0)
+    (color 1.0 0.0 1.0 1.0) ;; with alpha value
+
+"
+  ([rgb] 
+   (if (string? rgb)
+     (.getRGB (java.awt.Color/decode rgb))
+     ;(.getRGB (java.awt.Color. (int rgb)))))
+     (let [rgb (cond 
+                 (> rgb 255) 255 
+                 (< rgb 0) 0
+                 :else rgb)]
+         (reduce bit-or [(int 0xff000000) 
+                         (bit-shift-left (int rgb) 16) 
+                         (bit-shift-left (int rgb) 8) 
+                         (int rgb)]))))
+  
+  ([rgb alpha?] 
+    (.getRGB (java.awt.Color. (color rgb) alpha?)))
+    ;(.getRGB (java.awt.Color. (int rgb) alpha?)))
+  ([x y z] 
+   (if (or (float? x) (float? y) (float? z))
+      (.getRGB (java.awt.Color. (float x) (float y) (float z)))
+      (.getRGB (java.awt.Color. (int x) (int y) (int z)))))
+  ([x y z alpha] 
+   (if (or (float? x) (float? y) (float? z))
+      (.getRGB (java.awt.Color. (float x) (float y) (float z) (float alpha)))
+      (.getRGB (java.awt.Color. (int x) (int y) (int z) (int alpha))))))
+
+;;  ([#^PApplet sketch rgb] 
+;;   (if (string? rgb)
+;;     (.getRGB (java.awt.Color/decode rgb))
+;;     (.color sketch (int rgb))))
+;;  ([#^PApplet sketch rgb alpha] (.color sketch (int rgb) (float alpha)))
+;;  ([#^PApplet sketch r g b] (.color sketch (int r) (int g) (int b)))
+;;  ([#^PApplet sketch r g b a] (.color sketch (int r) (int g) (int b) (int a))))
+  
+;; DEL
+;;(defn background
+;;  ([#^PApplet sketch color] 
+;;    (if (float? color) 
+;;      (.background sketch (float color)) 
+;;      (.background sketch (int color))))
+;;  ([#^PApplet sketch color alpha] 
+;;    (if (float? color) 
+;;      (.background sketch (float color) (float alpha)) 
+;;      (.background sketch (int color) (float alpha))))
+;;  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
+;;  ([#^PApplet sketch r g b alpha] (.background sketch (float r) (float g) (float b) (float alpha))))
+
+
 
 (defn color-mode
   ([#^PApplet sketch mode] (.colorMode sketch (int mode)))
@@ -194,13 +336,20 @@
 
 ;; $$concat
 
-(defn constrain-float
+;; modified by DEL
+(defn constrain
   [amt low high]
-  (PApplet/constrain (float amt) (float low) (float high)))
+  (if (or (float? amt) (float? low) (float? high))
+    (PApplet/constrain (float amt) (float low) (float high))
+    (PApplet/constrain (int amt) (int low) (int high))))
 
-(defn constrain-int
-  [amt low high]
-  (PApplet/constrain (int amt) (int low) (int high)))
+;;(defn constrain-float
+;;  [amt low high]
+;;  (PApplet/constrain (float amt) (float low) (float high)))
+
+;;(defn constrain-int
+;;  [amt low high]
+;;  (PApplet/constrain (int amt) (int low) (int high)))
 
 (defn copy-pixels
 " Processing copy function. "
@@ -314,14 +463,24 @@
 
 (defn ellipse-mode [#^PApplet sketch mode] (.ellipseMode sketch (int mode)))
 
-(defn emissive-float
-  ([#^PApplet sketch gray] (.emissive sketch (float gray)))
-  ([#^PApplet sketch x y z] (.emissive sketch (float x) (float y) (float z))))
+;; modified by DEL
+(defn emissive
+  ([#^PApplet sketch rgb] 
+    (.emissive sketch (color rgb))))
+;;   (if (integer? rgb)
+;;     (.emissive sketch (int rgb))
+;;     (.emissive sketch (float rgb))))
+;;  ([#^PApplet sketch x y z] 
+;;   (.emissive sketch (float x) (float y) (float z))))
 
-(defn emissive-int
-  [#^PApplet sketch gray] (.emissive sketch (int gray)))
+;;(defn emissive-float
+;;  ([#^PApplet sketch gray] (.emissive sketch (float gray)))
+;;  ([#^PApplet sketch x y z] (.emissive sketch (float x) (float y) (float z))))
 
-(defn emissive [x y z] (emissive-float x y z))
+;;(defn emissive-int
+;;  [#^PApplet sketch gray] (.emissive sketch (int gray)))
+
+;(defn emissive [x y z] (emissive-float x y z))
 
 (defn end-camera [#^PApplet sketch ] (.endCamera sketch))
 
@@ -354,7 +513,7 @@
 ;;  ([#^PApplet sketch rgb alpha] (fill-int sketch rgb alpha)))
 
 
-;; DEL
+;; modified by DEL
 (defn fill
 "
   Sets the color used to fill shapes. For example, if you run (fill 204 102 0), all 
@@ -403,18 +562,53 @@
     http://processing.org/reference/fill_.html
 
 
+  Examples:
+
+    (def sktch (sketch))
+    (fill sktch \"0xFF00FF\")
+    (fill sktch 0xFF 0x00 0xFF)
+    (fill sktch 255 0 255)
 
 "
-  ([#^PApplet sketch color] 
-    (if (float? color) 
-      (.fill sketch (float color)) 
-      (.fill sketch (int color))))
-  ([#^PApplet sketch color alpha] 
-    (if (float? color) 
-      (.fill sketch (float color) (float alpha)) 
-      (.fill sketch (int color) (float alpha))))
-  ([#^PApplet sketch x y z] (.fill sketch (float x) (float y) (float z)))
-  ([#^PApplet sketch x y z a] (.fill sketch (float x) (float y) (float z) (float a))))
+  ([#^PApplet sketch rgb] 
+       (.fill sketch rgb)))
+;  ([#^PApplet sketch gray] 
+;   (cond 
+;     (string? gray)
+;       (.fill sketch (color sketch gray))
+;     (integer? gray)
+;      (.fill sketch (int gray))
+;     (float? gray)
+;      (.fill sketch (float gray))))
+;  ([#^PApplet sketch gray alpha] 
+;   (cond 
+;     (string? gray)
+;       (.fill sketch (color sketch gray) (float alpha))
+;     (integer? gray)
+;      (.fill sketch (int gray) (float alpha))
+;     (float? gray)
+;      (.fill sketch (float gray) (float alpha))))
+;  ([#^PApplet sketch x y z] 
+;   (if (or (float? x) (float? y) (float? z))
+;      (.fill sketch (float x) (float y) (float z))
+;      (.fill sketch (int x) (int y) (int z))))
+;  ([#^PApplet sketch x y z alpha] 
+;   (if (or (float? x) (float? y) (float? z))
+;      (.fill sketch (float x) (float y) (float z) (float alpha))
+;      (.fill sketch (int x) (int y) (int z) (float alpha)))))
+;
+
+
+;;  ([#^PApplet sketch color] 
+;;    (if (float? color) 
+;;      (.fill sketch (float color)) 
+;;      (.fill sketch (int color))))
+;;  ([#^PApplet sketch color alpha] 
+;;    (if (float? color) 
+;;      (.fill sketch (float color) (float alpha)) 
+;;      (.fill sketch (int color) (float alpha))))
+;;  ([#^PApplet sketch x y z] (.fill sketch (float x) (float y) (float z)))
+;;  ([#^PApplet sketch x y z a] (.fill sketch (float x) (float y) (float z) (float a))))
 
 
 
@@ -427,6 +621,10 @@
 ;; $$focusLost
 
 (defn framerate [#^PApplet sketch new-rate] (.frameRate sketch (float new-rate)))
+
+;; added by DEL 
+(defn frame-count [#^PApplet sketch] (.frameCount sketch))
+
 
 (defn frustum
   [#^PApplet sketch l r b t near far]
@@ -464,6 +662,29 @@
 ;; $$lerp
 ;; $$lerpColor
 ;; $$lightFallof
+
+
+;; added by DEL
+(defn lerp-color 
+ "
+  Calculates a color or colors between two color at a specific increment. 
+  The amt parameter is the amount to interpolate between the two values 
+  where 0.0 equal to the first point, 0.1 is very near the first point, 
+  0.5 is half-way in between, etc.
+
+  Parameters:
+    c1  color: interpolate from this color
+    c2  color: interpolate to this color
+    amt float: between 0.0 and 1.0
+
+  Returns:
+    float
+ 
+ "
+  ;([sketch c1 c2 amt] (.lerpColor sketch (int c1) (int c2) (float amt)))
+  ([c1 c2 amt] 
+   (PApplet/lerpColor c1 c2 (float amt) 1))) ;; use RGB mode
+
 
 (defn lights [#^PApplet sketch ] (.lights sketch))
 
@@ -505,8 +726,12 @@
 ;; $$mag
 ;; $$main
 
-(defn map-to [val istart istop ostart ostop]
+;; renamed by DEL
+(defn remap [val istart istop ostart ostop]
   (PApplet/map (float val) (float istart) (float istop) (float ostart) (float ostop)))
+
+;;(defn map-to [val istart istop ostart ostop]
+;;  (PApplet/map (float val) (float istart) (float istop) (float ostart) (float ostop)))
 
 (defn mask
   ([#^PApplet sketch #^ints alpha-array] (.mask sketch alpha-array)))
@@ -540,9 +765,9 @@
 ;; $$nfp
 ;; $$nfs
 
-(defn mouse-x [#^PApplet sketch ] (.mouseX sketch))
+(defn mouse-x [#^java.awt.event.MouseEvent mouse-event ] (.getX mouse-event))
 
-(defn mouse-y [#^PApplet sketch ] (.mouseY sketch))
+(defn mouse-y [#^java.awt.event.MouseEvent mouse-event ] (.getY mouse-event))
 
 (defn no-cursor [#^PApplet sketch ] (.noCursor sketch))
 
@@ -597,9 +822,11 @@
   ([#^PApplet sketch fovy aspect z-near z-far]
 	 (.perspective sketch (float fovy) (float aspect) (float z-near) (float z-far))))
 
-(defn pmouse-x [#^PApplet sketch ] (.pmouseX sketch))
+;; pmouse-x doesn't work, always returns 0
+;;(defn pmouse-x [#^PApplet sketch ] (.pmouseX sketch))
 
-(defn pmouse-y [#^PApplet sketch ] (.pmouseY sketch))
+;; pmouse-y doesn't work, always returns 0
+;;(defn pmouse-y [#^PApplet sketch ] (.pmouseY sketch))
 
 (defn point
   ([#^PApplet sketch x y] (.point sketch (float x)(float y)))
@@ -631,12 +858,12 @@
 
 (defn radians [deg] (PApplet/radians (float deg)))
 
-(defn random
-  ([#^PApplet sketch max] (.random sketch (float max)))
-  ([#^PApplet sketch min max] (.random sketch (float min) (float max))))
+;;(defn random
+;;  ([#^PApplet sketch max] (.random sketch (float max)))
+;;  ([#^PApplet sketch min max] (.random sketch (float min) (float max))))
 
 
-(defn random-seed [#^PApplet sketch w] (.randomSeed sketch (float w)))
+;;(defn random-seed [#^PApplet sketch w] (.randomSeed sketch (float w)))
 
 (defn rect [#^PApplet sketch x1 y1 x2 y2]
   (.rect sketch (float x1) (float y1) (float x2) (float y2)))
@@ -680,8 +907,11 @@
 
 (defn saturation [#^PApplet sketch what] (.saturation sketch (int what)))
 
-;; DEL
-(defmethod save :sketch ([#^PApplet sketch filename] (.save sketch filename)))
+;; modified by DEL
+(defmethod save :sketch ([#^PApplet sketch filename] 
+                         (doall 
+                           (.draw sketch)
+                           (.save sketch filename))))
 
 ;; $$saveBytes
 ;; $$saveFile
@@ -775,15 +1005,28 @@
 ;; $$stop
 ;; $$str
 
-(defn stroke-float
-  ([#^PApplet sketch gray] (.stroke sketch (float gray)))
-  ([#^PApplet sketch gray alpha] (.stroke sketch (float gray) (float alpha)))
-  ([#^PApplet sketch x y z] (.stroke sketch (float x) (float y) (float z)))
-  ([#^PApplet sketch x y z a] (.stroke sketch (float x) (float y) (float z) (float a))))
+;; modified by DEL
+(defn stroke
+  ([#^PApplet sketch rgb] 
+   (.stroke sketch rgb)))
 
-(defn stroke-int
-  ([#^PApplet sketch rgb] (.stroke sketch (int rgb)))
-  ([#^PApplet sketch rgb alpha] (.stroke sketch (int rgb) (float alpha))))
+;  ([#^PApplet sketch rgb] 
+;   (if (string? rgb)
+;    (.stroke sketch (color sketch rgb))
+;    (.stroke sketch (float rgb))))
+;  ([#^PApplet sketch rgb alpha] (.stroke sketch (float rgb) (float alpha)))
+;  ([#^PApplet sketch x y z] (.stroke sketch (float x) (float y) (float z)))
+;  ([#^PApplet sketch x y z a] (.stroke sketch (float x) (float y) (float z) (float a))))
+
+;;(defn stroke-float
+;;  ([#^PApplet sketch gray] (.stroke sketch (float gray)))
+;;  ([#^PApplet sketch gray alpha] (.stroke sketch (float gray) (float alpha)))
+;;  ([#^PApplet sketch x y z] (.stroke sketch (float x) (float y) (float z)))
+;;  ([#^PApplet sketch x y z a] (.stroke sketch (float x) (float y) (float z) (float a))))
+
+;;(defn stroke-int
+;;  ([#^PApplet sketch rgb] (.stroke sketch (int rgb)))
+;;  ([#^PApplet sketch rgb alpha] (.stroke sketch (int rgb) (float alpha))))
 
 (defn stroke-cap [#^PApplet sketch cap] (.strokeCap sketch (int cap)))
 
@@ -845,15 +1088,28 @@
 (defmethod text-width false
   [#^PApplet sketch #^java.lang.String s] (.textWidth sketch s))
 
-(defn tint-float
-  ([#^PApplet sketch gray] (.tint sketch (float gray)))
-  ([#^PApplet sketch gray alpha] (.tint sketch (float gray) (float alpha)))
-  ([#^PApplet sketch x y z] (.tint sketch (float x)(float y) (float z)))
-  ([#^PApplet sketch x y z a] (.tint sketch (float x)(float y) (float z) (float a))))
+;; modified by DEL 
+(defn tint
+  ([#^PApplet sketch rgb] 
+     (.tint sketch rgb)))
 
-(defn tint-int
-  ([#^PApplet sketch rgb] (.tint sketch (int rgb)))
-  ([#^PApplet sketch rgb alpha] (.tint sketch (int rgb) (float alpha))))
+;;  ([#^PApplet sketch rgb] 
+;;   (if (string? rgb)
+;;     (.tint sketch (color sketch rgb))
+;;     (.tint sketch (float rgb))))
+;;  ([#^PApplet sketch rgb alpha] (.tint sketch (float rgb) (float alpha)))
+;;  ([#^PApplet sketch x y z] (.tint sketch (float x)(float y) (float z)))
+;;  ([#^PApplet sketch x y z a] (.tint sketch (float x)(float y) (float z) (float a))))
+
+;;(defn tint-float
+;;  ([#^PApplet sketch gray] (.tint sketch (float gray)))
+;;  ([#^PApplet sketch gray alpha] (.tint sketch (float gray) (float alpha)))
+;;  ([#^PApplet sketch x y z] (.tint sketch (float x)(float y) (float z)))
+;;  ([#^PApplet sketch x y z a] (.tint sketch (float x)(float y) (float z) (float a))))
+
+;;(defn tint-int
+;;  ([#^PApplet sketch rgb] (.tint sketch (int rgb)))
+;;  ([#^PApplet sketch rgb alpha] (.tint sketch (int rgb) (float alpha))))
 
 (defn translate
 	([v] (apply translate v))
@@ -886,6 +1142,11 @@
   ([#^PApplet sketch x y z u v]
 	 (.vertex sketch (float x) (float y) (float z) (float u) (float v))))
 
+;; added by DEL
+(defn width [sketch] (.width sketch))
+(defn height [sketch] (.height sketch))
+  
+  
 (defn year [] (PApplet/year))
 
 ;; utility functions. clj-processing specific
@@ -1130,7 +1391,8 @@
               ;; define the draw function 
               (draw []
                 (doto this
-                  (background-float 255)
+                  ;(background-float 255)
+                  (background 255)
                   (image @map-image 0 0))))]
 
   (view-sketch sktch :title \"US Map\" :size [640 400]))
@@ -1140,7 +1402,9 @@
     http://processing.org/reference/
 
 "
-  `(proxy [PApplet] [] ~@methods))
+  `(let [sktch# (proxy [processing.core.PApplet] [] ~@methods)]
+     (do (.init sktch#)
+         sktch#)))
 
 
 
@@ -1148,14 +1412,14 @@
   ([sketch & options]
     (let [opts (when options (apply assoc {} options))
           title (or (:title opts) "Processing Sketch")
-          _ (.init sketch)
           [width height] (or (:size opts) 
                              [(.width (.getSize sketch)) 
                               (.height (.getSize sketch))])
-          swing-frame (javax.swing.JFrame. title)
+          frame (javax.swing.JFrame. title)
           ]
-      (doto swing-frame
+      (doto frame
             (.add sketch)
+            (.setDefaultCloseOperation javax.swing.WindowConstants/EXIT_ON_CLOSE)
             (.setSize width height)
             (.setVisible true)))))
 
