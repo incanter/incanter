@@ -459,10 +459,23 @@
    ([& args] (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args)))
 
 
+(defn atan2 
+  "Returns the atan2 of the elements in the given matrices, sequences or numbers.
+   Equivalent to R's atan2 function."
+   ([& args] (reduce (fn [A B] (combine-with A B #(Math/atan2 %1 %2) 
+                                    cern.jet.math.tdouble.DoubleFunctions/atan2)) args)))
+
+
 (defn sqrt 
   "Returns the square-root of the elements in the given matrix, sequence or number.
    Equivalent to R's sqrt function."
    ([A] (pow A 1/2)))
+
+
+(defn sq 
+  "Returns the square of the elements in the given matrix, sequence or number.
+   Equivalent to R's sq function."
+   ([A] (mult A A)))
 
 
 (defn log 
@@ -767,6 +780,7 @@
     arguments, etc.
 
     Examples:
+      (use 'incanter.core)
       (cumulative-sum (range 100))
   "
   ([coll] 

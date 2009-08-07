@@ -909,16 +909,16 @@
 
 ;; modified by DEL
 (defmethod save :sketch ([#^PApplet sketch filename] 
-                         (doall 
-                           (.draw sketch)
-                           (.save sketch filename))))
+                         (doto sketch 
+                               ;.redraw 
+                               (.save filename))))
 
 ;; $$saveBytes
 ;; $$saveFile
 
 (defn save-frame
   ([#^PApplet sketch ] (.saveFrame sketch))
-  ([#^PApplet sketch what] (.saveFrame sketch)))
+  ([#^PApplet sketch what] (.saveFrame sketch what)))
 
 ;; $$savePath
 ;; $$saveStream

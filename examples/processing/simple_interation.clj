@@ -1,5 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+
 (use '(incanter core processing))
 
 ;; simple interactive Processing example taken from processingjs.org website:
@@ -35,10 +37,11 @@
                       (ref-set radius (+ @radius (sin (/ (frame-count this) 4))))
                       (ref-set X (+ @X (/ (- @nX @X) delay)))
                       (ref-set Y (+ @Y (/ (- @nY @Y) delay))))
+                    (println (.mouseX this) (.mouseY this))
                     (doto this
                       (background (color 100 100 100))
                       (fill (color 0 121 184))
-                      (stroke (color 0xFFFFFF))
+                      (stroke (color 255))
                       (ellipse @X @Y @radius @radius)))
 
               ;; define mouseMoved function (mouseMoved and mouseDraw 

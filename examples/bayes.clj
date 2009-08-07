@@ -35,18 +35,19 @@
         shape (/ (- (nrow x) (ncol x)) 2)
        ]
       (loop [
-             coefs [[0 0 0 0 0 0 0 0 0]]
-             variances [1] 
+             coefs (transient [[0 0 0 0 0 0 0 0 0]])
+             variances (transient [1]) 
              i 0
             ]
         (if (= i N)
-          {:coef (matrix coefs) :var variances}
+          {:coef (matrix (persistent! coefs)) :var (persistent! variances)}
           (let [
-                b (to-list (plus pars (mmult (trans (sample-normal nx)) (decomp-cholesky (mult xtxi (variances i))))))
+                b (to-list (plus pars (mmult (trans (sample-normal nx)) 
+                                             (decomp-cholesky (mult xtxi (variances i))))))
                 resid (minus y (mmult x b))
                 s2 (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans resid) resid) 0.5) ))
                ]
-            (recur (conj coefs b) (conj variances s2) (inc i)))))))
+            (recur (conj! coefs b) (conj! variances s2) (inc i)))))))
 
 
 
@@ -127,12 +128,12 @@
         ncol-x (ncol x)
        ]
     (loop [
-           coefs [[0 0 0 0 0 0 0 0 0]]
-           variances [1] 
+           coefs (transient [[0 0 0 0 0 0 0 0 0]])
+           variances (transient [1])
            i 0
           ]
       (if (= i N)
-          {:coef (matrix coefs) :var variances}
+          {:coef (matrix (persistent! coefs)) :var (persistent! variances)}
           (let [
                 old-b (coefs i)
                 old-s2 (variances i)
@@ -150,6 +151,6 @@
                          old-s2 
                          cand-s2)
                ]
-        (recur (conj coefs new-b) (conj variances new-s2) (inc i)))))))
+        (recur (conj! coefs new-b) (conj! variances new-s2) (inc i)))))))
 
 
