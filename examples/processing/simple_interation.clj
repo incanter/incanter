@@ -37,9 +37,15 @@
                       (ref-set radius (+ @radius (sin (/ (frame-count this) 4))))
                       (ref-set X (+ @X (/ (- @nX @X) delay)))
                       (ref-set Y (+ @Y (/ (- @nY @Y) delay))))
-                    (println (.mouseX this) (.mouseY this))
+                    ;(println (.mouseX this) (.mouseY this))
                     (doto this
-                      (background (color 100 100 100))
+                      ;(background (color 100 100 100))
+                      ;(background 100 100 100) ;; orig color
+                      ;(background 225.0 0.0 100.0) ;; same as int version
+                      ;(background "0xff00ff") ;; 
+                      ;(background (color 225 0 100)) 
+                      ;(background (color 0xAEDD3C)) 
+                      (background 125) ;; gray
                       (fill (color 0 121 184))
                       (stroke (color 255))
                       (ellipse @X @Y @radius @radius)))

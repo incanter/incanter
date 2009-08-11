@@ -51,17 +51,17 @@
   [sketch rgb] (.ambient sketch rgb))
 
 ;; modified by DEL
-(defn ambient-light
-  ([sketch rgb]
-	 (.ambientLight sketch rgb))
-  ([sketch rgb x y z]
+;;(defn ambient-light
+;;  ([sketch rgb]
+;;    (.ambientLight sketch rgb))
+;;  ([sketch rgb x y z]
 	 (.ambientLight sketch rgb (float x) (float y) (float z))))
 
-;;(defn ambient-light
-;;  ([sketch red green blue]
-;;     (.ambientLight sketch (float red) (float green) (float blue)))
-;;  ([sketch red green blue x y z]
-;;     (.ambientLight sketch (float red) (float green) (float blue) (float x) (float y) (float z))))
+(defn ambient-light
+  ([sketch red green blue]
+     (.ambientLight sketch (float red) (float green) (float blue)))
+  ([sketch red green blue x y z]
+     (.ambientLight sketch (float red) (float green) (float blue) (float x) (float y) (float z))))
 
 ;; $$append
 
@@ -142,13 +142,37 @@
 
 
 "
-  ([#^PApplet sketch rgb] (.background sketch rgb)))
-;;   (if (string? rgb)
-;;     (.background sketch (color sketch rgb))
-;;     (.background sketch (int rgb))))
-;;  ([#^PApplet sketch rgb alpha] (.background sketch (int rgb) (float alpha)))
-;;  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
-;;  ([#^PApplet sketch r g b a] (.background sketch (float r) (float g) (float b) (float a))))
+;;  ([#^PApplet sketch rgb] (.background sketch rgb)))
+  ([#^PApplet sketch gray] 
+     (cond 
+       (string? gray)
+         (.background sketch (color gray))
+       (integer? gray)
+         (.background sketch (int gray))
+       (float? gray)
+         (.background sketch (float gray))
+       (= java.awt.Color (type gray))
+         (.background sketch #^java.awt.Color gray)))
+  ([#^PApplet sketch gray alpha] 
+    (cond 
+      (string? gray)
+        (.background sketch (color gray) (int alpha))
+      (integer? gray)
+       (.background sketch (int gray) (int alpha))
+      (float? gray)
+       (.background sketch (float gray) (float alpha))))
+  ([#^PApplet sketch r g b] 
+   (cond 
+     (or (integer? r) (integer? g) (integer? b))
+       (.background sketch (int r) (int g) (int b))
+     (or (float? r) (float? g) (float? b))
+     (.background sketch (float r) (float g) (float b))))
+  ([#^PApplet sketch r g b a] 
+    (cond 
+      (or (integer? r) (integer? g) (integer? b))
+        (.background sketch (int r) (int g) (int b) (int a))
+      (or (float? r) (float? g) (float? b))
+      (.background sketch (float r) (float g) (float b) (float a)))))
 
 
 ;; DEL
@@ -280,59 +304,84 @@
     (color 1.0 0.0 1.0 1.0) ;; with alpha value
 
 "
-  ([rgb] 
-   (if (string? rgb)
-     (.getRGB (java.awt.Color/decode rgb))
-     ;(.getRGB (java.awt.Color. (int rgb)))))
-     (let [rgb (cond 
-                 (> rgb 255) 255 
-                 (< rgb 0) 0
-                 :else rgb)]
-         (reduce bit-or [(int 0xff000000) 
-                         (bit-shift-left (int rgb) 16) 
-                         (bit-shift-left (int rgb) 8) 
-                         (int rgb)]))))
-  
-  ([rgb alpha?] 
-    (.getRGB (java.awt.Color. (color rgb) alpha?)))
-    ;(.getRGB (java.awt.Color. (int rgb) alpha?)))
-  ([x y z] 
-   (if (or (float? x) (float? y) (float? z))
-      (.getRGB (java.awt.Color. (float x) (float y) (float z)))
-      (.getRGB (java.awt.Color. (int x) (int y) (int z)))))
-  ([x y z alpha] 
-   (if (or (float? x) (float? y) (float? z))
-      (.getRGB (java.awt.Color. (float x) (float y) (float z) (float alpha)))
-      (.getRGB (java.awt.Color. (int x) (int y) (int z) (int alpha))))))
+([rgb] 
+  (.getRGB (java.awt.Color. (int rgb))))
+;; (cond 
+;;   (string? rgb)
+;;     (.getRGB (java.awt.Color/decode rgb))
+;;   (or (integer? rgb) (float? rgb))
+;;     (.getRGB (java.awt.Color. (int rgb)))))
+([rgb alpha?] 
+  ;;(.getRGB (java.awt.Color. (color rgb) alpha?)))
+  (.getRGB (java.awt.Color. (int rgb) alpha?)))
+([x y z] 
+ (if (or (float? x) (float? y) (float? z))
+    (.getRGB (java.awt.Color. (float x) (float y) (float z)))
+    (.getRGB (java.awt.Color. (int x) (int y) (int z)))))
+([x y z alpha] 
+ (if (or (float? x) (float? y) (float? z))
+    (.getRGB (java.awt.Color. (float x) (float y) (float z) (float alpha)))
+    (.getRGB (java.awt.Color. (int x) (int y) (int z) (int alpha))))))
 
-;;  ([#^PApplet sketch rgb] 
+;;([#^PApplet sketch rgb] 
+;; (if (string? rgb)
+;;   (.getRGB (java.awt.Color/decode rgb))
+;;   (.color sketch (int rgb))))
+;;([#^PApplet sketch rgb alpha] (.color sketch (int rgb) (float alpha)))
+;;([#^PApplet sketch r g b] (.color sketch (int r) (int g) (int b)))
+;;([#^PApplet sketch r g b a] (.color sketch (int r) (int g) (int b) (int a))))
+
+
+
+;;  ([#^PApplet sketch gray] 
+;;    (cond 
+;;      (string? gray) 
+;;        (.color sketch (Integer/parseInt gray 16))
+;;      (integer? gray) 
+;;        (.color sketch (int gray))
+;;      (float? gray) 
+;;        (.color sketch (float gray))))
+;;  ([#^PApplet sketch gray alpha] 
+;;    (cond 
+;;      (string? gray) 
+;;        (.color sketch (Integer/parseInt gray 16) (Integer/parseInt alpha 16))
+;;      (integer? gray) 
+;;        (.color sketch (int gray) (int alpha))
+;;      (float? gray) 
+;;        (.color sketch (float gray) (int alpha))))
+;;  ([#^PApplet sketch r g b] 
+;;    (if (or (integer? r) (integer? g) (integer? b))
+;;      (.color sketch (int r) (int g) (int b))
+;;      (.color sketch (float r) (float g) (float b))))
+;;  ([#^PApplet sketch r g b alpha] 
+;;    (if (or (integer? r) (integer? g) (integer? b))
+;;      (.color sketch (int r) (int g) (int b) (int alpha))
+;;      (.color sketch (float r) (float g) (float b) (float alpha)))))
+;;
+
+;;  ([rgb] 
 ;;   (if (string? rgb)
 ;;     (.getRGB (java.awt.Color/decode rgb))
-;;     (.color sketch (int rgb))))
-;;  ([#^PApplet sketch rgb alpha] (.color sketch (int rgb) (float alpha)))
-;;  ([#^PApplet sketch r g b] (.color sketch (int r) (int g) (int b)))
-;;  ([#^PApplet sketch r g b a] (.color sketch (int r) (int g) (int b) (int a))))
+;;     (.getRGB (java.awt.Color. (int rgb)))))
+;     (let [rgb (cond 
+;                 (> rgb 255) 255 
+;                 (< rgb 0) 0
+;                 :else rgb)]
+;         (reduce bit-or [(int 0xff000000) 
+;                         (bit-shift-left (int rgb) 16) 
+;                         (bit-shift-left (int rgb) 8) 
+;                         (int rgb)]))))
   
-;; DEL
-;;(defn background
-;;  ([#^PApplet sketch color] 
-;;    (if (float? color) 
-;;      (.background sketch (float color)) 
-;;      (.background sketch (int color))))
-;;  ([#^PApplet sketch color alpha] 
-;;    (if (float? color) 
-;;      (.background sketch (float color) (float alpha)) 
-;;      (.background sketch (int color) (float alpha))))
-;;  ([#^PApplet sketch r g b] (.background sketch (float r) (float g) (float b)))
-;;  ([#^PApplet sketch r g b alpha] (.background sketch (float r) (float g) (float b) (float alpha))))
-
-
 
 (defn color-mode
-  ([#^PApplet sketch mode] (.colorMode sketch (int mode)))
-  ([#^PApplet sketch mode max] (.colorMode sketch (int mode) (float max)))
-  ([#^PApplet sketch mode max-x max-y max-z] (.colorMode sketch (int mode) (float max-x) (float max-y) (float max-z)))
-  ([#^PApplet sketch mode max-x max-y max-z max-a] (.colorMode sketch (int mode) (float max-x) (float max-y) (float max-z) (float max-a))))
+  ([#^PApplet sketch mode] 
+    (.colorMode sketch (int mode)))
+  ([#^PApplet sketch mode max] 
+    (.colorMode sketch (int mode) (float max)))
+  ([#^PApplet sketch mode max-x max-y max-z] 
+    (.colorMode sketch (int mode) (float max-x) (float max-y) (float max-z)))
+  ([#^PApplet sketch mode max-x max-y max-z max-a] 
+    (.colorMode sketch (int mode) (float max-x) (float max-y) (float max-z) (float max-a))))
 
 ;; $$concat
 
@@ -367,6 +416,54 @@
   ([#^PApplet sketch name size smooth] (.createFont sketch name (float size) smooth))
   ([#^PApplet sketch name size smooth #^chars charset]
 	 (.createFont sketch name (float size) smooth charset)))
+
+
+;; added by DEL
+(defn list-fonts
+  "Returns a list of the fonts available on current system."
+  ([] (into [] (processing.core.PFont/list))))
+
+;; added by DEL
+(defn save-font
+  ([#^processing.core.PApplet sketch #^processing.core.PFont font filename]
+    (let [out (java.io.FileOutputStream. filename)]
+      (.save font out))))
+
+;; added by DEL
+(defn export-font
+" Exports the given system font to a vlw file.
+
+  Examples:
+
+    (use '(incanter core processing))
+    (export-font \"Ariel\" 48 \"/tmp/ariel_48.vlw\")
+
+    (view
+      (sketch 
+        (setup [] 
+          (let [font (load-font this \"/tmp/ariel_48.vlw\")]
+            (doto this
+              (text-font font)
+              smooth
+              (fill 0))))
+
+            (draw []
+              (doto this
+                (text \"LAX\" 0 40)
+                (text \"AMS\" 0 70)
+                (text \"FRA\" 0 100))))
+      :size [120 120])
+
+
+"
+  ([font-name size smooth filename]
+    (let [sketch (processing.core.PApplet.)
+          font (create-font sketch font-name size smooth)]
+      (save-font sketch font filename)))
+  ([font-name size filename]
+    (export-font font-name size true filename)))
+
+
 
 (defn create-graphics
   ([#^PApplet sketch w h renderer]
@@ -465,22 +562,15 @@
 
 ;; modified by DEL
 (defn emissive
-  ([#^PApplet sketch rgb] 
-    (.emissive sketch (color rgb))))
-;;   (if (integer? rgb)
-;;     (.emissive sketch (int rgb))
-;;     (.emissive sketch (float rgb))))
-;;  ([#^PApplet sketch x y z] 
-;;   (.emissive sketch (float x) (float y) (float z))))
+  ([#^PApplet sketch gray] 
+   (if (integer? gray)
+     (.emissive sketch (int gray))
+     (.emissive sketch (float gray))))
+  ([#^PApplet sketch x y z] 
+   (if (integer? gray)
+    (.emissive sketch (int x) (int y) (int z))
+    (.emissive sketch (float x) (float y) (float z)))))
 
-;;(defn emissive-float
-;;  ([#^PApplet sketch gray] (.emissive sketch (float gray)))
-;;  ([#^PApplet sketch x y z] (.emissive sketch (float x) (float y) (float z))))
-
-;;(defn emissive-int
-;;  [#^PApplet sketch gray] (.emissive sketch (int gray)))
-
-;(defn emissive [x y z] (emissive-float x y z))
 
 (defn end-camera [#^PApplet sketch ] (.endCamera sketch))
 
@@ -497,20 +587,6 @@
 ;;(defn exp [a] (PApplet/exp (float a)))
 
 ;; $$expand
-
-;;(defn fill-float
-;;  ([#^PApplet sketch gray] (.fill sketch (float gray)))
-;;  ([#^PApplet sketch gray alpha] (.fill sketch (float gray) (float alpha)))
-;;  ([#^PApplet sketch x y z] (.fill sketch (float x) (float y) (float z)))
-;;  ([#^PApplet sketch x y z a] (.fill sketch (float x) (float y) (float z) (float a))))
-
-;;(defn fill-int
-;;  ([#^PApplet sketch rgb] (.fill sketch (int rgb)))
-;;  ([#^PApplet sketch rgb alpha] (.fill sketch (int rgb) (float alpha))))
-
-;;(defn fill
-;;  ([#^PApplet sketch rgb] (fill-int sketch rgb))
-;;  ([#^PApplet sketch rgb alpha] (fill-int sketch rgb alpha)))
 
 
 ;; modified by DEL
@@ -570,45 +646,32 @@
     (fill sktch 255 0 255)
 
 "
-  ([#^PApplet sketch rgb] 
-       (.fill sketch rgb)))
-;  ([#^PApplet sketch gray] 
-;   (cond 
-;     (string? gray)
-;       (.fill sketch (color sketch gray))
-;     (integer? gray)
-;      (.fill sketch (int gray))
-;     (float? gray)
-;      (.fill sketch (float gray))))
-;  ([#^PApplet sketch gray alpha] 
-;   (cond 
-;     (string? gray)
-;       (.fill sketch (color sketch gray) (float alpha))
-;     (integer? gray)
-;      (.fill sketch (int gray) (float alpha))
-;     (float? gray)
-;      (.fill sketch (float gray) (float alpha))))
-;  ([#^PApplet sketch x y z] 
-;   (if (or (float? x) (float? y) (float? z))
-;      (.fill sketch (float x) (float y) (float z))
-;      (.fill sketch (int x) (int y) (int z))))
-;  ([#^PApplet sketch x y z alpha] 
-;   (if (or (float? x) (float? y) (float? z))
-;      (.fill sketch (float x) (float y) (float z) (float alpha))
-;      (.fill sketch (int x) (int y) (int z) (float alpha)))))
-;
+  ([#^PApplet sketch gray] 
+   (cond 
+     (string? gray)
+       (.fill sketch (color sketch gray))
+     (integer? gray)
+      (.fill sketch (int gray))
+     (float? gray)
+      (.fill sketch (float gray))))
+  ([#^PApplet sketch gray alpha] 
+   (cond 
+     (string? gray)
+       (.fill sketch (color sketch gray) (int alpha))
+     (integer? gray)
+      (.fill sketch (int gray) (int alpha))
+     (float? gray)
+      (.fill sketch (float gray) (float alpha))))
+  ([#^PApplet sketch x y z] 
+   (if (or (float? x) (float? y) (float? z))
+      (.fill sketch (float x) (float y) (float z))
+      (.fill sketch (int x) (int y) (int z))))
+  ([#^PApplet sketch x y z alpha] 
+   (if (or (float? x) (float? y) (float? z))
+      (.fill sketch (float x) (float y) (float z) (float alpha))
+      (.fill sketch (int x) (int y) (int z) (int alpha)))))
 
 
-;;  ([#^PApplet sketch color] 
-;;    (if (float? color) 
-;;      (.fill sketch (float color)) 
-;;      (.fill sketch (int color))))
-;;  ([#^PApplet sketch color alpha] 
-;;    (if (float? color) 
-;;      (.fill sketch (float color) (float alpha)) 
-;;      (.fill sketch (int color) (float alpha))))
-;;  ([#^PApplet sketch x y z] (.fill sketch (float x) (float y) (float z)))
-;;  ([#^PApplet sketch x y z a] (.fill sketch (float x) (float y) (float z) (float a))))
 
 
 
@@ -681,7 +744,6 @@
     float
  
  "
-  ;([sketch c1 c2 amt] (.lerpColor sketch (int c1) (int c2) (float amt)))
   ([c1 c2 amt] 
    (PApplet/lerpColor c1 c2 (float amt) 1))) ;; use RGB mode
 
@@ -726,12 +788,9 @@
 ;; $$mag
 ;; $$main
 
-;; renamed by DEL
+;; renamed from map-to to remap by DEL
 (defn remap [val istart istop ostart ostop]
   (PApplet/map (float val) (float istart) (float istop) (float ostart) (float ostop)))
-
-;;(defn map-to [val istart istop ostart ostop]
-;;  (PApplet/map (float val) (float istart) (float istop) (float ostart) (float ostop)))
 
 (defn mask
   ([#^PApplet sketch #^ints alpha-array] (.mask sketch alpha-array)))
@@ -1007,26 +1066,27 @@
 
 ;; modified by DEL
 (defn stroke
-  ([#^PApplet sketch rgb] 
-   (.stroke sketch rgb)))
+  ([#^PApplet sketch gray] 
+   (cond 
+     (string? gray)
+      (.stroke sketch (color sketch gray))
+     (integer? gray)
+       (.stroke sketch (int gray))
+     (float? gray)
+       (.stroke sketch (float gray))))
+  ([#^PApplet sketch gray alpha] 
+   (cond 
+     (string? gray)
+      (.stroke sketch (color sketch gray) (int alpha))
+     (integer? gray)
+       (.stroke sketch (int gray) (int alpha))
+     (float? gray)
+       (.stroke sketch (float gray) (float alpha))))
+  ([#^PApplet sketch x y z] 
+     (.stroke sketch (float x) (float y) (float z)))
+  ([#^PApplet sketch x y z alpha] 
+     (.stroke sketch (float x) (float y) (float z) (float alpha))))
 
-;  ([#^PApplet sketch rgb] 
-;   (if (string? rgb)
-;    (.stroke sketch (color sketch rgb))
-;    (.stroke sketch (float rgb))))
-;  ([#^PApplet sketch rgb alpha] (.stroke sketch (float rgb) (float alpha)))
-;  ([#^PApplet sketch x y z] (.stroke sketch (float x) (float y) (float z)))
-;  ([#^PApplet sketch x y z a] (.stroke sketch (float x) (float y) (float z) (float a))))
-
-;;(defn stroke-float
-;;  ([#^PApplet sketch gray] (.stroke sketch (float gray)))
-;;  ([#^PApplet sketch gray alpha] (.stroke sketch (float gray) (float alpha)))
-;;  ([#^PApplet sketch x y z] (.stroke sketch (float x) (float y) (float z)))
-;;  ([#^PApplet sketch x y z a] (.stroke sketch (float x) (float y) (float z) (float a))))
-
-;;(defn stroke-int
-;;  ([#^PApplet sketch rgb] (.stroke sketch (int rgb)))
-;;  ([#^PApplet sketch rgb alpha] (.stroke sketch (int rgb) (float alpha))))
 
 (defn stroke-cap [#^PApplet sketch cap] (.strokeCap sketch (int cap)))
 
@@ -1037,6 +1097,20 @@
 ;; $$subset
 
 ;;(defn tan [angle] (PApplet/tan (float angle)))
+
+;; added by DEL
+(defn text
+  ([#^PApplet sketch s] 
+    (.text sketch s))
+  ([#^PApplet sketch s x y] 
+    (.text sketch s (float x) (float y)))
+  ([#^PApplet sketch s x y z] 
+    (.text sketch s (float x) (float y) (float z)))
+  ([#^PApplet sketch s x1 y1 x2 y2]
+	 (.text sketch s (float x1) (float y1) (float x2) (float y2)))
+  ([#^PApplet sketch s x1 y1 x2 y2 z]
+	 (.text sketch s (float x1) (float y1) (float x2) (float y2) (float z))))
+
 
 (defn char->text
   ([#^PApplet sketch c] (.text sketch (char c)))
@@ -1090,26 +1164,31 @@
 
 ;; modified by DEL 
 (defn tint
-  ([#^PApplet sketch rgb] 
-     (.tint sketch rgb)))
+  ([#^PApplet sketch gray] 
+   (cond 
+     (string? gray)
+       (.tint sketch (color sketch gray))
+     (integer? gray)
+       (.tint sketch (int gray))
+     (float? gray)
+       (.tint sketch (float gray))))
+  ([#^PApplet sketch gray alpha] 
+   (cond 
+     (string? gray)
+       (.tint sketch (color sketch gray) (int alpha))
+     (integer? gray)
+       (.tint sketch (int gray) (int alpha))
+     (float? gray)
+       (.tint sketch (float gray) (float alpha))))
+  ([#^PApplet sketch x y z] 
+   (if (or (integer? x) (integer? y) (integer? z))
+       (.tint sketch (int x)(int y) (int z))
+       (.tint sketch (float x)(float y) (float z))))
+  ([#^PApplet sketch x y z a] 
+   (if (or (integer? x) (integer? y) (integer? z))
+       (.tint sketch (int x)(int y) (int z) (int alpha))
+       (.tint sketch (float x)(float y) (float z) (float alpha)))))
 
-;;  ([#^PApplet sketch rgb] 
-;;   (if (string? rgb)
-;;     (.tint sketch (color sketch rgb))
-;;     (.tint sketch (float rgb))))
-;;  ([#^PApplet sketch rgb alpha] (.tint sketch (float rgb) (float alpha)))
-;;  ([#^PApplet sketch x y z] (.tint sketch (float x)(float y) (float z)))
-;;  ([#^PApplet sketch x y z a] (.tint sketch (float x)(float y) (float z) (float a))))
-
-;;(defn tint-float
-;;  ([#^PApplet sketch gray] (.tint sketch (float gray)))
-;;  ([#^PApplet sketch gray alpha] (.tint sketch (float gray) (float alpha)))
-;;  ([#^PApplet sketch x y z] (.tint sketch (float x)(float y) (float z)))
-;;  ([#^PApplet sketch x y z a] (.tint sketch (float x)(float y) (float z) (float a))))
-
-;;(defn tint-int
-;;  ([#^PApplet sketch rgb] (.tint sketch (int rgb)))
-;;  ([#^PApplet sketch rgb alpha] (.tint sketch (int rgb) (float alpha))))
 
 (defn translate
 	([v] (apply translate v))
@@ -1395,7 +1474,7 @@
                   (background 255)
                   (image @map-image 0 0))))]
 
-  (view-sketch sktch :title \"US Map\" :size [640 400]))
+  (view-sketch sktch :title \"US Map\" :width 640 :height 400))
 
 
   References:
@@ -1412,6 +1491,8 @@
   ([sketch & options]
     (let [opts (when options (apply assoc {} options))
           title (or (:title opts) "Processing Sketch")
+          width (or (:width opts) (.width (.getSize sketch)))
+          height (or (:height opts) (.height (.getSize sketch)))
           [width height] (or (:size opts) 
                              [(.width (.getSize sketch)) 
                               (.height (.getSize sketch))])

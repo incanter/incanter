@@ -23,8 +23,8 @@
       map-image (ref nil)
       draw-data (fn [sketch data]
                   (doseq [[x y value percent] data]
-                    (fill sketch (lerp-color (color "0x296F34")
-                                             (color "0x61E2F0") 
+                    (fill sketch (lerp-color (color 0x296F34)
+                                             (color 0x61E2F0) 
                                              percent))
                     (ellipse sketch x y value value)))
       sktch (sketch
@@ -34,16 +34,16 @@
                 (dosync 
                   (ref-set map-image 
                            (load-image this "examples/benfry/images/map.png")))
+                (smooth this)
+                (no-stroke this)
                 (size this 640 400))
              
               ;; define the draw function 
               (draw []
                 (doto this
-                  (background (color "0xFFFFFF"))
+                  (background (color 0xFFFFFF))
                   ;(background (color 192 0 0))
                   (image @map-image 0 0)
-                  smooth 
-                  no-stroke
                   (draw-data data)
                   (save "/tmp/map_example.png")
                   no-loop
@@ -71,7 +71,8 @@
 
 (view (bar-chart (sel rand-dat :cols 0) 
                  (sel rand-dat :cols 1)
-                 :vertical false))
+                 :vertical false)
+      :height 800)
 
 (let [locations (sel (to-matrix (read-dataset "examples/benfry/locations.tsv" 
                                               :delim \tab)) 
@@ -89,7 +90,7 @@
       map-image (ref nil)
       draw-data (fn [sketch data]
                   (doseq [[x y value raw-dat] data]
-                    (fill sketch (if (pos? raw-dat) (color "0x0000ff") (color "0xff0000")))
+                    (fill sketch (if (pos? raw-dat) (color 0x0000ff) (color 0xff0000)))
                     (ellipse sketch x y value value)))
       sktch (sketch
               
@@ -98,16 +99,16 @@
                 (dosync 
                   (ref-set map-image 
                            (load-image this "examples/benfry/images/map.png")))
+                (smooth this)
+                (no-stroke this)
                 (size this 640 400))
              
               ;; define the draw function 
               (draw []
                 (doto this
-                  (background (color "0xFFFFFF"))
+                  (background (color 0xFFFFFF))
                   ;(background (color 192 0 0))
                   (image @map-image 0 0)
-                  smooth 
-                  no-stroke
                   (draw-data data)
                   (save "/tmp/map_example.png")
                   no-loop
@@ -136,10 +137,11 @@
 
 (view (bar-chart (sel rand-dat :cols 0) 
                  (sel rand-dat :cols 1)
-                 :vertical false))
+                 :vertical false)
+      :height 800)
 
 (let [map-image (ref nil)
-      font (ref nil)
+      ;font (ref nil)
       mse-x (ref 0)
       mse-y (ref 0)
       locations (sel (to-matrix (read-dataset "examples/benfry/locations.tsv" 
@@ -159,11 +161,11 @@
 
       draw-data (fn [sketch data abbrevs mse-x mse-y]
                   (doseq [[x y value raw-dat i] data]
-                    (fill sketch (if (pos? raw-dat) (color "0x0000ff") (color "0xff0000")))
+                    (fill sketch (if (pos? raw-dat) (color 0x0000ff) (color 0xff0000)))
                     ;(ellipse-mode sketch RADIUS)
                     (ellipse sketch x y value value)
                     (when (< (dist x y mse-x mse-y) (+ 2 value))
-                      (fill sketch (color 0))
+                      (fill sketch 0)
                       (text-align sketch CENTER)
                       (string->text sketch (str "(" (nth abbrevs i) ") " value) 
                                     x (- y value 4)))))
@@ -172,19 +174,22 @@
               ;; define the setup function
               (setup []
                 (dosync 
-                  (ref-set font (create-font this "Ariel" 12))
+                  ;(ref-set font (create-font this "Ariel" 12))
                   (ref-set map-image 
                            (load-image this "examples/benfry/images/map.png")))
-                (text-font this @font)
-                (size this 640 400))
+                ;(text-font this @font)
+                (doto this
+                  (text-font (create-font this "Ariel" 12))
+                  smooth 
+                  no-stroke
+                  (size 640 400)))
              
               ;; define the draw function 
               (draw []
                 (doto this
-                  (background (color 0))
+                  ;(background (color 0))
+                  (background 0)
                   (image @map-image 0 0)
-                  smooth 
-                  no-stroke
                   (draw-data data abbrevs @mse-x @mse-y)
                   ;(save "/tmp/map_example.png")
                   ;no-loop
@@ -199,7 +204,8 @@
                   (ref-set mse-x (mouse-x mouse-event)) 
                   (ref-set mse-y (mouse-y mouse-event)))))
       ]
-    (view sktch :title "US Map with Random Data" :size [640 400]))
+  ;(no-loop sktch)
+  (view sktch :title "US Map with Random Data" :size [640 400]))
 
 ;(view "file:///tmp/map_example.png")
 
