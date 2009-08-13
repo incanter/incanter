@@ -50,13 +50,13 @@
 (.. vv getRenderContext (setVertexLabelTransformer (new ToStringLabeller)))
 (.. vv getRenderContext (setEdgeLabelTransformer (new ToStringLabeller)))
 
-(.. vv getRenderer 
-  getVertexLabelRenderer 
+(.. vv getRenderer
+  getVertexLabelRenderer
   (setPosition (edu.uci.ics.jung.visualization.renderers.Renderer$VertexLabel$Position/CNTR)))
 
 (def frame (new JFrame "Simple Graph View"))
 ;(.setDefaultCloseOperation frame JFrame/EXIT_ON_CLOSE) ; this option kills the REPL
-(.. frame getContentPane (add vv))                      
+(.. frame getContentPane (add vv))
 (.pack frame)
 (.setVisible frame true)
 
@@ -87,10 +87,10 @@
       (.. vv getRenderContext (setEdgeStrokeTransformer edge-stroke-transformer))
       (.. vv getRenderContext (setVertexLabelTransformer (new ToStringLabeller)))
       (.. vv getRenderContext (setEdgeLabelTransformer (new ToStringLabeller)))
-      ;(.. vv getRenderer getVertexLabelRenderer 
+      ;(.. vv getRenderer getVertexLabelRenderer
         ;(setPosition (edu.uci.ics.jung.visualization.renderers.Renderer$VertexLabel$Position/CNTR)))
       ;(.setDefaultCloseOperation frame JFrame/EXIT_ON_CLOSE) ; this option kills the REPL
-      (.. frame getContentPane (add vv))                      
+      (.. frame getContentPane (add vv))
       (.pack frame)
       (.setVisible frame true))))
 
@@ -185,4 +185,3 @@
 (. org.jgraph.graph.GraphConstants (setDashPattern (.getAttributes edge) (float-array [10 10])))
 (.cellsChanged model (to-array [edge]))
 ;(. model (cellsChanged (to-array [edge])))
-

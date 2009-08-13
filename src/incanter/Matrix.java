@@ -1,10 +1,10 @@
 /*
 * Matrix.java -- Matrix class for Clojure that extends DenseColDoubleMatrix2D
 * in the CERN Colt Library
-* 
+*
 * by David Edgar Liebke http://incanter.org
 * March 11, 2009
-* 
+*
 * Copyright (c) David Edgar Liebke, 2009. All rights reserved.  The use
 * and distribution terms for this software are covered by the Eclipse
 * Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
@@ -105,11 +105,11 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
 
                 return(mat);
         }
-        
+
         public Matrix like(int rows, int columns) {
-	        return new Matrix(rows, columns);
+                return new Matrix(rows, columns);
         }
-        
+
         /**************************************
          * ISeq METHODS
         **************************************/
@@ -131,7 +131,7 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
 
 
         public ISeq next() {
-                if(this.rows == 0 || this.columns == 0) 
+                if(this.rows == 0 || this.columns == 0)
                         return(null);
                 else if(!this.oneDimensional && this.rows == 1) {
                         return(null);
@@ -203,33 +203,33 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
                         return(null);
         }
 
-        public int count() { 
-                if(this.oneDimensional) 
+        public int count() {
+                if(this.oneDimensional)
                         return this.elements.length;
                 else
-                        return this.rows; 
+                        return this.rows;
         }
 
-        public Matrix seq() { 
+        public Matrix seq() {
                 if(this.elements.length > 0)
                         return this;
                 else
-                        return null; 
+                        return null;
         }
 
         public IPersistentCollection empty() {
-                return(new Matrix(0, 0)); 
+                return(new Matrix(0, 0));
         }
 
         public boolean equiv(Object o) {
                 return equals(o);
-                
+
         }
-        
+
         public String toString() {
                 StringBuffer buf = new StringBuffer();
                 for(int i = 0; i < this.rows; i++) {
-                        for(int j = 0; j < this.columns; j++) { 
+                        for(int j = 0; j < this.columns; j++) {
                                 buf.append(this.get(i, j));
                                 buf.append("   ");
                         }
@@ -238,6 +238,3 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
                 return(buf.toString());
         }
 }
-
-
-

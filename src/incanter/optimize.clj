@@ -16,13 +16,13 @@
 
 
 
-(ns incanter.optimize 
+(ns incanter.optimize
   (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix ncol solve
                               abs sel trans bind-columns to-list identity-matrix)]))
 
 
 
-(defn integrate 
+(defn integrate
 " Integrate a function f from a to b
 
 
@@ -39,7 +39,7 @@
     (def std 1)
     (def mu 0)
     (defn normal [x]
-      (/ 1                   
+      (/ 1
         (* (* std (Math/sqrt (* 2 Math/PI)))
           (Math/exp (/ (Math/pow (- (- x mu)) 2)
           (* 2 (Math/pow std 2)))))))
@@ -64,7 +64,7 @@
 
 
 
-(defn derivative 
+(defn derivative
 "
   Returns a function that approximates the derivative of the given function.
 
@@ -88,7 +88,7 @@
     ;; get the second derivative function
     (def cube-deriv2 (derivative cube-deriv))
     (add-lines plot x (map cube-deriv2 x))
-   
+
     ;; plot the normal pdf and its derivatives
     (def plot (xy-plot x (pdf-normal x)))
     (view plot)
@@ -115,9 +115,9 @@
   Examples:
 
     (defn quad-fx [[x y]] (+ (* x x) (* x y) (* y y)))
-    (def quad-dfx0 (partial-derivative quad-fx 0)) 
+    (def quad-dfx0 (partial-derivative quad-fx 0))
     (def quad-dfx1 (partial-derivative quad-fx 1))
-    (quad-dfx0 [1 1]) 
+    (quad-dfx0 [1 1])
 
     (use '(incanter core optimize charts))
     (def x (range -3 3 0.1))
@@ -127,12 +127,12 @@
 
   References:
     http://en.wikipedia.org/wiki/Partial_derivative
-    
+
 "
   ([fx i & options]
     (let [opts (when options (apply assoc {} options))
           dx (or (:dx opts) 0.0001)]
-      (fn [theta] 
+      (fn [theta]
         (let [theta-next (assoc theta i (+ (theta i) dx))]
           (/ (- (fx theta-next) (fx theta)) dx))))))
 
@@ -161,7 +161,7 @@
 (defn- second-partial-derivative
 "
   Examples:
-    
+
     (use '(incanter core optimize charts))
     (defn quad-fx [[x y]] (+ (* x x) (* x y) (* y y)))
     (def quad-dfx00 (second-partial-derivative quad-fx 0 0))
@@ -172,7 +172,7 @@
     (quad-dfx10 [1 1])
     (quad-dfx01 [1 1])
     (quad-dfx11 [1 1])
-    
+
 "
   ([fx i j]
    (partial-derivative (partial-derivative fx i) j)))
@@ -194,7 +194,7 @@
 
 "
   ([fx n & options]
-    (let [funs (for [i (range n) j (range n) :when (<= j i)] 
+    (let [funs (for [i (range n) j (range n) :when (<= j i)]
                  (second-partial-derivative fx i j))]
       (fn [theta] (symmetric-matrix (map #(% theta) funs))))))
 
@@ -211,8 +211,8 @@
   Examples:
 
     (use '(incanter core optimize datasets charts))
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -240,7 +240,7 @@
         (reduce bind-columns
                 (for [i (range p)]
                   (div (map - (map (partial f (plus theta (mult (nth e i) (nth dx i)))) x)
-                              (map (partial f theta) x)) 
+                              (map (partial f theta) x))
                        (nth dx i))))))))
 
 
@@ -248,19 +248,19 @@
 
 
 (defn gradient
-" 
-  Returns a function that calculates a 5-point approximation to 
+"
+  Returns a function that calculates a 5-point approximation to
   the gradient of the given function. The vector of start values are
   used to determine the number of parameters required by the function, and
-  to scale the step-size. The generated function accepts a vector of 
+  to scale the step-size. The generated function accepts a vector of
   parameter values and a vector of x data points and returns a matrix,
   where each row is the gradient evaluated at the corresponding x value.
 
   Examples:
 
     (use '(incanter core optimize datasets charts))
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -286,21 +286,21 @@
         (reduce bind-columns
                 (for [i (range p)]
                   (let [h (mult (nth e i) dx)]
-                    (div 
-                      (map + (map (partial f (minus theta (mult 2 h))) x) 
-                            (map - (mult 8 (map (partial f (minus theta h)) x))) 
-                            (mult 8 (map (partial f (plus theta h)) x)) 
-                            (map - (map (partial f (plus theta (mult 2 h))) x))) 
+                    (div
+                      (map + (map (partial f (minus theta (mult 2 h))) x)
+                            (map - (mult 8 (map (partial f (minus theta h)) x)))
+                            (mult 8 (map (partial f (plus theta h)) x))
+                            (map - (map (partial f (plus theta (mult 2 h))) x)))
                       (* 12 (nth dx i))))))))))
 
 
 
 
 (defn hessian
-" Returns a function that calculates an approximation to the Hessian matrix 
-  of the given function. The vector of start values are used to determine 
-  the number of parameters required by the function, and to scale the 
-  step-size. The generated function accepts a vector of 
+" Returns a function that calculates an approximation to the Hessian matrix
+  of the given function. The vector of start values are used to determine
+  the number of parameters required by the function, and to scale the
+  step-size. The generated function accepts a vector of
   parameter values and a vector of x data points and returns a matrix,
   where each row with p*(p+1)/2 columns, one for each unique entry in
   the Hessian evaluated at the corresponding x value.
@@ -308,8 +308,8 @@
   Examples:
 
     (use '(incanter core optimize datasets charts))
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -337,11 +337,11 @@
                   (let [hi (mult (nth e i) dx)
                         hj (mult (nth e j) dx)
                         hij (mult (plus (nth e i) (nth e j)) dx)]
-                    (div 
+                    (div
                       (map +
-                        (map - (map (partial f theta) x) 
-                               (map (partial f (plus theta hi)) x) 
-                               (map (partial f (plus theta hj)) x)) 
+                        (map - (map (partial f theta) x)
+                               (map (partial f (plus theta hi)) x)
+                               (map (partial f (plus theta hj)) x))
                         (map (partial f (plus theta hij)) x))
                       (* (nth dx i) (nth dx j))))))))))
 
@@ -352,7 +352,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ROUTINES FOR NON-LINEAR LEAST SQUARES
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn- nls-rss
@@ -363,8 +363,8 @@
   Examples:
 
     (use '(incanter core optimize datasets charts))
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -396,8 +396,8 @@
   Examples:
 
     (use '(incanter core optimize datasets charts))
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -408,8 +408,8 @@
     ;; view the data
     (view (scatter-plot x y))
 
-    (nls-gradient f 
-                  (gradient f theta-init) 
+    (nls-gradient f
+                  (gradient f theta-init)
                   theta-init x y)
 
 
@@ -434,8 +434,8 @@
   Examples:
 
     (use '(incanter core optimize datasets charts))
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -446,9 +446,9 @@
     ;; view the data
     (view (scatter-plot x y))
 
-    (time (doall (nls-hessian f 
-                 (gradient f theta-init) 
-                 (hessian f theta-init) 
+    (time (doall (nls-hessian f
+                 (gradient f theta-init)
+                 (hessian f theta-init)
                  theta-init x y)))
 
 
@@ -479,8 +479,8 @@
     (use '(incanter core optimize datasets charts))
     ;; define the Michaelis-Menton model function
     ;; y = a + (b - a)*x/(c + x)
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
@@ -497,12 +497,12 @@
     (def d2f (hessian f start))
     (def result (nls-newton-raphson f df d2f start x y))
 
-    ;(add-lines plot x (f (:theta result) x)) 
-    (add-lines plot x (map (partial f (:theta result)) x)) 
+    ;(add-lines plot x (f (:theta result) x))
+    (add-lines plot x (map (partial f (:theta result)) x))
 
 
 
-" 
+"
   ([f df d2f start x y & options]
     (let [opts (when options (apply assoc {} options))
           max-iter (or (:max-iter opts) 200)
@@ -513,9 +513,9 @@
         (let [H (solve (nls-hessian f df d2f th x y))
               g (nls-gradient f df th x y)]
           (if (or (< (reduce max (abs g)) tol) (= i max-iter))
-            {:theta th 
-             :iterations i 
-             :gradient g 
+            {:theta th
+             :iterations i
+             :gradient g
              :hessian H
              :rss (nls-rss f th x y)}
             (recur (inc i) (map - th (mmult H g)))))))))
@@ -534,12 +534,12 @@
     (use '(incanter core optimize datasets charts))
     ;; define the Michaelis-Menton model function
     ;; y = a + (b - a)*x/(c + x)
-    (defn f [theta x] 
-      (+ (nth theta 0) 
+    (defn f [theta x]
+      (+ (nth theta 0)
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
-;    (defn f [theta x] 
+;    (defn f [theta x]
 ;      (let [[a b c] theta]
 ;        (plus a (div (mult x (minus b a)) (plus c x)))))
 
@@ -554,12 +554,12 @@
     ;(def df (gradient f start))
     (def result (nls-gauss-newton f df start x y))
 
-    ;(add-lines plot x (f (:theta result) x)) 
-    (add-lines plot x (map (partial f (:theta result)) x)) 
+    ;(add-lines plot x (f (:theta result) x))
+    (add-lines plot x (map (partial f (:theta result)) x))
 
 
 
-" 
+"
   ([f df start x y & options]
     (let [opts (when options (apply assoc {} options))
           max-iter (or (:max-iter opts) 200)
@@ -574,8 +574,8 @@
               update (mmult (solve (mmult (trans g) g)) (trans g) resid)
               ]
           (if (or (< (reduce max (abs update)) tol) (= i max-iter))
-            {:theta th 
-             :iterations i 
+            {:theta th
+             :iterations i
              :gradient g
              :rss (nls-rss f th x y)}
             (recur (inc i) (map + th update))))))))
@@ -585,9 +585,9 @@
 
 
 (defn non-linear-model
-" 
+"
   Determine the nonlinear least-squares estimates of the
-  parameters of a nonlinear model. 
+  parameters of a nonlinear model.
   Based on R's nls (non-linear least squares) function.
 
   Arguments:
@@ -599,7 +599,7 @@
 
   Options:
     :method (default :gauss-newton) other option :newton-raphson
-    :tol (default 1E-5) 
+    :tol (default 1E-5)
     :max-iter (default 200)
 
   Returns: a hash-map containing the following fields:
@@ -620,7 +620,7 @@
     (use '(incanter core optimize datasets charts))
     ;; define the Michaelis-Menton model function
     ;; y = a + (b - a)*x/(c + x)
-    (defn f [theta x] 
+    (defn f [theta x]
       (let [[a b c] theta]
         (plus a (div (mult x (minus b a)) (plus c x)))))
 
@@ -651,9 +651,9 @@
 
     (def plot (scatter-plot x y :legend true))
     (view plot)
- 
-    ;; the newton-raphson algorithm fails to converge to the correct solution 
-    ;; using first set of start values from NIST, but the default gauss-newton 
+
+    ;; the newton-raphson algorithm fails to converge to the correct solution
+    ;; using first set of start values from NIST, but the default gauss-newton
     ;; algorith converges to the correct solution.
 
     (def start1 [0.1 0.01 0.02])
@@ -687,6 +687,3 @@
        :fitted fitted
        :x x
        :y y})))
-
-
-
