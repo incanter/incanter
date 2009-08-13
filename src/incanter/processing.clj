@@ -56,7 +56,7 @@
 ;;  ([sketch rgb]
 ;;    (.ambientLight sketch rgb))
 ;;  ([sketch rgb x y z]
-         (.ambientLight sketch rgb (float x) (float y) (float z))))
+;;         (.ambientLight sketch rgb (float x) (float y) (float z))))
 
 (defn ambient-light
   ([sketch red green blue]
@@ -568,7 +568,7 @@
      (.emissive sketch (int gray))
      (.emissive sketch (float gray))))
   ([#^PApplet sketch x y z]
-   (if (integer? gray)
+   (if (or (integer? x) (integer? y) (integer? z))
     (.emissive sketch (int x) (int y) (int z))
     (.emissive sketch (float x) (float y) (float z)))))
 
