@@ -13,7 +13,7 @@
 ;;; Commentary:
 
 ;; The `incanter' function starts or switches to a SLIME session with
-;; Incanter loaded. 
+;; Incanter loaded.
 
 ;; You'll need clojure-mode and SLIME installed. Install clojure-mode
 ;; manually or through ELPA (http://tromey.com/elpa) and then hit M-x
@@ -45,7 +45,7 @@
     (slime))))
 
 (defun incanter-init ()
-  (save-excursion 
+  (save-excursion
     (switch-to-buffer "*slime-repl clojure*")
     (rename-buffer "*incanter*")
     (slime-eval-async `(swank:eval-and-grab-output

@@ -16,13 +16,13 @@
 
 
 
-(ns incanter.datasets 
+(ns incanter.datasets
   (:use [incanter.io :only (read-dataset)]))
 
 
 
-(def **datasets** 
-  { 
+(def **datasets**
+  {
    :iris {:filename "data/iris.dat"
           :delim \space
           :header true}
@@ -100,15 +100,15 @@
   Datasets:
 
     :iris -- the Fisher's or Anderson's Iris data set gives the
-             measurements in centimeters of the variables sepal 
-             length and width and petal length and width, 
-             respectively, for 50 flowers from each of 3 species 
+             measurements in centimeters of the variables sepal
+             length and width and petal length and width,
+             respectively, for 50 flowers from each of 3 species
              of iris.
 
-    :cars -- The data give the speed of cars and the distances taken 
+    :cars -- The data give the speed of cars and the distances taken
               to stop. Note that the data were recorded in the 1920s.
 
-    :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics 
+    :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics
                and Estimation for Social Scientists'
 
     :us-arrests -- This data set contains statistics, in arrests per 100,000
@@ -118,34 +118,34 @@
 
     :flow-meter -- flow meter data used in Bland Altman Lancet paper.
 
-    :co2 -- has 84 rows and 5 columns of data from an experiment on the cold tolerance 
+    :co2 -- has 84 rows and 5 columns of data from an experiment on the cold tolerance
             of the grass species _Echinochloa crus-galli_.
 
-    :chick-weight -- has 578 rows and 4 columns from an experiment on the effect of diet 
+    :chick-weight -- has 578 rows and 4 columns from an experiment on the effect of diet
                      on early growth of chicks.
 
     :plant-growth -- Results from an experiment to compare yields (as measured by dried
                      weight of plants) obtained under a control and two different
                      treatment conditions.
 
-    :pontius -- These data are from a NIST study involving calibration of load cells. 
-                The response variable (y) is the deflection and the predictor variable 
+    :pontius -- These data are from a NIST study involving calibration of load cells.
+                The response variable (y) is the deflection and the predictor variable
                 (x) is load.
                 See http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml
 
-    :filip -- NIST data set for linear regression certification, 
+    :filip -- NIST data set for linear regression certification,
               see http://www.itl.nist.gov/div898/strd/lls/data/Filip.shtml
 
-    :longely -- This classic dataset of labor statistics was one of the first used to 
-                test the accuracy of least squares computations. The response variable 
-                (y) is the Total Derived Employment and the predictor variables are GNP 
-                Implicit Price Deflator with Year 1954 = 100 (x1), Gross National Product 
-                (x2), Unemployment (x3), Size of Armed Forces (x4), Non-Institutional 
+    :longely -- This classic dataset of labor statistics was one of the first used to
+                test the accuracy of least squares computations. The response variable
+                (y) is the Total Derived Employment and the predictor variables are GNP
+                Implicit Price Deflator with Year 1954 = 100 (x1), Gross National Product
+                (x2), Unemployment (x3), Size of Armed Forces (x4), Non-Institutional
                 Population Age 14 & Over (x5), and Year (x6).
                 See http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml
 
-    :Chwirut -- These data are the result of a NIST study involving ultrasonic calibration. 
-                The response variable is ultrasonic response, and the predictor variable is 
+    :Chwirut -- These data are the result of a NIST study involving ultrasonic calibration.
+                The response variable is ultrasonic response, and the predictor variable is
                 metal distance.
                 See http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat
 
@@ -157,7 +157,7 @@
 
     :airline-passengers -- Monthly Airline Passenger Numbers 1949-1960
 
-    :math-prog -- Pass/fail results for a high school mathematics assessment test 
+    :math-prog -- Pass/fail results for a high school mathematics assessment test
                   and a freshmen college programming course.
 
     :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.
@@ -171,6 +171,3 @@
           delim (ds :delim)
           header (ds :header)]
    (read-dataset filename :delim delim :header header))))
-
-
-

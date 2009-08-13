@@ -19,21 +19,21 @@
 ;; DATA IO FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(ns incanter.io 
+(ns incanter.io
   (:import (java.io FileReader)
            (au.com.bytecode.opencsv CSVReader))
   (:use [incanter.core :only (dataset save)])
   )
 
 
-(defn- parse-string [value] 
-  (try (Integer/parseInt value) 
-    (catch NumberFormatException _ 
+(defn- parse-string [value]
+  (try (Integer/parseInt value)
+    (catch NumberFormatException _
       (try (Double/parseDouble value)
         (catch NumberFormatException _ value)))))
 
 
-(defn read-dataset 
+(defn read-dataset
   "
     Returns a dataset read from a file.
 
@@ -43,14 +43,14 @@
       :skip (default 0) the number of lines to skip at the top of the file.
       :header (default false) indicates the file has a header line
   "
-  ([filename & options] 
+  ([filename & options]
    (let [opts (when options (apply assoc {} options))
          delim (or (:delim opts) \,) ; space delim default
          quote-char (or (:quote opts) \")
          skip (or (:skip opts) 0)
          header? (or (:header opts) false)
-         reader (au.com.bytecode.opencsv.CSVReader. 
-                    (java.io.FileReader. filename) 
+         reader (au.com.bytecode.opencsv.CSVReader.
+                    (java.io.FileReader. filename)
                     delim
                     quote-char
                     skip)
@@ -59,21 +59,21 @@
          parsed-data (into [] (map (fn [row] (into [] (map #(parse-string %) row))) raw-data))
        ]
     ;;(if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data))))))
-    (if header? 
+    (if header?
       ; have header row
-      (dataset (first parsed-data) (rest parsed-data)) 
+      (dataset (first parsed-data) (rest parsed-data))
       ; no header row so build a default one
       (let [col-count (count (first parsed-data))
             col-names (apply vector (map str (repeat col-count "col") (iterate inc 0)))]
         (dataset col-names parsed-data))))))
-   
+
 
 
 
 (defmethod save incanter.Matrix [mat filename & options]
   (let [opts (when options (apply assoc {} options))
-        delim (or (:delim opts) \,) 
-        header (or (:header opts) nil) 
+        delim (or (:delim opts) \,)
+        header (or (:header opts) nil)
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)]
     (do
@@ -92,13 +92,13 @@
             (.write file-writer (str \newline)))))
       (.flush file-writer)
       (.close file-writer))))
-    
+
 
 
 
 (defmethod save :incanter.core/dataset [dataset filename & options]
   (let [opts (when options (apply assoc {} options))
-        delim (or (:delim opts) \,) 
+        delim (or (:delim opts) \,)
         header (or (:header opts) (:column-names dataset))
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)
@@ -118,4 +118,3 @@
             (.write file-writer (str \newline))))
       (.flush file-writer)
       (.close file-writer))))
-    

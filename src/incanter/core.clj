@@ -16,18 +16,18 @@
 
 
 
-(ns incanter.core 
+(ns incanter.core
   (:use (incanter internal))
   (:import (incanter Matrix)
-           (cern.colt.matrix.tdouble DoubleMatrix2D 
-                                     DoubleFactory2D 
+           (cern.colt.matrix.tdouble DoubleMatrix2D
+                                     DoubleFactory2D
                                      DoubleFactory1D)
            (cern.colt.matrix.tdouble.algo DoubleAlgebra
                                           DoubleFormatter)
            (cern.colt.matrix.tdouble.algo.decomposition DoubleCholeskyDecomposition
                                                         DoubleSingularValueDecompositionDC
                                                         DoubleEigenvalueDecomposition
-                                                        DoubleLUDecomposition 
+                                                        DoubleLUDecomposition
                                                         DoubleQRDecomposition)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
@@ -37,7 +37,7 @@
            (java.util Vector)))
 
 
-(defn matrix 
+(defn matrix
 "
   Returns an instance of an incanter.Matrix, which is an extension of
   cern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure
@@ -57,17 +57,17 @@
     (rest (first A)) ; produces a row matrix [2 3]
 
     ; since (plus row1 row2) adds the two rows element-by-element,
-    (reduce plus A) ; produces the sums of the columns, 
+    (reduce plus A) ; produces the sums of the columns,
 
-    ; and since (sum row1) sums the elements of the row, 
-    (map sum A) ; produces the sums of the rows, 
+    ; and since (sum row1) sums the elements of the row,
+    (map sum A) ; produces the sums of the rows,
 
     ; you can filter the rows using Clojure's filter function
     (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html
-    
+
 "
   ([data]
    (make-matrix data))
@@ -79,23 +79,23 @@
    (make-matrix init-val rows cols)))
 
 
-(defn matrix? 
+(defn matrix?
   " Test if obj is 'derived' incanter.Matrix."
   ([obj] (is-matrix obj)))
 
 
-(defn nrow 
+(defn nrow
   " Returns the number of rows in the given matrix. Equivalent to R's nrow function."
   ([mat]
-   (cond 
+   (cond
     (matrix? mat) (.rows #^Matrix mat)
     (coll? mat) (count mat))))
 
 
-(defn ncol 
+(defn ncol
   " Returns the number of columns in the given matrix. Equivalent to R's ncol function."
   ([mat]
-   (cond 
+   (cond
     (matrix? mat) (.columns #^Matrix mat)
     (coll? mat) 1 )))
 
@@ -108,9 +108,9 @@
 
 
 
-(defn identity-matrix 
+(defn identity-matrix
 "   Returns an n-by-n identity matrix.
-    
+
     Examples:
       (identity-matrix 4)
 
@@ -118,11 +118,11 @@
    ([n] (Matrix. (.identity DoubleFactory2D/dense n))))
 
 
-(defn diag 
+(defn diag
 "   If given a matrix, diag returns a sequence of its diagonal elements.
-    If given a sequence, it returns a matrix with the sequence's elements 
+    If given a sequence, it returns a matrix with the sequence's elements
     on its diagonal. Equivalent to R's diag function.
-  
+
     Examples:
       (diag [1 2 3 4])
 
@@ -134,7 +134,7 @@
 
 "
    ([m]
-    (cond 
+    (cond
      (matrix? m)
       (seq (.toArray (.diagonal DoubleFactory2D/dense m)))
      (coll? m)
@@ -143,19 +143,19 @@
       m)))
 
 
-(defn #^Matrix trans 
+(defn #^Matrix trans
 "   Returns the transpose of the given matrix. Equivalent to R's t function
 
     Examples:
-      (def A (matrix [[1 2 3] 
-                     [4 5 6] 
+      (def A (matrix [[1 2 3]
+                     [4 5 6]
                      [7 8 9]]))
 
       (trans A)
-  
+
 "
   ([mat]
-   (cond 
+   (cond
     (matrix? mat)
       (.viewDice #^Matrix mat)
     (coll? mat)
@@ -163,7 +163,7 @@
 
 
 
-(defn- except-for 
+(defn- except-for
 " Returns a lazy list of numbers ranging from 0 to n, except for the given exceptions.
 
   Examples:
@@ -172,27 +172,27 @@
     (except-for 10 [5 7])
 
 "
-  ([n exceptions] 
+  ([n exceptions]
     (let [except (if (coll? exceptions) exceptions [exceptions])]
       (for [i (range n) :when (reduce #(and %1 %2) (map #(not= i %) except))] i))))
 
 
 
-(defmulti sel 
+(defmulti sel
 "
-  Returns an element or subset of the given matrix, or dataset. 
+  Returns an element or subset of the given matrix, or dataset.
 
   Argument:
     a matrix object or dataset.
 
   Options:
-    :rows (default true) 
+    :rows (default true)
       returns all rows by default, can pass a row index or sequence of row indices
-    :cols (default true) 
+    :cols (default true)
       returns all columns by default, can pass a column index or sequence of column indices
     :except-rows (default nil) can pass a row index or sequence of row indices to exclude
     :except-cols (default nil) can pass a column index or sequence of column indices to exclude
-    :filter (default nil) 
+    :filter (default nil)
       a function can be provided to filter the rows of the matrix
 
   Examples:
@@ -249,16 +249,16 @@
    (let [opts (when options (apply assoc {} options))
          except-rows (:except-rows opts)
          except-columns (:except-cols opts)
-         rows (cond 
-                (:rows opts) 
-                  (:rows opts) 
+         rows (cond
+                (:rows opts)
+                  (:rows opts)
                 except-rows
                   (except-for (.rows mat) except-rows)
                 :else
                   true)
-         cols (cond 
-                (:cols opts) 
-                  (:cols opts) 
+         cols (cond
+                (:cols opts)
+                  (:cols opts)
                 except-columns
                   (except-for (.columns mat) except-columns)
                 :else
@@ -285,15 +285,15 @@
        (and (true? rows) (true? cols))
          mat))))
 
-    
 
-(defn bind-rows 
-"   Returns the matrix resulting from concatenating the given matrices 
+
+(defn bind-rows
+"   Returns the matrix resulting from concatenating the given matrices
     and/or sequences by their rows. Equivalent to R's rbind.
 
     Examples:
-      (def A (matrix [[1 2 3] 
-                     [4 5 6] 
+      (def A (matrix [[1 2 3]
+                     [4 5 6]
                      [7 8 9]]))
 
       (def B (matrix [[10 11 12]
@@ -306,8 +306,8 @@
 "
   ([& args]
    (reduce
-    (fn [A B] 
-      (cond 
+    (fn [A B]
+      (cond
         (nil? (seq A))
           B
         (nil? (seq B))
@@ -321,17 +321,17 @@
         (and (coll? A) (coll? B))
           (conj (matrix A (count A)) (matrix B (count B)))
         :else
-          (throw (Exception. "Incompatible types")))) 
+          (throw (Exception. "Incompatible types"))))
       args)))
 
 
-(defn bind-columns 
-"   Returns the matrix resulting from concatenating the given matrices 
+(defn bind-columns
+"   Returns the matrix resulting from concatenating the given matrices
     and/or sequences by their columns. Equivalent to R's cbind.
 
     Examples:
-      (def A (matrix [[1 2 3] 
-                     [4 5 6] 
+      (def A (matrix [[1 2 3]
+                     [4 5 6]
                      [7 8 9]]))
 
       (def B (matrix [10 11 12]))
@@ -343,12 +343,12 @@
 
 "
   ([& args]
-   (reduce 
+   (reduce
     (fn [A B] (.viewDice (bind-rows (trans A) (trans B))))
     args)))
 
 
-;(defn inner-product [& args] (apply + (apply map * args))) 
+;(defn inner-product [& args] (apply + (apply map * args)))
 ;(inner-product [1 2 3] [4 5 6]) ; = 32
 
 
@@ -359,16 +359,16 @@
 
 
 
-(defn plus 
-"   Performs element-by-element addition on multiple matrices, sequences, 
+(defn plus
+"   Performs element-by-element addition on multiple matrices, sequences,
     and/or numbers. Equivalent to R's + operator.
- 
+
     Examples:
 
-      (def A (matrix [[1 2 3] 
-                      [4 5 6] 
+      (def A (matrix [[1 2 3]
+                      [4 5 6]
                       [7 8 9]]))
-      (plus A A A) 
+      (plus A A A)
       (plus A 2)
       (plus 2 A)
       (plus [1 2 3] [1 2 3])
@@ -380,19 +380,19 @@
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core/+ plus)) args)))
 
 
-(defn minus 
-"   Performs element-by-element subtraction on multiple matrices, sequences, 
-    and/or numbers. If only a single argument is provided, returns the 
+(defn minus
+"   Performs element-by-element subtraction on multiple matrices, sequences,
+    and/or numbers. If only a single argument is provided, returns the
     negative of the given matrix, sequence, or number. Equivalent to R's - operator.
 
 
     Examples:
 
-      (def A (matrix [[1 2 3] 
-                      [4 5 6] 
+      (def A (matrix [[1 2 3]
+                      [4 5 6]
                       [7 8 9]]))
       (minus A)
-      (minus A A A) 
+      (minus A A A)
       (minus A 2)
       (minus 2 A)
       (minus [1 2 3] [1 2 3])
@@ -408,37 +408,37 @@
 
 
 
-(defn mult 
-"   Performs element-by-element multiplication on multiple matrices, sequences, 
+(defn mult
+"   Performs element-by-element multiplication on multiple matrices, sequences,
     and/or numbers. Equivalent to R's * operator.
-      
+
     Examples:
 
-      (def A (matrix [[1 2 3] 
-                      [4 5 6] 
+      (def A (matrix [[1 2 3]
+                      [4 5 6]
                       [7 8 9]]))
-      (mult A A A) 
+      (mult A A A)
       (mult A 2)
       (mult 2 A)
       (mult [1 2 3] [1 2 3])
       (mult [1 2 3] 2)
       (mult 2 [1 2 3])
 
-  
+
 "
    ([& args] (reduce (fn [A B] (combine-with A B clojure.core/* mult)) args)))
 
 
-(defn div 
-"   Performs element-by-element division on multiple matrices, sequences, 
+(defn div
+"   Performs element-by-element division on multiple matrices, sequences,
     and/or numbers. Equivalent to R's / operator.
-      
+
     Examples:
 
-      (def A (matrix [[1 2 3] 
-                      [4 5 6] 
+      (def A (matrix [[1 2 3]
+                      [4 5 6]
                       [7 8 9]]))
-      (div A A A) 
+      (div A A A)
       (div A 2)
       (div 2 A)
       (div [1 2 3] [1 2 3])
@@ -453,98 +453,98 @@
                (reduce (fn [A B] (combine-with A B clojure.core// div)) args))))
 
 
-(defn pow 
+(defn pow
   " This is an element-by-element exponent function, raising the first argument,
     by the exponents in the remaining arguments. Equivalent to R's ^ operator."
    ([& args] (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args)))
 
 
-(defn atan2 
+(defn atan2
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
    Equivalent to R's atan2 function."
-   ([& args] (reduce (fn [A B] (combine-with A B #(Math/atan2 %1 %2) 
+   ([& args] (reduce (fn [A B] (combine-with A B #(Math/atan2 %1 %2)
                                     cern.jet.math.tdouble.DoubleFunctions/atan2)) args)))
 
 
-(defn sqrt 
+(defn sqrt
   "Returns the square-root of the elements in the given matrix, sequence or number.
    Equivalent to R's sqrt function."
    ([A] (pow A 1/2)))
 
 
-(defn sq 
+(defn sq
   "Returns the square of the elements in the given matrix, sequence or number.
    Equivalent to R's sq function."
    ([A] (mult A A)))
 
 
-(defn log 
+(defn log
   "Returns the natural log of the elements in the given matrix, sequence or number.
    Equvalent to R's log function."
    ([A] (transform-with A #(Math/log %) log)))
 
 
-(defn log2 
+(defn log2
   "Returns the log base 2 of the elements in the given matrix, sequence or number.
    Equivalent to R's log2 function."
    ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
 
 
-(defn log10 
+(defn log10
   "Returns the log base 10 of the elements in the given matrix, sequence or number.
    Equivalent to R's log10 function."
    ([A] (transform-with A #(Math/log10 %) (lg 10.0))))
 
 
-(defn exp 
+(defn exp
   "Returns the exponential of the elements in the given matrix, sequence or number.
    Equivalent to R's exp function."
    ([A] (transform-with A #(Math/exp %) exp)))
 
 
-(defn abs 
+(defn abs
   "Returns the absolute value of the elements in the given matrix, sequence or number.
    Equivalent to R's abs function."
    ([A] (transform-with A #(Math/abs (float %)) abs)))
 
 
-(defn sin 
+(defn sin
   "Returns the sine of the elements in the given matrix, sequence or number.
    Equivalent to R's sin function."
    ([A] (transform-with A #(Math/sin %) sin)))
 
 
-(defn asin 
+(defn asin
   "Returns the arc sine of the elements in the given matrix, sequence or number.
    Equivalent to R's asin function."
    ([A] (transform-with A #(Math/asin %) asin)))
 
 
-(defn cos 
+(defn cos
   "Returns the cosine of the elements in the given matrix, sequence or number.
    Equivalent to R's cos function."
    ([A] (transform-with A #(Math/cos %) cos)))
 
 
-(defn acos 
+(defn acos
   "Returns the arc cosine of the elements in the given matrix, sequence or number.
    Equivalent to R's acos function."
    ([A] (transform-with A #(Math/acos %) acos)))
 
 
-(defn tan 
+(defn tan
   "Returns the tangent of the elements in the given matrix, sequence or number.
    Equivalent to R's tan function."
    ([A] (transform-with A #(Math/tan %) tan)))
 
 
-(defn atan 
+(defn atan
   "Returns the arc tangent of the elements in the given matrix, sequence or number.
    Equivalent to R's atan function."
    ([A] (transform-with A #(Math/atan %) atan)))
 
 
-(defn factorial 
+(defn factorial
 "
   Returns the factorial of k (k must be a positive integer). Equivalent to R's
   factorial function.
@@ -561,10 +561,10 @@
 
 
 
-(defn choose 
+(defn choose
 "
-  Returns number of k-combinations (each of size k) from a set S with 
-  n elements (size n), which is the binomial coefficient (also known 
+  Returns number of k-combinations (each of size k) from a set S with
+  n elements (size n), which is the binomial coefficient (also known
   as the 'choose function') [wikipedia]
         choose = n!/(k!(n - k)!)
 
@@ -586,13 +586,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn to-list 
+(defn to-list
   " Returns a list-of-lists if the given matrix is two-dimensional,
     and a flat list if the matrix is one-dimensional."
- ([#^Matrix mat] 
+ ([#^Matrix mat]
   (cond
     (and (coll? mat) (not (matrix? mat)))
-      mat 
+      mat
     (= (.columns mat) 1)
       (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
     (= (.rows mat) 1)
@@ -601,19 +601,19 @@
       (map #(seq %) (seq (.toArray mat))))))
 
 
-(defn #^Matrix copy 
+(defn #^Matrix copy
   "Returns a copy of the given matrix."
   ([#^Matrix mat] (.copy mat)))
 
 
-(defn mmult 
+(defn mmult
   " Returns the matrix resulting from the matrix multiplication of the
     the given arguments. Equivalent to R's %*% operator.
 
     Examples:
-  
-      (def A (matrix [[1 2 3] 
-                      [4 5 6] 
+
+      (def A (matrix [[1 2 3]
+                      [4 5 6]
                       [7 8 9]]))
       (mmult A (trans A))
       (mmult A (trans A) A)
@@ -630,7 +630,7 @@
                     result (Matrix. (.zMult #^Matrix a #^Matrix b nil))]
                 (if (and (= (.rows result) 1) (= (.columns result) 1))
                   (.getQuick result 0 0)
-                  result))) 
+                  result)))
             args)))
 
 
@@ -649,12 +649,12 @@
 "
   ([& args]
     (reduce (fn [A B]
-              (let [a (cond 
-                        (matrix? A) A 
+              (let [a (cond
+                        (matrix? A) A
                         (number? A) (matrix [A])
                         :else (matrix A))
-                    b (cond 
-                        (matrix? B) B 
+                    b (cond
+                        (matrix? B) B
                         (number? B) (matrix [B])
                         :else (matrix B))
                     rows (* (nrow a) (nrow b))
@@ -664,19 +664,19 @@
                                              (mult (sel a i j) b)))))))
             args)))
 
-              
 
 
-(defn solve 
+
+(defn solve
 " Returns a matrix solution if A is square, least squares solution otherwise.
   Equivalent to R's solve function.
-  
+
   Examples:
     (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))
 
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
-    
+
 
 "
   ([#^Matrix A & B]
@@ -686,7 +686,7 @@
 
 
 
-(defn det 
+(defn det
 " Returns the determinant of the given matrix using LU decomposition. Equivalent
   to R's det function.
 
@@ -698,7 +698,7 @@
   ([mat] (.det DoubleAlgebra/DEFAULT mat)))
 
 
-(defn trace 
+(defn trace
 " Returns the trace of the given matrix.
 
   References:
@@ -709,17 +709,17 @@
 
 
 
-(defn vectorize 
+(defn vectorize
   " Returns the vectorization (i.e. vec) of the given matrix.
-    The vectorization of an m-by-n matrix A, denoted by vec(A), 
-    is the m*n-by-1 column vector obtain by stacking the columns 
+    The vectorization of an m-by-n matrix A, denoted by vec(A),
+    is the m*n-by-1 column vector obtain by stacking the columns
     of the matrix A on top of one another.
 
     For instance:
       (= (vectorize (matrix [[a b] [c d]])) (matrix [a c b d]))
 
     Examples:
-      (def A (matrix [[1 2] [3 4]])) 
+      (def A (matrix [[1 2] [3 4]]))
       (vectorize A)
 
     References:
@@ -730,17 +730,17 @@
    ;(reduce #(concat %1 (to-list %2)) '() (trans mat))))
 
 
-(defn half-vectorize 
+(defn half-vectorize
   " Returns the half-vectorization (i.e. vech) of the given matrix.
-    The half-vectorization, vech(A), of a symmetric nxn matrix A 
-    is the n(n+1)/2 x 1 column vector obtained by vectorizing only 
+    The half-vectorization, vech(A), of a symmetric nxn matrix A
+    is the n(n+1)/2 x 1 column vector obtained by vectorizing only
     the upper triangular part of A.
 
     For instance:
       (= (half-vectorize (matrix [[a b] [b d]])) (matrix [a b d]))
 
     Examples:
-      (def A (matrix [[1 2] [2 4]])) 
+      (def A (matrix [[1 2] [2 4]]))
       (half-vectorize A)
 
     References:
@@ -751,21 +751,21 @@
 
 
 
-(defn sum-of-squares 
+(defn sum-of-squares
   "Returns the sum-of-squares of the given sequence."
   ([x]
     (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
       (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
 
 
-(defn sum 
+(defn sum
   "Returns the sum of the given sequence."
   ([x]
     (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
       (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
 
 
-(defn prod 
+(defn prod
   "Returns the product of the given sequence."
   ([x]
     (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
@@ -773,8 +773,8 @@
 
 
 
-(defn cumulative-sum 
-  " Returns a sequence of cumulative sum for the given collection. For instance 
+(defn cumulative-sum
+  " Returns a sequence of cumulative sum for the given collection. For instance
     The first value equals the first value of the argument, the second value is
     the sum of the first two arguments, the third is the sum of the first three
     arguments, etc.
@@ -783,7 +783,7 @@
       (use 'incanter.core)
       (cumulative-sum (range 100))
   "
-  ([coll] 
+  ([coll]
    (let [n (count coll)]
     (loop [in-coll (rest coll)
            cumu-sum [(first coll)]]
@@ -806,10 +806,10 @@
 
   Returns:
     a matrix of the triangular factor (note: the result from
-    cern.colt.matrix.linalg.CholeskyDecomposition is transposed so 
+    cern.colt.matrix.linalg.CholeskyDecomposition is transposed so
     that it matches the result return from R's chol function.
 
-                                            
+
 
   Examples:
 
@@ -827,7 +827,7 @@
 "
   ([#^Matrix mat]
     (.viewDice (.getL (DoubleCholeskyDecomposition. mat)))))
-    ;(Matrix. (.viewDice (.getL (CholeskyDecomposition. mat))))) 
+    ;(Matrix. (.viewDice (.getL (CholeskyDecomposition. mat)))))
 
 
 
@@ -847,7 +847,7 @@
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
   (decomp-foo foo)
-  
+
 
   References:
     http://en.wikipedia.org/wiki/Singular_value_decomposition
@@ -949,7 +949,7 @@
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
   (condition foo)
-  
+
 
   References:
     http://en.wikipedia.org/wiki/Condition_number
@@ -968,7 +968,7 @@
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
   (rank foo)
-  
+
 
 
   References:
@@ -985,7 +985,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn to-vect  
+(defn to-vect
   " Returns a vector-of-vectors if the given matrix is two-dimensional,
     and a flat vector if the matrix is one-dimensional. This is a bit
     slower than the to-list function. "
@@ -999,15 +999,15 @@
               (map #(into [] (seq %)) (seq (.toArray mat)))))))
 
 
-(defn length 
-  " A version of count that works on collections, matrices, and numbers. 
+(defn length
+  " A version of count that works on collections, matrices, and numbers.
     The length of a number is one, the length of a collection is its count,
     and the length of a matrix is the number of elements it contains (nrow*ncol).
     Equivalent to R's length function.
   "
   ([coll]
     (cond
-      (number? coll) 
+      (number? coll)
         1
       (matrix? coll)
         (* (.rows #^Matrix coll) (.columns #^Matrix coll))
@@ -1015,11 +1015,11 @@
         (count coll)
       :else
         (throw (Exception. "Argument must be a collection or matrix!")))))
-      
+
 
 
 (defn group-by
-" Groups the given matrix by the values in the columns indicated by the 
+" Groups the given matrix by the values in the columns indicated by the
   'on-cols' argument, returning a sequence of matrices. The returned
   matrices are sorted by the value of the group column ONLY when there
   is only a single (non-vector) on-col argument.
@@ -1037,7 +1037,7 @@
     (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))
     (group-by plant-growth-dummies [1 2])
     ;; return only the first column
-    (group-by plant-growth-dummies [1 2] :cols 0) 
+    (group-by plant-growth-dummies [1 2] :cols 0)
     ;; don't return the last two columns
     (group-by plant-growth-dummies [1 2] :except-cols [1 2])
 
@@ -1059,17 +1059,17 @@
           groups (if (coll? on-cols)
                    (into #{} (to-list (sel mat :cols on-cols)))
                    (sort (into #{} (to-list (sel mat :cols on-cols)))))
-          filter-fn (fn [group] 
-                      (cond 
+          filter-fn (fn [group]
+                      (cond
                         (and (coll? on-cols) (> (count on-cols) 1))
-                          (fn [row] 
-                            (reduce #(and %1 %2) 
+                          (fn [row]
+                            (reduce #(and %1 %2)
                                     (map (fn [i g] (= (nth row i) g)) on-cols group)))
                         (and (coll? on-cols) (= (count on-cols) 1))
-                          (fn [row] 
+                          (fn [row]
                             (= (nth row (first on-cols)) group))
                         :else
-                          (fn [row] 
+                          (fn [row]
                             (= (nth row on-cols) group))))
          ]
       (cond
@@ -1087,12 +1087,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn dataset 
+(defn dataset
 " Returns a map of type ::dataset constructed from the given column-names and
   data. The data is a sequence of sequences.
 "
-  ([column-names & data] 
-    (with-meta 
+  ([column-names & data]
+    (with-meta
       {:column-names column-names
       :rows (map #(apply assoc {} (interleave column-names %)) (first data))}
       {:type ::dataset})))
@@ -1118,22 +1118,22 @@
   ([dataset & options]
     (let [opts (when options (apply assoc {} options))
           rows (or (:rows opts) true)
-          cols (if (:cols opts) 
+          cols (if (:cols opts)
                  (if (coll? (:cols opts))
-                   (:cols opts) 
+                   (:cols opts)
                    [(:cols opts)])
                  (:column-names dataset))
           row-filter (:filter opts)
-          selected-rows (cond 
-                          (true? rows) (:rows dataset) 
+          selected-rows (cond
+                          (true? rows) (:rows dataset)
                           (number? rows) (list (nth (:rows dataset) rows))
-                          (coll? rows) (map #(nth (:rows dataset) %) rows)) 
+                          (coll? rows) (map #(nth (:rows dataset) %) rows))
           data (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows)
           result (if (nil? row-filter) data (filter row-filter data))]
-      (if (= (count cols) 1) 
+      (if (= (count cols) 1)
         (mapcat identity result)
-        (with-meta (hash-map :column-names cols 
-                             :rows (map #(apply assoc {} (interleave cols %)) result)) 
+        (with-meta (hash-map :column-names cols
+                             :rows (map #(apply assoc {} (interleave cols %)) result))
                    {:type ::dataset})))))
 
 
@@ -1162,7 +1162,7 @@
    (let [opts (when args (apply assoc {} args))
          data (:data opts)
          ordered? (if (false? (:ordered? opts)) true false)
-         labels (or (:labels opts) 
+         labels (or (:labels opts)
                     (if (nil? data)
                       (:levels opts)
                       (sort (into #{} data))))
@@ -1174,7 +1174,7 @@
      :to-levels (apply assoc {} (interleave labels levels))})))
 
 
-(defn to-levels 
+(defn to-levels
 "
 "
   ([coll & options]
@@ -1184,10 +1184,10 @@
       (for [label coll] (to-levels label)))))
 
 
-(defn to-labels 
+(defn to-labels
 "
 "
-  ([coll cat-var] 
+  ([coll cat-var]
     (let [to-labels (:to-labels cat-var)]
       (for [level coll] (to-labels level)))))
 
@@ -1214,27 +1214,27 @@
 
 (defn- string-to-categorical [dataset column-key dummies?]
   (let [col (first (get-columns dataset [column-key]))]
-    (if (some string? col) 
+    (if (some string? col)
       (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn to-matrix 
+(defn to-matrix
 "  Converts a dataset into a matrix. Equivalent to R's as.matrix function
    for datasets.
 
   Options:
-    :dummies (default false) -- if true converts non-numeric variables into sets 
+    :dummies (default false) -- if true converts non-numeric variables into sets
                                 of binary dummy variables, otherwise converts
                                 them into numeric codes.
 "
   ([dataset & options]
     (let [opts (when options (apply assoc {} options))
           dummies? (if (true? (:dummies opts)) true false)]
-      (reduce bind-columns 
-              (map #(string-to-categorical dataset % dummies?) 
+      (reduce bind-columns
+              (map #(string-to-categorical dataset % dummies?)
                     (range (count (keys (:column-names dataset)))))))))
 
 
@@ -1248,7 +1248,7 @@
 ;; GAMMA BASED FUNCTIONS FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn gamma 
+(defn gamma
 "
   Equivalent to R's gamma function.
 
@@ -1258,7 +1258,7 @@
   ([x]  (Gamma/gamma x)))
 
 
-(defn beta 
+(defn beta
 "
   Equivalent to R's beta function.
 
@@ -1268,7 +1268,7 @@
   ([a b]  (Gamma/beta a b)))
 
 
-(defn incomplete-beta 
+(defn incomplete-beta
 "
   Returns the non-regularized incomplete beta value.
 
@@ -1280,7 +1280,7 @@
 
 
 
-(defn regularized-beta 
+(defn regularized-beta
 "
   Returns the regularized incomplete beta value. Equivalent to R's pbeta function.
 
@@ -1289,17 +1289,17 @@
     http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
     http://mathworld.wolfram.com/RegularizedBetaFunction.html
 "
-  ([x a b] 
+  ([x a b]
     (Gamma/incompleteBeta a b x)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SYMMETRIC MATRIX 
+;; SYMMETRIC MATRIX
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn solve-quadratic
-" 
+"
   Returns a vector with the solution to x from the quadratic
   equation, a*x^2 + b*x + c.
 
@@ -1316,7 +1316,7 @@
     http://en.wikipedia.org/wiki/Quadratic_formula
 
 "
-  ([a b c] 
+  ([a b c]
    (let [t1 (- 0 b)
          t2 (sqrt (- (* b b) (* 4 a c)))
          t3 (* 2 a)]
@@ -1335,15 +1335,15 @@
     :lower (default true) -- lower-triangular. Set :lower to false to reverse the half-vectorize function.
 
   Examples:
-    
+
     (use 'incanter.core)
     (symmetric-matrix [1
                        2 3
                        4 5 6
                        7 8 9 10])
-   
 
-    (half-vectorize 
+
+    (half-vectorize
       (symmetric-matrix [1
                          2 3
                          4 5 6
@@ -1364,18 +1364,18 @@
       (let [[i j] (nth indices idx)]
         (.set mat i j (nth data idx))
         (.set mat j i (nth data idx))))
-     mat))) 
+     mat)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VIEW METHODS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defmulti view 
-  " This is a general 'view' function. When given an Incanter matrix/dataset 
-    or a Clojure numeric collection, it will display it in a Java Swing 
-    JTable. When given an Incanter chart object, it will display it in a new 
-    window. When given a URL string, it will open the location with the 
+(defmulti view
+  " This is a general 'view' function. When given an Incanter matrix/dataset
+    or a Clojure numeric collection, it will display it in a Java Swing
+    JTable. When given an Incanter chart object, it will display it in a new
+    window. When given a URL string, it will open the location with the
     platform's default web browser.
 
     Examples:
@@ -1411,8 +1411,8 @@
 
 
 "
-  (fn [obj & options] (cond 
-                        (and (not (matrix? obj)) 
+  (fn [obj & options] (cond
+                        (and (not (matrix? obj))
                              (not (dataset? obj))
                              (coll? obj))
                           ::coll
@@ -1426,16 +1426,16 @@
 
 
 (defmethod view incanter.Matrix
-  ([obj & options] 
+  ([obj & options]
     (let [opts (when options (apply assoc {} options))
           column-names (or (:column-names opts) (range (ncol obj)))
           m (ncol obj)
           n (nrow obj)]
       (doto (JFrame. "Incanter Matrix")
-        (.add (JScrollPane. 
-                (JTable. 
+        (.add (JScrollPane.
+                (JTable.
                   (cond
-                    (and (> m 1) (> n 1)) 
+                    (and (> m 1) (> n 1))
                       (Vector. (map #(Vector. %) (to-list obj)))
                     (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
                       (Vector. (map #(Vector. %) [(to-list obj) []]))
@@ -1447,11 +1447,11 @@
 
 
 (defmethod view :incanter.core/dataset
-  ([obj & options] 
+  ([obj & options]
    (let [column-names (:column-names obj)
          column-vals (map (fn [row] (map #(row %) column-names)) (:rows obj))]
      (doto (JFrame. "Incanter Dataset")
-       (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals)) 
+       (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals))
                                     (Vector. column-names))))
        (.setSize 400 600)
        (.setVisible true)))))
@@ -1459,26 +1459,26 @@
 
 
 
-;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser 
+;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
 (defmethod view java.lang.String
   ([url]
-    (try 
+    (try
       (when (clojure.lang.Reflector/invokeStaticMethod "java.awt.Desktop" "isDesktopSupported" (to-array nil))
         (-> (clojure.lang.Reflector/invokeStaticMethod "java.awt.Desktop" "getDesktop" (to-array nil))
             (.browse (java.net.URI. url)))
         url)
-      (catch ClassNotFoundException e nil))))    
+      (catch ClassNotFoundException e nil))))
 
 
 
 (defn quit
-" Exits the Clojure shell." 
+" Exits the Clojure shell."
   ([] (System/exit 0)))
 
 
 
-(defmulti save 
-" Save is a multi-function that is used to write matrices, datasets and 
+(defmulti save
+" Save is a multi-function that is used to write matrices, datasets and
   charts (in png format) to a file.
 
   Arguments:
@@ -1486,11 +1486,11 @@
     filename -- the filename to create.
 
   Matrix and dataset options:
-    :delim (default \\,) column delimiter 
+    :delim (default \\,) column delimiter
     :header (default nil) an sequence of strings to be used as header line,
         for matrices the default value is nil, for datasets, the default is
         the dataset's column-names array.
-    :append (default false) determines whether this given file should be 
+    :append (default false) determines whether this given file should be
         appended to. If true, a header will not be written to the file again.
 
   Chart options:
@@ -1504,9 +1504,9 @@
     (def A (matrix (range 12) 3)) ; creates a 3x4 matrix
     (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited
     (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited
-   
+
     ;; writes A to the file A.dat, with a header and tab delimited
-    (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"]) 
+    (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])
 
 
   Dataset Example:
@@ -1521,13 +1521,10 @@
 
     (use '(incanter core io stats charts))
     (save (histogram (sample-normal 1000)) \"hist.png\")
-  
+
 
 "
-  (fn [obj filename & options] 
+  (fn [obj filename & options]
     (if (.isInstance processing.core.PApplet obj)
       :sketch
       (type obj))))
-
-
-

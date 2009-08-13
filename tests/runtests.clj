@@ -1,7 +1,7 @@
 #!/usr/bin/env bin/clj
 
 
-;;; test-incanter.clj -- Unit tests of Incanter functions 
+;;; test-incanter.clj -- Unit tests of Incanter functions
 
 ;; by David Edgar Liebke http://incanter.org
 ;; March 12, 2009
@@ -19,7 +19,7 @@
 
 
 (ns tests.runtests
-  (:use [clojure.test :only (run-tests)] 
+  (:use [clojure.test :only (run-tests)]
         (tests test-cases)
         (incanter core io stats charts bayes)))
 

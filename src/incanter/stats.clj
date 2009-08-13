@@ -16,7 +16,7 @@
 
 
 
-(ns incanter.stats 
+(ns incanter.stats
   (:import (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
                                     Exponential NegativeBinomial Normal Poisson
@@ -24,7 +24,7 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability))
-  (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns 
+  (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length sum sum-of-squares sel matrix?
@@ -33,7 +33,7 @@
 
 
 
-(defn indicator 
+(defn indicator
 "
   Returns a sequence of ones and zeros, where ones
   are returned when the given predicate is true for
@@ -42,7 +42,7 @@
 
   Examples:
     (use 'incanter.stats)
-    
+
     (indicator #(neg? %) (sample-normal 10))
 
     ;; return the sum of the positive values in a normal sample
@@ -50,40 +50,40 @@
     (sum (mult x (indicator #(pos? %) x)))
 
 "
-  ([pred coll] 
+  ([pred coll]
     (for [el coll] (if (pred el) 1 0))))
 
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CONTINOUS DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; F DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-  
+
 (defn pdf-f
-" Returns the F pdf of the given value, x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's df function. 
+" Returns the F pdf of the given value, x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's df function.
 
-  Options: 
-    :df1 (default 1) 
+  Options:
+    :df1 (default 1)
     :df2 (default 1)
 
-  See also: 
+  See also:
       cdf-f and quantile-f
 
-  References: 
+  References:
       http://en.wikipedia.org/wiki/F_distribution
       http://mathworld.wolfram.com/F-Distribution.html
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-f 1.0 :df1 5 :df2 2)
 "
   ([x & options]
@@ -91,7 +91,7 @@
           df1 (or (:df1 opts) 0)
           df2 (or (:df2 opts) 1)
           pdf-fx (fn [x]
-                   (* (/ (gamma (/ (+ df1 df2) 2)) 
+                   (* (/ (gamma (/ (+ df1 df2) 2))
                          (* (gamma (/ df1 2)) (gamma (/ df2 2))))
                        (pow (/ df1 df2) (/ df1 2))
                        (pow x (- (/ df1 2) 1))
@@ -104,23 +104,23 @@
 
 
 
-(defn cdf-f 
-" Returns the F-distribution cdf of the given value, x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's pf function. 
+(defn cdf-f
+" Returns the F-distribution cdf of the given value, x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's pf function.
 
-  Options: 
-    :df1 (default 1) 
+  Options:
+    :df1 (default 1)
     :df2 (default 1)
 
-  See also: 
+  See also:
       pdf-f and quantile-f
 
-  References: 
+  References:
       http://en.wikipedia.org/wiki/F_distribution
       http://mathworld.wolfram.com/F-Distribution.html
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-f 1.0 :df1 5 :df2 2)
 "
   ([x & options]
@@ -129,11 +129,11 @@
           df1 (or (:df1 opts) 1)
           df2 (or (:df2 opts) 1)
           cdf-fx (if lower-tail?
-                   (fn [x1] (regularized-beta 
+                   (fn [x1] (regularized-beta
                               (/ (* df1 x1) (+ df2 (* df1 x1)))
                               (/ df1 2)
                               (/ df2 2)))
-                   (fn [x1] (- 1 (regularized-beta 
+                   (fn [x1] (- 1 (regularized-beta
                                    (/ (* df1 x1) (+ df2 (* df1 x1)))
                                    (/ df1 2)
                                    (/ df2 2)))))
@@ -144,27 +144,27 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NORMAL DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-normal
-" Returns the Normal pdf of the given value, x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's dnorm function. 
+" Returns the Normal pdf of the given value, x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's dnorm function.
 
-  Options: 
-    :mean (default 0) 
+  Options:
+    :mean (default 0)
     :sd (default 1)
 
-  See also: 
+  See also:
       cdf-normal, quantile-normal, sample-normal
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
   ([x & options]
@@ -179,55 +179,55 @@
 
 
 (defn cdf-normal
-" Returns the Normal cdf of the given value, x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's pnorm function. 
+" Returns the Normal cdf of the given value, x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's pnorm function.
 
-  Options: 
-    :mean (default 0) 
+  Options:
+    :mean (default 0)
     :sd (default 1)
 
-  See also: 
+  See also:
       pdf-normal, quantile-normal, sample-normal
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
           mean (or (:mean opts) 0)
           sd (or (:sd opts) 1)
-          dist (Normal. mean sd (DoubleMersenneTwister.))] 
+          dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
 
 
-(defn quantile-normal 
-" Returns the inverse of the Normal CDF for the given probability. 
-  It will return a sequence of values, if given a sequence of 
+(defn quantile-normal
+" Returns the inverse of the Normal CDF for the given probability.
+  It will return a sequence of values, if given a sequence of
   probabilities. This is equivalent to R's qnorm function.
 
-  Options: 
-    :mean (default 0) 
+  Options:
+    :mean (default 0)
     :sd (default 1)
 
-  Returns: 
+  Returns:
     a value x, where (cdf-normal x) = probability
 
-  See also: 
+  See also:
       pdf-normal, cdf-normal, and sample-normal
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html
       http://en.wikipedia.org/wiki/Normal_distribution
       http://en.wikipedia.org/wiki/Quantile
 
-  Example: 
+  Example:
       (quantile-normal 0.975)
       (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))
 "
@@ -235,7 +235,7 @@
     (let [opts (when options (apply assoc {} options))
           mean (or (:mean opts) 0)
           sd (or (:sd opts) 1)
-          x (if (coll? probability) 
+          x (if (coll? probability)
               (map #(Probability/normalInverse %) probability)
               (Probability/normalInverse probability))]
       (plus mean (mult sd x)))))
@@ -244,20 +244,20 @@
 
 (defn sample-normal
 " Returns a sample of the given size from a Normal distribution
-  This is equivalent to R's rnorm function. 
+  This is equivalent to R's rnorm function.
 
-  Options: 
-    :mean (default 0) 
+  Options:
+    :mean (default 0)
     :sd (default 1)
 
-  See also: 
+  See also:
       pdf-normal, cdf-normal, quantile-normal
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
       http://en.wikipedia.org/wiki/Normal_distribution
 
-  Example: 
+  Example:
       (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
 "
   ([size & options]
@@ -274,15 +274,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn sample-mvn 
-" Returns a sample of the given size from a Multivariate Normal 
-  distribution. This is equivalent to R's mvtnorm::rmvnorm function. 
+(defn sample-mvn
+" Returns a sample of the given size from a Multivariate Normal
+  distribution. This is equivalent to R's mvtnorm::rmvnorm function.
 
   Arguments:
     size -- the size of the sample to return
 
-  Options: 
-    :mean (default (repeat (ncol sigma) 0)) 
+  Options:
+    :mean (default (repeat (ncol sigma) 0))
     :sigma (default (identity-matrix (count mean)))
 
 
@@ -312,17 +312,17 @@
 "
   ([size & options]
    (let [opts (when options (apply assoc {} options))
-         mean (or (:mean opts) 
-                  (if (:sigma opts) 
+         mean (or (:mean opts)
+                  (if (:sigma opts)
                     (repeat (ncol (:sigma opts)) 0)
                     [0]))
-         sigma (or (:sigma opts) 
+         sigma (or (:sigma opts)
                    (identity-matrix (count mean)))
          p (count mean)
          chol (decomp-cholesky sigma)
          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
         ]
-     (if (> (nrow norm-samp) 1) 
+     (if (> (nrow norm-samp) 1)
        (matrix (map #(plus % (trans mean)) norm-samp))
        (matrix (plus norm-samp (trans mean)))))))
 
@@ -334,23 +334,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn pdf-uniform 
-" Returns the Uniform pdf of the given value of x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's dunif function. 
+(defn pdf-uniform
+" Returns the Uniform pdf of the given value of x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's dunif function.
 
-  Options: 
-    :min (default 0) 
+  Options:
+    :min (default 0)
     :max (default 1)
 
-  See also: 
+  See also:
       cdf-uniform and sample-uniform
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
       http://en.wikipedia.org/wiki/Uniform_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-uniform 5)
       (pdf-uniform 5 :min 1 :max 10)
 "
@@ -364,23 +364,23 @@
         (.pdf dist x)))))
 
 
-(defn cdf-uniform 
-" Returns the Uniform cdf of the given value of x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's punif function. 
+(defn cdf-uniform
+" Returns the Uniform cdf of the given value of x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's punif function.
 
-  Options: 
-    :min (default 0) 
+  Options:
+    :min (default 0)
     :max (default 1)
 
-  See also: 
+  See also:
       pdf-uniform and sample-uniform
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
       http://en.wikipedia.org/wiki/Uniform_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-uniform 5)
       (cdf-uniform 5 :min 1 :max 10)
 "
@@ -394,23 +394,23 @@
         (.cdf dist x)))))
 
 
-(defn sample-uniform 
+(defn sample-uniform
 " Returns a sample of the given size from a Uniform distribution.
-  This is equivalent to R's runif function. 
+  This is equivalent to R's runif function.
 
-  Options: 
-    :min (default 0) 
+  Options:
+    :min (default 0)
     :max (default 1)
     :integers (default false)
 
-  See also: 
+  See also:
       pdf-uniform and cdf-uniform
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
       http://en.wikipedia.org/wiki/Uniform_distribution
 
-  Example: 
+  Example:
       (sample-uniform 1000)
       (sample-uniform 1000 :min 1 :max 10)
 "
@@ -421,35 +421,35 @@
           ints? (if (true? (:integers opts)) true false)
           dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
       (if (= size 1)
-        (if ints? 
+        (if ints?
           (DoubleUniform/staticNextIntFromTo min-val max-val)
           (DoubleUniform/staticNextDoubleFromTo min-val max-val))
-        (if ints? 
+        (if ints?
           (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
           (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val)))))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BETA DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-beta
-" Returns the Beta pdf of the given value of x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's dbeta function. 
+" Returns the Beta pdf of the given value of x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's dbeta function.
 
-  Options: 
-    :alpha (default 1) 
+  Options:
+    :alpha (default 1)
     :beta (default 1)
 
-  See also: 
+  See also:
       cdf-beta and sample-beta
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
       http://en.wikipedia.org/wiki/Beta_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-beta 0.5 :alpha 1 :beta 2)
 "
   ([x & options]
@@ -463,23 +463,23 @@
 
 
 (defn cdf-beta
-" Returns the Beta cdf of the given value of x. It will return a sequence 
-  of values, if x is a sequence. This is equivalent to R's pbeta function. 
+" Returns the Beta cdf of the given value of x. It will return a sequence
+  of values, if x is a sequence. This is equivalent to R's pbeta function.
 
-  Options: 
-    :alpha (default 1) 
+  Options:
+    :alpha (default 1)
     :beta (default 1)
     :lower-tail (default true)
 
-  See also: 
+  See also:
       pdf-beta and sample-beta
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
       http://en.wikipedia.org/wiki/Beta_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-beta 0.5 :alpha 1 :beta 2)
       (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)
 "
@@ -503,19 +503,19 @@
 " Returns a sample of the given size from a Beta distribution.
   This is equivalent to R's rbeta function.
 
-  Options: 
-    :alpha (default 1) 
+  Options:
+    :alpha (default 1)
     :beta (default 1)
     These default values produce a Uniform distribution.
 
-  See also: 
+  See also:
       pdf-beta and cdf-beta
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
       http://en.wikipedia.org/wiki/Beta_distribution
 
-  Example: 
+  Example:
       (sample-beta 1000 :alpha 1 :beta 2)
 "
   ([size & options]
@@ -527,31 +527,31 @@
         (for [_ (range size)] (Beta/staticNextDouble alpha beta))))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GAMMA DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-gamma
-" Returns the Gamma pdf for the given value of x. It will return a sequence 
+" Returns the Gamma pdf for the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's dgamma function.
 
-  Options: 
-    :shape (default 1) 
+  Options:
+    :shape (default 1)
     :rate (default 1)
 
-  See also: 
+  See also:
       cdf-gamma and sample-gamma
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
       http://en.wikipedia.org/wiki/Gamma_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-gamma 10 :shape 1 :rate 2)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           shape (or (:shape opts) 1)
           rate (or (:rate opts) 1)
           dist (Gamma. shape rate (DoubleMersenneTwister.))]
@@ -562,31 +562,31 @@
 
 
 (defn cdf-gamma
-" Returns the Gamma cdf for the given value of x. It will return a sequence 
+" Returns the Gamma cdf for the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's pgamma function.
 
-  Options: 
-    :shape (default 1) 
+  Options:
+    :shape (default 1)
     :rate (default 1)
     :lower-tail (default true)
 
-  See also: 
+  See also:
       pdf-gamma and sample-gamma
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
       http://en.wikipedia.org/wiki/Gamma_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-gamma 10 :shape 1 :rate 2)
       (cdf-gamma 3 :shape 1 :lower-tail false)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           shape (or (:shape opts) 1)
           rate (or (:rate opts) 1)
-          lower-tail? (if (false? (:lower-tail opts)) false true) 
+          lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
                   (fn [x1] (Probability/gamma rate shape x1))
                   (fn [x1] (Probability/gammaComplemented rate shape x1)))]
@@ -600,22 +600,22 @@
 " Returns a sample of the given size from a Gamma distribution.
   This is equivalent to R's rgamma function.
 
-  Options: 
-    :shape (default 1) 
+  Options:
+    :shape (default 1)
     :rate (default 1)
 
-  See also: 
+  See also:
       pdf-gamma, cdf-gamma, and quantile-gamma
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
       http://en.wikipedia.org/wiki/Gamma_distribution
 
-  Example: 
+  Example:
       (sample-gamma 1000 :shape 1 :rate 2)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           shape (or (:shape opts) 1)
           rate (or (:rate opts) 1)]
       (if (= size 1)
@@ -625,30 +625,30 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CHI SQUARE DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-chisq
-" Returns the Chi Square pdf of the given value of x.  It will return a sequence 
+" Returns the Chi Square pdf of the given value of x.  It will return a sequence
   of values, if x is a sequence. Same as R's dchisq function.
 
-  Options: 
-    :df (default 1) 
+  Options:
+    :df (default 1)
 
-  See also: 
+  See also:
       cdf-chisq and sample-chisq
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
       http://en.wikipedia.org/wiki/Chi_square_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-chisq 5.0 :df 2)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)
           dist (ChiSquare. df (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -658,27 +658,27 @@
 
 
 (defn cdf-chisq
-" Returns the Chi Square cdf of the given value of x. It will return a sequence 
+" Returns the Chi Square cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pchisq function.
 
-  Options: 
-    :df (default 1) 
-    :lower-tail (default true) 
+  Options:
+    :df (default 1)
+    :lower-tail (default true)
 
-  See also: 
+  See also:
       pdf-chisq and sample-chisq
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
       http://en.wikipedia.org/wiki/Chi_square_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-chisq 5.0 :df 2)
       (cdf-chisq 5.0 :df 2 :lower-tail false)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
@@ -694,21 +694,21 @@
 " Returns a sample of the given size from a Chi Square distribution
   Same as R's rchisq function.
 
-  Options: 
-    :df (default 1) 
+  Options:
+    :df (default 1)
 
-  See also: 
+  See also:
       pdf-chisq and cdf-chisq
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
       http://en.wikipedia.org/wiki/Chi_square_distribution
 
-  Example: 
+  Example:
       (sample-chisq 1000 :df 2)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)]
       (if (= size 1)
         (ChiSquare/staticNextDouble df)
@@ -716,30 +716,30 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; STUDENT'S T DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-t
-" Returns the Student's t pdf for the given value of x. It will return a sequence 
+" Returns the Student's t pdf for the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dt function.
 
-  Options: 
-    :df (default 1) 
+  Options:
+    :df (default 1)
 
-  See also: 
+  See also:
       cdf-t, quantile-t, and sample-t
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
       http://en.wikipedia.org/wiki/Student-t_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-t 1.2 :df 10)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)
           dist (StudentT. df (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -748,25 +748,25 @@
 
 
 (defn cdf-t
-" Returns the Student's t cdf for the given value of x. It will return a sequence 
+" Returns the Student's t cdf for the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pt function.
 
-  Options: 
-    :df (default 1) 
+  Options:
+    :df (default 1)
 
-  See also: 
+  See also:
       pdf-t, quantile-t, and sample-t
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
       http://en.wikipedia.org/wiki/Student-t_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-t 1.2 :df 10)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
@@ -777,26 +777,26 @@
         (cdf-fx x)))))
 
 
-(defn quantile-t 
+(defn quantile-t
 " Returns the inverse of the Student's t CDF for the given probability
-  (i.e. the quantile).  It will return a sequence of values, if x is 
+  (i.e. the quantile).  It will return a sequence of values, if x is
   a sequence of probabilities. This is equivalent to R's qt function.
 
-  Options: 
-    :df (default 1) 
+  Options:
+    :df (default 1)
 
-  Returns: 
+  Returns:
     a value x, where (cdf-t x) = probability
 
-  See also: 
-     pdf-t, cdf-t, and sample-t 
+  See also:
+     pdf-t, cdf-t, and sample-t
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html
       http://en.wikipedia.org/wiki/Student-t_distribution
       http://en.wikipedia.org/wiki/Quantile
 
-  Example: 
+  Example:
       (quantile-t 0.975)
       (quantile-t [0.025 0.975] :df 25)
       (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])
@@ -806,11 +806,11 @@
     (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)
           to-alpha (fn [prob] ;; need to convert the probability to an alpha value
-                     (if (< prob 1/2) 
+                     (if (< prob 1/2)
                       (* 2 prob)
                       (* 2 (- 1 prob))))
           sign-fx (fn [x1 prob] (if (< prob 1/2) (* -1 x1) x1))
-          x (if (coll? probability) 
+          x (if (coll? probability)
               (map #(sign-fx (Probability/studentTInverse (to-alpha %) df) %) probability)
               (sign-fx (Probability/studentTInverse (to-alpha probability) df) probability))]
         x)))
@@ -821,21 +821,21 @@
 " Returns a sample of the given size from a Student's t distribution.
   Same as R's rt function.
 
-  Options: 
-    :df (default 1) 
+  Options:
+    :df (default 1)
 
-  See also: 
+  See also:
       pdf-t, cdf-t, and quantile-t
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
       http://en.wikipedia.org/wiki/Student-t_distribution
 
-  Example: 
+  Example:
       (cdf-t 1000 :df 10)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)]
       (if (= size 1)
         (StudentT/staticNextDouble df)
@@ -845,30 +845,30 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EXPONENTIAL DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-exp
-" Returns the Exponential pdf of the given value of x. It will return a sequence 
+" Returns the Exponential pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dexp
 
-  Options: 
-    :rate (default 1) 
+  Options:
+    :rate (default 1)
 
-  See also: 
+  See also:
       cdf-exp and sample-exp
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
       http://en.wikipedia.org/wiki/Exponential_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-exp 2.0 :rate 1/2)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           rate (or (:rate opts) 1)
           dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -877,25 +877,25 @@
 
 
 (defn cdf-exp
-" Returns the Exponential cdf of the given value of x. It will return a sequence 
+" Returns the Exponential cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pexp
 
-  Options: 
-    :rate (default 1) 
+  Options:
+    :rate (default 1)
 
-  See also: 
+  See also:
       pdf-exp and sample-exp
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
       http://en.wikipedia.org/wiki/Exponential_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-exp 2.0 :rate 1/2)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           rate (or (:rate opts) 1)
           dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -907,21 +907,21 @@
 " Returns a sample of the given size from a Exponential distribution.
   Same as R's rexp
 
-  Options: 
-    :rate (default 1) 
+  Options:
+    :rate (default 1)
 
-  See also: 
+  See also:
       pdf-exp, and cdf-exp
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
       http://en.wikipedia.org/wiki/Exponential_distribution
 
-  Example: 
+  Example:
       (sample-exp 1000 :rate 1/2)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           rate (or (:rate opts) 1)]
       (if (= size 1)
         (Exponential/staticNextDouble rate)
@@ -930,9 +930,9 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; WISHART DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn sample-wishart
@@ -961,7 +961,7 @@
           scale (or (:scale opts) (when (:p opts) (identity-matrix (:p opts))))
           p (count scale)
           df (or (:df opts) p)
-          diagonal (for [i (range 1 (inc p))] 
+          diagonal (for [i (range 1 (inc p))]
                      (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
           mat (diag diagonal)
           indices (for [i (range p) j (range p) :when (< j i)] [i j])
@@ -1015,7 +1015,7 @@
     ;; the counts y1, y2, and y3 are assumed to have a multinomial distribution
     ;; If a uniform prior distribution is assigned to the multinomial vector
     ;; theta = (th1, th2, th3), then the posterior distribution of theta is
-    ;; proportional to g(theta) = th1^y1 * th2^y2 * th3^y3, which is a 
+    ;; proportional to g(theta) = th1^y1 * th2^y2 * th3^y3, which is a
     ;; dirichlet distribution with parameters (y1+1, y2+1, y3+1)
     (def  theta (sample-dirichlet 1000 [(inc 727) (inc 583) (inc 137)]))
     ;; view means, 95% CI, and histograms of the proportion parameters
@@ -1041,40 +1041,40 @@
       (matrix (map #(div %1 %2) W T)))))
 
 
-          
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DISCRETE DISTRIBUTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BINOMIAL DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-binomial
-" Returns the Bionomial pdf of the given value of x. It will return a sequence 
+" Returns the Bionomial pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dbinom
 
-  Options: 
-    :size (default 1) 
+  Options:
+    :size (default 1)
     :prob (default 1/2)
 
-  See also: 
+  See also:
       cdf-binomial and sample-binomial
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
       http://en.wikipedia.org/wiki/Binomial_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-binomial 10 :prob 1/4 :size 20)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           n (or (:size opts) 1)
           p (or (:prob opts) 1/2)
           dist (Binomial. n p (DoubleMersenneTwister.))]
@@ -1085,27 +1085,27 @@
 
 
 (defn cdf-binomial
-" Returns the Bionomial cdf of the given value of x. It will return a sequence 
+" Returns the Bionomial cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pbinom
 
-  Options: 
-    :size (default 1) 
+  Options:
+    :size (default 1)
     :prob (default 1/2)
     :lower-tail (default true)
 
-  See also: 
+  See also:
       pdf-binomial and sample-binomial
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
       http://en.wikipedia.org/wiki/Binomial_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-binomial 10 :prob 1/4 :size 20)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           n (or (:size opts) 1)
           p (or (:prob opts) 1/2)
           lower-tail? (if (false? (:lower-tail opts)) false true)
@@ -1122,22 +1122,22 @@
 " Returns a sample of the given size from a Binomial distribution.
   Same as R's rbinom
 
-  Options: 
-    :size (default 1) 
+  Options:
+    :size (default 1)
     :prob (default 1/2)
 
-  See also: 
+  See also:
       cdf-binomial and sample-binomial
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
       http://en.wikipedia.org/wiki/Binomial_distribution
 
-  Example: 
+  Example:
       (sample-binomial 1000 :prob 1/4 :size 20)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           n (or (:size opts) 1)
           p (or (:prob opts) 1/2)]
       (if (= size 1)
@@ -1146,30 +1146,30 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; POISSON DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-poisson
-" Returns the Poisson pdf of the given value of x. It will return a sequence 
+" Returns the Poisson pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dpois
 
-  Options: 
-    :lambda (default 1) 
+  Options:
+    :lambda (default 1)
 
-  See also: 
+  See also:
       cdf-poisson and sample-poisson
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
       http://en.wikipedia.org/wiki/Poisson_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-poisson 5 :lambda 10)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           lambda (or (:lambda opts) 1)
           dist (Poisson. lambda (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -1179,26 +1179,26 @@
 
 
 (defn cdf-poisson
-" Returns the Poisson cdf of the given value of x. It will return a sequence 
+" Returns the Poisson cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's ppois
 
-  Options: 
-    :lambda (default 1) 
+  Options:
+    :lambda (default 1)
     :lower-tail (default true)
 
-  See also: 
+  See also:
       cdf-poisson and sample-poisson
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
       http://en.wikipedia.org/wiki/Poisson_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-poisson 5 :lambda 10)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           lambda (or (:lambda opts) 1)
           lower-tail? (if (false? (:lower-tail opts)) false true)
           cdf-fx (if lower-tail?
@@ -1214,21 +1214,21 @@
 " Returns a sample of the given size from a Poisson distribution.
   Same as R's rpois
 
-  Options: 
-    :lambda (default 1) 
+  Options:
+    :lambda (default 1)
 
-  See also: 
+  See also:
       pdf-poisson and cdf-poisson
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
       http://en.wikipedia.org/wiki/Poisson_distribution
 
-  Example: 
+  Example:
       (sample-poisson 1000 :lambda 10)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           lambda (or (:lambda opts) 1)]
      (if (= size 1)
         (Poisson/staticNextInt lambda)
@@ -1236,31 +1236,31 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NEGATIVE BINOMIAL DISTRIBUTION FUNCTIONS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-neg-binomial
-" Returns the Negative Binomial pdf of the given value of x. It will return a sequence 
+" Returns the Negative Binomial pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dnbinom
 
-  Options: 
-    :size (default 10) 
+  Options:
+    :size (default 10)
     :prob (default 1/2)
 
-  See also: 
+  See also:
       cdf-neg-binomial and sample-neg-binomial
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
       http://en.wikipedia.org/wiki/Probability_density_function
 
-  Example: 
+  Example:
       (pdf-neg-binomial 10 :prob 1/2 :size 20)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           size (or (:size opts) 10)
           prob (or (:prob opts) 1/2)
           dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
@@ -1272,26 +1272,26 @@
 
 
 (defn cdf-neg-binomial
-" Returns the Negative Binomial cdf of the given value of x. It will return a sequence 
+" Returns the Negative Binomial cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dnbinom
 
-  Options: 
-    :size (default 10) 
+  Options:
+    :size (default 10)
     :prob (default 1/2)
 
-  See also: 
+  See also:
       cdf-neg-binomial and sample-neg-binomial
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
-  Example: 
+  Example:
       (cdf-neg-binomial 10 :prob 1/2 :size 20)
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           size (or (:size opts) 10)
           prob (or (:prob opts) 1/2)
           lower-tail? (if (false? (:lower-tail opts)) false true)
@@ -1308,22 +1308,22 @@
 " Returns a sample of the given size from a Negative Binomial distribution.
   Same as R's rnbinom
 
-  Options: 
-    :size (default 10) 
+  Options:
+    :size (default 10)
     :prob (default 1/2)
 
-  See also: 
+  See also:
       pdf-neg-binomial and cdf-neg-binomial
 
-  References: 
+  References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
 
-  Example: 
+  Example:
       (sample-neg-binomial 1000 :prob 1/2 :size 20)
 "
   ([size & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           size (or (:size opts) 10)
           prob (or (:prob opts) 1/2)]
      (if (= size 1)
@@ -1336,13 +1336,13 @@
 ;; EMPIRICAL DISTRIBUTION
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn cdf-empirical 
+(defn cdf-empirical
 " Returns a step-function representing the empirical cdf of the given data.
   Equivalent to R's ecdf function.
 
-  The following description is from the ecdf help in R: The e.c.d.f. 
-  (empirical cumulative distribution function) Fn is a step function 
-  with jumps i/n at observation values, where i is the number of tied 
+  The following description is from the ecdf help in R: The e.c.d.f.
+  (empirical cumulative distribution function) Fn is a step function
+  with jumps i/n at observation values, where i is the number of tied
   observations at that value.  Missing values are ignored.
 
   For observations 'x'= (x1,x2, ... xn), Fn is the fraction of
@@ -1354,8 +1354,8 @@
   Examples:
     (use '(incanter core stats charts))
 
-    (def exam1 [192 160 183 136 162 165 181 188 150 163 192 164 184 
-                189 183 181 188 191 190 184 171 177 125 192 149 188 
+    (def exam1 [192 160 183 136 162 165 181 188 150 163 192 164 184
+                189 183 181 188 191 190 184 171 177 125 192 149 188
                 154 151 159 141 171 153 169 168 168 157 160 190 166 150])
 
     ;; the ecdf function returns an empirical cdf function for the given data
@@ -1365,7 +1365,7 @@
     (view (scatter-plot exam1 (map ecdf exam1)))
 
 
-    
+
 "
   ([x] (fn [t] (div (sum (indicator #(<= % t) x)) (count x)))))
 
@@ -1378,7 +1378,7 @@
 
 (defn mean
 "
-  Returns the mean of the data, x. 
+  Returns the mean of the data, x.
 
   Examples:
     (mean (sample-normal 100))
@@ -1387,14 +1387,14 @@
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Mean
 
-" 
+"
 ([x]
   (let [xx (to-list x)]
     (DoubleDescriptive/mean (DoubleArrayList. (double-array xx))))))
 
 
 
-(defn variance 
+(defn variance
 "
   Returns the sample variance of the data, x. Equivalent to R's var function.
 
@@ -1410,9 +1410,9 @@
 
 
 
-(defn covariance 
+(defn covariance
 "
-  Returns the sample covariance of x and y. 
+  Returns the sample covariance of x and y.
 
   Examples:
     ;; create some data that covaries
@@ -1431,20 +1431,20 @@
           xx (to-list x)
           yy (to-list y)
         ]
-      (DoubleDescriptive/covariance 
+      (DoubleDescriptive/covariance
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
         (let [n (ncol mat)]
-          (matrix 
-            (for [i (range n) j (range n)] 
+          (matrix
+            (for [i (range n) j (range n)]
               (covariance (sel mat true i) (sel mat true j))) n))))
 
 
 
-(defn sd 
+(defn sd
 "
-  Returns the sample standard deviation of the data, x. Equivalent to 
+  Returns the sample standard deviation of the data, x. Equivalent to
   R's sd function.
 
   Examples:
@@ -1453,7 +1453,7 @@
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Standard_deviation
-" 
+"
   ([x]
     ;; population sd, not the sample sd
     ;(DoubleDescriptive/sampleStandardDeviation (length x) (variance x))))
@@ -1464,8 +1464,8 @@
 
 (defn correlation
 "
-  Returns the sample correlation of x and y, or the correlation 
-  matrix of the given matrix. 
+  Returns the sample correlation of x and y, or the correlation
+  matrix of the given matrix.
 
   Examples:
 
@@ -1478,18 +1478,18 @@
           xx (to-list x)
           yy (to-list y)
         ]
-      (DoubleDescriptive/correlation 
+      (DoubleDescriptive/correlation
         (DoubleArrayList. (double-array xx)) (sd x)
         (DoubleArrayList. (double-array yy)) (sd y))))
   ([mat]
-   (div (covariance mat) 
+   (div (covariance mat)
         (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
 
 
 
-(defn median 
+(defn median
 "
-  Returns the median of the data, x. 
+  Returns the median of the data, x.
 
   Examples:
     (median (sample-normal 100))
@@ -1498,18 +1498,18 @@
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Median
 
-" 
+"
   ([x]
     (let [xx (sort (to-list x))]
       (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
 
- 
 
-(defn kurtosis 
+
+(defn kurtosis
 "
-  Returns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\" 
-  of the probability distribution of a real-valued random variable. Higher kurtosis 
-  means more of the variance is due to infrequent extreme deviations, as opposed to 
+  Returns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\"
+  of the probability distribution of a real-valued random variable. Higher kurtosis
+  means more of the variance is due to infrequent extreme deviations, as opposed to
   frequent modestly-sized deviations.\" (Wikipedia)
 
   Examples:
@@ -1526,9 +1526,9 @@
 
 
 
-(defn skewness 
+(defn skewness
 "
-  Returns the skewness of the data, x. \"Skewness is a measure of the asymmetry 
+  Returns the skewness of the data, x. \"Skewness is a measure of the asymmetry
   of the probability distribution of a real-valued random variable.\" (Wikipedia)
 
   Examples:
@@ -1545,9 +1545,9 @@
 
 
 
-(defn quantile 
+(defn quantile
 "
-  Returns the quantiles of the data, x. By default it returns the min, 
+  Returns the quantiles of the data, x. By default it returns the min,
   25th-percentile, 50th-percentile, 75th-percentile, and max value.
 
   Options:
@@ -1564,10 +1564,10 @@
 
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           _x (if (matrix? x) (to-list x) x)
           data (DoubleArrayList. (double-array (sort _x)))
-          probs (cond 
+          probs (cond
                   (number? (:probs opts))
                     (:probs opts)
                   (coll? (:probs opts))
@@ -1580,8 +1580,8 @@
 
 
 
-(defn sample 
-" Returns a sample of the given size from the given collection. If replacement 
+(defn sample
+" Returns a sample of the given size from the given collection. If replacement
   is set to false it returns a set, otherwise it returns a list.
 
   Arguments:
@@ -1599,7 +1599,7 @@
 
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           size (or (:size opts) (count x))
           replacement? (if (false? (:replacement opts)) false true)
           max-idx (dec (count x))]
@@ -1629,32 +1629,32 @@
 
   Options:
     :size -- the number of bootstrap samples to return
-    :smooth -- (default false) smoothing option 
-    :smooth-sd -- (default (/ (sqrt (count data)))) determines the standard 
+    :smooth -- (default false) smoothing option
+    :smooth-sd -- (default (/ (sqrt (count data)))) determines the standard
                   deviation of the noise to use for smoothing
-    :replacement -- (default true) determines if sampling of the data 
+    :replacement -- (default true) determines if sampling of the data
                     should be done with replacement
 
 
   References:
     1. Clifford E. Lunneborg, Data Analysis by Resampling Concepts and Applications, 2000, pages 105-117
     2. http://en.wikipedia.org/wiki/Bootstrapping_(statistics)
-    
+
 
   Examples:
-    
+
     ;; example from Data Analysis by Resampling Concepts and Applications
     ;; Clifford E. Lunneborg (pages 119-122)
 
     (use '(incanter core stats charts))
 
     ;; weights (in grams) of 50 randomly sampled bags of preztels
-    (def weights [464 447 446 454 450 457 450 442 
-                  433 452 449 454 450 438 448 449 
-                  457 451 456 452 450 463 464 453 
-                  452 447 439 449 468 443 433 460 
-                  452 447 447 446 450 459 466 433 
-                  445 453 454 446 464 450 456 456 
+    (def weights [464 447 446 454 450 457 450 442
+                  433 452 449 454 450 438 448 449
+                  457 451 456 452 450 463 464 453
+                  452 447 439 449 468 443 433 460
+                  452 447 447 446 450 459 466 433
+                  445 453 454 446 464 450 456 456
                   447 469])
 
     ;; calculate the sample median, 450
@@ -1689,17 +1689,17 @@
     ;; Newcomb's speed of light data
 
     (use '(incanter core stats charts))
-    
+
     ;; A numeric vector giving the Third Series of measurements of the
     ;; passage time of light recorded by Newcomb in 1882. The given
     ;; values divided by 1000 plus 24 give the time in millionths of a
     ;; second for light to traverse a known distance. The 'true' value is
     ;; now considered to be 33.02.
 
-    (def speed-of-light [28 -44  29  30  24  28  37  32  36  27  26  28  29  
-                         26  27  22  23  20  25 25  36  23  31  32  24  27  
-                         33  16  24  29  36  21  28  26  27  27  32  25 28  
-                         24  40  21  31  32  28  26  30  27  26  24  32  29  
+    (def speed-of-light [28 -44  29  30  24  28  37  32  36  27  26  28  29
+                         26  27  22  23  20  25 25  36  23  31  32  24  27
+                         33  16  24  29  36  21  28  26  27  27  32  25 28
+                         24  40  21  31  32  28  26  30  27  26  24  32  29
                          34  -2  25  19  36 29  30  22  28  33  39  25  16  23])
 
     ;; view histogram of data to see outlier observations
@@ -1714,11 +1714,11 @@
     (view (histogram smooth-samp :density true :nbins 30))
     (mean smooth-samp)
     (quantile smooth-samp :probs [0.025 0.975])
-    
+
 
 "
   ([data statistic & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           size (:size opts)
           replacement (if (false? (:replacement opts)) false true)
           n (or (:n opts) (count data))
@@ -1742,13 +1742,13 @@
       (if smooth? (plus samp (sample-normal samp-size :sd smooth-sd)) samp))))
 
 
-        
 
 
 
 
-(defn cumulative-mean 
-  " Returns a sequence of cumulative means for the given collection. For instance 
+
+(defn cumulative-mean
+  " Returns a sequence of cumulative means for the given collection. For instance
     The first value equals the first value of the argument, the second value is
     the mean of the first two arguments, the third is the mean of the first three
     arguments, etc.
@@ -1773,29 +1773,29 @@
           :fun (defaul minus) the function used to sweep the stat out
 
     Example:
-    
+
       (use '(incanter core stats))
-  
+
       (def x (sample-normal 30 :mean 10 :sd 5))
       (sweep x) ;; center the data around mean
       (sweep x :stat sd :fun div) ;; divide data by its sd
 
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           stat-fn (or (:stat opts) mean)
           fun (or (:fun opts) minus)
           stat (stat-fn x)]
       (fun x stat))))
 
-    
+
 
 
 (defn permute
-" If provided a single argument, returns a permuted version of the 
+" If provided a single argument, returns a permuted version of the
   given collection. (perm x) is the same as (sample x).
 
-  If provided two arguments, returns two lists that are permutations 
+  If provided two arguments, returns two lists that are permutations
   across the given collections. In other words, each of the new collections
   will contain elements from both of the given collections. Useful for
   permutation tests or randomization tests.
@@ -1804,7 +1804,7 @@
 
     (permute (range 10))
     (permute (range 10) (range 10 20))
-    
+
 
 "
   ([x]
@@ -1819,7 +1819,7 @@
 
 
 
-(defn sample-permutations 
+(defn sample-permutations
 " If provided a two arguments (n x), it returns a list of n permutations
   of x. If provided three (n x y) arguments, returns a list with two with n permutations of
   each arguments, where each permutation is drawn from the pooled arguments.
@@ -1838,42 +1838,42 @@
 
     ;; extended example with plant-growth data
     (use '(incanter core stats datasets charts))
-    
+
     ;; load the plant-growth dataset
     (def data (to-matrix (get-dataset :plant-growth)))
-    
+
     ;; break the first column of the data into groups based on treatment (second column).
     (def groups (group-by data 1 :cols 0))
-    
+
     ;; define a function for the statistic of interest
     (defn means-diff [x y] (minus (mean x) (mean y)))
-    
+
     ;; calculate the difference in sample means between the two groups
     (def samp-mean-diff (means-diff (first groups) (second groups))) ;; 0.371
-    
+
     ;; create 500 permuted versions of the original two groups
     (def permuted-groups (sample-permutations 1000 (first groups) (second groups)))
-    
+
     ;; calculate the difference of means of the 500 samples
     (def permuted-means-diffs1 (map means-diff (first permuted-groups) (second permuted-groups)))
-    
+
     ;; use an indicator function that returns 1 when the randomized means diff is greater
     ;; than the original sample mean, and zero otherwise. Then take the mean of this sequence
     ;; of ones and zeros. That is the proportion of times you would see a value more extreme
     ;; than the sample mean (i.e. the p-value).
     (mean (indicator #(> % samp-mean-diff) permuted-means-diffs1)) ;; 0.088
-    
+
     ;; calculate the 95% confidence interval of the null hypothesis. If the
-    ;; sample difference in means is outside of this range, that is evidence 
+    ;; sample difference in means is outside of this range, that is evidence
     ;; that the two means are statistically significantly different.
     (quantile permuted-means-diffs1 :probs [0.025 0.975]) ;; (-0.606 0.595)
 
     ;; Plot a histogram of the permuted-means-diffs using the density option,
-    ;; instead of the default frequency, and then add a normal pdf curve with 
+    ;; instead of the default frequency, and then add a normal pdf curve with
     ;; the mean and sd of permuted-means-diffs data for a visual comparison.
     (doto (histogram permuted-means-diffs1 :density true)
-          (add-lines (range -1 1 0.01) (pdf-normal (range -1 1 0.01) 
-                                                   :mean (mean permuted-means-diffs1) 
+          (add-lines (range -1 1 0.01) (pdf-normal (range -1 1 0.01)
+                                                   :mean (mean permuted-means-diffs1)
                                                    :sd (sd permuted-means-diffs1)))
           view)
 
@@ -1883,19 +1883,19 @@
     (def samp-mean-diff (means-diff (first groups) (last groups))) ;; -0.4939
     (mean (indicator #(< % samp-mean-diff) permuted-means-diffs2)) ;; 0.022
     (quantile permuted-means-diffs2 :probs [0.025 0.975]) ;; (-0.478 0.466)
-    
+
     ;; compare the means of treatment 1 and treatment 2
     (def permuted-groups (sample-permutations 1000 (second groups) (last groups)))
     (def permuted-means-diffs3 (map means-diff (first permuted-groups) (second permuted-groups)))
     (def samp-mean-diff (means-diff (second groups) (last groups))) ;; -0.865
     (mean (indicator #(< % samp-mean-diff) permuted-means-diffs3)) ;;  0.002
     (quantile permuted-means-diffs3 :probs [0.025 0.975]) ;; (-0.676 0.646)
-    
+
     (doto (box-plot permuted-means-diffs1)
           (add-box-plot permuted-means-diffs2)
           (add-box-plot permuted-means-diffs3)
           view)
-    
+
 
     Further Reading:
       http://en.wikipedia.org/wiki/Resampling_(statistics)
@@ -1905,7 +1905,7 @@
     (loop [samp '() i 0]
       (if (= i n)
           samp
-          (recur 
+          (recur
             (conj samp (sample x)) (inc i)))))
 
   ([n x y]
@@ -1926,7 +1926,7 @@
 
 
 (defn linear-model
-" 
+"
   Returns the results of performing a OLS linear regression of y on x.
 
   Arguments:
@@ -1970,7 +1970,7 @@
 
     (def x1 (range 0.0 3 0.1))
     (view (xy-plot x1 (cdf-f x1 :df1 4 :df2 144)))
-  
+
 
   References:
     http://en.wikipedia.org/wiki/OLS_Regression
@@ -1978,7 +1978,7 @@
 
 "
   ([y x & options]
-    (let [opts (when options (apply assoc {} options)) 
+    (let [opts (when options (apply assoc {} options))
           intercept? (if (false? (:intercept opts)) false true)
           _x (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
           xtx (mmult (trans _x) _x)
@@ -1986,7 +1986,7 @@
           xty (mmult (trans _x) y)
           coefs (if (and (number? xtxi) (number? xty))
                   (* xtxi xty)
-                  (to-list (if (or (number? xtxi) (number? xty)) 
+                  (to-list (if (or (number? xtxi) (number? xty))
                     (mult xtxi xty)
                     (mmult xtxi xty))))
           fitted (to-list (if (number? coefs)
@@ -2013,11 +2013,11 @@
           t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
-                       [(plus coefs t-95) 
+                       [(plus coefs t-95)
                         (minus coefs t-95)]
-                       (partition 2 
-                         (interleave 
-                           (minus coefs t-95) 
+                       (partition 2
+                         (interleave
+                           (minus coefs t-95)
                            (plus coefs t-95))))
          ]
       (with-meta
@@ -2042,7 +2042,7 @@
          :coef-var coef-var
          :r-square r-square
          :adj-r-square adj-r-square
-        } 
+        }
         {:type ::linear-model}))))
 
 
@@ -2061,8 +2061,8 @@
     :conf-level (default 0.95) for returned confidence interval
 
   Examples:
-  
-    (t-test (range 1 11) :mu 0) 
+
+    (t-test (range 1 11) :mu 0)
     (t-test (range 1 11) :mu 0 :alternative :less)
     (t-test (range 1 11) :mu 0 :alternative :greater)
 
@@ -2078,9 +2078,9 @@
 "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
-          y (or (:y opts) nil)   
+          y (or (:y opts) nil)
           one-sample? (nil? y)
-          mu (or (:mu opts) 
+          mu (or (:mu opts)
                  (if y (mean y) 0))
           paired? (if (true? (:paired opts)) true false)
           var-equal? (if (true? (:var-equal opts)) true false)
@@ -2129,14 +2129,14 @@
                    [(if (= alternative :less)
                       Double/NEGATIVE_INFINITY
                       (+ x-mean (/ (* qt (sqrt x-var)) (sqrt n1))))
-                    (if (= alternative :greater) 
+                    (if (= alternative :greater)
                       Double/POSITIVE_INFINITY
                       (- x-mean (/ (* qt (sqrt x-var)) (sqrt n1))))]
                    ;; two-sample confidence interval
                    [(if (= alternative :less)
-                      Double/NEGATIVE_INFINITY 
+                      Double/NEGATIVE_INFINITY
                       (+ (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))
-                    (if (= alternative :greater) 
+                    (if (= alternative :greater)
                       Double/POSITIVE_INFINITY
                       (- (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))])
       })))
@@ -2152,14 +2152,14 @@
     :levels -- a sequence of sequences, where each sequence list
                the levels (possible values) of the corresponding
                column of x.
-    :margins -- a sequence of sequences, where each sequence 
-                represents the marginal total for each level 
+    :margins -- a sequence of sequences, where each sequence
+                represents the marginal total for each level
                 of the corresponding column of x.
     :counts -- a hash-map, where vectors of unique combinations
                of the cross-tabulated levels are the keys and the
                values are the total count of each combination.
     :N  -- the grand-total for the contingency table
-    
+
 
   Examples:
 
@@ -2172,26 +2172,26 @@
     (tabulate (sel math-prog :cols [1 2]))
 
 
-    (def data (matrix [[1 0 1] 
-                       [1 1 1] 
-                       [1 1 1] 
-                       [1 0 1] 
-                       [0 0 0] 
-                       [1 1 1] 
-                       [1 1 1] 
-                       [1 0 1] 
+    (def data (matrix [[1 0 1]
+                       [1 1 1]
+                       [1 1 1]
+                       [1 0 1]
+                       [0 0 0]
+                       [1 1 1]
+                       [1 1 1]
+                       [1 0 1]
                        [1 1 0]]))
     (tabulate data)
 
 
-    (def data (matrix [[1 0] 
-                       [1 1] 
-                       [1 1] 
-                       [1 0] 
-                       [0 0] 
-                       [1 1] 
-                       [1 1] 
-                       [1 0] 
+    (def data (matrix [[1 0]
+                       [1 1]
+                       [1 1]
+                       [1 0]
+                       [0 0]
+                       [1 1]
+                       [1 1]
+                       [1 0]
                        [1 1]]))
     (tabulate data)
 
@@ -2208,7 +2208,7 @@
                       marg
                       (let [lvl (sel _x :rows i :cols j)]
                         (recur (let [cnt (get marg lvl)]
-                                (if cnt 
+                                (if cnt
                                   (assoc marg lvl (inc cnt))
                                   (assoc marg lvl 1)))
                               (inc i))))))
@@ -2228,40 +2228,40 @@
       {:counts counts
        :margins margins
        :table (when (= p 2)
-                (matrix (for [r (first levels) 
-                              c (second levels)]  
-                          (let [c (get counts (to-list (trans [r c])))] 
-                            (if c c 0))) 
+                (matrix (for [r (first levels)
+                              c (second levels)]
+                          (let [c (get counts (to-list (trans [r c])))]
+                            (if c c 0)))
                         (second n-levels)))
        :n-vars p
        :N (reduce + (vals (first margins)))
        :n-levels n-levels
        :levels levels})))
 
-         
+
 
 
 
 
 
 (defn chisq-test
-" 
+"
   Performs chi-squared contingency table tests and goodness-of-fit tests.
-  
+
   If the optional argument :y is not provided then a goodness-of-fit test
-  is performed. In this case, the hypothesis tested is whether the 
-  population probabilities equal those in :probs, or are all equal if 
+  is performed. In this case, the hypothesis tested is whether the
+  population probabilities equal those in :probs, or are all equal if
   :probs is not given.
 
   If :y is provided, it must be a sequence of integers that is the
-  same length as x. A contingency table is computed from x and :y. 
+  same length as x. A contingency table is computed from x and :y.
   Then, Pearson's chi-squared test of the null hypothesis that the joint
   distribution of the cell counts in a 2-dimensional contingency
   table is the product of the row and column marginals is performed.
   By default the Yates' continuity correction for 2x2 contingency
-  tables is performed, this can be disabled by setting the :correct 
+  tables is performed, this can be disabled by setting the :correct
   option to false.
-  
+
 
   Options:
     :x -- a sequence of numbers.
@@ -2287,7 +2287,7 @@
     (chisq-test :table (trans table)) ;; throws exception
 
     (chisq-test :x [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25
-   
+
     (use '(incanter core stats datasets))
     (def math-prog (to-matrix (get-dataset :math-prog)))
     (def x (sel math-prog :cols 1))
@@ -2316,7 +2316,7 @@
     (def probs [0.40 0.20 0.20 0.19 0.01])
     (chisq-test :table table :probs probs) ;; X-sq = 5.7947, df = 4, p-value = 0.215
 
-    ;; use frequencies instead of probabilities 
+    ;; use frequencies instead of probabilities
     (def freq [40 20 20 15 5])
     (chisq-test :table table :freq freq) ;; X-sq = 9.9901, df = 4, p-value = 0.04059
 
@@ -2335,47 +2335,47 @@
           y (:y opts)
           table? (if (:table opts) true false)
           xtab (when (or x y)
-                 (if y 
-                   (tabulate (bind-columns x y)) 
+                 (if y
+                   (tabulate (bind-columns x y))
                    (tabulate x)))
-          table (cond 
-                  table? 
-                   (:table opts) 
+          table (cond
+                  table?
+                   (:table opts)
                   (and x y)
                     (:table xtab))
-          two-samp? (if (or (and x y) 
-                            (and table? 
-                                 (and (> (nrow table) 1) (> (ncol table) 1)))) 
+          two-samp? (if (or (and x y)
+                            (and table?
+                                 (and (> (nrow table) 1) (> (ncol table) 1))))
                       true false)
           r-levels (if table?
-                     (range (nrow table)) 
+                     (range (nrow table))
                      (first (:levels xtab)))
-          c-levels (if table? 
-                     (range (ncol table)) 
+          c-levels (if table?
+                     (range (ncol table))
                      (second (:levels xtab)))
           r-margins (if table?
                       (if two-samp?
                         (apply hash-map (interleave r-levels (map sum (trans table))))
-                        (if (> (nrow table) 1) 
-                          (to-list table) 
+                        (if (> (nrow table) 1)
+                          (to-list table)
                           (throw (Exception. "One dimensional tables must have only a single column"))))
                       (second (:margins xtab)))
-          c-margins (if table? 
+          c-margins (if table?
                       (if two-samp?
                         (apply hash-map (interleave c-levels (map sum table)))
                         0)
                       (first (:margins xtab)))
-                  
+
           counts (if two-samp? (vectorize table) table)
-          N (if table? 
-              (sum counts) 
+          N (if table?
+              (sum counts)
               (:N xtab))
           n (when (not two-samp?) (count r-levels))
           df (if two-samp? (* (dec (nrow table)) (dec (ncol table))) (dec n))
           probs (when (not two-samp?)
-                  (cond 
-                    (:probs opts) 
-                      (:probs opts) 
+                  (cond
+                    (:probs opts)
+                      (:probs opts)
                     (:freq opts)
                       (div (:freq opts) (sum (:freq opts)))
                     :else
@@ -2404,11 +2404,11 @@
 
 
 
-(defn principal-components 
+(defn principal-components
 "
   Performs a principal components analysis on the given data matrix.
   Equivalent to R's prcomp function.
-  
+
   Returns:
     A map with the following fields:
     :std-dev -- the standard deviations of the principal compoenents
@@ -2420,7 +2420,7 @@
 
 
   Examples:
-   
+
     (use '(incanter core stats charts datasets))
     ;; load the iris dataset
     (def iris (to-matrix (get-dataset :iris)))
@@ -2432,9 +2432,9 @@
 
     ;; project the first four dimension of the iris data onto the first
     ;; two principal components
-    (def x1 (mmult (sel iris :cols (range 4)) pc1)) 
-    (def x2 (mmult (sel iris :cols (range 4)) pc2)) 
-   
+    (def x1 (mmult (sel iris :cols (range 4)) pc1))
+    (def x2 (mmult (sel iris :cols (range 4)) pc2))
+
     ;; now plot the transformed data, coloring each species a different color
     (doto (scatter-plot (sel x1 :rows (range 50)) (sel x2 :rows (range 50))
                         :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\")
@@ -2444,7 +2444,7 @@
 
 
     ;; alternatively, the :group-by option can be used in scatter-plot
-    (view (scatter-plot x1 x2 
+    (view (scatter-plot x1 x2
                         :group-by (sel iris :cols 4)
                         :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))
 
@@ -2476,17 +2476,17 @@
     (tabulate (detabulate :table table))
 
     ;; example 2
-    (def data (matrix [[1 0] 
-                       [1 1] 
-                       [1 1] 
-                       [1 0] 
-                       [0 0] 
-                       [1 1] 
-                       [1 1] 
-                       [1 0] 
+    (def data (matrix [[1 0]
+                       [1 1]
+                       [1 1]
+                       [1 0]
+                       [0 0]
+                       [1 1]
+                       [1 1]
+                       [1 0]
                        [1 1]]))
     (tabulate data)
-    
+
     (tabulate (detabulate :table (:table (tabulate data))))
 
 "
@@ -2495,12 +2495,8 @@
           table (:table opts)
           row-labels (when table (or (:row-labels opts) (range (nrow table))))
           col-labels (when table (or (:col-labels opts) (range (ncol table))))
-          data (apply bind-rows 
+          data (apply bind-rows
                       (apply concat
                              (for [r row-labels c col-labels]
                                   (repeat (sel table :rows r :cols c) [r c]))))]
        data)))
-
-
-
-

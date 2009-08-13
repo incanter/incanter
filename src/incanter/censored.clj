@@ -1,27 +1,25 @@
-
-
-(ns incanter.censored 
-  (:use [incanter.core :only (mult pow)] 
+(ns incanter.censored
+  (:use [incanter.core :only (mult pow)]
         [incanter.stats :only (pdf-normal cdf-normal sd)]))
 
-  
-(defn- lambda-two-sided 
-  ([a-std b-std] 
-   (/ (- (pdf-normal a-std) (pdf-normal b-std)) 
+
+(defn- lambda-two-sided
+  ([a-std b-std]
+   (/ (- (pdf-normal a-std) (pdf-normal b-std))
       (- (cdf-normal b-std) (cdf-normal a-std)))))
 
-(defn- lambda-lower 
+(defn- lambda-lower
   ([a-std] (/ (pdf-normal a-std) (- 1 (cdf-normal a-std)))))
 
-(defn- lambda-upper 
-  ([b-std] 
+(defn- lambda-upper
+  ([b-std]
    (/ (- (pdf-normal b-std)) (cdf-normal b-std))))
 
 (defn- psi [y mu sigma] (/ (- y mu) sigma))
 
 
-(defn censored-mean-two-sided 
-" Returns the mean of a normal distribution (with mean mu and standard 
+(defn censored-mean-two-sided
+" Returns the mean of a normal distribution (with mean mu and standard
   deviation sigma) with the lower tail censored at 'a' and the upper
   tail censored at 'b'
 "
@@ -36,7 +34,7 @@
 
 
 (defn censored-variance-two-sided
-" Returns the variance of a normal distribution (with mean mu and standard 
+" Returns the variance of a normal distribution (with mean mu and standard
   deviation sigma) with the lower tail censored at 'a' and the upper
   tail censored at 'b'
 "
@@ -48,7 +46,7 @@
          cdf-a (cdf-normal a-std)
          cdf-b (cdf-normal b-std)]
      (+ (* cdf-a (* a a))
-        (* (- cdf-b cdf-a) 
+        (* (- cdf-b cdf-a)
            (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-two-sided a-std b-std))))
         (* sigma-sq (- (* a-std (pdf-normal a-std)) (* b-std (pdf-normal b-std))))
         (- (* (- 1 cdf-b) (* b b)) (* Ey Ey))))))
@@ -56,19 +54,19 @@
 
 
 (defn censored-mean-lower
-" Returns the mean of a normal distribution (with mean mu and standard 
-  deviation sigma) with the lower tail censored at 'a' 
+" Returns the mean of a normal distribution (with mean mu and standard
+  deviation sigma) with the lower tail censored at 'a'
 "
   ([a mu sigma]
    (let [a-std (psi a mu sigma)]
     (+ (* (cdf-normal a-std) a)
-       (* (- 1 (cdf-normal a-std)) 
+       (* (- 1 (cdf-normal a-std))
           (+ mu (* sigma (lambda-lower a-std))))))))
 
 
 (defn censored-variance-lower
-" Returns the variance of a normal distribution (with mean mu and standard 
-  deviation sigma) with the lower tail censored at 'a' 
+" Returns the variance of a normal distribution (with mean mu and standard
+  deviation sigma) with the lower tail censored at 'a'
 "
   ([a mu sigma]
    (let [a-std (psi a mu sigma)
@@ -84,7 +82,7 @@
 
 
 (defn censored-mean-upper
-" Returns the mean of a normal distribution (with mean mu and standard 
+" Returns the mean of a normal distribution (with mean mu and standard
   deviation sigma) with the upper tail censored at 'b'
 "
   ([b mu sigma]
@@ -94,7 +92,7 @@
 
 
 (defn censored-variance-upper
-" Returns the variance of a normal distribution (with mean mu and standard 
+" Returns the variance of a normal distribution (with mean mu and standard
   deviation sigma) with the upper tail censored at 'b'
 "
   ([b mu sigma]
@@ -110,7 +108,7 @@
 
 
 
-(defn truncated-variance 
+(defn truncated-variance
 " Returns the variance of a normal distribution truncated at a and b.
 
   Options:
@@ -120,9 +118,9 @@
     :b (default +infinity) upper truncation point
 
   Examples:
-  
+
     (use '(incanter core stats))
-    (truncated-variance :a -1.96 :b 1.96)  
+    (truncated-variance :a -1.96 :b 1.96)
     (truncated-variance :a 0)
     (truncated-variance :b 0)
 
@@ -138,9 +136,9 @@
 
 
   References:
-    DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables. 
+    DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables.
       Wiley-IEEE.
-    
+
     http://en.wikipedia.org/wiki/Truncated_normal_distribution
 "
   ([& options]
@@ -152,11 +150,11 @@
           b (or (:b opts) Double/POSITIVE_INFINITY)
           lambda (fn [alpha] (/ (pdf-normal alpha) (- 1 (cdf-normal alpha))))
           delta (fn [alpha] (* (lambda alpha) (- (lambda alpha) alpha)))
-          ;one-tail-var (fn [alpha s-sq] 
-          ;               (* s-sq 
-          ;                  (- 1 (cdf-normal alpha)) 
-          ;                  (+ (- 1 (delta alpha)) 
-          ;                     (* (pow (- alpha (lambda alpha)) 2) 
+          ;one-tail-var (fn [alpha s-sq]
+          ;               (* s-sq
+          ;                  (- 1 (cdf-normal alpha))
+          ;                  (+ (- 1 (delta alpha))
+          ;                     (* (pow (- alpha (lambda alpha)) 2)
           ;                        (cdf-normal alpha)))))
           a-std (if (= a Double/NEGATIVE_INFINITY) Double/NEGATIVE_INFINITY (/ (- a mu) sd))
           b-std (if (= b Double/POSITIVE_INFINITY) Double/POSITIVE_INFINITY (/ (- b mu) sd))
@@ -164,7 +162,7 @@
           pdf-b (if (= b Double/POSITIVE_INFINITY) 0 (pdf-normal b-std))
           cdf-a (if (= a Double/NEGATIVE_INFINITY) 0 (cdf-normal a-std))
           cdf-b (if (= b Double/POSITIVE_INFINITY) 1 (cdf-normal b-std))]
-      (cond 
+      (cond
         (and (= b Double/POSITIVE_INFINITY) (= a Double/NEGATIVE_INFINITY))
           sigma-sq
         (and (= b Double/POSITIVE_INFINITY) (> a Double/NEGATIVE_INFINITY))
@@ -174,9 +172,7 @@
           (* sigma-sq (- 1 (delta (- 1 b-std))))
           ;(- sigma-sq (one-tail-var b-std sigma-sq))
         :else
-          (* sigma-sq 
+          (* sigma-sq
             (+ 1 (/ (- (* a-std pdf-a) (* b-std pdf-b))
                     (- cdf-b cdf-a))
               (- (pow (/ (- pdf-a pdf-b) (- cdf-b cdf-a)) 2))))))))
-
-
