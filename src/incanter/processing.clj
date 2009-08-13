@@ -50,6 +50,7 @@
 (defn ambient
   [sketch rgb] (.ambient sketch rgb))
 
+
 ;; modified by DEL
 ;;(defn ambient-light
 ;;  ([sketch rgb]
