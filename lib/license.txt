@@ -2,20 +2,36 @@ LICENSES FOR INCLUDED LIBRARIES
 
 
 --------------------------------------------------------------------------------
-Files: incanter.jar, clojure.jar, clojure-contrib.jar
+Files: incanter.jar, clojure.jar are licensed under the 
 Eclipse Public License - v 1.0, see http://www.eclipse.org/legal/epl-v10.html
+with the exception of incanter.processing which is a fork of Roland Sadowski’s 
+clj-processing library which is licensed under the Common Public License 
+Version 1.0 (see $INCANTER/lib/CPL.TXT for details).
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
-Files: jfreechart-1.0.12.jar, jcommon-1.0.15.jar
+Files: clojure-contrib.jar contains libraries licensed under either the
+Eclipse Public License - v 1.0, see http://www.eclipse.org/legal/epl-v10.html
+or the Common Public License Version 1.0 (see $INCANTER/lib/CPL.TXT for details).
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Files: $INCANTER/lib/processing/core.jar is licensed under the 
 GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, 
 see http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
-Files: gnujaxp.jar
+Files: $INCANTER/lib/jfreechart-1.0.12.jar, $INCANTER/lib/jcommon-1.0.15.jar
+GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, 
+see http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+Files: $INCANTER/lib/gnujaxp.jar
 GPL + library exception, see http://www.gnu.org/software/classpath/license.html
 Linking this library statically or dynamically with other modules is making a combined work based on this library. Thus, the terms and conditions of the GNU General Public License cover the whole combination.
 
@@ -25,20 +41,20 @@ As a special exception, the copyright holders of this library give you permissio
 
 
 --------------------------------------------------------------------------------
-Files: opencsv-1.8.jar
+Files: $INCANTER/lib/opencsv-1.8.jar
 Apache 2.0 license, see http://www.apache.org/licenses/LICENSE-2.0
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
-Files: parallelcolt-0.7.2.jar
+Files: $INCANTER/lib/parallelcolt-0.7.2.jar
 Copyright © 1999 CERN - European Organization for Nuclear Research
 Permission to use, copy, modify, distribute and sell this software and its documentation for any purpose is hereby granted without fee, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation. CERN makes no representations about the suitability of this software for any purpose. It is provided "as is" without expressed or implied warranty.
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
-Files: netlib-java-0.9.1.jar, arpack-combo-0.1.jar
+Files: $INCANTER/lib/netlib-java-0.9.1.jar, $INCANTER/lib/arpack-combo-0.1.jar
 Copyright 2003-2007 Keith Seymour.
 Copyright 1992-2007 The University of Tennessee. All rights reserved.
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:     
@@ -63,13 +79,13 @@ Redistribution and use in source and binary forms, with or without modification,
 
 
 --------------------------------------------------------------------------------
-Files: jline-0.9.94.jar
+Files: $INCANTER/lib/jline-0.9.94.jar
 BSD license, see http://www.opensource.org/licenses/bsd-license.php
 --------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------
-Files: jgraph.jar
+Files: $INCANTER/lib/jgraph.jar
 JGRAPH GENERAL LICENSE STATEMENT AND LIMITED WARRANTY
 IMPORTANT - READ CAREFULLY
 

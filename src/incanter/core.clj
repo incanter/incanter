@@ -1528,6 +1528,7 @@
     (def fos (FileOutputStream. \"/tmp/hist.png\"))
     (def hist (histogram (sample-normal 1000)))
     (save hist fos)
+    (.close fos)
 
     (view \"file:///tmp/hist.png\")
 
