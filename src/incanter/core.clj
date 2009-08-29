@@ -1522,6 +1522,15 @@
     (use '(incanter core io stats charts))
     (save (histogram (sample-normal 1000)) \"hist.png\")
 
+    ;; chart example using java.io.OutputStream instead of filename
+    (use '(incanter core stats charts))
+    (import 'java.io.FileOutputStream)
+    (def fos (FileOutputStream. \"/tmp/hist.png\"))
+    (def hist (histogram (sample-normal 1000)))
+    (save hist fos)
+
+    (view \"file:///tmp/hist.png\")
+
 
 "
   (fn [obj filename & options]

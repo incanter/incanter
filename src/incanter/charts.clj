@@ -22,6 +22,7 @@
                               bind-columns view save)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
   (:import  (java.io File)
+            (javax.imageio ImageIO)
             (org.jfree.data.statistics HistogramDataset
                                        HistogramType
                                        DefaultBoxAndWhiskerCategoryDataset)
@@ -1318,5 +1319,13 @@
     (let [opts (when options (apply assoc {} options))
           width (or (:width opts) 500)
           height (or (:height opts) 400)]
-      (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
+      ;; if filename is not a string, treat it as java.io.OutputStream
+      (if (= (type filename) java.lang.String)
+        (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
+        (ImageIO/write (.createBufferedImage chart width height) "png" filename))
       nil)))
+
+
+
+
+
