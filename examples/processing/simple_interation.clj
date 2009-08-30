@@ -20,18 +20,17 @@
 
               ;; define the setup function
               (setup []
+                     (doto this
+                       ;no-loop
+                       (size 200 200)
+                       (stroke-weight 10)
+                       (framerate 15)
+                       smooth)
                      (dosync
                        (ref-set X (/ (width this) 2))
                        (ref-set Y (/ (width this) 2))
                        (ref-set nX @X)
-                       (ref-set nY @Y))
-                     (doto this
-                       (size 200 200)
-                       (stroke-weight 10)
-                       (framerate 15)
-                       smooth
-                       ;no-loop
-                       ))
+                       (ref-set nY @Y)))
 
               ;; define the draw function
               (draw []
