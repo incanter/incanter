@@ -34,6 +34,7 @@
            (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.stat.tdouble DoubleDescriptive Gamma)
            (javax.swing JTable JScrollPane JFrame)
+           (processing.core PApplet)
            (java.util Vector)))
 
 
@@ -1416,7 +1417,7 @@
                              (not (dataset? obj))
                              (coll? obj))
                           ::coll
-                        (.isInstance processing.core.PApplet obj)
+                        (.isInstance PApplet obj)
                           :sketch
                         :else
                         (type obj))))
@@ -1535,6 +1536,9 @@
 
 "
   (fn [obj filename & options]
-    (if (.isInstance processing.core.PApplet obj)
+    (if (.isInstance PApplet obj)
       :sketch
       (type obj))))
+
+
+
