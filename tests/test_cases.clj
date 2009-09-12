@@ -507,7 +507,9 @@
   (view (histogram (sample-normal 1000)))
   (view (histogram (sample-gamma 1000)))
   (view (histogram (sample-uniform 1000)))
-  (save (histogram (sample-normal 1000)) "/tmp/norm_hist.png")
+  (save (histogram (sample-normal 1000)) 
+	(new java.io.File (System/getProperty "java.io.tmpdir") 
+		                "norm_hist.png"))
   
   (view (histogram (sample-gamma 1000) 
                    :nbins 30 
