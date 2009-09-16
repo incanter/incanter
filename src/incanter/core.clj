@@ -787,10 +787,34 @@
   ([coll]
    (let [n (count coll)]
     (loop [in-coll (rest coll)
-           cumu-sum [(first coll)]]
+           cumu-sum [(first coll)]
+           cumu-val (first coll)]
       (if (empty? in-coll)
         cumu-sum
-        (recur (rest in-coll) (conj cumu-sum (+ (last cumu-sum) (first in-coll)))))))))
+        (let [cv (+ cumu-val (first in-coll))]
+          (recur (rest in-coll) (conj cumu-sum cv) cv)))))))
+
+
+(defn cumulative-sum2
+  " Returns a sequence of cumulative sum for the given collection. For instance
+    The first value equals the first value of the argument, the second value is
+    the sum of the first two arguments, the third is the sum of the first three
+    arguments, etc.
+
+    Examples:
+      (use 'incanter.core)
+      (cumulative-sum (range 100))
+  "
+  ([coll]
+   (let [n (count coll)]
+    (loop [i 0
+           cumu-sum-vec [(first coll)]
+           cumu-val (first coll)]
+      (if (= i n)
+        cumu-sum-vec
+        (let [cv (+ cumu-val (nth coll i))]
+          (recur (inc i) (conj cumu-sum-vec cv) cv)))))))
+
 
 
 
