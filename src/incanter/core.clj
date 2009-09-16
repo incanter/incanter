@@ -785,14 +785,13 @@
       (cumulative-sum (range 100))
   "
   ([coll]
-   (let [n (count coll)]
-    (loop [in-coll (rest coll)
-           cumu-sum [(first coll)]
-           cumu-val (first coll)]
-      (if (empty? in-coll)
-        cumu-sum
-        (let [cv (+ cumu-val (first in-coll))]
-          (recur (rest in-coll) (conj cumu-sum cv) cv)))))))
+   (loop [in-coll (rest coll)
+          cumu-sum [(first coll)]
+          cumu-val (first coll)]
+     (if (empty? in-coll)
+       cumu-sum
+       (let [cv (+ cumu-val (first in-coll))]
+         (recur (rest in-coll) (conj cumu-sum cv) cv))))))
 
 
 
