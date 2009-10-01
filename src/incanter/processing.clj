@@ -968,7 +968,7 @@
 (defn saturation [#^PApplet sketch what] (.saturation sketch (int what)))
 
 ;; modified by DEL
-(defmethod save :sketch 
+(defmethod save :sketch
   ([#^PApplet sketch filename]
      (doto sketch
        ;.redraw
