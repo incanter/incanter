@@ -40,6 +40,8 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
+A pre-built version of Incanter can be downloaded at <a href="http://incanter.org/downloads/incanter.tar.gz">http://incanter.org/downloads/incanter.tar.gz</a>. If you would like to build it from source, read <a href="#build">Building Incanter</a>.
+
 Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@ or @bin\clj.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the clj script so that it uses an absolute path instead the ./ directory).
 
 From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats charts))</code></pre>
@@ -84,8 +86,11 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 h2. Building Incanter
 
-The Incanter distribution includes a pre-built jar file, but if you would like to build it, test it, and generate the api documentation yourself, run the following commands from the Incanter directory:
+To build Incanter, test it, and generate the api documentation yourself, run the following commands from the Incanter directory:
 
+* Clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
+* cd into the incanter directory
+* Download and uncompress Incanter's dependencies: @ant deps@
 * Build incanter.jar: @ant@
 * Run unit tests: @tests/runtests.clj@
 * Generate API docs: @bin/generate_docs.clj@
