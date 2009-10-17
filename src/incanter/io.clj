@@ -33,9 +33,17 @@
         (catch NumberFormatException _ value)))))
 
 
+(defn- get-input-reader [location] 
+  (try
+    (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
+  (catch java.net.MalformedURLException _
+    (java.io.FileReader. location))))
+
+
+
 (defn read-dataset
   "
-    Returns a dataset read from a file.
+    Returns a dataset read from a file or a URL.
 
     Options:
       :delim (default \\,), other options (\\tab \\space \\|  etc)
@@ -50,7 +58,8 @@
          skip (or (:skip opts) 0)
          header? (or (:header opts) false)
          reader (au.com.bytecode.opencsv.CSVReader.
-                    (java.io.FileReader. filename)
+                    ;(java.io.FileReader. filename)
+                    (get-input-reader filename)
                     delim
                     quote-char
                     skip)
