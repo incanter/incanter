@@ -1,0 +1,238 @@
+\documentclass[footexclude,twocolumn,DIV25,fontsize=10pt]{scrreprt} 
+
+% Author: David Edgar Liebke (based on Steve Tayon's Clojure cheat sheet)
+% Comments, errors, suggestions: liebke(at)googlemail.com
+
+
+% License
+% Eclipse Public License v1.0
+% http://opensource.org/licenses/eclipse-1.0.php
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\usepackage[table]{xcolor}
+
+% Set column space
+\setlength{\columnsep}{0.25em}
+
+% Define colours
+\definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
+
+\definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
+
+\definecolorset{hsb}{}{}
+{magenta,.9,.4,0.95;green2,.29,.4,0.95}
+
+% Redefine sections
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}
+	{-1.7ex}{0.7ex}{\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}
+	{-1.7ex}{0.5ex}{\normalfont\normalsize\bfseries}}
+\makeatother
+
+% No section numbers
+\setcounter{secnumdepth}{0}
+
+% No indentation
+\setlength{\parindent}{0em}
+
+% No header and footer
+\pagestyle{empty}
+
+
+% A few shortcuts
+\newcommand{\cmd}[1] {\texttt{\textbf{{#1}}}}
+\newcommand{\cmdline}[1] {
+	\begin{tabularx}{\hsize}{X}
+			\texttt{\textbf{{#1}}}
+	\end{tabularx}
+}
+
+\newcommand{\colouredbox}[2] {
+	\colorbox{#1!40}{
+		\begin{minipage}{0.95\linewidth}
+			{
+			\rowcolors[]{1}{#1!20}{#1!10}
+			#2
+			}
+		\end{minipage}
+	}
+}
+
+\begin{document}
+
+\centerline{\Large{\textbf{Incanter Cheat Sheet}}}
+\centerline{{\large{\textbf{\textit{Functions and Macros Overview}}}}}
+
+\colouredbox{green}{
+\section{Documentation \textmd{\textrm{(http://incanter.org/docs/api)}}}
+\cmdline{doc find-doc source \textmd{\textrm{(clojure.contrib.repl-utils)}}}
+}
+
+\colouredbox{blue}{
+\section{Charts and Plots \textmd{\textrm{(incanter.charts)}}}
+
+\subsection{XY Plots}
+\begin{tabularx}{\hsize}{lX}
+Create:& \cmd{xy-plot scatter-plot}\\
+Add data:& \cmd{add-lines add-points add-function}\\
+Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
+Annotate:& \cmd{add-points add-polygon, add-text} \\
+View:& \cmd{view}\\
+Save PNG:& \cmd{save}\\
+\end{tabularx}
+
+\subsection{Category Charts}
+\begin{tabularx}{\hsize}{lX}
+Create:& \cmd{bar-chart line-chart}\\
+Add data:& \cmd{add-category}\\
+Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
+View:& \cmd{view}\\
+Save PNG:& \cmd{save}\\
+\end{tabularx}
+
+\subsection{Histograms}
+\begin{tabularx}{\hsize}{lX}
+Create:& \cmd{histogram}\\
+Add data:& \cmd{add-histogram add-lines add-function}\\
+Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
+View:& \cmd{view}\\
+Save PNG:& \cmd{save}\\
+\end{tabularx}
+
+\subsection{Box Plots}
+\begin{tabularx}{\hsize}{lX}
+Create:& \cmd{box-plot}\\
+Add data:& \cmd{add-box-plot}\\
+Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
+View:& \cmd{view}\\
+Save PNG:& \cmd{save}\\
+\end{tabularx}
+
+\subsection{Misc. Plots}
+\begin{tabularx}{\hsize}{lX}
+Create:& \cmd{qq-plot trace-plot bland-altman-plot}\\
+Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
+View:& \cmd{view}\\
+Save PNG:& \cmd{save}\\
+\end{tabularx}
+
+
+}
+
+
+\colouredbox{orange}{
+\section{Math \textmd{\textrm{(incanter.core)}}}
+% \section{Math}
+
+% \subsection{incanter.core}
+\begin{tabularx}{\hsize}{lX}
+Operations: & \cmd{plus minus mult div exp log log10 log2 pow sqr sq sum prod abs} \\
+Trigonometry: & \cmd{cos sign tan acos asin atan} \\
+Special fns: & \cmd{beta gamma regularized-beta incomplete-beta} \\
+Misc. fns: & \cmd{choose factorial sum-of-squares solve-quadratic} \\
+\end{tabularx}
+
+}
+
+\colouredbox{yellow}{
+\section{Matrices \textmd{\textrm{(incanter.core)}}}
+% \section{Matrices}
+% \subsection{incanter.core}
+\begin{tabularx}{\hsize}{lX}
+Create: & \cmd{matrix diag identity-matrix symmetric-matrix bind-columns bind-rows to-matrix} \\
+Properties: & \cmd{dim ncol nrow rank condition matrix?} \\
+Selection: & \cmd{sel diag group-by} \\
+Element-wise ops: & \cmd{plus minus mult div exp log log10 log2 pow sin cos tan asin acos atan abs} \\
+Matrix ops: & \cmd{mmult kronecker solve trace det} \\
+Transformation: & \cmd{trans vectorize half-vectorize to-list to-vect} \\
+Decomposition: & \cmd{decomp-cholesky decomp-eigenvalue decomp-lu decomp-qr decomp-svd} \\
+View: & \cmd{view} \\
+Save to file: & \cmd{save} \\
+\end{tabularx}
+
+}
+
+
+
+\colouredbox{green}{
+\section{IO \textmd{\textrm{(incanter.io)}}}
+\begin{tabularx}{\hsize}{lX}
+Read Data: & \cmd{read-dataset} \\
+Write Data: & \cmd{save} \\
+\end{tabularx}
+
+}
+
+
+
+\colouredbox{magenta}{
+\section{Probability \textmd{\textrm{(incanter.stats)}}}
+\begin{tabularx}{\hsize}{lX}
+PDF: & \cmd{pdf-beta pdf-binomial pdf-chisq pdf-exp pdf-f pdf-gamma pdf-neg-binomial pdf-normal pdf-poisson pdf-t pdf-uniform} \\
+CDF: & \cmd{cdf-beta cdf-binomial cdf-chisq cdf-empirical cdf-exp cdf-f cdf-gamma cdf-neg-binomial cdf-normal cdf-poisson cdf-t cdf-uniform} \\
+Quantile: & \cmd{quantile quantile-normal quantile-t} \\
+Sampling: & \cmd{sample sample-beta sample-binomial sample-chisq sample-dirichlet sample-exp sample-gamma sample-inv-wishart sample-mvn sample-neg-binomial sample-normal sample-poisson sample-t sample-uniform sample-wishart} \\
+\end{tabularx}
+}
+
+
+\colouredbox{pink}{
+\section{Statistics \textmd{\textrm{(incanter.stats)}}}
+\begin{tabularx}{\hsize}{lX}
+Summary: & \cmd{mean variance sd skewness kurtosis median cumulative-mean tabulate detabulate} \\
+Association: & \cmd{covariance correlation} \\
+Tests: & \cmd{chisq-test t-test permutations bootstrap} \\
+Regression: & \cmd{linear-model} \\
+\end{tabularx}
+}
+
+
+\colouredbox{red}{
+\section{Bayesian Inference \textmd{\textrm{(incanter.bayes)}}}
+\begin{tabularx}{\hsize}{lX}
+Sampling: & \cmd{sample-model-params sample-multinomial-params sample-proportions } \\
+Plots: & \cmd{trace-plot histogram} \\
+\end{tabularx}
+
+}
+
+
+\colouredbox{blue2}{
+\section{Optimization \textmd{\textrm{(incanter.optimize)}}}
+\cmdline{non-linear-model gradient hessian derivative integrate}
+}
+
+
+\colouredbox{yellow}{
+\section{Censored Data \textmd{\textrm{(incanter.censored)}}}
+\cmdline{censored-mean-lower censored-mean-two-sided censored-mean-upper censored-variance-lower censored-variance-two-sided censored-variance-upper truncated-variance}
+}
+
+
+
+
+
+\begin{flushright}
+\footnotesize
+\rule{0.7\linewidth}{0.25pt}
+\verb!$Revision: 1.00, $Date: October 21, 2009!\\
+\verb!David Edgar Liebke (liebke googlemail com)!
+\end{flushright}
+
+% history
+%
+% v1.00
+% First version based on API documentation
+% http://incanter.org/docs/api
+% LaTeX format based on Steve Tayon's Clojure Cheat Sheet
+%
+
+\end{document}
+
