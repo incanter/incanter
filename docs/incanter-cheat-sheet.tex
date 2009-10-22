@@ -143,8 +143,6 @@ Misc. fns: & \cmd{choose factorial sum-of-squares solve-quadratic} \\
 
 \colouredbox{yellow}{
 \section{Matrices \textmd{\textrm{(incanter.core)}}}
-% \section{Matrices}
-% \subsection{incanter.core}
 \begin{tabularx}{\hsize}{lX}
 Create: & \cmd{matrix diag identity-matrix symmetric-matrix bind-columns bind-rows to-matrix} \\
 Properties: & \cmd{dim ncol nrow rank condition matrix?} \\
@@ -160,15 +158,19 @@ Save to file: & \cmd{save} \\
 }
 
 
-
 \colouredbox{green}{
-\section{IO \textmd{\textrm{(incanter.io)}}}
+\section{Data Sets \textmd{\textrm{(incanter.core)}}}
 \begin{tabularx}{\hsize}{lX}
-Read Data: & \cmd{read-dataset} \\
-Write Data: & \cmd{save} \\
+Create: & \cmd{dataset read-dataset \textmd{\textrm{(incanter.io)}} get-dataset \textmd{\textrm{(incanter.datasets)}}} \\
+Properties: & \cmd{dim ncol nrow dataset?} \\
+Selection: & \cmd{sel group-by} \\
+Transformation: & \cmd{to-matrix} \\
+View: & \cmd{view} \\
+Save to file: & \cmd{save} \\
 \end{tabularx}
 
 }
+
 
 
 
@@ -192,6 +194,16 @@ Tests: & \cmd{chisq-test t-test permutations bootstrap} \\
 Regression: & \cmd{linear-model} \\
 \end{tabularx}
 }
+
+\colouredbox{green}{
+\section{I/O \textmd{\textrm{(incanter.io)}}}
+\begin{tabularx}{\hsize}{lX}
+Read Data: & \cmd{read-dataset} \\
+Write Data: & \cmd{save} \\
+\end{tabularx}
+
+}
+
 
 
 \colouredbox{red}{
