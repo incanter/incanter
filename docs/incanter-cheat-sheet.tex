@@ -78,68 +78,47 @@
 \colouredbox{blue}{
 \section{Charts and Plots \textmd{\textrm{(incanter.charts)}}}
 
+\subsection{Common Functions}
+\begin{tabularx}{\hsize}{lX}
+Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
+View:& \cmd{view}\\
+Save PNG:& \cmd{save}\\
+\end{tabularx}
+
+
 \subsection{XY Plots}
 \begin{tabularx}{\hsize}{lX}
 Create:& \cmd{xy-plot scatter-plot}\\
 Add data:& \cmd{add-lines add-points add-function}\\
-Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
 Annotate:& \cmd{add-points add-polygon, add-text} \\
-View:& \cmd{view}\\
-Save PNG:& \cmd{save}\\
 \end{tabularx}
 
 \subsection{Category Charts}
 \begin{tabularx}{\hsize}{lX}
 Create:& \cmd{bar-chart line-chart}\\
 Add data:& \cmd{add-category}\\
-Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
-View:& \cmd{view}\\
-Save PNG:& \cmd{save}\\
 \end{tabularx}
 
 \subsection{Histograms}
 \begin{tabularx}{\hsize}{lX}
 Create:& \cmd{histogram}\\
 Add data:& \cmd{add-histogram add-lines add-function}\\
-Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
-View:& \cmd{view}\\
-Save PNG:& \cmd{save}\\
 \end{tabularx}
 
 \subsection{Box Plots}
 \begin{tabularx}{\hsize}{lX}
 Create:& \cmd{box-plot}\\
 Add data:& \cmd{add-box-plot}\\
-Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
-View:& \cmd{view}\\
-Save PNG:& \cmd{save}\\
 \end{tabularx}
 
 \subsection{Misc. Plots}
 \begin{tabularx}{\hsize}{lX}
 Create:& \cmd{qq-plot trace-plot bland-altman-plot}\\
-Appearance:& \cmd{clear-background set-alpha set-background set-title set-x-label set-y-label}\\
-View:& \cmd{view}\\
-Save PNG:& \cmd{save}\\
 \end{tabularx}
 
 
 }
 
-
-\colouredbox{orange}{
-\section{Math \textmd{\textrm{(incanter.core)}}}
-% \section{Math}
-
-% \subsection{incanter.core}
-\begin{tabularx}{\hsize}{lX}
-Operations: & \cmd{plus minus mult div exp log log10 log2 pow sqr sq sum prod abs} \\
-Trigonometry: & \cmd{cos sign tan acos asin atan} \\
-Special fns: & \cmd{beta gamma regularized-beta incomplete-beta} \\
-Misc. fns: & \cmd{choose factorial sum-of-squares solve-quadratic} \\
-\end{tabularx}
-
-}
 
 \colouredbox{yellow}{
 \section{Matrices and Vectors \textmd{\textrm{(incanter.core)}}}
@@ -149,8 +128,8 @@ Properties: & \cmd{dim ncol nrow rank condition matrix?} \\
 Selection: & \cmd{sel diag group-by} \\
 Element-wise ops: & \cmd{plus minus mult div exp log log10 log2 pow sin cos tan asin acos atan abs} \\
 Matrix ops: & \cmd{mmult kronecker solve trace det} \\
-Transformation: & \cmd{trans vectorize half-vectorize to-list to-vect} \\
-Decomposition: & \cmd{decomp-cholesky decomp-eigenvalue decomp-lu decomp-qr decomp-svd} \\
+Transform: & \cmd{trans vectorize half-vectorize to-list to-vect} \\
+Decomp: & \cmd{decomp-cholesky decomp-eigenvalue decomp-lu decomp-qr decomp-svd} \\
 View: & \cmd{view} \\
 Save to file: & \cmd{save} \\
 \end{tabularx}
@@ -159,12 +138,29 @@ Save to file: & \cmd{save} \\
 
 
 \colouredbox{green}{
+\section{I/O \textmd{\textrm{(incanter.io)}}}
+\begin{tabularx}{\hsize}{lX}
+Read Data: & \cmd{read-dataset} \\
+Write Data: & \cmd{save} \\
+\end{tabularx}
+
+}
+
+\colouredbox{blue2}{
+\section{Optimization \textmd{\textrm{(incanter.optimize)}}}
+\cmdline{non-linear-model gradient hessian derivative integrate}
+}
+
+
+
+
+\colouredbox{magenta}{
 \section{Data Sets \textmd{\textrm{(incanter.core)}}}
 \begin{tabularx}{\hsize}{lX}
 Create: & \cmd{dataset read-dataset \textmd{\textrm{(incanter.io)}} get-dataset \textmd{\textrm{(incanter.datasets)}}} \\
 Properties: & \cmd{dim ncol nrow dataset?} \\
 Selection: & \cmd{sel group-by} \\
-Transformation: & \cmd{to-matrix} \\
+Transform: & \cmd{to-matrix} \\
 View: & \cmd{view} \\
 Save to file: & \cmd{save} \\
 \end{tabularx}
@@ -173,8 +169,22 @@ Save to file: & \cmd{save} \\
 
 
 
+\colouredbox{orange}{
+\section{Math \textmd{\textrm{(incanter.core)}}}
+% \section{Math}
 
-\colouredbox{magenta}{
+% \subsection{incanter.core}
+\begin{tabularx}{\hsize}{lX}
+Basic: & \cmd{plus minus mult div exp log log10 log2 pow sqr sq sum prod abs} \\
+Trig: & \cmd{cos sin tan acos asin atan} \\
+Special: & \cmd{beta gamma regularized-beta incomplete-beta} \\
+Misc.: & \cmd{choose factorial sum-of-squares solve-quadratic} \\
+\end{tabularx}
+
+}
+
+
+\colouredbox{green}{
 \section{Probability \textmd{\textrm{(incanter.stats)}}}
 \begin{tabularx}{\hsize}{lX}
 PDF: & \cmd{pdf-beta pdf-binomial pdf-chisq pdf-exp pdf-f pdf-gamma pdf-neg-binomial pdf-normal pdf-poisson pdf-t pdf-uniform} \\
@@ -195,16 +205,6 @@ Regression: & \cmd{linear-model} \\
 \end{tabularx}
 }
 
-\colouredbox{green}{
-\section{I/O \textmd{\textrm{(incanter.io)}}}
-\begin{tabularx}{\hsize}{lX}
-Read Data: & \cmd{read-dataset} \\
-Write Data: & \cmd{save} \\
-\end{tabularx}
-
-}
-
-
 
 \colouredbox{red}{
 \section{Bayesian Inference \textmd{\textrm{(incanter.bayes)}}}
@@ -213,12 +213,6 @@ Sampling: & \cmd{sample-model-params sample-multinomial-params sample-proportion
 Plots: & \cmd{trace-plot histogram} \\
 \end{tabularx}
 
-}
-
-
-\colouredbox{blue2}{
-\section{Optimization \textmd{\textrm{(incanter.optimize)}}}
-\cmdline{non-linear-model gradient hessian derivative integrate}
 }
 
 
@@ -234,7 +228,7 @@ Plots: & \cmd{trace-plot histogram} \\
 \begin{flushright}
 \footnotesize
 \rule{0.7\linewidth}{0.25pt}
-\verb!$Revision: 1.00, $Date: October 21, 2009!\\
+\verb!$Revision: 1.1, $Date: October 23, 2009!\\
 \verb!David Edgar Liebke (liebke googlemail com)!
 \end{flushright}
 
@@ -245,6 +239,8 @@ Plots: & \cmd{trace-plot histogram} \\
 % http://incanter.org/docs/api
 % LaTeX format based on Steve Tayon's Clojure Cheat Sheet
 %
+% v1.1
+% Removed redundancies from Charts and Plots section
 
 \end{document}
 
