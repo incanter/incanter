@@ -1417,7 +1417,7 @@
                              (not (dataset? obj))
                              (coll? obj))
                           ::coll
-                        (= (str (type obj)) "class clojure.proxy.processing.core.PApplet")
+                        (.contains (str (type obj)) "processing.core.PApplet")
                           :sketch
                         :else
                         (type obj))))
