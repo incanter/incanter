@@ -1536,7 +1536,7 @@
 
 "
   (fn [obj filename & options] 
-    (if (= (str (type obj)) "class clojure.proxy.processing.core.PApplet")
+    (if (.contains (str (type obj)) "processing.core.PApplet")
       :sketch
       (type obj))))
 
