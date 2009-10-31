@@ -1,4 +1,5 @@
 (ns incanter.censored
+  (:gen-class)
   (:use [incanter.core :only (mult pow)]
         [incanter.stats :only (pdf-normal cdf-normal sd)]))
 

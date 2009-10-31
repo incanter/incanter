@@ -17,6 +17,7 @@
 
 
 (ns incanter.core
+  (:gen-class)
   (:use (incanter internal))
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D

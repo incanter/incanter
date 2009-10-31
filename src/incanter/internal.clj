@@ -17,6 +17,7 @@
 
 
 (ns incanter.internal
+  (:gen-class)
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)

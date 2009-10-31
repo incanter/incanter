@@ -20,6 +20,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns incanter.io
+  (:gen-class)
   (:import (java.io FileReader)
            (au.com.bytecode.opencsv CSVReader))
   (:use [incanter.core :only (dataset save)])
