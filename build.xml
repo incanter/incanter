@@ -21,6 +21,7 @@
   <property name="netlib.jar" location="${lib}/netlib-java-0.9.1.jar" />
   <property name="opencsv.jar" location="${lib}/opencsv-1.8.jar" />
   <property name="jarfile" location="incanter.jar" />
+  <property name="core-jarfile" location="incanter-core.jar" />
   <property name="LICENSE" location="epl-v10.html" />
   <property name="deps.file" value="deps.zip"/>
   <property name="deps.url" value="http://cloud.github.com/downloads/liebke/incanter/${deps.file}"/>
@@ -116,7 +117,7 @@
   </target>
 
   <target name="incanter-core" depends="compile-core-clj">
-    <jar jarfile="${jarfile}" >
+    <jar jarfile="${core-jarfile}" >
       <fileset dir="${build.dir}" includes="**/*.class"/>
       <manifest>
         <attribute name="Class-Path" value="."/>
@@ -126,6 +127,7 @@
 
   <target name="clean">
     <delete file="${jarfile}"/>
+    <delete file="${core-jarfile}"/>
     <delete dir="${build.dir}" />
   </target>
 
