@@ -98,6 +98,8 @@ To build Incanter, test it, and generate the api documentation yourself, run the
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
 
 
+For back-end processing that doesn't require charts or visualizations, an alternative ant target, called @incanter-core@, is available that creates @incanter-core.jar@, which only includes the 'core' and 'stats' libraries, and only depends on the clojure.jar and Parallel Colt libraries (colt.jar, netlib.jar, arpack-combo.jar).
+
 <a name="depends"></a>
 
 h2. Included dependencies
