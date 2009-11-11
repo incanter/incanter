@@ -1,3 +1,6 @@
 .*.swp
 *~
 build
+target
+lib
+incanter.jar
