@@ -3,7 +3,7 @@
 ##; clj -- script to start Clojure REPL with libraries necessary for Incanter
 # For native BLAS/LAPACK support
 
-INCANTER_HOME=.
+INCANTER_HOME=/home/jared/hacking/incanter.
 INCANTER_LIB_DIR=$INCANTER_HOME/lib
 INCANTER_SRC=$INCANTER_HOME/src
 CLASSES_DIR=$INCANTER_HOME/classes

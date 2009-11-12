@@ -42,7 +42,8 @@
               <tasks>
                 <java fork="true"
                       classname="clojure.lang.Compile"
-                      classpathref="maven.compile.classpath">
+                      classpathref="maven.compile.classpath"
+                      failonerror="true">
                   <sysproperty key="clojure.compile.path"
                                value="${project.build.outputDirectory}"/>
                   <arg value="incanter.core"/>
@@ -60,12 +61,39 @@
     <!-- <property name="processing-core.jar" location="${lib}/processing/core.jar" /> -->
     <!-- <property name="arpack-combo.jar" location="${lib}/arpack-combo-0.1.jar" /> -->
     <dependency>
+      <groupId>processing</groupId>
+      <artifactId>processing-core</artifactId>
+      <version>1</version>
+    </dependency> 
+    <dependency>
+      <groupId>arpack</groupId>
+      <artifactId>arpack-combo</artifactId>
+      <version>0.1.</version>
+    </dependency> 
+
+    <dependency>
       <groupId>concurrent</groupId>
       <artifactId>concurrent</artifactId>
       <version>1.3.4</version>
     </dependency> 
+    <dependency>
+      <groupId>netlib-java</groupId>
+      <artifactId>netlib-java</artifactId>
+      <version>0.9.1</version>
+    </dependency> 
+    <dependency>
+      <groupId>parallelcolt</groupId>
+      <artifactId>parallelcolt</artifactId>
+      <version>0.7.2</version>
+    </dependency> 
     <!-- <property name="gnujaxp.jar" location="${lib}/gnujaxp.jar" /> -->
     <!-- <property name="netlib.jar" location="${lib}/netlib-java-0.9.1.jar" /> -->
+    <dependency>
+      <groupId>gnujaxp</groupId>
+      <artifactId>gnujaxp</artifactId>
+      <version>1</version>
+    </dependency> 
+
     <dependency>
       <groupId>jfree</groupId>
       <artifactId>jcommon</artifactId>
