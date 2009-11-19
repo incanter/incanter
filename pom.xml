@@ -68,7 +68,7 @@
     <dependency>
       <groupId>arpack</groupId>
       <artifactId>arpack-combo</artifactId>
-      <version>0.1.</version>
+      <version>0.1</version>
     </dependency> 
 
     <dependency>
@@ -125,4 +125,20 @@
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
+      <repositories>
+        <repository>
+          <id>artifactory</id>
+          <name>libs-releases-local</name>
+          <url>http://174.143.180.82:8081/artifactory/libs-releases-local</url>
+        </repository>
+      </repositories>
+   <pluginRepositories>
+     <pluginRepository>
+       <id>artifactory</id>
+       <url>http://174.143.180.82:8081/artifactory/libs-releases-local</url>
+       <snapshots>
+         <enabled>false</enabled>
+       </snapshots>
+     </pluginRepository>
+   </pluginRepositories>
 </project>
