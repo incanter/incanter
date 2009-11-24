@@ -37,7 +37,7 @@
     (setq swank-clojure-binary nil
           swank-clojure-jar-path (expand-file-name "lib/clojure.jar" incanter-root)
           swank-clojure-extra-classpaths
-          (append (list (expand-file-name "incanter.jar" incanter-root))
+          (append (list (expand-file-name "incanter.jar" incanter-root)
            (let ((lib (expand-file-name "lib" incanter-root)))
              (if (file-exists-p lib)
                  (directory-files lib t ".jar$")))))

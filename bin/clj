@@ -3,10 +3,10 @@
 ##; clj -- script to start Clojure REPL with libraries necessary for Incanter
 # For native BLAS/LAPACK support
 
-INCANTER_HOME=/home/jared/hacking/incanter.
+INCANTER_HOME=.
 INCANTER_LIB_DIR=$INCANTER_HOME/lib
-INCANTER_SRC=$INCANTER_HOME/src
-CLASSES_DIR=$INCANTER_HOME/classes
+INCANTER_SRC=$INCANTER_HOME/src/
+CLASSES_DIR=$INCANTER_HOME../build/
 INCANTER_JAR=$INCANTER_HOME/incanter.jar
 
 CLOJURE_JARS=$INCANTER_LIB_DIR/clojure.jar:$INCANTER_LIB_DIR/clojure-contrib.jar
@@ -16,6 +16,8 @@ COLT_JARS=$INCANTER_LIB_DIR/parallelcolt-0.7.2.jar:$INCANTER_LIB_DIR/netlib-java
 JFREECHART_JARS=$INCANTER_LIB_DIR/jfreechart-1.0.13.jar:$INCANTER_LIB_DIR/jcommon-1.0.16.jar:$INCANTER_LIB_DIR/gnujaxp.jar
 OPENCSV_JARS=$INCANTER_LIB_DIR/opencsv-1.8.jar
 PROCESSING_JARS=$INCANTER_LIB_DIR/processing/core.jar:$INCANTER_LIB_DIR/processing/
+
+echo "java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.main"
 
 if [ -z "$1" ]; then
         java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.main
