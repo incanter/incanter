@@ -2501,3 +2501,72 @@
                              (for [r row-labels c col-labels]
                                   (repeat (sel table :rows r :cols c) [r c]))))]
        data)))
+
+
+
+
+(defn mahalanobis-dist
+  "Returns the Mahalanobis distance between x, which is 
+   either a vector or matrix of row vectors, and the 
+   centroid of the observations in the matrix :y.
+  
+  Arguments:
+    x -- either a vector or a matrix of row vectors
+  
+  Options:
+    :y -- Defaults to x, must be a matrix of row vectors which will be used to calculate a centroid
+    :W -- Defaults to (solve (covariance y)), if an identity matrix is provided, the mahalanobis-dist
+          function will be equal to the Euclidean distance.
+    :centroid -- Defaults to (map mean (trans y))
+  
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    ;; generate some multivariate normal data with a single outlier.
+    (def data (bind-rows
+                (bind-columns 
+                  (sample-mvn 100 
+                              :sigma (matrix [[1 0.9] 
+                                              [0.9 1]])))
+                [-1.75 1.75]))
+
+    ;; view a scatter plot of the data
+    (let [[x y] (trans data)]
+      (doto (scatter-plot x y)
+        (add-points [(mean x)] [(mean y)])
+        view))
+
+    ;; calculate the distances of each point from the centroid.
+    (def dists (mahalanobis-dist data))
+    ;; view a bar-chart of the distances
+    (view (bar-chart (range 102) dists))
+
+    ;; Now contrast with the Euclidean distance.
+    (def dists (mahalanobis-dist data :W (matrix [[1 0] [0 1]])))
+    ;; view a bar-chart of the distances
+    (view (bar-chart (range 102) dists))
+
+
+    ;; another example
+    (mahalanobis-dist [-1.75 1.75] :y data)
+    (mahalanobis-dist [-1.75 1.75] 
+                      :y data 
+                      :W (matrix [[1 0] 
+                                  [0 1]]))
+ 
+"
+  ([x & options]
+    (let [opts (when options (apply assoc {} options))
+          y (or (:y opts) x)
+          W (or (:W opts) (solve (covariance y)))
+          centroid (or (:centroid opts) (map mean (trans y)))
+          x-centroid (if (matrix? x)
+                       (map #(minus (trans %) centroid) x)
+                       (minus x centroid))
+          dist-fn (fn [a-b W] (sqrt (mmult (trans a-b) W a-b)))]
+      (if (matrix? x)
+        (map #(dist-fn % W) x-centroid)
+        (dist-fn x-centroid W)))))
+
+
