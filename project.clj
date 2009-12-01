@@ -8,7 +8,6 @@
                  [incanter/netlib-java "0.9.1"]
                  [incanter/parallelcolt "0.7.2"]
                  [incanter/gnujaxp "1"]
-                 [incanter "0.9.0"]
                  [org.danlarkin/clojure-json "1.1-SNAPSHOT"]
                  [joda-time/joda-time "1.6"]
                  [mysql/mysql-connector-java "5.1.6"]

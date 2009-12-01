@@ -172,9 +172,8 @@
   </dependencies>
       <repositories>
         <repository>
-          <id>artifactory</id>
-          <name>libs-releases-local</name>
-          <url>http://174.143.180.82:8081/artifactory/libs-releases-local</url>
+          <id>clojars.org</id>
+          <url>http://clojars.org/repo</url> 
         </repository>
         <repository>
             <snapshots>
