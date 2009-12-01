@@ -81,9 +81,6 @@
   </build>
 
   <dependencies>
-    <!-- <property name="colt.jar" location="${lib}/parallelcolt-0.7.2.jar" /> -->
-    <!-- <property name="processing-core.jar" location="${lib}/processing/core.jar" /> -->
-    <!-- <property name="arpack-combo.jar" location="${lib}/arpack-combo-0.1.jar" /> -->
     <dependency>
       <groupId>processing</groupId>
       <artifactId>processing-core</artifactId>
@@ -94,7 +91,6 @@
       <artifactId>arpack-combo</artifactId>
       <version>0.1</version>
     </dependency> 
-
     <dependency>
       <groupId>concurrent</groupId>
       <artifactId>concurrent</artifactId>
@@ -110,14 +106,11 @@
       <artifactId>parallelcolt</artifactId>
       <version>0.7.2</version>
     </dependency> 
-    <!-- <property name="gnujaxp.jar" location="${lib}/gnujaxp.jar" /> -->
-    <!-- <property name="netlib.jar" location="${lib}/netlib-java-0.9.1.jar" /> -->
     <dependency>
       <groupId>gnujaxp</groupId>
       <artifactId>gnujaxp</artifactId>
       <version>1</version>
     </dependency> 
-
     <dependency>
       <groupId>jfree</groupId>
       <artifactId>jcommon</artifactId>
@@ -151,7 +144,7 @@
      <dependency>
       <groupId>org.danlarkin</groupId>
       <artifactId>clojure-json</artifactId>
-   	  <version>1.1-SNAPSHOT</version>
+      <version>1.1-SNAPSHOT</version>
      </dependency>
     <dependency>
       <groupId>joda-time</groupId>
@@ -168,7 +161,6 @@
       <artifactId>gt-referencing</artifactId>
       <version>2.5.5</version>
     </dependency>
-
   </dependencies>
       <repositories>
         <repository>
@@ -183,13 +175,11 @@
             <name>Ibiblio - the public's library and digital archive</name>
             <url>http://www.ibiblio.org/maven2</url>
         </repository>
-
         <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>http://download.osgeo.org/webdav/geotools/</url>
         </repository>
-
         <repository>
             <snapshots>
                 <enabled>false</enabled>
@@ -198,15 +188,5 @@
             <name>Geotools repository</name>
             <url>http://maven.geotools.fr/repository</url>
         </repository>
-
       </repositories>
-   <pluginRepositories>
-     <pluginRepository>
-       <id>artifactory</id>
-       <url>http://174.143.180.82:8081/artifactory/libs-releases-local</url>
-       <snapshots>
-         <enabled>false</enabled>
-       </snapshots>
-     </pluginRepository>
-   </pluginRepositories>
 </project>
