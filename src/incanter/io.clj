@@ -70,7 +70,7 @@ incanter.io
   (:use [clojure.contrib.java-utils :only [file]])
   (:use [clojure.contrib.sql 
 	 :only [with-connection with-query-results]])
-  (:use [clojure.contrib.str-utils :only [str-join]])))
+  (:use [clojure.contrib.str-utils :only [str-join]]))
 
 (defn- parse-string [value]
   (try (Integer/parseInt value)

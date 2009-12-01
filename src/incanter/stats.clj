@@ -29,13 +29,12 @@
   (:use [incanter.transformations :only [map-map same-length? sort-map]])
   (:use [incanter.internal :only [tree-comp-each]])
   (:use [clojure.contrib.map-utils :only [deep-merge-with]])
-  (:use [clojure.set :only [difference intersection union]]))
+  (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]))
-
 
 (defn indicator
 "

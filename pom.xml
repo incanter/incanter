@@ -48,6 +48,29 @@
                   <sysproperty key="clojure.compile.path"
                                value="${project.build.outputDirectory}"/>
                   <arg value="incanter.core"/>
+		  <arg value="incanter.chrono"/>
+		  <arg value="incanter.classification"/>
+		  <arg value="incanter.incremental-stats"/>
+		  <arg value="incanter.information-theory"/>
+		  <arg value="incanter.internal"/>
+		  <arg value="incanter.io"/>
+		  <arg value="incanter.transformations"/>
+		  <arg value="incanter.probability"/>
+		  <arg value="incanter.geospatial"/>
+		  <arg value="incanter.stats"/>
+                </java>
+              </tasks>
+            </configuration>
+          </execution>
+	  <execution>
+	    <id>test</id>
+            <configuration>
+              <tasks>
+		<java classname="clojure.main" 
+		      classpathref="maven.test.classpath">
+                  <arg value="-e"/>
+                  <arg value="(require '(incanter [tests :as main]))
+                              (main/run)"/>
                 </java>
               </tasks>
             </configuration>
@@ -125,6 +148,27 @@
       <artifactId>clojure-contrib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+     <dependency>
+      <groupId>org.danlarkin</groupId>
+      <artifactId>clojure-json</artifactId>
+   	  <version>1.1-SNAPSHOT</version>
+     </dependency>
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.6</version>
+    </dependency> 
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-referencing</artifactId>
+      <version>2.5.5</version>
+    </dependency>
+
   </dependencies>
       <repositories>
         <repository>
@@ -132,6 +176,30 @@
           <name>libs-releases-local</name>
           <url>http://174.143.180.82:8081/artifactory/libs-releases-local</url>
         </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>ibiblio</id>
+            <name>Ibiblio - the public's library and digital archive</name>
+            <url>http://www.ibiblio.org/maven2</url>
+        </repository>
+
+        <repository>
+            <id>osgeo</id>
+            <name>Open Source Geospatial Foundation Repository</name>
+            <url>http://download.osgeo.org/webdav/geotools/</url>
+        </repository>
+
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>geotools</id>
+            <name>Geotools repository</name>
+            <url>http://maven.geotools.fr/repository</url>
+        </repository>
+
       </repositories>
    <pluginRepositories>
      <pluginRepository>
