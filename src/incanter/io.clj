@@ -70,7 +70,8 @@ incanter.io
   (:use [clojure.contrib.java-utils :only [file]])
   (:use [clojure.contrib.sql 
 	 :only [with-connection with-query-results]])
-  (:use [clojure.contrib.str-utils :only [str-join]]))
+  (:use [clojure.contrib.str-utils :only [str-join]])
+  (:use [incanter.core :only (dataset save)]))
 
 (defn- parse-string [value]
   (try (Integer/parseInt value)
@@ -84,6 +85,7 @@ incanter.io
     (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
   (catch java.net.MalformedURLException _
     (java.io.FileReader. location))))
+
 
 
 
@@ -102,25 +104,23 @@ incanter.io
          delim (or (:delim opts) \,) ; space delim default
          quote-char (or (:quote opts) \")
          skip (or (:skip opts) 0)
-         header? (or (:header opts) false)
-         reader (au.com.bytecode.opencsv.CSVReader.
-                    ;(java.io.FileReader. filename)
+         header? (or (:header opts) false)]
+     (with-open [reader #^CSVReader (CSVReader.
                     (get-input-reader filename)
                     delim
                     quote-char
-                    skip)
-         data-lines (map seq (seq (.readAll reader)))
-         raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
-         parsed-data (into [] (map (fn [row] (into [] (map #(parse-string %) row))) raw-data))
-       ]
-    ;;(if header? (dataset (first parsed-data) (rest parsed-data) (dataset parsed-data))))))
+                    skip)]
+       (let [data-lines (map seq (seq (.readAll reader)))
+             raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
+             parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) raw-data))
+            ]
     (if header?
       ; have header row
       (dataset (first parsed-data) (rest parsed-data))
       ; no header row so build a default one
       (let [col-count (count (first parsed-data))
             col-names (apply vector (map str (repeat col-count "col") (iterate inc 0)))]
-        (dataset col-names parsed-data))))))
+        (dataset col-names parsed-data))))))))
 
 
 

@@ -17,12 +17,12 @@ JFREECHART_JARS=$INCANTER_LIB_DIR/jfreechart-1.0.13.jar:$INCANTER_LIB_DIR/jcommo
 OPENCSV_JARS=$INCANTER_LIB_DIR/opencsv-1.8.jar
 PROCESSING_JARS=$INCANTER_LIB_DIR/processing/core.jar:$INCANTER_LIB_DIR/processing/
 
-echo "java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.main"
+TESTS_DIR=$INCANTER_HOME/test
 
 if [ -z "$1" ]; then
-        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.main
+        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS:$TESTS_DIR -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME jline.ConsoleRunner clojure.main
 else
         scriptname=$1
-        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME clojure.lang.Script $scriptname -- $*
+        java -server -cp .:..:$INCANTER_JAR:$COLT_JARS:$JLINE_JARS:$CLOJURE_JARS:$JFREECHART_JARS:$OPENCSV_JARS:$PROCESSING_JARS:$TESTS_DIR -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME clojure.lang.Script $scriptname -- $*
 fi
 
