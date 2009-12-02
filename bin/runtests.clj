@@ -18,9 +18,9 @@
 ;; March 12, 2009: First version
 
 
-(ns tests.runtests
+(ns test.runtests
   (:use [clojure.test :only (run-tests)]
-        (tests test-cases)
-        (incanter core io stats charts bayes)))
+        (incanter tests)))
 
-(run-tests 'tests.test-cases)
+(run)
+
