@@ -60,9 +60,9 @@ The online documentation for most Incanter functions contain usage examples. The
 ** "Datasets":http://wiki.github.com/liebke/incanter/datasets
 ** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
 ** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
-* See the @examples/@ directory and @tests/test-cases.clj@ for additional usage examples
+* See the @examples/@ directory and @test/incanter/*-tests.clj@ for additional usage examples
 ** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
-** Run @tests/runtests.clj@ to run test cases
+** Run @bin/runtests.clj@ to run test cases
 
 
 <a name="docs"></a>
@@ -92,7 +92,7 @@ To build Incanter, test it, and generate the api documentation yourself, run the
 * cd into the incanter directory
 * Download and uncompress Incanter's dependencies: @ant deps@
 * Build incanter.jar: @ant@
-* Run unit tests: @tests/runtests.clj@
+* Run unit tests: @bin/runtests.clj@
 * Generate API docs: @bin/generate_docs.clj@
 
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
