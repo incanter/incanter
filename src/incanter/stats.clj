@@ -2505,7 +2505,7 @@
 
 
 
-(defn mahalanobis-dist
+(defn mahalanobis-distance
   "Returns the Mahalanobis distance between x, which is 
    either a vector or matrix of row vectors, and the 
    centroid of the observations in the matrix :y.
@@ -2515,10 +2515,15 @@
   
   Options:
     :y -- Defaults to x, must be a matrix of row vectors which will be used to calculate a centroid
-    :W -- Defaults to (solve (covariance y)), if an identity matrix is provided, the mahalanobis-dist
+    :W -- Defaults to (solve (covariance y)), if an identity matrix is provided, the mahalanobis-distance
           function will be equal to the Euclidean distance.
     :centroid -- Defaults to (map mean (trans y))
-  
+
+
+  References:
+    http://en.wikipedia.org/wiki/Mahalanobis_distance
+
+
   Examples:
 
     (use '(incanter core stats charts))
@@ -2535,22 +2540,24 @@
     (let [[x y] (trans data)]
       (doto (scatter-plot x y)
         (add-points [(mean x)] [(mean y)])
+        (add-pointer -1.75 1.75 :text \"Outlier\")
+        (add-pointer (mean x) (mean y) :text \"Centroid\")
         view))
 
     ;; calculate the distances of each point from the centroid.
-    (def dists (mahalanobis-dist data))
+    (def dists (mahalanobis-distance data))
     ;; view a bar-chart of the distances
     (view (bar-chart (range 102) dists))
 
     ;; Now contrast with the Euclidean distance.
-    (def dists (mahalanobis-dist data :W (matrix [[1 0] [0 1]])))
+    (def dists (mahalanobis-distance data :W (matrix [[1 0] [0 1]])))
     ;; view a bar-chart of the distances
     (view (bar-chart (range 102) dists))
 
 
     ;; another example
-    (mahalanobis-dist [-1.75 1.75] :y data)
-    (mahalanobis-dist [-1.75 1.75] 
+    (mahalanobis-distance [-1.75 1.75] :y data)
+    (mahalanobis-distance [-1.75 1.75] 
                       :y data 
                       :W (matrix [[1 0] 
                                   [0 1]]))
