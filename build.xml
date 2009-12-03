@@ -20,9 +20,6 @@
   <property name="jline.jar" location="${lib}/jline-0.9.94.jar" />
   <property name="netlib.jar" location="${lib}/netlib-java-0.9.1.jar" />
   <property name="opencsv.jar" location="${lib}/opencsv-1.8.jar" />
-  <property name="gt-referencing.jar" location="${lib}/gt-referencing-2.5.5.jar" />
-  <property name="gt-metadata.jar" location="${lib}/gt-metadata-2.5.5.jar" />
-  <property name="geoapi.jar" location="${lib}/geoapi-2.2.0.jar" />
   <property name="joda-time.jar" location="${lib}/joda-time-1.6.jar" />
   <property name="clojure-json.jar" location="${lib}/clojure-json-1.1-SNAPSHOT.jar" />
   <property name="jarfile" location="incanter.jar" />
@@ -52,10 +49,6 @@
     <!-- incanter.io dependencies -->
     <path location="${opencsv.jar}"/>
     <path location="${clojure-json.jar}"/>
-    <!-- incanter.geospatial dependencies -->
-    <path location="${gt-referencing.jar}"/>
-    <path location="${gt-metadata.jar}"/>
-    <path location="${geoapi.jar}"/>
     <!-- incanter.chrono dependencies -->
     <path location="${joda-time.jar}"/>
   </path>
@@ -82,9 +75,6 @@
         <path location="${jline.jar}"/>
         <path location="${netlib.jar}"/>
         <path location="${opencvs.jar}"/>
-        <path location="${gt-referencing.jar}"/>
-        <path location="${gt-metadata.jar}"/>
-        <path location="${geoapi.jar}"/>
         <path location="${joda-time.jar}"/>
         <path location="${clojure-json.jar}"/>
         <path location="${build.dir}" />
@@ -110,7 +100,6 @@
       <arg value="incanter.censored" />
       <arg value="incanter.chrono" />
       <arg value="incanter.classification" />
-      <arg value="incanter.geospatial" />
       <arg value="incanter.incremental-stats" />
       <arg value="incanter.information-theory" />
       <arg value="incanter.probability" />

@@ -11,7 +11,6 @@
 		 :transformations-tests 
 		 :probability-tests 
 		 :information-theory-tests 
-		 :geospatial-tests
                  :bayes-tests])
 
 (def test-namespaces
