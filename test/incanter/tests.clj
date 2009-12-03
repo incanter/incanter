@@ -2,13 +2,17 @@
   (:use [clojure.contrib.test-is :only (run-tests)])
   (:gen-class))
 
-(def test-names [:chrono-test 
+(def test-names [:core-tests
+		 :stats-tests
+		 :io-tests 
+                 :charts-tests
+                 :internal-tests
+                 :chrono-test 
 		 :transformations-tests 
 		 :probability-tests 
-		 :io-tests 
-		 :stats-tests
 		 :information-theory-tests 
-		 :geospatial-tests])
+		 :geospatial-tests
+                 :bayes-tests])
 
 (def test-namespaces
      (map #(symbol (str "incanter." (name %)))

@@ -8,7 +8,7 @@
   <property name="src" location="src" />
   <property name="build.dir" location="build" />
   <property name="lib" location="lib" />
-  <property name="clojure.jar" location="${lib}/clojure.jar" />
+  <property name="clojure.jar" location="${lib}/clojure-1.1.0-alpha-SNAPSHOT.jar" />
   <property name="clojure-contrib.jar" location="${lib}/clojure-contrib.jar" />
   <property name="colt.jar" location="${lib}/parallelcolt-0.7.2.jar" />
   <property name="jfreechart.jar" location="${lib}/jfreechart-1.0.13.jar" />
@@ -20,10 +20,15 @@
   <property name="jline.jar" location="${lib}/jline-0.9.94.jar" />
   <property name="netlib.jar" location="${lib}/netlib-java-0.9.1.jar" />
   <property name="opencsv.jar" location="${lib}/opencsv-1.8.jar" />
+  <property name="gt-referencing.jar" location="${lib}/gt-referencing-2.5.5.jar" />
+  <property name="gt-metadata.jar" location="${lib}/gt-metadata-2.5.5.jar" />
+  <property name="geoapi.jar" location="${lib}/geoapi-2.2.0.jar" />
+  <property name="joda-time.jar" location="${lib}/joda-time-1.6.jar" />
+  <property name="clojure-json.jar" location="${lib}/clojure-json-1.1-SNAPSHOT.jar" />
   <property name="jarfile" location="incanter.jar" />
   <property name="core-jarfile" location="incanter-core.jar" />
   <property name="LICENSE" location="epl-v10.html" />
-  <property name="deps.file" value="deps.zip"/>
+  <property name="deps.file" value="deps-1.0.zip"/>
   <property name="deps.url" value="http://cloud.github.com/downloads/liebke/incanter/${deps.file}"/>
 
   <path id="classpath">
@@ -46,6 +51,13 @@
     <path location="${processing-core.jar}"/>
     <!-- incanter.io dependencies -->
     <path location="${opencsv.jar}"/>
+    <path location="${clojure-json.jar}"/>
+    <!-- incanter.geospatial dependencies -->
+    <path location="${gt-referencing.jar}"/>
+    <path location="${gt-metadata.jar}"/>
+    <path location="${geoapi.jar}"/>
+    <!-- incanter.chrono dependencies -->
+    <path location="${joda-time.jar}"/>
   </path>
 
   <target name="init">
@@ -70,6 +82,11 @@
         <path location="${jline.jar}"/>
         <path location="${netlib.jar}"/>
         <path location="${opencvs.jar}"/>
+        <path location="${gt-referencing.jar}"/>
+        <path location="${gt-metadata.jar}"/>
+        <path location="${geoapi.jar}"/>
+        <path location="${joda-time.jar}"/>
+        <path location="${clojure-json.jar}"/>
         <path location="${build.dir}" />
       </classpath>
     </javac>
@@ -91,6 +108,13 @@
       <arg value="incanter.som" />
       <arg value="incanter.bayes" />
       <arg value="incanter.censored" />
+      <arg value="incanter.chrono" />
+      <arg value="incanter.classification" />
+      <arg value="incanter.geospatial" />
+      <arg value="incanter.incremental-stats" />
+      <arg value="incanter.information-theory" />
+      <arg value="incanter.probability" />
+      <arg value="incanter.transformations" />
     </java>
   </target>
 
