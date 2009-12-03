@@ -40,7 +40,7 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
-A pre-built version of Incanter that includes all the necessary dependencies can be downloaded at <a href="http://cloud.github.com/downloads/liebke/incanter/incanter.zip">http://cloud.github.com/downloads/liebke/incanter/incanter.zip</a>. If you would like to build it from source, read <a href="#build">Building Incanter</a>.
+A pre-built version of Incanter that includes all the necessary dependencies can be downloaded at <a href="http://cloud.github.com/downloads/liebke/incanter/incanter-1.0rc.zip">http://cloud.github.com/downloads/liebke/incanter/incanter-1.0rc.zip</a>. If you would like to build it from source, read <a href="#build">Building Incanter</a>.
 
 Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@ or @bin\clj.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the clj script so that it uses an absolute path instead the ./ directory).
 
