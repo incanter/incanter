@@ -12,6 +12,8 @@
                                                          'incanter.information-theory
                                                          'incanter.bayes 
                                                          'incanter.datasets 
+                                                         'incanter.probability 
+                                                         'incanter.transformations 
                                                          'incanter.optimize 
                                                          'incanter.censored])
 

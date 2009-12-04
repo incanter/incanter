@@ -10,5 +10,4 @@
                  [incanter/gnujaxp "1"]
                  [org.danlarkin/clojure-json "1.1-SNAPSHOT"]
                  [joda-time/joda-time "1.6"]
-                 [mysql/mysql-connector-java "5.1.6"]
-                 [org.geotools/gt-referencing "2.5.5"]])
+                 [mysql/mysql-connector-java "5.1.6"]])
