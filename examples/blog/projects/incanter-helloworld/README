@@ -1,0 +1,25 @@
+
+
+First make sure Leiningen is installed:
+
+$ cd ~/bin
+$ wget http://github.com/technomancy/leiningen/raw/master/bin/lein
+$ chmod +x lein
+$ lein self-install
+
+Then download and install the project dependencies:
+
+$ lein deps
+
+Compile it:
+
+$ lein compile
+
+And create a uberjar that contains all of the project files and dependencies:
+
+$ lein uberjar
+
+And finally, run incanter-helloworld:
+
+$ java -jar incanter-helloworld.jar
+
