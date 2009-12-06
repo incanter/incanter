@@ -16,7 +16,19 @@
 
 
 
-(ns incanter.stats
+(ns #^{:doc "This is the core statistical library for Incanter.
+            It provides probability functions (cdf, pdf, quantile),
+            random number generation, statistical tests, basic
+            modeling functions, similarity/association measures,
+            and more.
+
+            This library is built on Parallel Colt 
+            (http://sites.google.com/site/piotrwendykier/software/parallelcolt),
+            an extension of the Colt numerics library 
+            (http://acs.lbl.gov/~hoschek/colt/).
+            "
+       :author "David Edgar Liebke and Bradford Cross"}
+  incanter.stats
   (:gen-class)
   (:import (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform

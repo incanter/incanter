@@ -16,7 +16,11 @@
 
 
 
-(ns incanter.bayes
+(ns #^{:doc "This is library provides functions for performing
+            basic Bayesian modeling and inference.
+            "
+       :author "David Edgar Liebke"}
+  incanter.bayes
   (:gen-class)
   (:use [incanter.core :only (matrix mmult mult div minus trans ncol nrow
                               plus to-list decomp-cholesky solve half-vectorize

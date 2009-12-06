@@ -16,7 +16,17 @@
 
 
 
-(ns incanter.charts
+(ns #^{:doc "This is the core charting library for Incanter.
+            It provides basic scatter plots, histograms, box plots,
+            xy plots, bar charts, line charts, as well as 
+            specialized charts like trace plots and Bland-Altman
+            plots.
+
+            This library is built on the JFreeChart library
+            (http://www.jfree.org/jfreechart/).
+            "
+       :author "David Edgar Liebke"}
+  incanter.charts
   (:gen-class)
   ;(:use (incanter core stats))
   (:use [incanter.core :only (matrix? to-list plus minus div group-by

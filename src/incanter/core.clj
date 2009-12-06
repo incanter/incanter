@@ -16,7 +16,19 @@
 
 
 
-(ns incanter.core
+(ns #^{:doc "This is the core numerics library for Incanter.
+            It provides functions for vector- and matrix-based 
+            mathematical operations and the core data manipulation 
+            functions for Incanter. 
+
+            This library is built on Parallel Colt 
+            (http://sites.google.com/site/piotrwendykier/software/parallelcolt),
+            an extension of the Colt numerics library 
+            (http://acs.lbl.gov/~hoschek/colt/).
+            "
+       :author "David Edgar Liebke"}
+  
+  incanter.core
   (:gen-class)
   (:use (incanter internal))
   (:import (incanter Matrix)

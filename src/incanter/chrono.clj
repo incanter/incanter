@@ -1,79 +1,80 @@
-;;; chrono.clj --- Because calling it date-utils would be boring.
 
-;; By Matt Moriarity, Phil Hagelberg, and Bradford Cross
+(ns #^{:doc "
+       chrono.clj --- Because calling it date-utils would be boring.
 
-;;; Use the date function to create dates. You can look up components
-;;; much like you would in a map:
-;;
-;; (def my-date (date 2009 2 27 12 34 56))
-;;
-;; (my-date :year)   ;; 2009
-;; (my-date :month)  ;; 2
-;; (my-date :day)    ;; 27
-;; (my-date :hour)   ;; 12
-;; (my-date :minute) ;; 34
-;; (my-date :second) ;; 56
-;;
-;;; You may omit the time if you like:
-;;
-;; (def my-other-date (date 2009 2 27))
-;; (my-other-date :hour) ;; 0
-;;
-;;; To get a date relative to another date, use earlier and later:
-;;
-;; (earlier my-date 100 :minute) ;; 2009 2 27 10:54:56
-;; (later my-other-date 10 :day) ;; 2009 3 9
-;;
-;;; For comparing dates, use earlier? and later?:
-;;
-;; (earlier? my-date my-other-date) ;; false
-;; (later? (later my-date 10 :day) my-date) ;; true
-;;
-;;; You can see the time between two dates by calling time-between:
-;;
-;; (time-between my-other-date (date 2009 2 25) :days) ;; 2
-;;
-;; The date-seq function returns a lazy seq of dates incrementing by
-;; the units in its first arg starting from its second arg. The third
-;; arg if given dictates the end of the sequence.
-;;
-;; (date-seq :hours my-other-date my-date) ;; (a seq of twelve hours)
-;; (take 4 (date-seq :years my-date))
-;; ;; (date 2009 2 27 12 34 56) (date 2010 2 27 12 34 56)
-;; ;; (date 2011 2 27 12 34 56) (date 2012 2 27 12 34 56) [...]
-;;
-;;; For converting between strings and dates, use format-date and
-;;; parse-date
-;;
-;; (format-date my-date :short-date-time) ;; 2/27/09 12:34 PM
-;; (format-date my-other-date :long-date) ;; February 27, 2009
-;; (parse-date "12/25/09" :short-date) ;; (date 2009 12 25)
-;; (parse-date "January 1, 2008 1:45:23 PM EST" :long-date-time)
-;; ;; (date 2008 1 1 13 45 23)
-;;
-;; Supported date formats are:
-;;   iso8601
-;;   short-date
-;;   medium-date
-;;   long-date
-;;   full-date
-;;   short-date-time
-
-;; Both format-date and parse-date also support a string for the
-;; format argument, which will use the string as the format for a
-;; SimpleDateFormat (see the javadocs of that class for how to write
-;; these formats).
-;;
-;; See test_contrib/chrono.clj for more details.
-;;
-;;; TODO:
-;;
-;; * Timezones
-;; * More support for weeks
-;; * Various others scattered through code
-;;
-
-(ns incanter.chrono
+       Use the date function to create dates. You can look up components
+       much like you would in a map:
+      
+      (def my-date (date 2009 2 27 12 34 56))
+      
+      (my-date :year)   ;; 2009
+      (my-date :month)  ;; 2
+      (my-date :day)    ;; 27
+      (my-date :hour)   ;; 12
+      (my-date :minute) ;; 34
+      (my-date :second) ;; 56
+      
+       You may omit the time if you like:
+      
+      (def my-other-date (date 2009 2 27))
+      (my-other-date :hour) ;; 0
+      
+       To get a date relative to another date, use earlier and later:
+      
+      (earlier my-date 100 :minute) ;; 2009 2 27 10:54:56
+      (later my-other-date 10 :day) ;; 2009 3 9
+      
+       For comparing dates, use earlier? and later?:
+      
+      (earlier? my-date my-other-date) ;; false
+      (later? (later my-date 10 :day) my-date) ;; true
+      
+       You can see the time between two dates by calling time-between:
+      
+      (time-between my-other-date (date 2009 2 25) :days) ;; 2
+      
+      The date-seq function returns a lazy seq of dates incrementing by
+      the units in its first arg starting from its second arg. The third
+      arg if given dictates the end of the sequence.
+      
+      (date-seq :hours my-other-date my-date) ;; (a seq of twelve hours)
+      (take 4 (date-seq :years my-date))
+      ;; (date 2009 2 27 12 34 56) (date 2010 2 27 12 34 56)
+      ;; (date 2011 2 27 12 34 56) (date 2012 2 27 12 34 56) [...]
+      
+       For converting between strings and dates, use format-date and
+       parse-date
+      
+      (format-date my-date :short-date-time) ;; 2/27/09 12:34 PM
+      (format-date my-other-date :long-date) ;; February 27, 2009
+      (parse-date \"12/25/09\" :short-date) ;; (date 2009 12 25)
+      (parse-date \"January 1, 2008 1:45:23 PM EST\" :long-date-time)
+      ;; (date 2008 1 1 13 45 23)
+      
+      Supported date formats are:
+        iso8601
+        short-date
+        medium-date
+        long-date
+        full-date
+        short-date-time
+      
+      Both format-date and parse-date also support a string for the
+      format argument, which will use the string as the format for a
+      SimpleDateFormat (see the javadocs of that class for how to write
+      these formats).
+      
+      See test_contrib/chrono.clj for more details.
+      
+       TODO:
+      
+      * Timezones
+      * More support for weeks
+      * Various others scattered through code
+      
+      "
+       :author "Matt Moriarity, Phil Hagelberg, and Bradford Cross"}
+  incanter.chrono
   (:use [incanter.internal :only [maybe?]])
   (:import (java.util Calendar TimeZone)
            (java.text DateFormat SimpleDateFormat)
