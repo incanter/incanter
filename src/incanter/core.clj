@@ -1428,6 +1428,7 @@
   (fn [obj & options] (cond
                         (and (not (matrix? obj))
                              (not (dataset? obj))
+                             (not (map? obj))
                              (coll? obj))
                           ::coll
                         (.contains (str (type obj)) "processing.core.PApplet")
