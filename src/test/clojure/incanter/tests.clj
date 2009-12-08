@@ -29,3 +29,6 @@
   [& args]
   (run)
   (System/exit 0))
+
+; There ought to be a better way to do this
+(run)
