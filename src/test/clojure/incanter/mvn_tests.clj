@@ -1,8 +1,7 @@
 ;;; Wrapper for maven running tests.
 
-(ns incanter.mvn_tests)
+(ns incanter.mvn_tests
+  (:require [incanter.tests]))
 
-
-(require '(incanter [tests]))
 (System/setProperty "incanter.home" ".")
-(tests/run)
+(incanter.tests/run)
