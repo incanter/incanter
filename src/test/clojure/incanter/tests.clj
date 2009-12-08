@@ -31,4 +31,5 @@
   (System/exit 0))
 
 ; There ought to be a better way to do this
+(System/setProperty "incanter.home" ".")
 (run)
