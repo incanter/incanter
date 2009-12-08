@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <title>incanter.io API reference (Incanter)</title>
+    <link href="static/favicon.png" rel="icon" />
+    <link href="static/favicon.png" rel="shortcut icon" />
+    <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
+    <!-- TODO: are we using these (from clojure.org)? If so, add the files -->
+    <script src="file/view/code_highlighter.js" type="text/javascript"></script>
+    <script src="file/view/clojure.js" type="text/javascript"></script>
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
+      </div>
+      <div id="leftcolumn"><div><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <a class="wiki_link" href="index.html">Overview</a><br />
+    <a class="wiki_link" href="api-index.html">API Index</a><br />
+    <a class="wiki_link" href="#">Namespaces:</a>
+    <ul id="left-sidebar-list">
+      <li><a href="incanter.bayes-api.html" class="wiki_link">incanter.bayes</a></li><li><a href="incanter.censored-api.html" class="wiki_link">incanter.censored</a></li><li><a href="incanter.charts-api.html" class="wiki_link">incanter.charts</a></li><li><a href="incanter.chrono-api.html" class="wiki_link">incanter.chrono</a></li><li><a href="incanter.classification-api.html" class="wiki_link">incanter.classification</a></li><li><a href="incanter.core-api.html" class="wiki_link">incanter.core</a></li><li><a href="incanter.datasets-api.html" class="wiki_link">incanter.datasets</a></li><li><a href="incanter.incremental-stats-api.html" class="wiki_link">incanter.incremental-stats</a></li><li><a href="incanter.information-theory-api.html" class="wiki_link">incanter.information-theory</a></li><li><a href="incanter.internal-api.html" class="wiki_link">incanter.internal</a></li><li><a href="incanter.io-api.html" class="wiki_link">incanter.io</a></li><li><a href="incanter.optimize-api.html" class="wiki_link">incanter.optimize</a></li><li><a href="incanter.probability-api.html" class="wiki_link">incanter.probability</a></li><li><a href="incanter.processing-api.html" class="wiki_link">incanter.processing</a></li><li><a href="incanter.som-api.html" class="wiki_link">incanter.som</a></li><li><a href="incanter.stats-api.html" class="wiki_link">incanter.stats</a></li><li><a href="incanter.transformations-api.html" class="wiki_link">incanter.transformations</a></li>
+    </ul>
+  </div>
+</div>
+</div></div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0">Overview</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.io/read-dataset">read-dataset</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.io/with-mysql-results">with-mysql-results</a>
+    </div>
+    <br />
+  </div>
+</div>
+</div></div>
+                <div id="content-tag"><div><h1 id="overview">API for <span id="namespace-name">incanter.io</span></h1>
+by <span id="author">Unknown</span><br />
+<br />Usage:
+<pre>
+(ns your-namespace
+  (:require <span id="long-name">incanter.io</span>))
+</pre><pre>
+</pre><h2>Overview</h2>
+<pre id="namespace-docstr"></pre>
+<br />
+<h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.io/read-dataset">read-dataset</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (read-dataset filename &amp; options)
+</pre>
+  <pre id="var-docstr">
+  Returns a dataset read from a file or a URL.
+
+  Options:
+    :delim (default \,), other options (\tab \space \|  etc)
+    :quote (default \") character used for quoting strings
+    :skip (default 0) the number of lines to skip at the top of the file.
+    :header (default false) indicates the file has a header line
+</pre>
+  <a href="http://github.com/liebke/incanter/blob/29762d615c2538747b46e35d1b7afda14ccb98eb/src/incanter/io.clj#L92" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.io/with-mysql-results">with-mysql-results</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (with-mysql-results dbinfo query f)
+</pre>
+  <pre id="var-docstr">
+takes dbinfo, query and a fn and applys the fn to query results.
+
+example dbinfo:
+
+ {:host "localhost"
+ :port 3306
+ :name "testimport"
+ :classname "com.mysql.jdbc.Driver"
+ :subprotocol "mysql"
+ :user "root"
+ :password "12345"}</pre>
+  <a href="http://github.com/liebke/incanter/blob/29762d615c2538747b46e35d1b7afda14ccb98eb/src/incanter/io.clj#L245" id="var-source">Source</a>
+</div>
+
+
+</div></div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info</div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>
