@@ -3,7 +3,7 @@
 First make sure Leiningen is installed:
 
 $ cd ~/bin
-$ wget http://github.com/technomancy/leiningen/raw/master/bin/lein
+$ wget http://github.com/technomancy/leiningen/raw/stable/bin/lein
 $ chmod +x lein
 $ lein self-install
 
