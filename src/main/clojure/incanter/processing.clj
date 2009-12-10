@@ -34,7 +34,8 @@
 
 
 (defn alpha
-  [sketch what] (.alpha sketch (int what)))
+  ""
+  ([sketch what] (.alpha sketch (int what))))
 
 
 ;;(defn ambient
@@ -49,7 +50,8 @@
 
 ;; modified by DEL
 (defn ambient
-  [sketch rgb] (.ambient sketch rgb))
+  ""
+  ([sketch rgb] (.ambient sketch rgb)))
 
 
 ;; modified by DEL
@@ -60,6 +62,7 @@
 ;;         (.ambientLight sketch rgb (float x) (float y) (float z))))
 
 (defn ambient-light
+  ""
   ([sketch red green blue]
      (.ambientLight sketch (float red) (float green) (float blue)))
   ([sketch red green blue x y z]
@@ -68,6 +71,7 @@
 ;; $$append
 
 (defn apply-matrix
+  ""
   ([sketch n00 n01 n02 n10 n11 n12]
          (.applyMatrix sketch (float n00) (float n01) (float n02)
                                    (float n10) (float n11) (float n12)))
@@ -81,8 +85,9 @@
                                    (float n30) (float n31) (float n32) (float 33))))
 
 (defn arc
-  [sketch a b c d start stop]
-  (.arc sketch (float a)(float b) (float c) (float d) (float start) (float stop)))
+  ""
+  ([sketch a b c d start stop]
+    (.arc sketch (float a)(float b) (float c) (float d) (float start) (float stop))))
 
 ;; $$arraycopy
 
@@ -191,12 +196,15 @@
 ;;  ([#^PApplet sketch r g b alpha] (.background sketch (float r) (float g) (float b) (float alpha))))
 
 (defn background-image
-  [#^PApplet sketch #^PImage img] (.background sketch img))
+  ""
+  ([#^PApplet sketch #^PImage img] (.background sketch img)))
 
 (defn begin-camera
-  [#^PApplet sketch] (.beginCamera sketch))
+  ""
+  ([#^PApplet sketch] (.beginCamera sketch)))
 
 (defn begin-raw
+  ""
   ([#^PApplet sketch #^PGraphics rawGfx] (.beginRaw sketch rawGfx))
   ([#^PApplet sketch #^java.lang.String renderer #^java.lang.String filename]
          (.beginRaw sketch renderer filename)))
@@ -204,10 +212,12 @@
 ;; $$beginRecord
 
 (defn begin-shape
+  ""
   ([#^PApplet sketch ] (.beginShape sketch))
   ([#^PApplet sketch kind] (.beginShape sketch (int kind))))
 
 (defn bezier
+  ""
   ([#^PApplet sketch x1 y1 x2 y2 x3 y3 x4 y4]
          (.bezier sketch
                           (float x1) (float y1)
@@ -222,15 +232,22 @@
                           (float x4) (float y4) (float z4))))
 
 (defn bezier-detail
-  [#^PApplet sketch detail] (.bezierDetail sketch (int detail)))
+  ""
+  ([#^PApplet sketch detail] 
+    (.bezierDetail sketch (int detail))))
 
 (defn bezier-point
-  [#^PApplet sketch a b c d t] (.bezierPoint sketch (float a) (float b) (float c) (float d) (float t)))
+  ""
+  ([#^PApplet sketch a b c d t] 
+    (.bezierPoint sketch (float a) (float b) (float c) (float d) (float t))))
 
 (defn bezier-tangent
-  [#^PApplet sketch a b c d t] (.bezierTangent sketch (float a) (float b) (float c) (float d) (float t)))
+  ""
+  ([#^PApplet sketch a b c d t] 
+    (.bezierTangent sketch (float a) (float b) (float c) (float d) (float t))))
 
 (defn bezier-vertex
+  ""
   ([#^PApplet sketch x2 y2 x3 y3 x4 y4]
          (.bezierVertex sketch
                           (float x2) (float y2)
@@ -245,6 +262,7 @@
 ;; $$binary
 
 (defn blend
+  ""
   ([#^PApplet sketch sx1 sy1 sx2 sy2 dx1 dy1 dx2 dy2 mode]
          (.blend sketch (int sx1) (int sy1) (int sx2) (int sy2)
                         (int dx1) (int dy1) (int dx2) (int dy2)
@@ -255,24 +273,37 @@
                             (int mode))))
 
 (defn blend-color
-  [c1 c2 mode] (PApplet/blendColor (int c1) (int c2) (int mode)))
+  ""
+  ([c1 c2 mode] 
+    (PApplet/blendColor (int c1) (int c2) (int mode))))
 
-(defn blue [#^PApplet sketch what] (.blue sketch (int what)))
+(defn blue 
+  ""
+  ([#^PApplet sketch what] 
+    (.blue sketch (int what))))
 
 (defn box
+  ""
   ([#^PApplet sketch size] (.box sketch (int size)))
   ([#^PApplet sketch w h d] (.box sketch (float w) (float h) (float d))))
 
-(defn brightness [#^PApplet sketch what] (.brightness sketch (int what)))
+(defn brightness 
+  ""
+  ([#^PApplet sketch what] (.brightness sketch (int what))))
 
 (defn camera
+  ""
   ([#^PApplet sketch ] (.camera sketch))
   ([#^PApplet sketch eyeX eyeY eyeZ centerX centerY centerZ upX upY upZ]
          (.camera sketch (float eyeX) (float eyeY) (float eyeZ) (float centerX) (float centerY) (float centerZ) (float upX) (float upY) (float upZ))))
 
-(defn can-draw? [#^PApplet sketch ] (.canDraw sketch))
+(defn can-draw? 
+  ""
+  ([#^PApplet sketch ] (.canDraw sketch)))
 
-(defn ceil [n] (PApplet/ceil (float n)))
+(defn ceil 
+  ""
+  ([n] (PApplet/ceil (float n))))
 
 ;;(defn color-float
 ;;  ([#^PApplet sketch gray] (.background sketch (float gray)))
@@ -376,6 +407,7 @@
 
 
 (defn color-mode
+  ""
   ([#^PApplet sketch mode]
     (.colorMode sketch (int mode)))
   ([#^PApplet sketch mode max]
@@ -389,6 +421,7 @@
 
 ;; modified by DEL
 (defn constrain
+  ""
   [amt low high]
   (if (or (float? amt) (float? low) (float? high))
     (PApplet/constrain (float amt) (float low) (float high))
@@ -414,6 +447,7 @@
 ;;(defn cos [angle] (PApplet/cos (float angle)))
 
 (defn create-font
+  ""
   ([#^PApplet sketch name size] (.createFont sketch name (float size)))
   ([#^PApplet sketch name size smooth] (.createFont sketch name (float size) smooth))
   ([#^PApplet sketch name size smooth #^chars charset]
@@ -427,6 +461,7 @@
 
 ;; added by DEL
 (defn save-font
+  ""
   ([#^processing.core.PApplet sketch #^processing.core.PFont font filename]
     (let [out (java.io.FileOutputStream. filename)]
       (.save font out))))
@@ -468,39 +503,55 @@
 
 
 (defn create-graphics
+  ""
   ([#^PApplet sketch w h renderer]
          (.createGraphics sketch (int w) (int h) renderer))
   ([#^PApplet sketch w h renderer path]
          (.createGraphics sketch (int w) (int h) renderer path)))
 
-(defn create-image [#^PApplet sketch w h format] (.createImage sketch (int w) (int h) (int format)))
+(defn create-image 
+  ""
+  ([#^PApplet sketch w h format] (.createImage sketch (int w) (int h) (int format))))
 
-(defn create-input [filename]
-        (PApplet/createInput (java.io.File. filename)))
+(defn create-input 
+  ""
+  ([filename]
+        (PApplet/createInput (java.io.File. filename))))
 
 (defn create-input-raw
         "Call openStream() without automatic gzip decompression."
         [#^PApplet sketch filename]
         (.createInputRaw sketch filename))
 
-(defn create-output [filename]
-        (PApplet/createOutput (java.io.File. filename)))
+(defn create-output 
+  ""
+  ([filename]
+        (PApplet/createOutput (java.io.File. filename))))
 
-(defn create-path [filename] (PApplet/createPath filename))
+(defn create-path 
+  ""
+  ([filename] (PApplet/createPath filename)))
 
-(defn create-reader [#^PApplet sketch filename] (.createReader sketch filename))
+(defn create-reader 
+  ""
+  ([#^PApplet sketch filename] (.createReader sketch filename)))
 
-(defn create-writer [#^PApplet sketch filename] (.createWriter sketch filename))
+(defn create-writer 
+  ""
+  ([#^PApplet sketch filename] (.createWriter sketch filename)))
 
 (defn cursor
+  ""
   ([#^PApplet sketch ] (.cursor sketch))
   ([#^PApplet sketch cur-type] (.cursor sketch (int cur-type))))
 
 (defn cursor-image
+  ""
   ([#^PApplet sketch #^PImage img] (.cursor sketch img))
   ([#^PApplet sketch #^PImage img hx hy] (.cursor sketch img (int hx) (int hy))))
 
 (defn curve
+  ""
   ([#^PApplet sketch x1 y1 x2 y2 x3 y3 x4 y4]
          (.curve sketch
                           (float x1) (float y1)
@@ -514,17 +565,27 @@
                           (float x3) (float y3) (float z3)
                           (float x4) (float y4) (float z4))))
 
-(defn curve-detail [#^PApplet sketch detail] (.curveDetail sketch (int detail)))
+(defn curve-detail 
+  ""
+  ([#^PApplet sketch detail] 
+    (.curveDetail sketch (int detail))))
 
 (defn curve-point
-  [#^PApplet sketch a b c d t] (.bezierPoint sketch (float a) (float b) (float c) (float d) (float t)))
+  ""
+  ([#^PApplet sketch a b c d t] 
+    (.bezierPoint sketch (float a) (float b) (float c) (float d) (float t))))
 
 (defn curve-tangent
-  [#^PApplet sketch a b c d t] (.curveTangent sketch (float a) (float b) (float c) (float d) (float t)))
+  ""
+  ([#^PApplet sketch a b c d t] 
+    (.curveTangent sketch (float a) (float b) (float c) (float d) (float t))))
 
-(defn curve-tightness [#^PApplet sketch ti] (.curveTightness sketch (float ti)))
+(defn curve-tightness 
+  ""
+  ([#^PApplet sketch ti] (.curveTightness sketch (float ti))))
 
 (defn curve-vertex
+  ""
   ([#^PApplet sketch x y] (.curveVertex sketch (float x) (float y)))
   ([#^PApplet sketch x y z] (.curveVertex sketch (float x) (float y) (float z))))
 
@@ -536,34 +597,49 @@
   []
   (PApplet/day))
 
-(defn degrees [radians] (PApplet/degrees (float radians)))
+(defn degrees 
+  ""
+  ([radians] (PApplet/degrees (float radians))))
 
-(defn delay-frame [#^PApplet sketch nap-time] (.delay sketch (int nap-time)))
+(defn delay-frame 
+  ""
+  ([#^PApplet sketch nap-time] (.delay sketch (int nap-time))))
 
-(defn destroy [#^PApplet sketch ] (.destroy sketch))
+(defn destroy 
+  ""
+  ([#^PApplet sketch ] (.destroy sketch)))
 
 ;; $$die
 
 (defn directional-light
-  [#^PApplet sketch r g b nx ny nz]
-  (.directionalLight sketch (float r) (float g) (float b) (float nx) (float ny) (float nz)))
+  ""
+  ([#^PApplet sketch r g b nx ny nz]
+    (.directionalLight sketch (float r) (float g) (float b) (float nx) (float ny) (float nz))))
 
-(defn displayable? [#^PApplet sketch ] (.displayable sketch))
+(defn displayable? 
+  ""
+  ([#^PApplet sketch ] (.displayable sketch)))
 
 (defn dist
+  ""
   ([a b x y] (PApplet/dist (float a) (float b) (float x) (float y)))
   ([a b c x y z] (PApplet/dist (float a) (float b) (float c) (float x) (float y) (float z))))
 
 ;; $$draw
 
 (defn ellipse
-  [#^PApplet sketch a b c d]
-  (.ellipse sketch (float a) (float b) (float c) (float d)))
+  ""
+  ([#^PApplet sketch a b c d]
+    (.ellipse sketch (float a) (float b) (float c) (float d))))
 
-(defn ellipse-mode [#^PApplet sketch mode] (.ellipseMode sketch (int mode)))
+(defn ellipse-mode 
+  ""
+  ([#^PApplet sketch mode] 
+    (.ellipseMode sketch (int mode))))
 
 ;; modified by DEL
 (defn emissive
+  ""
   ([#^PApplet sketch gray]
    (if (integer? gray)
      (.emissive sketch (int gray))
@@ -574,17 +650,24 @@
     (.emissive sketch (float x) (float y) (float z)))))
 
 
-(defn end-camera [#^PApplet sketch ] (.endCamera sketch))
+(defn end-camera 
+  ""
+  ([#^PApplet sketch ] (.endCamera sketch)))
 
-(defn end-raw [#^PApplet sketch ] (.endRaw sketch))
+(defn end-raw 
+  ""
+  ([#^PApplet sketch ] (.endRaw sketch)))
 
 (defn end-shape
+  ""
   ([#^PApplet sketch ] (.endShape sketch))
   ([#^PApplet sketch mode] (.endShape sketch (int mode))))
 
 ;; $$exec
 
-(defn exit [#^PApplet sketch ] (.exit sketch))
+(defn exit 
+  ""
+  ([#^PApplet sketch ] (.exit sketch)))
 
 ;;(defn exp [a] (PApplet/exp (float a)))
 
@@ -679,44 +762,63 @@
 
 
 (defn filter-kind
+  ""
   ([#^PApplet sketch kind] (.filter sketch (int kind)))
   ([#^PApplet sketch kind param] (.filter sketch (int kind) (float param))))
 
 ;; $$focusGained
 ;; $$focusLost
 
-(defn framerate [#^PApplet sketch new-rate] (.frameRate sketch (float new-rate)))
+(defn framerate 
+  ""
+  ([#^PApplet sketch new-rate] (.frameRate sketch (float new-rate))))
+
 
 ;; added by DEL
-(defn frame-count [#^PApplet sketch] (.frameCount sketch))
+(defn frame-count 
+  ""
+  ([#^PApplet sketch] (.frameCount sketch)))
 
 
 (defn frustum
-  [#^PApplet sketch l r b t near far]
-  (.frustum sketch (float l) (float r) (float b) (float t) (float near) (float far)))
+  ""
+  ([#^PApplet sketch l r b t near far]
+    (.frustum sketch (float l) (float r) (float b) (float t) (float near) (float far))))
 
 (defn get-pixel
+  ""
   ([#^PApplet sketch ] (.get sketch))
   ([#^PApplet sketch x y] (.get sketch (int x) (int y)))
   ([#^PApplet sketch x y w h] (.get sketch (int x) (int y) (int w) (int h))))
 
-(defn green [#^PApplet sketch what] (.green sketch (int what)))
+(defn green 
+  ""
+  ([#^PApplet sketch what] (.green sketch (int what))))
 
 ;; $$handleDraw
 ;; $$hex
 
-(defn hint [#^PApplet sketch which] (.hint sketch (int which)))
+(defn hint 
+  ""
+  ([#^PApplet sketch which] (.hint sketch (int which))))
 
-(defn hour [] (PApplet/hour))
+(defn hour 
+  ""
+  ([] (PApplet/hour)))
 
-(defn hue [#^PApplet sketch what] (.hue sketch (int what)))
+(defn hue 
+  ""
+  ([#^PApplet sketch what] (.hue sketch (int what))))
 
 (defn image
+  ""
   ([#^PApplet sketch #^PImage img x y] (.image sketch img (float x) (float y)))
   ([#^PApplet sketch #^PImage img x y c d] (.image sketch img (float x) (float y) (float c) (float d)))
   ([#^PApplet sketch #^PImage img x y c d u1 v1 u2 v2] (.image sketch img (float x) (float y) (float c) (float d) (float u1) (float v1) (float u2) (float v2))))
 
-(defn image-mode [#^PApplet sketch mode] (.imageMode sketch (int mode)))
+(defn image-mode 
+  ""
+  ([#^PApplet sketch mode] (.imageMode sketch (int mode))))
 
 ;; $$init
 ;; $$insertFrame
@@ -750,28 +852,42 @@
    (PApplet/lerpColor c1 c2 (float amt) 1))) ;; use RGB mode
 
 
-(defn lights [#^PApplet sketch ] (.lights sketch))
+(defn lights 
+  ""
+  ([#^PApplet sketch ] (.lights sketch)))
 
 (defn light-specular
+  ""
   [#^PApplet sketch x y z]
   (.lightSpecular sketch (float x) (float y) (float z)))
 
 (defn line
+  ""
   ([#^PApplet sketch p1 p2] (apply line (concat p1 p2)))
   ([#^PApplet sketch x1 y1 x2 y2] (.line sketch (float x1) (float y1) (float x2) (float y2)))
   ([#^PApplet sketch x1 y1 z1 x2 y2 z2] (.line sketch (float x1) (float y1) (float z1) (float x2) (float y2) (float z2))))
 
 ;; $$link
 
-(defn load-bytes [filename] (PApplet/loadBytes filename))
+(defn load-bytes 
+  ""
+  ([filename] (PApplet/loadBytes filename)))
 
-(defn load-font [#^PApplet sketch filename] (.loadFont sketch filename))
+(defn load-font 
+  ""
+  ([#^PApplet sketch filename] (.loadFont sketch filename)))
 
-(defn load-image [#^PApplet sketch filename] (.loadImage sketch filename))
+(defn load-image 
+  ""
+  ([#^PApplet sketch filename] (.loadImage sketch filename)))
 
-(defn load-matrix [#^PApplet sketch ] (.loadMatrix sketch))
+(defn load-matrix 
+  ""
+  ([#^PApplet sketch ] (.loadMatrix sketch)))
 
-(defn load-pixels [#^PApplet sketch ] (.loadPixels sketch))
+(defn load-pixels 
+  ""
+  ([#^PApplet sketch ] (.loadPixels sketch)))
 
 (defn load-shape
         "Load a geometry from a file as a PShape."
@@ -785,34 +901,55 @@
 
 ;; $$log
 
-(defn start-loop [#^PApplet sketch ] (.loop sketch))
+(defn start-loop 
+  ""
+  ([#^PApplet sketch ] (.loop sketch)))
 
 ;; $$mag
 ;; $$main
 
 ;; renamed from map-to to remap by DEL
-(defn remap [val istart istop ostart ostop]
-  (PApplet/map (float val) (float istart) (float istop) (float ostart) (float ostop)))
+(defn remap 
+  ""
+  ([val istart istop ostart ostop]
+  (PApplet/map (float val) (float istart) (float istop) (float ostart) (float ostop))))
 
 (defn mask
+  ""
   ([#^PApplet sketch #^ints alpha-array] (.mask sketch alpha-array)))
 
-(defn mask-image [#^PApplet sketch #^PImage img] (.mask sketch img))
+(defn mask-image 
+  ""
+  ([#^PApplet sketch #^PImage img] (.mask sketch img)))
 
 ;; $$match
 ;; $$max
 
-(defn millis [#^PApplet sketch ] (.millis sketch))
+(defn millis 
+  ""
+  ([#^PApplet sketch ] (.millis sketch)))
 
 ;; $$min
 
-(defn minute [] (PApplet/minute))
+(defn minute 
+  ""
+  ([] (PApplet/minute)))
 
-(defn model-x [#^PApplet sketch x y z] (.modelX sketch (float x) (float y) (float z)))
-(defn model-y [#^PApplet sketch x y z] (.modelY sketch (float x) (float y) (float z)))
-(defn model-z [#^PApplet sketch x y z] (.modelZ sketch (float x) (float y) (float z)))
+(defn model-x 
+  ""
+  ([#^PApplet sketch x y z] (.modelX sketch (float x) (float y) (float z))))
 
-(defn month [] (PApplet/month))
+(defn model-y 
+  ""
+  ([#^PApplet sketch x y z] (.modelY sketch (float x) (float y) (float z))))
+
+(defn model-z 
+  "" 
+  ([#^PApplet sketch x y z] (.modelZ sketch (float x) (float y) (float z))))
+
+(defn month 
+  ""
+  ([] (PApplet/month)))
 
 ;; $$mouseClicked
 ;; $$mouseDragged
@@ -826,47 +963,75 @@
 ;; $$nfp
 ;; $$nfs
 
-(defn mouse-x [#^java.awt.event.MouseEvent mouse-event ] (.getX mouse-event))
+(defn mouse-x 
+  ""
+  ([#^java.awt.event.MouseEvent mouse-event ] (.getX mouse-event)))
 
-(defn mouse-y [#^java.awt.event.MouseEvent mouse-event ] (.getY mouse-event))
 
-(defn no-cursor [#^PApplet sketch ] (.noCursor sketch))
+(defn mouse-y 
+  ""
+  ([#^java.awt.event.MouseEvent mouse-event ] (.getY mouse-event)))
 
-(defn no-fill [#^PApplet sketch ] (.noFill sketch))
+(defn no-cursor 
+  ""
+  ([#^PApplet sketch ] (.noCursor sketch)))
+
+(defn no-fill 
+  ""
+  ([#^PApplet sketch ] (.noFill sketch)))
 
 (defn noise
+  ""
   ([#^PApplet sketch x] (.noise sketch (float x)))
   ([#^PApplet sketch x y] (.noise sketch (float x) (float y)))
   ([#^PApplet sketch x y z] (.noise sketch (float x) (float y) (float z))))
 
 (defn noise-detail
+  ""
   ([#^PApplet sketch int detail] (.noiseDetail sketch (int detail)))
   ([#^PApplet sketch int detail falloff] (.noiseDetail sketch (int detail) (float falloff))))
 
-(defn noise-seed [#^PApplet sketch what] (.noiseSeed sketch (int what)))
+(defn noise-seed 
+  ""
+  ([#^PApplet sketch what] (.noiseSeed sketch (int what))))
 
-(defn no-lights [#^PApplet sketch ] (.noLights sketch))
+(defn no-lights 
+  ""
+  ([#^PApplet sketch ] (.noLights sketch)))
 
-(defn no-loop [#^PApplet sketch ] (.noLoop sketch))
+(defn no-loop 
+  ""
+  ([#^PApplet sketch ] (.noLoop sketch)))
 
 (defn norm
         "Normalize a value to exist between 0 and 1 (inclusive)."
         [val start stop]
         (PApplet/norm (float val) (float start) (float stop)))
 
-(defn normal [#^PApplet sketch nx ny nz] (.normal sketch (float nx) (float ny) (float nz)))
+(defn normal 
+  ""
+  ([#^PApplet sketch nx ny nz] (.normal sketch (float nx) (float ny) (float nz))))
 
-(defn no-smooth [#^PApplet sketch ] (.noSmooth sketch))
+(defn no-smooth 
+  ""
+  ([#^PApplet sketch ] (.noSmooth sketch)))
 
-(defn no-stroke [#^PApplet sketch ] (.noStroke sketch))
+(defn no-stroke 
+  ""
+  ([#^PApplet sketch ] (.noStroke sketch)))
 
-(defn no-tint [#^PApplet sketch ] (.noTint sketch))
+(defn no-tint
+  ""
+  ([#^PApplet sketch ] (.noTint sketch)))
 
-(defn open [#^java.lang.String filename] (PApplet/open filename))
+(defn open 
+  ""
+  ([#^java.lang.String filename] (PApplet/open filename)))
 
 ;; $$open -- overload
 
 (defn ortho
+  ""
   ([#^PApplet sketch ] (.ortho sketch))
   ([#^PApplet sketch l r b t near far] (.ortho sketch (float l) (float r) (float b) (float t) (float near) (float far))))
 
@@ -879,6 +1044,7 @@
 ;; $$parseInt
 
 (defn perspective
+  ""
   ([#^PApplet sketch ] (.perspective sketch))
   ([#^PApplet sketch fovy aspect z-near z-far]
          (.perspective sketch (float fovy) (float aspect) (float z-near) (float z-far))))
@@ -890,34 +1056,49 @@
 ;;(defn pmouse-y [#^PApplet sketch ] (.pmouseY sketch))
 
 (defn point
+  ""
   ([#^PApplet sketch x y] (.point sketch (float x)(float y)))
   ([#^PApplet sketch x y z] (.point sketch (float x) (float y) (float z))))
 
 (defn point-light
-  [#^PApplet sketch r g b x y z]
-  (.pointLight sketch r g b x y z))
+  ""
+  ([#^PApplet sketch r g b x y z]
+    (.pointLight sketch r g b x y z)))
 
-(defn pop-matrix [#^PApplet sketch ] (.popMatrix sketch))
+(defn pop-matrix 
+  ""
+  ([#^PApplet sketch ] (.popMatrix sketch)))
 
 ;;(defn pow [a b] (PApplet/pow (float a) (float b)))
 
 ;; $$print
 
-(defn print-camera [#^PApplet sketch ] (.printCamera sketch))
+(defn print-camera 
+  ""
+  ([#^PApplet sketch ] (.printCamera sketch)))
 
 ;; $$println
 
-(defn print-matrix [#^PApplet sketch ] (.printMatrix sketch))
+(defn print-matrix 
+  ""
+  ([#^PApplet sketch ] (.printMatrix sketch)))
 
-(defn print-projection [#^PApplet sketch ] (.printProjection sketch))
+(defn print-projection 
+  ""
+  ([#^PApplet sketch ] (.printProjection sketch)))
 
-(defn push-matrix [#^PApplet sketch ] (.pushMatrix sketch))
+(defn push-matrix 
+  ""
+  ([#^PApplet sketch ] (.pushMatrix sketch)))
 
 (defn quad
-  [#^PApplet sketch x1 y1 x2 y2 x3 y3 x4 y4]
-  (.quad sketch x1 y1 x2 y2 x3 y3 x4 y4))
+  ""
+  ([#^PApplet sketch x1 y1 x2 y2 x3 y3 x4 y4]
+    (.quad sketch x1 y1 x2 y2 x3 y3 x4 y4)))
 
-(defn radians [deg] (PApplet/radians (float deg)))
+(defn radians 
+  ""
+  ([deg] (PApplet/radians (float deg))))
 
 ;;(defn random
 ;;  ([#^PApplet sketch max] (.random sketch (float max)))
@@ -926,14 +1107,22 @@
 
 ;;(defn random-seed [#^PApplet sketch w] (.randomSeed sketch (float w)))
 
-(defn rect [#^PApplet sketch x1 y1 x2 y2]
-  (.rect sketch (float x1) (float y1) (float x2) (float y2)))
+(defn rect 
+  ""
+  ([#^PApplet sketch x1 y1 x2 y2]
+    (.rect sketch (float x1) (float y1) (float x2) (float y2))))
 
-(defn rect-mode [#^PApplet sketch mode] (.rectMode sketch (int mode)))
+(defn rect-mode 
+  ""
+  ([#^PApplet sketch mode] (.rectMode sketch (int mode))))
 
-(defn red [#^PApplet sketch what] (.red sketch (int what)))
+(defn red 
+  ""
+  ([#^PApplet sketch what] (.red sketch (int what))))
 
-(defn redraw [#^PApplet sketch ] (.redraw sketch))
+(defn redraw 
+  ""
+  ([#^PApplet sketch ] (.redraw sketch)))
 
 ;; $$registerDispose
 ;; $$registerDraw
@@ -945,28 +1134,44 @@
 ;; $$registerSize
 
 (defn request-image
-        ([#^PApplet sketch filename] (.requestImage sketch filename))
-        ([#^PApplet sketch filename extension] (.requestImage sketch filename extension)))
+  ""
+  ([#^PApplet sketch filename] (.requestImage sketch filename))
+  ([#^PApplet sketch filename extension] (.requestImage sketch filename extension)))
 
-(defn reset-matrix [#^PApplet sketch ] (.resetMatrix sketch))
+(defn reset-matrix 
+  ""
+  ([#^PApplet sketch ] (.resetMatrix sketch)))
 
-(defn reverse-array [arr] (PApplet/reverse arr))
+(defn reverse-array 
+  ""
+  ([arr] (PApplet/reverse arr)))
 
 (defn rotate
+  ""
   ([#^PApplet sketch angle] (.rotate sketch (float angle)))
   ([#^PApplet sketch angle vx vy vz] (.rotate sketch (float angle) (float vx) (float vy) (float vz))))
 
-(defn rotate-x [#^PApplet sketch angle] (.rotateX sketch (float angle)))
+(defn rotate-x 
+  ""
+  ([#^PApplet sketch angle] (.rotateX sketch (float angle))))
 
-(defn rotate-y [#^PApplet sketch angle] (.rotateY sketch (float angle)))
+(defn rotate-y 
+  ""
+  ([#^PApplet sketch angle] (.rotateY sketch (float angle))))
 
-(defn rotate-z [#^PApplet sketch angle] (.rotateZ sketch (float angle)))
+(defn rotate-z 
+  ""
+  ([#^PApplet sketch angle] (.rotateZ sketch (float angle))))
 
-(defn round [what] (PApplet/round (float what)))
+(defn round 
+  ""
+  ([what] (PApplet/round (float what))))
 
 ;; $$run
 
-(defn saturation [#^PApplet sketch what] (.saturation sketch (int what)))
+(defn saturation 
+  ""
+  ([#^PApplet sketch what] (.saturation sketch (int what))))
 
 ;; modified by DEL
 (defmethod save :sketch
@@ -980,6 +1185,7 @@
 ;; $$saveFile
 
 (defn save-frame
+  ""
   ([#^PApplet sketch ] (.saveFrame sketch))
   ([#^PApplet sketch what] (.saveFrame sketch what)))
 
@@ -988,64 +1194,80 @@
 ;; $$saveStrings
 
 (defn scale
+  ""
   ([#^PApplet sketch s] (.scale sketch (float s)))
   ([#^PApplet sketch sx sy] (.scale sketch (float sx) (float sy))))
 
 (defn screen-x
+  ""
   ([#^PApplet sketch x y] (.screenX sketch (float x) (float y)))
   ([#^PApplet sketch x y y] (.screenX sketch (float x) (float y))))
 
 (defn screen-y
+  ""
   ([#^PApplet sketch x y] (.screenY sketch (float x) (float y)))
   ([#^PApplet sketch x y z] (.screenY sketch (float x) (float y) (float z))))
 
 (defn screen-z
-  [#^PApplet sketch x y z] (.screenX sketch (float x) (float y) (float z)))
+  ""
+  ([#^PApplet sketch x y z] (.screenX sketch (float x) (float y) (float z))))
 
-(defn seconds [] (PApplet/second))
+(defn seconds 
+  ""
+  ([] (PApplet/second)))
 
 ;; $$selectFolder
 ;; $$selectInput
 ;; $$selectOutput
 
 (defn set-pixel
-  [#^PApplet sketch x y c] (.set sketch (int x) (int y) (int c)))
+  ""
+  ([#^PApplet sketch x y c] (.set sketch (int x) (int y) (int c))))
 
 (defn set-image-at
-  [#^PApplet sketch dx dy #^PImage src] (.set sketch (int dx) (int dy) src))
+  ""
+  ([#^PApplet sketch dx dy #^PImage src] (.set sketch (int dx) (int dy) src)))
 
 ;; $$setup
 
 ;; $$setupExternalMessages
 ;; $$setupFrameListener
 
-(defn shininess [#^PApplet sketch shine] (.shininess sketch (float shine)))
+(defn shininess 
+  ""
+  ([#^PApplet sketch shine] (.shininess sketch (float shine))))
 
 ;; $$shorten
 
 ;;(defn sin [angle] (PApplet/sin (float angle)))
 
 (defn size
+  ""
   ([#^PApplet sketch w h] (.size sketch (int w) (int h)))
   ([#^PApplet sketch w h #^java.lang.String renderer] (.size sketch (int w) (int h) renderer)))
 
 ;; $$sketchFile
 ;; $$sketchPath
 
-(defn smooth [#^PApplet sketch ] (.smooth sketch))
+(defn smooth 
+  ""
+  ([#^PApplet sketch ] (.smooth sketch)))
 
 ;; $$sort
 
 (defn specular
+  ""
   ([#^PApplet sketch gray] (.specular sketch (float gray)))
   ([#^PApplet sketch gray alpha] (.specular sketch (float gray) (float alpha)))
   ([#^PApplet sketch x y z] (.specular sketch (float x) (float y) (float z)))
   ([#^PApplet sketch x y z a] (.specular sketch (float x) (float y) (float z) (float a))))
 
 (defn sphere
-  [#^PApplet sketch r] (.sphere sketch (float r)))
+  ""
+  ([#^PApplet sketch r] (.sphere sketch (float r))))
 
 (defn sphere-detail
+  ""
   ([#^PApplet sketch res] (.sphereDetail sketch (int res)))
   ([#^PApplet sketch ures vres] (.sphereDetail sketch (int ures) (int vres))))
 
@@ -1054,6 +1276,7 @@
 ;; $$splitTokens
 
 (defn spotlight
+  ""
   ([#^PApplet sketch r g b x y z nx ny nz angle concentration]
          (.spotLight sketch r g b x y z nx ny nz angle concentration))
   ([#^PApplet sketch [r g b] [x y z] [nx ny nz] angle concentration]
@@ -1070,6 +1293,7 @@
 
 ;; modified by DEL
 (defn stroke
+  ""
   ([#^PApplet sketch gray]
    (cond
      (string? gray)
@@ -1092,11 +1316,17 @@
      (.stroke sketch (float x) (float y) (float z) (float alpha))))
 
 
-(defn stroke-cap [#^PApplet sketch cap] (.strokeCap sketch (int cap)))
+(defn stroke-cap 
+  ""
+  ([#^PApplet sketch cap] (.strokeCap sketch (int cap))))
 
-(defn stroke-join [#^PApplet sketch jn] (.strokeJoin sketch (int jn)))
+(defn stroke-join 
+  ""
+  ([#^PApplet sketch jn] (.strokeJoin sketch (int jn))))
 
-(defn stroke-weight [#^PApplet sketch weight] (.strokeWeight sketch (float weight)))
+(defn stroke-weight 
+  ""
+  ([#^PApplet sketch weight] (.strokeWeight sketch (float weight))))
 
 ;; $$subset
 
@@ -1104,6 +1334,7 @@
 
 ;; added by DEL
 (defn text
+  ""
   ([#^PApplet sketch s]
     (.text sketch s))
   ([#^PApplet sketch s x y]
@@ -1117,48 +1348,70 @@
 
 
 (defn char->text
+  ""
   ([#^PApplet sketch c] (.text sketch (char c)))
   ([#^PApplet sketch c x y] (.text sketch (char c) (float x) (float y)))
   ([#^PApplet sketch c x y z] (.text sketch (char c) (float x) (float y) (float z))))
 
 (defn num->text
+  ""
   ([#^PApplet sketch num x y] (.text sketch (float num) (float x) (float y)))
   ([#^PApplet sketch num x y z] (.text sketch (float num) (float x) (float y) (float z))))
 
 (defn string->text
+  ""
   ([#^PApplet sketch #^java.lang.String s] (.text sketch s))
   ([#^PApplet sketch #^java.lang.String s x y] (.text sketch s (float x) (float y)))
   ([#^PApplet sketch #^java.lang.String s x y z] (.text sketch s (float x) (float y) (float z))))
 
 (defn string->text-in
+  ""
   ([#^PApplet sketch #^java.lang.String s x1 y1 x2 y2]
          (.text sketch s (float x1) (float y1) (float x2) (float y2)))
   ([#^PApplet sketch #^java.lang.String s x1 y1 x2 y2 z]
          (.text sketch s (float x1) (float y1) (float x2) (float y2) (float z))))
 
 (defn text-align
+  ""
   ([#^PApplet sketch align] (.textAlign sketch (int align)))
   ([#^PApplet sketch align-x align-y] (.textAlign sketch (int align-x) (int align-y))))
 
-(defn text-ascent [#^PApplet sketch ] (.textAscent sketch))
+(defn text-ascent 
+  ""
+  ([#^PApplet sketch ] (.textAscent sketch)))
 
-(defn text-descend [#^PApplet sketch ] (.textDescent sketch))
+(defn text-descend 
+  ""
+  ([#^PApplet sketch ] (.textDescent sketch)))
 
 (defn text-font
+  ""
   ([#^PApplet sketch #^PFont which] (.textFont sketch which))
   ([#^PApplet sketch #^PFont which size] (.textFont sketch which (int size))))
 
-(defn text-leading [#^PApplet sketch leading] (.textLeading sketch (float leading)))
+(defn text-leading 
+  ""
+  ([#^PApplet sketch leading] (.textLeading sketch (float leading))))
 
-(defn text-mode [#^PApplet sketch mode] (.textMode sketch (int mode)))
+(defn text-mode 
+  ""
+  ([#^PApplet sketch mode] (.textMode sketch (int mode))))
 
-(defn text-size [#^PApplet sketch size] (.textSize sketch (float size)))
+(defn text-size 
+  ""
+  ([#^PApplet sketch size] (.textSize sketch (float size))))
 
-(defn texture [#^PApplet sketch #^PImage img] (.texture sketch img))
+(defn texture 
+  ""
+  ([#^PApplet sketch #^PImage img] (.texture sketch img)))
 
-(defn texture-mode [#^PApplet sketch mode] (.textureMode sketch (int mode)))
+(defn texture-mode 
+  ""
+  ([#^PApplet sketch mode] (.textureMode sketch (int mode))))
 
-(defmulti text-width #(= (class %) (class \a)))
+(defmulti text-width 
+  ""
+  (fn [w] (= (class w) (class \a))))
 
 (defmethod text-width true
   [#^PApplet sketch c] (.textWidth sketch (char c)))
@@ -1168,6 +1421,7 @@
 
 ;; modified by DEL
 (defn tint
+  ""
   ([#^PApplet sketch gray]
    (cond
      (string? gray)
@@ -1195,13 +1449,15 @@
 
 
 (defn translate
-        ([v] (apply translate v))
+  ""
+  ([v] (apply translate v))
   ([#^PApplet sketch tx ty] (.translate sketch (float tx) (float ty)))
   ([#^PApplet sketch tx ty tz] (.translate sketch (float tx) (float ty) (float tz))))
 
 (defn triangle
-  [#^PApplet sketch x1 y1 x2 y2 x3 y3]
-  (.triangle sketch (float x1) (float y1) (float x2) (float y2) (float x3) (float y3)))
+  ""
+  ([#^PApplet sketch x1 y1 x2 y2 x3 y3]
+    (.triangle sketch (float x1) (float y1) (float x2) (float y2) (float x3) (float y3))))
 
 ;; $$trim
 ;; $$unbinary
@@ -1219,6 +1475,7 @@
 ;; $$updatePixels
 
 (defn vertex
+  ""
   ([#^PApplet sketch x y] (.vertex sketch (float x) (float y)))
   ([#^PApplet sketch x y z] (.vertex sketch (float x) (float y) (float z)))
   ([#^PApplet sketch x y u v] (.vertex sketch (float x) (float y) (float u) (float v)))
@@ -1226,22 +1483,29 @@
          (.vertex sketch (float x) (float y) (float z) (float u) (float v))))
 
 ;; added by DEL
-(defn width [sketch] (.width sketch))
-(defn height [sketch] (.height sketch))
+(defn width 
+  ""
+  ([sketch] (.width sketch)))
+
+(defn height 
+  ""
+  ([sketch] (.height sketch)))
 
 
-(defn year [] (PApplet/year))
+(defn year 
+  ""
+  ([] (PApplet/year)))
 
 ;; utility functions. clj-processing specific
 
 (defmacro with-translation
         "Berforms body with translation, restores current transformation on exit."
-        [translation-vector & body]
+        ([translation-vector & body]
         `(let [tr# ~translation-vector]
                  (push-matrix)
                  (translate tr#)
                  ~@body
-                 (pop-matrix)))
+                 (pop-matrix))))
 
 (defmacro with-rotation
         "Berforms body with rotation, restores current transformation on exit.
@@ -1250,12 +1514,12 @@
   Example:
     (with-rotation [angle]
       (vertex 1 2))"
-        [rotation & body]
+        ([rotation & body]
         `(let [tr# ~rotation]
                  (push-matrix)
                  (apply rotate tr#)
                  ~@body
-                 (pop-matrix)))
+                 (pop-matrix))))
 
 
 
