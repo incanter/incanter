@@ -38,7 +38,7 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.core-api.html",
    "name":"incanter.core",
@@ -712,7 +712,7 @@
    "makes a wrapping classifier like categortical but with wrapper fn.",
    "name":"wrapper-classifiers"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L518",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L518",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/abs",
    "namespace":"incanter.core",
@@ -721,7 +721,7 @@
    "Returns the absolute value of the elements in the given matrix, sequence or number.\nEquivalent to R's abs function.",
    "name":"abs"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L542",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L542",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/acos",
    "namespace":"incanter.core",
@@ -730,7 +730,7 @@
    "Returns the arc cosine of the elements in the given matrix, sequence or number.\nEquivalent to R's acos function.",
    "name":"acos"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L530",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L530",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/asin",
    "namespace":"incanter.core",
@@ -739,7 +739,7 @@
    "Returns the arc sine of the elements in the given matrix, sequence or number.\nEquivalent to R's asin function.",
    "name":"asin"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L554",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L554",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/atan",
    "namespace":"incanter.core",
@@ -748,7 +748,7 @@
    "Returns the arc tangent of the elements in the given matrix, sequence or number.\nEquivalent to R's atan function.",
    "name":"atan"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L475",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L475",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/atan2",
    "namespace":"incanter.core",
@@ -757,7 +757,7 @@
    "Returns the atan2 of the elements in the given matrices, sequences or numbers.\nEquivalent to R's atan2 function.",
    "name":"atan2"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1275",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1275",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/beta",
    "namespace":"incanter.core",
@@ -766,7 +766,7 @@
    "\nEquivalent to R's beta function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    "name":"beta"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L341",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L341",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/bind-columns",
    "namespace":"incanter.core",
@@ -775,7 +775,7 @@
    "   Returns the matrix resulting from concatenating the given matrices\nand/or sequences by their columns. Equivalent to R's cbind.\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (def B (matrix [10 11 12]))\n\n  (bind-columns A B)\n\n  (bind-columns [1 2 3 4] [5 6 7 8])",
    "name":"bind-columns"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L303",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L303",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/bind-rows",
    "namespace":"incanter.core",
@@ -784,7 +784,7 @@
    "   Returns the matrix resulting from concatenating the given matrices\nand/or sequences by their rows. Equivalent to R's rbind.\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (def B (matrix [[10 11 12]\n                  [13 14 15]]))\n\n  (bind-rows A B)\n\n  (bind-rows [1 2 3 4] [5 6 7 8])",
    "name":"bind-rows"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1158",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1158",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/categorical-var",
    "namespace":"incanter.core",
@@ -793,7 +793,7 @@
    " Returns a categorical variable based on the values in the given collection.\nEquivalent to R's factor function.\n\nOptions:\n  :data (default nil) factors will be extracted from the given data.\n  :ordered? (default false) indicates that the variable is ordinal.\n  :labels (default (sort (into #{} data)))\n  :levels (range (count labels))\n\nExamples:\n  (categorical-var :data [:a :a :c :b :a :c :c])\n  (categorical-var :labels [:a :b :c])\n  (categorical-var :labels [:a :b :c] :levels [10 20 30])\n  (categorical-var :levels [1 2 3])",
    "name":"categorical-var"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L577",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L577",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/choose",
    "namespace":"incanter.core",
@@ -802,7 +802,7 @@
    "\nReturns number of k-combinations (each of size k) from a set S with\nn elements (size n), which is the binomial coefficient (also known\nas the 'choose function') [wikipedia]\n      choose = n!/(k!(n - k)!)\n\nEquivalent to R's choose function.\n\nExamples:\n  (choose 25 6) ; => 2,598,960\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html\n  http://en.wikipedia.org/wiki/Combination",
    "name":"choose"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L957",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L957",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/condition",
    "namespace":"incanter.core",
@@ -811,7 +811,7 @@
    " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(condition foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Condition_number\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html",
    "name":"condition"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L617",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L617",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/copy",
    "namespace":"incanter.core",
@@ -819,7 +819,7 @@
    "doc":"Returns a copy of the given matrix.",
    "name":"copy"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L536",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L536",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/cos",
    "namespace":"incanter.core",
@@ -828,7 +828,7 @@
    "Returns the cosine of the elements in the given matrix, sequence or number.\nEquivalent to R's cos function.",
    "name":"cos"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L789",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L789",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/cumulative-sum",
    "namespace":"incanter.core",
@@ -837,7 +837,7 @@
    " Returns a sequence of cumulative sum for the given collection. For instance\n  The first value equals the first value of the argument, the second value is\n  the sum of the first two arguments, the third is the sum of the first three\n  arguments, etc.\n\n  Examples:\n    (use 'incanter.core)\n    (cumulative-sum (range 100))\n",
    "name":"cumulative-sum"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1104",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1104",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/dataset",
    "namespace":"incanter.core",
@@ -846,7 +846,7 @@
    " Returns a map of type ::dataset constructed from the given column-names and\ndata. The data is a sequence of sequences.",
    "name":"dataset"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1115",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1115",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/dataset?",
    "namespace":"incanter.core",
@@ -854,7 +854,7 @@
    "doc":" Determines if obj is of type ::dataset.",
    "name":"dataset?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L817",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L817",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-cholesky",
    "namespace":"incanter.core",
@@ -863,7 +863,7 @@
    " Returns the Cholesky decomposition of the given matrix. Equivalent to R's\nchol function.\n\nReturns:\n  a matrix of the triangular factor (note: the result from\n  cern.colt.matrix.linalg.CholeskyDecomposition is transposed so\n  that it matches the result return from R's chol function.\n\n\n\nExamples:\n\n(use '(incanter core stats charts datasets))\n;; load the iris dataset\n(def iris (to-matrix (get-dataset :iris)))\n;; take the Cholesky decompostion of the correlation matrix of the iris data.\n(decomp-cholesky (correlation iris))\n\n\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html\n  http://en.wikipedia.org/wiki/Cholesky_decomposition",
    "name":"decomp-cholesky"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L878",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L878",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-eigenvalue",
    "namespace":"incanter.core",
@@ -872,7 +872,7 @@
    " Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.\n\nReturns:\n  a map containing:\n    :values -- vector of eigenvalues\n    :vectors -- the matrix of eigenvectors\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-eigenvalue foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Eigenvalue_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html",
    "name":"decomp-eigenvalue"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L904",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L904",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-lu",
    "namespace":"incanter.core",
@@ -881,7 +881,7 @@
    " Returns the LU decomposition of the given matrix.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-lu foo)\n\n\nReturns:\n  a map containing:\n    :L -- the lower triangular factor\n    :U -- the upper triangular factor\n\nReferences:\n  http://en.wikipedia.org/wiki/LU_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html",
    "name":"decomp-lu"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L930",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L930",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-qr",
    "namespace":"incanter.core",
@@ -890,7 +890,7 @@
    " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-qr foo)\n\n\n\nReturns:\n  a map containing:\n    :Q -- orthogonal factor\n    :R -- the upper triangular factor\n\nReferences:\n  http://en.wikipedia.org/wiki/QR_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleQRDecomposition.html",
    "name":"decomp-qr"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L848",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L848",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-svd",
    "namespace":"incanter.core",
@@ -899,7 +899,7 @@
    " Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to\nR's svd function.\n\nReturns:\n  a map containing:\n    :S -- the diagonal matrix of singular values\n    :U -- the left singular vectors U\n    :V -- the right singular vectors V\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-foo foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Singular_value_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html",
    "name":"decomp-svd"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L702",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L702",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/det",
    "namespace":"incanter.core",
@@ -908,7 +908,7 @@
    " Returns the determinant of the given matrix using LU decomposition. Equivalent\nto R's det function.\n\nReferences:\n  http://en.wikipedia.org/wiki/LU_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html",
    "name":"det"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L134",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L134",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/diag",
    "namespace":"incanter.core",
@@ -917,7 +917,7 @@
    "   If given a matrix, diag returns a sequence of its diagonal elements.\nIf given a sequence, it returns a matrix with the sequence's elements\non its diagonal. Equivalent to R's diag function.\n\nExamples:\n  (diag [1 2 3 4])\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (diag A)",
    "name":"diag"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L117",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L117",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/dim",
    "namespace":"incanter.core",
@@ -926,7 +926,7 @@
    " Returns a vector with the number of rows and columns of the given matrix. ",
    "name":"dim"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L445",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L445",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/div",
    "namespace":"incanter.core",
@@ -935,7 +935,7 @@
    "   Performs element-by-element division on multiple matrices, sequences,\nand/or numbers. Equivalent to R's / operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (div A A A)\n  (div A 2)\n  (div 2 A)\n  (div [1 2 3] [1 2 3])\n  (div [1 2 3] 2)\n  (div 2 [1 2 3])\n\n  (div [1 2 3]) ; returns [1 1/2 13]",
    "name":"div"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L512",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L512",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/exp",
    "namespace":"incanter.core",
@@ -944,7 +944,7 @@
    "Returns the exponential of the elements in the given matrix, sequence or number.\nEquivalent to R's exp function.",
    "name":"exp"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L560",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L560",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/factorial",
    "namespace":"incanter.core",
@@ -953,7 +953,7 @@
    "\nReturns the factorial of k (k must be a positive integer). Equivalent to R's\nfactorial function.\n\nExamples:\n  (factorial 6)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html\n  http://en.wikipedia.org/wiki/Factorial",
    "name":"factorial"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1265",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1265",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/gamma",
    "namespace":"incanter.core",
@@ -962,7 +962,7 @@
    "\nEquivalent to R's gamma function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    "name":"gamma"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1035",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1035",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/group-by",
    "namespace":"incanter.core",
@@ -971,7 +971,7 @@
    " Groups the given matrix by the values in the columns indicated by the\n'on-cols' argument, returning a sequence of matrices. The returned\nmatrices are sorted by the value of the group column ONLY when there\nis only a single (non-vector) on-col argument.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (def plant-growth (to-matrix (get-dataset :plant-growth)))\n  (group-by plant-growth 1)\n  ;; only return the first column\n  (group-by plant-growth 1 :cols 0)\n  ;; don't return the second column\n  (group-by plant-growth 1 :except-cols 1)\n\n  (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))\n  (group-by plant-growth-dummies [1 2])\n  ;; return only the first column\n  (group-by plant-growth-dummies [1 2] :cols 0)\n  ;; don't return the last two columns\n  (group-by plant-growth-dummies [1 2] :except-cols [1 2])\n\n  ;; plot the plant groups\n  (use 'incanter.charts)\n  ;; can use destructuring if you know the number of groups,\n  ;; groups are sorted only if the group is based on a single column value\n  (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]\n    (doto (box-plot ctrl)\n          (add-box-plot trt1)\n          (add-box-plot trt2)\n          view))",
    "name":"group-by"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L746",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L746",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/half-vectorize",
    "namespace":"incanter.core",
@@ -980,7 +980,7 @@
    " Returns the half-vectorization (i.e. vech) of the given matrix.\n  The half-vectorization, vech(A), of a symmetric nxn matrix A\n  is the n(n+1)/2 x 1 column vector obtained by vectorizing only\n  the upper triangular part of A.\n\n  For instance:\n    (= (half-vectorize (matrix [[a b] [b d]])) (matrix [a b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [2 4]]))\n    (half-vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
    "name":"half-vectorize"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L124",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L124",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/identity-matrix",
    "namespace":"incanter.core",
@@ -989,7 +989,7 @@
    "   Returns an n-by-n identity matrix.\n\nExamples:\n  (identity-matrix 4)",
    "name":"identity-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1285",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1285",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/incomplete-beta",
    "namespace":"incanter.core",
@@ -998,7 +998,7 @@
    "\nReturns the non-regularized incomplete beta value.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    "name":"incomplete-beta"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L650",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L650",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/kronecker",
    "namespace":"incanter.core",
@@ -1007,7 +1007,7 @@
    " Returns the Kronecker product of the given arguments.\n\nExamples:\n\n  (def x (matrix (range 6) 2))\n  (def y (matrix (range 4) 2))\n  (kronecker 4 x)\n  (kronecker x 4)\n  (kronecker x y)",
    "name":"kronecker"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1016",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1016",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/length",
    "namespace":"incanter.core",
@@ -1016,7 +1016,7 @@
    " A version of count that works on collections, matrices, and numbers.\n  The length of a number is one, the length of a collection is its count,\n  and the length of a matrix is the number of elements it contains (nrow*ncol).\n  Equivalent to R's length function.\n",
    "name":"length"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L494",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L494",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/log",
    "namespace":"incanter.core",
@@ -1025,7 +1025,7 @@
    "Returns the natural log of the elements in the given matrix, sequence or number.\nEquvalent to R's log function.",
    "name":"log"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L506",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L506",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/log10",
    "namespace":"incanter.core",
@@ -1034,7 +1034,7 @@
    "Returns the log base 10 of the elements in the given matrix, sequence or number.\nEquivalent to R's log10 function.",
    "name":"log10"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L500",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L500",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/log2",
    "namespace":"incanter.core",
@@ -1043,7 +1043,7 @@
    "Returns the log base 2 of the elements in the given matrix, sequence or number.\nEquivalent to R's log2 function.",
    "name":"log2"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L53",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L53",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/matrix",
    "namespace":"incanter.core",
@@ -1053,7 +1053,7 @@
    "\nReturns an instance of an incanter.Matrix, which is an extension of\ncern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure\ninterface clojure.lang.ISeq. Therefore Clojure sequence operations can\nbe applied to matrices. A matrix consists of a sequence of rows, where\neach row is a one-dimensional row matrix. One-dimensional matrices are,\nin turn, sequences of numbers. Equivalent to R's matrix function.\n\nExamples:\n  (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix\n  (def A2 (matrix [1 2 3 4 5 6 7 8 9] 3)) ; produces the same 3x3 matrix\n  (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column vector\n\n  (first A) ; produces a row matrix [1 2 3]\n  (rest A) ; produces a sub matrix [[4 5 6] [7 8 9]]\n  (first (first A)) ; produces 1.0\n  (rest (first A)) ; produces a row matrix [2 3]\n\n  ; since (plus row1 row2) adds the two rows element-by-element,\n  (reduce plus A) ; produces the sums of the columns,\n\n  ; and since (sum row1) sums the elements of the row,\n  (map sum A) ; produces the sums of the rows,\n\n  ; you can filter the rows using Clojure's filter function\n  (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html",
    "name":"matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L95",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L95",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/matrix?",
    "namespace":"incanter.core",
@@ -1061,7 +1061,7 @@
    "doc":" Test if obj is 'derived' incanter.Matrix.",
    "name":"matrix?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L396",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L396",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/minus",
    "namespace":"incanter.core",
@@ -1070,7 +1070,7 @@
    "   Performs element-by-element subtraction on multiple matrices, sequences,\nand/or numbers. If only a single argument is provided, returns the\nnegative of the given matrix, sequence, or number. Equivalent to R's - operator.\n\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (minus A)\n  (minus A A A)\n  (minus A 2)\n  (minus 2 A)\n  (minus [1 2 3] [1 2 3])\n  (minus [1 2 3] 2)\n  (minus 2 [1 2 3])\n  (minus [1 2 3])",
    "name":"minus"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L622",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L622",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/mmult",
    "namespace":"incanter.core",
@@ -1079,7 +1079,7 @@
    " Returns the matrix resulting from the matrix multiplication of the\n  the given arguments. Equivalent to R's %*% operator.\n\n  Examples:\n\n    (def A (matrix [[1 2 3]\n                    [4 5 6]\n                    [7 8 9]]))\n    (mmult A (trans A))\n    (mmult A (trans A) A)\n\n  References:\n    http://en.wikipedia.org/wiki/Matrix_multiplication\n    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html\n\n",
    "name":"mmult"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L424",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L424",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/mult",
    "namespace":"incanter.core",
@@ -1088,7 +1088,7 @@
    "   Performs element-by-element multiplication on multiple matrices, sequences,\nand/or numbers. Equivalent to R's * operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (mult A A A)\n  (mult A 2)\n  (mult 2 A)\n  (mult [1 2 3] [1 2 3])\n  (mult [1 2 3] 2)\n  (mult 2 [1 2 3])",
    "name":"mult"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L108",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L108",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/ncol",
    "namespace":"incanter.core",
@@ -1097,7 +1097,7 @@
    " Returns the number of columns in the given matrix. Equivalent to R's ncol function.",
    "name":"ncol"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L100",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L100",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/nrow",
    "namespace":"incanter.core",
@@ -1106,7 +1106,7 @@
    " Returns the number of rows in the given matrix. Equivalent to R's nrow function.",
    "name":"nrow"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L375",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L375",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/plus",
    "namespace":"incanter.core",
@@ -1115,7 +1115,7 @@
    "   Performs element-by-element addition on multiple matrices, sequences,\nand/or numbers. Equivalent to R's + operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (plus A A A)\n  (plus A 2)\n  (plus 2 A)\n  (plus [1 2 3] [1 2 3])\n  (plus [1 2 3] 2)\n  (plus 2 [1 2 3])",
    "name":"plus"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L469",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L469",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/pow",
    "namespace":"incanter.core",
@@ -1124,7 +1124,7 @@
    " This is an element-by-element exponent function, raising the first argument,\nby the exponents in the remaining arguments. Equivalent to R's ^ operator.",
    "name":"pow"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L781",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L781",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/prod",
    "namespace":"incanter.core",
@@ -1132,7 +1132,7 @@
    "doc":"Returns the product of the given sequence.",
    "name":"prod"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1488",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1489",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/quit",
    "namespace":"incanter.core",
@@ -1140,7 +1140,7 @@
    "doc":" Exits the Clojure shell.",
    "name":"quit"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L976",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L976",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/rank",
    "namespace":"incanter.core",
@@ -1149,7 +1149,7 @@
    " Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(rank foo)\n\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_rank\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html",
    "name":"rank"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1297",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1297",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/regularized-beta",
    "namespace":"incanter.core",
@@ -1158,7 +1158,7 @@
    "\nReturns the regularized incomplete beta value. Equivalent to R's pbeta function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html\n  http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function\n  http://mathworld.wolfram.com/RegularizedBetaFunction.html",
    "name":"regularized-beta"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1494",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1495",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/save",
    "namespace":"incanter.core",
@@ -1166,7 +1166,7 @@
    " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line,\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
    "name":"save"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L194",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L194",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sel",
    "namespace":"incanter.core",
@@ -1174,7 +1174,7 @@
    "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])",
    "name":"sel"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L524",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L524",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sin",
    "namespace":"incanter.core",
@@ -1183,7 +1183,7 @@
    "Returns the sine of the elements in the given matrix, sequence or number.\nEquivalent to R's sin function.",
    "name":"sin"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L683",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L683",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/solve",
    "namespace":"incanter.core",
@@ -1192,7 +1192,7 @@
    " Returns a matrix solution if A is square, least squares solution otherwise.\nEquivalent to R's solve function.\n\nExamples:\n  (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_inverse",
    "name":"solve"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1315",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1315",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/solve-quadratic",
    "namespace":"incanter.core",
@@ -1201,7 +1201,7 @@
    "\nReturns a vector with the solution to x from the quadratic\nequation, a*x^2 + b*x + c.\n\nArguments:\n  a, b, c: coefficients of a qaudratic equation.\n\nExamples:\n  ;; -2*x^2 + 7*x + 15\n  (quadratic-formula -2 7 15)\n  ;; x^2 + -2*x + 1\n  (quadratic-formula 1 -2 1)\n\nReferences:\n  http://en.wikipedia.org/wiki/Quadratic_formula",
    "name":"solve-quadratic"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L488",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L488",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sq",
    "namespace":"incanter.core",
@@ -1210,7 +1210,7 @@
    "Returns the square of the elements in the given matrix, sequence or number.\nEquivalent to R's sq function.",
    "name":"sq"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L482",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L482",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sqrt",
    "namespace":"incanter.core",
@@ -1219,7 +1219,7 @@
    "Returns the square-root of the elements in the given matrix, sequence or number.\nEquivalent to R's sqrt function.",
    "name":"sqrt"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L774",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L774",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sum",
    "namespace":"incanter.core",
@@ -1227,7 +1227,7 @@
    "doc":"Returns the sum of the given sequence.",
    "name":"sum"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L767",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L767",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sum-of-squares",
    "namespace":"incanter.core",
@@ -1235,7 +1235,7 @@
    "doc":"Returns the sum-of-squares of the given sequence.",
    "name":"sum-of-squares"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1342",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1342",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/symmetric-matrix",
    "namespace":"incanter.core",
@@ -1244,7 +1244,7 @@
    "\nReturns a symmetric matrix from the given data, which represents the lower triangular elements\nordered by row. This is not the inverse of half-vectorize which returns a vector of the upper-triangular\nvalues, unless the :lower option is set to false.\n\nOptions:\n  :lower (default true) -- lower-triangular. Set :lower to false to reverse the half-vectorize function.\n\nExamples:\n\n  (use 'incanter.core)\n  (symmetric-matrix [1\n                     2 3\n                     4 5 6\n                     7 8 9 10])\n\n\n  (half-vectorize\n    (symmetric-matrix [1\n                       2 3\n                       4 5 6\n                       7 8 9 10] :lower false))",
    "name":"symmetric-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L548",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L548",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/tan",
    "namespace":"incanter.core",
@@ -1253,7 +1253,7 @@
    "Returns the tangent of the elements in the given matrix, sequence or number.\nEquivalent to R's tan function.",
    "name":"tan"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1201",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1201",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-labels",
    "namespace":"incanter.core",
@@ -1261,7 +1261,7 @@
    "doc":"\n",
    "name":"to-labels"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1191",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1191",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-levels",
    "namespace":"incanter.core",
@@ -1269,7 +1269,7 @@
    "doc":"\n",
    "name":"to-levels"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L602",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L602",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-list",
    "namespace":"incanter.core",
@@ -1278,7 +1278,7 @@
    " Returns a list-of-lists if the given matrix is two-dimensional,\nand a flat list if the matrix is one-dimensional.",
    "name":"to-list"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1238",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1238",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-matrix",
    "namespace":"incanter.core",
@@ -1287,7 +1287,7 @@
    "Converts a dataset into a matrix. Equivalent to R's as.matrix function\n for datasets.\n\nOptions:\n  :dummies (default false) -- if true converts non-numeric variables into sets\n                              of binary dummy variables, otherwise converts\n                              them into numeric codes.",
    "name":"to-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1002",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1002",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-vect",
    "namespace":"incanter.core",
@@ -1296,7 +1296,7 @@
    " Returns a vector-of-vectors if the given matrix is two-dimensional,\nand a flat vector if the matrix is one-dimensional. This is a bit\nslower than the to-list function. ",
    "name":"to-vect"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L714",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L714",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/trace",
    "namespace":"incanter.core",
@@ -1305,7 +1305,7 @@
    " Returns the trace of the given matrix.\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_trace\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DoubleAlgebra.html",
    "name":"trace"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L159",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L159",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/trans",
    "namespace":"incanter.core",
@@ -1314,7 +1314,7 @@
    "   Returns the transpose of the given matrix. Equivalent to R's t function\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (trans A)",
    "name":"trans"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L725",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L725",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/vectorize",
    "namespace":"incanter.core",
@@ -1323,7 +1323,7 @@
    " Returns the vectorization (i.e. vec) of the given matrix.\n  The vectorization of an m-by-n matrix A, denoted by vec(A),\n  is the m*n-by-1 column vector obtain by stacking the columns\n  of the matrix A on top of one another.\n\n  For instance:\n    (= (vectorize (matrix [[a b] [c d]])) (matrix [a c b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [3 4]]))\n    (vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
    "name":"vectorize"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2a2bdec8e857efbe5fce2dc0db7175dc94339954/src/incanter/core.clj#L1388",
+   "http://github.com/liebke/incanter/blob/8f75803701cfe058556c35635503f62e6f69407f/src/incanter/core.clj#L1388",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/view",
    "namespace":"incanter.core",
