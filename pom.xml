@@ -156,11 +156,16 @@
       <artifactId>jfreechart</artifactId>
       <version>1.0.13</version>
     </dependency> 
-    <dependency>
+    <!-- <dependency>
       <groupId>colt</groupId>
       <artifactId>colt</artifactId>
       <version>1.2.0</version>
-    </dependency> 
+    </dependency>  -->
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>1.1.0-master-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure-contrib</artifactId>
@@ -189,6 +194,10 @@
   </dependencies>
       <repositories>
         <repository>
+          <id>build.clojure.org</id>
+          <url>http://build.clojure.org/snapshots</url> 
+        </repository>
+        <repository>
           <id>clojars.org</id>
           <url>http://clojars.org/repo</url> 
         </repository>
@@ -200,7 +209,7 @@
             <name>Ibiblio - the public's library and digital archive</name>
             <url>http://www.ibiblio.org/maven2</url>
         </repository>
-        <repository>
+        <!-- <repository>
             <id>osgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>http://download.osgeo.org/webdav/geotools/</url>
@@ -212,6 +221,6 @@
             <id>geotools</id>
             <name>Geotools repository</name>
             <url>http://maven.geotools.fr/repository</url>
-        </repository>
+    </repository> -->
       </repositories>
 </project>
