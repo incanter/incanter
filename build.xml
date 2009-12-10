@@ -5,7 +5,7 @@
     Compile Incanter into a Java JAR.
   </description>
 
-  <property name="src" location="src" />
+  <property name="src" location="src/main" />
   <property name="build.dir" location="build" />
   <property name="lib" location="lib" />
   <property name="clojure.jar" location="${lib}/clojure-1.1.0-alpha-SNAPSHOT.jar" />
@@ -29,7 +29,8 @@
   <property name="deps.url" value="http://cloud.github.com/downloads/liebke/incanter/${deps.file}"/>
 
   <path id="classpath">
-    <path location="${src}"/>
+    <path location="${src}/clojure"/>
+    <path location="${src}/java"/>
     <path location="${build.dir}" />
     <!-- Incanter core dependencies -->
     <path location="${clojure.jar}"/>
@@ -59,13 +60,13 @@
   
   <target name="compile-java" depends="init"
           description="Compile Java sources.">
-    <javac srcdir="${src}" destdir="${build.dir}" includeJavaRuntime="yes"
+          <javac srcdir="${src}/java" destdir="${build.dir}" includeJavaRuntime="yes"
            debug="true" target="1.5">
       <classpath>
-        <path location="${src}"/>
+        <path location="${src}/java"/>
         <path location="${clojure.jar}"/>
         <path location="${colt.jar}"/>
-        <path location="${clojure-contrib.jar}"/>
+        <!-- <path location="${clojure-contrib.jar}"/>
         <path location="${jfreechart.jar}"/>
         <path location="${processing-core.jar}"/>
         <path location="${arpack-combo.jar}"/>
@@ -76,7 +77,7 @@
         <path location="${netlib.jar}"/>
         <path location="${opencvs.jar}"/>
         <path location="${joda-time.jar}"/>
-        <path location="${clojure-json.jar}"/>
+        <path location="${clojure-json.jar}"/> -->
         <path location="${build.dir}" />
       </classpath>
     </javac>
