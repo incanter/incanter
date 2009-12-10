@@ -107,39 +107,39 @@
       <version>1.1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>processing</groupId>
+      <groupId>incanter</groupId>
       <artifactId>processing-core</artifactId>
       <version>1</version>
     </dependency> 
     <dependency>
-      <groupId>arpack</groupId>
+      <groupId>incanter</groupId>
       <artifactId>arpack-combo</artifactId>
       <version>0.1</version>
     </dependency> 
-    <dependency>
+    <!-- <dependency>
       <groupId>concurrent</groupId>
       <artifactId>concurrent</artifactId>
       <version>1.3.4</version>
-    </dependency> 
+    </dependency>  -->
     <dependency>
-      <groupId>netlib-java</groupId>
+      <groupId>incanter</groupId>
       <artifactId>netlib-java</artifactId>
       <version>0.9.1</version>
     </dependency> 
     <dependency>
-      <groupId>parallelcolt</groupId>
+      <groupId>incanter</groupId>
       <artifactId>parallelcolt</artifactId>
       <version>0.7.2</version>
     </dependency> 
     <dependency>
-      <groupId>gnujaxp</groupId>
+      <groupId>incanter</groupId>
       <artifactId>gnujaxp</artifactId>
       <version>1</version>
     </dependency> 
     <dependency>
-      <groupId>jfree</groupId>
+      <groupId>incanter</groupId>
       <artifactId>jcommon</artifactId>
-      <version>1.0.15</version>
+      <version>1.0.16</version>
     </dependency> 
     <dependency>
       <groupId>jline</groupId>
@@ -152,7 +152,7 @@
       <version>2.0.1</version>
     </dependency> 
     <dependency>
-      <groupId>jfree</groupId>
+      <groupId>incanter</groupId>
       <artifactId>jfreechart</artifactId>
       <version>1.0.13</version>
     </dependency> 
@@ -181,11 +181,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.6</version>
     </dependency> 
-    <dependency>
+    <!-- <dependency>
       <groupId>org.geotools</groupId>
       <artifactId>gt-referencing</artifactId>
       <version>2.5.5</version>
-    </dependency>
+    </dependency> -->
   </dependencies>
       <repositories>
         <repository>
