@@ -91,14 +91,14 @@ To build Incanter, test it, and generate the api documentation yourself, run the
 * Clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
 * cd into the incanter directory
 * Download and uncompress Incanter's dependencies: @ant deps@
-* Build incanter.jar: @ant@
+* Build target/incanter-1.0-SNAPSHOT.jar: @ant@
 * Run unit tests: @bin/runtests.clj@
 * Generate API docs: @bin/generate_docs.clj@
 
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
 
 
-For back-end processing that doesn't require charts or visualizations, an alternative ant target, called @incanter-core@, is available that creates @incanter-core.jar@, which only includes the 'core' and 'stats' libraries, and only depends on the clojure.jar and Parallel Colt libraries (colt.jar, netlib.jar, arpack-combo.jar).
+For back-end processing that doesn't require charts or visualizations, an alternative ant target, called @incanter-core@, is available that creates @incanter-core-1.0-SNAPSHOT.jar@, which only includes the 'core' and 'stats' libraries, and only depends on the clojure.jar and Parallel Colt libraries (colt.jar, netlib.jar, arpack-combo.jar).
 
 h2. Building Incanter with Maven
 
@@ -107,6 +107,7 @@ Incanter can be built and tested with Maven with the following commands:
 @mvn clojure:compile@ to build the remaining Clojure classes
 @mvn clojure:test@ to run the tests
 @mvn clojure:repl@ to start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH
+@mvn package@ to create incanter-1.0-SNAPSHOT.jar file in the ./target directory.
 
 
 

@@ -4,32 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion> 
-  <!--
-  <parent>
-    <groupId>org.clojure</groupId>
-    <artifactId>clojure-pom</artifactId>
-    <version>1.1.0-alpha-SNAPSHOT</version>
-  </parent>
-  -->
   <artifactId>incanter</artifactId>
-  <groupId>${artifactId}</groupId>
-  <name>${artifactId}</name>
+  <groupId>incanter</groupId>
+  <name>incanter</name>
   <version>1.0-SNAPSHOT</version>
   <build>
-    <!--
-    <sourceDirectory>${basedir}/src</sourceDirectory>
-    <outputDirectory>${basedir}/target/classes</outputDirectory> 
-    <resources>
-      <resource>
-        <directory>${basedir}/src</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>${basedir}/test</directory>
-      </testResource>
-    </testResources>
-    -->
     <plugins>
       <plugin>
         <groupId>com.theoryinpractise</groupId>
@@ -47,57 +26,6 @@
           <target>1.5</target>
         </configuration>
       </plugin>
-      <!-- Demonstrating it works without this plugin.
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <configuration>
-              <tasks>
-                <java fork="true"
-                      classname="clojure.lang.Compile"
-                      classpathref="maven.compile.classpath"
-                      failonerror="true">
-                  <sysproperty key="clojure.compile.path"
-                               value="${project.build.outputDirectory}"/>
-                  <arg value="incanter.core"/>
-		  <arg value="incanter.chrono"/>
-		  <arg value="incanter.classification"/>
-		  <arg value="incanter.incremental-stats"/>
-		  <arg value="incanter.information-theory"/>
-		  <arg value="incanter.internal"/>
-		  <arg value="incanter.io"/>
-		  <arg value="incanter.transformations"/>
-		  <arg value="incanter.probability"/>
-		  <arg value="incanter.stats"/>
-		  <arg value="incanter.som"/>
-		  <arg value="incanter.bayes"/>
-		  <arg value="incanter.chrono"/>
-		  <arg value="incanter.classification"/>
-		  <arg value="incanter.transformations"/>
-		  <arg value="incanter.incremental-stats"/>
-		  <arg value="incanter.information-theory"/>
-                </java>
-              </tasks>
-            </configuration>
-          </execution>
-	  <execution>
-	    <id>test</id>
-            <configuration>
-              <tasks>
-		<java classname="clojure.main" 
-		      classpathref="maven.test.classpath">
-                  <arg value="-e"/>
-                  <arg value="(require '(incanter [tests :as main]))
-                              (main/run)"/>
-                </java>
-              </tasks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      -->
     </plugins>
   </build>
   <dependencies>
@@ -116,11 +44,6 @@
       <artifactId>arpack-combo</artifactId>
       <version>0.1</version>
     </dependency> 
-    <!-- <dependency>
-      <groupId>concurrent</groupId>
-      <artifactId>concurrent</artifactId>
-      <version>1.3.4</version>
-    </dependency>  -->
     <dependency>
       <groupId>incanter</groupId>
       <artifactId>netlib-java</artifactId>
@@ -156,11 +79,6 @@
       <artifactId>jfreechart</artifactId>
       <version>1.0.13</version>
     </dependency> 
-    <!-- <dependency>
-      <groupId>colt</groupId>
-      <artifactId>colt</artifactId>
-      <version>1.2.0</version>
-    </dependency>  -->
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
@@ -186,11 +104,6 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.6</version>
     </dependency> 
-    <!-- <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-referencing</artifactId>
-      <version>2.5.5</version>
-    </dependency> -->
   </dependencies>
       <repositories>
         <repository>
@@ -209,18 +122,5 @@
             <name>Ibiblio - the public's library and digital archive</name>
             <url>http://www.ibiblio.org/maven2</url>
         </repository>
-        <!-- <repository>
-            <id>osgeo</id>
-            <name>Open Source Geospatial Foundation Repository</name>
-            <url>http://download.osgeo.org/webdav/geotools/</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>geotools</id>
-            <name>Geotools repository</name>
-            <url>http://maven.geotools.fr/repository</url>
-    </repository> -->
       </repositories>
 </project>

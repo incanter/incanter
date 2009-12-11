@@ -7,6 +7,7 @@
 
   <property name="src" location="src/main" />
   <property name="build.dir" location="build" />
+  <property name="target.dir" location="target" />
   <property name="lib" location="lib" />
   <property name="clojure.jar" location="${lib}/clojure-1.1.0-alpha-SNAPSHOT.jar" />
   <property name="clojure-contrib.jar" location="${lib}/clojure-contrib.jar" />
@@ -22,8 +23,8 @@
   <property name="opencsv.jar" location="${lib}/opencsv-1.8.jar" />
   <property name="joda-time.jar" location="${lib}/joda-time-1.6.jar" />
   <property name="clojure-json.jar" location="${lib}/clojure-json-1.1-SNAPSHOT.jar" />
-  <property name="jarfile" location="incanter.jar" />
-  <property name="core-jarfile" location="incanter-core.jar" />
+  <property name="jarfile" location="${target.dir}/incanter-1.0-SNAPSHOT.jar" />
+  <property name="core-jarfile" location="${target.dir}/incanter-core-1.0-SNAPSHOT.jar" />
   <property name="LICENSE" location="epl-v10.html" />
   <property name="deps.file" value="deps-1.0.zip"/>
   <property name="deps.url" value="http://cloud.github.com/downloads/liebke/incanter/${deps.file}"/>
@@ -56,6 +57,7 @@
 
   <target name="init">
     <mkdir dir="${build.dir}" />
+    <mkdir dir="${target.dir}" />
   </target>
   
   <target name="compile-java" depends="init"
@@ -109,7 +111,7 @@
   </target>
 
   <target name="incanter" depends="compile-clj">
-    <jar jarfile="${jarfile}" >
+          <jar jarfile="${jarfile}" >
       <fileset dir="${build.dir}" includes="**/*.class"/>
       <!-- <fileset dir="${src}" includes="**/*.clj"/>
       <fileset dir="${src}" includes="**/*.java"/> -->
@@ -131,8 +133,8 @@
   </target>
 
   <target name="incanter-core" depends="compile-core-clj">
-    <jar jarfile="${core-jarfile}" >
-      <fileset dir="${build.dir}" includes="**/*.class"/>
+          <jar jarfile="${core-jarfile}" >
+            <fileset dir="${build.dir}" includes="**/*.class"/>
       <manifest>
         <attribute name="Class-Path" value="."/>
       </manifest>
@@ -143,6 +145,7 @@
     <delete file="${jarfile}"/>
     <delete file="${core-jarfile}"/>
     <delete dir="${build.dir}" />
+    <delete dir="${target.dir}" />
   </target>
 
 
