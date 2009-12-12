@@ -1,10 +1,10 @@
 @echo off
     set INCANTER_HOME=.
-    set CLOJURE_JAR=%INCANTER_HOME%\clojure.jar
+    set CLOJURE_JAR=%INCANTER_HOME%\clojure-1.0-SNAPSHOT.jar
     set INCANTER_LIB_DIR=%INCANTER_HOME%\lib
-    set INCANTER_SRC=%INCANTER_HOME%\src
+    set INCANTER_SRC=%INCANTER_HOME%\src\main\clojure
     set CLASSES_DIR=%INCANTER_HOME%\classes
-    set INCANTER_JAR=%INCANTER_HOME%\incanter.jar
+    set INCANTER_JAR=%INCANTER_HOME%\target\incanter-1.0-SNAPSHOT.jar
 
     set CLOJURE_JARS=%INCANTER_LIB_DIR%\clojure.jar;%INCANTER_LIB_DIR%\clojure-contrib.jar
 
@@ -14,10 +14,15 @@
     set OPENCSV_JARS=%INCANTER_LIB_DIR%\opencsv-1.8.jar
     set PROCESSING_JARS=%INCANTER_LIB_DIR%\processing\core.jar;%INCANTER_LIB_DIR%\processing
  
+    set JODA_TIME_JARS=%INCANTER_LIB_DIR%\joda-time-1.6.jar
+    set CLJ_JSON_JARS=%INCANTER_LIB_DIR%\clojure-json-1.1-SNAPSHOT.jar
+
+    set TESTS_DIR=%INCANTER_HOME%\src\test\clojure
+
     IF (%1)==() (
-        java -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%PROCESSING_JARS% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME%  clojure.main
+        java -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%PROCESSING_JARS%;%JODA_TIME_JARS%;%CLJ_JSON_JARS%;%TESTS_DIR% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME%  clojure.main
     ) ELSE (
-        java -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%PROCESSING_JARS% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME% clojure.lang.Script %1 -- %*
+        java -cp .;..;%INCANTER_JAR%;%COLT_JARS%;%JLINE_JARS%;%CLOJURE_JARS%;%JFREECHART_JARS%;%OPENCSV_JARS%;%PROCESSING_JARS%;%JODA_TIME_JARS%;%CLJ_JSON_JARS%;%TESTS_DIR% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME% clojure.lang.Script %1 -- %*
     )
 
 
