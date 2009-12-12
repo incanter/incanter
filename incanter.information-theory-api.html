@@ -72,7 +72,18 @@ by <span id="author">Unknown</span><br />
   (:require <span id="long-name">incanter.information-theory</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr"></pre>
+<pre id="namespace-docstr">
+
+TODO: docs - describe representations taht these measures expect.
+
+TODO
+other divergences and distances that can be described as kl divergences
+http://en.wikipedia.org/wiki/Hellinger_distance
+interaction information
+http://en.wikipedia.org/wiki/Interaction_information
+http://en.wikipedia.org/wiki/Kirkwood_approximation
+http://en.wikipedia.org/wiki/F-divergence
+<a href="http://en.wikipedia.org/wiki/Statistical_distance">http://en.wikipedia.org/wiki/Statistical_distance</a></pre>
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -83,7 +94,7 @@ by <span id="author">Unknown</span><br />
   <pre id="var-usage">Usage: (entropy counts)
 </pre>
   <pre id="var-docstr">takes a map of class label to counts</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/information_theory.clj#L57" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L57" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -96,7 +107,7 @@ computes information gain from count matrix of feature class labels to predicted
 
 example: (gain {:weak {:positive 6 :negative 2} 
 		:strong {:positive 3 :negative 3}})</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/information_theory.clj#L69" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L69" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -105,7 +116,7 @@ example: (gain {:weak {:positive 6 :negative 2}
   <pre id="var-usage">Usage: (gini-impurity counts)
 </pre>
   <pre id="var-docstr">Gini impurity is  measure of how often a randoincanter. chosen element from the set would be incorrectly labelled if it were randoincanter. labelled according to the distribution of labels in the subset. Gini impurity can be computed by summing the probability of each item being chosen times the probability of a mistake in categorizing that item. It reaches its minimum (zero) when all cases in the node fall into a single target category.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/information_theory.clj#L21" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L21" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -122,7 +133,7 @@ takes a map of class label to counts.
 note the (&gt; p 0) predicate defines (* 0 (log2 0)) as 0 rather than NaN
 
 assumes you pass in distributions as nested maps and flattens them before applying the algorithm. </pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/information_theory.clj#L32" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L32" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -133,7 +144,7 @@ assumes you pass in distributions as nested maps and flattens them before applyi
   <pre id="var-docstr">mutual information is the Kullback-Leibler divergence between the product of the marginal distributions of two random variables, p(x)p(y), and the the random variables' joint distribution, p(x,y).
 
 see: <a href="http://en.wikipedia.org/wiki/Mutual_information">http://en.wikipedia.org/wiki/Mutual_information</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/information_theory.clj#L97" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L97" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -144,7 +155,7 @@ see: <a href="http://en.wikipedia.org/wiki/Mutual_information">http://en.wikiped
   <pre id="var-docstr">total correlation is a multivariate generalization of mutual information.  it is the Kullback-Leibler divergence between the joint distribution of a set and its maximum entropy product approximation.
 
 see: <a href="http://en.wikipedia.org/wiki/Total_correlation">http://en.wikipedia.org/wiki/Total_correlation</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/information_theory.clj#L88" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L88" id="var-source">Source</a>
 </div>
 
 

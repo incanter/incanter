@@ -92,7 +92,10 @@ by <span id="author">Unknown</span><br />
   (:require <span id="long-name">incanter.classification</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr"></pre>
+<pre id="namespace-docstr">
+fundamentals of classification, cross validation, and performance measures such as precision and recall.
+
+classifiers are maps of classifier-name -&gt; functions, data are maps of feature-name features.</pre>
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -103,7 +106,7 @@ by <span id="author">Unknown</span><br />
   <pre id="var-usage">Usage: (categorical-classifiers features)
 </pre>
   <pre id="var-docstr">makes a categorical classifier for use with |each.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L26" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L26" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -115,7 +118,7 @@ by <span id="author">Unknown</span><br />
 composes a classification workflow from a classifier a counter and a transformer.
 
 note that count-all has been abstracted due to the fact taht you may count with reduce or merge-with depending on wheter you ahve vectors or maps.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L99" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L99" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -134,7 +137,7 @@ usage:
 				     (&lt; (:b %) 6)))}
    {:a 10 :b 5})
 -&gt; {:a 1}</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L76" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L76" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -151,7 +154,7 @@ usage:
    {:a (present-when (gt 5)) :b (present-when (lt 5))}
    {:a 10 :b 5})
 -&gt; {:a {:a 1 :b 0} :b {:a 0 :b 0}}</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L61" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L61" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -168,7 +171,7 @@ usage:
    {:a (present-when (gt 5)) :b (present-when (lt 5))}
    {:a 10 :b 5})
 -&gt; {:a 1 :b 0}</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L46" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L46" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -180,7 +183,7 @@ usage:
 produces a confusion matrix from teh joint distributions of test and train data.
 
 right now the tests and train data are con-prob-tuples this may change if we store only the joint PMFs</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L245" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L245" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -192,7 +195,7 @@ right now the tests and train data are con-prob-tuples this may change if we sto
 takes a set of n joint PMFs, and holds each joint PMF out in turn as the test set.  
 
 merges the resulting n cross-validation matrices into a single matrix.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L257" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L257" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -206,7 +209,7 @@ takes a map where key is class and value is a set of equivalence classes to the 
 usage:
  (equivalence-classes {0 #{0 1}, 1 #{2, 3, 4}, 2 #{5 6}})
 -&gt; {0 0, 1 0, 2 1, 3 1, 4 1, 5 2, 6 2}</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L119" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L119" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -217,7 +220,7 @@ usage:
   <pre id="var-docstr">Returns a sorted map of the elements of coll keyed by the result of
 f on each element. The value at each key will be a vector of the
 corresponding elements, in the order they appeared in coll.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L108" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L108" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -236,7 +239,7 @@ corresponding elements, in the order they appeared in coll.</pre>
 		      3 bucket-eq-classes}]
   (map (fn [[modelcnts totalcnts]] [(merge-equivalence-classes model-merger modelcnts) 
 				    (merge-equivalence-classes count-merger totalcnts)]) model)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L141" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L141" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -245,7 +248,7 @@ corresponding elements, in the order they appeared in coll.</pre>
   <pre id="var-usage">Usage: (model-from-maps prob-map)
 </pre>
   <pre id="var-docstr">creates a model from probability report maps.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L184" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L184" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -258,7 +261,7 @@ computes the most likely class from a map of classes to class probability.
 
 usage:
  (most-likely {:a 0.6 :b 0.4}) -&gt; :a</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L189" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L189" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -267,7 +270,7 @@ usage:
   <pre id="var-usage">Usage: (numerical-classifiers ranges)
 </pre>
   <pre id="var-docstr">makes a bucketing classifier out of each range for use with |each.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L19" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L19" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -279,7 +282,7 @@ usage:
   <pre id="var-docstr">compute probability from computed counts.  
 
 this is division, you have to count up the proper numerator and denominator in your counting step.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L165" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L165" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -290,7 +293,7 @@ this is division, you have to count up the proper numerator and denominator in y
   <pre id="var-docstr">process probability maps using a provided report function. 
 
 beware: can't pass keys to reporter our you get double nested final level in map.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L172" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L172" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -299,7 +302,7 @@ beware: can't pass keys to reporter our you get double nested final level in map
   <pre id="var-usage">Usage: (wrapper-classifiers features)
 </pre>
   <pre id="var-docstr">makes a wrapping classifier like categortical but with wrapper fn.</pre>
-  <a href="http://github.com/liebke/incanter/blob/9a69d1fe1dfdb36ee43a79cb8bc3e8784b3cc366/src/incanter/classification.clj#L39" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L39" id="var-source">Source</a>
 </div>
 
 
