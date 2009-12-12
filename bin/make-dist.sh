@@ -23,6 +23,6 @@ cp bin/incanter.bat dist/incanter/bin/clj.bat
 
 ## zip the distribution
 cd dist
-zip -r incanter.zip incanter
+zip -r incanter-1.0-SNAPSHOT.zip incanter
 
 
