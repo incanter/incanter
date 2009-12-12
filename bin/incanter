@@ -1,0 +1,20 @@
+#!/bin/bash
+
+##; incanter -- script to start Clojure REPL configured with the Incanter libraries
+
+## This script uses the uberjar file created by maven with the following commands
+# $ mvn compile; mvn clojure:compile; mvn package
+
+
+INCANTER_HOME=.
+CLASSES_DIR=$INCANTER_HOME/target/
+INCANTER_JAR=$INCANTER_HOME/target/incanter-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+if [ -z "$1" ]; then
+        java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -jar $INCANTER_JAR clojure.main
+        #java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp $INCANTER_JAR jline.ConsoleRunner clojure.main
+else
+        scriptname=$1
+        java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp $INCANTER_JAR clojure.lang.Script $scriptname -- $*
+fi
+
