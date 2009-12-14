@@ -16,7 +16,7 @@
 
 
 (ns incanter.processing
-  (:gen-class)
+  ;(:gen-class)
   (:use [incanter.core :only (view save)])
   (:import (processing.core PApplet PImage PGraphics PFont)))
 

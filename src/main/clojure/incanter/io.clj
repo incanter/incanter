@@ -56,7 +56,7 @@ http://stackoverflow.com/questions/613929/how-do-i-connect-to-a-mysql-database-f
 "}
 
 incanter.io
-  (:gen-class)
+  ;(:gen-class)
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
   (:use [incanter.core :only (dataset save)])

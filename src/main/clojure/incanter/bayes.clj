@@ -21,7 +21,7 @@
             "
        :author "David Edgar Liebke"}
   incanter.bayes
-  (:gen-class)
+  ;(:gen-class)
   (:use [incanter.core :only (matrix mmult mult div minus trans ncol nrow
                               plus to-list decomp-cholesky solve half-vectorize
                               vectorize symmetric-matrix identity-matrix kronecker

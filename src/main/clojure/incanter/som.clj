@@ -14,7 +14,7 @@
 
 
 (ns incanter.som
-  (:gen-class)
+  ;(:gen-class)
   (:use [incanter.core :only (sel ncol nrow mult div plus minus trans to-vect sqrt sum pow)]
         [incanter.stats :only (mean principal-components covariance)]))
 

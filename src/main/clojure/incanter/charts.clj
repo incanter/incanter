@@ -27,7 +27,7 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:gen-class)
+  ;(:gen-class)
   ;(:use (incanter core stats))
   (:use [incanter.core :only (matrix? to-list plus minus div group-by
                               bind-columns view save)]

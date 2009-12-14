@@ -29,7 +29,7 @@
        :author "David Edgar Liebke"}
   
   incanter.core
-  (:gen-class)
+  ;(:gen-class)
   (:use (incanter internal))
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
