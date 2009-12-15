@@ -21,5 +21,5 @@ $ lein uberjar
 
 And finally, run incanter-helloworld:
 
-$ java -jar incanter-helloworld.jar
+$ java -jar incanter-helloworld-standalone.jar
 
