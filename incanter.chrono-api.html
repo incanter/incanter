@@ -48,21 +48,55 @@ namespace.
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
     <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/are-overlapping?">are-overlapping?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/before?">before?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/beginning-of">beginning-of</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/date">date</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/date-seq">date-seq</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/date-time">date-time</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/date&gt;">date&gt;</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/def-date-format">def-date-format</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/def-date-parser">def-date-parser</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/earlier">earlier</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/earlier?">earlier?</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/end-of">end-of</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/format-date">format-date</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/hours-around">hours-around</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/hours-between">hours-between</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/hours-from">hours-from</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/is-within?">is-within?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/joda-date">joda-date</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/joda-guard">joda-guard</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/joda-proxy">joda-proxy</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/joda-str">joda-str</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/later">later</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/later?">later?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/minutes-between">minutes-between</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/minutes-from">minutes-from</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/now">now</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -70,11 +104,15 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/time-between">time-between</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/time-zone">time-zone</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/today">today</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/units-in-seconds">units-in-seconds</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/units-to-calendar-units">units-to-calendar-units</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.chrono/valid-range?">valid-range?</a>
     </div>
     <br />
   </div>
@@ -167,12 +205,30 @@ See test_contrib/chrono.clj for more details.
 <div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.chrono/are-overlapping?">are-overlapping?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (are-overlapping? [s e] [s1 e1])
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L256" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/before?">before?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (before? start end)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L244" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.chrono/beginning-of">beginning-of</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (beginning-of the-date unit)
 </pre>
   <pre id="var-docstr">Return a date at the beginning of the month, year, day, etc. from the-date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L322" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L345" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -182,7 +238,7 @@ See test_contrib/chrono.clj for more details.
 </pre>
   <pre id="var-docstr">Returns a new date object. Takes year, month, and day as args as
 well as optionally hours, minutes, and seconds.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L135" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L135" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -193,7 +249,43 @@ well as optionally hours, minutes, and seconds.</pre>
 </pre>
   <pre id="var-docstr">Returns a lazy seq of dates starting with from up until to in
 increments of units. If to is omitted, returns an infinite seq.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L336" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L359" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/date-time">date-time</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (date-time d t)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L303" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/date&gt;">date&gt;</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (date&gt; d)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L158" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/def-date-format">def-date-format</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (def-date-format fname [arg] &amp; body)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L370" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/def-date-parser">def-date-parser</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (def-date-parser fname [arg] &amp; body)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L376" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -204,7 +296,16 @@ increments of units. If to is omitted, returns an infinite seq.</pre>
 </pre>
   <pre id="var-docstr">Returns a date that is earlier than the-date by amount units.
 Amount is one if not specified.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L285" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L307" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/earlier?">earlier?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (earlier? date-a date-b)
+</pre>
+  <pre id="var-docstr">Is date-a earlier than date-b?</pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L320" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -213,7 +314,7 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">Usage: (end-of the-date unit)
 </pre>
   <pre id="var-docstr">Return a date at the end of the month, year, day, etc. from the-date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L330" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L353" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -222,7 +323,62 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">No usage documentation available</pre>
   <pre id="var-docstr">Take in a date and a format (either a keyword or a string) and
 return a string with the formatted date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L125" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L125" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/hours-around">hours-around</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (hours-around r d)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L240" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/hours-between">hours-between</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (hours-between start end)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L225" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/hours-from">hours-from</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (hours-from d h)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L232" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/is-within?">is-within?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (is-within? d [s e])
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L252" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/joda-date">joda-date</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (joda-date str-d)
+       (joda-date y m d h min sec mill zone)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L171" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/joda-guard">joda-guard</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (joda-guard d)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L213" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -231,7 +387,16 @@ return a string with the formatted date.</pre>
   <pre id="var-usage">Usage: (joda-proxy &amp; args)
 </pre>
   <pre id="var-docstr">joda-date object wraped in a proxy of goodness.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L172" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L177" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/joda-str">joda-str</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (joda-str d)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L207" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -242,7 +407,34 @@ return a string with the formatted date.</pre>
 </pre>
   <pre id="var-docstr">Returns a date that is later than the-date by amount units.
 Amount is one if not specified.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L271" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L291" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/later?">later?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (later? date-a date-b)
+</pre>
+  <pre id="var-docstr">Is date-a later than date-b?</pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L315" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/minutes-between">minutes-between</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (minutes-between start end)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L218" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/minutes-from">minutes-from</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (minutes-from d m)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L236" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -251,7 +443,7 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">Usage: (now)
 </pre>
   <pre id="var-docstr">Returns a new date object with the current date and time.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L257" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L277" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -260,7 +452,7 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">No usage documentation available</pre>
   <pre id="var-docstr">Take in a string with a formatted date and a format (either a
 keyword or a string) and return a parsed date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L130" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L130" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -270,7 +462,16 @@ keyword or a string) and return a parsed date.</pre>
        (time-between date-a date-b units)
 </pre>
   <pre id="var-docstr">How many units between date-a and date-b? Units defaults to seconds.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L301" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L324" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/time-zone">time-zone</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (time-zone offset)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L167" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -280,7 +481,7 @@ keyword or a string) and return a parsed date.</pre>
 </pre>
   <pre id="var-docstr">Returns a new date object with only the current date. The time
 fields will be set to 0.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L262" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L282" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -288,7 +489,7 @@ fields will be set to 0.</pre>
   <span id="var-type">var</span><br />
   <pre id="var-usage"></pre>
   <pre id="var-docstr">Number of seconds in each unit</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L94" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L94" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -296,7 +497,16 @@ fields will be set to 0.</pre>
   <span id="var-type">var</span><br />
   <pre id="var-usage"></pre>
   <pre id="var-docstr">Conversion of unit keywords to Calendar units</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L84" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L84" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.chrono/valid-range?">valid-range?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (valid-range? [start end])
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L248" id="var-source">Source</a>
 </div>
 
 

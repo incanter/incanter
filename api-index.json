@@ -23,7 +23,7 @@
    "doc":
    "This is the core charting library for Incanter.\nIt provides basic scatter plots, histograms, box plots,\nxy plots, bar charts, line charts, as well as \nspecialized charts like trace plots and Bland-Altman\nplots.\n\nThis library is built on the JFreeChart library\n(http://www.jfree.org/jfreechart/).\n"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.chrono-api.html",
    "name":"incanter.chrono",
@@ -453,7 +453,23 @@
    " Returns a JFreeChart object representing a xy-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x and y values into series.\n\nSee also:\n  view, save, add-points, add-lines\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  ;; plot the cosine function\n  (def x (range -1 5 0.01))\n  (def y (cos (mult 2 Math/PI x)))\n  (view (xy-plot x y))\n\n  ;; plot gamma pdf with different parameters\n  (def x2 (range 0 20 0.1))\n  (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :rate 2)\n                             :legend true\n                             :title \"Gamma PDF\"\n                             :y-label \"Density\"))\n  (view gamma-plot)\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))\n\n  ;; use :group-by option\n  (use '(incanter core charts datasets))\n  (def data (to-matrix (get-dataset :chick-weight)))\n  (let [[weight time chick] (trans data)]\n    (view (xy-plot time weight :group-by chick)))\n\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"xy-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L322",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L256",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/are-overlapping?",
+   "namespace":"incanter.chrono",
+   "arglists":[[["s", "e"], ["s1", "e1"]]],
+   "doc":"",
+   "name":"are-overlapping?"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L244",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/before?",
+   "namespace":"incanter.chrono",
+   "arglists":[["start", "end"]],
+   "doc":"",
+   "name":"before?"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L345",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/beginning-of",
    "namespace":"incanter.chrono",
@@ -462,7 +478,7 @@
    "Return a date at the beginning of the month, year, day, etc. from the-date.",
    "name":"beginning-of"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L135",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L135",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/date",
    "namespace":"incanter.chrono",
@@ -471,7 +487,7 @@
    "Returns a new date object. Takes year, month, and day as args as\nwell as optionally hours, minutes, and seconds.",
    "name":"date"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L336",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L359",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/date-seq",
    "namespace":"incanter.chrono",
@@ -480,7 +496,39 @@
    "Returns a lazy seq of dates starting with from up until to in\nincrements of units. If to is omitted, returns an infinite seq.",
    "name":"date-seq"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L285",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L303",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/date-time",
+   "namespace":"incanter.chrono",
+   "arglists":[["d", "t"]],
+   "doc":"",
+   "name":"date-time"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L158",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/date>",
+   "namespace":"incanter.chrono",
+   "arglists":[["d"]],
+   "doc":"",
+   "name":"date>"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L370",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/def-date-format",
+   "namespace":"incanter.chrono",
+   "arglists":[["fname", ["arg"], "&", "body"]],
+   "doc":"",
+   "name":"def-date-format"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L376",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/def-date-parser",
+   "namespace":"incanter.chrono",
+   "arglists":[["fname", ["arg"], "&", "body"]],
+   "doc":"",
+   "name":"def-date-parser"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L307",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/earlier",
    "namespace":"incanter.chrono",
@@ -490,7 +538,15 @@
    "Returns a date that is earlier than the-date by amount units.\nAmount is one if not specified.",
    "name":"earlier"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L330",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L320",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/earlier?",
+   "namespace":"incanter.chrono",
+   "arglists":[["date-a", "date-b"]],
+   "doc":"Is date-a earlier than date-b?",
+   "name":"earlier?"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L353",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/end-of",
    "namespace":"incanter.chrono",
@@ -499,7 +555,7 @@
    "Return a date at the end of the month, year, day, etc. from the-date.",
    "name":"end-of"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L125",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L125",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/format-date",
    "namespace":"incanter.chrono",
@@ -507,7 +563,56 @@
    "Take in a date and a format (either a keyword or a string) and\nreturn a string with the formatted date.",
    "name":"format-date"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L172",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L240",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/hours-around",
+   "namespace":"incanter.chrono",
+   "arglists":[["r", "d"]],
+   "doc":"",
+   "name":"hours-around"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L225",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/hours-between",
+   "namespace":"incanter.chrono",
+   "arglists":[["start", "end"]],
+   "doc":"",
+   "name":"hours-between"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L232",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/hours-from",
+   "namespace":"incanter.chrono",
+   "arglists":[["d", "h"]],
+   "doc":"",
+   "name":"hours-from"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L252",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/is-within?",
+   "namespace":"incanter.chrono",
+   "arglists":[["d", ["s", "e"]]],
+   "doc":"",
+   "name":"is-within?"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L171",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/joda-date",
+   "namespace":"incanter.chrono",
+   "arglists":
+   [["str-d"], ["y", "m", "d", "h", "min", "sec", "mill", "zone"]],
+   "doc":"",
+   "name":"joda-date"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L213",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/joda-guard",
+   "namespace":"incanter.chrono",
+   "arglists":[["d"]],
+   "doc":"",
+   "name":"joda-guard"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L177",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/joda-proxy",
    "namespace":"incanter.chrono",
@@ -515,7 +620,15 @@
    "doc":"joda-date object wraped in a proxy of goodness.",
    "name":"joda-proxy"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L271",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L207",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/joda-str",
+   "namespace":"incanter.chrono",
+   "arglists":[["d"]],
+   "doc":"",
+   "name":"joda-str"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L291",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/later",
    "namespace":"incanter.chrono",
@@ -525,7 +638,31 @@
    "Returns a date that is later than the-date by amount units.\nAmount is one if not specified.",
    "name":"later"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L257",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L315",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/later?",
+   "namespace":"incanter.chrono",
+   "arglists":[["date-a", "date-b"]],
+   "doc":"Is date-a later than date-b?",
+   "name":"later?"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L218",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/minutes-between",
+   "namespace":"incanter.chrono",
+   "arglists":[["start", "end"]],
+   "doc":"",
+   "name":"minutes-between"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L236",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/minutes-from",
+   "namespace":"incanter.chrono",
+   "arglists":[["d", "m"]],
+   "doc":"",
+   "name":"minutes-from"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L277",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/now",
    "namespace":"incanter.chrono",
@@ -533,7 +670,7 @@
    "doc":"Returns a new date object with the current date and time.",
    "name":"now"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L130",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L130",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/parse-date",
    "namespace":"incanter.chrono",
@@ -541,7 +678,7 @@
    "Take in a string with a formatted date and a format (either a\nkeyword or a string) and return a parsed date.",
    "name":"parse-date"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L301",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L324",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/time-between",
    "namespace":"incanter.chrono",
@@ -550,7 +687,15 @@
    "How many units between date-a and date-b? Units defaults to seconds.",
    "name":"time-between"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L262",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L167",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/time-zone",
+   "namespace":"incanter.chrono",
+   "arglists":[["offset"]],
+   "doc":"",
+   "name":"time-zone"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L282",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/today",
    "namespace":"incanter.chrono",
@@ -559,19 +704,27 @@
    "Returns a new date object with only the current date. The time\nfields will be set to 0.",
    "name":"today"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L94",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L94",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/units-in-seconds",
    "namespace":"incanter.chrono",
    "doc":"Number of seconds in each unit",
    "name":"units-in-seconds"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/chrono.clj#L84",
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L84",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/units-to-calendar-units",
    "namespace":"incanter.chrono",
    "doc":"Conversion of unit keywords to Calendar units",
    "name":"units-to-calendar-units"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L248",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.chrono-api.html#incanter.chrono/valid-range?",
+   "namespace":"incanter.chrono",
+   "arglists":[[["start", "end"]]],
+   "doc":"",
+   "name":"valid-range?"},
   {"source-url":
    "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L26",
    "wiki-url":
