@@ -155,16 +155,21 @@
 
 ;;brad's hacks
 
-(defn date> [d] 
-  (let [cal (Calendar/getInstance)]
-    (.setTime cal d)
-  (date cal)))
+(defn date> 
+  ""
+  ([d] 
+    (let [cal (Calendar/getInstance)]
+      (.setTime cal d)
+    (date cal))))
 
 ;;joda time 
 
-(defn time-zone [offset] (DateTimeZone/forOffsetHours offset)) 
+(defn time-zone 
+  ""
+  ([offset] (DateTimeZone/forOffsetHours offset)))
 
 (defn joda-date
+  ""
   ([str-d] (DateTime. str-d))
   ([y m d h min sec mill zone]
   (DateTime. y m d h min sec mill zone)))
@@ -199,48 +204,63 @@
       (valAt [unit] (.invoke this unit))
       (equiv [o] (.equals this o)))))
 
-(defn joda-str [d]
- (str `(DateTime. ~(str d))))
+(defn joda-str 
+  ""
+  ([d] (str `(DateTime. ~(str d)))))
 
 (defmethod print-dup org.joda.time.DateTime [d w] (.write w (joda-str d)))
  
-(defn joda-guard [d]
-  (not (instance? org.joda.time.DateTime d)))
-;;TODO: make this stuff monadic
-(defn minutes-between [start end] 
-  (if (or (joda-guard start) (joda-guard end))
-    nil
-    (.getMinutes (Minutes/minutesBetween start end))))
+(defn joda-guard 
+  ""
+  ([d] (not (instance? org.joda.time.DateTime d))))
 
-(defn hours-between [start end] 
-  (if (or (joda-guard start) (joda-guard end))
-    nil
-    (.getHours (Hours/hoursBetween start end))))
+  ;;TODO: make this stuff monadic
+(defn minutes-between 
+  ""
+  ([start end] 
+    (if (or (joda-guard start) (joda-guard end))
+      nil
+      (.getMinutes (Minutes/minutesBetween start end)))))
 
-(defn hours-from [d h]
-  (.plusHours d h))
+(defn hours-between 
+  ""
+  ([start end] 
+    (if (or (joda-guard start) (joda-guard end))
+      nil
+      (.getHours (Hours/hoursBetween start end)))))
 
-(defn minutes-from [d m]
-  (.plusMinutes d m))
+(defn hours-from 
+  ""
+  ([d h] (.plusHours d h)))
 
-(defn hours-around [r d]
-  (map #(.plusHours d %) r))  
+(defn minutes-from 
+  ""
+  ([d m] (.plusMinutes d m)))
 
-(defn before? [start end]
-  (.isBefore start end))
+(defn hours-around 
+  ""
+  ([r d] (map #(.plusHours d %) r)))
 
-(defn valid-range? [[start end]]
-  (maybe? before? start end))
+(defn before? 
+  ""
+  ([start end] (.isBefore start end)))
 
-(defn is-within? [d [s e]]
-  (.contains (Interval. s e) d))
+(defn valid-range? 
+  "" 
+  ([[start end]] (maybe? before? start end)))
 
-(defn are-overlapping? [[s e] [s1 e1]]
-  (if (and (valid-range? [s e]) (valid-range? [s1 e1]))
-    (letfn [(has-overlap? [start end start1 end1]
-			(not (nil? (.overlap (Interval. start end) (Interval. start1 end1)))))]
-      (maybe? has-overlap? s e s1 e1))
-    false))
+(defn is-within? 
+  ""
+  ([d [s e]] (.contains (Interval. s e) d)))
+
+(defn are-overlapping? 
+  ""
+  ([[s e] [s1 e1]]
+    (if (and (valid-range? [s e]) (valid-range? [s1 e1]))
+      (letfn [(has-overlap? [start end start1 end1]
+			  (not (nil? (.overlap (Interval. start end) (Interval. start1 end1)))))]
+        (maybe? has-overlap? s e s1 e1))
+      false)))
 
 ;;todo: find otu why this yields different resutls thatn reading the
 ;;other joda-str function output back in.
@@ -280,7 +300,9 @@
   ([the-date units]
      (later the-date 1 units)))
 
-(defn date-time [d t] (later d t :minute))
+(defn date-time 
+  ""
+  ([d t] (later d t :minute)))
 
 (defn earlier
   "Returns a date that is earlier than the-date by amount units.
@@ -290,13 +312,14 @@
   ([the-date units]
      (later the-date -1 units)))
 
-(defn later? [date-a date-b]
+(defn later? 
   "Is date-a later than date-b?"
-  (.after (date-a :calendar) (date-b :calendar)))
+  ([date-a date-b]
+    (.after (date-a :calendar) (date-b :calendar))))
 
-(defn earlier? [date-a date-b]
+(defn earlier? 
   "Is date-a earlier than date-b?"
-  (.before (date-a :calendar) (date-b :calendar)))
+  ([date-a date-b] (.before (date-a :calendar) (date-b :calendar))))
 
 (defn time-between
   "How many units between date-a and date-b? Units defaults to seconds."
@@ -344,13 +367,17 @@
 
 ;;; Formatting and Parsing
 
-(defmacro def-date-format [fname [arg] & body]
-  `(defmethod format-date ~(keyword (name fname)) [~arg ~'_]
-     ~@body))
+(defmacro def-date-format 
+  ""
+  ([fname [arg] & body]
+    `(defmethod format-date ~(keyword (name fname)) [~arg ~'_]
+       ~@body)))
 
-(defmacro def-date-parser [fname [arg] & body]
-  `(defmethod parse-date ~(keyword (name fname)) [~arg ~'_]
-     ~@body))
+(defmacro def-date-parser 
+  ""
+  ([fname [arg] & body]
+    `(defmethod parse-date ~(keyword (name fname)) [~arg ~'_]
+       ~@body)))
 
 ;;; Use the normal Java date formats
 
