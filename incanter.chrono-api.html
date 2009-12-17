@@ -27,7 +27,7 @@ namespace.
 	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
 	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
       </div>
-      <div id="leftcolumn"><div><div style="text-align: center;"></div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
     <a class="wiki_link" href="index.html">Overview</a><br />
@@ -38,65 +38,31 @@ namespace.
     </ul>
   </div>
 </div>
-</div></div>
+</div>
       <div id="rightcolumn">
 	<div id="Content">
 	  <div class="contentBox"><div class="innerContentBox">
               <div id="content_view" class="wiki wikiPage">
-                <div id="right-sidebar"><div><div id="toc">
+                <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/are-overlapping?">are-overlapping?</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/before?">before?</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/beginning-of">beginning-of</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/date">date</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/date-seq">date-seq</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/date-time">date-time</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/date&gt;">date&gt;</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/def-date-format">def-date-format</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/def-date-parser">def-date-parser</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/earlier">earlier</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/earlier?">earlier?</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/end-of">end-of</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/format-date">format-date</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/hours-around">hours-around</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/hours-between">hours-between</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/hours-from">hours-from</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/is-within?">is-within?</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/joda-date">joda-date</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/joda-guard">joda-guard</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/joda-proxy">joda-proxy</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/joda-str">joda-str</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/later">later</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/later?">later?</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/minutes-between">minutes-between</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/minutes-from">minutes-from</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/now">now</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -104,123 +70,28 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/time-between">time-between</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/time-zone">time-zone</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/today">today</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/units-in-seconds">units-in-seconds</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.chrono/units-to-calendar-units">units-to-calendar-units</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.chrono/valid-range?">valid-range?</a>
     </div>
     <br />
   </div>
 </div>
-</div></div>
-                <div id="content-tag"><div><h1 id="overview">API for <span id="namespace-name">incanter.chrono</span></h1>
-by <span id="author">Matt Moriarity, Phil Hagelberg, and Bradford Cross</span><br />
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">incanter.chrono</span></h1>
+by <span id="author">Unknown</span><br />
 <br />Usage:
 <pre>
 (ns your-namespace
   (:require <span id="long-name">incanter.chrono</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr">
- chrono.clj --- Because calling it date-utils would be boring.
-
- Use the date function to create dates. You can look up components
- much like you would in a map:
-
-(def my-date (date 2009 2 27 12 34 56))
-
-(my-date :year)   ;; 2009
-(my-date :month)  ;; 2
-(my-date :day)    ;; 27
-(my-date :hour)   ;; 12
-(my-date :minute) ;; 34
-(my-date :second) ;; 56
-
- You may omit the time if you like:
-
-(def my-other-date (date 2009 2 27))
-(my-other-date :hour) ;; 0
-
- To get a date relative to another date, use earlier and later:
-
-(earlier my-date 100 :minute) ;; 2009 2 27 10:54:56
-(later my-other-date 10 :day) ;; 2009 3 9
-
- For comparing dates, use earlier? and later?:
-
-(earlier? my-date my-other-date) ;; false
-(later? (later my-date 10 :day) my-date) ;; true
-
- You can see the time between two dates by calling time-between:
-
-(time-between my-other-date (date 2009 2 25) :days) ;; 2
-
-The date-seq function returns a lazy seq of dates incrementing by
-the units in its first arg starting from its second arg. The third
-arg if given dictates the end of the sequence.
-
-(date-seq :hours my-other-date my-date) ;; (a seq of twelve hours)
-(take 4 (date-seq :years my-date))
-;; (date 2009 2 27 12 34 56) (date 2010 2 27 12 34 56)
-;; (date 2011 2 27 12 34 56) (date 2012 2 27 12 34 56) [...]
-
- For converting between strings and dates, use format-date and
- parse-date
-
-(format-date my-date :short-date-time) ;; 2/27/09 12:34 PM
-(format-date my-other-date :long-date) ;; February 27, 2009
-(parse-date "12/25/09" :short-date) ;; (date 2009 12 25)
-(parse-date "January 1, 2008 1:45:23 PM EST" :long-date-time)
-;; (date 2008 1 1 13 45 23)
-
-Supported date formats are:
-  iso8601
-  short-date
-  medium-date
-  long-date
-  full-date
-  short-date-time
-
-Both format-date and parse-date also support a string for the
-format argument, which will use the string as the format for a
-SimpleDateFormat (see the javadocs of that class for how to write
-these formats).
-
-See test_contrib/chrono.clj for more details.
-
- TODO:
-
-* Timezones
-* More support for weeks
-* Various others scattered through code
-
-</pre>
+<pre id="namespace-docstr"></pre>
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/are-overlapping?">are-overlapping?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (are-overlapping? [s e] [s1 e1])
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L256" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/before?">before?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (before? start end)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L244" id="var-source">Source</a>
-</div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.chrono/beginning-of">beginning-of</h2>
@@ -228,7 +99,8 @@ See test_contrib/chrono.clj for more details.
   <pre id="var-usage">Usage: (beginning-of the-date unit)
 </pre>
   <pre id="var-docstr">Return a date at the beginning of the month, year, day, etc. from the-date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L345" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L321" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -238,7 +110,8 @@ See test_contrib/chrono.clj for more details.
 </pre>
   <pre id="var-docstr">Returns a new date object. Takes year, month, and day as args as
 well as optionally hours, minutes, and seconds.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L135" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L134" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -249,43 +122,8 @@ well as optionally hours, minutes, and seconds.</pre>
 </pre>
   <pre id="var-docstr">Returns a lazy seq of dates starting with from up until to in
 increments of units. If to is omitted, returns an infinite seq.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L359" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/date-time">date-time</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (date-time d t)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L303" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/date&gt;">date&gt;</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (date&gt; d)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L158" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/def-date-format">def-date-format</h2>
-  <span id="var-type">macro</span><br />
-  <pre id="var-usage">Usage: (def-date-format fname [arg] &amp; body)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L370" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/def-date-parser">def-date-parser</h2>
-  <span id="var-type">macro</span><br />
-  <pre id="var-usage">Usage: (def-date-parser fname [arg] &amp; body)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L376" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L335" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -296,16 +134,8 @@ increments of units. If to is omitted, returns an infinite seq.</pre>
 </pre>
   <pre id="var-docstr">Returns a date that is earlier than the-date by amount units.
 Amount is one if not specified.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L307" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/earlier?">earlier?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (earlier? date-a date-b)
-</pre>
-  <pre id="var-docstr">Is date-a earlier than date-b?</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L320" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L284" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -314,7 +144,8 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">Usage: (end-of the-date unit)
 </pre>
   <pre id="var-docstr">Return a date at the end of the month, year, day, etc. from the-date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L353" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L329" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -323,62 +154,8 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">No usage documentation available</pre>
   <pre id="var-docstr">Take in a date and a format (either a keyword or a string) and
 return a string with the formatted date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L125" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/hours-around">hours-around</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (hours-around r d)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L240" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/hours-between">hours-between</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (hours-between start end)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L225" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/hours-from">hours-from</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (hours-from d h)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L232" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/is-within?">is-within?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (is-within? d [s e])
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L252" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/joda-date">joda-date</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (joda-date str-d)
-       (joda-date y m d h min sec mill zone)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L171" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/joda-guard">joda-guard</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (joda-guard d)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L213" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L124" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -387,16 +164,8 @@ return a string with the formatted date.</pre>
   <pre id="var-usage">Usage: (joda-proxy &amp; args)
 </pre>
   <pre id="var-docstr">joda-date object wraped in a proxy of goodness.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L177" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/joda-str">joda-str</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (joda-str d)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L207" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L171" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -407,34 +176,8 @@ return a string with the formatted date.</pre>
 </pre>
   <pre id="var-docstr">Returns a date that is later than the-date by amount units.
 Amount is one if not specified.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L291" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/later?">later?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (later? date-a date-b)
-</pre>
-  <pre id="var-docstr">Is date-a later than date-b?</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L315" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/minutes-between">minutes-between</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (minutes-between start end)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L218" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/minutes-from">minutes-from</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (minutes-from d m)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L236" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L270" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -443,7 +186,8 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">Usage: (now)
 </pre>
   <pre id="var-docstr">Returns a new date object with the current date and time.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L277" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L256" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -452,7 +196,8 @@ Amount is one if not specified.</pre>
   <pre id="var-usage">No usage documentation available</pre>
   <pre id="var-docstr">Take in a string with a formatted date and a format (either a
 keyword or a string) and return a parsed date.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L130" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L129" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -462,16 +207,8 @@ keyword or a string) and return a parsed date.</pre>
        (time-between date-a date-b units)
 </pre>
   <pre id="var-docstr">How many units between date-a and date-b? Units defaults to seconds.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L324" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/time-zone">time-zone</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (time-zone offset)
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L167" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L300" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -481,7 +218,8 @@ keyword or a string) and return a parsed date.</pre>
 </pre>
   <pre id="var-docstr">Returns a new date object with only the current date. The time
 fields will be set to 0.</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L282" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L261" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -489,7 +227,8 @@ fields will be set to 0.</pre>
   <span id="var-type">var</span><br />
   <pre id="var-usage"></pre>
   <pre id="var-docstr">Number of seconds in each unit</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L94" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L93" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -497,20 +236,12 @@ fields will be set to 0.</pre>
   <span id="var-type">var</span><br />
   <pre id="var-usage"></pre>
   <pre id="var-docstr">Conversion of unit keywords to Calendar units</pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L84" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.chrono/valid-range?">valid-range?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (valid-range? [start end])
-</pre>
-  <pre id="var-docstr"></pre>
-  <a href="http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj#L248" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/chrono.clj': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions/src/incanter/chrono.clj#L83" id="var-source">Source</a>
 </div>
 
 
-</div></div>
+</div>
               </div>
             </div>
           </div>
