@@ -1,8 +1,8 @@
 <html>
   <head>
-    <title>transformations API reference (Incanter)</title>
-    <link href="static/incanter.ico" rel="icon" />
-    <link href="static/incanter.ico" rel="shortcut icon" />
+    <title>incanter.transformations API reference (Incanter)</title>
+    <link href="static/favicon.png" rel="icon" />
+    <link href="static/favicon.png" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
@@ -27,23 +27,23 @@ namespace.
 	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
 	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
       </div>
-      <div id="leftcolumn"><div style="text-align: center;"></div>
+      <div id="leftcolumn"><div><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="incanter.bayes-api.html" class="wiki_link">incanter.bayes</a></li><li><a href="incanter.censored-api.html" class="wiki_link">incanter.censored</a></li><li><a href="incanter.charts-api.html" class="wiki_link">incanter.charts</a></li><li><a href="incanter.chrono-api.html" class="wiki_link">incanter.chrono</a></li><li><a href="incanter.classification-api.html" class="wiki_link">incanter.classification</a></li><li><a href="incanter.core-api.html" class="wiki_link">incanter.core</a></li><li><a href="incanter.datasets-api.html" class="wiki_link">incanter.datasets</a></li><li><a href="incanter.incremental-stats-api.html" class="wiki_link">incanter.incremental-stats</a></li><li><a href="incanter.information-theory-api.html" class="wiki_link">incanter.information-theory</a></li><li><a href="incanter.internal-api.html" class="wiki_link">incanter.internal</a></li><li><a href="incanter.io-api.html" class="wiki_link">incanter.io</a></li><li><a href="incanter.optimize-api.html" class="wiki_link">incanter.optimize</a></li><li><a href="incanter.probability-api.html" class="wiki_link">incanter.probability</a></li><li><a href="incanter.processing-api.html" class="wiki_link">incanter.processing</a></li><li><a href="incanter.som-api.html" class="wiki_link">incanter.som</a></li><li><a href="incanter.stats-api.html" class="wiki_link">incanter.stats</a></li><li><a href="incanter.transformations-api.html" class="wiki_link">incanter.transformations</a></li>
     </ul>
   </div>
 </div>
-</div>
+</div></div>
       <div id="rightcolumn">
 	<div id="Content">
 	  <div class="contentBox"><div class="innerContentBox">
               <div id="content_view" class="wiki wikiPage">
-                <div id="right-sidebar"><div id="toc">
+                <div id="right-sidebar"><div><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
@@ -61,8 +61,8 @@ namespace.
     <br />
   </div>
 </div>
-</div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">transformations</span></h1>
+</div></div>
+                <div id="content-tag"><div><h1 id="overview">API for <span id="namespace-name">incanter.transformations</span></h1>
 by <span id="author">Unknown</span><br />
 <br />Usage:
 <pre>
@@ -81,8 +81,7 @@ by <span id="author">Unknown</span><br />
   <pre id="var-usage">Usage: (all-keys m)
 </pre>
   <pre id="var-docstr">returns a set of all the keys from an arbitarily deeply nested map or seq of maps.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/transformations.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/transformations.clj#L82" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/transformations.clj#L82" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -95,8 +94,7 @@ given a map; is this the bottom level in the map?
 
  (bottom-level? {:a 1}) -&gt; true
  (bottom-level? {:a {:b 1}}) -&gt; false</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/transformations.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/transformations.clj#L96" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/transformations.clj#L96" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -108,8 +106,7 @@ Use '--' to separate paths from revisions/src/incanter/transformations.clj#L96" 
 takes an arbitrarily deeply nested map, and flattens it to one level by merging keys. 
 
  (flatten-with str {:a {:b {:c 1}}}) -&gt; {":a:b:c" 1}</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/transformations.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/transformations.clj#L127" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/transformations.clj#L127" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -125,8 +122,7 @@ returns the number of levels of depth of nesting for a nested map.
  {0 1} -&gt; 1
  {1 {0 1}} -&gt; 2
  ...</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/transformations.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/transformations.clj#L106" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/transformations.clj#L106" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -152,12 +148,11 @@ splits out the individual vectors.
  -&gt;
 
  [[106 86 100 101 99 103 97 113 112 110] [7 0 27 50 28 29 20 12 6 17]]</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/transformations.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/transformations.clj#L7" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/transformations.clj#L7" id="var-source">Source</a>
 </div>
 
 
-</div>
+</div></div>
               </div>
             </div>
           </div>

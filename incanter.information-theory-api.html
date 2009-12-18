@@ -1,8 +1,8 @@
 <html>
   <head>
-    <title>information-theory API reference (Incanter)</title>
-    <link href="static/incanter.ico" rel="icon" />
-    <link href="static/incanter.ico" rel="shortcut icon" />
+    <title>incanter.information-theory API reference (Incanter)</title>
+    <link href="static/favicon.png" rel="icon" />
+    <link href="static/favicon.png" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
@@ -27,23 +27,23 @@ namespace.
 	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
 	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
       </div>
-      <div id="leftcolumn"><div style="text-align: center;"></div>
+      <div id="leftcolumn"><div><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="incanter.bayes-api.html" class="wiki_link">incanter.bayes</a></li><li><a href="incanter.censored-api.html" class="wiki_link">incanter.censored</a></li><li><a href="incanter.charts-api.html" class="wiki_link">incanter.charts</a></li><li><a href="incanter.chrono-api.html" class="wiki_link">incanter.chrono</a></li><li><a href="incanter.classification-api.html" class="wiki_link">incanter.classification</a></li><li><a href="incanter.core-api.html" class="wiki_link">incanter.core</a></li><li><a href="incanter.datasets-api.html" class="wiki_link">incanter.datasets</a></li><li><a href="incanter.incremental-stats-api.html" class="wiki_link">incanter.incremental-stats</a></li><li><a href="incanter.information-theory-api.html" class="wiki_link">incanter.information-theory</a></li><li><a href="incanter.internal-api.html" class="wiki_link">incanter.internal</a></li><li><a href="incanter.io-api.html" class="wiki_link">incanter.io</a></li><li><a href="incanter.optimize-api.html" class="wiki_link">incanter.optimize</a></li><li><a href="incanter.probability-api.html" class="wiki_link">incanter.probability</a></li><li><a href="incanter.processing-api.html" class="wiki_link">incanter.processing</a></li><li><a href="incanter.som-api.html" class="wiki_link">incanter.som</a></li><li><a href="incanter.stats-api.html" class="wiki_link">incanter.stats</a></li><li><a href="incanter.transformations-api.html" class="wiki_link">incanter.transformations</a></li>
     </ul>
   </div>
 </div>
-</div>
+</div></div>
       <div id="rightcolumn">
 	<div id="Content">
 	  <div class="contentBox"><div class="innerContentBox">
               <div id="content_view" class="wiki wikiPage">
-                <div id="right-sidebar"><div id="toc">
+                <div id="right-sidebar"><div><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
@@ -63,8 +63,8 @@ namespace.
     <br />
   </div>
 </div>
-</div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">information-theory</span></h1>
+</div></div>
+                <div id="content-tag"><div><h1 id="overview">API for <span id="namespace-name">incanter.information-theory</span></h1>
 by <span id="author">Unknown</span><br />
 <br />Usage:
 <pre>
@@ -72,7 +72,18 @@ by <span id="author">Unknown</span><br />
   (:require <span id="long-name">incanter.information-theory</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr"></pre>
+<pre id="namespace-docstr">
+
+TODO: docs - describe representations taht these measures expect.
+
+TODO
+other divergences and distances that can be described as kl divergences
+http://en.wikipedia.org/wiki/Hellinger_distance
+interaction information
+http://en.wikipedia.org/wiki/Interaction_information
+http://en.wikipedia.org/wiki/Kirkwood_approximation
+http://en.wikipedia.org/wiki/F-divergence
+<a href="http://en.wikipedia.org/wiki/Statistical_distance">http://en.wikipedia.org/wiki/Statistical_distance</a></pre>
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -83,8 +94,7 @@ by <span id="author">Unknown</span><br />
   <pre id="var-usage">Usage: (entropy counts)
 </pre>
   <pre id="var-docstr">takes a map of class label to counts</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/information_theory.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L57" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L57" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -97,8 +107,7 @@ computes information gain from count matrix of feature class labels to predicted
 
 example: (gain {:weak {:positive 6 :negative 2} 
 		:strong {:positive 3 :negative 3}})</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/information_theory.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L69" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L69" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -107,8 +116,7 @@ Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L6
   <pre id="var-usage">Usage: (gini-impurity counts)
 </pre>
   <pre id="var-docstr">Gini impurity is  measure of how often a randoincanter. chosen element from the set would be incorrectly labelled if it were randoincanter. labelled according to the distribution of labels in the subset. Gini impurity can be computed by summing the probability of each item being chosen times the probability of a mistake in categorizing that item. It reaches its minimum (zero) when all cases in the node fall into a single target category.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/information_theory.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L21" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L21" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -125,8 +133,7 @@ takes a map of class label to counts.
 note the (&gt; p 0) predicate defines (* 0 (log2 0)) as 0 rather than NaN
 
 assumes you pass in distributions as nested maps and flattens them before applying the algorithm. </pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/information_theory.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L32" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L32" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -137,8 +144,7 @@ Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L3
   <pre id="var-docstr">mutual information is the Kullback-Leibler divergence between the product of the marginal distributions of two random variables, p(x)p(y), and the the random variables' joint distribution, p(x,y).
 
 see: <a href="http://en.wikipedia.org/wiki/Mutual_information">http://en.wikipedia.org/wiki/Mutual_information</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/information_theory.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L97" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L97" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -149,12 +155,11 @@ Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L9
   <pre id="var-docstr">total correlation is a multivariate generalization of mutual information.  it is the Kullback-Leibler divergence between the joint distribution of a set and its maximum entropy product approximation.
 
 see: <a href="http://en.wikipedia.org/wiki/Total_correlation">http://en.wikipedia.org/wiki/Total_correlation</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/information_theory.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/information_theory.clj#L88" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L88" id="var-source">Source</a>
 </div>
 
 
-</div>
+</div></div>
               </div>
             </div>
           </div>

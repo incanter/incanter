@@ -15,7 +15,7 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.charts-api.html",
    "name":"incanter.charts",
@@ -218,7 +218,7 @@
    " Returns the variance of a normal distribution truncated at a and b.\n\nOptions:\n  :mean (default 0) mean of untruncated normal distribution\n  :sd (default 1) standard deviation of untruncated normal distribution\n  :a (default -infinity) lower truncation point\n  :b (default +infinity) upper truncation point\n\nExamples:\n\n  (use '(incanter core stats))\n  (truncated-variance :a -1.96 :b 1.96)\n  (truncated-variance :a 0)\n  (truncated-variance :b 0)\n\n  (use 'incanter.charts)\n  (def x (range -3 3 0.1))\n  (def plot (xy-plot x (map #(truncated-variance :a %) x)))\n  (view plot)\n  (add-lines plot x (map #(truncated-variance :b %) x))\n\n  (def samp (sample-normal 10000))\n  (add-lines plot x (map #(variance (filter (fn [s] (> s %)) samp)) x))\n  (add-lines plot x (map #(variance (mult samp (indicator (fn [s] (> s %)) samp))) x))\n\n\nReferences:\n  DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables.\n    Wiley-IEEE.\n\n  http://en.wikipedia.org/wiki/Truncated_normal_distribution",
    "name":"truncated-variance"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L655",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L672",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-box-plot",
    "namespace":"incanter.charts",
@@ -227,7 +227,7 @@
    "\nAdds an additional box to an existing box-plot, returns the modified chart object.\n\nOptions:\n  :series-label (default x expression)\n\nExamples:\n\n    (use '(incanter core charts stats))\n    (doto (box-plot (sample-normal 1000) :legend true)\n          view\n          (add-box-plot (sample-normal 1000 :sd 2))\n          (add-box-plot (sample-gamma 1000)))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-box-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L692",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L709",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-categories",
    "namespace":"incanter.charts",
@@ -236,7 +236,7 @@
    "\nAdds an additional categories to an existing bar-chart or line-chart, returns the modified chart object.\n\nOptions:\n  :group-by\n\nExamples:\n\n    (use '(incanter core charts stats))\n    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n    (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n    (def x (sample-uniform 12 :integers true :max 100))\n    (def plot (bar-chart years x :group-by seasons :legend true))\n    (view plot)\n    (add-category-line plot (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)\n\n    (def plot2 (line-chart years x :group-by seasons :legend true))\n    (view plot2)\n    (add-category-line plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-categories"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L889",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L908",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-function",
    "namespace":"incanter.charts",
@@ -246,7 +246,7 @@
    " Adds a xy-plot of the given function to the given chart, returning\na modified version of the chart.\n\nOptions:\n  :series-label (default x expression)\n  :step-size (default (/ (- max-range min-range) 500))\n\nSee also:\n  function-plot, view, save, add-function, add-points, add-lines\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  ;; plot the sine and cosine functions\n  (doto (function-plot sin (- Math/PI) Math/PI)\n        (add-function cos (- Math/PI) Math/PI)\n        view)\n\n\n  ;; plot two normal pdf functions\n  (doto (function-plot pdf-normal -3 3 :legend true)\n        (add-function (fn [x] (pdf-normal x :mean 0.5 :sd 0.5)) -3 3)\n        view)\n\n\n  ;; plot a user defined function and its derivative\n  (use '(incanter core charts optimize))\n\n  ;; define the function, x^3 + 2x^2 + 2x + 3\n  (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))\n\n  ;; use the derivative function to get a function\n  ;; that approximates its derivative\n  (def deriv-cubic (derivative cubic))\n\n  ;; plot the cubic function and its derivative\n  (doto (function-plot cubic -10 10)\n        (add-function deriv-cubic -10 10)\n        view)",
    "name":"add-function"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L617",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L634",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-histogram",
    "namespace":"incanter.charts",
@@ -255,7 +255,7 @@
    "\nAdds a histogram to an existing histogram plot, returns the modified\nchart object.\n\nOptions:\n  :nbins (default 10) number of bins for histogram\n  :series-label (default x expression)\n\nExamples:\n\n  (use '(incanter core charts stats))\n  (doto (histogram (sample-normal 1000)\n                   :legend true)\n        view\n        (add-histogram (sample-normal 1000 :sd 0.5)))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-histogram"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L825",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L844",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-lines",
    "namespace":"incanter.charts",
@@ -264,7 +264,7 @@
    " Plots lines on the given scatter or line plot of the (x,y) points.\nEquivalent to R's lines function, returns the modified chart object.\n\nOptions:\n  :series-label (default x expression)\n\nExamples:\n\n  (use '(incanter core stats io datasets charts))\n  (def cars (to-matrix (get-dataset :cars)))\n  (def y (sel cars :cols 0))\n  (def x (sel cars :cols 1))\n  (def plot1 (scatter-plot x y :legend true))\n  (view plot1)\n\n  ;; add regression line to scatter plot\n  (def lm1 (linear-model y x))\n  (add-lines plot1 x (:fitted lm1))\n\n  ;; model the data without an intercept\n  (def lm2 (linear-model y x :intercept false))\n  (add-lines plot1 x (:fitted lm2))\n\n\n  ;; Clojure's doto macro can be used to build a chart\n  (doto (xy-plot x (pdf-normal x))\n        view\n        clear-background\n        (add-lines x (pdf-normal x :sd 1.5))\n        (add-lines x (pdf-normal x :sd 0.5)))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-lines"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L1007",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1026",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-pointer",
    "namespace":"incanter.charts",
@@ -273,7 +273,7 @@
    " Adds an arrow annotation to the given chart.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinate to add the annotation\n\n\nOptions:\n    :text -- (default \"\") text to include at the end of the arrow\n    :angle -- (default :nw) either a number indicating the angle of the arrow,\n              or a keyword indicating a direction (:north :nw :west :sw :south\n              :se :east :ne)\n\n\nExamples:\n\n  (use '(incanter core charts))\n  (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))\n  (def plot (xy-plot x (sin x)))\n  (view plot)\n  ;; annotate the plot\n  (doto plot\n    (add-pointer (- Math/PI) (sin (- Math/PI)) :text \"(-pi, (sin -pi))\")\n    (add-pointer Math/PI (sin Math/PI) :text \"(pi, (sin pi))\" :angle :ne)\n    (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text \"(pi/2, (sin pi/2))\" :angle :south))\n\n  ;; try the different angle options\n  (add-pointer plot 0 0 :text \"north\" :angle :north)\n  (add-pointer plot 0 0 :text \"nw\" :angle :nw)\n  (add-pointer plot 0 0 :text \"ne\" :angle :ne)\n  (add-pointer plot 0 0 :text \"west\" :angle :west)\n  (add-pointer plot 0 0 :text \"east\" :angle :east)\n  (add-pointer plot 0 0 :text \"south\" :angle :south)\n  (add-pointer plot 0 0 :text \"sw\" :angle :sw)\n  (add-pointer plot 0 0 :text \"se\" :angle :se)",
    "name":"add-pointer"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L944",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L963",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-points",
    "namespace":"incanter.charts",
@@ -282,7 +282,7 @@
    " Plots points on the given scatter-plot or xy-plot of the (x,y) points.\nEquivalent to R's lines function, returns the modified chart object.\n\nOptions:\n  :series-label (default x expression)\n\nExamples:\n\n  (use '(incanter core stats io datasets charts))\n  (def cars (to-matrix (get-dataset :cars)))\n  (def y (sel cars :cols 0))\n  (def x (sel cars :cols 1))\n\n  ;; add regression line to scatter plot\n  (def lm1 (linear-model y x))\n  ;; model the data without an intercept\n  (def lm2 (linear-model y x :intercept false))\n\n  (doto (xy-plot x (:fitted lm1) :legend true)\n        view\n        (add-points x y)\n        (add-lines x (:fitted lm2)))\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-points"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L1141",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1160",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-polygon",
    "namespace":"incanter.charts",
@@ -291,7 +291,7 @@
    " Adds a polygon outline defined by a given coordinates. The last coordinate will\nclose with the first. If only two points are given, it will plot a line.\n\nArguments:\n  chart -- the chart to add the polygon to.\n  coords -- a list of coords (an n-by-2 matrix can also be used)\n\n\nExamples:\n  (use '(incanter core stats charts))\n  (def x (range -3 3 0.01))\n  (def plot (xy-plot x (pdf-normal x)))\n  (view plot)\n\n  ;; add polygon to the chart\n  (add-polygon plot [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]])\n  ;; the coordinates can also be passed in a matrix\n  ;; (def points (matrix [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]]))\n  ;; (add-polygon plot points)\n  ;; add a text annotation\n  (add-text plot -1.25 0.35 \"95% Conf Interval\")\n\n  ;; PCA chart example\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (def plot (scatter-plot x1 x2\n                          :group-by (sel iris :cols 4)\n                          :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n\n  (view plot)\n  ;; put box around the first group\n  (add-polygon plot [[-3.2 -6.3] [-2 -6.3] [-2 -3.78] [-3.2 -3.78]])\n  ;; add some text annotations\n  (add-text plot -2.5 -6.5 \"Setosa\")\n  (add-text plot -5 -5.5 \"Versicolor\")\n  (add-text plot -8 -5.5 \"Virginica\")",
    "name":"add-polygon"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L1096",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1115",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-text",
    "namespace":"incanter.charts",
@@ -300,7 +300,7 @@
    " Adds a text annotation centered at the given coordinates.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinates to center the text\n  text -- the text to add\n\n\nExamples:\n\n  ;; PCA chart example\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (def plot (scatter-plot x1 x2\n                          :group-by (sel iris :cols 4)\n                          :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n  (view plot)\n  ;; add some text annotations\n  (add-text plot -2.5 -6.5 \"Setosa\")\n  (add-text plot -5 -5.5 \"Versicolor\")\n  (add-text plot -8 -5.5 \"Virginica\")",
    "name":"add-text"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L427",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L440",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/bar-chart",
    "namespace":"incanter.charts",
@@ -309,7 +309,7 @@
    " Returns a JFreeChart object representing a bar-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :legend (default false) prints legend\n  :vertical (default true) the orientation of the plot\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (def data (get-dataset :co2))\n  (def grass-type (sel data :cols 1))\n  (def treatment-type (sel data :cols 2))\n  (def uptake (sel data :cols 4))\n  (view (bar-chart grass-type uptake\n                  :title \"CO2 Uptake\"\n                  :group-by treatment-type\n                  :x-label \"Grass Types\" :y-label \"Uptake\"\n                  :legend true))\n\n\n  (def data (get-dataset :airline-passengers))\n  (def years (sel data :cols 0))\n  (def months (sel data :cols 2))\n  (def passengers (sel data :cols 1))\n  (view (bar-chart years passengers :group-by months :legend true))\n  (view (bar-chart months passengers :group-by years :legend true))\n\n\n  (def data (get-dataset :austres))\n  (view data)\n  (def plot (bar-chart (sel data :cols 0) (sel data :cols 1)\n                       :group-by (sel data :cols 2) :legend true))\n  (view plot)\n  (save plot \"/tmp/austres_plot.png\" :width 1000)\n  (view \"file:///tmp/austres_plot.png\")\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def values (sample-uniform 12 :integers true :max 100))\n  (view (bar-chart years values :group-by seasons :legend true))\n\n  (view (bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))\n  (view (bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]\n                   :legend true\n                   :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))\n\n  (view (bar-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                   (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"bar-chart"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L1276",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1295",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/bland-altman-plot",
    "namespace":"incanter.charts",
@@ -318,7 +318,7 @@
    "\n\nExamples:\n\n  (use '(incanter core datasets charts))\n  (def flow-meter (to-matrix (get-dataset :flow-meter)))\n  (def x1 (sel flow-meter :cols 1))\n  (def x2 (sel flow-meter :cols 3))\n  (view (bland-altman-plot x1 x2))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Bland-Altman_plot\n  http://www-users.york.ac.uk/~mb55/meas/ba.htm",
    "name":"bland-altman-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L360",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L366",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/box-plot",
    "namespace":"incanter.charts",
@@ -327,7 +327,7 @@
    " Returns a JFreeChart object representing a box-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x values into series.\n\nSee also:\n  view and save\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                        :title \"Gamma Boxplot\"\n                        :legend true))\n  (view gamma-box-plot)\n  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))\n\n  ;; use the group-by options\n  (use '(incanter core stats datasets charts))\n  (def iris (to-matrix (get-dataset :iris)))\n  (view (box-plot (sel iris :cols 0) :group-by (sel iris :cols 4) :legend true))\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"box-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L769",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L788",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/clear-background",
    "namespace":"incanter.charts",
@@ -336,7 +336,7 @@
    " Sets the alpha level (transparancy) of the plot's background to zero,\nremoving the default grid, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"clear-background"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L310",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L316",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/function-plot",
    "namespace":"incanter.charts",
@@ -346,7 +346,7 @@
    " Returns a xy-plot object of the given function over the range indicated\nby the min-range and max-range arguments. Use the 'view' function to\ndisplay the chart, or the 'save' function to write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :step-size (default (/ (- max-range min-range) 500))\n\nSee also:\n  view, save, add-points, add-lines\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  (view (function-plot sin (- Math/PI) Math/PI))\n  (view (function-plot pdf-normal -3 3))\n\n  (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))\n  (view (function-plot cubic -10 10))",
    "name":"function-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L58",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L58",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/histogram",
    "namespace":"incanter.charts",
@@ -355,7 +355,7 @@
    " Returns a JFreeChart object representing the histogram of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :nbins (default 10) number of bins\n  :density (default false) if false, plots frequency, otherwise density\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n\n\nSee also:\n  view, save, add-histogram\n\nExamples:\n\n  (use '(incanter core charts stats))\n  (view (histogram (sample-normal 1000)))\n\n  # plot a density histogram\n  (def hist (histogram (sample-normal 1000) :density true))\n  (view hist)\n  # add a normal density line to the plot\n  (def x (range -4 4 0.01))\n  (add-lines hist x (pdf-normal x))\n\n  # plot some gamma data\n  (def gam-hist (histogram (sample-gamma 1000) :density true :nbins 30))\n  (view gam-hist)\n  (def x (range 0 8 0.01))\n  (add-lines gam-hist x (pdf-gamma x))\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"histogram"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L535",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L550",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/line-chart",
    "namespace":"incanter.charts",
@@ -364,7 +364,7 @@
    " Returns a JFreeChart object representing a line-chart of the given values and categories.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :legend (default false) prints legend\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n\n  (def data (get-dataset :airline-passengers))\n  (def years (sel data :cols 0))\n  (def months (sel data :cols 2))\n  (def passengers (sel data :cols 1))\n  (view (line-chart years passengers :group-by months :legend true))\n  (view (line-chart months passengers :group-by years :legend true))\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def x (sample-uniform 12 :integers true :max 100))\n  (view (line-chart years x :group-by seasons :legend true))\n\n  (view (line-chart [\"a\" \"b\" \"c\" \"d\" \"e\" \"f\"] [10 20 30 10 40 20]))\n\n  (view (line-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                       (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"line-chart"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L214",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L218",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/line-plot",
    "namespace":"incanter.charts",
@@ -372,7 +372,7 @@
    "doc":"WARNING: line-plot has been renamed xy-plot.",
    "name":"line-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L1246",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1265",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/qq-plot",
    "namespace":"incanter.charts",
@@ -381,7 +381,7 @@
    "\nReturns a QQ-Plot object. Use the 'view' function to display it.\n\nReferences:\n  http://en.wikipedia.org/wiki/QQ_plot\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (view (qq-plot (sample-normal 100)))\n  (view (qq-plot (sample-exp 100)))\n  (view (qq-plot (sample-gamma 100)))",
    "name":"qq-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L131",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L133",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/scatter-plot",
    "namespace":"incanter.charts",
@@ -390,7 +390,7 @@
    " Returns a JFreeChart object representing a scatter-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x and y values into series.\n\nSee also:\n  view, save, add-points, add-lines\n\nExamples:\n\n  (use '(incanter core stats charts))\n  ;; create some data\n  (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))\n\n  ;; create scatter-plot of points\n  (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))\n  (view mvn-plot)\n\n  ;; add regression line to scatter plot\n  (def x (sel mvn-samp :cols 0))\n  (def y (sel mvn-samp :cols 1))\n  (def lm (linear-model y x))\n  (add-lines mvn-plot x (:fitted lm))\n\n  ;; use :group-by option\n  (use '(incanter core stats datasets charts))\n  ;; load the :iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; plot the first two columns grouped by the fifth column\n  (view (scatter-plot (sel iris :cols 0) (sel iris :cols 1) :group-by (sel iris :cols 4)))\n\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"scatter-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L741",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L760",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-alpha",
    "namespace":"incanter.charts",
@@ -399,7 +399,7 @@
    " Sets the alpha level (transparancy) of the plot's foreground,\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-alpha"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L755",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L774",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-background-alpha",
    "namespace":"incanter.charts",
@@ -408,7 +408,7 @@
    " Sets the alpha level (transparancy) of the plot's background,\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-background-alpha"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L784",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L803",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-title",
    "namespace":"incanter.charts",
@@ -417,7 +417,7 @@
    " Sets the main title of the plot, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-title"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L797",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L816",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-x-label",
    "namespace":"incanter.charts",
@@ -426,7 +426,7 @@
    " Sets the label of the x-axis, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-x-label"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L810",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L829",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-y-label",
    "namespace":"incanter.charts",
@@ -435,7 +435,7 @@
    " Sets the label of the y-axis, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-y-label"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L1209",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1228",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/trace-plot",
    "namespace":"incanter.charts",
@@ -444,7 +444,7 @@
    " Returns a trace-plot object, use the 'view' function to display it.\n\nExamples:\n  (use '(incanter core datasets stats bayes charts))\n  (def ols-data (to-matrix (get-dataset :survey)))\n  (def x (sel ols-data (range 0 2313) (range 1 10)))\n  (def y (sel ols-data (range 0 2313) 10))\n  (def sample-params (sample-model-params 5000 (linear-model y x :intercept false)))\n  (view (trace-plot (:var sample-params)))\n\n  (view (trace-plot (sel (:coefs sample-params) :cols 0)))",
    "name":"trace-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/charts.clj#L221",
+   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L225",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/xy-plot",
    "namespace":"incanter.charts",

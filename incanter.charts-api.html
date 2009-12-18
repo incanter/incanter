@@ -1,8 +1,8 @@
 <html>
   <head>
-    <title>charts API reference (Incanter)</title>
-    <link href="static/incanter.ico" rel="icon" />
-    <link href="static/incanter.ico" rel="shortcut icon" />
+    <title>incanter.charts API reference (Incanter)</title>
+    <link href="static/favicon.png" rel="icon" />
+    <link href="static/favicon.png" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
@@ -27,23 +27,23 @@ namespace.
 	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
 	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
       </div>
-      <div id="leftcolumn"><div style="text-align: center;"></div>
+      <div id="leftcolumn"><div><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="incanter.bayes-api.html" class="wiki_link">incanter.bayes</a></li><li><a href="incanter.censored-api.html" class="wiki_link">incanter.censored</a></li><li><a href="incanter.charts-api.html" class="wiki_link">incanter.charts</a></li><li><a href="incanter.chrono-api.html" class="wiki_link">incanter.chrono</a></li><li><a href="incanter.classification-api.html" class="wiki_link">incanter.classification</a></li><li><a href="incanter.core-api.html" class="wiki_link">incanter.core</a></li><li><a href="incanter.datasets-api.html" class="wiki_link">incanter.datasets</a></li><li><a href="incanter.incremental-stats-api.html" class="wiki_link">incanter.incremental-stats</a></li><li><a href="incanter.information-theory-api.html" class="wiki_link">incanter.information-theory</a></li><li><a href="incanter.internal-api.html" class="wiki_link">incanter.internal</a></li><li><a href="incanter.io-api.html" class="wiki_link">incanter.io</a></li><li><a href="incanter.optimize-api.html" class="wiki_link">incanter.optimize</a></li><li><a href="incanter.probability-api.html" class="wiki_link">incanter.probability</a></li><li><a href="incanter.processing-api.html" class="wiki_link">incanter.processing</a></li><li><a href="incanter.som-api.html" class="wiki_link">incanter.som</a></li><li><a href="incanter.stats-api.html" class="wiki_link">incanter.stats</a></li><li><a href="incanter.transformations-api.html" class="wiki_link">incanter.transformations</a></li>
     </ul>
   </div>
 </div>
-</div>
+</div></div>
       <div id="rightcolumn">
 	<div id="Content">
 	  <div class="contentBox"><div class="innerContentBox">
               <div id="content_view" class="wiki wikiPage">
-                <div id="right-sidebar"><div id="toc">
+                <div id="right-sidebar"><div><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
@@ -103,16 +103,24 @@ namespace.
     <br />
   </div>
 </div>
-</div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">charts</span></h1>
-by <span id="author">Unknown</span><br />
+</div></div>
+                <div id="content-tag"><div><h1 id="overview">API for <span id="namespace-name">incanter.charts</span></h1>
+by <span id="author">David Edgar Liebke</span><br />
 <br />Usage:
 <pre>
 (ns your-namespace
   (:require <span id="long-name">incanter.charts</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr"></pre>
+<pre id="namespace-docstr">This is the core charting library for Incanter.
+It provides basic scatter plots, histograms, box plots,
+xy plots, bar charts, line charts, as well as 
+specialized charts like trace plots and Bland-Altman
+plots.
+
+This library is built on the JFreeChart library
+(<a href="http://www.jfree.org/jfreechart/)">http://www.jfree.org/jfreechart/)</a>.
+</pre>
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -139,8 +147,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L645" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L672" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -172,8 +179,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L682" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L709" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -222,8 +228,7 @@ Examples:
   (doto (function-plot cubic -10 10)
         (add-function deriv-cubic -10 10)
         view)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L879" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L908" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -250,8 +255,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L607" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L634" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -293,8 +297,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L815" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L844" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -337,8 +340,7 @@ Examples:
   (add-pointer plot 0 0 :text "south" :angle :south)
   (add-pointer plot 0 0 :text "sw" :angle :sw)
   (add-pointer plot 0 0 :text "se" :angle :se)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L997" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1026" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -373,8 +375,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L934" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L963" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -431,8 +432,7 @@ Examples:
   (add-text plot -2.5 -6.5 "Setosa")
   (add-text plot -5 -5.5 "Versicolor")
   (add-text plot -8 -5.5 "Virginica")</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L1131" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1160" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -474,8 +474,7 @@ Examples:
   (add-text plot -2.5 -6.5 "Setosa")
   (add-text plot -5 -5.5 "Versicolor")
   (add-text plot -8 -5.5 "Virginica")</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L1086" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1115" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -555,8 +554,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L417" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L440" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -578,8 +576,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/Bland-Altman_plot
   <a href="http://www-users.york.ac.uk/~mb55/meas/ba.htm">http://www-users.york.ac.uk/~mb55/meas/ba.htm</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L1266" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1295" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -622,8 +619,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L350" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L366" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -637,8 +633,7 @@ removing the default grid, returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L759" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L788" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -671,8 +666,7 @@ Examples:
 
   (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
   (view (function-plot cubic -10 10))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L300" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L316" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -720,8 +714,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L48" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L58" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -776,8 +769,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L525" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L550" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -786,8 +778,7 @@ Use '--' to separate paths from revisions/src/incanter/charts.clj#L525" id="var-
   <pre id="var-usage">Usage: (line-plot x y &amp; options)
 </pre>
   <pre id="var-docstr">WARNING: line-plot has been renamed xy-plot.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L204" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L218" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -807,8 +798,7 @@ Examples:
   (view (qq-plot (sample-normal 100)))
   (view (qq-plot (sample-exp 100)))
   (view (qq-plot (sample-gamma 100)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L1236" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1265" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -860,8 +850,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L121" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L133" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -875,8 +864,7 @@ returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L731" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L760" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -890,8 +878,7 @@ returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L745" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L774" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -904,8 +891,7 @@ Use '--' to separate paths from revisions/src/incanter/charts.clj#L745" id="var-
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L774" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L803" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -918,8 +904,7 @@ Use '--' to separate paths from revisions/src/incanter/charts.clj#L774" id="var-
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L787" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L816" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -932,8 +917,7 @@ Use '--' to separate paths from revisions/src/incanter/charts.clj#L787" id="var-
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L800" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L829" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -952,8 +936,7 @@ Examples:
   (view (trace-plot (:var sample-params)))
 
   (view (trace-plot (sel (:coefs sample-params) :cols 0)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L1199" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1228" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1009,12 +992,11 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/charts.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/charts.clj#L211" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L225" id="var-source">Source</a>
 </div>
 
 
-</div>
+</div></div>
               </div>
             </div>
           </div>

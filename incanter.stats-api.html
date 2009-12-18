@@ -1,8 +1,8 @@
 <html>
   <head>
-    <title>stats API reference (Incanter)</title>
-    <link href="static/incanter.ico" rel="icon" />
-    <link href="static/incanter.ico" rel="shortcut icon" />
+    <title>incanter.stats API reference (Incanter)</title>
+    <link href="static/favicon.png" rel="icon" />
+    <link href="static/favicon.png" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
     <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
@@ -27,23 +27,23 @@ namespace.
 	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
 	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
       </div>
-      <div id="leftcolumn"><div style="text-align: center;"></div>
+      <div id="leftcolumn"><div><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="incanter.bayes-api.html" class="wiki_link">incanter.bayes</a></li><li><a href="incanter.censored-api.html" class="wiki_link">incanter.censored</a></li><li><a href="incanter.charts-api.html" class="wiki_link">incanter.charts</a></li><li><a href="incanter.chrono-api.html" class="wiki_link">incanter.chrono</a></li><li><a href="incanter.classification-api.html" class="wiki_link">incanter.classification</a></li><li><a href="incanter.core-api.html" class="wiki_link">incanter.core</a></li><li><a href="incanter.datasets-api.html" class="wiki_link">incanter.datasets</a></li><li><a href="incanter.incremental-stats-api.html" class="wiki_link">incanter.incremental-stats</a></li><li><a href="incanter.information-theory-api.html" class="wiki_link">incanter.information-theory</a></li><li><a href="incanter.internal-api.html" class="wiki_link">incanter.internal</a></li><li><a href="incanter.io-api.html" class="wiki_link">incanter.io</a></li><li><a href="incanter.optimize-api.html" class="wiki_link">incanter.optimize</a></li><li><a href="incanter.probability-api.html" class="wiki_link">incanter.probability</a></li><li><a href="incanter.processing-api.html" class="wiki_link">incanter.processing</a></li><li><a href="incanter.som-api.html" class="wiki_link">incanter.som</a></li><li><a href="incanter.stats-api.html" class="wiki_link">incanter.stats</a></li><li><a href="incanter.transformations-api.html" class="wiki_link">incanter.transformations</a></li>
     </ul>
   </div>
 </div>
-</div>
+</div></div>
       <div id="rightcolumn">
 	<div id="Content">
 	  <div class="contentBox"><div class="innerContentBox">
               <div id="content_view" class="wiki wikiPage">
-                <div id="right-sidebar"><div id="toc">
+                <div id="right-sidebar"><div><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
@@ -245,16 +245,26 @@ namespace.
     <br />
   </div>
 </div>
-</div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">stats</span></h1>
-by <span id="author">Unknown</span><br />
+</div></div>
+                <div id="content-tag"><div><h1 id="overview">API for <span id="namespace-name">incanter.stats</span></h1>
+by <span id="author">David Edgar Liebke and Bradford Cross</span><br />
 <br />Usage:
 <pre>
 (ns your-namespace
   (:require <span id="long-name">incanter.stats</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr"></pre>
+<pre id="namespace-docstr">This is the core statistical library for Incanter.
+It provides probability functions (cdf, pdf, quantile),
+random number generation, statistical tests, basic
+modeling functions, similarity/association measures,
+and more.
+
+This library is built on Parallel Colt 
+(http://sites.google.com/site/piotrwendykier/software/parallelcolt),
+an extension of the Colt numerics library 
+(<a href="http://acs.lbl.gov/~hoschek/colt/)">http://acs.lbl.gov/~hoschek/colt/)</a>.
+</pre>
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -357,8 +367,7 @@ Examples:
   (view (histogram smooth-samp :density true :nbins 30))
   (mean smooth-samp)
   (quantile smooth-samp :probs [0.025 0.975])</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1626" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1638" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -385,8 +394,7 @@ References:
 Example:
     (cdf-beta 0.5 :alpha 1 :beta 2)
     (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L468" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L480" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -412,8 +420,7 @@ References:
 
 Example:
     (cdf-binomial 10 :prob 1/4 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1090" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1102" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -439,8 +446,7 @@ References:
 Example:
     (cdf-chisq 5.0 :df 2)
     (cdf-chisq 5.0 :df 2 :lower-tail false)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L663" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L675" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -474,8 +480,7 @@ Examples:
 
   ;; plot the data's empircal cdf
   (view (scatter-plot exam1 (map ecdf exam1)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1342" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1354" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -499,8 +504,7 @@ References:
 
 Example:
     (cdf-exp 2.0 :rate 1/2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L882" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L894" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -525,8 +529,7 @@ References:
 
 Example:
     (cdf-f 1.0 :df1 5 :df2 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L110" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L122" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -553,8 +556,7 @@ References:
 Example:
     (cdf-gamma 10 :shape 1 :rate 2)
     (cdf-gamma 3 :shape 1 :lower-tail false)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L567" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L579" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -579,8 +581,7 @@ References:
 
 Example:
     (cdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1277" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1289" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -605,8 +606,7 @@ References:
 
 Example:
     (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L184" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L196" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -631,8 +631,7 @@ References:
 
 Example:
     (cdf-poisson 5 :lambda 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1184" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1196" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -656,8 +655,7 @@ References:
 
 Example:
     (cdf-t 1.2 :df 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L753" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L765" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -683,8 +681,7 @@ References:
 Example:
     (cdf-uniform 5)
     (cdf-uniform 5 :min 1 :max 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L370" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L382" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -693,8 +690,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L370" id="var-s
   <pre id="var-usage">Usage: (chebyshev-distance a b)
 </pre>
   <pre id="var-docstr">In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2871" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2883" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -782,9 +778,8 @@ Examples:
 References:
   http://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm
   http://en.wikipedia.org/wiki/Pearson's_chi-square_test
-  <a href="http://en.wikipedia.org/wiki/Yates'_chi-square_test">http://en.wikipedia.org/wiki/Yates'_chi-square_test</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2250" id="var-source">Source</a>
+  <a _chi-square_test="_chi-square_test" href="http://en.wikipedia.org/wiki/Yates">http://en.wikipedia.org/wiki/Yates'_chi-square_test</a></pre>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2262" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -802,8 +797,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Correlation">http://en.wikipedia.org/wiki/Correlation</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1468" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1480" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -815,8 +809,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L1468" id="var-
 http://en.wikipedia.org/wiki/Correlation_ratio
 
 It is worth noting that if the relationship between values of  and values of overline y_x is linear (which is certainly true when there are only two possibilities for x) this will give the same result as the square of the correlation coefficient, otherwise the correlation ratio will be larger in magnitude. It can therefore be used for judging non-linear relationships.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2670" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2682" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -852,8 +845,7 @@ suggesting that most of the overall dispersion is a result of differences betwee
     eta = sqrt 6780/9640=0.8386
 
 Observe that for η = 1 the overall sample dispersion is purely due to dispersion among the categories and not at all due to dispersion within the individual categories. For a quick comprehension simply imagine all Algebra, Geometry, and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2632" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2644" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -881,8 +873,7 @@ dot(d1, d2) = (2)*(3) + (4)*(5) + (3)*(1) + (1)*(2) + (6)*(5) = 61
 Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
                            = 61 / 64.9923072371
                            = 0.938572618717</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2892" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2904" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -905,8 +896,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Covariance">http://en.wikipedia.org/wiki/Covariance</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1416" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1428" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -922,8 +912,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L1416" id="var-
   Examples:
     (cumulative-mean (sample-normal 100))
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1753" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1765" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -956,8 +945,7 @@ Examples:
   (tabulate data)
 
   (tabulate (detabulate :table (:table (tabulate data))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2468" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2480" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -968,8 +956,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2468" id="var-
   <pre id="var-docstr">
 http://en.wikipedia.org/wiki/Dice%27s_coefficient
 Dice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2970" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2982" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -993,8 +980,7 @@ We would find the set of bigrams in each word:
 Each set has four elements, and the intersection of these two sets has only one element: ht.
 
 Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2996" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L3008" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1003,8 +989,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2996" id="var-
   <pre id="var-usage">Usage: (discordant-pairs a b)
 </pre>
   <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Discordant_pairs">http://en.wikipedia.org/wiki/Discordant_pairs</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2755" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2767" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1015,8 +1000,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2755" id="var-
   <pre id="var-docstr">http://en.wikipedia.org/wiki/Euclidean_distance
 
 the Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2864" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2876" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1028,8 +1012,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2864" id="var-
 http://www.statsdirect.com/help/nonparametric_methods/kend.htm
 
 The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2778" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2790" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1040,8 +1023,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2778" id="var-
   <pre id="var-docstr">http://en.wikipedia.org/wiki/Hamming_distance
 
 In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L3019" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L3031" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1063,8 +1045,7 @@ Examples:
   ;; return the sum of the positive values in a normal sample
   (def x (sample-normal 100))
   (sum (mult x (indicator #(pos? %) x)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L39" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L51" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1076,8 +1057,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L39" id="var-so
 http://en.wikipedia.org/wiki/Jaccard_index
 
 The Jaccard distance, which measures dissimilarity between sample sets, is complementary to the Jaccard coefficient and is obtained by subtracting the Jaccard coefficient from 1, or, equivalently, by dividing the difference of the sizes of the union and the intersection of two sets by the size of the union.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2959" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2971" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1091,8 +1071,7 @@ http://en.wikipedia.org/wiki/Jaccard_index
 The Jaccard index, also known as the Jaccard similarity coefficient (originally coined coefficient de communauté by Paul Jaccard), is a statistic used for comparing the similarity and diversity of sample sets.
 
 The Jaccard coefficient measures similarity between sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2948" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2960" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1106,8 +1085,7 @@ http://www.statsdirect.com/help/nonparametric_methods/kend.htm
 http://mail.scipy.org/pipermail/scipy-dev/2009-March/011589.html
 best explanation and example is in "cluster analysis for researchers" page 165.
 <a href="http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175">http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2706" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2718" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1140,8 +1118,7 @@ If the test statistic W is 1, then all the survey respondents have been unanimou
 Legendre[2] discusses a variant of the W statistic which accommodates ties in the rankings and also describes methods of making significance tests based on W.
 
  [{:observation [1 2 3]} {} ... {}] -&gt; W</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2787" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2799" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1163,8 +1140,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Kurtosis">http://en.wikipedia.org/wiki/Kurtosis</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1511" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1523" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1179,8 +1155,7 @@ In coding theory, the Lee distance is a distance between two strings x1x2...xn a
 If q = 2 or q = 3 the Lee distance coincides with the Hamming distance.
 
 The metric space induced by the Lee distance is a discrete analog of the elliptic space.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L3034" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L3046" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1209,8 +1184,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
     * It is at most the length of the longer string.
     * It is zero if and only if the strings are identical.
     * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L3081" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L3093" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1267,8 +1241,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/OLS_Regression
   <a href="http://en.wikipedia.org/wiki/Coefficient_of_determination">http://en.wikipedia.org/wiki/Coefficient_of_determination</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1931" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1943" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1332,8 +1305,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L1931" id="var-
                      :W (matrix [[1 0] 
                                  [0 1]]))
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L3184" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L3196" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1344,8 +1316,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L3184" id="var-
   <pre id="var-docstr">http://en.wikipedia.org/wiki/Manhattan_distance
 
 usual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2881" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2893" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1362,8 +1333,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Mean">http://en.wikipedia.org/wiki/Mean</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1382" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1394" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1380,8 +1350,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Median">http://en.wikipedia.org/wiki/Median</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1493" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1505" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1397,8 +1366,7 @@ The Minkowski distance is a metric on Euclidean space which can be considered as
 Minkowski distance is typically used with p being 1 or 2. The latter is the Euclidean distance, while the former is sometimes known as the Manhattan distance.
 
 In the limiting case of p reaching infinity we obtain the Chebyshev distance.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2840" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2852" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1409,8 +1377,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2840" id="var-
   <pre id="var-docstr">returns a set of the unique n-grams in a string.
 
 this is using actual sets here, discards dupicate n-grams?</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2982" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2994" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1422,8 +1389,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2982" id="var-
 http://en.wikipedia.org/wiki/Kendall_tau_distance
 
 Kendall tau distance is the total number of discordant pairs.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2765" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2777" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1444,8 +1410,7 @@ Suppose that in a sample of 100 men, 90 have drunk wine in the previous week, wh
 Relation to statistical independence
 
 If X and Y are independent, their joint probabilities can be expressed in terms of their marginal probabilities.  In this case, the odds ratio equals one, and conversely the odds ratio can only equal one if the joint probabilities can be factored in this way. Thus the odds ratio equals one if and only if X and Y are independent.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2612" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2624" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1454,8 +1419,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2612" id="var-
   <pre id="var-usage">Usage: (pairings a b)
 </pre>
   <pre id="var-docstr">confusing ass name.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2742" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2754" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1464,8 +1428,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2742" id="var-
   <pre id="var-usage">Usage: (pairs a b)
 </pre>
   <pre id="var-docstr">returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2730" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2742" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1490,8 +1453,7 @@ References:
 
 Example:
     (pdf-beta 0.5 :alpha 1 :beta 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L439" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L451" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1516,8 +1478,7 @@ References:
 
 Example:
     (pdf-binomial 10 :prob 1/4 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1060" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1072" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1541,8 +1502,7 @@ References:
 
 Example:
     (pdf-chisq 5.0 :df 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L635" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L647" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1566,8 +1526,7 @@ References:
 
 Example:
     (pdf-exp 2.0 :rate 1/2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L855" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L867" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1592,8 +1551,7 @@ References:
 
 Example:
     (pdf-f 1.0 :df1 5 :df2 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L73" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L85" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1618,8 +1576,7 @@ References:
 
 Example:
     (pdf-gamma 10 :shape 1 :rate 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L537" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L549" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1644,8 +1601,7 @@ References:
 
 Example:
     (pdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1246" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1258" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1670,8 +1626,7 @@ References:
 
 Example:
     (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L154" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L166" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1695,8 +1650,7 @@ References:
 
 Example:
     (pdf-poisson 5 :lambda 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1156" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1168" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1720,8 +1674,7 @@ References:
 
 Example:
     (pdf-t 1.2 :df 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L726" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L738" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1747,8 +1700,7 @@ References:
 Example:
     (pdf-uniform 5)
     (pdf-uniform 5 :min 1 :max 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L340" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L352" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1769,8 +1721,7 @@ Examples:
 
   (permute (range 10))
   (permute (range 10) (range 10 20))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1797" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1809" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1780,8 +1731,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L1797" id="var-
 </pre>
   <pre id="var-docstr">Takes a linear-model and an x value (either a scalar or vector)
 and returns the predicted value based on the linear-model.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2581" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2593" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1835,8 +1785,7 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Principal_component_analysis">http://en.wikipedia.org/wiki/Principal_component_analysis</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2410" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2422" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1845,8 +1794,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2410" id="var-
   <pre id="var-usage">Usage: (product-marginal-test j)
 </pre>
   <pre id="var-docstr">the joint PMF of independent variables is equal to the product of their marginal PMFs.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2829" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2841" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1869,8 +1817,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Quantile">http://en.wikipedia.org/wiki/Quantile</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1551" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1563" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1900,8 +1847,7 @@ References:
 Example:
     (quantile-normal 0.975)
     (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L213" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L225" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1932,8 +1878,7 @@ Example:
     (quantile-t [0.025 0.975] :df 25)
     (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])
     (map #(quantile-t 0.025 :df %) df)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L783" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L795" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1943,8 +1888,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L783" id="var-s
 </pre>
   <pre id="var-docstr">
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2680" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2692" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1967,8 +1911,7 @@ Examples:
   (sample (range 10)) ; permutation of numbers zero through ten
   (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.
   (sample (seq "abcdefghijklmnopqrstuvwxyz")  :size 4 :replacement false) ; choose 4 random letters.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1586" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1598" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1993,8 +1936,7 @@ References:
 
 Example:
     (sample-beta 1000 :alpha 1 :beta 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L505" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L517" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2018,8 +1960,7 @@ References:
 
 Example:
     (sample-binomial 1000 :prob 1/4 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1124" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1136" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2042,8 +1983,7 @@ References:
 
 Example:
     (sample-chisq 1000 :df 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L696" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L708" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2079,8 +2019,7 @@ Examples:
   ;; view  a histogram of the difference in proportions between the first
   ;; two candidates
   (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1009" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1021" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2103,8 +2042,7 @@ References:
 
 Example:
     (sample-exp 1000 :rate 1/2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L909" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L921" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2128,8 +2066,7 @@ References:
 
 Example:
     (sample-gamma 1000 :shape 1 :rate 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L602" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L614" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2155,8 +2092,7 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Inverse-Wishart_distribution">http://en.wikipedia.org/wiki/Inverse-Wishart_distribution</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L978" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L990" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2197,8 +2133,7 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Multivariate_normal">http://en.wikipedia.org/wiki/Multivariate_normal</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L280" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L292" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2222,8 +2157,7 @@ References:
 
 Example:
     (sample-neg-binomial 1000 :prob 1/2 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1310" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1322" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2247,8 +2181,7 @@ References:
 
 Example:
     (sample-normal 1000 :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L248" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L260" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2336,8 +2269,7 @@ Examples:
 
   Further Reading:
     <a href="http://en.wikipedia.org/wiki/Resampling_(statistics)">http://en.wikipedia.org/wiki/Resampling_(statistics)</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1825" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1837" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2360,8 +2292,7 @@ References:
 
 Example:
     (sample-poisson 1000 :lambda 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1216" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1228" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2384,8 +2315,7 @@ References:
 
 Example:
     (cdf-t 1000 :df 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L823" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L835" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2411,8 +2341,7 @@ References:
 Example:
     (sample-uniform 1000)
     (sample-uniform 1000 :min 1 :max 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L400" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L412" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2438,8 +2367,7 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Wishart_distribution#">http://en.wikipedia.org/wiki/Wishart_distribution#</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L941" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L953" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2457,8 +2385,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Standard_deviation">http://en.wikipedia.org/wiki/Standard_deviation</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1448" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1460" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2468,8 +2395,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L1448" id="var-
 </pre>
   <pre id="var-docstr">A stripped version of linear-model that returns a map containing only
 the coefficients.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2563" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2575" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2489,8 +2415,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Skewness">http://en.wikipedia.org/wiki/Skewness</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1532" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1544" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2504,8 +2429,7 @@ smooth a map of discrete probabilities.
 clear up any discrete steps that are missing and should be there.
 
 TODO: single class may have a spike of 100% probability.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2591" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2603" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2525,8 +2449,7 @@ The Sørensen coefficient is mainly useful for ecological community data (e.g. L
 This function assumes you pass in a and b as sets.
 
 The sorensen index extended to abundance instead of incidence of species is called the Czekanowski index.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L3055" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L3067" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2538,8 +2461,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L3055" id="var-
 http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
 
 In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2687" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2699" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2551,8 +2473,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2687" id="var-
   <pre id="var-docstr">takes either a sample or a sample and a precalculated mean.
 
 returns the squares of the difference between each observation and the sample mean.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2540" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2552" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2564,8 +2485,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2540" id="var-
   <pre id="var-docstr">takes either a sample or a sample and a precalculated mean.
 
 returns the sum of the squares of the difference between each observation and the sample mean.</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2553" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2565" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2576,8 +2496,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2553" id="var-
   <pre id="var-docstr">the variance of the sum of n independent variables is equal to the sum of their variances.
 
 (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -&gt; 5/2</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2819" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2831" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2603,8 +2522,7 @@ summary statistic. Based to R's sweep function.
     (def x (sample-normal 30 :mean 10 :sd 5))
     (sweep x) ;; center the data around mean
     (sweep x :stat sd :fun div) ;; divide data by its sd</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1766" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1778" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2638,8 +2556,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/T_test
   <a href="http://www.socialresearchmethods.net/kb/stat_t.php">http://www.socialresearchmethods.net/kb/stat_t.php</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2053" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2065" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2697,8 +2614,7 @@ Examples:
                      [1 0]
                      [1 1]]))
   (tabulate data)</pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2149" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2161" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2711,8 +2627,7 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L2149" id="var-
 http://en.wikipedia.org/wiki/Jaccard_index
 
 The cosine similarity metric may be extended such that it yields the Jaccard coefficient in the case of binary attributes. This is the Tanimoto coefficient. </pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2927" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2939" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2729,8 +2644,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L1400" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L1412" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2740,12 +2654,11 @@ Use '--' to separate paths from revisions/src/incanter/stats.clj#L1400" id="var-
 </pre>
   <pre id="var-docstr">
 y is within z of x in metric space.  </pre>
-  <a href="http://github.com/liebke/incanter/blob/fatal: ambiguous argument 'incanter/stats.clj': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions/src/incanter/stats.clj#L2533" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/stats.clj#L2545" id="var-source">Source</a>
 </div>
 
 
-</div>
+</div></div>
               </div>
             </div>
           </div>
