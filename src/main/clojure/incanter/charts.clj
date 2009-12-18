@@ -100,7 +100,8 @@
 "
   ([x & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-          data# (if (matrix? ~x) (to-list ~x) ~x)
+          x# ~x
+          data# (if (matrix? x#) (to-list x#) x#)
           nbins# (or (:nbins opts#) 10)
           density?# (true? (:density opts#))
           main-title# (or (:title opts#) "Histogram")
@@ -123,6 +124,7 @@
             legend?# ; no legend
             true  ; tooltips
             false)))))
+
 
 
 
@@ -177,8 +179,10 @@
 "
   ([x y & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-           _x# (if (matrix? ~x) (to-list ~x) ~x)
-           _y# (if (matrix? ~y) (to-list ~y) ~y)
+           x# ~x
+           y# ~y
+           _x# (if (matrix? x#) (to-list x#) x#)
+           _y# (if (matrix? y#) (to-list y#) y#)
            group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
            x-groups# (when group-by# (group-by (bind-columns _x# group-by#) 1 :cols 0))
            y-groups# (when group-by# (group-by (bind-columns _y# group-by#) 1 :cols 0))
@@ -271,8 +275,10 @@
 "
   ([x y & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-           _x# (if (matrix? ~x) (to-list ~x) ~x)
-           _y# (if (matrix? ~y) (to-list ~y) ~y)
+           x# ~x
+           y# ~y
+           _x# (if (matrix? x#) (to-list x#) x#)
+           _y# (if (matrix? y#) (to-list y#) y#)
            group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
            x-groups# (when group-by# (group-by (bind-columns _x# group-by#) 1 :cols 0))
            y-groups# (when group-by# (group-by (bind-columns _y# group-by#) 1 :cols 0))
@@ -397,10 +403,17 @@
 "
   ([x & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-           _x# (if (matrix? ~x) (to-list ~x) ~x)
-           group-by# (when (:group-by opts#) (if (matrix? (:group-by opts#)) (to-list (:group-by opts#)) (:group-by opts#)))
-           x-groups# (when group-by# (map to-list (group-by (bind-columns _x# group-by#) 1 :cols 0)))
-           x# (if x-groups# (first x-groups#) _x#)
+           x# ~x
+           _x# (if (matrix? x#) (to-list x#) x#)
+           group-by# (when (:group-by opts#) 
+                       (if (matrix? (:group-by opts#)) 
+                         (to-list (:group-by opts#)) 
+                         (:group-by opts#)))
+           x-groups# (when group-by# 
+                       (map to-list (group-by (bind-columns _x# group-by#) 1 :cols 0)))
+           x# (if x-groups# 
+                (first x-groups#) 
+                _x#)
            main-title# (or (:title opts#) "Boxplot")
            x-label# (or (:x-label opts#) "")
            y-label# (or (:y-label opts#) "Values")
@@ -501,7 +514,9 @@
 "
   ([categories values & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-           values# (if (matrix? ~values) (to-list ~values) ~values)
+           categories# ~categories
+           values# ~values
+           _values# (if (matrix? values#) (to-list values#) values#)
            main-title# (or (:title opts#) "Bar Chart")
            group-by# (:group-by opts#)
            x-label# (or (:x-label opts#) "Categories")
@@ -521,12 +536,12 @@
                      true
                      false)]
         (do
-          (doseq [i# (range 0 (count values#))] (.addValue dataset#
-                                                      (nth values# i#)
+          (doseq [i# (range 0 (count _values#))] (.addValue dataset#
+                                                      (nth _values# i#)
                                                       (if group-by#
                                                         (nth group-by# i#)
                                                         (str '~values))
-                                                       (nth ~categories i#)))
+                                                       (nth categories# i#)))
           chart#))))
 
 
@@ -584,7 +599,9 @@
 "
   ([categories values & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-           values# (if (matrix? ~values) (to-list ~values) ~values)
+           categories# ~categories
+           values# ~values
+           _values# (if (matrix? values#) (to-list values#) values#)
            main-title# (or (:title opts#) "Line Chart")
            group-by# (:group-by opts#)
            x-label# (or (:x-label opts#) "Categories")
@@ -604,12 +621,12 @@
                      true
                      false)]
         (do
-          (doseq [i# (range 0 (count values#))] (.addValue dataset#
-                                                      (nth values# i#)
+          (doseq [i# (range 0 (count _values#))] (.addValue dataset#
+                                                      (nth _values# i#)
                                                       (if group-by#
                                                         (nth group-by# i#)
                                                         (str '~values))
-                                                       (nth ~categories i#)))
+                                                       (nth categories# i#)))
           chart#))))
 
 
@@ -638,13 +655,13 @@
 "
   ([chart x & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-          _x# (if (matrix? ~x) (to-list ~x) ~x)
-          chart# ~chart
-          data-plot# (.getPlot chart#)
-          n# (.getDatasetCount data-plot#)
-          nbins# (or (:nbins opts#) 10)
-          series-lab# (or (:series-label opts#) (str '~x))
-        ]
+           x# ~x
+           _x# (if (matrix? x#) (to-list x#) x#)
+           chart# ~chart
+           data-plot# (.getPlot chart#)
+           n# (.getDatasetCount data-plot#)
+           nbins# (or (:nbins opts#) 10)
+           series-lab# (or (:series-label opts#) (str '~x))]
       (do
         (.addSeries (.getDataset data-plot#) series-lab# (double-array _x#) nbins#)
         (.setSeriesRenderingOrder data-plot# org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
@@ -674,15 +691,15 @@
 "
   ([chart x & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-          _x# (if (matrix? ~x) (to-list ~x) ~x)
-          chart# ~chart
-          data-plot# (.getCategoryPlot chart#)
-          n-col# (.getColumnCount (.getDataset data-plot#))
-          n-row# (.getRowCount (.getDataset data-plot#))
-          series-label# (or (:series-label opts#) (str '~x))
-          category-label# (or (:category-label opts#)
-                              (str n-col#))
-        ]
+           x# ~x
+           _x# (if (matrix? x#) (to-list x#) x#)
+           chart# ~chart
+           data-plot# (.getCategoryPlot chart#)
+           n-col# (.getColumnCount (.getDataset data-plot#))
+           n-row# (.getRowCount (.getDataset data-plot#))
+           series-label# (or (:series-label opts#) (str '~x))
+           category-label# (or (:category-label opts#)
+                               (str n-col#))]
       (do
         (.add (.getDataset data-plot#) _x# series-label# category-label#)
         chart#))))
@@ -718,19 +735,21 @@
 "
   ([chart categories values & options]
     `(let [opts# (when '~options (assoc {} ~@options))
-           values# (if (matrix? ~values) (to-list ~values) ~values)
+           categories# ~categories
+           values# ~values
+           _values# (if (matrix? values#) (to-list values#) values#)
            chart# ~chart
            group-by# (:group-by opts#)
            data-plot# (.getCategoryPlot chart#)
            n-col# (.getColumnCount (.getDataset data-plot#))
            n-row# (.getRowCount (.getDataset data-plot#))]
         (do
-          (doseq [i# (range 0 (count values#))] (.addValue (.getDataset data-plot#)
-                                                      (nth values# i#)
+          (doseq [i# (range 0 (count _values#))] (.addValue (.getDataset data-plot#)
+                                                      (nth _values# i#)
                                                       (if group-by#
                                                         (nth group-by# i#)
                                                         (str '~values))
-                                                       (nth ~categories i#)))
+                                                       (nth categories# i#)))
           chart#))))
 
 
