@@ -3,14 +3,14 @@
   (:gen-class))
 
 (def test-names [:core-tests
-		 :stats-tests
-		 :io-tests 
+                 :stats-tests
+                 :io-tests
                  :charts-tests
                  :internal-tests
-                 :chrono-test 
-		 :transformations-tests 
-		 :probability-tests 
-		 :information-theory-tests 
+                 :chrono-test
+                 :transformations-tests
+                 :probability-tests
+                 :information-theory-tests
                  :bayes-tests])
 
 (def test-namespaces
@@ -21,7 +21,7 @@
   "Runs all defined tests"
   []
   (println "Loading tests...")
-  (apply require :reload-all test-namespaces)
+  (apply require :reload test-namespaces)
   (apply run-tests test-namespaces))
 
 (defn -main
