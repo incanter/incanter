@@ -92,10 +92,12 @@ To build and test Incanter, you will need to have <a href="http://maven.apache.o
 * cd into the incanter directory
 * use Maven to build, test, and install Incanter: @mvn install@
 
-To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@
+To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@ (or on Windows @bin/clj.bat@)
 
 or run:
 @mvn clojure:repl@ 
+
+A Swank server can be started by running: @mvn clojure:swank@, which can be connected to with @M-x slime-connect@ within Emacs.
 
 
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
