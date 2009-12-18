@@ -24,7 +24,7 @@
 
 (ns incanter.charts-tests
   (:use clojure.test 
-        (incanter core stats charts)))
+        (incanter core stats charts datasets)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTS FOR incanter.charts.clj
@@ -122,4 +122,71 @@
   (view chart2))
 
 
+(deftest bar-chart-tests
+  (def data (get-dataset :co2))
+  (def grass-type (sel data :cols 1))
+  (def treatment-type (sel data :cols 2))
+  (def uptake (sel data :cols 4))
+  (view (bar-chart grass-type uptake
+                  :title "CO2 Uptake"
+                  :group-by treatment-type
+                  :x-label "Grass Types" :y-label "Uptake"
+                  :legend true))
+  
+  
+  (def data (get-dataset :airline-passengers))
+  (def years (sel data :cols 0))
+  (def months (sel data :cols 2))
+  (def passengers (sel data :cols 1))
+  (view (bar-chart years passengers :group-by months :legend true))
+  (view (bar-chart months passengers :group-by years :legend true)))
+
+
+(deftest line-chart-tests
+  (def data (get-dataset :airline-passengers))
+  (def years (sel data :cols 0))
+  (def months (sel data :cols 2))
+  (def passengers (sel data :cols 1))
+  (view (line-chart years passengers :group-by months :legend true))
+  (view (line-chart months passengers :group-by years :legend true))
+  
+  
+  (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+  (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+  (def x (sample-uniform 12 :integers true :max 100))
+  (view (line-chart years x :group-by seasons :legend true)))
+
+
+(deftest function-plot-tests
+  (view (function-plot sin (- Math/PI) Math/PI))
+  (view (function-plot pdf-normal -3 3))
+
+  (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
+  (view (function-plot cubic -10 10)))
+
+
+
+(deftest annotations-tests
+  (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))
+  (def plot (xy-plot x (sin x)))
+  (view plot)
+  ;; annotate the plot
+  (doto plot
+    (add-pointer (- Math/PI) (sin (- Math/PI)) :text "(-pi, (sin -pi))")
+    (add-pointer Math/PI (sin Math/PI) :text "(pi, (sin pi))" :angle :ne)
+    (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text "(pi/2, (sin pi/2))" :angle :south))
+  
+  ;; try the different angle options
+  (add-pointer plot 0 0 :text "north" :angle :north)
+  (add-pointer plot 0 0 :text "nw" :angle :nw)
+  (add-pointer plot 0 0 :text "ne" :angle :ne)
+  (add-pointer plot 0 0 :text "west" :angle :west)
+  (add-pointer plot 0 0 :text "east" :angle :east)
+  (add-pointer plot 0 0 :text "south" :angle :south)
+  (add-pointer plot 0 0 :text "sw" :angle :sw)
+  (add-pointer plot 0 0 :text "se" :angle :se)
+
+  (add-text plot -5 -0.75 "-5, -0.75")
+
+  (add-polygon plot [[(- Math/PI) -1] [Math/PI -1] [Math/PI 1] [(- Math/PI) 1]]))
 
