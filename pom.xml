@@ -17,16 +17,32 @@
         <configuration>
           <testScript>src/test/clojure/incanter/mvn_tests.clj</testScript>
         </configuration>
+        <executions>
+<!--          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>-->
+          <execution>
+            <id>test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>        
+        </executions>
       </plugin>
-
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
         </configuration>
-     </plugin>
-     <plugin>
+      </plugin>
+
+      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <descriptorRefs>
@@ -47,9 +63,16 @@
             </goals>
           </execution>
         </executions>
-     </plugin>
+      </plugin>
     </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/clojure</directory>
+      </resource>
+    </resources>
   </build>
+
   <dependencies>
     <dependency>
       <groupId>org.clojure</groupId>
@@ -61,11 +84,6 @@
       <artifactId>clojure-contrib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
-    <!--    <dependency>
-      <groupId>swank-clojure</groupId>
-      <artifactId>swank-clojure</artifactId>
-      <version>1.1.0-SNAPSHOT</version>
-    </dependency> -->
     <dependency>
       <groupId>incanter</groupId>
       <artifactId>processing-core</artifactId>
@@ -111,11 +129,11 @@
       <artifactId>jfreechart</artifactId>
       <version>1.0.13</version>
     </dependency> 
-     <dependency>
+    <dependency>
       <groupId>org.danlarkin</groupId>
       <artifactId>clojure-json</artifactId>
       <version>1.1-SNAPSHOT</version>
-     </dependency>
+    </dependency>
     <dependency>
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
@@ -127,22 +145,24 @@
       <version>5.1.6</version>
     </dependency> 
   </dependencies>
-      <repositories>
-        <repository>
-          <id>build.clojure.org</id>
-          <url>http://build.clojure.org/snapshots</url> 
-        </repository>
-        <repository>
-          <id>clojars.org</id>
-          <url>http://clojars.org/repo</url> 
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>ibiblio</id>
-            <name>Ibiblio - the public's library and digital archive</name>
-            <url>http://www.ibiblio.org/maven2</url>
-        </repository>
-      </repositories>
+
+  <repositories>
+    <repository>
+      <id>build.clojure.org</id>
+      <url>http://build.clojure.org/snapshots</url> 
+    </repository>
+    <repository>
+      <id>clojars.org</id>
+      <url>http://clojars.org/repo</url> 
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>ibiblio</id>
+      <name>Ibiblio - the public's library and digital archive</name>
+      <url>http://www.ibiblio.org/maven2</url>
+    </repository>
+  </repositories>
+
 </project>
