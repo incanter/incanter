@@ -102,12 +102,16 @@ For back-end processing that doesn't require charts or visualizations, an altern
 
 h2. Building Incanter with Maven
 
-Incanter can be built and tested with Maven with the following commands:
-@mvn compile@ to build the incanter.Matrix Java class,
-@mvn clojure:compile@ to build the remaining Clojure classes,
-@mvn clojure:test@ to run the tests,
-@mvn clojure:repl@ to start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH,
-@mvn package@ to create a standard Incanter jar file, and an uberjar that includes all of Incanter's dependencies, in the ./target directory.
+To build and test Incanter with Maven, run: 
+@mvn package@
+
+This will create a standard Incanter jar file, and an uberjar that includes all of Incanter's dependencies, in the ./target directory.
+
+To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: 
+@mvn clojure:repl@ 
+
+or run:
+@bin/incanter@
 
 
 
