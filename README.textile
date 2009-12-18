@@ -86,32 +86,19 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 h2. Building Incanter
 
-To build Incanter, test it, and generate the api documentation yourself, run the following commands from the Incanter directory:
+To build and test Incanter, you will need to have <a href="http://maven.apache.org/">Maven</a> and <a href="http://git-scm.com/">git</a> installed:
 
-* Clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
+* First, clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
 * cd into the incanter directory
-* Download and uncompress Incanter's dependencies: @ant deps@
-* Build target/incanter-1.0-SNAPSHOT.jar: @ant@
-* Run unit tests: @bin/runtests.clj@
-* Generate API docs: @bin/generate_docs.clj@
+* use Maven to build, test, and install Incanter: @mvn install@
 
-(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
-
-
-For back-end processing that doesn't require charts or visualizations, an alternative ant target, called @incanter-core@, is available that creates @incanter-core-1.0-SNAPSHOT.jar@, which only includes the 'core' and 'stats' libraries, and only depends on the clojure.jar and Parallel Colt libraries (colt.jar, netlib.jar, arpack-combo.jar).
-
-h2. Building Incanter with Maven
-
-To build and test Incanter with Maven, run: 
-@mvn package@
-
-This will create a standard Incanter jar file, and an uberjar that includes all of Incanter's dependencies, in the ./target directory.
-
-To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: 
-@mvn clojure:repl@ 
+To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@
 
 or run:
-@bin/incanter@
+@mvn clojure:repl@ 
+
+
+(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
 
 
 
@@ -131,3 +118,5 @@ See @lib/license.txt@ file for license terms of included libraries.
 * "JGraph":http://www.jgraph.com/ (for future development)
 * "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs, repl-utils)
 * "JLine":http://jline.sourceforge.net/
+* "Joda Time":http://joda-time.sourceforge.net/
+

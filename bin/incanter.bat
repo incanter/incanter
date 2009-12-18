@@ -6,7 +6,7 @@
     IF (%1)==() (
         java -cp %INCANTER_JAR% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME%  clojure.main
     ) ELSE (
-        java -cp %INCANTER_JAR% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME% clojure.lang.Script %1 -- %*
+        java -cp %INCANTER_JAR% -Dclojure.compile.path=%CLASSES_DIR% -Dincanter.home=%INCANTER_HOME% clojure.main %1 -- %*
     )
 
 

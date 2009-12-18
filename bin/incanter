@@ -15,6 +15,7 @@ if [ -z "$1" ]; then
         java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR jline.ConsoleRunner clojure.main
 else
         scriptname=$1
-        java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR clojure.lang.Script $scriptname -- $*
+        #java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR clojure.lang.Script $scriptname -- $*
+        java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR clojure.main $scriptname -- $*
 fi
 
