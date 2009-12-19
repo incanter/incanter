@@ -15,13 +15,13 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.charts-api.html",
    "name":"incanter.charts",
    "author":"David Edgar Liebke",
    "doc":
-   "This is the core charting library for Incanter.\nIt provides basic scatter plots, histograms, box plots,\nxy plots, bar charts, line charts, as well as \nspecialized charts like trace plots and Bland-Altman\nplots.\n\nThis library is built on the JFreeChart library\n(http://www.jfree.org/jfreechart/).\n"},
+   "This is the core charting library for Incanter.\nIt provides basic scatter plots, histograms, box plots\nxy plots, bar charts, line charts, as well as\nspecialized charts like trace plots and Bland-Altman\nplots.\n\nThis library is built on the JFreeChart library\n(http://www.jfree.org/jfreechart/).\n"},
   {"source-url":
    "http://github.com/liebke/incanter/blob/62edc172a0d6713ab4e190d98b2f950888c90114/src/main/clojure/incanter/chrono.clj",
    "wiki-url":
@@ -39,13 +39,13 @@
    "doc":
    "\nfundamentals of classification, cross validation, and performance measures such as precision and recall.\n\nclassifiers are maps of classifier-name -> functions, data are maps of feature-name features."},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.core-api.html",
    "name":"incanter.core",
    "author":"David Edgar Liebke",
    "doc":
-   "This is the core numerics library for Incanter.\nIt provides functions for vector- and matrix-based \nmathematical operations and the core data manipulation \nfunctions for Incanter. \n\nThis library is built on Parallel Colt \n(http://sites.google.com/site/piotrwendykier/software/parallelcolt),\nan extension of the Colt numerics library \n(http://acs.lbl.gov/~hoschek/colt/).\n"},
+   "This is the core numerics library for Incanter.\nIt provides functions for vector- and matrix-based\nmathematical operations and the core data manipulation\nfunctions for Incanter.\n\nThis library is built on Parallel Colt\n(http://sites.google.com/site/piotrwendykier/software/parallelcolt)\nan extension of the Colt numerics library\n(http://acs.lbl.gov/~hoschek/colt/).\n"},
   {"source-url":
    "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/datasets.clj",
    "wiki-url":
@@ -98,7 +98,7 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.processing-api.html",
    "name":"incanter.processing",
@@ -218,7 +218,7 @@
    " Returns the variance of a normal distribution truncated at a and b.\n\nOptions:\n  :mean (default 0) mean of untruncated normal distribution\n  :sd (default 1) standard deviation of untruncated normal distribution\n  :a (default -infinity) lower truncation point\n  :b (default +infinity) upper truncation point\n\nExamples:\n\n  (use '(incanter core stats))\n  (truncated-variance :a -1.96 :b 1.96)\n  (truncated-variance :a 0)\n  (truncated-variance :b 0)\n\n  (use 'incanter.charts)\n  (def x (range -3 3 0.1))\n  (def plot (xy-plot x (map #(truncated-variance :a %) x)))\n  (view plot)\n  (add-lines plot x (map #(truncated-variance :b %) x))\n\n  (def samp (sample-normal 10000))\n  (add-lines plot x (map #(variance (filter (fn [s] (> s %)) samp)) x))\n  (add-lines plot x (map #(variance (mult samp (indicator (fn [s] (> s %)) samp))) x))\n\n\nReferences:\n  DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables.\n    Wiley-IEEE.\n\n  http://en.wikipedia.org/wiki/Truncated_normal_distribution",
    "name":"truncated-variance"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L672",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L673",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-box-plot",
    "namespace":"incanter.charts",
@@ -227,7 +227,7 @@
    "\nAdds an additional box to an existing box-plot, returns the modified chart object.\n\nOptions:\n  :series-label (default x expression)\n\nExamples:\n\n    (use '(incanter core charts stats))\n    (doto (box-plot (sample-normal 1000) :legend true)\n          view\n          (add-box-plot (sample-normal 1000 :sd 2))\n          (add-box-plot (sample-gamma 1000)))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-box-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L709",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L710",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-categories",
    "namespace":"incanter.charts",
@@ -236,7 +236,7 @@
    "\nAdds an additional categories to an existing bar-chart or line-chart, returns the modified chart object.\n\nOptions:\n  :group-by\n\nExamples:\n\n    (use '(incanter core charts stats))\n    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n    (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n    (def x (sample-uniform 12 :integers true :max 100))\n    (def plot (bar-chart years x :group-by seasons :legend true))\n    (view plot)\n    (add-category-line plot (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)\n\n    (def plot2 (line-chart years x :group-by seasons :legend true))\n    (view plot2)\n    (add-category-line plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-categories"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L908",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L909",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-function",
    "namespace":"incanter.charts",
@@ -246,7 +246,7 @@
    " Adds a xy-plot of the given function to the given chart, returning\na modified version of the chart.\n\nOptions:\n  :series-label (default x expression)\n  :step-size (default (/ (- max-range min-range) 500))\n\nSee also:\n  function-plot, view, save, add-function, add-points, add-lines\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  ;; plot the sine and cosine functions\n  (doto (function-plot sin (- Math/PI) Math/PI)\n        (add-function cos (- Math/PI) Math/PI)\n        view)\n\n\n  ;; plot two normal pdf functions\n  (doto (function-plot pdf-normal -3 3 :legend true)\n        (add-function (fn [x] (pdf-normal x :mean 0.5 :sd 0.5)) -3 3)\n        view)\n\n\n  ;; plot a user defined function and its derivative\n  (use '(incanter core charts optimize))\n\n  ;; define the function, x^3 + 2x^2 + 2x + 3\n  (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))\n\n  ;; use the derivative function to get a function\n  ;; that approximates its derivative\n  (def deriv-cubic (derivative cubic))\n\n  ;; plot the cubic function and its derivative\n  (doto (function-plot cubic -10 10)\n        (add-function deriv-cubic -10 10)\n        view)",
    "name":"add-function"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L634",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L635",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-histogram",
    "namespace":"incanter.charts",
@@ -255,7 +255,7 @@
    "\nAdds a histogram to an existing histogram plot, returns the modified\nchart object.\n\nOptions:\n  :nbins (default 10) number of bins for histogram\n  :series-label (default x expression)\n\nExamples:\n\n  (use '(incanter core charts stats))\n  (doto (histogram (sample-normal 1000)\n                   :legend true)\n        view\n        (add-histogram (sample-normal 1000 :sd 0.5)))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-histogram"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L844",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L845",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-lines",
    "namespace":"incanter.charts",
@@ -264,16 +264,16 @@
    " Plots lines on the given scatter or line plot of the (x,y) points.\nEquivalent to R's lines function, returns the modified chart object.\n\nOptions:\n  :series-label (default x expression)\n\nExamples:\n\n  (use '(incanter core stats io datasets charts))\n  (def cars (to-matrix (get-dataset :cars)))\n  (def y (sel cars :cols 0))\n  (def x (sel cars :cols 1))\n  (def plot1 (scatter-plot x y :legend true))\n  (view plot1)\n\n  ;; add regression line to scatter plot\n  (def lm1 (linear-model y x))\n  (add-lines plot1 x (:fitted lm1))\n\n  ;; model the data without an intercept\n  (def lm2 (linear-model y x :intercept false))\n  (add-lines plot1 x (:fitted lm2))\n\n\n  ;; Clojure's doto macro can be used to build a chart\n  (doto (xy-plot x (pdf-normal x))\n        view\n        clear-background\n        (add-lines x (pdf-normal x :sd 1.5))\n        (add-lines x (pdf-normal x :sd 0.5)))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-lines"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1026",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L1027",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-pointer",
    "namespace":"incanter.charts",
    "arglists":[["chart", "x", "y", "&", "options"]],
    "doc":
-   " Adds an arrow annotation to the given chart.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinate to add the annotation\n\n\nOptions:\n    :text -- (default \"\") text to include at the end of the arrow\n    :angle -- (default :nw) either a number indicating the angle of the arrow,\n              or a keyword indicating a direction (:north :nw :west :sw :south\n              :se :east :ne)\n\n\nExamples:\n\n  (use '(incanter core charts))\n  (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))\n  (def plot (xy-plot x (sin x)))\n  (view plot)\n  ;; annotate the plot\n  (doto plot\n    (add-pointer (- Math/PI) (sin (- Math/PI)) :text \"(-pi, (sin -pi))\")\n    (add-pointer Math/PI (sin Math/PI) :text \"(pi, (sin pi))\" :angle :ne)\n    (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text \"(pi/2, (sin pi/2))\" :angle :south))\n\n  ;; try the different angle options\n  (add-pointer plot 0 0 :text \"north\" :angle :north)\n  (add-pointer plot 0 0 :text \"nw\" :angle :nw)\n  (add-pointer plot 0 0 :text \"ne\" :angle :ne)\n  (add-pointer plot 0 0 :text \"west\" :angle :west)\n  (add-pointer plot 0 0 :text \"east\" :angle :east)\n  (add-pointer plot 0 0 :text \"south\" :angle :south)\n  (add-pointer plot 0 0 :text \"sw\" :angle :sw)\n  (add-pointer plot 0 0 :text \"se\" :angle :se)",
+   " Adds an arrow annotation to the given chart.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinate to add the annotation\n\n\nOptions:\n    :text -- (default \"\") text to include at the end of the arrow\n    :angle -- (default :nw) either a number indicating the angle of the arrow\n              or a keyword indicating a direction (:north :nw :west :sw :south\n              :se :east :ne)\n\n\nExamples:\n\n  (use '(incanter core charts))\n  (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))\n  (def plot (xy-plot x (sin x)))\n  (view plot)\n  ;; annotate the plot\n  (doto plot\n    (add-pointer (- Math/PI) (sin (- Math/PI)) :text \"(-pi, (sin -pi))\")\n    (add-pointer Math/PI (sin Math/PI) :text \"(pi, (sin pi))\" :angle :ne)\n    (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text \"(pi/2, (sin pi/2))\" :angle :south))\n\n  ;; try the different angle options\n  (add-pointer plot 0 0 :text \"north\" :angle :north)\n  (add-pointer plot 0 0 :text \"nw\" :angle :nw)\n  (add-pointer plot 0 0 :text \"ne\" :angle :ne)\n  (add-pointer plot 0 0 :text \"west\" :angle :west)\n  (add-pointer plot 0 0 :text \"east\" :angle :east)\n  (add-pointer plot 0 0 :text \"south\" :angle :south)\n  (add-pointer plot 0 0 :text \"sw\" :angle :sw)\n  (add-pointer plot 0 0 :text \"se\" :angle :se)",
    "name":"add-pointer"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L963",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L964",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-points",
    "namespace":"incanter.charts",
@@ -282,7 +282,7 @@
    " Plots points on the given scatter-plot or xy-plot of the (x,y) points.\nEquivalent to R's lines function, returns the modified chart object.\n\nOptions:\n  :series-label (default x expression)\n\nExamples:\n\n  (use '(incanter core stats io datasets charts))\n  (def cars (to-matrix (get-dataset :cars)))\n  (def y (sel cars :cols 0))\n  (def x (sel cars :cols 1))\n\n  ;; add regression line to scatter plot\n  (def lm1 (linear-model y x))\n  ;; model the data without an intercept\n  (def lm2 (linear-model y x :intercept false))\n\n  (doto (xy-plot x (:fitted lm1) :legend true)\n        view\n        (add-points x y)\n        (add-lines x (:fitted lm2)))\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"add-points"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1160",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L1161",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-polygon",
    "namespace":"incanter.charts",
@@ -291,7 +291,7 @@
    " Adds a polygon outline defined by a given coordinates. The last coordinate will\nclose with the first. If only two points are given, it will plot a line.\n\nArguments:\n  chart -- the chart to add the polygon to.\n  coords -- a list of coords (an n-by-2 matrix can also be used)\n\n\nExamples:\n  (use '(incanter core stats charts))\n  (def x (range -3 3 0.01))\n  (def plot (xy-plot x (pdf-normal x)))\n  (view plot)\n\n  ;; add polygon to the chart\n  (add-polygon plot [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]])\n  ;; the coordinates can also be passed in a matrix\n  ;; (def points (matrix [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]]))\n  ;; (add-polygon plot points)\n  ;; add a text annotation\n  (add-text plot -1.25 0.35 \"95% Conf Interval\")\n\n  ;; PCA chart example\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (def plot (scatter-plot x1 x2\n                          :group-by (sel iris :cols 4)\n                          :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n\n  (view plot)\n  ;; put box around the first group\n  (add-polygon plot [[-3.2 -6.3] [-2 -6.3] [-2 -3.78] [-3.2 -3.78]])\n  ;; add some text annotations\n  (add-text plot -2.5 -6.5 \"Setosa\")\n  (add-text plot -5 -5.5 \"Versicolor\")\n  (add-text plot -8 -5.5 \"Virginica\")",
    "name":"add-polygon"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1115",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L1116",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/add-text",
    "namespace":"incanter.charts",
@@ -300,7 +300,7 @@
    " Adds a text annotation centered at the given coordinates.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinates to center the text\n  text -- the text to add\n\n\nExamples:\n\n  ;; PCA chart example\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (def plot (scatter-plot x1 x2\n                          :group-by (sel iris :cols 4)\n                          :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n  (view plot)\n  ;; add some text annotations\n  (add-text plot -2.5 -6.5 \"Setosa\")\n  (add-text plot -5 -5.5 \"Versicolor\")\n  (add-text plot -8 -5.5 \"Virginica\")",
    "name":"add-text"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L440",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L441",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/bar-chart",
    "namespace":"incanter.charts",
@@ -309,7 +309,7 @@
    " Returns a JFreeChart object representing a bar-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :legend (default false) prints legend\n  :vertical (default true) the orientation of the plot\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (def data (get-dataset :co2))\n  (def grass-type (sel data :cols 1))\n  (def treatment-type (sel data :cols 2))\n  (def uptake (sel data :cols 4))\n  (view (bar-chart grass-type uptake\n                  :title \"CO2 Uptake\"\n                  :group-by treatment-type\n                  :x-label \"Grass Types\" :y-label \"Uptake\"\n                  :legend true))\n\n\n  (def data (get-dataset :airline-passengers))\n  (def years (sel data :cols 0))\n  (def months (sel data :cols 2))\n  (def passengers (sel data :cols 1))\n  (view (bar-chart years passengers :group-by months :legend true))\n  (view (bar-chart months passengers :group-by years :legend true))\n\n\n  (def data (get-dataset :austres))\n  (view data)\n  (def plot (bar-chart (sel data :cols 0) (sel data :cols 1)\n                       :group-by (sel data :cols 2) :legend true))\n  (view plot)\n  (save plot \"/tmp/austres_plot.png\" :width 1000)\n  (view \"file:///tmp/austres_plot.png\")\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def values (sample-uniform 12 :integers true :max 100))\n  (view (bar-chart years values :group-by seasons :legend true))\n\n  (view (bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))\n  (view (bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]\n                   :legend true\n                   :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))\n\n  (view (bar-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                   (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"bar-chart"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1295",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L1296",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/bland-altman-plot",
    "namespace":"incanter.charts",
@@ -318,7 +318,7 @@
    "\n\nExamples:\n\n  (use '(incanter core datasets charts))\n  (def flow-meter (to-matrix (get-dataset :flow-meter)))\n  (def x1 (sel flow-meter :cols 1))\n  (def x2 (sel flow-meter :cols 3))\n  (view (bland-altman-plot x1 x2))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Bland-Altman_plot\n  http://www-users.york.ac.uk/~mb55/meas/ba.htm",
    "name":"bland-altman-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L366",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L367",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/box-plot",
    "namespace":"incanter.charts",
@@ -327,16 +327,16 @@
    " Returns a JFreeChart object representing a box-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x values into series.\n\nSee also:\n  view and save\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                        :title \"Gamma Boxplot\"\n                        :legend true))\n  (view gamma-box-plot)\n  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))\n\n  ;; use the group-by options\n  (use '(incanter core stats datasets charts))\n  (def iris (to-matrix (get-dataset :iris)))\n  (view (box-plot (sel iris :cols 0) :group-by (sel iris :cols 4) :legend true))\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"box-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L788",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L789",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/clear-background",
    "namespace":"incanter.charts",
    "arglists":[["chart"]],
    "doc":
-   " Sets the alpha level (transparancy) of the plot's background to zero,\nremoving the default grid, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
+   " Sets the alpha level (transparancy) of the plot's background to zero\nremoving the default grid, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"clear-background"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L316",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L317",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/function-plot",
    "namespace":"incanter.charts",
@@ -346,16 +346,16 @@
    " Returns a xy-plot object of the given function over the range indicated\nby the min-range and max-range arguments. Use the 'view' function to\ndisplay the chart, or the 'save' function to write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :step-size (default (/ (- max-range min-range) 500))\n\nSee also:\n  view, save, add-points, add-lines\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  (view (function-plot sin (- Math/PI) Math/PI))\n  (view (function-plot pdf-normal -3 3))\n\n  (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))\n  (view (function-plot cubic -10 10))",
    "name":"function-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L58",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L58",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/histogram",
    "namespace":"incanter.charts",
    "arglists":[["x", "&", "options"]],
    "doc":
-   " Returns a JFreeChart object representing the histogram of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :nbins (default 10) number of bins\n  :density (default false) if false, plots frequency, otherwise density\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n\n\nSee also:\n  view, save, add-histogram\n\nExamples:\n\n  (use '(incanter core charts stats))\n  (view (histogram (sample-normal 1000)))\n\n  # plot a density histogram\n  (def hist (histogram (sample-normal 1000) :density true))\n  (view hist)\n  # add a normal density line to the plot\n  (def x (range -4 4 0.01))\n  (add-lines hist x (pdf-normal x))\n\n  # plot some gamma data\n  (def gam-hist (histogram (sample-gamma 1000) :density true :nbins 30))\n  (view gam-hist)\n  (def x (range 0 8 0.01))\n  (add-lines gam-hist x (pdf-gamma x))\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
+   " Returns a JFreeChart object representing the histogram of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :nbins (default 10) number of bins\n  :density (default false) if false, plots frequency, otherwise density\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n\n\nSee also:\n  view, save, add-histogram\n\nExamples:\n\n  (use '(incanter core charts stats))\n  (view (histogram (sample-normal 1000)))\n\n  # plot a density histogram\n  (def hist (histogram (sample-normal 1000) :density true))\n  (view hist)\n\n  # add a normal density line to the plot\n  (def x (range -4 4 0.01))\n  (add-lines hist x (pdf-normal x))\n\n  # plot some gamma data\n  (def gam-hist (histogram (sample-gamma 1000) :density true :nbins 30))\n  (view gam-hist)\n  (def x (range 0 8 0.01))\n  (add-lines gam-hist x (pdf-gamma x))\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"histogram"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L550",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L551",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/line-chart",
    "namespace":"incanter.charts",
@@ -364,7 +364,7 @@
    " Returns a JFreeChart object representing a line-chart of the given values and categories.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :legend (default false) prints legend\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n\n  (def data (get-dataset :airline-passengers))\n  (def years (sel data :cols 0))\n  (def months (sel data :cols 2))\n  (def passengers (sel data :cols 1))\n  (view (line-chart years passengers :group-by months :legend true))\n  (view (line-chart months passengers :group-by years :legend true))\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def x (sample-uniform 12 :integers true :max 100))\n  (view (line-chart years x :group-by seasons :legend true))\n\n  (view (line-chart [\"a\" \"b\" \"c\" \"d\" \"e\" \"f\"] [10 20 30 10 40 20]))\n\n  (view (line-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                       (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"line-chart"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L218",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L219",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/line-plot",
    "namespace":"incanter.charts",
@@ -372,7 +372,7 @@
    "doc":"WARNING: line-plot has been renamed xy-plot.",
    "name":"line-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1265",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L1266",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/qq-plot",
    "namespace":"incanter.charts",
@@ -381,7 +381,7 @@
    "\nReturns a QQ-Plot object. Use the 'view' function to display it.\n\nReferences:\n  http://en.wikipedia.org/wiki/QQ_plot\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (view (qq-plot (sample-normal 100)))\n  (view (qq-plot (sample-exp 100)))\n  (view (qq-plot (sample-gamma 100)))",
    "name":"qq-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L133",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L134",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/scatter-plot",
    "namespace":"incanter.charts",
@@ -390,25 +390,25 @@
    " Returns a JFreeChart object representing a scatter-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x and y values into series.\n\nSee also:\n  view, save, add-points, add-lines\n\nExamples:\n\n  (use '(incanter core stats charts))\n  ;; create some data\n  (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))\n\n  ;; create scatter-plot of points\n  (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))\n  (view mvn-plot)\n\n  ;; add regression line to scatter plot\n  (def x (sel mvn-samp :cols 0))\n  (def y (sel mvn-samp :cols 1))\n  (def lm (linear-model y x))\n  (add-lines mvn-plot x (:fitted lm))\n\n  ;; use :group-by option\n  (use '(incanter core stats datasets charts))\n  ;; load the :iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; plot the first two columns grouped by the fifth column\n  (view (scatter-plot (sel iris :cols 0) (sel iris :cols 1) :group-by (sel iris :cols 4)))\n\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"scatter-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L760",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L761",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-alpha",
    "namespace":"incanter.charts",
    "arglists":[["chart", "alpha"]],
    "doc":
-   " Sets the alpha level (transparancy) of the plot's foreground,\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
+   " Sets the alpha level (transparancy) of the plot's foreground\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-alpha"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L774",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L775",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-background-alpha",
    "namespace":"incanter.charts",
    "arglists":[["chart", "alpha"]],
    "doc":
-   " Sets the alpha level (transparancy) of the plot's background,\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
+   " Sets the alpha level (transparancy) of the plot's background\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-background-alpha"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L803",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L804",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-title",
    "namespace":"incanter.charts",
@@ -417,7 +417,7 @@
    " Sets the main title of the plot, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-title"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L816",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L817",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-x-label",
    "namespace":"incanter.charts",
@@ -426,7 +426,7 @@
    " Sets the label of the x-axis, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-x-label"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L829",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L830",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/set-y-label",
    "namespace":"incanter.charts",
@@ -435,7 +435,7 @@
    " Sets the label of the y-axis, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    "name":"set-y-label"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L1228",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L1229",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/trace-plot",
    "namespace":"incanter.charts",
@@ -444,7 +444,7 @@
    " Returns a trace-plot object, use the 'view' function to display it.\n\nExamples:\n  (use '(incanter core datasets stats bayes charts))\n  (def ols-data (to-matrix (get-dataset :survey)))\n  (def x (sel ols-data (range 0 2313) (range 1 10)))\n  (def y (sel ols-data (range 0 2313) 10))\n  (def sample-params (sample-model-params 5000 (linear-model y x :intercept false)))\n  (view (trace-plot (:var sample-params)))\n\n  (view (trace-plot (sel (:coefs sample-params) :cols 0)))",
    "name":"trace-plot"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/706377b3b0b1068429da692a71db37ed95ed1f95/src/main/clojure/incanter/charts.clj#L225",
+   "http://github.com/liebke/incanter/blob/bb6e05e7fad43287f874bc6f95258b684e0a3efd/src/main/clojure/incanter/charts.clj#L226",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.charts-api.html#incanter.charts/xy-plot",
    "namespace":"incanter.charts",
@@ -974,7 +974,7 @@
    "makes a wrapping classifier like categortical but with wrapper fn.",
    "name":"wrapper-classifiers"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L518",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L518",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/abs",
    "namespace":"incanter.core",
@@ -983,7 +983,7 @@
    "Returns the absolute value of the elements in the given matrix, sequence or number.\nEquivalent to R's abs function.",
    "name":"abs"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L542",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L542",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/acos",
    "namespace":"incanter.core",
@@ -992,7 +992,7 @@
    "Returns the arc cosine of the elements in the given matrix, sequence or number.\nEquivalent to R's acos function.",
    "name":"acos"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L530",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L530",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/asin",
    "namespace":"incanter.core",
@@ -1001,7 +1001,7 @@
    "Returns the arc sine of the elements in the given matrix, sequence or number.\nEquivalent to R's asin function.",
    "name":"asin"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L554",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L554",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/atan",
    "namespace":"incanter.core",
@@ -1010,7 +1010,7 @@
    "Returns the arc tangent of the elements in the given matrix, sequence or number.\nEquivalent to R's atan function.",
    "name":"atan"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L475",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L475",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/atan2",
    "namespace":"incanter.core",
@@ -1019,7 +1019,7 @@
    "Returns the atan2 of the elements in the given matrices, sequences or numbers.\nEquivalent to R's atan2 function.",
    "name":"atan2"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1275",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1275",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/beta",
    "namespace":"incanter.core",
@@ -1028,7 +1028,7 @@
    "\nEquivalent to R's beta function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    "name":"beta"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L341",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L341",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/bind-columns",
    "namespace":"incanter.core",
@@ -1037,7 +1037,7 @@
    "   Returns the matrix resulting from concatenating the given matrices\nand/or sequences by their columns. Equivalent to R's cbind.\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (def B (matrix [10 11 12]))\n\n  (bind-columns A B)\n\n  (bind-columns [1 2 3 4] [5 6 7 8])",
    "name":"bind-columns"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L303",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L303",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/bind-rows",
    "namespace":"incanter.core",
@@ -1046,7 +1046,7 @@
    "   Returns the matrix resulting from concatenating the given matrices\nand/or sequences by their rows. Equivalent to R's rbind.\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (def B (matrix [[10 11 12]\n                  [13 14 15]]))\n\n  (bind-rows A B)\n\n  (bind-rows [1 2 3 4] [5 6 7 8])",
    "name":"bind-rows"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1158",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1158",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/categorical-var",
    "namespace":"incanter.core",
@@ -1055,7 +1055,7 @@
    " Returns a categorical variable based on the values in the given collection.\nEquivalent to R's factor function.\n\nOptions:\n  :data (default nil) factors will be extracted from the given data.\n  :ordered? (default false) indicates that the variable is ordinal.\n  :labels (default (sort (into #{} data)))\n  :levels (range (count labels))\n\nExamples:\n  (categorical-var :data [:a :a :c :b :a :c :c])\n  (categorical-var :labels [:a :b :c])\n  (categorical-var :labels [:a :b :c] :levels [10 20 30])\n  (categorical-var :levels [1 2 3])",
    "name":"categorical-var"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L577",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L577",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/choose",
    "namespace":"incanter.core",
@@ -1064,7 +1064,7 @@
    "\nReturns number of k-combinations (each of size k) from a set S with\nn elements (size n), which is the binomial coefficient (also known\nas the 'choose function') [wikipedia]\n      choose = n!/(k!(n - k)!)\n\nEquivalent to R's choose function.\n\nExamples:\n  (choose 25 6) ; => 2,598,960\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html\n  http://en.wikipedia.org/wiki/Combination",
    "name":"choose"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L957",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L957",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/condition",
    "namespace":"incanter.core",
@@ -1073,7 +1073,7 @@
    " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(condition foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Condition_number\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html",
    "name":"condition"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L617",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L617",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/copy",
    "namespace":"incanter.core",
@@ -1081,7 +1081,7 @@
    "doc":"Returns a copy of the given matrix.",
    "name":"copy"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L536",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L536",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/cos",
    "namespace":"incanter.core",
@@ -1090,7 +1090,7 @@
    "Returns the cosine of the elements in the given matrix, sequence or number.\nEquivalent to R's cos function.",
    "name":"cos"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L789",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L789",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/cumulative-sum",
    "namespace":"incanter.core",
@@ -1099,7 +1099,7 @@
    " Returns a sequence of cumulative sum for the given collection. For instance\n  The first value equals the first value of the argument, the second value is\n  the sum of the first two arguments, the third is the sum of the first three\n  arguments, etc.\n\n  Examples:\n    (use 'incanter.core)\n    (cumulative-sum (range 100))\n",
    "name":"cumulative-sum"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1104",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1104",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/dataset",
    "namespace":"incanter.core",
@@ -1108,7 +1108,7 @@
    " Returns a map of type ::dataset constructed from the given column-names and\ndata. The data is a sequence of sequences.",
    "name":"dataset"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1115",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1115",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/dataset?",
    "namespace":"incanter.core",
@@ -1116,7 +1116,7 @@
    "doc":" Determines if obj is of type ::dataset.",
    "name":"dataset?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L817",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L817",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-cholesky",
    "namespace":"incanter.core",
@@ -1125,7 +1125,7 @@
    " Returns the Cholesky decomposition of the given matrix. Equivalent to R's\nchol function.\n\nReturns:\n  a matrix of the triangular factor (note: the result from\n  cern.colt.matrix.linalg.CholeskyDecomposition is transposed so\n  that it matches the result return from R's chol function.\n\n\n\nExamples:\n\n(use '(incanter core stats charts datasets))\n;; load the iris dataset\n(def iris (to-matrix (get-dataset :iris)))\n;; take the Cholesky decompostion of the correlation matrix of the iris data.\n(decomp-cholesky (correlation iris))\n\n\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html\n  http://en.wikipedia.org/wiki/Cholesky_decomposition",
    "name":"decomp-cholesky"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L878",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L878",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-eigenvalue",
    "namespace":"incanter.core",
@@ -1134,7 +1134,7 @@
    " Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.\n\nReturns:\n  a map containing:\n    :values -- vector of eigenvalues\n    :vectors -- the matrix of eigenvectors\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-eigenvalue foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Eigenvalue_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html",
    "name":"decomp-eigenvalue"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L904",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L904",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-lu",
    "namespace":"incanter.core",
@@ -1143,7 +1143,7 @@
    " Returns the LU decomposition of the given matrix.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-lu foo)\n\n\nReturns:\n  a map containing:\n    :L -- the lower triangular factor\n    :U -- the upper triangular factor\n\nReferences:\n  http://en.wikipedia.org/wiki/LU_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html",
    "name":"decomp-lu"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L930",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L930",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-qr",
    "namespace":"incanter.core",
@@ -1152,7 +1152,7 @@
    " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-qr foo)\n\n\n\nReturns:\n  a map containing:\n    :Q -- orthogonal factor\n    :R -- the upper triangular factor\n\nReferences:\n  http://en.wikipedia.org/wiki/QR_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleQRDecomposition.html",
    "name":"decomp-qr"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L848",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L848",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/decomp-svd",
    "namespace":"incanter.core",
@@ -1161,7 +1161,7 @@
    " Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to\nR's svd function.\n\nReturns:\n  a map containing:\n    :S -- the diagonal matrix of singular values\n    :U -- the left singular vectors U\n    :V -- the right singular vectors V\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-foo foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Singular_value_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html",
    "name":"decomp-svd"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L702",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L702",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/det",
    "namespace":"incanter.core",
@@ -1170,7 +1170,7 @@
    " Returns the determinant of the given matrix using LU decomposition. Equivalent\nto R's det function.\n\nReferences:\n  http://en.wikipedia.org/wiki/LU_decomposition\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html",
    "name":"det"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L134",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L134",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/diag",
    "namespace":"incanter.core",
@@ -1179,7 +1179,7 @@
    "   If given a matrix, diag returns a sequence of its diagonal elements.\nIf given a sequence, it returns a matrix with the sequence's elements\non its diagonal. Equivalent to R's diag function.\n\nExamples:\n  (diag [1 2 3 4])\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (diag A)",
    "name":"diag"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L117",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L117",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/dim",
    "namespace":"incanter.core",
@@ -1188,16 +1188,16 @@
    " Returns a vector with the number of rows and columns of the given matrix. ",
    "name":"dim"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L445",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L445",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/div",
    "namespace":"incanter.core",
    "arglists":[["&", "args"]],
    "doc":
-   "   Performs element-by-element division on multiple matrices, sequences,\nand/or numbers. Equivalent to R's / operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (div A A A)\n  (div A 2)\n  (div 2 A)\n  (div [1 2 3] [1 2 3])\n  (div [1 2 3] 2)\n  (div 2 [1 2 3])\n\n  (div [1 2 3]) ; returns [1 1/2 13]",
+   "   Performs element-by-element division on multiple matrices, sequences\nand/or numbers. Equivalent to R's / operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (div A A A)\n  (div A 2)\n  (div 2 A)\n  (div [1 2 3] [1 2 3])\n  (div [1 2 3] 2)\n  (div 2 [1 2 3])\n\n  (div [1 2 3]) ; returns [1 1/2 13]",
    "name":"div"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L512",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L512",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/exp",
    "namespace":"incanter.core",
@@ -1206,7 +1206,7 @@
    "Returns the exponential of the elements in the given matrix, sequence or number.\nEquivalent to R's exp function.",
    "name":"exp"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L560",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L560",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/factorial",
    "namespace":"incanter.core",
@@ -1215,7 +1215,7 @@
    "\nReturns the factorial of k (k must be a positive integer). Equivalent to R's\nfactorial function.\n\nExamples:\n  (factorial 6)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html\n  http://en.wikipedia.org/wiki/Factorial",
    "name":"factorial"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1265",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1265",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/gamma",
    "namespace":"incanter.core",
@@ -1224,16 +1224,16 @@
    "\nEquivalent to R's gamma function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    "name":"gamma"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1035",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1035",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/group-by",
    "namespace":"incanter.core",
    "arglists":[["mat", "on-cols", "&", "options"]],
    "doc":
-   " Groups the given matrix by the values in the columns indicated by the\n'on-cols' argument, returning a sequence of matrices. The returned\nmatrices are sorted by the value of the group column ONLY when there\nis only a single (non-vector) on-col argument.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (def plant-growth (to-matrix (get-dataset :plant-growth)))\n  (group-by plant-growth 1)\n  ;; only return the first column\n  (group-by plant-growth 1 :cols 0)\n  ;; don't return the second column\n  (group-by plant-growth 1 :except-cols 1)\n\n  (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))\n  (group-by plant-growth-dummies [1 2])\n  ;; return only the first column\n  (group-by plant-growth-dummies [1 2] :cols 0)\n  ;; don't return the last two columns\n  (group-by plant-growth-dummies [1 2] :except-cols [1 2])\n\n  ;; plot the plant groups\n  (use 'incanter.charts)\n  ;; can use destructuring if you know the number of groups,\n  ;; groups are sorted only if the group is based on a single column value\n  (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]\n    (doto (box-plot ctrl)\n          (add-box-plot trt1)\n          (add-box-plot trt2)\n          view))",
+   " Groups the given matrix by the values in the columns indicated by the\n'on-cols' argument, returning a sequence of matrices. The returned\nmatrices are sorted by the value of the group column ONLY when there\nis only a single (non-vector) on-col argument.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (def plant-growth (to-matrix (get-dataset :plant-growth)))\n  (group-by plant-growth 1)\n  ;; only return the first column\n  (group-by plant-growth 1 :cols 0)\n  ;; don't return the second column\n  (group-by plant-growth 1 :except-cols 1)\n\n  (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))\n  (group-by plant-growth-dummies [1 2])\n  ;; return only the first column\n  (group-by plant-growth-dummies [1 2] :cols 0)\n  ;; don't return the last two columns\n  (group-by plant-growth-dummies [1 2] :except-cols [1 2])\n\n  ;; plot the plant groups\n  (use 'incanter.charts)\n  ;; can use destructuring if you know the number of groups\n  ;; groups are sorted only if the group is based on a single column value\n  (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]\n    (doto (box-plot ctrl)\n          (add-box-plot trt1)\n          (add-box-plot trt2)\n          view))",
    "name":"group-by"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L746",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L746",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/half-vectorize",
    "namespace":"incanter.core",
@@ -1242,7 +1242,7 @@
    " Returns the half-vectorization (i.e. vech) of the given matrix.\n  The half-vectorization, vech(A), of a symmetric nxn matrix A\n  is the n(n+1)/2 x 1 column vector obtained by vectorizing only\n  the upper triangular part of A.\n\n  For instance:\n    (= (half-vectorize (matrix [[a b] [b d]])) (matrix [a b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [2 4]]))\n    (half-vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
    "name":"half-vectorize"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L124",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L124",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/identity-matrix",
    "namespace":"incanter.core",
@@ -1251,7 +1251,7 @@
    "   Returns an n-by-n identity matrix.\n\nExamples:\n  (identity-matrix 4)",
    "name":"identity-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1285",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1285",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/incomplete-beta",
    "namespace":"incanter.core",
@@ -1260,7 +1260,7 @@
    "\nReturns the non-regularized incomplete beta value.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    "name":"incomplete-beta"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L650",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L650",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/kronecker",
    "namespace":"incanter.core",
@@ -1269,16 +1269,16 @@
    " Returns the Kronecker product of the given arguments.\n\nExamples:\n\n  (def x (matrix (range 6) 2))\n  (def y (matrix (range 4) 2))\n  (kronecker 4 x)\n  (kronecker x 4)\n  (kronecker x y)",
    "name":"kronecker"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1016",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1016",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/length",
    "namespace":"incanter.core",
    "arglists":[["coll"]],
    "doc":
-   " A version of count that works on collections, matrices, and numbers.\n  The length of a number is one, the length of a collection is its count,\n  and the length of a matrix is the number of elements it contains (nrow*ncol).\n  Equivalent to R's length function.\n",
+   " A version of count that works on collections, matrices, and numbers.\n  The length of a number is one, the length of a collection is its count\n  and the length of a matrix is the number of elements it contains (nrow*ncol).\n  Equivalent to R's length function.\n",
    "name":"length"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L494",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L494",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/log",
    "namespace":"incanter.core",
@@ -1287,7 +1287,7 @@
    "Returns the natural log of the elements in the given matrix, sequence or number.\nEquvalent to R's log function.",
    "name":"log"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L506",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L506",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/log10",
    "namespace":"incanter.core",
@@ -1296,7 +1296,7 @@
    "Returns the log base 10 of the elements in the given matrix, sequence or number.\nEquivalent to R's log10 function.",
    "name":"log10"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L500",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L500",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/log2",
    "namespace":"incanter.core",
@@ -1305,17 +1305,17 @@
    "Returns the log base 2 of the elements in the given matrix, sequence or number.\nEquivalent to R's log2 function.",
    "name":"log2"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L53",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L53",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/matrix",
    "namespace":"incanter.core",
    "arglists":
    [["data"], ["data", "ncol"], ["init-val", "rows", "cols"]],
    "doc":
-   "\nReturns an instance of an incanter.Matrix, which is an extension of\ncern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure\ninterface clojure.lang.ISeq. Therefore Clojure sequence operations can\nbe applied to matrices. A matrix consists of a sequence of rows, where\neach row is a one-dimensional row matrix. One-dimensional matrices are,\nin turn, sequences of numbers. Equivalent to R's matrix function.\n\nExamples:\n  (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix\n  (def A2 (matrix [1 2 3 4 5 6 7 8 9] 3)) ; produces the same 3x3 matrix\n  (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column vector\n\n  (first A) ; produces a row matrix [1 2 3]\n  (rest A) ; produces a sub matrix [[4 5 6] [7 8 9]]\n  (first (first A)) ; produces 1.0\n  (rest (first A)) ; produces a row matrix [2 3]\n\n  ; since (plus row1 row2) adds the two rows element-by-element,\n  (reduce plus A) ; produces the sums of the columns,\n\n  ; and since (sum row1) sums the elements of the row,\n  (map sum A) ; produces the sums of the rows,\n\n  ; you can filter the rows using Clojure's filter function\n  (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html",
+   "\nReturns an instance of an incanter.Matrix, which is an extension of\ncern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure\ninterface clojure.lang.ISeq. Therefore Clojure sequence operations can\nbe applied to matrices. A matrix consists of a sequence of rows, where\neach row is a one-dimensional row matrix. One-dimensional matrices are\nin turn, sequences of numbers. Equivalent to R's matrix function.\n\nExamples:\n  (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix\n  (def A2 (matrix [1 2 3 4 5 6 7 8 9] 3)) ; produces the same 3x3 matrix\n  (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column vector\n\n  (first A) ; produces a row matrix [1 2 3]\n  (rest A) ; produces a sub matrix [[4 5 6] [7 8 9]]\n  (first (first A)) ; produces 1.0\n  (rest (first A)) ; produces a row matrix [2 3]\n\n  ; since (plus row1 row2) adds the two rows element-by-element\n  (reduce plus A) ; produces the sums of the columns\n\n  ; and since (sum row1) sums the elements of the row\n  (map sum A) ; produces the sums of the rows\n\n  ; you can filter the rows using Clojure's filter function\n  (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html",
    "name":"matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L95",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L95",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/matrix?",
    "namespace":"incanter.core",
@@ -1323,16 +1323,16 @@
    "doc":" Test if obj is 'derived' incanter.Matrix.",
    "name":"matrix?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L396",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L396",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/minus",
    "namespace":"incanter.core",
    "arglists":[["&", "args"]],
    "doc":
-   "   Performs element-by-element subtraction on multiple matrices, sequences,\nand/or numbers. If only a single argument is provided, returns the\nnegative of the given matrix, sequence, or number. Equivalent to R's - operator.\n\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (minus A)\n  (minus A A A)\n  (minus A 2)\n  (minus 2 A)\n  (minus [1 2 3] [1 2 3])\n  (minus [1 2 3] 2)\n  (minus 2 [1 2 3])\n  (minus [1 2 3])",
+   "   Performs element-by-element subtraction on multiple matrices, sequences\nand/or numbers. If only a single argument is provided, returns the\nnegative of the given matrix, sequence, or number. Equivalent to R's - operator.\n\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (minus A)\n  (minus A A A)\n  (minus A 2)\n  (minus 2 A)\n  (minus [1 2 3] [1 2 3])\n  (minus [1 2 3] 2)\n  (minus 2 [1 2 3])\n  (minus [1 2 3])",
    "name":"minus"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L622",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L622",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/mmult",
    "namespace":"incanter.core",
@@ -1341,16 +1341,16 @@
    " Returns the matrix resulting from the matrix multiplication of the\n  the given arguments. Equivalent to R's %*% operator.\n\n  Examples:\n\n    (def A (matrix [[1 2 3]\n                    [4 5 6]\n                    [7 8 9]]))\n    (mmult A (trans A))\n    (mmult A (trans A) A)\n\n  References:\n    http://en.wikipedia.org/wiki/Matrix_multiplication\n    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html\n\n",
    "name":"mmult"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L424",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L424",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/mult",
    "namespace":"incanter.core",
    "arglists":[["&", "args"]],
    "doc":
-   "   Performs element-by-element multiplication on multiple matrices, sequences,\nand/or numbers. Equivalent to R's * operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (mult A A A)\n  (mult A 2)\n  (mult 2 A)\n  (mult [1 2 3] [1 2 3])\n  (mult [1 2 3] 2)\n  (mult 2 [1 2 3])",
+   "   Performs element-by-element multiplication on multiple matrices, sequences\nand/or numbers. Equivalent to R's * operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (mult A A A)\n  (mult A 2)\n  (mult 2 A)\n  (mult [1 2 3] [1 2 3])\n  (mult [1 2 3] 2)\n  (mult 2 [1 2 3])",
    "name":"mult"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L108",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L108",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/ncol",
    "namespace":"incanter.core",
@@ -1359,7 +1359,7 @@
    " Returns the number of columns in the given matrix. Equivalent to R's ncol function.",
    "name":"ncol"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L100",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L100",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/nrow",
    "namespace":"incanter.core",
@@ -1368,25 +1368,25 @@
    " Returns the number of rows in the given matrix. Equivalent to R's nrow function.",
    "name":"nrow"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L375",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L375",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/plus",
    "namespace":"incanter.core",
    "arglists":[["&", "args"]],
    "doc":
-   "   Performs element-by-element addition on multiple matrices, sequences,\nand/or numbers. Equivalent to R's + operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (plus A A A)\n  (plus A 2)\n  (plus 2 A)\n  (plus [1 2 3] [1 2 3])\n  (plus [1 2 3] 2)\n  (plus 2 [1 2 3])",
+   "   Performs element-by-element addition on multiple matrices, sequences\nand/or numbers. Equivalent to R's + operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (plus A A A)\n  (plus A 2)\n  (plus 2 A)\n  (plus [1 2 3] [1 2 3])\n  (plus [1 2 3] 2)\n  (plus 2 [1 2 3])",
    "name":"plus"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L469",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L469",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/pow",
    "namespace":"incanter.core",
    "arglists":[["&", "args"]],
    "doc":
-   " This is an element-by-element exponent function, raising the first argument,\nby the exponents in the remaining arguments. Equivalent to R's ^ operator.",
+   " This is an element-by-element exponent function, raising the first argument\nby the exponents in the remaining arguments. Equivalent to R's ^ operator.",
    "name":"pow"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L781",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L781",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/prod",
    "namespace":"incanter.core",
@@ -1394,7 +1394,7 @@
    "doc":"Returns the product of the given sequence.",
    "name":"prod"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1489",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1489",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/quit",
    "namespace":"incanter.core",
@@ -1402,7 +1402,7 @@
    "doc":" Exits the Clojure shell.",
    "name":"quit"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L976",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L976",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/rank",
    "namespace":"incanter.core",
@@ -1411,7 +1411,7 @@
    " Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(rank foo)\n\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_rank\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html",
    "name":"rank"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1297",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1297",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/regularized-beta",
    "namespace":"incanter.core",
@@ -1420,15 +1420,15 @@
    "\nReturns the regularized incomplete beta value. Equivalent to R's pbeta function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html\n  http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function\n  http://mathworld.wolfram.com/RegularizedBetaFunction.html",
    "name":"regularized-beta"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1495",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1495",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/save",
    "namespace":"incanter.core",
    "doc":
-   " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line,\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
+   " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
    "name":"save"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L194",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L194",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sel",
    "namespace":"incanter.core",
@@ -1436,7 +1436,7 @@
    "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])",
    "name":"sel"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L524",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L524",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sin",
    "namespace":"incanter.core",
@@ -1445,7 +1445,7 @@
    "Returns the sine of the elements in the given matrix, sequence or number.\nEquivalent to R's sin function.",
    "name":"sin"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L683",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L683",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/solve",
    "namespace":"incanter.core",
@@ -1454,7 +1454,7 @@
    " Returns a matrix solution if A is square, least squares solution otherwise.\nEquivalent to R's solve function.\n\nExamples:\n  (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_inverse",
    "name":"solve"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1315",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1315",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/solve-quadratic",
    "namespace":"incanter.core",
@@ -1463,7 +1463,7 @@
    "\nReturns a vector with the solution to x from the quadratic\nequation, a*x^2 + b*x + c.\n\nArguments:\n  a, b, c: coefficients of a qaudratic equation.\n\nExamples:\n  ;; -2*x^2 + 7*x + 15\n  (quadratic-formula -2 7 15)\n  ;; x^2 + -2*x + 1\n  (quadratic-formula 1 -2 1)\n\nReferences:\n  http://en.wikipedia.org/wiki/Quadratic_formula",
    "name":"solve-quadratic"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L488",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L488",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sq",
    "namespace":"incanter.core",
@@ -1472,7 +1472,7 @@
    "Returns the square of the elements in the given matrix, sequence or number.\nEquivalent to R's sq function.",
    "name":"sq"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L482",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L482",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sqrt",
    "namespace":"incanter.core",
@@ -1481,7 +1481,7 @@
    "Returns the square-root of the elements in the given matrix, sequence or number.\nEquivalent to R's sqrt function.",
    "name":"sqrt"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L774",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L774",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sum",
    "namespace":"incanter.core",
@@ -1489,7 +1489,7 @@
    "doc":"Returns the sum of the given sequence.",
    "name":"sum"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L767",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L767",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/sum-of-squares",
    "namespace":"incanter.core",
@@ -1497,7 +1497,7 @@
    "doc":"Returns the sum-of-squares of the given sequence.",
    "name":"sum-of-squares"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1342",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1342",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/symmetric-matrix",
    "namespace":"incanter.core",
@@ -1506,7 +1506,7 @@
    "\nReturns a symmetric matrix from the given data, which represents the lower triangular elements\nordered by row. This is not the inverse of half-vectorize which returns a vector of the upper-triangular\nvalues, unless the :lower option is set to false.\n\nOptions:\n  :lower (default true) -- lower-triangular. Set :lower to false to reverse the half-vectorize function.\n\nExamples:\n\n  (use 'incanter.core)\n  (symmetric-matrix [1\n                     2 3\n                     4 5 6\n                     7 8 9 10])\n\n\n  (half-vectorize\n    (symmetric-matrix [1\n                       2 3\n                       4 5 6\n                       7 8 9 10] :lower false))",
    "name":"symmetric-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L548",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L548",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/tan",
    "namespace":"incanter.core",
@@ -1515,7 +1515,7 @@
    "Returns the tangent of the elements in the given matrix, sequence or number.\nEquivalent to R's tan function.",
    "name":"tan"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1201",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1201",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-labels",
    "namespace":"incanter.core",
@@ -1523,7 +1523,7 @@
    "doc":"\n",
    "name":"to-labels"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1191",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1191",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-levels",
    "namespace":"incanter.core",
@@ -1531,16 +1531,16 @@
    "doc":"\n",
    "name":"to-levels"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L602",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L602",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-list",
    "namespace":"incanter.core",
    "arglists":[["mat"]],
    "doc":
-   " Returns a list-of-lists if the given matrix is two-dimensional,\nand a flat list if the matrix is one-dimensional.",
+   " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
    "name":"to-list"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1238",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1238",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-matrix",
    "namespace":"incanter.core",
@@ -1549,16 +1549,16 @@
    "Converts a dataset into a matrix. Equivalent to R's as.matrix function\n for datasets.\n\nOptions:\n  :dummies (default false) -- if true converts non-numeric variables into sets\n                              of binary dummy variables, otherwise converts\n                              them into numeric codes.",
    "name":"to-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1002",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1002",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/to-vect",
    "namespace":"incanter.core",
    "arglists":[["mat"]],
    "doc":
-   " Returns a vector-of-vectors if the given matrix is two-dimensional,\nand a flat vector if the matrix is one-dimensional. This is a bit\nslower than the to-list function. ",
+   " Returns a vector-of-vectors if the given matrix is two-dimensional\nand a flat vector if the matrix is one-dimensional. This is a bit\nslower than the to-list function. ",
    "name":"to-vect"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L714",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L714",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/trace",
    "namespace":"incanter.core",
@@ -1567,7 +1567,7 @@
    " Returns the trace of the given matrix.\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_trace\n  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DoubleAlgebra.html",
    "name":"trace"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L159",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L159",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/trans",
    "namespace":"incanter.core",
@@ -1576,16 +1576,16 @@
    "   Returns the transpose of the given matrix. Equivalent to R's t function\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (trans A)",
    "name":"trans"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L725",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L725",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/vectorize",
    "namespace":"incanter.core",
    "arglists":[["mat"]],
    "doc":
-   " Returns the vectorization (i.e. vec) of the given matrix.\n  The vectorization of an m-by-n matrix A, denoted by vec(A),\n  is the m*n-by-1 column vector obtain by stacking the columns\n  of the matrix A on top of one another.\n\n  For instance:\n    (= (vectorize (matrix [[a b] [c d]])) (matrix [a c b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [3 4]]))\n    (vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
+   " Returns the vectorization (i.e. vec) of the given matrix.\n  The vectorization of an m-by-n matrix A, denoted by vec(A)\n  is the m*n-by-1 column vector obtain by stacking the columns\n  of the matrix A on top of one another.\n\n  For instance:\n    (= (vectorize (matrix [[a b] [c d]])) (matrix [a c b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [3 4]]))\n    (vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
    "name":"vectorize"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/core.clj#L1388",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/core.clj#L1388",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.core-api.html#incanter.core/view",
    "namespace":"incanter.core",
@@ -2011,7 +2011,7 @@
    "conditional probability where the bs are taken to be a map of feature->classifier-function paris, where we want to compute the conditional probability between a and each b independently.",
    "name":"|each"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L36",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L36",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/alpha",
    "namespace":"incanter.processing",
@@ -2019,7 +2019,7 @@
    "doc":"",
    "name":"alpha"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L52",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L52",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/ambient",
    "namespace":"incanter.processing",
@@ -2027,7 +2027,7 @@
    "doc":"",
    "name":"ambient"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L64",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L64",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/ambient-light",
    "namespace":"incanter.processing",
@@ -2037,7 +2037,7 @@
    "doc":"",
    "name":"ambient-light"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L73",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L73",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/apply-matrix",
    "namespace":"incanter.processing",
@@ -2048,7 +2048,7 @@
    "doc":"",
    "name":"apply-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L87",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L87",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/arc",
    "namespace":"incanter.processing",
@@ -2056,7 +2056,7 @@
    "doc":"",
    "name":"arc"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L112",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L112",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/background",
    "namespace":"incanter.processing",
@@ -2067,7 +2067,7 @@
    "\nExamples:\n\n  (use 'incanter.processing)\n  (def sktch (sketch))\n\n  (background sktch (color 255 0 255))\n  (draw sktch)\n\n  (background sktch (color 255 0 255 255)) ;; with alpha value\n  (draw sktch)\n\n  (background sktch (color \"0xFF00FF\"))\n  (draw sktch)\n\n  (background sktch (color 0xFF00FF))\n  (draw sktch)\n\n  (background sktch (color -65281))\n  (draw sktch)\n\n  (background sktch (color 0xFFFF00FF true)) ;; with alpha? true\n  (draw sktch)\n\n  (background sktch (color 0xFF 0x00 0xFF))\n  (draw sktch)\n\n  (background sktch (color 0xFF 0x00 0xFF 0xFF)) ;; with alpha value\n  (draw sktch)\n\n  (background sktch (color 1.0 0.0 1.0))\n  (draw sktch)\n\n  (background sktch (color 1.0 0.0 1.0 1.0)) ;; with alpha value\n  (draw sktch)",
    "name":"background"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L198",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L198",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/background-image",
    "namespace":"incanter.processing",
@@ -2075,7 +2075,7 @@
    "doc":"",
    "name":"background-image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L202",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L202",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/begin-camera",
    "namespace":"incanter.processing",
@@ -2083,7 +2083,7 @@
    "doc":"",
    "name":"begin-camera"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L206",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L206",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/begin-raw",
    "namespace":"incanter.processing",
@@ -2092,7 +2092,7 @@
    "doc":"",
    "name":"begin-raw"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L214",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L214",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/begin-shape",
    "namespace":"incanter.processing",
@@ -2100,7 +2100,7 @@
    "doc":"",
    "name":"begin-shape"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L219",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L219",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/bezier",
    "namespace":"incanter.processing",
@@ -2111,7 +2111,7 @@
    "doc":"",
    "name":"bezier"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L234",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L234",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/bezier-detail",
    "namespace":"incanter.processing",
@@ -2119,7 +2119,7 @@
    "doc":"",
    "name":"bezier-detail"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L239",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L239",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/bezier-point",
    "namespace":"incanter.processing",
@@ -2127,7 +2127,7 @@
    "doc":"",
    "name":"bezier-point"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L244",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L244",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/bezier-tangent",
    "namespace":"incanter.processing",
@@ -2135,7 +2135,7 @@
    "doc":"",
    "name":"bezier-tangent"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L249",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L249",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/bezier-vertex",
    "namespace":"incanter.processing",
@@ -2146,7 +2146,7 @@
    "doc":"",
    "name":"bezier-vertex"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L264",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L264",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/blend",
    "namespace":"incanter.processing",
@@ -2158,7 +2158,7 @@
    "doc":"",
    "name":"blend"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L275",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L275",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/blend-color",
    "namespace":"incanter.processing",
@@ -2166,7 +2166,7 @@
    "doc":"",
    "name":"blend-color"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L280",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L280",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/blue",
    "namespace":"incanter.processing",
@@ -2174,7 +2174,7 @@
    "doc":"",
    "name":"blue"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L285",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L285",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/box",
    "namespace":"incanter.processing",
@@ -2182,7 +2182,7 @@
    "doc":"",
    "name":"box"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L290",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L290",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/brightness",
    "namespace":"incanter.processing",
@@ -2190,7 +2190,7 @@
    "doc":"",
    "name":"brightness"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L294",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L294",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/camera",
    "namespace":"incanter.processing",
@@ -2201,7 +2201,7 @@
    "doc":"",
    "name":"camera"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L300",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L300",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/can-draw?",
    "namespace":"incanter.processing",
@@ -2209,7 +2209,7 @@
    "doc":"",
    "name":"can-draw?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L304",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L304",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/ceil",
    "namespace":"incanter.processing",
@@ -2217,7 +2217,7 @@
    "doc":"",
    "name":"ceil"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1350",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1350",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/char->text",
    "namespace":"incanter.processing",
@@ -2227,7 +2227,7 @@
    "doc":"",
    "name":"char->text"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L322",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L322",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/color",
    "namespace":"incanter.processing",
@@ -2238,7 +2238,7 @@
    "\n\nExamples:\n\n  (use 'incanter.processing)\n  (color 255 0 255)\n  (color 255 0 255 255) ;; with alpha value\n  (color \"0xFF00FF\")\n  (color 0xFF00FF)\n  (color -65281)\n  (color 0xFFFF00FF true) ;; with alpha? true\n  (color 0xFF 0x00 0xFF)\n  (color 0xFF 0x00 0xFF 0xFF) ;; with alpha value\n  (color 1.0 0.0 1.0)\n  (color 1.0 0.0 1.0 1.0) ;; with alpha value",
    "name":"color"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L409",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L409",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/color-mode",
    "namespace":"incanter.processing",
@@ -2249,7 +2249,7 @@
    "doc":"",
    "name":"color-mode"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L423",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L423",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/constrain",
    "namespace":"incanter.processing",
@@ -2257,7 +2257,7 @@
    "doc":"",
    "name":"constrain"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L438",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L438",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/copy-pixels",
    "namespace":"incanter.processing",
@@ -2269,7 +2269,7 @@
    "doc":" Processing copy function. ",
    "name":"copy-pixels"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L449",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L449",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-font",
    "namespace":"incanter.processing",
@@ -2279,7 +2279,7 @@
    "doc":"",
    "name":"create-font"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L505",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L505",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-graphics",
    "namespace":"incanter.processing",
@@ -2289,7 +2289,7 @@
    "doc":"",
    "name":"create-graphics"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L512",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L512",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-image",
    "namespace":"incanter.processing",
@@ -2297,7 +2297,7 @@
    "doc":"",
    "name":"create-image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L516",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L516",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-input",
    "namespace":"incanter.processing",
@@ -2305,7 +2305,7 @@
    "doc":"",
    "name":"create-input"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L521",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L521",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-input-raw",
    "namespace":"incanter.processing",
@@ -2313,7 +2313,7 @@
    "doc":"Call openStream() without automatic gzip decompression.",
    "name":"create-input-raw"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L526",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L526",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-output",
    "namespace":"incanter.processing",
@@ -2321,7 +2321,7 @@
    "doc":"",
    "name":"create-output"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L531",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L531",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-path",
    "namespace":"incanter.processing",
@@ -2329,7 +2329,7 @@
    "doc":"",
    "name":"create-path"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L535",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L535",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-reader",
    "namespace":"incanter.processing",
@@ -2337,7 +2337,7 @@
    "doc":"",
    "name":"create-reader"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L539",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L539",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/create-writer",
    "namespace":"incanter.processing",
@@ -2345,7 +2345,7 @@
    "doc":"",
    "name":"create-writer"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L543",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L543",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/cursor",
    "namespace":"incanter.processing",
@@ -2353,7 +2353,7 @@
    "doc":"",
    "name":"cursor"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L548",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L548",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/cursor-image",
    "namespace":"incanter.processing",
@@ -2361,7 +2361,7 @@
    "doc":"",
    "name":"cursor-image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L553",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L553",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/curve",
    "namespace":"incanter.processing",
@@ -2372,7 +2372,7 @@
    "doc":"",
    "name":"curve"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L568",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L568",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/curve-detail",
    "namespace":"incanter.processing",
@@ -2380,7 +2380,7 @@
    "doc":"",
    "name":"curve-detail"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L573",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L573",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/curve-point",
    "namespace":"incanter.processing",
@@ -2388,7 +2388,7 @@
    "doc":"",
    "name":"curve-point"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L578",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L578",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/curve-tangent",
    "namespace":"incanter.processing",
@@ -2396,7 +2396,7 @@
    "doc":"",
    "name":"curve-tangent"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L583",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L583",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/curve-tightness",
    "namespace":"incanter.processing",
@@ -2404,7 +2404,7 @@
    "doc":"",
    "name":"curve-tightness"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L587",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L587",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/curve-vertex",
    "namespace":"incanter.processing",
@@ -2412,7 +2412,7 @@
    "doc":"",
    "name":"curve-vertex"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L595",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L595",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/day",
    "namespace":"incanter.processing",
@@ -2420,7 +2420,7 @@
    "doc":"Get the current day of the month (1 through 31).",
    "name":"day"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L600",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L600",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/degrees",
    "namespace":"incanter.processing",
@@ -2428,7 +2428,7 @@
    "doc":"",
    "name":"degrees"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L604",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L604",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/delay-frame",
    "namespace":"incanter.processing",
@@ -2436,7 +2436,7 @@
    "doc":"",
    "name":"delay-frame"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L608",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L608",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/destroy",
    "namespace":"incanter.processing",
@@ -2444,7 +2444,7 @@
    "doc":"",
    "name":"destroy"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L614",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L614",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/directional-light",
    "namespace":"incanter.processing",
@@ -2452,7 +2452,7 @@
    "doc":"",
    "name":"directional-light"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L619",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L619",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/displayable?",
    "namespace":"incanter.processing",
@@ -2460,7 +2460,7 @@
    "doc":"",
    "name":"displayable?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L623",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L623",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/dist",
    "namespace":"incanter.processing",
@@ -2468,7 +2468,7 @@
    "doc":"",
    "name":"dist"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L630",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L630",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/ellipse",
    "namespace":"incanter.processing",
@@ -2476,7 +2476,7 @@
    "doc":"",
    "name":"ellipse"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L635",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L635",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/ellipse-mode",
    "namespace":"incanter.processing",
@@ -2484,7 +2484,7 @@
    "doc":"",
    "name":"ellipse-mode"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L641",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L641",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/emissive",
    "namespace":"incanter.processing",
@@ -2492,7 +2492,7 @@
    "doc":"",
    "name":"emissive"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L653",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L653",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/end-camera",
    "namespace":"incanter.processing",
@@ -2500,7 +2500,7 @@
    "doc":"",
    "name":"end-camera"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L657",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L657",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/end-raw",
    "namespace":"incanter.processing",
@@ -2508,7 +2508,7 @@
    "doc":"",
    "name":"end-raw"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L661",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L661",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/end-shape",
    "namespace":"incanter.processing",
@@ -2516,7 +2516,7 @@
    "doc":"",
    "name":"end-shape"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L668",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L668",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/exit",
    "namespace":"incanter.processing",
@@ -2524,7 +2524,7 @@
    "doc":"",
    "name":"exit"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L470",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L470",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/export-font",
    "namespace":"incanter.processing",
@@ -2535,7 +2535,7 @@
    " Exports the given system font to a vlw file.\n\nExamples:\n\n  (use '(incanter core processing))\n  (export-font \"Ariel\" 48 \"/tmp/ariel_48.vlw\")\n\n  (view\n    (sketch\n      (setup []\n        (let [font (load-font this \"/tmp/ariel_48.vlw\")]\n          (doto this\n            (text-font font)\n            smooth\n            (fill 0))))\n\n          (draw []\n            (doto this\n              (text \"LAX\" 0 40)\n              (text \"AMS\" 0 70)\n              (text \"FRA\" 0 100))))\n    :size [120 120])",
    "name":"export-font"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L678",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L678",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/fill",
    "namespace":"incanter.processing",
@@ -2543,10 +2543,10 @@
    [["sketch", "gray"], ["sketch", "gray", "alpha"],
     ["sketch", "x", "y", "z"], ["sketch", "x", "y", "z", "alpha"]],
    "doc":
-   "\nSets the color used to fill shapes. For example, if you run (fill 204 102 0), all\nsubsequent shapes will be filled with orange. This color is either specified in\nterms of the RGB or HSB color depending on the current colorMode() (the default\ncolor space is RGB, with each value in the range from 0 to 255).\n\nWhen using hexadecimal notation to specify a color, use '16r' before\nthe values (e.g. 16rCCFFAA, 16rFFCCFFAA). Use six digits to specify\na color (the way colors are specified in HTML and CSS). When eight\ndigits are used, the first two characters define the alpha component and the\nremainder the red, green, and blue components.\n\nThe value for the parameter \"gray\" must be less than or equal to the current\nmaximum value as specified by (colorMode). The default maximum value is 255.\n\nTo change the color of an image (or a texture), use (tint).\n\n\n\nSyntax:\n  (fill sketch gray)\n  (fill sketch gray alpha)\n  (fill sketch value1 value2 value3)\n  (fill sketch value1 value2 value3 alpha)\n  (fill sketch color)\n  (fill sketch color alpha)\n  (fill sketch hex)\n  (fill sketch hex alpha)\n\n\nParameters:\n  sketch    PApplet\n  gray      int or float: number specifying value between white and black\n  alpha     int or float: opacity of the fill\n  value1    int or float: red or hue value\n  value2    int or float: green or saturation value\n  value3    int or float: blue or brightness value\n  color     color: any value of the color datatype\n  hex\tint:  color value in hexadecimal notation (i.e. #FFCC00 or 0xFFFFCC00)\n\nReturns:\n  None\n\nReferences:\n  http://processing.org/reference/fill_.html\n\n\nExamples:\n\n  (def sktch (sketch))\n  (fill sktch \"0xFF00FF\")\n  (fill sktch 0xFF 0x00 0xFF)\n  (fill sktch 255 0 255)",
+   "\nSets the color used to fill shapes. For example, if you run (fill 204 102 0), all\nsubsequent shapes will be filled with orange. This color is either specified in\nterms of the RGB or HSB color depending on the current colorMode() (the default\ncolor space is RGB, with each value in the range from 0 to 255).\n\nWhen using hexadecimal notation to specify a color, use '16r' before\nthe values (e.g. 16rCCFFAA, 16rFFCCFFAA). Use six digits to specify\na color (the way colors are specified in HTML and CSS). When eight\ndigits are used, the first two characters define the alpha component and the\nremainder the red, green, and blue components.\n\nThe value for the parameter \"gray\" must be less than or equal to the current\nmaximum value as specified by (colorMode). The default maximum value is 255.\n\nTo change the color of an image (or a texture), use (tint).\n\n\n\nSyntax:\n  (fill sketch gray)\n  (fill sketch gray alpha)\n  (fill sketch value1 value2 value3)\n  (fill sketch value1 value2 value3 alpha)\n  (fill sketch color)\n  (fill sketch color alpha)\n  (fill sketch hex)\n  (fill sketch hex alpha)\n\n\nParameters:\n  sketch    PApplet\n  gray      int or float: number specifying value between white and black\n  alpha     int or float: opacity of the fill\n  value1    int or float: red or hue value\n  value2    int or float: green or saturation value\n  value3    int or float: blue or brightness value\n  color     color: any value of the color datatype\n  hex int:  color value in hexadecimal notation (i.e. #FFCC00 or 0xFFFFCC00)\n\nReturns:\n  None\n\nReferences:\n  http://processing.org/reference/fill_.html\n\n\nExamples:\n\n  (def sktch (sketch))\n  (fill sktch \"0xFF00FF\")\n  (fill sktch 0xFF 0x00 0xFF)\n  (fill sktch 255 0 255)",
    "name":"fill"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L764",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L764",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/filter-kind",
    "namespace":"incanter.processing",
@@ -2554,7 +2554,7 @@
    "doc":"",
    "name":"filter-kind"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L778",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L778",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/frame-count",
    "namespace":"incanter.processing",
@@ -2562,7 +2562,7 @@
    "doc":"",
    "name":"frame-count"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L772",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L772",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/framerate",
    "namespace":"incanter.processing",
@@ -2570,7 +2570,7 @@
    "doc":"",
    "name":"framerate"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L783",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L783",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/frustum",
    "namespace":"incanter.processing",
@@ -2578,7 +2578,7 @@
    "doc":"",
    "name":"frustum"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L788",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L788",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/get-pixel",
    "namespace":"incanter.processing",
@@ -2587,7 +2587,7 @@
    "doc":"",
    "name":"get-pixel"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L794",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L794",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/green",
    "namespace":"incanter.processing",
@@ -2595,7 +2595,7 @@
    "doc":"",
    "name":"green"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1490",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1490",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/height",
    "namespace":"incanter.processing",
@@ -2603,7 +2603,7 @@
    "doc":"",
    "name":"height"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L801",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L801",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/hint",
    "namespace":"incanter.processing",
@@ -2611,7 +2611,7 @@
    "doc":"",
    "name":"hint"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L805",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L805",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/hour",
    "namespace":"incanter.processing",
@@ -2619,7 +2619,7 @@
    "doc":"",
    "name":"hour"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L809",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L809",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/hue",
    "namespace":"incanter.processing",
@@ -2627,7 +2627,7 @@
    "doc":"",
    "name":"hue"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L813",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L813",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/image",
    "namespace":"incanter.processing",
@@ -2637,7 +2637,7 @@
    "doc":"",
    "name":"image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L819",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L819",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/image-mode",
    "namespace":"incanter.processing",
@@ -2645,16 +2645,16 @@
    "doc":"",
    "name":"image-mode"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L835",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L835",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/lerp-color",
    "namespace":"incanter.processing",
    "arglists":[["c1", "c2", "amt"]],
    "doc":
-   "\n Calculates a color or colors between two color at a specific increment.\n The amt parameter is the amount to interpolate between the two values\n where 0.0 equal to the first point, 0.1 is very near the first point,\n 0.5 is half-way in between, etc.\n\n Parameters:\n   c1  color: interpolate from this color\n   c2  color: interpolate to this color\n   amt float: between 0.0 and 1.0\n\n Returns:\n   float\n\n",
+   "\n Calculates a color or colors between two color at a specific increment.\n The amt parameter is the amount to interpolate between the two values\n where 0.0 equal to the first point, 0.1 is very near the first point\n 0.5 is half-way in between, etc.\n\n Parameters:\n   c1  color: interpolate from this color\n   c2  color: interpolate to this color\n   amt float: between 0.0 and 1.0\n\n Returns:\n   float\n\n",
    "name":"lerp-color"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L859",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L859",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/light-specular",
    "namespace":"incanter.processing",
@@ -2662,7 +2662,7 @@
    "doc":"",
    "name":"light-specular"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L855",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L855",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/lights",
    "namespace":"incanter.processing",
@@ -2670,7 +2670,7 @@
    "doc":"",
    "name":"lights"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L864",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L864",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/line",
    "namespace":"incanter.processing",
@@ -2680,7 +2680,7 @@
    "doc":"",
    "name":"line"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L458",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L458",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/list-fonts",
    "namespace":"incanter.processing",
@@ -2688,7 +2688,7 @@
    "doc":"Returns a list of the fonts available on current system.",
    "name":"list-fonts"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L872",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L872",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-bytes",
    "namespace":"incanter.processing",
@@ -2696,7 +2696,7 @@
    "doc":"",
    "name":"load-bytes"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L876",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L876",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-font",
    "namespace":"incanter.processing",
@@ -2704,7 +2704,7 @@
    "doc":"",
    "name":"load-font"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L880",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L880",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-image",
    "namespace":"incanter.processing",
@@ -2712,7 +2712,7 @@
    "doc":"",
    "name":"load-image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L884",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L884",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-matrix",
    "namespace":"incanter.processing",
@@ -2720,7 +2720,7 @@
    "doc":"",
    "name":"load-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L888",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L888",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-pixels",
    "namespace":"incanter.processing",
@@ -2728,7 +2728,7 @@
    "doc":"",
    "name":"load-pixels"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L892",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L892",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-shape",
    "namespace":"incanter.processing",
@@ -2736,7 +2736,7 @@
    "doc":"Load a geometry from a file as a PShape.",
    "name":"load-shape"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L897",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L897",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/load-strings",
    "namespace":"incanter.processing",
@@ -2744,7 +2744,7 @@
    "doc":"Load data from a file and shove it into a String array.",
    "name":"load-strings"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L917",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L917",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/mask",
    "namespace":"incanter.processing",
@@ -2752,7 +2752,7 @@
    "doc":"",
    "name":"mask"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L921",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L921",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/mask-image",
    "namespace":"incanter.processing",
@@ -2760,7 +2760,7 @@
    "doc":"",
    "name":"mask-image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L928",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L928",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/millis",
    "namespace":"incanter.processing",
@@ -2768,7 +2768,7 @@
    "doc":"",
    "name":"millis"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L934",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L934",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/minute",
    "namespace":"incanter.processing",
@@ -2776,7 +2776,7 @@
    "doc":"",
    "name":"minute"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L938",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L938",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/model-x",
    "namespace":"incanter.processing",
@@ -2784,7 +2784,7 @@
    "doc":"",
    "name":"model-x"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L942",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L942",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/model-y",
    "namespace":"incanter.processing",
@@ -2792,7 +2792,7 @@
    "doc":"",
    "name":"model-y"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L946",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L946",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/model-z",
    "namespace":"incanter.processing",
@@ -2800,7 +2800,7 @@
    "doc":"",
    "name":"model-z"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L950",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L950",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/month",
    "namespace":"incanter.processing",
@@ -2808,7 +2808,7 @@
    "doc":"",
    "name":"month"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L966",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L966",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/mouse-x",
    "namespace":"incanter.processing",
@@ -2816,7 +2816,7 @@
    "doc":"",
    "name":"mouse-x"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L971",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L971",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/mouse-y",
    "namespace":"incanter.processing",
@@ -2824,7 +2824,7 @@
    "doc":"",
    "name":"mouse-y"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L975",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L975",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-cursor",
    "namespace":"incanter.processing",
@@ -2832,7 +2832,7 @@
    "doc":"",
    "name":"no-cursor"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L979",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L979",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-fill",
    "namespace":"incanter.processing",
@@ -2840,7 +2840,7 @@
    "doc":"",
    "name":"no-fill"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L998",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L998",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-lights",
    "namespace":"incanter.processing",
@@ -2848,7 +2848,7 @@
    "doc":"",
    "name":"no-lights"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1002",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1002",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-loop",
    "namespace":"incanter.processing",
@@ -2856,7 +2856,7 @@
    "doc":"",
    "name":"no-loop"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1015",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1015",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-smooth",
    "namespace":"incanter.processing",
@@ -2864,7 +2864,7 @@
    "doc":"",
    "name":"no-smooth"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1019",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1019",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-stroke",
    "namespace":"incanter.processing",
@@ -2872,7 +2872,7 @@
    "doc":"",
    "name":"no-stroke"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1023",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1023",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/no-tint",
    "namespace":"incanter.processing",
@@ -2880,7 +2880,7 @@
    "doc":"",
    "name":"no-tint"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L983",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L983",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/noise",
    "namespace":"incanter.processing",
@@ -2889,7 +2889,7 @@
    "doc":"",
    "name":"noise"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L989",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L989",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/noise-detail",
    "namespace":"incanter.processing",
@@ -2899,7 +2899,7 @@
    "doc":"",
    "name":"noise-detail"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L994",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L994",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/noise-seed",
    "namespace":"incanter.processing",
@@ -2907,7 +2907,7 @@
    "doc":"",
    "name":"noise-seed"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1006",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1006",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/norm",
    "namespace":"incanter.processing",
@@ -2915,7 +2915,7 @@
    "doc":"Normalize a value to exist between 0 and 1 (inclusive).",
    "name":"norm"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1011",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1011",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/normal",
    "namespace":"incanter.processing",
@@ -2923,7 +2923,7 @@
    "doc":"",
    "name":"normal"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1356",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1356",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/num->text",
    "namespace":"incanter.processing",
@@ -2932,7 +2932,7 @@
    "doc":"",
    "name":"num->text"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1027",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1027",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/open",
    "namespace":"incanter.processing",
@@ -2940,7 +2940,7 @@
    "doc":"",
    "name":"open"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1033",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1033",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/ortho",
    "namespace":"incanter.processing",
@@ -2949,7 +2949,7 @@
    "doc":"",
    "name":"ortho"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1046",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1046",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/perspective",
    "namespace":"incanter.processing",
@@ -2958,7 +2958,7 @@
    "doc":"",
    "name":"perspective"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1058",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1058",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/point",
    "namespace":"incanter.processing",
@@ -2966,7 +2966,7 @@
    "doc":"",
    "name":"point"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1063",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1063",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/point-light",
    "namespace":"incanter.processing",
@@ -2974,7 +2974,7 @@
    "doc":"",
    "name":"point-light"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1068",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1068",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/pop-matrix",
    "namespace":"incanter.processing",
@@ -2982,7 +2982,7 @@
    "doc":"",
    "name":"pop-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1076",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1076",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/print-camera",
    "namespace":"incanter.processing",
@@ -2990,7 +2990,7 @@
    "doc":"",
    "name":"print-camera"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1082",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1082",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/print-matrix",
    "namespace":"incanter.processing",
@@ -2998,7 +2998,7 @@
    "doc":"",
    "name":"print-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1086",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1086",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/print-projection",
    "namespace":"incanter.processing",
@@ -3006,7 +3006,7 @@
    "doc":"",
    "name":"print-projection"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1090",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1090",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/push-matrix",
    "namespace":"incanter.processing",
@@ -3014,7 +3014,7 @@
    "doc":"",
    "name":"push-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1094",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1094",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/quad",
    "namespace":"incanter.processing",
@@ -3023,7 +3023,7 @@
    "doc":"",
    "name":"quad"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1099",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1099",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/radians",
    "namespace":"incanter.processing",
@@ -3031,7 +3031,7 @@
    "doc":"",
    "name":"radians"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1110",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1110",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/rect",
    "namespace":"incanter.processing",
@@ -3039,7 +3039,7 @@
    "doc":"",
    "name":"rect"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1115",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1115",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/rect-mode",
    "namespace":"incanter.processing",
@@ -3047,7 +3047,7 @@
    "doc":"",
    "name":"rect-mode"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1119",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1119",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/red",
    "namespace":"incanter.processing",
@@ -3055,7 +3055,7 @@
    "doc":"",
    "name":"red"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1123",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1123",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/redraw",
    "namespace":"incanter.processing",
@@ -3063,7 +3063,7 @@
    "doc":"",
    "name":"redraw"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L912",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L912",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/remap",
    "namespace":"incanter.processing",
@@ -3071,7 +3071,7 @@
    "doc":"",
    "name":"remap"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1136",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1136",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/request-image",
    "namespace":"incanter.processing",
@@ -3080,7 +3080,7 @@
    "doc":"",
    "name":"request-image"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1141",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1141",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/reset-matrix",
    "namespace":"incanter.processing",
@@ -3088,7 +3088,7 @@
    "doc":"",
    "name":"reset-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1145",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1145",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/reverse-array",
    "namespace":"incanter.processing",
@@ -3096,7 +3096,7 @@
    "doc":"",
    "name":"reverse-array"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1149",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1149",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/rotate",
    "namespace":"incanter.processing",
@@ -3105,7 +3105,7 @@
    "doc":"",
    "name":"rotate"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1154",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1154",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/rotate-x",
    "namespace":"incanter.processing",
@@ -3113,7 +3113,7 @@
    "doc":"",
    "name":"rotate-x"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1158",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1158",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/rotate-y",
    "namespace":"incanter.processing",
@@ -3121,7 +3121,7 @@
    "doc":"",
    "name":"rotate-y"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1162",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1162",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/rotate-z",
    "namespace":"incanter.processing",
@@ -3129,7 +3129,7 @@
    "doc":"",
    "name":"rotate-z"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1166",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1166",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/round",
    "namespace":"incanter.processing",
@@ -3137,7 +3137,7 @@
    "doc":"",
    "name":"round"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1172",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1172",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/saturation",
    "namespace":"incanter.processing",
@@ -3145,7 +3145,7 @@
    "doc":"",
    "name":"saturation"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L463",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L463",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/save-font",
    "namespace":"incanter.processing",
@@ -3153,7 +3153,7 @@
    "doc":"",
    "name":"save-font"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1187",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1187",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/save-frame",
    "namespace":"incanter.processing",
@@ -3161,7 +3161,7 @@
    "doc":"",
    "name":"save-frame"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1196",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1196",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/scale",
    "namespace":"incanter.processing",
@@ -3169,7 +3169,7 @@
    "doc":"",
    "name":"scale"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1201",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1201",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/screen-x",
    "namespace":"incanter.processing",
@@ -3177,7 +3177,7 @@
    "doc":"",
    "name":"screen-x"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1206",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1206",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/screen-y",
    "namespace":"incanter.processing",
@@ -3185,7 +3185,7 @@
    "doc":"",
    "name":"screen-y"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1211",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1211",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/screen-z",
    "namespace":"incanter.processing",
@@ -3193,7 +3193,7 @@
    "doc":"",
    "name":"screen-z"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1215",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1215",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/seconds",
    "namespace":"incanter.processing",
@@ -3201,7 +3201,7 @@
    "doc":"",
    "name":"seconds"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1227",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1227",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/set-image-at",
    "namespace":"incanter.processing",
@@ -3209,7 +3209,7 @@
    "doc":"",
    "name":"set-image-at"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1223",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1223",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/set-pixel",
    "namespace":"incanter.processing",
@@ -3217,7 +3217,7 @@
    "doc":"",
    "name":"set-pixel"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1236",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1236",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/shininess",
    "namespace":"incanter.processing",
@@ -3225,7 +3225,7 @@
    "doc":"",
    "name":"shininess"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1244",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1244",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/size",
    "namespace":"incanter.processing",
@@ -3234,7 +3234,7 @@
    "doc":"",
    "name":"size"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1252",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1252",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/smooth",
    "namespace":"incanter.processing",
@@ -3242,7 +3242,7 @@
    "doc":"",
    "name":"smooth"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1258",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1258",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/specular",
    "namespace":"incanter.processing",
@@ -3252,7 +3252,7 @@
    "doc":"",
    "name":"specular"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1265",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1265",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/sphere",
    "namespace":"incanter.processing",
@@ -3260,7 +3260,7 @@
    "doc":"",
    "name":"sphere"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1269",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1269",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/sphere-detail",
    "namespace":"incanter.processing",
@@ -3268,7 +3268,7 @@
    "doc":"",
    "name":"sphere-detail"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1278",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1278",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/spotlight",
    "namespace":"incanter.processing",
@@ -3280,7 +3280,7 @@
    "doc":"",
    "name":"spotlight"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L904",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L904",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/start-loop",
    "namespace":"incanter.processing",
@@ -3288,7 +3288,7 @@
    "doc":"",
    "name":"start-loop"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1361",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1361",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/string->text",
    "namespace":"incanter.processing",
@@ -3298,7 +3298,7 @@
    "doc":"",
    "name":"string->text"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1367",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1367",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/string->text-in",
    "namespace":"incanter.processing",
@@ -3308,7 +3308,7 @@
    "doc":"",
    "name":"string->text-in"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1295",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1295",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/stroke",
    "namespace":"incanter.processing",
@@ -3318,7 +3318,7 @@
    "doc":"",
    "name":"stroke"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1319",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1319",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/stroke-cap",
    "namespace":"incanter.processing",
@@ -3326,7 +3326,7 @@
    "doc":"",
    "name":"stroke-cap"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1323",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1323",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/stroke-join",
    "namespace":"incanter.processing",
@@ -3334,7 +3334,7 @@
    "doc":"",
    "name":"stroke-join"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1327",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1327",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/stroke-weight",
    "namespace":"incanter.processing",
@@ -3342,7 +3342,7 @@
    "doc":"",
    "name":"stroke-weight"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1336",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1336",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text",
    "namespace":"incanter.processing",
@@ -3354,7 +3354,7 @@
    "doc":"",
    "name":"text"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1374",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1374",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-align",
    "namespace":"incanter.processing",
@@ -3362,7 +3362,7 @@
    "doc":"",
    "name":"text-align"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1379",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1379",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-ascent",
    "namespace":"incanter.processing",
@@ -3370,7 +3370,7 @@
    "doc":"",
    "name":"text-ascent"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1383",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1383",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-descend",
    "namespace":"incanter.processing",
@@ -3378,7 +3378,7 @@
    "doc":"",
    "name":"text-descend"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1387",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1387",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-font",
    "namespace":"incanter.processing",
@@ -3386,7 +3386,7 @@
    "doc":"",
    "name":"text-font"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1392",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1392",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-leading",
    "namespace":"incanter.processing",
@@ -3394,7 +3394,7 @@
    "doc":"",
    "name":"text-leading"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1396",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1396",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-mode",
    "namespace":"incanter.processing",
@@ -3402,7 +3402,7 @@
    "doc":"",
    "name":"text-mode"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1400",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1400",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-size",
    "namespace":"incanter.processing",
@@ -3410,14 +3410,14 @@
    "doc":"",
    "name":"text-size"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1412",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1412",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/text-width",
    "namespace":"incanter.processing",
    "doc":"",
    "name":"text-width"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1404",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1404",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/texture",
    "namespace":"incanter.processing",
@@ -3425,7 +3425,7 @@
    "doc":"",
    "name":"texture"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1408",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1408",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/texture-mode",
    "namespace":"incanter.processing",
@@ -3433,7 +3433,7 @@
    "doc":"",
    "name":"texture-mode"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1423",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1423",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/tint",
    "namespace":"incanter.processing",
@@ -3443,7 +3443,7 @@
    "doc":"",
    "name":"tint"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1451",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1451",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/translate",
    "namespace":"incanter.processing",
@@ -3452,7 +3452,7 @@
    "doc":"",
    "name":"translate"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1457",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1457",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/triangle",
    "namespace":"incanter.processing",
@@ -3460,7 +3460,7 @@
    "doc":"",
    "name":"triangle"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1477",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1477",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/vertex",
    "namespace":"incanter.processing",
@@ -3471,7 +3471,7 @@
    "doc":"",
    "name":"vertex"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1486",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1486",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/width",
    "namespace":"incanter.processing",
@@ -3479,7 +3479,7 @@
    "doc":"",
    "name":"width"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1510",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1510",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/with-rotation",
    "namespace":"incanter.processing",
@@ -3488,7 +3488,7 @@
    "Berforms body with rotation, restores current transformation on exit.\nAccepts a vector [angle] or [angle x-axis y-axis z-axis].\n\nExample:\n  (with-rotation [angle]\n    (vertex 1 2))",
    "name":"with-rotation"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1501",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1501",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/with-translation",
    "namespace":"incanter.processing",
@@ -3497,7 +3497,7 @@
    "Berforms body with translation, restores current transformation on exit.",
    "name":"with-translation"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/processing.clj#L1495",
+   "http://github.com/liebke/incanter/blob/e79a7a47f6bff31033eda00ec497841fa88c435f/src/main/clojure/incanter/processing.clj#L1495",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.processing-api.html#incanter.processing/year",
    "namespace":"incanter.processing",
