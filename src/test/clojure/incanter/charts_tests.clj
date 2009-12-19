@@ -1,5 +1,5 @@
 
-;;; test-cases.clj -- Unit tests of Incanter functions 
+;;; test-cases.clj -- Unit tests of Incanter functions
 
 ;; by David Edgar Liebke http://incanter.org
 ;; March 12, 2009
@@ -18,17 +18,19 @@
 ;; to run these tests:
 ;; (use 'tests test-cases)
 ;;  need to load this file to define data variables
-;; (use 'clojure.contrib.test-is) 
+;; (use 'clojure.contrib.test-is)
 ;; then run tests
 ;; (run-tests 'incanter.tests.test-cases)
 
 (ns incanter.charts-tests
-  (:use clojure.test 
+  (:use clojure.test
         (incanter core stats charts datasets)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTS FOR incanter.charts.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def wait-timeout 3000)
 
 (def test-mat (matrix
   [[39      10 ]
@@ -59,67 +61,86 @@
 
 
 (deftest histogram-tests
-  (view (histogram (sample-normal 1000)))
-  (view (histogram (sample-gamma 1000)))
-  (view (histogram (sample-uniform 1000)))
-  (save (histogram (sample-normal 1000)) 
-	(new java.io.File (System/getProperty "java.io.tmpdir") 
-		                "norm_hist.png"))
-  
-  (view (histogram (sample-gamma 1000) 
-                   :nbins 30 
-                   :title "Gamma Distribution" 
-                   :x-label "Value"))
-  
+  (def hw1 (view (histogram (sample-normal 1000))))
+  (def hw2 (view (histogram (sample-gamma 1000))))
+  (def hw3 (view (histogram (sample-uniform 1000))))
+  (save (histogram (sample-normal 1000))
+        (new java.io.File (System/getProperty "java.io.tmpdir")
+                                "norm_hist.png"))
+
+  (def hw4 (view (histogram (sample-gamma 1000)
+                            :nbins 30
+                            :title "Gamma Distribution"
+                            :x-label "Value")))
+
   (def hist0 (histogram (sample-normal 100)))
-  (view hist0)
+  (def hw5 (view hist0))
   (add-histogram hist0 (sample-gamma 100))
-  (set-alpha hist0 0.5))
-  
- 
+  (set-alpha hist0 0.5)
+  (Thread/sleep wait-timeout)
+  (.dispose hw1)
+  (.dispose hw2)
+  (.dispose hw3)
+  (.dispose hw4)
+  (.dispose hw5)
+  )
+
+
 (deftest scatter-tests
-  (view (scatter-plot 
-          (sel test-mat :cols 0) 
-          (sel test-mat :cols 0) 
-          :series-lab "Test data col 1 versus col 2"))
-  
-  
+  (def sw1 (view (scatter-plot
+                  (sel test-mat :cols 0)
+                  (sel test-mat :cols 0)
+                  :series-lab "Test data col 1 versus col 2")))
+
+
   (def plot1 (scatter-plot (sample-normal 100) (sample-normal 100)))
-  (view plot1)
+  (def sw2 (view plot1))
   (add-points plot1 (sample-normal 100) (sample-normal 100))
   (add-points plot1 (sample-normal 100) (sample-normal 100))
   (add-points plot1 (sample-normal 100) (sample-normal 100))
   (add-points plot1 (sample-normal 100) (sample-normal 100))
-  
-  (set-title plot1 "new title") 
+
+  (set-title plot1 "new title")
   (set-x-label plot1 "new x label")
-  (set-y-label plot1 "new y label"))
-  
-  
-(deftest boxplot-tests 
-  (def boxplt (box-plot (sample-gamma 1000))) 
-  (view boxplt)
+  (set-y-label plot1 "new y label")
+  (Thread/sleep wait-timeout)
+  (.dispose sw1)
+  (.dispose sw2)
+  )
+
+
+(deftest boxplot-tests
+  (def boxplt (box-plot (sample-gamma 1000)))
+  (def bw1 (view boxplt))
   (add-box-plot boxplt (sample-gamma 1000))
   (add-box-plot boxplt (sample-gamma 1000))
   (add-box-plot boxplt (sample-gamma 1000))
-  (add-box-plot boxplt (sample-gamma 1000)))
-  
- 
+  (add-box-plot boxplt (sample-gamma 1000))
+  (Thread/sleep wait-timeout)
+  (.dispose bw1)
+  )
+
+
 (deftest xy-plot-tests
-  (def chart1 (xy-plot (range 100) (range 100))) 
-  (view chart1) 
+  (def chart1 (xy-plot (range 100) (range 100)))
+  (def cw1 (view chart1))
   (add-lines chart1 (range 100) (mult 1/2 (range 100)))
-  
-  
+
+
   (def x1 (range -10 10 0.01))
   (def chart2 (xy-plot x1 (pow x1 2)))
-  (view chart2) 
+  (def cw2 (view chart2))
   (add-lines chart2 x1 (mult 1/2 (pow x1 2)))
-  
-  
+
+
   (def x2 (range 0 4 0.01))
   (def chart2 (xy-plot x2 (exp x1)))
-  (view chart2))
+  (def cw3 (view chart2))
+  (Thread/sleep wait-timeout)
+  (.dispose cw1)
+  (.dispose cw2)
+  (.dispose cw3)
+  )
 
 
 (deftest bar-chart-tests
@@ -127,19 +148,24 @@
   (def grass-type (sel data :cols 1))
   (def treatment-type (sel data :cols 2))
   (def uptake (sel data :cols 4))
-  (view (bar-chart grass-type uptake
-                  :title "CO2 Uptake"
-                  :group-by treatment-type
-                  :x-label "Grass Types" :y-label "Uptake"
-                  :legend true))
-  
-  
+  (def bw1 (view (bar-chart grass-type uptake
+                            :title "CO2 Uptake"
+                            :group-by treatment-type
+                            :x-label "Grass Types" :y-label "Uptake"
+                            :legend true)))
+
+
   (def data (get-dataset :airline-passengers))
   (def years (sel data :cols 0))
   (def months (sel data :cols 2))
   (def passengers (sel data :cols 1))
-  (view (bar-chart years passengers :group-by months :legend true))
-  (view (bar-chart months passengers :group-by years :legend true)))
+  (def bw2 (view (bar-chart years passengers :group-by months :legend true)))
+  (def bw3 (view (bar-chart months passengers :group-by years :legend true)))
+  (Thread/sleep wait-timeout)
+  (.dispose bw1)
+  (.dispose bw2)
+  (.dispose bw3)
+  )
 
 
 (deftest line-chart-tests
@@ -147,35 +173,45 @@
   (def years (sel data :cols 0))
   (def months (sel data :cols 2))
   (def passengers (sel data :cols 1))
-  (view (line-chart years passengers :group-by months :legend true))
-  (view (line-chart months passengers :group-by years :legend true))
-  
-  
+  (def lw1 (view (line-chart years passengers :group-by months :legend true)))
+  (def lw2 (view (line-chart months passengers :group-by years :legend true)))
+
+
   (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
   (def years (mapcat identity (repeat 4 [2007 2008 2009])))
   (def x (sample-uniform 12 :integers true :max 100))
-  (view (line-chart years x :group-by seasons :legend true)))
+  (def lw3 (view (line-chart years x :group-by seasons :legend true)))
+  (Thread/sleep wait-timeout)
+  (.dispose lw1)
+  (.dispose lw2)
+  (.dispose lw3)
+  )
 
 
 (deftest function-plot-tests
-  (view (function-plot sin (- Math/PI) Math/PI))
-  (view (function-plot pdf-normal -3 3))
+  (def fw1 (view (function-plot sin (- Math/PI) Math/PI)))
+  (def fw2 (view (function-plot pdf-normal -3 3)))
 
   (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
-  (view (function-plot cubic -10 10)))
+  (def fw3 (view (function-plot cubic -10 10)))
+  (Thread/sleep wait-timeout)
+  (.dispose fw1)
+  (.dispose fw2)
+  (.dispose fw3)
+  )
 
 
 
 (deftest annotations-tests
   (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))
   (def plot (xy-plot x (sin x)))
-  (view plot)
+  (def aw1 (view plot))
   ;; annotate the plot
   (doto plot
     (add-pointer (- Math/PI) (sin (- Math/PI)) :text "(-pi, (sin -pi))")
     (add-pointer Math/PI (sin Math/PI) :text "(pi, (sin pi))" :angle :ne)
     (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text "(pi/2, (sin pi/2))" :angle :south))
-  
+
   ;; try the different angle options
   (add-pointer plot 0 0 :text "north" :angle :north)
   (add-pointer plot 0 0 :text "nw" :angle :nw)
@@ -188,5 +224,8 @@
 
   (add-text plot -5 -0.75 "-5, -0.75")
 
-  (add-polygon plot [[(- Math/PI) -1] [Math/PI -1] [Math/PI 1] [(- Math/PI) 1]]))
+  (add-polygon plot [[(- Math/PI) -1] [Math/PI -1] [Math/PI 1] [(- Math/PI) 1]])
+  (Thread/sleep wait-timeout)
+  (.dispose aw1)
+  )
 

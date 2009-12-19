@@ -17,8 +17,8 @@
 
 
 (ns #^{:doc "This is the core charting library for Incanter.
-            It provides basic scatter plots, histograms, box plots,
-            xy plots, bar charts, line charts, as well as 
+            It provides basic scatter plots, histograms, box plots
+            xy plots, bar charts, line charts, as well as
             specialized charts like trace plots and Bland-Altman
             plots.
 
@@ -406,14 +406,14 @@
     `(let [opts# (when '~options (assoc {} ~@options))
            x# ~x
            _x# (if (matrix? x#) (to-list x#) x#)
-           group-by# (when (:group-by opts#) 
-                       (if (matrix? (:group-by opts#)) 
-                         (to-list (:group-by opts#)) 
+           group-by# (when (:group-by opts#)
+                       (if (matrix? (:group-by opts#))
+                         (to-list (:group-by opts#))
                          (:group-by opts#)))
-           x-groups# (when group-by# 
+           x-groups# (when group-by#
                        (map to-list (group-by (bind-columns _x# group-by#) 1 :cols 0)))
-           x# (if x-groups# 
-                (first x-groups#) 
+           x# (if x-groups#
+                (first x-groups#)
                 _x#)
            main-title# (or (:title opts#) "Boxplot")
            x-label# (or (:x-label opts#) "")
@@ -759,7 +759,7 @@
 
 
 (defn set-alpha
-" Sets the alpha level (transparancy) of the plot's foreground,
+" Sets the alpha level (transparancy) of the plot's foreground
   returns the modified chart object.
 
   References:
@@ -773,7 +773,7 @@
 
 
 (defn set-background-alpha
-" Sets the alpha level (transparancy) of the plot's background,
+" Sets the alpha level (transparancy) of the plot's background
   returns the modified chart object.
 
   References:
@@ -787,7 +787,7 @@
 
 
 (defn clear-background
-" Sets the alpha level (transparancy) of the plot's background to zero,
+" Sets the alpha level (transparancy) of the plot's background to zero
   removing the default grid, returns the modified chart object.
 
   References:
@@ -1034,7 +1034,7 @@
 
   Options:
       :text -- (default \"\") text to include at the end of the arrow
-      :angle -- (default :nw) either a number indicating the angle of the arrow,
+      :angle -- (default :nw) either a number indicating the angle of the arrow
                 or a keyword indicating a direction (:north :nw :west :sw :south
                 :se :east :ne)
 
@@ -1342,7 +1342,7 @@
       (doto frame
         (.setSize width height)
         (.setVisible true))
-      nil)))
+      frame)))
 
 
 (defmethod save org.jfree.chart.JFreeChart
@@ -1351,7 +1351,7 @@
           width (or (:width opts) 500)
           height (or (:height opts) 400)]
       ;; if filename is not a string, treat it as java.io.OutputStream
-      (if (= (type filename) java.lang.String)
+      (if (string? filename)
         (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
         (ImageIO/write (.createBufferedImage chart width height) "png" filename))
       nil)))

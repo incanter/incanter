@@ -17,17 +17,17 @@
 
 
 (ns #^{:doc "This is the core numerics library for Incanter.
-            It provides functions for vector- and matrix-based 
-            mathematical operations and the core data manipulation 
-            functions for Incanter. 
+            It provides functions for vector- and matrix-based
+            mathematical operations and the core data manipulation
+            functions for Incanter.
 
-            This library is built on Parallel Colt 
-            (http://sites.google.com/site/piotrwendykier/software/parallelcolt),
-            an extension of the Colt numerics library 
+            This library is built on Parallel Colt
+            (http://sites.google.com/site/piotrwendykier/software/parallelcolt)
+            an extension of the Colt numerics library
             (http://acs.lbl.gov/~hoschek/colt/).
             "
        :author "David Edgar Liebke"}
-  
+
   incanter.core
   ;(:gen-class)
   (:use (incanter internal))
@@ -56,7 +56,7 @@
   cern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure
   interface clojure.lang.ISeq. Therefore Clojure sequence operations can
   be applied to matrices. A matrix consists of a sequence of rows, where
-  each row is a one-dimensional row matrix. One-dimensional matrices are,
+  each row is a one-dimensional row matrix. One-dimensional matrices are
   in turn, sequences of numbers. Equivalent to R's matrix function.
 
   Examples:
@@ -69,11 +69,11 @@
     (first (first A)) ; produces 1.0
     (rest (first A)) ; produces a row matrix [2 3]
 
-    ; since (plus row1 row2) adds the two rows element-by-element,
-    (reduce plus A) ; produces the sums of the columns,
+    ; since (plus row1 row2) adds the two rows element-by-element
+    (reduce plus A) ; produces the sums of the columns
 
-    ; and since (sum row1) sums the elements of the row,
-    (map sum A) ; produces the sums of the rows,
+    ; and since (sum row1) sums the elements of the row
+    (map sum A) ; produces the sums of the rows
 
     ; you can filter the rows using Clojure's filter function
     (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
@@ -373,7 +373,7 @@
 
 
 (defn plus
-"   Performs element-by-element addition on multiple matrices, sequences,
+"   Performs element-by-element addition on multiple matrices, sequences
     and/or numbers. Equivalent to R's + operator.
 
     Examples:
@@ -394,7 +394,7 @@
 
 
 (defn minus
-"   Performs element-by-element subtraction on multiple matrices, sequences,
+"   Performs element-by-element subtraction on multiple matrices, sequences
     and/or numbers. If only a single argument is provided, returns the
     negative of the given matrix, sequence, or number. Equivalent to R's - operator.
 
@@ -422,7 +422,7 @@
 
 
 (defn mult
-"   Performs element-by-element multiplication on multiple matrices, sequences,
+"   Performs element-by-element multiplication on multiple matrices, sequences
     and/or numbers. Equivalent to R's * operator.
 
     Examples:
@@ -443,7 +443,7 @@
 
 
 (defn div
-"   Performs element-by-element division on multiple matrices, sequences,
+"   Performs element-by-element division on multiple matrices, sequences
     and/or numbers. Equivalent to R's / operator.
 
     Examples:
@@ -467,7 +467,7 @@
 
 
 (defn pow
-  " This is an element-by-element exponent function, raising the first argument,
+  " This is an element-by-element exponent function, raising the first argument
     by the exponents in the remaining arguments. Equivalent to R's ^ operator."
    ([& args] (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args)))
 
@@ -600,7 +600,7 @@
 
 
 (defn to-list
-  " Returns a list-of-lists if the given matrix is two-dimensional,
+  " Returns a list-of-lists if the given matrix is two-dimensional
     and a flat list if the matrix is one-dimensional."
  ([#^Matrix mat]
   (cond
@@ -724,7 +724,7 @@
 
 (defn vectorize
   " Returns the vectorization (i.e. vec) of the given matrix.
-    The vectorization of an m-by-n matrix A, denoted by vec(A),
+    The vectorization of an m-by-n matrix A, denoted by vec(A)
     is the m*n-by-1 column vector obtain by stacking the columns
     of the matrix A on top of one another.
 
@@ -1000,7 +1000,7 @@
 
 
 (defn to-vect
-  " Returns a vector-of-vectors if the given matrix is two-dimensional,
+  " Returns a vector-of-vectors if the given matrix is two-dimensional
     and a flat vector if the matrix is one-dimensional. This is a bit
     slower than the to-list function. "
  ([#^Matrix mat]
@@ -1015,7 +1015,7 @@
 
 (defn length
   " A version of count that works on collections, matrices, and numbers.
-    The length of a number is one, the length of a collection is its count,
+    The length of a number is one, the length of a collection is its count
     and the length of a matrix is the number of elements it contains (nrow*ncol).
     Equivalent to R's length function.
   "
@@ -1057,7 +1057,7 @@
 
     ;; plot the plant groups
     (use 'incanter.charts)
-    ;; can use destructuring if you know the number of groups,
+    ;; can use destructuring if you know the number of groups
     ;; groups are sorted only if the group is based on a single column value
     (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]
       (doto (box-plot ctrl)
@@ -1475,7 +1475,7 @@
 
 
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
-(defmethod view java.lang.String
+(defmethod view String
   ([url]
     (try
       (when (clojure.lang.Reflector/invokeStaticMethod "java.awt.Desktop" "isDesktopSupported" (to-array nil))
@@ -1502,7 +1502,7 @@
 
   Matrix and dataset options:
     :delim (default \\,) column delimiter
-    :header (default nil) an sequence of strings to be used as header line,
+    :header (default nil) an sequence of strings to be used as header line
         for matrices the default value is nil, for datasets, the default is
         the dataset's column-names array.
     :append (default false) determines whether this given file should be
@@ -1549,7 +1549,7 @@
 
 
 "
-  (fn [obj filename & options] 
+  (fn [obj filename & options]
     (if (.contains (str (type obj)) "processing.core.PApplet")
       :sketch
       (type obj))))
