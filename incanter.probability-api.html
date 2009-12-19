@@ -50,11 +50,15 @@ namespace.
     <div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/+cond-prob-tuples">+cond-prob-tuples</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.probability/P">P</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/binary">binary</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/comb-merge">comb-merge</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/cond-prob-tuple">cond-prob-tuple</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.probability/count-missing">count-missing</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/map-counter">map-counter</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -63,6 +67,8 @@ namespace.
       <a href="#incanter.probability/range-classifier">range-classifier</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/summate">summate</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.probability/summate-level">summate-level</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.probability/vector-counter">vector-counter</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -95,7 +101,17 @@ by <span id="author">Unknown</span><br />
 </pre>
   <pre id="var-docstr">adds two conditional probability tuples. [[{}{}][{}{}]] -&gt; [{}{}]
 passes through a single conditional probability tuple. [[{}{}] -&gt; [{}{}]</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L36" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L39" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.probability/P">P</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (P a given b &amp; bs)
+       (P a given b)
+</pre>
+  <pre id="var-docstr"></pre>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L194" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -105,7 +121,7 @@ passes through a single conditional probability tuple. [[{}{}] -&gt; [{}{}]</pre
 </pre>
   <pre id="var-docstr">
 a function for binary classification that takes a booleavn value and returns 1 for true and 0 for false.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L11" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L11" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -115,7 +131,7 @@ a function for binary classification that takes a booleavn value and returns 1 f
 </pre>
   <pre id="var-docstr">combinatorial merge takes two maps and a fn and and merges all combinations fo keys between the two maps using the fn.
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L45" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L48" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -124,7 +140,16 @@ a function for binary classification that takes a booleavn value and returns 1 f
   <pre id="var-usage">Usage: (cond-prob-tuple a b)
 </pre>
   <pre id="var-docstr">build [a&amp;b b] count tuples for calculating conditional probabilities p(a | b)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L160" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L165" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.probability/count-missing">count-missing</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (count-missing exp act)
+</pre>
+  <pre id="var-docstr">set based counting for keys in maps</pre>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L17" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -134,7 +159,7 @@ a function for binary classification that takes a booleavn value and returns 1 f
 </pre>
   <pre id="var-docstr">
 wraps a counting function for maps in apply and deep-merge-with, curreid fn expects a seq of maps to count.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L24" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L27" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -148,7 +173,7 @@ computes the marginal PMFs from the joint PMF.
 of the form:   {a {b n}} where n is the nubmer of co-occurances of a and b.
 
 for summation note that a variable, suppose it is x, is represented as a level of depth in the nested maps, so summation for margianl of x occurs on all branches stemming from maps at the level corresponding with x. </pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L68" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L72" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -158,7 +183,7 @@ for summation note that a variable, suppose it is x, is represented as a level o
 </pre>
   <pre id="var-docstr">
 classify one item based on what interval in a range the item falls into.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L123" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L128" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -167,7 +192,16 @@ classify one item based on what interval in a range the item falls into.</pre>
   <pre id="var-usage">Usage: (summate m)
 </pre>
   <pre id="var-docstr">summate all counts in a deeply nested map of counts.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L54" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L57" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.probability/summate-level">summate-level</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (summate-level j)
+</pre>
+  <pre id="var-docstr">given a nested map, summates all counts below the tree from each key-node in the map-tree.</pre>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L66" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -177,7 +211,7 @@ classify one item based on what interval in a range the item falls into.</pre>
 </pre>
   <pre id="var-docstr">
 wraps a counting function for vectors in apply and deep-merge-with, curreid fn expects a seq of vectors to count.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L30" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L33" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -186,7 +220,7 @@ wraps a counting function for vectors in apply and deep-merge-with, curreid fn e
   <pre id="var-usage">Usage: (| a b)
 </pre>
   <pre id="var-docstr">this is the core of the conditional probability based classification model.  this model takes a &amp; bs in the form a given bs.  a and bs are all functions, and the conditional probability classification model composes a new classifier function that ultimately returns the cond-prob-tuple: [{a's counts}{b's counts}].</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L174" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L179" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -195,7 +229,7 @@ wraps a counting function for vectors in apply and deep-merge-with, curreid fn e
   <pre id="var-usage">Usage: (|each a bs)
 </pre>
   <pre id="var-docstr">conditional probability where the bs are taken to be a map of feature-&gt;classifier-function paris, where we want to compute the conditional probability between a and each b independently.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L182" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L187" id="var-source">Source</a>
 </div>
 
 

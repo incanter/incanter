@@ -31,7 +31,7 @@
    "doc":
    "\n chrono.clj --- Because calling it date-utils would be boring.\n\n Use the date function to create dates. You can look up components\n much like you would in a map:\n\n(def my-date (date 2009 2 27 12 34 56))\n\n(my-date :year)   ;; 2009\n(my-date :month)  ;; 2\n(my-date :day)    ;; 27\n(my-date :hour)   ;; 12\n(my-date :minute) ;; 34\n(my-date :second) ;; 56\n\n You may omit the time if you like:\n\n(def my-other-date (date 2009 2 27))\n(my-other-date :hour) ;; 0\n\n To get a date relative to another date, use earlier and later:\n\n(earlier my-date 100 :minute) ;; 2009 2 27 10:54:56\n(later my-other-date 10 :day) ;; 2009 3 9\n\n For comparing dates, use earlier? and later?:\n\n(earlier? my-date my-other-date) ;; false\n(later? (later my-date 10 :day) my-date) ;; true\n\n You can see the time between two dates by calling time-between:\n\n(time-between my-other-date (date 2009 2 25) :days) ;; 2\n\nThe date-seq function returns a lazy seq of dates incrementing by\nthe units in its first arg starting from its second arg. The third\narg if given dictates the end of the sequence.\n\n(date-seq :hours my-other-date my-date) ;; (a seq of twelve hours)\n(take 4 (date-seq :years my-date))\n;; (date 2009 2 27 12 34 56) (date 2010 2 27 12 34 56)\n;; (date 2011 2 27 12 34 56) (date 2012 2 27 12 34 56) [...]\n\n For converting between strings and dates, use format-date and\n parse-date\n\n(format-date my-date :short-date-time) ;; 2/27/09 12:34 PM\n(format-date my-other-date :long-date) ;; February 27, 2009\n(parse-date \"12/25/09\" :short-date) ;; (date 2009 12 25)\n(parse-date \"January 1, 2008 1:45:23 PM EST\" :long-date-time)\n;; (date 2008 1 1 13 45 23)\n\nSupported date formats are:\n  iso8601\n  short-date\n  medium-date\n  long-date\n  full-date\n  short-date-time\n\nBoth format-date and parse-date also support a string for the\nformat argument, which will use the string as the format for a\nSimpleDateFormat (see the javadocs of that class for how to write\nthese formats).\n\nSee test_contrib/chrono.clj for more details.\n\n TODO:\n\n* Timezones\n* More support for weeks\n* Various others scattered through code\n\n"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.classification-api.html",
    "name":"incanter.classification",
@@ -54,7 +54,7 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/incremental_stats.clj",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/incremental_stats.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.incremental-stats-api.html",
    "name":"incanter.incremental-stats",
@@ -76,7 +76,7 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/io.clj",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.io-api.html",
    "name":"incanter.io",
@@ -91,7 +91,7 @@
    "author":null,
    "doc":null},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter/incanter.probability-api.html",
    "name":"incanter.probability",
@@ -726,7 +726,7 @@
    "doc":"",
    "name":"valid-range?"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L26",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L28",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/categorical-classifiers",
    "namespace":"incanter.classification",
@@ -734,7 +734,23 @@
    "doc":"makes a categorical classifier for use with |each.",
    "name":"categorical-classifiers"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L99",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L35",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/category-classifier",
+   "namespace":"incanter.classification",
+   "arglists":[["x"]],
+   "doc":"",
+   "name":"category-classifier"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L40",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/category-map-classifier",
+   "namespace":"incanter.classification",
+   "arglists":[["x"], ["s", "x"]],
+   "doc":"",
+   "name":"category-map-classifier"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L106",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/classification-workflow",
    "namespace":"incanter.classification",
@@ -743,7 +759,15 @@
    "\ncomposes a classification workflow from a classifier a counter and a transformer.\n\nnote that count-all has been abstracted due to the fact taht you may count with reduce or merge-with depending on wheter you ahve vectors or maps.",
    "name":"classification-workflow"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L76",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L15",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/classifier",
+   "namespace":"incanter.classification",
+   "arglists":[["fns", "classify"]],
+   "doc":"",
+   "name":"classifier"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L83",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/classify-one-to-all",
    "namespace":"incanter.classification",
@@ -752,7 +776,7 @@
    "\ntakes a map of fns and a map of features, apply each classifer fn to the entire feature map.\n\nusage:\n\n (classify-one-to-each  \n   {:a (present-when #(and \n\t\t\t\t     (> (:a %) 9)\n\t\t\t\t     (< (:b %) 6)))}\n   {:a 10 :b 5})\n-> {:a 1}",
    "name":"classify-one-to-all"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L61",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L68",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/classify-one-to-each",
    "namespace":"incanter.classification",
@@ -761,7 +785,7 @@
    "\ntakes a map of fns and a map of features, apply each classifer fn to each feature in the data map individually.\n\nusage:\n\n (classify-one-to-each  \n   {:a (present-when (gt 5)) :b (present-when (lt 5))}\n   {:a 10 :b 5})\n-> {:a {:a 1 :b 0} :b {:a 0 :b 0}}",
    "name":"classify-one-to-each"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L46",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L53",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/classify-one-to-one",
    "namespace":"incanter.classification",
@@ -770,7 +794,32 @@
    "\ntakes a map of fns and a map of features, where there is one classifier fn per feature and they share the same key names in the classifier and feature maps.  apply each classifer fn to the corresponding feature.\n\nusage:\n\n (classify-one-to-one  \n   {:a (present-when (gt 5)) :b (present-when (lt 5))}\n   {:a 10 :b 5})\n-> {:a 1 :b 0}",
    "name":"classify-one-to-one"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L245",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L300",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/collect-vals",
+   "namespace":"incanter.classification",
+   "arglists":[["maps"]],
+   "doc":"",
+   "name":"collect-vals"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L213",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/confusion-matrix",
+   "namespace":"incanter.classification",
+   "arglists":[["trd", "tst"]],
+   "doc":
+   "computes a confusion matrix from the counts on train and test data sets represented as maps. traverse map...as you get to the point of counts of actuals, replace the series of nested keys that lead to that point with the single key of the predicted",
+   "name":"confusion-matrix"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L314",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/confusion-matrix-by-time",
+   "namespace":"incanter.classification",
+   "arglists":[["results"]],
+   "doc":"",
+   "name":"confusion-matrix-by-time"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L257",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/confusion-matrix-from-counts",
    "namespace":"incanter.classification",
@@ -779,7 +828,7 @@
    "\nproduces a confusion matrix from teh joint distributions of test and train data.\n\nright now the tests and train data are con-prob-tuples this may change if we store only the joint PMFs",
    "name":"confusion-matrix-from-counts"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L257",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L269",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/cross-validation-confusion-matrix",
    "namespace":"incanter.classification",
@@ -788,7 +837,7 @@
    "\ntakes a set of n joint PMFs, and holds each joint PMF out in turn as the test set.  \n\nmerges the resulting n cross-validation matrices into a single matrix.",
    "name":"cross-validation-confusion-matrix"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L119",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L126",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/equivalence-classes",
    "namespace":"incanter.classification",
@@ -797,7 +846,7 @@
    "\ntakes a map where key is class and value is a set of equivalence classes to the key class.  it then inverts the mapping so that you can look up classes that are equivalence classes of a new larger class.\n\nusage:\n (equivalence-classes {0 #{0 1}, 1 #{2, 3, 4}, 2 #{5 6}})\n-> {0 0, 1 0, 2 1, 3 1, 4 1, 5 2, 6 2}",
    "name":"equivalence-classes"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L108",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L115",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/heterogenious-group-by",
    "namespace":"incanter.classification",
@@ -806,7 +855,15 @@
    "Returns a sorted map of the elements of coll keyed by the result of\nf on each element. The value at each key will be a vector of the\ncorresponding elements, in the order they appeared in coll.",
    "name":"heterogenious-group-by"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L141",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L289",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/map-of-vectors",
+   "namespace":"incanter.classification",
+   "arglists":[["keys"]],
+   "doc":"",
+   "name":"map-of-vectors"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L150",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/merge-equivalence-classes",
    "namespace":"incanter.classification",
@@ -815,7 +872,15 @@
    "\n (defn merge-classes-time-before-dep [model]\n  \"take in [[{modelcounts} {totalcounts}] [{} {}]]\"\n  ;;starting with 2 becasue 1 is the first slot, which is time before departure for the metrics\n  (let [model-merger {2 bucket-eq-classes\n\t\t      3 bucket-eq-classes\n\t\t      6 bucket-eq-classes}\n\tcount-merger {2 bucket-eq-classes\n\t\t      3 bucket-eq-classes}]\n  (map (fn [[modelcnts totalcnts]] [(merge-equivalence-classes model-merger modelcnts) \n\t\t\t\t    (merge-equivalence-classes count-merger totalcnts)]) model)))",
    "name":"merge-equivalence-classes"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L184",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L138",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/merge-levels",
+   "namespace":"incanter.classification",
+   "arglists":[["class-mappings", "coll"]],
+   "doc":"",
+   "name":"merge-levels"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L193",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/model-from-maps",
    "namespace":"incanter.classification",
@@ -823,7 +888,7 @@
    "doc":"creates a model from probability report maps.",
    "name":"model-from-maps"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L189",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L198",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/most-likely",
    "namespace":"incanter.classification",
@@ -832,7 +897,15 @@
    "\ncomputes the most likely class from a map of classes to class probability.\n\nusage:\n (most-likely {:a 0.6 :b 0.4}) -> :a",
    "name":"most-likely"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L19",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L282",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/n-times-k-fold-cross-validation-confusion-matrix",
+   "namespace":"incanter.classification",
+   "arglists":[["list-of-lists"]],
+   "doc":"",
+   "name":"n-times-k-fold-cross-validation-confusion-matrix"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L21",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/numerical-classifiers",
    "namespace":"incanter.classification",
@@ -841,7 +914,24 @@
    "makes a bucketing classifier out of each range for use with |each.",
    "name":"numerical-classifiers"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L165",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L231",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/precision",
+   "namespace":"incanter.classification",
+   "arglists":[["m"]],
+   "doc":"computes precision by class label from confusion matrix.",
+   "name":"precision"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L307",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/prob-map-tuples-by-time",
+   "namespace":"incanter.classification",
+   "arglists":[["prob-map-tuple"]],
+   "doc":
+   "use to transform data for confusion matrix by time before departure",
+   "name":"prob-map-tuples-by-time"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L174",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/probs-only",
    "namespace":"incanter.classification",
@@ -850,7 +940,7 @@
    "compute probability from computed counts.  \n\nthis is division, you have to count up the proper numerator and denominator in your counting step.",
    "name":"probs-only"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L172",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L181",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/process-prob-map",
    "namespace":"incanter.classification",
@@ -859,7 +949,23 @@
    "process probability maps using a provided report function. \n\nbeware: can't pass keys to reporter our you get double nested final level in map.",
    "name":"process-prob-map"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/classification.clj#L39",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L241",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/recall",
+   "namespace":"incanter.classification",
+   "arglists":[["m"]],
+   "doc":"computes recall by class label from confusion matrix.",
+   "name":"recall"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L295",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/vectorize",
+   "namespace":"incanter.classification",
+   "arglists":[["maps"]],
+   "doc":"",
+   "name":"vectorize"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/classification.clj#L46",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.classification-api.html#incanter.classification/wrapper-classifiers",
    "namespace":"incanter.classification",
@@ -1496,6 +1602,38 @@
    " Returns the sample dataset associated with the given key. Most datasets\nare from R's sample data sets, as are the descriptions below.\n\nOptions:\n\n  :incanter-home -- if the incanter.home property is not set when the JVM is\n                    started, use the :incanter-home options to provide the\n                    parent directory of the sample data directory.\n\n\nDatasets:\n\n  :iris -- the Fisher's or Anderson's Iris data set gives the\n           measurements in centimeters of the variables sepal\n           length and width and petal length and width,\n           respectively, for 50 flowers from each of 3 species\n           of iris.\n\n  :cars -- The data give the speed of cars and the distances taken\n            to stop. Note that the data were recorded in the 1920s.\n\n  :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics\n             and Estimation for Social Scientists'\n\n  :us-arrests -- This data set contains statistics, in arrests per 100,000\n                 residents for assault, murder, and rape in each of the 50 US\n                 states in 1973. Also given is the percent of the population living\n                 in urban areas.\n\n  :flow-meter -- flow meter data used in Bland Altman Lancet paper.\n\n  :co2 -- has 84 rows and 5 columns of data from an experiment on the cold tolerance\n          of the grass species _Echinochloa crus-galli_.\n\n  :chick-weight -- has 578 rows and 4 columns from an experiment on the effect of diet\n                   on early growth of chicks.\n\n  :plant-growth -- Results from an experiment to compare yields (as measured by dried\n                   weight of plants) obtained under a control and two different\n                   treatment conditions.\n\n  :pontius -- These data are from a NIST study involving calibration of load cells.\n              The response variable (y) is the deflection and the predictor variable\n              (x) is load.\n              See http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml\n\n  :filip -- NIST data set for linear regression certification,\n            see http://www.itl.nist.gov/div898/strd/lls/data/Filip.shtml\n\n  :longely -- This classic dataset of labor statistics was one of the first used to\n              test the accuracy of least squares computations. The response variable\n              (y) is the Total Derived Employment and the predictor variables are GNP\n              Implicit Price Deflator with Year 1954 = 100 (x1), Gross National Product\n              (x2), Unemployment (x3), Size of Armed Forces (x4), Non-Institutional\n              Population Age 14 & Over (x5), and Year (x6).\n              See http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml\n\n  :Chwirut -- These data are the result of a NIST study involving ultrasonic calibration.\n              The response variable is ultrasonic response, and the predictor variable is\n              metal distance.\n              See http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat\n\n  :thurstone -- test data for non-linear least squares.\n\n  :austres -- Quarterly Time Series of the Number of Australian Residents\n\n  :hair-eye-color -- Hair and eye color of sample of students\n\n  :airline-passengers -- Monthly Airline Passenger Numbers 1949-1960\n\n  :math-prog -- Pass/fail results for a high school mathematics assessment test\n                and a freshmen college programming course.\n\n  :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.",
    "name":"get-dataset"},
   {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/incremental_stats.clj#L14",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.incremental-stats-api.html#incanter.incremental-stats/mean-state",
+   "namespace":"incanter.incremental-stats",
+   "arglists":[["x", "val", "queue"]],
+   "doc":"",
+   "name":"mean-state"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/incremental_stats.clj#L65",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.incremental-stats-api.html#incanter.incremental-stats/tuplize-apply",
+   "namespace":"incanter.incremental-stats",
+   "arglists":[["f"]],
+   "doc":"",
+   "name":"tuplize-apply"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/incremental_stats.clj#L43",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.incremental-stats-api.html#incanter.incremental-stats/update-mean",
+   "namespace":"incanter.incremental-stats",
+   "arglists":[["x"], ["x", "&", "xs"]],
+   "doc":"",
+   "name":"update-mean"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/incremental_stats.clj#L37",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.incremental-stats-api.html#incanter.incremental-stats/update-sample",
+   "namespace":"incanter.incremental-stats",
+   "arglists":[["x"]],
+   "doc":"",
+   "name":"update-sample"},
+  {"source-url":
    "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/information_theory.clj#L57",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.information-theory-api.html#incanter.information-theory/entropy",
@@ -1575,7 +1713,71 @@
    "compose a list of functions such that they are each applied to the arguments to which the composed function is applied and the results of each application are inserted as slots in a vector.",
    "name":"vector-comp"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/io.clj#L92",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L203",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/clj-to-json-file",
+   "namespace":"incanter.io",
+   "arglists":[["c", "f"]],
+   "doc":"",
+   "name":"clj-to-json-file"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L324",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/columns",
+   "namespace":"incanter.io",
+   "arglists":[["&", "x"]],
+   "doc":"",
+   "name":"columns"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L245",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/csv-line",
+   "namespace":"incanter.io",
+   "arglists":[["v"]],
+   "doc":"turn a vector into a csv line",
+   "name":"csv-line"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L256",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/csv-table",
+   "namespace":"incanter.io",
+   "arglists":[["m"]],
+   "doc":"turn a 2-level map into a csv table",
+   "name":"csv-table"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L239",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/into-file",
+   "namespace":"incanter.io",
+   "arglists":[["filename", "stuff"]],
+   "doc":"",
+   "name":"into-file"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L223",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/json-from-classpath",
+   "namespace":"incanter.io",
+   "arglists":[["f"]],
+   "doc":"",
+   "name":"json-from-classpath"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L211",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/load-resource",
+   "namespace":"incanter.io",
+   "arglists":[["f"]],
+   "doc":"",
+   "name":"load-resource"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L297",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/query",
+   "namespace":"incanter.io",
+   "arglists":[["table", "sample", "&", "columns"]],
+   "doc":"",
+   "name":"query"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L92",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/read-dataset",
    "namespace":"incanter.io",
@@ -1584,7 +1786,55 @@
    "\n  Returns a dataset read from a file or a URL.\n\n  Options:\n    :delim (default \\,), other options (\\tab \\space \\|  etc)\n    :quote (default \\\") character used for quoting strings\n    :skip (default 0) the number of lines to skip at the top of the file.\n    :header (default false) indicates the file has a header line\n",
    "name":"read-dataset"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/io.clj#L245",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L218",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/read-from-classpath",
+   "namespace":"incanter.io",
+   "arglists":[["f"]],
+   "doc":"",
+   "name":"read-from-classpath"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L191",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/read-json-file",
+   "namespace":"incanter.io",
+   "arglists":[["f"]],
+   "doc":"",
+   "name":"read-json-file"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L314",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/sql-order-by",
+   "namespace":"incanter.io",
+   "arglists":[["c"]],
+   "doc":"",
+   "name":"sql-order-by"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L290",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/sql-query",
+   "namespace":"incanter.io",
+   "arglists":[["d", "q"]],
+   "doc":"",
+   "name":"sql-query"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L304",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/sql-select",
+   "namespace":"incanter.io",
+   "arglists":[["&", "x"]],
+   "doc":"",
+   "name":"sql-select"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L319",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/sql-where",
+   "namespace":"incanter.io",
+   "arglists":[["pred"]],
+   "doc":"",
+   "name":"sql-where"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/io.clj#L269",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.io-api.html#incanter.io/with-mysql-results",
    "namespace":"incanter.io",
@@ -1638,7 +1888,7 @@
    "\nDetermine the nonlinear least-squares estimates of the\nparameters of a nonlinear model.\nBased on R's nls (non-linear least squares) function.\n\nArguments:\n  f -- model function, takes two argumetns the first a list of parameters\n       that are to be estimated, and an x value.\n  y -- sequence of dependent data\n  x -- sequence of independent data\n  start -- start values for the parameters to be estimated\n\nOptions:\n  :method (default :gauss-newton) other option :newton-raphson\n  :tol (default 1E-5)\n  :max-iter (default 200)\n\nReturns: a hash-map containing the following fields:\n  :method -- the method used\n  :coefs  -- the parameter estimates\n  :gradient  -- the estimated gradient\n  :hessian -- the estimated hessian, if available\n  :iterations -- the number of iterations performed\n  :fitted -- the fitted values of y (i.e. y-hat)\n  :rss -- the residual sum-of-squares\n  :x -- the independent data values\n  :y -- the dependent data values\n\n\nExamples:\n\n  ;; example 1\n  (use '(incanter core optimize datasets charts))\n  ;; define the Michaelis-Menton model function\n  ;; y = a + (b - a)*x/(c + x)\n  (defn f [theta x]\n    (let [[a b c] theta]\n      (plus a (div (mult x (minus b a)) (plus c x)))))\n\n  (def start [20 200 100])\n  (def data (to-matrix (get-dataset :thurstone)))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (def plot (scatter-plot x y))\n  (view plot)\n\n  (def nlm (non-linear-model f y x start))\n  (add-lines plot x (:fitted nlm))\n\n\n  ;; example 2\n  (use '(incanter core optimize datasets charts))\n  ;; Chwirut data set from NIST\n  ;; http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat\n  (def data (to-matrix (get-dataset :chwirut)))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n\n  ;; define model function: y = exp(-b1*x)/(b2+b3*x) + e\n  (defn f [theta x]\n    (let [[b1 b2 b3] theta]\n      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))\n\n  (def plot (scatter-plot x y :legend true))\n  (view plot)\n\n  ;; the newton-raphson algorithm fails to converge to the correct solution\n  ;; using first set of start values from NIST, but the default gauss-newton\n  ;; algorith converges to the correct solution.\n\n  (def start1 [0.1 0.01 0.02])\n  (add-lines plot x (f start1 x))\n  (def nlm1 (non-linear-model f y x start1))\n  (add-lines plot x (:fitted nlm1))\n\n  ;; both algorithms converges with second set of start values from NIST\n  (def start2 [0.15 0.008 0.010])\n  (add-lines plot x (f start2 x))\n  (def nlm2 (non-linear-model f y x start2))\n  (add-lines plot x (:fitted nlm2))",
    "name":"non-linear-model"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L36",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L39",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/+cond-prob-tuples",
    "namespace":"incanter.probability",
@@ -1647,7 +1897,15 @@
    "adds two conditional probability tuples. [[{}{}][{}{}]] -> [{}{}]\npasses through a single conditional probability tuple. [[{}{}] -> [{}{}]",
    "name":"+cond-prob-tuples"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L11",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L194",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/P",
+   "namespace":"incanter.probability",
+   "arglists":[["a", "given", "b", "&", "bs"], ["a", "given", "b"]],
+   "doc":"",
+   "name":"P"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L11",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/binary",
    "namespace":"incanter.probability",
@@ -1656,7 +1914,7 @@
    "\na function for binary classification that takes a booleavn value and returns 1 for true and 0 for false.",
    "name":"binary"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L45",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L48",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/comb-merge",
    "namespace":"incanter.probability",
@@ -1665,7 +1923,7 @@
    "combinatorial merge takes two maps and a fn and and merges all combinations fo keys between the two maps using the fn.\n",
    "name":"comb-merge"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L160",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L165",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/cond-prob-tuple",
    "namespace":"incanter.probability",
@@ -1674,7 +1932,15 @@
    "build [a&b b] count tuples for calculating conditional probabilities p(a | b)",
    "name":"cond-prob-tuple"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L24",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L17",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/count-missing",
+   "namespace":"incanter.probability",
+   "arglists":[["exp", "act"]],
+   "doc":"set based counting for keys in maps",
+   "name":"count-missing"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L27",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/map-counter",
    "namespace":"incanter.probability",
@@ -1683,7 +1949,7 @@
    "\nwraps a counting function for maps in apply and deep-merge-with, curreid fn expects a seq of maps to count.",
    "name":"map-counter"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L68",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L72",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/marginals",
    "namespace":"incanter.probability",
@@ -1692,7 +1958,7 @@
    "\ncomputes the marginal PMFs from the joint PMF.\n\nof the form:   {a {b n}} where n is the nubmer of co-occurances of a and b.\n\nfor summation note that a variable, suppose it is x, is represented as a level of depth in the nested maps, so summation for margianl of x occurs on all branches stemming from maps at the level corresponding with x. ",
    "name":"marginals"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L123",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L128",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/range-classifier",
    "namespace":"incanter.probability",
@@ -1701,7 +1967,7 @@
    "\nclassify one item based on what interval in a range the item falls into.",
    "name":"range-classifier"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L54",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L57",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/summate",
    "namespace":"incanter.probability",
@@ -1709,7 +1975,16 @@
    "doc":"summate all counts in a deeply nested map of counts.",
    "name":"summate"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L30",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L66",
+   "wiki-url":
+   "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/summate-level",
+   "namespace":"incanter.probability",
+   "arglists":[["j"]],
+   "doc":
+   "given a nested map, summates all counts below the tree from each key-node in the map-tree.",
+   "name":"summate-level"},
+  {"source-url":
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L33",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/vector-counter",
    "namespace":"incanter.probability",
@@ -1718,7 +1993,7 @@
    "\nwraps a counting function for vectors in apply and deep-merge-with, curreid fn expects a seq of vectors to count.",
    "name":"vector-counter"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L174",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L179",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/|",
    "namespace":"incanter.probability",
@@ -1727,7 +2002,7 @@
    "this is the core of the conditional probability based classification model.  this model takes a & bs in the form a given bs.  a and bs are all functions, and the conditional probability classification model composes a new classifier function that ultimately returns the cond-prob-tuple: [{a's counts}{b's counts}].",
    "name":"|"},
   {"source-url":
-   "http://github.com/liebke/incanter/blob/ffd7b538697a03dc7845d323741c2bd120ea156a/src/main/clojure/incanter/probability.clj#L182",
+   "http://github.com/liebke/incanter/blob/0ecd289e43304698922164ca8cdfae8078086219/src/main/clojure/incanter/probability.clj#L187",
    "wiki-url":
    "http://tomfaulhaber.github.com/incanter//incanter.probability-api.html#incanter.probability/|each",
    "namespace":"incanter.probability",
