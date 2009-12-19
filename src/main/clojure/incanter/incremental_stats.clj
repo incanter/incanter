@@ -11,10 +11,13 @@
 
 ;;     \operatorname{Cov}(X_i, X_j) = \operatorname{E}\left((X_i-\operatorname{E}(X_i))(X_j-\operatorname{E}(X_j))\right) = \operatorname{E}(X_iX_j) -\operatorname{E}(X_i)\operatorname{E}(X_j) 
 
-(defn mean-state [x val queue]
+(defn mean-state 
+""
+[x val queue]
    [(+ val (/ (- x (peek queue)) (count queue))) (conj (pop queue) x)])
 
-(defn mean-state-2 [x val queue] 
+(defn mean-state-2 
+[x val queue] 
   (let [m (+ val (/ (- x (peek queue)) (count queue)))] 
     [m #(mean-state-2 %1 m (conj (pop queue) x))]))
 
@@ -31,11 +34,14 @@
 ;; [4 #<test$mean_state_2__1717$fn__1719 test$mean_state_2__1717$fn__1719@1854b38>]
 ;; test> 
 
-(defn update-sample [x]
+(defn update-sample 
+""
+[x]
  (update-val :sample #(conj (pop %) x)))
 
 ;;Monad spike for stateful rolling stats
 (defn update-mean
+""
  ([x]
   (domonad state-m
     [sample (fetch-val :sample)
@@ -56,7 +62,10 @@
 ;; ((update-mean 4 5 6) a-state)
 
 
-(defn tuplize-apply [f] (fn [x] [(f x) f]))
+(defn tuplize-apply 
+""
+[f] 
+  (fn [x] [(f x) f]))
 
 ;; (defn rolling-mean [l k]
 ;;   (let [rm  (RollingMean. l)]

@@ -12,7 +12,9 @@ incanter.classification
   (:use [incanter.probability :only [bucket +cond-prob-tuples]])
   (:use [incanter.internal :only [safe threshold-to]]))
 
-(defn classifier [fns classify]
+(defn classifier 
+""
+[fns classify]
   (fn [data]
     (classify fns data)))
 
@@ -30,8 +32,13 @@ incanter.classification
 	(for [feature features]
 	  [feature feature])))
 
-(defn category-classifier [x] {x 1})
+(defn category-classifier 
+""
+[x] 
+  {x 1})
+
 (defn category-map-classifier 
+""
   ([x] (map-map category-classifier x))
   ([s x] (category-map-classifier (into {} (filter #(contains? s (key %)) x)))))
 
@@ -128,7 +135,9 @@ usage:
   (into {} (for [[k v] class-mappings]
     (into {} (for [equiv v] [equiv k])))))
 
-(defn merge-levels [class-mappings coll]
+(defn merge-levels 
+""
+[class-mappings coll]
      (map-map 
       #(apply deep-merge-with + (map second %))
       (heterogenious-group-by 
@@ -201,8 +210,9 @@ usage:
 		[k2 v2])) 
 	    m)] k)) 
 
-(defn confusion-matrix [trd tst]
+(defn confusion-matrix 
   "computes a confusion matrix from the counts on train and test data sets represented as maps. traverse map...as you get to the point of counts of actuals, replace the series of nested keys that lead to that point with the single key of the predicted"
+[trd tst]
   (apply deep-merge-with +
 	 (flatten  
 	  ((fn each-level [tr ts]
@@ -218,8 +228,9 @@ usage:
 		   (each-level {} v)))))
 	   trd tst))))
 
-(defn precision [m]
+(defn precision 
  "computes precision by class label from confusion matrix."
+[m]
   (into {} 
 	(for [[k v] m
 	      :let [predicted (v k)]
@@ -227,8 +238,9 @@ usage:
 	  [k (float (/ (if predicted predicted 0)
 		(apply + (vals v))))])))
 
-(defn recall [m]
+(defn recall 
  "computes recall by class label from confusion matrix."
+[m]
   (into {} 
 	(for [k (all-keys m)
 	      :let [v-predicted (m k)]
@@ -267,30 +279,41 @@ merges the resulting n cross-validation matrices into a single matrix.
      confusion-matrix-from-counts 
        x (remove #{x} xs)))))
     
-(defn n-times-k-fold-cross-validation-confusion-matrix [list-of-lists]
+(defn n-times-k-fold-cross-validation-confusion-matrix 
+""
+[list-of-lists]
   (apply deep-merge-with +
   (map (partial apply cross-validation-confusion-matrix)
        list-of-lists)))
 
-(defn map-of-vectors [keys]
+(defn map-of-vectors 
+""
+[keys]
  (into {} 
        (map (fn [k] [k []]) keys)))
 
-(defn vectorize [maps]
+(defn vectorize 
+""
+[maps]
   (map-of-vectors (all-keys maps)))
 
-(defn collect-vals [maps]
+(defn collect-vals 
+""
+[maps]
   "(collect-vals [{:a 1 :b 2} {:a 4 :b 5} {:c 4} {:c 5}]) > {:b [2 5], :c [4 5], :a [1 4]}"
   (apply merge-with conj 
 	 (cons (vectorize maps) maps)))
 
-(defn prob-map-tuples-by-time [prob-map-tuple]
+(defn prob-map-tuples-by-time 
 "use to transform data for confusion matrix by time before departure"
+[prob-map-tuple]
   (into {} 
 	(for [[k v] (first prob-map-tuple)] 
 	  [k [v ((second prob-map-tuple) k)]])))
 
-(defn confusion-matrix-by-time [results]
+(defn confusion-matrix-by-time 
+""
+[results]
   (let [results-by-time (collect-vals 
 			 (map prob-map-tuples-by-time results))]
     (into {} 

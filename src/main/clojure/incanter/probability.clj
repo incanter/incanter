@@ -14,12 +14,15 @@ a function for binary classification that takes a booleavn value and returns 1 f
 "
 [pred] (if pred 1 0))
 
-;;set based counting for keys in maps
-(defn count-missing [exp act]
+(defn count-missing 
+"set based counting for keys in maps"
+[exp act]
   (let [diff (difference exp (keys act))] 
     (set-to-unit-map diff)))
 
-(defn rolling-windows [len] (fn [col] (partition len 1 col)))
+(defn rolling-windows 
+[len] 
+  (fn [col] (partition len 1 col)))
 
 (defn map-counter 
 "
@@ -60,8 +63,9 @@ wraps a counting function for vectors in apply and deep-merge-with, curreid fn e
 			:otherwise 
 			(map summate (vals m))))))
 
-(defn summate-level [j]
+(defn summate-level 
 "given a nested map, summates all counts below the tree from each key-node in the map-tree."
+[j]
   (assert (not (bottom-level? j)))
       (map-map summate j))
 
@@ -97,7 +101,8 @@ for summation note that a variable, suppose it is x, is represented as a level o
 ;;   (recur next (+ 1 level))))
 ;;  j 0))
 
-(defn n-sided-die [n] 
+(defn n-sided-die 
+[n] 
      (apply hash-map 
 	    (interleave (range 1 (+ n 1) 1) 
 			(repeat n 1))))
@@ -187,5 +192,6 @@ classify one item based on what interval in a range the item falls into.
 	       [k (cond-prob-tuple (a obs) (b obs))]))))
 
 (defn P 
+""
   ([a given b & bs] (given a (cons b bs)))
   ([a given b] (given a (if (coll? b) b [b])))) 

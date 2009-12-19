@@ -111,15 +111,20 @@ incanter.io
                     quote-char
                     skip)]
        (let [data-lines (map seq (seq (.readAll reader)))
-             raw-data (filter #(> (count %) 0) (map (fn [line] (filter #(not= % "") line)) data-lines))
-             parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) raw-data))
+             raw-data (filter #(> (count %) 0) 
+			      (map (fn [line] (filter #(not= % "") line)) 
+				   data-lines))
+             parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) 
+				       raw-data))
             ]
     (if header?
       ; have header row
       (dataset (first parsed-data) (rest parsed-data))
       ; no header row so build a default one
       (let [col-count (count (first parsed-data))
-            col-names (apply vector (map str (repeat col-count "col") (iterate inc 0)))]
+            col-names (apply vector (map str 
+					 (repeat col-count "col") 
+					 (iterate inc 0)))]
         (dataset col-names parsed-data))))))))
 
 
@@ -175,53 +180,71 @@ incanter.io
       (.close file-writer))))
 
 
-(defn read-map [& keys] 
+(defn read-map 
+[& keys] 
   (into {} (for [k keys] [k (comp eval read-string)]))) 
 
-(defn string-date-read-map [& keys] 
+(defn string-date-read-map 
+[& keys] 
   (into {} (for [k keys] [k joda-date]))) 
 
-(defn read-json-file [f] 
+(defn read-json-file 
+""
+[f] 
   (decode-from-reader (reader f)))
 
 ;;todo if we want this process to be lazy we can remove the doall.
-(defn read-json-lines [f] 
+(defn read-json-lines 
+[f] 
   (doall 
    (for [l (read-lines f)] (decode-from-str l))))
 
 ;;TODO: switch back to stream impl? 
-(defn clj-to-json-file [c f] 
+(defn clj-to-json-file 
+""
+[c f] 
   (spit (File. f) 
       (encode-to-str c)))
 
 ;;doesn't work in maven builds.  must use fn below.
 ;;(ClassLoader/getSystemResource f)))))
-(defn load-resource [f]
+(defn load-resource 
+""
+[f]
   (.getResourceAsStream 
    (.getClassLoader 
     (class *ns*)) f)) 
 
-(defn read-from-classpath [f]
+(defn read-from-classpath 
+""
+[f]
  (reader (load-resource f)))
 
-(defn json-from-classpath [f]
+(defn json-from-classpath 
+""
+[f]
   (decode-from-reader (read-from-classpath f)))
 
 
 (def report-model (comp pprint sort-map-of-maps model-from-maps))
 
-(defn package-model [file prob-map-tuple]
+(defn package-model 
+[file prob-map-tuple]
   (clj-to-json-file (model-from-maps prob-map-tuple) file))
 
-(defn unpackage-model [file]
+(defn unpackage-model 
+[file]
   (read-json-file file))
 
-(defn into-file [filename stuff]
+(defn into-file 
+""
+[filename stuff]
   (let [f (file filename)] 
    (spit f stuff)))
 
-(defn csv-line [v]
+(defn csv-line 
  "turn a vector into a csv line"
+[v]
   (let [commas (repeat (- (count v) 1) ", ")
 	;;the seperated list must be a vector so that conj appends
 	;;conj prepends for list type.
@@ -230,8 +253,9 @@ incanter.io
 	cells (conj seperated (str tail "\n"))]
     (apply str cells)))
 
-(defn csv-table [m]
+(defn csv-table 
   "turn a 2-level map into a csv table"
+[m]
   (let [column-names (all-keys (vals m))
 	rows (for [[k v] m]
 	       (cons k
@@ -263,17 +287,41 @@ example dbinfo:
     (with-connection db
       (with-query-results rs [query] (f rs)))))
 
-(defn sql-query [d q] 
+(defn sql-query 
+""
+[d q] 
   (let [printer #(println (:internaluage :iso_code %))]
   (with-mysql-results d q 
     #(dorun (map printer %)))))
 
-(defn query [table sample & columns] (str "select " (str-join ", " columns) " from " table " limit " sample))
-(defn sql-select [& x] (str-join " " (cons "select" x)))
+(defn query 
+""
+[table sample & columns] 
+  (str "select " (str-join ", " columns) 
+       " from " table 
+       " limit " sample))
+
+(defn sql-select 
+""
+[& x] 
+  (str-join " " (cons "select" x)))
+
 (def sql-from #(str "from " %))
 (def sql-unique #(str "distinct " %))
 (def sql-limit #(str "limit " %))
 (def random-row "order by rand()")
-(defn sql-order-by [c] (str "order by " c))
-(defn sql-where [pred] (str "where " pred))
-(defn columns [& x] (str-join ", " x))
+
+(defn sql-order-by 
+""
+[c] 
+  (str "order by " c))
+
+(defn sql-where 
+""
+[pred] 
+  (str "where " pred))
+
+(defn columns 
+""
+[& x] 
+  (str-join ", " x))
