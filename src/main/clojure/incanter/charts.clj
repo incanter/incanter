@@ -81,6 +81,7 @@
     # plot a density histogram
     (def hist (histogram (sample-normal 1000) :density true))
     (view hist)
+
     # add a normal density line to the plot
     (def x (range -4 4 0.01))
     (add-lines hist x (pdf-normal x))
