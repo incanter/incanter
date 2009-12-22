@@ -48,9 +48,12 @@
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
+          <finalName>incanter-exec</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
           <archive>
             <manifest>
-              <mainClass>jline.ConsoleRunner</mainClass>
+              <!-- <mainClass>jline.ConsoleRunner</mainClass> -->
+              <mainClass>clojure.main</mainClass> 
             </manifest>
           </archive>
         </configuration>
