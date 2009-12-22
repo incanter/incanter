@@ -18,13 +18,15 @@
           <testScript>src/test/clojure/incanter/mvn_tests.clj</testScript>
         </configuration>
         <executions>
-<!--          <execution>
+    <!--
+          <execution>
             <id>compile</id>
             <phase>compile</phase>
             <goals>
               <goal>compile</goal>
             </goals>
-          </execution>-->
+    </execution>
+    -->
           <execution>
             <id>test</id>
             <phase>test</phase>

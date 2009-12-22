@@ -231,8 +231,11 @@
     (use 'incanter.datasets)
     (def us-arrests (get-dataset :us-arrests))
     (sel us-arrests :cols \"State\")
+    (sel us-arrests :cols :State)
 
     (sel us-arrests :cols [\"State\" \"Murder\"])
+    (sel us-arrests :cols [:State :Murder])
+
 
 "
 (fn [mat & options] [(type mat) (keyword? (first options))]))
@@ -1119,11 +1122,14 @@
 
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
-        id (if (number? column-key)
-             (if (some #(= column-key %) headers)
-               column-key
-               (nth headers column-key))
-             column-key)]
+	col-key (if (keyword? column-key)
+		  (name column-key)
+		  column-key)
+        id (if (number? col-key)
+             (if (some #(= col-key %) headers)
+               col-key
+               (nth headers col-key))
+             col-key)]
     id))
 
 
