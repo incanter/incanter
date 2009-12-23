@@ -21,7 +21,7 @@
         <artifactId>clojure-maven-plugin</artifactId>
         <version>1.1</version>
         <configuration>
-          <testScript>src/test/clojure/incanter/tests.clj</testScript>
+          <testScript>${project.basedir}/src/test/clojure/incanter/tests.clj</testScript>
         </configuration>
         <executions>
           <execution>
