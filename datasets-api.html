@@ -78,8 +78,9 @@ are from R's sample data sets, as are the descriptions below.
 Options:
 
   :incanter-home -- if the incanter.home property is not set when the JVM is
-                    started, use the :incanter-home options to provide the
-                    parent directory of the sample data directory.
+                    started (using -Dincanter.home) or there is no INCANTER_HOME
+                    environment variable set, use the :incanter-home options to 
+                    provide the parent directory of the sample data directory.
 
 
 Datasets:
@@ -145,8 +146,12 @@ Datasets:
   :math-prog -- Pass/fail results for a high school mathematics assessment test
                 and a freshmen college programming course.
 
-  :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.</pre>
-  <a href="http://github.com/liebke/incanter/blob/2bf3401884c58caf620601908312318d9053c059/src/main/clojure/incanter/datasets.clj#L90" id="var-source">Source</a>
+  :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.
+
+ Examples:
+   (def data (get-dataset :cars))
+   (def data2 (get-dataset :cars :incanter.home "/usr/local/packages/incanter"))</pre>
+  <a href="http://github.com/liebke/incanter/blob/b49679a74b6db48ab468a00672c497d88dbc0cd2/src/main/clojure/incanter/datasets.clj#L90" id="var-source">Source</a>
 </div>
 
 
