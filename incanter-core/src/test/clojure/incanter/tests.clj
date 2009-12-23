@@ -4,10 +4,10 @@
 
 (def test-names [:core-tests
                  :stats-tests
-                 :io-tests
-                 :charts-tests
+;;                 :io-tests
+;;                 :charts-tests
                  :internal-tests
-                 :chrono-test
+;;                 :chrono-test
                  :transformations-tests
                  :probability-tests
                  :information-theory-tests

@@ -1,173 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion> 
-  <artifactId>incanter</artifactId>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>incanter</groupId>
+    <artifactId>incanter-parent</artifactId>
+    <version>1.0-master-SNAPSHOT</version>
+    <relativePath>incanter-parent/pom.xml</relativePath>
+  </parent>
+
   <groupId>incanter</groupId>
-  <name>incanter</name>
-  <version>1.0-master-SNAPSHOT</version>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>com.theoryinpractise</groupId>
-        <artifactId>clojure-maven-plugin</artifactId>
-        <version>1.1</version>
-        <configuration>
-          <testScript>src/test/clojure/incanter/mvn_tests.clj</testScript>
-        </configuration>
-        <executions>
-<!--          <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>-->
-          <execution>
-            <id>test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-          </execution>        
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
+  <artifactId>incanter</artifactId>
+  <packaging>pom</packaging>
+  <name>Incanter</name>
+  <url>http://incanter.org/</url>
 
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>jline.ConsoleRunner</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id> <!-- this is used for inheritance merges -->
-            <phase>package</phase> <!-- append to the packaging phase. -->
-            <goals>
-              <goal>single</goal> <!-- goals == mojos -->
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
+  <scm>
+    <connection>
+      scm:git:git://github.com/liebke/incanter.git
+    </connection>
+    <url>http://github.com/liebke/incanter</url>
+  </scm>
 
-    <resources>
-      <resource>
-        <directory>src/main/clojure</directory>
-      </resource>
-    </resources>
-  </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.clojure</groupId>
-      <artifactId>clojure</artifactId>
-      <version>1.1.0-master-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.clojure</groupId>
-      <artifactId>clojure-contrib</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>processing-core</artifactId>
-      <version>1</version>
-    </dependency> 
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>arpack-combo</artifactId>
-      <version>0.1</version>
-    </dependency> 
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>netlib-java</artifactId>
-      <version>0.9.1</version>
-    </dependency> 
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>parallelcolt</artifactId>
-      <version>0.7.2</version>
-    </dependency> 
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>gnujaxp</artifactId>
-      <version>1</version>
-    </dependency> 
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>jcommon</artifactId>
-      <version>1.0.16</version>
-    </dependency> 
-    <dependency>
-      <groupId>jline</groupId>
-      <artifactId>jline</artifactId>
-      <version>0.9.94</version>
-    </dependency> 
-    <dependency>
-      <groupId>net.sf.opencsv</groupId>
-      <artifactId>opencsv</artifactId>
-      <version>2.0.1</version>
-    </dependency> 
-    <dependency>
-      <groupId>incanter</groupId>
-      <artifactId>jfreechart</artifactId>
-      <version>1.0.13</version>
-    </dependency> 
-    <dependency>
-      <groupId>org.danlarkin</groupId>
-      <artifactId>clojure-json</artifactId>
-      <version>1.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>1.6</version>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.6</version>
-    </dependency> 
-    <dependency>
-            <groupId>swank-clojure</groupId>
-            <artifactId>swank-clojure</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-
-  <repositories>
-    <repository>
-      <id>build.clojure.org</id>
-      <url>http://build.clojure.org/snapshots</url> 
-    </repository>
-    <repository>
-      <id>clojars.org</id>
-      <url>http://clojars.org/repo</url> 
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>ibiblio</id>
-      <name>Ibiblio - the public's library and digital archive</name>
-      <url>http://www.ibiblio.org/maven2</url>
-    </repository>
-  </repositories>
+  <modules>
+    <module>incanter-parent</module>
+    <module>incanter-core</module>
+<!--    <module>incanter-charts</module> -->
+<!--    <module>incanter-io</module> -->
+<!--    <module>incanter-processing</module> -->
+<!--    <module>incanter-chrono</module> -->
+<!--    <module>incanter-</module> -->
+<!--    <module>incanter-bundle</module> -->
+  </modules>
 
 </project>
