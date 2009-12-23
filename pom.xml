@@ -26,10 +26,10 @@
   <modules>
     <module>incanter-parent</module>
     <module>incanter-core</module>
+    <module>incanter-chrono</module>
+    <module>incanter-io</module>
 <!--    <module>incanter-charts</module> -->
-<!--    <module>incanter-io</module> -->
 <!--    <module>incanter-processing</module> -->
-<!--    <module>incanter-chrono</module> -->
 <!--    <module>incanter-</module> -->
 <!--    <module>incanter-bundle</module> -->
   </modules>
@@ -49,18 +49,6 @@
         </configuration>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemProperties>
-            <property>
-              <name>incanter.home</name>
-              <value>${project.basedir}</value>
-            </property>
-          </systemProperties>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 

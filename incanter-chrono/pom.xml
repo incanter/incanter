@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>incanter</groupId>
+    <artifactId>incanter-parent</artifactId>
+    <version>1.0-master-SNAPSHOT</version>
+    <relativePath>../incanter-parent/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>incanter-chrono</artifactId>
+  <packaging>jar</packaging>
+  <name>Incanter Chrono</name>
+  <url>http://incanter.org/</url>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.theoryinpractise</groupId>
+        <artifactId>clojure-maven-plugin</artifactId>
+        <version>1.1</version>
+        <configuration>
+          <systemProperties>
+            <property>
+              <name>incanter.home</name>
+              <value>${project.basedir}</value>
+            </property>
+          </systemProperties>
+          <testScript>${project.basedir}/src/test/clojure/incanter/tests.clj</testScript>
+        </configuration>
+        <executions>
+          <execution>
+            <id>test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>        
+        </executions>
+      </plugin>
+    </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/clojure</directory>
+      </resource>
+    </resources>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>incanter</groupId>
+      <artifactId>incanter-core</artifactId>
+      <version>1.0-master-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>1.6</version>
+    </dependency>
+  </dependencies>
+
+
+</project>
