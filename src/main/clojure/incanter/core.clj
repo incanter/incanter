@@ -610,8 +610,6 @@
 (defmethod to-list Matrix
  ([#^Matrix mat]
   (cond
-    (and (coll? mat) (not (matrix? mat)))
-      mat
     (= (.columns mat) 1)
       (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
     (= (.rows mat) 1)
@@ -619,7 +617,8 @@
     :else
       (map #(seq %) (seq (.toArray mat))))))
 
-(defmethod to-list clojure.lang.ISeq [s] s)
+
+(defmethod to-list :default [s] s)
 
 (defmethod to-list nil [s] nil)
 
