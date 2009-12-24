@@ -602,9 +602,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn to-list
+(defmulti to-list
   " Returns a list-of-lists if the given matrix is two-dimensional
     and a flat list if the matrix is one-dimensional."
+  class)
+
+(defmethod to-list Matrix
  ([#^Matrix mat]
   (cond
     (and (coll? mat) (not (matrix? mat)))
@@ -616,6 +619,9 @@
     :else
       (map #(seq %) (seq (.toArray mat))))))
 
+(defmethod to-list clojure.lang.ISeq [s] s)
+
+(defmethod to-list nil [s] nil)
 
 (defn #^Matrix copy
   "Returns a copy of the given matrix."

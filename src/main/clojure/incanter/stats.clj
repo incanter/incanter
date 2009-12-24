@@ -1580,7 +1580,7 @@
 "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
-          _x (if (matrix? x) (to-list x) x)
+          _x (to-list x)
           data (DoubleArrayList. (double-array (sort _x)))
           probs (cond
                   (number? (:probs opts))
