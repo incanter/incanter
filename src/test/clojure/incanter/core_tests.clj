@@ -154,7 +154,11 @@
                       [10 11 12]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (= (to-list (matrix [1 2 3 4 5 6])) [1 2 3 4 5 6]))
-  (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1 2 3 4 5 6])))
+  (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1 2 3 4 5 6]))
+  (is (= (to-list [1 2 3]) [1 2 3]))
+  (is (= (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
+  (is (= (to-list 3) 3))
+  (is (nil? (to-list nil))))
 
 (deftest matrix-sel-tests
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
