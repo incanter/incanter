@@ -1111,13 +1111,16 @@
 
 (defn dataset
 " Returns a map of type ::dataset constructed from the given column-names and
-  data. The data is a sequence of sequences.
+  data. The data is either a sequence of sequences or a sequence of hash-maps.
 "
   ([column-names & data]
-    (with-meta
-      {:column-names column-names
-      :rows (map #(apply assoc {} (interleave column-names %)) (first data))}
-      {:type ::dataset})))
+    (let [rows (if (map? (ffirst data))
+		      (first data)
+		      (map #(apply assoc {} (interleave column-names %)) (first data)))] 
+      (with-meta
+        {:column-names column-names
+	 :rows rows}
+        {:type ::dataset}))))
 
 
 (defn dataset?
