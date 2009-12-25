@@ -1127,9 +1127,11 @@
 
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
-	col-key (if (keyword? column-key)
-		  (name column-key)
-		  column-key)
+	col-key (if (and
+		           (keyword? column-key) ;; if the given column name is a keyword, and
+			   (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
+		         (name column-key) ;; convert the keyword to a string
+		         column-key) ;; otherwise use the given column key
         id (if (number? col-key)
              (if (some #(= col-key %) headers)
                col-key

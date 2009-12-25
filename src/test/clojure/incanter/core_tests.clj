@@ -29,6 +29,15 @@
 ;; UNIT TESTS FOR incanter.core.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6]]))
+(def dataset2 (dataset [" a" "b" "c"] [[1 2 3] [4 5 6]]))
+
+(deftest dataset-tests
+  (is (= (sel dataset1 :cols :a) [1 4]))
+  (is (= (sel dataset2 :cols :b) [2 5]))
+  (is (= (sel dataset2 :cols "c") [3 6])))
+
+
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3] 
                 [4 5 6] 
