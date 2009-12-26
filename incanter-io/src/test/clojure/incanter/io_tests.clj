@@ -30,28 +30,31 @@
 ;; UNIT TESTS FOR incanter.io.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; (System/getProperty "incanter.home")
+(def incanter-home ".")
+
 ;; read in a dataset from a space delimited file 
 (def test-data (read-dataset 
-                 (str (System/getProperty "incanter.home") "/data/cars.dat") 
+                 (str incanter-home "/data/cars.dat") 
                  :delim \space
                  :header true)) ; default delimiter: \,
 ;; read in a dataset from a comma delimited file 
 (def test-csv-data (read-dataset 
-                     (str (System/getProperty "incanter.home") "/data/cars.csv") 
+                     (str incanter-home "/data/cars.csv") 
                      :header true))
 ;; read in a dataset from a tab delimited file 
 (def test-tdd-data (read-dataset 
-                     (str (System/getProperty "incanter.home") "/data/cars.tdd") 
+                     (str incanter-home "/data/cars.tdd") 
                      :header true 
                      :delim \tab)) 
 ;; read in the iris dataset from a space delimited file 
 (def iris-data (read-dataset 
-                 (str (System/getProperty "incanter.home") "/data/iris.dat") 
+                 (str incanter-home "/data/iris.dat") 
                  :delim \space
                  :header true))
 ;; read in the social science survey dataset from a space delimited file 
 (def ols-data (to-matrix (read-dataset 
-                           (str (System/getProperty "incanter.home") "/data/olsexamp.dat")
+                           (str incanter-home "/data/olsexamp.dat")
                            :delim \space
                            :header true)))
 

@@ -19,7 +19,7 @@
       <plugin>
         <groupId>com.theoryinpractise</groupId>
         <artifactId>clojure-maven-plugin</artifactId>
-        <version>1.1</version>
+        <version>1.3</version>
         <configuration>
           <systemProperties>
             <property>
@@ -27,7 +27,7 @@
               <value>${project.basedir}</value>
             </property>
           </systemProperties>
-          <testScript>${project.basedir}/src/test/clojure/incanter/tests.clj</testScript>
+          <testScript>${project.basedir}/src/test/clojure/incanter/chrono_test.clj</testScript>
         </configuration>
         <executions>
           <execution>

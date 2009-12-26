@@ -102,37 +102,37 @@
 
 (deftest is-within-date-range
   (let [in (joda-date "2009-06-10T08:45:27Z")
-	out (joda-date "2009-06-10T9:27:27Z")
-	s (joda-date "2009-06-10T08:27:27Z")
-	e (joda-date "2009-06-10T09:27:27Z")]
+        out (joda-date "2009-06-10T9:27:27Z")
+        s (joda-date "2009-06-10T08:27:27Z")
+        e (joda-date "2009-06-10T09:27:27Z")]
     (is (= true
-	   (is-within? in [s e])))
+           (is-within? in [s e])))
     (is (= false
-	   (is-within? out [s e])))
+           (is-within? out [s e])))
     (is (thrown? java.lang.IllegalArgumentException
-		 (is-within? in [e s])))
+                 (is-within? in [e s])))
     ;;notice that nil seems to resovle to infinite creates unbounded ranges
     (is (= true
-	   (is-within? in [s nil])))
+           (is-within? in [s nil])))
     (is (= false
-	   (is-within? in [e nil])))))
+           (is-within? in [e nil])))))
 
 (deftest create-date-range-around-a-date
   (let [you (joda-date 2009 6 5 11 0 0 0 (time-zone 0))]
   (is (= (list (hours-from you -1) you (hours-from you 1))
-	 (hours-around (range -1 2) you)))))
+         (hours-around (range -1 2) you)))))
 
 (deftest minutes-between-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-	end (joda-date "2009-06-10T09:45:27Z")]
+        end (joda-date "2009-06-10T09:45:27Z")]
   (is (= 60
-	 (minutes-between start end)))
+         (minutes-between start end)))
  (is (= -60
-	 (minutes-between end start)))))
+         (minutes-between end start)))))
 
 (deftest valid-range-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-	end (joda-date "2009-06-10T09:45:27Z")]
+        end (joda-date "2009-06-10T09:45:27Z")]
   (is (valid-range? [start end]))
   (is (before? start end))
   (is (not (valid-range? [end start])))
@@ -140,14 +140,16 @@
 
 (deftest are-overlapping-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-	end (joda-date "2009-06-10T09:45:27Z")
-	start1 (joda-date "2009-06-10T08:55:27Z")
-	end1 (joda-date "2009-06-10T09:45:27Z")]
+        end (joda-date "2009-06-10T09:45:27Z")
+        start1 (joda-date "2009-06-10T08:55:27Z")
+        end1 (joda-date "2009-06-10T09:45:27Z")]
     (is (true? 
-	 (are-overlapping? [start end] [start1 end1])))
+         (are-overlapping? [start end] [start1 end1])))
     (is (true? 
-	 (are-overlapping? [start1 end1] [start end])))
+         (are-overlapping? [start1 end1] [start end])))
     (is (false?
-	 (are-overlapping? [start end] [(joda-date "2009-06-11T08:45:27Z") (joda-date "2009-06-11T08:45:27Z")])))
+         (are-overlapping? [start end] [(joda-date "2009-06-11T08:45:27Z") (joda-date "2009-06-11T08:45:27Z")])))
     (is (false?
-	(are-overlapping? [start end] [start1 nil])))))
+        (are-overlapping? [start end] [start1 nil])))))
+
+(run-tests)
