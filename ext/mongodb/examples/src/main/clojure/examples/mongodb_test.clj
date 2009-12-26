@@ -12,21 +12,27 @@
 ;(mass-insert! :survey (:rows survey))
 
 
-;(def data (read-dataset "http://github.com/liebke/incanter/raw/master/data/airline_passengers.csv"
-;:header true))
+(def data (read-dataset "http://github.com/liebke/incanter/raw/master/data/airline_passengers.csv"
+			             :header true))
+(view data)
+
 
 (mongo! :db "mydb")
-;(mass-insert! :airline-data (:rows data))
 
-;(view data)
+(mass-insert! :airline-data (:rows data))
 
 
- (def new-data (fetch-dataset :airline-data))
+(def results (fetch :airline-data))
+(def new-data (dataset [:year :month :passengers] results))
+(view new-data)
 
- (def new-data (fetch-dataset :airline-data
+
+(def new-data (fetch-dataset :airline-data))
+
+(def new-data (fetch-dataset :airline-data
 			      :only [:year]))
 
- (def new-data (fetch-dataset :airline-data
+(def new-data (fetch-dataset :airline-data
 			      :where {:month "Feb"}))
 
 (view new-data)
