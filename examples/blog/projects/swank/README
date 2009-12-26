@@ -1,0 +1,17 @@
+
+This is a simple project that is used to start a Swank server configured with Incanter and its dependencies using Leiningen. For more details see the following blog post: http://incanter-blog.org/2009/12/22/lein-swank/
+
+To build:
+
+Download the necessary dependencies:
+$ lein deps
+
+and start the Swank server:
+$ lein swank
+
+Now connect to the server within Emacs with the following command:
+M-x slime-connect
+
+That's it, you should have a live Clojure REPL in Emacs now, and can evaluate your Clojure code with 'C-x C-e'.
+
+

@@ -94,8 +94,9 @@
   Options:
 
     :incanter-home -- if the incanter.home property is not set when the JVM is
-                      started, use the :incanter-home options to provide the
-                      parent directory of the sample data directory.
+                      started (using -Dincanter.home) or there is no INCANTER_HOME
+                      environment variable set, use the :incanter-home options to 
+                      provide the parent directory of the sample data directory.
 
 
   Datasets:
@@ -163,10 +164,17 @@
 
     :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.
 
+   Examples:
+     (def data (get-dataset :cars))
+     (def data2 (get-dataset :cars :incanter.home \"/usr/local/packages/incanter\"))
+
+
 "
   ([dataset-key & options]
     (let [opts (when options (apply assoc {} options))
-          incanter-home (or (:incanter-home opts) (System/getProperty "incanter.home"))
+          incanter-home (or (:incanter-home opts) 
+			    (System/getProperty "incanter.home")
+			    (System/getenv "INCANTER_HOME"))
           ds (**datasets** dataset-key)
           filename (if (nil? incanter-home) (ds :filename) (str incanter-home "/" (ds :filename)))
           delim (ds :delim)

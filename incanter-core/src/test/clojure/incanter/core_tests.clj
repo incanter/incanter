@@ -29,6 +29,22 @@
 ;; UNIT TESTS FOR incanter.core.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6]]))
+(def dataset2 (dataset [" a" "b" "c"] [[1 2 3] [4 5 6]]))
+(def dataset3 (dataset [:a :b :c] [{:a 1 :b 2 :c 3} {:a 4 :b 5 :c 6}]))
+(def dataset4 (dataset ["a" "b" "c"] [{"a" 1 "b" 2 "c" 3} {"a" 4 "b" 5 "c" 6}]))
+(def dataset5 (dataset ["a" "b" "c"] [{"a" 1 "b" 2 "c" 3} {"b" 5 "c" 6}]))
+
+(deftest dataset-tests
+  (is (= (sel dataset1 :cols :a) [1 4]))
+  (is (= (sel dataset2 :cols :b) [2 5]))
+  (is (= (sel dataset2 :cols "c") [3 6]))
+  (is (= (sel dataset3 :cols :a) [1 4]))
+  (is (= (sel dataset4 :cols :b) [2 5]))
+  (is (= (sel dataset4 :cols "c") [3 6]))
+  (is (= (sel dataset5 :rows 1 :cols :a) [nil])))
+
+
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3] 
                 [4 5 6] 
@@ -154,7 +170,11 @@
                       [10 11 12]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (= (to-list (matrix [1 2 3 4 5 6])) [1 2 3 4 5 6]))
-  (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1 2 3 4 5 6])))
+  (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1 2 3 4 5 6]))
+  (is (= (to-list [1 2 3]) [1 2 3]))
+  (is (= (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
+  (is (= (to-list 3) 3))
+  (is (nil? (to-list nil))))
 
 (deftest matrix-sel-tests
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)

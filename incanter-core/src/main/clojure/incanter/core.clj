@@ -231,8 +231,11 @@
     (use 'incanter.datasets)
     (def us-arrests (get-dataset :us-arrests))
     (sel us-arrests :cols \"State\")
+    (sel us-arrests :cols :State)
 
     (sel us-arrests :cols [\"State\" \"Murder\"])
+    (sel us-arrests :cols [:State :Murder])
+
 
 "
 (fn [mat & options] [(type mat) (keyword? (first options))]))
@@ -599,13 +602,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn to-list
+(defmulti to-list
   " Returns a list-of-lists if the given matrix is two-dimensional
     and a flat list if the matrix is one-dimensional."
+  class)
+
+(defmethod to-list Matrix
  ([#^Matrix mat]
   (cond
-    (and (coll? mat) (not (matrix? mat)))
-      mat
     (= (.columns mat) 1)
       (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
     (= (.rows mat) 1)
@@ -613,6 +617,10 @@
     :else
       (map #(seq %) (seq (.toArray mat))))))
 
+
+(defmethod to-list :default [s] s)
+
+(defmethod to-list nil [s] nil)
 
 (defn #^Matrix copy
   "Returns a copy of the given matrix."
@@ -1103,13 +1111,16 @@
 
 (defn dataset
 " Returns a map of type ::dataset constructed from the given column-names and
-  data. The data is a sequence of sequences.
+  data. The data is either a sequence of sequences or a sequence of hash-maps.
 "
   ([column-names & data]
-    (with-meta
-      {:column-names column-names
-      :rows (map #(apply assoc {} (interleave column-names %)) (first data))}
-      {:type ::dataset})))
+    (let [rows (if (map? (ffirst data))
+		      (first data)
+		      (map #(apply assoc {} (interleave column-names %)) (first data)))] 
+      (with-meta
+        {:column-names column-names
+	 :rows rows}
+        {:type ::dataset}))))
 
 
 (defn dataset?
@@ -1119,11 +1130,16 @@
 
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
-        id (if (number? column-key)
-             (if (some #(= column-key %) headers)
-               column-key
-               (nth headers column-key))
-             column-key)]
+	col-key (if (and
+		           (keyword? column-key) ;; if the given column name is a keyword, and
+			   (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
+		         (name column-key) ;; convert the keyword to a string
+		         column-key) ;; otherwise use the given column key
+        id (if (number? col-key)
+             (if (some #(= col-key %) headers)
+               col-key
+               (nth headers col-key))
+             col-key)]
     id))
 
 
