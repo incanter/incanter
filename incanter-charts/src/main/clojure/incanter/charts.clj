@@ -28,7 +28,6 @@
        :author "David Edgar Liebke"}
   incanter.charts
   ;(:gen-class)
-  ;(:use (incanter core stats))
   (:use [incanter.core :only (matrix? to-list plus minus div group-by
                               bind-columns view save)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
@@ -50,8 +49,7 @@
             (org.jfree.ui TextAnchor)
             (org.jfree.chart.annotations XYPointerAnnotation
                                          XYTextAnnotation
-                                         XYPolygonAnnotation)
-     ))
+                                         XYPolygonAnnotation)))
 
 
 
