@@ -16,6 +16,11 @@
 			             :header true))
 (view data)
 
+(def data2 (read-dataset "http://www.census.gov/popest/national/files/NST_EST2009_ALLDATA.csv"
+			             :header true))
+(view data2)
+
+
 
 (mongo! :db "mydb")
 
@@ -41,4 +46,12 @@
 		  (sel new-data :cols :passengers)))
 
 
+
+(insert-dataset :census-data data2)
+(def new-census (fetch-dataset :census-data))
+(def region-names (sel new-census :cols :NAME))
+(def popest-2009 (sel new-census :cols :POPESTIMATE2009))
+(view (bar-chart region-names popest-2009))
+
+(view (bar-chart (drop 5 region-names) (drop 5 popest-2009)))
 
