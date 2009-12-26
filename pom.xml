@@ -29,9 +29,8 @@
     <module>incanter-chrono</module>
     <module>incanter-io</module>
     <module>incanter-charts</module>
-<!--    <module>incanter-processing</module> -->
-<!--    <module>incanter-</module> -->
-<!--    <module>incanter-bundle</module> -->
+    <module>incanter-processing</module>
+    <module>incanter-bundle</module>
   </modules>
 
 </project>
