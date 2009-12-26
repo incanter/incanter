@@ -97,11 +97,17 @@
   ([obj] (is-matrix obj)))
 
 
+(defn dataset?
+" Determines if obj is of type ::dataset."
+  ([obj] (= (type obj) ::dataset)))
+
+
 (defn nrow
   " Returns the number of rows in the given matrix. Equivalent to R's nrow function."
   ([mat]
    (cond
     (matrix? mat) (.rows #^Matrix mat)
+    (dataset? mat) (count (:rows mat))
     (coll? mat) (count mat))))
 
 
@@ -110,6 +116,7 @@
   ([mat]
    (cond
     (matrix? mat) (.columns #^Matrix mat)
+    (dataset? mat) (count (:column-names mat))
     (coll? mat) 1 )))
 
 
@@ -1121,11 +1128,6 @@
         {:column-names column-names
 	 :rows rows}
         {:type ::dataset}))))
-
-
-(defn dataset?
-" Determines if obj is of type ::dataset."
-  ([obj] (= (type obj) ::dataset)))
 
 
 (defn- get-column-id [dataset column-key]
