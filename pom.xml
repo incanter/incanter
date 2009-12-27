@@ -9,7 +9,7 @@
     <groupId>incanter</groupId>
     <artifactId>incanter-parent</artifactId>
     <version>1.0-master-SNAPSHOT</version>
-    <relativePath>incanter-parent/pom.xml</relativePath>
+    <relativePath>modules/incanter-parent/pom.xml</relativePath>
   </parent>
 
   <groupId>incanter</groupId>
@@ -26,13 +26,14 @@
   </scm>
 
   <modules>
-    <module>incanter-parent</module>
-    <module>incanter-core</module>
-    <module>incanter-chrono</module>
-    <module>incanter-io</module>
-    <module>incanter-charts</module>
-    <module>incanter-processing</module>
-    <module>incanter-bundle</module>
+    <module>modules/incanter-parent</module>
+    <module>modules/incanter-core</module>
+    <module>modules/incanter-chrono</module>
+    <module>modules/incanter-io</module>
+    <module>modules/incanter-charts</module>
+    <module>modules/incanter-processing</module>
+    <module>modules/incanter-bundle</module>
+    <module>modules/incanter-mongodb</module>
   </modules>
 
 </project>

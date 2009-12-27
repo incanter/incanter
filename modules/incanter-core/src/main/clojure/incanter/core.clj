@@ -1455,7 +1455,16 @@
                         (type obj))))
 
 
-(defmethod view ::coll ([obj & options] (view (matrix obj))))
+;;(defmethod view ::coll ([obj & options] (view (matrix obj))))
+
+(defmethod view ::coll
+  ([obj & options]
+    (let [rows (if (coll? (first obj))
+			  obj
+			  (map vector obj))
+	  colnames (range (count (first rows)))]
+      (view (dataset colnames rows)))))
+  
 
 
 (defmethod view incanter.Matrix

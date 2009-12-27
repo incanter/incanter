@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd ./modules/incanter-bundle
+mvn clojure:swank
+
