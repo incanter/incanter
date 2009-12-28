@@ -21,6 +21,8 @@
   (:use [incanter.io :only (read-dataset)]))
 
 
+(def **datasets-base-url** "http://github.com/liebke/incanter/raw/master/")
+
 
 (def **datasets**
   {
@@ -97,6 +99,9 @@
                       started (using -Dincanter.home) or there is no INCANTER_HOME
                       environment variable set, use the :incanter-home options to 
                       provide the parent directory of the sample data directory.
+
+    :from-repo (default false) -- If true, retrieves the dataset from the online repository 
+                       instead of locally, it will do this by default if incanter-home is not set.
 
 
   Datasets:
@@ -176,7 +181,10 @@
 			    (System/getProperty "incanter.home")
 			    (System/getenv "INCANTER_HOME"))
           ds (**datasets** dataset-key)
-          filename (if (nil? incanter-home) (ds :filename) (str incanter-home "/" (ds :filename)))
+	  from-repo? (if (true? (:from-repo opts)) true false)
+          filename (if (or (nil? incanter-home) from-repo?) 
+		     (str **datasets-base-url** (ds :filename)) 
+		     (str incanter-home "/" (ds :filename)))
           delim (ds :delim)
           header (ds :header)]
    (read-dataset filename :delim delim :header header))))
