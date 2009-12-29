@@ -9,13 +9,15 @@
 INCANTER_HOME=.
 CLASSES_DIR=$INCANTER_HOME/target/
 INCANTER_JAR=$INCANTER_HOME/modules/incanter-bundle/target/incanter-exec.jar
+REPL_JAVA_OPTS="-server"
+SCRIPT_JAVA_OPTS="-server -XX:+AggressiveOpts"
 
 if [ -z "$1" ]; then
         #java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -jar $INCANTER_JAR clojure.main
-        java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR jline.ConsoleRunner clojure.main
+        java $REPL_JAVA_OPTS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR jline.ConsoleRunner clojure.main
 else
         scriptname=$1
         #java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR clojure.lang.Script $scriptname -- $*
-        java -server -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR clojure.main $scriptname -- $*
+        java $SCRIPT_JAVA_OPTS -Dclojure.compile.path=$CLASSES_DIR -Dincanter.home=$INCANTER_HOME -cp .:$INCANTER_JAR clojure.main $scriptname -- $*
 fi
 
