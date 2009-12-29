@@ -1384,7 +1384,7 @@
     ($ cars :speed)
 
     
-    (with-data [cars]
+    (with-data cars
       (def lm (linear-model ($ :dist) ($ :speed)))
       (doto (scatter-plot ($ :speed) ($ :dist))
         view
@@ -1405,7 +1405,7 @@
 
     (def cars (get-dataset :cars))
 
-    (with-data [cars]
+    (with-data cars
       (def lm (linear-model ($ :dist) ($ :speed)))
       (doto (scatter-plot ($ :speed) ($ :dist))
         view
@@ -1413,8 +1413,8 @@
 
 "
   ([data-binding & body]
-    `(binding [**current-data** ~(first data-binding)]
-        (do ~@body))))
+     `(binding [**current-data** ~data-binding]
+	      (do ~@body))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
