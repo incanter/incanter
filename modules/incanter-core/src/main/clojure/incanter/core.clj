@@ -1184,7 +1184,9 @@
 
 "
   ([query-map]
-   (let [ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= :$in (fn [value val-set] (some val-set [value]))}
+   (let [in-fn (fn [value val-set] (some val-set [value]))
+          nin-fn (complement in-fn)
+	  ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= :$in in-fn :$nin nin-fn}
 	  _and (fn [a b] (and a b))] 
      (fn [row] 
        (reduce _and
@@ -1205,10 +1207,13 @@
     
     To indicate that :x should be between 10 and 20, use {:x {:$gt 10 :$lt 20}}.
     
-    To indicate that :category should also be either :red, :green, or :blue, use
+    To indicate that :category should also be either :red, :green, or :blue, use :$in
     {:x {:$gt 10 :$lt 20} :y {:$in #{:green :blue :red}}}
 
-    The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in.
+    And to indicate that :category should not include :red, :green, or :blue, use :$nin
+    {:x {:$gt 10 :$lt 20} :y {:$nin #{:green :blue :red}}}
+
+    The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in, :$nin.
 
    Examples:
       (use '(incanter core datasets))
@@ -1362,6 +1367,55 @@
   ([data] (:column-names data)) 
   ([data colnames]
      (dataset colnames (to-list data))))
+
+
+
+(def **current-data**)
+
+(defn $ 
+"An alias to (sel (first args) :cols (second args)). If given only a single argument,
+  it will use the **current-data** binding for the first argument, which is set with
+  the with-data macro.
+
+  Examples:
+    (use '(incanter core stats datasets))
+
+    (def cars (get-dataset :cars))
+    ($ cars :speed)
+
+    
+    (with-data [cars]
+      (def lm (linear-model ($ :dist) ($ :speed)))
+      (doto (scatter-plot ($ :speed) ($ :dist))
+        view
+        (add-lines ($ :speed) (:fitted lm))))
+
+"
+  ([& args] 
+     (if (= (count args) 1) 
+       (sel **current-data** :cols (first args))
+       (sel (first args) :cols (second args)))))
+
+(defmacro with-data 
+  "Binds the given data to **current-data** and executes the body.
+   Typically used with the $ function.
+
+  Examples:
+    (use '(incanter core datasets))
+
+    (def cars (get-dataset :cars))
+
+    (with-data [cars]
+      (def lm (linear-model ($ :dist) ($ :speed)))
+      (doto (scatter-plot ($ :speed) ($ :dist))
+        view
+        (add-lines ($ :speed) (:fitted lm))))
+
+"
+  ([data-binding & body]
+    `(binding [**current-data** ~(first data-binding)]
+        (do ~@body))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES
