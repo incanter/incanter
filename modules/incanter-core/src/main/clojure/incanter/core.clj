@@ -348,6 +348,7 @@
       args)))
 
 
+
 (defn bind-columns
 "   Returns the matrix resulting from concatenating the given matrices
     and/or sequences by their columns. Equivalent to R's cbind.
@@ -369,6 +370,7 @@
    (reduce
     (fn [A B] (.viewDice (bind-rows (trans A) (trans B))))
     args)))
+
 
 
 ;(defn inner-product [& args] (apply + (apply map * args)))
@@ -612,7 +614,7 @@
 (defmulti to-list
   " Returns a list-of-lists if the given matrix is two-dimensional
     and a flat list if the matrix is one-dimensional."
-  class)
+  type)
 
 (defmethod to-list Matrix
  ([#^Matrix mat]
@@ -623,6 +625,13 @@
       (first (map #(seq %) (seq (.toArray mat))))
     :else
       (map #(seq %) (seq (.toArray mat))))))
+
+
+(defmethod to-list ::dataset
+  [data]
+    (map (fn [row] (map (fn [col] (row col)) 
+			           (:column-names data)))
+	     (:rows data)))
 
 
 (defmethod to-list :default [s] s)
@@ -1043,7 +1052,7 @@
       (coll? coll)
         (count coll)
       :else
-        (throw (Exception. "Argument must be a collection or matrix!")))))
+        1)))
 
 
 
@@ -1121,13 +1130,24 @@
   data. The data is either a sequence of sequences or a sequence of hash-maps.
 "
   ([column-names & data]
-    (let [rows (if (map? (ffirst data))
-		      (first data)
-		      (map #(apply assoc {} (interleave column-names %)) (first data)))] 
+    (let [dat (cond
+	           (or (map? (ffirst data)) (coll? (ffirst data)))
+	             (first data)
+	           (map? (first data))
+	             data
+	           :else
+	             (map vector (first data)))
+	   rows (cond
+		      (map? dat)
+		        [dat]
+		      (map? (first dat))
+		        dat
+		      :else 
+	  	        (map #(apply assoc {} (interleave column-names %)) dat))] 
       (with-meta
-        {:column-names column-names
+        {:column-names (into [] column-names)
 	 :rows rows}
-        {:type ::dataset}))))
+        {:type :incanter.core/dataset}))))
 
 
 (defn- get-column-id [dataset column-key]
@@ -1143,6 +1163,69 @@
                (nth headers col-key))
              col-key)]
     id))
+
+
+
+(defn query-to-pred 
+  "Given a query-map, it returns a function that accepts a hash-map and returns true if it 
+   satisfies the conditions specified in the provided query-map.
+
+   Examples:
+
+     (use 'incanter.core)
+     (def pred (query-to-pred {:x 5 :y 7}))
+     (pred {:x 5 :y 7 :z :d})
+
+     (def pred (query-to-pred {:x 5 :y {:$gt 5 :$lt 10}}))
+     (pred {:x 5 :y 7 :z :d})
+
+     (def pred (query-to-pred {:z {:$in #{:a :b}}}))
+     (pred {:x 5 :y 7 :z :d})
+
+"
+  ([query-map]
+   (let [ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= :$in (fn [value val-set] (some val-set [value]))}
+	  _and (fn [a b] (and a b))] 
+     (fn [row] 
+       (reduce _and
+	       (for [k (keys query-map)]
+		 (if (map? (query-map k))
+		   (reduce _and
+			   (for [sk (keys (query-map k))]
+			     ((ops sk) (row k) ((query-map k) sk))))
+		   (= (row k) (query-map k)))))))))
+
+(defn query-dataset 
+  "Queries the given dataset using the query-map, returning a new dataset.
+    The query-map uses the the dataset's column-names as keys and a
+    simple variant of the MongoDB query language. 
+
+    For instance, given a dataset with two columns, :x and :category,  to query 
+    for rows where :x equals 10, use the following query-map: {:x 10}.
+    
+    To indicate that :x should be between 10 and 20, use {:x {:$gt 10 :$lt 20}}.
+    
+    To indicate that :category should also be either :red, :green, or :blue, use
+    {:x {:$gt 10 :$lt 20} :y {:$in #{:green :blue :red}}}
+
+    The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in.
+
+   Examples:
+      (use '(incanter core datasets))
+      (def cars (get-dataset :cars))
+      
+      (view (query-dataset cars {\"speed\" 10}))
+      (view (query-dataset cars {\"speed\" {:$in #{17 14 19}}}))
+      (view (query-dataset cars {\"speed\" {:$lt 20 :$gt 10}}))
+
+
+"
+  ([data query-map]
+     (let [pred (query-to-pred query-map)
+	    rows (:rows data)]
+       (assoc data :rows
+	      (for [row rows :when (pred row)] row)))))
+
 
 
 
@@ -1168,6 +1251,117 @@
                              :rows (map #(apply assoc {} (interleave cols %)) result))
                    {:type ::dataset})))))
 
+
+(defn to-dataset
+  "Returns a dataset containing the given values.
+
+   Examples:
+
+     (use 'incanter.core)
+     (to-dataset 1)
+     (to-dataset :a)
+     (to-dataset [:a]) 
+     (to-dataset (range 10))
+     (to-dataset [[1 2] [3 4] [5 6]])
+     (to-dataset {:a 1 :b 2 :c 3})
+     (to-dataset {\"a\" 1 \"b\" 2 \"c\" 3})
+     (to-dataset [{:a 1 :b 2} {:a 1 :b 2}])
+     (to-dataset [{\"a\" 1 \"b\" 2 \"c\" 3} {\"a\" 1 \"b\" 2 \"c\" 3}])
+
+"
+  ([obj]
+     (let [colnames (cond
+		              (dataset? obj)
+			        (:column-names obj)
+			      (map? obj)
+			        (keys obj)
+			      (coll? obj)
+			        (if (map? (first obj))
+				  (keys (first obj))
+				  (map #(keyword (str "col-" %)) (range (length (first obj)))))
+			      :else
+			        [:col-0]) 
+	    rows (cond
+		       (dataset? obj)
+		         (:rows obj)
+		       (map? obj)
+		         [(vals obj)]
+		       (coll? obj)
+		         obj
+		       :else
+		         [obj])]
+         (dataset colnames rows))))
+
+
+(defn bind-data-columns
+  "Returns a dataset created by merging the given datasets and/or collections.
+   There must be the same number of rows in each dataset and/or collections. 
+    Column names are not preserved in order to prevent naming conflicts.
+
+    Examples:
+      (use '(incanter core datasets))
+      (def cars (get-dataset :cars))
+      (def x (sel cars :cols 0))
+      (view (bind-data-columns cars cars))
+      (view (bind-data-columns cars x))
+      (view (bind-data-columns (range (nrow cars)) cars))
+      (view (bind-data-columns (range 10) (range 10)))
+      (view (bind-data-columns {:a 1 :b 2} {:c 1 :d 2}))
+
+"
+  ([& args]
+     (reduce (fn [A B] 
+	            (let [a (to-dataset A)
+			   b (to-dataset B)
+			   ncol-a (ncol a)
+			   ncol-b (ncol b)
+			   colnames (map #(keyword (str "col-" %))
+						    (range (+ ncol-a ncol-b)))]
+		      (dataset colnames
+			            (map concat (to-list a) (to-list b)))))
+	     args)))
+
+
+(defn bind-data-rows
+  "Returns a dataset created by combining the rows of the given datasets and/or collections.
+
+   Examples:
+
+     (use '(incanter core datasets))
+     (view (bind-data-rows (to-dataset (range 5)) (to-dataset (range 5 10))))
+     (view (bind-data-rows cars cars))
+     (view (bind-data-rows [[1 2] [3 4]] [[5 6] [7 8]]))
+     (view (bind-data-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]])) 
+     (view (bind-data-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
+
+"
+  ([& args]
+     (reduce (fn [A B] 
+	           (let [a (to-dataset A)
+			  b (to-dataset B)]
+		      (dataset (:column-names a) 
+			           (concat (to-list a) (to-list b)))))
+	          args)))
+
+
+
+(defn column-names
+  "If given a dataset, it returns its column names. If given a dataset and a sequence
+   of column names, it returns a dataset with the given column names.
+
+   Examples:
+     (use '(incanter core datasets))
+     (def data (get-dataset :cars))
+     (column-names data)
+
+     (def renamed-data (column-names data [:x1 :x2]))
+     (column-names renamed-data)
+
+ 
+    "
+  ([data] (:column-names data)) 
+  ([data colnames]
+     (dataset colnames (to-list data))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES
