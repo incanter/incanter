@@ -1,9 +1,98 @@
 
 ;; load the necessary Incanter libraries
-(use '(incanter core stats charts io mongodb))
+(use '(incanter core stats charts io))
 
 ;; load Somnium's Congomongo library
-(use 'somnium.congomongo) 
+(use '(incanter io mongodb))
+(use 'somnium.congomongo)
+
+;; read in some data, you provide the read-dataset function a string that is either a 
+;; filename or a URL to the data
+
+(def breaking-data (read-dataset "http://github.com/liebke/incanter/raw/master/data/cars.csv"
+				                     :header true))
+
+(def breaking-data (read-dataset "http://github.com/liebke/incanter/raw/submodules/data/cars.csv"
+				                     :header true))
+
+(def breaking-data (read-dataset "/Users/dliebke/Desktop/dev/incanter/data/cars.csv"
+				                     :header true))
+
+(use 'incanter.datasets)
+(def breaking-data (get-dataset :cars))
+(view breaking-data)
+
+;; I used a URL to the sample data included with the Incanter distribution. I could have used
+;; (incanter.datasets/get-dataset :cars) to retrieve the same data
+
+;; I will use the new with-data macro and $ column-selector function to simplify access
+;; to the dataset's columns. Within the with-data macro, columns of the bound dataset
+;; can be accessed, by name, using the $ function, e.g. ($ colname). Columns can
+;; also be accessed using the column index for both datasets and matrices, ($ 0).
+
+;; The following code will create a scatter plot of the breaking-data (speed vs. dist),
+;; and then add a regression line using the fitted values returned from the linear-model
+;; function.
+
+(column-names breaking-data)
+
+(with-data breaking-data
+  (def lm (linear-model ($ :dist) ($ :speed)))
+  (doto (scatter-plot ($ :speed) ($ :dist))
+    view
+    (add-lines ($ :speed) (:fitted lm))))
+
+;; We can add the fitted (or predicted values) to the data using the bind-data-columns
+;; function.
+
+(def breaking-data (bind-data-columns breaking-data (:fitted lm)))
+
+(view breaking-data)
+
+;; Notice that the column names are changed, this is done to prevent naming conflicts
+;; when merging datasets. We can add more meaningful names with the column-names
+;; function
+
+(def breaking-data (column-names breaking-data [:speed :dist :predicted-dist]))
+
+;; We can use the -> macro to perform both steps.
+(view breaking-data)
+
+(with-data breaking-data
+   
+  (def lm (linear-model ($ :dist) ($ :speed)))
+   
+  (doto (scatter-plot ($ :speed) ($ :dist))
+           (add-lines ($ :speed) (:fitted lm))
+	   view)
+
+  (view (scatter-plot ($ :speed) (:residuals lm))) 
+
+  ;; let's append the fitted values and residuals, from the regression, to the original dataset
+  (def data (-> $data
+		       (bind-data-columns (:fitted lm))
+		       (bind-data-columns (:residuals lm))
+		       (column-names [:speed :dist :predicted-dist :residuals])))
+  (view data)
+
+  ;; get the mean speed of the observations that have residuals between -10 and 10.
+  (mean ($ :speed ($where {:residuals {:$gt -10 :$lt 10}} data))) ; =14.32
+
+  (view
+      (-> ($where {:speed {:$lt 10}}) 
+	    (bind-data-rows ($where {:speed {:$gt 20}}))))
+
+  ;; Now connect to MongoDB. If mydb doesn't exist, it will be created.
+  (mongo! :db "mydb")
+  (insert-dataset :breaking-data data))
+
+
+(def results (fetch-dataset :breaking-data))
+(view results)
+(with-data (sel results :rows (range 50))
+  ($ :residuals))
+
+
 
 ;; Note: congomongo doesn't seem to work with 'lein swank', 
 ;; it thows a clojure.contrib.json error. It does work with 'lein repl'.
@@ -74,6 +163,9 @@
 ;; view the region names and population estimates for 2009
 (view (sel new-census :cols [:NAME :POPESTIMATE2009]))
 
+;; or use the $ column selector function
+(view ($ [:NAME :POPESTIMATE200] new-census))
+
 ;; select the region names and populatione estimates for 2009 from the dataset
 (def region-names (sel new-census :cols :NAME))
 (def popest-2009 (sel new-census :cols :POPESTIMATE2009))
@@ -81,9 +173,35 @@
 ;; and view a bar-chart
 (view (bar-chart region-names popest-2009))
 
+;; or use the with-data macro
+(with-data new-census
+  (view (bar-chart ($ :NAME) ($ :POPESTIMATE2009)))
+  ;; drop the first five values from each, since they are aggregate data
+  (view (bar-chart (drop 5 ($ :NAME)) (drop 5 ($ :POPESTIMATE)))))
+
 ;; the first 5 values were aggregate data, so let's drop them and 
 ;; create a new bar-chart.
 (view (bar-chart (drop 5 region-names) (drop 5 popest-2009)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ (use '(incanter core stats datasets))
 
+(def cars (get-dataset :cars))
+($qry {"speed" 10} cars)
+($qry {:speed 10} cars)
+
+(with-data (get-dataset :cars)
+  (view $data)
+  (view ($where {"speed" {:$gt -10 :$lt 10}}))    
+  (view ($where {"dist" {:$in #{10 12 16}}})))
+
+(with-data (get-dataset :cars)
+  (view $data)
+  (view ($where {:speed {:$gt -10 :$lt 10}}))    
+  (view ($where {:dist {:$in #{10 12 16}}})))
+
+
+
+
+ 
 
