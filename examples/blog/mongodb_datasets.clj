@@ -12,11 +12,6 @@
 (def breaking-data (read-dataset "http://github.com/liebke/incanter/raw/master/data/cars.csv"
 				                     :header true))
 
-(def breaking-data (read-dataset "http://github.com/liebke/incanter/raw/submodules/data/cars.csv"
-				                     :header true))
-
-(def breaking-data (read-dataset "/Users/dliebke/Desktop/dev/incanter/data/cars.csv"
-				                     :header true))
 
 (use 'incanter.datasets)
 (def breaking-data (get-dataset :cars))
