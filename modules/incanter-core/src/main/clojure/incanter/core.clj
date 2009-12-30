@@ -1226,7 +1226,14 @@
 
 "
   ([data query-map]
-     (let [pred (query-to-pred query-map)
+     (let [qmap (into {}
+		        (for [k (keys query-map)] 
+			  (if (keyword? k) 
+			    (if (some #{k} (:column-names data))
+			      [k (query-map k)]
+			      [(name k) (query-map k)])
+			    [k (query-map k)])))
+	    pred (query-to-pred qmap)
 	    rows (:rows data)]
        (assoc data :rows
 	      (for [row rows :when (pred row)] row)))))
@@ -1370,18 +1377,20 @@
 
 
 
-(def **current-data**)
+(def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
+             functions like $ and $where can use $data as a default argument."} 
+     $data)
 
 (defn $ 
-"An alias to (sel (first args) :cols (second args)). If given only a single argument,
-  it will use the **current-data** binding for the first argument, which is set with
+"An alias to (sel (second args) :cols (first args)). If given only a single argument,
+  it will use the $data binding for the first argument, which is set with
   the with-data macro.
 
   Examples:
     (use '(incanter core stats datasets))
 
     (def cars (get-dataset :cars))
-    ($ cars :speed)
+    ($ :speed cars)
 
     
     (with-data cars
@@ -1393,29 +1402,64 @@
 "
   ([& args] 
      (if (= (count args) 1) 
-       (sel **current-data** :cols (first args))
-       (sel (first args) :cols (second args)))))
+       (sel $data :cols (first args))
+       (sel (second args) :cols (first args)))))
 
-(defmacro with-data 
-  "Binds the given data to **current-data** and executes the body.
-   Typically used with the $ function.
+(defn $where 
+"An alias to (query-dataset (second args) (first args)). If given only a single argument,
+  it will use the $data binding for the first argument, which is set with
+  the with-data macro.
 
   Examples:
+
     (use '(incanter core datasets))
 
     (def cars (get-dataset :cars))
+    ($where {:speed 10} cars)
 
+    ;; use the with-data macro and the one arg version of $where
     (with-data cars
-      (def lm (linear-model ($ :dist) ($ :speed)))
-      (doto (scatter-plot ($ :speed) ($ :dist))
-        view
-        (add-lines ($ :speed) (:fitted lm))))
+      (view ($where {:speed {:$gt -10 :$lt 10}}))     
+      (view ($where {:dist {:$in #{10 12 16}}}))
+      (view ($where {:dist {:$nin #{10 12 16}}})))
+
+    ;; create a dataset where :speed greater than 10 or less than -10
+    (with-data (get-dataset :cars)
+      (view (-> ($where {:speed {:$gt 20}}) 
+                      (bind-data-rows ($where {:speed {:$lt 10}})))))
+       
 
 "
-  ([data-binding & body]
-     `(binding [**current-data** ~data-binding]
-	      (do ~@body))))
+  ([& args] 
+     (if (= (count args) 1) 
+       (query-dataset $data  (first args))
+       (query-dataset (second args) (first args)))))
 
+
+ 
+(defmacro with-data 
+  "Binds the given data to $data and executes the body.
+   Typically used with the $ and $where functions.
+ 
+  Examples:
+    (use '(incanter core stats datasets))
+  
+    (with-data  (get-dataset :cars)
+      (def lm (linear-model ($ :dist) ($ :speed)))
+      (doto (scatter-plot ($ :speed) ($ :dist))
+                (add-lines ($ :speed) (:fitted lm))
+                 view))
+
+     ;; create a dataset where :speed greater than 10 or less than -10
+     (with-data (get-dataset :cars)
+       (view (-> ($where {:speed {:$gt 20}}) 
+                       (bind-data-rows ($where {:speed {:$lt 10}})))))
+ 
+"
+  ([data-binding & body]
+     `(binding [$data ~data-binding]
+	      (do ~@body))))
+ 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES
