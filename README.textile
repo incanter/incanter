@@ -60,7 +60,7 @@ Try another simple example, a plot of the sine function over the range -4 to 4:
 <img src="http://incanter.org/images/examples/sin-plot.png" />
 
 
-The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found in the @docs/api/@ directory and online at <a href="http://incanter.org/docs/api">http://incanter.org/docs/api/</a>.
+The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
 
 *More Incanter examples*
 
@@ -83,8 +83,8 @@ h2. Documentation
 The following documentation covers the Incanter and Clojure APIs and the APIs of the underlying java libraries.
 
 *Incanter documentation*
-* "Incanter Wiki":http://wiki.github.com/liebke/incanter
-* "Incanter API":http://incanter.org/docs/api/
+* "Doc Index":http://incanter-blog.org/contents/
+* "API":http://liebke.github.com/incanter
 
 
 *Related API documentation*
@@ -129,7 +129,7 @@ See @lib/license.txt@ file for license terms of included libraries.
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
 * "JGraph":http://www.jgraph.com/ (for future development)
-* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ (test-is, gen-html-docs, repl-utils)
+* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
 * "JLine":http://jline.sourceforge.net/
 * "Joda Time":http://joda-time.sourceforge.net/
 
