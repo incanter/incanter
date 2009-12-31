@@ -22,6 +22,7 @@
         <version>1.3</version>
         <configuration>
           <testScript>${project.basedir}/src/test/clojure/incanter/io_tests_runner.clj</testScript>
+          <clojureOptions>-Dincanter.home=${basedir}/../../</clojureOptions> 
         </configuration>
         <executions>
           <execution>

@@ -30,8 +30,7 @@
 ;; UNIT TESTS FOR incanter.io.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (System/getProperty "incanter.home")
-(def incanter-home ".")
+(def incanter-home (System/getProperty "incanter.home"))
 
 ;; read in a dataset from a space delimited file 
 (def test-data (read-dataset 
