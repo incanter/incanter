@@ -37,10 +37,10 @@
     view
     (add-lines ($ :speed) (:fitted lm))))
 
-;; We can add the fitted (or predicted values) to the data using the bind-data-columns
+;; We can add the fitted (or predicted values) to the data using the conj-cols
 ;; function.
 
-(def breaking-data (bind-data-columns breaking-data (:fitted lm)))
+(def breaking-data (conj-cols breaking-data (:fitted lm)))
 
 (view breaking-data)
 
@@ -64,22 +64,20 @@
   (view (scatter-plot ($ :speed) (:residuals lm))) 
 
   ;; let's append the fitted values and residuals, from the regression, to the original dataset
-  (def data (-> $data
-		       (bind-data-columns (:fitted lm))
-		       (bind-data-columns (:residuals lm))
-		       (column-names [:speed :dist :predicted-dist :residuals])))
-  (view data)
+  (def results (-> $data 
+	                   (conj-cols (:fitted lm) (:residuals lm))
+		           (column-names [:speed :dist :predicted-dist :residuals])))
+  (view results)
 
   ;; get the mean speed of the observations that have residuals between -10 and 10.
-  (mean ($ :speed ($where {:residuals {:$gt -10 :$lt 10}} data))) ; =14.32
+  (mean ($ :speed ($where {:residuals {:$gt -10 :$lt 10}} results))) ; =14.32
 
-  (view
-      (-> ($where {:speed {:$lt 10}}) 
-	    (bind-data-rows ($where {:speed {:$gt 20}}))))
+  (mean ($ :speed (-> ($where {:speed {:$lt 10}}) 
+	                          (conj-rows ($where {:speed {:$gt 20}})))))
 
   ;; Now connect to MongoDB. If mydb doesn't exist, it will be created.
   (mongo! :db "mydb")
-  (insert-dataset :breaking-data data))
+  (insert-dataset :breaking-data results))
 
 
 (def results (fetch-dataset :breaking-data))
@@ -87,7 +85,10 @@
 (with-data (sel results :rows (range 50))
   ($ :residuals))
 
-
+;; mean speed for observations with residuals greater than 10 or less than -10
+(with-data breaking-data
+  (mean ($ :speed (-> ($where {:speed {:$lt 10}}) 
+	                          (conj-rows ($where {:speed {:$gt 20}}))))))
 
 ;; Note: congomongo doesn't seem to work with 'lein swank', 
 ;; it thows a clojure.contrib.json error. It does work with 'lein repl'.
@@ -196,7 +197,24 @@
   (view ($where {:dist {:$in #{10 12 16}}})))
 
 
+(with-data (get-dataset :cars)
+ (view ($ :dist 
+	      (conj-rows ($where {:speed {:$lt 10}})
+				($where {:speed {:$gt 20}})))))
+
+(with-data (get-dataset :cars)
+ (view (conj-rows ($where {:speed {:$lt 10}})
+		            ($where {:speed {:$gt 20}}))))
 
 
- 
+(use '(incanter core stats charts))
+
+(def normal-data (sample-normal 10000))
+(def data (-> (conj-cols (sample-normal 50000) (sample-normal 50000))
+	             (column-names [:x1 :x2])))
+
+
+(with-data ($where {:x1 {:$gt 2} :x2 {:$lt -2}} data)
+  (view $data)
+  (view (scatter-plot ($ :x1) ($ :x2))))
 
