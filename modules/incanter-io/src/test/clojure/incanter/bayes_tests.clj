@@ -29,7 +29,7 @@
 
 ;; read in the social science survey dataset from a space delimited file 
 (def ols-data (to-matrix (read-dataset 
-                           (str "." ;;(System/getProperty "incanter.home")
+                           (str (System/getProperty "incanter.home")
                                 "/data/olsexamp.dat")
                            :delim \space
                            :header true)))
