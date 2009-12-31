@@ -1297,7 +1297,10 @@
 		       (dataset? obj)
 		         (:rows obj)
 		       (map? obj)
-		         [(vals obj)]
+		         ;; see if any of the values are collections
+		         (if (reduce #(or %1 %2) (map coll? (vals obj))) 
+			   (vals obj)
+			   [(vals obj)])
 		       (coll? obj)
 		         obj
 		       :else
@@ -1305,7 +1308,7 @@
          (dataset colnames rows))))
 
 
-(defn bind-data-columns
+(defn conj-cols
   "Returns a dataset created by merging the given datasets and/or collections.
    There must be the same number of rows in each dataset and/or collections. 
     Column names are not preserved in order to prevent naming conflicts.
@@ -1314,11 +1317,11 @@
       (use '(incanter core datasets))
       (def cars (get-dataset :cars))
       (def x (sel cars :cols 0))
-      (view (bind-data-columns cars cars))
-      (view (bind-data-columns cars x))
-      (view (bind-data-columns (range (nrow cars)) cars))
-      (view (bind-data-columns (range 10) (range 10)))
-      (view (bind-data-columns {:a 1 :b 2} {:c 1 :d 2}))
+      (view (conj-cols cars cars))
+      (view (conj-cols cars x))
+      (view (conj-cols (range (nrow cars)) cars))
+      (view (conj-cols (range 10) (range 10)))
+      (view (conj-cols {:a 1 :b 2} {:c 1 :d 2}))
 
 "
   ([& args]
@@ -1334,17 +1337,18 @@
 	     args)))
 
 
-(defn bind-data-rows
+(defn conj-rows
   "Returns a dataset created by combining the rows of the given datasets and/or collections.
 
    Examples:
 
      (use '(incanter core datasets))
-     (view (bind-data-rows (to-dataset (range 5)) (to-dataset (range 5 10))))
-     (view (bind-data-rows cars cars))
-     (view (bind-data-rows [[1 2] [3 4]] [[5 6] [7 8]]))
-     (view (bind-data-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]])) 
-     (view (bind-data-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
+     (def cars (get-dataset :cars))
+     (view (conj-rows (to-dataset (range 5)) (to-dataset (range 5 10))))
+     (view (conj-rows cars cars))
+     (view (conj-rows [[1 2] [3 4]] [[5 6] [7 8]]))
+     (view (conj-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]]))
+     (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
 
 "
   ([& args]
@@ -1426,7 +1430,7 @@
     ;; create a dataset where :speed greater than 10 or less than -10
     (with-data (get-dataset :cars)
       (view (-> ($where {:speed {:$gt 20}}) 
-                      (bind-data-rows ($where {:speed {:$lt 10}})))))
+                      (conj-rows ($where {:speed {:$lt 10}})))))
        
 
 "
@@ -1453,13 +1457,41 @@
      ;; create a dataset where :speed greater than 10 or less than -10
      (with-data (get-dataset :cars)
        (view (-> ($where {:speed {:$gt 20}}) 
-                       (bind-data-rows ($where {:speed {:$lt 10}})))))
+                       (conj-rows ($where {:speed {:$lt 10}})))))
  
 "
   ([data-binding & body]
      `(binding [$data ~data-binding]
 	      (do ~@body))))
  
+
+(defmulti to-map
+  "Takes a dataset or matrix and returns a hash-map where the keys are 
+   keyword versions of the column names, for datasets, or numbers, for 
+   matrices, and the values are sequence of the column values.
+
+  Examples:
+    (use '(incanter core datasets))
+
+    (to-map (get-dataset :cars))
+
+    (to-map (matrix (range 9) 3))
+
+"
+ type)
+
+(defmethod to-map :incanter.core/dataset
+  ([data]
+     (let [cols (map (partial sel data :cols) (column-names data))
+	    col-keys (map keyword (column-names data))]
+       (zipmap col-keys cols))))
+
+(defmethod to-map incanter.Matrix
+  ([mat]
+     (let [cols (to-list (trans mat))
+	    col-keys (range (ncol mat))]
+       (zipmap col-keys cols))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES
