@@ -105,8 +105,7 @@ To build and test Incanter, you will need to have <a href="http://maven.apache.o
 
 To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@ (or on Windows @bin/clj.bat@)
 
-or run:
-@mvn clojure:repl@ 
+or run: @mvn clojure:repl@ , from the @modules/incanter-bundle@ directory
 
 A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-bundle@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
 
