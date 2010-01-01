@@ -1186,7 +1186,8 @@
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
           nin-fn (complement in-fn)
-	  ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= :$in in-fn :$nin nin-fn}
+	  ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+	          :$in in-fn :$nin nin-fn :$fn (fn [v f] (f v))}
 	  _and (fn [a b] (and a b))] 
      (fn [row] 
        (reduce _and
@@ -1194,7 +1195,9 @@
 		 (if (map? (query-map k))
 		   (reduce _and
 			   (for [sk (keys (query-map k))]
-			     ((ops sk) (row k) ((query-map k) sk))))
+			     (if (nil? (ops sk)) 
+			       false
+			       ((ops sk) (row k) ((query-map k) sk)))))
 		   (= (row k) (query-map k)))))))))
 
 (defn query-dataset 
@@ -1213,15 +1216,16 @@
     And to indicate that :category should not include :red, :green, or :blue, use :$nin
     {:x {:$gt 10 :$lt 20} :y {:$nin #{:green :blue :red}}}
 
-    The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in, :$nin.
+    The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in, :$nin, $fn.
 
    Examples:
       (use '(incanter core datasets))
       (def cars (get-dataset :cars))
       
-      (view (query-dataset cars {\"speed\" 10}))
-      (view (query-dataset cars {\"speed\" {:$in #{17 14 19}}}))
-      (view (query-dataset cars {\"speed\" {:$lt 20 :$gt 10}}))
+      (view (query-dataset cars {:speed 10}))
+      (view (query-dataset cars {:speed {:$in #{17 14 19}}}))
+      (view (query-dataset cars {:speed {:$lt 20 :$gt 10}}))
+      (view (query-dataset cars {:speed {:$fn #(> (log %) 3)}}))
 
 
 "
