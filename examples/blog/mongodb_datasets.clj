@@ -209,12 +209,83 @@
 
 (use '(incanter core stats charts))
 
-(def normal-data (sample-normal 10000))
-(def data (-> (conj-cols (sample-normal 50000) (sample-normal 50000))
-	             (column-names [:x1 :x2])))
+
+(def data (-> (conj-cols (sample-normal 50000) 
+			              (sample-normal 50000)
+				      (sample-uniform 50000 :integers true :max 100))
+	             (column-names [:x1 :x2 :y])))
 
 
-(with-data ($where {:x1 {:$gt 2} :x2 {:$lt -2}} data)
+(with-data ($where {:x1 {:$gt 2} :y {:$in #{1 50 100}}} data)
   (view $data)
-  (view (scatter-plot ($ :x1) ($ :x2))))
+  (view (scatter-plot ($ :x1) ($ :x2)))
+  (nrow $data))
 
+(use '(incanter core datasets charts stats))
+
+(with-data (get-dataset :cars) 
+  ($where {:speed {:$fn #(> (log %) 3)}}))
+
+
+(view (query-dataset cars (fn [row] (> (/ (row "speed") (row "dist")) 1/2))))
+
+
+
+
+(use '(incanter core datasets))
+(def cars (get-dataset :cars))
+
+($map \"speed\" (fn [s] (/ s)) cars)
+($map [\"speed\" \"dist\"] (fn [s d] (/ s d)) cars)
+
+($map :speed (fn [s] (/ s)) cars)
+($map [:speed :dist] (fn [s d] (/ s d)) cars)
+
+(with-data (get-dataset :cars)
+  (view ($map :speed (fn [s] (/ s))))
+  (view ($map [:speed :dist] (fn [s d] (/ s d)))))
+
+
+(use '(incanter core stats charts datasets))
+  
+(with-data  (get-dataset :cars)
+  (def lm (linear-model ($ :dist) ($ :speed)))
+  (doto (scatter-plot ($ :speed) ($ :dist))
+    (add-lines ($ :speed) (:fitted lm))
+    view))
+
+;; create a dataset where :speed greater than 10 or less than -10
+(with-data (get-dataset :cars)
+  (view (-> ($where {:speed {:$gt 20}}) 
+	    (conj-rows ($where {:speed {:$lt 10}})))))
+
+
+(to-map (get-dataset :cars))
+
+(to-map (matrix (range 9) 3))
+
+
+(use '(incanter core datasets))
+
+(def cars (get-dataset :cars))
+($where {:speed 10} cars)
+
+    ;; use the with-data macro and the one arg version of $where
+(with-data cars
+  (view ($where {:speed {:$gt -10 :$lt 10}}))     
+  (view ($where {:dist {:$in #{10 12 16}}}))
+  (view ($where {:dist {:$nin #{10 12 16}}})))
+
+    ;; create a dataset where :speed greater than 10 or less than -10
+(with-data (get-dataset :cars)
+  (view (-> ($where {:speed {:$gt 20}}) 
+	    (conj-rows ($where {:speed {:$lt 10}})))))
+       
+
+(def data (get-dataset :cars))
+(col-names data)
+
+(def renamed-data (col-names data [:x1 :x2]))
+(col-names renamed-data)
+
+ 

@@ -1165,6 +1165,11 @@
     id))
 
 
+(defn- map-get [m k] 
+  (if (keyword? k)
+    (or (m k) (m (name k))) 
+    (m k)))
+
 
 (defn query-to-pred 
   "Given a query-map, it returns a function that accepts a hash-map and returns true if it 
@@ -1196,9 +1201,10 @@
 		   (reduce _and
 			   (for [sk (keys (query-map k))]
 			     (if (nil? (ops sk)) 
-			       false
+			       (throw (Exception. (str "Invalid key in query-map: " sk)))
 			       ((ops sk) (row k) ((query-map k) sk)))))
 		   (= (row k) (query-map k)))))))))
+
 
 (defn query-dataset 
   "Queries the given dataset using the query-map, returning a new dataset.
@@ -1218,6 +1224,10 @@
 
     The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in, :$nin, $fn.
 
+    A row predicate function can be used instead of a query-map. The function must accept 
+    a map, representing a row of the dataset, and return a boolean value indicating whether 
+    the row should be included in the new dataset.
+
    Examples:
       (use '(incanter core datasets))
       (def cars (get-dataset :cars))
@@ -1227,20 +1237,25 @@
       (view (query-dataset cars {:speed {:$lt 20 :$gt 10}}))
       (view (query-dataset cars {:speed {:$fn #(> (log %) 3)}}))
 
+      ;; use a row predicate function instead of a query map.
+      (view (query-dataset cars (fn [row] (> (/ (row \"speed\") (row \"dist\")) 1/2))))
 
 "
   ([data query-map]
-     (let [qmap (into {}
-		        (for [k (keys query-map)] 
+     (if (fn? query-map)
+       (assoc data :rows
+	      (for [row (:rows data) :when (query-map row)] row))
+       (let [qmap (into {}
+			(for [k (keys query-map)] 
 			  (if (keyword? k) 
 			    (if (some #{k} (:column-names data))
 			      [k (query-map k)]
 			      [(name k) (query-map k)])
 			    [k (query-map k)])))
-	    pred (query-to-pred qmap)
-	    rows (:rows data)]
-       (assoc data :rows
-	      (for [row rows :when (pred row)] row)))))
+	     pred (query-to-pred qmap)
+	     rows (:rows data)]
+	 (assoc data :rows
+		(for [row rows :when (pred row)] row))))))
 
 
 
@@ -1365,17 +1380,17 @@
 
 
 
-(defn column-names
+(defn col-names
   "If given a dataset, it returns its column names. If given a dataset and a sequence
    of column names, it returns a dataset with the given column names.
 
    Examples:
      (use '(incanter core datasets))
      (def data (get-dataset :cars))
-     (column-names data)
+     (col-names data)
 
-     (def renamed-data (column-names data [:x1 :x2]))
-     (column-names renamed-data)
+     (def renamed-data (col-names data [:x1 :x2]))
+     (col-names renamed-data)
 
  
     "
@@ -1408,10 +1423,10 @@
         (add-lines ($ :speed) (:fitted lm))))
 
 "
-  ([& args] 
-     (if (= (count args) 1) 
-       (sel $data :cols (first args))
-       (sel (second args) :cols (first args)))))
+  ([cols] 
+     (sel $data :cols cols))
+  ([cols data] 
+     (sel data :cols cols)))
 
 (defn $where 
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
@@ -1438,10 +1453,43 @@
        
 
 "
-  ([& args] 
-     (if (= (count args) 1) 
-       (query-dataset $data  (first args))
-       (query-dataset (second args) (first args)))))
+  ([query-map] 
+    (query-dataset $data  query-map))
+  ([query-map data] 
+     (query-dataset data query-map)))
+
+
+
+(defn $map 
+  "This function returns a sequence resulting from mapping the given function over
+    the value(s) for the given column key(s) of the given dataset.
+    Like other '$*' functions, it will use $data as the default dataset
+    if none is provided, where $data is set using the with-data macro. 
+
+  Examples:
+
+    (use '(incanter core datasets))
+    (def cars (get-dataset :cars))
+
+    ($map \"speed\" (fn [s] (/ s)) cars)
+    ($map [\"speed\" \"dist\"] (fn [s d] (/ s d)) cars)
+
+    ($map :speed (fn [s] (/ s)) cars)
+    ($map [:speed :dist] (fn [s d] (/ s d)) cars)
+
+    (with-data (get-dataset :cars)
+      (view ($map :speed (fn [s] (/ s))))
+      (view ($map [:speed :dist] (fn [s d] (/ s d)))))
+
+
+"
+  ([col-keys fun data]
+     (let [rows (:rows data)]
+       (if (coll? col-keys)
+	 (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
+	 (map (fn [row] (fun (map-get  row col-keys))) (:rows data)))))
+  ([col-keys fun]
+     ($map col-keys fun $data)))
 
 
  
@@ -1450,7 +1498,7 @@
    Typically used with the $ and $where functions.
  
   Examples:
-    (use '(incanter core stats datasets))
+    (use '(incanter core stats charts datasets))
   
     (with-data  (get-dataset :cars)
       (def lm (linear-model ($ :dist) ($ :speed)))
@@ -1486,8 +1534,8 @@
 
 (defmethod to-map :incanter.core/dataset
   ([data]
-     (let [cols (map (partial sel data :cols) (column-names data))
-	    col-keys (map keyword (column-names data))]
+     (let [cols (map (partial sel data :cols) (col-names data))
+	    col-keys (map keyword (col-names data))]
        (zipmap col-keys cols))))
 
 (defmethod to-map incanter.Matrix
@@ -1495,6 +1543,7 @@
      (let [cols (to-list (trans mat))
 	    col-keys (range (ncol mat))]
        (zipmap col-keys cols))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1798,7 +1847,7 @@
 (defmethod view incanter.Matrix
   ([obj & options]
     (let [opts (when options (apply assoc {} options))
-          column-names (or (:column-names opts) (range (ncol obj)))
+          col-names (or (:column-names opts) (range (ncol obj)))
           m (ncol obj)
           n (nrow obj)]
       (doto (JFrame. "Incanter Matrix")
@@ -1811,18 +1860,18 @@
                       (Vector. (map #(Vector. %) [(to-list obj) []]))
                     (and (= m 1) (> n 1))
                       (Vector. (map #(Vector. [%]) (to-list obj))))
-                                     (Vector. column-names))))
+                                     (Vector. col-names))))
         (.setSize 400 600)
         (.setVisible true)))))
 
 
 (defmethod view :incanter.core/dataset
   ([obj & options]
-   (let [column-names (:column-names obj)
-         column-vals (map (fn [row] (map #(row %) column-names)) (:rows obj))]
+   (let [col-names (:column-names obj)
+         column-vals (map (fn [row] (map #(row %) col-names)) (:rows obj))]
      (doto (JFrame. "Incanter Dataset")
        (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals))
-                                    (Vector. column-names))))
+                                    (Vector. col-names))))
        (.setSize 400 600)
        (.setVisible true)))))
 

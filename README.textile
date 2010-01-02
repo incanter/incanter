@@ -71,9 +71,9 @@ The online documentation for most Incanter functions contain usage examples. The
 ** "Datasets":http://wiki.github.com/liebke/incanter/datasets
 ** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
 ** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
-* See the @examples/@ directory and @test/incanter/*-tests.clj@ for additional usage examples
-** Run @examples/run_prob_plots.clj@ to generate example probability distribution plots
-** Run @bin/runtests.clj@ to run test cases
+* See the @examples/@ directory for additional usage examples.
+**  @bin/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
+
 
 
 <a name="docs"></a>
@@ -88,9 +88,12 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 
 *Related API documentation*
-* "Clojure API":http://clojure.org/api
+* "Clojure API":http://richhickey.github.com/clojure/
+*"Clojure-contrib API":http://richhickey.github.com/clojure-contrib/
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
+"Processing API":http://www.processing.org/reference/
+"Joda Time API":http://joda-time.sourceforge.net/
 
 
 <a name="build"></a>
