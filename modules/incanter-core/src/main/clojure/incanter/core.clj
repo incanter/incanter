@@ -1474,22 +1474,22 @@
     ($map \"speed\" (fn [s] (/ s)) cars)
     ($map [\"speed\" \"dist\"] (fn [s d] (/ s d)) cars)
 
-    ($map :speed (fn [s] (/ s)) cars)
-    ($map [:speed :dist] (fn [s d] (/ s d)) cars)
+    ($map (fn [s] (/ s)) :speed cars)
+    ($map (fn [s d] (/ s d)) [:speed :dist] cars)
 
     (with-data (get-dataset :cars)
-      (view ($map :speed (fn [s] (/ s))))
-      (view ($map [:speed :dist] (fn [s d] (/ s d)))))
+      (view ($map (fn [s] (/ s)) :speed))
+      (view ($map (fn [s d] (/ s d)) [:speed :dist])))
 
 
 "
-  ([col-keys fun data]
+  ([fun col-keys data]
      (let [rows (:rows data)]
        (if (coll? col-keys)
 	 (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
 	 (map (fn [row] (fun (map-get  row col-keys))) (:rows data)))))
-  ([col-keys fun]
-     ($map col-keys fun $data)))
+  ([fun col-keys]
+     ($map fun col-keys $data)))
 
 
  
