@@ -1422,6 +1422,12 @@
         view
         (add-lines ($ :speed) (:fitted lm))))
 
+    ;; standardize speed and dist and append the standardized variables to the original dataset
+    (with-data (get-dataset :cars)
+      (view (conj-cols $data 
+                       (sweep (sweep ($ :speed)) :stat sd :fun div)
+                       (sweep (sweep ($ :dist)) :stat sd :fun div))))
+
 "
   ([cols] 
      (sel $data :cols cols))
@@ -1477,9 +1483,15 @@
     ($map (fn [s] (/ s)) :speed cars)
     ($map (fn [s d] (/ s d)) [:speed :dist] cars)
 
+    (map (fn [s d] (/ s d)) ($ :speed cars) ($ :speed cars))
+
     (with-data (get-dataset :cars)
       (view ($map (fn [s] (/ s)) :speed))
       (view ($map (fn [s d] (/ s d)) [:speed :dist])))
+
+    ;; calculate the speed to dist ratio and append as new column to dataset
+    (with-data (get-dataset :cars)
+      (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))
 
 
 "

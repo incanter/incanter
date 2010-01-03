@@ -1,4 +1,4 @@
-<a border="0" href="http://incanter.org" ><img src="http://incanter.org/images/incanter.jpg" alt="Incanter" /></a>
+<a border="0" href="http://incanter.org" ><img src="http://incanter.org/incanter-banner.png" alt="Incanter" /></a>
 
 
 * <a href="#overview">Overview</a>
