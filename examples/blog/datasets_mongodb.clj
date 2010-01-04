@@ -13,8 +13,14 @@
 (use 'incanter.datasets)
 (incanter.datasets/get-dataset :cars)
 
+;; view the dimensions of the dataset
+(dim data)
+
 ;; view the column names
 (col-names data)
+
+(with-data (get-dataset :cars)
+  (view (conj-cols (range (nrow $data)) $data)))
 
 ;; plot a scatter plot of speed vs. distance and add a regression line
 (with-data data
