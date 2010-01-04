@@ -45,9 +45,9 @@ A pre-built version of Incanter that includes all the necessary dependencies can
 Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@ or @bin\clj.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the clj script so that it uses an absolute path instead the ./ directory).
 
 You can also start Incanter directly with the following command:
-@java -jar modules/incanter-bundle/target/incanter-exec.jar@
+@java -jar modules/incanter-app/target/incanter-app-*.jar@
 This will start a Clojure REPL, but will not have command history like the clj scripts. If you want to use the built-in data sets, you'll also need to set the incanter.home property as follows:
-@java -Dincanter.home=/path/to/incanter/dir -jar modules/incanter-bundle/target/incanter-exec.jar@
+@java -Dincanter.home=/path/to/incanter/dir -jar modules/incanter-app/target/incanter-app-*.jar@
 
 
 From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats charts))</code></pre>
@@ -109,9 +109,9 @@ To build and test Incanter, you will need to have <a href="http://maven.apache.o
 
 To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@ (or on Windows @bin/clj.bat@)
 
-or run: @mvn clojure:repl@ , from the @modules/incanter-bundle@ directory
+or run: @mvn clojure:repl@ , from the @modules/incanter-app@ directory
 
-A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-bundle@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
+A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
 
 
 (Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)

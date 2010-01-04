@@ -10,8 +10,8 @@
     <relativePath>../incanter-parent/pom.xml</relativePath>
   </parent>
 
-  <artifactId>incanter-bundle</artifactId>
-  <name>Incanter Bundle</name>
+  <artifactId>incanter-full</artifactId>
+  <name>Incanter modules without dependencies</name>
   <url>http://incanter.org/</url>
   <packaging>bundle</packaging>
 
@@ -52,17 +52,6 @@
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>jline</groupId>
-      <artifactId>jline</artifactId>
-      <version>0.9.94</version>
-    </dependency> 
-    <dependency>
-      <groupId>swank-clojure</groupId>
-      <artifactId>swank-clojure</artifactId>
-      <version>1.1.0-SNAPSHOT</version>
-    </dependency>
-    
   </dependencies>
 
   <build>
@@ -79,13 +68,8 @@
             </_exportcontents>
             <Embed-Dependency>
               *;scope=!runtime;type=!pom;inline=true
-<!--              incanter-core,incanter-io, incanter-chrono,incanter-processing,
-              incanter-charts, incanter-mongodb,-->
-<!--              jline,swank-clojure,processing-core,congomongo,clojure-json,
-              opencsv,parallelcolt,clojure,clojure-contrib,joda-time,jfreechart-->
             </Embed-Dependency>
-            <Main-Class>clojure.main</Main-Class>
-            <Embed-Transitive>true</Embed-Transitive>
+            <Embed-Transitive>false</Embed-Transitive>
             <Bundle-DocURL>${project.url}</Bundle-DocURL>
           </instructions>
         </configuration>

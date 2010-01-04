@@ -32,8 +32,9 @@
     <module>modules/incanter-io</module>
     <module>modules/incanter-charts</module>
     <module>modules/incanter-processing</module>
-    <module>modules/incanter-bundle</module>
     <module>modules/incanter-mongodb</module>
+    <module>modules/incanter-full</module>
+    <module>modules/incanter-app</module>
   </modules>
 
 </project>
