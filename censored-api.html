@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <title>censored API reference (Incanter)</title>
+    <link href="static/incanter.ico" rel="icon" />
+    <link href="static/incanter.ico" rel="shortcut icon" />
+    <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
+    <!-- TODO: are we using these (from clojure.org)? If so, add the files -->
+    <script src="file/view/code_highlighter.js" type="text/javascript"></script>
+    <script src="file/view/clojure.js" type="text/javascript"></script>
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
+      </div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <a class="wiki_link" href="index.html">Overview</a><br />
+    <a class="wiki_link" href="api-index.html">API Index</a><br />
+    <a class="wiki_link" href="#">Namespaces:</a>
+    <ul id="left-sidebar-list">
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0">Overview</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/censored-mean-lower">censored-mean-lower</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/censored-mean-two-sided">censored-mean-two-sided</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/censored-mean-upper">censored-mean-upper</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/censored-variance-lower">censored-variance-lower</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/censored-variance-two-sided">censored-variance-two-sided</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/censored-variance-upper">censored-variance-upper</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.censored/truncated-variance">truncated-variance</a>
+    </div>
+    <br />
+  </div>
+</div>
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">censored</span></h1>
+by <span id="author">Unknown</span><br />
+<br />Usage:
+<pre>
+(ns your-namespace
+  (:require <span id="long-name">incanter.censored</span>))
+</pre><pre>
+</pre><h2>Overview</h2>
+<pre id="namespace-docstr"></pre>
+<br />
+<h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/censored-mean-lower">censored-mean-lower</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (censored-mean-lower a mu sigma)
+</pre>
+  <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
+deviation sigma) with the lower tail censored at 'a'</pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L57" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/censored-mean-two-sided">censored-mean-two-sided</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (censored-mean-two-sided a b mu sigma)
+</pre>
+  <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
+deviation sigma) with the lower tail censored at 'a' and the upper
+tail censored at 'b'</pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L22" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/censored-mean-upper">censored-mean-upper</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (censored-mean-upper b mu sigma)
+</pre>
+  <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
+deviation sigma) with the upper tail censored at 'b'</pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L85" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/censored-variance-lower">censored-variance-lower</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (censored-variance-lower a mu sigma)
+</pre>
+  <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
+deviation sigma) with the lower tail censored at 'a'</pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L68" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/censored-variance-two-sided">censored-variance-two-sided</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (censored-variance-two-sided a b mu sigma)
+</pre>
+  <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
+deviation sigma) with the lower tail censored at 'a' and the upper
+tail censored at 'b'</pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L37" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/censored-variance-upper">censored-variance-upper</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (censored-variance-upper b mu sigma)
+</pre>
+  <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
+deviation sigma) with the upper tail censored at 'b'</pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L95" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.censored/truncated-variance">truncated-variance</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (truncated-variance &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns the variance of a normal distribution truncated at a and b.
+
+Options:
+  :mean (default 0) mean of untruncated normal distribution
+  :sd (default 1) standard deviation of untruncated normal distribution
+  :a (default -infinity) lower truncation point
+  :b (default +infinity) upper truncation point
+
+Examples:
+
+  (use '(incanter core stats))
+  (truncated-variance :a -1.96 :b 1.96)
+  (truncated-variance :a 0)
+  (truncated-variance :b 0)
+
+  (use 'incanter.charts)
+  (def x (range -3 3 0.1))
+  (def plot (xy-plot x (map #(truncated-variance :a %) x)))
+  (view plot)
+  (add-lines plot x (map #(truncated-variance :b %) x))
+
+  (def samp (sample-normal 10000))
+  (add-lines plot x (map #(variance (filter (fn [s] (&gt; s %)) samp)) x))
+  (add-lines plot x (map #(variance (mult samp (indicator (fn [s] (&gt; s %)) samp))) x))
+
+
+References:
+  DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables.
+    Wiley-IEEE.
+
+  <a href="http://en.wikipedia.org/wiki/Truncated_normal_distribution">http://en.wikipedia.org/wiki/Truncated_normal_distribution</a></pre>
+  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/censored.clj#L112" id="var-source">Source</a>
+</div>
+
+
+</div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info</div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>
