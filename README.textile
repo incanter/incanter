@@ -105,6 +105,7 @@ To build and test Incanter, you will need to have <a href="http://maven.apache.o
 * First, clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
 * cd into the incanter directory
 * use Maven to build, test, and install Incanter: @mvn install@
+* to build Incanter without running tests or installing jars in the Maven repository, run: @mvn package -Dmaven.test.skip=true@
 
 To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@ (or on Windows @bin/clj.bat@)
 
