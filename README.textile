@@ -111,6 +111,8 @@ To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, 
 
 or run: @mvn clojure:repl@ , from the @modules/incanter-app@ directory
 
+or run @java -jar modules/incanter-app/target/incanter-app-1.0-master-SNAPSHOT.jar@
+
 A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
 
 

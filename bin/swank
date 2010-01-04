@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd ./modules/incanter-bundle
+cd `dirname $0`/../modules/incanter-app
 mvn clojure:swank
 
