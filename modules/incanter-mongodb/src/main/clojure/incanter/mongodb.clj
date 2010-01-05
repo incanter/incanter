@@ -1,6 +1,9 @@
-(ns #^{:doc "A simple library that provides functions for persisting Incanter data structures using MongoDB.
+(ns #^{:doc "A simple library that provides functions for persisting 
+Incanter data structures using MongoDB.
 
-Use incanter.mongodb in combination with the somnium.congomongo library. For usage examples, see the Congomongo README at http://github.com/somnium/congomongo, and the examples/blog/mongodb_datasets.clj file in the Incanter distribution. 
+Use incanter.mongodb in combination with the somnium.congomongo library. 
+For usage examples, see the Congomongo README at http://github.com/somnium/congomongo, 
+and the examples/blog/mongodb_datasets.clj file in the Incanter distribution. 
 
 Here are Somnium's descriptions of Congomongo's functions:
 
@@ -67,7 +70,9 @@ Here are Somnium's descriptions of Congomongo's functions:
 
 
 (defn fetch-dataset
-  "Queries a MongoDB database, accepting the same arguments as somnium.congomongo/fetch, but returning an Incanter dataset instead of a sequence of maps.
+  "Queries a MongoDB database, accepting the same arguments as 
+somnium.congomongo/fetch, but returning an Incanter dataset instead 
+of a sequence of maps.
 
 Examples:
 
