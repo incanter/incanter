@@ -50,13 +50,25 @@ namespace.
     <div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/categorical-classifiers">categorical-classifiers</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/category-classifier">category-classifier</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/category-map-classifier">category-map-classifier</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/classification-workflow">classification-workflow</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/classifier">classifier</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/classify-one-to-all">classify-one-to-all</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/classify-one-to-each">classify-one-to-each</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/classify-one-to-one">classify-one-to-one</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/collect-vals">collect-vals</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/confusion-matrix">confusion-matrix</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/confusion-matrix-by-time">confusion-matrix-by-time</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/confusion-matrix-from-counts">confusion-matrix-from-counts</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -66,17 +78,31 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/heterogenious-group-by">heterogenious-group-by</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/map-of-vectors">map-of-vectors</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/merge-equivalence-classes">merge-equivalence-classes</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/merge-levels">merge-levels</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/model-from-maps">model-from-maps</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/most-likely">most-likely</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/n-times-k-fold-cross-validation-confusion-matrix">n-times-k-fold-cross-validation-confusion-matrix</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/numerical-classifiers">numerical-classifiers</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/precision">precision</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/prob-map-tuples-by-time">prob-map-tuples-by-time</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/probs-only">probs-only</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/process-prob-map">process-prob-map</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/recall">recall</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.classification/vectorize">vectorize</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.classification/wrapper-classifiers">wrapper-classifiers</a>
     </div>
@@ -110,6 +136,25 @@ classifiers are maps of classifier-name -&gt; functions, data are maps of featur
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.classification/category-classifier">category-classifier</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (category-classifier x)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/category-map-classifier">category-map-classifier</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (category-map-classifier x)
+       (category-map-classifier s x)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.classification/classification-workflow">classification-workflow</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (classification-workflow transformer classifier count-all)
@@ -118,6 +163,15 @@ classifiers are maps of classifier-name -&gt; functions, data are maps of featur
 composes a classification workflow from a classifier a counter and a transformer.
 
 note that count-all has been abstracted due to the fact taht you may count with reduce or merge-with depending on wheter you ahve vectors or maps.</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/classifier">classifier</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (classifier fns classify)
+</pre>
+  <pre id="var-docstr"></pre>
   
 </div><div id="var-entry">
   <br />
@@ -175,6 +229,33 @@ usage:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.classification/collect-vals">collect-vals</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (collect-vals maps)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/confusion-matrix">confusion-matrix</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (confusion-matrix trd tst)
+</pre>
+  <pre id="var-docstr">computes a confusion matrix from the counts on train and test data sets represented as maps. traverse map...as you get to the point of counts of actuals, replace the series of nested keys that lead to that point with the single key of the predicted</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/confusion-matrix-by-time">confusion-matrix-by-time</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (confusion-matrix-by-time results)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.classification/confusion-matrix-from-counts">confusion-matrix-from-counts</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (confusion-matrix-from-counts test &amp; train)
@@ -224,6 +305,15 @@ corresponding elements, in the order they appeared in coll.</pre>
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.classification/map-of-vectors">map-of-vectors</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (map-of-vectors keys)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.classification/merge-equivalence-classes">merge-equivalence-classes</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (merge-equivalence-classes class-mappings x)
@@ -239,6 +329,15 @@ corresponding elements, in the order they appeared in coll.</pre>
 		      3 bucket-eq-classes}]
   (map (fn [[modelcnts totalcnts]] [(merge-equivalence-classes model-merger modelcnts) 
 				    (merge-equivalence-classes count-merger totalcnts)]) model)))</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/merge-levels">merge-levels</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (merge-levels class-mappings coll)
+</pre>
+  <pre id="var-docstr"></pre>
   
 </div><div id="var-entry">
   <br />
@@ -265,11 +364,38 @@ usage:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.classification/n-times-k-fold-cross-validation-confusion-matrix">n-times-k-fold-cross-validation-confusion-matrix</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (n-times-k-fold-cross-validation-confusion-matrix list-of-lists)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.classification/numerical-classifiers">numerical-classifiers</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (numerical-classifiers ranges)
 </pre>
   <pre id="var-docstr">makes a bucketing classifier out of each range for use with |each.</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/precision">precision</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (precision m)
+</pre>
+  <pre id="var-docstr">computes precision by class label from confusion matrix.</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/prob-map-tuples-by-time">prob-map-tuples-by-time</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (prob-map-tuples-by-time prob-map-tuple)
+</pre>
+  <pre id="var-docstr">use to transform data for confusion matrix by time before departure</pre>
   
 </div><div id="var-entry">
   <br />
@@ -297,6 +423,24 @@ beware: can't pass keys to reporter our you get double nested final level in map
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.classification/recall">recall</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (recall m)
+</pre>
+  <pre id="var-docstr">computes recall by class label from confusion matrix.</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.classification/vectorize">vectorize</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (vectorize maps)
+</pre>
+  <pre id="var-docstr"></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.classification/wrapper-classifiers">wrapper-classifiers</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (wrapper-classifiers features)
@@ -312,7 +456,7 @@ beware: can't pass keys to reporter our you get double nested final level in map
           </div>
 	</div>
 	<div id="foot">
-	  <div style="text-align: center;" id="copyright">No copyright info</div>
+	  <div style="text-align: center;" id="copyright">No copyright info </div>
 	</div>
       </div>
       <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
