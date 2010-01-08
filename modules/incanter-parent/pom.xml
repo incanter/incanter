@@ -12,7 +12,18 @@
   <inceptionYear>2009</inceptionYear>
 
   <url>http://incanter.org/</url>
-
+  <licenses>
+      <license>
+        <name>Eclipse Public License - v 1.0</name>
+        <url>http://www.eclipse.org/legal/epl-v10.html</url>
+        <distribution>repo</distribution>
+      </license>
+  </licenses>
+  <scm>
+	<connection>scm:git:git@github.com:liebke/incanter.git</connection>
+	<url>scm:git:git@github.com:liebke/incanter.git</url>
+	<developerConnection>scm:git:git@github.com:liebke/incanter.git</developerConnection>	
+  </scm>
   <mailingLists>
     <mailingList>
       <name>Development &amp; Users mailing list</name>
