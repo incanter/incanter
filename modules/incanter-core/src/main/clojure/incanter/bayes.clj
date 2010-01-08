@@ -67,7 +67,7 @@
     (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 
 "
-  ([size linear-model]
+  ([#^Integer size linear-model]
     (let [x (:x linear-model)
           y (:y linear-model)
           pars (:coefs linear-model)
@@ -129,7 +129,7 @@
 
 
 "
-  ([size counts]
+([#^Integer size counts]
     (sample-dirichlet size (plus counts 1))))
 
 
@@ -189,7 +189,7 @@
 
 
 "
-  ([size y & options]
+([#^Integer size y & options]
     (let [opts (when options (apply assoc {} options))
           means (map mean (trans y))
           n (count y)
@@ -225,7 +225,7 @@
 
 
 "
-  ([size y x & options]
+([#^Integer size y x & options]
     (let [opts (when options (apply assoc {} options))
           _x (bind-columns (repeat (nrow x) 1) x)
           ;_x x

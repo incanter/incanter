@@ -85,10 +85,10 @@
   ([data]
    (make-matrix data))
 
-  ([data ncol]
+  ([data #^Integer ncol]
    (make-matrix data ncol))
 
-  ([init-val rows cols]
+  ([init-val #^Integer rows #^Integer cols]
    (make-matrix init-val rows cols)))
 
 
@@ -103,7 +103,8 @@
 
 
 (defn nrow
-  " Returns the number of rows in the given matrix. Equivalent to R's nrow function."
+  #^{:tag Integer 
+     :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
     (matrix? mat) (.rows #^Matrix mat)
@@ -112,7 +113,8 @@
 
 
 (defn ncol
-  " Returns the number of columns in the given matrix. Equivalent to R's ncol function."
+  #^{:tag Integer 
+     :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
     (matrix? mat) (.columns #^Matrix mat)
@@ -135,7 +137,7 @@
       (identity-matrix 4)
 
 "
-   ([n] (Matrix. (.identity DoubleFactory2D/dense n))))
+([#^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
 
 
 (defn diag
@@ -582,7 +584,7 @@
     http://en.wikipedia.org/wiki/Factorial
 
 "
-  ([k] (DoubleArithmetic/factorial k)))
+  ([#^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
 
 
 
@@ -630,8 +632,8 @@
 (defmethod to-list ::dataset
   [data]
     (map (fn [row] (map (fn [col] (row col)) 
-			           (:column-names data)))
-	     (:rows data)))
+                                   (:column-names data)))
+             (:rows data)))
 
 
 (defmethod to-list :default [s] s)
@@ -1131,32 +1133,32 @@
 "
   ([column-names & data]
     (let [dat (cond
-	           (or (map? (ffirst data)) (coll? (ffirst data)))
-	             (first data)
-	           (map? (first data))
-	             data
-	           :else
-	             (map vector (first data)))
-	   rows (cond
-		      (map? dat)
-		        [dat]
-		      (map? (first dat))
-		        dat
-		      :else 
-	  	        (map #(apply assoc {} (interleave column-names %)) dat))] 
+                   (or (map? (ffirst data)) (coll? (ffirst data)))
+                     (first data)
+                   (map? (first data))
+                     data
+                   :else
+                     (map vector (first data)))
+           rows (cond
+                      (map? dat)
+                        [dat]
+                      (map? (first dat))
+                        dat
+                      :else 
+                        (map #(apply assoc {} (interleave column-names %)) dat))] 
       (with-meta
         {:column-names (into [] column-names)
-	 :rows rows}
+         :rows rows}
         {:type :incanter.core/dataset}))))
 
 
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
-	col-key (if (and
-		           (keyword? column-key) ;; if the given column name is a keyword, and
-			   (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
-		         (name column-key) ;; convert the keyword to a string
-		         column-key) ;; otherwise use the given column key
+        col-key (if (and
+                           (keyword? column-key) ;; if the given column name is a keyword, and
+                           (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
+                         (name column-key) ;; convert the keyword to a string
+                         column-key) ;; otherwise use the given column key
         id (if (number? col-key)
              (if (some #(= col-key %) headers)
                col-key
@@ -1191,19 +1193,19 @@
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
           nin-fn (complement in-fn)
-	  ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
-	          :$in in-fn :$nin nin-fn :$fn (fn [v f] (f v))}
-	  _and (fn [a b] (and a b))] 
+          ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+                  :$in in-fn :$nin nin-fn :$fn (fn [v f] (f v))}
+          _and (fn [a b] (and a b))] 
      (fn [row] 
        (reduce _and
-	       (for [k (keys query-map)]
-		 (if (map? (query-map k))
-		   (reduce _and
-			   (for [sk (keys (query-map k))]
-			     (if (nil? (ops sk)) 
-			       (throw (Exception. (str "Invalid key in query-map: " sk)))
-			       ((ops sk) (row k) ((query-map k) sk)))))
-		   (= (row k) (query-map k)))))))))
+               (for [k (keys query-map)]
+                 (if (map? (query-map k))
+                   (reduce _and
+                           (for [sk (keys (query-map k))]
+                             (if (nil? (ops sk)) 
+                               (throw (Exception. (str "Invalid key in query-map: " sk)))
+                               ((ops sk) (row k) ((query-map k) sk)))))
+                   (= (row k) (query-map k)))))))))
 
 
 (defn query-dataset 
@@ -1244,18 +1246,18 @@
   ([data query-map]
      (if (fn? query-map)
        (assoc data :rows
-	      (for [row (:rows data) :when (query-map row)] row))
+              (for [row (:rows data) :when (query-map row)] row))
        (let [qmap (into {}
-			(for [k (keys query-map)] 
-			  (if (keyword? k) 
-			    (if (some #{k} (:column-names data))
-			      [k (query-map k)]
-			      [(name k) (query-map k)])
-			    [k (query-map k)])))
-	     pred (query-to-pred qmap)
-	     rows (:rows data)]
-	 (assoc data :rows
-		(for [row rows :when (pred row)] row))))))
+                        (for [k (keys query-map)] 
+                          (if (keyword? k) 
+                            (if (some #{k} (:column-names data))
+                              [k (query-map k)]
+                              [(name k) (query-map k)])
+                            [k (query-map k)])))
+             pred (query-to-pred qmap)
+             rows (:rows data)]
+         (assoc data :rows
+                (for [row rows :when (pred row)] row))))))
 
 
 
@@ -1302,28 +1304,28 @@
 "
   ([obj]
      (let [colnames (cond
-		              (dataset? obj)
-			        (:column-names obj)
-			      (map? obj)
-			        (keys obj)
-			      (coll? obj)
-			        (if (map? (first obj))
-				  (keys (first obj))
-				  (map #(keyword (str "col-" %)) (range (length (first obj)))))
-			      :else
-			        [:col-0]) 
-	    rows (cond
-		       (dataset? obj)
-		         (:rows obj)
-		       (map? obj)
-		         ;; see if any of the values are collections
-		         (if (reduce #(or %1 %2) (map coll? (vals obj))) 
-			   (vals obj)
-			   [(vals obj)])
-		       (coll? obj)
-		         obj
-		       :else
-		         [obj])]
+                              (dataset? obj)
+                                (:column-names obj)
+                              (map? obj)
+                                (keys obj)
+                              (coll? obj)
+                                (if (map? (first obj))
+                                  (keys (first obj))
+                                  (map #(keyword (str "col-" %)) (range (length (first obj)))))
+                              :else
+                                [:col-0]) 
+            rows (cond
+                       (dataset? obj)
+                         (:rows obj)
+                       (map? obj)
+                         ;; see if any of the values are collections
+                         (if (reduce #(or %1 %2) (map coll? (vals obj))) 
+                           (vals obj)
+                           [(vals obj)])
+                       (coll? obj)
+                         obj
+                       :else
+                         [obj])]
          (dataset colnames rows))))
 
 
@@ -1345,15 +1347,15 @@
 "
   ([& args]
      (reduce (fn [A B] 
-	            (let [a (to-dataset A)
-			   b (to-dataset B)
-			   ncol-a (ncol a)
-			   ncol-b (ncol b)
-			   colnames (map #(keyword (str "col-" %))
-						    (range (+ ncol-a ncol-b)))]
-		      (dataset colnames
-			            (map concat (to-list a) (to-list b)))))
-	     args)))
+                    (let [a (to-dataset A)
+                           b (to-dataset B)
+                           ncol-a (ncol a)
+                           ncol-b (ncol b)
+                           colnames (map #(keyword (str "col-" %))
+                                                    (range (+ ncol-a ncol-b)))]
+                      (dataset colnames
+                                    (map concat (to-list a) (to-list b)))))
+             args)))
 
 
 (defn conj-rows
@@ -1372,11 +1374,11 @@
 "
   ([& args]
      (reduce (fn [A B] 
-	           (let [a (to-dataset A)
-			  b (to-dataset B)]
-		      (dataset (:column-names a) 
-			           (concat (to-list a) (to-list b)))))
-	          args)))
+                   (let [a (to-dataset A)
+                          b (to-dataset B)]
+                      (dataset (:column-names a) 
+                                   (concat (to-list a) (to-list b)))))
+                  args)))
 
 
 
@@ -1498,8 +1500,8 @@
   ([fun col-keys data]
      (let [rows (:rows data)]
        (if (coll? col-keys)
-	 (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
-	 (map (fn [row] (fun (map-get  row col-keys))) (:rows data)))))
+         (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
+         (map (fn [row] (fun (map-get  row col-keys))) (:rows data)))))
   ([fun col-keys]
      ($map fun col-keys $data)))
 
@@ -1526,7 +1528,7 @@
 "
   ([data-binding & body]
      `(binding [$data ~data-binding]
-	      (do ~@body))))
+              (do ~@body))))
  
 
 (defmulti to-map
@@ -1547,13 +1549,13 @@
 (defmethod to-map :incanter.core/dataset
   ([data]
      (let [cols (map (partial sel data :cols) (col-names data))
-	    col-keys (map keyword (col-names data))]
+            col-keys (map keyword (col-names data))]
        (zipmap col-keys cols))))
 
 (defmethod to-map incanter.Matrix
   ([mat]
      (let [cols (to-list (trans mat))
-	    col-keys (range (ncol mat))]
+            col-keys (range (ncol mat))]
        (zipmap col-keys cols))))
 
 
@@ -1849,9 +1851,9 @@
 (defmethod view ::coll
   ([obj & options]
     (let [rows (if (coll? (first obj))
-			  obj
-			  (map vector obj))
-	  colnames (range (count (first rows)))]
+                          obj
+                          (map vector obj))
+          colnames (range (count (first rows)))]
       (view (dataset colnames rows)))))
   
 
