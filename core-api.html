@@ -146,10 +146,6 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.core/mult">mult</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.core/ncol">ncol</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.core/nrow">nrow</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.core/plus">plus</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.core/pow">pow</a>
@@ -266,7 +262,7 @@ Examples:
     (view (conj-cols $data 
                      (sweep (sweep ($ :speed)) :stat sd :fun div)
                      (sweep (sweep ($ :dist)) :stat sd :fun div))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1407" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1409" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -275,7 +271,7 @@ Examples:
   <pre id="var-usage"></pre>
   <pre id="var-docstr">This variable is bound to a dataset when the with-data macro is used.
 functions like $ and $where can use $data as a default argument.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1403" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1405" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -309,7 +305,7 @@ Examples:
   ;; calculate the speed to dist ratio and append as new column to dataset
   (with-data (get-dataset :cars)
     (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1469" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1471" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -340,7 +336,7 @@ Examples:
     (view (-&gt; ($where {:speed {:$gt 20}}) 
                     (conj-rows ($where {:speed {:$lt 10}})))))
      </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1437" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1439" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -350,7 +346,7 @@ Examples:
 </pre>
   <pre id="var-docstr">Returns the absolute value of the elements in the given matrix, sequence or number.
 Equivalent to R's abs function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L530" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L532" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -360,7 +356,7 @@ Equivalent to R's abs function.</pre>
 </pre>
   <pre id="var-docstr">Returns the arc cosine of the elements in the given matrix, sequence or number.
 Equivalent to R's acos function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L554" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L556" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -370,7 +366,7 @@ Equivalent to R's acos function.</pre>
 </pre>
   <pre id="var-docstr">Returns the arc sine of the elements in the given matrix, sequence or number.
 Equivalent to R's asin function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L542" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L544" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -380,7 +376,7 @@ Equivalent to R's asin function.</pre>
 </pre>
   <pre id="var-docstr">Returns the arc tangent of the elements in the given matrix, sequence or number.
 Equivalent to R's atan function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L566" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L568" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -390,7 +386,7 @@ Equivalent to R's atan function.</pre>
 </pre>
   <pre id="var-docstr">Returns the atan2 of the elements in the given matrices, sequences or numbers.
 Equivalent to R's atan2 function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L487" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L489" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -403,7 +399,7 @@ Equivalent to R's beta function.
 
 References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1682" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1684" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -424,7 +420,7 @@ Examples:
   (bind-columns A B)
 
   (bind-columns [1 2 3 4] [5 6 7 8])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L352" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L354" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -446,7 +442,7 @@ Examples:
   (bind-rows A B)
 
   (bind-rows [1 2 3 4] [5 6 7 8])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L313" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L315" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -468,7 +464,7 @@ Examples:
   (categorical-var :labels [:a :b :c])
   (categorical-var :labels [:a :b :c] :levels [10 20 30])
   (categorical-var :levels [1 2 3])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1565" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1567" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -490,7 +486,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html
   <a href="http://en.wikipedia.org/wiki/Combination">http://en.wikipedia.org/wiki/Combination</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L589" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L591" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -512,7 +508,7 @@ References:
 
 
    </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1383" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1385" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -533,7 +529,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/Condition_number
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L981" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L983" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -554,7 +550,7 @@ There must be the same number of rows in each dataset and/or collections.
    (view (conj-cols (range (nrow cars)) cars))
    (view (conj-cols (range 10) (range 10)))
    (view (conj-cols {:a 1 :b 2} {:c 1 :d 2}))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1330" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1332" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -573,7 +569,7 @@ Examples:
   (view (conj-rows [[1 2] [3 4]] [[5 6] [7 8]]))
   (view (conj-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]]))
   (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1359" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1361" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -582,7 +578,7 @@ Examples:
   <pre id="var-usage">Usage: (copy mat)
 </pre>
   <pre id="var-docstr">Returns a copy of the given matrix.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L641" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L643" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -592,7 +588,7 @@ Examples:
 </pre>
   <pre id="var-docstr">Returns the cosine of the elements in the given matrix, sequence or number.
 Equivalent to R's cos function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L548" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L550" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -609,7 +605,7 @@ Equivalent to R's cos function.</pre>
     (use 'incanter.core)
     (cumulative-sum (range 100))
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L813" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L815" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -619,7 +615,7 @@ Equivalent to R's cos function.</pre>
 </pre>
   <pre id="var-docstr"> Returns a map of type ::dataset constructed from the given column-names and
 data. The data is either a sequence of sequences or a sequence of hash-maps.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1128" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1130" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -628,7 +624,7 @@ data. The data is either a sequence of sequences or a sequence of hash-maps.</pr
   <pre id="var-usage">Usage: (dataset? obj)
 </pre>
   <pre id="var-docstr"> Determines if obj is of type ::dataset.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L100" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L100" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -659,7 +655,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
   <a href="http://en.wikipedia.org/wiki/Cholesky_decomposition">http://en.wikipedia.org/wiki/Cholesky_decomposition</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L841" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L843" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -685,7 +681,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/Eigenvalue_decomposition
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L902" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L904" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -711,7 +707,7 @@ Returns:
 References:
   http://en.wikipedia.org/wiki/LU_decomposition
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L928" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L930" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -738,7 +734,7 @@ Returns:
 References:
   http://en.wikipedia.org/wiki/QR_decomposition
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleQRDecomposition.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleQRDecomposition.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L954" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L956" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -766,7 +762,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/Singular_value_decomposition
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L872" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L874" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -780,7 +776,7 @@ to R's det function.
 References:
   http://en.wikipedia.org/wiki/LU_decomposition
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L726" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L728" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -799,7 +795,7 @@ Examples:
                   [4 5 6]
                   [7 8 9]]))
   (diag A)</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L141" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L143" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -808,7 +804,7 @@ Examples:
   <pre id="var-usage">Usage: (dim mat)
 </pre>
   <pre id="var-docstr"> Returns a vector with the number of rows and columns of the given matrix. </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L124" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L126" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -832,7 +828,7 @@ Examples:
   (div 2 [1 2 3])
 
   (div [1 2 3]) ; returns [1 1/2 13]</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L457" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L459" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -842,7 +838,7 @@ Examples:
 </pre>
   <pre id="var-docstr">Returns the exponential of the elements in the given matrix, sequence or number.
 Equivalent to R's exp function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L524" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L526" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -860,7 +856,7 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html
   <a href="http://en.wikipedia.org/wiki/Factorial">http://en.wikipedia.org/wiki/Factorial</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L572" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L574" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -873,7 +869,7 @@ Equivalent to R's gamma function.
 
 References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1672" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1674" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -912,7 +908,7 @@ Examples:
           (add-box-plot trt1)
           (add-box-plot trt2)
           view))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1059" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1061" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -935,7 +931,7 @@ Examples:
   References:
     <a href="http://en.wikipedia.org/wiki/Vectorization_(mathematics)">http://en.wikipedia.org/wiki/Vectorization_(mathematics)</a>
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L770" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L772" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -947,7 +943,7 @@ Examples:
 
 Examples:
   (identity-matrix 4)</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L131" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L133" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -960,7 +956,7 @@ Returns the non-regularized incomplete beta value.
 
 References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1692" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1694" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -977,7 +973,7 @@ Examples:
   (kronecker 4 x)
   (kronecker x 4)
   (kronecker x y)</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L674" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L676" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -990,7 +986,7 @@ Examples:
   and the length of a matrix is the number of elements it contains (nrow*ncol).
   Equivalent to R's length function.
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1040" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1042" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1000,7 +996,7 @@ Examples:
 </pre>
   <pre id="var-docstr">Returns the natural log of the elements in the given matrix, sequence or number.
 Equvalent to R's log function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L506" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L508" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1010,7 +1006,7 @@ Equvalent to R's log function.</pre>
 </pre>
   <pre id="var-docstr">Returns the log base 10 of the elements in the given matrix, sequence or number.
 Equivalent to R's log10 function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L518" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L520" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1020,7 +1016,7 @@ Equivalent to R's log10 function.</pre>
 </pre>
   <pre id="var-docstr">Returns the log base 2 of the elements in the given matrix, sequence or number.
 Equivalent to R's log2 function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L512" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L514" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1059,7 +1055,7 @@ Examples:
 
 References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L53" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L53" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1068,7 +1064,7 @@ References:
   <pre id="var-usage">Usage: (matrix? obj)
 </pre>
   <pre id="var-docstr"> Test if obj is 'derived' incanter.Matrix.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L95" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L95" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1094,7 +1090,7 @@ Examples:
   (minus [1 2 3] 2)
   (minus 2 [1 2 3])
   (minus [1 2 3])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L408" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L410" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1118,7 +1114,7 @@ Examples:
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html
 
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L646" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L648" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1140,25 +1136,7 @@ Examples:
   (mult [1 2 3] [1 2 3])
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L436" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.core/ncol">ncol</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (ncol mat)
-</pre>
-  <pre id="var-docstr"> Returns the number of columns in the given matrix. Equivalent to R's ncol function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L114" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.core/nrow">nrow</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (nrow mat)
-</pre>
-  <pre id="var-docstr"> Returns the number of rows in the given matrix. Equivalent to R's nrow function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L105" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L438" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1180,7 +1158,7 @@ Examples:
   (plus [1 2 3] [1 2 3])
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L387" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L389" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1190,7 +1168,7 @@ Examples:
 </pre>
   <pre id="var-docstr"> This is an element-by-element exponent function, raising the first argument
 by the exponents in the remaining arguments. Equivalent to R's ^ operator.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L481" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L483" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1199,7 +1177,7 @@ by the exponents in the remaining arguments. Equivalent to R's ^ operator.</pre>
   <pre id="var-usage">Usage: (prod x)
 </pre>
   <pre id="var-docstr">Returns the product of the given sequence.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L805" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L807" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1239,7 +1217,7 @@ Examples:
 
    ;; use a row predicate function instead of a query map.
    (view (query-dataset cars (fn [row] (&gt; (/ (row "speed") (row "dist")) 1/2))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1209" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1211" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1261,7 +1239,7 @@ Examples:
 
   (def pred (query-to-pred {:z {:$in #{:a :b}}}))
   (pred {:x 5 :y 7 :z :d})</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1174" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1176" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1270,7 +1248,7 @@ Examples:
   <pre id="var-usage">Usage: (quit)
 </pre>
   <pre id="var-docstr"> Exits the Clojure shell.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1905" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1907" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1292,7 +1270,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/Matrix_rank
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1000" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1002" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1307,7 +1285,7 @@ References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html
   http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function
   <a href="http://mathworld.wolfram.com/RegularizedBetaFunction.html">http://mathworld.wolfram.com/RegularizedBetaFunction.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1704" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1706" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1367,7 +1345,7 @@ Chart Example:
   (.close fos)
 
   (view "<a href="file:///tmp/hist.png&quot;)">file:///tmp/hist.png")</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1911" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1913" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1417,7 +1395,7 @@ Examples:
 
   (sel us-arrests :cols ["State" "Murder"])
   (sel us-arrests :cols [:State :Murder])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L201" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L203" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1427,7 +1405,7 @@ Examples:
 </pre>
   <pre id="var-docstr">Returns the sine of the elements in the given matrix, sequence or number.
 Equivalent to R's sin function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L536" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L538" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1443,7 +1421,7 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Matrix_inverse">http://en.wikipedia.org/wiki/Matrix_inverse</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L707" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L709" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1466,7 +1444,7 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Quadratic_formula">http://en.wikipedia.org/wiki/Quadratic_formula</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1722" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1724" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1476,7 +1454,7 @@ References:
 </pre>
   <pre id="var-docstr">Returns the square of the elements in the given matrix, sequence or number.
 Equivalent to R's sq function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L500" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L502" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1486,7 +1464,7 @@ Equivalent to R's sq function.</pre>
 </pre>
   <pre id="var-docstr">Returns the square-root of the elements in the given matrix, sequence or number.
 Equivalent to R's sqrt function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L494" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L496" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1495,7 +1473,7 @@ Equivalent to R's sqrt function.</pre>
   <pre id="var-usage">Usage: (sum x)
 </pre>
   <pre id="var-docstr">Returns the sum of the given sequence.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L798" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L800" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1504,7 +1482,7 @@ Equivalent to R's sqrt function.</pre>
   <pre id="var-usage">Usage: (sum-of-squares x)
 </pre>
   <pre id="var-docstr">Returns the sum-of-squares of the given sequence.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L791" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L793" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1534,7 +1512,7 @@ Examples:
                        2 3
                        4 5 6
                        7 8 9 10] :lower false))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1749" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1751" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1544,7 +1522,7 @@ Examples:
 </pre>
   <pre id="var-docstr">Returns the tangent of the elements in the given matrix, sequence or number.
 Equivalent to R's tan function.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L560" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L562" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1566,7 +1544,7 @@ Examples:
   (to-dataset {"a" 1 "b" 2 "c" 3})
   (to-dataset [{:a 1 :b 2} {:a 1 :b 2}])
   (to-dataset [{"a" 1 "b" 2 "c" 3} {"a" 1 "b" 2 "c" 3}])</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1286" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1288" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1576,7 +1554,7 @@ Examples:
 </pre>
   <pre id="var-docstr">
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1608" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1610" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1586,7 +1564,7 @@ Examples:
 </pre>
   <pre id="var-docstr">
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1598" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1600" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1595,7 +1573,7 @@ Examples:
   <pre id="var-usage">No usage documentation available</pre>
   <pre id="var-docstr"> Returns a list-of-lists if the given matrix is two-dimensional
 and a flat list if the matrix is one-dimensional.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L614" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L616" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1612,7 +1590,7 @@ Examples:
   (to-map (get-dataset :cars))
 
   (to-map (matrix (range 9) 3))</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1532" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1534" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1627,7 +1605,7 @@ Options:
   :dummies (default false) -- if true converts non-numeric variables into sets
                               of binary dummy variables, otherwise converts
                               them into numeric codes.</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1645" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1647" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1638,7 +1616,7 @@ Options:
   <pre id="var-docstr"> Returns a vector-of-vectors if the given matrix is two-dimensional
 and a flat vector if the matrix is one-dimensional. This is a bit
 slower than the to-list function. </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1026" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1028" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1651,7 +1629,7 @@ slower than the to-list function. </pre>
 References:
   http://en.wikipedia.org/wiki/Matrix_trace
   <a href="http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DoubleAlgebra.html">http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DoubleAlgebra.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L738" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L740" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1667,7 +1645,7 @@ Examples:
                  [7 8 9]]))
 
   (trans A)</pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L166" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L168" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1690,7 +1668,7 @@ Examples:
   References:
     <a href="http://en.wikipedia.org/wiki/Vectorization_(mathematics)">http://en.wikipedia.org/wiki/Vectorization_(mathematics)</a>
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L749" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L751" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1733,7 +1711,7 @@ Examples:
   ;; view a PNG file
   (save (histogram (sample-normal 1000)) "/tmp/norm_hist.png")
   (view "<a href="file:///tmp/norm_hist.png&quot;)">file:///tmp/norm_hist.png")</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1795" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1797" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1758,7 +1736,7 @@ Examples:
       (view (-&gt; ($where {:speed {:$gt 20}}) 
                       (conj-rows ($where {:speed {:$lt 10}})))))
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/e64e8c78cb999874c4c7f702aab3ff828d506e8b/modules/incanter-core/src/main/clojure/incanter/core.clj#L1508" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/core.clj#L1510" id="var-source">Source</a>
 </div>
 
 
