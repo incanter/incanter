@@ -275,7 +275,7 @@
   Example:
       (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
 "
-  ([size & options]
+  ([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           mean (or (:mean opts) 0)
           sd (or (:sd opts) 1)]
@@ -325,7 +325,7 @@
     http://en.wikipedia.org/wiki/Multivariate_normal
 
 "
-  ([size & options]
+([#^Integer size & options]
    (let [opts (when options (apply assoc {} options))
          mean (or (:mean opts)
                   (if (:sigma opts)
@@ -429,7 +429,7 @@
       (sample-uniform 1000)
       (sample-uniform 1000 :min 1 :max 10)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           min-val (double (or (:min opts) 0.0))
           max-val (double (or (:max opts) 1.0))
@@ -533,7 +533,7 @@
   Example:
       (sample-beta 1000 :alpha 1 :beta 2)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           alpha (or (:alpha opts) 1)
           beta (or (:beta opts) 1)]
@@ -629,7 +629,7 @@
   Example:
       (sample-gamma 1000 :shape 1 :rate 2)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           shape (or (:shape opts) 1)
           rate (or (:rate opts) 1)]
@@ -722,7 +722,7 @@
   Example:
       (sample-chisq 1000 :df 2)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           df (or (:df opts) 1)]
       (if (= size 1)
@@ -1050,7 +1050,7 @@
 
 
 "
-  ([size alpha]
+([#^Integer size alpha]
     (let [W (trans (for [a alpha] (sample-gamma size :shape a :rate 1)))
           T (map sum W)]
       (matrix (map #(div %1 %2) W T)))))
@@ -1151,7 +1151,7 @@
   Example:
       (sample-binomial 1000 :prob 1/4 :size 20)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           n (or (:size opts) 1)
           p (or (:prob opts) 1/2)]
@@ -1242,7 +1242,7 @@
   Example:
       (sample-poisson 1000 :lambda 10)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           lambda (or (:lambda opts) 1)]
      (if (= size 1)
@@ -1337,7 +1337,7 @@
   Example:
       (sample-neg-binomial 1000 :prob 1/2 :size 20)
 "
-  ([size & options]
+([#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           size (or (:size opts) 10)
           prob (or (:prob opts) 1/2)]
@@ -1916,14 +1916,14 @@
       http://en.wikipedia.org/wiki/Resampling_(statistics)
 
 "
-  ([n x]
+([#^Integer n x]
     (loop [samp '() i 0]
       (if (= i n)
           samp
           (recur
             (conj samp (sample x)) (inc i)))))
 
-  ([n x y]
+([#^Integer n x y]
    (let [pool (concat x y)
          m1 (count x)]
      (loop [samp-x '() samp-y '() i 0]
@@ -2559,7 +2559,7 @@ returns the squares of the difference between each observation and the sample me
   ([x m]
      (map 
       #(pow 
-	(- % m) 2)
+        (- % m) 2)
       x)))
 
 (defn sum-of-square-devs-from-mean 
@@ -2612,10 +2612,10 @@ TODO: single class may have a spike of 100% probability.
 (let [model (simple-regression (vals probs) (keys probs))
       missing (difference (into #{} (keys probs)) buckets)
       smoothed (merge probs 
-		    (into {}
-			  (for [b buckets
-				:when (not (probs b))]
-			    [b (predict model b)])))
+                    (into {}
+                          (for [b buckets
+                                :when (not (probs b))]
+                            [b (predict model b)])))
       total-prob (apply + (vals smoothed))
       scalar (/ 1 total-prob)
       rescaled-smoothed (map-map #(* scalar %) smoothed)]
@@ -2708,12 +2708,12 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
       arank (rank-index a)
       brank (rank-index b)
       dsos (apply 
-	    + (map (fn [x y] (pow
-		      (- (arank x) (brank y)) 
-			  2))
-	   a b))]
+            + (map (fn [x y] (pow
+                      (- (arank x) (brank y)) 
+                          2))
+           a b))]
   (- 1 (/ (* 6 dsos) 
-	  (* n (- (pow n 2) 1))))))
+          (* n (- (pow n 2) 1))))))
 
 (defn kendalls-tau
 "
@@ -2729,13 +2729,13 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
       ranked (reverse (sort-map (zipmap a b)))
       ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
       dcd (second
-	   (reduce
-	   (fn [[vals total] [k v]]
-	     (let [diff (- (count (filter (gt v) vals))
-			   (count (filter (lt v) vals)))]
-	       [(conj vals v) (+ total diff)]))
-	   [[] 0]
-	   ranked))]
+           (reduce
+           (fn [[vals total] [k v]]
+             (let [diff (- (count (filter (gt v) vals))
+                           (count (filter (lt v) vals)))]
+               [(conj vals v) (+ total diff)]))
+           [[] 0]
+           ranked))]
 (/ (* 2 dcd)
    (* n (- n 1)))))
 
@@ -2744,12 +2744,12 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
 [a b]
 ((fn combine [combos ra rb]
     (let [heada (first ra)
-	  level-combos (for [bx (rest rb)]
-			 [heada bx])
-	  all-combos (concat combos level-combos)]
+          level-combos (for [bx (rest rb)]
+                         [heada bx])
+          all-combos (concat combos level-combos)]
       (if (= 0 (count (rest ra)))
-	all-combos
-	(combine all-combos (rest ra) (rest rb))))) [] a b))
+        all-combos
+        (combine all-combos (rest ra) (rest rb))))) [] a b))
 
 (defn pairings 
   "confusing ass name."
@@ -3116,34 +3116,34 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
 "
   [a b]
   (let [m (count a)
-	n (count b)
-	init (apply deep-merge-with (fn [a b] b)
-		    (concat 
-		     ;;deletion
-		     (for [i (range 0 (+ 1 m))]
-		       {i {0 i}})
-		     ;;insertion
-		     (for [j (range 0 (+ 1 n))]
-		       {0 {j j}})))
-	table (reduce
-	       (fn [d [i j]]
-		 (deep-merge-with 
-		  (fn [a b] b) 
-		  d 
-		  {i {j (if (= (nth a (- i 1))
-			       (nth b (- j 1)))
-			  ((d (- i 1)) (- j 1))
-			  (min 
-			   (+ ((d (- i 1)) 
-			       j) 1) ;;deletion
-			   (+ ((d i) 
-			       (- j 1)) 1) ;;insertion
-			   (+ ((d (- i 1)) 
-			       (- j 1)) 1))) ;;substitution))
-		      }}))
-	       init
-	       (for [j (range 1 (+ 1 n))
-		     i (range 1 (+ 1 m))] [i j]))]
+        n (count b)
+        init (apply deep-merge-with (fn [a b] b)
+                    (concat 
+                     ;;deletion
+                     (for [i (range 0 (+ 1 m))]
+                       {i {0 i}})
+                     ;;insertion
+                     (for [j (range 0 (+ 1 n))]
+                       {0 {j j}})))
+        table (reduce
+               (fn [d [i j]]
+                 (deep-merge-with 
+                  (fn [a b] b) 
+                  d 
+                  {i {j (if (= (nth a (- i 1))
+                               (nth b (- j 1)))
+                          ((d (- i 1)) (- j 1))
+                          (min 
+                           (+ ((d (- i 1)) 
+                               j) 1) ;;deletion
+                           (+ ((d i) 
+                               (- j 1)) 1) ;;insertion
+                           (+ ((d (- i 1)) 
+                               (- j 1)) 1))) ;;substitution))
+                      }}))
+               init
+               (for [j (range 1 (+ 1 n))
+                     i (range 1 (+ 1 m))] [i j]))]
 
     ((table m) n)))
 
@@ -3151,45 +3151,45 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
 (defn damerau-levenshtein-distance
   [a b]
   (let [m (count a)
-	n (count b)
-	init (apply deep-merge-with (fn [a b] b)
-		    (concat 
-		     ;;deletion
-		     (for [i (range 0 (+ 1 m))]
-		       {i {0 i}})
-		     ;;insertion
-		     (for [j (range 0 (+ 1 n))]
-		       {0 {j j}})))
-	table (reduce
-	       (fn [d [i j]]
-		 (deep-merge-with 
-		  (fn [a b] b) 
-		  d 
-		  (let [cost (binary (not (= (nth a (- i 1))
-					  (nth b (- j 1)))))
-			x
-			  (min 
-			   (+ ((d (- i 1)) 
-			       j) 1) ;;deletion
-			   (+ ((d i) 
-			       (- j 1)) 1) ;;insertion
-			   (+ ((d (- i 1)) 
-			       (- j 1)) cost)) ;;substitution))
-		      
-			val (if (and (> i 1)
-			       (> j 1)
-			       (= (nth a (- i 1))
-				  (nth b (- j 2)))
-			       (= (nth a (- i 2))
-				  (nth b (- j 1))))
-			(min x (+ ((d (- i 2)) 
-				   (- j 2)) ;;transposition
-				  cost))
-			x)]
-		    {i {j val}})))
-	       init
-	       (for [j (range 1 (+ 1 n))
-		     i (range 1 (+ 1 m))] [i j]))]
+        n (count b)
+        init (apply deep-merge-with (fn [a b] b)
+                    (concat 
+                     ;;deletion
+                     (for [i (range 0 (+ 1 m))]
+                       {i {0 i}})
+                     ;;insertion
+                     (for [j (range 0 (+ 1 n))]
+                       {0 {j j}})))
+        table (reduce
+               (fn [d [i j]]
+                 (deep-merge-with 
+                  (fn [a b] b) 
+                  d 
+                  (let [cost (binary (not (= (nth a (- i 1))
+                                          (nth b (- j 1)))))
+                        x
+                          (min 
+                           (+ ((d (- i 1)) 
+                               j) 1) ;;deletion
+                           (+ ((d i) 
+                               (- j 1)) 1) ;;insertion
+                           (+ ((d (- i 1)) 
+                               (- j 1)) cost)) ;;substitution))
+                      
+                        val (if (and (> i 1)
+                               (> j 1)
+                               (= (nth a (- i 1))
+                                  (nth b (- j 2)))
+                               (= (nth a (- i 2))
+                                  (nth b (- j 1))))
+                        (min x (+ ((d (- i 2)) 
+                                   (- j 2)) ;;transposition
+                                  cost))
+                        x)]
+                    {i {j val}})))
+               init
+               (for [j (range 1 (+ 1 n))
+                     i (range 1 (+ 1 m))] [i j]))]
 
     ((table m) n)))
 

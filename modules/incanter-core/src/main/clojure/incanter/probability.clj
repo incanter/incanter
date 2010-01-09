@@ -6,7 +6,7 @@
   (:use [clojure.contrib.seq-utils :only [flatten]])
   (:use [incanter.internal :only [tree-comp any?]])
   (:use [incanter.transformations 
-	 :only [set-to-unit-map bottom-level? map-map same-length?]]))
+         :only [set-to-unit-map bottom-level? map-map same-length?]]))
 
 (defn binary 
 "
@@ -50,18 +50,18 @@ wraps a counting function for vectors in apply and deep-merge-with, curreid fn e
 "   
   [f x y] 
   (apply merge-with merge
-	(for [[kx vx] x
-	      [ky vy] y]
-	  {kx {ky (f vx vy)}})))
+        (for [[kx vx] x
+              [ky vy] y]
+          {kx {ky (f vx vy)}})))
 
 (defn summate
 "summate all counts in a deeply nested map of counts."
   [m]
   (apply +
-	 (flatten (cond (bottom-level? m) 
-			(vals m)
-			:otherwise 
-			(map summate (vals m))))))
+         (flatten (cond (bottom-level? m) 
+                        (vals m)
+                        :otherwise 
+                        (map summate (vals m))))))
 
 (defn summate-level 
 "given a nested map, summates all counts below the tree from each key-node in the map-tree."
@@ -81,7 +81,7 @@ for summation note that a variable, suppose it is x, is represented as a level o
 ((fn [jx marginals]
 (if (bottom-level? jx) (conj marginals jx)
   (recur (apply deep-merge-with + (vals jx))
-	 (conj marginals  (summate-level jx))))) j []))
+         (conj marginals  (summate-level jx))))) j []))
 
 
 ;;TODO: in progress.  meditating on the simplest implimentation
@@ -96,16 +96,16 @@ for summation note that a variable, suppose it is x, is represented as a level o
 ;; [j ps]
 ;; ((fn [jx level]
 ;;    (let [nxt (if (contains? ps level)
-;; 	       jx
-;; 	       (apply deep-merge-with + (vals jx)))]
+;;             jx
+;;             (apply deep-merge-with + (vals jx)))]
 ;;   (recur next (+ 1 level))))
 ;;  j 0))
 
 (defn n-sided-die 
-[n] 
+[#^Integer n] 
      (apply hash-map 
-	    (interleave (range 1 (+ n 1) 1) 
-			(repeat n 1))))
+            (interleave (range 1 (+ n 1) 1) 
+                        (repeat n 1))))
 
 ;;Predicates and constraints
 (defn pred [f arg] #(f % arg))
@@ -138,8 +138,8 @@ classify one item based on what interval in a range the item falls into.
 (defn missing? [x]
   (any? nil?
      (cond (map? x) (vals x) 
-	   (coll? x) x
-	   :otherwise [x])))
+           (coll? x) x
+           :otherwise [x])))
 
 ;;TODO: refactor to use joint-only represetnation and compute marginals and pairwise as needed from the full joint.  this should also lead to some renamings.
 
@@ -156,11 +156,11 @@ classify one item based on what interval in a range the item falls into.
      (fn [x]
        (let [trans (t x)]
          (if (missing? trans) :missing
-	    (let [val-to-bucket (f trans)]
-	       (if (missing? val-to-bucket) :missing
-		   (if-let [short-circuit (p val-to-bucket)] 
-		     short-circuit
-		     (range-classifier r val-to-bucket)))))))))
+            (let [val-to-bucket (f trans)]
+               (if (missing? val-to-bucket) :missing
+                   (if-let [short-circuit (p val-to-bucket)] 
+                     short-circuit
+                     (range-classifier r val-to-bucket)))))))))
 
 (defn cond-prob-tuple
   "build [a&b b] count tuples for calculating conditional probabilities p(a | b)"
@@ -169,9 +169,9 @@ classify one item based on what interval in a range the item falls into.
 
 (defn label-cond-prob-dependent [a & bs]
   (let [tree-maker
-	(fn [[ab-tree b-tree] b] 
-	  [{b ab-tree} {b b-tree}])
-	init [{a 1} 1]]
+        (fn [[ab-tree b-tree] b] 
+          [{b ab-tree} {b b-tree}])
+        init [{a 1} 1]]
     (if (coll? bs)
       (reduce tree-maker init (reverse bs))
       (tree-maker init bs))))
@@ -189,7 +189,7 @@ classify one item based on what interval in a range the item falls into.
   [a bs]
   (fn [obs]
     (into {} (for [[k b] bs]
-	       [k (cond-prob-tuple (a obs) (b obs))]))))
+               [k (cond-prob-tuple (a obs) (b obs))]))))
 
 (defn P 
 ""

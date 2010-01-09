@@ -78,8 +78,8 @@
   (:use [incanter.internal :only [maybe?]])
   (:import (java.util Calendar TimeZone)
            (java.text DateFormat SimpleDateFormat)
-	   (org.joda.time DateTime DateTime$Property DateTimeZone 
-			  Minutes Hours Period Interval)))
+           (org.joda.time DateTime DateTime$Property DateTimeZone 
+                          Minutes Hours Period Interval)))
 
 (def #^{:doc "Conversion of unit keywords to Calendar units"}
      units-to-calendar-units
@@ -179,25 +179,25 @@
   [& args]
   (let [d (apply joda-date args)]
     (proxy [clojure.lang.IFn 
-	    clojure.lang.Associative] []
+            clojure.lang.Associative] []
       (toString [] (str d))
       (equals [other-date]
               (and (instance? (.getClass this) other-date)
                    (.equals d (other-date :datetime))))
       (invoke [unit]
-	      (let [res
-	      (cond (= :years unit) (.year d) 
-		    (= :months unit) (.monthOfYear d) 
-		    (= :days unit) (.dayOfMonth d) 
-		    (= :day-of-week unit) (.dayOfWeek d) 
-		    (= :hours unit) (.hourOfDay d) 
-		    (= :minutes unit) (.minuteOfHour d) 
-		    (= :seconds unit) (.secondOfMinute d) 
-		    (= :millis unit) (.millisOfSecond d) 
+              (let [res
+              (cond (= :years unit) (.year d) 
+                    (= :months unit) (.monthOfYear d) 
+                    (= :days unit) (.dayOfMonth d) 
+                    (= :day-of-week unit) (.dayOfWeek d) 
+                    (= :hours unit) (.hourOfDay d) 
+                    (= :minutes unit) (.minuteOfHour d) 
+                    (= :seconds unit) (.secondOfMinute d) 
+                    (= :millis unit) (.millisOfSecond d) 
                     :otherwise d)]
-		(if (instance? DateTime$Property res)
-		  (.get res)
-		  res)))
+                (if (instance? DateTime$Property res)
+                  (.get res)
+                  res)))
       ;; These (along with implementing Associative) allow us to use
       ;; (:month my-date), etc. Good idea? Not sure since we don't
       ;; implement all of Associative, just enough for keywords.
@@ -231,15 +231,15 @@
 
 (defn hours-from 
   ""
-  ([d h] (.plusHours d h)))
+  ([d #^Integer h] (.plusHours d h)))
 
 (defn minutes-from 
   ""
-  ([d m] (.plusMinutes d m)))
+  ([d #^Integer m] (.plusMinutes d m)))
 
 (defn hours-around 
   ""
-  ([r d] (map #(.plusHours d %) r)))
+  ([r #^Integer d] (map #(.plusHours d %) r)))
 
 (defn before? 
   ""
@@ -258,7 +258,7 @@
   ([[s e] [s1 e1]]
     (if (and (valid-range? [s e]) (valid-range? [s1 e1]))
       (letfn [(has-overlap? [start end start1 end1]
-			  (not (nil? (.overlap (Interval. start end) (Interval. start1 end1)))))]
+                          (not (nil? (.overlap (Interval. start end) (Interval. start1 end1)))))]
         (maybe? has-overlap? s e s1 e1))
       false)))
 
