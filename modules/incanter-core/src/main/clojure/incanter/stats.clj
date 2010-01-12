@@ -36,7 +36,8 @@
                                     StudentT)
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
-                                  Probability))
+                                  Probability)
+           (incanter.random Weibull))
   (:use [incanter.probability :only [gt lt binary]])
   (:use [incanter.transformations :only [map-map same-length? sort-map]])
   (:use [incanter.internal :only [tree-comp-each]])
@@ -541,6 +542,37 @@
         (Beta/staticNextDouble alpha beta)
         (for [_ (range size)] (Beta/staticNextDouble alpha beta))))))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; WEIBULL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn pdf-weibull
+" Returns the Weibull pdf for the given value of x. It will return a sequence
+  of values, if x is a sequence.
+
+  Options:
+      :scale (default 1)
+      :shape (default 1)
+
+  See also:
+      cdf-weibull and sample-weibull
+
+  References:
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html
+      http://en.wikipedia.org/wiki/Weibull_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example:
+      (pdf-weibull 2 :alpha 1 :beta 0.5)
+"
+([x & options]
+   (let [opts (when options (apply assoc {} options))
+         scale (or (:scale opts) 1)
+         shape (or (:shape opts) 1)
+         dist (Weibull. scale shape (DoubleMersenneTwister.))]
+     (if (coll? x)
+       (map #(.pdf dist %) x)
+       (.pdf dist x)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GAMMA DISTRIBUTION FUNCTIONS
