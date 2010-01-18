@@ -98,22 +98,27 @@ incanter.io
       :quote (default \\\") character used for quoting strings
       :skip (default 0) the number of lines to skip at the top of the file.
       :header (default false) indicates the file has a header line
+      :compress-delim (default true if delim = \\space, false otherwise) means
+                      compress multiple adjacent delimiters into a single delimiter
   "
   ([filename & options]
    (let [opts (when options (apply assoc {} options))
-         delim (or (:delim opts) \,) ; space delim default
+         delim (or (:delim opts) \,) ; comma delim default
          quote-char (or (:quote opts) \")
          skip (or (:skip opts) 0)
-         header? (or (:header opts) false)]
+         header? (or (:header opts) false)
+         compress-delim? (or (:compress-delim opts)
+                             (if (= delim \space) true false))]
      (with-open [reader #^CSVReader (CSVReader.
                     (get-input-reader filename)
                     delim
                     quote-char
                     skip)]
        (let [data-lines (map seq (seq (.readAll reader)))
-             raw-data (filter #(> (count %) 0) 
-			      (map (fn [line] (filter #(not= % "") line)) 
-				   data-lines))
+             raw-data (filter #(> (count (filter (fn [field] (not= field "")) %)) 0) 
+			      (if compress-delim? 
+                                (map (fn [line] (filter #(not= % "") line)) data-lines)
+                                data-lines))
              parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) 
 				       raw-data))
             ]
