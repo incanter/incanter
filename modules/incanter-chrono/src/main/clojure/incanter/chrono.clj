@@ -332,7 +332,8 @@
      ;; units-in-seconds and units-to-calendar-units?
      (let [units (if (re-find #"s$" (name units)) ;; Allow plurals
                    ;; This relies on the patched subs defn below
-                   (keyword (subs (name units) 0 -1))
+                   ;;(keyword (subs (name units) 0 -1))
+                   (keyword (apply str (drop-last (name units)))) ;; DEL 12/12/2009
                    units)]
        (/ (time-between date-a date-b)
           (units-in-seconds units)))))
