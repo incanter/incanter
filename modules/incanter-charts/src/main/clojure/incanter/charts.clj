@@ -698,6 +698,7 @@
 
   Options:
     :group-by
+    :series-label
 
   Examples:
 
@@ -707,11 +708,16 @@
       (def x (sample-uniform 12 :integers true :max 100))
       (def plot (bar-chart years x :group-by seasons :legend true))
       (view plot)
-      (add-category-line plot (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+      (add-categories plot years [10 20 40] :series-label \"winter-break\")
+
+      (add-categories plot 
+                         (plus 3 years) 
+                         (sample-uniform 12 :integers true :max 100) 
+                         :group-by seasons)
 
       (def plot2 (line-chart years x :group-by seasons :legend true))
       (view plot2)
-      (add-category-line plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+      (add-categories plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
 
 
   References:
@@ -725,15 +731,20 @@
            values# (to-list ~values)
            chart# ~chart
            group-by# (:group-by opts#)
+	   series-label# (:series-label opts#)
            data-plot# (.getCategoryPlot chart#)
            n-col# (.getColumnCount (.getDataset data-plot#))
            n-row# (.getRowCount (.getDataset data-plot#))]
         (do
           (doseq [i# (range 0 (count values#))] (.addValue (.getDataset data-plot#)
                                                       (nth values# i#)
-                                                      (if group-by#
-                                                        (nth group-by# i#)
-                                                        (str '~values))
+                                                      (cond 
+						       group-by#
+                                                         (nth group-by# i#)
+						       series-label#
+						         series-label#
+						       :else
+                                                         (str '~values))
                                                        (nth categories# i#)))
           chart#))))
 
