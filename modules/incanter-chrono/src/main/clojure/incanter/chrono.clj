@@ -1,4 +1,3 @@
-
 (ns #^{:doc "
        chrono.clj --- Because calling it date-utils would be boring.
 
@@ -75,11 +74,11 @@
       "
        :author "Matt Moriarity, Phil Hagelberg, and Bradford Cross"}
   incanter.chrono
-  (:use [incanter.internal :only [maybe?]])
-  (:import (java.util Calendar TimeZone)
-           (java.text DateFormat SimpleDateFormat)
+  (:import (java.util Calendar TimeZone Date GregorianCalendar)
+	   (java.sql Timestamp)
            (org.joda.time DateTime DateTime$Property DateTimeZone 
-                          Minutes Hours Period Interval)))
+                          Minutes Hours Period Interval)
+	   (org.joda.time.format ISODateTimeFormat DateTimeFormatter)))
 
 (def #^{:doc "Conversion of unit keywords to Calendar units"}
      units-to-calendar-units
@@ -101,6 +100,184 @@
       :minute 60,
       :second 1,
       :millisecond 0.001})
+
+;;--------------------------
+;; Constants & Dispatch fn
+;;--------------------------
+
+(def default-format :basic-date)
+
+(def formatters
+     {:basic-date (ISODateTimeFormat/basicDate)
+      :basic-date-time (ISODateTimeFormat/basicDateTime)
+      :basic-date-time-no-ms (ISODateTimeFormat/basicDateTimeNoMillis)
+      :basic-ordinal-date (ISODateTimeFormat/basicOrdinalDate)
+      :basic-ordinal-date-time (ISODateTimeFormat/basicOrdinalDateTime)
+      :basic-ordinal-date-time-no-ms (ISODateTimeFormat/basicOrdinalDateTimeNoMillis)
+      :basic-time (ISODateTimeFormat/basicTime)
+      :basic-time-no-ms (ISODateTimeFormat/basicTimeNoMillis)
+      :basic-t-time (ISODateTimeFormat/basicTTime)
+      :basic-t-time-no-ms (ISODateTimeFormat/basicTTimeNoMillis)
+      :basic-week-date (ISODateTimeFormat/basicWeekDate)
+      :basic-week-date-time (ISODateTimeFormat/basicWeekDateTime)
+      :basic-week-date-time-no-ms (ISODateTimeFormat/basicWeekDateTimeNoMillis)
+      :date (ISODateTimeFormat/date)
+      :date-element-parser (ISODateTimeFormat/dateElementParser)
+      :date-hour (ISODateTimeFormat/dateHour)
+      :date-hour-minute (ISODateTimeFormat/dateHourMinute)
+      :date-hour-minute-second (ISODateTimeFormat/dateHourMinuteSecond)
+      :date-hour-minute-second-fraction (ISODateTimeFormat/dateHourMinuteSecondFraction)
+      :date-hour-minute-second-ms (ISODateTimeFormat/dateHourMinuteSecondMillis)
+      :date-opt-time (ISODateTimeFormat/dateOptionalTimeParser)
+      :date-parser (ISODateTimeFormat/dateParser)
+      :date-time (ISODateTimeFormat/dateTime)
+      :date-time-no-ms (ISODateTimeFormat/dateTimeNoMillis)
+      :date-time-parser (ISODateTimeFormat/dateTimeParser)
+      :hour (ISODateTimeFormat/hour)
+      :hour-minute (ISODateTimeFormat/hourMinute)
+      :hour-minute-second (ISODateTimeFormat/hourMinuteSecond)
+      :hour-minute-second-fraction (ISODateTimeFormat/hourMinuteSecondFraction)
+      :hour-minute-second-ms (ISODateTimeFormat/hourMinuteSecondMillis)
+      :local-date-opt-time (ISODateTimeFormat/localDateOptionalTimeParser)
+      :local-date (ISODateTimeFormat/localDateParser)
+      :local-time (ISODateTimeFormat/localTimeParser)
+      :ordinal-date (ISODateTimeFormat/ordinalDate)
+      :ordinal-date-time (ISODateTimeFormat/ordinalDateTime)
+      :ordinal-date-time-no-ms (ISODateTimeFormat/ordinalDateTimeNoMillis)
+      :time (ISODateTimeFormat/time)
+      :time-element-parser (ISODateTimeFormat/timeElementParser)
+      :time-no-ms (ISODateTimeFormat/timeNoMillis)
+      :time-parser (ISODateTimeFormat/timeParser)
+      :t-time (ISODateTimeFormat/tTime)
+      :t-time-no-ms (ISODateTimeFormat/tTimeNoMillis)
+      :week-date (ISODateTimeFormat/weekDate)
+      :week-date-time (ISODateTimeFormat/weekDateTime)
+      :week-date-time-no-ms (ISODateTimeFormat/weekDateTimeNoMillis)
+      :weekyear (ISODateTimeFormat/weekyear)
+      :weekyear-week (ISODateTimeFormat/weekyearWeek)
+      :weekyear-week-day (ISODateTimeFormat/weekyearWeekDay)
+      :year (ISODateTimeFormat/year)
+      :year-month (ISODateTimeFormat/yearMonth)
+      :year-month-day (ISODateTimeFormat/yearMonthDay)
+      })
+
+(def time-keys
+     [:year :month :day :hour :minute :second :ms])
+
+(defn- to-ms-dispatch
+  [& params]
+  (let [lead-param (first params)]
+    (cond
+     (empty? params) ::empty
+     (nil? lead-param) ::nil
+     (instance? java.util.Calendar lead-param) ::calendar
+     (map? lead-param) ::map
+     true (class lead-param))))
+
+;;------------------------------
+;; Long Conversion Multmethod
+;;------------------------------
+(defmulti to-ms to-ms-dispatch)
+
+(defmethod to-ms Long
+  [& params]
+  (first params))
+
+(defmethod to-ms Date
+  [& params]
+  (.getTime (first params)))
+
+(defmethod to-ms Timestamp
+  [& params]
+  (.getTime (first params)))
+
+(defmethod to-ms ::calendar
+  [& params]
+  (to-ms (.getTime (first params))))
+
+(defmethod to-ms DateTime
+  [& params]
+  (.getMillis (first params)))
+
+(defmethod to-ms ::map
+  [& params]
+  (let [default-map {:year 2000
+		     :month 1
+		     :day 1
+		     :hour 0
+		     :minute 0
+		     :second 0
+		     :ms 0}
+	input-map (first params)
+	resulting-map (merge default-map input-map)
+	[y mo d h mi s ms] ((apply juxt time-keys)
+			    resulting-map)]
+    (to-ms (DateTime. y mo d h mi s ms))))
+
+(defmethod to-ms String
+  [& params]
+  (if (= (count params) 1)
+    (to-ms (first params) default-format)
+    (to-ms (.parseDateTime (formatters (second params)) (first params)))))
+
+(defmethod to-ms ::empty
+  [& params]
+  (to-ms (Date. )))
+
+(defmethod to-ms ::nil
+  [& params]
+  nil)
+
+;;--------------------
+;; Dispatched fns
+;;--------------------
+(defn date [& params]
+  (Date. (apply to-ms params)))
+
+(defn greg-cal [& params]
+  (doto (GregorianCalendar. )
+    (.setTime (apply date params))))
+
+(defn sql-ts [& params]
+  (Timestamp. (apply to-ms params)))
+
+(defn joda [& params]
+  (DateTime. (apply to-ms params)))
+
+(defn time-map [& params]
+  (let [time-extractor (juxt :year 
+			     :monthOfYear 
+			     :dayOfMonth 
+			     :hourOfDay
+			     :minuteOfHour
+			     :secondOfMinute
+			     :millisOfSecond)
+	joda-bean   (bean (apply joda params))]
+    (zipmap time-keys (time-extractor joda-bean))))
+
+(defn str-time [& params]
+  (cond
+    (zero? (count params)) (str-time (to-ms))
+    (keyword? (first params)) (str-time (to-ms) (first params))
+    (= (count params) 1) (str-time (first params) default-format)
+    true (.print (formatters (second params)) (joda (first params)))))
+
+(defn display-formats []
+  (let [an-instant (to-ms)
+	;Ignore the parsers that are for input only
+	input-only #{:date-element-parser 
+		     :date-opt-time
+		     :date-parser 
+		     :date-time-parser
+		     :local-date-opt-time
+		     :local-date 
+		     :local-time}]
+    (apply str
+	   (interpose "\n"
+		      (sort
+		       (map #(str (name %) "\t"  (str-time an-instant %))
+			    (remove input-only (keys formatters))))))))
+
 
 (defn- make-calendar
   "Given some date values, create a Java Calendar object."
@@ -169,7 +346,7 @@
   ([offset] (DateTimeZone/forOffsetHours offset)))
 
 (defn joda-date
-  ""
+  "Creates a joda date object"
   ([str-d] (DateTime. str-d))
   ([y m d h min sec mill zone]
   (DateTime. y m d h min sec mill zone)))
@@ -262,7 +439,7 @@
         (maybe? has-overlap? s e s1 e1))
       false)))
 
-;;todo: find otu why this yields different resutls thatn reading the
+;;todo: find out why this yields different resutls than reading the
 ;;other joda-str function output back in.
 ;;  joda-date 
 ;;        ~(.getYear d)
