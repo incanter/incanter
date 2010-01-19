@@ -147,7 +147,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L659" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L659" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -160,6 +160,7 @@ Adds an additional categories to an existing bar-chart or line-chart, returns th
 
 Options:
   :group-by
+  :series-label
 
 Examples:
 
@@ -169,17 +170,22 @@ Examples:
     (def x (sample-uniform 12 :integers true :max 100))
     (def plot (bar-chart years x :group-by seasons :legend true))
     (view plot)
-    (add-category-line plot (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+    (add-categories plot years [10 20 40] :series-label "winter-break")
+
+    (add-categories plot 
+                       (plus 3 years) 
+                       (sample-uniform 12 :integers true :max 100) 
+                       :group-by seasons)
 
     (def plot2 (line-chart years x :group-by seasons :legend true))
     (view plot2)
-    (add-category-line plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+    (add-categories plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
 
 
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L695" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L695" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -228,7 +234,7 @@ Examples:
   (doto (function-plot cubic -10 10)
         (add-function deriv-cubic -10 10)
         view)</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L893" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L904" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -255,7 +261,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L622" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L622" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -297,7 +303,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L829" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L840" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -340,7 +346,7 @@ Examples:
   (add-pointer plot 0 0 :text "south" :angle :south)
   (add-pointer plot 0 0 :text "sw" :angle :sw)
   (add-pointer plot 0 0 :text "se" :angle :se)</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1011" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1022" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -375,7 +381,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L948" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L959" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -432,7 +438,7 @@ Examples:
   (add-text plot -2.5 -6.5 "Setosa")
   (add-text plot -5 -5.5 "Versicolor")
   (add-text plot -8 -5.5 "Virginica")</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1145" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1156" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -474,7 +480,7 @@ Examples:
   (add-text plot -2.5 -6.5 "Setosa")
   (add-text plot -5 -5.5 "Versicolor")
   (add-text plot -8 -5.5 "Virginica")</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1100" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1111" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -554,7 +560,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L430" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L430" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -576,7 +582,7 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/Bland-Altman_plot
   <a href="http://www-users.york.ac.uk/~mb55/meas/ba.htm">http://www-users.york.ac.uk/~mb55/meas/ba.htm</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1280" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1291" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -619,7 +625,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L360" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L360" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -633,7 +639,7 @@ removing the default grid, returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L773" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L784" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -666,7 +672,7 @@ Examples:
 
   (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
   (view (function-plot cubic -10 10))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L310" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L310" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -715,7 +721,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L56" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L56" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -770,7 +776,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L539" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L539" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -779,7 +785,7 @@ References:
   <pre id="var-usage">Usage: (line-plot x y &amp; options)
 </pre>
   <pre id="var-docstr">WARNING: line-plot has been renamed xy-plot.</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L214" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L214" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -799,7 +805,7 @@ Examples:
   (view (qq-plot (sample-normal 100)))
   (view (qq-plot (sample-exp 100)))
   (view (qq-plot (sample-gamma 100)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1250" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1261" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -851,7 +857,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L131" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L131" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -865,7 +871,7 @@ returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L745" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L756" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -879,7 +885,7 @@ returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L759" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L770" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -892,7 +898,7 @@ References:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L788" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L799" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -905,7 +911,7 @@ References:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L801" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L812" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -918,7 +924,7 @@ References:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L814" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L825" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -937,7 +943,7 @@ Examples:
   (view (trace-plot (:var sample-params)))
 
   (view (trace-plot (sel (:coefs sample-params) :cols 0)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1213" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1224" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -993,7 +999,7 @@ Examples:
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L221" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/89196321b12392d00bc33a11d82691cdd00f4f43/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L221" id="var-source">Source</a>
 </div>
 
 
