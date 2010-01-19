@@ -440,6 +440,7 @@
     :title (default 'Histogram') main title
     :x-label (default 'Categories')
     :y-label (default 'Value')
+    :series-label
     :legend (default false) prints legend
     :vertical (default true) the orientation of the plot
     :group-by (default nil) -- a vector of values used to group the values into
@@ -492,6 +493,11 @@
                      :legend true
                      :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
 
+    ;; add a series label
+    (def plot (bar-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
+    (view plot) 
+    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
+ 
     (view (bar-chart (sample \"abcdefghij\" :size 10 :replacement true)
                      (sample-uniform 10 :max 50) :legend true))
 
@@ -510,6 +516,7 @@
            group-by# (:group-by opts#)
            x-label# (or (:x-label opts#) "Categories")
            y-label# (or (:y-label opts#) "Value")
+	   series-label# (:series-label opts#)
            vertical?# (if (false? (:vertical opts#)) false true)
            legend?# (true? (:legend opts#))
            dataset# (DefaultCategoryDataset.)
@@ -527,9 +534,13 @@
         (do
           (doseq [i# (range 0 (count values#))] (.addValue dataset#
                                                       (nth values# i#)
-                                                      (if group-by#
-                                                        (nth group-by# i#)
-                                                        (str '~values))
+                                                      (cond 
+						       group-by#
+                                                         (nth group-by# i#)
+						       series-label#
+						         series-label#
+						       :else
+                                                         (str '~values))
                                                        (nth categories# i#)))
           chart#))))
 
@@ -550,6 +561,7 @@
     :x-label (default 'Categories')
     :y-label (default 'Value')
     :legend (default false) prints legend
+    :series-label
     :group-by (default nil) -- a vector of values used to group the values into
                                series within each category.
 
@@ -579,7 +591,11 @@
     (view (line-chart (sample \"abcdefghij\" :size 10 :replacement true)
                          (sample-uniform 10 :max 50) :legend true))
 
-
+    ;; add a series label
+    (def plot (line-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
+    (view plot) 
+    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
+ 
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -594,6 +610,7 @@
            group-by# (:group-by opts#)
            x-label# (or (:x-label opts#) "Categories")
            y-label# (or (:y-label opts#) "Value")
+	   series-label# (:series-label opts#)
            vertical?# (if (false? (:vertical opts#)) false true)
            legend?# (true? (:legend opts#))
            dataset# (DefaultCategoryDataset.)
@@ -611,9 +628,13 @@
         (do
           (doseq [i# (range 0 (count values#))] (.addValue dataset#
                                                       (nth values# i#)
-                                                      (if group-by#
-                                                        (nth group-by# i#)
-                                                        (str '~values))
+                                                      (cond 
+						       group-by#
+                                                         (nth group-by# i#)
+						       series-label#
+						         series-label#
+						       :else
+                                                         (str '~values))
                                                        (nth categories# i#)))
           chart#))))
 
