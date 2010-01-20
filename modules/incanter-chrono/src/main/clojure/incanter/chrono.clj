@@ -201,8 +201,9 @@
 
 (defmethod to-ms Integer
   ([y mo d] (to-ms y mo d 0 0 0))
-  ([y mo d h mi s & r]
-     (to-ms (DateTime. y mo d h mi s 0))))
+  ([y mo d h mi s] (to-ms y mo d mi s 0))
+  ([y mo d h mi s ms & r]
+     (to-ms (DateTime. y mo d h mi s ms))))
 
 (defmethod to-ms String
   ([s] (to-ms s default-format))
