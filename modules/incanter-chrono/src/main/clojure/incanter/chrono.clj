@@ -80,27 +80,6 @@
                           Minutes Hours Period Interval)
 	   (org.joda.time.format ISODateTimeFormat DateTimeFormatter)))
 
-(def #^{:doc "Conversion of unit keywords to Calendar units"}
-     units-to-calendar-units
-     {:year Calendar/YEAR,
-      :month Calendar/MONTH,
-      :day Calendar/DATE,
-      :hour Calendar/HOUR_OF_DAY,
-      :minute Calendar/MINUTE,
-      :second Calendar/SECOND,
-      :dayofweek Calendar/DAY_OF_WEEK})
-
-(def #^{:doc "Number of seconds in each unit"}
-     units-in-seconds
-     {:year 31557600,
-      :month 2592000,
-      :week 604800,
-      :day 86400,
-      :hour 3600,
-      :minute 60,
-      :second 1,
-      :millisecond 0.001})
-
 ;;--------------------------
 ;; Constants & Dispatch fn
 ;;--------------------------
@@ -354,7 +333,7 @@ the end of range 1."
 ;; Relative functions
 ;;--------------------
 (defn period
-  "This returns a period n units long."
+  "This returns a Period object n units long."
   [n unit]
   ((unit period-fns) n))
 
@@ -387,7 +366,7 @@ t.  If t is not provided, now is assumed."
        (merge (time-map t) start-point ))))
 
 (defn end-of
-  "Return a date at the end of the month, year, day, etc. from the-date."
+  "Return a time at the end of the month, year, day, etc. from the-date."
   ([unit] (end-of (to-ms) unit))
   ([the-date unit]
   (earlier (later (start-of the-date unit) (period 1 unit)) (period 1 :second))))
