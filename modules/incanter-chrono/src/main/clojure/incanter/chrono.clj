@@ -74,6 +74,7 @@
       "
        :author "Matt Moriarity, Phil Hagelberg, and Bradford Cross"}
   incanter.chrono
+  (:use [incanter.internal :only maybe?])
   (:import (java.util Calendar TimeZone Date GregorianCalendar)
 	   (java.sql Timestamp)
            (org.joda.time DateTime DateTime$Property DateTimeZone 
@@ -161,8 +162,26 @@
       :year-month-day (ISODateTimeFormat/yearMonthDay)
       })
 
+(def period-fns
+     {:ms #(Period/millis %)
+      :second #(Period/seconds %)
+      :minute #(Period/minutes %)
+      :hour #(Period/hours %)
+      :day #(Period/days %)
+      :month #(Period/months %)
+      :year #(Period/years %)})
+
 (def time-keys
      [:year :month :day :hour :minute :second :ms])
+
+(def default-time-map 
+     {:year 1970
+      :month 1
+      :day 1
+      :hour 0
+      :minute 0
+      :second 0
+      :ms 0})
 
 (defn- to-ms-dispatch
   [& params]
@@ -201,15 +220,8 @@
 
 (defmethod to-ms ::map
   [& params]
-  (let [default-map {:year 2000
-		     :month 1
-		     :day 1
-		     :hour 0
-		     :minute 0
-		     :second 0
-		     :ms 0}
-	input-map (first params)
-	resulting-map (merge default-map input-map)
+  (let [input-map (first params)
+	resulting-map (merge default-time-map input-map)
 	[y mo d h mi s ms] ((apply juxt time-keys)
 			    resulting-map)]
     (to-ms (DateTime. y mo d h mi s ms))))
@@ -262,6 +274,9 @@
     (= (count params) 1) (str-time (first params) default-format)
     true (.print (formatters (second params)) (joda (first params)))))
 
+;;--------------------
+;; String Helpers
+;;--------------------
 (defn display-formats []
   (let [an-instant (to-ms)
 	;Ignore the parsers that are for input only
@@ -272,266 +287,111 @@
 		     :local-date-opt-time
 		     :local-date 
 		     :local-time}]
-    (apply str
-	   (interpose "\n"
-		      (sort
-		       (map #(str (name %) "\t"  (str-time an-instant %))
-			    (remove input-only (keys formatters))))))))
+    (->> formatters
+	 keys
+	 (remove input-only)
+	 (map #(str (name %) "\t"  (str-time an-instant %)))
+	 sort
+	 (interpose "\n")
+	 (apply str)
+	 println)))
 
-
-(defn- make-calendar
-  "Given some date values, create a Java Calendar object."
-  ([] (doto (Calendar/getInstance)
-        (.clear)
-        (.setLenient true)))
-  ([calendar]
-     (.clone calendar))
-  ([year month day]
-     (doto (make-calendar)
-       (.set year (dec month) day)))
-  ([year month day hours minutes]
-     (doto (make-calendar)
-       (.set year (dec month) day hours minutes)))
-  ([year month day hours minutes seconds]
-     (doto (make-calendar)
-       (.set year (dec month) day hours minutes seconds))))
-
-(defn- get-unit [calendar unit]
-  (.get calendar (units-to-calendar-units unit)))
-
-(defmulti format-date
-  "Take in a date and a format (either a keyword or a string) and
-  return a string with the formatted date."
-  (fn [date & form] (first form)))
-
-(defmulti parse-date
-  "Take in a string with a formatted date and a format (either a
-  keyword or a string) and return a parsed date."
-  (fn [source & form] (first form)))
-
-(defn date
-  "Returns a new date object. Takes year, month, and day as args as
-  well as optionally hours, minutes, and seconds."
-  [& args]
-  (let [calendar (apply make-calendar args)]
-    (proxy [clojure.lang.IFn clojure.lang.Associative] []
-      (toString [] (format-date this :iso8601))
-      (equals [other-date]
-              (and (instance? (.getClass this) other-date)
-                   (.equals calendar (other-date :calendar))))
-      ;; look up :year, :month, :date, etc.
-      (invoke [unit]
-              (cond (= :calendar unit) calendar ;; mostly for internal use
-                    (= :month unit) (inc (get-unit calendar :month))
-                    true (get-unit calendar unit)))
-      ;; These (along with implementing Associative) allow us to use
-      ;; (:month my-date), etc. Good idea? Not sure since we don't
-      ;; implement all of Associative, just enough for keywords.
-      (valAt [unit] (.invoke this unit))
-      (equiv [o] (.equals this o)))))
-
-;;brad's hacks
-
-(defn date> 
-  ""
-  ([d] 
-    (let [cal (Calendar/getInstance)]
-      (.setTime cal d)
-    (date cal))))
-
-;;joda time 
-
-(defn time-zone 
-  ""
+;;-------------------
+;; Time Zone Stuff
+;;-------------------
+(defn tz 
+  "Creates a Joda Time Zone"
   ([offset] (DateTimeZone/forOffsetHours offset)))
 
-(defn joda-date
-  "Creates a joda date object"
-  ([str-d] (DateTime. str-d))
-  ([y m d h min sec mill zone]
-  (DateTime. y m d h min sec mill zone)))
-    
-(defn joda-proxy
-  "joda-date object wraped in a proxy of goodness."
-  [& args]
-  (let [d (apply joda-date args)]
-    (proxy [clojure.lang.IFn 
-            clojure.lang.Associative] []
-      (toString [] (str d))
-      (equals [other-date]
-              (and (instance? (.getClass this) other-date)
-                   (.equals d (other-date :datetime))))
-      (invoke [unit]
-              (let [res
-              (cond (= :years unit) (.year d) 
-                    (= :months unit) (.monthOfYear d) 
-                    (= :days unit) (.dayOfMonth d) 
-                    (= :day-of-week unit) (.dayOfWeek d) 
-                    (= :hours unit) (.hourOfDay d) 
-                    (= :minutes unit) (.minuteOfHour d) 
-                    (= :seconds unit) (.secondOfMinute d) 
-                    (= :millis unit) (.millisOfSecond d) 
-                    :otherwise d)]
-                (if (instance? DateTime$Property res)
-                  (.get res)
-                  res)))
-      ;; These (along with implementing Associative) allow us to use
-      ;; (:month my-date), etc. Good idea? Not sure since we don't
-      ;; implement all of Associative, just enough for keywords.
-      (valAt [unit] (.invoke this unit))
-      (equiv [o] (.equals this o)))))
+(def utc (DateTimeZone/UTC))
 
-(defn joda-str 
-  ""
-  ([d] (str `(DateTime. ~(str d)))))
+(defn switch-tz
+  "Switches an instant to a different time zone"
+  [d zone]
+  (.toDateTime (joda d) zone))
 
-(defmethod print-dup org.joda.time.DateTime [d w] (.write w (joda-str d)))
+
+;;-------------------
+;; Predicates
+;;-------------------
+
+(defn compare-time
+  "Compares 2 times a and b."
+  [a b]
+  (.compareTo (date a) (date b)))
  
-(defn joda-guard 
-  ""
-  ([d] (not (instance? org.joda.time.DateTime d))))
-
-  ;;TODO: make this stuff monadic
-(defn minutes-between 
-  ""
-  ([start end] 
-    (if (or (joda-guard start) (joda-guard end))
-      nil
-      (.getMinutes (Minutes/minutesBetween start end)))))
-
-(defn hours-between 
-  ""
-  ([start end] 
-    (if (or (joda-guard start) (joda-guard end))
-      nil
-      (.getHours (Hours/hoursBetween start end)))))
-
-(defn hours-from 
-  ""
-  ([d #^Integer h] (.plusHours d h)))
-
-(defn minutes-from 
-  ""
-  ([d #^Integer m] (.plusMinutes d m)))
-
-(defn hours-around 
-  ""
-  ([r #^Integer d] (map #(.plusHours d %) r)))
-
-(defn before? 
-  ""
-  ([start end] (.isBefore start end)))
+(defn before?
+  "Tests to determine if time a is before time b"
+  [a b]
+  (= (compare-time a b) -1))
+ 
+(defn after?
+  "Tests to determine if time a is after time b"
+  [a b]
+  (= (compare-time a b) 1))
 
 (defn valid-range? 
-  "" 
-  ([[start end]] (maybe? before? start end)))
+  "Tests to determine if the range is valid, i.e.
+start is before finish." 
+  [[start end]] (before? start end))
 
 (defn is-within? 
-  ""
-  ([d [s e]] (.contains (Interval. s e) d)))
+  "Tests to see if a date d is within a range specified
+by start and end"
+  [d [start end]]
+  (and (before? start d)
+       (before? d end)))
 
 (defn are-overlapping? 
-  ""
-  ([[s e] [s1 e1]]
-    (if (and (valid-range? [s e]) (valid-range? [s1 e1]))
-      (letfn [(has-overlap? [start end start1 end1]
-                          (not (nil? (.overlap (Interval. start end) (Interval. start1 end1)))))]
-        (maybe? has-overlap? s e s1 e1))
-      false)))
+  "Tests to see if two ranges are overlapping.  i.e. 
+each range is valid and the start of range 2 is before
+the end of range 1."
+  [[start-1 end-1] [start-2 end-2]]
+  (and (valid-range? start-1 end-1)
+       (valid-range? start-2 end-2)
+       (before? start-2 end-1)))
 
-;;todo: find out why this yields different resutls than reading the
-;;other joda-str function output back in.
-;;  joda-date 
-;;        ~(.getYear d)
-;;        ~(.getMonthOfYear d)
-;;        ~(.getDayOfWeek d)
-;;        ~(.getHourOfDay d)
-;;        ~(.getMinuteOfHour d)
-;;        ~(.getSecondOfMinute d)
-;;        ~(.getMillisOfSecond d)
-;;        (DateTimeZone/forID ~(str (.getZone d))))))
+;;--------------------
+;; Relative functions
+;;--------------------
+(defn period
+  "This returns a period n units long."
+  [n unit]
+  ((unit period-fns) n))
 
-(defn now
-  "Returns a new date object with the current date and time."
-  []
-  (date (Calendar/getInstance)))
-
-(defn today
-  "Returns a new date object with only the current date. The time
-  fields will be set to 0."
-  []
-  (let [d (now)]
-    (date (d :year) (d :month) (d :day))))
-
-;;; Relative functions
+(defn period-between
+  "This find the period between start and end"
+  [start end]
+  (Period. (to-ms start) (to-ms end)))
 
 (defn later
-  "Returns a date that is later than the-date by amount units.
-  Amount is one if not specified."
-  ([the-date amount units]
-     (date (doto (.clone (the-date :calendar))
-             (.set (units-to-calendar-units units)
-                   (+ (.get (the-date :calendar)
-                            (units-to-calendar-units units))
-                      amount)))))
-  ([the-date units]
-     (later the-date 1 units)))
-
-(defn date-time 
-  ""
-  ([d t] (later d t :minute)))
+  "This returns a date later by a-period"
+  [a-date a-period]
+  (.plus (joda a-date) a-period))
 
 (defn earlier
-  "Returns a date that is earlier than the-date by amount units.
-  Amount is one if not specified."
-  ([the-date amount units]
-     (later the-date (- amount) units))
-  ([the-date units]
-     (later the-date -1 units)))
+  "This returns a date earlier by a-period"
+  [a-date a-period]
+  (.minus (joda a-date) a-period))
 
-(defn later? 
-  "Is date-a later than date-b?"
-  ([date-a date-b]
-    (.after (date-a :calendar) (date-b :calendar))))
-
-(defn earlier? 
-  "Is date-a earlier than date-b?"
-  ([date-a date-b] (.before (date-a :calendar) (date-b :calendar))))
-
-(defn time-between
-  "How many units between date-a and date-b? Units defaults to seconds."
-  ([date-a date-b]
-     (/ (java.lang.Math/abs
-      (- (.getTimeInMillis (date-a :calendar))
-         (.getTimeInMillis (date-b :calendar)))) 1000))
-  ([date-a date-b units]
-     ;; TODO: should we move plural support up to
-     ;; units-in-seconds and units-to-calendar-units?
-     (let [units (if (re-find #"s$" (name units)) ;; Allow plurals
-                   ;; This relies on the patched subs defn below
-                   (keyword (subs (name units) 0 -1))
-                   units)]
-       (/ (time-between date-a date-b)
-          (units-in-seconds units)))))
-
-(defn- args-for "Allow round-tripping through date function"
-  [date]
-  [(date :year) (date :month) (date :day)
-   (date :hour) (date :minute) (date :second)])
-
-(defn beginning-of
-  "Return a date at the beginning of the month, year, day, etc. from the-date."
-  [the-date unit]
-  ;; TODO: clean up!
-  (let [position ({:year 1 :month 2 :day 3 :hour 4 :minute 5 :second 6} unit)]
-    (apply date (concat (take position (args-for the-date))
-                        (drop position [1970 1 1 0 0 0])))))
+;;--------------------
+;; Interval Utils
+;;--------------------
+(defn start-of
+  "This returns a the start of field for a given time
+t.  If t is not provided, now is assumed."
+  ([field] (start-of (to-ms) field))
+  ([t field]
+     (let [fields (take-while (complement (hash-set field)) time-keys)
+	   fields (set (drop (inc (count fields)) time-keys))
+	   start-point (into {} (filter (comp fields key) default-time-map))]
+       (merge (time-map t) start-point ))))
 
 (defn end-of
   "Return a date at the end of the month, year, day, etc. from the-date."
-  [the-date unit]
-  ;; TODO: this is kinda ugly too?
-  (earlier (later (beginning-of the-date unit) unit) :second))
+  ([unit] (end-of (to-ms) unit))
+  ([the-date unit]
+  (earlier (later (start-of the-date unit) (period 1 unit)) (period 1 :second))))
 
 (defn date-seq
   "Returns a lazy seq of dates starting with from up until to in
@@ -541,80 +401,3 @@
        (when (or (nil? to) (earlier? from to))
          (cons from (date-seq units (later from units) to)))))
   ([units from] (date-seq units from nil)))
-
-;;; Formatting and Parsing
-
-(defmacro def-date-format 
-  ""
-  ([fname [arg] & body]
-    `(defmethod format-date ~(keyword (name fname)) [~arg ~'_]
-       ~@body)))
-
-(defmacro def-date-parser 
-  ""
-  ([fname [arg] & body]
-    `(defmethod parse-date ~(keyword (name fname)) [~arg ~'_]
-       ~@body)))
-
-;;; Use the normal Java date formats
-
-(def #^{:private true}
-     format-to-java-const
-     {:short DateFormat/SHORT,
-      :medium DateFormat/MEDIUM,
-      :long DateFormat/LONG,
-      :full DateFormat/FULL})
-
-(doseq [[key con] format-to-java-const]
-  (defmethod format-date (keyword (str (name key) "-date")) [date _]
-    (.format (DateFormat/getDateInstance con)
-             (.getTime (date :calendar))))
-  (defmethod parse-date (keyword (str (name key) "-date")) [source _]
-    (date (doto (make-calendar)
-            (.setTime (.parse (DateFormat/getDateInstance con)
-                              source)))))
-  (defmethod format-date (keyword (str (name key) "-date-time")) [date _]
-    (.format (DateFormat/getDateTimeInstance con con)
-             (.getTime (date :calendar))))
-  (defmethod parse-date (keyword (str (name key) "-date-time")) [source _]
-    (date (doto (make-calendar)
-            (.setTime (.parse (DateFormat/getDateTimeInstance con con)
-                              source))))))
-
-;;; Formats dates with a custom string format
-(defmethod format-date :default [date form]
-  (.format (SimpleDateFormat. form)
-           (.getTime (date :calendar))))
-
-;;; Parse a date from a string format
-(defmethod parse-date :default [source form]
-  (date
-   (doto (make-calendar)
-     (.setTime (.parse (SimpleDateFormat. form) source)))))
-
-(defmethod format-date nil [date]
-  (format-date date :iso8601))
-
-(defmacro def-simple-date-format [fname form]
-  `(do
-     (def-date-format ~fname [date#]
-       (format-date date# ~form))
-     (def-date-parser ~fname [source#]
-       (parse-date source# ~form))))
-
-;; Technically this should also have a single character time zone
-;; indicator, but I'm not sure how to do that yet.
-(def-simple-date-format iso8601 "yyyy-MM-dd HH:mm:ss")
-
-;; TODO: parse-date should be able to guess at the format
-
-;; Redefine subs to allow for negative indices.
-;; TODO: This should be submitted as a patch to Clojure.
-(in-ns 'clojure.core)
-(defn subs
-  "Returns the substring of s beginning at start inclusive, and ending
-  at end (defaults to length of string), exclusive."
-  ([#^String s start] (subs s start (count s)))
-  ([#^String s start end]
-     (let [count-back #(if (< % 0) (+ (count s) %) %)]
-       (.substring s (count-back start) (count-back end)))))
