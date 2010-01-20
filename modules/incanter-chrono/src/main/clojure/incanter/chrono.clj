@@ -376,6 +376,6 @@ t.  If t is not provided, now is assumed."
   increments of units. If to is omitted, returns an infinite seq."
   ([units from to]
      (lazy-seq
-       (when (or (nil? to) (earlier? from to))
-         (cons from (date-seq units (later from units) to)))))
+       (when (or (nil? to) (before? from to))
+         (cons from (date-seq units (later from (period 1 units)) to)))))
   ([units from] (date-seq units from nil)))
