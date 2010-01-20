@@ -167,8 +167,6 @@
     (cond
      (empty? params) ::empty
      (nil? lead-param) ::nil
-     (instance? java.util.Calendar lead-param) ::calendar
-     (map? lead-param) ::map
      true (class lead-param))))
 
 ;;------------------------------
@@ -176,39 +174,39 @@
 ;;------------------------------
 (defmulti to-ms to-ms-dispatch)
 
-(defmethod to-ms Long
-  [& params]
-  (first params))
+(defmethod to-ms Long [l] l)
 
 (defmethod to-ms Date
-  [& params]
-  (.getTime (first params)))
+  [d]
+  (.getTime d))
 
 (defmethod to-ms Timestamp
-  [& params]
-  (.getTime (first params)))
+  [ts]
+  (.getTime ts))
 
-(defmethod to-ms ::calendar
-  [& params]
-  (to-ms (.getTime (first params))))
+(defmethod to-ms Calendar
+  [cal]
+  (to-ms (.getTime cal)))
 
 (defmethod to-ms DateTime
-  [& params]
-  (.getMillis (first params)))
+  [d]
+  (.getMillis d))
 
-(defmethod to-ms ::map
-  [& params]
-  (let [input-map (first params)
-	resulting-map (merge default-time-map input-map)
+(defmethod to-ms clojure.lang.IPersistentMap
+  [input-map]
+  (let [resulting-map (merge default-time-map input-map)
 	[y mo d h mi s ms] ((apply juxt time-keys)
 			    resulting-map)]
     (to-ms (DateTime. y mo d h mi s ms))))
 
+(defmethod to-ms Integer
+  ([y mo d] (to-ms y mo d 0 0 0))
+  ([y mo d h mi s & r]
+     (to-ms (DateTime. y mo d h mi s 0))))
+
 (defmethod to-ms String
-  [& params]
-  (if (= (count params) 1)
-    (to-ms (first params) default-format)
-    (to-ms (.parseDateTime (formatters (second params)) (first params)))))
+  ([s] (to-ms s default-format))
+  ([s f] (to-ms (.parseDateTime (formatters f) s))))
 
 (defmethod to-ms ::empty
   [& params]
@@ -231,7 +229,7 @@
 (defn sql-ts [& params]
   (Timestamp. (apply to-ms params)))
 
-(defn joda [& params]
+(defn joda-date [& params]
   (DateTime. (apply to-ms params)))
 
 (defn time-map [& params]
@@ -242,15 +240,16 @@
 			     :minuteOfHour
 			     :secondOfMinute
 			     :millisOfSecond)
-	joda-bean   (bean (apply joda params))]
+	joda-bean   (bean (apply joda-date params))]
     (zipmap time-keys (time-extractor joda-bean))))
 
-(defn str-time [& params]
-  (cond
-    (zero? (count params)) (str-time (to-ms))
-    (keyword? (first params)) (str-time (to-ms) (first params))
-    (= (count params) 1) (str-time (first params) default-format)
-    true (.print (formatters (second params)) (joda (first params)))))
+(defn str-time 
+  ([] (str-time (to-ms)))
+  ([& params]
+     (cond
+       (keyword? (first params)) (str-time (to-ms) (first params))
+       (= (count params) 1) (str-time (first params) default-format)
+       true (.print (formatters (second params)) (joda-date (first params))))))
 
 ;;--------------------
 ;; String Helpers
@@ -281,12 +280,14 @@
   "Creates a Joda Time Zone"
   ([offset] (DateTimeZone/forOffsetHours offset)))
 
+(def time-zone tz)
+
 (def utc (DateTimeZone/UTC))
 
 (defn switch-tz
   "Switches an instant to a different time zone"
   [d zone]
-  (.toDateTime (joda d) zone))
+  (.toDateTime (joda-date d) zone))
 
 
 ;;-------------------
@@ -344,26 +345,28 @@ the end of range 1."
 
 (defn later
   "This returns a date later by a-period"
-  [a-date a-period]
-  (.plus (joda a-date) a-period))
+  ([a-date a-period] (.plus (joda-date a-date) a-period))
+  ([a-date n unit] (later a-date (period n unit))))
 
 (defn earlier
   "This returns a date earlier by a-period"
-  [a-date a-period]
-  (.minus (joda a-date) a-period))
+  ([a-date a-period] (.minus (joda-date a-date) a-period))
+  ([a-date n unit] (earlier a-date (period n unit))))
 
 ;;--------------------
 ;; Interval Utils
 ;;--------------------
 (defn start-of
-  "This returns a the start of field for a given time
+  "This returns a the beginning of field for a given time
 t.  If t is not provided, now is assumed."
   ([field] (start-of (to-ms) field))
   ([t field]
      (let [fields (take-while (complement (hash-set field)) time-keys)
 	   fields (set (drop (inc (count fields)) time-keys))
 	   start-point (into {} (filter (comp fields key) default-time-map))]
-       (merge (time-map t) start-point ))))
+       (joda-date (merge (time-map t) start-point)))))
+
+(def beginning-of start-of)
 
 (defn end-of
   "Return a time at the end of the month, year, day, etc. from the-date."
