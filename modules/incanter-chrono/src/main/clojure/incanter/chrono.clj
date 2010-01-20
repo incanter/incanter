@@ -74,7 +74,6 @@
       "
        :author "Matt Moriarity, Phil Hagelberg, and Bradford Cross"}
   incanter.chrono
-  (:use [incanter.internal :only maybe?])
   (:import (java.util Calendar TimeZone Date GregorianCalendar)
 	   (java.sql Timestamp)
            (org.joda.time DateTime DateTime$Property DateTimeZone 
