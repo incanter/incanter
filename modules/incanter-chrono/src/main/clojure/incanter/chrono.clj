@@ -159,7 +159,8 @@
       :hour 0
       :minute 0
       :second 0
-      :ms 0})
+      :ms 0
+      :tz (.getZone (DateTime.))})
 
 (defn- to-ms-dispatch
   [& params]
@@ -168,12 +169,16 @@
      (empty? params) ::empty
      (nil? lead-param) ::nil
      true (class lead-param))))
+;;----------------------------
+;; Define Multimethods
+;;----------------------------
+(defmulti tz class)
 
-;;------------------------------
-;; Long Conversion Multmethod
-;;------------------------------
 (defmulti to-ms to-ms-dispatch)
 
+;;------------------------------
+;; Long Conversion Methods
+;;------------------------------
 (defmethod to-ms Long [l] l)
 
 (defmethod to-ms Date
@@ -195,15 +200,17 @@
 (defmethod to-ms clojure.lang.IPersistentMap
   [input-map]
   (let [resulting-map (merge default-time-map input-map)
-	[y mo d h mi s ms] ((apply juxt time-keys)
+	[y mo d h mi s ms tz] ((apply juxt (conj time-keys :tz))
 			    resulting-map)]
-    (to-ms (DateTime. y mo d h mi s ms))))
+    (to-ms (DateTime. y mo d h mi s ms tz))))
 
 (defmethod to-ms Integer
   ([y mo d] (to-ms y mo d 0 0 0))
-  ([y mo d h mi s] (to-ms y mo d mi s 0))
-  ([y mo d h mi s ms & r]
-     (to-ms (DateTime. y mo d h mi s ms))))
+  ([y mo d h mi s] (to-ms y mo d h mi s 0))
+  ([y mo d h mi s ms]
+     (to-ms (DateTime. y mo d h mi s ms)))
+  ([y mo d h mi s ms t]
+     (to-ms (DateTime. y mo d h mi s ms (tz t)))))
 
 (defmethod to-ms String
   ([s] (to-ms s default-format))
@@ -275,20 +282,49 @@
 	 println)))
 
 ;;-------------------
-;; Time Zone Stuff
+;; Time Zone Constructor
 ;;-------------------
-(defn tz 
-  "Creates a Joda Time Zone"
-  ([offset] (DateTimeZone/forOffsetHours offset)))
+(def available-ids (apply sorted-set (DateTimeZone/getAvailableIDs)))
+
+(defmethod tz DateTimeZone
+  [zone]
+  zone)
+
+(defmethod tz Number
+  [offset]
+  (DateTimeZone/forOffsetHours offset))
+
+(defmethod tz String
+  [named-zone]
+  (DateTimeZone/forID named-zone))
+
+(defmethod tz Calendar
+  [cal]
+  (tz (.getTimeZone cal)))
+
+(defmethod tz Date
+  [d]
+  (tz (greg-cal d)))
+
+(defmethod tz DateTime
+  [d]
+  (.getZone d))
+
+(defmethod tz TimeZone
+  [t]
+  (DateTimeZone/forID t))
 
 (def time-zone tz)
 
 (def utc (DateTimeZone/UTC))
 
+;;-------------------
+;; Time Zone Utils
+;;-------------------
 (defn switch-tz
   "Switches an instant to a different time zone"
   [d zone]
-  (.toDateTime (joda-date d) zone))
+  (.toDateTime (joda-date d) (tz zone)))
 
 
 ;;-------------------
@@ -300,12 +336,12 @@
   [a b]
   (.compareTo (date a) (date b)))
  
-(defn before?
+(defn earlier?
   "Tests to determine if time a is before time b"
   [a b]
   (= (compare-time a b) -1))
  
-(defn after?
+(defn later?
   "Tests to determine if time a is after time b"
   [a b]
   (= (compare-time a b) 1))
@@ -313,14 +349,14 @@
 (defn valid-range? 
   "Tests to determine if the range is valid, i.e.
 start is before finish." 
-  [[start end]] (before? start end))
+  [[start end]] (earlier? start end))
 
 (defn is-within? 
   "Tests to see if a date d is within a range specified
 by start and end"
   [d [start end]]
-  (and (before? start d)
-       (before? d end)))
+  (and (earlier? start d)
+       (earlier? d end)))
 
 (defn are-overlapping? 
   "Tests to see if two ranges are overlapping.  i.e. 
@@ -329,7 +365,7 @@ the end of range 1."
   [[start-1 end-1] [start-2 end-2]]
   (and (valid-range? start-1 end-1)
        (valid-range? start-2 end-2)
-       (before? start-2 end-1)))
+       (earlier? start-2 end-1)))
 
 ;;--------------------
 ;; Relative functions
