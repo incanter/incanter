@@ -1193,8 +1193,10 @@
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
           nin-fn (complement in-fn)
-          ops {:$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
-                  :$in in-fn :$nin nin-fn :$fn (fn [v f] (f v))}
+          ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
+	       :in in-fn :nin nin-fn :fn (fn [v f] (f v))
+	       :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+	       :$in in-fn :$nin nin-fn :$fn (fn [v f] (f v))}
           _and (fn [a b] (and a b))] 
      (fn [row] 
        (reduce _and
@@ -1465,6 +1467,125 @@
     (query-dataset $data  query-map))
   ([query-map data] 
      (query-dataset data query-map)))
+
+(defn $rollup
+"Returns a dataset that uses the given summary function (or function identifier keyword)
+ to rollup the given column based on a set of group-by columns. The summary function
+ should accept a single sequence of values and return a single summary value. Alternatively,
+ you can provide a keyword identifer of a set of built-in functions including:
+   
+   :max -- the maximum value of the data in each group
+   :min -- the minimum value of the data in each group
+   :sum -- the sum of the data in each group
+   :count -- the number of elements in each group
+   :mean -- the mean of the data in each group
+   
+
+  Like the other '$' dataset functions, $rollup will use the dataset bound to $data
+  (see the with-data macro) if a dataset is not provided as an argument.
+
+  Examples:
+
+    (use '(incanter core datasets))
+
+    (def iris (get-dataset :iris))
+    ($rollup :mean :Sepal.Length :Species iris)
+    ($rollup :count :Sepal.Length :Species iris)
+    ($rollup :max :Sepal.Length :Species iris)
+    ($rollup :min :Sepal.Length :Species iris)
+    
+    ;; The following is an example using a custom function, but since all the 
+    ;; iris measurements are positive, the built-in mean function could have 
+    ;; been used instead.
+
+    ($rollup #(mean (abs %)) :Sepal.Width :Species iris)
+
+    ($rollup sd :Sepal.Length :Species iris)
+    ($rollup variance :Sepal.Length :Species iris)
+    ($rollup median :Sepal.Length :Species iris)
+
+    (def hair-eye-color (get-dataset :hair-eye-color))
+    ($rollup :mean :count [:hair :eye] hair-eye-color)
+
+    (with-data ($rollup :mean :Sepal.Length :Species iris)
+      (view (bar-chart ($ :Species) ($ :Sepal.Length))))
+
+     ;; the following exaples use the built-in data set called hair-eye-color.
+
+     (with-data ($rollup :mean :count [:hair :eye] hair-eye-color)
+       (view (bar-chart ($ :hair) ($ :count) :group-by ($ :eye) :legend true)))
+
+     (with-data (->>  (get-dataset :hair-eye-color)
+                      ($where {:hair {:in #{\"brown\" \"blond\"}}})
+                      ($rollup :sum :count [:hair :eye])
+                      ($order :count :desc))
+       (view $data)
+       (view (bar-chart ($ :hair) ($ :count) :group-by ($ :eye) :legend true)))
+
+
+"
+  ([summary-fun col-name group-by]
+     ($rollup summary-fun col-name group-by $data))
+  ([summary-fun col-name group-by data]
+     (let [submap (fn [m ks] 
+		    (zipmap (if (coll? ks) ks [ks]) 
+			    (map #(map-get m %) (if (coll? ks) ks [ks]))))
+	   key-fn (if (coll? col-name) 
+		    (fn [row] 
+		      (into [] (map #(map-get row %) col-name)))
+		    (fn [row] 
+		      (map-get row col-name)))
+	   rows (:rows data)
+	   n (nrow data)
+	   rollup-fns {:max (fn [col-data] (apply max col-data))
+		       :min (fn [col-data] (apply min col-data))
+		       :sum (fn [col-data] (apply + col-data))
+		       :count count
+		       :mean (fn [col-data] (/ (apply + col-data) (count col-data)))}
+	   rollup-fn (if (keyword? summary-fun)
+		       (rollup-fns summary-fun)
+		       summary-fun)]
+       (loop [r 0 reduced-rows {}]
+	 (if (= r n)
+	   (let [group-cols (to-dataset (keys reduced-rows))
+		 res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
+	     (col-names res (concat (col-names group-cols)
+				    (if (coll? col-name) col-name [col-name]))))
+	   (recur (inc r) 
+		  (let [row (nth rows r)
+			k (submap row group-by)
+			a (reduced-rows k)
+			b (key-fn row)]
+		    (assoc reduced-rows k (if a (conj a b) [b])))))))))
+
+
+(defn $order
+  " Sorts a dataset by the given columns in either ascending (:asc)
+    or descending (:desc) order. If used within a the body of 
+    the with-data macro, the data argument is optional, defaulting
+    to the dataset bound to the variable $data.
+
+    Examples:
+
+    (use '(incanter core charts datasets))
+    (def iris (get-datset :iris))
+    (view ($order :Sepal.Length :asc iris))
+    (view ($order [:Sepal.Width :Sepal.Length] :desc iris))
+
+    (with-data (get-dataset :iris)
+      (view ($order [:Petal.Length :Sepal.Length] :desc)))
+          
+  "
+  ([cols order]
+     ($order cols order $data))
+  ([cols order data]
+     (let [key-cols (if (coll? cols) cols [cols])
+	   key-fn (fn [row] (into [] (map #(map-get row %) key-cols)))
+	   comp-fn (if (= order :desc)
+		     (comparator (fn [a b] (pos? (compare a b))))
+		     compare)]
+       (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
+
 
 
 
