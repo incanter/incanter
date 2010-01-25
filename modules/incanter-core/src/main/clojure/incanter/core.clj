@@ -1627,6 +1627,87 @@
      ($map fun col-keys $data)))
 
 
+
+(defn $join
+" 
+  Returns a dataset created by joining the two given datasets.
+  The join is based on one or more columns in the datasets. 
+  If used within the body of the with-data macro, the second
+  dataset is optional, defaulting the the dataset bound to $data.
+
+
+  Examples:
+    (use '(incanter core stats datasets charts))
+    (def iris (get-dataset :iris))
+
+
+
+    (def lookup (dataset [:species :species-key] [[\"setosa\" :setosa] 
+                                                  [\"versicolor\" :versicolor] 
+                                                  [\"virginica\" :virginica]]))
+    (view ($join [:species :Species] lookup iris))
+   
+   (def hair-eye-color (get-dataset :hair-eye-color))
+   (def lookup2 (conj-cols ($ [:hair :eye :gender] hair-eye-color) (range (nrow hair-eye-color))))
+   (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2 hair-eye-color))
+
+   (with-data hair-eye-color
+     (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2)))
+
+
+   (def lookup3 (dataset [:gender :hair :hair-gender] [[\"male\" \"black\" :male-black]
+                                                       [\"male\" \"brown\" :male-brown]
+                                                       [\"male\" \"red\" :male-red]
+                                                       [\"male\" \"blond\" :male-blond]
+                                                       [\"female\" \"black\" :female-black]
+                                                       [\"female\" \"brown\" :female-brown]
+                                                       [\"female\" \"red\" :female-red]
+                                                       [\"female\" \"blond\" :female-blond]]))
+
+   (view ($join [[:gender :hair] [:gender :hair]] lookup3 hair-eye-color))
+
+
+"
+  ([[A-keys B-keys] data-A]
+     ($join [A-keys B-keys] data-A $data))
+  ([[A-keys B-keys] data-A data-B]
+     (let [A-keys (if (coll? A-keys) A-keys [A-keys])
+	   B-keys (if (coll? B-keys) B-keys [B-keys])
+	   submap (fn [m ks] (zipmap (if (coll? ks) ks [ks]) 
+				     (map #(map-get m %) 
+					  (if (coll? ks) ks [ks]))))
+	   index (apply hash-map 
+			(interleave 
+			 (map (fn [row] 
+				(apply hash-map 
+				       (interleave B-keys 
+						   (map #(map-get (submap row A-keys) %) 
+							A-keys)))) 
+			      (:rows data-A))
+			 (map #(reduce dissoc % A-keys) (:rows data-A))))
+	   rows (map #(merge (index (submap % B-keys)) %) (:rows data-B))]
+       (to-dataset rows))))
+
+
+
+(defn get-categories
+"
+  Given a dataset and one or more column keys, returns the set of categories for them.
+
+  Examples:
+
+    (use '(incanter core datasets))
+    (get-categories :eye (get-dataset :hair-eye-color))
+    (get-categories [:eye :hair] (get-dataset :hair-eye-color))
+
+
+"
+  ([cols data]
+     (if (coll? cols)
+       (for [col cols] (into #{} ($ col data)))
+       (into #{} ($ cols data)))))
+
+
  
 (defmacro with-data 
   "Binds the given data to $data and executes the body.
