@@ -50,6 +50,11 @@
            (java.util Vector)))
 
 
+(def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
+             functions like $ and $where can use $data as a default argument."} 
+     $data)
+
+
 (defn matrix
 "
   Returns an instance of an incanter.Matrix, which is an extension of
@@ -250,7 +255,8 @@
 (fn [mat & options] [(type mat) (keyword? (first options))]))
 
 
-
+;; (defmethod sel [nil false] [])
+;; (defmethod sel [nil true] [])
 
 (defmethod sel [incanter.Matrix false]
   ([#^Matrix mat rows columns]
@@ -1058,6 +1064,8 @@
 
 
 
+
+
 (defn group-by
 " Groups the given matrix by the values in the columns indicated by the
   'on-cols' argument, returning a sequence of matrices. The returned
@@ -1171,6 +1179,12 @@
   (if (keyword? k)
     (or (m k) (m (name k))) 
     (m k)))
+
+(defn- submap [m ks]
+  (zipmap (if (coll? ks) ks [ks]) 
+	  (map #(map-get m %) (if (coll? ks) ks [ks]))))
+
+
 
 
 (defn query-to-pred 
@@ -1404,9 +1418,7 @@
 
 
 
-(def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
-             functions like $ and $where can use $data as a default argument."} 
-     $data)
+
 
 (defn $ 
 "An alias to (sel (second args) :cols (first args)). If given only a single argument,
@@ -1436,7 +1448,10 @@
   ([cols] 
      (sel $data :cols cols))
   ([cols data] 
-     (sel data :cols cols)))
+     (if (nil? data) 
+       (sel $data :cols cols)
+       (sel data :cols cols))))
+
 
 (defn $where 
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
@@ -1527,10 +1542,7 @@
   ([summary-fun col-name group-by]
      ($rollup summary-fun col-name group-by $data))
   ([summary-fun col-name group-by data]
-     (let [submap (fn [m ks] 
-		    (zipmap (if (coll? ks) ks [ks]) 
-			    (map #(map-get m %) (if (coll? ks) ks [ks]))))
-	   key-fn (if (coll? col-name) 
+     (let [key-fn (if (coll? col-name) 
 		    (fn [row] 
 		      (into [] (map #(map-get row %) col-name)))
 		    (fn [row] 
@@ -1586,6 +1598,36 @@
 		     compare)]
        (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
 
+
+(defn $group-by
+"Returns a map of datasets keyed by a query-map corresponding the group.
+
+  Examples:
+
+    (use '(incanter core datasets))
+    ($group-by :Species (get-dataset :iris))
+
+    ($group-by [:hair :eye] (get-dataset :hair-eye-color))
+
+    (with-data (get-dataset :hair-eye-color)
+      ($group-by [:hair :eye]))
+
+"
+  ([cols]
+     ($group-by cols $data))
+  ([cols data]
+     (let [n (nrow data)
+	   rows (:rows data)]
+       (loop [r 0 grouped-rows {}]
+	 (if (= r n) 
+	   (let [group-cols (keys grouped-rows)
+ 		 res (apply assoc {} (interleave group-cols (map to-dataset (vals grouped-rows))))]
+ 	     res)
+	   (recur (inc r) 
+		  (let [row (nth rows r)
+			k (submap row cols)
+			k-rows (grouped-rows k)]
+		    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
 
 
 
@@ -1666,6 +1708,15 @@
 
    (view ($join [[:gender :hair] [:gender :hair]] lookup3 hair-eye-color))
 
+   (use 'incanter.charts)
+   (with-data (->>  (get-dataset :hair-eye-color)
+                    ($where {:hair {:in #{\"brown\" \"blond\"}}})
+                    ($rollup :sum :count [:hair :gender])
+                    ($join [[:gender :hair] [:gender :hair]] lookup3)
+                    ($order :count :desc))
+       (view $data)
+       (view (bar-chart ($ :hair) ($ :count) :group-by ($ :gender) :legend true)))
+
 
 "
   ([[A-keys B-keys] data-A]
@@ -1673,9 +1724,6 @@
   ([[A-keys B-keys] data-A data-B]
      (let [A-keys (if (coll? A-keys) A-keys [A-keys])
 	   B-keys (if (coll? B-keys) B-keys [B-keys])
-	   submap (fn [m ks] (zipmap (if (coll? ks) ks [ks]) 
-				     (map #(map-get m %) 
-					  (if (coll? ks) ks [ks]))))
 	   index (apply hash-map 
 			(interleave 
 			 (map (fn [row] 
