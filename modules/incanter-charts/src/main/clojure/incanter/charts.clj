@@ -229,7 +229,7 @@
 (declare add-lines)
 
 
-(defmacro xy-plot
+(defmacro xy-plot-orig
 " Returns a JFreeChart object representing a xy-plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
@@ -318,7 +318,7 @@
 
 
 
-(defmacro function-plot
+(defmacro function-plot-orig
 " Returns a xy-plot object of the given function over the range indicated
   by the min-range and max-range arguments. Use the 'view' function to
   display the chart, or the 'save' function to write it to a file.
@@ -368,7 +368,7 @@
 (declare add-box-plot)
 
 
-(defmacro box-plot
+(defmacro box-plot-orig
 " Returns a JFreeChart object representing a box-plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
@@ -1055,6 +1055,131 @@
 ;;  NEW CHART FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+(defn xy-plot*
+  ([x y & options]
+    (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _x (if (coll? x) (to-list x) ($ x data))
+	  _y (if (coll? y) (to-list y) ($ y data))
+	  _group-by (when (:group-by opts) 
+		      (if (coll? (:group-by opts)) 
+			(to-list (:group-by opts))
+			($ (:group-by opts) data)))
+	  x-groups (when _group-by 
+		     (map #($ :col-0 %) 
+			  (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+	  y-groups (when _group-by 
+		     (map #($ :col-0 %) 
+			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+           __x (if x-groups (first x-groups) _x)
+           __y (if y-groups (first y-groups) _y)
+           main-title (or (:title opts) "XY Plot")
+           x-lab (or (:x-label opts) (str 'x))
+           y-lab (or (:y-label opts) (str 'y))
+           series-lab (or (:series-label opts) 
+			  (if x-groups 
+			    (format "%s, %s (0)" 'x 'y) 
+			    (format "%s, %s" 'x 'y)))
+           legend? (true? (:legend opts))
+           data-series (XYSeries. series-lab)
+           dataset (XYSeriesCollection.)
+           chart (do
+                    (doseq [i (range (count __x))] 
+		      (.add data-series (nth __x i)  (nth __y i)))
+                    (.addSeries dataset data-series)
+                    (org.jfree.chart.ChartFactory/createXYLineChart
+                        main-title
+                        x-lab
+                        y-lab
+                        dataset
+                        org.jfree.chart.plot.PlotOrientation/VERTICAL
+                        legend?
+                        true  ; tooltips
+                        false))
+           _ (when x-groups
+                (doseq [i (range 1 (count x-groups))]
+                  (add-lines chart (nth x-groups i)
+                             (nth y-groups i)
+                             :series-label (format "%s, %s (%s)" 'x 'y i))))]
+        chart)))
+
+
+
+(defmacro xy-plot
+" Returns a JFreeChart object representing a xy-plot of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Options:
+    :data (default nil) If the :data option is provided a dataset, 
+                        column names can be used instead of sequences 
+                        of data as arguments to xy-plot.
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+    :group-by (default nil) -- a vector of values used to group the x and y values into series.
+
+  See also:
+    view, save, add-points, add-lines
+
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    ;; plot the cosine function
+    (def x (range -1 5 0.01))
+    (def y (cos (mult 2 Math/PI x)))
+    (view (xy-plot x y))
+
+    ;; plot gamma pdf with different parameters
+    (def x2 (range 0 20 0.1))
+    (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :rate 2)
+                               :legend true
+                               :title \"Gamma PDF\"
+                               :y-label \"Density\"))
+    (view gamma-plot)
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))
+
+    ;; use :group-by option
+    (use '(incanter core charts datasets))
+
+    (with-data (get-dataset :chick-weight)
+      (view (xy-plot :Time :weight :group-by :Chick)))
+
+
+    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([x y & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "XY Plot")
+           x-lab# (or (:x-label opts#) (str '~x))
+           y-lab# (or (:y-label opts#) (str '~y))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s, %s (0)" '~x '~y) 
+						   (format "%s, %s" '~x '~y)))
+	   args# (concat [~x ~y] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply xy-plot* args#))))
+
+
+
+
 (defn scatter-plot*
   ([x y & options]
     (let [opts (when options (apply assoc {} options))
@@ -1549,6 +1674,180 @@
 							    :y-label y-lab# 
 							    :series-label series-lab#]))))]
         (apply bar-chart* args#))))
+
+
+
+
+(defn box-plot*
+  ([x & options]
+    (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _x (if (coll? x) (to-list x) ($ x data))
+	  _group-by (when (:group-by opts) 
+		      (if (coll? (:group-by opts)) 
+			(to-list (:group-by opts))
+			($ (:group-by opts) data)))
+	  x-groups (when _group-by 
+		     (map #($ :col-0 %) 
+			  (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+	  __x (if x-groups
+                (first x-groups)
+                _x)
+	  main-title (or (:title opts) "Boxplot")
+	  x-label (or (:x-label opts) "")
+	  y-label (or (:y-label opts) (str 'x))
+	  series-label (or (:series-label opts) (str 'x))
+	  category-label (or (:category-label opts) 0)
+	  group-labels (:group-labels opts)
+	  legend? (true? (:legend opts))
+	  dataset (DefaultBoxAndWhiskerCategoryDataset.)
+	  chart (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart
+		 main-title
+		 x-label
+		 y-label
+		 dataset
+		 legend?)]
+        (do
+          (-> chart .getCategoryPlot .getRenderer (.setMaximumBarWidth 0.25))
+          (.add dataset __x 
+		(if _group-by 
+		  (str series-label " (0)") 
+		  series-label) 
+		category-label)
+          (when-not (empty? (rest x-groups))
+            (doseq [i (range 1 (count x-groups))] 
+	      (.add dataset 
+		    (nth x-groups i) 
+		    (str series-label " (" i ")") i)))
+          chart))))
+
+
+
+(defmacro box-plot
+" Returns a JFreeChart object representing a box-plot of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Options:
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+    :group-by (default nil) -- a vector of values used to group the x values into series.
+
+  See also:
+    view and save
+
+  Examples:
+
+    (use '(incanter core stats charts))
+    (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                          :title \"Gamma Boxplot\"
+                          :legend true))
+    (view gamma-box-plot)
+    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+
+    ;; use the group-by options
+    (use '(incanter core stats datasets charts))
+    (with-data (get-dataset :iris)
+      (view (box-plot :Petal.Length :group-by :Species :legend true))
+      (view (box-plot :Petal.Width :group-by :Species :legend true))
+      (view (box-plot :Sepal.Length :group-by :Species :legend true))
+      (view (box-plot :Sepal.Width :group-by :Species :legend true)))
+
+    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([x & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "Bar Chart")
+	   x-lab# (or (:x-label opts#) "")
+           y-lab# (or (:y-label opts#) (str '~x))
+           series-lab# (or (:series-label opts#) (str '~x))
+           category-lab# (or (:category-label opts#) 0)
+	   args# (concat [~x] (apply concat (seq (apply assoc opts# 
+							[:group-by group-by# 
+							 :main-title main-title# 
+							 :x-label x-lab# 
+							 :y-label y-lab# 
+							 :category-label category-lab#
+							 :series-label series-lab#]))))]
+        (apply box-plot* args#))))
+
+
+
+
+(defn function-plot*
+  ([function min-range max-range & options]
+   (let [opts (when options (apply assoc {} options))
+          step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
+          _x (range min-range max-range step-size)
+          main-title (or (:title opts) "Function Plot")
+          x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
+          y-lab (or (:y-label opts) (str 'function))
+          series-lab (or (:series-label opts) (format "%s" 'function))
+          legend? (true? (:legend opts))]
+      (xy-plot _x (map function _x)
+                 :x-label x-lab
+                 :y-label y-lab
+                 :title main-title
+                 :series-label series-lab
+                 :legend legend?))))
+
+
+
+
+(defmacro function-plot
+" Returns a xy-plot object of the given function over the range indicated
+  by the min-range and max-range arguments. Use the 'view' function to
+  display the chart, or the 'save' function to write it to a file.
+
+  Options:
+    :title (default 'Histogram') main title
+    :x-label (default x expression)
+    :y-label (default 'Frequency')
+    :legend (default false) prints legend
+    :series-label (default x expression)
+    :step-size (default (/ (- max-range min-range) 500))
+
+  See also:
+    view, save, add-points, add-lines
+
+
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    (view (function-plot sin (- Math/PI) Math/PI))
+    (view (function-plot pdf-normal -3 3))
+
+    (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
+    (view (function-plot cubic -10 10))
+
+"
+  ([function min-range max-range & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "Function Plot")
+           x-lab# (or (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
+           y-lab# (or (:y-label opts#) (str '~function))
+           series-lab# (or (:series-label opts#) (format "%s" '~function))
+	   args# (concat [~function ~min-range ~max-range] 
+			 (apply concat (seq (apply assoc opts# 
+						   [:group-by group-by# 
+						    :main-title main-title# 
+						    :x-label x-lab# 
+						    :y-label y-lab# 
+						    :series-label series-lab#]))))]
+       (apply function-plot* args#))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
