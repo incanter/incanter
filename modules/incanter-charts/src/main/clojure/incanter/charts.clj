@@ -53,601 +53,22 @@
 
 
 
-(defmacro histogram-orig
-" Returns a JFreeChart object representing the histogram of the given data.
-  Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
-
-  Options:
-    :nbins (default 10) number of bins
-    :density (default false) if false, plots frequency, otherwise density
-    :title (default 'Histogram') main title
-    :x-label (default x expression)
-    :y-label (default 'Frequency')
-    :legend (default false) prints legend
-    :series-label (default x expression)
 
 
-  See also:
-    view, save, add-histogram
-
-  Examples:
-
-    (use '(incanter core charts stats))
-    (view (histogram (sample-normal 1000)))
-
-    # plot a density histogram
-    (def hist (histogram (sample-normal 1000) :density true))
-    (view hist)
-
-    # add a normal density line to the plot
-    (def x (range -4 4 0.01))
-    (add-lines hist x (pdf-normal x))
-
-    # plot some gamma data
-    (def gam-hist (histogram (sample-gamma 1000) :density true :nbins 30))
-    (view gam-hist)
-    (def x (range 0 8 0.01))
-    (add-lines gam-hist x (pdf-gamma x))
-
-    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-"
-  ([x & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-          data# (to-list ~x)
-          nbins# (or (:nbins opts#) 10)
-          density?# (true? (:density opts#))
-          main-title# (or (:title opts#) "Histogram")
-          x-lab# (or (:x-label opts#) (str '~x))
-          y-lab# (or (:y-label opts#)
-                     (if density?# "Density" "Frequency"))
-          series-lab# (or (:series-label opts#) (str '~x))
-          legend?# (true? (:legend opts#))
-          dataset# (HistogramDataset.)
-        ]
+(defn add-histogram*
+  ([chart x & options]
+    (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _x (if (coll? x) (to-list x) ($ x data))
+	  data-plot (.getPlot chart)
+	  n (.getDatasetCount data-plot)
+	  nbins (or (:nbins opts) 10)
+	  series-lab (or (:series-label opts) (str 'x))]
       (do
-        (.addSeries dataset# series-lab# (double-array data#) nbins#)
-        (when density?# (.setType dataset# org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1))
-        (org.jfree.chart.ChartFactory/createHistogram
-            main-title#
-            x-lab#
-            y-lab#
-            dataset#
-            org.jfree.chart.plot.PlotOrientation/VERTICAL
-            legend?# ; no legend
-            true  ; tooltips
-            false)))))
-
-
-
-
-(declare add-points)
-
-(defmacro scatter-plot-orig
-" Returns a JFreeChart object representing a scatter-plot of the given data.
-  Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
-
-  Options:
-    :title (default 'Histogram') main title
-    :x-label (default x expression)
-    :y-label (default 'Frequency')
-    :legend (default false) prints legend
-    :series-label (default x expression)
-    :group-by (default nil) -- a vector of values used to group the x and y values into series.
-
-  See also:
-    view, save, add-points, add-lines
-
-  Examples:
-
-    (use '(incanter core stats charts datasets))
-    ;; create some data
-    (def mvn-samp (sample-mvn 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
-
-    ;; create scatter-plot of points
-    (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))
-    (view mvn-plot)
-
-    ;; add regression line to scatter plot
-    (def x (sel mvn-samp :cols 0))
-    (def y (sel mvn-samp :cols 1))
-    (def lm (linear-model y x))
-    (add-lines mvn-plot x (:fitted lm))
-
-    ;; use :group-by option
-    (use '(incanter core stats datasets charts))
-    ;; load the :iris dataset
-    (def iris (to-matrix (get-dataset :iris)))
-    ;; plot the first two columns grouped by the fifth column
-    (view (scatter-plot (sel iris :cols 0) (sel iris :cols 1) :group-by (sel iris :cols 4)))
-
-    (with-data (get-dataset :iris)
-       (view (scatter-plot :Sepal.Length :Sepal.Width :data $data)))
-
-    (view (scatter-plot \"Sepal.Length\" \"Sepal.Width\" :data (get-dataset :iris)))
-
-
-    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-"
-  ([x y & options]
-    `(let [opts# ~(when options (apply assoc {} options))
-           data# (:data opts#)
-           x# (if ~(coll? x) ~(to-list x) ($ ~x data#))
-           y# (if ~(coll? y) ~(to-list y) ($ ~y data#))
-           group-by# (to-list (:group-by opts#)) 
-	   ;; (if (coll? (:group-by opts#)) 
-;;  		       (to-list (:group-by opts#)) 
-;;  		       ($ (:group-by opts#) data#))
-           x-groups# (when group-by# (group-by (bind-columns x# group-by#) 1 :cols 0))
-           y-groups# (when group-by# (group-by (bind-columns y# group-by#) 1 :cols 0))
-           x# (if x-groups# (first x-groups#) x#)
-           y# (if y-groups# (first y-groups#) y#)
-           main-title# (or (:title opts#) "Scatter Plot")
-           x-lab# (or (:x-label opts#) (str '~x))
-           y-lab# (or (:y-label opts#) (str '~y))
-           series-lab# (or (:series-label opts#) (if x-groups# 
-						   (format "%s, %s (0)" '~x '~y) 
-						   (format "%s, %s" '~x '~y)))
-           legend?# (true? (:legend opts#))
-           data-series# (XYSeries. series-lab#)
-           dataset# (XYSeriesCollection.)
-           chart# (do
-                    (doseq [i# (range (count x#))] (.add data-series# (nth x# i#)  (nth y# i#)))
-                    (.addSeries dataset# data-series#)
-                    (org.jfree.chart.ChartFactory/createScatterPlot
-		     main-title#
-		     x-lab#
-		     y-lab#
-		     dataset#
-		     org.jfree.chart.plot.PlotOrientation/VERTICAL
-		     legend?#
-		     true		; tooltips
-		     false))
-           _# (when x-groups#
-                (doseq [i# (range 1 (count x-groups#))]
-                  (add-points chart# (nth x-groups# i#)
-                              (nth y-groups# i#)
-                              :series-label (format "%s, %s (%s)" '~x '~y i#))))]
-        chart#)))
-
-
-
-
-
-
-(declare add-lines)
-
-
-(defmacro xy-plot-orig
-" Returns a JFreeChart object representing a xy-plot of the given data.
-  Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
-
-  Options:
-    :title (default 'Histogram') main title
-    :x-label (default x expression)
-    :y-label (default 'Frequency')
-    :legend (default false) prints legend
-    :series-label (default x expression)
-    :group-by (default nil) -- a vector of values used to group the x and y values into series.
-
-  See also:
-    view, save, add-points, add-lines
-
-  Examples:
-
-    (use '(incanter core stats charts))
-
-    ;; plot the cosine function
-    (def x (range -1 5 0.01))
-    (def y (cos (mult 2 Math/PI x)))
-    (view (xy-plot x y))
-
-    ;; plot gamma pdf with different parameters
-    (def x2 (range 0 20 0.1))
-    (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :rate 2)
-                               :legend true
-                               :title \"Gamma PDF\"
-                               :y-label \"Density\"))
-    (view gamma-plot)
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))
-
-    ;; use :group-by option
-    (use '(incanter core charts datasets))
-    (def data (to-matrix (get-dataset :chick-weight)))
-    (let [[weight time chick] (trans data)]
-      (view (xy-plot time weight :group-by chick)))
-
-
-    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-"
-  ([x y & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           x# (to-list ~x)
-           y# (to-list ~y)
-           group-by# (to-list (:group-by opts#))
-           x-groups# (when group-by# (group-by (bind-columns x# group-by#) 1 :cols 0))
-           y-groups# (when group-by# (group-by (bind-columns y# group-by#) 1 :cols 0))
-           x# (if x-groups# (first x-groups#) x#)
-           y# (if y-groups# (first y-groups#) y#)
-           main-title# (or (:title opts#) "XY Plot")
-           x-lab# (or (:x-label opts#) (str '~x))
-           y-lab# (or (:y-label opts#) (str '~y))
-           series-lab# (or (:series-label opts#) (if x-groups# (format "%s, %s (0)" '~x '~y) (format "%s, %s" '~x '~y)))
-           legend?# (true? (:legend opts#))
-           data-series# (XYSeries. series-lab#)
-           dataset# (XYSeriesCollection.)
-           chart# (do
-                    (doseq [i# (range (count x#))] (.add data-series# (nth x# i#)  (nth y# i#)))
-                    (.addSeries dataset# data-series#)
-                    (org.jfree.chart.ChartFactory/createXYLineChart
-                        main-title#
-                        x-lab#
-                        y-lab#
-                        dataset#
-                        org.jfree.chart.plot.PlotOrientation/VERTICAL
-                        legend?#
-                        true  ; tooltips
-                        false))
-           _# (when x-groups#
-                (doseq [i# (range 1 (count x-groups#))]
-                  (add-lines chart# (nth x-groups# i#)
-                             (nth y-groups# i#)
-                             :series-label (format "%s, %s (%s)" '~x '~y i#))))]
-        chart#)))
-
-
-
-
-(defmacro function-plot-orig
-" Returns a xy-plot object of the given function over the range indicated
-  by the min-range and max-range arguments. Use the 'view' function to
-  display the chart, or the 'save' function to write it to a file.
-
-  Options:
-    :title (default 'Histogram') main title
-    :x-label (default x expression)
-    :y-label (default 'Frequency')
-    :legend (default false) prints legend
-    :series-label (default x expression)
-    :step-size (default (/ (- max-range min-range) 500))
-
-  See also:
-    view, save, add-points, add-lines
-
-
-  Examples:
-
-    (use '(incanter core stats charts))
-
-    (view (function-plot sin (- Math/PI) Math/PI))
-    (view (function-plot pdf-normal -3 3))
-
-    (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
-    (view (function-plot cubic -10 10))
-
-"
-  ([function min-range max-range & options]
-   `(let [opts# (when '~options (assoc {} ~@options))
-          step-size# (or (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
-          x# (range ~min-range ~max-range step-size#)
-          main-title# (or (:title opts#) "Function Plot")
-          x-lab# (or (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
-          y-lab# (or (:y-label opts#) (str '~function))
-          series-lab# (or (:series-label opts#) (format "%s" '~function))
-          legend?# (true? (:legend opts#))]
-      (xy-plot x# (map ~function x#)
-                 :x-label x-lab#
-                 :y-label y-lab#
-                 :title main-title#
-                 :series-label series-lab#
-                 :legend legend?#))))
-
-
-
-
-(declare add-box-plot)
-
-
-(defmacro box-plot-orig
-" Returns a JFreeChart object representing a box-plot of the given data.
-  Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
-
-  Options:
-    :title (default 'Histogram') main title
-    :x-label (default x expression)
-    :y-label (default 'Frequency')
-    :legend (default false) prints legend
-    :series-label (default x expression)
-    :group-by (default nil) -- a vector of values used to group the x values into series.
-
-  See also:
-    view and save
-
-  Examples:
-
-    (use '(incanter core stats charts))
-    (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)
-                          :title \"Gamma Boxplot\"
-                          :legend true))
-    (view gamma-box-plot)
-    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))
-    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
-
-    ;; use the group-by options
-    (use '(incanter core stats datasets charts))
-    (def iris (to-matrix (get-dataset :iris)))
-    (view (box-plot (sel iris :cols 0) :group-by (sel iris :cols 4) :legend true))
-
-    ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-"
-  ([x & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           x# (to-list ~x)
-           group-by# (to-list (:group-by opts#))
-           x-groups# (when group-by#
-                       (map to-list (group-by (bind-columns x# group-by#) 1 :cols 0)))
-           x# (if x-groups#
-                (first x-groups#)
-                x#)
-           main-title# (or (:title opts#) "Boxplot")
-           x-label# (or (:x-label opts#) "")
-           y-label# (or (:y-label opts#) (str '~x))
-           series-label# (or (:series-label opts#) (if x-groups# (str '~x 0) (str '~x)))
-           category-label# (or (:category-label opts#) 0)
-           legend?# (true? (:legend opts#))
-           dataset# (DefaultBoxAndWhiskerCategoryDataset.)
-           chart# (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart
-                     main-title#
-                     x-label#
-                     y-label#
-                     dataset#
-                     legend?#)]
-        (do
-          (.. chart# getCategoryPlot getRenderer (setMaximumBarWidth 0.25))
-          (.add dataset# x# series-label# category-label#)
-          (when-not (empty? (rest x-groups#))
-            ;(doseq [g# (rest x-groups#)] (add-box-plot chart# g#)))
-            (doseq [i# (range 1 (count x-groups#))] (.add dataset# (nth x-groups# i#) (str '~x i#) i#)))
-          chart#))))
-
-
-
-(defmacro bar-chart-orig
-" Returns a JFreeChart object representing a bar-chart of the given data.
-  Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
-
-  Arguments:
-    categories -- a sequence of categories
-    values -- a sequence of numeric values
-
-  Options:
-    :title (default 'Histogram') main title
-    :x-label (default 'Categories')
-    :y-label (default 'Value')
-    :series-label
-    :legend (default false) prints legend
-    :vertical (default true) the orientation of the plot
-    :group-by (default nil) -- a vector of values used to group the values into
-                               series within each category.
-
-
-  See also:
-    view and save
-
-  Examples:
-
-
-    (use '(incanter core stats charts datasets))
-
-    (def data (get-dataset :co2))
-    (def grass-type (sel data :cols 1))
-    (def treatment-type (sel data :cols 2))
-    (def uptake (sel data :cols 4))
-    (view (bar-chart grass-type uptake
-                    :title \"CO2 Uptake\"
-                    :group-by treatment-type
-                    :x-label \"Grass Types\" :y-label \"Uptake\"
-                    :legend true))
-
-
-    (def data (get-dataset :airline-passengers))
-    (def years (sel data :cols 0))
-    (def months (sel data :cols 2))
-    (def passengers (sel data :cols 1))
-    (view (bar-chart years passengers :group-by months :legend true))
-    (view (bar-chart months passengers :group-by years :legend true))
-
-
-    (def data (get-dataset :austres))
-    (view data)
-    (def plot (bar-chart (sel data :cols 0) (sel data :cols 1)
-                         :group-by (sel data :cols 2) :legend true))
-    (view plot)
-    (save plot \"/tmp/austres_plot.png\" :width 1000)
-    (view \"file:///tmp/austres_plot.png\")
-
-
-    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
-    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
-    (def values (sample-uniform 12 :integers true :max 100))
-    (view (bar-chart years values :group-by seasons :legend true))
-
-    (view (bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))
-    (view (bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
-                     :legend true
-                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
-
-    ;; add a series label
-    (def plot (bar-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
-    (view plot) 
-    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
- 
-    (view (bar-chart (sample \"abcdefghij\" :size 10 :replacement true)
-                     (sample-uniform 10 :max 50) :legend true))
-
-
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-"
-  ([categories values & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           categories# ~categories
-           values# (to-list ~values)
-           main-title# (or (:title opts#) "Bar Chart")
-           group-by# (:group-by opts#)
-           x-label# (or (:x-label opts#) (str '~categories))
-           y-label# (or (:y-label opts#) (str '~values))
-	   series-label# (:series-label opts#)
-           vertical?# (if (false? (:vertical opts#)) false true)
-           legend?# (true? (:legend opts#))
-           dataset# (DefaultCategoryDataset.)
-           chart# (org.jfree.chart.ChartFactory/createBarChart
-                     main-title#
-                     x-label#
-                     y-label#
-                     dataset#
-                     (if vertical?#
-                       org.jfree.chart.plot.PlotOrientation/VERTICAL
-                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
-                     legend?#
-                     true
-                     false)]
-        (do
-          (doseq [i# (range 0 (count values#))] (.addValue dataset#
-                                                      (nth values# i#)
-                                                      (cond 
-						       group-by#
-                                                         (nth group-by# i#)
-						       series-label#
-						         series-label#
-						       :else
-                                                         (str '~values))
-                                                       (nth categories# i#)))
-          chart#))))
-
-
-
-
-(defmacro line-chart-orig
-" Returns a JFreeChart object representing a line-chart of the given values and categories.
-  Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
-
-  Arguments:
-    categories -- a sequence of categories
-    values -- a sequence of numeric values
-
-  Options:
-    :title (default 'Histogram') main title
-    :x-label (default 'Categories')
-    :y-label (default 'Value')
-    :legend (default false) prints legend
-    :series-label
-    :group-by (default nil) -- a vector of values used to group the values into
-                               series within each category.
-
-
-  See also:
-    view and save
-
-  Examples:
-
-    (use '(incanter core stats charts datasets))
-
-    (def data (get-dataset :airline-passengers))
-    (def years (sel data :cols 0))
-    (def months (sel data :cols 2))
-    (def passengers (sel data :cols 1))
-    (view (line-chart years passengers :group-by months :legend true))
-    (view (line-chart months passengers :group-by years :legend true))
-
-
-    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
-    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
-    (def x (sample-uniform 12 :integers true :max 100))
-    (view (line-chart years x :group-by seasons :legend true))
-
-    (view (line-chart [\"a\" \"b\" \"c\" \"d\" \"e\" \"f\"] [10 20 30 10 40 20]))
-
-    (view (line-chart (sample \"abcdefghij\" :size 10 :replacement true)
-                         (sample-uniform 10 :max 50) :legend true))
-
-    ;; add a series label
-    (def plot (line-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
-    (view plot) 
-    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
- 
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-"
-  ([categories values & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           categories# ~categories
-           values# (to-list ~values)
-           main-title# (or (:title opts#) "Line Chart")
-           group-by# (:group-by opts#)
-           x-label# (or (:x-label opts#) (str '~categories))
-           y-label# (or (:y-label opts#) (str '~values))
-	   series-label# (:series-label opts#)
-           vertical?# (if (false? (:vertical opts#)) false true)
-           legend?# (true? (:legend opts#))
-           dataset# (DefaultCategoryDataset.)
-           chart# (org.jfree.chart.ChartFactory/createLineChart
-                     main-title#
-                     x-label#
-                     y-label#
-                     dataset#
-                     (if vertical?#
-                       org.jfree.chart.plot.PlotOrientation/VERTICAL
-                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
-                     legend?#
-                     true
-                     false)]
-        (do
-          (doseq [i# (range 0 (count values#))] (.addValue dataset#
-                                                      (nth values# i#)
-                                                      (cond 
-						       group-by#
-                                                         (nth group-by# i#)
-						       series-label#
-						         series-label#
-						       :else
-                                                         (str '~values))
-                                                       (nth categories# i#)))
-          chart#))))
+        (.addSeries (.getDataset data-plot) series-lab (double-array _x) nbins)
+        (.setSeriesRenderingOrder data-plot org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+        (.fireChartChanged chart)
+        chart))))
 
 
 
@@ -662,11 +83,17 @@
 
   Examples:
 
-    (use '(incanter core charts stats))
+    (use '(incanter core charts stats datasets))
     (doto (histogram (sample-normal 1000)
                      :legend true)
           view
           (add-histogram (sample-normal 1000 :sd 0.5)))
+
+
+    (with-data (get-dataset :iris)
+      (doto (histogram :Sepal.Length :legend true)
+        (add-histogram :Petal.Length)
+        view))
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -674,18 +101,31 @@
 
 "
   ([chart x & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           x# (to-list ~x)
-           chart# ~chart
-           data-plot# (.getPlot chart#)
-           n# (.getDatasetCount data-plot#)
-           nbins# (or (:nbins opts#) 10)
-           series-lab# (or (:series-label opts#) (str '~x))]
+    `(let [opts# (if '~options (assoc {} ~@options) {})
+           series-lab# (or (:series-label opts#) (str '~x))
+           args# (concat [~chart ~x] 
+			 (apply concat (seq (apply assoc opts# 
+						   [:series-label series-lab#]))))]
+        (apply add-histogram* args#))))
+
+
+
+
+
+(defn add-box-plot*
+  ([chart x & options]
+    (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _x (if (coll? x) (to-list x) ($ x data))
+	  data-plot (.getCategoryPlot chart)
+	  n-col (.getColumnCount (.getDataset data-plot))
+	  n-row (.getRowCount (.getDataset data-plot))
+	  series-label (or (:series-label opts) (str 'x))
+	  category-label (or (:category-label opts)
+                               (str n-col))]
       (do
-        (.addSeries (.getDataset data-plot#) series-lab# (double-array x#) nbins#)
-        (.setSeriesRenderingOrder data-plot# org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-        (.fireChartChanged chart#)
-        chart#))))
+        (.add (.getDataset data-plot) _x series-label category-label)
+        chart))))
 
 
 (defmacro add-box-plot
@@ -703,24 +143,58 @@
             (add-box-plot (sample-normal 1000 :sd 2))
             (add-box-plot (sample-gamma 1000)))
 
+
+     (with-data (get-dataset :iris)
+       (doto (box-plot :Sepal.Length :legend true)
+         (add-box-plot :Petal.Length)
+         (add-box-plot :Sepal.Width)
+         (add-box-plot :Petal.Width)
+         view))
+
+
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
 "
   ([chart x & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           x# (to-list ~x)
-           chart# ~chart
-           data-plot# (.getCategoryPlot chart#)
-           n-col# (.getColumnCount (.getDataset data-plot#))
-           n-row# (.getRowCount (.getDataset data-plot#))
-           series-label# (or (:series-label opts#) (str '~x))
-           category-label# (or (:category-label opts#)
-                               (str n-col#))]
-      (do
-        (.add (.getDataset data-plot#) x# series-label# category-label#)
-        chart#))))
+    `(let [opts# (if '~options (assoc {} ~@options) {})
+           series-lab# (or (:series-label opts#) (str '~x))
+           args# (concat [~chart ~x] (apply concat (seq (apply assoc opts# 
+							[:series-label series-lab#]))))]
+        (apply add-box-plot* args#))))
+
+
+
+
+
+(defn add-categories*
+  ([chart categories values & options]
+    (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+	  _group-by (when (:group-by opts) 
+		      (if (coll? (:group-by opts)) 
+		       (to-list (:group-by opts))
+		       ($ (:group-by opts) data)))
+           _chart chart
+	   series-label (:series-label opts)
+           data-plot (.getCategoryPlot _chart)
+           n-col (.getColumnCount (.getDataset data-plot))
+           n-row (.getRowCount (.getDataset data-plot))]
+        (do
+          (doseq [i (range 0 (count _values))] (.addValue (.getDataset data-plot)
+                                                      (nth _values i)
+                                                      (cond 
+						       _group-by
+                                                         (nth _group-by i)
+						       series-label
+						         series-label
+						       :else
+                                                         (str 'values))
+                                                       (nth _categories i)))
+          chart))))
 
 
 
@@ -734,7 +208,7 @@
 
   Examples:
 
-      (use '(incanter core charts stats))
+      (use '(incanter core charts stats datasets))
       (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
       (def years (mapcat identity (repeat 4 [2007 2008 2009])))
       (def x (sample-uniform 12 :integers true :max 100))
@@ -751,6 +225,15 @@
       (view plot2)
       (add-categories plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
 
+      (with-data (get-dataset :iris)
+        (doto (line-chart :Species :Sepal.Length 
+                          :data ($rollup mean :Sepal.Length :Species)
+                          :legend true)
+          (add-categories :Species :Sepal.Width :data ($rollup mean :Sepal.Width :Species))
+          (add-categories :Species :Petal.Length :data ($rollup mean :Petal.Length :Species))
+          (add-categories :Species :Petal.Width :data ($rollup mean :Petal.Width :Species))
+          view))
+
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
@@ -758,27 +241,237 @@
 
 "
   ([chart categories values & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           categories# ~categories
-           values# (to-list ~values)
-           chart# ~chart
-           group-by# (:group-by opts#)
-	   series-label# (:series-label opts#)
-           data-plot# (.getCategoryPlot chart#)
-           n-col# (.getColumnCount (.getDataset data-plot#))
-           n-row# (.getRowCount (.getDataset data-plot#))]
-        (do
-          (doseq [i# (range 0 (count values#))] (.addValue (.getDataset data-plot#)
-                                                      (nth values# i#)
-                                                      (cond 
-						       group-by#
-                                                         (nth group-by# i#)
-						       series-label#
-						         series-label#
-						       :else
-                                                         (str '~values))
-                                                       (nth categories# i#)))
-          chart#))))
+    `(let [opts# ~(if options (apply assoc {} options) {})
+           group-by# (:group-by opts#) 
+           series-lab# (or (:series-label opts#) 
+			   (if group-by#
+			     (format "%s, %s (0)" '~categories '~values) 
+			     (format "%s, %s" '~categories '~values)))
+	   args# (concat [~chart ~categories ~values] 
+			 (apply concat (seq (apply assoc opts# [:series-label series-lab#]))))]
+       (apply add-categories* args#))))
+
+
+
+
+(defn add-lines*
+  ([chart x y & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	   _x (if (coll? x) (to-list x) ($ x data))
+	   _y (if (coll? y) (to-list y) ($ y data))
+	   data-plot (.getPlot chart)
+	   n (.getDatasetCount data-plot)
+	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+	   data-series (XYSeries. series-lab)
+           line-renderer (XYLineAndShapeRenderer. true false)
+           data-set (XYSeriesCollection.)]
+    (do
+      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+      (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+      (.setDatasetRenderingOrder data-plot org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+      (.addSeries data-set data-series)
+      (.setDataset data-plot (.getDatasetCount data-plot) data-set)
+      (.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)
+      chart))))
+
+
+
+(defmacro add-lines
+" Plots lines on the given scatter or line plot of the (x,y) points.
+  Equivalent to R's lines function, returns the modified chart object.
+
+  Options:
+    :series-label (default x expression)
+
+  Examples:
+
+    (use '(incanter core stats io datasets charts))
+    (def cars (to-matrix (get-dataset :cars)))
+    (def y (sel cars :cols 0))
+    (def x (sel cars :cols 1))
+    (def plot1 (scatter-plot x y :legend true))
+    (view plot1)
+
+    ;; add regression line to scatter plot
+    (def lm1 (linear-model y x))
+    (add-lines plot1 x (:fitted lm1))
+
+    ;; model the data without an intercept
+    (def lm2 (linear-model y x :intercept false))
+    (add-lines plot1 x (:fitted lm2))
+
+
+    ;; Clojure's doto macro can be used to build a chart
+    (doto (histogram (sample-normal 1000) :density true)
+          (add-lines (range -3 3 0.05) (pdf-normal (range -3 3 0.05)))
+          view)
+
+
+    (with-data (get-dataset :iris)
+        (doto (xy-plot :Sepal.Width :Sepal.Length :legend true)
+              (add-lines :Petal.Width :Petal.Length)
+              view))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+
+"
+  ([chart x y & options]
+    `(let [opts# (if '~options (apply assoc {} ~@options) {})
+           series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
+	   args# (concat [~chart ~x ~y] (apply concat (seq (apply assoc opts# 
+							   [:series-label series-lab#]))))]
+        (apply add-lines* args#))))
+
+
+
+
+
+(defn add-function*
+  ([chart function min-range max-range & options]
+    (let [opts (when options (apply assoc {} options))
+           step-size (or (:step-size opts) 
+			 (float (/ (- max-range min-range) 500)))
+           x (range min-range max-range step-size)
+           series-lab (or (:series-label opts) 
+			  (format "%s" 'function))]
+       (add-lines chart x (map function x) :series-label series-lab))))
+
+
+
+(defmacro add-function
+" Adds a xy-plot of the given function to the given chart, returning
+  a modified version of the chart.
+
+  Options:
+    :series-label (default x expression)
+    :step-size (default (/ (- max-range min-range) 500))
+
+  See also:
+    function-plot, view, save, add-function, add-points, add-lines
+
+
+  Examples:
+
+    (use '(incanter core stats charts))
+
+    ;; plot the sine and cosine functions
+    (doto (function-plot sin (- Math/PI) Math/PI)
+          (add-function cos (- Math/PI) Math/PI)
+          view)
+
+
+    ;; plot two normal pdf functions
+    (doto (function-plot pdf-normal -3 3 :legend true)
+          (add-function (fn [x] (pdf-normal x :mean 0.5 :sd 0.5)) -3 3)
+          view)
+
+
+    ;; plot a user defined function and its derivative
+    (use '(incanter core charts optimize))
+
+    ;; define the function, x^3 + 2x^2 + 2x + 3
+    (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
+
+    ;; use the derivative function to get a function
+    ;; that approximates its derivative
+    (def deriv-cubic (derivative cubic))
+
+    ;; plot the cubic function and its derivative
+    (doto (function-plot cubic -10 10)
+          (add-function deriv-cubic -10 10)
+          view)
+
+"
+  ([chart function min-range max-range & options]
+    `(let [opts# (if '~options (assoc {} ~@options) {})
+           series-lab# (or (:series-label opts#) (str '~function))
+           args# (concat [~chart ~function ~min-range ~max-range] 
+			 (apply concat (seq (apply assoc opts# 
+						   [:series-label series-lab#]))))]
+        (apply add-function* args#))))
+
+
+
+
+
+(defn add-points*
+  ([chart x y & options]
+    (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _x (if (coll? x) (to-list x) ($ x data))
+	  _y (if (coll? y) (to-list y) ($ y data))
+	  data-plot (.getPlot chart)
+	  n (.getDatasetCount data-plot)
+	  series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+	  data-series (XYSeries. series-lab)
+	  line-renderer (XYLineAndShapeRenderer. false true)
+	  data-set (XYSeriesCollection.)]
+      (do
+	(doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+	(.addSeries data-set data-series)
+	(.setDataset data-plot (.getDatasetCount data-plot) data-set)
+	(.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)
+	chart))))
+
+
+
+(defmacro add-points
+" Plots points on the given scatter-plot or xy-plot of the (x,y) points.
+  Equivalent to R's lines function, returns the modified chart object.
+
+  Options:
+    :series-label (default x expression)
+
+  Examples:
+
+    (use '(incanter core stats io datasets charts))
+    (def cars (to-matrix (get-dataset :cars)))
+    (def y (sel cars :cols 0))
+    (def x (sel cars :cols 1))
+
+    ;; add regression line to scatter plot
+    (def lm1 (linear-model y x))
+    ;; model the data without an intercept
+    (def lm2 (linear-model y x :intercept false))
+
+    (doto (xy-plot x (:fitted lm1) :legend true)
+          view
+          (add-points x y)
+          (add-lines x (:fitted lm2)))
+
+
+    (with-data (get-dataset :iris)
+      (doto (scatter-plot :Sepal.Length :Sepal.Width :data ($where {:Species \"setosa\"}))
+            (add-points :Sepal.Length :Sepal.Width :data ($where {:Species \"versicolor\"}))
+            (add-points :Sepal.Length :Sepal.Width :data ($where {:Species \"virginica\"}))
+            view))
+
+    ;; of course this chart can be achieved in a single line:
+    (view (scatter-plot :Sepal.Length :Sepal.Width :group-by :Species :data (get-dataset :iris)))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+
+"
+  ([chart x y & options]
+    `(let [opts# ~(if options (apply assoc {} options) {})
+           series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
+	   args# (concat [~chart ~x ~y] (apply concat (seq (apply assoc opts# 
+							   [:series-label series-lab#]))))]
+        (apply add-points* args#))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -872,182 +565,6 @@
     chart))
 
 
-
-
-(defmacro add-lines
-" Plots lines on the given scatter or line plot of the (x,y) points.
-  Equivalent to R's lines function, returns the modified chart object.
-
-  Options:
-    :series-label (default x expression)
-
-  Examples:
-
-    (use '(incanter core stats io datasets charts))
-    (def cars (to-matrix (get-dataset :cars)))
-    (def y (sel cars :cols 0))
-    (def x (sel cars :cols 1))
-    (def plot1 (scatter-plot x y :legend true))
-    (view plot1)
-
-    ;; add regression line to scatter plot
-    (def lm1 (linear-model y x))
-    (add-lines plot1 x (:fitted lm1))
-
-    ;; model the data without an intercept
-    (def lm2 (linear-model y x :intercept false))
-    (add-lines plot1 x (:fitted lm2))
-
-
-    ;; Clojure's doto macro can be used to build a chart
-    (doto (xy-plot x (pdf-normal x))
-          view
-          clear-background
-          (add-lines x (pdf-normal x :sd 1.5))
-          (add-lines x (pdf-normal x :sd 0.5)))
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-
-"
-  ([chart x y & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           x# (to-list ~x)
-           y# (to-list ~y)
-           chart# ~chart
-           data-plot# (.getPlot chart#)
-           n# (.getDatasetCount data-plot#)
-           series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
-           ;legend?# (if (false? (:legend opts#)) false true)
-           ;points?# (if (false? (:points opts#)) false true) ;; TODO
-           data-series# (XYSeries. series-lab#)
-           line-renderer# (XYLineAndShapeRenderer. true false)
-           data-set# (XYSeriesCollection.)
-          ]
-    (do
-      (doseq [i# (range (count x#))] (.add data-series# (nth x# i#)  (nth y# i#)))
-      ;(.addSeries (.getDataset data-plot) data-series)
-      (.setSeriesRenderingOrder (.getPlot chart#) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-      (.setDatasetRenderingOrder data-plot# org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
-      (.addSeries data-set# data-series#)
-      (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
-      ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
-      (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
-      chart#))))
-
-
-(defmacro add-function
-" Adds a xy-plot of the given function to the given chart, returning
-  a modified version of the chart.
-
-  Options:
-    :series-label (default x expression)
-    :step-size (default (/ (- max-range min-range) 500))
-
-  See also:
-    function-plot, view, save, add-function, add-points, add-lines
-
-
-  Examples:
-
-    (use '(incanter core stats charts))
-
-    ;; plot the sine and cosine functions
-    (doto (function-plot sin (- Math/PI) Math/PI)
-          (add-function cos (- Math/PI) Math/PI)
-          view)
-
-
-    ;; plot two normal pdf functions
-    (doto (function-plot pdf-normal -3 3 :legend true)
-          (add-function (fn [x] (pdf-normal x :mean 0.5 :sd 0.5)) -3 3)
-          view)
-
-
-    ;; plot a user defined function and its derivative
-    (use '(incanter core charts optimize))
-
-    ;; define the function, x^3 + 2x^2 + 2x + 3
-    (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
-
-    ;; use the derivative function to get a function
-    ;; that approximates its derivative
-    (def deriv-cubic (derivative cubic))
-
-    ;; plot the cubic function and its derivative
-    (doto (function-plot cubic -10 10)
-          (add-function deriv-cubic -10 10)
-          view)
-
-"
-  ([chart function min-range max-range & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-           step-size# (or (:step-size opts#) (float (/ (- ~max-range ~min-range) 500)))
-           x# (range ~min-range ~max-range step-size#)
-           series-lab# (or (:series-label opts#) (format "%s" '~function))
-          ]
-       (add-lines ~chart x# (map ~function x#)
-                 :series-label series-lab#))))
-
-
-
-(defmacro add-points
-" Plots points on the given scatter-plot or xy-plot of the (x,y) points.
-  Equivalent to R's lines function, returns the modified chart object.
-
-  Options:
-    :series-label (default x expression)
-
-  Examples:
-
-    (use '(incanter core stats io datasets charts))
-    (def cars (to-matrix (get-dataset :cars)))
-    (def y (sel cars :cols 0))
-    (def x (sel cars :cols 1))
-
-    ;; add regression line to scatter plot
-    (def lm1 (linear-model y x))
-    ;; model the data without an intercept
-    (def lm2 (linear-model y x :intercept false))
-
-    (doto (xy-plot x (:fitted lm1) :legend true)
-          view
-          (add-points x y)
-          (add-lines x (:fitted lm2)))
-
-
-  References:
-    http://www.jfree.org/jfreechart/api/javadoc/
-    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
-
-
-"
-  ([chart x y & options]
-    `(let [opts# (when '~options (assoc {} ~@options))
-        x# (to-list ~x)
-        y# (to-list ~y)
-        chart# ~chart
-        data-plot# (.getPlot chart#)
-        n# (.getDatasetCount data-plot#)
-        series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
-        ;legend?# (if (false? (:legend opts#)) false true)
-        ;points?# (if (false? (:points opts#)) false true) ;; TODO
-        data-series# (XYSeries. series-lab#)
-        line-renderer# (XYLineAndShapeRenderer. false true)
-        data-set# (XYSeriesCollection.)
-       ]
-    (do
-      (doseq [i# (range (count x#))] (.add data-series# (nth x# i#)  (nth y# i#)))
-      ;(.addSeries (.getDataset data-plot) data-series)
-      (.setSeriesRenderingOrder (.getPlot chart#) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-      (.setDatasetRenderingOrder (.getPlot chart#) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
-      (.addSeries data-set# data-series#)
-      (.setDataset data-plot# (.getDatasetCount data-plot#) data-set#)
-      ;(.setSeriesPaint line-renderer 1 java.awt.Color/blue)
-      (.setRenderer data-plot# (dec (.getDatasetCount data-plot#)) line-renderer#)
-      chart#))))
 
 
 
@@ -1390,7 +907,7 @@
     `(let [opts# ~(if options (apply assoc {} options) {})
            main-title# (or (:title opts#) "Histogram")
            x-lab# (or (:x-label opts#) (str '~x))
-	   series-lab# (or (:series-label opts#) (str 'x))
+	   series-lab# (or (:series-label opts#) (str '~x))
            args# (concat [~x] (apply concat (seq (apply assoc opts# 
 							[:main-title main-title# 
 							 :x-label x-lab# 
@@ -2072,20 +1589,22 @@
 "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
+	  data (:data opts)
+	  _x (if (coll? x) (to-list x) ($ x data))
           title (or (:title opts) "Trace Plot")
           x-label (or (:x-label opts) "Iteration")
           y-label (or (:y-label opts) "Value")
           series-lab (or (:series-label opts) "Value")
           ;legend? (or (:series-label opts) true)
-          n (count x)
+          n (count _x)
           chart (xy-plot (range n)
-                         x ;)]
+                         _x ;)]
                          :title title
                          :x-label x-label
                          :y-label y-label
                          :series-label series-lab)]
       (do
-        (add-lines chart (range n) (cumulative-mean x) :series-label "running mean")
+        (add-lines chart (range n) (cumulative-mean _x) :series-label "running mean")
         (.setSeriesRenderingOrder (.getPlot chart) SeriesRenderingOrder/FORWARD)
         (.setDatasetRenderingOrder (.getPlot chart) DatasetRenderingOrder/FORWARD)
         chart))))
@@ -2102,18 +1621,25 @@
 
   Examples:
 
-    (use '(incanter core stats charts))
+    (use '(incanter core stats charts datasets))
     (view (qq-plot (sample-normal 100)))
     (view (qq-plot (sample-exp 100)))
     (view (qq-plot (sample-gamma 100)))
 
+    (with-data (get-dataset :iris)
+      (view (qq-plot :Sepal.Length)))
+
+
 
 "
   ([x & options]
-   (let [n (count x)
+   (let [opts (when options (apply assoc {} options))
+	 data (:data opts)
+	 _x (if (coll? x) (to-list x) ($ x data))
+	 n (count _x)
          quants (for [k (range 1 n)] (/ k (inc n)))
          norm-quants (quantile-normal quants)
-         y (quantile x :probs quants)]
+         y (quantile _x :probs quants)]
          (scatter-plot norm-quants y
                    :title "QQ-Plot"
                    :x-label "Normal theoretical quantiles"
@@ -2134,26 +1660,34 @@
     (def x2 (sel flow-meter :cols 3))
     (view (bland-altman-plot x1 x2))
 
+    (with-data (get-dataset :flow-meter)
+      (view (bland-altman-plot \"Wright 1st PEFR\" \"Mini Wright 1st PEFR\")))
+
+
 
   References:
     http://en.wikipedia.org/wiki/Bland-Altman_plot
     http://www-users.york.ac.uk/~mb55/meas/ba.htm
 
 "
-  ([x1 x2]
-      (let [plot (scatter-plot (div (plus x1 x2) 2) (minus x1 x2)
+  ([x1 x2 & options]
+      (let [opts (when options (apply assoc {} options))
+	    data (:data opts)
+	    _x1 (if (coll? x1) (to-list x1) ($ x1 data))
+	    _x2 (if (coll? x2) (to-list x2) ($ x2 data))
+	    plot (scatter-plot (div (plus _x1 _x2) 2) (minus _x1 _x2)
                                :title "Bland Altman Plot"
                                :legend false)
-            x-axis (div (plus x1 x2) 2)
-            y-axis (minus x1 x2)
+            x-axis (div (plus _x1 _x2) 2)
+            y-axis (minus _x1 _x2)
             min-x (reduce min x-axis)
             max-x (reduce max x-axis)
-            x (range min-x max-x (/ (- max-x min-x) 100))
+            _x (range min-x max-x (/ (- max-x min-x) 100))
             y-sd (* (sd y-axis) 2)]
         (do
-          (add-lines plot x (repeat (count x) 0) :series-label "mean")
-          (add-lines plot x (repeat (count x) y-sd) :series-label "mean + sd")
-          (add-lines plot x (repeat (count x) (- 0 y-sd)) :series-label "mean - sd")
+          (add-lines plot _x (repeat (count _x) 0) :series-label "mean")
+          (add-lines plot _x (repeat (count _x) y-sd) :series-label "mean + sd")
+          (add-lines plot _x (repeat (count _x) (- 0 y-sd)) :series-label "mean - sd")
           plot))))
 
 
