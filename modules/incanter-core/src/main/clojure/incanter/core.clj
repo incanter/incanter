@@ -1672,7 +1672,7 @@
 
 (defn $join
 " 
-  Returns a dataset created by joining the two given datasets.
+  Returns a dataset created by right-joining two datasets.
   The join is based on one or more columns in the datasets. 
   If used within the body of the with-data macro, the second
   dataset is optional, defaulting the the dataset bound to $data.
@@ -1719,21 +1719,21 @@
 
 
 "
-  ([[A-keys B-keys] data-A]
-     ($join [A-keys B-keys] data-A $data))
-  ([[A-keys B-keys] data-A data-B]
-     (let [A-keys (if (coll? A-keys) A-keys [A-keys])
-	   B-keys (if (coll? B-keys) B-keys [B-keys])
+  ([[left-keys right-keys] left-data]
+     ($join [left-keys right-keys] left-data $data))
+  ([[left-keys right-keys] left-data right-data]
+     (let [left-keys (if (coll? left-keys) left-keys [left-keys])
+	   right-keys (if (coll? right-keys) right-keys [right-keys])
 	   index (apply hash-map 
 			(interleave 
 			 (map (fn [row] 
 				(apply hash-map 
-				       (interleave B-keys 
-						   (map #(map-get (submap row A-keys) %) 
-							A-keys)))) 
-			      (:rows data-A))
-			 (map #(reduce dissoc % A-keys) (:rows data-A))))
-	   rows (map #(merge (index (submap % B-keys)) %) (:rows data-B))]
+				       (interleave right-keys 
+						   (map #(map-get (submap row left-keys) %) 
+							left-keys)))) 
+			      (:rows left-data))
+			 (map #(reduce dissoc % left-keys) (:rows left-data))))
+	   rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
 
