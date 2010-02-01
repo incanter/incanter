@@ -1175,10 +1175,19 @@
     id))
 
 
-(defn- map-get [m k] 
-  (if (keyword? k)
-    (or (m k) (m (name k))) 
-    (m k)))
+(defn- map-get 
+  ([m k] 
+     (if (keyword? k)
+       (or (m k) (m (name k))) 
+       (m k)))
+  ([m k colnames]
+     (cond 
+      (keyword? k)
+        (or (m k) (m (name k))) 
+      (number? k)
+        (m (nth colnames k))
+      :else
+        (m k))))
 
 (defn- submap [m ks]
   (zipmap (if (coll? ks) ks [ks]) 
@@ -1523,19 +1532,19 @@
     ($rollup :mean :count [:hair :eye] hair-eye-color)
 
     (with-data ($rollup :mean :Sepal.Length :Species iris)
-      (view (bar-chart ($ :Species) ($ :Sepal.Length))))
+      (view (bar-chart :Species :Sepal.Length)))
 
      ;; the following exaples use the built-in data set called hair-eye-color.
 
      (with-data ($rollup :mean :count [:hair :eye] hair-eye-color)
-       (view (bar-chart ($ :hair) ($ :count) :group-by ($ :eye) :legend true)))
+       (view (bar-chart :hair :count :group-by :eye :legend true)))
 
      (with-data (->>  (get-dataset :hair-eye-color)
                       ($where {:hair {:in #{\"brown\" \"blond\"}}})
                       ($rollup :sum :count [:hair :eye])
                       ($order :count :desc))
        (view $data)
-       (view (bar-chart ($ :hair) ($ :count) :group-by ($ :eye) :legend true)))
+       (view (bar-chart :hair :count :group-by :eye :legend true)))
 
 
 "
@@ -1715,7 +1724,7 @@
                     ($join [[:gender :hair] [:gender :hair]] lookup3)
                     ($order :count :desc))
        (view $data)
-       (view (bar-chart ($ :hair) ($ :count) :group-by ($ :gender) :legend true)))
+       (view (bar-chart :hair :count :group-by :gender :legend true)))
 
 
 "
@@ -1735,6 +1744,75 @@
 			 (map #(reduce dissoc % left-keys) (:rows left-data))))
 	   rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
+
+
+
+(defn $deshape
+" Returns a dataset where the columns identified by :merge are collapsed into 
+  two columns called :variable and :value. The values in these columns are grouped
+  by the columns identified by :group-by.
+
+  Examples:
+
+    (use '(incanter core charts datasets))
+    (with-data (->> ($deshape :merge [:Ahmadinejad :Rezai :Karrubi :Mousavi] 
+                              :group-by :Region
+                              :data (get-dataset :iran-election))
+                    ($order :value :desc))
+      (view $data)
+      (view (bar-chart :variable :value :group-by :Region :legend true))
+
+      (view (bar-chart :Region :value :group-by :variable 
+                       :legend true :vertical false))
+
+      (view (bar-chart :Region :value :legend true :vertical false
+                       :data ($order :value :desc ($rollup :sum :value :Region)))))
+
+
+
+      (def data (to-dataset [{:subject \"John Smith\" :time 1 :age 33 :weight 90 :height 1.87}
+		             {:subject \"Mary Smith\" :time 1 :height 1.54}]))
+      (view data)
+      (view ($deshape :group-by [:subject :time] :merge [:age :weight :height] :data data))
+      (view ($deshape :merge [:age :weight :height] :data data))
+      (view ($deshape :group-by [:subject :time] :data data))
+
+      (view ($deshape :merge [:age :weight :height] :remove-na false :data data))
+ 
+
+
+"
+  ([& options]
+     (let [opts (when options (apply assoc {} options))
+	   data (or (:data opts) $data)
+           colnames (col-names data)
+	   remove-na? (if (false? (:remove-na opts)) false true)
+	   _group-by (into #{} (when (:group-by opts)
+				 (if (coll? (:group-by opts)) 
+				   (:group-by opts)
+				   [(:group-by opts)])))
+	   _merge (into #{} (when (:merge opts)
+			      (if (coll? (:merge opts)) 
+				(:merge opts)
+				[(:merge opts)])))
+           __group-by (if (empty? _group-by)
+			(clojure.set/difference (into #{} (col-names data)) _merge)
+			_group-by)
+	   __merge (if (empty? _merge)
+			(clojure.set/difference (into #{} (col-names data)) _group-by)
+			_merge)
+	   deshaped-data (mapcat (fn [row] 
+				   (let [base-map (zipmap __group-by 
+							  (map #(map-get row % colnames) __group-by))]
+				     (filter identity 
+					     (map (fn [k] 
+						    (if (and remove-na? (nil? (map-get row k colnames)))
+						      nil
+						      (assoc base-map :variable k :value (map-get row k colnames)))) 
+						  __merge))))
+				 (:rows data))]
+       (to-dataset deshaped-data))))
+
 
 
 
