@@ -1182,8 +1182,8 @@
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
-						   (format "%s, %s (0)" '~categories '~values) 
-						   (format "%s, %s" '~categories '~values)))
+						   (format "%s (0)" '~categories) 
+						   (format "%s" '~categories)))
 	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts# 
 							   [:group-by group-by# 
 							    :main-title main-title# 
