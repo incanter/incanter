@@ -1747,7 +1747,7 @@
 
 
 
-(defn $deshape
+(defn deshape
 " Returns a dataset where the columns identified by :merge are collapsed into 
   two columns called :variable and :value. The values in these columns are grouped
   by the columns identified by :group-by.
@@ -1755,7 +1755,7 @@
   Examples:
 
     (use '(incanter core charts datasets))
-    (with-data (->> ($deshape :merge [:Ahmadinejad :Rezai :Karrubi :Mousavi] 
+    (with-data (->> (deshape :merge [:Ahmadinejad :Rezai :Karrubi :Mousavi] 
                               :group-by :Region
                               :data (get-dataset :iran-election))
                     ($order :value :desc))
@@ -1773,11 +1773,11 @@
       (def data (to-dataset [{:subject \"John Smith\" :time 1 :age 33 :weight 90 :height 1.87}
 		             {:subject \"Mary Smith\" :time 1 :height 1.54}]))
       (view data)
-      (view ($deshape :group-by [:subject :time] :merge [:age :weight :height] :data data))
-      (view ($deshape :merge [:age :weight :height] :data data))
-      (view ($deshape :group-by [:subject :time] :data data))
+      (view (deshape :group-by [:subject :time] :merge [:age :weight :height] :data data))
+      (view (deshape :merge [:age :weight :height] :data data))
+      (view (deshape :group-by [:subject :time] :data data))
 
-      (view ($deshape :merge [:age :weight :height] :remove-na false :data data))
+      (view (deshape :merge [:age :weight :height] :remove-na false :data data))
  
 
 
