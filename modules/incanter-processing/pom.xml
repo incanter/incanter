@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>incanter</groupId>
+          <groupId>org.incanter</groupId>
     <artifactId>incanter-parent</artifactId>
     <version>1.0-master-SNAPSHOT</version>
     <relativePath>../incanter-parent/pom.xml</relativePath>
@@ -44,12 +44,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>incanter</groupId>
+            <groupId>org.incanter</groupId>
       <artifactId>incanter-core</artifactId>
       <version>1.0-master-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>incanter</groupId>
+            <groupId>incanter</groupId>
       <artifactId>processing-core</artifactId>
       <version>1</version>
     </dependency> 

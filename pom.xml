@@ -6,13 +6,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>incanter</groupId>
+    <groupId>org.incanter</groupId>
     <artifactId>incanter-parent</artifactId>
     <version>1.0-master-SNAPSHOT</version>
     <relativePath>modules/incanter-parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>incanter</groupId>
+  <groupId>org.incanter</groupId>
   <artifactId>incanter</artifactId>
   <packaging>pom</packaging>
   <name>Incanter</name>
