@@ -2,20 +2,19 @@
   (:use clojure.contrib.test-is)
   (:use :reload-all incanter.chrono))
 
-(def christmas (date 2007 12 25, 3 00 02))
-(def new-years (date 2008 1 1))
-(def day-one (date 2008 11 21, 11 21 48))
+(def christmas (joda-date 2007 12 25, 3 00 02))
+(def new-years (joda-date 2008 1 1))
+(def day-one (joda-date 2008 11 21, 11 21 48))
 
+(comment
 (deftest test-date-creation-lookup
-  (is (= 2008 (day-one :year)))
-  (is (= 11 (day-one :month)))
-  (is (= 21 (day-one :day)))
-  (is (= 11 (day-one :hour)))
-  (is (= 21 (day-one :minute)))
-  (is (= 48 (day-one :second)))
-  (is (= 48 (:second day-one)))
-  ;; overflows simply roll over to the next month/year/etc.
-  (is (= 1 ((date 2008 1 32) :day))))
+  (are [field expected] (= expected ((time-map day-one) field))
+       :year 2008
+       :month 11
+       :day 21
+       :hour 11
+       :minute 21
+       :second 48)))
 
 (deftest test-equality
   (is (= (date 2009 3 2)
@@ -53,12 +52,12 @@
   (is (= (date 2008 11 21 9 21 48)
          (earlier day-one 2 :hour))))
 
-(deftest test-before?
-  (is (before? (date 2008 12 12)
+(deftest test-earlier?
+  (is (earlier? (date 2008 12 12)
                 (date 2009 12 12))))
 
 (deftest test-later?
-  (is (after? (date 2008 12 99)
+  (is (later? (date 2008 12 31)
               (date 2009 1 1))))
 
 (comment

@@ -1,84 +1,19 @@
 (ns #^{:doc "
        chrono.clj --- Because calling it date-utils would be boring.
 
-       Use the date function to create dates. You can look up components
-       much like you would in a map:
-      
-      (def my-date (date 2009 2 27 12 34 56))
-      
-      (my-date :year)   ;; 2009
-      (my-date :month)  ;; 2
-      (my-date :day)    ;; 27
-      (my-date :hour)   ;; 12
-      (my-date :minute) ;; 34
-      (my-date :second) ;; 56
-      
-       You may omit the time if you like:
-      
-      (def my-other-date (date 2009 2 27))
-      (my-other-date :hour) ;; 0
-      
-       To get a date relative to another date, use earlier and later:
-      
-      (earlier my-date 100 :minute) ;; 2009 2 27 10:54:56
-      (later my-other-date 10 :day) ;; 2009 3 9
-      
-       For comparing dates, use earlier? and later?:
-      
-      (earlier? my-date my-other-date) ;; false
-      (later? (later my-date 10 :day) my-date) ;; true
-      
-       You can see the time between two dates by calling time-between:
-      
-      (time-between my-other-date (date 2009 2 25) :days) ;; 2
-      
-      The date-seq function returns a lazy seq of dates incrementing by
-      the units in its first arg starting from its second arg. The third
-      arg if given dictates the end of the sequence.
-      
-      (date-seq :hours my-other-date my-date) ;; (a seq of twelve hours)
-      (take 4 (date-seq :years my-date))
-      ;; (date 2009 2 27 12 34 56) (date 2010 2 27 12 34 56)
-      ;; (date 2011 2 27 12 34 56) (date 2012 2 27 12 34 56) [...]
-      
-       For converting between strings and dates, use format-date and
-       parse-date
-      
-      (format-date my-date :short-date-time) ;; 2/27/09 12:34 PM
-      (format-date my-other-date :long-date) ;; February 27, 2009
-      (parse-date \"12/25/09\" :short-date) ;; (date 2009 12 25)
-      (parse-date \"January 1, 2008 1:45:23 PM EST\" :long-date-time)
-      ;; (date 2008 1 1 13 45 23)
-      
-      Supported date formats are:
-        iso8601
-        short-date
-        medium-date
-        long-date
-        full-date
-        short-date-time
-      
-      Both format-date and parse-date also support a string for the
-      format argument, which will use the string as the format for a
-      SimpleDateFormat (see the javadocs of that class for how to write
-      these formats).
-      
-      See test_contrib/chrono.clj for more details.
-      
-       TODO:
-      
-      * Timezones
-      * More support for weeks
-      * Various others scattered through code
+Complete and total re-write, centered around to multimethods, joda-tz
+and to-joda*.  joda-tz converts the following types to a DateTimeZone
       
       "
-       :author "Matt Moriarity, Phil Hagelberg, and Bradford Cross"}
+       :author "Matt Moriarity, Phil Hagelberg, Bradford Cross, Sean Devlin"}
   incanter.chrono
-  (:import (java.util Calendar TimeZone Date GregorianCalendar)
+  (:import (java.util Calendar TimeZone SimpleTimeZone Date GregorianCalendar)
 	   (java.sql Timestamp)
-           (org.joda.time DateTime DateTime$Property DateTimeZone 
+           (org.joda.time DateTime DateTime$Property DateTimeZone
                           Minutes Hours Period Interval)
-	   (org.joda.time.format ISODateTimeFormat DateTimeFormatter)))
+	   (org.joda.time.tz FixedDateTimeZone CachedDateTimeZone)
+	   (org.joda.time.format ISODateTimeFormat DateTimeFormatter))
+  (:use clojure.template))
 
 ;;--------------------------
 ;; Constants & Dispatch fn
@@ -172,75 +107,144 @@
 ;;----------------------------
 ;; Define Multimethods
 ;;----------------------------
-(defmulti tz class)
+(defmulti
+  #^{
+     :doc "Converts the following types to a DateTimeZone
 
-(defmulti to-ms to-ms-dispatch)
+* DateTimeZone
+* TimeZone
+* Number (numeric offset)
+* String (iso conversion)
+* java.util.Calendar (based on instance tz)
+* Date (based on instance tz)
+* DateTime (based on instance tz)
+"}
+  joda-tz class)
+
+(defmulti to-joda* (fn [a & args] (class a)))
+
+;;-------------------
+;; Time Zone Constructor
+;;-------------------
+(def available-ids (apply sorted-set (DateTimeZone/getAvailableIDs)))
+
+(defmethod joda-tz DateTimeZone
+  [#^DateTimeZone zone]
+  zone)
+
+(defmethod joda-tz Number
+  [#^Number offset]
+  (DateTimeZone/forOffsetHours offset))
+
+(defmethod joda-tz String
+  [#^String named-zone]
+  (DateTimeZone/forID named-zone))
+
+(defmethod joda-tz Calendar
+  [#^Calendar cal]
+  (joda-tz (.getTimeZone cal)))
+
+(defmethod joda-tz Date
+  [#^Date d]
+  (joda-tz (doto (GregorianCalendar. ) (.setTime d))))
+
+(defmethod joda-tz DateTime
+  [#^DateTime d]
+  (.getZone d))
+
+(defmethod joda-tz TimeZone
+  [#^TimeZone zone]
+  (DateTimeZone/forTimeZone zone))
+
+(defn java-tz
+  "Accepts the same types as joda-tz, but returns a TimeZone object
+instead."
+  [arg]
+  (.toTimeZone (joda-tz arg)))
+
+(def tz joda-tz)
+(def time-zone joda-tz)
+
+(def utc (DateTimeZone/UTC))
 
 ;;------------------------------
-;; Long Conversion Methods
+;; to-joda*
 ;;------------------------------
-(defmethod to-ms Long [l] l)
+(defmethod to-joda* Long
+  ([l] (DateTime. l))
+  ([l zone] (DateTime. l #^DateTimeZone(tz zone))))
 
-(defmethod to-ms Date
-  [d]
-  (.getTime d))
+(defmethod to-joda* DateTimeZone
+  ([#^DateTimeZone zone] (DateTime. zone)))
 
-(defmethod to-ms Timestamp
-  [ts]
-  (.getTime ts))
+(defmethod to-joda* TimeZone
+  ([#^TimeZone zone] (DateTime. #^DateTimeZone(tz zone))))
 
-(defmethod to-ms Calendar
-  [cal]
-  (to-ms (.getTime cal)))
+(defmethod to-joda* Calendar
+  ([#^Calendar cal] (to-joda* #^Date(.getTime cal) (tz cal)))
+  ([#^Calendar cal zone] (to-joda* #^Date(.getTime cal) zone)))
 
-(defmethod to-ms DateTime
-  [d]
-  (.getMillis d))
+(defmethod to-joda* Date
+  ([#^Date d] (to-joda* #^Long(.getTime d) (tz d)))
+  ([#^Date d zone] (to-joda* #^Long(.getTime d) zone)))
 
-(defmethod to-ms clojure.lang.IPersistentMap
-  [input-map]
-  (let [resulting-map (merge default-time-map input-map)
-	[y mo d h mi s ms tz] ((apply juxt (conj time-keys :tz))
-			    resulting-map)]
-    (to-ms (DateTime. y mo d h mi s ms tz))))
+(defmethod to-joda* DateTime
+  ([#^DateTime d] d)
+  ([#^DateTime d zone] (.withZone d #^DateTimeZone(tz zone))))
 
-(defmethod to-ms Integer
-  ([y mo d] (to-ms y mo d 0 0 0))
-  ([y mo d h mi s] (to-ms y mo d h mi s 0))
+(defmethod to-joda* clojure.lang.IPersistentMap
+  ([input-map]
+     (let [resulting-map (merge default-time-map input-map)
+	   [y mo d h mi s ms zone] ((apply juxt (conj time-keys :tz))
+				    resulting-map)]
+       (DateTime. y mo d h mi s ms (tz zone))))
+    ([input-map zone]
+     (let [resulting-map (merge default-time-map input-map)
+	   [y mo d h mi s ms] ((apply juxt time-keys) resulting-map)]
+       (DateTime. y mo d h mi s ms (tz zone)))))
+
+(defmethod to-joda* Integer
+  ([zone] (to-joda* (tz zone)))
+  ([y mo d] (to-joda* y mo d 0 0 0 0))
+  ([y mo d zone] (to-joda* y mo d 0 0 0 0 zone))
+  ([y mo d h mi s] (to-joda* y mo d h mi s 0))
   ([y mo d h mi s ms]
-     (to-ms (DateTime. y mo d h mi s ms)))
-  ([y mo d h mi s ms t]
-     (to-ms (DateTime. y mo d h mi s ms (tz t)))))
+     (to-joda* (DateTime. y mo d h mi s ms)))
+  ([y mo d h mi s ms zone]
+     (to-joda* (DateTime. y mo d h mi s ms #^DateTimeZone(tz zone)))))
 
-(defmethod to-ms String
-  ([s] (to-ms s default-format))
-  ([s f] (to-ms (.parseDateTime (formatters f) s))))
-
-(defmethod to-ms ::empty
-  [& params]
-  (to-ms (Date. )))
-
-(defmethod to-ms ::nil
-  [& params]
-  nil)
-
+(defmethod to-joda* String
+  ([s] (try (to-joda* (tz s)) ;Try treating it like a tz
+	    (catch Exception e (to-joda* s default-format)))) ;Then assume it need parsed
+  ([s f] (.parseDateTime (formatters f) s)) ;formatter
+  ([s f zone] (to-joda* (.parseDateTime (formatters f) s) (tz zone))))
+  
 ;;--------------------
 ;; Dispatched fns
 ;;--------------------
-(defn date [& params]
-  (Date. (apply to-ms params)))
+(defn joda-date
+  "Creates a joda-date based on a wide variety of inputs."
+  ([] (DateTime. ))
+  ([& args] (apply to-joda* args)))
 
-(defn greg-cal [& params]
-  (doto (GregorianCalendar. )
-    (.setTime (apply date params))))
+(defn to-ms
+  "Does not support time zones :("
+  [& args]
+  (.getMillis (apply joda-date args)))
 
-(defn sql-ts [& params]
-  (Timestamp. (apply to-ms params)))
+(defn greg-cal
+  [& args]
+  (let [j (apply joda-date args)]
+    (doto (GregorianCalendar. )
+      (.setTimeZone #^TimeZone(java-tz j))
+      (.setTimeInMillis (to-ms j)))))
 
-(defn joda-date [& params]
-  (DateTime. (apply to-ms params)))
-
-(defn time-map [& params]
+(defn date
+  "Does not support time zones :("
+  [& args]
+  (.getTime (apply greg-cal args)))
+  
+(defn time-map [& args]
   (let [time-extractor (juxt :year 
 			     :monthOfYear 
 			     :dayOfMonth 
@@ -248,14 +252,14 @@
 			     :minuteOfHour
 			     :secondOfMinute
 			     :millisOfSecond)
-	joda-bean   (bean (apply joda-date params))]
+	joda-bean   (bean (apply joda-date args))]
     (zipmap time-keys (time-extractor joda-bean))))
 
 (defn str-time 
-  ([] (str-time (to-ms)))
+  ([] (str-time (joda-date)))
   ([& params]
      (cond
-       (keyword? (first params)) (str-time (to-ms) (first params))
+       (keyword? (first params)) (str-time (joda-date) (first params))
        (= (count params) 1) (str-time (first params) default-format)
        true (.print (formatters (second params)) (joda-date (first params))))))
 
@@ -280,52 +284,6 @@
 	 (interpose "\n")
 	 (apply str)
 	 println)))
-
-;;-------------------
-;; Time Zone Constructor
-;;-------------------
-(def available-ids (apply sorted-set (DateTimeZone/getAvailableIDs)))
-
-(defmethod tz DateTimeZone
-  [zone]
-  zone)
-
-(defmethod tz Number
-  [offset]
-  (DateTimeZone/forOffsetHours offset))
-
-(defmethod tz String
-  [named-zone]
-  (DateTimeZone/forID named-zone))
-
-(defmethod tz Calendar
-  [cal]
-  (tz (.getTimeZone cal)))
-
-(defmethod tz Date
-  [d]
-  (tz (greg-cal d)))
-
-(defmethod tz DateTime
-  [d]
-  (.getZone d))
-
-(defmethod tz TimeZone
-  [t]
-  (DateTimeZone/forID t))
-
-(def time-zone tz)
-
-(def utc (DateTimeZone/UTC))
-
-;;-------------------
-;; Time Zone Utils
-;;-------------------
-(defn switch-tz
-  "Switches an instant to a different time zone"
-  [d zone]
-  (.toDateTime (joda-date d) (tz zone)))
-
 
 ;;-------------------
 ;; Predicates
@@ -375,6 +333,26 @@ the end of range 1."
   [n unit]
   ((unit period-fns) n))
 
+;;--------------------
+;; Period Shorthand
+;;--------------------
+(do-template
+ [fn-name unit]
+ (defn fn-name [n] (period n unit))
+ year :year
+ month :month
+ day :day
+ hour :hour
+ minute :minute
+ sec :second
+ ;; Plural Support
+ years :year
+ months :month
+ days :day
+ hours :hour
+ minutes :minute
+ secs :second)
+
 (defn period-between
   "This find the period between start and end"
   [start end]
@@ -416,6 +394,6 @@ t.  If t is not provided, now is assumed."
   increments of units. If to is omitted, returns an infinite seq."
   ([units from to]
      (lazy-seq
-       (when (or (nil? to) (before? from to))
+       (when (or (nil? to) (earlier? from to))
          (cons from (date-seq units (later from (period 1 units)) to)))))
   ([units from] (date-seq units from nil)))
