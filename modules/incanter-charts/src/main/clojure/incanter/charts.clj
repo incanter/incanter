@@ -38,7 +38,8 @@
                                        DefaultBoxAndWhiskerCategoryDataset)
             (org.jfree.chart ChartFactory
                              ChartUtilities
-                             ChartFrame)
+                             ChartFrame
+			     StandardChartTheme)
             (org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder)
@@ -52,6 +53,48 @@
                                          XYPolygonAnnotation)))
 
 
+
+
+(defn set-theme
+"  Changes the chart theme.
+
+   Arguments:
+     chart -- an Incanter/JFreeChart object
+     theme -- either a keyword indicating one of the built-in themes, or a JFreeChart ChartTheme object.
+
+   Built-in Themes:
+     :default
+     :dark
+
+   Examples:
+
+     (use '(incanter core charts))
+     (def chart (function-plot sin -4 4))
+     (view chart)
+     ;; change the theme of chart to :dark
+     (set-theme chart :dark)
+     ;; change it back to the default
+     (set-theme chart :default)
+
+   
+    References:
+       http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html
+       http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html 
+
+"
+  ([chart theme]
+     (let [_theme (if (keyword? theme) 
+		    (cond
+		      (= theme :dark)
+		        (StandardChartTheme/createDarknessTheme)
+		      (= theme :legacy)
+		        (StandardChartTheme/createLegacyTheme)
+			:default
+			  (StandardChartTheme/createJFreeTheme))
+		    theme)]
+       (do
+	 (.apply _theme chart)
+	 chart))))
 
 
 
@@ -1564,6 +1607,7 @@
           points (double-array (mapcat identity coords))
           anno (XYPolygonAnnotation. points)]
       (.addAnnotation (.getPlot chart) anno))))
+
 
 
 
