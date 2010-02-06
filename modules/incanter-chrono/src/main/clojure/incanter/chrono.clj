@@ -243,7 +243,11 @@ instead."
   "Does not support time zones :("
   [& args]
   (.getTime (apply greg-cal args)))
-  
+
+(defn to-sql
+  [& args]
+  (Timestamp. (apply to-ms args)))
+
 (defn time-map [& args]
   (let [time-extractor (juxt :year 
 			     :monthOfYear 
