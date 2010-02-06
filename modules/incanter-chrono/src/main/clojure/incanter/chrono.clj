@@ -215,9 +215,9 @@ instead."
 
 (defmethod to-joda* String
   ([s] (try (to-joda* (tz s)) ;Try treating it like a tz
-	    (catch Exception e (to-joda* s default-format)))) ;Then assume it need parsed
+	    (catch Exception e (to-joda* s default-format)))) ;Then assume it needs to be parsed
   ([s f] (.parseDateTime (formatters f) s)) ;formatter
-  ([s f zone] (to-joda* (.parseDateTime (formatters f) s) (tz zone))))
+  ([s f zone] (to-joda* (.parseDateTime (formatters f) s) zone)))
   
 ;;--------------------
 ;; Dispatched fns
