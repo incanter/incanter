@@ -2129,6 +2129,9 @@
     window. When given a URL string, it will open the location with the
     platform's default web browser.
 
+    When viewing charts, a :width (default 500) and :height (default 400) 
+    option can be provided.
+
     Examples:
 
       (use '(incanter core stats datasets charts))
