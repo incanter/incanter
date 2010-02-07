@@ -93,6 +93,7 @@
 			  (StandardChartTheme/createJFreeTheme))
 		    theme)]
        (do
+	 (.setShadowVisible _theme false)
 	 (.apply _theme chart)
 	 chart))))
 
@@ -632,19 +633,20 @@
 	  y-groups (when _group-by 
 		     (map #($ :col-0 %) 
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
-           __x (if x-groups (first x-groups) _x)
+	  __x (if x-groups (first x-groups) _x)
            __y (if y-groups (first y-groups) _y)
-           main-title (or (:title opts) "XY Plot")
-           x-lab (or (:x-label opts) (str 'x))
-           y-lab (or (:y-label opts) (str 'y))
-           series-lab (or (:series-label opts) 
+	  main-title (or (:title opts) "XY Plot")
+	  x-lab (or (:x-label opts) (str 'x))
+	  y-lab (or (:y-label opts) (str 'y))
+	  series-lab (or (:series-label opts) 
 			  (if x-groups 
 			    (format "%s, %s (0)" 'x 'y) 
 			    (format "%s, %s" 'x 'y)))
-           legend? (true? (:legend opts))
-           data-series (XYSeries. series-lab)
-           dataset (XYSeriesCollection.)
-           chart (do
+	  theme (or (:theme opts) :default)
+	  legend? (true? (:legend opts))
+	  data-series (XYSeries. series-lab)
+	  dataset (XYSeriesCollection.)
+	  chart (do
                     (doseq [i (range (count __x))] 
 		      (.add data-series (nth __x i)  (nth __y i)))
                     (.addSeries dataset data-series)
@@ -662,7 +664,8 @@
                   (add-lines chart (nth x-groups i)
                              (nth y-groups i)
                              :series-label (format "%s, %s (%s)" 'x 'y i))))]
-        chart)))
+      (set-theme chart theme)  
+      chart)))
 
 
 
@@ -765,6 +768,7 @@
 			 (if x-groups 
 			   (format "%s, %s (0)" 'x 'y) 
 			   (format "%s, %s" 'x 'y)))
+	  theme (or (:theme opts) :default)
 	  legend? (true? (:legend opts))
 	  data-series (XYSeries. series-lab)
 	  _dataset (XYSeriesCollection.)
@@ -786,6 +790,7 @@
 			    (nth x-groups i)
 			    (nth y-groups i)
 			    :series-label (format "%s, %s (%s)" 'x 'y i))))]
+      (set-theme chart theme)
       chart)))
 
 
@@ -872,6 +877,7 @@
           data (:data opts)
 	  _x (if (coll? x) (to-list x) ($ x data))
           nbins (or (:nbins opts) 10)
+	  theme (or (:theme opts) :default)
           density? (true? (:density opts))
           main-title (or (:title opts) "Histogram")
           x-lab (or (:x-label opts) (str 'x))
@@ -883,15 +889,15 @@
       (do
         (.addSeries dataset series-lab (double-array _x) nbins)
         (when density? (.setType dataset org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1))
-        (org.jfree.chart.ChartFactory/createHistogram
-	 main-title
-	 x-lab
-	 y-lab
-	 dataset
-	 org.jfree.chart.plot.PlotOrientation/VERTICAL
-	 legend? ; no legend
-	 true  ; tooltips
-	 false)))))
+        (set-theme (org.jfree.chart.ChartFactory/createHistogram
+		    main-title
+		    x-lab
+		    y-lab
+		    dataset
+		    org.jfree.chart.plot.PlotOrientation/VERTICAL
+		    legend?			; no legend
+		    true				; tooltips
+		    false) theme)))))
 
 
 
@@ -975,6 +981,7 @@
 	  y-label (or (:y-label opts) (str 'values))
 	  series-label (:series-label opts)
 	  vertical? (if (false? (:vertical opts)) false true)
+	  theme (or (:theme opts) :default)
 	  legend? (true? (:legend opts))
 	  dataset (DefaultCategoryDataset.)
 	  chart (org.jfree.chart.ChartFactory/createLineChart
@@ -999,6 +1006,7 @@
 							:else
 							  (str 'values))
                                                        (nth _categories i)))
+	(set-theme chart theme)
 	chart))))
 
 
@@ -1105,6 +1113,7 @@
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
            main-title (or (:title opts) "Bar Chart")
+	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts) 
 		     (if (coll? (:group-by opts)) 
 		       (to-list (:group-by opts))
@@ -1138,7 +1147,8 @@
 			:else
 			  (str 'values))
 		       (nth _categories i)))
-          chart))))
+          (set-theme chart theme)
+	  chart))))
 
 
 
@@ -1259,6 +1269,7 @@
 	  series-label (or (:series-label opts) (str 'x))
 	  category-label (or (:category-label opts) 0)
 	  group-labels (:group-labels opts)
+	  theme (or (:theme opts) :default)
 	  legend? (true? (:legend opts))
 	  dataset (DefaultBoxAndWhiskerCategoryDataset.)
 	  chart (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart
@@ -1279,7 +1290,8 @@
 	      (.add dataset 
 		    (nth x-groups i) 
 		    (str series-label " (" i ")") i)))
-          chart))))
+          (set-theme chart theme)
+	  chart))))
 
 
 
@@ -1347,19 +1359,20 @@
 (defn function-plot*
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
-          step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
-          _x (range min-range max-range step-size)
-          main-title (or (:title opts) "Function Plot")
-          x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
-          y-lab (or (:y-label opts) (str 'function))
-          series-lab (or (:series-label opts) (format "%s" 'function))
-          legend? (true? (:legend opts))]
-      (xy-plot _x (map function _x)
-                 :x-label x-lab
-                 :y-label y-lab
-                 :title main-title
-                 :series-label series-lab
-                 :legend legend?))))
+	 step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
+	 _x (range min-range max-range step-size)
+	 main-title (or (:title opts) "Function Plot")
+	 x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
+	 y-lab (or (:y-label opts) (str 'function))
+	 series-lab (or (:series-label opts) (format "%s" 'function))
+	 theme (or (:theme opts) :default)
+	 legend? (true? (:legend opts))]
+      (set-theme (xy-plot _x (map function _x)
+			  :x-label x-lab
+			  :y-label y-lab
+			  :title main-title
+			  :series-label series-lab
+			  :legend legend?) theme))))
 
 
 
@@ -1639,6 +1652,7 @@
           x-label (or (:x-label opts) "Iteration")
           y-label (or (:y-label opts) "Value")
           series-lab (or (:series-label opts) "Value")
+	  theme (or (:theme opts) :default)
           ;legend? (or (:series-label opts) true)
           n (count _x)
           chart (xy-plot (range n)
@@ -1651,6 +1665,7 @@
         (add-lines chart (range n) (cumulative-mean _x) :series-label "running mean")
         (.setSeriesRenderingOrder (.getPlot chart) SeriesRenderingOrder/FORWARD)
         (.setDatasetRenderingOrder (.getPlot chart) DatasetRenderingOrder/FORWARD)
+	(set-theme chart theme)
         chart))))
 
 
@@ -1683,12 +1698,14 @@
 	 n (count _x)
          quants (for [k (range 1 n)] (/ k (inc n)))
          norm-quants (quantile-normal quants)
+	 theme (or (:theme opts) :default)
          y (quantile _x :probs quants)]
-         (scatter-plot norm-quants y
-                   :title "QQ-Plot"
-                   :x-label "Normal theoretical quantiles"
-                   :y-label "Data quantiles"
-                   :series-label "Theoretical Normal"))))
+         (set-theme (scatter-plot norm-quants y
+				  :title "QQ-Plot"
+				  :x-label "Normal theoretical quantiles"
+				  :y-label "Data quantiles"
+				  :series-label "Theoretical Normal")
+		    theme))))
 
 
 
@@ -1727,11 +1744,13 @@
             min-x (reduce min x-axis)
             max-x (reduce max x-axis)
             _x (range min-x max-x (/ (- max-x min-x) 100))
-            y-sd (* (sd y-axis) 2)]
+            y-sd (* (sd y-axis) 2)
+	    theme (or (:theme opts) :default)]
         (do
           (add-lines plot _x (repeat (count _x) 0) :series-label "mean")
           (add-lines plot _x (repeat (count _x) y-sd) :series-label "mean + sd")
           (add-lines plot _x (repeat (count _x) (- 0 y-sd)) :series-label "mean - sd")
+	  (set-theme plot theme)
           plot))))
 
 
