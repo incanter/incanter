@@ -1318,8 +1318,9 @@
      (use 'incanter.core)
      (to-dataset 1)
      (to-dataset :a)
-     (to-dataset [:a]) 
+     (to-dataset [:a])
      (to-dataset (range 10))
+     (to-dataset (range 10) :transpose true)
      (to-dataset [[1 2] [3 4] [5 6]])
      (to-dataset {:a 1 :b 2 :c 3})
      (to-dataset {\"a\" 1 \"b\" 2 \"c\" 3})
@@ -1327,30 +1328,44 @@
      (to-dataset [{\"a\" 1 \"b\" 2 \"c\" 3} {\"a\" 1 \"b\" 2 \"c\" 3}])
 
 "
-  ([obj]
-     (let [colnames (cond
-                              (dataset? obj)
-                                (:column-names obj)
-                              (map? obj)
-                                (keys obj)
-                              (coll? obj)
-                                (if (map? (first obj))
-                                  (keys (first obj))
-                                  (map #(keyword (str "col-" %)) (range (length (first obj)))))
-                              :else
-                                [:col-0]) 
-            rows (cond
-                       (dataset? obj)
-                         (:rows obj)
-                       (map? obj)
-                         ;; see if any of the values are collections
-                         (if (reduce #(or %1 %2) (map coll? (vals obj))) 
-                           (vals obj)
-                           [(vals obj)])
-                       (coll? obj)
-                         obj
-                       :else
-                         [obj])]
+  ([obj & options]
+     (let [opts (when options (apply assoc {} options))
+	   transpose? (true? (:transpose opts))
+	   colnames (cond
+		     (dataset? obj)
+		       (:column-names obj)
+		     (map? obj)
+		       (keys obj)
+		     (coll? obj)
+		       (cond 
+			(map? (first obj))
+			  (keys (first obj))
+			(coll? (first obj))
+			  (map #(keyword (str "col-" %)) (range (length (first obj))))
+			transpose?
+			  (map #(keyword (str "col-" %)) (range (length obj)))
+			:else
+			  [:col-0])
+		     :else
+		       [:col-0]) 
+	   rows (cond
+		 (dataset? obj)
+		   (:rows obj)
+		 (map? obj)
+		   ;; see if any of the values are collections
+		   (if (reduce #(or %1 %2) (map coll? (vals obj))) 
+		     (vals obj)
+		     [(vals obj)])
+		   (coll? obj)
+		     (cond
+		       (coll? (first obj)) 
+		         obj
+		       transpose?
+		         [obj]
+		       :else
+		         obj)
+		   :else
+		     [obj])]
          (dataset colnames rows))))
 
 
@@ -1395,15 +1410,16 @@
      (view (conj-rows [[1 2] [3 4]] [[5 6] [7 8]]))
      (view (conj-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]]))
      (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
+     (conj-rows (range 5) (range 5 10))
 
 "
   ([& args]
      (reduce (fn [A B] 
-                   (let [a (to-dataset A)
-                          b (to-dataset B)]
-                      (dataset (:column-names a) 
-                                   (concat (to-list a) (to-list b)))))
-                  args)))
+                   (let [a (to-dataset A :transpose true)
+			 b (to-dataset B :transpose true)]
+		     (dataset (:column-names a) 
+			      (concat (to-list a) (to-list b)))))
+	     args)))
 
 
 
