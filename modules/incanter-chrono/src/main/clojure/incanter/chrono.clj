@@ -16,9 +16,9 @@ different types of input.  It can dispatch on the following:
     [year month day hour min sec]
     [year month day hour min sec ms]
 * java.lang.String - This defaults to :basic-date-time-no-ms, but you can choose from
-51 existing formatters.  Use display-formats for more information.
+51 existing ISO-8601 formatters.  Use display-formats for more information.
 * clojure.lang.IPersistentMap - See the constant time-keys for the proper keys to use.
-* clojure.lang.IPersistentVector - Calls apply to-joda* on the vector
+* clojure.lang.IPersistentVector - Calls (apply to-joda* v) on the vector v.
 * org.joda.time.DateTime - Passes the Joda DateTime object through.
 
 All empty calls default to the instant the fn is called.
