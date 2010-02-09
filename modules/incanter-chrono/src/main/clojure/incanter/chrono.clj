@@ -121,7 +121,6 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
 "}
   joda-tz class)
 
-(defmulti to-joda* (fn [a & args] (class a)))
 
 ;;-------------------
 ;; Time Zone Constructor
@@ -169,25 +168,34 @@ instead."
 
 ;;------------------------------
 ;; to-joda*
+;; This is the workhorse for chrono
 ;;------------------------------
+(defmulti to-joda* (fn [a & args] (class a)))
+
+;;Assumes that the long is the number of ms in the current epoch.
 (defmethod to-joda* Long
   ([l] (DateTime. l))
   ([l zone] (DateTime. l #^DateTimeZone(tz zone))))
 
+;;Creates the current instant at the supplied Joda Time Zone
 (defmethod to-joda* DateTimeZone
   ([#^DateTimeZone zone] (DateTime. zone)))
 
+;;Creates the current instant at the supplied Java Time Zone
 (defmethod to-joda* TimeZone
   ([#^TimeZone zone] (DateTime. #^DateTimeZone(tz zone))))
 
+;;Creates a Date object from a Calendar, recurrsively calls to-joda*.  Preserves TimeZone
 (defmethod to-joda* Calendar
   ([#^Calendar cal] (to-joda* #^Date(.getTime cal) (tz cal)))
   ([#^Calendar cal zone] (to-joda* #^Date(.getTime cal) zone)))
 
+;;Creates a Long object from a Calendar, recurrsively calls to-joda*.  Preserves TimeZone
 (defmethod to-joda* Date
   ([#^Date d] (to-joda* #^Long(.getTime d) (tz d)))
   ([#^Date d zone] (to-joda* #^Long(.getTime d) zone)))
 
+;;Passes through a Joda DateTime object, or changes tz if required.
 (defmethod to-joda* DateTime
   ([#^DateTime d] d)
   ([#^DateTime d zone] (.withZone d #^DateTimeZone(tz zone))))
@@ -251,7 +259,8 @@ instead."
   (Timestamp. (apply to-ms args)))
 
 (defn time-map
-  "Returns a map of time objects, with "
+  ;TO-DO: Add tz support
+  "Returns a map of time objects, without time zone."
   [& args]
   (let [time-extractor (juxt :year 
 			     :monthOfYear 
@@ -263,7 +272,9 @@ instead."
 	joda-bean   (bean (apply joda-date args))]
     (zipmap time-keys (time-extractor joda-bean))))
 
-(defn str-time 
+(defn str-time
+  "Creates a string reprentation of the time.  Accpets the keyword formatting parameters
+as the input parsers as a second argument position."
   ([] (str-time (joda-date)))
   ([& params]
      (cond
@@ -271,27 +282,36 @@ instead."
        (= (count params) 1) (str-time (first params) default-format)
        true (.print (formatters (second params)) (joda-date (first params))))))
 
+(defn int-vec
+  "Turns a time into a vector of ints, in the same order as time-keys."
+  [& args]
+  ((apply juxt time-keys) (apply time-map args)))
+
 ;;--------------------
 ;; String Helpers
 ;;--------------------
-(defn display-formats []
-  (let [an-instant (to-ms)
-	;Ignore the parsers that are for input only
-	input-only #{:date-element-parser 
-		     :date-opt-time
-		     :date-parser 
-		     :date-time-parser
-		     :local-date-opt-time
-		     :local-date 
-		     :local-time}]
-    (->> formatters
-	 keys
-	 (remove input-only)
-	 (map #(str (name %) "\t"  (str-time an-instant %)))
-	 sort
-	 (interpose "\n")
-	 (apply str)
-	 println)))
+(defn display-formats
+  "This fn takes a date object in, and displays it in every String format that chrono
+is aware of.  If no date is passed, it uses now.  Very useful for determining which
+parser to use."
+  ([] (display-formats (to-ms)))
+  ([an-instant]
+     ;Ignore the parsers that are for input only
+     (let [input-only #{:date-element-parser 
+			:date-opt-time
+			:date-parser 
+			:date-time-parser
+			:local-date-opt-time
+			:local-date 
+			:local-time}]
+       (->> formatters
+	    keys
+	    (remove input-only)
+	    (map #(str (name %) "\t"  (str-time an-instant %)))
+	    sort
+	    (interpose "\n")
+	    (apply str)
+	    println))))
 
 ;;-------------------
 ;; Predicates
@@ -367,7 +387,8 @@ the end of range 1."
 
 (do-template
  [fn-name method]
- (defn fn-name "Returns a period between the start and end."
+ (defn fn-name "Returns a period between the start and end
+in the same interval as the fn name."
    [start end]
    (let [standard-period (method #^Period(period-between start end))
 	 field-type (.getFieldType standard-period 0)]

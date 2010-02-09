@@ -13,7 +13,12 @@
        :day 21
        :hour 11
        :minute 21
-       :second 48))
+       :second 48
+       :ms 0))
+
+(deftest test-int-vec
+  (is (= (int-vec day-one)
+	 [2008 11 21 11 21 48 0])))
 
 (deftest test-equality
   (is (= (date 2009 3 2)
@@ -177,12 +182,12 @@
                           :minutes)))
   (is (= 6 (int (time-between christmas new-years :day)))))
 
-  ;;Completely deprecated by advanced parsing methods
+  ;;Completely deprecated by advanced parsing methods - SFD
 (deftest test-iso-date-format
   (is (= (date 2008 12 25) (parse-date "2008-12-25 00:00:00" :iso8601)))
   (is (= "2008-11-21 11:21:48" (format-date day-one :iso8601))))
 
-  ;;Killed - Could be fixed.  Should it?
+  ;;Killed - Could be fixed.  Should it? - SFD
 (deftest create-date-range-around-a-date
   (let [you (joda-date 2009 6 5 11 0 0 0 (time-zone 0))]
   (is (= (list (hours-from you -1) you (hours-from you 1))
