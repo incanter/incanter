@@ -406,7 +406,7 @@ the end of range 1."
 ;;--------------------
 (do-template
  [fn-name unit]
- (defn fn-name [n] (period n unit))
+ (defn fn-name "A shorthand fn.  Creates a period n long." [n] (period n unit))
  year :year
  month :month
  day :day
@@ -471,9 +471,11 @@ t.  If t is not provided, the current system time is assumed."
 
 (defn date-seq
   "Returns a lazy seq of dates starting with from up until to in
-  increments of units. If to is omitted, returns an infinite seq."
+  increments of units. If to is omitted, returns an infinite seq.
+  If from is omitted, assumes now."
+  ([units] (date-seq units (joda-date) nil))
+  ([units from] (date-seq units from nil))
   ([units from to]
      (lazy-seq
        (when (or (nil? to) (earlier? from to))
-         (cons from (date-seq units (later from (period 1 units)) to)))))
-  ([units from] (date-seq units from nil)))
+         (cons from (date-seq units (later from (period 1 units)) to))))))
