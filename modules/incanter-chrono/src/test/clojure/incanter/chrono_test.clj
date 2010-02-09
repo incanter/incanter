@@ -16,6 +16,17 @@
        :second 48
        :ms 0))
 
+(deftest test-map-creation
+  (is (= day-one
+	 (joda-date
+	  {:year 2008
+	   :month 11
+	   :day 21
+	   :hour 11
+	   :minute 21
+	   :second 48
+	   :ms 0}))))
+
 (deftest test-int-vec
   (is (= (int-vec day-one)
 	 [2008 11 21 11 21 48 0])))

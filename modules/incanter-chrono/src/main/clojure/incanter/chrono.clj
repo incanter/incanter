@@ -214,6 +214,9 @@ instead."
   ([y mo d h mi s ms zone]
      (to-joda* (DateTime. y mo d h mi s ms #^DateTimeZone(tz zone)))))
 
+(defmethod to-joda* clojure.lang.IPersistentVector
+  [v] (apply to-joda* v))
+
 (defmethod to-joda* String
   ([s] (try (to-joda* (tz s)) ;Try treating it like a tz
 	    (catch Exception e (to-joda* s default-format)))) ;Then assume it needs to be parsed
