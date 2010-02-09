@@ -363,12 +363,12 @@ ISO8601 parser to use."
   (.compareTo (date a) (date b)))
  
 (defn earlier?
-  "Tests to determine if time a is before time b"
+  "Tests to determine if time a is earlier than time b"
   [a b]
   (= (compare-time a b) -1))
  
 (defn later?
-  "Tests to determine if time a is after time b"
+  "Tests to determine if time a is later than time b"
   [a b]
   (= (compare-time a b) 1))
 
