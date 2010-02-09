@@ -97,13 +97,6 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
       :ms 0
       :tz (.getZone (DateTime.))})
 
-(defn- to-ms-dispatch
-  [& params]
-  (let [lead-param (first params)]
-    (cond
-     (empty? params) ::empty
-     (nil? lead-param) ::nil
-     true (class lead-param))))
 ;;----------------------------
 ;; Define Multimethods
 ;;----------------------------
