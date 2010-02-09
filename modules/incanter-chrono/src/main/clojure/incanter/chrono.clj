@@ -358,7 +358,7 @@ ISO8601 parser to use."
 ;; Predicates
 ;;-------------------
 (defn compare-time
-  "Compares 2 times a and b."
+  "Compares two times objects, a and b."
   [a b]
   (.compareTo (date a) (date b)))
  
@@ -462,8 +462,6 @@ t.  If t is not provided, the current system time is assumed."
 	   fields (set (drop (inc (count fields)) time-keys))
 	   start-point (into {} (filter (comp fields key) default-time-map))]
        (joda-date (merge (time-map t) start-point)))))
-
-(def beginning-of start-of)
 
 (defn end-of
   "Return a time at the end of the month, year, day, etc. from the-date."
