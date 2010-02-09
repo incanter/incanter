@@ -2,9 +2,47 @@
        chrono.clj --- Because calling it date-utils would be boring.
 
 Complete and total re-write, centered around two multimethods, joda-tz
-and to-joda*.  joda-tz converts the following types to a DateTimeZone
-      
-      "
+and to-joda*.  See the doc string for joda-tz to learn what type of objects
+can be used to create a time zone object.
+
+The to-joda* fn is designed to create a Joda DateTime object based on several
+different types of input.  It can dispatch on the following:
+
+* java.util.Date (and subclasses)
+* java.util.Calendar (and subclasses)
+* java.lang.Long (as the ms count in the epoch)
+* java.lang.Integer - with vairable arity, so that you can create from the following:
+    [year month day]
+    [year month day hour min sec]
+    [year month day hour min sec ms]
+* java.lang.String - This defaults to :basic-date-time-no-ms, but you can choose from
+51 existing formatters.  Use display-formats for more information.
+* clojure.lang.IPersistentMap - See the constant time-keys for the proper keys to use.
+* clojure.lang.IPersistentVector - Calls apply to-joda* on the vector
+* org.joda.time.DateTime - Passes the Joda DateTime object through.
+
+All empty calls default to the instant the fn is called.
+
+Each of this casses also takes an optional time zone value at the end.  Any time zone
+represnetation joda-tz knows how to handle can be passed in.  This makes it very simple
+to convert time types to a different time zone.
+
+It is also possible to create other representations of time objects using the following
+fns:
+
+* joda-date (preffered over to-joda*)
+* date
+* to-sql
+* greg-cal
+* time-vec
+* time-map
+* time-str
+
+Each of these fns wrap a call to to-joda*, so they accept the same bredth of arguments.
+
+This library also contains several preicate & time manipulation fns.  Each fns casts its
+input to the appriate time object, so you don't have to worry about converting them before
+use.  Check the specific doc strnigs for more information."
        :author "Sean Devlin"}
   incanter.chrono
   (:import (java.util Calendar TimeZone SimpleTimeZone Date GregorianCalendar)
@@ -16,12 +54,15 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
   (:use clojure.template))
 
 ;;--------------------------
-;; Constants & Dispatch fn
+;; Constants
 ;;--------------------------
 
 (def default-format :basic-date-time-no-ms)
 
-(def formatters
+(def #^{:doc "This is a map of available formatters that can be
+used with date pasing.  They come from the ISO8601 standard.  Use the
+fn display-formats to see all the different formats available"}
+     formatters
      {:basic-date (ISODateTimeFormat/basicDate)
       :basic-date-time (ISODateTimeFormat/basicDateTime)
       :basic-date-time-no-ms (ISODateTimeFormat/basicDateTimeNoMillis)
@@ -84,7 +125,9 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
       :month #(Period/months %)
       :year #(Period/years %)})
 
-(def time-keys
+(def #^{:doc "This is a vector with the keys that are expected to be
+used with time map."}
+     time-keys
      [:year :month :day :hour :minute :second :ms])
 
 (def default-time-map 
@@ -97,9 +140,11 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
       :ms 0
       :tz (.getZone (DateTime.))})
 
-;;----------------------------
-;; Define Multimethods
-;;----------------------------
+(def #^{:doc "This is a sorted set of every sting time zone represnetation avialable"
+       }available-ids (apply sorted-set (DateTimeZone/getAvailableIDs)))
+;;-------------------
+;; Time Zone Constructor
+;;-------------------
 (defmulti
   #^{
      :doc "Converts the following types to a DateTimeZone
@@ -114,11 +159,6 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
 "}
   joda-tz class)
 
-
-;;-------------------
-;; Time Zone Constructor
-;;-------------------
-(def available-ids (apply sorted-set (DateTimeZone/getAvailableIDs)))
 
 (defmethod joda-tz DateTimeZone
   [#^DateTimeZone zone]
@@ -256,7 +296,8 @@ instead."
 
 (defn time-map
   ;TO-DO: Add tz support
-  "Returns a map of time objects, without time zone."
+  "Returns a map of time objects, without time zone.  Check the constant
+time-keys to see what keys are used when creating/reading a time-map."
   [& args]
   (let [time-extractor (juxt :year 
 			     :monthOfYear 
@@ -278,10 +319,15 @@ as the input parsers as a second argument position."
        (= (count params) 1) (str-time (first params) default-format)
        true (.print (formatters (second params)) (joda-date (first params))))))
 
-(defn int-vec
+(defn time-vec
   "Turns a time into a vector of ints, in the same order as time-keys."
   [& args]
   ((apply juxt time-keys) (apply time-map args)))
+
+(def #^{:doc "Creates a string reprentation of the time.  Accpets the keyword formatting parameters
+as the input parsers as a second argument position."
+	:arglists '([] [& params])
+	}time-str str-time)
 
 ;;--------------------
 ;; String Helpers
@@ -289,7 +335,7 @@ as the input parsers as a second argument position."
 (defn display-formats
   "This fn takes a date object in, and displays it in every String format that chrono
 is aware of.  If no date is passed, it uses now.  Very useful for determining which
-parser to use."
+ISO8601 parser to use."
   ([] (display-formats (to-ms)))
   ([an-instant]
      ;Ignore the parsers that are for input only
