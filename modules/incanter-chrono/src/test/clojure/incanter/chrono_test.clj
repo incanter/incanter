@@ -4,7 +4,7 @@
 
 (def christmas (joda-date 2007 12 25, 3 00 02))
 (def new-years (joda-date 2008 1 1))
-(def day-one (joda-date 2008 11 21, 11 21 48))
+(def day-one   (joda-date 2008 11 21, 11 21 48))
 
 (deftest test-date-creation-lookup
   (are [field expected] (= expected ((time-map day-one) field))
@@ -76,27 +76,27 @@
               (date 2009 1 1))))
 
 (deftest test-start-of
-  (is (= (date 2007 12 1) (start-of christmas :month)))
+  (is (= (date 2007 12 1)  (start-of christmas :month)))
   (is (= (date 2007 12 25) (start-of christmas :day))))
 
 (deftest test-end-of
-  (is (= (date 2007 12 31 23 59 59) (end-of christmas :month)))
+  (is (= (date 2007 12 31, 23 59 59) (end-of christmas :month)))
   (is (= (date 2007 12 25, 23 59 59) (end-of christmas :day)))
-  (is (= (date 2007 12 25, 3 59 59) (end-of christmas :hour))))
+  (is (= (date 2007 12 25,  3 59 59) (end-of christmas :hour))))
 
 (deftest valid-range-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")]
+        end   (joda-date "2009-06-10T09:45:27Z")]
   (is (valid-range? [start end]))
   (is (earlier? start end))
   (is (not (valid-range? [end start])))
   (is (false? (valid-range? [start nil])))))
 
 (deftest are-overlapping-test
-  (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")
+  (let [start  (joda-date "2009-06-10T08:45:27Z")
+        end    (joda-date "2009-06-10T09:45:27Z")
         start1 (joda-date "2009-06-10T08:55:27Z")
-        end1 (joda-date "2009-06-10T09:45:27Z")]
+        end1   (joda-date "2009-06-10T09:45:27Z")]
     (is (true? 
          (are-overlapping? [start end] [start1 end1])))
     (is (true? 
@@ -107,7 +107,7 @@
         (are-overlapping? [start end] [start1 nil])))))
 
 (deftest is-within-date-range
-  (let [in (joda-date "2009-06-10T08:45:27Z")
+  (let [in  (joda-date "2009-06-10T08:45:27Z")
         out (joda-date "2009-06-10T9:27:27Z")
         s (joda-date "2009-06-10T08:27:27Z")
         e (joda-date "2009-06-10T09:27:27Z")]
@@ -140,43 +140,33 @@
 
 (deftest secs-between-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")]
-    (is (= 3600
-	   (secs-between start end)))
-    (is (= -3600
-	   (secs-between end start)))))
+        end   (joda-date "2009-06-10T09:45:27Z")]
+    (is (= 3600  (secs-between start end)))
+    (is (= -3600 (secs-between end start)))))
 
 (deftest minutes-between-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")]
-    (is (= 60
-	   (minutes-between start end)))
-    (is (= -60
-	   (minutes-between end start)))))
+        end   (joda-date "2009-06-10T09:45:27Z")]
+    (is (= 60  (minutes-between start end)))
+    (is (= -60 (minutes-between end start)))))
 
 (deftest hours-between-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")]
-    (is (= 1
-	   (hours-between start end)))
-    (is (= -1
-	   (hours-between end start)))))
+        end   (joda-date "2009-06-10T09:45:27Z")]
+    (is (= 1  (hours-between start end)))
+    (is (= -1 (hours-between end start)))))
 
 (deftest days-between-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-17T08:45:27Z")]
-    (is (= 7
-	   (days-between start end)))
-    (is (= -7
-	   (days-between end start)))))
+        end   (joda-date "2009-06-17T08:45:27Z")]
+    (is (= 7  (days-between start end)))
+    (is (= -7 (days-between end start)))))
 
 (deftest weeks-between-test
   (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-17T08:45:27Z")]
-    (is (= 1
-	   (weeks-between start end)))
-    (is (= -1
-	   (weeks-between end start)))))
+        end   (joda-date "2009-06-17T08:45:27Z")]
+    (is (= 1  (weeks-between start end)))
+    (is (= -1 (weeks-between end start)))))
 
 ;;---------------------------------------
 ;; FAIL - The tests below fail.  Problem?
@@ -188,7 +178,7 @@
 (deftest test-time-between
   ;; Seconds is the default unit
   (is (= 5 (time-between (date 2009 1 1, 10 10 10)
-                            (date 2009 1 1, 10 10 15))))
+			 (date 2009 1 1, 10 10 15))))
   (is (= 10 (time-between (date 2009 1 1, 10 10 10)
                           (date 2009 1 1, 10 20 10)
                           :minutes)))
