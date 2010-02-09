@@ -1,12 +1,11 @@
 (ns incanter.chrono-test
-  (:use clojure.contrib.test-is)
+  (:use clojure.test)
   (:use :reload-all incanter.chrono))
 
 (def christmas (joda-date 2007 12 25, 3 00 02))
 (def new-years (joda-date 2008 1 1))
 (def day-one (joda-date 2008 11 21, 11 21 48))
 
-(comment
 (deftest test-date-creation-lookup
   (are [field expected] (= expected ((time-map day-one) field))
        :year 2008
@@ -14,7 +13,7 @@
        :day 21
        :hour 11
        :minute 21
-       :second 48)))
+       :second 48))
 
 (deftest test-equality
   (is (= (date 2009 3 2)
@@ -60,15 +59,53 @@
   (is (later? (date 2008 12 31)
               (date 2009 1 1))))
 
-(comment
-(deftest test-time-between
-  ;; Seconds is the default unit
-  (is (= 5 (time-between (date 2009 1 1, 10 10 10)
-                            (date 2009 1 1, 10 10 15))))
-  (is (= 10 (time-between (date 2009 1 1, 10 10 10)
-                          (date 2009 1 1, 10 20 10)
-                          :minutes)))
-  (is (= 6 (int (time-between christmas new-years :day)))))
+(deftest test-start-of
+  (is (= (date 2007 12 1) (start-of christmas :month)))
+  (is (= (date 2007 12 25) (start-of christmas :day))))
+
+(deftest test-end-of
+  (is (= (date 2007 12 31 23 59 59) (end-of christmas :month)))
+  (is (= (date 2007 12 25, 23 59 59) (end-of christmas :day)))
+  (is (= (date 2007 12 25, 3 59 59) (end-of christmas :hour))))
+
+(deftest valid-range-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-10T09:45:27Z")]
+  (is (valid-range? [start end]))
+  (is (earlier? start end))
+  (is (not (valid-range? [end start])))
+  (is (false? (valid-range? [start nil])))))
+
+(deftest are-overlapping-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-10T09:45:27Z")
+        start1 (joda-date "2009-06-10T08:55:27Z")
+        end1 (joda-date "2009-06-10T09:45:27Z")]
+    (is (true? 
+         (are-overlapping? [start end] [start1 end1])))
+    (is (true? 
+         (are-overlapping? [start1 end1] [start end])))
+    (is (false?
+         (are-overlapping? [start end] [(joda-date "2009-06-11T08:45:27Z") (joda-date "2009-06-11T08:45:27Z")])))
+    (is (false?
+        (are-overlapping? [start end] [start1 nil])))))
+
+(deftest is-within-date-range
+  (let [in (joda-date "2009-06-10T08:45:27Z")
+        out (joda-date "2009-06-10T9:27:27Z")
+        s (joda-date "2009-06-10T08:27:27Z")
+        e (joda-date "2009-06-10T09:27:27Z")]
+    (is (= true
+           (is-within? in [s e])))
+    (is (= false
+           (is-within? out [s e])))
+    (is (thrown? java.lang.IllegalArgumentException
+                 (is-within? in [e s])))
+    ;;notice that nil seems to resovle to infinite creates unbounded ranges
+    (is (= true
+           (is-within? in [s nil])))
+    (is (= false
+           (is-within? in [e nil])))))
 
 (deftest test-date-seq
   (is (= (list christmas
@@ -85,37 +122,24 @@
     (is (= (list party party2)
            (take 2 the-seq)))))
 
+;;---------------------------------------
+;; FAIL - The tests below fail.  Problem?
+;; These fns don't exist in Sean's Design...
+;;---------------------------------------
+(comment
+(deftest test-time-between
+  ;; Seconds is the default unit
+  (is (= 5 (time-between (date 2009 1 1, 10 10 10)
+                            (date 2009 1 1, 10 10 15))))
+  (is (= 10 (time-between (date 2009 1 1, 10 10 10)
+                          (date 2009 1 1, 10 20 10)
+                          :minutes)))
+  (is (= 6 (int (time-between christmas new-years :day)))))
 
-(deftest test-start-of
-  (is (= (date 2007 12 1) (start-of christmas :month)))
-  (is (= (date 2007 12 25) (start-of christmas :day))))
-
-(deftest test-end-of
-  ;; (is (= (date 2008 1 5) (end-of new-years :week)))
-  (is (= (date 2007 12 31 23 59 59) (end-of christmas :month)))
-  (is (= (date 2007 12 25, 23 59 59) (end-of christmas :day)))
-  (is (= (date 2007 12 25, 3 59 59) (end-of christmas :hour))))
 
 (deftest test-iso-date-format
   (is (= (date 2008 12 25) (parse-date "2008-12-25 00:00:00" :iso8601)))
   (is (= "2008-11-21 11:21:48" (format-date day-one :iso8601))))
-
-(deftest is-within-date-range
-  (let [in (joda "2009-06-10T08:45:27Z")
-        out (joda "2009-06-10T9:27:27Z")
-        s (joda "2009-06-10T08:27:27Z")
-        e (joda "2009-06-10T09:27:27Z")]
-    (is (= true
-           (is-within? in [s e])))
-    (is (= false
-           (is-within? out [s e])))
-    (is (thrown? java.lang.IllegalArgumentException
-                 (is-within? in [e s])))
-    ;;notice that nil seems to resovle to infinite creates unbounded ranges
-    (is (= true
-           (is-within? in [s nil])))
-    (is (= false
-           (is-within? in [e nil])))))
 
 (deftest create-date-range-around-a-date
   (let [you (joda-date 2009 6 5 11 0 0 0 (time-zone 0))]
@@ -129,27 +153,5 @@
          (minutes-between start end)))
  (is (= -60
          (minutes-between end start)))))
-
-(deftest valid-range-test
-  (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")]
-  (is (valid-range? [start end]))
-  (is (before? start end))
-  (is (not (valid-range? [end start])))
-  (is (false? (valid-range? [start nil])))))
-
-(deftest are-overlapping-test
-  (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")
-        start1 (joda-date "2009-06-10T08:55:27Z")
-        end1 (joda-date "2009-06-10T09:45:27Z")]
-    (is (true? 
-         (are-overlapping? [start end] [start1 end1])))
-    (is (true? 
-         (are-overlapping? [start1 end1] [start end])))
-    (is (false?
-         (are-overlapping? [start end] [(joda "2009-06-11T08:45:27Z") (joda "2009-06-11T08:45:27Z")])))
-    (is (false?
-        (are-overlapping? [start end] [start1 nil])))))
 )
 ;(run-tests)

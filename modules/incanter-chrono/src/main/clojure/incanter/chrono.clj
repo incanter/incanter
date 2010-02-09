@@ -1,11 +1,11 @@
 (ns #^{:doc "
        chrono.clj --- Because calling it date-utils would be boring.
 
-Complete and total re-write, centered around to multimethods, joda-tz
+Complete and total re-write, centered around two multimethods, joda-tz
 and to-joda*.  joda-tz converts the following types to a DateTimeZone
       
       "
-       :author "Matt Moriarity, Phil Hagelberg, Bradford Cross, Sean Devlin"}
+       :author "Sean Devlin"}
   incanter.chrono
   (:import (java.util Calendar TimeZone SimpleTimeZone Date GregorianCalendar)
 	   (java.sql Timestamp)
@@ -19,7 +19,7 @@ and to-joda*.  joda-tz converts the following types to a DateTimeZone
 ;; Constants & Dispatch fn
 ;;--------------------------
 
-(def default-format :basic-date)
+(def default-format :basic-date-time-no-ms)
 
 (def formatters
      {:basic-date (ISODateTimeFormat/basicDate)
@@ -233,6 +233,7 @@ instead."
   (.getMillis (apply joda-date args)))
 
 (defn greg-cal
+  "Creates a gregorian calendar that preserves time zones"
   [& args]
   (let [j (apply joda-date args)]
     (doto (GregorianCalendar. )
@@ -245,10 +246,13 @@ instead."
   (.getTime (apply greg-cal args)))
 
 (defn to-sql
+  "Used to create a java.sql.Timestamp"
   [& args]
   (Timestamp. (apply to-ms args)))
 
-(defn time-map [& args]
+(defn time-map
+  "Returns a map of time objects, with "
+  [& args]
   (let [time-extractor (juxt :year 
 			     :monthOfYear 
 			     :dayOfMonth 
@@ -292,7 +296,6 @@ instead."
 ;;-------------------
 ;; Predicates
 ;;-------------------
-
 (defn compare-time
   "Compares 2 times a and b."
   [a b]
@@ -358,7 +361,7 @@ the end of range 1."
  secs :second)
 
 (defn period-between
-  "This find the period between start and end"
+  "This find the period between start and end, in ms."
   [start end]
   (Period. (to-ms start) (to-ms end)))
 
@@ -377,7 +380,7 @@ the end of range 1."
 ;;--------------------
 (defn start-of
   "This returns a the beginning of field for a given time
-t.  If t is not provided, now is assumed."
+t.  If t is not provided, the current system time is assumed."
   ([field] (start-of (to-ms) field))
   ([t field]
      (let [fields (take-while (complement (hash-set field)) time-keys)
