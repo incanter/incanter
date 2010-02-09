@@ -1,12 +1,11 @@
-(ns #^{:doc "
-       chrono.clj --- Because calling it date-utils would be boring.
+(ns #^{:doc "chrono.clj --- Because calling it date-utils would be boring.
 
-Complete and total re-write, centered around two multimethods, joda-tz
-and to-joda*.  See the doc string for joda-tz to learn what type of objects
-can be used to create a time zone object.
+Complete and total re-write, centered around two multimethods, joda-tz and to-joda*.
+See the doc string for joda-tz to learn what type of objects can be used to create a
+ time zone object.
 
-The to-joda* fn is designed to create a Joda DateTime object based on several
-different types of input.  It can dispatch on the following:
+The to-joda* fn is designed to create a Joda DateTime object based on several different
+types of input.  It can dispatch on the following:
 
 * java.util.Date (and subclasses)
 * java.util.Calendar (and subclasses)
