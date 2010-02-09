@@ -183,7 +183,8 @@
 ;; These fns don't exist in Sean's Design...
 ;;---------------------------------------
 (comment
-  ;;Recommend killing time between - SFD
+  ;;Recommend killing time-between, use specific *-between fns
+  ;;instead. - SFD
 (deftest test-time-between
   ;; Seconds is the default unit
   (is (= 5 (time-between (date 2009 1 1, 10 10 10)
@@ -193,12 +194,13 @@
                           :minutes)))
   (is (= 6 (int (time-between christmas new-years :day)))))
 
-  ;;Completely deprecated by advanced parsing methods - SFD
+;; Completely deprecated by advanced parsing methods. See display-formats
+;; in action to understand why. - SFD
 (deftest test-iso-date-format
   (is (= (date 2008 12 25) (parse-date "2008-12-25 00:00:00" :iso8601)))
   (is (= "2008-11-21 11:21:48" (format-date day-one :iso8601))))
 
-  ;;Killed - Could be fixed.  Should it? - SFD
+  ;;Killed - Could be fixed.  Should it? date-seq does job - SFD
 (deftest create-date-range-around-a-date
   (let [you (joda-date 2009 6 5 11 0 0 0 (time-zone 0))]
   (is (= (list (hours-from you -1) you (hours-from you 1))
