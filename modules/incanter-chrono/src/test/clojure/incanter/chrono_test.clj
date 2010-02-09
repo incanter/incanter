@@ -122,11 +122,52 @@
     (is (= (list party party2)
            (take 2 the-seq)))))
 
+(deftest secs-between-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-10T09:45:27Z")]
+    (is (= 3600
+	   (secs-between start end)))
+    (is (= -3600
+	   (secs-between end start)))))
+
+(deftest minutes-between-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-10T09:45:27Z")]
+    (is (= 60
+	   (minutes-between start end)))
+    (is (= -60
+	   (minutes-between end start)))))
+
+(deftest hours-between-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-10T09:45:27Z")]
+    (is (= 1
+	   (hours-between start end)))
+    (is (= -1
+	   (hours-between end start)))))
+
+(deftest days-between-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-17T08:45:27Z")]
+    (is (= 7
+	   (days-between start end)))
+    (is (= -7
+	   (days-between end start)))))
+
+(deftest weeks-between-test
+  (let [start (joda-date "2009-06-10T08:45:27Z")
+        end (joda-date "2009-06-17T08:45:27Z")]
+    (is (= 1
+	   (weeks-between start end)))
+    (is (= -1
+	   (weeks-between end start)))))
+
 ;;---------------------------------------
 ;; FAIL - The tests below fail.  Problem?
 ;; These fns don't exist in Sean's Design...
 ;;---------------------------------------
 (comment
+  ;;Recommend killing time between - SFD
 (deftest test-time-between
   ;; Seconds is the default unit
   (is (= 5 (time-between (date 2009 1 1, 10 10 10)
@@ -136,22 +177,15 @@
                           :minutes)))
   (is (= 6 (int (time-between christmas new-years :day)))))
 
-
+  ;;Completely deprecated by advanced parsing methods
 (deftest test-iso-date-format
   (is (= (date 2008 12 25) (parse-date "2008-12-25 00:00:00" :iso8601)))
   (is (= "2008-11-21 11:21:48" (format-date day-one :iso8601))))
 
+  ;;Killed - Could be fixed.  Should it?
 (deftest create-date-range-around-a-date
   (let [you (joda-date 2009 6 5 11 0 0 0 (time-zone 0))]
   (is (= (list (hours-from you -1) you (hours-from you 1))
          (hours-around (range -1 2) you)))))
-
-(deftest minutes-between-test
-  (let [start (joda-date "2009-06-10T08:45:27Z")
-        end (joda-date "2009-06-10T09:45:27Z")]
-  (is (= 60
-         (minutes-between start end)))
- (is (= -60
-         (minutes-between end start)))))
 )
 ;(run-tests)

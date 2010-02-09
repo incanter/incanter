@@ -365,6 +365,19 @@ the end of range 1."
   [start end]
   (Period. (to-ms start) (to-ms end)))
 
+(do-template
+ [fn-name method]
+ (defn fn-name "Returns a period between the start and end."
+   [start end]
+   (let [standard-period (method #^Period(period-between start end))
+	 field-type (.getFieldType standard-period 0)]
+     (.get standard-period field-type)))
+ secs-between .getStandardSeconds
+ minutes-between .getStandardMinutes
+ hours-between .getStandardHours
+ days-between .getStandardDays
+ weeks-between .getStandardWeeks)
+ 
 (defn later
   "This returns a date later by a-period"
   ([a-date a-period] (.plus (joda-date a-date) a-period))
