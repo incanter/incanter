@@ -455,12 +455,12 @@ in the same interval as the fn name."
 
 (defn later
   "This returns a date later by a-period"
-  ([a-date a-period] (.plus (joda-date a-date) a-period))
+  ([a-date interval] (.plus (joda-date a-date) interval))
   ([a-date n unit] (later a-date (period n unit))))
 
 (defn earlier
   "This returns a date earlier by a-period"
-  ([a-date a-period] (.minus (joda-date a-date) a-period))
+  ([a-date interval] (.minus (joda-date a-date) interval))
   ([a-date n unit] (earlier a-date (period n unit))))
 
 ;;--------------------
@@ -470,11 +470,11 @@ in the same interval as the fn name."
   "This returns a the beginning of field for a given time
 t.  If t is not provided, the current system time is assumed."
   ([field] (start-of (to-ms) field))
-  ([t field]
+  ([the-date field]
      (let [fields (take-while (complement (hash-set field)) time-keys)
 	   fields (set (drop (inc (count fields)) time-keys))
 	   start-point (into {} (filter (comp fields key) default-time-map))]
-       (joda-date (merge (time-map t) start-point)))))
+       (joda-date (merge (time-map the-date) start-point)))))
 
 (defn end-of
   "Return a time at the end of the month, year, day, etc. from the-date."
@@ -496,11 +496,11 @@ t.  If t is not provided, the current system time is assumed."
 (defn later-seq
   "Returns a lazy seq of DateTime objects that is later than time t by
  a constant period p.  A default of now is used if t is not provided."
-  ([p] (later-seq p (joda-date)))
-  ([p t] (iterate #(later % p) (joda-date t))))
+  ([interval] (later-seq interval (joda-date)))
+  ([interval start] (iterate #(later % interval) (joda-date start))))
 
 (defn earlier-seq
   "Returns a lazy seq of DateTime objects that is earlier than time t by
  a constant period p.  A default of now is used if t is not provided."
-  ([p] (earlier-seq p (joda-date)))
-  ([p t] (iterate #(earlier % p) (joda-date t))))
+  ([interval] (earlier-seq interval (joda-date)))
+  ([interval start] (iterate #(earlier % interval) (joda-date start))))
