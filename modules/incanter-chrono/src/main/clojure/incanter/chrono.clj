@@ -439,7 +439,20 @@ in the same interval as the fn name."
  hours-between .getStandardHours
  days-between .getStandardDays
  weeks-between .getStandardWeeks)
- 
+
+(defn +periods
+  "A fn to add joda period objects.  Returns a period."
+  ([] (Period.))
+  ([x] x)
+  ([x y] (.plus x y))
+  ([x y & more] (+periods x (apply +periods y more))))
+
+(defn -periods
+  "A fn to subtract joda period objects.  Returns a period."
+  ([x] (.minus (Period.) x))
+  ([x y] (.minus x y))
+  ([x y & more] (-periods x (apply +periods y more))))
+
 (defn later
   "This returns a date later by a-period"
   ([a-date a-period] (.plus (joda-date a-date) a-period))
@@ -479,3 +492,15 @@ t.  If t is not provided, the current system time is assumed."
      (lazy-seq
        (when (or (nil? to) (earlier? from to))
          (cons from (date-seq units (later from (period 1 units)) to))))))
+
+(defn later-seq
+  "Returns a lazy seq of DateTime objects that is later than time t by
+ a constant period p.  A default of now is used if t is not provided."
+  ([p] (later-seq p (joda-date)))
+  ([p t] (iterate #(later % p) (joda-date t))))
+
+(defn earlier-seq
+  "Returns a lazy seq of DateTime objects that is earlier than time t by
+ a constant period p.  A default of now is used if t is not provided."
+  ([p] (earlier-seq p (joda-date)))
+  ([p t] (iterate #(earlier % p) (joda-date t))))
