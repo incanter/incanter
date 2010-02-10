@@ -732,7 +732,7 @@
 
 
 (defn det
-" Returns the determinant of the given matrix using LU decomposition. Equivalent
+" Returns the determinant of the given matrix. Equivalent
   to R's det function.
 
   References:
@@ -2147,6 +2147,13 @@
 
     When viewing charts, a :width (default 500) and :height (default 400) 
     option can be provided.
+
+    When viewing an incanter.processing sketch, set the :exit-on-close option
+    to true (default is false) to kill the animation processes when you
+    close the window (this will also kill your REPL or Swank server), 
+    otherwise those processing will continue to run in the background.
+
+
 
     Examples:
 
