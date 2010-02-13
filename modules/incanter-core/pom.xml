@@ -5,7 +5,7 @@
   <parent>
           <groupId>org.incanter</groupId>
     <artifactId>incanter-parent</artifactId>
-    <version>1.0-master-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../incanter-parent/pom.xml</relativePath>
   </parent>
 
@@ -59,14 +59,12 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
-      <!-- <version>1.1.0</version>  -->
-      <version>1.2.0-master-SNAPSHOT</version>
+      <version>1.1.0</version> 
     </dependency>
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure-contrib</artifactId>
-      <!-- <version>1.1.0</version>  -->
-      <version>1.2.0-master-SNAPSHOT</version>
+      <version>1.1.0</version>
     </dependency>
     <dependency>
             <groupId>incanter</groupId>

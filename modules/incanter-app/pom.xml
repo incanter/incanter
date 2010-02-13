@@ -6,7 +6,7 @@
   <parent>
           <groupId>org.incanter</groupId>
     <artifactId>incanter-parent</artifactId>
-    <version>1.0-master-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../incanter-parent/pom.xml</relativePath>
   </parent>
 

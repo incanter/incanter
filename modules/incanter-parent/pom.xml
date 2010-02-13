@@ -4,7 +4,7 @@
 
   <groupId>org.incanter</groupId>
   <artifactId>incanter-parent</artifactId>
-  <version>1.0-master-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>Incanter parent</name>
@@ -75,8 +75,7 @@
   <repositories>
     <repository>
       <id>build.clojure.org</id>
-      <!-- <url>http://build.clojure.org/releases</url> -->
-      <url>http://build.clojure.org/snapshots</url>
+      <url>http://build.clojure.org/releases</url>
     </repository>
     <repository>
       <id>clojars.org</id>

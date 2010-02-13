@@ -5,7 +5,7 @@
   <parent>
           <groupId>org.incanter</groupId>
     <artifactId>incanter-parent</artifactId>
-    <version>1.0-master-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../incanter-parent/pom.xml</relativePath>
   </parent>
 
@@ -48,7 +48,7 @@
     <dependency>
             <groupId>org.incanter</groupId>
       <artifactId>incanter-chrono</artifactId>
-      <version>1.0-master-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>net.sf.opencsv</groupId>
