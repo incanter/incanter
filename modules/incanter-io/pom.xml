@@ -64,6 +64,10 @@
           <groupId>org.clojure</groupId>
           <artifactId>clojure</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.clojure</groupId>
+          <artifactId>clojure-contrib</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
