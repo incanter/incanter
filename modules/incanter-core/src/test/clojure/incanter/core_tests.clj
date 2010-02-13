@@ -42,7 +42,7 @@
   (is (= (sel dataset3 :cols :a) [1 4]))
   (is (= (sel dataset4 :cols :b) [2 5]))
   (is (= (sel dataset4 :cols "c") [3 6]))
-  (is (= (sel dataset5 :rows 1 :cols :a) [nil])))
+  (is (= (sel dataset5 :rows 1 :cols :a) nil)))
 
 
 ;; define a simple matrix for testing
