@@ -24,7 +24,7 @@
 
 (ns incanter.charts-tests
   (:use clojure.test
-        (incanter core stats charts datasets)))
+        (incanter core stats charts datasets chrono)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTS FOR incanter.charts.clj
@@ -140,6 +140,24 @@
   (.dispose cw1)
   (.dispose cw2)
   (.dispose cw3)
+  )
+
+(deftest time-series-plot-tests
+  (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0)) 
+                       .getMillis) 
+                  (range 100)))
+  (def chart1 (time-series-plot dates (range 100)))
+  (def cw1 (view chart1))
+  (add-lines chart1 dates (mult 1/2 (range 100)))
+
+  (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))
+               :y-label "number of units"
+               :x-label "years"
+               :title "Units Sold"))
+  (def cw2 (view chart2))
+  (Thread/sleep wait-timeout)
+  (.dispose cw1)
+  (.dispose cw2)
   )
 
 
