@@ -1339,15 +1339,15 @@
 			    (map #(nth (:rows data) %) rows))
           _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
           result (if (nil? row-filter) _data (filter row-filter _data))]
-      (if (= (count cols) 1)
-        (if (= (count result) 1) 
-	  (ffirst result)
-	  (mapcat identity result))
-	(dataset cols (map #(apply assoc {} (interleave cols %)) result))
-        ;; (with-meta (hash-map :column-names cols
-;;                              :rows (map #(apply assoc {} (interleave cols %)) result))
-;;                    {:type ::dataset})
-	))))
+      (cond 
+        (= (count cols) 1)
+          (if (= (count result) 1) 
+	    (ffirst result)
+	    (mapcat identity result))
+	(= (count result) 1)
+	  (first result)
+	:else
+	(dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
 
 
 (defn to-dataset
@@ -1555,7 +1555,7 @@
      ($ (range 5) :dist (get-dataset :cars))
      ($ [:not (range 5)] 0 (get-dataset :cars))
      ($ [:not 0 1 2 3 4] 0 (get-dataset :cars))
-     (with-data (get-dataset :cars) 
+     (with-data (get-dataset :cars)
        ($ 0 :dist))
 
      (with-data (get-dataset :hair-eye-color)
