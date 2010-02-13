@@ -75,8 +75,8 @@
   <repositories>
     <repository>
       <id>build.clojure.org</id>
-      <url>http://build.clojure.org/releases</url>
-      <!-- <url>http://build.clojure.org/snapshots</url> -->
+      <!-- <url>http://build.clojure.org/releases</url> -->
+      <url>http://build.clojure.org/snapshots</url>
     </repository>
     <repository>
       <id>clojars.org</id>
