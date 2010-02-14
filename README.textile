@@ -40,7 +40,7 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
-Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a <a href="http://incanter.org/downloads/incanter-1.0-SNAPSHOT.zip">pre-built version of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
+Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a> or <a href="http://incanter.org/downloads/incanter-1.0.x.zip">the 1.0 release</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
 Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@ or @bin\clj.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the clj script so that it uses an absolute path instead the ./ directory).
 
@@ -89,11 +89,11 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 *Related API documentation*
 * "Clojure API":http://richhickey.github.com/clojure/
-*"Clojure-contrib API":http://richhickey.github.com/clojure-contrib/
+* "Clojure-contrib API":http://richhickey.github.com/clojure-contrib/
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
-"Processing API":http://www.processing.org/reference/
-"Joda Time API":http://joda-time.sourceforge.net/
+* "Processing API":http://www.processing.org/reference/
+* "Joda Time API":http://joda-time.sourceforge.net/
 
 
 <a name="build"></a>
@@ -111,7 +111,7 @@ To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, 
 
 or run: @mvn clojure:repl@ , from the @modules/incanter-app@ directory
 
-or run @java -jar modules/incanter-app/target/incanter-app-1.0-master-SNAPSHOT.jar@
+or run @java -jar modules/incanter-app/target/incanter-app-*.jar@
 
 A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
 
@@ -133,7 +133,6 @@ See @lib/license.txt@ file for license terms of included libraries.
 ** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
-* "JGraph":http://www.jgraph.com/ (for future development)
 * "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
 * "JLine":http://jline.sourceforge.net/
 * "Joda Time":http://joda-time.sourceforge.net/
