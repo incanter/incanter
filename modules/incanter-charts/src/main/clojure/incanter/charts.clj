@@ -616,9 +616,31 @@
 ;;  NEW CHART FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defn- create-xy-plot
+  [main-title x-lab y-lab dataset legend? tooltips? urls?]
+  (org.jfree.chart.ChartFactory/createXYLineChart
+    main-title
+    x-lab
+    y-lab
+    dataset
+    org.jfree.chart.plot.PlotOrientation/VERTICAL
+    legend?
+    tooltips?
+    urls?))
+
+(defn- create-time-series-plot
+  [main-title x-lab y-lab dataset legend? tooltips? urls?]
+  (org.jfree.chart.ChartFactory/createTimeSeriesChart
+    main-title
+    x-lab
+    y-lab
+    dataset
+    legend?
+    tooltips?
+    urls?))
 
 (defn xy-plot*
-  ([x y & options]
+  ([x y create-plot & options]
     (let [opts (when options (apply assoc {} options))
 	  data (:data opts)
 	  _x (if (coll? x) (to-list x) ($ x data))
@@ -635,7 +657,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
 	  __x (if x-groups (first x-groups) _x)
            __y (if y-groups (first y-groups) _y)
-	  main-title (or (:title opts) "XY Plot")
+	  main-title (or (:main-title opts) "XY Plot")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts) 
@@ -647,15 +669,14 @@
 	  data-series (XYSeries. series-lab)
 	  dataset (XYSeriesCollection.)
 	  chart (do
-                    (doseq [i (range (count __x))] 
-		      (.add data-series (nth __x i)  (nth __y i)))
-                    (.addSeries dataset data-series)
-                    (org.jfree.chart.ChartFactory/createXYLineChart
+              (doseq [i (range (count __x))] 
+		        (.add data-series (nth __x i)  (nth __y i)))
+               (.addSeries dataset data-series)
+                    (create-plot
                         main-title
                         x-lab
                         y-lab
                         dataset
-                        org.jfree.chart.plot.PlotOrientation/VERTICAL
                         legend?
                         true  ; tooltips
                         false))
@@ -678,7 +699,7 @@
     :data (default nil) If the :data option is provided a dataset, 
                         column names can be used instead of sequences 
                         of data as arguments to xy-plot.
-    :title (default 'Histogram') main title
+    :title (default 'XY Plot') main title
     :x-label (default x expression)
     :y-label (default 'Frequency')
     :legend (default false) prints legend
@@ -732,7 +753,7 @@
            series-lab# (or (:series-label opts#) (if group-by#
 						   (format "%s, %s (0)" '~x '~y) 
 						   (format "%s, %s" '~x '~y)))
-	   args# (concat [~x ~y] (apply concat (seq (apply assoc opts# 
+	   args# (concat [~x ~y ~create-xy-plot] (apply concat (seq (apply assoc opts# 
 							   [:group-by group-by# 
 							    :main-title main-title# 
 							    :x-label x-lab# 
@@ -740,6 +761,59 @@
 							    :series-label series-lab#]))))]
         (apply xy-plot* args#))))
 
+(defmacro time-series-plot
+" Returns a JFreeChart object representing a time series plot of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file. Sequence passed in for the x axis should be
+  number of milliseconds from the epoch (1 Janurary 1970).
+
+  Options:
+    :data (default nil) If the :data option is provided a dataset, 
+                        column names can be used instead of sequences 
+                        of data as arguments to xy-plot.
+    :title (default 'Time Series Plot') main title
+    :x-label (default x expression)
+    :y-label (default y expression)
+    :legend (default false) prints legend
+    :series-label (default x expression)
+    :group-by (default nil) -- a vector of values used to group the x and y values into series.
+
+  See also:
+    view, save, add-points, add-lines
+
+  Examples:
+
+    (use '(incanter core stats charts chrono))
+
+    ;; plot numbers against years starting with 1900 
+    (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0)) 
+                         .getMillis) 
+                    (range 100)))
+    (def y (range 100))
+    (view (time-series-plot dates y
+                            :x-label \"Year\"))
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([x y & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "Time Series Plot")
+           x-lab# (or (:x-label opts#) (str '~x))
+           y-lab# (or (:y-label opts#) (str '~y))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s, %s (0)" '~x '~y) 
+						   (format "%s, %s" '~x '~y)))
+	   args# (concat [~x ~y ~create-time-series-plot] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply xy-plot* args#))))
 
 
 

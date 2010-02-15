@@ -142,6 +142,25 @@
   (.dispose cw3)
   )
 
+(deftest time-series-plot-tests
+  (def epoch 0)
+  (defn num-years-to-milliseconds [x]
+    (* 365 24 60 60 1000 x))
+  (def dates (map num-years-to-milliseconds (range 100)))
+  (def chart1 (time-series-plot dates (range 100)))
+  (def cw1 (view chart1))
+  (add-lines chart1 dates (mult 1/2 (range 100)))
+
+  (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))
+               :y-label "number of units"
+               :x-label "years"
+               :title "Units Sold"))
+  (def cw2 (view chart2))
+  (Thread/sleep wait-timeout)
+  (.dispose cw1)
+  (.dispose cw2)
+  )
+
 
 (deftest bar-chart-tests
   (def data (get-dataset :co2))
