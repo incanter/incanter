@@ -30,7 +30,7 @@
 ;; TESTS FOR incanter.charts.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def wait-timeout 6000)
+(def wait-timeout 3000)
 
 (def test-mat (matrix
   [[39      10 ]
