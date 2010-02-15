@@ -76,8 +76,8 @@ of a sequence of maps.
 
 Examples:
 
-   (use '(incanter core datasets mongodb)
-   (use '(somnium.congomongo))
+   (use '(incanter core datasets mongodb))
+   (use 'somnium.congomongo)
 
    ;; first load some sample data
    (def data (get-dataset :airline-passengers))
@@ -106,8 +106,8 @@ Examples:
 
    Examples:
 
-   (use '(incanter core datasets mongodb)
-   (use '(somnium.congomongo))
+   (use '(incanter core datasets mongodb))
+   (use 'somnium.congomongo)
 
    (def data (get-dataset :airline-passengers))
    (view data)

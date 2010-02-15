@@ -261,17 +261,19 @@
 (defmethod sel [incanter.Matrix false]
   ([#^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
-         cols (if (number? columns) [columns] columns)]
+         cols (if (number? columns) [columns] columns)
+	 all-rows? (or (true? rws) (= rws :all))
+	 all-cols? (or (true? cols) (= cols :all))]
     (cond
       (and (number? rows) (number? columns))
         (.getQuick mat rows columns)
-      (and (true? rws) (coll? cols))
+      (and all-rows? (coll? cols))
         (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
-      (and (coll? rws) (true? cols))
+      (and (coll? rws) all-cols?)
         (.viewSelection mat (int-array rws) (int-array (range (.columns mat))))
       (and (coll? rws) (coll? cols))
         (.viewSelection mat (int-array rws) (int-array cols))
-      (and (true? rws) (true? cols))
+      (and all-rows? all-cols?)
         mat))))
 
 
@@ -295,25 +297,27 @@
                 :else
                   true)
          row-filter (:filter opts)
-         mat (if (nil? row-filter) mat (matrix (filter row-filter mat)))]
+         mat (if (nil? row-filter) mat (matrix (filter row-filter mat)))
+	 all-rows? (or (true? rows) (= rows :all))
+	 all-cols? (or (true? cols) (= cols :all))]
      (cond
        (and (number? rows) (number? cols))
          (.getQuick mat rows cols)
-       (and (true? rows) (coll? cols))
+       (and all-rows? (coll? cols))
          (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
-       (and (true? rows) (number? cols))
+       (and all-rows? (number? cols))
          (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
        (and (coll? rows) (number? cols))
          (.viewSelection mat (int-array rows) (int-array [cols]))
-       (and (coll? rows) (true? cols))
+       (and (coll? rows) all-cols?)
          (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
-       (and (number? rows) (true? cols))
+       (and (number? rows) all-cols?)
          (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
        (and (number? rows) (coll? cols))
          (.viewSelection mat (int-array [rows]) (int-array cols))
        (and (coll? rows) (coll? cols))
          (.viewSelection mat (int-array rows) (int-array cols))
-       (and (true? rows) (true? cols))
+       (and all-rows? all-cols?)
          mat))))
 
 
@@ -1163,10 +1167,10 @@
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
         col-key (if (and
-                           (keyword? column-key) ;; if the given column name is a keyword, and
-                           (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
-                         (name column-key) ;; convert the keyword to a string
-                         column-key) ;; otherwise use the given column key
+		     (keyword? column-key) ;; if the given column name is a keyword, and
+		     (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
+		  (name column-key) ;; convert the keyword to a string
+		  column-key) ;; otherwise use the given column key
         id (if (number? col-key)
              (if (some #(= col-key %) headers)
                col-key
@@ -1285,29 +1289,65 @@
                 (for [row rows :when (pred row)] row))))))
 
 
+(defn- except-for-cols
+"
+"
+  ([data except-cols]
+     (let [colnames (:column-names data)
+	   _except-cols (if (coll? except-cols)
+			  (map #(get-column-id data %) except-cols)
+			  [(get-column-id data except-cols)])
+	   except-names  (if (some number? _except-cols)
+			   (map #(nth colnames %) _except-cols)
+			   _except-cols)]
+       (for [name colnames :when (not (some #{name} except-names))] 
+	 name))))
 
 
 (defmethod sel [::dataset true]
-  ([dataset & options]
+  ([data & options]
     (let [opts (when options (apply assoc {} options))
-          rows (or (:rows opts) true)
-          cols (if (:cols opts)
-                 (if (coll? (:cols opts))
-                   (:cols opts)
-                   [(:cols opts)])
-                 (:column-names dataset))
+	  except-rows (:except-rows opts)
+	  except-cols (:except-cols opts)
+          rows (cond
+		(:rows opts)
+		  (:rows opts) 
+		except-rows
+		  (except-for (nrow data) except-rows)
+		:else
+		  true)
+          cols (cond 
+		(:cols opts)
+                  (cond 
+		    (coll? (:cols opts))
+		      (:cols opts)
+		    (or (= :all (:cols opts)) (true? (:cols opts)))
+		      (:column-names data)
+		    :else
+		      [(:cols opts)])
+		except-cols
+		  (except-for-cols data except-cols)
+		:else
+		  (:column-names data))
           row-filter (:filter opts)
           selected-rows (cond
-                          (true? rows) (:rows dataset)
-                          (number? rows) (list (nth (:rows dataset) rows))
-                          (coll? rows) (map #(nth (:rows dataset) %) rows))
-          data (map (fn [row] (map #(row (get-column-id dataset %)) cols)) selected-rows)
-          result (if (nil? row-filter) data (filter row-filter data))]
-      (if (= (count cols) 1)
-        (mapcat identity result)
-        (with-meta (hash-map :column-names cols
-                             :rows (map #(apply assoc {} (interleave cols %)) result))
-                   {:type ::dataset})))))
+                          (or (= rows :all) (true? rows)) 
+			    (:rows data)
+                          (number? rows) 
+			    (list (nth (:rows data) rows))
+                          (coll? rows) 
+			    (map #(nth (:rows data) %) rows))
+          _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
+          result (if (nil? row-filter) _data (filter row-filter _data))]
+      (cond 
+        (= (count cols) 1)
+          (if (= (count result) 1) 
+	    (ffirst result)
+	    (mapcat identity result))
+	(= (count result) 1)
+	  (first result)
+	:else
+	(dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
 
 
 (defn to-dataset
@@ -1444,14 +1484,13 @@
 
 
 
-
 (defn $ 
 "An alias to (sel (second args) :cols (first args)). If given only a single argument,
   it will use the $data binding for the first argument, which is set with
   the with-data macro.
 
   Examples:
-    (use '(incanter core stats datasets))
+    (use '(incanter core stats charts datasets))
 
     (def cars (get-dataset :cars))
     ($ :speed cars)
@@ -1469,13 +1508,88 @@
                        (sweep (sweep ($ :speed)) :stat sd :fun div)
                        (sweep (sweep ($ :dist)) :stat sd :fun div))))
 
+    (with-data (get-dataset :iris)
+      (view $data)
+      (view ($ [:Sepal.Length :Sepal.Width :Species]))
+      (view ($ [:not :Petal.Width :Petal.Length]))
+      (view ($ 0 [:not :Petal.Width :Petal.Length])))
+
+
+     (use 'incanter.core)
+     (def mat (matrix (range 9) 3))
+     (view mat)
+     ($ 2 2 mat)
+     ($ [0 2] 2 mat)
+     ($ :all 1 mat)
+     ($ 1 mat)
+     ($ [:not 1] mat)
+     ($ 0 :all mat)
+     ($ [0 2] [0 2] mat)
+     ($ [:not 1] [:not 1] mat)
+     ($ [:not 1] :all mat)
+     ($ [0 2] [:not 1] mat)
+     ($ [0 2] [:not 1 2] mat)
+     ($ [0 2] [:not (range 2)] mat)
+     ($ [:not (range 2)] [0 2] mat)
+
+     (with-data mat 
+       ($ 0 0))
+     (with-data mat 
+       ($ [0 2] 2 mat))
+     (with-data mat 
+       ($ :all 1))
+     (with-data mat 
+       ($ [0 2] [0 2]))
+     (with-data mat 
+       ($ [:not 1] :all))
+     (with-data mat 
+       ($ [0 2] [:not 1]))
+
+
+     (use 'incanter.datasets)
+     (view (get-dataset :cars))
+     ($ (range 5) 0 (get-dataset :cars))
+     ($ (range 5) :all (get-dataset :cars))
+     ($ :all (range 2) (get-dataset :cars))
+
+     ($ (range 5) :dist (get-dataset :cars))
+     ($ [:not (range 5)] 0 (get-dataset :cars))
+     ($ [:not 0 1 2 3 4] 0 (get-dataset :cars))
+     (with-data (get-dataset :cars)
+       ($ 0 :dist))
+
+     (with-data (get-dataset :hair-eye-color)
+       (view $data)
+       (view ($ [:not :gender])))
+
+
 "
   ([cols] 
-     (sel $data :cols cols))
+     ($ :all cols $data))
   ([cols data] 
-     (if (nil? data) 
-       (sel $data :cols cols)
-       (sel data :cols cols))))
+     (cond
+       (nil? data) 
+         ($ :all cols $data)
+       (or (matrix? data) (dataset? data))
+         ($ :all cols data)
+       :else ;; data is actually a col index and cols is a row index
+         ($ cols data $data)))
+  ([rows cols data]
+     (let [except-rows? (and (vector? rows) (= :not (first rows)))
+	   except-cols? (and (vector? cols) (= :not (first cols)))
+	   _rows (if except-rows?
+		   (if (coll? (second rows))
+		     (conj [:except-rows] (second rows))
+		     (conj [:except-rows] (rest rows)))		     
+		   [:rows rows])
+	   _cols (if except-cols?
+		   (if (coll? (second cols)) 
+		     (conj [:except-cols] (second cols))
+		     (conj [:except-cols] (rest cols)))
+		   [:cols cols])
+	   args (concat _rows _cols)]
+       (apply sel data args))))
+
 
 
 (defn $where 
@@ -1507,6 +1621,8 @@
     (query-dataset $data  query-map))
   ([query-map data] 
      (query-dataset data query-map)))
+
+
 
 (defn $rollup
 "Returns a dataset that uses the given summary function (or function identifier keyword)
