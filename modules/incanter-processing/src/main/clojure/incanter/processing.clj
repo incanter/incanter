@@ -1761,7 +1761,7 @@
           title (or (:title opts) "Processing Sketch")
           width (or (:width opts) (.width (.getSize sketch)))
           height (or (:height opts) (.height (.getSize sketch)))
-	  exit-on-close? (true? (:exit-on-close opts))
+          exit-on-close? (true? (:exit-on-close opts))
           [width height] (or (:size opts)
                              [(.width (.getSize sketch))
                               (.height (.getSize sketch))])
@@ -1770,7 +1770,11 @@
       (doto frame
             (.add sketch)
             (.setDefaultCloseOperation (if exit-on-close?
-					 javax.swing.WindowConstants/EXIT_ON_CLOSE
-					 javax.swing.WindowConstants/DISPOSE_ON_CLOSE))
+                                         javax.swing.WindowConstants/EXIT_ON_CLOSE
+                                         javax.swing.WindowConstants/DO_NOTHING_ON_CLOSE))
+            (.addWindowListener (proxy [java.awt.event.WindowAdapter] []
+                                  (windowClosing [event]
+                                                 (do (.destroy sketch)
+                                                     (.dispose frame)))))
             (.setSize width height)
             (.setVisible true)))))
