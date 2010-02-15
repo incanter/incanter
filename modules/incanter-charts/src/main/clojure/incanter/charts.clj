@@ -764,7 +764,8 @@
 (defmacro time-series-plot
 " Returns a JFreeChart object representing a time series plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
-  to write it to a file.
+  to write it to a file. Sequence passed in for the x axis should be
+  number of milliseconds from the epoch (1 Janurary 1970).
 
   Options:
     :data (default nil) If the :data option is provided a dataset, 
