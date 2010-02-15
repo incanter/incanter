@@ -24,13 +24,13 @@
 
 (ns incanter.charts-tests
   (:use clojure.test
-        (incanter core stats charts datasets chrono)))
+        (incanter core stats charts datasets)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTS FOR incanter.charts.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def wait-timeout 3000)
+(def wait-timeout 6000)
 
 (def test-mat (matrix
   [[39      10 ]
@@ -143,9 +143,10 @@
   )
 
 (deftest time-series-plot-tests
-  (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0)) 
-                       .getMillis) 
-                  (range 100)))
+  (def epoch 0)
+  (defn num-years-to-milliseconds [x]
+    (* 365 24 60 60 1000 x))
+  (def dates (map num-years-to-milliseconds (range 100)))
   (def chart1 (time-series-plot dates (range 100)))
   (def cw1 (view chart1))
   (add-lines chart1 dates (mult 1/2 (range 100)))

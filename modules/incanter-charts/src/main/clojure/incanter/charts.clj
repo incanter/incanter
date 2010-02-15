@@ -616,7 +616,7 @@
 ;;  NEW CHART FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn create-xy-plot
+(defn- create-xy-plot
   [main-title x-lab y-lab dataset legend? tooltips? urls?]
   (org.jfree.chart.ChartFactory/createXYLineChart
     main-title
@@ -628,7 +628,7 @@
     tooltips?
     urls?))
 
-(defn create-time-series-plot
+(defn- create-time-series-plot
   [main-title x-lab y-lab dataset legend? tooltips? urls?]
   (org.jfree.chart.ChartFactory/createTimeSeriesChart
     main-title
@@ -657,7 +657,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
 	  __x (if x-groups (first x-groups) _x)
            __y (if y-groups (first y-groups) _y)
-	  main-title (or (:title opts) "XY Plot")
+	  main-title (or (:main-title opts) "XY Plot")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts) 
@@ -753,7 +753,7 @@
            series-lab# (or (:series-label opts#) (if group-by#
 						   (format "%s, %s (0)" '~x '~y) 
 						   (format "%s, %s" '~x '~y)))
-	   args# (concat [~x ~y create-xy-plot] (apply concat (seq (apply assoc opts# 
+	   args# (concat [~x ~y ~create-xy-plot] (apply concat (seq (apply assoc opts# 
 							   [:group-by group-by# 
 							    :main-title main-title# 
 							    :x-label x-lab# 
@@ -807,7 +807,7 @@
            series-lab# (or (:series-label opts#) (if group-by#
 						   (format "%s, %s (0)" '~x '~y) 
 						   (format "%s, %s" '~x '~y)))
-	   args# (concat [~x ~y create-time-series-plot] (apply concat (seq (apply assoc opts# 
+	   args# (concat [~x ~y ~create-time-series-plot] (apply concat (seq (apply assoc opts# 
 							   [:group-by group-by# 
 							    :main-title main-title# 
 							    :x-label x-lab# 
