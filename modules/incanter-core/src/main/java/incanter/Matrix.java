@@ -26,14 +26,17 @@ import cern.colt.matrix.tdouble.DoubleMatrix2D;
 import cern.colt.function.tdouble.DoubleDoubleFunction;
 import cern.colt.function.tdouble.DoubleFunction;
 
+import clojure.lang.IObj;
 import clojure.lang.ISeq;
 import clojure.lang.Counted;
 import clojure.lang.IPersistentCollection;
+import clojure.lang.IPersistentMap;
 import clojure.lang.Seqable;
 
-public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
+public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted, IObj {
 
         public boolean oneDimensional = false;
+        IPersistentMap meta;
 
         /**************************************
          * MATRIX CONSTRUCTORS
@@ -47,6 +50,7 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
 
         public Matrix(int nrow, int ncol, Number initValue) {
                 super(nrow, ncol);
+                this.meta = null;
                 for(int i = 0; i < nrow; i++)
                         for(int j = 0; j < ncol; j++)
                                 this.set(i, j, initValue.doubleValue());
@@ -60,6 +64,7 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
 
         public Matrix(double[] data, int ncol) {
                 super(data.length/ncol, ncol);
+                this.meta = null;
                 if(this.rows == 1 || this.columns == 1)
                         this.oneDimensional = true;
                 for(int i = 0; i < this.rows; i++)
@@ -69,8 +74,14 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
 
         public Matrix(double[][] data) {
                 super(data);
+                this.meta = null;
                 if(this.rows == 1 || this.columns == 1)
                         this.oneDimensional = true;
+        }
+
+        public Matrix(IPersistentMap meta, double[][] data) {
+                this(data);
+                this.meta = meta;
         }
 
         public Matrix(DoubleMatrix2D mat) {
@@ -80,12 +91,14 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
 
         public Matrix(int rows, int columns, double[] elements, boolean oneDimensional) {
                 super(rows, columns, elements, 0, 0, columns, 1, false);
+                this.meta = null;
                 this.oneDimensional = oneDimensional;
         }
 
 
         public Matrix(Seqable coll, int rows, int columns) {
                 super(rows, columns);
+                this.meta = null;
                 ISeq seq = coll.seq();
                 for(int i = 0; i < (rows); i++) {
                         for(int j = 0; j < (columns); j++) {
@@ -236,5 +249,16 @@ public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted {
                         buf.append("\n");
                 }
                 return(buf.toString());
+        }
+
+        /**************************************
+         * IOBJ METHODS
+        **************************************/
+        public IPersistentMap meta(){
+                return this.meta;
+        }
+
+        public Matrix withMeta(IPersistentMap meta) {
+                return new Matrix(meta, super.toArray());
         }
 }
