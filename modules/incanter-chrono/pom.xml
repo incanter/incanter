@@ -21,7 +21,7 @@
         <artifactId>clojure-maven-plugin</artifactId>
         <version>1.3</version>
         <configuration>
-          <testScript>${project.basedir}/src/test/clojure/incanter/chrono_test.clj</testScript>
+          <testScript>${project.basedir}/src/test/clojure/incanter/chrono_tests_runner.clj</testScript>
         </configuration>
         <executions>
           <execution>
@@ -32,6 +32,13 @@
             </goals>
           </execution>        
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${maven.compile.source}</source>
+          <target>${maven.compile.target}</target>
+        </configuration>
       </plugin>
     </plugins>
 
