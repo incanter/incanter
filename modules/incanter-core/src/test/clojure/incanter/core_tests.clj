@@ -415,3 +415,8 @@
 (is (= (prod [1 2 3 4 5 6]) 720)))
 
 
+(deftest test-metadata
+  (let [m (with-meta (matrix [0 1 2]) {:name "metadata test"})]
+    (is (= (meta m) {:name "metadata test"}))))
+
+
