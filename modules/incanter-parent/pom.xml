@@ -63,6 +63,13 @@
         <role>committer</role>
       </roles>
     </developer>
+     <developer>
+      <name>Sean Devlin</name>
+      <id>francoisdevlin</id>
+      <roles>
+        <role>committer</role>
+      </roles>
+    </developer>
     <developer>
       <name>Jared Strate</name>
       <id>jstrate</id>
@@ -71,6 +78,13 @@
       </roles>
     </developer>
   </developers>
+
+  <distributionManagement>
+    <repository>
+      <id>incanter-repository</id>
+      <url>ftp://repo.incanter.org/repo</url>
+    </repository>
+  </distributionManagement>
 
   <repositories>
     <repository>
