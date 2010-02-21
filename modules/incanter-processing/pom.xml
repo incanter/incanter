@@ -15,6 +15,14 @@
   <url>http://incanter.org/</url>
 
   <build>
+    <extensions>
+    <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+        <version>1.0-beta-6</version>
+      </extension>
+    </extensions>
     <plugins>
       <plugin>
         <groupId>com.theoryinpractise</groupId>
@@ -46,7 +54,7 @@
     <dependency>
             <groupId>org.incanter</groupId>
       <artifactId>incanter-core</artifactId>
-      <version>1.0-master-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
             <groupId>incanter</groupId>

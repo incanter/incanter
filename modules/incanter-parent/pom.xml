@@ -72,6 +72,12 @@
     </developer>
   </developers>
 
+    <distributionManagement>
+      <repository>
+        <id>incanter-repository</id>
+        <url>ftp://repo.incanter.org/repo</url>
+      </repository>
+    </distributionManagement>
   <repositories>
     <repository>
       <id>build.clojure.org</id>
