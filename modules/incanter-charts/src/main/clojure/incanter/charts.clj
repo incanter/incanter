@@ -783,11 +783,11 @@
 
   Examples:
 
-    (use '(incanter core stats charts chrono))
+    (use '(incanter core charts chrono))
 
     ;; plot numbers against years starting with 1900 
-    (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0)) 
-                         .getMillis) 
+    (def dates (map #(-> (joda-date (+ 1900 %) 1 1) 
+                         to-ms) 
                     (range 100)))
     (def y (range 100))
     (view (time-series-plot dates y

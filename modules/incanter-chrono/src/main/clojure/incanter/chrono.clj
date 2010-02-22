@@ -494,13 +494,15 @@ t.  If t is not provided, the current system time is assumed."
          (cons from (date-seq units (later from (period 1 units)) to))))))
 
 (defn later-seq
-  "Returns a lazy seq of DateTime objects that is later than time t by
- a constant period p.  A default of now is used if t is not provided."
+  "Returns a lazy seq of DateTime objects that is later than start by
+ a constant period, interval.  A default of now is used if start is not
+ provided."
   ([interval] (later-seq interval (joda-date)))
   ([interval start] (iterate #(later % interval) (joda-date start))))
 
 (defn earlier-seq
-  "Returns a lazy seq of DateTime objects that is earlier than time t by
- a constant period p.  A default of now is used if t is not provided."
+  "Returns a lazy seq of DateTime objects that is earlier than start by
+ a constant period, interval.  A default of now is used if start is not
+ provided."
   ([interval] (earlier-seq interval (joda-date)))
   ([interval start] (iterate #(earlier % interval) (joda-date start))))
