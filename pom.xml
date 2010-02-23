@@ -33,6 +33,7 @@
     <module>modules/incanter-charts</module>
     <module>modules/incanter-processing</module>
     <module>modules/incanter-mongodb</module>
+    <module>modules/incanter-pdf</module>
     <module>modules/incanter-full</module>
     <module>modules/incanter-app</module>
   </modules>

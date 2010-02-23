@@ -46,6 +46,11 @@
       <artifactId>incanter-mongodb</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.incanter</groupId>
+      <artifactId>incanter-pdf</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
