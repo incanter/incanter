@@ -610,6 +610,46 @@
 
 
 
+(defn set-x-range
+" Sets the range of the x-axis on the given chart.
+
+  Examples:
+    
+    (use '(incanter core charts datasets))
+
+    (def chart (xy-plot :speed :dist :data (get-dataset :cars)))
+    (view chart)
+    (set-x-range chart 10 20)
+
+"
+  ([chart lower upper]
+     (-> chart
+	 .getPlot
+	 .getDomainAxis
+	 (.setRange lower upper))
+     chart))
+
+
+(defn set-y-range
+" Sets the range of the y-axis on the given chart.
+
+  Examples:
+    
+    (use '(incanter core charts datasets))
+
+    (def chart (xy-plot :speed :dist :data (get-dataset :cars)))
+    (view chart)
+    (set-y-range chart 10 60)
+
+"
+  ([chart lower upper]
+     (-> chart
+	 .getPlot
+	 .getRangeAxis
+	 (.setRange lower upper))
+     chart))
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -783,11 +823,11 @@
 
   Examples:
 
-    (use '(incanter core charts chrono))
+    (use '(incanter core stats charts chrono))
 
     ;; plot numbers against years starting with 1900 
-    (def dates (map #(-> (joda-date (+ 1900 %) 1 1) 
-                         to-ms) 
+    (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0)) 
+                         .getMillis) 
                     (range 100)))
     (def y (range 100))
     (view (time-series-plot dates y
