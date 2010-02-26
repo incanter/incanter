@@ -158,8 +158,7 @@
   (def cw2 (view chart2))
   (Thread/sleep wait-timeout)
   (.dispose cw1)
-  (.dispose cw2)
-  )
+  (.dispose cw2))
 
 
 (deftest bar-chart-tests
@@ -183,8 +182,13 @@
   (Thread/sleep wait-timeout)
   (.dispose bw1)
   (.dispose bw2)
-  (.dispose bw3)
-  )
+  (.dispose bw3))
+
+
+(deftest pie-chart-tests
+  (def pw1 (view (pie-chart ["a" "b" "c"] [10 20 30])))
+  (Thread/sleep wait-timeout)
+  (.dispose pw1))
 
 
 (deftest line-chart-tests

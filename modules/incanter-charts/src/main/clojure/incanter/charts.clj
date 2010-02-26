@@ -46,6 +46,7 @@
             (org.jfree.data.xy XYSeries
                                XYSeriesCollection)
             (org.jfree.data.category DefaultCategoryDataset)
+	    (org.jfree.data.general DefaultPieDataset)
             (org.jfree.chart.renderer.xy XYLineAndShapeRenderer)
             (org.jfree.ui TextAnchor)
             (org.jfree.chart.annotations XYPointerAnnotation
@@ -1359,6 +1360,80 @@
 							    :series-label series-lab#]))))]
         (apply bar-chart* args#))))
 
+
+
+(defn pie-chart*
+  ([categories values & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+           main-title (or (:title opts) "Bar Chart")
+	   theme (or (:theme opts) :default)
+           legend? (true? (:legend opts))
+           dataset (DefaultPieDataset.)
+           chart (org.jfree.chart.ChartFactory/createPieChart
+                     main-title
+		     dataset
+		     legend?
+                     true
+                     false)]
+        (do
+	  (doseq [i (range 0 (count _values))] 
+	    (.setValue dataset (nth _categories i) (nth _values i)))
+	  (set-theme chart theme)
+	  chart))))
+
+
+
+(defmacro pie-chart
+" Returns a JFreeChart object representing a pie-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default 'Histogram') main title
+    :legend (default false) prints legend
+    
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (view (pie-chart [\"a\" \"b\" \"c\"] [10 20 30]))
+
+     (view (pie-chart (sample \"abcdefghij\" :size 10 :replacement true)
+                     (sample-uniform 10 :max 50) :legend true))
+
+
+     (with-data (->> (get-dataset :hair-eye-color)
+                     ($rollup :sum :count [:hair :eye]))
+       (view $data)
+       (view (pie-chart :hair :count :title \"Hair Color\"))
+       (view (pie-chart :eye :count :title \"Eye Color\")))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([categories values & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+	   main-title# (or (:title opts#) "Bar Chart")
+	   args# (concat [~categories ~values] 
+			 (apply concat (seq (apply assoc opts# 
+						   [:main-title main-title#]))))]
+        (apply pie-chart* args#))))
 
 
 
