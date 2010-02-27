@@ -220,8 +220,17 @@
   (Thread/sleep wait-timeout)
   (.dispose fw1)
   (.dispose fw2)
-  (.dispose fw3)
-  )
+  (.dispose fw3))
+
+
+(deftest heat-map-tests
+  (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
+  (def hw1 (view (heat-map f -10 10 -10 10)))
+  (def hw2 (view (heat-map f -10 10 -10 10 :color? false)))
+  (Thread/sleep wait-timeout)
+  (.dispose hw1)
+  (.dispose hw2))
+
 
 
 

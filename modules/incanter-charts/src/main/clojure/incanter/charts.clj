@@ -29,7 +29,7 @@
   incanter.charts
   ;(:gen-class)
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-by
-                              bind-columns view save $group-by conj-cols)]
+                              bind-columns view save $group-by conj-cols grid-apply)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
   (:import  (java.io File)
             (javax.imageio ImageIO)
@@ -1610,6 +1610,110 @@
 						    :series-label series-lab#]))))]
        (apply function-plot* args#))))
 
+
+
+(defn heat-map*
+  ([function x-min x-max y-min y-max & options]
+     (let [opts (when options (apply assoc {} options))
+	   color? (if (false? (:color? opts)) false true)
+	   title (or (:title opts) "Heat Map")
+	   x-label (or (:x-label opts) "x")
+	   y-label (or (:y-label opts) "y")
+	   z-label (or (:z-label opts) "z scale")
+	   xyz-dataset (org.jfree.data.xy.DefaultXYZDataset.)
+	   data (into-array (map double-array 
+				 (grid-apply function x-min x-max y-min y-max)))
+	   min-z (reduce min (last data))
+	   max-z (reduce max (last data))
+	   x-axis (doto (org.jfree.chart.axis.NumberAxis. x-label)
+		    (.setStandardTickUnits (org.jfree.chart.axis.NumberAxis/createIntegerTickUnits))
+		    (.setLowerMargin 0.0)
+		    (.setUpperMargin 0.0)
+		    (.setAxisLinePaint java.awt.Color/white)
+		    (.setTickMarkPaint java.awt.Color/white))
+	   y-axis (doto (org.jfree.chart.axis.NumberAxis. y-label)
+		    (.setStandardTickUnits (org.jfree.chart.axis.NumberAxis/createIntegerTickUnits))
+		    (.setLowerMargin 0.0)
+		    (.setUpperMargin 0.0)
+		    (.setAxisLinePaint java.awt.Color/white)
+		    (.setTickMarkPaint java.awt.Color/white))
+	   colors (or (:colors opts) 
+		      [[0 0 127] [0 0 212] [0 42 255] [0 127 255] [0 127 255] 
+		       [0 226 255] [42 255 212] [56 255 198] [255 212 0] [255 198 0]
+		       [255 169 0] [255 112 0] [255 56 0] [255 14 0] [255 42 0]
+		       [226 0 0]])
+	   scale (if color?
+		   (org.jfree.chart.renderer.LookupPaintScale. min-z max-z java.awt.Color/white)
+		   (org.jfree.chart.renderer.GrayPaintScale. min-z max-z))
+	   add-color (fn [idx color]
+		       (.add scale 
+			     (+ min-z (* (/ idx (count colors)) (- max-z min-z))) 
+			     (apply #(java.awt.Color. %1 %2 %3) color)))
+	   scale-axis (org.jfree.chart.axis.NumberAxis. z-label)
+	   legend (org.jfree.chart.title.PaintScaleLegend. scale scale-axis)
+	   renderer (org.jfree.chart.renderer.xy.XYBlockRenderer.)
+	   
+	   plot (org.jfree.chart.plot.XYPlot. xyz-dataset x-axis y-axis renderer)
+	   chart (org.jfree.chart.JFreeChart. plot)]
+       (do
+	(.setPaintScale renderer scale)
+	(when color? (doseq [i (range (count colors))]
+		       (add-color i (nth colors i))))
+	(.addSeries xyz-dataset "Series 1" data)
+	(.setBackgroundPaint plot java.awt.Color/lightGray)
+	(.setDomainGridlinesVisible plot false)
+	(.setRangeGridlinePaint plot java.awt.Color/white)
+	(.setAxisOffset plot (org.jfree.ui.RectangleInsets. 5 5 5 5))
+	(.setOutlinePaint plot java.awt.Color/blue)
+	(.removeLegend chart)
+	(.setSubdivisionCount legend 20)
+	(.setAxisLocation legend org.jfree.chart.axis.AxisLocation/BOTTOM_OR_LEFT)
+	(.setAxisOffset legend 5.0)
+	(.setMargin legend (org.jfree.ui.RectangleInsets. 5 5 5 5))
+	(.setFrame legend (org.jfree.chart.block.BlockBorder. java.awt.Color/red))
+	(.setPadding legend (org.jfree.ui.RectangleInsets. 10 10 10 10))
+	(.setStripWidth legend 10)
+	(.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
+	(.setTitle chart title)
+	(.addSubtitle chart legend)
+	(org.jfree.chart.ChartUtilities/applyCurrentTheme chart))
+       chart)))
+
+
+(defmacro heat-map
+"
+  Examples:
+    (use '(incanter core charts))
+    (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
+    (view (heat-map f -10 10 -15 15))
+    (view (heat-map f -10 10 -10 10 :color? false))
+
+    (defn f2 [x y] (plus (sq x) (sq y)))
+    (view (heat-map f2 -10 10 -10 10))
+    (view (heat-map f2 -10 10 -10 10 :color? false))
+
+    (use 'incanter.stats)
+    (defn f3 [x y] (pdf-normal (sqrt (plus (sq x) (sq y)))))
+    (view (heat-map f3 -3 3 -3 3 :x-label \"x1\" :y-label \"x2\" :z-label \"pdf\"))
+    (view (heat-map f3 -3 3 -3 3 :color? false))
+
+    (defn f4 [x y] (minus (sq x) (sq y)))
+    (view (heat-map f4 -10 10 -10 10))
+    (view (heat-map f4 -10 10 -10 10 :color? false))
+
+
+"
+  ([function x-min x-max y-min y-max & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           x-lab# (or (:x-label opts#) (format "%s < x < %s" '~x-min '~x-max))
+	   y-lab# (or (:y-label opts#) (format "%s < y < %s" '~y-min '~y-max))
+           z-lab# (or (:z-label opts#) (str '~function))
+           args# (concat [~function ~x-min ~x-max ~y-min ~y-max] 
+			 (apply concat (seq (apply assoc opts# 
+						   [:z-label z-lab#
+						    :x-label x-lab# 
+						    :y-label y-lab#]))))]
+       (apply heat-map* args#))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
