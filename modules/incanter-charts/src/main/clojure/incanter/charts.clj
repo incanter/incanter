@@ -146,7 +146,7 @@
 
 "
   ([chart x & options]
-    `(let [opts# (if '~options (assoc {} ~@options) {})
+    `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~x))
            args# (concat [~chart ~x] 
 			 (apply concat (seq (apply assoc opts# 
@@ -203,7 +203,7 @@
 
 "
   ([chart x & options]
-    `(let [opts# (if '~options (assoc {} ~@options) {})
+    `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~x))
            args# (concat [~chart ~x] (apply concat (seq (apply assoc opts# 
 							[:series-label series-lab#]))))]
@@ -367,10 +367,11 @@
 
 "
   ([chart x y & options]
-    `(let [opts# (if '~options (apply assoc {} ~@options) {})
-           series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
+    `(let [opts# ~(when options (apply assoc {} options))
+           series-lab# (or (:series-label opts#) 
+			   (format "%s, %s" '~x '~y))
 	   args# (concat [~chart ~x ~y] (apply concat (seq (apply assoc opts# 
-							   [:series-label series-lab#]))))]
+								  [:series-label series-lab#]))))]
         (apply add-lines* args#))))
 
 
@@ -434,7 +435,7 @@
 
 "
   ([chart function min-range max-range & options]
-    `(let [opts# (if '~options (assoc {} ~@options) {})
+    `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~function))
            args# (concat [~chart ~function ~min-range ~max-range] 
 			 (apply concat (seq (apply assoc opts# 
@@ -511,7 +512,7 @@
 
 "
   ([chart x y & options]
-    `(let [opts# ~(if options (apply assoc {} options) {})
+    `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
 	   args# (concat [~chart ~x ~y] (apply concat (seq (apply assoc opts# 
 							   [:series-label series-lab#]))))]
@@ -791,9 +792,10 @@
            main-title# (or (:title opts#) "XY Plot")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
-           series-lab# (or (:series-label opts#) (if group-by#
-						   (format "%s, %s (0)" '~x '~y) 
-						   (format "%s, %s" '~x '~y)))
+           series-lab# (or (:series-label opts#) 
+			   (if group-by#
+			     (format "%s, %s (0)" '~x '~y) 
+			     (format "%s, %s" '~x '~y)))
 	   args# (concat [~x ~y ~create-xy-plot] (apply concat (seq (apply assoc opts# 
 							   [:group-by group-by# 
 							    :main-title main-title# 
