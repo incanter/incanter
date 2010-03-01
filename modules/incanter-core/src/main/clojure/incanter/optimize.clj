@@ -553,7 +553,7 @@
     (view plot)
 
     ;(def df (gradient f start))
-    (def result (nls-gauss-newton f df start x y))
+    (def result (nls-gauss-newton f start x y))
 
     ;(add-lines plot x (f (:theta result) x))
     (add-lines plot x (map (partial f (:theta result)) x))
@@ -561,25 +561,28 @@
 
 
 "
-  ([f df start x y & options]
+  ([f start x y & options]
     (let [opts (when options (apply assoc {} options))
           max-iter (or (:max-iter opts) 200)
           tol (or (:tol opts) 1E-5)
           grad (gradient f start)
-          g (grad start x)]
+          ;; g
+	  ;; (grad start x)
+	  ]
       (loop [i (int 0)
              th start]
         (let [y-hat (map (partial f th) x)
               resid (minus y y-hat)
               g (grad th x)
-              update (mmult (solve (mmult (trans g) g)) (trans g) resid)
-              ]
+              update (mmult (solve (mmult (trans g) g)) (trans g) resid)]
           (if (or (< (reduce max (abs update)) tol) (= i max-iter))
             {:theta th
              :iterations i
              :gradient g
              :rss (nls-rss f th x y)}
             (recur (inc i) (map + th update))))))))
+
+
 
 
 
@@ -677,7 +680,7 @@
           max-iter (or (:max-iter opts) 200)
           nls (if (= method :newton-raphson)
                 (nls-newton-raphson f (gradient f start) (hessian f start) start x y :tol tol :max-iter max-iter)
-                (nls-gauss-newton f (gradient f start) start x y :tol tol :max-iter max-iter))
+                (nls-gauss-newton f start x y :tol tol :max-iter max-iter))
           fitted (map #(f (:theta nls) %) x)]
       {:method method
        :coefs (:theta nls)
