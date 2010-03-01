@@ -1162,6 +1162,51 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MULTINOMIAL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn sample-multinomial
+" Returns a sequence representing a sample from a multinomial distribution.
+
+  Argumenets: size -- number of values to return
+
+  Options:
+    :categories (default [0 1]) -- the values returned
+    :probs (default [0.5 0.5]) -- the probabilities associated with each category
+
+  Examples:
+    (use '(incanter core stats charts))
+
+    (sample-multinomial 10)
+    (sample-multinomial 10 :probs [0.25 0.5 0.25])
+
+    ;; estimate sample proportions
+    (def sample-size 1000.0)
+    (def data (to-dataset (sample-multinomial sample-size 
+			   	              :categories [:red :yellow :blue :green] 
+				              :probs [0.5 0.25 0.2 0.05])))
+
+    ;; check the sample proportions
+    (div (count ($ :col-0 ($where {:col-0 :red} data))) sample-size)
+    (div (count ($ :col-0 ($where {:col-0 :yellow} data))) sample-size)
+    (div (count ($ :col-0 ($where {:col-0 :blue} data))) sample-size)
+    (div (count ($ :col-0 ($where {:col-0 :green} data))) sample-size)
+
+"
+  ([size & options]
+     (let [opts (when options (apply assoc {} options))
+	   probs (or (:probs opts) [0.5 0.5])
+	   categories (or (:categories opts) (range (count probs)))
+	   cumulative-probs (cumulative-sum probs)]
+       (for [x (sample-uniform size)] 
+	 (loop [i 0]
+	   (if (< (nth cumulative-probs i) x)
+	     (recur (inc i))
+	     (nth categories i)))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; POISSON DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
