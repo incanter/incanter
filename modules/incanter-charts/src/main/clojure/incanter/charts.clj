@@ -1704,6 +1704,17 @@
     (view (heat-map f4 -10 10 -10 10 :color? false))
 
 
+    (use '(incanter core stats charts))
+    (let [points [[0 5] 
+  	          [0 10] 
+	          [15 0] 
+	          [18 10]] 
+          diffusion (fn [x y] 
+	  	      (sum (map #(pdf-normal (euclidean-distance [x y] %) :sd 2) 
+			        points)))]
+      (view (heat-map diffusion -5 20 -5 20)))
+
+
 "
   ([function x-min x-max y-min y-max & options]
     `(let [opts# ~(when options (apply assoc {} options))
