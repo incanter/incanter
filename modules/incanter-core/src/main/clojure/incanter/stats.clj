@@ -1169,11 +1169,16 @@
 (defn sample-multinomial
 " Returns a sequence representing a sample from a multinomial distribution.
 
-  Argumenets: size -- number of values to return
+  Arguments: size -- number of values to return
 
   Options:
     :categories (default [0 1]) -- the values returned
     :probs (default [0.5 0.5]) -- the probabilities associated with each category
+
+
+  References:
+    http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution
+
 
   Examples:
     (use '(incanter core stats charts))
@@ -1183,15 +1188,17 @@
 
     ;; estimate sample proportions
     (def sample-size 1000.0)
+    (def categories [:red :yellow :blue :green])
     (def data (to-dataset (sample-multinomial sample-size 
-			   	              :categories [:red :yellow :blue :green] 
+			   	              :categories categories
 				              :probs [0.5 0.25 0.2 0.05])))
 
     ;; check the sample proportions
-    (div (count ($ :col-0 ($where {:col-0 :red} data))) sample-size)
-    (div (count ($ :col-0 ($where {:col-0 :yellow} data))) sample-size)
-    (div (count ($ :col-0 ($where {:col-0 :blue} data))) sample-size)
-    (div (count ($ :col-0 ($where {:col-0 :green} data))) sample-size)
+    (view (pie-chart categories
+                     (map #(div (count ($ :col-0 ($where {:col-0 %} data))) 
+                                sample-size)
+                          categories)))
+                      
 
 "
   ([size & options]
@@ -1201,9 +1208,9 @@
 	   cumulative-probs (cumulative-sum probs)]
        (for [x (sample-uniform size)] 
 	 (loop [i 0]
-	   (if (< (nth cumulative-probs i) x)
-	     (recur (inc i))
-	     (nth categories i)))))))
+	   (if (>= (nth cumulative-probs i) x)
+	     (nth categories i)
+	     (recur (inc i))))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
