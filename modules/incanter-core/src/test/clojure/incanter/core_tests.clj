@@ -416,7 +416,25 @@
 
 
 (deftest test-metadata
-  (let [m (with-meta (matrix [0 1 2]) {:name "metadata test"})]
-    (is (= (meta m) {:name "metadata test"}))))
-
-
+  (let [md {:name "metadata test"}
+        m  (with-meta (identity-matrix 3) md)]
+    (testing "Basic Matrix metadata conformance"
+      (is (= (meta m) md))
+      (is (nil? (meta (rest m)))))
+    (testing "Matrix decomposition/mult functions"
+      (is (nil? (meta (kronecker 4 m))))
+      (is (nil? (meta (mmult m (trans m)))))
+      (is (nil? (some map? 
+                      (for [op [solve decomp-cholesky decomp-svd decomp-eigenvalue decomp-lu decomp-qr]] 
+                        (meta (-> m op)))))))
+    (testing "Matrix math ops"
+      (is (nil? (some map? 
+                      (for [op [plus minus mult div pow atan2]] 
+                        (meta (-> m #(op % %)))))))
+      (is (nil? (some map? 
+                      (for [op [sqrt sq log log2 log10 exp abs sin asin cos acos tan atan]] 
+                        (meta (-> m op)))))))
+    (testing "Known Matrix metadata holes"
+      (is (nil? (some nil? 
+                      (for [op [seq trans pow atan2]] 
+                        (meta (-> m op)))))))))
