@@ -1705,15 +1705,15 @@
 
 
     (use '(incanter core stats charts))
-    (let [points [[0 5] 
-  	          [0 10] 
-	          [15 0] 
-	          [18 10]] 
+    (let [data [[0 5 1 2] 
+  	          [0 10 1.9 1] 
+	          [15 0 0.5 1.5] 
+	          [18 10 4.5 2.1]] 
           diffusion (fn [x y] 
-	  	      (sum (map #(pdf-normal (euclidean-distance [x y] %) :sd 2) 
-			        points)))]
+	  	      (sum (map #(pdf-normal (euclidean-distance [x y] (take 2 %)) 
+                                             :mean (nth % 2) :sd (last %)) 
+			        data)))]
       (view (heat-map diffusion -5 20 -5 20)))
-
 
 "
   ([function x-min x-max y-min y-max & options]
