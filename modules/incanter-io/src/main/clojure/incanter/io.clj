@@ -164,7 +164,7 @@ incanter.io
 (defmethod save :incanter.core/dataset [dataset filename & options]
   (let [opts (when options (apply assoc {} options))
         delim (or (:delim opts) \,)
-        header (or (:header opts) (:column-names dataset))
+        header (or (:header opts) (map #(if (keyword? %) (name %) %) (:column-names dataset)))
         append? (if (true? (:append opts)) true false)
         file-writer (java.io.FileWriter. filename append?)
         rows (:rows dataset)
