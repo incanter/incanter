@@ -2273,7 +2273,7 @@
 
 
 
-(defmacro xy-slider-plot
+(defmacro dynamic-xy-plot
 " Returns an xy-plot bound to sliders (which tend to appear behind the chart). 
   See the sliders macro for more information.
 
@@ -2283,7 +2283,7 @@
   (use '(incanter core stats charts))
 
   (let [x (range -3 3 0.1)]
-    (view (xy-slider-plot [mean (range -3 3 0.1)
+    (view (dynamic-xy-plot [mean (range -3 3 0.1)
 		           sd (range 0.1 10 0.1)]
 	    [x (pdf-normal x :mean mean :sd sd)]
             :title \"Normal PDF Plot\")))
@@ -2298,7 +2298,7 @@
 	(set-y-label chart# (str '~y-expr)))))
 
 
-(defmacro scatter-slider-plot
+(defmacro dynamic-scatter-plot
 " Returns an scatter-plot bound to sliders (which tend to appear behind the chart). 
   See the sliders macro for more information.
 
@@ -2308,7 +2308,7 @@
   (use '(incanter core stats charts))
 
   (let [x (range -3 3 0.1)]
-    (view (scatter-slider-plot [mean (range -3 3 0.1)
+    (view (dynamic-scatter-plot [mean (range -3 3 0.1)
 		                sd (range 0.1 10 0.1)]
 	    [x (pdf-normal x :mean mean :sd sd)]
             :title \"Normal PDF Plot\")))
