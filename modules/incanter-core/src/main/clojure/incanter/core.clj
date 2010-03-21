@@ -1219,12 +1219,13 @@
 "
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
-          nin-fn (complement in-fn)
-          ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
-	       :in in-fn :nin nin-fn :fn (fn [v f] (f v))
-	       :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
-	       :$in in-fn :$nin nin-fn :$fn (fn [v f] (f v))}
-          _and (fn [a b] (and a b))] 
+	 nin-fn (complement in-fn)
+	 ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
+	      :in in-fn :nin nin-fn :fn (fn [v f] (f v))
+	      :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+	      :$in in-fn :$nin nin-fn  
+	      :$fn (fn [v f] (f v))}
+	 _and (fn [a b] (and a b))] 
      (fn [row] 
        (reduce _and
                (for [k (keys query-map)]
