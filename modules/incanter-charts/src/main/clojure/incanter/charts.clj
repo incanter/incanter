@@ -2284,18 +2284,24 @@
 
   (let [x (range -3 3 0.1)]
     (view (dynamic-xy-plot [mean (range -3 3 0.1)
-		           sd (range 0.1 10 0.1)]
+		            sd (range 0.1 10 0.1)]
 	    [x (pdf-normal x :mean mean :sd sd)]
             :title \"Normal PDF Plot\")))
 
+   (let [x (range -3 3 0.1)]
+     (view (dynamic-xy-plot [mean (range -3 3 0.1)
+		             sd (range 0.1 10 0.1)]
+	    (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
+            :title \"Normal PDF Plot\")))
+
 "
-  ([[& slider-bindings] [x-expr y-expr] & options]
+  ([[& slider-bindings] expression & options]
      `(let [chart# (xy-plot [] [] ~@options)
 	    sliders# (sliders ~(vec slider-bindings)
-			      (set-data chart# [~x-expr ~y-expr]))]
+			      (set-data chart# ~expression))]
 	(doall sliders#)
-	(set-x-label chart# (str '~x-expr))
-	(set-y-label chart# (str '~y-expr)))))
+	(set-x-label chart# (str '~(first expression)))
+	(set-y-label chart# (str '~(second expression))))))
 
 
 (defmacro dynamic-scatter-plot
@@ -2309,18 +2315,25 @@
 
   (let [x (range -3 3 0.1)]
     (view (dynamic-scatter-plot [mean (range -3 3 0.1)
-		                sd (range 0.1 10 0.1)]
+		                 sd (range 0.1 10 0.1)]
 	    [x (pdf-normal x :mean mean :sd sd)]
             :title \"Normal PDF Plot\")))
 
+
+   (let [x (range -3 3 0.1)]
+     (view (dynamic-scatter-plot [mean (range -3 3 0.1)
+		                  sd (range 0.1 10 0.1)]
+	    (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
+            :title \"Normal PDF Plot\")))
+
 "
-  ([[& slider-bindings] [x-expr y-expr] & options]
+  ([[& slider-bindings] expression & options]
      `(let [chart# (scatter-plot [] [] ~@options)
 	    sliders# (sliders ~(vec slider-bindings)
-			      (set-data chart# [~x-expr ~y-expr]))]
+			      (set-data chart# ~expression))]
 	(doall sliders#)
-	(set-x-label chart# (str '~x-expr))
-	(set-y-label chart# (str '~y-expr)))))
+	(set-x-label chart# (str '~(first expression)))
+	(set-y-label chart# (str '~(second expression))))))
 
 
 
