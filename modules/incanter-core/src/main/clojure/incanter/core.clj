@@ -2294,7 +2294,7 @@
       (view (to-matrix (get-dataset :iris) :dummies true))
 
       ;; view a chart
-      (view (histogram (sample-normal 1000)))
+      (view (histogram (sample-normal 1000)) :width 700 :height 700)
 
       ;; view a URL
       (view \"http://incanter.org\")
@@ -2362,6 +2362,14 @@
 
 
 
+(defmethod view javax.swing.JTable
+  ([obj & options]
+     (doto (javax.swing.JFrame. "Incanter Dataset")
+       (.add (javax.swing.JScrollPane. obj))
+       (.setSize 500 600)
+       (.setVisible true))))
+
+
 
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
 (defmethod view String
@@ -2372,6 +2380,57 @@
             (.browse (java.net.URI. url)))
         url)
       (catch ClassNotFoundException e nil))))
+
+
+
+
+(defn data-table
+"Creates a javax.swing.JTable given an Incanter dataset."
+  ([data]
+   (let [col-names (:column-names data)
+         column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
+	 table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
+							   (java.util.Vector. col-names))]
+     
+     (javax.swing.JTable. table-model))))
+
+
+
+(defmulti set-data
+  "
+
+  Examples:
+
+    (use '(incanter core charts datasets))
+
+    (def data (get-dataset :iris))
+    (def table (data-table data))
+    (view table)
+    ;; now view only a subset of the data
+    (set-data table ($where {:Petal.Length {:gt 6}} data))
+
+
+    ;; use sliders to dynamically select the query values
+    (let [data (get-dataset :iris)
+          table (data-table data)]
+      (view table)
+      (sliders [species [\"setosa\" \"virginica\" \"versicolor\"]
+	        min-petal-length (range 0 8 0.1)]
+        (set-data table ($where {:Species species 
+                                 :Petal.Length {:gt min-petal-length}} 
+                                data))))
+
+"
+  (fn [obj data] (type obj)))
+
+
+(defmethod set-data javax.swing.JTable
+([table data] 
+   (let [col-names (:column-names data)
+	 column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
+	 table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
+							   (java.util.Vector. col-names))] 
+     (.setModel table table-model))))
 
 
 

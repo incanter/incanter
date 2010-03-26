@@ -29,7 +29,8 @@
   incanter.charts
   ;(:gen-class)
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-by
-                              bind-columns view save $group-by conj-cols grid-apply)]
+                              bind-columns view save $group-by conj-cols 
+			      grid-apply set-data)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
   (:import  (java.io File)
             (javax.imageio ImageIO)
@@ -2113,8 +2114,9 @@
 		     (.getDataset series-idx) 
 		     .getSeries)))))
 
-(defn set-data 
-"set-data"
+
+
+(defmethod set-data org.jfree.chart.JFreeChart
   ([chart data]
      (set-data chart data 0))
   ([chart data series-idx]
