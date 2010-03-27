@@ -50,9 +50,9 @@
            (java.util Vector)))
 
 
-(def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
-             functions like $ and $where can use $data as a default argument."} 
-     $data)
+ (def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
+              functions like $ and $where can use $data as a default argument."} 
+      $data)
 
 
 (defn matrix
@@ -2397,7 +2397,7 @@
 
 
 (defmulti set-data
-  "
+"
 
   Examples:
 
@@ -2421,7 +2421,7 @@
                                 data))))
 
 "
-  (fn [obj data] (type obj)))
+  (fn [obj & more] (type obj)))
 
 
 (defmethod set-data javax.swing.JTable
