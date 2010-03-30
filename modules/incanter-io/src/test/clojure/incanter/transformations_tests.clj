@@ -1,18 +1,20 @@
 (ns incanter.transformations-tests
   (:use clojure.contrib.test-is)
-  (:use incanter.chrono)
+;  (:use incanter.chrono)
   (:use incanter.transformations))
+
+
 
 (deftest sort-seq-of-maps-by-key
   (is (= '({:a 1} {:a 5})
 	 (sort-maps-by :a [{:a 5} {:a 1}]))))
 
-(deftest sort-seq-maps-by-date
-  (let [d1 (joda-date 2009 9 12 20 1 1 1 (time-zone 1))
-	d2 (joda-date 2009 9 12 20 2 1 1 (time-zone 1))
-	d3 (joda-date 2009 9 12 20 3 1 1 (time-zone 1))]
-  (is (= [{:a d1} {:a d2} {:a d3}]
-	 (sort-maps-by :a [{:a d2} {:a d3} {:a d1}])))))
+;(deftest sort-seq-maps-by-date
+;  (let [d1 (joda-date 2009 9 12 20 1 1 1 (time-zone 1))
+;	d2 (joda-date 2009 9 12 20 2 1 1 (time-zone 1))
+;	d3 (joda-date 2009 9 12 20 3 1 1 (time-zone 1))]
+;  (is (= [{:a d1} {:a d2} {:a d3}]
+;	 (sort-maps-by :a [{:a d2} {:a d3} {:a d1}])))))
 
 (deftest compare-heterogenious-keys
   (is (= 1
@@ -59,3 +61,5 @@
 (deftest flatten-map-test
   (is (= {":a:b:c" 1}
 	 (flatten-with str {:a {:b {:c 1}}}))))
+
+

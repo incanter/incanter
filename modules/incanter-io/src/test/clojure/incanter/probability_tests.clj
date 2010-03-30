@@ -2,7 +2,7 @@
   (:use clojure.contrib.test-is)
   (:use incanter.classification)
   (:use incanter.transformations)
-  (:use incanter.chrono)
+;  (:use incanter.chrono)
   (:use incanter.internal)
   (:use incanter.probability))
 

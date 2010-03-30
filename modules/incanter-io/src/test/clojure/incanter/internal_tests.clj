@@ -2,7 +2,7 @@
   (:use incanter.internal)
   (:use clojure.contrib.monads)
   (:use incanter.probability)
-  (:use incanter.chrono)
+  ;(:use incanter.chrono)
   (:use clojure.contrib.test-is))
 
 (deftest maybe-predicates
@@ -78,6 +78,6 @@
   (is (= [{1 {1 1}} {1 1}]
 	 ((P (present-when (tree-comp > :a 5)) | (present-when (tree-comp < :b 10))) {:a 6 :b 6}))))
 
-(deftest tree-comp-edge-case
-  (is (=
-       ((tree-comp #(not (nil? %)) :foo) {:foo (joda-date 1 1 1 2 0 0 0 (time-zone 0))}))))
+;(deftest tree-comp-edge-case
+  ;(is (=
+       ;((tree-comp #(not (nil? %)) :foo) {:foo (joda-date 1 1 1 2 0 0 0 (time-zone 0))}))))

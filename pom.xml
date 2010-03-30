@@ -28,7 +28,7 @@
   <modules>
     <module>modules/incanter-parent</module>
     <module>modules/incanter-core</module>
-    <module>modules/incanter-chrono</module>
+    <!-- <module>modules/incanter-chrono</module> -->
     <module>modules/incanter-io</module>
     <module>modules/incanter-charts</module>
     <module>modules/incanter-processing</module>

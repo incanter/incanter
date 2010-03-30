@@ -1,6 +1,6 @@
 (ns incanter.io-tests-runner
-  (:use [clojure.contrib.test-is :only (run-tests)])
-  (:gen-class))
+  (:use [clojure.contrib.test-is :only (run-tests)]))
+  
 
 (def test-names [:io-tests
                  :transformations-tests

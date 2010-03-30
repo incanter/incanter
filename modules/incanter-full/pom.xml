@@ -26,11 +26,13 @@
       <artifactId>incanter-io</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <!--
     <dependency>
       <groupId>org.incanter</groupId>
       <artifactId>incanter-chrono</artifactId>
       <version>${project.version}</version>
     </dependency>
+    -->
     <dependency>
       <groupId>org.incanter</groupId>
       <artifactId>incanter-processing</artifactId>

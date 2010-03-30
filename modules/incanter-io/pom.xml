@@ -56,9 +56,16 @@
   <dependencies>
     <dependency>
             <groupId>org.incanter</groupId>
+      <artifactId>incanter-core</artifactId>
+      <version>1.2.0-SNAPSHOT</version>
+    </dependency>
+          <!--
+    <dependency>
+            <groupId>org.incanter</groupId>
       <artifactId>incanter-chrono</artifactId>
       <version>1.2.0-SNAPSHOT</version>
     </dependency>
+    -->
     <dependency>
       <groupId>net.sf.opencsv</groupId>
       <artifactId>opencsv</artifactId>

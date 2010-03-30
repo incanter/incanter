@@ -63,7 +63,7 @@ incanter.io
   (:use [org.danlarkin.json 
 	 :only [decode-from-reader decode-from-str encode-to-str]])
   (:use [clojure.contrib.duck-streams :only [reader read-lines spit]])
-  (:use [incanter.chrono :only [joda-date]])
+  ;(:use [incanter.chrono :only [joda-date]])
   (:use [clojure.contrib.pprint :only [pprint]])
   (:use [incanter.classification :only [model-from-maps]])
   (:use [incanter.transformations :only [sort-map-of-maps all-keys]])
@@ -189,9 +189,9 @@ incanter.io
 [& keys] 
   (into {} (for [k keys] [k (comp eval read-string)]))) 
 
-(defn string-date-read-map 
-[& keys] 
-  (into {} (for [k keys] [k joda-date]))) 
+;(defn string-date-read-map 
+;[& keys] 
+  ;(into {} (for [k keys] [k joda-date]))) 
 
 (defn read-json-file 
 ""
