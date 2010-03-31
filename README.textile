@@ -40,9 +40,9 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
-Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a> or <a href="http://incanter.org/downloads/incanter-1.0.x.zip">the 1.0 release</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
+Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
-Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. 
+Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
 
 NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein deps@ to download the necessary dependencies before using @script/repl@ or @script/swank@ (or @script\repl.bat@, @script\swank.bat@).
 
@@ -112,16 +112,18 @@ To build and test Incanter, you will need to have <a href="http://github.com/tec
 
 <a name="depends"></a>
 
-h2. Included dependencies
+h2. Incanter dependencies
 
 * "Clojure":http://code.google.com/p/clojure/
+* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
 * "Parallel Colt":http://sites.google.com/site/piotrwendykier/software/parallelcolt
 ** "Netlib-Java":http://code.google.com/p/netlib-java/ (included with Parallel Colt)
 * "JFreeChart":http://www.jfree.org/jfreechart/
 ** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
-* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
+* "iText":http://itextpdf.com/
+* "Congomongo":http://github.com/somnium/congomongo
+* "Clojure-json":http://github.com/danlarkin/clojure-json
 * "JLine":http://jline.sourceforge.net/
-* "Joda Time":http://joda-time.sourceforge.net/
 
