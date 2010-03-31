@@ -70,7 +70,7 @@ The online documentation for most Incanter functions contain usage examples. The
 ** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
 ** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
 * See the @examples/@ directory for additional usage examples.
-**  @script/repl examples/run_prob_plots.clj@ to generate example probability distribution plots
+**  @script/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
 
 
 
