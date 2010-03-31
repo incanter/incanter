@@ -42,15 +42,12 @@ h2. Getting started with Incanter
 
 Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a> or <a href="http://incanter.org/downloads/incanter-1.0.x.zip">the 1.0 release</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
-Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the repl script so that it uses an absolute path instead the ./ directory).
+Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. 
 
-You can also start Incanter directly with the following command:
-@java -jar modules/incanter-app/target/incanter-app-*.jar@
-This will start a Clojure REPL, but will not have command history like the repl scripts. If you want to use the built-in data sets, you'll also need to set the incanter.home property as follows:
-@java -Dincanter.home=/path/to/incanter/dir -jar modules/incanter-app/target/incanter-app-*.jar@
+NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein/deps@ to download the necessary dependencies before using @script/repl@ (@repl.bat@) or @script/swank@ (@swank.bat@).
 
-
-From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats charts))</code></pre>
+From the Clojure shell, load the Incanter libraries: 
+<pre><code>user=> (use '(incanter core stats charts))</code></pre>
 
 Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: <pre><code>(view (histogram (sample-normal 1000)))</code></pre>
 <img src="http://incanter.org/images/examples/normal_hist.png" />
@@ -100,31 +97,21 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 h2. Building Incanter
 
-To build and test Incanter, you will need to have <a href="http://maven.apache.org/">Maven</a> and <a href="http://git-scm.com/">git</a> installed:
+To build and test Incanter, you will need to have <a href="http://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
 
 * First, clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
 * cd into the incanter directory
-* use Maven to build, test, and install Incanter: @mvn install@
-* to build Incanter without running tests or installing jars in the Maven repository, run: @mvn package -Dmaven.test.skip=true@
-
-To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @script/repl@ (or on Windows @script\repl.bat@)
-
-or run: @mvn clojure:repl@ , from the @modules/incanter-app@ directory
-
-or run @java -jar modules/incanter-app/target/incanter-app-*.jar@
-
-A Swank server can be started with the @script/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
-
-
-(Note: the @script/repl@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
+* use Leiningen to download the necessary dependencies: @lein deps@
+* You can now use the @script/repl@ and @script/swank@ scripts (or on Windows @repl.bat@ and @swank.bat@) to start a REPL and Swank server respectively.
+* If you want to run the tests for each of Incanter's modules, use @script/test@ 
+* Each of Incanter's modules are independent Leiningen projects, just cd into modules/incanter-* and use Leiningen to build each one as a standalone library.
+* The @script/install@ script will use Leiningen to build and install each modules in your local ~/.m2 repository.
 
 
 
 <a name="depends"></a>
 
 h2. Included dependencies
-
-See @lib/license.txt@ file for license terms of included libraries.
 
 * "Clojure":http://code.google.com/p/clojure/
 * "Parallel Colt":http://sites.google.com/site/piotrwendykier/software/parallelcolt
