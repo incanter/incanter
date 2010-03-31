@@ -1,0 +1,13 @@
+<body>
+    ....
+    <script src="http://www.java.com/js/deployJava.js"></script>
+    <script>
+        // using JavaScript to get location of JNLP file relative to HTML page
+        var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
+        var url = dir + "incanter.jnlp";
+        deployJava.createWebStartLaunchButton(url, '1.6.0');
+    </script>
+    Incanter Web Start Application
+
+<a href="file:///Users/dliebke/Desktop/dev/incanter/examples/blog/projects/repl/incanter.jnlp">Incanter Application</a>
+</body>
