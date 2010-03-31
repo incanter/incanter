@@ -3,6 +3,6 @@
 build
 target
 lib
-incanter.jar
-/pom.old
+classes
+*.jar
 *.log

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+cd ./modules/incanter-core
+lein test
+
+cd ../incanter-io
+lein test
+
+cd ../incanter-charts
+lein test
+
+cd ../incanter-processing
+lein test
+
+#cd ../incanter-mongodb
+#lein test
+
+#cd ../incanter-pdf
+#lein test
+
+

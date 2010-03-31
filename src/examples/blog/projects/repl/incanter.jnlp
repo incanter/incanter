@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="" href="">
+    <information>
+        <title>Incanter Demo</title>
+        <vendor>incanter.org</vendor>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.6+"
+              href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="file:///Users/dliebke/Desktop/dev/incanter/examples/blog/projects/repl/SignedIncanter.jar" main="true" />
+
+    </resources>
+    <application-desc
+         name="Incanter Demo Application"
+         main-class="gui.repl"
+         width="300"
+         height="300">
+     </application-desc>
+     <update check="background"/>
+</jnlp>	

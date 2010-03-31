@@ -42,11 +42,11 @@ h2. Getting started with Incanter
 
 Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a> or <a href="http://incanter.org/downloads/incanter-1.0.x.zip">the 1.0 release</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
-Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@ or @bin\clj.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the clj script so that it uses an absolute path instead the ./ directory).
+Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script/repl.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the repl script so that it uses an absolute path instead the ./ directory).
 
 You can also start Incanter directly with the following command:
 @java -jar modules/incanter-app/target/incanter-app-*.jar@
-This will start a Clojure REPL, but will not have command history like the clj scripts. If you want to use the built-in data sets, you'll also need to set the incanter.home property as follows:
+This will start a Clojure REPL, but will not have command history like the repl scripts. If you want to use the built-in data sets, you'll also need to set the incanter.home property as follows:
 @java -Dincanter.home=/path/to/incanter/dir -jar modules/incanter-app/target/incanter-app-*.jar@
 
 
@@ -72,7 +72,7 @@ The online documentation for most Incanter functions contain usage examples. The
 ** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
 ** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
 * See the @examples/@ directory for additional usage examples.
-**  @bin/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
+**  @script/repl examples/run_prob_plots.clj@ to generate example probability distribution plots
 
 
 
@@ -107,16 +107,16 @@ To build and test Incanter, you will need to have <a href="http://maven.apache.o
 * use Maven to build, test, and install Incanter: @mvn install@
 * to build Incanter without running tests or installing jars in the Maven repository, run: @mvn package -Dmaven.test.skip=true@
 
-To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@ (or on Windows @bin/clj.bat@)
+To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @script/repl@ (or on Windows @script/repl.bat@)
 
 or run: @mvn clojure:repl@ , from the @modules/incanter-app@ directory
 
 or run @java -jar modules/incanter-app/target/incanter-app-*.jar@
 
-A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
+A Swank server can be started with the @script/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
 
 
-(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
+(Note: the @script/repl@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
 
 
 
