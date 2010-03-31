@@ -44,16 +44,17 @@ Start by visiting the <a href="http://incanter.org">Incanter website</a> for an 
 
 Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. 
 
-NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein/deps@ to download the necessary dependencies before using @script/repl@ (@repl.bat@) or @script/swank@ (@swank.bat@).
+NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein deps@ to download the necessary dependencies before using @script/repl@ or @script/swank@ (or @script\repl.bat@, @script\swank.bat@).
 
 From the Clojure shell, load the Incanter libraries: 
 <pre><code>user=> (use '(incanter core stats charts))</code></pre>
 
-Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: <pre><code>(view (histogram (sample-normal 1000)))</code></pre>
+Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: 
+<pre><code>user=> (view (histogram (sample-normal 1000)))</code></pre>
 <img src="http://incanter.org/images/examples/normal_hist.png" />
 
 Try another simple example, a plot of the sine function over the range -4 to 4:
-<pre><code>(view (function-plot sin -4 4))</code></pre>
+<pre><code>user=> (view (function-plot sin -4 4))</code></pre>
 <img src="http://incanter.org/images/examples/sin-plot.png" />
 
 
