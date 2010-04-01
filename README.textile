@@ -12,7 +12,7 @@
 
 h2. Overview and motivation
 
-_Incanter is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._  At the core of Incanter are the <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">Parallel Colt</a> numerics library, a multithreaded version of <a href="http://acs.lbl.gov/~hoschek/colt/">Colt</a>, and the <a href="http://www.jfree.org/jfreechart/">JFreeChart</a> charting library, as well as several other Java and Clojure libraries.
+<a href="http://incanter.org">_Incanter</a> is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._  At the core of Incanter are the <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">Parallel Colt</a> numerics library, a multithreaded version of <a href="http://acs.lbl.gov/~hoschek/colt/">Colt</a>, and the <a href="http://www.jfree.org/jfreechart/">JFreeChart</a> charting library, as well as several other Java and Clojure libraries.
 
 The motivation for creating Incanter is to provide a JVM-based statistical computing and graphics platform with R-like semantics and interactive-programming environment. Running on the JVM provides access to the large number of existing Java libraries for data access, data processing, and presentation.  Clojure’s seamless integration with Java makes leveraging these libraries much simpler than is possible in R, and Incanter’s R-like semantics makes statistical programming much simpler than is possible in pure Java.
 
@@ -40,23 +40,21 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
-Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a <a href="http://incanter.org/downloads/incanter-1.0-SNAPSHOT.zip">pre-built version of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
+Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
-Start the Clojure shell (aka the REPL) from the Incanter directory: @bin/clj@ or @bin\clj.bat@ on Windows (note: if you want to start the Clojure REPL from a directory other than the top level Incanter directory, change the INCANTER_HOME variable in the clj script so that it uses an absolute path instead the ./ directory).
+Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
 
-You can also start Incanter directly with the following command:
-@java -jar modules/incanter-app/target/incanter-app-*.jar@
-This will start a Clojure REPL, but will not have command history like the clj scripts. If you want to use the built-in data sets, you'll also need to set the incanter.home property as follows:
-@java -Dincanter.home=/path/to/incanter/dir -jar modules/incanter-app/target/incanter-app-*.jar@
+NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein deps@ to download the necessary dependencies before using @script/repl@ or @script/swank@ (or @script\repl.bat@, @script\swank.bat@).
 
+From the Clojure shell, load the Incanter libraries: 
+<pre><code>user=> (use '(incanter core stats charts))</code></pre>
 
-From the Clojure shell, load the Incanter libraries: <pre><code>(use '(incanter core stats charts))</code></pre>
-
-Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: <pre><code>(view (histogram (sample-normal 1000)))</code></pre>
+Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: 
+<pre><code>user=> (view (histogram (sample-normal 1000)))</code></pre>
 <img src="http://incanter.org/images/examples/normal_hist.png" />
 
 Try another simple example, a plot of the sine function over the range -4 to 4:
-<pre><code>(view (function-plot sin -4 4))</code></pre>
+<pre><code>user=> (view (function-plot sin -4 4))</code></pre>
 <img src="http://incanter.org/images/examples/sin-plot.png" />
 
 
@@ -72,7 +70,7 @@ The online documentation for most Incanter functions contain usage examples. The
 ** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
 ** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
 * See the @examples/@ directory for additional usage examples.
-**  @bin/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
+**  @script/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
 
 
 
@@ -89,52 +87,42 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 *Related API documentation*
 * "Clojure API":http://richhickey.github.com/clojure/
-*"Clojure-contrib API":http://richhickey.github.com/clojure-contrib/
+* "Clojure-contrib API":http://richhickey.github.com/clojure-contrib/
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
-"Processing API":http://www.processing.org/reference/
-"Joda Time API":http://joda-time.sourceforge.net/
+* "Processing API":http://www.processing.org/reference/
 
 
 <a name="build"></a>
 
 h2. Building Incanter
 
-To build and test Incanter, you will need to have <a href="http://maven.apache.org/">Maven</a> and <a href="http://git-scm.com/">git</a> installed:
+To build and test Incanter, you will need to have <a href="http://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
 
 * First, clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
 * cd into the incanter directory
-* use Maven to build, test, and install Incanter: @mvn install@
-* to build Incanter without running tests or installing jars in the Maven repository, run: @mvn package -Dmaven.test.skip=true@
-
-To start up a Clojure REPL with Incanter and its dependencies in the CLASSPATH, run: @bin/clj@ (or on Windows @bin/clj.bat@)
-
-or run: @mvn clojure:repl@ , from the @modules/incanter-app@ directory
-
-or run @java -jar modules/incanter-app/target/incanter-app-1.0-master-SNAPSHOT.jar@
-
-A Swank server can be started with the @bin/swank@ script or by running @mvn clojure:swank@, from the @modules/incanter-app@ directory, which can be connected to with @M-x slime-connect@ within Emacs.
-
-
-(Note: the @bin/clj@ and @*.clj@ scripts won't run on Windows systems as is. Although, the Clojure code contained in the @*.clj@ scripts can be run from the Clojure shell.)
+* use Leiningen to download the necessary dependencies: @lein deps@
+* You can now use the @script/repl@ and @script/swank@ scripts (or on Windows @repl.bat@ and @swank.bat@) to start a REPL and Swank server respectively.
+* If you want to run the tests for each of Incanter's modules, use @script/test@ 
+* Each of Incanter's modules are independent Leiningen projects. Just cd into modules/incanter-* and use Leiningen to build each one as a standalone library.
+* @script/install@ uses Leiningen to build all the modules and install them in your local ~/.m2 repository.
 
 
 
 <a name="depends"></a>
 
-h2. Included dependencies
-
-See @lib/license.txt@ file for license terms of included libraries.
+h2. Incanter dependencies
 
 * "Clojure":http://code.google.com/p/clojure/
+* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
 * "Parallel Colt":http://sites.google.com/site/piotrwendykier/software/parallelcolt
 ** "Netlib-Java":http://code.google.com/p/netlib-java/ (included with Parallel Colt)
 * "JFreeChart":http://www.jfree.org/jfreechart/
 ** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
-* "JGraph":http://www.jgraph.com/ (for future development)
-* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
+* "iText":http://itextpdf.com/
+* "Congomongo":http://github.com/somnium/congomongo
+* "Clojure-json":http://github.com/danlarkin/clojure-json
 * "JLine":http://jline.sourceforge.net/
-* "Joda Time":http://joda-time.sourceforge.net/
 

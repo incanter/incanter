@@ -1,0 +1,4 @@
+#!/bin/sh
+export LABREPL_SWANK="(require 'swank.swank) (swank.swank/start-repl 4005)"
+script/repl
+

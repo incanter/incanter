@@ -3,7 +3,7 @@
 ;; http://incanter-blog.org/2009/11/29/incanter-webapp/
 
 
-(ns simple-web-app
+(ns simple_web_app
   (:gen-class)
   (:use [compojure]
         [compojure.http response]
