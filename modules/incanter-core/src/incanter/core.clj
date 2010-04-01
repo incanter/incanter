@@ -817,7 +817,9 @@
 (defn prod
   "Returns the product of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+    (let [xx (if (or (nil? x) (empty? x)) 
+	       [1] 
+	       (to-list x))]
       (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
 
 

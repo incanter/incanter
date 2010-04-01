@@ -12,7 +12,7 @@
 
 h2. Overview and motivation
 
-_Incanter is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._  At the core of Incanter are the <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">Parallel Colt</a> numerics library, a multithreaded version of <a href="http://acs.lbl.gov/~hoschek/colt/">Colt</a>, and the <a href="http://www.jfree.org/jfreechart/">JFreeChart</a> charting library, as well as several other Java and Clojure libraries.
+<a href="http://incanter.org">_Incanter</a> is a <a href="http://clojure.org">Clojure</a>-based, <a href="http://www.r-project.org/">R</a>-like statistical computing and graphics environment for the JVM._  At the core of Incanter are the <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">Parallel Colt</a> numerics library, a multithreaded version of <a href="http://acs.lbl.gov/~hoschek/colt/">Colt</a>, and the <a href="http://www.jfree.org/jfreechart/">JFreeChart</a> charting library, as well as several other Java and Clojure libraries.
 
 The motivation for creating Incanter is to provide a JVM-based statistical computing and graphics platform with R-like semantics and interactive-programming environment. Running on the JVM provides access to the large number of existing Java libraries for data access, data processing, and presentation.  Clojure’s seamless integration with Java makes leveraging these libraries much simpler than is possible in R, and Incanter’s R-like semantics makes statistical programming much simpler than is possible in pure Java.
 
@@ -91,7 +91,6 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
 * "Processing API":http://www.processing.org/reference/
-* "Joda Time API":http://joda-time.sourceforge.net/
 
 
 <a name="build"></a>
@@ -105,8 +104,8 @@ To build and test Incanter, you will need to have <a href="http://github.com/tec
 * use Leiningen to download the necessary dependencies: @lein deps@
 * You can now use the @script/repl@ and @script/swank@ scripts (or on Windows @repl.bat@ and @swank.bat@) to start a REPL and Swank server respectively.
 * If you want to run the tests for each of Incanter's modules, use @script/test@ 
-* Each of Incanter's modules are independent Leiningen projects, just cd into modules/incanter-* and use Leiningen to build each one as a standalone library.
-* The @script/install@ script will use Leiningen to build and install each modules in your local ~/.m2 repository.
+* Each of Incanter's modules are independent Leiningen projects. Just cd into modules/incanter-* and use Leiningen to build each one as a standalone library.
+* @script/install@ uses Leiningen to build all the modules and install them in your local ~/.m2 repository.
 
 
 
