@@ -930,6 +930,9 @@
     :legend (default false) prints legend
     :series-label (default x expression)
     :group-by (default nil) -- a vector of values used to group the x and y values into series.
+    :density? (default false) -- chart will represent density instead of frequency.
+    :nbins (default 10) -- number of bins (i.e. bars)
+    :gradient? (default false) -- use gradient on bars
 
   See also:
     view, save, add-points, add-lines
@@ -1002,7 +1005,9 @@
 	  _x (if (coll? x) (to-list x) ($ x data))
           nbins (or (:nbins opts) 10)
 	  theme (or (:theme opts) :default)
-          density? (true? (:density opts))
+	  gradient? (or (:gradient? opts) false)
+	  bar-painter (org.jfree.chart.renderer.xy.StandardXYBarPainter.)
+          density? (true? (:density? opts))
           main-title (or (:title opts) "Histogram")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts)
@@ -1013,15 +1018,22 @@
       (do
         (.addSeries dataset series-lab (double-array _x) nbins)
         (when density? (.setType dataset org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1))
-        (set-theme (org.jfree.chart.ChartFactory/createHistogram
-		    main-title
-		    x-lab
-		    y-lab
-		    dataset
-		    org.jfree.chart.plot.PlotOrientation/VERTICAL
-		    legend?			; no legend
-		    true				; tooltips
-		    false) theme)))))
+        (let [chart (-> (org.jfree.chart.ChartFactory/createHistogram
+			  main-title
+			  x-lab
+			  y-lab
+			  dataset
+			  org.jfree.chart.plot.PlotOrientation/VERTICAL
+			  legend?		; no legend
+			  true			; tooltips
+			  false)
+			(set-theme theme))
+	      _ (when-not gradient?
+		  (doto (-> chart .getPlot .getRenderer)
+		    (.setBarPainter bar-painter)
+		    (.setShadowVisible false)
+		    (.setDrawBarOutline true)))]
+	  chart)))))
 
 
 
@@ -1151,6 +1163,7 @@
     :series-label
     :group-by (default nil) -- a vector of values used to group the values into
                                series within each category.
+    :gradient? (default false) -- use gradient on bars
 
 
   See also:
@@ -1247,6 +1260,7 @@
 	   series-label (:series-label opts)
            vertical? (if (false? (:vertical opts)) false true)
            legend? (true? (:legend opts))
+	   gradient? (or (:gradient? opts) false)
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createBarChart
                      main-title
@@ -1258,7 +1272,8 @@
                        org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
                      legend?
                      true
-                     false)]
+                     false)
+	   bar-painter (org.jfree.chart.renderer.category.StandardBarPainter.)]
         (do
           (doseq [i (range 0 (count _values))] 
 	    (.addValue dataset
@@ -1272,6 +1287,10 @@
 			  (str 'values))
 		       (nth _categories i)))
           (set-theme chart theme)
+	  (when-not gradient?
+	    (doto (-> chart .getPlot .getRenderer)
+	      (.setBarPainter bar-painter)
+	      (.setDrawBarOutline true)))
 	  chart))))
 
 
