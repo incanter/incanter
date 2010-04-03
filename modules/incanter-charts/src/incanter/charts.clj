@@ -58,6 +58,79 @@
 
 
 
+(defmulti set-theme-default
+  (fn [chart & options] (type (-> chart .getPlot .getDataset))))
+
+
+(defmulti set-theme-bw 
+"
+
+  Examples:
+    (use '(incanter core stats charts datasets))
+
+    (doto (histogram (sample-normal 1000))
+      set-theme-bw
+      view)
+
+ 
+    (doto (histogram (sample-normal 1000))
+      set-theme-bw
+      (add-histogram (sample-normal 1000 :mean 1))
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (set-stroke :dash 5)
+      (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (set-stroke :dash 5)
+      (add-function sin 0 25)
+      view)
+
+
+    (doto (xy-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (add-lines :speed :dist :data (get-dataset :cars))
+      view)
+
+   
+    (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                    :legend true)
+      view
+      (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+      (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+      set-theme-bw)
+
+
+    (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-theme-bw
+      (add-categories [:a :b :c] [5 25 40]))
+  
+
+    (doto (line-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-theme-bw
+      (add-categories [:a :b :c] [5 25 40]))
+ 
+
+"
+(fn [chart & options] (type (-> chart .getPlot .getDataset))))
+
+
 
 (defn set-theme
 "  Changes the chart theme.
@@ -87,18 +160,35 @@
 
 "
   ([chart theme]
-     (let [_theme (if (keyword? theme) 
+     (let [built-in-theme? (some #{theme} #{:dark :legacy :gradient})
+	   _theme (if built-in-theme? 
 		    (cond
-		      (= theme :dark)
-		        (StandardChartTheme/createDarknessTheme)
-		      (= theme :legacy)
-		        (StandardChartTheme/createLegacyTheme)
-			:default
-			  (StandardChartTheme/createJFreeTheme))
-		    theme)]
+		     (= theme :dark)
+		       (StandardChartTheme/createDarknessTheme)
+		     (= theme :legacy)
+		       (StandardChartTheme/createLegacyTheme)
+		     :default
+		       (StandardChartTheme/createJFreeTheme))
+		    (cond
+		     (= theme :bw)
+		       set-theme-bw
+		     :default
+		       set-theme-default))
+	   ;; bar-painter
+	   ;; (org.jfree.chart.renderer.xy.StandardXYBarPainter.)
+	   ]
        (do
-	 (.setShadowVisible _theme false)
-	 (.apply _theme chart)
+	 (if built-in-theme? 
+	   (do
+	     (.setShadowVisible _theme false)
+	     (.apply _theme chart))
+	   (do
+	     ;; (doto (-> chart .getPlot .getRenderer)
+;; 	       (.setBarPainter bar-painter)
+;; 	       (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+;; 	       (.setShadowVisible false)
+;; 	       (.setDrawBarOutline true))
+	     (_theme chart)))
 	 chart))))
 
 
@@ -114,6 +204,7 @@
 	  series-lab (or (:series-label opts) (str 'x))]
       (do
         (.addSeries (.getDataset data-plot) series-lab (double-array _x) nbins)
+	(.setSeriesOutlinePaint (-> chart .getPlot .getRenderer) n java.awt.Color/lightGray)
         (.setSeriesRenderingOrder data-plot org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
         (.fireChartChanged chart)
         chart))))
@@ -301,8 +392,33 @@
 
 
 
+(defmulti add-lines* (fn [chart x y & options] (type (-> chart .getPlot .getDataset))))
 
-(defn add-lines*
+
+(defmethod add-lines* org.jfree.data.xy.XYSeriesCollection
+  ([chart x y & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	   _x (if (coll? x) (to-list x) ($ x data))
+	   _y (if (coll? y) (to-list y) ($ y data))
+	   data-plot (.getPlot chart)
+	   n (.getDatasetCount data-plot)
+	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+	   data-series (XYSeries. series-lab)
+           line-renderer (XYLineAndShapeRenderer. true false)
+           data-set (.getDataset data-plot)]
+    (do
+      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+      (.addSeries data-set data-series)
+      (doto data-plot
+	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+	(.setRenderer (dec n) line-renderer))
+      chart))))
+
+
+;; doesn't work
+(defmethod add-lines* org.jfree.data.statistics.HistogramDataset
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
 	   data (:data opts)
@@ -316,11 +432,12 @@
            data-set (XYSeriesCollection.)]
     (do
       (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
-      (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-      (.setDatasetRenderingOrder data-plot org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
       (.addSeries data-set data-series)
-      (.setDataset data-plot (.getDatasetCount data-plot) data-set)
-      (.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)
+      (doto data-plot
+	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)     
+	(.setDataset n data-set)
+	(.setRenderer n line-renderer))
       chart))))
 
 
@@ -1005,9 +1122,11 @@
 	  _x (if (coll? x) (to-list x) ($ x data))
           nbins (or (:nbins opts) 10)
 	  theme (or (:theme opts) :default)
-	  gradient? (or (:gradient? opts) false)
-	  bar-painter (org.jfree.chart.renderer.xy.StandardXYBarPainter.)
-          density? (true? (:density? opts))
+	  ;; gradient?
+	  ;; (or (:gradient? opts) false)
+	  ;; bar-painter nil
+	  ;; (org.jfree.chart.renderer.xy.StandardXYBarPainter.)
+          density? (true? (:density opts))
           main-title (or (:title opts) "Histogram")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts)
@@ -1028,11 +1147,13 @@
 			  true			; tooltips
 			  false)
 			(set-theme theme))
-	      _ (when-not gradient?
-		  (doto (-> chart .getPlot .getRenderer)
-		    (.setBarPainter bar-painter)
-		    (.setShadowVisible false)
-		    (.setDrawBarOutline true)))]
+	      _ nil;; (when-not gradient?
+;; 		  (doto (-> chart .getPlot .getRenderer)
+;; 		    (.setBarPainter bar-painter)
+;; 		    (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+;; 		    (.setShadowVisible false)
+;; 		    (.setDrawBarOutline true)))
+	      ]
 	  chart)))))
 
 
@@ -1260,7 +1381,8 @@
 	   series-label (:series-label opts)
            vertical? (if (false? (:vertical opts)) false true)
            legend? (true? (:legend opts))
-	   gradient? (or (:gradient? opts) false)
+	   ;; gradient?
+	   ;; (or (:gradient? opts) false)
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createBarChart
                      main-title
@@ -1273,7 +1395,9 @@
                      legend?
                      true
                      false)
-	   bar-painter (org.jfree.chart.renderer.category.StandardBarPainter.)]
+	   ;; bar-painter
+	   ;; (org.jfree.chart.renderer.category.StandardBarPainter.)
+	   ]
         (do
           (doseq [i (range 0 (count _values))] 
 	    (.addValue dataset
@@ -1287,10 +1411,12 @@
 			  (str 'values))
 		       (nth _categories i)))
           (set-theme chart theme)
-	  (when-not gradient?
-	    (doto (-> chart .getPlot .getRenderer)
-	      (.setBarPainter bar-painter)
-	      (.setDrawBarOutline true)))
+	 ;;  (when-not gradient?
+;; 	    (doto (-> chart .getPlot .getRenderer)
+;; 	      (.setBarPainter bar-painter)
+;; 	      ;; (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+;; 	      ;; (.setDrawBarOutline true)
+;; 	      ))
 	  chart))))
 
 
@@ -2358,5 +2484,160 @@
 
 
 
+;;; CHART CUSTOMIZATION
+
+(defn set-stroke
+"
+  Examples:
+    (use '(incanter core charts))
+
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (set-stroke :width 4 :dash 5)
+      view)
+   
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (add-categories [:a :b :c :d] [20 5 30 15])
+      (set-stroke :width 4 :dash 5)
+      (set-stroke :series 1 :width 2 :dash 10)
+      view)
 
 
+    (doto (function-plot sin -10 10 :step-size 0.1)
+      (set-stroke :width 3 :dash 5)
+      view)
+       
+"
+([chart & options]
+   (let [{:keys [width dash series dataset] 
+	  :or {width 1.0 dash 1.0 series 0 dataset 0}} (apply hash-map options)
+	 renderer (-> chart .getPlot (.getRenderer dataset))
+	 stroke (java.awt.BasicStroke. width 
+				       java.awt.BasicStroke/CAP_ROUND 
+				       java.awt.BasicStroke/JOIN_ROUND 
+				       1.0 
+				       (float-array 1.0 dash) 
+				       0.0)]
+     (.setSeriesStroke renderer series stroke)
+     chart)))
+
+
+(defn set-stroke-color
+"
+  Examples:
+    (use '(incanter core charts))
+
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (set-stroke :width 4 :dash 5)
+      (set-stroke-color java.awt.Color/blue)
+      view)
+   
+    (doto (function-plot sin -10 10 :step-size 0.1)
+      (set-stroke :width 3 :dash 5)
+      (set-stroke-color java.awt.Color/gray)
+      view)
+       
+"
+([chart color & options]
+   (let [{:keys [series] 
+	  :or {series 0}} (apply hash-map options)
+	 renderer (-> chart .getPlot .getRenderer)]
+     (.setSeriesPaint renderer series color)
+     chart)))
+
+
+
+;;;; DEFAULT THEME METHODS
+
+(defmethod set-theme-default org.jfree.data.category.DefaultCategoryDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)
+	   bar-painter (org.jfree.chart.renderer.category.StandardBarPainter.)]
+       (when (= (type (.getRenderer (.getPlot chart)))
+		org.jfree.chart.renderer.category.BarRenderer)  
+	 (doto renderer
+	   (.setBarPainter bar-painter)
+	   (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+	   (.setShadowVisible false)
+	   (.setDrawBarOutline false)))
+       chart)))
+
+
+(defmethod set-theme-default org.jfree.data.statistics.HistogramDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)
+	   bar-painter (org.jfree.chart.renderer.xy.StandardXYBarPainter.)]
+       (doto renderer
+	 (.setBarPainter bar-painter)
+	 (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+	 (.setShadowVisible false)
+	 (.setDrawBarOutline true))
+       chart)))
+
+
+(defmethod set-theme-default :default
+  ([chart]
+     chart))
+
+
+;;;; BW THEME METHODS
+
+(defmethod set-theme-bw org.jfree.data.xy.XYSeriesCollection
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	 (doto plot
+	   (.setBackgroundPaint java.awt.Color/white)
+	   (.setRangeGridlinePaint java.awt.Color/gray)
+	   (.setDomainGridlinePaint java.awt.Color/gray))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+(defmethod set-theme-bw org.jfree.data.statistics.HistogramDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	 (doto plot
+	   (.setBackgroundPaint java.awt.Color/white)
+	   (.setRangeGridlinePaint java.awt.Color/gray)
+	   (.setDomainGridlinePaint java.awt.Color/gray))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+(defmethod set-theme-bw org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	 (doto plot
+	   (.setBackgroundPaint java.awt.Color/white)
+	   (.setRangeGridlinePaint java.awt.Color/gray)
+	   (.setDomainGridlinePaint java.awt.Color/gray))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+(defmethod set-theme-bw org.jfree.data.category.DefaultCategoryDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	 (doto plot
+	   (.setBackgroundPaint java.awt.Color/white)
+	   (.setRangeGridlinePaint java.awt.Color/gray)
+	   (.setDomainGridlinePaint java.awt.Color/gray))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
