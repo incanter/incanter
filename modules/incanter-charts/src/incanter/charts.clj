@@ -27,7 +27,6 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  ;(:gen-class)
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-by
                               bind-columns view save $group-by conj-cols 
 			      grid-apply set-data)]
@@ -56,6 +55,85 @@
                                          XYTextAnnotation
                                          XYPolygonAnnotation)))
 
+
+
+(defmulti set-background-default 
+"
+
+  Examples:
+    (use '(incanter core stats charts datasets))
+
+    (doto (histogram (sample-normal 1000) :title (str :Test-Tittle))
+      set-theme-bw
+      view)
+
+ 
+    (doto (histogram (sample-normal 1000))
+      set-background-default
+      (add-histogram (sample-normal 1000 :mean 1))
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (set-stroke :dash 5)
+      (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-background-default
+      (set-stroke :dash 5)
+      (add-function sin 0 25)
+      view)
+
+
+    (doto (xy-plot :speed :dist :data (get-dataset :cars) :legend true)
+      set-background-default
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-background-default
+      view)
+
+   
+    (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                    :legend true)
+      view set-background-default
+      (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+      (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))
+
+
+    (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-background-default
+      (add-categories [:a :b :c] [5 25 40]))
+  
+
+    (doto (line-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-background-default
+      (add-categories [:a :b :c] [5 25 40]))
+ 
+    ;; time-series-plot
+    (def epoch 0)
+    (defn num-years-to-milliseconds [x]
+      (* 365 24 60 60 1000 x))
+    (def dates (map num-years-to-milliseconds (range 100)))
+    (def chart1 (time-series-plot dates (range 100)))
+    (def cw1 (view chart1))
+    (add-lines chart1 dates (mult 1/2 (range 100)))
+
+    (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))
+    (def cw2 (view chart2))
+
+
+"
+(fn [chart] (type (.getPlot chart))))
 
 
 (defmulti set-theme-default
@@ -819,7 +897,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
 	  __x (if x-groups (first x-groups) _x)
            __y (if y-groups (first y-groups) _y)
-	  main-title (or (:main-title opts) "XY Plot")
+	  main-title (or (:main-title opts) "")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts) 
@@ -911,7 +989,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "XY Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) 
@@ -966,7 +1044,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Time Series Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1000,7 +1078,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
           __x (if x-groups (first x-groups) _x)
           __y (if y-groups (first y-groups) _y)
-	  main-title (or (:title opts) "Scatter Plot")
+	  main-title (or (:title opts) "")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts) 
@@ -1029,6 +1107,8 @@
 			    (nth x-groups i)
 			    (nth y-groups i)
 			    :series-label (format "%s, %s (%s)" 'x 'y i))))]
+      (.setSeriesShape (-> chart .getPlot .getRenderer) 0 (java.awt.geom.Ellipse2D$Double. -3 -3 6 6))
+      (.setSeriesShape (-> chart .getPlot .getRenderer) 1 (java.awt.geom.Rectangle2D$Double. -3 -3 6 6))
       (set-theme chart theme)
       chart)))
 
@@ -1099,7 +1179,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Scatter Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1122,12 +1202,8 @@
 	  _x (if (coll? x) (to-list x) ($ x data))
           nbins (or (:nbins opts) 10)
 	  theme (or (:theme opts) :default)
-	  ;; gradient?
-	  ;; (or (:gradient? opts) false)
-	  ;; bar-painter nil
-	  ;; (org.jfree.chart.renderer.xy.StandardXYBarPainter.)
           density? (true? (:density opts))
-          main-title (or (:title opts) "Histogram")
+          main-title (or (:title opts) "")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts)
                      (if density? "Density" "Frequency"))
@@ -1146,14 +1222,7 @@
 			  legend?		; no legend
 			  true			; tooltips
 			  false)
-			(set-theme theme))
-	      _ nil;; (when-not gradient?
-;; 		  (doto (-> chart .getPlot .getRenderer)
-;; 		    (.setBarPainter bar-painter)
-;; 		    (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
-;; 		    (.setShadowVisible false)
-;; 		    (.setDrawBarOutline true)))
-	      ]
+			(set-theme theme))]
 	  chart)))))
 
 
@@ -1211,7 +1280,7 @@
 "
   ([x & options]
     `(let [opts# ~(if options (apply assoc {} options) {})
-           main-title# (or (:title opts#) "Histogram")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
 	   series-lab# (or (:series-label opts#) (str '~x))
            args# (concat [~x] (apply concat (seq (apply assoc opts# 
@@ -1229,7 +1298,7 @@
 	  data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-	  main-title (or (:title opts) "Line Chart")
+	  main-title (or (:title opts) "")
 	  group-by (when (:group-by opts) 
 		     (if (coll? (:group-by opts)) 
 		       (to-list (:group-by opts))
@@ -1347,7 +1416,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Line Chart")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1370,7 +1439,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "Bar Chart")
+           main-title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts) 
 		     (if (coll? (:group-by opts)) 
@@ -1381,8 +1450,6 @@
 	   series-label (:series-label opts)
            vertical? (if (false? (:vertical opts)) false true)
            legend? (true? (:legend opts))
-	   ;; gradient?
-	   ;; (or (:gradient? opts) false)
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createBarChart
                      main-title
@@ -1394,10 +1461,7 @@
                        org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
                      legend?
                      true
-                     false)
-	   ;; bar-painter
-	   ;; (org.jfree.chart.renderer.category.StandardBarPainter.)
-	   ]
+                     false)]
         (do
           (doseq [i (range 0 (count _values))] 
 	    (.addValue dataset
@@ -1411,12 +1475,6 @@
 			  (str 'values))
 		       (nth _categories i)))
           (set-theme chart theme)
-	 ;;  (when-not gradient?
-;; 	    (doto (-> chart .getPlot .getRenderer)
-;; 	      (.setBarPainter bar-painter)
-;; 	      ;; (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
-;; 	      ;; (.setDrawBarOutline true)
-;; 	      ))
 	  chart))))
 
 
@@ -1500,7 +1558,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Bar Chart")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1522,7 +1580,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "Bar Chart")
+           main-title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            legend? (true? (:legend opts))
            dataset (DefaultPieDataset.)
@@ -1583,7 +1641,7 @@
 "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
-	   main-title# (or (:title opts#) "Bar Chart")
+	   main-title# (or (:title opts#) "")
 	   args# (concat [~categories ~values] 
 			 (apply concat (seq (apply assoc opts# 
 						   [:main-title main-title#]))))]
@@ -1606,7 +1664,7 @@
 	  __x (if x-groups
                 (first x-groups)
                 _x)
-	  main-title (or (:title opts) "Boxplot")
+	  main-title (or (:title opts) "")
 	  x-label (or (:x-label opts) "")
 	  y-label (or (:y-label opts) (str 'x))
 	  series-label (or (:series-label opts) (str 'x))
@@ -1682,7 +1740,7 @@
   ([x & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Bar Chart")
+           main-title# (or (:title opts#) "")
 	   x-lab# (or (:x-label opts#) "")
            y-lab# (or (:y-label opts#) (str '~x))
            series-lab# (or (:series-label opts#) (str '~x))
@@ -1704,7 +1762,7 @@
    (let [opts (when options (apply assoc {} options))
 	 step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
 	 _x (range min-range max-range step-size)
-	 main-title (or (:title opts) "Function Plot")
+	 main-title (or (:title opts) "")
 	 x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
 	 y-lab (or (:y-label opts) (str 'function))
 	 series-lab (or (:series-label opts) (format "%s" 'function))
@@ -1751,7 +1809,7 @@
   ([function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Function Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
            y-lab# (or (:y-label opts#) (str '~function))
            series-lab# (or (:series-label opts#) (format "%s" '~function))
@@ -1770,10 +1828,11 @@
   ([function x-min x-max y-min y-max & options]
      (let [opts (when options (apply assoc {} options))
 	   color? (if (false? (:color? opts)) false true)
-	   title (or (:title opts) "Heat Map")
-	   x-label (or (:x-label opts) "x")
-	   y-label (or (:y-label opts) "y")
+	   title (or (:title opts) "")
+	   x-label (or (:x-label opts) "")
+	   y-label (or (:y-label opts) "")
 	   z-label (or (:z-label opts) "z scale")
+	   theme (or (:theme opts) :default)
 	   xyz-dataset (org.jfree.data.xy.DefaultXYZDataset.)
 	   data (into-array (map double-array 
 				 (grid-apply function x-min x-max y-min y-max)))
@@ -1830,7 +1889,8 @@
 	(.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
 	(.setTitle chart title)
 	(.addSubtitle chart legend)
-	(org.jfree.chart.ChartUtilities/applyCurrentTheme chart))
+	(org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
+	(set-theme chart theme))
        chart)))
 
 
@@ -2560,6 +2620,7 @@
 	   (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
 	   (.setShadowVisible false)
 	   (.setDrawBarOutline false)))
+       (set-background-default chart)
        chart)))
 
 
@@ -2573,12 +2634,14 @@
 	 (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
 	 (.setShadowVisible false)
 	 (.setDrawBarOutline true))
+       (set-background-default chart)
        chart)))
+
 
 
 (defmethod set-theme-default :default
   ([chart]
-     chart))
+     (set-background-default chart)))
 
 
 ;;;; BW THEME METHODS
@@ -2588,10 +2651,10 @@
      (let [plot (.getPlot chart)
 	   renderer (.getRenderer plot)]
        (do
-	 (doto plot
-	   (.setBackgroundPaint java.awt.Color/white)
-	   (.setRangeGridlinePaint java.awt.Color/gray)
-	   (.setDomainGridlinePaint java.awt.Color/gray))
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
 	 (doto renderer
 	   (.setOutlinePaint java.awt.Color/white)
 	   (.setPaint java.awt.Color/gray))
@@ -2603,10 +2666,10 @@
      (let [plot (.getPlot chart)
 	   renderer (.getRenderer plot)]
        (do
-	 (doto plot
-	   (.setBackgroundPaint java.awt.Color/white)
-	   (.setRangeGridlinePaint java.awt.Color/gray)
-	   (.setDomainGridlinePaint java.awt.Color/gray))
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
 	 (doto renderer
 	   (.setOutlinePaint java.awt.Color/white)
 	   (.setPaint java.awt.Color/gray))
@@ -2618,10 +2681,10 @@
      (let [plot (.getPlot chart)
 	   renderer (.getRenderer plot)]
        (do
-	 (doto plot
-	   (.setBackgroundPaint java.awt.Color/white)
-	   (.setRangeGridlinePaint java.awt.Color/gray)
-	   (.setDomainGridlinePaint java.awt.Color/gray))
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
 	 (doto renderer
 	   (.setOutlinePaint java.awt.Color/white)
 	   (.setPaint java.awt.Color/gray))
@@ -2633,11 +2696,110 @@
      (let [plot (.getPlot chart)
 	   renderer (.getRenderer plot)]
        (do
-	 (doto plot
-	   (.setBackgroundPaint java.awt.Color/white)
-	   (.setRangeGridlinePaint java.awt.Color/gray)
-	   (.setDomainGridlinePaint java.awt.Color/gray))
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
 	 (doto renderer
 	   (.setOutlinePaint java.awt.Color/white)
 	   (.setPaint java.awt.Color/gray))
 	 chart))))
+
+
+
+
+;;;;; DEFAULT PLOT BACKGROUND SETTINGS
+
+
+(defmethod set-background-default org.jfree.chart.plot.XYPlot
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)
+	   plot (.getPlot chart)]
+       (doto plot
+	 (.setRangeGridlineStroke grid-stroke)
+	 (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/lightGray)
+	 (.setBackgroundPaint (java.awt.Color. 235 235 235))
+	 (.setRangeGridlinePaint java.awt.Color/white)
+	 (.setDomainGridlinePaint java.awt.Color/white)
+	 (.setOutlineVisible false)
+	 (-> .getDomainAxis (.setAxisLineVisible false))
+	 (-> .getRangeAxis (.setAxisLineVisible false))
+	 (-> .getDomainAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getDomainAxis (.setTickLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (.setDomainMinorGridlinesVisible true)
+	 ;; (.setRangeMinorGridlinesVisible true)
+	 (.setDomainZeroBaselineVisible false)
+	 )
+       (if (= (-> plot .getDataset type) 
+	      org.jfree.data.statistics.HistogramDataset)
+	 (-> plot .getRenderer (.setPaint java.awt.Color/gray)))
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+(defmethod set-background-default org.jfree.chart.plot.CategoryPlot
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1 
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)]
+       (doto (.getPlot chart)
+	 (.setRangeGridlineStroke grid-stroke)
+	 (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/lightGray)
+	 (.setBackgroundPaint (java.awt.Color. 235 235 235))
+	 (.setRangeGridlinePaint java.awt.Color/white)
+	 (.setDomainGridlinePaint java.awt.Color/white)
+	 (.setOutlineVisible false)
+	 (-> .getDomainAxis (.setAxisLineVisible false))
+	 (-> .getRangeAxis (.setAxisLineVisible false))
+	 (-> .getDomainAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getDomainAxis (.setTickLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (.setRangeMinorGridlinesVisible true)
+	 )
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+(defmethod set-background-default :default
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1.5 
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)]
+       (doto (.getPlot chart)
+	 ;; (.setRangeGridlineStroke grid-stroke)
+	 ;; (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/lightGray)
+	 (.setBackgroundPaint (java.awt.Color. 235 235 235))
+	 ;; (.setRangeGridlinePaint java.awt.Color/white)
+	 ;; (.setDomainGridlinePaint java.awt.Color/white)
+	 (.setOutlineVisible false)
+	 ;; (-> .getDomainAxis (.setAxisLineVisible false))
+	 ;; (-> .getRangeAxis (.setAxisLineVisible false))
+	 ;; (-> .getDomainAxis (.setLabelPaint java.awt.Color/gray))
+	 ;; (-> .getRangeAxis (.setLabelPaint java.awt.Color/gray))
+	 ;; (-> .getDomainAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (-> .getRangeAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (.setRangeMinorGridlinesVisible true)
+	 )
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+
+
