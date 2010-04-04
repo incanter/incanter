@@ -51,11 +51,11 @@ From the Clojure shell, load the Incanter libraries:
 
 Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: 
 <pre><code>user=> (view (histogram (sample-normal 1000)))</code></pre>
-<img src="http://incanter.org/images/examples/normal_hist.png" />
+<img src="http://incanter.org/images/examples/newtheme/hist-norm.png" />
 
 Try another simple example, a plot of the sine function over the range -4 to 4:
-<pre><code>user=> (view (function-plot sin -4 4))</code></pre>
-<img src="http://incanter.org/images/examples/sin-plot.png" />
+<pre><code>user=> (view (function-plot sin -10 10))</code></pre>
+<img src="http://incanter.org/images/examples/newtheme/xy-sin.png" />
 
 
 The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
