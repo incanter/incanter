@@ -30,6 +30,7 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 *Other Clojure resources*
 
 * "Clojure website":http://clojure.org
+* "Getting Started with Clojure":http://www.assembla.com/wiki/show/clojure/Getting_Started
 * "Clojure Google group":http://groups.google.com/group/clojure
 * "clojure.blip.tv":http://clojure.blip.tv
 * "Clojure Programming Wikibook":http://en.wikibooks.org/wiki/Clojure_Programming
