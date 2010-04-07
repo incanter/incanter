@@ -45,9 +45,21 @@ Start by visiting the <a href="http://incanter.org">Incanter website</a> for an 
 
 Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
 
-NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein deps@ to download the necessary dependencies before using @script/repl@ or @script/swank@ (or @script\repl.bat@, @script\swank.bat@).
+If you want the latest version of Incanter, 
 
-From the Clojure shell, load the Incanter libraries: 
+1. Clone the repository with git: @git clone git://github.com/liebke/incanter.git@
+
+2. Install Leiningen
+  a. Download the lein script: @wget http://github.com/technomancy/leiningen/raw/stable/bin/lein@
+     (use <a href="http://github.com/technomancy/leiningen/raw/stable/bin/lein.bat">lein.bat</a> on Windows)
+  b. Place it on your path and chmod it to be executable: @chmod +x lein@
+  c. Run: @lein self-install@
+
+3. From the incanter directory, download the necessary dependencies: @lein deps@ 
+
+4. Start a REPL: @script/repl@ or @script\repl.bat@, or start a Swank server: @script/swank@ or @script\swank.bat@
+
+5. From the Clojure shell, load the Incanter libraries: 
 <pre><code>user=> (use '(incanter core stats charts))</code></pre>
 
 Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: 
