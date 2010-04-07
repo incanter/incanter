@@ -484,14 +484,16 @@
 	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
 	   data-series (XYSeries. series-lab)
            line-renderer (XYLineAndShapeRenderer. true false)
-           data-set (.getDataset data-plot)]
+           ;; data-set (.getDataset data-plot)
+	   data-set (XYSeriesCollection.)]
     (do
       (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
-	(.setRenderer (dec n) line-renderer))
+	(.setDataset n data-set)
+	(.setRenderer n line-renderer))
       chart))))
 
 
@@ -2371,9 +2373,9 @@
 							  (do
 							    (.setText label (label-txt value))
 							    (updater-fn value)))))))
-		      panel (doto (JPanel. (BorderLayout.))
-			      (.add label BorderLayout/NORTH)
-			      (.add slider BorderLayout/CENTER))
+	   panel (doto (JPanel. (BorderLayout.))
+		   (.add label BorderLayout/NORTH)
+		   (.add slider BorderLayout/CENTER))
 	   frame (JFrame. "Slider Control")
 	   width 500
 	   height 70] 
@@ -2381,7 +2383,7 @@
 	 (.setDefaultCloseOperation JFrame/DISPOSE_ON_CLOSE)
 	 (.add panel BorderLayout/CENTER)
 	 (.setSize width height)
-	 (.setVisible true)
+	 ;; (.setVisible true)
 	 (.setVisible true))
        frame)))
 
@@ -2410,7 +2412,7 @@
 	   slider-fns (map #(fn [v] 
 			      (do 
 				(dosync (ref-set (nth refs %) v)) 
-				(apply f (map deref refs)))) 
+				(apply f (map deref refs))))
 			   (range (count refs)))
 	   _ ((first slider-fns) (first init-values))]
        (if slider-labels 
