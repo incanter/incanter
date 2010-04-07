@@ -663,8 +663,8 @@
 	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
 	(.addSeries data-set data-series)
-	(.setDataset data-plot (.getDatasetCount data-plot) data-set)
-	(.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)
+	(.setDataset data-plot n data-set)
+	(.setRenderer data-plot n line-renderer)
 	chart))))
 
 
