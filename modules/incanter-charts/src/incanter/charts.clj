@@ -2775,6 +2775,29 @@
        chart)))
 
 
+(defmethod set-background-default org.jfree.chart.plot.PiePlot
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1.5 
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)]
+       (doto (.getPlot chart)
+	 ;; (.setRangeGridlineStroke grid-stroke)
+	 ;; (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/white)
+	 (.setShadowPaint java.awt.Color/white)
+	 (.setLabelShadowPaint java.awt.Color/white)
+	 (.setLabelPaint java.awt.Color/darkGray)
+	 (.setLabelOutlinePaint java.awt.Color/gray)
+	 (.setLabelBackgroundPaint (java.awt.Color. 235 235 235))
+	 (.setLabelLinksVisible false)
+	 (.setOutlineVisible false))
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
 (defmethod set-background-default :default
   ([chart]
      (let [grid-stroke (java.awt.BasicStroke. 1.5 
