@@ -1,8 +1,8 @@
 (defproject incanter "1.2.1"
   :description "Incanter is a Clojure-based, R-like statistical programming and data visualization environment."
   :dependencies [
-                 [org.clojure/clojure "1.1.0"]
-                 [org.clojure/clojure-contrib "1.1.0"]
+                 [org.clojure/clojure "1.2.0-master-SNAPSHOT"]
+                 [org.clojure/clojure-contrib "1.2.0-master-SNAPSHOT"]
                  ;[org.clojure/clojure "1.2.0-master-SNAPSHOT"]
                  ;[org.clojure/clojure-contrib "1.2.0-master-SNAPSHOT"]
                  [incanter/incanter-core "1.2.1"]
