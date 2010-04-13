@@ -2144,6 +2144,29 @@
 
 
 
+(defn add-image
+" Adds an image to the chart at the given coordinates.
+
+  Arguments:
+    chart -- the chart to add the polygon to.
+    x, y -- the coordinates to place the image
+    img -- a java.awt.Image object
+
+
+  Examples:
+    (use '(incanter core charts latex))   
+
+     (doto (function-plot sin -10 10)
+      (add-image 0 0 (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))
+      view)
+
+"
+  ([chart x y img & options]
+    (let [opts (when options (apply assoc {} options))
+	  anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
+      (.addAnnotation (.getPlot chart) anno))))
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2824,6 +2847,37 @@
 	 )
        (-> chart .getTitle (.setPaint java.awt.Color/gray))
        chart)))
+
+
+
+(defmulti add-subtitle
+"Adds a JFreeChart title object to a chart as a subtitle.
+
+  Examples:
+    (use '(incanter core charts latex))
+
+    (doto (function-plot sin -10 10)
+      (add-subtitle \"subtitle\")
+      (add-subtitle (latex \" \\\\frac{(a+b)^2} {(a-b)^2}\"))
+      view)
+
+"
+  (fn [chart title] (type title)))
+
+(defmethod add-subtitle java.awt.image.BufferedImage
+  ([chart title]
+     (.addSubtitle chart (org.jfree.chart.title.ImageTitle. title))
+     chart))
+
+(defmethod add-subtitle java.lang.String
+  ([chart title]
+     (.addSubtitle chart (org.jfree.chart.title.TextTitle. title))
+     chart))
+
+(defmethod add-subtitle :default
+  ([chart title]
+     (.addSubtitle chart title)
+     chart))
 
 
 

@@ -2505,6 +2505,8 @@
       (type obj))))
 
 
+
+
 (defn grid-apply
 " Applies the given function f, that accepts two arguments, to a grid 
   defined by rectangle bounded x-min, y-min, x-max, y-max and returns a 
