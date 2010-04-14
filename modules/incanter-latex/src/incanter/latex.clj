@@ -1,27 +1,42 @@
-(ns #^{:doc "This library is used to render LaTex Math equations and is based
-   on the jLateXMath library.
+(ns #^{:doc "This library is used to render LaTex Math equations, based
+   on the jLateXMath library, and applying them incanter.charts as annotations
+   and subtitles.
             "
        :author "David Edgar Liebke"}
 
   incanter.latex
-  (:use [incanter.core :only (save)])
+  ;; (:use [incanter.core :only (save)])
   (:import [org.scilab.forge.jlatexmath TeXConstants TeXIcon TeXFormula]))
 
 
 
 (defn latex 
-"
+" Returns the given LaTeX equation rendered as an java.awt.Image.
+
+  Options:
+    :color (default java.awt.Color/black) -- the text color
 
   Examples:
-    (use '(incanter core charts latex))
+    (use '(incanter core charts stats latex))
+
     (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))
     (save latex-img \"/tmp/latex-example1.png\")
     (view \"file:///tmp/latex-example1.png\")
 
+    (view (latex \"f(x)=\\\\frac {1} {\\\\sqrt {2\\\\pi \\\\sigma ^2}} e^{\\\\frac {-(x - \\\\mu)^2}{2 \\\\sigma ^2}}\"))
+
+    (view (latex \"\\\\begin{pmatrix}
+                   a & b & c \\\\\\\\
+                   d & e & f \\\\\\\\
+                   g & h & i
+                   \\\\end{pmatrix}\"))
+
 
 "
-  ([latex-txt]
-     (let [formula (org.scilab.forge.jlatexmath.TeXFormula. latex-txt)
+  ([latex-txt & options]
+     (let [opts (apply hash-map options)
+	   color (or (:color opts) java.awt.Color/black)
+	   formula (org.scilab.forge.jlatexmath.TeXFormula. latex-txt)
 	   icon (doto (.createTeXIcon formula TeXConstants/STYLE_DISPLAY 20)
 		  (.setInsets (java.awt.Insets. 5 5 5 5)))
 	   image (java.awt.image.BufferedImage. (.getIconWidth icon) 
@@ -31,7 +46,7 @@
 		(.setColor (java.awt.Color. 0 0 0 0))
 		(.fillRect 0 0 (.getIconWidth icon) (.getIconHeight icon)))
 	   label (doto (javax.swing.JLabel.)
-		   (.setForeground java.awt.Color/gray))]
+		   (.setForeground color))]
        (do
 	 (.paintIcon icon label g2 0 0)
 	 image))))
@@ -42,25 +57,32 @@
 
 
 (defn add-latex-subtitle
-" Sets the chart's title to the rendered LaTeX equation.
+" Adds the given LaTeX equation as a subtitle to the chart.
+
+
+  Options:
+    :color (default java.awt.Color/darkGray) -- the text color
+
 
   Examples:
-    (use '(incanter core charts latex))
+    (use '(incanter core charts stats latex))
 
-    (doto (function-plot sin -10 10)
-      (set-latex-title \" \\\\frac{(a+b)^2} {(a-b)^2}\")
+    (doto (function-plot pdf-normal -3 3)
+      (add-latex-subtitle \"f(x)=\\\\frac{1}{\\\\sqrt{2\\\\pi \\\\sigma^2}} e^{\\\\frac{-(x - \\\\mu)^2}{2 \\\\sigma^2}}\")
       view)
 
 "
-  ([chart latex-str]
-     (doto chart
-       (.addSubtitle (org.jfree.chart.title.ImageTitle. (latex latex-str))))
-     chart))
+  ([chart latex-str & options]
+     (let [opts (apply hash-map options)
+	   color (or (:color opts) java.awt.Color/darkGray)] 
+       (.addSubtitle chart (org.jfree.chart.title.ImageTitle. (latex latex-str :color color)))
+       chart)))
+
 
 
 
 (defn add-latex
-" Adds an latex equation to the chart at the given coordinates.
+" Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
 
   Arguments:
     chart -- the chart to add the polygon to.
@@ -68,18 +90,24 @@
     latex-str -- a string of latex code
 
 
-  Examples:
-    (use '(incanter core charts latex))   
+  Options:
+    :color (default java.awt.Color/darkGray) -- the text color
 
-     (doto (function-plot sin -10 10)
-      (add-latex 0 0 \"\\\\frac{(a+b)^2} {(a-b)^2}\")
-      view)
+
+  Examples:
+    (use '(incanter core charts stats latex))   
+
+      (doto (function-plot pdf-normal -3 3)
+        (add-latex 0 0.1 \"f(x)=\\\\frac{1}{\\\\sqrt{2\\\\pi \\\\sigma^2}} e^{\\\\frac{-(x - \\\\mu)^2}{2 \\\\sigma^2}}\")
+        view)
 
 "
   ([chart x y latex-str & options]
-    (let [opts (when options (apply assoc {} options))
-	  img (latex latex-str)
+    (let [opts (apply hash-map options)
+	  color (or (:color opts) java.awt.Color/darkGray)
+	  img (latex latex-str :color color)
 	  anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
-      (.addAnnotation (.getPlot chart) anno))))
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 

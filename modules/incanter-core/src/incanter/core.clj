@@ -2372,6 +2372,19 @@
        (.setVisible true))))
 
 
+(defmethod view java.awt.Image
+  ([obj & options]
+     (let [icon (javax.swing.ImageIcon. obj)
+	   label (javax.swing.JLabel. icon)
+	   height (+ 15 (.getIconHeight icon))
+	   width (+ 15 (.getIconWidth icon))] 
+       (doto (javax.swing.JFrame. "Incanter Image")
+	 (.add (javax.swing.JScrollPane. label))
+	 (.setSize height width)
+	 .pack
+	 (.setVisible true)))))
+
+
 
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
 (defmethod view String
