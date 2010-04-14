@@ -18,6 +18,9 @@ lein clean
 cd ../incanter-pdf
 lein clean
 
+cd ../incanter-latex
+lein clean
+
 cd ../..
 lein clean
 

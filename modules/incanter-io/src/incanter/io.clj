@@ -185,6 +185,17 @@ incanter.io
       (.close file-writer))))
 
 
+
+(defmethod save java.awt.image.BufferedImage
+  ([img filename & options]
+     (javax.imageio.ImageIO/write img 
+				  "png" 
+				  (.getAbsoluteFile (java.io.File. filename)))))
+
+
+
+
+
 (defn read-map 
 [& keys] 
   (into {} (for [k keys] [k (comp eval read-string)]))) 
