@@ -17,10 +17,18 @@
        (. c setFont f)
   c))
 
-(defn write-line [#^HSSFSheet sheet row-num line #^CellStyle style]
+(defmulti write-cell #(let [c (. % getClass)]
+(cond (isa? c Number) :numeric
+      :else           :other )))
+(defmethod write-cell :other [o]
+  (str o))
+(defmethod write-cell :numeric [n]
+  (. n doubleValue))
+
+(defn- write-line [#^HSSFSheet sheet row-num line #^CellStyle style]
    (let [#^HSSFRow xl-line (. sheet createRow row-num)]
         (do-loop
-          #(doto (. xl-line createCell %1) (.setCellValue (str %2)) (.setCellStyle style))
+          #(doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style))
           0
           line)))
 
@@ -30,13 +38,11 @@
   (with-open [f (FileOutputStream. filename)]
     (. workbook write f)))
 
-(defn write-cell [#^HSSFCell c #^Object o]
-  (. c setCellValue (str o)))
-  
-(defn write-cell [#^HSSFCell c #^Number n]
-  (. c setCellValue (. n doubleValue)))
-
-(defn save-xls [
+(defn #^{:doc "Save a dataset to an Excel file.
+Options are:
+:sheet-name defaults to \"dataset\" if not provided.
+"}
+  save-xls [
   #^:incanter.core/dataset dataset
   #^String filename
   & options]
@@ -47,8 +53,12 @@
              :normal  (make-font true w)
              :bold    (make-font false w)})
           s (. (:workbook x) createSheet (or (opts :sheet-name "dataset")))
+          align-row (fn [row cols] (map #(get row %1) cols))
           ]
           (write-line s 0 (:column-names dataset) (:bold x))
-          (do-loop #(write-line s %1 (vals %2) (:normal x)) 1 (:rows dataset))
+          (do-loop
+            #(write-line s %1 (align-row %2 (:column-names dataset)) (:normal x))
+            1
+            (:rows dataset))
     (:workbook x))
     filename))
