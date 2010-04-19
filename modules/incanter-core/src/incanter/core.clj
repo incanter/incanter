@@ -1234,8 +1234,12 @@
                  (if (map? (query-map k))
                    (reduce _and
                            (for [sk (keys (query-map k))]
-                             (if (nil? (ops sk)) 
-                               (throw (Exception. (str "Invalid key in query-map: " sk)))
+                             (cond 
+			      (fn? sk)
+			        (sk (row k) ((query-map k) sk))
+			      (nil? (ops sk)) 
+                                (throw (Exception. (str "Invalid key in query-map: " sk)))
+			      :else
                                ((ops sk) (row k) ((query-map k) sk)))))
                    (= (row k) (query-map k)))))))))
 
@@ -1741,6 +1745,59 @@
 		     (comparator (fn [a b] (pos? (compare a b))))
 		     compare)]
        (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
+
+
+
+(defmacro $fn
+" A simple macro used as syntactic sugar for defining predicate functions to be used
+  in the $where function. The supplied arguments should be column names of a dataset. 
+  This macro performs map destructuring on the arguments.
+  
+  For instance, 
+  ($fn [speed] (< speed 10)) => (fn [{:keys [speed]}] (< speed 10))
+
+  Examples:
+    (use '(incanter core datasets))
+    (view ($where ($fn [speed dist] (or (> speed 20) (< dist 10))) (get-dataset :cars)))
+
+    (view ($where ($fn [speed dist] (< (/ dist speed) 2)) (get-dataset :cars)))
+
+    (use '(incanter core datasets charts))
+    (with-data (get-dataset :cars)
+      (doto (scatter-plot :speed :dist :data ($where ($fn [speed dist] (< (/ dist speed) 2))))
+        (add-points :speed :dist :data ($where ($fn [speed dist] (>= (/ dist speed) 2))))
+        (add-lines ($ :speed) (mult 2 ($ :speed)))
+        view))
+
+
+    (let [passed? ($fn [speed dist] (< (/ dist speed) 2))
+          failed? (complement passed?)]
+      (with-data (get-dataset :cars)
+        (doto (scatter-plot :speed :dist :data ($where passed?))
+          (add-points :speed :dist :data ($where failed?))
+          (add-lines ($ :speed) (mult 2 ($ :speed)))
+          view)))
+
+
+    (use '(incanter core stats charts))
+    (let [above-sine? ($fn [col-0 col-1] (> col-1 (sin col-0)))
+          below-sine? (complement above-sine?)]
+      (with-data (conj-cols (sample-uniform 1000 :min -5 :max 5) 
+                            (sample-uniform 1000 :min -1 :max 1))
+        (doto (function-plot sin -5 5)
+          (add-points :col-0 :col-1 :data ($where above-sine?))
+          (add-points :col-0 :col-1 :data ($where below-sine?))
+          view)))
+
+
+    (view ($where ($fn [] (> (rand) 0.9)) (get-dataset :cars)))
+
+    (view ($where ($fn [Species] ($in Species #{\"virginica\" \"setosa\"})) (get-dataset :iris)))
+
+"
+  ([col-bindings body]
+     `(fn [{:keys ~col-bindings}] ~body)))
+
 
 
 (defn $group-by
