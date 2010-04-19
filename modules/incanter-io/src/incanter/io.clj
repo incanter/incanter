@@ -105,6 +105,7 @@ incanter.io
    (let [opts (when options (apply assoc {} options))
          delim (or (:delim opts) \,) ; comma delim default
          quote-char (or (:quote opts) \")
+	 keyword-headers? (or (:keyword-headers opts) true)
          skip (or (:skip opts) 0)
          header? (or (:header opts) false)
          compress-delim? (or (:compress-delim opts)
@@ -124,13 +125,19 @@ incanter.io
             ]
     (if header?
       ; have header row
-      (dataset (first parsed-data) (rest parsed-data))
+      (dataset (if keyword-headers?
+		 (map keyword (first parsed-data))
+		 (first parsed-data)) 
+	       (rest parsed-data))
       ; no header row so build a default one
       (let [col-count (count (first parsed-data))
             col-names (apply vector (map str 
 					 (repeat col-count "col") 
 					 (iterate inc 0)))]
-        (dataset col-names parsed-data))))))))
+        (dataset (if keyword-headers?
+		   (map keyword col-names) 
+		   col-names) 
+		 parsed-data))))))))
 
 
 
