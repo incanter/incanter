@@ -1,9 +1,9 @@
 (ns incanter.excel
   (:import
     [org.apache.poi.hssf.usermodel HSSFWorkbook HSSFCell HSSFFont HSSFRow HSSFSheet]
-    [org.apache.poi.ss.usermodel Font CellStyle]
+    [org.apache.poi.ss.usermodel Font CellStyle Cell]
     org.apache.poi.hssf.model.Sheet
-    java.io.FileOutputStream)
+    [java.io FileOutputStream FileInputStream])
   (:use
     [incanter core]))
 
@@ -18,12 +18,11 @@
   c))
 
 (defmulti write-cell #(let [c (. % getClass)]
-(cond (isa? c Number) :numeric
-      :else           :other )))
-(defmethod write-cell :other [o]
-  (str o))
-(defmethod write-cell :numeric [n]
-  (. n doubleValue))
+  (cond (isa? c Number) :numeric
+        :else           :other )))
+
+(defmethod write-cell :other   [o] (str o))
+(defmethod write-cell :numeric [n] (. n doubleValue))
 
 (defn- write-line [#^HSSFSheet sheet row-num line #^CellStyle style]
    (let [#^HSSFRow xl-line (. sheet createRow row-num)]
@@ -52,7 +51,7 @@ Options are:
             {:workbook w
              :normal  (make-font true w)
              :bold    (make-font false w)})
-          s (. (:workbook x) createSheet (or (opts :sheet-name "dataset")))
+          s (. (:workbook x) createSheet (or (:sheet-name opts) "dataset"))
           align-row (fn [row cols] (map #(get row %1) cols))
           ]
           (write-line s 0 (:column-names dataset) (:bold x))
@@ -62,3 +61,34 @@ Options are:
             (:rows dataset))
     (:workbook x))
     filename))
+
+(defmulti get-workbook-sheet (fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
+(defmethod get-workbook-sheet :indexed [wbk index-or-name]
+ (. wbk getSheetAt index-or-name))
+(defmethod get-workbook-sheet :named [wbk index-or-name]
+ (. wbk getSheet (str index-or-name)))
+
+(defmulti  get-cell-value (fn [cell] (. cell getCellType)))
+(defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
+(defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
+(defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell] (. cell getStringCellValue))
+(defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue)) ;TODO: date fields seem to live in here.
+
+(defn #^{:doc "Read an Excel file into a dataset.
+Options are:
+:sheet-name either a String for the tab name or an int for the sheet index -- defaults to 0"}
+  read-xls [
+  #^String filename
+  & options]
+    (let [opts (when options (apply assoc {} options))
+          sheet-pointer (or (:sheet-name opts) 0)]
+    (with-open [in-fs (FileInputStream. filename)]
+      (let [workbook  (HSSFWorkbook. in-fs)
+            sheet     (get-workbook-sheet workbook sheet-pointer)
+            rows-it   (iterator-seq (. sheet iterator))
+            rowi      (. (first rows-it) iterator)
+            colnames  (doall (map get-cell-value (iterator-seq rowi)))
+            data      (map #(iterator-seq (. % iterator)) (rest rows-it))
+           ] (dataset
+               colnames
+               (map (fn [d] (map get-cell-value d)) data))))))
