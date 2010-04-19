@@ -37,9 +37,6 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability))
-  (:use [incanter.probability :only [gt lt binary]])
-  (:use [incanter.transformations :only [map-map same-length? sort-map]])
-  (:use [incanter.internal :only [tree-comp-each]])
   (:use [clojure.contrib.map-utils :only [deep-merge-with]])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns
@@ -2652,26 +2649,7 @@ the coefficients."
    (mmult (trans (:coefs model))
           predictor))))
 
-(defn smooth-discrete-probs
-"
-smooth a map of discrete probabilities.
 
-clear up any discrete steps that are missing and should be there.
-
-TODO: single class may have a spike of 100% probability.
-"
-[probs buckets]
-(let [model (simple-regression (vals probs) (keys probs))
-      missing (difference (into #{} (keys probs)) buckets)
-      smoothed (merge probs 
-                    (into {}
-                          (for [b buckets
-                                :when (not (probs b))]
-                            [b (predict model b)])))
-      total-prob (apply + (vals smoothed))
-      scalar (/ 1 total-prob)
-      rescaled-smoothed (map-map #(* scalar %) smoothed)]
-  rescaled-smoothed))
 
 (defn odds-ratio
 "
@@ -2755,7 +2733,7 @@ http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
 In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.
 "
 [a b]
-(let [_ (assert (same-length? a b))
+(let [_ (assert (= (count a) (count b)))
       n (count a)
       arank (rank-index a)
       brank (rank-index b)
@@ -2767,6 +2745,30 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
   (- 1 (/ (* 6 dsos) 
           (* n (- (pow n 2) 1))))))
 
+
+
+
+
+(defn- key-compare
+ [x y]
+  (cond 
+    (and 
+       (keyword? x)
+       (not (keyword? y))) 1
+    (and 
+       (keyword? y)
+       (not (keyword? x))) -1
+    :otherwise (compare x y)))
+
+;;weird inversion makes us revers k1 and k2 
+(defn- kv-compare [[k1 v1] [k2 v2]] (key-compare k2 k1))
+
+;;TDOO: doesn't seem to work? test and beat on it.
+;;use clojrue sorting: sort-by, sorted-map-by, etc. 
+(defn- sort-map [m] (into {} (sort kv-compare m)))
+
+
+
 (defn kendalls-tau
 "
 http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient
@@ -2776,15 +2778,15 @@ best explanation and example is in \"cluster analysis for researchers\" page 165
 http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175
 "
 [a b]
-(let [_ (assert (same-length? a b))
+(let [_ (assert (= (count a) (count b)))
       n (count a)
       ranked (reverse (sort-map (zipmap a b)))
       ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
       dcd (second
            (reduce
            (fn [[vals total] [k v]]
-             (let [diff (- (count (filter (gt v) vals))
-                           (count (filter (lt v) vals)))]
+             (let [diff (- (count (filter #(> % v) vals))
+                           (count (filter #(< % v) vals)))]
                [(conj vals v) (+ total diff)]))
            [[] 0]
            ranked))]
@@ -2896,6 +2898,14 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
 )
 
 
+
+;;TODO: combine into one tree comp that can figure out if it should call one branch function on each leave, or each branch function on all leaves.
+(defn- tree-comp-each [root branch & leaves]
+ (apply 
+  root (map branch leaves)))
+
+
+
 ;;TODO: seems very useful for clustering: http://en.wikipedia.org/wiki/Mahalanobis_distance and http://en.wikipedia.org/wiki/Partial_leverage
 ;;TODO: add http://en.wikipedia.org/wiki/Jaro-Winkler
 ;;TODO: add graphical approaches to similarity: http://en.wikipedia.org/wiki/SimRank
@@ -2911,7 +2921,7 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 
 In the limiting case of p reaching infinity we obtain the Chebyshev distance."
  [a b p]
-(let [_ (assert (same-length? a b))]
+(let [_ (assert (= (count a) (count b)))]
 
  (pow
   (apply
@@ -2935,7 +2945,7 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
 (defn chebyshev-distance
 "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance."
 [a b]
-(let [_ (assert (same-length? a b))]
+(let [_ (assert (= (count a) (count b)))]
   (apply
    tree-comp-each
    max 
@@ -3080,6 +3090,8 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.
  (bigrams a)
  (bigrams b)))
 
+(defn- bool-to-binary [pred] (if pred 1 0))
+
 (defn hamming-distance
 "http://en.wikipedia.org/wiki/Hamming_distance
 
@@ -3087,11 +3099,11 @@ In information theory, the Hamming distance between two strings of equal length 
 [a b]
 (if (and (integer? a) (integer? b))
   (hamming-distance (str a) (str b))
-(let [_ (assert (same-length? a b))]
+(let [_ (assert (= (count a) (count b)))]
 (apply
  tree-comp-each 
   + 
-  #(binary (not (apply = %)))
+  #(bool-to-binary (not (apply = %)))
   (map vector a b)))))
 
 ;;TODO: not exactly sure if this is right. :-)
@@ -3107,7 +3119,7 @@ The metric space induced by the Lee distance is a discrete analog of the ellipti
 [a b q]
 (if (and (integer? a) (integer? b))
   (lee-distance (str a) (str b) q)
-(let [_ (assert (same-length? a b))]
+(let [_ (assert (= (count a) (count b)))]
 (apply
  tree-comp-each 
   + 
@@ -3217,7 +3229,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
                  (deep-merge-with 
                   (fn [a b] b) 
                   d 
-                  (let [cost (binary (not (= (nth a (- i 1))
+                  (let [cost (bool-to-binary (not (= (nth a (- i 1))
                                           (nth b (- j 1)))))
                         x
                           (min 
