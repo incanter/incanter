@@ -1,5 +1,5 @@
 /*
-* Matrix.java -- Matrix class for Clojure that extends DenseColDoubleMatrix2D
+* Matrix.java -- Matrix class for Clojure that extends DenseColumnDoubleMatrix2D
 * in the CERN Colt Library
 *
 * by David Edgar Liebke http://incanter.org
@@ -21,7 +21,7 @@ March 11, 2009: First version
 
 package incanter;
 
-import cern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D;
+import cern.colt.matrix.tdouble.impl.DenseColumnDoubleMatrix2D;
 import cern.colt.matrix.tdouble.DoubleMatrix2D;
 import cern.colt.function.tdouble.DoubleDoubleFunction;
 import cern.colt.function.tdouble.DoubleFunction;
@@ -33,7 +33,7 @@ import clojure.lang.IPersistentCollection;
 import clojure.lang.IPersistentMap;
 import clojure.lang.Seqable;
 
-public class Matrix extends DenseColDoubleMatrix2D implements ISeq, Counted, IObj {
+public class Matrix extends DenseColumnDoubleMatrix2D implements ISeq, Counted, IObj {
 
         public boolean oneDimensional = false;
         IPersistentMap meta;
