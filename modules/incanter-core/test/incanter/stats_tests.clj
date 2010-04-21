@@ -21,9 +21,7 @@
 
 (ns incanter.stats-tests
   (:use clojure.test 
-        (incanter core stats))
- (:use incanter.stats)
- (:use incanter.stats))
+        (incanter core stats)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.stats.clj
@@ -128,14 +126,6 @@
   (is (= 3
 	 (predict r 2)))))	 
 
-(deftest smooth-discrete-probs-test
-  (is (= {1 0.19047619047619047, 
-	  2 0.3333333333333334, 
-	  3 0.47619047619047616}
-	 (smooth-discrete-probs 
-	  {1 0.2
-	   3 0.5}
-	  [1 2 3]))))
 
 (deftest odds-ratio-test
   (let [p1 9/10
