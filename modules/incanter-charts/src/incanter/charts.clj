@@ -1576,6 +1576,288 @@
 
 
 
+
+(defn area-chart*
+  ([categories values & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+           main-title (or (:title opts) "")
+	   theme (or (:theme opts) :default)
+           _group-by (when (:group-by opts) 
+		     (if (coll? (:group-by opts)) 
+		       (to-list (:group-by opts))
+		       ($ (:group-by opts) data)))
+           x-label (or (:x-label opts) (str 'categories))
+           y-label (or (:y-label opts) (str 'values))
+	   series-label (:series-label opts)
+           vertical? (if (false? (:vertical opts)) false true)
+           legend? (true? (:legend opts))
+           dataset (DefaultCategoryDataset.)
+           chart (org.jfree.chart.ChartFactory/createAreaChart
+                     main-title
+                     x-label
+                     y-label
+                     dataset
+                     (if vertical?
+                       org.jfree.chart.plot.PlotOrientation/VERTICAL
+                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                     legend?
+                     true
+                     false)]
+        (do
+          (doseq [i (range 0 (count _values))] 
+	    (.addValue dataset
+		       (nth _values i)
+		       (cond 
+			_group-by
+			  (nth _group-by i)
+			series-label
+			  series-label
+			:else
+			  (str 'values))
+		       (nth _categories i)))
+          (set-theme chart theme)
+	  chart))))
+
+
+
+(defmacro area-chart
+" Returns a JFreeChart object representing an area-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default '') main title
+    :x-label (default 'Categories')
+    :y-label (default 'Value')
+    :series-label
+    :legend (default false) prints legend
+    :vertical (default true) the orientation of the plot
+    :group-by (default nil) -- a vector of values used to group the values into
+                               series within each category.
+
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (with-data (get-dataset :co2)
+      (view (area-chart :Type :uptake
+                       :title \"CO2 Uptake\"
+                       :group-by :Treatment
+                       :x-label \"Grass Types\" :y-label \"Uptake\"
+                      :legend true)))
+
+
+    (def data (get-dataset :airline-passengers))
+    (view (area-chart :year :passengers :group-by :month :legend true :data data))
+
+    (with-data  (get-dataset :airline-passengers)
+      (view (area-chart :month :passengers :group-by :year :legend true)))
+
+
+    (def data (get-dataset :austres))
+    (view data)
+    (def plot (area-chart :year :population :group-by :quarter :legend true :data data))
+    (view plot)
+    (save plot \"/tmp/austres_plot.png\" :width 1000)
+    (view \"file:///tmp/austres_plot.png\")
+
+
+    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def values (sample-uniform 12 :integers true :max 100))
+    (view (area-chart years values :group-by seasons :legend true))
+
+    (view (area-chart [\"a\" \"b\" \"c\"] [10 20 30]))
+    (view (area-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
+                     :legend true
+                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
+
+    ;; add a series label
+    (def plot (area-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
+    (view plot) 
+    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
+ 
+    (view (area-chart (sample \"abcdefghij\" :size 10 :replacement true)
+                     (sample-uniform 10 :max 50) :legend true))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([categories values & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "")
+           x-lab# (or (:x-label opts#) (str '~categories))
+           y-lab# (or (:y-label opts#) (str '~values))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s (0)" '~categories) 
+						   (format "%s" '~categories)))
+	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply area-chart* args#))))
+
+
+
+(defn stacked-bar-chart*
+  ([categories values & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+           main-title (or (:title opts) "")
+	   theme (or (:theme opts) :default)
+           _group-by (when (:group-by opts) 
+		     (if (coll? (:group-by opts)) 
+		       (to-list (:group-by opts))
+		       ($ (:group-by opts) data)))
+           x-label (or (:x-label opts) (str 'categories))
+           y-label (or (:y-label opts) (str 'values))
+	   series-label (:series-label opts)
+           vertical? (if (false? (:vertical opts)) false true)
+           legend? (true? (:legend opts))
+           dataset (DefaultCategoryDataset.)
+           chart (org.jfree.chart.ChartFactory/createStackedBarChart
+                     main-title
+                     x-label
+                     y-label
+                     dataset
+                     (if vertical?
+                       org.jfree.chart.plot.PlotOrientation/VERTICAL
+                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                     legend?
+                     true
+                     false)]
+        (do
+          (doseq [i (range 0 (count _values))] 
+	    (.addValue dataset
+		       (nth _values i)
+		       (cond 
+			_group-by
+			  (nth _group-by i)
+			series-label
+			  series-label
+			:else
+			  (str 'values))
+		       (nth _categories i)))
+          (set-theme chart theme)
+	  chart))))
+
+
+(defmacro stacked-bar-chart
+" Returns a JFreeChart object representing an area-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default '') main title
+    :x-label (default 'Categories')
+    :y-label (default 'Value')
+    :series-label
+    :legend (default false) prints legend
+    :vertical (default true) the orientation of the plot
+    :group-by (default nil) -- a vector of values used to group the values into
+                               series within each category.
+
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (with-data (get-dataset :co2)
+      (view (stacked-bar-chart :Type :uptake
+                       :title \"CO2 Uptake\"
+                       :group-by :Treatment
+                       :x-label \"Grass Types\" :y-label \"Uptake\"
+                      :legend true)))
+
+
+    (def data (get-dataset :airline-passengers))
+    (view (stacked-bar-chart :year :passengers :group-by :month :legend true :data data))
+
+    (with-data  (get-dataset :airline-passengers)
+      (view (stacked-bar-chart :month :passengers :group-by :year :legend true)))
+
+
+    (def data (get-dataset :austres))
+    (view data)
+    (def plot (stacked-bar-chart :year :population :group-by :quarter :legend true :data data))
+    (view plot)
+    (save plot \"/tmp/austres_plot.png\" :width 1000)
+    (view \"file:///tmp/austres_plot.png\")
+
+
+    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def values (sample-uniform 12 :integers true :max 100))
+    (view (stacked-bar-chart years values :group-by seasons :legend true))
+
+    (view (stacked-bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))
+    (view (stacked-bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
+                     :legend true
+                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
+
+    ;; add a series label
+    (def plot (stacked-bar-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
+    (view plot) 
+    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
+ 
+    (view (stacked-bar-chart (sample \"abcdefghij\" :size 10 :replacement true)
+                     (sample-uniform 10 :max 50) :legend true))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([categories values & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "")
+           x-lab# (or (:x-label opts#) (str '~categories))
+           y-lab# (or (:y-label opts#) (str '~values))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s (0)" '~categories) 
+						   (format "%s" '~categories)))
+	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply stacked-bar-chart* args#))))
+
+
+
 (defn pie-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
@@ -2631,6 +2913,8 @@
 
 
 
+
+
 ;;;; DEFAULT THEME METHODS
 
 (defmethod set-theme-default org.jfree.data.category.DefaultCategoryDataset
@@ -2638,8 +2922,9 @@
      (let [plot (.getPlot chart)
 	   renderer (.getRenderer plot)
 	   bar-painter (org.jfree.chart.renderer.category.StandardBarPainter.)]
-       (when (= (type (.getRenderer (.getPlot chart)))
-		org.jfree.chart.renderer.category.BarRenderer)  
+       (when (some #{(type (.getRenderer (.getPlot chart)))}
+		#{org.jfree.chart.renderer.category.BarRenderer 
+		  org.jfree.chart.renderer.category.StackedBarRenderer})  
 	 (doto renderer
 	   (.setBarPainter bar-painter)
 	   (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
