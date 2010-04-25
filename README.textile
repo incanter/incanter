@@ -41,7 +41,7 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
-Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
+Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://data-sorcery.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
 Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
 
@@ -75,15 +75,8 @@ The online documentation for most Incanter functions contain usage examples. The
 
 *More Incanter examples*
 
-* See the <a href="http://incanter.wordpress.com">Incanter blog</a>
-* See Incanter wiki
-** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
-** "Matrices":http://wiki.github.com/liebke/incanter/matrices
-** "Datasets":http://wiki.github.com/liebke/incanter/datasets
-** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
-** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
-* See the @examples/@ directory for additional usage examples.
-**  @script/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
+* See the <a href="http://data-sorcery.org">Data-Sorcery blog</a>
+* See the <a href="http://data-sorcery.org/contents">Documentation table of contents</a>
 
 
 
@@ -94,7 +87,7 @@ h2. Documentation
 The following documentation covers the Incanter and Clojure APIs and the APIs of the underlying java libraries.
 
 *Incanter documentation*
-* "Doc Index":http://incanter-blog.org/contents/
+* "Doc Index":http://data-sorcery.org/contents/
 * "API":http://liebke.github.com/incanter
 
 
@@ -136,6 +129,6 @@ h2. Incanter dependencies
 * "OpenCSV":http://opencsv.sourceforge.net/
 * "iText":http://itextpdf.com/
 * "Congomongo":http://github.com/somnium/congomongo
-* "Clojure-json":http://github.com/danlarkin/clojure-json
+* "JLaTeXMath":http://forge.scilab.org/index.php/p/jlatexmath/
 * "JLine":http://jline.sourceforge.net/
 
