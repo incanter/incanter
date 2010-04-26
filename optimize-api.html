@@ -30,11 +30,17 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
+    <div class="BranchTOC">
+      <a class="wiki_link" href="#">Branches</a>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="index.html" class="wiki_link">master</a></li><li><a href="branch-1.0.x/index.html" class="wiki_link">1.0.x</a></li>
+      </ul>
+    </div>
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li>
     </ul>
   </div>
 </div>
@@ -62,7 +68,8 @@ namespace.
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">optimize</span></h1>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">optimize</span>
+  <span id="branch-name">(master branch)</span></h1>
 by <span id="author">Unknown</span><br />
 <br />Usage:
 <pre>
@@ -113,7 +120,7 @@ Examples:
   ;; plot the second derivative function
   (def pdf-deriv2 (derivative pdf-deriv))
   (add-lines plot x (pdf-deriv2 x))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L68" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/optimize.clj#L68" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -146,7 +153,7 @@ Examples:
 
   (def grad (gradient f start))
   (time (doall (grad start x)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L251" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/optimize.clj#L251" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -179,7 +186,7 @@ Examples:
 
   (time (def hess (hessian f start)))
   (time (doall (hess start x)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L300" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/optimize.clj#L300" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -214,7 +221,7 @@ Examples:
 Reference:
   http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L26" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/optimize.clj#L26" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -303,7 +310,7 @@ Examples:
   (add-lines plot x (f start2 x))
   (def nlm2 (non-linear-model f y x start2))
   (add-lines plot x (:fitted nlm2))</pre>
-  <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L588" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/optimize.clj#L591" id="var-source">Source</a>
 </div>
 
 

@@ -30,11 +30,17 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
+    <div class="BranchTOC">
+      <a class="wiki_link" href="#">Branches</a>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="index.html" class="wiki_link">master</a></li><li><a href="branch-1.0.x/index.html" class="wiki_link">1.0.x</a></li>
+      </ul>
+    </div>
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li>
     </ul>
   </div>
 </div>
@@ -56,6 +62,8 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/add-histogram">add-histogram</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/add-image">add-image</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/add-lines">add-lines</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/add-pointer">add-pointer</a>
@@ -66,6 +74,8 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/add-text">add-text</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/area-chart">area-chart</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/bar-chart">bar-chart</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/bland-altman-plot">bland-altman-plot</a>
@@ -74,13 +84,21 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/clear-background">clear-background</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/dynamic-scatter-plot">dynamic-scatter-plot</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/dynamic-xy-plot">dynamic-xy-plot</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/function-plot">function-plot</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/get-series">get-series</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/heat-map">heat-map</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/histogram">histogram</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/line-chart">line-chart</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.charts/line-plot">line-plot</a>
+      <a href="#incanter.charts/pie-chart">pie-chart</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/qq-plot">qq-plot</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -90,11 +108,31 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-background-alpha">set-background-alpha</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-stroke">set-stroke</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-stroke-color">set-stroke-color</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-theme">set-theme</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-title">set-title</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-x-label">set-x-label</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-x-range">set-x-range</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-y-label">set-y-label</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-y-range">set-y-range</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/slider">slider</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/sliders">sliders</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/sliders*">sliders*</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/stacked-bar-chart">stacked-bar-chart</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/time-series-plot">time-series-plot</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/trace-plot">trace-plot</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -104,7 +142,8 @@ namespace.
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">charts</span></h1>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">charts</span>
+  <span id="branch-name">(master branch)</span></h1>
 by <span id="author">David Edgar Liebke</span><br />
 <br />Usage:
 <pre>
@@ -144,6 +183,15 @@ Examples:
           (add-box-plot (sample-normal 1000 :sd 2))
           (add-box-plot (sample-gamma 1000)))
 
+
+   (with-data (get-dataset :iris)
+     (doto (box-plot :Sepal.Length :legend true)
+       (add-box-plot :Petal.Length)
+       (add-box-plot :Sepal.Width)
+       (add-box-plot :Petal.Width)
+       view))
+
+
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
@@ -160,20 +208,35 @@ Adds an additional categories to an existing bar-chart or line-chart, returns th
 
 Options:
   :group-by
+  :series-label
 
 Examples:
 
-    (use '(incanter core charts stats))
+    (use '(incanter core charts stats datasets))
     (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
     (def years (mapcat identity (repeat 4 [2007 2008 2009])))
     (def x (sample-uniform 12 :integers true :max 100))
     (def plot (bar-chart years x :group-by seasons :legend true))
     (view plot)
-    (add-category-line plot (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+    (add-categories plot years [10 20 40] :series-label "winter-break")
+
+    (add-categories plot 
+                       (plus 3 years) 
+                       (sample-uniform 12 :integers true :max 100) 
+                       :group-by seasons)
 
     (def plot2 (line-chart years x :group-by seasons :legend true))
     (view plot2)
-    (add-category-line plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+    (add-categories plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
+
+    (with-data (get-dataset :iris)
+      (doto (line-chart :Species :Sepal.Length 
+                        :data ($rollup mean :Sepal.Length :Species)
+                        :legend true)
+        (add-categories :Species :Sepal.Width :data ($rollup mean :Sepal.Width :Species))
+        (add-categories :Species :Petal.Length :data ($rollup mean :Petal.Length :Species))
+        (add-categories :Species :Petal.Width :data ($rollup mean :Petal.Width :Species))
+        view))
 
 
 References:
@@ -246,15 +309,43 @@ Options:
 
 Examples:
 
-  (use '(incanter core charts stats))
+  (use '(incanter core charts stats datasets))
   (doto (histogram (sample-normal 1000)
                    :legend true)
         view
         (add-histogram (sample-normal 1000 :sd 0.5)))
 
+
+  (with-data (get-dataset :iris)
+    (doto (histogram :Sepal.Length :legend true)
+      (add-histogram :Petal.Length)
+      view))
+
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/add-image">add-image</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (add-image chart x y img &amp; options)
+</pre>
+  <pre id="var-docstr"> Adds an image to the chart at the given coordinates.
+
+Arguments:
+  chart -- the chart to add the polygon to.
+  x, y -- the coordinates to place the image
+  img -- a java.awt.Image object
+
+
+Examples:
+  (use '(incanter core charts latex))   
+
+   (doto (function-plot sin -10 10)
+    (add-image 0 0 (latex "\\frac{(a+b)^2} {(a-b)^2}"))
+    view)</pre>
   
 </div><div id="var-entry">
   <br />
@@ -288,11 +379,17 @@ Examples:
 
 
   ;; Clojure's doto macro can be used to build a chart
-  (doto (xy-plot x (pdf-normal x))
-        view
-        clear-background
-        (add-lines x (pdf-normal x :sd 1.5))
-        (add-lines x (pdf-normal x :sd 0.5)))
+  (doto (histogram (sample-normal 1000) :density true)
+        (add-lines (range -3 3 0.05) (pdf-normal (range -3 3 0.05)))
+        view)
+
+
+  (with-data (get-dataset :iris)
+      (doto (xy-plot :Sepal.Width :Sepal.Length :legend true)
+            (add-lines :Petal.Width :Petal.Length)
+            view))
+
+
 
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
@@ -370,6 +467,17 @@ Examples:
         view
         (add-points x y)
         (add-lines x (:fitted lm2)))
+
+
+  (with-data (get-dataset :iris)
+    (doto (scatter-plot :Sepal.Length :Sepal.Width :data ($where {:Species "setosa"}))
+          (add-points :Sepal.Length :Sepal.Width :data ($where {:Species "versicolor"}))
+          (add-points :Sepal.Length :Sepal.Width :data ($where {:Species "virginica"}))
+          view))
+
+  ;; of course this chart can be achieved in a single line:
+  (view (scatter-plot :Sepal.Length :Sepal.Width :group-by :Species :data (get-dataset :iris)))
+
 
 
 References:
@@ -478,89 +586,171 @@ Examples:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.charts/area-chart">area-chart</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (area-chart categories values &amp; options)
+</pre>
+  <pre id="var-docstr">Returns a JFreeChart object representing an area-chart of the given data.
+ Use the 'view' function to display the chart, or the 'save' function
+ to write it to a file.
+
+ Arguments:
+   categories -- a sequence of categories
+   values -- a sequence of numeric values
+
+ Options:
+   :title (default '') main title
+   :x-label (default 'Categories')
+   :y-label (default 'Value')
+   :series-label
+   :legend (default false) prints legend
+   :vertical (default true) the orientation of the plot
+   :group-by (default nil) -- a vector of values used to group the values into
+                              series within each category.
+
+
+ See also:
+   view and save
+
+ Examples:
+
+
+   (use '(incanter core stats charts datasets))
+
+   (with-data (get-dataset :co2)
+     (view (area-chart :Type :uptake
+                      :title "CO2 Uptake"
+                      :group-by :Treatment
+                      :x-label "Grass Types" :y-label "Uptake"
+                     :legend true)))
+
+
+   (def data (get-dataset :airline-passengers))
+   (view (area-chart :year :passengers :group-by :month :legend true :data data))
+
+   (with-data  (get-dataset :airline-passengers)
+     (view (area-chart :month :passengers :group-by :year :legend true)))
+
+
+   (def data (get-dataset :austres))
+   (view data)
+   (def plot (area-chart :year :population :group-by :quarter :legend true :data data))
+   (view plot)
+   (save plot "/tmp/austres_plot.png" :width 1000)
+   (view "file:///tmp/austres_plot.png")
+
+
+   (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+   (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+   (def values (sample-uniform 12 :integers true :max 100))
+   (view (area-chart years values :group-by seasons :legend true))
+
+   (view (area-chart ["a" "b" "c"] [10 20 30]))
+   (view (area-chart ["a" "a" "b" "b" "c" "c" ] [10 20 30 10 40 20]
+                    :legend true
+                    :group-by ["I" "II" "I" "II" "I" "II"]))
+
+   ;; add a series label
+   (def plot (area-chart ["a" "b" "c"] [10 20 30] :legend true :series-label "s1"))
+   (view plot) 
+   (add-categories plot ["a" "b" "c"] [5 25 40] :series-label "s2")  
+
+   (view (area-chart (sample "abcdefghij" :size 10 :replacement true)
+                    (sample-uniform 10 :max 50) :legend true))
+
+
+
+ References:
+   http://www.jfree.org/jfreechart/api/javadoc/
+   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.charts/bar-chart">bar-chart</h2>
   <span id="var-type">macro</span><br />
   <pre id="var-usage">Usage: (bar-chart categories values &amp; options)
 </pre>
-  <pre id="var-docstr"> Returns a JFreeChart object representing a bar-chart of the given data.
-Use the 'view' function to display the chart, or the 'save' function
-to write it to a file.
+  <pre id="var-docstr">Returns a JFreeChart object representing a bar-chart of the given data.
+ Use the 'view' function to display the chart, or the 'save' function
+ to write it to a file.
 
-Arguments:
-  categories -- a sequence of categories
-  values -- a sequence of numeric values
+ Arguments:
+   categories -- a sequence of categories
+   values -- a sequence of numeric values
 
-Options:
-  :title (default 'Histogram') main title
-  :x-label (default 'Categories')
-  :y-label (default 'Value')
-  :legend (default false) prints legend
-  :vertical (default true) the orientation of the plot
-  :group-by (default nil) -- a vector of values used to group the values into
-                             series within each category.
-
-
-See also:
-  view and save
-
-Examples:
+ Options:
+   :title (default 'Histogram') main title
+   :x-label (default 'Categories')
+   :y-label (default 'Value')
+   :series-label
+   :legend (default false) prints legend
+   :vertical (default true) the orientation of the plot
+   :group-by (default nil) -- a vector of values used to group the values into
+                              series within each category.
 
 
-  (use '(incanter core stats charts datasets))
+ See also:
+   view and save
 
-  (def data (get-dataset :co2))
-  (def grass-type (sel data :cols 1))
-  (def treatment-type (sel data :cols 2))
-  (def uptake (sel data :cols 4))
-  (view (bar-chart grass-type uptake
-                  :title "CO2 Uptake"
-                  :group-by treatment-type
-                  :x-label "Grass Types" :y-label "Uptake"
-                  :legend true))
+ Examples:
 
 
-  (def data (get-dataset :airline-passengers))
-  (def years (sel data :cols 0))
-  (def months (sel data :cols 2))
-  (def passengers (sel data :cols 1))
-  (view (bar-chart years passengers :group-by months :legend true))
-  (view (bar-chart months passengers :group-by years :legend true))
+   (use '(incanter core stats charts datasets))
+
+   (with-data (get-dataset :co2)
+     (view (bar-chart :Type :uptake
+                      :title "CO2 Uptake"
+                      :group-by :Treatment
+                      :x-label "Grass Types" :y-label "Uptake"
+                     :legend true)))
 
 
-  (def data (get-dataset :austres))
-  (view data)
-  (def plot (bar-chart (sel data :cols 0) (sel data :cols 1)
-                       :group-by (sel data :cols 2) :legend true))
-  (view plot)
-  (save plot "/tmp/austres_plot.png" :width 1000)
-  (view "file:///tmp/austres_plot.png")
+   (def data (get-dataset :airline-passengers))
+   (view (bar-chart :year :passengers :group-by :month :legend true :data data))
+
+   (with-data  (get-dataset :airline-passengers)
+     (view (bar-chart :month :passengers :group-by :year :legend true)))
 
 
-  (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
-  (def years (mapcat identity (repeat 4 [2007 2008 2009])))
-  (def values (sample-uniform 12 :integers true :max 100))
-  (view (bar-chart years values :group-by seasons :legend true))
-
-  (view (bar-chart ["a" "b" "c"] [10 20 30]))
-  (view (bar-chart ["a" "a" "b" "b" "c" "c" ] [10 20 30 10 40 20]
-                   :legend true
-                   :group-by ["I" "II" "I" "II" "I" "II"]))
-
-  (view (bar-chart (sample "abcdefghij" :size 10 :replacement true)
-                   (sample-uniform 10 :max 50) :legend true))
+   (def data (get-dataset :austres))
+   (view data)
+   (def plot (bar-chart :year :population :group-by :quarter :legend true :data data))
+   (view plot)
+   (save plot "/tmp/austres_plot.png" :width 1000)
+   (view "file:///tmp/austres_plot.png")
 
 
+   (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+   (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+   (def values (sample-uniform 12 :integers true :max 100))
+   (view (bar-chart years values :group-by seasons :legend true))
 
-References:
-  http://www.jfree.org/jfreechart/api/javadoc/
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+   (view (bar-chart ["a" "b" "c"] [10 20 30]))
+   (view (bar-chart ["a" "a" "b" "b" "c" "c" ] [10 20 30 10 40 20]
+                    :legend true
+                    :group-by ["I" "II" "I" "II" "I" "II"]))
+
+   ;; add a series label
+   (def plot (bar-chart ["a" "b" "c"] [10 20 30] :legend true :series-label "s1"))
+   (view plot) 
+   (add-categories plot ["a" "b" "c"] [5 25 40] :series-label "s2")  
+
+   (view (bar-chart (sample "abcdefghij" :size 10 :replacement true)
+                    (sample-uniform 10 :max 50) :legend true))
+
+
+
+ References:
+   http://www.jfree.org/jfreechart/api/javadoc/
+   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
   
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.charts/bland-altman-plot">bland-altman-plot</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (bland-altman-plot x1 x2)
+  <pre id="var-usage">Usage: (bland-altman-plot x1 x2 &amp; options)
 </pre>
   <pre id="var-docstr">
 
@@ -571,6 +761,10 @@ Examples:
   (def x1 (sel flow-meter :cols 1))
   (def x2 (sel flow-meter :cols 3))
   (view (bland-altman-plot x1 x2))
+
+  (with-data (get-dataset :flow-meter)
+    (view (bland-altman-plot "Wright 1st PEFR" "Mini Wright 1st PEFR")))
+
 
 
 References:
@@ -611,8 +805,11 @@ Examples:
 
   ;; use the group-by options
   (use '(incanter core stats datasets charts))
-  (def iris (to-matrix (get-dataset :iris)))
-  (view (box-plot (sel iris :cols 0) :group-by (sel iris :cols 4) :legend true))
+  (with-data (get-dataset :iris)
+    (view (box-plot :Petal.Length :group-by :Species :legend true))
+    (view (box-plot :Petal.Width :group-by :Species :legend true))
+    (view (box-plot :Sepal.Length :group-by :Species :legend true))
+    (view (box-plot :Sepal.Width :group-by :Species :legend true)))
 
   ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
 
@@ -633,6 +830,61 @@ removing the default grid, returns the modified chart object.
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/dynamic-scatter-plot">dynamic-scatter-plot</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (dynamic-scatter-plot [&amp; slider-bindings] expression &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns an scatter-plot bound to sliders (which tend to appear behind the chart). 
+  See the sliders macro for more information.
+
+
+  Examples:
+
+  (use '(incanter core stats charts))
+
+  (let [x (range -3 3 0.1)]
+    (view (dynamic-scatter-plot [mean (range -3 3 0.1)
+		                 sd (range 0.1 10 0.1)]
+	    [x (pdf-normal x :mean mean :sd sd)]
+            :title "Normal PDF Plot")))
+
+
+   (let [x (range -3 3 0.1)]
+     (view (dynamic-scatter-plot [mean (range -3 3 0.1)
+		                  sd (range 0.1 10 0.1)]
+	    (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
+            :title "Normal PDF Plot")))</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/dynamic-xy-plot">dynamic-xy-plot</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (dynamic-xy-plot [&amp; slider-bindings] expression &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns an xy-plot bound to sliders (which tend to appear behind the chart). 
+  See the sliders macro for more information.
+
+
+  Examples:
+
+  (use '(incanter core stats charts))
+
+  (let [x (range -3 3 0.1)]
+    (view (dynamic-xy-plot [mean (range -3 3 0.1)
+		            sd (range 0.1 10 0.1)]
+	    [x (pdf-normal x :mean mean :sd sd)]
+            :title "Normal PDF Plot")))
+
+   (let [x (range -3 3 0.1)]
+     (view (dynamic-xy-plot [mean (range -3 3 0.1)
+		             sd (range 0.1 10 0.1)]
+	    (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
+            :title "Normal PDF Plot")))</pre>
   
 </div><div id="var-entry">
   <br />
@@ -666,6 +918,55 @@ Examples:
 
   (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
   (view (function-plot cubic -10 10))</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/get-series">get-series</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (get-series chart)
+       (get-series chart series-idx)
+</pre>
+  <pre id="var-docstr">get-series</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/heat-map">heat-map</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (heat-map function x-min x-max y-min y-max &amp; options)
+</pre>
+  <pre id="var-docstr">
+  Examples:
+    (use '(incanter core charts))
+    (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
+    (view (heat-map f -10 10 -15 15))
+    (view (heat-map f -10 10 -10 10 :color? false))
+
+    (defn f2 [x y] (plus (sq x) (sq y)))
+    (view (heat-map f2 -10 10 -10 10))
+    (view (heat-map f2 -10 10 -10 10 :color? false))
+
+    (use 'incanter.stats)
+    (defn f3 [x y] (pdf-normal (sqrt (plus (sq x) (sq y)))))
+    (view (heat-map f3 -3 3 -3 3 :x-label "x1" :y-label "x2" :z-label "pdf"))
+    (view (heat-map f3 -3 3 -3 3 :color? false))
+
+    (defn f4 [x y] (minus (sq x) (sq y)))
+    (view (heat-map f4 -10 10 -10 10))
+    (view (heat-map f4 -10 10 -10 10 :color? false))
+
+
+    (use '(incanter core stats charts))
+    (let [data [[0 5 1 2] 
+  	          [0 10 1.9 1] 
+	          [15 0 0.5 1.5] 
+	          [18 10 4.5 2.1]] 
+          diffusion (fn [x y] 
+	  	      (sum (map #(pdf-normal (euclidean-distance [x y] (take 2 %)) 
+                                             :mean (nth % 2) :sd (last %)) 
+			        data)))]
+      (view (heat-map diffusion -5 20 -5 20)))</pre>
   
 </div><div id="var-entry">
   <br />
@@ -710,7 +1011,14 @@ Examples:
   (def x (range 0 8 0.01))
   (add-lines gam-hist x (pdf-gamma x))
 
-  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
+  (use 'incanter.datasets)
+  (def iris (get-dataset :iris))
+  (view (histogram :Sepal.Width :data iris))
+
+  (with-data (get-dataset :iris)
+    (view (histogram :Petal.Length)))
+
+
 
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
@@ -723,7 +1031,89 @@ References:
   <span id="var-type">macro</span><br />
   <pre id="var-usage">Usage: (line-chart categories values &amp; options)
 </pre>
-  <pre id="var-docstr"> Returns a JFreeChart object representing a line-chart of the given values and categories.
+  <pre id="var-docstr">Returns a JFreeChart object representing a line-chart of the given values and categories.
+ Use the 'view' function to display the chart, or the 'save' function
+ to write it to a file.
+
+ Arguments:
+   categories -- a sequence of categories
+   values -- a sequence of numeric values
+
+ Options:
+   :title (default 'Histogram') main title
+   :x-label (default 'Categories')
+   :y-label (default 'Value')
+   :legend (default false) prints legend
+   :series-label
+   :group-by (default nil) -- a vector of values used to group the values into
+                              series within each category.
+   :gradient? (default false) -- use gradient on bars
+
+
+ See also:
+   view and save
+
+ Examples:
+
+   (use '(incanter core stats charts datasets))
+
+   (def data (get-dataset :airline-passengers))
+   (def years (sel data :cols 0))
+   (def months (sel data :cols 2))
+   (def passengers (sel data :cols 1))
+   (view (line-chart years passengers :group-by months :legend true))
+   (view (line-chart months passengers :group-by years :legend true))
+
+
+   (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+   (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+   (def x (sample-uniform 12 :integers true :max 100))
+   (view (line-chart years x :group-by seasons :legend true))
+
+   (view (line-chart ["a" "b" "c" "d" "e" "f"] [10 20 30 10 40 20]))
+
+   (view (line-chart (sample "abcdefghij" :size 10 :replacement true)
+                        (sample-uniform 10 :max 50) :legend true))
+
+   ;; add a series label
+   (def plot (line-chart ["a" "b" "c"] [10 20 30] :legend true :series-label "s1"))
+   (view plot) 
+   (add-categories plot ["a" "b" "c"] [5 25 40] :series-label "s2")  
+
+
+   (view (line-chart :year :passengers :group-by :month :legend true :data data)) 
+   
+   (view (line-chart :month :passengers :group-by :year :legend true :data data))
+   
+   (with-data data
+     (view (line-chart :month :passengers :group-by :year :legend true)))
+
+   (with-data (-&gt;&gt; ($rollup :sum :passengers :year (get-dataset :airline-passengers))
+                   ($order :year :asc))
+     (view (line-chart :year :passengers)))
+
+   (with-data (-&gt;&gt; ($rollup :sum :passengers :month (get-dataset :airline-passengers))
+                   ($order :passengers :asc))
+     (view (line-chart :month :passengers)))
+
+
+   (with-data ($rollup :sum :passengers :month (get-dataset :airline-passengers))
+     (view (line-chart :month :passengers)))
+
+
+
+ References:
+   http://www.jfree.org/jfreechart/api/javadoc/
+   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/pie-chart">pie-chart</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (pie-chart categories values &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns a JFreeChart object representing a pie-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -733,52 +1123,34 @@ Arguments:
 
 Options:
   :title (default 'Histogram') main title
-  :x-label (default 'Categories')
-  :y-label (default 'Value')
   :legend (default false) prints legend
-  :group-by (default nil) -- a vector of values used to group the values into
-                             series within each category.
-
+  
 
 See also:
   view and save
 
 Examples:
 
+
   (use '(incanter core stats charts datasets))
 
-  (def data (get-dataset :airline-passengers))
-  (def years (sel data :cols 0))
-  (def months (sel data :cols 2))
-  (def passengers (sel data :cols 1))
-  (view (line-chart years passengers :group-by months :legend true))
-  (view (line-chart months passengers :group-by years :legend true))
+  (view (pie-chart ["a" "b" "c"] [10 20 30]))
+
+   (view (pie-chart (sample "abcdefghij" :size 10 :replacement true)
+                   (sample-uniform 10 :max 50) :legend true))
 
 
-  (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
-  (def years (mapcat identity (repeat 4 [2007 2008 2009])))
-  (def x (sample-uniform 12 :integers true :max 100))
-  (view (line-chart years x :group-by seasons :legend true))
-
-  (view (line-chart ["a" "b" "c" "d" "e" "f"] [10 20 30 10 40 20]))
-
-  (view (line-chart (sample "abcdefghij" :size 10 :replacement true)
-                       (sample-uniform 10 :max 50) :legend true))
+   (with-data (-&gt;&gt; (get-dataset :hair-eye-color)
+                   ($rollup :sum :count [:hair :eye]))
+     (view $data)
+     (view (pie-chart :hair :count :title "Hair Color"))
+     (view (pie-chart :eye :count :title "Eye Color")))
 
 
 
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
-  
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.charts/line-plot">line-plot</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (line-plot x y &amp; options)
-</pre>
-  <pre id="var-docstr">WARNING: line-plot has been renamed xy-plot.</pre>
   
 </div><div id="var-entry">
   <br />
@@ -795,17 +1167,21 @@ References:
 
 Examples:
 
-  (use '(incanter core stats charts))
+  (use '(incanter core stats charts datasets))
   (view (qq-plot (sample-normal 100)))
   (view (qq-plot (sample-exp 100)))
-  (view (qq-plot (sample-gamma 100)))</pre>
+  (view (qq-plot (sample-gamma 100)))
+
+  (with-data (get-dataset :iris)
+    (view (qq-plot :Sepal.Length)))</pre>
   
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.charts/scatter-plot">scatter-plot</h2>
   <span id="var-type">macro</span><br />
-  <pre id="var-usage">Usage: (scatter-plot x y &amp; options)
+  <pre id="var-usage">Usage: (scatter-plot)
+       (scatter-plot x y &amp; options)
 </pre>
   <pre id="var-docstr"> Returns a JFreeChart object representing a scatter-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -818,15 +1194,18 @@ Options:
   :legend (default false) prints legend
   :series-label (default x expression)
   :group-by (default nil) -- a vector of values used to group the x and y values into series.
+  :density? (default false) -- chart will represent density instead of frequency.
+  :nbins (default 10) -- number of bins (i.e. bars)
+  :gradient? (default false) -- use gradient on bars
 
 See also:
   view, save, add-points, add-lines
 
 Examples:
 
-  (use '(incanter core stats charts))
+  (use '(incanter core stats charts datasets))
   ;; create some data
-  (def mvn-samp (sample-multivariate-normal 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
+  (def mvn-samp (sample-mvn 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))
 
   ;; create scatter-plot of points
   (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))
@@ -841,12 +1220,21 @@ Examples:
   ;; use :group-by option
   (use '(incanter core stats datasets charts))
   ;; load the :iris dataset
-  (def iris (to-matrix (get-dataset :iris)))
+  (def iris (get-dataset :iris))
   ;; plot the first two columns grouped by the fifth column
-  (view (scatter-plot (sel iris :cols 0) (sel iris :cols 1) :group-by (sel iris :cols 4)))
+  (view (scatter-plot ($ :Sepal.Width iris) ($ :Sepal.Length iris) :group-by ($ :Species iris)))
+
+  (view (scatter-plot :Sepal.Length :Sepal.Width :data (get-dataset :iris)))
+
+  (view (scatter-plot :Sepal.Length :Sepal.Width :group-by :Species :data (get-dataset :iris)))
+
+  (with-data (get-dataset :iris)
+     (view (scatter-plot :Sepal.Length :Sepal.Width)))
+
+  (with-data (get-dataset :iris)
+     (view (scatter-plot :Sepal.Length :Sepal.Width :group-by :Species)))
 
 
-  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
 
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
@@ -883,6 +1271,87 @@ References:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.charts/set-stroke">set-stroke</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (set-stroke chart &amp; options)
+</pre>
+  <pre id="var-docstr">
+Examples:
+  (use '(incanter core charts))
+
+  (doto (line-chart [:a :b :c :d] [10 20 5 35])
+    (set-stroke :width 4 :dash 5)
+    view)
+ 
+  (doto (line-chart [:a :b :c :d] [10 20 5 35])
+    (add-categories [:a :b :c :d] [20 5 30 15])
+    (set-stroke :width 4 :dash 5)
+    (set-stroke :series 1 :width 2 :dash 10)
+    view)
+
+
+  (doto (function-plot sin -10 10 :step-size 0.1)
+    (set-stroke :width 3 :dash 5)
+    view)
+     </pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/set-stroke-color">set-stroke-color</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (set-stroke-color chart color &amp; options)
+</pre>
+  <pre id="var-docstr">
+Examples:
+  (use '(incanter core charts))
+
+  (doto (line-chart [:a :b :c :d] [10 20 5 35])
+    (set-stroke :width 4 :dash 5)
+    (set-stroke-color java.awt.Color/blue)
+    view)
+ 
+  (doto (function-plot sin -10 10 :step-size 0.1)
+    (set-stroke :width 3 :dash 5)
+    (set-stroke-color java.awt.Color/gray)
+    view)
+     </pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/set-theme">set-theme</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (set-theme chart theme)
+</pre>
+  <pre id="var-docstr">  Changes the chart theme.
+
+Arguments:
+  chart -- an Incanter/JFreeChart object
+  theme -- either a keyword indicating one of the built-in themes, or a JFreeChart ChartTheme object.
+
+Built-in Themes:
+  :default
+  :dark
+
+Examples:
+
+  (use '(incanter core charts))
+  (def chart (function-plot sin -4 4))
+  (view chart)
+  ;; change the theme of chart to :dark
+  (set-theme chart :dark)
+  ;; change it back to the default
+  (set-theme chart :default)
+
+
+ References:
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html
+    <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html</a> </pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.charts/set-title">set-title</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (set-title chart title)
@@ -909,11 +1378,270 @@ References:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.charts/set-x-range">set-x-range</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (set-x-range chart lower upper)
+</pre>
+  <pre id="var-docstr"> Sets the range of the x-axis on the given chart.
+
+Examples:
+  
+  (use '(incanter core charts datasets))
+
+  (def chart (xy-plot :speed :dist :data (get-dataset :cars)))
+  (view chart)
+  (set-x-range chart 10 20)</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.charts/set-y-label">set-y-label</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (set-y-label chart label)
 </pre>
   <pre id="var-docstr"> Sets the label of the y-axis, returns the modified chart object.
+
+References:
+  http://www.jfree.org/jfreechart/api/javadoc/
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/set-y-range">set-y-range</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (set-y-range chart lower upper)
+</pre>
+  <pre id="var-docstr"> Sets the range of the y-axis on the given chart.
+
+Examples:
+  
+  (use '(incanter core charts datasets))
+
+  (def chart (xy-plot :speed :dist :data (get-dataset :cars)))
+  (view chart)
+  (set-y-range chart 10 60)</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/slider">slider</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (slider updater-fn slider-values)
+       (slider updater-fn slider-values slider-label)
+</pre>
+  <pre id="var-docstr">
+
+Examples:
+  (use '(incanter core stats charts))
+
+  (def pdf-chart (function-plot pdf-normal -3 3))
+  (view pdf-chart)
+  (add-function pdf-chart pdf-normal -3 3)
+
+  (let [x (range -3 3 0.1)] 
+    (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1)))
+
+  (let [x (range -3 3 0.1)] 
+    (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1) "sd"))</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/sliders">sliders</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (sliders [&amp; slider-bindings] body)
+</pre>
+  <pre id="var-docstr"> Creates one slider control for each of the given sequence bindings. 
+  Each slider calls the given expression when manipulated. 
+
+
+  Examples:
+  (use '(incanter core stats charts))
+  
+  ;; manipulate a normal pdf
+  (let [x (range -3 3 0.1)]
+    (def pdf-chart (xy-plot))
+    (view pdf-chart) 
+    (sliders [mean (range -3 3 0.1) 
+  	      stdev (range 0.1 10 0.1)]
+      (set-data pdf-chart [x (pdf-normal x :mean mean :sd stdev)])))
+
+
+
+  ;; manipulate a gamma pdf
+  (let [x (range 0 20 0.1)]
+    (def pdf-chart (xy-plot))
+    (view pdf-chart) 
+    (sliders [rate (range 0.1 10 0.1) 
+  	      shape (range 0.1 10 0.1)]
+      (set-data pdf-chart [x (pdf-gamma x :rate rate :shape shape)])))
+
+
+
+  ;; find the start values of a non-linear model function
+  (use '(incanter core charts datasets))
+  ;; create model function used in the following data-sorcery post:
+  ;; http://data-sorcery.org/2009/06/06/fitting-non-linear-models/
+
+  (defn f [theta x]
+    (let [[b1 b2 b3] theta]
+      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))
+
+
+  (with-data (get-dataset :chwirut)
+    (view $data)
+    (def chart (scatter-plot ($ :x) ($ :y)))
+    (view chart)
+    (add-lines chart ($ :x) (f [0 0.01 0] ($ :x)))
+
+    ;; manipulate the model line to find some good start values.
+    ;; give the index of the line data (i.e. 1) to set-data.
+    (let [x ($ :x)] 
+      (sliders [b1 (range 0 2 0.01)
+	        b2 (range 0.01 2 0.01)
+	        b3 (range 0 2 0.01)]
+        (set-data chart [x (f [b1 b2 b3] x)] 1))))</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/sliders*">sliders*</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (sliders* f [&amp; slider-values])
+       (sliders* f [&amp; slider-values] [&amp; slider-labels])
+</pre>
+  <pre id="var-docstr">sliders*
+
+  Examples:
+  (use '(incanter core stats charts))
+
+  (let [x (range -3 3 0.1)] 
+    (do
+      (def pdf-chart (xy-plot x (pdf-normal x :mean -3 :sd 0.1)))
+      (view pdf-chart)
+      (sliders* #(set-data pdf-chart [x (pdf-normal x :mean %1 :sd %2)]) 
+	       [(range -3 3 0.1) (range 0.1 10 0.1)] 
+               ["mean" "sd"])))</pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/stacked-bar-chart">stacked-bar-chart</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (stacked-bar-chart categories values &amp; options)
+</pre>
+  <pre id="var-docstr">Returns a JFreeChart object representing an area-chart of the given data.
+ Use the 'view' function to display the chart, or the 'save' function
+ to write it to a file.
+
+ Arguments:
+   categories -- a sequence of categories
+   values -- a sequence of numeric values
+
+ Options:
+   :title (default '') main title
+   :x-label (default 'Categories')
+   :y-label (default 'Value')
+   :series-label
+   :legend (default false) prints legend
+   :vertical (default true) the orientation of the plot
+   :group-by (default nil) -- a vector of values used to group the values into
+                              series within each category.
+
+
+ See also:
+   view and save
+
+ Examples:
+
+
+   (use '(incanter core stats charts datasets))
+
+   (with-data (get-dataset :co2)
+     (view (stacked-bar-chart :Type :uptake
+                      :title "CO2 Uptake"
+                      :group-by :Treatment
+                      :x-label "Grass Types" :y-label "Uptake"
+                     :legend true)))
+
+
+   (def data (get-dataset :airline-passengers))
+   (view (stacked-bar-chart :year :passengers :group-by :month :legend true :data data))
+
+   (with-data  (get-dataset :airline-passengers)
+     (view (stacked-bar-chart :month :passengers :group-by :year :legend true)))
+
+
+   (def data (get-dataset :austres))
+   (view data)
+   (def plot (stacked-bar-chart :year :population :group-by :quarter :legend true :data data))
+   (view plot)
+   (save plot "/tmp/austres_plot.png" :width 1000)
+   (view "file:///tmp/austres_plot.png")
+
+
+   (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+   (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+   (def values (sample-uniform 12 :integers true :max 100))
+   (view (stacked-bar-chart years values :group-by seasons :legend true))
+
+   (view (stacked-bar-chart ["a" "b" "c"] [10 20 30]))
+   (view (stacked-bar-chart ["a" "a" "b" "b" "c" "c" ] [10 20 30 10 40 20]
+                    :legend true
+                    :group-by ["I" "II" "I" "II" "I" "II"]))
+
+   ;; add a series label
+   (def plot (stacked-bar-chart ["a" "b" "c"] [10 20 30] :legend true :series-label "s1"))
+   (view plot) 
+   (add-categories plot ["a" "b" "c"] [5 25 40] :series-label "s2")  
+
+   (view (stacked-bar-chart (sample "abcdefghij" :size 10 :replacement true)
+                    (sample-uniform 10 :max 50) :legend true))
+
+
+
+ References:
+   http://www.jfree.org/jfreechart/api/javadoc/
+   <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/time-series-plot">time-series-plot</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (time-series-plot x y &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns a JFreeChart object representing a time series plot of the given data.
+Use the 'view' function to display the chart, or the 'save' function
+to write it to a file. Sequence passed in for the x axis should be
+number of milliseconds from the epoch (1 Janurary 1970).
+
+Options:
+  :data (default nil) If the :data option is provided a dataset, 
+                      column names can be used instead of sequences 
+                      of data as arguments to xy-plot.
+  :title (default 'Time Series Plot') main title
+  :x-label (default x expression)
+  :y-label (default y expression)
+  :legend (default false) prints legend
+  :series-label (default x expression)
+  :group-by (default nil) -- a vector of values used to group the x and y values into series.
+
+See also:
+  view, save, add-points, add-lines
+
+Examples:
+
+  (use '(incanter core stats charts chrono))
+
+  ;; plot numbers against years starting with 1900 
+  (def dates (map #(-&gt; (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0)) 
+                       .getMillis) 
+                  (range 100)))
+  (def y (range 100))
+  (view (time-series-plot dates y
+                          :x-label "Year"))
 
 References:
   http://www.jfree.org/jfreechart/api/javadoc/
@@ -943,14 +1671,18 @@ Examples:
   <hr />
   <h2 id="incanter.charts/xy-plot">xy-plot</h2>
   <span id="var-type">macro</span><br />
-  <pre id="var-usage">Usage: (xy-plot x y &amp; options)
+  <pre id="var-usage">Usage: (xy-plot)
+       (xy-plot x y &amp; options)
 </pre>
   <pre id="var-docstr"> Returns a JFreeChart object representing a xy-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
 Options:
-  :title (default 'Histogram') main title
+  :data (default nil) If the :data option is provided a dataset, 
+                      column names can be used instead of sequences 
+                      of data as arguments to xy-plot.
+  :title (default 'XY Plot') main title
   :x-label (default x expression)
   :y-label (default 'Frequency')
   :legend (default false) prints legend
@@ -983,9 +1715,9 @@ Examples:
 
   ;; use :group-by option
   (use '(incanter core charts datasets))
-  (def data (to-matrix (get-dataset :chick-weight)))
-  (let [[weight time chick] (trans data)]
-    (view (xy-plot time weight :group-by chick)))
+
+  (with-data (get-dataset :chick-weight)
+    (view (xy-plot :Time :weight :group-by :Chick)))
 
 
   ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots
