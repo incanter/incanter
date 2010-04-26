@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>datasets API reference (Incanter)</title>
+    <link href="../static/incanter.ico" rel="icon" />
+    <link href="../static/incanter.ico" rel="shortcut icon" />
+    <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/internal.css" rel="stylesheet" />
+    <!-- TODO: are we using these (from clojure.org)? If so, add the files -->
+    <script src="file/view/code_highlighter.js" type="text/javascript"></script>
+    <script src="file/view/clojure.js" type="text/javascript"></script>
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="../static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
+      </div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <div class="BranchTOC">
+      <a class="wiki_link" href="#">Branches</a>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="../index.html" class="wiki_link">master</a></li><li><a href="../branch-1.0.x/index.html" class="wiki_link">1.0.x</a></li>
+      </ul>
+    </div>
+    <a class="wiki_link" href="index.html">Overview</a><br />
+    <a class="wiki_link" href="api-index.html">API Index</a><br />
+    <a class="wiki_link" href="#">Namespaces:</a>
+    <ul id="left-sidebar-list">
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0">Overview</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.datasets/get-dataset">get-dataset</a>
+    </div>
+    <br />
+  </div>
+</div>
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">datasets</span>
+  <span id="branch-name">(1.0.x branch)</span></h1>
+by <span id="author">Unknown</span><br />
+<br />Usage:
+<pre>
+(ns your-namespace
+  (:require <span id="long-name">incanter.datasets</span>))
+</pre><pre>
+</pre><h2>Overview</h2>
+<pre id="namespace-docstr"></pre>
+<br />
+<h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.datasets/get-dataset">get-dataset</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (get-dataset dataset-key &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns the sample dataset associated with the given key. Most datasets
+are from R's sample data sets, as are the descriptions below.
+
+Options:
+
+  :incanter-home -- if the incanter.home property is not set when the JVM is
+                    started (using -Dincanter.home) or there is no INCANTER_HOME
+                    environment variable set, use the :incanter-home options to 
+                    provide the parent directory of the sample data directory.
+
+  :from-repo (default false) -- If true, retrieves the dataset from the online repository 
+                     instead of locally, it will do this by default if incanter-home is not set.
+
+
+Datasets:
+
+  :iris -- the Fisher's or Anderson's Iris data set gives the
+           measurements in centimeters of the variables sepal
+           length and width and petal length and width,
+           respectively, for 50 flowers from each of 3 species
+           of iris.
+
+  :cars -- The data give the speed of cars and the distances taken
+            to stop. Note that the data were recorded in the 1920s.
+
+  :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics
+             and Estimation for Social Scientists'
+
+  :us-arrests -- This data set contains statistics, in arrests per 100,000
+                 residents for assault, murder, and rape in each of the 50 US
+                 states in 1973. Also given is the percent of the population living
+                 in urban areas.
+
+  :flow-meter -- flow meter data used in Bland Altman Lancet paper.
+
+  :co2 -- has 84 rows and 5 columns of data from an experiment on the cold tolerance
+          of the grass species _Echinochloa crus-galli_.
+
+  :chick-weight -- has 578 rows and 4 columns from an experiment on the effect of diet
+                   on early growth of chicks.
+
+  :plant-growth -- Results from an experiment to compare yields (as measured by dried
+                   weight of plants) obtained under a control and two different
+                   treatment conditions.
+
+  :pontius -- These data are from a NIST study involving calibration of load cells.
+              The response variable (y) is the deflection and the predictor variable
+              (x) is load.
+              See http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml
+
+  :filip -- NIST data set for linear regression certification,
+            see http://www.itl.nist.gov/div898/strd/lls/data/Filip.shtml
+
+  :longely -- This classic dataset of labor statistics was one of the first used to
+              test the accuracy of least squares computations. The response variable
+              (y) is the Total Derived Employment and the predictor variables are GNP
+              Implicit Price Deflator with Year 1954 = 100 (x1), Gross National Product
+              (x2), Unemployment (x3), Size of Armed Forces (x4), Non-Institutional
+              Population Age 14 &amp; Over (x5), and Year (x6).
+              See http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml
+
+  :Chwirut -- These data are the result of a NIST study involving ultrasonic calibration.
+              The response variable is ultrasonic response, and the predictor variable is
+              metal distance.
+              See http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat
+
+  :thurstone -- test data for non-linear least squares.
+
+  :austres -- Quarterly Time Series of the Number of Australian Residents
+
+  :hair-eye-color -- Hair and eye color of sample of students
+
+  :airline-passengers -- Monthly Airline Passenger Numbers 1949-1960
+
+  :math-prog -- Pass/fail results for a high school mathematics assessment test
+                and a freshmen college programming course.
+
+  :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.
+
+ Examples:
+   (def data (get-dataset :cars))
+   (def data2 (get-dataset :cars :incanter.home "/usr/local/packages/incanter"))</pre>
+  <a href="http://github.com/liebke/incanter/blob/5357ddc0b170aa0fa6058ea07a184695b754f62e/modules/incanter-io/src/main/clojure/incanter/datasets.clj#L92" id="var-source">Source</a>
+</div>
+
+
+</div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info </div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>
