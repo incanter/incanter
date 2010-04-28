@@ -53,13 +53,7 @@ namespace.
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.latex/add-latex">add-latex</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.latex/add-latex-subtitle">add-latex-subtitle</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.latex/latex">latex</a>
-    </div>
+    
     <br />
   </div>
 </div>
@@ -79,81 +73,7 @@ and subtitles.
          </pre>
 <br />
 <h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.latex/add-latex">add-latex</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; options)
-</pre>
-  <pre id="var-docstr"> Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
 
-Arguments:
-  chart -- the chart to add the polygon to.
-  x, y -- the coordinates to place the image
-  latex-str -- a string of latex code
-
-
-Options:
-  :color (default java.awt.Color/darkGray) -- the text color
-
-
-Examples:
-  (use '(incanter core charts stats latex))   
-
-    (doto (function-plot pdf-normal -3 3)
-      (add-latex 0 0.1 "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
-      view)</pre>
-  <a href="http://github.com/liebke/incanter/blob/f4d53f08063f9c42c2f0ae68636faf1263fc5ea4/modules/incanter-latex/src/incanter/latex.clj#L84" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.latex/add-latex-subtitle">add-latex-subtitle</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; options)
-</pre>
-  <pre id="var-docstr"> Adds the given LaTeX equation as a subtitle to the chart.
-
-
-Options:
-  :color (default java.awt.Color/darkGray) -- the text color
-
-
-Examples:
-  (use '(incanter core charts stats latex))
-
-  (doto (function-plot pdf-normal -3 3)
-    (add-latex-subtitle "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
-    view)</pre>
-  <a href="http://github.com/liebke/incanter/blob/f4d53f08063f9c42c2f0ae68636faf1263fc5ea4/modules/incanter-latex/src/incanter/latex.clj#L59" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.latex/latex">latex</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (latex latex-txt &amp; options)
-</pre>
-  <pre id="var-docstr"> Returns the given LaTeX equation rendered as an java.awt.Image.
-
-Options:
-  :color (default java.awt.Color/black) -- the text color
-
-Examples:
-  (use '(incanter core charts stats latex))
-
-  (def latex-img (latex "\\frac{(a+b)^2} {(a-b)^2}"))
-  (save latex-img "/tmp/latex-example1.png")
-  (view "file:///tmp/latex-example1.png")
-
-  (view (latex "f(x)=\\frac {1} {\\sqrt {2\\pi \\sigma ^2}} e^{\\frac {-(x - \\mu)^2}{2 \\sigma ^2}}"))
-
-  (view (latex "\\begin{pmatrix}
-                 a &amp; b &amp; c \\\\
-                 d &amp; e &amp; f \\\\
-                 g &amp; h &amp; i
-                 \\end{pmatrix}"))</pre>
-  <a href="http://github.com/liebke/incanter/blob/f4d53f08063f9c42c2f0ae68636faf1263fc5ea4/modules/incanter-latex/src/incanter/latex.clj#L13" id="var-source">Source</a>
-</div>
 
 
 </div>
