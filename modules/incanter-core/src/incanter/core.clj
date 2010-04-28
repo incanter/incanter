@@ -1072,7 +1072,7 @@
 
 
 
-(defn group-by
+(defn group-on
 " Groups the given matrix by the values in the columns indicated by the
   'on-cols' argument, returning a sequence of matrices. The returned
   matrices are sorted by the value of the group column ONLY when there
@@ -1082,24 +1082,24 @@
 
     (use '(incanter core datasets))
     (def plant-growth (to-matrix (get-dataset :plant-growth)))
-    (group-by plant-growth 1)
+    (group-on plant-growth 1)
     ;; only return the first column
-    (group-by plant-growth 1 :cols 0)
+    (group-on plant-growth 1 :cols 0)
     ;; don't return the second column
-    (group-by plant-growth 1 :except-cols 1)
+    (group-on plant-growth 1 :except-cols 1)
 
     (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))
-    (group-by plant-growth-dummies [1 2])
+    (group-on plant-growth-dummies [1 2])
     ;; return only the first column
-    (group-by plant-growth-dummies [1 2] :cols 0)
+    (group-on plant-growth-dummies [1 2] :cols 0)
     ;; don't return the last two columns
-    (group-by plant-growth-dummies [1 2] :except-cols [1 2])
+    (group-on plant-growth-dummies [1 2] :except-cols [1 2])
 
     ;; plot the plant groups
     (use 'incanter.charts)
     ;; can use destructuring if you know the number of groups
     ;; groups are sorted only if the group is based on a single column value
-    (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]
+    (let [[ctrl trt1 trt2] (group-on plant-growth 1 :cols 0)]
       (doto (box-plot ctrl)
             (add-box-plot trt1)
             (add-box-plot trt2)
