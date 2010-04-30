@@ -29,8 +29,9 @@
        :author "David Edgar Liebke"}
 
   incanter.core
-  ;(:gen-class)
-  (:use (incanter internal))
+
+  (:use [incanter internal]
+	[incanter.infix :only (infix-to-prefix defop)])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
@@ -2591,3 +2592,91 @@
 			    (conj (nth %1 2) (nth %2 2)))]
        (reduce transpose [[] [] []] xyz))))
 
+
+
+
+
+(defop '- 50 'incanter.core/minus)
+(defop '+ 60 'incanter.core/plus)
+(defop '/ 70 'incanter.core/div)
+(defop '* 80 'incanter.core/mult)
+(defop '<*> 80 'incanter.core/mmult)
+(defop '<x> 80 'incanter.core/kronecker)
+(defop '** 100 'incanter.core/pow)
+
+(defmacro $=
+  "Formula macro translates from infix to prefix
+
+
+   Examples:
+
+    (use 'incanter.core)
+    ($= 7 + 8)
+    ($= [1 2 3] + [4 5 6])
+    ($= [1 2 3] + (sin [4 5 6]))
+    ($= [1 2 3] <*> (trans [1 2 3]))
+    ($= [1 2 3] * [1 2 3])
+    ($= [1 2 3] <x> [1 2 3])
+    ($= 9 * 8 ** 3)
+    ($= (sin Math/PI) * 10)
+
+    ($= 10 + 20 * (4 - 5) / 6)
+
+    ($= 20 * (4 - 5) / 6)
+
+    (let [x 10
+          y -5]
+      ($= x + y / -10))
+
+    ($= 3 ** 3)
+
+    ($= [1 2 3] * [1 2 3])
+    ($= [1 2 3] / (sq [1 2 3]) + [5 6 7])
+
+    ($= (sqrt 5 * 5 + 3 * 3))
+    ($= (sq [1 2 3] + [1 2 3]))
+    ($= ((5 + 4) * 5))
+    ($= ((5 + 4 * (3 - 4)) / (5 + 8) * 6))
+    ($= [1 2 3] + 5)
+    ($= (matrix [[1 2] [4 5]]) + 6)
+    ($= (trans [[1 2] [4 5]]) + 6)
+
+    ($= (trans [[1 2] [4 5]]) <*> (matrix [[1 2] [4 5]]))
+    
+
+    (use '(incanter core charts))
+    (defn f [x] ($= x ** 2 + 3 * x + 5))
+    (f 5)
+    (view (function-plot f -10 10))
+    (view (function-plot #($= % ** 2 + 3 * % + 5) -10 10))
+    (view (function-plot (fn [x] ($= x ** 2 + 3 * x + 5)) -10 10))
+    (let [x (range -10 10 0.1)] 
+      (view (xy-plot x ($= x ** 3 - 5 * x ** 2 + 3 * x + 5))))
+
+    ($= (5 + 7))
+    ($= (trans [1 2 3 4]) <*> [1 2 3 4])
+    ($= [1 2 3 4] <*> (trans [1 2 3 4]))
+
+    ($= [1 2 3 4] <*> (trans [1 2 3 4]))
+    ($= [1 2 3 4] <x> (trans [1 2 3 4]))
+
+
+    ;; kronecker product example
+    ($= (matrix [[1 2] [3 4] [5 6]]) <x> 4)
+    ($= (matrix [[1 2] [3 4] [5 6]]) <x> (matrix [[1 2] [3 4]]))
+    ($= [1 2 3 4] <x> 4)
+
+    ($= 3 > (5 * 2/7))
+
+    (use '(incanter core datasets charts))
+    (with-data (get-dataset :cars)
+      (doto (scatter-plot :speed :dist :data ($where ($fn [speed dist] ($= dist / speed < 2))))
+        (add-points :speed :dist :data ($where ($fn [speed dist] ($= dist / speed >= 2))))
+        (add-lines ($ :speed) ($= 2 * ($ :speed)))
+        view))
+
+   
+
+"
+  ([& equation]
+     (infix-to-prefix equation)))
