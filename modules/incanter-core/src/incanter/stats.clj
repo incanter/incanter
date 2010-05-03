@@ -1907,7 +1907,7 @@
     (def data (to-matrix (get-dataset :plant-growth)))
 
     ;; break the first column of the data into groups based on treatment (second column).
-    (def groups (group-by data 1 :cols 0))
+    (def groups (group-on data 1 :cols 0))
 
     ;; define a function for the statistic of interest
     (defn means-diff [x y] (minus (mean x) (mean y)))
@@ -2533,7 +2533,7 @@
 
     (use '(incanter core stats datasets))
 
-    (def by-gender (group-by (get-dataset :hair-eye-color) 2))
+    (def by-gender (group-on (get-dataset :hair-eye-color) 2))
     (def table (matrix (sel (first by-gender) :cols 3) 4))
 
     (detabulate :table table)

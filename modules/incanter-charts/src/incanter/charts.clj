@@ -27,7 +27,7 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? to-list plus minus div group-by
+  (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
                               bind-columns view save $group-by conj-cols 
 			      grid-apply set-data)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
