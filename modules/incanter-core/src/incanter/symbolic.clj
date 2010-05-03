@@ -1,7 +1,7 @@
 
-
-  ;; (:use clojure.contrib.math)
-(ns incanter.symbolic
+(ns  #^{:doc "A library for performing symbolic math, a port from SICP (http://mitpress.mit.edu/sicp/)."
+       :author "Bryce Nyeggen, with modifications by David Edgar Liebke"}
+ incanter.symbolic
   (:use [incanter.core :only (pow)]))
 
 ;functions of multiple arguments
@@ -166,6 +166,8 @@
 
     (deriv (* x y (+ x 3)) x 2) ; => (+ y y)
     (deriv (* x y (+ x 3)) x 3) ; => 0
+
+    (deriv (+ (* 3 x) (* 8 x)) x) ; => 11
 
   
 "
