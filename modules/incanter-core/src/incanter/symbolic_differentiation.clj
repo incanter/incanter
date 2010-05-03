@@ -72,22 +72,6 @@
     (and (number? b) (number? e)) (expt b e)
     true (list '** b e)))
 
-(defn make-fnc
-  "Creates a function with a list evaled to its body.  Useful for using
-  derivatives as functions in their own right. fn is in current NS, or you may
-  qualify it.  needs to be adapted to accept param list, not x"
-  ([new-fn code]
-    (eval `(defn ~(symbol new-fn) [~'x] ~@code))
-    )
-  ([new-ns new-fn code]
-    (binding [*ns* *ns*]
-    `(ns ~(symbol new-ns))
-    ;instead of evaling defn, could be inline letfn
-    (eval `(defn ~(symbol new-fn) [~'x] ~@code)))
-    ;(eval `~(symbol new-fn)) ;what does this do?
-    )
-  )
-
 (defn deriv
   "main sub-function for differentiation. with 2 args, takes 1st degree deriv.
   with 3, takes arbitrary degrees. contains all deriv rules for basic funcs."
