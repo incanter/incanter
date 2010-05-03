@@ -1,9 +1,8 @@
 
-(ns incanter.symbolic-differentiation
-  ;(:require )
-  (:use clojure.contrib.math)
-  ;(:import )
-  )
+
+  ;; (:use clojure.contrib.math)
+(ns incanter.symbolic
+  (:use [incanter.core :only (pow)]))
 
 ;functions of multiple arguments
 (def fn-list #{ '+ '- '* '/ 'pow '** 'expt})
@@ -33,7 +32,7 @@
 (defn- quotient? [x] (and (>= (count x) 3) (= (first x) '/)))
 
 (defn- conv-qtnt [x] "Convert a quotient to a product of a base with an inverse"
-  (list '* (second x) (list '** (list '* (nthnext x 2)) -1)))
+  (list '* (second x) (list 'pow (list '* (nthnext x 2)) -1)))
 ;exp can also kind of be chainrulized below, it makes sense not to though since
 ;it takes 2 args, not one.  log base whatever is same situation
 (defn- expnt [e] (nth e 2))
@@ -69,52 +68,110 @@
     (= b 1) 1
     (= e 0) 1
     (= e 1) b
-    (and (number? b) (number? e)) (expt b e)
-    true (list '** b e)))
+    (and (number? b) (number? e)) (pow b e)
+    true (list 'pow b e)))
 
-(defn deriv
+(defn deriv*
   "main sub-function for differentiation. with 2 args, takes 1st degree deriv.
-  with 3, takes arbitrary degrees. contains all deriv rules for basic funcs."
+  with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
+
+
+  Examples:
+
+    (use '(incanter core symbolic))
+
+    (deriv* '(+ x 3) 'x)
+    (deriv* '(* x y) 'x)
+    (deriv* '(* (* x y) '(+ x 3)) x)
+    (deriv* '(* (* x y) (+ x 3)) 'y)
+
+    (deriv* '(* x y (+ x 3)) 'x)
+    (deriv* '(* x y (+ x 3)) 'y)
+
+    (deriv* '(* x y (+ x 3)) 'x 2)
+    (deriv* '(* x y (+ x 3)) 'x 3)
+
+
+"
   ([exp v]
     (cond
       (number? exp) 0
       (same-var? exp v) 1
       (and (same-var? exp) (not= exp v)) 0
-      (sum? exp) (make-sum (deriv (second exp) v) (deriv (reduce-expr exp '+) v))
-      (difference? exp) (make-sum (deriv (second exp) v)
-                          (deriv (make-prod -1 (reduce-expr exp '+)) v))
+      (sum? exp) (make-sum (deriv* (second exp) v) (deriv* (reduce-expr exp '+) v))
+      (difference? exp) (make-sum (deriv* (second exp) v)
+                          (deriv* (make-prod -1 (reduce-expr exp '+)) v))
       (product? exp)
       (make-sum
         (make-prod (second exp)
-          (deriv (reduce-expr exp '*) v))
-        (make-prod (deriv (second exp) v)
+          (deriv* (reduce-expr exp '*) v))
+        (make-prod (deriv* (second exp) v)
           (reduce-expr exp '*)))
-      (quotient? exp) (deriv (conv-qtnt exp) v)
+      (quotient? exp) (deriv* (conv-qtnt exp) v)
       (expnt? exp)
       (let [u (second exp)
             n (expnt exp)]
         (make-prod (make-prod
                      (expnt exp)
                      (make-expnt (second exp) (make-sum (expnt exp) -1)))
-          (deriv (second exp) v)))
+          (deriv* (second exp) v)))
       (chainable? exp)
       (let [u (first exp)
             n (second exp)]
         (cond
           (number? n) 0;things could be out-of-bounds a la log(0), but that's philosophical
-          (= 'sin u) (make-prod (list 'cos n) (deriv n v))
-          (= 'cos u) (make-prod (list '* -1 (list 'sin n)) (deriv n v))
-          (= 'tan u) (make-prod (list 'pow (list 'cos n) -2) (deriv n v))
+          (= 'sin u) (make-prod (list 'cos n) (deriv* n v))
+          (= 'cos u) (make-prod (list '* -1 (list 'sin n)) (deriv* n v))
+          (= 'tan u) (make-prod (list 'pow (list 'cos n) -2) (deriv* n v))
           ;multiply by inverse of denominator is same as numerator/denominator
-          (= 'log u) (make-prod (deriv n v) (list '** n -1))
-          (= 'exp u) (make-prod (list 'exp n) (deriv n v))
+          (= 'log u) (make-prod (deriv* n v) (list 'pow n -1))
+          (= 'exp u) (make-prod (list 'exp n) (deriv* n v))
           true false));should not happen as chainable? refers to a list that
       ;we should completely specify here
-      true (list 'deriv exp v);some kind of error here, return a description of
+      true (list 'deriv* exp v);some kind of error here, return a description of
       ;"the derivative of this function" rather than the actual result
       ))
   ([exp vr degree]
     (loop [x exp v vr dgr degree]
       (if (zero? dgr) x
-        (recur (deriv x v) v (dec dgr) )))))
+        (recur (deriv* x v) v (dec dgr) )))))
+
+
+(defmacro deriv
+  "Macro for symbolic differentiation. with 2 args, takes 1st degree deriv.
+  with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
+
+
+  Examples:
+
+    (use '(incanter core symbolic))
+
+    (deriv (+ x 3) x) ; => 1
+    (deriv (* x y) x) ; => y
+    (deriv (* (* x y) (+ x 3)) x) ; => (+ (* (+ x 3) y) (* x y))
+    (deriv (* (* x y) (+ x 3)) y) ; => (* (+ x 3) x)
+
+    (deriv (* x y (+ x 3)) x) ; => (+ (* y (+ x 3)) (* y x))
+    (deriv (* x y (+ x 3)) y) ; => (* (+ x 3) x)
+
+    (deriv (sin x) x) ; => (cos x)
+    (deriv (cos x) x) ; => (* -1 (sin x))
+
+    (deriv (sin (* x y)) y) ; => (* x (cos (* x y)))
+
+    (deriv (pow x 3) x) ; => (* 3 (pow x 2))
+    (deriv (** x 3) x) ; => (* 3 (pow x 2))
+
+    (deriv (pow x 3) x 2) ; => (* 3 (* 2 x))
+
+    (deriv (* x y (+ x 3)) x 2) ; => (+ y y)
+    (deriv (* x y (+ x 3)) x 3) ; => 0
+
+  
+"
+  ([exp v]
+     `(deriv* '~exp '~v))
+  ([exp v degree]
+     `(deriv* '~exp '~v ~degree)))
+
 
