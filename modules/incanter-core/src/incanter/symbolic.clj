@@ -5,7 +5,7 @@
   (:use [incanter.core :only (pow)]))
 
 ;functions of multiple arguments
-(def fn-list #{ '+ '- '* '/ 'pow '** 'expt})
+(def fn-list #{ '+ '- '* '/ 'pow '** 'exp})
 
 ;functions of one argument
 (def chain-list #{'exp 'log 'sin 'cos 'tan })
@@ -27,7 +27,7 @@
 
 (defn- sum? [x] (and (>= (count x) 3) (= (first x) '+)))
 (defn- product? [x] (and (>= (count x) 3) (= (first x) '*)))
-(defn- expnt? [x] (and (= (count x) 3) (contains? #{'** 'pow 'expt} (first x))))
+(defn- expnt? [x] (and (= (count x) 3) (contains? #{'** 'pow 'exp} (first x))))
 (defn- difference? [x] (and (>= (count x) 3) (= (first x) '-)))
 (defn- quotient? [x] (and (>= (count x) 3) (= (first x) '/)))
 
@@ -169,7 +169,12 @@
 
     (deriv (+ (* 3 x) (* 8 x)) x) ; => 11
 
-  
+
+
+    ;; NOT WORKING YET
+
+    (deriv (/ 1 x) x) ; => (* (deriv* (* (x)) x) (* -1 (pow (* (x)) -2)))
+                                          ^-- need to fix
 "
   ([exp v]
      `(deriv* '~exp '~v))
@@ -177,3 +182,127 @@
      `(deriv* '~exp '~v ~degree)))
 
 
+
+(defn- tree-subst
+"
+
+  Examples:
+    (use '(incanter core symbolic))
+
+    (def ops {'+ clojure.core/+
+		'- clojure.core/-
+		'* clojure.core/*
+		'/ clojure.core//
+		'sin incanter.core/sin
+		'cos incanter.core/cos
+		'tan incanter.core/tan
+		'pow incanter.core/pow
+		'** incanter.core/pow
+		'exp incanter.core/exp
+                'fn clojure.core/fn})
+
+    (tree-subst '(+ (* x y) x) {'x 3, 'y 9, '* 'clojure.core/*, '+ 'clojure.core/+})
+    (eval (tree-subst '(+ (* x y) x) {'x 3, 'y 9, '* 'clojure.core/*, '+ 'clojure.core/+}))
+
+    (tree-subst (deriv (+ (* x y) x) x)  (apply assoc ops ['x 3 'y 9]))
+    (eval (tree-subst (deriv (+ (* x y) x) x) (apply assoc ops ['x 3 'y 9])))
+
+    (fn [x y] (tree-subst (deriv (+ (* x y) x) x)  (apply assoc ops ['x 3 'y 9])))
+    
+    ((fn [x y] (eval (tree-subst (deriv (+ (* x y) x) x) (apply assoc ops ['x 3 'y 9])))) 5 9)
+
+    ((eval (tree-subst (list 'fn '[x y] (deriv (+ (* x y) x) x))
+                       (apply assoc ops ['x (gensym 'x) 'y (gensym 'y)]))) 
+      5 9)
+
+     ((eval (tree-subst (list 'fn '[x y] (deriv* '(+ (* x y) x) 'x))
+                       (apply assoc ops ['x (gensym 'x) 'y (gensym 'y)]))) 
+      5 9)
+
+
+"
+  ([tree subst-map]
+     (let [subst-fn (fn [el] 
+		      (cond
+		       (vector? el)
+		         (apply vector (tree-subst el subst-map))
+		       (coll? el) 
+			 (tree-subst el subst-map) 
+			:else
+			  (if (number? el)
+			    el
+			    (or (subst-map el) el))))]
+       (map subst-fn tree))))
+
+
+(defn deriv-fn*
+"
+
+  Examples:
+    (use '(incanter core symbolic))
+
+    (deriv-fn* '[x y] '(+ (* x y) x) 'x)
+
+    ((deriv-fn* '[x y] '(+ (* x y) x) 'x) 5 9)
+"
+  ([[& args] expr v]
+     (deriv-fn* args expr v 1))
+  ([[& args] expr v degree]
+     (let [ops {'+ clojure.core/+
+		'- clojure.core/-
+		'* clojure.core/*
+		'/ clojure.core//
+		'sin incanter.core/sin
+		'cos incanter.core/cos
+		'tan incanter.core/tan
+		'pow incanter.core/pow
+		'** incanter.core/pow
+		'exp incanter.core/exp}] 
+       (eval (tree-subst (list 'fn (apply vector args) (deriv* expr v degree))
+			 (apply assoc ops (interleave args (map gensym args))))))))
+
+
+(defmacro deriv-fn
+"
+
+  Examples:
+    (use '(incanter core symbolic))
+
+    (deriv-fn [x y] (+ (* x y) x) x)
+
+    ((deriv-fn [x y] (+ (* x y) x) x) 5 9)
+
+    (use 'incanter.charts)
+    (doto (function-plot sin -5 5)
+       (add-function (deriv-fn [x] (sin x) x) -5 5)
+       (add-function (deriv-fn [x] (sin x) x 2) -5 5)
+       view)
+
+    (let [f (fn [x] (pow x 2))
+          df (deriv-fn [x] (pow x 2) x)]
+      (doto (function-plot f -5 5)
+        (add-function df -5 5)
+        view))
+
+
+    (let [f (fn [x] (pow x 3))
+          df (deriv-fn [x] (pow x 3) x)]
+      (doto (function-plot f -5 5)
+        (add-function df -5 5)
+        view))
+
+
+    ;; NOT WORKING YET
+
+    (let [f (fn [x] (/ 1 x ))
+          df (deriv-fn [x] (/ 1 x) x)]
+      (doto (function-plot f 0.5 5)
+        (add-function df 0.5 5)
+        view))
+
+
+"
+([[& args] expr v]
+   `(deriv-fn* '[~@args] '~expr '~v 1))
+([[& args] expr v degree]
+   `(deriv-fn* '[~@args] '~expr '~v ~degree)))
