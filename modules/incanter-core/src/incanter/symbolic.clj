@@ -227,11 +227,9 @@
 		       (vector? el)
 		         (apply vector (tree-subst el subst-map))
 		       (coll? el) 
-			 (tree-subst el subst-map) 
-			:else
-			  (if (number? el)
-			    el
-			    (or (subst-map el) el))))]
+		         (tree-subst el subst-map) 
+		       :else
+		         (or (subst-map el) el)))]
        (map subst-fn tree))))
 
 
