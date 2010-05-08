@@ -135,7 +135,7 @@
 
 
 
-(defn- sample-mvn-params
+(defn sample-mvn-params
 " Returns samples of means (sampled from an mvn distribution) and vectorized covariance
   matrices (sampled from an inverse-wishart distribution) for the given mvn data.
 
@@ -152,7 +152,7 @@
   Examples:
 
     (use '(incanter core stats bayes charts))
-    (def y (sample-mvn 500 :sigma (identity-matrix 2)))
+    (def y (sample-mvn 500 :mean [0 0] :sigma (identity-matrix 2)))
     (def samp (sample-mvn-params 1000 y))
 
     (map mean (trans (:means samp)))
@@ -177,16 +177,7 @@
     (map mean (trans (:means samp)))
 
 
-    (use '(incanter core stats bayes charts datasets))
-    (def cars (to-matrix (get-dataset :cars)))
-    (def cars-std (trans (map #(sweep (sweep %) :fun div :stat sd) (trans cars))))
-    (def samp (sample-mvn-params 1000 cars-std))
-    (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
-    (map mean (trans (:means samp)))
-
-    (covariance cars-std)
-
-
+ 
 
 "
 ([#^Integer size y & options]
