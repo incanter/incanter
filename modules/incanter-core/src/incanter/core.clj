@@ -879,7 +879,7 @@
     http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
   ([#^Matrix mat]
-    (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat)))))
+    (Matrix. (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat))))))
     ;(Matrix. (.viewDice (.getL (DenseCholeskyDecomposition. mat)))))
 
 
