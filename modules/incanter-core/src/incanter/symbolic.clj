@@ -32,7 +32,7 @@
 (defn- quotient? [x] (and (>= (count x) 3) (= (first x) '/)))
 
 (defn- conv-qtnt [x] "Convert a quotient to a product of a base with an inverse"
-  (list '* (second x) (list 'pow (list '* (nthnext x 2)) -1)))
+  (list '* (second x) (list 'pow (flatten (list '* (nthnext x 2) 1)) -1)))
 ;exp can also kind of be chainrulized below, it makes sense not to though since
 ;it takes 2 args, not one.  log base whatever is same situation
 (defn- expnt [e] (nth e 2))
