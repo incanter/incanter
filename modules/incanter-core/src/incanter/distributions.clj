@@ -24,7 +24,7 @@
 	 (defined over vectors). Distributions may be discrete or continuous."
 	(pdf [d v] "Returns the value of the probability density/mass function for the d at support v")
 	(cdf [d v] "Returns the value of the cumulative distribution function for the distribution at support v")
-	(draw [d] [d n] "Returns 1 or n samples drawn from d")
+	(draw [d] "Returns 1 or n samples drawn from d") ; [d n] version removed temporarily
   (support [d] "Returns the support of d in the form of XYZ"))
 ;; Notes: other possible methods include moment generating function, transformations/change of vars
 
@@ -39,8 +39,8 @@
 ;; vectors are tabulated for total counts
 (extend-type clojure.lang.PersistentVector
 	Distribution
-		(pdf [d v] (get v (tabulate v) 0))
+		(pdf [d v] (get v (tabulate d) 0))
 		(cdf [d v] nil)
 		(draw [d] (nth d (rand-int (count d))))
-    (draw [d n] (repeatedly n #(draw d))) 
+    ; (draw [d n] (repeatedly n #(draw d))) 
 		(support [d] (keys (frequencies d))))
