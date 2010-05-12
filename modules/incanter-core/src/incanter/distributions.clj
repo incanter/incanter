@@ -37,9 +37,9 @@
 
 ;; Extending some common types to be distributions
 ;; vectors are tabulated for total counts
-(extend-type clojure.lang.PersistentVector
+(extend-type clojure.lang.ISeq
 	Distribution
-		(pdf [d v] (get v (tabulate d) 0))
+		(pdf [d v] (get (tabulate d) v 0))
 		(cdf [d v] nil)
 		(draw [d] (nth d (rand-int (count d))))
     ; (draw [d n] (repeatedly n #(draw d))) 
