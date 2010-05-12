@@ -35,12 +35,20 @@
         total (reduce + (vals f))]
     (into {} (map (fn [[k v]] [k (/ v total)]) f))))
 
-;; Extending some common types to be distributions
-;; vectors are tabulated for total counts
+(defn- simple-cdf
+  "Compute the CDF at a value by getting the support and adding up the values until
+	 you get to v (inclusive)"
+  [d v]
+	(reduce + (map #(pdf d %) (filter #(>= v %) (support d)))))
+
+;; Extending some all sequence types to be distributions
 (extend-type clojure.lang.ISeq
 	Distribution
 		(pdf [d v] (get (tabulate d) v 0))
-		(cdf [d v] nil)
+		(cdf [d v] (simple-cdf d v))
 		(draw [d] (nth d (rand-int (count d))))
     ; (draw [d n] (repeatedly n #(draw d))) 
 		(support [d] (keys (frequencies d))))
+
+; TODO set up a map extension that takes the values as frequencies
+

@@ -24,5 +24,6 @@
 (deftest extending-basic-types 
 	(= (pdf [1 2 2] 1) 1/3)
   (= (pdf '(1 2 1 2 2 1) 2) 1/2)
-	(= (support [1 2 3 2 :foo :bar]) [1 2 3 :foo :bar]))
+	(= (support [1 2 3 2 :foo :bar]) [1 2 3 :foo :bar])
+  (= (cdf [1 2 3] 2) 2/3))
 
