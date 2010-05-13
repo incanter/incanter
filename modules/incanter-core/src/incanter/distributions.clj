@@ -51,6 +51,13 @@
     ; (draw [d n] (repeatedly n #(draw d))) 
 		(support [d] (keys (frequencies d))))
 
+(extend-type clojure.lang.PersistentHashSet
+	Distribution
+  	(pdf [d v] (if (contains? d v) (/ 1 (count d)) 0))
+    (cdf [d v] nil) ; should this throw an exception?
+    (draw [d] (nth (support d) (rand-int (count d))))
+    (support [d] (vec d)))
+
 ; TODO set up a map extension that takes the values as frequencies
 
 (defrecord UniformInt [start end]

@@ -26,7 +26,9 @@
 	(is (= (pdf [1 2 2] 1) 1/3))
   (is (= (pdf '(1 2 1 2 2 1) 2) 1/2))
 	(is (= (support [1 2 3 2 :foo :bar]) [1 2 3 :foo :bar]))
-  (is (= (cdf [1 2 3] 2) 2/3)))
+  (is (= (cdf [1 2 3] 2) 2/3))
+  (is (= (pdf #{:foo :bar :baz} :baz) 1/3))
+  (is (= (pdf #{:foo :bar} :baz) 0)))
 
 (deftest basic-uniform-int-tests
   (is (thrown? AssertionError (uniform-int 5 0))) ; wrong argment order
@@ -43,5 +45,5 @@
 
 (deftest combination-distribution-tests
   (let [cd (combination-distribution 5 3)]
-    (is (= 3 (count (draw cd))))))
-
+    (is (= 3 (count (draw cd))))
+		(is (= 3 (count (set (draw cd)))))))
