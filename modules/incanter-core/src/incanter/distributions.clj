@@ -73,9 +73,45 @@
 	[] => start = 0, end = 1
 	[end] => start = 0
 	[start end] => user specified
+
+	This function is preferred to creating a UniformInt object
+	directly.
 	"
   ([] (uniform-int 1))
   ([end] (uniform-int 0 end))
   ([start end]
      (assert (> end start))
      (UniformInt. start end)))
+
+;;;; Combination Sampling: Draws from the nCk possible combinations ;;;;
+
+(defn- nCk [n k]
+  (cond
+   	(or (< n 0) (< k 0) (< n k)) 0
+    (or (= k 0) (= n k)) 1
+  	:else (/ (reduce * 1 (range (inc (- n k)) (inc n))) (reduce * 1 (range 1 (inc k))))))
+
+(defn- decode-combinadic
+  "Decodes a 0 to nCk - 1 integer into its combinadic form, a set of
+	k-tuple of indices, where each index i is 0 < i < n - 1"
+  [n k]
+  (let [max-c (nCk n k)]
+    (fn [c]
+      (assert (and (<= 0 c) (> max-c c)))
+      (loop [candidate (dec n) ks (range k 0 -1) remaining c tuple '()]
+        (if (empty? ks) tuple ;; <- return value of function
+        	(let [k (first ks)
+                v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
+            (assert (not (nil? v)))
+            (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v))))))))
+
+;; there has got to be a better, function way to do this!
+;;      (loop [tuple '(), remaining c, previous n, i k]
+;;        (if (= k 0) tuple ; <- function return value
+;;        	(let [candidate (first (filter (fn [q] (>= remaining (nCk q i))) (range previous i -1)))]
+;;            (recur
+;;             	(conj tuple candidate)
+;;              (- remaining (nCk candidate i))
+;;              candidate
+;;              (dec i))))))))
+ 
