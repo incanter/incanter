@@ -1,4 +1,6 @@
-(ns incanter.excel
+(ns 
+	#^{:doc "Excel module for Incanter datasets."} 
+	incanter.excel
   (:import
     [org.apache.poi.hssf.usermodel HSSFWorkbook HSSFCell HSSFFont HSSFRow HSSFSheet]
     [org.apache.poi.ss.usermodel Font CellStyle Cell]
@@ -62,7 +64,8 @@ Options are:
     (:workbook x))
     filename))
 
-(defmulti get-workbook-sheet (fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
+(defmulti get-workbook-sheet "Retrieve the Excel workbook based on either the index or the sheet name."
+	(fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
 (defmethod get-workbook-sheet :indexed [wbk index-or-name]
  (. wbk getSheetAt index-or-name))
 (defmethod get-workbook-sheet :named [wbk index-or-name]
@@ -70,10 +73,11 @@ Options are:
 
 (defmulti  get-cell-value (fn [cell] (. cell getCellType)))
 (defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
+(defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]); NOTHING for now.
 (defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell] (. cell getStringCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue)) ;TODO: date fields seem to live in here.
-
+(defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
 (defn #^{:doc "Read an Excel file into a dataset.
 Options are:
 :sheet-name either a String for the tab name or an int for the sheet index -- defaults to 0"}
