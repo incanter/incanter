@@ -78,6 +78,8 @@ by <span id="author">Unknown</span><br />
 </pre><pre>
 </pre><h2>Overview</h2>
 <pre id="namespace-docstr"></pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -88,6 +90,8 @@ by <span id="author">Unknown</span><br />
   <pre id="var-usage">Usage: (all-keys m)
 </pre>
   <pre id="var-docstr">returns a set of all the keys from an arbitarily deeply nested map or seq of maps.</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L82" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -101,6 +105,8 @@ given a map; is this the bottom level in the map?
 
  (bottom-level? {:a 1}) -&gt; true
  (bottom-level? {:a {:b 1}}) -&gt; false</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L96" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -113,6 +119,8 @@ given a map; is this the bottom level in the map?
 takes an arbitrarily deeply nested map, and flattens it to one level by merging keys. 
 
  (flatten-with str {:a {:b {:c 1}}}) -&gt; {":a:b:c" 1}</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L127" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -129,6 +137,8 @@ returns the number of levels of depth of nesting for a nested map.
  {0 1} -&gt; 1
  {1 {0 1}} -&gt; 2
  ...</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L106" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -155,6 +165,8 @@ splits out the individual vectors.
  -&gt;
 
  [[106 86 100 101 99 103 97 113 112 110] [7 0 27 50 28 29 20 12 6 17]]</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L7" id="var-source">Source</a>
 </div>
 

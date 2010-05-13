@@ -78,6 +78,8 @@ by <span id="author">Unknown</span><br />
 </pre><pre>
 </pre><h2>Overview</h2>
 <pre id="namespace-docstr"></pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -120,6 +122,8 @@ Examples:
   ;; plot the second derivative function
   (def pdf-deriv2 (derivative pdf-deriv))
   (add-lines plot x (pdf-deriv2 x))</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L68" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -153,6 +157,8 @@ Examples:
 
   (def grad (gradient f start))
   (time (doall (grad start x)))</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L251" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -186,6 +192,8 @@ Examples:
 
   (time (def hess (hessian f start)))
   (time (doall (hess start x)))</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L300" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -221,6 +229,8 @@ Examples:
 Reference:
   http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L26" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -310,6 +320,8 @@ Examples:
   (add-lines plot x (f start2 x))
   (def nlm2 (non-linear-model f y x start2))
   (add-lines plot x (:fitted nlm2))</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L588" id="var-source">Source</a>
 </div>
 

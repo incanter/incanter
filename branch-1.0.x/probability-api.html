@@ -96,6 +96,8 @@ by <span id="author">Unknown</span><br />
 </pre><pre>
 </pre><h2>Overview</h2>
 <pre id="namespace-docstr"></pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -109,6 +111,8 @@ by <span id="author">Unknown</span><br />
   <pre id="var-docstr">adds two conditional probability tuples. [[{}{}][{}{}]] -&gt; [{}{}]
 passes through a single conditional probability tuple. [[{}{}] -&gt; [{}{}]</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -118,6 +122,8 @@ passes through a single conditional probability tuple. [[{}{}] -&gt; [{}{}]</pre
        (P a given b)
 </pre>
   <pre id="var-docstr"></pre>
+  
+  
   
 </div><div id="var-entry">
   <br />
@@ -129,6 +135,8 @@ passes through a single conditional probability tuple. [[{}{}] -&gt; [{}{}]</pre
   <pre id="var-docstr">
 a function for binary classification that takes a booleavn value and returns 1 for true and 0 for false.</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -139,6 +147,8 @@ a function for binary classification that takes a booleavn value and returns 1 f
   <pre id="var-docstr">combinatorial merge takes two maps and a fn and and merges all combinations fo keys between the two maps using the fn.
 </pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -147,6 +157,8 @@ a function for binary classification that takes a booleavn value and returns 1 f
   <pre id="var-usage">Usage: (cond-prob-tuple a b)
 </pre>
   <pre id="var-docstr">build [a&amp;b b] count tuples for calculating conditional probabilities p(a | b)</pre>
+  
+  
   
 </div><div id="var-entry">
   <br />
@@ -157,6 +169,8 @@ a function for binary classification that takes a booleavn value and returns 1 f
 </pre>
   <pre id="var-docstr">set based counting for keys in maps</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -166,6 +180,8 @@ a function for binary classification that takes a booleavn value and returns 1 f
 </pre>
   <pre id="var-docstr">
 wraps a counting function for maps in apply and deep-merge-with, curreid fn expects a seq of maps to count.</pre>
+  
+  
   
 </div><div id="var-entry">
   <br />
@@ -181,6 +197,8 @@ of the form:   {a {b n}} where n is the nubmer of co-occurances of a and b.
 
 for summation note that a variable, suppose it is x, is represented as a level of depth in the nested maps, so summation for margianl of x occurs on all branches stemming from maps at the level corresponding with x. </pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -191,6 +209,8 @@ for summation note that a variable, suppose it is x, is represented as a level o
   <pre id="var-docstr">
 classify one item based on what interval in a range the item falls into.</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -200,6 +220,8 @@ classify one item based on what interval in a range the item falls into.</pre>
 </pre>
   <pre id="var-docstr">summate all counts in a deeply nested map of counts.</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -208,6 +230,8 @@ classify one item based on what interval in a range the item falls into.</pre>
   <pre id="var-usage">Usage: (summate-level j)
 </pre>
   <pre id="var-docstr">given a nested map, summates all counts below the tree from each key-node in the map-tree.</pre>
+  
+  
   
 </div><div id="var-entry">
   <br />
@@ -219,6 +243,8 @@ classify one item based on what interval in a range the item falls into.</pre>
   <pre id="var-docstr">
 wraps a counting function for vectors in apply and deep-merge-with, curreid fn expects a seq of vectors to count.</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -228,6 +254,8 @@ wraps a counting function for vectors in apply and deep-merge-with, curreid fn e
 </pre>
   <pre id="var-docstr">this is the core of the conditional probability based classification model.  this model takes a &amp; bs in the form a given bs.  a and bs are all functions, and the conditional probability classification model composes a new classifier function that ultimately returns the cond-prob-tuple: [{a's counts}{b's counts}].</pre>
   
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -236,6 +264,8 @@ wraps a counting function for vectors in apply and deep-merge-with, curreid fn e
   <pre id="var-usage">Usage: (|each a bs)
 </pre>
   <pre id="var-docstr">conditional probability where the bs are taken to be a map of feature-&gt;classifier-function paris, where we want to compute the conditional probability between a and each b independently.</pre>
+  
+  
   
 </div>
 

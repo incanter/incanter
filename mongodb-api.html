@@ -40,7 +40,7 @@ namespace.
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
     </ul>
   </div>
 </div>
@@ -133,6 +133,8 @@ Here are Somnium's descriptions of Congomongo's functions:
   (collections) : Returns the set of collections stored in the current database
 
   (drop-collection coll) : Permanently deletes a collection. Use with care.</pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -164,6 +166,8 @@ Examples:
    ;; and then retrieve it
    ;; notice that the retrieved data set has two additional columns,  :_id :_ns
    (view (fetch-dataset :airline-data))</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-mongodb/src/incanter/mongodb.clj#L72" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
@@ -190,6 +194,8 @@ Examples:
 
 ;; notice that the retrieved data set has two additional columns,  :_id :_ns
 (view (fetch-dataset :airline-data))</pre>
+  
+  
   <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-mongodb/src/incanter/mongodb.clj#L104" id="var-source">Source</a>
 </div>
 

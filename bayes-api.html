@@ -40,7 +40,7 @@ namespace.
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
     </ul>
   </div>
 </div>
@@ -57,6 +57,8 @@ namespace.
       <a href="#incanter.bayes/sample-model-params">sample-model-params</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.bayes/sample-multinomial-params">sample-multinomial-params</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.bayes/sample-mvn-params">sample-mvn-params</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.bayes/sample-proportions">sample-proportions</a>
     </div>
@@ -76,6 +78,8 @@ by <span id="author">David Edgar Liebke</span><br />
 <pre id="namespace-docstr">This is library provides functions for performing
 basic Bayesian modeling and inference.
 </pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -116,7 +120,9 @@ Examples:
 
   ;; show the 95% bayesian confidence interval for the firt coefficient
   (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])</pre>
-  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/bayes.clj#L36" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/77bbabad35d6ab4db9c9770ad9bfe94f363401e8/modules/incanter-core/src/incanter/bayes.clj#L36" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -151,7 +157,61 @@ Examples:
   ;; view  a histogram of the difference in proportions between the first
   ;; two candidates
   (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/bayes.clj#L100" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/77bbabad35d6ab4db9c9770ad9bfe94f363401e8/modules/incanter-core/src/incanter/bayes.clj#L100" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.bayes/sample-mvn-params">sample-mvn-params</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (sample-mvn-params size y &amp; options)
+</pre>
+  <pre id="var-docstr">Returns samples of means (sampled from an mvn distribution) and vectorized covariance
+ matrices (sampled from an inverse-wishart distribution) for the given mvn data.
+
+ Arguments:
+   size -- the number of samples to return
+   y -- the data used to estimate the parameters
+
+
+ Returns map with following fields:
+   :means
+   :sigmas
+
+
+ Examples:
+
+   (use '(incanter core stats bayes charts))
+   (def y (sample-mvn 500 :mean [0 0] :sigma (identity-matrix 2)))
+   (def samp (sample-mvn-params 1000 y))
+
+   (map mean (trans (:means samp)))
+   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+
+   (view (histogram (sel (:means samp) :cols 0) :x-label "mean 1"))
+   (view (histogram (sel (:means samp) :cols 1) :x-label "mean 2"))
+   (view (histogram (sel (:sigmas samp) :cols 1) :x-label "covariance"))
+   (view (histogram (sel (:sigmas samp) :cols 0) :x-label "variance 1"))
+   (view (histogram (sel (:sigmas samp) :cols 2) :x-label "variance 2"))
+
+   (map #(quantile % :probs [0.025 0.0975]) (trans (:means samp)))
+   (map #(quantile % :probs [0.025 0.0975]) (trans (:sigmas samp)))
+
+
+
+
+   (use '(incanter core stats bayes charts))
+   (def y (sample-mvn 500 :sigma (symmetric-matrix [10 5 10]) :mean [5 2]))
+   (def samp (sample-mvn-params 1000 y))
+   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+   (map mean (trans (:means samp)))
+
+
+</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/77bbabad35d6ab4db9c9770ad9bfe94f363401e8/modules/incanter-core/src/incanter/bayes.clj#L138" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -160,7 +220,9 @@ Examples:
   <pre id="var-usage">Usage: (sample-proportions size counts)
 </pre>
   <pre id="var-docstr"> sample-proportions has been renamed sample-multinomial-params</pre>
-  <a href="http://github.com/liebke/incanter/blob/c7ce51920ee82cc35b3871531fddf393bd11398a/modules/incanter-core/src/incanter/bayes.clj#L93" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/77bbabad35d6ab4db9c9770ad9bfe94f363401e8/modules/incanter-core/src/incanter/bayes.clj#L93" id="var-source">Source</a>
 </div>
 
 

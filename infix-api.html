@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>latex API reference (Incanter)</title>
+    <title>infix API reference (Incanter)</title>
     <link href="static/incanter.ico" rel="icon" />
     <link href="static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
@@ -53,29 +53,65 @@ namespace.
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
-    
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.infix/defop">defop</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.infix/formula">formula</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.infix/infix-to-prefix">infix-to-prefix</a>
+    </div>
     <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">latex</span>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">infix</span>
   <span id="branch-name">(master branch)</span></h1>
-by <span id="author">David Edgar Liebke</span><br />
+by <span id="author">J. Bester</span><br />
 <br />Usage:
 <pre>
 (ns your-namespace
-  (:require <span id="long-name">incanter.latex</span>))
+  (:require <span id="long-name">incanter.infix</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr">This library is used to render LaTex Math equations, based
-on the jLateXMath library, and applying them incanter.charts as annotations
-and subtitles.
-         </pre>
+<pre id="namespace-docstr">Library for converting infix mathematical formula to prefix expressions</pre>
 
 
 <br />
 <h2>Public Variables and Functions</h2>
-
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.infix/defop">defop</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (defop op prec &amp; [trans])
+</pre>
+  <pre id="var-docstr">Define operators for formula macro</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/4e253c0608ad61c8d7baa8c762ac1bf352a8cd53/modules/incanter-core/src/incanter/infix.clj#L42" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.infix/formula">formula</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (formula &amp; equation)
+</pre>
+  <pre id="var-docstr">Convert from infix notation to prefix notation</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/4e253c0608ad61c8d7baa8c762ac1bf352a8cd53/modules/incanter-core/src/incanter/infix.clj#L118" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.infix/infix-to-prefix">infix-to-prefix</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (infix-to-prefix col)
+</pre>
+  <pre id="var-docstr">Convert from infix notation to prefix notation</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/4e253c0608ad61c8d7baa8c762ac1bf352a8cd53/modules/incanter-core/src/incanter/infix.clj#L99" id="var-source">Source</a>
+</div>
 
 
 </div>

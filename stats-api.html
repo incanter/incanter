@@ -40,7 +40,7 @@ namespace.
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
     </ul>
   </div>
 </div>
@@ -272,6 +272,8 @@ This library is built on Parallel Colt
 an extension of the Colt numerics library 
 (<a href="http://acs.lbl.gov/~hoschek/colt/)">http://acs.lbl.gov/~hoschek/colt/)</a>.
 </pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 <div id="var-entry">
@@ -374,7 +376,9 @@ Examples:
   (view (histogram smooth-samp :density true :nbins 30))
   (mean smooth-samp)
   (quantile smooth-samp :probs [0.025 0.975])</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1687" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1687" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -401,7 +405,9 @@ References:
 Example:
     (cdf-beta 0.5 :alpha 1 :beta 2)
     (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L477" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L477" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -427,7 +433,9 @@ References:
 
 Example:
     (cdf-binomial 10 :prob 1/4 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1099" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1099" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -453,7 +461,9 @@ References:
 Example:
     (cdf-chisq 5.0 :df 2)
     (cdf-chisq 5.0 :df 2 :lower-tail false)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L672" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L672" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -487,7 +497,9 @@ Examples:
 
   ;; plot the data's empircal cdf
   (view (scatter-plot exam1 (map ecdf exam1)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1403" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1403" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -511,7 +523,9 @@ References:
 
 Example:
     (cdf-exp 2.0 :rate 1/2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L891" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L891" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -536,7 +550,9 @@ References:
 
 Example:
     (cdf-f 1.0 :df1 5 :df2 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L119" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L119" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -563,7 +579,9 @@ References:
 Example:
     (cdf-gamma 10 :shape 1 :rate 2)
     (cdf-gamma 3 :shape 1 :lower-tail false)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L576" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L576" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -588,7 +606,9 @@ References:
 
 Example:
     (cdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1338" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1338" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -613,7 +633,9 @@ References:
 
 Example:
     (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L193" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L193" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -638,7 +660,9 @@ References:
 
 Example:
     (cdf-poisson 5 :lambda 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1245" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1245" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -662,7 +686,9 @@ References:
 
 Example:
     (cdf-t 1.2 :df 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L762" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L762" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -688,7 +714,9 @@ References:
 Example:
     (cdf-uniform 5)
     (cdf-uniform 5 :min 1 :max 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L379" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L379" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -697,7 +725,9 @@ Example:
   <pre id="var-usage">Usage: (chebyshev-distance a b)
 </pre>
   <pre id="var-docstr">In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2945" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2945" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -786,7 +816,9 @@ References:
   http://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm
   http://en.wikipedia.org/wiki/Pearson's_chi-square_test
   <a href="http://en.wikipedia.org/wiki/Yates'_chi-square_test">http://en.wikipedia.org/wiki/Yates'_chi-square_test</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2311" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2311" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -804,7 +836,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Correlation">http://en.wikipedia.org/wiki/Correlation</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1529" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1529" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -816,7 +850,9 @@ References:
 http://en.wikipedia.org/wiki/Correlation_ratio
 
 It is worth noting that if the relationship between values of  and values of overline y_x is linear (which is certainly true when there are only two possibilities for x) this will give the same result as the square of the correlation coefficient, otherwise the correlation ratio will be larger in magnitude. It can therefore be used for judging non-linear relationships.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2712" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2712" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -852,7 +888,9 @@ suggesting that most of the overall dispersion is a result of differences betwee
     eta = sqrt 6780/9640=0.8386
 
 Observe that for η = 1 the overall sample dispersion is purely due to dispersion among the categories and not at all due to dispersion within the individual categories. For a quick comprehension simply imagine all Algebra, Geometry, and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2674" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2674" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -880,7 +918,9 @@ dot(d1, d2) = (2)*(3) + (4)*(5) + (3)*(1) + (1)*(2) + (6)*(5) = 61
 Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
                            = 61 / 64.9923072371
                            = 0.938572618717</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2966" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2966" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -903,7 +943,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Covariance">http://en.wikipedia.org/wiki/Covariance</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1477" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1477" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -919,7 +961,9 @@ References:
   Examples:
     (cumulative-mean (sample-normal 100))
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1814" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1814" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -933,7 +977,7 @@ Examples:
 
   (use '(incanter core stats datasets))
 
-  (def by-gender (group-by (get-dataset :hair-eye-color) 2))
+  (def by-gender (group-on (get-dataset :hair-eye-color) 2))
   (def table (matrix (sel (first by-gender) :cols 3) 4))
 
   (detabulate :table table)
@@ -952,7 +996,9 @@ Examples:
   (tabulate data)
 
   (tabulate (detabulate :table (:table (tabulate data))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2529" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2529" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -963,7 +1009,9 @@ Examples:
   <pre id="var-docstr">
 http://en.wikipedia.org/wiki/Dice%27s_coefficient
 Dice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3044" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3044" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -987,7 +1035,9 @@ We would find the set of bigrams in each word:
 Each set has four elements, and the intersection of these two sets has only one element: ht.
 
 Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3070" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3070" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -996,7 +1046,9 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
   <pre id="var-usage">Usage: (discordant-pairs a b)
 </pre>
   <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Discordant_pairs">http://en.wikipedia.org/wiki/Discordant_pairs</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2821" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2821" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1007,7 +1059,9 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
   <pre id="var-docstr">http://en.wikipedia.org/wiki/Euclidean_distance
 
 the Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2938" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2938" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1019,7 +1073,9 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
 http://www.statsdirect.com/help/nonparametric_methods/kend.htm
 
 The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2844" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2844" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1030,7 +1086,9 @@ The gamma coefficient is given as a measure of association that is highly resist
   <pre id="var-docstr">http://en.wikipedia.org/wiki/Hamming_distance
 
 In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3095" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3095" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1052,7 +1110,9 @@ Examples:
   ;; return the sum of the positive values in a normal sample
   (def x (sample-normal 100))
   (sum (mult x (indicator #(pos? %) x)))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L48" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L48" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1064,7 +1124,9 @@ Examples:
 http://en.wikipedia.org/wiki/Jaccard_index
 
 The Jaccard distance, which measures dissimilarity between sample sets, is complementary to the Jaccard coefficient and is obtained by subtracting the Jaccard coefficient from 1, or, equivalently, by dividing the difference of the sizes of the union and the intersection of two sets by the size of the union.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3033" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3033" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1078,7 +1140,9 @@ http://en.wikipedia.org/wiki/Jaccard_index
 The Jaccard index, also known as the Jaccard similarity coefficient (originally coined coefficient de communauté by Paul Jaccard), is a statistic used for comparing the similarity and diversity of sample sets.
 
 The Jaccard coefficient measures similarity between sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3022" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3022" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1092,7 +1156,9 @@ http://www.statsdirect.com/help/nonparametric_methods/kend.htm
 http://mail.scipy.org/pipermail/scipy-dev/2009-March/011589.html
 best explanation and example is in "cluster analysis for researchers" page 165.
 <a href="http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175">http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2772" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2772" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1125,7 +1191,9 @@ If the test statistic W is 1, then all the survey respondents have been unanimou
 Legendre[2] discusses a variant of the W statistic which accommodates ties in the rankings and also describes methods of making significance tests based on W.
 
  [{:observation [1 2 3]} {} ... {}] -&gt; W</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2853" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2853" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1147,7 +1215,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Kurtosis">http://en.wikipedia.org/wiki/Kurtosis</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1572" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1572" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1162,7 +1232,9 @@ In coding theory, the Lee distance is a distance between two strings x1x2...xn a
 If q = 2 or q = 3 the Lee distance coincides with the Hamming distance.
 
 The metric space induced by the Lee distance is a discrete analog of the elliptic space.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3110" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3110" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1191,7 +1263,9 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
     * It is at most the length of the longer string.
     * It is zero if and only if the strings are identical.
     * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3157" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3157" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1248,7 +1322,9 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/OLS_Regression
   <a href="http://en.wikipedia.org/wiki/Coefficient_of_determination">http://en.wikipedia.org/wiki/Coefficient_of_determination</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1992" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1992" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1312,7 +1388,9 @@ References:
                      :W (matrix [[1 0] 
                                  [0 1]]))
 </pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3260" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3260" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1323,7 +1401,9 @@ References:
   <pre id="var-docstr">http://en.wikipedia.org/wiki/Manhattan_distance
 
 usual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2955" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2955" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1340,7 +1420,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Mean">http://en.wikipedia.org/wiki/Mean</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1443" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1443" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1357,7 +1439,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Median">http://en.wikipedia.org/wiki/Median</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1554" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1554" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1373,7 +1457,9 @@ The Minkowski distance is a metric on Euclidean space which can be considered as
 Minkowski distance is typically used with p being 1 or 2. The latter is the Euclidean distance, while the former is sometimes known as the Manhattan distance.
 
 In the limiting case of p reaching infinity we obtain the Chebyshev distance.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2914" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2914" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1384,7 +1470,9 @@ In the limiting case of p reaching infinity we obtain the Chebyshev distance.</p
   <pre id="var-docstr">returns a set of the unique n-grams in a string.
 
 this is using actual sets here, discards dupicate n-grams?</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3056" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3056" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1396,7 +1484,9 @@ this is using actual sets here, discards dupicate n-grams?</pre>
 http://en.wikipedia.org/wiki/Kendall_tau_distance
 
 Kendall tau distance is the total number of discordant pairs.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2831" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2831" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1417,7 +1507,9 @@ Suppose that in a sample of 100 men, 90 have drunk wine in the previous week, wh
 Relation to statistical independence
 
 If X and Y are independent, their joint probabilities can be expressed in terms of their marginal probabilities.  In this case, the odds ratio equals one, and conversely the odds ratio can only equal one if the joint probabilities can be factored in this way. Thus the odds ratio equals one if and only if X and Y are independent.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2654" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2654" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1426,7 +1518,9 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
   <pre id="var-usage">Usage: (pairings a b)
 </pre>
   <pre id="var-docstr">confusing ass name.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2808" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2808" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1435,7 +1529,9 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
   <pre id="var-usage">Usage: (pairs a b)
 </pre>
   <pre id="var-docstr">returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2796" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2796" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1460,7 +1556,9 @@ References:
 
 Example:
     (pdf-beta 0.5 :alpha 1 :beta 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L448" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L448" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1485,7 +1583,9 @@ References:
 
 Example:
     (pdf-binomial 10 :prob 1/4 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1069" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1069" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1509,7 +1609,9 @@ References:
 
 Example:
     (pdf-chisq 5.0 :df 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L644" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L644" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1533,7 +1635,9 @@ References:
 
 Example:
     (pdf-exp 2.0 :rate 1/2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L864" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L864" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1558,7 +1662,9 @@ References:
 
 Example:
     (pdf-f 1.0 :df1 5 :df2 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L82" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L82" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1583,7 +1689,9 @@ References:
 
 Example:
     (pdf-gamma 10 :shape 1 :rate 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L546" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L546" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1608,7 +1716,9 @@ References:
 
 Example:
     (pdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1307" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1307" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1633,7 +1743,9 @@ References:
 
 Example:
     (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L163" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L163" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1657,7 +1769,9 @@ References:
 
 Example:
     (pdf-poisson 5 :lambda 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1217" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1217" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1681,7 +1795,9 @@ References:
 
 Example:
     (pdf-t 1.2 :df 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L735" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L735" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1707,7 +1823,9 @@ References:
 Example:
     (pdf-uniform 5)
     (pdf-uniform 5 :min 1 :max 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L349" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L349" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1728,7 +1846,9 @@ Examples:
 
   (permute (range 10))
   (permute (range 10) (range 10 20))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1858" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1858" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1738,7 +1858,9 @@ Examples:
 </pre>
   <pre id="var-docstr">Takes a linear-model and an x value (either a scalar or vector)
 and returns the predicted value based on the linear-model.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2642" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2642" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1792,7 +1914,9 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Principal_component_analysis">http://en.wikipedia.org/wiki/Principal_component_analysis</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2471" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2471" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1801,7 +1925,9 @@ References:
   <pre id="var-usage">Usage: (product-marginal-test j)
 </pre>
   <pre id="var-docstr">the joint PMF of independent variables is equal to the product of their marginal PMFs.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2895" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2895" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1824,7 +1950,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Quantile">http://en.wikipedia.org/wiki/Quantile</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1612" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1612" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1854,7 +1982,9 @@ References:
 Example:
     (quantile-normal 0.975)
     (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L222" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L222" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1885,7 +2015,9 @@ Example:
     (quantile-t [0.025 0.975] :df 25)
     (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])
     (map #(quantile-t 0.025 :df %) df)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L792" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L792" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1895,7 +2027,9 @@ Example:
 </pre>
   <pre id="var-docstr">
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2722" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2722" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1918,7 +2052,9 @@ Examples:
   (sample (range 10)) ; permutation of numbers zero through ten
   (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.
   (sample (seq "abcdefghijklmnopqrstuvwxyz")  :size 4 :replacement false) ; choose 4 random letters.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1647" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1647" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1943,7 +2079,9 @@ References:
 
 Example:
     (sample-beta 1000 :alpha 1 :beta 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L514" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L514" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1967,7 +2105,9 @@ References:
 
 Example:
     (sample-binomial 1000 :prob 1/4 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1133" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1133" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1990,7 +2130,9 @@ References:
 
 Example:
     (sample-chisq 1000 :df 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L705" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L705" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2026,7 +2168,9 @@ Examples:
   ;; view  a histogram of the difference in proportions between the first
   ;; two candidates
   (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1018" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1018" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2049,7 +2193,9 @@ References:
 
 Example:
     (sample-exp 1000 :rate 1/2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L918" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L918" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2073,7 +2219,9 @@ References:
 
 Example:
     (sample-gamma 1000 :shape 1 :rate 2)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L611" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L611" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2099,7 +2247,9 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Inverse-Wishart_distribution">http://en.wikipedia.org/wiki/Inverse-Wishart_distribution</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L987" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L987" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2139,7 +2289,9 @@ References:
                                 sample-size)
                           categories)))
                       </pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1166" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1166" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2180,7 +2332,9 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Multivariate_normal">http://en.wikipedia.org/wiki/Multivariate_normal</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L289" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L289" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2204,7 +2358,9 @@ References:
 
 Example:
     (sample-neg-binomial 1000 :prob 1/2 :size 20)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1371" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1371" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2228,7 +2384,9 @@ References:
 
 Example:
     (sample-normal 1000 :mean -2 :sd (sqrt 0.5))</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L257" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L257" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2260,7 +2418,7 @@ Examples:
   (def data (to-matrix (get-dataset :plant-growth)))
 
   ;; break the first column of the data into groups based on treatment (second column).
-  (def groups (group-by data 1 :cols 0))
+  (def groups (group-on data 1 :cols 0))
 
   ;; define a function for the statistic of interest
   (defn means-diff [x y] (minus (mean x) (mean y)))
@@ -2316,7 +2474,9 @@ Examples:
 
   Further Reading:
     <a href="http://en.wikipedia.org/wiki/Resampling_(statistics)">http://en.wikipedia.org/wiki/Resampling_(statistics)</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1886" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1886" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2339,7 +2499,9 @@ References:
 
 Example:
     (sample-poisson 1000 :lambda 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1277" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1277" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2362,7 +2524,9 @@ References:
 
 Example:
     (cdf-t 1000 :df 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L832" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L832" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2388,7 +2552,9 @@ References:
 Example:
     (sample-uniform 1000)
     (sample-uniform 1000 :min 1 :max 10)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L409" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L409" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2414,7 +2580,9 @@ Examples:
 
 References:
   <a href="http://en.wikipedia.org/wiki/Wishart_distribution#">http://en.wikipedia.org/wiki/Wishart_distribution#</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L950" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L950" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2432,7 +2600,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Standard_deviation">http://en.wikipedia.org/wiki/Standard_deviation</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1509" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1509" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2442,7 +2612,9 @@ References:
 </pre>
   <pre id="var-docstr">A stripped version of linear-model that returns a map containing only
 the coefficients.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2624" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2624" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2462,7 +2634,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Skewness">http://en.wikipedia.org/wiki/Skewness</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1593" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1593" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2482,7 +2656,9 @@ The Sørensen coefficient is mainly useful for ecological community data (e.g. L
 This function assumes you pass in a and b as sets.
 
 The sorensen index extended to abundance instead of incidence of species is called the Czekanowski index.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3131" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3131" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2494,7 +2670,9 @@ The sorensen index extended to abundance instead of incidence of species is call
 http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
 
 In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2729" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2729" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2506,7 +2684,9 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
   <pre id="var-docstr">takes either a sample or a sample and a precalculated mean.
 
 returns the squares of the difference between each observation and the sample mean.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2601" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2601" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2518,7 +2698,9 @@ returns the squares of the difference between each observation and the sample me
   <pre id="var-docstr">takes either a sample or a sample and a precalculated mean.
 
 returns the sum of the squares of the difference between each observation and the sample mean.</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2614" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2614" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2529,7 +2711,9 @@ returns the sum of the squares of the difference between each observation and th
   <pre id="var-docstr">the variance of the sum of n independent variables is equal to the sum of their variances.
 
 (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -&gt; 5/2</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2885" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2885" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2555,7 +2739,9 @@ summary statistic. Based to R's sweep function.
     (def x (sample-normal 30 :mean 10 :sd 5))
     (sweep x) ;; center the data around mean
     (sweep x :stat sd :fun div) ;; divide data by its sd</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1827" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1827" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2589,7 +2775,9 @@ Examples:
 References:
   http://en.wikipedia.org/wiki/T_test
   <a href="http://www.socialresearchmethods.net/kb/stat_t.php">http://www.socialresearchmethods.net/kb/stat_t.php</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2114" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2114" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2647,7 +2835,9 @@ Examples:
                      [1 0]
                      [1 1]]))
   (tabulate data)</pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2210" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2210" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2660,7 +2850,9 @@ Examples:
 http://en.wikipedia.org/wiki/Jaccard_index
 
 The cosine similarity metric may be extended such that it yields the Jaccard coefficient in the case of binary attributes. This is the Tanimoto coefficient. </pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L3001" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L3001" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2677,7 +2869,9 @@ Examples:
 References:
   http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   <a href="http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance</a></pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L1461" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L1461" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2687,7 +2881,9 @@ References:
 </pre>
   <pre id="var-docstr">
 y is within z of x in metric space.  </pre>
-  <a href="http://github.com/liebke/incanter/blob/ccb349f64917ef009ba166ac96406055495a0817/modules/incanter-core/src/incanter/stats.clj#L2594" id="var-source">Source</a>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/38d5a84ec4159057b46d92848cffb5b24b09c5f9/modules/incanter-core/src/incanter/stats.clj#L2594" id="var-source">Source</a>
 </div>
 
 
