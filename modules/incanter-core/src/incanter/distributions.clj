@@ -94,24 +94,39 @@
 (defn- decode-combinadic
   "Decodes a 0 to nCk - 1 integer into its combinadic form, a set of
 	k-tuple of indices, where each index i is 0 < i < n - 1"
-  [n k]
+  [n k c]
   (let [max-c (nCk n k)]
-    (fn [c]
       (assert (and (<= 0 c) (> max-c c)))
       (loop [candidate (dec n) ks (range k 0 -1) remaining c tuple '()]
         (if (empty? ks) tuple ;; <- return value of function
-        	(let [k (first ks)
-                v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
-            (assert (not (nil? v)))
-            (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v))))))))
+            (let [k (first ks)
+                  v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
+              (assert (not (nil? v)))
+              (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v)))))))
 
-;; there has got to be a better, function way to do this!
-;;      (loop [tuple '(), remaining c, previous n, i k]
-;;        (if (= k 0) tuple ; <- function return value
-;;        	(let [candidate (first (filter (fn [q] (>= remaining (nCk q i))) (range previous i -1)))]
-;;            (recur
-;;             	(conj tuple candidate)
-;;              (- remaining (nCk candidate i))
-;;              candidate
-;;              (dec i))))))))
- 
+(defn- list-map ;; TODO rewrite this as a lazy operation
+  "Instead of providing (first lst) at each iteration, provides the
+	entire remaining list."
+  [f lst]
+  (loop [acc '() lst lst]
+    (if (or (nil? lst) (empty? lst)) acc
+    	(recur (conj acc (f lst)) (rest lst)))))
+
+(defn- fast-comb-sampler
+	"Get a sample from the nCk possible combinations"
+  [n k]
+  (sort
+   (list-map
+    (fn [lst] (+ (first lst) (count (filter #(>= % (first lst)) (rest lst)))))
+    (map draw (map uniform-int (range (- n k) n))))))
+
+(defrecord Combination [n k u]
+  Distribution
+  	(pdf [d v] (/ 1 (nCk n k)))
+  	(cdf [d v] nil) ; TODO: this requires encoding combinations
+  	(draw [d] (fast-comb-sampler n k))
+  	(support [d] (map #(decode-combinadic n k %) (range 0 (nCk n k)))))
+
+(defn combination-distribution [n k]
+  (assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
+  (Combination. n k (uniform-int 0 (nCk n k))))

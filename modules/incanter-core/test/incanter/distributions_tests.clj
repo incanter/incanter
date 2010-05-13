@@ -40,3 +40,8 @@
   (let [u (uniform-int (reduce * (repeat 100 2)) (reduce * (repeat 100 3)))]
     (is (all? (repeatedly 100 #(<= (:start u) (draw u)))))
 		(is (all? (repeatedly 100 #(> (:end u) (draw u)))))))
+
+(deftest combination-distribution-tests
+  (let [cd (combination-distribution 5 3)]
+    (is (= 3 (count (draw cd))))))
+
