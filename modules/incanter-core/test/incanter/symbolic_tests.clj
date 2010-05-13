@@ -37,4 +37,5 @@
   (is (= (deriv (* x y (+ x 3)) x 2) '(+ y y)))
   (is (= (deriv (* x y (+ x 3)) x 3) 0))
   (is (= (deriv (+ (* x y) (* 3 y)) y) '(+ 3 x)))
+  (is (= (deriv (log (pow x 2)) x) '(* (pow (pow x 2) -1) (* 2 x))))
   (is (= (deriv (+ (* 3 x) (* 8 x)) x) 11)))
