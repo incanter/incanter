@@ -11,19 +11,32 @@
 ;; agreeing to be bound by the terms of this license.  You must not
 ;; remove this notice, or any other, from this software.
 
-
-
 (ns incanter.distributions-tests
   (:use clojure.test 
         (incanter distributions)))
+
+;; testing helpers
+(defn- all? [coll] (every? true? coll))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.distributions.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (deftest extending-basic-types 
-	(= (pdf [1 2 2] 1) 1/3)
-  (= (pdf '(1 2 1 2 2 1) 2) 1/2)
-	(= (support [1 2 3 2 :foo :bar]) [1 2 3 :foo :bar])
-  (= (cdf [1 2 3] 2) 2/3))
+	(is (= (pdf [1 2 2] 1) 1/3))
+  (is (= (pdf '(1 2 1 2 2 1) 2) 1/2))
+	(is (= (support [1 2 3 2 :foo :bar]) [1 2 3 :foo :bar]))
+  (is (= (cdf [1 2 3] 2) 2/3)))
 
+(deftest basic-uniform-int-tests
+  (is (thrown? AssertionError (uniform-int 5 0))) ; wrong argment order
+  (let [u (uniform-int 1 5)]
+    (is (< 0 (draw u)))
+    (is (= (pdf u 5) 1/4))
+    (is (= (cdf u 2) 1/2))
+  	(is (all? (repeatedly 100 #(> (:end u) (draw u)))))))
+
+(deftest large-uniform-tests
+  (let [u (uniform-int (reduce * (repeat 100 2)) (reduce * (repeat 100 3)))]
+    (is (all? (repeatedly 100 #(<= (:start u) (draw u)))))
+		(is (all? (repeatedly 100 #(> (:end u) (draw u)))))))

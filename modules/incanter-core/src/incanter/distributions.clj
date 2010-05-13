@@ -16,7 +16,8 @@
 
 
 (ns #^{:doc "Distributions. TODO: provide a useful string" :author "Mark M. Fredrickson"}
-	incanter.distributions)
+	incanter.distributions
+  (:import java.util.Random))
 
 (defprotocol Distribution
 	"The distribution protocol defines operations on probability distributions.
@@ -42,7 +43,7 @@
 	(reduce + (map #(pdf d %) (filter #(>= v %) (support d)))))
 
 ;; Extending some all sequence types to be distributions
-(extend-type clojure.lang.ISeq
+(extend-type clojure.lang.Sequential
 	Distribution
 		(pdf [d v] (get (tabulate d) v 0))
 		(cdf [d v] (simple-cdf d v))
@@ -52,3 +53,29 @@
 
 ; TODO set up a map extension that takes the values as frequencies
 
+(defrecord UniformInt [start end]
+  Distribution
+  	(pdf [d v] (/ 1 (- end start)))
+		(cdf [d v] (* v (pdf d v)))
+		(draw [d]
+		; for simplicity, cast to BigInt to use the random bitstream
+    ; a better implementation would handle different types differently
+    	(let [r (bigint (- end start))
+            f #(+ start (BigInteger. (.bitLength r) (Random.)))] ; TODO replace with reused, threadsafe random
+        (loop [candidate (f)] ; rejection sampler, P(accept) > .5, so don't fret
+					(if (< candidate end) candidate (recur (f))))))
+    ; (draw [d n] (repeatedly n #(draw d))) 
+		(support [d] (range start end)))
+
+(defn uniform-int
+  "Convenience function to a create a uniform distribution over
+	a set of integers over the (start, end] interval.
+	[] => start = 0, end = 1
+	[end] => start = 0
+	[start end] => user specified
+	"
+  ([] (uniform-int 1))
+  ([end] (uniform-int 0 end))
+  ([start end]
+     (assert (> end start))
+     (UniformInt. start end)))
