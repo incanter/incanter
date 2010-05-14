@@ -1,6 +1,8 @@
 (ns 
-	#^{:doc "Excel module for reading and writing Incanter datasets."}
-	incanter.excel
+  #^{
+    :doc "Excel module for reading and writing Incanter datasets."
+    :author "David James Humphreys"}
+  incanter.excel
   (:import
     [org.apache.poi.hssf.usermodel HSSFWorkbook HSSFCell HSSFFont HSSFRow HSSFSheet]
     [org.apache.poi.ss.usermodel Font CellStyle Cell DateUtil]
@@ -85,6 +87,7 @@ Options are:
 				(if (DateUtil/isCellDateFormatted cell)
 					:date
 					ct)))))
+
 (defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
 (defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]); NOTHING for now.
 (defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
