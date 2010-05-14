@@ -1,4 +1,4 @@
-(ns #^{:doc "A simple library that provides functions for persisting 
+(ns ^{:doc "A simple library that provides functions for persisting 
 Incanter data structures using MongoDB.
 
 Use incanter.mongodb in combination with the somnium.congomongo library. 

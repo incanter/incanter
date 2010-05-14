@@ -25,7 +25,7 @@
 ;; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(ns #^{:doc "Library for converting infix mathematical formula to prefix expressions"
+(ns ^{:doc "Library for converting infix mathematical formula to prefix expressions"
        :author "J. Bester"}
   incanter.infix)
 

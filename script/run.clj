@@ -5,6 +5,8 @@
                  (second found)
                  run-swank)))
 
-(use 'clojure.contrib.repl-utils)
+(require 'clojure.contrib.repl-utils)
+(use 'clojure.repl)
 (set! *print-length* 500)
 (clojure.contrib.repl-utils/add-break-thread!)
+
