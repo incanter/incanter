@@ -13,7 +13,7 @@
 
 (ns incanter.distributions-tests
   (:use clojure.test 
-        (incanter distributions)))
+        (incanter distributions stats)))
 
 ;; testing helpers
 (defn- all? [coll] (every? true? coll))

@@ -111,14 +111,6 @@
               (assert (not (nil? v)))
               (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v)))))))
 
-(defn- list-map ;; TODO rewrite this as a lazy operation
-  "Instead of providing (first lst) at each iteration, provides the
-	entire remaining list."
-  [f lst]
-  (loop [acc '() lst lst]
-    (if (or (nil? lst) (empty? lst)) acc
-    	(recur (conj acc (f lst)) (rest lst)))))
-
 (defn- fast-comb-sampler
 	"Get a sample from the nCk possible combinations. Uses a resrvoir
 	sample from Chapter 4 of Tille, Y. (2006). Sampling Algorithms. Springer, New York."
@@ -145,4 +137,6 @@
   [n k]
   (assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
   (Combination. n k (integer-distribution 0 (nCk n k))))
+
+
 
