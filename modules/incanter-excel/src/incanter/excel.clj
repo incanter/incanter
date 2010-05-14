@@ -66,14 +66,18 @@ Options are:
     (:workbook workbook-blob))
     filename))
 
-(defmulti get-workbook-sheet "Retrieve the Excel workbook based on either the index or the sheet name."
+(defmulti #^ {:private true
+              :doc "Retrieve the Excel workbook based on either the index or the sheet name."}
+          get-workbook-sheet
 	(fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
 (defmethod get-workbook-sheet :indexed [wbk index-or-name]
  (. wbk getSheetAt index-or-name))
 (defmethod get-workbook-sheet :named [wbk index-or-name]
  (. wbk getSheet (str index-or-name)))
 
-(defmulti  get-cell-value
+(defmulti #^ {:private true
+              :doc "Get the cell value depending on the cell type."}
+          get-cell-value
 	(fn [cell]
 		(let [ct (. cell getCellType)]
 			(if (not (= Cell/CELL_TYPE_NUMERIC ct))
