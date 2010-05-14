@@ -3,7 +3,7 @@
 ;; by Mark Fredrickson http://www.markmfredrickson.com
 ;; May 10, 2010
 
-;; Copyright (c) David Edgar Liebke, 2009. All rights reserved.  The use
+;; Copyright (c) Mark M. Fredrickson, 2010. All rights reserved.  The use
 ;; and distribution terms for this software are covered by the Eclipse
 ;; Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
 ;; which can be found in the file epl-v10.htincanter.at the root of this
@@ -74,7 +74,7 @@
     ; (draw [d n] (repeatedly n #(draw d))) 
 		(support [d] (range start end)))
 
-(defn uniform-int
+(defn integer-distribution
   "Convenience function to a create a uniform distribution over
 	a set of integers over the (start, end] interval.
 	[] => start = 0, end = 1
@@ -84,8 +84,8 @@
 	This function is preferred to creating a UniformInt object
 	directly.
 	"
-  ([] (uniform-int 1))
-  ([end] (uniform-int 0 end))
+  ([] (integer-distribution 1))
+  ([end] (integer-distribution 0 end))
   ([start end]
      (assert (> end start))
      (UniformInt. start end)))
@@ -120,12 +120,13 @@
     	(recur (conj acc (f lst)) (rest lst)))))
 
 (defn- fast-comb-sampler
-	"Get a sample from the nCk possible combinations"
+	"Get a sample from the nCk possible combinations. Uses a resrvoir
+	sample from Chapter 4 of Tille, Y. (2006). Sampling Algorithms. Springer, New York."
   [n k]
-  (sort
-   (list-map
-    (fn [lst] (+ (first lst) (count (filter #(>= % (first lst)) (rest lst)))))
-    (map draw (map uniform-int (range (- n k) n))))))
+  (reduce
+  	(fn [set i] (if (< (/ i k) (rand)) (conj (disj set (draw set)) i) set))
+    (set (range 0 k))
+    (range k n)))
 
 (defrecord Combination [n k u]
   Distribution
@@ -134,6 +135,14 @@
   	(draw [d] (fast-comb-sampler n k))
   	(support [d] (map #(decode-combinadic n k %) (range 0 (nCk n k)))))
 
-(defn combination-distribution [n k]
+(defn combination-distribution
+	"Create a distribution of all the k-sized combinations of n integers.
+	Can be considered a multivariate distribution over k-dimensions, where
+	each dimension is a discrete random variable on the (0, n] range.
+
+	It is recommended to use this function over creating a
+	Combination record directly."
+  [n k]
   (assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
-  (Combination. n k (uniform-int 0 (nCk n k))))
+  (Combination. n k (integer-distribution 0 (nCk n k))))
+

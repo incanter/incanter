@@ -1,12 +1,12 @@
-;;; symbolic-test-cases.clj -- Unit tests of Incanter functions 
+;;; distributions_tests.clj -- Tests of incanter.distributions namespace
 
-;; by Mark M. Fredrickson
-;; May 10 2010
+;; by Mark Fredrickson http://www.markmfredrickson.com
+;; May 10, 2010
 
-;; Copyright (c) David Edgar Liebke, 2009. All rights reserved.  The use
+;; Copyright (c) Mark M. Fredrickson, 2010. All rights reserved.  The use
 ;; and distribution terms for this software are covered by the Eclipse
 ;; Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
-;; which can be found in the file epl-v10.html at the root of this
+;; which can be found in the file epl-v10.htincanter.at the root of this
 ;; distribution.  By using this software in any fashion, you are
 ;; agreeing to be bound by the terms of this license.  You must not
 ;; remove this notice, or any other, from this software.
@@ -30,16 +30,16 @@
   (is (= (pdf #{:foo :bar :baz} :baz) 1/3))
   (is (= (pdf #{:foo :bar} :baz) 0)))
 
-(deftest basic-uniform-int-tests
-  (is (thrown? AssertionError (uniform-int 5 0))) ; wrong argment order
-  (let [u (uniform-int 1 5)]
+(deftest basic-integer-distribution-tests
+  (is (thrown? AssertionError (integer-distribution 5 0))) ; wrong argment order
+  (let [u (integer-distribution 1 5)]
     (is (< 0 (draw u)))
     (is (= (pdf u 5) 1/4))
     (is (= (cdf u 2) 1/2))
   	(is (all? (repeatedly 100 #(> (:end u) (draw u)))))))
 
-(deftest large-uniform-tests
-  (let [u (uniform-int (reduce * (repeat 100 2)) (reduce * (repeat 100 3)))]
+(deftest large-integer-tests
+  (let [u (integer-distribution (reduce * (repeat 100 2)) (reduce * (repeat 100 3)))]
     (is (all? (repeatedly 100 #(<= (:start u) (draw u)))))
 		(is (all? (repeatedly 100 #(> (:end u) (draw u)))))))
 
