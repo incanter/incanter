@@ -29,7 +29,6 @@
             "
        :author "David Edgar Liebke and Bradford Cross"}
   incanter.stats
-  ;(:gen-class)
   (:import (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
                                     Exponential NegativeBinomial Normal Poisson

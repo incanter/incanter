@@ -17,7 +17,6 @@
 
 
 (ns incanter.datasets
-  ;(:gen-class)
   (:use [incanter.io :only (read-dataset)]))
 
 

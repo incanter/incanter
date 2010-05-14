@@ -24,7 +24,6 @@
        "Library for reading and writing Incanter datasets and matrices."}
 
 incanter.io
-  ;(:gen-class)
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
   (:use [incanter.core :only (dataset save)]))
