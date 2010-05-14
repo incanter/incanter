@@ -5,7 +5,6 @@
        :author "David Edgar Liebke"}
 
   incanter.latex
-  ;; (:use [incanter.core :only (save)])
   (:import [org.scilab.forge.jlatexmath TeXConstants TeXIcon TeXFormula]))
 
 
