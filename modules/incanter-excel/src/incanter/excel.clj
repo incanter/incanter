@@ -41,7 +41,8 @@
 
 (defn #^{:doc "Save a dataset to an Excel file.
 Options are:
-:sheet-name defaults to \"dataset\" if not provided.
+:sheet defaults to \"dataset\" if not provided.
+:use-bold defaults to true.  Set the header line in bold.
 "}
   save-xls [
   #^:incanter.core/dataset dataset
@@ -49,19 +50,20 @@ Options are:
   & options]
     (write-file (let [
           opts (when options (apply assoc {} options))
-          x (let [w (HSSFWorkbook.)]
+          bold-header (or (:use-bold opts) true)
+          workbook-blob (let [w (HSSFWorkbook.)]
             {:workbook w
              :normal  (make-font true w)
              :bold    (make-font false w)})
-          s (. (:workbook x) createSheet (or (:sheet-name opts) "dataset"))
+          workbook-sheet (. (:workbook workbook-blob) createSheet (or (:sheet opts) "dataset"))
           align-row (fn [row cols] (map #(get row %1) cols))
           ]
-          (write-line s 0 (:column-names dataset) (:bold x))
+          (write-line workbook-sheet 0 (:column-names dataset) (if bold-header (:bold workbook-blob) (:normal workbook-blob)))
           (do-loop
-            #(write-line s %1 (align-row %2 (:column-names dataset)) (:normal x))
+            #(write-line workbook-sheet %1 (align-row %2 (:column-names dataset)) (:normal workbook-blob))
             1
             (:rows dataset))
-    (:workbook x))
+    (:workbook workbook-blob))
     filename))
 
 (defmulti get-workbook-sheet "Retrieve the Excel workbook based on either the index or the sheet name."
@@ -89,12 +91,12 @@ Options are:
 
 (defn #^{:doc "Read an Excel file into a dataset.
 Options are:
-:sheet-name either a String for the tab name or an int for the sheet index -- defaults to 0"}
+:sheet either a String for the tab name or an int for the sheet index -- defaults to 0"}
   read-xls [
   #^String filename
   & options]
     (let [opts (when options (apply assoc {} options))
-          sheet-pointer (or (:sheet-name opts) 0)]
+          sheet-pointer (or (:sheet opts) 0)]
     (with-open [in-fs (FileInputStream. filename)]
       (let [workbook  (HSSFWorkbook. in-fs)
             sheet     (get-workbook-sheet workbook sheet-pointer)
