@@ -3,10 +3,12 @@
         incanter.core
         incanter.excel)
   (:import java.lang.Math
-           java.util.Date))
+           java.util.Date
+           java.io.File))
 
 (deftest xls-roundtrip
- (let [fname (. (java.io.File/createTempFile "excel-test" ".xls") getAbsolutePath)]
+ (let [ffile (File/createTempFile "excel-test" ".xls")
+       fname (. ffile getAbsolutePath)]
   (try
      (let [cols ["Ints" "Doubles" "Strings" "Dates"]
            dset (dataset
@@ -19,4 +21,4 @@
         (do
           (is (dataset? result))
           (is (= cols (:column-names result)))))
-       (. (java.io.File. fname) delete))))
+      (finally (. ffile delete)))))
