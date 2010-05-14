@@ -1,9 +1,9 @@
 (ns 
-	#^{:doc "Excel module for Incanter datasets."} 
+	#^{:doc "Excel module for reading and writing Incanter datasets."}
 	incanter.excel
   (:import
     [org.apache.poi.hssf.usermodel HSSFWorkbook HSSFCell HSSFFont HSSFRow HSSFSheet]
-    [org.apache.poi.ss.usermodel Font CellStyle Cell]
+    [org.apache.poi.ss.usermodel Font CellStyle Cell DateUtil]
     org.apache.poi.hssf.model.Sheet
     [java.io FileOutputStream FileInputStream])
   (:use
@@ -71,13 +71,22 @@ Options are:
 (defmethod get-workbook-sheet :named [wbk index-or-name]
  (. wbk getSheet (str index-or-name)))
 
-(defmulti  get-cell-value (fn [cell] (. cell getCellType)))
+(defmulti  get-cell-value
+	(fn [cell]
+		(let [ct (. cell getCellType)]
+			(if (not (= Cell/CELL_TYPE_NUMERIC ct))
+				ct
+				(if (DateUtil/isCellDateFormatted cell)
+					:date
+					ct)))))
 (defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
 (defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]); NOTHING for now.
 (defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell] (. cell getStringCellValue))
-(defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue)) ;TODO: date fields seem to live in here.
+(defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue))
+(defmethod get-cell-value :date                  [cell] (. cell getDateCellValue))
 (defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
+
 (defn #^{:doc "Read an Excel file into a dataset.
 Options are:
 :sheet-name either a String for the tab name or an int for the sheet index -- defaults to 0"}
