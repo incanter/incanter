@@ -47,3 +47,18 @@
   (let [cd (combination-distribution 5 3)]
     (is (= 3 (count (draw cd))))
 		(is (= 3 (count (set (draw cd)))))))
+
+(deftest normal-tests
+  ;; generate a sample of standard normal data
+  (let [N (normal-distribution)
+        std-normal-data (repeatedly 1000 #(draw N))]
+  	(is (= (count std-normal-data) 1000))
+  	(is (= (Math/round (mean std-normal-data)) 0))
+  	(is (= (Math/round (sd std-normal-data)) 1)))
+  
+  ;; generate a sample of normal data with mean = 10 and sd = 5
+  (let [N (normal-distribution 10 5)
+        nonstd-normal-data (repeatedly 1000 #(draw N))]
+ 		(is (= (count nonstd-normal-data) 1000))
+  	(is (= (Math/round (mean nonstd-normal-data)) 10))
+  	(is (= (Math/round (sd nonstd-normal-data)) 5))))

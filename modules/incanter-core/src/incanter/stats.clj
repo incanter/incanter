@@ -43,7 +43,8 @@
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows)]))
+                              cumulative-sum solve vectorize bind-rows)])
+  (:use [incanter.internal :only (defdeprecated)]))
 
 (defn indicator
 "
@@ -160,8 +161,12 @@
 ;; NORMAL DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn pdf-normal
-" Returns the Normal pdf of the given value, x. It will return a sequence
+(defdeprecated pdf-normal
+" 
+  See incanter.distributions.Distribution and 
+  incanter.distributions.normal-distribution for equivalent functionality.
+
+  Returns the Normal pdf of the given value, x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's dnorm function.
 
   Options:
@@ -179,19 +184,23 @@
   Example:
       (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
-  ([x & options]
+  [x & options]
     (let [opts (when options (apply assoc {} options))
           mean (or (:mean opts) 0)
           sd (or (:sd opts) 1)
           dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
-        (.pdf dist x)))))
+        (.pdf dist x))))
 
 
 
-(defn cdf-normal
-" Returns the Normal cdf of the given value, x. It will return a sequence
+(defdeprecated cdf-normal
+" 
+  See incanter.distributions.Distribution and 
+  incanter.distributions.normal-distribution for equivalent functionality.
+
+  Returns the Normal cdf of the given value, x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's pnorm function.
 
   Options:
@@ -209,14 +218,14 @@
   Example:
       (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
-  ([x & options]
+  [x & options]
     (let [opts (when options (apply assoc {} options))
           mean (or (:mean opts) 0)
           sd (or (:sd opts) 1)
           dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
-        (.cdf dist x)))))
+        (.cdf dist x))))
 
 
 (defn quantile-normal
@@ -254,8 +263,12 @@
 
 
 
-(defn sample-normal
-" Returns a sample of the given size from a Normal distribution
+(defdeprecated sample-normal
+" 
+  See incanter.distributions.Distribution and 
+  incanter.distributions.normal-distribution for equivalent functionality.
+
+  Returns a sample of the given size from a Normal distribution
   This is equivalent to R's rnorm function.
 
   Options:
@@ -272,13 +285,13 @@
   Example:
       (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
 "
-  ([#^Integer size & options]
+  [#^Integer size & options]
     (let [opts (when options (apply assoc {} options))
           mean (or (:mean opts) 0)
           sd (or (:sd opts) 1)]
       (if (= size 1)
         (Normal/staticNextDouble mean sd)
-        (for [_ (range size)] (Normal/staticNextDouble mean sd))))))
+        (for [_ (range size)] (Normal/staticNextDouble mean sd)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

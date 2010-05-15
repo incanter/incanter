@@ -17,7 +17,9 @@
 
 (ns #^{:doc "Distributions. TODO: provide a useful string" :author "Mark M. Fredrickson"}
 	incanter.distributions
-  (:import java.util.Random))
+  (:import java.util.Random
+  	(cern.jet.random.tdouble Normal)
+    (cern.jet.random.tdouble.engine DoubleMersenneTwister)))
 
 (defprotocol Distribution
 	"The distribution protocol defines operations on probability distributions.
@@ -138,5 +140,42 @@
   (assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
   (Combination. n k (integer-distribution 0 (nCk n k))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; NORMAL DISTRIBUTION 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(def inf+ Double/POSITIVE_INFINITY)
+(def inf- Double/NEGATIVE_INFINITY)
 
+(def colt-extenders
+	{:pdf (fn [d v] (.pdf d v))
+   :cdf (fn [d v] (.cdf d v))
+   :draw (fn [d] (.nextDouble d))
+   :support (fn [d] [inf-, inf+])})
+
+; bootstrap by extending the colt object to implement this protocol
+; future versions could implement a Box-Muller transform in clojure
+; I think clojure.contrib.probabilities would have an example implementation.
+(extend cern.jet.random.tdouble.Normal Distribution colt-extenders)
+
+(defn normal-distribution
+"
+	Returns a Normal distribution that implements the Distribution protocol
+	(for more information use (doc Distribution)).
+
+	Argument Lists:
+			[] => Returns a standard normal (mean = 0, standard deviation = 1)
+			[mean sd] => Returns a distribution with supplied mean and standard deviation.
+
+  See also:
+      Distribution, pdf, cdf, draw, support
+
+  References:
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html
+      http://en.wikipedia.org/wiki/Normal_distribution
+
+  Example:
+      (pdf (normal 2 (sqrt 0.5) 1.96))
+"
+	([] (normal-distribution 0 1))
+  ([mean sd] (Normal. mean sd (DoubleMersenneTwister.))))
