@@ -13,8 +13,6 @@
 
 ;; CHANGE LOG
 
-
-
 (ns #^{:doc "Distributions. TODO: provide a useful string" :author "Mark M. Fredrickson"}
 	incanter.distributions
   (:import java.util.Random
@@ -141,13 +139,17 @@
 ;; Sets (e.g. #{1 2 3}) are not seqs, so need their own implementation
 (extend-type clojure.lang.PersistentHashSet
 	Distribution
-  	(pdf [d v] (if (contains? d v) (/ 1 (count d)) 0))
+  	(pdf [d v] (if (get d v) (/ 1 (count d)) 0))
     (cdf [d v] nil) ; should this throw an exception?
     (draw [d] (nth (support d) (rand-int (count d))))
     (support [d] (vec d)))
 
 ; TODO set up a map extension that takes the values as frequencies
 
+
+; defrecord expands to have a (contains? ...) (or .contains method) that causes
+; a reflection warning. Note much to do about that for now. Perhaps it will be
+; fixed in clojure.core later.
 (defrecord UniformInt [start end]
   Distribution
   	(pdf [d v] (/ 1 (- end start)))
@@ -225,6 +227,9 @@
     (set (range 0 k))
     (range k n)))
 
+; defrecord expands to have a (contains? ...) (or .contains method) that causes
+; a reflection warning. Note much to do about that for now. Perhaps it will be
+; fixed in clojure.core later.
 (defrecord Combination [n k u]
   Distribution
   	(pdf [d v] (/ 1 (nCk n k)))
@@ -273,10 +278,16 @@
 (defvar- inf+ Double/POSITIVE_INFINITY)
 (defvar- inf- Double/NEGATIVE_INFINITY)
 
+; NOTE: the pdf and cdf functions require a reflection call. They could be made
+; to note reflect by type hinting the d argument:
+; (fn [#^cern.jet.randome.tdouble.Normal d v] (.pdf d v))
+; for now, I'm skipping this optimization so that more distributions can be boostrapped
+; quickly using the extenders map. This can be easily pulled out for each distribution
+; later, and appropriate type hints inserted.
 (defvar- colt-extenders
 	{:pdf (fn [d v] (.pdf d v))
    :cdf (fn [d v] (.cdf d v))
-   :draw (fn [d] (.nextDouble d))
+   :draw (fn [#^cern.jet.random.tdouble.AbstractDoubleDistribution d] (.nextDouble d))
    :support (fn [d] [inf-, inf+])})
 
 ; bootstrap by extending the colt object to implement this protocol
