@@ -25,7 +25,7 @@
 (deftest extending-basic-types 
 	(is (= (pdf [1 2 2] 1) 1/3))
   (is (= (pdf '(1 2 1 2 2 1) 2) 1/2))
-	(is (= (support [1 2 3 2 :foo :bar]) [1 2 3 :foo :bar]))
+	(is (= (support [1 2 3 2 :foo :bar]) #{1 2 3 :foo :bar}))
   (is (= (cdf [1 2 3] 2) 2/3))
   (is (= (pdf #{:foo :bar :baz} :baz) 1/3))
   (is (= (pdf #{:foo :bar} :baz) 0)))

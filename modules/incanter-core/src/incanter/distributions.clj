@@ -19,16 +19,101 @@
 	incanter.distributions
   (:import java.util.Random
   	(cern.jet.random.tdouble Normal)
-    (cern.jet.random.tdouble.engine DoubleMersenneTwister)))
+    (cern.jet.random.tdouble.engine DoubleMersenneTwister))
+  (:use [clojure.contrib.def :only (defvar defvar-)]))
 
+;; NOTE: as of this writing, (doc pdf/cdf/...) do not show the doc strings.
+;; including them for when this bug is fixed.
 (defprotocol Distribution
-	"The distribution protocol defines operations on probability distributions.
-	 Distributions may be univariate (defined over scalars) or multivariate
-	 (defined over vectors). Distributions may be discrete or continuous."
-	(pdf [d v] "Returns the value of the probability density/mass function for the d at support v")
-	(cdf [d v] "Returns the value of the cumulative distribution function for the distribution at support v")
-	(draw [d] "Returns 1 or n samples drawn from d") ; [d n] version removed temporarily
-  (support [d] "Returns the support of d in the form of XYZ"))
+"
+  The distribution protocol defines operations on probability distributions.
+	Distributions may be univariate (defined over scalars) or multivariate
+	(defined over vectors). Distributions may be discrete or continuous.
+
+	For a list of types that implement the protocol run (extenders Distribution).
+	Implementations are provided for the various Clojure collection datatypes.
+	See the example below for using the distribution methods on these types.
+
+	See also:
+		pdf, cdf, draw, support
+
+	References:
+		http://en.wikipedia.org/wiki/Probability_distribution
+
+	Examples:
+	  (support [1 3 4 2 1 3 4 2]) ; returns the set #{1 2 3 4}
+		(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}
+		(pdf [2 1 2] 1) ; returns the value 1/3
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 
+"
+	(pdf [d v]
+"
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns the value of the probability density/mass function for the
+  distribution d at support v.
+
+	See also:
+	  Distribution, cdf, draw, support
+
+	References:
+	  http://en.wikipedia.org/wiki/Probability_density_function
+
+	Examples:
+		(pdf [2 1 2] 1) ; returns the value 1/3\n")
+  
+	(cdf [d v]
+"
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns the value of the cumulative density function for the
+  distribution d at support v.
+
+	See also:
+	  Distribution, pdf, draw, support
+
+	References:
+	  http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+	Examples:
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 \n")
+
+	(draw [d]
+"
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns a randomly drawn value from the support of distribution d. 
+
+	See also:
+	  Distribution, pdf, cdf, support
+
+	Examples:
+		(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}\n")
+  
+  (support [d]
+"
+	**** EXPERIMENTAL ****
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns the support of the probability distribution d.
+	For discrete distributions, the support is a set (i.e. #{1 2 3}).
+	For continuous distributions, the support is a 2 element vector
+	discribing the range. For example, the uniform distribution over
+	the unit interval would return the vector [0 1].
+
+	This function is marked as experimental to note that the output
+	format might need to adapt to more complex support structures.
+	For example, what would best describe a mixture of continuous
+	distributions?
+
+	See also:
+	  Distribution, pdf, draw, support
+
+	References:
+	  http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+	Examples:
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 \n"))
 ;; Notes: other possible methods include moment generating function, transformations/change of vars
 
 (defn- tabulate
@@ -44,15 +129,16 @@
   [d v]
 	(reduce + (map #(pdf d %) (filter #(>= v %) (support d)))))
 
-;; Extending some all sequence types to be distributions
+;; Extending all sequence types to be distributions
 (extend-type clojure.lang.Sequential
 	Distribution
 		(pdf [d v] (get (tabulate d) v 0))
 		(cdf [d v] (simple-cdf d v))
 		(draw [d] (nth d (rand-int (count d))))
     ; (draw [d n] (repeatedly n #(draw d))) 
-		(support [d] (keys (frequencies d))))
+		(support [d] (set d)))
 
+;; Sets (e.g. #{1 2 3}) are not seqs, so need their own implementation
 (extend-type clojure.lang.PersistentHashSet
 	Distribution
   	(pdf [d v] (if (contains? d v) (/ 1 (count d)) 0))
@@ -73,20 +159,37 @@
             f #(+ start (BigInteger. (.bitLength r) (Random.)))] ; TODO replace with reused, threadsafe random
         (loop [candidate (f)] ; rejection sampler, P(accept) > .5, so don't fret
 					(if (< candidate end) candidate (recur (f))))))
-    ; (draw [d n] (repeatedly n #(draw d))) 
 		(support [d] (range start end)))
 
 (defn integer-distribution
-  "Convenience function to a create a uniform distribution over
-	a set of integers over the (start, end] interval.
-	[] => start = 0, end = 1
-	[end] => start = 0
-	[start end] => user specified
+"
+  Create a uniform distribution over a set of integers over
+	the (start, end] interval. An alternative method of creating
+	a distribution would be to just use a sequence of integers
+	(e.g. (draw (range 100000))). For large sequences, like the one
+	in the example, using a sequence will be require realizing the
+	entire sequence before a draw can be taken. This less efficient than
+	computing random draws based on the end points of the distribution.
 
-	This function is preferred to creating a UniformInt object
-	directly.
-	"
-  ([] (integer-distribution 1))
+	Arguments:
+		start	The lowest end of the interval, such that (>= (draw d) start)
+					is always true. (Default 0)
+		end		The value at the upper end of the interval, such that
+					(> end (draw d)) is always true. Note the strict inequality.
+					(Default 1)
+
+	See also:
+		pdf, cdf, draw, support
+
+	References:
+		http://en.wikipedia.org/wiki/Uniform_distribution_(discrete)
+
+	Examples:
+		(pdf (integer-distribution 0 10) 3) ; returns 1/10 for any value
+		(draw (integer-distribution -5 5))
+		(draw (integer-distribution (bit-shift-left 2 1000))) ; probably a very large value
+"  
+  ([] (integer-distribution 0 1))
   ([end] (integer-distribution 0 end))
   ([start end]
      (assert (> end start))
@@ -130,42 +233,68 @@
   	(support [d] (map #(decode-combinadic n k %) (range 0 (nCk n k)))))
 
 (defn combination-distribution
-	"Create a distribution of all the k-sized combinations of n integers.
+"
+	Create a distribution of all the k-sized combinations of n integers.
 	Can be considered a multivariate distribution over k-dimensions, where
 	each dimension is a discrete random variable on the (0, n] range.
+	A draw from this distribution can also be considered a sample without
+	replacement from any finite set, where the values in the returned
+	vector represent the indices of the items in the set.
 
-	It is recommended to use this function over creating a
-	Combination record directly."
+	This distribution can be useful to simulate sampling from a finite
+	population. For example, randomly selecting 50 subjects out of a pool
+	of 100 to be under the treatment condition in an experiment. Repeated
+	sampling can be used to estimate the distribution of a test statistic
+	over all possible samples/treatment assignments, the so-called
+	sampling distribution.
+
+	Arguments:
+		n		The number of possible items from which to select.
+		k		The size of a sample (without replacement) to draw.
+
+	See also:
+		integer-distribution, pdf, cdf, draw, support
+
+	References:
+		http://en.wikipedia.org/wiki/Combination
+		http://en.wikipedia.org/wiki/Sampling_distribution
+
+	Examples:
+		
+"  
   [n k]
-  (assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
-  (Combination. n k (integer-distribution 0 (nCk n k))))
+  	(assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
+  	(Combination. n k (integer-distribution 0 (nCk n k))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NORMAL DISTRIBUTION 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def inf+ Double/POSITIVE_INFINITY)
-(def inf- Double/NEGATIVE_INFINITY)
+(defvar- inf+ Double/POSITIVE_INFINITY)
+(defvar- inf- Double/NEGATIVE_INFINITY)
 
-(def colt-extenders
+(defvar- colt-extenders
 	{:pdf (fn [d v] (.pdf d v))
    :cdf (fn [d v] (.cdf d v))
    :draw (fn [d] (.nextDouble d))
    :support (fn [d] [inf-, inf+])})
 
 ; bootstrap by extending the colt object to implement this protocol
-; future versions could implement a Box-Muller transform in clojure
+; future versions could implement a Box-Muller transform in clojure for (draw)
 ; I think clojure.contrib.probabilities would have an example implementation.
+; I'm interested to know how pdf/cdf are implemented in colt...
 (extend cern.jet.random.tdouble.Normal Distribution colt-extenders)
 
 (defn normal-distribution
 "
-	Returns a Normal distribution that implements the Distribution protocol
-	(for more information use (doc Distribution)).
+	Returns a Normal distribution that implements the
+  incanter.distributions.Distribution protocol.
 
-	Argument Lists:
-			[] => Returns a standard normal (mean = 0, standard deviation = 1)
-			[mean sd] => Returns a distribution with supplied mean and standard deviation.
+	Arguments:
+		mean	The mean of the distribution. One of two parameters
+					that summarize the Normal distribution (default 0).
+		sd		The standard deviation of the distribution.
+				 	The second parameter that describes the Normal (default 1).
 
   See also:
       Distribution, pdf, cdf, draw, support
