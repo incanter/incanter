@@ -271,6 +271,67 @@
   	(assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
   	(Combination. n k (integer-distribution 0 (nCk n k))))
 
+(def *test-statistic-iterations* 1000)
+(def *test-statistic-map* pmap)
+
+(defn test-statistic-distribution
+"
+	Create a distribution of the test-statistic over the possible
+	random samples of treatment units from the possible units.
+
+	There are two methods for generating the distribution. The
+	first method is enumerating all possible randomizations and
+	performing the test statistic on each. This gives the exact
+	distribution, but is only feasible for small problems.
+
+	The second method uses a combination-distribution to sample
+	for the space of possible treatment assignments and applies
+	the test statistic the sampled randomizations. While the
+	resulting distribution is not exact, it is tractable for
+	larger problems.
+
+	The algorithm automatically chooses between the two methods
+	by computing the number of possible randomizations and
+	comparing it to *test-statistic-iterations*. If the exact
+	distribution requires fewer than *test-statistic-iterations*
+	the enumeration method is used. Otherwise, it draws
+	*test-statistic-iterations* total samples for the simulated
+	method.
+
+	By default, the algorithm uses parallel computation. This is
+	controlled by the function *test-statistic-map*, which is
+	bound to pmap by default. Bind it to map to use a single
+	thread for computation.
+
+	Arguments:
+		test-statistic	A function that takes two vectors and summarizes
+				the difference between them
+		n		The number of total units in the pool
+		k	  The number of treatment units per sample
+
+	See also:
+		combination-distribution, pdf, cdf, draw, support
+
+	References:
+		http://en.wikipedia.org/wiki/Sampling_distribution
+		http://en.wikipedia.org/wiki/Exact_test
+		http://en.wikipedia.org/wiki/Randomization_test
+		http://en.wikipedia.org/wiki/Lady_tasting_tea
+
+	Examples:
+		
+"
+	[test-statistic n k]
+	; for now returns entire set of computed values, should summarize via frequencies
+  (*test-statistic-map* test-statistic ; *t-s-m* is bound to pmap by default
+    (let [cd (combination-distribution n k)]
+  		(if (> (nCk n k) *test-statistic-iterations*)
+      ; simulated method
+        (repeatedly *test-statistic-iterations* #(draw cd))
+      ; exact method -- this is slow as it requires decoding combinadics
+      ; replace with something better soon, this was just on hand.
+      	(support cd)))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NORMAL DISTRIBUTION 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -12,7 +12,8 @@
 ;; remove this notice, or any other, from this software.
 
 (ns incanter.distributions-tests
-  (:use clojure.test 
+  (:use clojure.test
+        clojure.set
         (incanter distributions stats)))
 
 ;; testing helpers
@@ -62,3 +63,16 @@
  		(is (= (count nonstd-normal-data) 1000))
   	(is (= (Math/round (mean nonstd-normal-data)) 10))
   	(is (= (Math/round (sd nonstd-normal-data)) 5))))
+
+(deftest lady-tasting-tea
+  ; http://en.wikipedia.org/wiki/Lady_tasting_tea
+  ; under fisher's lady tasting tea experiment, the test statistic is
+  ; the number of milk first cups correctly classified. Therefore, we only care
+  ; that the treatment units correspond to the "true" treatments,
+  ; which I arbitrarily decide are cups 0 -3
+  (let [lady-fn (fn [x] (count (intersection (set x) #{0 1 2 3})))
+        lady-tasting-tea (test-statistic-distribution lady-fn 8 4)]
+    (= (support lady-tasting-tea) #{0 1 2 3}) ; possible cups correctly classified
+    (= (map #(pdf lady-tasting-tea %) [0 1 2 3 4]) [1/70 16/70 36/70 16/70 1/70])))
+
+    
