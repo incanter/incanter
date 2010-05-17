@@ -1,5 +1,5 @@
 (ns 
-#^{:doc "This library currently has only a single function, save-pdf, which saves
+^{:doc "This library currently has only a single function, save-pdf, which saves
   charts as a PDF file. To build this namespace make sure the you have the iText
   library (http://itextpdf.com/) as a declared dependency in your pom.xml or 
   project.clj file:

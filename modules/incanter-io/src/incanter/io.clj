@@ -20,7 +20,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns 
-    #^{:doc 
+    ^{:doc 
        "Library for reading and writing Incanter datasets and matrices."}
 
 incanter.io
@@ -65,7 +65,7 @@ incanter.io
          header? (or (:header opts) false)
          compress-delim? (or (:compress-delim opts)
                              (if (= delim \space) true false))]
-     (with-open [reader #^CSVReader (CSVReader.
+     (with-open [reader ^CSVReader (CSVReader.
                     (get-input-reader filename)
                     delim
                     quote-char

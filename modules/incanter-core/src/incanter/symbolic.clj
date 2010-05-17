@@ -1,5 +1,5 @@
 
-(ns  #^{:doc "A library for performing symbolic math, a port from SICP (http://mitpress.mit.edu/sicp/)."
+(ns  ^{:doc "A library for performing symbolic math, a port from SICP (http://mitpress.mit.edu/sicp/)."
        :author "Bryce Nyeggen, with modifications by David Edgar Liebke"}
  incanter.symbolic
   (:use [incanter.core :only (pow)]))

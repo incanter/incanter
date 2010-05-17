@@ -1,4 +1,4 @@
-(ns #^{:doc "This library is used to render LaTex Math equations, based
+(ns ^{:doc "This library is used to render LaTex Math equations, based
    on the jLateXMath library, and applying them incanter.charts as annotations
    and subtitles.
             "
