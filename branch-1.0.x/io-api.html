@@ -99,7 +99,38 @@ by <span id="author">Unknown</span><br />
   (:require <span id="long-name">incanter.io</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr">Library for reading and writing Incanter datasets and matrices.</pre>
+<pre id="namespace-docstr">
+lib for handy io goodness.
+
+-ability to pretty print reports of various models
+-read in clojure and json literals in different ways; files, classpath resources, etc.
+-support for csv and sql
+
+
+http://stackoverflow.com/questions/613929/how-do-i-connect-to-a-mysql-database-from-clojure
+
+;;example sql transformation
+
+ (def stuff (sql-select 
+  (sql-unique "something") 
+  (sql-where (str "something = "something"))
+  (sql-from "mytable"))
+  (sql-order-by "foo, bar")))
+
+ (defn transform-query [t q] #(with-query-results res [(q %)] (t res)))
+
+ (defn sql-transformer [key-query
+		       transform
+		       view-query
+		       output-file]
+  (with-data key-query
+    #(with-out-writer output-file
+        (dorun (do-for :something % (transform-query transform view-query))))))
+
+ (defn sql-to-hadoop [transform]
+  (sql-transformer stuff transform myview "/target/dir/preprocessed.pre"))
+
+ (defn transform-dates [] (sql-to-hadoop #(binding [*print-dup* true] (prn (preprocess %)))))</pre>
 
 
 <br />

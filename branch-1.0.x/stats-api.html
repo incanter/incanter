@@ -202,8 +202,6 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.stats/sample-inv-wishart">sample-inv-wishart</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.stats/sample-multinomial">sample-multinomial</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.stats/sample-mvn">sample-mvn</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.stats/sample-neg-binomial">sample-neg-binomial</a>
@@ -225,6 +223,8 @@ namespace.
       <a href="#incanter.stats/simple-regression">simple-regression</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.stats/skewness">skewness</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.stats/smooth-discrete-probs">smooth-discrete-probs</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.stats/sorensen-index">sorensen-index</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -378,7 +378,7 @@ Examples:
   (quantile smooth-samp :probs [0.025 0.975])</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1638" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -407,7 +407,7 @@ Example:
     (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L480" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -435,7 +435,7 @@ Example:
     (cdf-binomial 10 :prob 1/4 :size 20)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1102" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -463,7 +463,7 @@ Example:
     (cdf-chisq 5.0 :df 2 :lower-tail false)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L675" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -499,7 +499,7 @@ Examples:
   (view (scatter-plot exam1 (map ecdf exam1)))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1354" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -525,7 +525,7 @@ Example:
     (cdf-exp 2.0 :rate 1/2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L894" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -552,7 +552,7 @@ Example:
     (cdf-f 1.0 :df1 5 :df2 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L122" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -581,7 +581,7 @@ Example:
     (cdf-gamma 3 :shape 1 :lower-tail false)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L579" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -608,7 +608,7 @@ Example:
     (cdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1289" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -635,7 +635,7 @@ Example:
     (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L196" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -662,7 +662,7 @@ Example:
     (cdf-poisson 5 :lambda 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1196" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -688,7 +688,7 @@ Example:
     (cdf-t 1.2 :df 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L765" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -716,7 +716,7 @@ Example:
     (cdf-uniform 5 :min 1 :max 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L382" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -727,7 +727,7 @@ Example:
   <pre id="var-docstr">In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2883" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -818,7 +818,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Yates'_chi-square_test">http://en.wikipedia.org/wiki/Yates'_chi-square_test</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2262" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -838,7 +838,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Correlation">http://en.wikipedia.org/wiki/Correlation</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1480" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -852,7 +852,7 @@ http://en.wikipedia.org/wiki/Correlation_ratio
 It is worth noting that if the relationship between values of  and values of overline y_x is linear (which is certainly true when there are only two possibilities for x) this will give the same result as the square of the correlation coefficient, otherwise the correlation ratio will be larger in magnitude. It can therefore be used for judging non-linear relationships.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2682" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -890,7 +890,7 @@ suggesting that most of the overall dispersion is a result of differences betwee
 Observe that for η = 1 the overall sample dispersion is purely due to dispersion among the categories and not at all due to dispersion within the individual categories. For a quick comprehension simply imagine all Algebra, Geometry, and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2644" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -920,7 +920,7 @@ Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
                            = 0.938572618717</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2904" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -945,7 +945,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Covariance">http://en.wikipedia.org/wiki/Covariance</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1428" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -963,7 +963,7 @@ References:
 </pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1765" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -998,7 +998,7 @@ Examples:
   (tabulate (detabulate :table (:table (tabulate data))))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2480" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1011,7 +1011,7 @@ http://en.wikipedia.org/wiki/Dice%27s_coefficient
 Dice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2982" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1037,7 +1037,7 @@ Each set has four elements, and the intersection of these two sets has only one 
 Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L3008" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1048,7 +1048,7 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
   <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Discordant_pairs">http://en.wikipedia.org/wiki/Discordant_pairs</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2767" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1061,7 +1061,7 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
 the Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2876" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1075,7 +1075,7 @@ http://www.statsdirect.com/help/nonparametric_methods/kend.htm
 The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2790" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1088,7 +1088,7 @@ The gamma coefficient is given as a measure of association that is highly resist
 In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L3031" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1112,7 +1112,7 @@ Examples:
   (sum (mult x (indicator #(pos? %) x)))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L51" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1126,7 +1126,7 @@ http://en.wikipedia.org/wiki/Jaccard_index
 The Jaccard distance, which measures dissimilarity between sample sets, is complementary to the Jaccard coefficient and is obtained by subtracting the Jaccard coefficient from 1, or, equivalently, by dividing the difference of the sizes of the union and the intersection of two sets by the size of the union.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2971" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1142,7 +1142,7 @@ The Jaccard index, also known as the Jaccard similarity coefficient (originally 
 The Jaccard coefficient measures similarity between sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2960" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1158,7 +1158,7 @@ best explanation and example is in "cluster analysis for researchers" page 165.
 <a href="http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175">http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2718" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1193,7 +1193,7 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
  [{:observation [1 2 3]} {} ... {}] -&gt; W</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2799" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1217,7 +1217,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Kurtosis">http://en.wikipedia.org/wiki/Kurtosis</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1523" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1234,7 +1234,7 @@ If q = 2 or q = 3 the Lee distance coincides with the Hamming distance.
 The metric space induced by the Lee distance is a discrete analog of the elliptic space.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L3046" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1265,7 +1265,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
     * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L3093" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1324,7 +1324,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Coefficient_of_determination">http://en.wikipedia.org/wiki/Coefficient_of_determination</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1943" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1390,7 +1390,7 @@ References:
 </pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L3196" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1403,7 +1403,7 @@ References:
 usual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2893" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1422,7 +1422,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Mean">http://en.wikipedia.org/wiki/Mean</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1394" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1441,7 +1441,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Median">http://en.wikipedia.org/wiki/Median</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1505" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1459,7 +1459,7 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 In the limiting case of p reaching infinity we obtain the Chebyshev distance.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2852" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1472,7 +1472,7 @@ In the limiting case of p reaching infinity we obtain the Chebyshev distance.</p
 this is using actual sets here, discards dupicate n-grams?</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2994" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1486,7 +1486,7 @@ http://en.wikipedia.org/wiki/Kendall_tau_distance
 Kendall tau distance is the total number of discordant pairs.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2777" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1509,7 +1509,7 @@ Relation to statistical independence
 If X and Y are independent, their joint probabilities can be expressed in terms of their marginal probabilities.  In this case, the odds ratio equals one, and conversely the odds ratio can only equal one if the joint probabilities can be factored in this way. Thus the odds ratio equals one if and only if X and Y are independent.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2624" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1520,7 +1520,7 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
   <pre id="var-docstr">confusing ass name.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2754" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1531,7 +1531,7 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
   <pre id="var-docstr">returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2742" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1558,7 +1558,7 @@ Example:
     (pdf-beta 0.5 :alpha 1 :beta 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L451" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1585,7 +1585,7 @@ Example:
     (pdf-binomial 10 :prob 1/4 :size 20)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1072" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1611,7 +1611,7 @@ Example:
     (pdf-chisq 5.0 :df 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L647" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1637,7 +1637,7 @@ Example:
     (pdf-exp 2.0 :rate 1/2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L867" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1664,7 +1664,7 @@ Example:
     (pdf-f 1.0 :df1 5 :df2 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L85" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1691,7 +1691,7 @@ Example:
     (pdf-gamma 10 :shape 1 :rate 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L549" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1718,7 +1718,7 @@ Example:
     (pdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1258" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1745,7 +1745,7 @@ Example:
     (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L166" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1771,7 +1771,7 @@ Example:
     (pdf-poisson 5 :lambda 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1168" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1797,7 +1797,7 @@ Example:
     (pdf-t 1.2 :df 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L738" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1825,7 +1825,7 @@ Example:
     (pdf-uniform 5 :min 1 :max 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L352" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1848,7 +1848,7 @@ Examples:
   (permute (range 10) (range 10 20))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1809" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1860,7 +1860,7 @@ Examples:
 and returns the predicted value based on the linear-model.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2593" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1916,7 +1916,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Principal_component_analysis">http://en.wikipedia.org/wiki/Principal_component_analysis</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2422" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1927,7 +1927,7 @@ References:
   <pre id="var-docstr">the joint PMF of independent variables is equal to the product of their marginal PMFs.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2841" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1952,7 +1952,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Quantile">http://en.wikipedia.org/wiki/Quantile</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1563" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1984,7 +1984,7 @@ Example:
     (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L225" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2017,7 +2017,7 @@ Example:
     (map #(quantile-t 0.025 :df %) df)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L795" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2029,7 +2029,7 @@ Example:
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2692" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2054,7 +2054,7 @@ Examples:
   (sample (seq "abcdefghijklmnopqrstuvwxyz")  :size 4 :replacement false) ; choose 4 random letters.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1598" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2081,7 +2081,7 @@ Example:
     (sample-beta 1000 :alpha 1 :beta 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L517" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2107,7 +2107,7 @@ Example:
     (sample-binomial 1000 :prob 1/4 :size 20)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1136" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2132,7 +2132,7 @@ Example:
     (sample-chisq 1000 :df 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L708" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2170,7 +2170,7 @@ Examples:
   (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1021" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2195,7 +2195,7 @@ Example:
     (sample-exp 1000 :rate 1/2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L921" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2221,7 +2221,7 @@ Example:
     (sample-gamma 1000 :shape 1 :rate 2)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L614" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2249,49 +2249,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Inverse-Wishart_distribution">http://en.wikipedia.org/wiki/Inverse-Wishart_distribution</a></pre>
   
   
-  
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.stats/sample-multinomial">sample-multinomial</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-multinomial size &amp; options)
-</pre>
-  <pre id="var-docstr"> Returns a sequence representing a sample from a multinomial distribution.
-
-  Arguments: size -- number of values to return
-
-  Options:
-    :categories (default [0 1]) -- the values returned
-    :probs (default [0.5 0.5]) -- the probabilities associated with each category
-
-
-  References:
-    http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution
-
-
-  Examples:
-    (use '(incanter core stats charts))
-
-    (sample-multinomial 10)
-    (sample-multinomial 10 :probs [0.25 0.5 0.25])
-
-    ;; estimate sample proportions
-    (def sample-size 1000.0)
-    (def categories [:red :yellow :blue :green])
-    (def data (to-dataset (sample-multinomial sample-size 
-			   	              :categories categories
-				              :probs [0.5 0.25 0.2 0.05])))
-
-    ;; check the sample proportions
-    (view (pie-chart categories
-                     (map #(div (count ($ :col-0 ($where {:col-0 %} data))) 
-                                sample-size)
-                          categories)))
-                      </pre>
-  
-  
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L990" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2334,7 +2292,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Multivariate_normal">http://en.wikipedia.org/wiki/Multivariate_normal</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L292" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2360,7 +2318,7 @@ Example:
     (sample-neg-binomial 1000 :prob 1/2 :size 20)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1322" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2386,7 +2344,7 @@ Example:
     (sample-normal 1000 :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L260" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2476,7 +2434,7 @@ Examples:
     <a href="http://en.wikipedia.org/wiki/Resampling_(statistics)">http://en.wikipedia.org/wiki/Resampling_(statistics)</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1837" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2501,7 +2459,7 @@ Example:
     (sample-poisson 1000 :lambda 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1228" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2526,7 +2484,7 @@ Example:
     (cdf-t 1000 :df 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L835" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2554,7 +2512,7 @@ Example:
     (sample-uniform 1000 :min 1 :max 10)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L412" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2582,7 +2540,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Wishart_distribution#">http://en.wikipedia.org/wiki/Wishart_distribution#</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L953" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2602,7 +2560,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Standard_deviation">http://en.wikipedia.org/wiki/Standard_deviation</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1460" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2614,7 +2572,7 @@ References:
 the coefficients.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2575" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2636,7 +2594,23 @@ References:
   <a href="http://en.wikipedia.org/wiki/Skewness">http://en.wikipedia.org/wiki/Skewness</a></pre>
   
   
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1544" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.stats/smooth-discrete-probs">smooth-discrete-probs</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (smooth-discrete-probs probs buckets)
+</pre>
+  <pre id="var-docstr">
+smooth a map of discrete probabilities.
+
+clear up any discrete steps that are missing and should be there.
+
+TODO: single class may have a spike of 100% probability.</pre>
   
+  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2603" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2658,7 +2632,7 @@ This function assumes you pass in a and b as sets.
 The sorensen index extended to abundance instead of incidence of species is called the Czekanowski index.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L3067" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2672,7 +2646,7 @@ http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
 In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2699" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2686,7 +2660,7 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
 returns the squares of the difference between each observation and the sample mean.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2552" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2700,7 +2674,7 @@ returns the squares of the difference between each observation and the sample me
 returns the sum of the squares of the difference between each observation and the sample mean.</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2565" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2713,7 +2687,7 @@ returns the sum of the squares of the difference between each observation and th
 (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -&gt; 5/2</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2831" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2741,7 +2715,7 @@ summary statistic. Based to R's sweep function.
     (sweep x :stat sd :fun div) ;; divide data by its sd</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1778" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2777,7 +2751,7 @@ References:
   <a href="http://www.socialresearchmethods.net/kb/stat_t.php">http://www.socialresearchmethods.net/kb/stat_t.php</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2065" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2837,7 +2811,7 @@ Examples:
   (tabulate data)</pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2161" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2852,7 +2826,7 @@ http://en.wikipedia.org/wiki/Jaccard_index
 The cosine similarity metric may be extended such that it yields the Jaccard coefficient in the case of binary attributes. This is the Tanimoto coefficient. </pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2939" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2871,7 +2845,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance</a></pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L1412" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2883,7 +2857,7 @@ References:
 y is within z of x in metric space.  </pre>
   
   
-  
+  <a href="http://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/stats.clj#L2545" id="var-source">Source</a>
 </div>
 
 

@@ -30,11 +30,17 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
+    <div class="BranchTOC">
+      <a class="wiki_link" href="#">Branches</a>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="index.html" class="wiki_link">master</a></li><li><a href="branch-1.0.x/index.html" class="wiki_link">1.0.x</a></li>
+      </ul>
+    </div>
     <a class="wiki_link" href="index.html">Overview</a><br />
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+      <li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li>
     </ul>
   </div>
 </div>
@@ -52,7 +58,8 @@ namespace.
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">chrono</span></h1>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">chrono</span>
+  <span id="branch-name">(master branch)</span></h1>
 by <span id="author">Matt Moriarity, Phil Hagelberg, and Bradford Cross</span><br />
 <br />Usage:
 <pre>
@@ -134,6 +141,8 @@ See test_contrib/chrono.clj for more details.
 * Various others scattered through code
 
 </pre>
+
+
 <br />
 <h2>Public Variables and Functions</h2>
 

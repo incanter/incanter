@@ -53,7 +53,15 @@ namespace.
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
-    
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.symbolic/deriv">deriv</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.symbolic/deriv*">deriv*</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.symbolic/deriv-fn">deriv-fn</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.symbolic/deriv-fn*">deriv-fn*</a>
+    </div>
     <br />
   </div>
 </div>
@@ -72,7 +80,150 @@ by <span id="author">Bryce Nyeggen, with modifications by David Edgar Liebke</sp
 
 <br />
 <h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.symbolic/deriv">deriv</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (deriv exp v)
+       (deriv exp v degree)
+</pre>
+  <pre id="var-docstr">Macro for symbolic differentiation. with 2 args, takes 1st degree deriv.
+with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
 
+
+Examples:
+
+  (use '(incanter core symbolic))
+
+  (deriv (+ x 3) x) ; =&gt; 1
+  (deriv (* x y) x) ; =&gt; y
+  (deriv (* (* x y) (+ x 3)) x) ; =&gt; (+ (* (+ x 3) y) (* x y))
+  (deriv (* (* x y) (+ x 3)) y) ; =&gt; (* (+ x 3) x)
+
+  (deriv (* x y (+ x 3)) x) ; =&gt; (+ (* y (+ x 3)) (* y x))
+  (deriv (* x y (+ x 3)) y) ; =&gt; (* (+ x 3) x)
+
+  (deriv (sin x) x) ; =&gt; (cos x)
+  (deriv (cos x) x) ; =&gt; (* -1 (sin x))
+
+  (deriv (sin (* x y)) y) ; =&gt; (* x (cos (* x y)))
+
+  (deriv (pow x 3) x) ; =&gt; (* 3 (pow x 2))
+  (deriv (** x 3) x) ; =&gt; (* 3 (pow x 2))
+
+  (deriv (pow x 3) x 2) ; =&gt; (* 3 (* 2 x))
+
+  (deriv (* x y (+ x 3)) x 2) ; =&gt; (+ y y)
+  (deriv (* x y (+ x 3)) x 3) ; =&gt; 0
+
+  (deriv (+ (* 3 x) (* 8 x)) x) ; =&gt; 11
+
+
+
+  ;; NOT WORKING YET
+
+  (deriv (/ 1 x) x) ; =&gt; (* (deriv* (* (x)) x) (* -1 (pow (* (x)) -2)))
+                                        ^-- need to fix</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-core/src/incanter/symbolic.clj#L140" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.symbolic/deriv*">deriv*</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (deriv* exp v)
+       (deriv* exp vr degree)
+</pre>
+  <pre id="var-docstr">main sub-function for differentiation. with 2 args, takes 1st degree deriv.
+with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
+
+
+Examples:
+
+  (use '(incanter core symbolic))
+
+  (deriv* '(+ x 3) 'x)
+  (deriv* '(* x y) 'x)
+  (deriv* '(* (* x y) '(+ x 3)) x)
+  (deriv* '(* (* x y) (+ x 3)) 'y)
+
+  (deriv* '(* x y (+ x 3)) 'x)
+  (deriv* '(* x y (+ x 3)) 'y)
+
+  (deriv* '(* x y (+ x 3)) 'x 2)
+  (deriv* '(* x y (+ x 3)) 'x 3)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-core/src/incanter/symbolic.clj#L74" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.symbolic/deriv-fn">deriv-fn</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (deriv-fn [&amp; args] expr v)
+       (deriv-fn [&amp; args] expr v degree)
+</pre>
+  <pre id="var-docstr">
+
+Examples:
+  (use '(incanter core symbolic))
+
+  (deriv-fn [x y] (+ (* x y) x) x)
+
+  ((deriv-fn [x y] (+ (* x y) x) x) 5 9)
+
+  (use 'incanter.charts)
+  (doto (function-plot sin -5 5)
+     (add-function (deriv-fn [x] (sin x) x) -5 5)
+     (add-function (deriv-fn [x] (sin x) x 2) -5 5)
+     view)
+
+  (let [f (fn [x] (pow x 2))
+        df (deriv-fn [x] (pow x 2) x)]
+    (doto (function-plot f -5 5)
+      (add-function df -5 5)
+      view))
+
+
+  (let [f (fn [x] (pow x 3))
+        df (deriv-fn [x] (pow x 3) x)]
+    (doto (function-plot f -5 5)
+      (add-function df -5 5)
+      view))
+
+
+  ;; NOT WORKING YET
+
+  (let [f (fn [x] (/ 1 x ))
+        df (deriv-fn [x] (/ 1 x) x)]
+    (doto (function-plot f 0.5 5)
+      (add-function df 0.5 5)
+      view))</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-core/src/incanter/symbolic.clj#L263" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.symbolic/deriv-fn*">deriv-fn*</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (deriv-fn* [&amp; args] expr v)
+       (deriv-fn* [&amp; args] expr v degree)
+</pre>
+  <pre id="var-docstr">
+
+Examples:
+  (use '(incanter core symbolic))
+
+  (deriv-fn* '[x y] '(+ (* x y) x) 'x)
+
+  ((deriv-fn* '[x y] '(+ (* x y) x) 'x) 5 9)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-core/src/incanter/symbolic.clj#L236" id="var-source">Source</a>
+</div>
 
 
 </div>
