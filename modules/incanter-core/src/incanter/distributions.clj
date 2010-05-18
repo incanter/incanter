@@ -241,28 +241,22 @@
 "
 	Create a distribution of all the k-sized combinations of n integers.
 	Can be considered a multivariate distribution over k-dimensions, where
-	each dimension is a discrete random variable on the (0, n] range.
+	each dimension is a discrete random variable on the (0, n] range (though
+	these variables are decidedly non-independent).
+
 	A draw from this distribution can also be considered a sample without
 	replacement from any finite set, where the values in the returned
 	vector represent the indices of the items in the set.
-
-	This distribution can be useful to simulate sampling from a finite
-	population. For example, randomly selecting 50 subjects out of a pool
-	of 100 to be under the treatment condition in an experiment. Repeated
-	sampling can be used to estimate the distribution of a test statistic
-	over all possible samples/treatment assignments, the so-called
-	sampling distribution.
 
 	Arguments:
 		n		The number of possible items from which to select.
 		k		The size of a sample (without replacement) to draw.
 
 	See also:
-		integer-distribution, pdf, cdf, draw, support
+		test-statistic-distribution, integer-distribution, pdf, cdf, draw, support
 
 	References:
 		http://en.wikipedia.org/wiki/Combination
-		http://en.wikipedia.org/wiki/Sampling_distribution
 
 	Examples:
 		
