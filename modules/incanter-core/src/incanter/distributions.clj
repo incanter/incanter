@@ -18,7 +18,9 @@
   (:import java.util.Random
   	(cern.jet.random.tdouble Normal)
     (cern.jet.random.tdouble.engine DoubleMersenneTwister))
-  (:use [clojure.contrib.def :only (defvar defvar-)]))
+  (:use [clojure.contrib.def :only (defvar defvar-)]
+        [clojure.set :only (intersection)]
+        [clojure.contrib.combinatorics :only (combinations)]))
 
 ;; NOTE: as of this writing, (doc pdf/cdf/...) do not show the doc strings.
 ;; including them for when this bug is fixed.
@@ -223,7 +225,7 @@
 	sample from Chapter 4 of Tille, Y. (2006). Sampling Algorithms. Springer, New York."
   [n k]
   (reduce
-  	(fn [set i] (if (< (/ i k) (rand)) (conj (disj set (draw set)) i) set))
+  	(fn [set i] (if (< (/ k i) (rand)) (conj (disj set (draw set)) i) set))
     (set (range 0 k))
     (range k n)))
 
@@ -322,9 +324,8 @@
   		(if (> (nCk n k) *test-statistic-iterations*)
       ; simulated method
         (repeatedly *test-statistic-iterations* #(draw cd))
-      ; exact method -- this is slow as it requires decoding combinadics
-      ; replace with something better soon, this was just on hand.
-      	(support cd)))))
+      ; exact method
+      	(combinations (range 0 n) k)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; NORMAL DISTRIBUTION 
