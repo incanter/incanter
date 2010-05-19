@@ -16,12 +16,11 @@
 
 
 
-(ns #^{:doc "This is library provides functions for performing
+(ns ^{:doc "This is library provides functions for performing
             basic Bayesian modeling and inference.
             "
        :author "David Edgar Liebke"}
   incanter.bayes
-  ;(:gen-class)
   (:use [incanter.core :only (matrix mmult mult div minus trans ncol nrow
                               plus to-list decomp-cholesky solve half-vectorize
                               vectorize symmetric-matrix identity-matrix kronecker
@@ -67,7 +66,7 @@
     (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 
 "
-  ([#^Integer size linear-model]
+  ([^Integer size linear-model]
     (let [x (:x linear-model)
           y (:y linear-model)
           pars (:coefs linear-model)
@@ -129,13 +128,13 @@
 
 
 "
-([#^Integer size counts]
+([^Integer size counts]
     (sample-dirichlet size (plus counts 1))))
 
 
 
 
-(defn- sample-mvn-params
+(defn sample-mvn-params
 " Returns samples of means (sampled from an mvn distribution) and vectorized covariance
   matrices (sampled from an inverse-wishart distribution) for the given mvn data.
 
@@ -152,7 +151,7 @@
   Examples:
 
     (use '(incanter core stats bayes charts))
-    (def y (sample-mvn 500 :sigma (identity-matrix 2)))
+    (def y (sample-mvn 500 :mean [0 0] :sigma (identity-matrix 2)))
     (def samp (sample-mvn-params 1000 y))
 
     (map mean (trans (:means samp)))
@@ -177,19 +176,10 @@
     (map mean (trans (:means samp)))
 
 
-    (use '(incanter core stats bayes charts datasets))
-    (def cars (to-matrix (get-dataset :cars)))
-    (def cars-std (trans (map #(sweep (sweep %) :fun div :stat sd) (trans cars))))
-    (def samp (sample-mvn-params 1000 cars-std))
-    (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
-    (map mean (trans (:means samp)))
-
-    (covariance cars-std)
-
-
+ 
 
 "
-([#^Integer size y & options]
+([^Integer size y & options]
     (let [opts (when options (apply assoc {} options))
           means (map mean (trans y))
           n (count y)
@@ -225,7 +215,7 @@
 
 
 "
-([#^Integer size y x & options]
+([^Integer size y x & options]
     (let [opts (when options (apply assoc {} options))
           _x (bind-columns (repeat (nrow x) 1) x)
           ;_x x
