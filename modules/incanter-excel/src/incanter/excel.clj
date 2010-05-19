@@ -1,5 +1,5 @@
 (ns 
-  #^{
+  ^{
     :doc "Excel module for reading and writing Incanter datasets."
     :author "David James Humphreys"}
   incanter.excel
@@ -14,7 +14,7 @@
 (defn- do-loop [fun start-number data]
   (dorun (map fun (iterate inc start-number) (seq data))))
 
-(defn- make-font [#^boolean normal? #^HSSFWorkbook w]
+(defn- make-font [^boolean normal? ^HSSFWorkbook w]
   (let [f (. w createFont)
         c (. w createCellStyle)]
        (. f setBoldweight (if normal? Font/BOLDWEIGHT_NORMAL Font/BOLDWEIGHT_BOLD))
@@ -28,27 +28,27 @@
 (defmethod write-cell :other   [o] (str o))
 (defmethod write-cell :numeric [n] (. n doubleValue))
 
-(defn- write-line [#^HSSFSheet sheet row-num line #^CellStyle style]
-   (let [#^HSSFRow xl-line (. sheet createRow row-num)]
+(defn- write-line [^HSSFSheet sheet row-num line ^CellStyle style]
+   (let [^HSSFRow xl-line (. sheet createRow row-num)]
         (do-loop
           #(doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style))
           0
           line)))
 
 (defn- write-file
-  [#^HSSFWorkbook workbook
-  #^String filename]
+  [^HSSFWorkbook workbook
+  ^String filename]
   (with-open [f (FileOutputStream. filename)]
     (. workbook write f)))
 
-(defn #^{:doc "Save a dataset to an Excel file.
+(defn ^{:doc "Save a dataset to an Excel file.
 Options are:
 :sheet defaults to \"dataset\" if not provided.
 :use-bold defaults to true.  Set the header line in bold.
 "}
   save-xls [
-  #^:incanter.core/dataset dataset
-  #^String filename
+  ^:incanter.core/dataset dataset
+  ^String filename
   & options]
     (write-file (let [
           opts (when options (apply assoc {} options))
@@ -68,7 +68,7 @@ Options are:
     (:workbook workbook-blob))
     filename))
 
-(defmulti #^ {:private true
+(defmulti ^ {:private true
               :doc "Retrieve the Excel workbook based on either the index or the sheet name."}
           get-workbook-sheet
 	(fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
@@ -77,7 +77,7 @@ Options are:
 (defmethod get-workbook-sheet :named [wbk index-or-name]
  (. wbk getSheet (str index-or-name)))
 
-(defmulti #^ {:private true
+(defmulti ^ {:private true
               :doc "Get the cell value depending on the cell type."}
           get-cell-value
 	(fn [cell]
@@ -96,11 +96,11 @@ Options are:
 (defmethod get-cell-value :date                  [cell] (. cell getDateCellValue))
 (defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
 
-(defn #^{:doc "Read an Excel file into a dataset.
+(defn ^{:doc "Read an Excel file into a dataset.
 Options are:
 :sheet either a String for the tab name or an int for the sheet index -- defaults to 0"}
   read-xls [
-  #^String filename
+  ^String filename
   & options]
     (let [opts (when options (apply assoc {} options))
           sheet-pointer (or (:sheet opts) 0)]

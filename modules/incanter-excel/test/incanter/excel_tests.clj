@@ -1,6 +1,6 @@
 (ns incanter.excel-tests
-  (:use clojure.test 
-        incanter.core
+  (:use [clojure.test :only[ deftest is]]
+        [incanter.core :only [dataset dataset?]]
         incanter.excel)
   (:import java.lang.Math
            java.util.Date
