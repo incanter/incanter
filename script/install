@@ -36,6 +36,11 @@ lein clean
 lein deps
 lein install
 
+cd ../incanter-excel
+lein clean
+lein deps
+lein install
+
 cd ../../
 lein clean
 lein deps

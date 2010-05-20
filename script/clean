@@ -21,6 +21,9 @@ lein clean
 cd ../incanter-latex
 lein clean
 
+cd ../incanter-excel
+lein clean
+
 cd ../..
 lein clean
 

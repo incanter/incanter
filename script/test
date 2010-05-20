@@ -21,4 +21,5 @@ lein test
 cd ../incanter-latex
 lein test
 
-
+cd ../incanter-excel
+lein test
