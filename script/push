@@ -21,6 +21,9 @@ lein push
 cd ../incanter-latex
 lein push
 
+cd ../incanter-excel
+lein push
+
 cd ../..
 lein push
 
