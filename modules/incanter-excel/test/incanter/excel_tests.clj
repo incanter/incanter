@@ -1,7 +1,7 @@
 (ns incanter.excel-tests
-  (:use [clojure.test :only[ deftest is]]
+  (:use [clojure.test :only[deftest is]]
         [incanter.core :only [dataset dataset?]]
-        incanter.excel)
+        [incanter.excel :only [save-xls read-xls]])
   (:import java.lang.Math
            java.util.Date
            java.io.File))

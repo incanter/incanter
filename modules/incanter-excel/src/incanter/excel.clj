@@ -9,7 +9,7 @@
     org.apache.poi.hssf.model.Sheet
     [java.io FileOutputStream FileInputStream])
   (:use
-    [incanter core]))
+    [incanter.core :only [dataset]]))
 
 (defn- do-loop [fun start-number data]
   (dorun (map fun (iterate inc start-number) (seq data))))
