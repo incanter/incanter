@@ -9,6 +9,6 @@
                  [incanter/incanter-pdf "1.2.3-SNAPSHOT"]
                  [incanter/incanter-latex "1.2.3-SNAPSHOT"]]
   :dev-dependencies [[lein-clojars "0.5.0-SNAPSHOT"]
-                     [leiningen/lein-swank "1.1.0"]
+                     [swank-clojure "1.2.1"]
                      [jline "0.9.94"]]
   :repositories {"clojure-releases" "http://build.clojure.org/releases"})
