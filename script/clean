@@ -1,26 +1,12 @@
 #!/bin/sh
 
-cd ./modules/incanter-core
-lein clean
+cd modules
+for f in core io charts processing mongodb pdf latex ; do
+    cd incanter-$f
+    lein clean
+    cd ..
+done
+cd ..
 
-cd ../incanter-io
-lein clean
-
-cd ../incanter-charts
-lein clean
-
-cd ../incanter-processing
-lein clean
-
-cd ../incanter-mongodb
-lein clean
-
-cd ../incanter-pdf
-lein clean
-
-cd ../incanter-latex
-lein clean
-
-cd ../..
 lein clean
 
