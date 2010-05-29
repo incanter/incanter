@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd modules
-for f in core io charts processing mongodb pdf latex ; do
+for f in core io charts processing mongodb pdf latex excel ; do
     cd incanter-$f
     lein clean
     lein deps
@@ -13,8 +13,4 @@ for f in core io charts processing mongodb pdf latex ; do
     cd ..
 done
 cd ..
-
-lein clean
-lein deps
-lein install
 

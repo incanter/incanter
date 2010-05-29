@@ -1,12 +1,10 @@
 #!/bin/sh
 
 cd modules
-for f in core io charts processing mongodb pdf latex ; do
+for f in core io charts processing mongodb pdf latex excel ; do
     cd incanter-$f
     lein clean
     cd ..
 done
 cd ..
-
-lein clean
 
