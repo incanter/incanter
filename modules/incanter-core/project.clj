@@ -7,6 +7,5 @@
                  ;[org.clojure/clojure-contrib "1.2.0-20100427.200505-82"]
                  [incanter/parallelcolt "0.9.4"]]
   :dev-dependencies [[lein-javac "0.0.2-SNAPSHOT"]
-                     [lein-clojars "0.5.0-SNAPSHOT"]
-                     [leiningen/lein-swank "1.1.0"]]
+                     [lein-clojars "0.5.0-SNAPSHOT"]]
   :repositories {"clojure-releases" "http://build.clojure.org/releases"})
