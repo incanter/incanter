@@ -220,15 +220,18 @@
               (assert (not (nil? v)))
               (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v)))))))
 
-(defn- fast-comb-sampler
-	"Get a sample from the nCk possible combinations. Uses a resrvoir
+
+
+(defn- res-sampler
+  "Get a sample from the nCk possible combinations. Uses a reservoir
 	sample from Chapter 4 of Tille, Y. (2006). Sampling Algorithms. Springer, New York."
   [n k]
-  (reduce
-  	(fn [set i] (if (< (/ k i) (rand)) (conj (disj set (draw set)) i) set))
-    (set (range 0 k))
-    (range k n)))
-
+  (let [res (transient (into [] (range 0 k)))]
+    (doall (map
+     (fn [i] (if (< (/ k i) (rand)) (assoc! res (rand-int k) i)))
+     (range k n)))
+    (persistent! res)))
+  
 ; defrecord expands to have a (contains? ...) (or .contains method) that causes
 ; a reflection warning. Note much to do about that for now. Perhaps it will be
 ; fixed in clojure.core later.
@@ -236,7 +239,7 @@
   Distribution
   	(pdf [d v] (/ 1 (nCk n k)))
   	(cdf [d v] nil) ; TODO: this requires encoding combinations
-  	(draw [d] (fast-comb-sampler n k))
+  	(draw [d] (res-sampler n k))
   	(support [d] (map #(decode-combinadic n k %) (range 0 (nCk n k)))))
 
 (defn combination-distribution
