@@ -1,4 +1,4 @@
-(defproject incanter/excel "1.2.3-SNAPSHOT"
+(defproject incanter/incanter-excel "1.2.3-SNAPSHOT"
   :description "Incanter-excel provides access to reading and writing Excel files."
   :dependencies [[incanter/incanter-core "1.2.3-SNAPSHOT"]
   		 [org.apache.poi/poi "3.6"]]
