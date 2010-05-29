@@ -1354,14 +1354,17 @@
 
 (defn translate
   ""
-  ([v] (apply translate v))
-  ([^PApplet sketch tx ty] (.translate sketch (float tx) (float ty)))
-  ([^PApplet sketch tx ty tz] (.translate sketch (float tx) (float ty) (float tz))))
+  ([^PApplet sktch [tx ty & [tz]]]
+     (if tz
+       (translate sktch (float tx) (float ty) (float tz))
+       (translate sktch (float tx) (float ty))))
+  ([^PApplet sktch tx ty] (.translate sktch (float tx) (float ty)))
+  ([^PApplet sktch tx ty tz] (.translate sktch (float tx) (float ty) (float tz))))
 
 (defn triangle
   ""
-  ([^PApplet sketch x1 y1 x2 y2 x3 y3]
-    (.triangle sketch (float x1) (float y1) (float x2) (float y2) (float x3) (float y3))))
+  ([^PApplet sktch x1 y1 x2 y2 x3 y3]
+    (.triangle sktch (float x1) (float y1) (float x2) (float y2) (float x3) (float y3))))
 
 ;; $$trim
 ;; $$unbinary
@@ -1403,27 +1406,29 @@
 ;; utility functions. clj-processing specific
 
 (defmacro with-translation
-        "Berforms body with translation, restores current transformation on exit."
-        ([translation-vector & body]
-        `(let [tr# ~translation-vector]
-                 (push-matrix)
-                 (translate tr#)
+        "Performs body with translation, restores current transformation on exit."
+        ([^PApplet sketch translation-vector & body]
+        `(let [tr# ~translation-vector
+               sk# ~sketch]
+                 (push-matrix sk#)
+                 (translate sk# tr#)
                  ~@body
-                 (pop-matrix))))
+                 (pop-matrix sk#))))
 
 (defmacro with-rotation
-        "Berforms body with rotation, restores current transformation on exit.
+        "Performs body with rotation, restores current transformation on exit.
   Accepts a vector [angle] or [angle x-axis y-axis z-axis].
 
   Example:
-    (with-rotation [angle]
-      (vertex 1 2))"
-        ([rotation & body]
-        `(let [tr# ~rotation]
-                 (push-matrix)
-                 (apply rotate tr#)
+    (with-rotation sktch angle
+      (vertex sktch 1 2))"
+        ([^PApplet sketch rotation & body]
+        `(let [tr# ~rotation
+               sk# ~sketch]
+                 (push-matrix sk#)
+                 (apply rotate [sk# tr#])
                  ~@body
-                 (pop-matrix))))
+                 (pop-matrix sk#))))
 
 
 
@@ -1664,7 +1669,7 @@
     (let [opts (when options (apply assoc {} options))
           title (or (:title opts) "Processing Sketch")
           width (or (:width opts) (.width (.getSize sketch)))
-          height (or (:height opts) (.height (.getSize sketch)))
+          height (or (:height opts) (+ 22 (.height (.getSize sketch))))
           exit-on-close? (true? (:exit-on-close opts))
           [width height] (or (:size opts)
                              [(.width (.getSize sketch))
