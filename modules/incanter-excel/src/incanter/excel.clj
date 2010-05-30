@@ -45,6 +45,11 @@
 Options are:
 :sheet defaults to \"dataset\" if not provided.
 :use-bold defaults to true.  Set the header line in bold.
+
+Examples:
+  (use '(incanter core datasets excel))
+  (save-xls (get-dataset :cars) \"/tmp/cars.xls\")
+
 "}
   save-xls [
   ^:incanter.core/dataset dataset
@@ -96,13 +101,25 @@ Options are:
 (defmethod get-cell-value :date                  [cell] (. cell getDateCellValue))
 (defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
 
-(defn ^{:doc "Read an Excel file into a dataset.
+(defn ^{:doc "Read an Excel file into a dataset. Note: cells containing formulas will be
+empty upon import.
 Options are:
 :sheet either a String for the tab name or an int for the sheet index -- defaults to 0
 
  Examples:
    (use '(incanter core io excel))
    (view (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\"))
+
+   (use '(incanter core charts excel))
+   ;; read .xls file of Australian airline passenger data from the 1950s.
+   (with-data (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\")
+   (view $data)
+   ;; time-series-plot needs time in millisecs
+   ;; create a function, to-millis, to convert a sequence of Date objects
+   ;; to a sequence of milliseconds
+   (let [to-millis (fn [dates] (map #(.getTime %) dates))] 
+     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))
+
 "}
   read-xls
   [^String filename  & options]
