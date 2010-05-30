@@ -1832,6 +1832,33 @@
 		    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
 
 
+(defn matrix-map
+ "Like clojure.core/map, but will work on matrices of any dimension:
+ 1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m
+
+  Examples:
+    (use '(incanter core))
+    (def mat (matrix (range 9) 3))
+    (matrix-map #(mod % 2) mat)
+    (matrix-map #(mod % 2) (first mat))
+    (matrix-map #(mod % 2) ($ 1 0 mat))
+    (matrix-map #(mod % 2) [1 2 3 4])
+    (matrix-map #(mod % 2) 9)
+
+"
+ ([f m]
+    (if (sequential? m)
+      (if (sequential? (first m))
+        (map (fn [& a] (apply map f a)) m)
+        (map f m))
+      (f m)))
+ ([f m & ms]
+    (if (sequential? m)
+      (if (sequential? (first m))
+        (apply map (fn [& a] (apply map f a)) m ms)
+        (apply map f m ms))
+      (apply f m ms))))
+
 
 (defn $map 
   "This function returns a sequence resulting from mapping the given function over

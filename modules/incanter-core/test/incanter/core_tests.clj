@@ -438,3 +438,15 @@
       (is (nil? (some nil? 
                       (for [op [seq trans pow atan2]] 
                         (meta (-> m op)))))))))
+
+
+
+(deftest matrix-map-test
+  (let [mat (matrix (range 9) 3)]
+    (are [x y] (= x y)
+	 '((0.0 1.0 0.0) (1.0 0.0 1.0) (0.0 1.0 0.0)) (matrix-map #(mod % 2) mat)
+	 '(0.0 1.0 0.0) (matrix-map #(mod % 2) (first mat))
+	 1.0 (matrix-map #(mod % 2) ($ 1 0 mat))
+	 '(1 0 1 0) (matrix-map #(mod % 2) [1 2 3 4]) 
+	 1 (matrix-map #(mod % 2) 9))))
+
