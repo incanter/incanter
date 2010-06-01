@@ -16,7 +16,7 @@
 
 
 
-(ns #^{:doc "This is the core charting library for Incanter.
+(ns ^{:doc "This is the core charting library for Incanter.
             It provides basic scatter plots, histograms, box plots
             xy plots, bar charts, line charts, as well as
             specialized charts like trace plots and Bland-Altman
@@ -2672,7 +2672,7 @@
 	   label (JLabel. (label-txt (first slider-values)) JLabel/CENTER)
 	   slider (doto (JSlider. JSlider/HORIZONTAL 0 max-idx 0)
 		    (.addChangeListener (proxy [javax.swing.event.ChangeListener] []
-					  (stateChanged [#^javax.swing.event.ChangeEvent event]
+					  (stateChanged [^javax.swing.event.ChangeEvent event]
 							(let [source (.getSource event)
 							      value (nth slider-values (.getValue source))]
 							  (do

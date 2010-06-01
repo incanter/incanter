@@ -17,7 +17,6 @@
 
 
 (ns incanter.internal
-  ;(:gen-class)
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
@@ -51,12 +50,12 @@
 
 
 
-(defmacro #^Matrix transform-with [A op fun]
+(defmacro ^Matrix transform-with [A op fun]
   `(cond
     (is-matrix ~A)
       (.assign (.copy ~A) (. DoubleFunctions ~fun))
     (and (coll? ~A) (coll? (first ~A)))
-      (.assign #^Matrix (make-matrix ~A) (. DoubleFunctions ~fun))
+      (.assign ^Matrix (make-matrix ~A) (. DoubleFunctions ~fun))
     (coll? ~A)
       (map ~op ~A)
     (number? ~A)
@@ -68,26 +67,25 @@
     (and (number? ~A) (number? ~B))
        (~op ~A ~B)
     (and (is-matrix ~A) (is-matrix ~B))
-      (.assign #^Matrix (.copy #^Matrix ~A)
-               #^Matrix ~B
-               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+      (.assign ^Matrix (.copy ^Matrix ~A)
+               ^Matrix ~B
+               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
     (and (is-matrix ~A) (number? ~B))
-      (.assign #^Matrix (.copy #^Matrix ~A)
+      (.assign ^Matrix (.copy ^Matrix ~A)
                (make-matrix ~B (.rows ~A) (.columns ~A))
-               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
-               ;;#^DoubleDoubleFunction (. DoubleFunctions (~fun ~B)))
+               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
     (and (number? ~A) (is-matrix ~B))
-      (.assign #^Matrix (make-matrix ~A (.rows ~B) (.columns ~B))
-               #^Matrix ~B
-               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+      (.assign ^Matrix (make-matrix ~A (.rows ~B) (.columns ~B))
+               ^Matrix ~B
+               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
     (and (coll? ~A) (is-matrix ~B))
-      (.assign #^Matrix (make-matrix ~A (.columns ~B))
-               #^Matrix (make-matrix ~B)
-               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+      (.assign ^Matrix (make-matrix ~A (.columns ~B))
+               ^Matrix (make-matrix ~B)
+               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
     (and (is-matrix ~A) (coll? ~B))
-      (.assign #^Matrix (.copy ~A)
-               #^Matrix (make-matrix ~B)
-               #^DoubleDoubleFunction (. DoubleFunctions ~fun))
+      (.assign ^Matrix (.copy ~A)
+               ^Matrix (make-matrix ~B)
+               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
     (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
       (.assign (make-matrix ~A)
                (make-matrix ~B)
@@ -111,7 +109,7 @@
 
 
 ;; PRINT METHOD FOR COLT MATRICES
-(defmethod print-method Matrix [o, #^java.io.Writer w]
+(defmethod print-method Matrix [o, ^java.io.Writer w]
   (let [formatter (DoubleFormatter. "%1.4f")]
     (do
       (.setPrintShape formatter false)
@@ -121,7 +119,7 @@
 
 
 ;; PRINT METHOD FOR INCANTER DATASETS
-(defmethod print-method :incanter.core/dataset [o, #^java.io.Writer w]
+(defmethod print-method :incanter.core/dataset [o, ^java.io.Writer w]
   (do
     (.write w (str (:column-names o)))
     (.write w "\n")

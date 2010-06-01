@@ -20,29 +20,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns 
-    #^{:doc 
+    ^{:doc 
        "Library for reading and writing Incanter datasets and matrices."}
 
 incanter.io
-  ;(:gen-class)
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
-  (:use [incanter.core :only (dataset save)]))
+  (:use [incanter.core :only (dataset save get-input-reader)]))
 
 (defn- parse-string [value]
   (try (Integer/parseInt value)
     (catch NumberFormatException _
       (try (Double/parseDouble value)
         (catch NumberFormatException _ value)))))
-
-
-(defn- get-input-reader [location] 
-  (try
-    (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
-  (catch java.net.MalformedURLException _
-    (java.io.FileReader. location))))
-
-
 
 
 (defn read-dataset
@@ -66,7 +56,7 @@ incanter.io
          header? (or (:header opts) false)
          compress-delim? (or (:compress-delim opts)
                              (if (= delim \space) true false))]
-     (with-open [reader #^CSVReader (CSVReader.
+     (with-open [reader ^CSVReader (CSVReader.
                     (get-input-reader filename)
                     delim
                     quote-char
@@ -77,8 +67,7 @@ incanter.io
                                 (map (fn [line] (filter #(not= % "") line)) data-lines)
                                 data-lines))
              parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) 
-				       raw-data))
-            ]
+				       raw-data))]
     (if header?
       ; have header row
       (dataset (if keyword-headers?

@@ -1,11 +1,10 @@
-(ns #^{:doc "This library is used to render LaTex Math equations, based
+(ns ^{:doc "This library is used to render LaTex Math equations, based
    on the jLateXMath library, and applying them incanter.charts as annotations
    and subtitles.
             "
        :author "David Edgar Liebke"}
 
   incanter.latex
-  ;; (:use [incanter.core :only (save)])
   (:import [org.scilab.forge.jlatexmath TeXConstants TeXIcon TeXFormula]))
 
 

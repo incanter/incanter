@@ -16,12 +16,11 @@
 
 
 
-(ns #^{:doc "This is library provides functions for performing
+(ns ^{:doc "This is library provides functions for performing
             basic Bayesian modeling and inference.
             "
        :author "David Edgar Liebke"}
   incanter.bayes
-  ;(:gen-class)
   (:use [incanter.core :only (matrix mmult mult div minus trans ncol nrow
                               plus to-list decomp-cholesky solve half-vectorize
                               vectorize symmetric-matrix identity-matrix kronecker
@@ -67,7 +66,7 @@
     (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 
 "
-  ([#^Integer size linear-model]
+  ([^Integer size linear-model]
     (let [x (:x linear-model)
           y (:y linear-model)
           pars (:coefs linear-model)
@@ -129,7 +128,7 @@
 
 
 "
-([#^Integer size counts]
+([^Integer size counts]
     (sample-dirichlet size (plus counts 1))))
 
 
@@ -180,7 +179,7 @@
  
 
 "
-([#^Integer size y & options]
+([^Integer size y & options]
     (let [opts (when options (apply assoc {} options))
           means (map mean (trans y))
           n (count y)
@@ -216,7 +215,7 @@
 
 
 "
-([#^Integer size y x & options]
+([^Integer size y x & options]
     (let [opts (when options (apply assoc {} options))
           _x (bind-columns (repeat (nrow x) 1) x)
           ;_x x

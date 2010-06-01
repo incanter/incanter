@@ -16,7 +16,7 @@
 
 
 
-(ns #^{:doc "This is the core numerics library for Incanter.
+(ns ^{:doc "This is the core numerics library for Incanter.
             It provides functions for vector- and matrix-based
             mathematical operations and the core data manipulation
             functions for Incanter.
@@ -51,7 +51,7 @@
            (java.util Vector)))
 
 
- (def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
+ (def ^{:doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."} 
       $data)
 
@@ -91,10 +91,10 @@
   ([data]
    (make-matrix data))
 
-  ([data #^Integer ncol]
+  ([data ^Integer ncol]
    (make-matrix data ncol))
 
-  ([init-val #^Integer rows #^Integer cols]
+  ([init-val ^Integer rows ^Integer cols]
    (make-matrix init-val rows cols)))
 
 
@@ -109,21 +109,21 @@
 
 
 (defn nrow
-  #^{:tag Integer 
+  ^{:tag Integer 
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
-    (matrix? mat) (.rows #^Matrix mat)
+    (matrix? mat) (.rows ^Matrix mat)
     (dataset? mat) (count (:rows mat))
     (coll? mat) (count mat))))
 
 
 (defn ncol
-  #^{:tag Integer 
+  ^{:tag Integer 
      :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
-    (matrix? mat) (.columns #^Matrix mat)
+    (matrix? mat) (.columns ^Matrix mat)
     (dataset? mat) (count (:column-names mat))
     (coll? mat) 1 )))
 
@@ -143,7 +143,7 @@
       (identity-matrix 4)
 
 "
-([#^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
+([^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
 
 
 (defn diag
@@ -171,7 +171,7 @@
       m)))
 
 
-(defn #^Matrix trans
+(defn ^Matrix trans
 "   Returns the transpose of the given matrix. Equivalent to R's t function
 
     Examples:
@@ -185,9 +185,9 @@
   ([mat]
    (cond
     (matrix? mat)
-      (.viewDice #^Matrix mat)
+      (.viewDice ^Matrix mat)
     (coll? mat)
-      (.viewDice #^Matrix (matrix #^double-array mat)))))
+      (.viewDice ^Matrix (matrix ^double-array mat)))))
 
 
 
@@ -260,7 +260,7 @@
 ;; (defmethod sel [nil true] [])
 
 (defmethod sel [incanter.Matrix false]
-  ([#^Matrix mat rows columns]
+  ([^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
          cols (if (number? columns) [columns] columns)
 	 all-rows? (or (true? rws) (= rws :all))
@@ -279,7 +279,7 @@
 
 
 (defmethod sel [incanter.Matrix true]
-  ([#^Matrix mat & options]
+  ([^Matrix mat & options]
    (let [opts (when options (apply assoc {} options))
          except-rows (:except-rows opts)
          except-columns (:except-cols opts)
@@ -595,7 +595,7 @@
     http://en.wikipedia.org/wiki/Factorial
 
 "
-  ([#^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
+  ([^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
 
 
 
@@ -630,7 +630,7 @@
   type)
 
 (defmethod to-list Matrix
- ([#^Matrix mat]
+ ([^Matrix mat]
   (cond
     (= (.columns mat) 1)
       (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
@@ -651,9 +651,9 @@
 
 (defmethod to-list nil [s] nil)
 
-(defn #^Matrix copy
+(defn ^Matrix copy
   "Returns a copy of the given matrix."
-  ([#^Matrix mat] (.copy mat)))
+  ([^Matrix mat] (.copy mat)))
 
 
 (defn mmult
@@ -677,7 +677,7 @@
      (reduce (fn [A B]
               (let [a (if (matrix? A) A (matrix A))
                     b (if (matrix? B) B (matrix B))
-                    result (Matrix. (.zMult #^Matrix a #^Matrix b nil))]
+                    result (Matrix. (.zMult ^Matrix a ^Matrix b nil))]
                 (if (and (= (.rows result) 1) (= (.columns result) 1))
                   (.getQuick result 0 0)
                   result)))
@@ -729,7 +729,7 @@
 
 
 "
-  ([#^Matrix A & B]
+  ([^Matrix A & B]
    (if B
     (Matrix. (.solve (DenseDoubleAlgebra.) A (first B)))
     (Matrix. (.inverse (DenseDoubleAlgebra.) A)))))
@@ -853,7 +853,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn #^Matrix decomp-cholesky
+(defn ^Matrix decomp-cholesky
 " Returns the Cholesky decomposition of the given matrix. Equivalent to R's
   chol function.
 
@@ -878,7 +878,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
     http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
-  ([#^Matrix mat]
+  ([^Matrix mat]
     (Matrix. (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat))))))
     ;(Matrix. (.viewDice (.getL (DenseCholeskyDecomposition. mat)))))
 
@@ -1042,7 +1042,7 @@
   " Returns a vector-of-vectors if the given matrix is two-dimensional
     and a flat vector if the matrix is one-dimensional. This is a bit
     slower than the to-list function. "
- ([#^Matrix mat]
+ ([^Matrix mat]
   (into [] (cond
              (= (.columns mat) 1)
               (first (map #(into [] (seq %)) (seq (.toArray (.viewDice mat)))))
@@ -1063,7 +1063,7 @@
       (number? coll)
         1
       (matrix? coll)
-        (* (.rows #^Matrix coll) (.columns #^Matrix coll))
+        (* (.rows ^Matrix coll) (.columns ^Matrix coll))
       (coll? coll)
         (count coll)
       :else
@@ -1831,6 +1831,33 @@
 			k-rows (grouped-rows k)]
 		    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
 
+
+(defn matrix-map
+ "Like clojure.core/map, but will work on matrices of any dimension:
+ 1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m
+
+  Examples:
+    (use '(incanter core))
+    (def mat (matrix (range 9) 3))
+    (matrix-map #(mod % 2) mat)
+    (matrix-map #(mod % 2) (first mat))
+    (matrix-map #(mod % 2) ($ 1 0 mat))
+    (matrix-map #(mod % 2) [1 2 3 4])
+    (matrix-map #(mod % 2) 9)
+
+"
+ ([f m]
+    (if (sequential? m)
+      (if (sequential? (first m))
+        (map (fn [& a] (apply map f a)) m)
+        (map f m))
+      (f m)))
+ ([f m & ms]
+    (if (sequential? m)
+      (if (sequential? (first m))
+        (apply map (fn [& a] (apply map f a)) m ms)
+        (apply map f m ms))
+      (apply f m ms))))
 
 
 (defn $map 
@@ -2680,3 +2707,22 @@
 "
   ([& equation]
      (infix-to-prefix equation)))
+
+
+(defn get-input-reader
+  "Returns a java.io.FileReader when given a filename, or a
+   java.io.InputStreamReader when given a URL."
+  [location] 
+  (try
+    (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
+  (catch java.net.MalformedURLException _
+    (java.io.FileReader. location))))
+
+(defn get-input-stream
+  "Returns a java.io.FileInputStream when given a filename, or a
+   java.io.InputStream when given a URL."
+  [location] 
+  (try
+    (.openStream (java.net.URL. location))
+    (catch java.net.MalformedURLException _
+      (java.io.FileInputStream. location))))
