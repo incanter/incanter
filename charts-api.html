@@ -40,7 +40,7 @@ namespace.
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
     </ul>
   </div>
 </div>
@@ -71,6 +71,8 @@ namespace.
       <a href="#incanter.charts/add-points">add-points</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/add-polygon">add-polygon</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/add-subtitle">add-subtitle</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/add-text">add-text</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -108,11 +110,15 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-background-alpha">set-background-alpha</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-background-default">set-background-default</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-stroke">set-stroke</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-stroke-color">set-stroke-color</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-theme">set-theme</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/set-theme-bw">set-theme-bw</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/set-title">set-title</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -561,6 +567,24 @@ Examples:
   
   
   
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/add-subtitle">add-subtitle</h2>
+  <span id="var-type">multimethod</span><br />
+  <pre id="var-usage">No usage documentation available</pre>
+  <pre id="var-docstr">Adds a JFreeChart title object to a chart as a subtitle.
+
+Examples:
+  (use '(incanter core charts latex))
+
+  (doto (function-plot sin -10 10)
+    (add-subtitle "subtitle")
+    (add-subtitle (latex " \\frac{(a+b)^2} {(a-b)^2}"))
+    view)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-charts/src/incanter/charts.clj#L3138" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1327,6 +1351,87 @@ References:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.charts/set-background-default">set-background-default</h2>
+  <span id="var-type">multimethod</span><br />
+  <pre id="var-usage">No usage documentation available</pre>
+  <pre id="var-docstr">
+
+ Examples:
+   (use '(incanter core stats charts datasets))
+
+   (doto (histogram (sample-normal 1000) :title (str :Test-Tittle))
+     set-theme-bw
+     view)
+
+
+   (doto (histogram (sample-normal 1000))
+     set-background-default
+     (add-histogram (sample-normal 1000 :mean 1))
+     view)
+
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     view)
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     (set-stroke :dash 5)
+     (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))
+     view)
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-background-default
+     (set-stroke :dash 5)
+     (add-function sin 0 25)
+     view)
+
+
+   (doto (xy-plot :speed :dist :data (get-dataset :cars) :legend true)
+     set-background-default
+     view)
+
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-background-default
+     view)
+
+  
+   (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                   :legend true)
+     view set-background-default
+     (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+     (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))
+
+
+   (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
+     view
+     set-background-default
+     (add-categories [:a :b :c] [5 25 40]))
+ 
+
+   (doto (line-chart [:a :b :c] [10 20 30] :legend true)
+     view
+     set-background-default
+     (add-categories [:a :b :c] [5 25 40]))
+
+   ;; time-series-plot
+   (def epoch 0)
+   (defn num-years-to-milliseconds [x]
+     (* 365 24 60 60 1000 x))
+   (def dates (map num-years-to-milliseconds (range 100)))
+   (def chart1 (time-series-plot dates (range 100)))
+   (def cw1 (view chart1))
+   (add-lines chart1 dates (mult 1/2 (range 100)))
+
+   (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))
+   (def cw2 (view chart2))</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-charts/src/incanter/charts.clj#L60" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.charts/set-stroke">set-stroke</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (set-stroke chart &amp; options)
@@ -1411,6 +1516,78 @@ Examples:
   
   
   
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.charts/set-theme-bw">set-theme-bw</h2>
+  <span id="var-type">multimethod</span><br />
+  <pre id="var-usage">No usage documentation available</pre>
+  <pre id="var-docstr">
+
+ Examples:
+   (use '(incanter core stats charts datasets))
+
+   (doto (histogram (sample-normal 1000))
+     set-theme-bw
+     view)
+
+
+   (doto (histogram (sample-normal 1000))
+     set-theme-bw
+     (add-histogram (sample-normal 1000 :mean 1))
+     view)
+
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     view)
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     (set-stroke :dash 5)
+     (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))
+     view)
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     (set-stroke :dash 5)
+     (add-function sin 0 25)
+     view)
+
+
+   (doto (xy-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     view)
+
+
+   (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+     set-theme-bw
+     (add-lines :speed :dist :data (get-dataset :cars))
+     view)
+
+  
+   (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                   :legend true)
+     view
+     (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+     (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+     set-theme-bw)
+
+
+   (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
+     view
+     set-theme-bw
+     (add-categories [:a :b :c] [5 25 40]))
+ 
+
+   (doto (line-chart [:a :b :c] [10 20 30] :legend true)
+     view
+     set-theme-bw
+     (add-categories [:a :b :c] [5 25 40]))
+</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-charts/src/incanter/charts.clj#L143" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />

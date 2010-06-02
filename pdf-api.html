@@ -40,7 +40,7 @@ namespace.
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
     </ul>
   </div>
 </div>
@@ -71,7 +71,7 @@ by <span id="author">Unknown</span><br />
 </pre><h2>Overview</h2>
 <pre id="namespace-docstr">This library currently has only a single function, save-pdf, which saves
 charts as a PDF file. To build this namespace make sure the you have the iText
-library (<a href="http://itextpdf.com/)">http://itextpdf.com/)</a> as a declared dependency in your pom.xml or 
+library (<a href="http://itextpdf.com/)">http://itextpdf.com/)</a> as a declared dependency in your pom.xml or
 project.clj file:
 [com.lowagie/itext "1.4"] </pre>
 
@@ -96,13 +96,12 @@ Options:
   :height (defualt 400)
 
 Examples:
+
+  (use '(incanter core charts pdf))
+  (save-pdf (function-plot sin -4 4) "./pdf-chart.pdf")</pre>
   
-  (use '(incanter core charts))
-  (save-pdf (function-plot sin -4 4) "./pdf-chart.pdf")
-  </pre>
   
-  
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-pdf/src/incanter/pdf.clj#L19" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/ed819aec2b130495d5c30da6e5b7784189f494ac/modules/incanter-pdf/src/incanter/pdf.clj#L19" id="var-source">Source</a>
 </div>
 
 
