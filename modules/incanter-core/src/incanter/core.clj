@@ -1697,7 +1697,6 @@
 		    (fn [row] 
 		      (map-get row col-name)))
 	   rows (:rows data)
-	   n (nrow data)
 	   rollup-fns {:max (fn [col-data] (apply max col-data))
 		       :min (fn [col-data] (apply min col-data))
 		       :sum (fn [col-data] (apply + col-data))
@@ -1706,14 +1705,14 @@
 	   rollup-fn (if (keyword? summary-fun)
 		       (rollup-fns summary-fun)
 		       summary-fun)]
-       (loop [r 0 reduced-rows {}]
-	 (if (= r n)
+       (loop [cur rows reduced-rows {}]
+	 (if (empty? cur)
 	   (let [group-cols (to-dataset (keys reduced-rows))
 		 res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
 	     (col-names res (concat (col-names group-cols)
 				    (if (coll? col-name) col-name [col-name]))))
-	   (recur (inc r) 
-		  (let [row (nth rows r)
+	   (recur (next cur)
+		  (let [row (first cur)
 			k (submap row group-by)
 			a (reduced-rows k)
 			b (key-fn row)]
