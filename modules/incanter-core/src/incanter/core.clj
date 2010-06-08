@@ -55,6 +55,8 @@
               functions like $ and $where can use $data as a default argument."} 
       $data)
 
+(defrecord Dataset [column-names rows])
+(derive incanter.core.Dataset ::dataset)
 
 (defn matrix
 "
@@ -1141,9 +1143,8 @@
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 (defn dataset
-" Returns a map of type ::dataset constructed from the given column-names and
+" Returns a map of type incanter.core.dataset constructed from the given column-names and
   data. The data is either a sequence of sequences or a sequence of hash-maps.
 "
   ([column-names & data]
@@ -1161,10 +1162,7 @@
                         dat
                       :else 
                         (map #(apply assoc {} (interleave column-names %)) dat))] 
-      (with-meta
-        {:column-names (into [] column-names)
-         :rows rows}
-        {:type :incanter.core/dataset}))))
+      (Dataset. (into [] column-names) rows))))
 
 
 (defn- get-column-id [dataset column-key]
