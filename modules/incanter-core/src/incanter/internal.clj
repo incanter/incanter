@@ -128,13 +128,4 @@
       (.write w "\n"))))
 
 
-;; MACRO FOR MARKING FUNCTIONS AS DEPRECATED
-(defmacro defdeprecated
-  "A macro to mark functions as deprecated. Use of the function prints
-	out a warning message when the function is invoked. The second argument
-	is a string directing for users to see replacements or alternatives."
-  [fn msg args & body]
-  (let [warning (str "*** " fn " IS DEPRECATED -- RUN (doc " fn ") FOR DETAILS ***\n")
-        newdoc (str "*** DEPRECATED ***\n" msg)]
-    (list `defn fn newdoc args (list* `do `(print ~warning) body))))
 
