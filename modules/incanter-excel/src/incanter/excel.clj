@@ -14,7 +14,7 @@
 (defn- do-loop [fun start-number data]
   (dorun (map fun (iterate inc start-number) (seq data))))
 
-(defn- make-font [^boolean normal? ^HSSFWorkbook w]
+(defn- make-font [normal? ^HSSFWorkbook w]
   (let [f (. w createFont)
         c (. w createCellStyle)]
        (. f setBoldweight (if normal? Font/BOLDWEIGHT_NORMAL Font/BOLDWEIGHT_BOLD))
