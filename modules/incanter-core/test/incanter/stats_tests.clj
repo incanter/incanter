@@ -89,20 +89,6 @@
 (deftest median-test
   ;; calculate the median of a variable
   (is (= (median x) 113)))
-  
- 
-(deftest sample-normal-tests
-  ;; generate a sample of standard normal data
-  (def std-normal-data (sample-normal 1000))
-  (is (= (count std-normal-data) 1000))
-  (is (= (Math/round (mean std-normal-data)) 0))
-  (is (= (Math/round (sd std-normal-data)) 1))
-  
-  ;; generate a sample of normal data with mean = 10 and sd = 5
-  (def nonstd-normal-data (sample-normal 1000 :mean 10 :sd 5))
-  (is (= (count nonstd-normal-data) 1000))
-  (is (= (Math/round (mean nonstd-normal-data)) 10))
-  (is (= (Math/round (sd nonstd-normal-data)) 5)))
 
 (deftest sample-tests
   ;; test sample function
