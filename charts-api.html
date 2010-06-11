@@ -40,7 +40,7 @@ namespace.
     <a class="wiki_link" href="api-index.html">API Index</a><br />
     <a class="wiki_link" href="#">Namespaces:</a>
     <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
+      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
     </ul>
   </div>
 </div>
@@ -135,6 +135,8 @@ namespace.
       <a href="#incanter.charts/sliders">sliders</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/sliders*">sliders*</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.charts/stacked-area-chart">stacked-area-chart</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.charts/stacked-bar-chart">stacked-bar-chart</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -584,7 +586,7 @@ Examples:
     view)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-charts/src/incanter/charts.clj#L3138" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/bf37fdf88867027b78defaf8d88f7407d074d17b/modules/incanter-charts/src/incanter/charts.clj#L3268" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1428,7 +1430,7 @@ References:
    (def cw2 (view chart2))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-charts/src/incanter/charts.clj#L60" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/bf37fdf88867027b78defaf8d88f7407d074d17b/modules/incanter-charts/src/incanter/charts.clj#L60" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1587,7 +1589,7 @@ Examples:
 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-charts/src/incanter/charts.clj#L143" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/bf37fdf88867027b78defaf8d88f7407d074d17b/modules/incanter-charts/src/incanter/charts.clj#L143" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1782,11 +1784,84 @@ Examples:
 </div><div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.charts/stacked-area-chart">stacked-area-chart</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (stacked-area-chart categories values &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns a JFreeChart object representing an stacked-area-chart of the given data.
+Use the 'view' function to display the chart, or the 'save' function
+to write it to a file.
+
+Arguments:
+  categories -- a sequence of categories
+  values -- a sequence of numeric values
+
+Options:
+  :title (default '') main title
+  :x-label (default 'Categories')
+  :y-label (default 'Value')
+  :series-label
+  :legend (default false) prints legend
+  :vertical (default true) the orientation of the plot
+  :group-by (default nil) -- a vector of values used to group the values into
+                             series within each category.
+
+
+See also:
+  view and save
+
+Examples:
+
+
+  (use '(incanter core stats charts datasets))
+
+  (with-data (get-dataset :co2)
+    (view (stacked-area-chart :Type :uptake
+                     :title "CO2 Uptake"
+                     :group-by :Treatment
+                     :x-label "Grass Types" :y-label "Uptake"
+                    :legend true)))
+
+
+  (def data (get-dataset :airline-passengers))
+  (view (stacked-area-chart :year :passengers :group-by :month :legend true :data data))
+
+  (with-data  (get-dataset :airline-passengers)
+    (view (stacked-area-chart :month :passengers :group-by :year :legend true)))
+
+
+  (def data (get-dataset :austres))
+  (view data)
+  (def plot (stacked-area-chart :year :population :group-by :quarter :legend true :data data))
+  (view plot)
+  (save plot "/tmp/austres_plot.png" :width 1000)
+  (view "file:///tmp/austres_plot.png")
+
+
+  (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+  (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+  (def values (sample-uniform 12 :integers true :max 100))
+  (view (stacked-area-chart years values :group-by seasons :legend true))
+
+  (view (stacked-area-chart ["a" "a" "b" "b" "c" "c" ] [10 20 30 10 40 20]
+                   :legend true
+                   :group-by ["I" "II" "I" "II" "I" "II"]))
+
+
+References:
+  http://www.jfree.org/jfreechart/api/javadoc/
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.charts/stacked-bar-chart">stacked-bar-chart</h2>
   <span id="var-type">macro</span><br />
   <pre id="var-usage">Usage: (stacked-bar-chart categories values &amp; options)
 </pre>
-  <pre id="var-docstr">Returns a JFreeChart object representing an area-chart of the given data.
+  <pre id="var-docstr">Returns a JFreeChart object representing an stacked-bar-chart of the given data.
  Use the 'view' function to display the chart, or the 'save' function
  to write it to a file.
 
