@@ -81,4 +81,13 @@
 
 ) ;; end of io-validation tests
 
+(deftest read-dataset-validation
 
+  (doseq [[name cars-dataset]
+	  [["dat" test-data]
+	   ["csv" test-csv-data]
+	   ["tdd" test-tdd-data]]]
+    (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
+    (is (= 50 (count (:rows cars-dataset)))) (str "Reading rows for " name " failed"))
+
+  ) ;; end of read-dataset-validation tests
