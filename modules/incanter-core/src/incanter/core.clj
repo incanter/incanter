@@ -2725,3 +2725,16 @@
     (.openStream (java.net.URL. location))
     (catch java.net.MalformedURLException _
       (java.io.FileInputStream. location))))
+
+
+
+;; PRINT METHOD FOR INCANTER DATASETS
+(defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
+  (do
+    (.write w (str (:column-names o)))
+    (.write w "\n")
+    (doseq [row (:rows o)]
+      (.write w (str (apply vector (map #(get row %) (:column-names o)))))
+      (.write w "\n"))))
+
+
