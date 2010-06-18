@@ -34,11 +34,6 @@
                 [7 8 9] 
                 [10 11 12]]))
 
-(def V (matrix [[1 2 3] 
-                [4 5 6] 
-                [7 8 9] 
-                [10 11 12]]))
-
 (def test-mat (matrix
   [[39      10 ]
    [51      20 ]
@@ -88,7 +83,7 @@
 
 (deftest median-test
   ;; calculate the median of a variable
-  (is (= (median x) 113)))
+  (is (= (median x) 113.0)))
 
 (deftest sample-tests
   ;; test sample function
@@ -100,7 +95,7 @@
   (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))) 
 
 (deftest sample-mean
- (is (= 3 
+ (is (= 3.0 
       (mean [2 3 4]))))
 
 (deftest stdev-test
@@ -109,7 +104,7 @@
 
 (deftest simple-regresssion-tests
  (let [r (simple-regression [2 4] [1 3])]
-  (is (= 3
+  (is (= 3.0
 	 (predict r 2)))))	 
 
 
@@ -233,7 +228,7 @@
 
 (deftest manhattan
   (is 
-   (= (+ 1 1 2 1 1) 
+   (= (+ 1.0 1 2 1 1) 
       (manhattan-distance [2 4 3 1 6]
 			  [3 5 1 2 5]))))
 
@@ -254,3 +249,5 @@
    (=  0.8591549295774648
        (tanimoto-coefficient  [2 4 3 1 6]
 			      [3 5 1 2 5]))))
+
+
