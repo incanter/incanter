@@ -55,6 +55,8 @@
               functions like $ and $where can use $data as a default argument."} 
       $data)
 
+(defrecord Dataset [column-names rows])
+(derive incanter.core.Dataset ::dataset)
 
 (defn matrix
 "
@@ -104,8 +106,8 @@
 
 
 (defn dataset?
-" Determines if obj is of type ::dataset."
-  ([obj] (= (type obj) ::dataset)))
+" Determines if obj is of type incanter.core.Dataset."
+  ([obj] (= (type obj) incanter.core.Dataset)))
 
 
 (defn nrow
@@ -1141,9 +1143,8 @@
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 (defn dataset
-" Returns a map of type ::dataset constructed from the given column-names and
+" Returns a map of type incanter.core.dataset constructed from the given column-names and
   data. The data is either a sequence of sequences or a sequence of hash-maps.
 "
   ([column-names & data]
@@ -1161,10 +1162,7 @@
                         dat
                       :else 
                         (map #(apply assoc {} (interleave column-names %)) dat))] 
-      (with-meta
-        {:column-names (into [] column-names)
-         :rows rows}
-        {:type :incanter.core/dataset}))))
+      (Dataset. (into [] column-names) rows))))
 
 
 (defn- get-column-id [dataset column-key]
@@ -1662,6 +1660,7 @@
     ;; iris measurements are positive, the built-in mean function could have 
     ;; been used instead.
 
+    (use 'incanter.stats)
     ($rollup #(mean (abs %)) :Sepal.Width :Species iris)
 
     ($rollup sd :Sepal.Length :Species iris)
@@ -1671,6 +1670,7 @@
     (def hair-eye-color (get-dataset :hair-eye-color))
     ($rollup :mean :count [:hair :eye] hair-eye-color)
 
+    (use 'incanter.charts)
     (with-data ($rollup :mean :Sepal.Length :Species iris)
       (view (bar-chart :Species :Sepal.Length)))
 
@@ -2725,3 +2725,16 @@
     (.openStream (java.net.URL. location))
     (catch java.net.MalformedURLException _
       (java.io.FileInputStream. location))))
+
+
+
+;; PRINT METHOD FOR INCANTER DATASETS
+(defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
+  (do
+    (.write w (str (:column-names o)))
+    (.write w "\n")
+    (doseq [row (:rows o)]
+      (.write w (str (apply vector (map #(get row %) (:column-names o)))))
+      (.write w "\n"))))
+
+

@@ -70,15 +70,18 @@
 
 
 (deftest io-validation
-
   ;; validate matrices read from files
   (is (= (reduce plus test-mat) (matrix [770 2149] 2)))
   (is (= (reduce plus test-csv-mat) (matrix [770 2149] 2)))
   (is (= (reduce plus test-tdd-mat) (matrix [770 2149] 2)))
   ;; confirm that iris species factor was converted to two dummy variables
   (is (= (first iris-mat) (matrix [5.10 3.50 1.40 0.20 0] 5)))
-  (is (= (first iris-mat-dummies) (matrix [5.10 3.50 1.40 0.20 0 0] 6)))
+  (is (= (first iris-mat-dummies) (matrix [5.10 3.50 1.40 0.20 0 0] 6)))) ;; end of io-validation tests
 
-) ;; end of io-validation tests
-
-
+(deftest read-dataset-validation
+  (doseq [[name cars-dataset]
+	  [["dat" test-data]
+	   ["csv" test-csv-data]
+	   ["tdd" test-tdd-data]]]
+    (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
+    (is (= 50 (count (:rows cars-dataset)))) (str "Reading rows for " name " failed"))) ;; end of read-dataset-validation tests
