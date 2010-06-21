@@ -118,14 +118,6 @@
       (.write w "]\n"))))
 
 
-;; PRINT METHOD FOR INCANTER DATASETS
-(defmethod print-method :incanter.core/dataset [o, ^java.io.Writer w]
-  (do
-    (.write w (str (:column-names o)))
-    (.write w "\n")
-    (doseq [row (:rows o)]
-      (.write w (str (apply vector (map #(get row %) (:column-names o)))))
-      (.write w "\n"))))
 
 
 
