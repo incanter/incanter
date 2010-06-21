@@ -83,6 +83,18 @@ Examples:
  (. wbk getSheet (str index-or-name)))
 
 (defmulti ^ {:private true
+	     :doc "Get the value after the evaluating the formula.  See http://poi.apache.org/spreadsheet/eval.html#Evaluate"}
+  get-cell-formula-value
+  (fn [evaled-cell evaled-type]
+    evaled-type))
+(defmethod get-cell-formula-value Cell/CELL_TYPE_BOOLEAN [evaled-cell evaled-type] (. evaled-cell getBooleanValue))
+(defmethod get-cell-formula-value Cell/CELL_TYPE_STRING  [evaled-cell evaled-type] (. evaled-cell getStringValue))
+(defmethod get-cell-formula-value :number  [evaled-cell evaled-type] (. evaled-cell getNumberValue))
+(defmethod get-cell-formula-value :date    [evaled-cell evaled-type] (DateUtil/getJavaDate (. evaled-cell getNumberValue)))
+(defmethod get-cell-formula-value :default [evaled-cell evaled-type] (str "Unknown cell type " (. evaled-cell getCellType)))
+
+
+(defmulti ^ {:private true
               :doc "Get the cell value depending on the cell type."}
           get-cell-value
 	(fn [cell]
@@ -94,7 +106,15 @@ Examples:
 					ct)))))
 
 (defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
-(defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]); NOTHING for now.
+(defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]
+	   (let [val (. (.. cell getSheet getWorkbook getCreationHelper createFormulaEvaluator) evaluate cell)
+		 evaluated-type   (. val getCellType)]
+	     (get-cell-formula-value val (if (= Cell/CELL_TYPE_NUMERIC evaluated-type)
+					   (if (DateUtil/isCellInternalDateFormatted cell) ; Check the original for date formatting hints
+					     :date
+					     :number)
+					   evaluated-type))))
+
 (defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell] (. cell getStringCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue))
