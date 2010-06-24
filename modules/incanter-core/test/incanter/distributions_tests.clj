@@ -2,6 +2,8 @@
 
 ;; by Mark Fredrickson http://www.markmfredrickson.com
 ;; May 10, 2010
+;; Changes added by William Leung
+;; Jun 24, 2010
 
 ;; Copyright (c) Mark M. Fredrickson, 2010. All rights reserved.  The use
 ;; and distribution terms for this software are covered by the Eclipse
@@ -76,3 +78,47 @@
     (= (map #(pdf lady-tasting-tea %) [0 1 2 3 4]) [1/70 16/70 36/70 16/70 1/70])))
 
     
+;; tests against incanter.stats, checking for similar behaviour
+(deftest beta-distribution-tests
+  (is (= (pdf (beta-distribution 1 2) 0.5) (pdf-beta 0.5 :alpha 1 :beta 2)))
+  (is (= (cdf (beta-distribution 1 2) 0.5) (cdf-beta 0.5 :alpha 1 :beta 2))))
+
+(deftest binomial-distribution-tests
+  (is (= (pdf (binomial-distribution 20 1/4) 10) (pdf-binomial 10 :prob 1/4 :size 20)))
+  (is (= (cdf (binomial-distribution 20 1/4) 10) (cdf-binomial 10 :prob 1/4 :size 20))))
+
+(deftest chisq-distribution-tests
+  (is (= (pdf (chisq-distribution 2) 5.0) (pdf-chisq 5.0 :df 2)))
+  (is (= (cdf (chisq-distribution 2) 5.0) (cdf-chisq 5.0 :df 2))))
+
+(deftest exponential-distribution-tests
+  (is (= (pdf (exponential-distribution 1/2) 2.0) (pdf-exp 2.0 :rate 1/2)))
+  (is (= (cdf (exponential-distribution 1/2) 2.0) (cdf-exp 2.0 :rate 1/2))))
+
+(deftest f-distribution-tests
+  (is (= (pdf (f-distribution 5 2) 1.0) (pdf-f 1.0 :df1 5 :df2 2)))
+  (is (= (cdf (f-distribution 5 2) 1.0) (cdf-f 1.0 :df1 5 :df2 2))))
+
+(deftest gamma-distribution-tests
+  (is (= (pdf (gamma-distribution 1 2) 10) (pdf-gamma 10 :shape 1 :rate 2)))
+  (is (= (cdf (gamma-distribution 1 2) 10) (cdf-gamma 10 :shape 1 :rate 2))))
+
+(deftest neg-binomial-distribution-tests
+  (is (= (pdf (neg-binomial-distribution 20 1/2) 10) (pdf-neg-binomial 10 :prob 1/2 :size 20)))
+  (is (= (cdf (neg-binomial-distribution 20 1/2) 10) (cdf-neg-binomial 10 :prob 1/2 :size 20))))
+
+(deftest normal-distribution-tests
+  (is (= (pdf (normal-distribution -2 (Math/sqrt 0.5)) 1.96) (pdf-normal 1.96 :mean -2 :sd (Math/sqrt 0.5))))
+  (is (= (cdf (normal-distribution -2 (Math/sqrt 0.5)) 1.96) (cdf-normal 1.96 :mean -2 :sd (Math/sqrt 0.5)))))
+
+(deftest poisson-distribution-tests
+  (is (= (pdf (poisson-distribution 10) 5) (pdf-poisson 5 :lambda 10)))
+  (is (= (cdf (poisson-distribution 10) 5) (cdf-poisson 5 :lambda 10))))
+
+(deftest t-distribution-tests
+  (is (= (pdf (t-distribution 10) 1.2) (pdf-t 1.2 :df 10)))
+  (is (= (cdf (t-distribution 10) 1.2) (cdf-t 1.2 :df 10))))
+
+(deftest uniform-distribution-tests
+  (is (= (pdf (uniform-distribution 1.0 10.0) 5) (pdf-uniform 5 :min 1 :max 10)))
+  (is (= (cdf (uniform-distribution 1.0 10.0) 5) (cdf-uniform 5 :min 1 :max 10))))

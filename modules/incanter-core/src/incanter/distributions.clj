@@ -2,6 +2,8 @@
 
 ;; by Mark Fredrickson http://www.markmfredrickson.com
 ;; May 10, 2010
+;; Changes added by William Leung
+;; Jun 24, 2010
 
 ;; Copyright (c) Mark M. Fredrickson, 2010. All rights reserved.  The use
 ;; and distribution terms for this software are covered by the Eclipse
@@ -16,8 +18,9 @@
 (ns #^{:doc "Distributions. TODO: provide a useful string" :author "Mark M. Fredrickson"}
 	incanter.distributions
   (:import java.util.Random
-  	(cern.jet.random.tdouble Normal)
-    (cern.jet.random.tdouble.engine DoubleMersenneTwister))
+           (cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT)
+           (cern.jet.stat.tdouble Probability)
+           (cern.jet.random.tdouble.engine DoubleMersenneTwister))
   (:use [clojure.contrib.def :only (defvar defvar-)]
         [clojure.set :only (intersection)]
         [clojure.contrib.combinatorics :only (combinations)]))
@@ -374,7 +377,226 @@
       http://en.wikipedia.org/wiki/Normal_distribution
 
   Example:
-      (pdf (normal 2 (sqrt 0.5) 1.96))
+      (pdf (normal-distribution -2 (sqrt 0.5)) 1.96)
 "
 	([] (normal-distribution 0 1))
   ([mean sd] (Normal. mean sd (DoubleMersenneTwister.))))
+
+;; distributions created using code and default values from http://github.com/markmfredrickson/incanter/blob/distributions/modules/incanter-core/src/incanter/stats.clj
+
+(extend cern.jet.random.tdouble.Beta Distribution colt-extenders)
+(defn beta-distribution
+  "Returns a Beta distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    alpha      (default 1)
+    beta       (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
+    http://en.wikipedia.org/wiki/Beta_distribution
+
+  Example:
+    (pdf (beta-distribution 1 2) 0.5)"
+  ([] (beta-distribution 1 1))
+  ([alpha beta] (Beta. alpha beta (DoubleMersenneTwister.))))
+
+(extend cern.jet.random.tdouble.Binomial Distribution colt-extenders)
+(defn binomial-distribution
+  "Returns a Binomial distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    size       (default 1)
+    prob       (default 1/2)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
+    http://en.wikipedia.org/wiki/Binomial_distribution
+
+  Example:
+    (pdf (binomial-distribution 20 1/4) 10)"
+  ([] (binomial-distribution 1 1/2))
+  ([n p] (Binomial. n p (DoubleMersenneTwister.))))
+
+(extend cern.jet.random.tdouble.ChiSquare Distribution colt-extenders)
+(defn chisq-distribution
+  "Returns a Chi-square distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    df         (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
+    http://en.wikipedia.org/wiki/Chi_square_distribution
+
+  Example:
+    (pdf (chisq-distribution 2) 5.0)"
+  ([] (chisq-distribution 1))
+  ([df] (ChiSquare. df (DoubleMersenneTwister.))))
+
+(extend cern.jet.random.tdouble.Exponential Distribution colt-extenders)
+(defn exponential-distribution
+  "Returns a Exponential distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    rate       (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
+    http://en.wikipedia.org/wiki/Exponential_distribution
+
+  Example:
+    (pdf (exponential-distribution 1/2) 2.0)"
+  ([] (exponential-distribution 1))
+  ([rate] (Exponential. rate (DoubleMersenneTwister.))))
+
+(defrecord F [df1 df2]
+  Distribution
+  (pdf [d v] (* (/ (gamma (/ (+ df1 df2) 2))
+                   (* (gamma (/ df1 2)) (gamma (/ df2 2))))
+                (pow (/ df1 df2) (/ df1 2))
+                (pow v (- (/ df1 2) 1))
+                (pow (+ 1 (* (/ df1 df2) v))
+                     (- 0 (/ (+ df1 df2) 2)))))
+  (cdf [d v] (regularized-beta ; TODO decide on :lower-tail
+              (/ (* df1 v) (+ df2 (* df1 v)))
+              (/ df1 2)
+              (/ df2 2)))
+  (draw [d] nil)                        ; TODO
+  (support [d] [0,inf+]))
+
+(defn f-distribution
+  "Returns a F-distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    df1        (default 1)
+    df2        (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://en.wikipedia.org/wiki/F_distribution
+    http://mathworld.wolfram.com/F-Distribution.html
+
+  Example:
+    (pdf (f-distribution 5 2) 1.0)"
+  ([] (f-distribution 1 1)) ; or is that "0 1" ? code for pdf-f default values in http://github.com/markmfredrickson/incanter/blob/distributions/modules/incanter-core/src/incanter/stats.clj differs from doc string
+  ([df1 df2] (F. df1 df2)))
+
+(defrecord Gamma-rec [shape rate] ; using defrecord since cdf was not matching up in unittest without switching ":lower-tail"
+  Distribution
+  (pdf [d v] (.pdf (Gamma. shape rate (DoubleMersenneTwister.)) v))
+  (cdf [d v] (Probability/gamma rate shape v)) ; TODO decide on :lower-tail
+  (draw [d] (cern.jet.random.tdouble.Gamma/staticNextDouble shape rate))
+  (support [d] [0,inf+]))
+
+;(extend cern.jet.random.tdouble.Gamma Distribution colt-extenders)
+(defn gamma-distribution
+  "Returns a Gamma distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    shape      (default 1)
+    rate       (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
+    http://en.wikipedia.org/wiki/Gamma_distribution
+
+  Example:
+    (pdf (gamma-distribution 1 2) 10)"
+  ([] (gamma-distribution 1 1))
+  ([shape rate] (Gamma-rec. shape rate)))
+
+(extend cern.jet.random.tdouble.NegativeBinomial Distribution colt-extenders)
+(defn neg-binomial-distribution
+  "Returns a Negative binomial distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    size       (default 10)
+    prob       (default 1/2)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
+    http://en.wikipedia.org/wiki/Negative_binomial_distribution
+
+  Example:
+    (pdf (neg-binomial-distribution 20 1/2) 10)"
+  ([] (neg-binomial-distribution 10 1/2))
+  ([size prob] (NegativeBinomial. size prob (DoubleMersenneTwister.))))
+
+(extend cern.jet.random.tdouble.Poisson Distribution colt-extenders)
+(defn poisson-distribution
+  "Returns a Poisson distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    lambda     (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
+    http://en.wikipedia.org/wiki/Poisson_distribution
+
+  Example:
+    (pdf (poisson-distribution 10) 5)"
+  ([] (poisson-distribution 1))
+  ([lambda] (Poisson. lambda (DoubleMersenneTwister.))))
+
+(extend cern.jet.random.tdouble.StudentT Distribution colt-extenders)
+(defn t-distribution
+  "Returns a Student-t distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    df         (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
+    http://en.wikipedia.org/wiki/Student-t_distribution
+
+  Example:
+    (pdf (t-distribution 10) 1.2)"
+  ([] (t-distribution 1))
+  ([df] (StudentT. df (DoubleMersenneTwister.))))
+
+(extend cern.jet.random.tdouble.DoubleUniform Distribution colt-extenders)
+(defn uniform-distribution
+  "Returns a Uniform distribution that implements the incanter.distributions.Distribution protocol.
+
+  Arguments:
+    min        (default 0)
+    max        (default 1)
+
+  See also:
+    Distribution, pdf, cdf, draw, support
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
+    http://en.wikipedia.org/wiki/Uniform_distribution
+
+  Example:
+    (pdf (uniform-distribution 1.0 10.0) 5)"
+  ([] (uniform-distribution 0.0 1.0)) ; since "0 1" not implicitly promoted, otheriwse no matching ctor...
+  ([min max] (DoubleUniform. min max (DoubleMersenneTwister.))))
