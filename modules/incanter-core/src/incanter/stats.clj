@@ -99,7 +99,7 @@
 "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
-          df1 (or (:df1 opts) 0)
+          df1 (or (:df1 opts) 1)
           df2 (or (:df2 opts) 1)
           pdf-fx (fn [x]
                    (* (/ (gamma (/ (+ df1 df2) 2))
