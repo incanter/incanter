@@ -23,7 +23,8 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister))
   (:use [clojure.contrib.def :only (defvar defvar-)]
         [clojure.set :only (intersection)]
-        [clojure.contrib.combinatorics :only (combinations)]))
+        [clojure.contrib.combinatorics :only (combinations)]
+        [incanter.core :only (gamma pow regularized-beta)]))
 
 ;; NOTE: as of this writing, (doc pdf/cdf/...) do not show the doc strings.
 ;; including them for when this bug is fixed.
