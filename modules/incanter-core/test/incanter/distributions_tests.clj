@@ -33,6 +33,84 @@
   (is (= (pdf #{:foo :bar :baz} :baz) 1/3))
   (is (= (pdf #{:foo :bar} :baz) 0)))
 
+(deftest extending-map-type-tests
+
+  (let [hmap (hash-map)]                ; hmm...
+    (is (= 0 (pdf hmap :5)))
+
+    (is (= nil (cdf hmap :5)))
+
+    (is (= nil (support hmap))))
+
+  (let [hmap (hash-map :5 20)]
+    (is (= 0 (pdf hmap :4)))
+    (is (= 1 (pdf hmap :5)))
+    (is (= 0 (pdf hmap :6)))
+
+    (is (= nil (cdf hmap :4)))
+    (is (= nil (cdf hmap :5)))
+    (is (= nil (cdf hmap :6)))
+
+    (is (= #{:5} (set (support hmap)))))
+
+  (let [hmap (hash-map :6 30 :5 20 :7 40 :8 10)]
+    (is (= 0        (pdf hmap :4)))
+    (is (= (/ 1 5)  (pdf hmap :5)))
+    (is (= (/ 3 10) (pdf hmap :6)))
+    (is (= (/ 2 5)  (pdf hmap :7)))
+    (is (= (/ 1 10) (pdf hmap :8)))
+    (is (= 0        (pdf hmap :9)))
+
+    (is (= nil (cdf hmap :4)))
+    (is (= nil (cdf hmap :5)))
+    (is (= nil (cdf hmap :6)))
+    (is (= nil (cdf hmap :7)))
+    (is (= nil (cdf hmap :8)))
+    (is (= nil (cdf hmap :9)))
+
+    (is (= #{:5 :6 :7 :8} (set (support hmap)))))
+
+  (let [trmap (sorted-map)]             ; hmm...
+    (is (= 0 (pdf trmap :5)))
+
+    (is (= 0 (cdf trmap :5)))
+
+    (is (= nil (support trmap))))
+
+  (let [trmap (sorted-map :5 20)]
+    (is (= 0 (pdf trmap :4)))
+    (is (= 1 (pdf trmap :5)))
+    (is (= 0 (pdf trmap :6)))
+
+    (is (= 0 (cdf trmap :4)))
+    (is (= 1 (cdf trmap :5)))
+    (is (= 1 (cdf trmap :6)))
+
+    (is (= '(:5) (support trmap))))
+
+  (let [trmap (sorted-map :6 30 :5 20 :7 40 :8 10)]
+    (is (= 0        (pdf trmap :4)))
+    (is (= (/ 1 5)  (pdf trmap :5)))
+    (is (= (/ 3 10) (pdf trmap :6)))
+    (is (= (/ 2 5)  (pdf trmap :7)))
+    (is (= (/ 1 10) (pdf trmap :8)))
+    (is (= 0        (pdf trmap :9)))
+
+    (is (= 0        (cdf trmap :4)))
+    (is (= (/ 1 5)  (cdf trmap :5)))
+    (is (= (/ 1 2)  (cdf trmap :6)))
+    (is (= (/ 9 10) (cdf trmap :7)))
+    (is (= 1        (cdf trmap :8)))
+    (is (= 1        (cdf trmap :9)))
+
+    (is (= '(:5 :6 :7 :8) (support trmap)))))
+
+;; TODO replace
+(deftest test-roulette-wheel
+  (let [freqs (map #(val %) (into (sorted-map) (frequencies (repeatedly 10000 #(roulette-wheel '(40 30 20 10))))))
+        diffs (map #(Math/abs (- %1 %2)) freqs '(4000 3000 2000 1000))]
+    (is (every? #(< (float (/ % 10000)) 0.05) diffs) "If this fails, check distribution manually")))
+
 (deftest basic-integer-distribution-tests
   (is (thrown? AssertionError (integer-distribution 5 0))) ; wrong argment order
   (let [u (integer-distribution 1 5)]

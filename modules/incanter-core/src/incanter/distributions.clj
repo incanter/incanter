@@ -146,12 +146,68 @@
 (extend-type clojure.lang.PersistentHashSet
 	Distribution
   	(pdf [d v] (if (get d v) (/ 1 (count d)) 0))
-    (cdf [d v] nil) ; should this throw an exception?
+    (cdf [d v] nil) ; should this throw an exception? ; or just sort ascendingly then find P[X \leq x] (but then what is a comparator is not defined)?
     (draw [d] (nth (support d) (rand-int (count d))))
     (support [d] (vec d)))
 
-; TODO set up a map extension that takes the values as frequencies
+(defn- take-to-first
+  "Returns a lazy sequence of successive items from coll up to
+  and including the point at which it (pred item) returns true.
+  pred must be free of side-effects.
 
+  src: http://www.mail-archive.com/clojure@googlegroups.com/msg25706.html"
+  [pred coll]
+  (lazy-seq
+   (when-let [s (seq coll)]
+     (if-not (pred (first s))
+       (cons (first s) (take-to-first pred (rest s)))
+       (list (first s))))))
+
+(defn roulette-wheel
+  "Perform a roulette wheel selection given a list of frequencies"
+  [freqs]
+  (let [nfreqs (count freqs)
+        tot (reduce + freqs)
+        dist (map #(double (/ % tot)) freqs)
+        rval (double (rand))]
+    (loop [acc 0, i 0]
+      (let [lb acc, ub (+ acc (nth dist i))]
+        (cond (>= (+ i 1) nfreqs) i
+              (and (>= rval lb) (< rval ub)) i
+              :else (recur ub (+ i 1)))))))
+
+;; map extension takes values as frequencies
+(extend-type clojure.lang.APersistentMap
+  Distribution
+  (pdf [d v] (if-not (contains? d v)
+               0
+               (/ (get d v) (reduce + (vals d)))))
+  (cdf [d v] (if (instance? clojure.lang.PersistentTreeMap d)
+               ;; clojure.lang.Keyword cannot be cast to java.lang.Number
+               ;; (/ (reduce + (vals (take-while #(<= (key %) v) d)))
+               ;;    (reduce + (vals d)))
+
+               ;; not working
+               ;; (let [compd (.comparator d)
+               ;;       upto (take-while #(let [c (.compare compd (key %) v)]
+               ;;                           (or (= -1 c) (= 0 c)))
+               ;;                        d)]
+               ;;   (/ (reduce + (vals upto))
+               ;;      (reduce + (vals d))))
+
+               (let [nd (count (support d))
+                     compd (.comparator d)
+                     fkey (first (keys d))]
+                 (cond (= nd 0) 0
+                       (= nd 1) (if (= -1 (.compare compd v fkey)) 0 1)
+                       :else (let [upto (take-to-first #(= (key %) v) d)]
+                               (if-not (contains? d v)
+                                 (if (= -1 (.compare compd v fkey)) 0 1)
+                                 (/ (reduce + (vals upto))
+                                    (reduce + (vals d)))))))
+               nil))
+  (draw [d] (nth (keys d) (roulette-wheel (vals d))))
+  (support [d] (keys d)))
 
 ; defrecord expands to have a (contains? ...) (or .contains method) that causes
 ; a reflection warning. Note much to do about that for now. Perhaps it will be
