@@ -56,21 +56,41 @@ namespace.
     <div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/Distribution">Distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/beta-distribution">beta-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/binomial-distribution">binomial-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/cdf">cdf</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/chisq-distribution">chisq-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/combination-distribution">combination-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/draw">draw</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/exponential-distribution">exponential-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/f-distribution">f-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/gamma-distribution">gamma-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/integer-distribution">integer-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/neg-binomial-distribution">neg-binomial-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/normal-distribution">normal-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/pdf">pdf</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/poisson-distribution">poisson-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/support">support</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/t-distribution">t-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/test-statistic-distribution">test-statistic-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/uniform-distribution">uniform-distribution</a>
     </div>
     <br />
   </div>
@@ -118,7 +138,59 @@ by <span id="author">Mark M. Fredrickson</span><br />
 		(cdf [2 1 2 3] 2) ; returns the value 3/4 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/baf134898e947b3033c86ce51c327cb6072f8371/modules/incanter-core/src/incanter/distributions.clj#L27" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L31" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/beta-distribution">beta-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (beta-distribution)
+       (beta-distribution alpha beta)
+</pre>
+  <pre id="var-docstr">Returns a Beta distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  alpha      (default 1)
+  beta       (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html
+  http://en.wikipedia.org/wiki/Beta_distribution
+
+Example:
+  (pdf (beta-distribution 1 2) 0.5)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L389" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/binomial-distribution">binomial-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (binomial-distribution)
+       (binomial-distribution n p)
+</pre>
+  <pre id="var-docstr">Returns a Binomial distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  size       (default 1)
+  prob       (default 1/2)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
+  http://en.wikipedia.org/wiki/Binomial_distribution
+
+Example:
+  (pdf (binomial-distribution 20 1/4) 10)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L409" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -143,6 +215,31 @@ by <span id="author">Mark M. Fredrickson</span><br />
   
   
   
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/chisq-distribution">chisq-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (chisq-distribution)
+       (chisq-distribution df)
+</pre>
+  <pre id="var-docstr">Returns a Chi-square distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  df         (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html
+  http://en.wikipedia.org/wiki/Chi_square_distribution
+
+Example:
+  (pdf (chisq-distribution 2) 5.0)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L429" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -174,7 +271,7 @@ by <span id="author">Mark M. Fredrickson</span><br />
 		</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/baf134898e947b3033c86ce51c327cb6072f8371/modules/incanter-core/src/incanter/distributions.clj#L245" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L249" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -195,6 +292,83 @@ by <span id="author">Mark M. Fredrickson</span><br />
   
   
   
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/exponential-distribution">exponential-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (exponential-distribution)
+       (exponential-distribution rate)
+</pre>
+  <pre id="var-docstr">Returns a Exponential distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  rate       (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
+  http://en.wikipedia.org/wiki/Exponential_distribution
+
+Example:
+  (pdf (exponential-distribution 1/2) 2.0)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L448" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/f-distribution">f-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (f-distribution)
+       (f-distribution df1 df2)
+</pre>
+  <pre id="var-docstr">Returns a F-distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  df1        (default 1)
+  df2        (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://en.wikipedia.org/wiki/F_distribution
+  http://mathworld.wolfram.com/F-Distribution.html
+
+Example:
+  (pdf (f-distribution 5 2) 1.0)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L481" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/gamma-distribution">gamma-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (gamma-distribution)
+       (gamma-distribution shape rate)
+</pre>
+  <pre id="var-docstr">Returns a Gamma distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  shape      (default 1)
+  rate       (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html
+  http://en.wikipedia.org/wiki/Gamma_distribution
+
+Example:
+  (pdf (gamma-distribution 1 2) 10)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L508" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -232,7 +406,33 @@ by <span id="author">Mark M. Fredrickson</span><br />
 		(draw (integer-distribution (bit-shift-left 2 1000))) ; probably a very large value</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/baf134898e947b3033c86ce51c327cb6072f8371/modules/incanter-core/src/incanter/distributions.clj#L168" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L172" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/neg-binomial-distribution">neg-binomial-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (neg-binomial-distribution)
+       (neg-binomial-distribution size prob)
+</pre>
+  <pre id="var-docstr">Returns a Negative binomial distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  size       (default 10)
+  prob       (default 1/2)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
+  http://en.wikipedia.org/wiki/Negative_binomial_distribution
+
+Example:
+  (pdf (neg-binomial-distribution 20 1/2) 10)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L528" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -259,10 +459,10 @@ by <span id="author">Mark M. Fredrickson</span><br />
       http://en.wikipedia.org/wiki/Normal_distribution
 
   Example:
-      (pdf (normal 2 (sqrt 0.5) 1.96))</pre>
+      (pdf (normal-distribution -2 (sqrt 0.5)) 1.96)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/baf134898e947b3033c86ce51c327cb6072f8371/modules/incanter-core/src/incanter/distributions.clj#L358" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L362" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -287,6 +487,31 @@ by <span id="author">Mark M. Fredrickson</span><br />
   
   
   
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/poisson-distribution">poisson-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (poisson-distribution)
+       (poisson-distribution lambda)
+</pre>
+  <pre id="var-docstr">Returns a Poisson distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  lambda     (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
+  http://en.wikipedia.org/wiki/Poisson_distribution
+
+Example:
+  (pdf (poisson-distribution 10) 5)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L548" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -320,6 +545,31 @@ by <span id="author">Mark M. Fredrickson</span><br />
   
   
   
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/t-distribution">t-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (t-distribution)
+       (t-distribution df)
+</pre>
+  <pre id="var-docstr">Returns a Student-t distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  df         (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html
+  http://en.wikipedia.org/wiki/Student-t_distribution
+
+Example:
+  (pdf (t-distribution 10) 1.2)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L567" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -374,7 +624,33 @@ by <span id="author">Mark M. Fredrickson</span><br />
 		</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/baf134898e947b3033c86ce51c327cb6072f8371/modules/incanter-core/src/incanter/distributions.clj#L276" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L280" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/uniform-distribution">uniform-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (uniform-distribution)
+       (uniform-distribution min max)
+</pre>
+  <pre id="var-docstr">Returns a Uniform distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  min        (default 0)
+  max        (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html
+  http://en.wikipedia.org/wiki/Uniform_distribution
+
+Example:
+  (pdf (uniform-distribution 1.0 10.0) 5)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L586" id="var-source">Source</a>
 </div>
 
 
