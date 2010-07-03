@@ -102,7 +102,7 @@
   Returns the support of the probability distribution d.
 	For discrete distributions, the support is a set (i.e. #{1 2 3}).
 	For continuous distributions, the support is a 2 element vector
-	discribing the range. For example, the uniform distribution over
+	describing the range. For example, the uniform distribution over
 	the unit interval would return the vector [0 1].
 
 	This function is marked as experimental to note that the output
@@ -117,7 +117,11 @@
 	  http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
 	Examples:
-		(cdf [2 1 2 3] 2) ; returns the value 3/4 \n"))
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 \n")
+;  (mean [d] "TODO")
+;  (variance [d] "TODO")
+
+)
 ;; Notes: other possible methods include moment generating function, transformations/change of vars
 
 (defn- tabulate
@@ -133,14 +137,20 @@
   [d v]
 	(reduce + (map #(pdf d %) (filter #(>= v %) (support d)))))
 
+;(defn- draw-nr)
+
 ;; Extending all sequence types to be distributions
 (extend-type clojure.lang.Sequential
-	Distribution
-		(pdf [d v] (get (tabulate d) v 0))
-		(cdf [d v] (simple-cdf d v))
-		(draw [d] (nth d (rand-int (count d))))
-    ; (draw [d n] (repeatedly n #(draw d))) 
-		(support [d] (set d)))
+  Distribution
+  (pdf [d v] (get (tabulate d) v 0))
+  (cdf [d v] (simple-cdf d v))
+  (draw [d] (nth d (rand-int (count d))))
+                                        ; (draw [d n] (repeatedly n #(draw d))) 
+  (support [d] (set d))
+  ;; (mean [d] (if-not (every? number? d) nil
+  ;;                   (/ (reduce + d)
+  ;;                      (count d))))
+)
 
 ;; Sets (e.g. #{1 2 3}) are not seqs, so need their own implementation
 (extend-type clojure.lang.PersistentHashSet
@@ -167,14 +177,16 @@
   "Perform a roulette wheel selection given a list of frequencies"
   [freqs]
   (let [nfreqs (count freqs)
-        tot (reduce + freqs)
-        dist (map #(double (/ % tot)) freqs)
-        rval (double (rand))]
-    (loop [acc 0, i 0]
-      (let [lb acc, ub (+ acc (nth dist i))]
-        (cond (>= (+ i 1) nfreqs) i
-              (and (>= rval lb) (< rval ub)) i
-              :else (recur ub (+ i 1)))))))
+        tot (reduce + freqs)]
+    (if (= tot 0)
+      nil
+      (let [dist (map #(/ % tot) freqs)
+            rval (double (rand))]
+        (loop [acc 0, i 0]
+          (let [lb acc, ub (+ acc (nth dist i))]
+            (cond (>= (+ i 1) nfreqs) i
+                  (and (>= rval lb) (< rval ub)) i
+                  :else (recur ub (+ i 1)))))))))
 
 ;; map extension takes values as frequencies
 (extend-type clojure.lang.APersistentMap
@@ -183,18 +195,6 @@
                0
                (/ (get d v) (reduce + (vals d)))))
   (cdf [d v] (if (instance? clojure.lang.PersistentTreeMap d)
-               ;; clojure.lang.Keyword cannot be cast to java.lang.Number
-               ;; (/ (reduce + (vals (take-while #(<= (key %) v) d)))
-               ;;    (reduce + (vals d)))
-
-               ;; not working
-               ;; (let [compd (.comparator d)
-               ;;       upto (take-while #(let [c (.compare compd (key %) v)]
-               ;;                           (or (= -1 c) (= 0 c)))
-               ;;                        d)]
-               ;;   (/ (reduce + (vals upto))
-               ;;      (reduce + (vals d))))
-
                (let [nd (count (support d))
                      compd (.comparator d)
                      fkey (first (keys d))]
@@ -550,7 +550,7 @@
 
   Example:
     (pdf (f-distribution 5 2) 1.0)"
-  ([] (f-distribution 1 1)) ; or is that "0 1" ? code for pdf-f default values in http://github.com/markmfredrickson/incanter/blob/distributions/modules/incanter-core/src/incanter/stats.clj differs from doc string
+  ([] (f-distribution 1 1))
   ([df1 df2] (F. df1 df2)))
 
 (defrecord Gamma-rec [shape rate] ; using defrecord since cdf was not matching up in unittest without switching ":lower-tail"

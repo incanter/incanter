@@ -25,11 +25,38 @@
 ;; UNIT TESTS FOR incanter.distributions.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(deftest extending-basic-types 
-	(is (= (pdf [1 2 2] 1) 1/3))
-  (is (= (pdf '(1 2 1 2 2 1) 2) 1/2))
-	(is (= (support [1 2 3 2 :foo :bar]) #{1 2 3 :foo :bar}))
-  (is (= (cdf [1 2 3] 2) 2/3))
+(deftest extending-seq-type-tests
+  (let [coll ()]
+    (is (= 0 (pdf coll 1)))
+
+    (is (= 0 (cdf coll 1)))
+
+    (is (thrown? RuntimeException (draw coll)))
+
+    (is (= #{} (support coll))))
+
+  (let [coll '(1 2 1 2 2 1 3 3)]
+    (is (= 0   (pdf coll 0)))
+    (is (= 3/8 (pdf coll 2)))
+    (is (= 0   (pdf coll 4)))
+
+    (is (= 0   (cdf coll 0)))
+    (is (= 3/4 (cdf coll 2)))
+    (is (= 1   (cdf coll 3)))
+    (is (= 1   (cdf coll 4)))
+
+    (is (= #{1 2 3} (support coll))))
+
+  (let [coll [1 2 3 2 :foo :bar]]
+    (is (= 1/3 (pdf coll 2)))
+    (is (= 1/6 (pdf coll :foo)))
+    (is (= 0 (pdf coll :baz)))
+
+    (is (thrown? Exception (cdf coll 2)))
+
+    (is (= #{1 2 3 :foo :bar} (support [1 2 3 2 :foo :bar])))))
+
+(deftest extending-set-type-tests
   (is (= (pdf #{:foo :bar :baz} :baz) 1/3))
   (is (= (pdf #{:foo :bar} :baz) 0)))
 
@@ -54,12 +81,12 @@
     (is (= #{:5} (set (support hmap)))))
 
   (let [hmap (hash-map :6 30 :5 20 :7 40 :8 10)]
-    (is (= 0        (pdf hmap :4)))
-    (is (= (/ 1 5)  (pdf hmap :5)))
-    (is (= (/ 3 10) (pdf hmap :6)))
-    (is (= (/ 2 5)  (pdf hmap :7)))
-    (is (= (/ 1 10) (pdf hmap :8)))
-    (is (= 0        (pdf hmap :9)))
+    (is (= 0    (pdf hmap :4)))
+    (is (= 1/5  (pdf hmap :5)))
+    (is (= 3/10 (pdf hmap :6)))
+    (is (= 2/5  (pdf hmap :7)))
+    (is (= 1/10 (pdf hmap :8)))
+    (is (= 0    (pdf hmap :9)))
 
     (is (= nil (cdf hmap :4)))
     (is (= nil (cdf hmap :5)))
@@ -89,24 +116,28 @@
     (is (= '(:5) (support trmap))))
 
   (let [trmap (sorted-map :6 30 :5 20 :7 40 :8 10)]
-    (is (= 0        (pdf trmap :4)))
-    (is (= (/ 1 5)  (pdf trmap :5)))
-    (is (= (/ 3 10) (pdf trmap :6)))
-    (is (= (/ 2 5)  (pdf trmap :7)))
-    (is (= (/ 1 10) (pdf trmap :8)))
-    (is (= 0        (pdf trmap :9)))
+    (is (= 0    (pdf trmap :4)))
+    (is (= 1/5  (pdf trmap :5)))
+    (is (= 3/10 (pdf trmap :6)))
+    (is (= 2/5  (pdf trmap :7)))
+    (is (= 1/10 (pdf trmap :8)))
+    (is (= 0    (pdf trmap :9)))
 
-    (is (= 0        (cdf trmap :4)))
-    (is (= (/ 1 5)  (cdf trmap :5)))
-    (is (= (/ 1 2)  (cdf trmap :6)))
-    (is (= (/ 9 10) (cdf trmap :7)))
-    (is (= 1        (cdf trmap :8)))
-    (is (= 1        (cdf trmap :9)))
+    (is (= 0    (cdf trmap :4)))
+    (is (= 1/5  (cdf trmap :5)))
+    (is (= 1/2  (cdf trmap :6)))
+    (is (= 9/10 (cdf trmap :7)))
+    (is (= 1    (cdf trmap :8)))
+    (is (= 1    (cdf trmap :9)))
 
     (is (= '(:5 :6 :7 :8) (support trmap)))))
 
 ;; TODO replace
 (deftest test-roulette-wheel
+  (is (= nil (roulette-wheel '(0 0 0 0 0))))
+  (is (= 3 (roulette-wheel '(0 0 0 5 0))))
+  (is (not (= 5 (roulette-wheel '(0 0 0 5 0)))))
+
   (let [freqs (map #(val %) (into (sorted-map) (frequencies (repeatedly 10000 #(roulette-wheel '(40 30 20 10))))))
         diffs (map #(Math/abs (- %1 %2)) freqs '(4000 3000 2000 1000))]
     (is (every? #(< (float (/ % 10000)) 0.05) diffs) "If this fails, check distribution manually")))
