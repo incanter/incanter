@@ -1,7 +1,6 @@
 (defproject incanter "1.2.3-SNAPSHOT"
   :description "Incanter is a Clojure-based, R-like statistical programming and data visualization environment."
   :dependencies [[incanter/incanter-core "1.2.3-SNAPSHOT"]
-                 [incanter/incanter-core "1.2.3-SNAPSHOT"]
                  [incanter/incanter-io "1.2.3-SNAPSHOT"]
                  [incanter/incanter-charts "1.2.3-SNAPSHOT"]
                  [incanter/incanter-processing "1.2.3-SNAPSHOT"]
@@ -13,5 +12,4 @@
   :dev-dependencies [[lein-clojars "0.5.0-SNAPSHOT"]
                      [swank-clojure "1.2.1"]
                      [jline "0.9.94"]]
-  :repositories {"clojure-releases" "http://build.clojure.org/releases"}
   :main incanter.main)
