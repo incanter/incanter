@@ -90,11 +90,11 @@ Options are:
 
  Examples:
    (use '(incanter core io excel))
-   (view (read-xls "http://incanter.org/data/aus-airline-passengers.xls"))
+   (view (read-xls "<a href="http://incanter.org/data/aus-airline-passengers.xls">http://incanter.org/data/aus-airline-passengers.xls</a>"))
 
    (use '(incanter core charts excel))
    ;; read .xls file of Australian airline passenger data from the 1950s.
-   (with-data (read-xls "http://incanter.org/data/aus-airline-passengers.xls")
+   (with-data (read-xls "<a href="http://incanter.org/data/aus-airline-passengers.xls">http://incanter.org/data/aus-airline-passengers.xls</a>")
    (view $data)
    ;; time-series-plot needs time in millisecs
    ;; create a function, to-millis, to convert a sequence of Date objects
