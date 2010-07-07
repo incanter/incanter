@@ -1549,6 +1549,24 @@
         (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
 
 
+(defn auto-correlation
+"
+  Returns the auto-correlation of x with given lag, mean, and variance.
+  If no mean or variance is provided, the they are calculated from x.
+
+  References:
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
+
+"
+  ([x lag]
+    auto-correlation x lag (mean x) (variance x))
+  ([x lag mean variance]
+     (DoubleDescriptive/autoCorrelation
+      (DoubleArrayList. (double-array (to-list x)))
+      lag
+      mean
+      variance)))
+
 
 (defn median
 "
