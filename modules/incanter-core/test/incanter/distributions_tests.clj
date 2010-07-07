@@ -188,9 +188,15 @@
 
     
 ;; tests against incanter.stats, checking for similar behaviour
+;; and other functions
 (deftest beta-distribution-tests
-  (is (= (pdf (beta-distribution 1 2) 0.5) (pdf-beta 0.5 :alpha 1 :beta 2)))
-  (is (= (cdf (beta-distribution 1 2) 0.5) (cdf-beta 0.5 :alpha 1 :beta 2))))
+  (let [dist (beta-distribution 1 2)]
+    (is (= (pdf dist 0.5) (pdf-beta 0.5 :alpha 1 :beta 2)))
+    (is (= (cdf dist 0.5) (cdf-beta 0.5 :alpha 1 :beta 2)))
+
+    
+
+))
 
 (deftest binomial-distribution-tests
   (is (= (pdf (binomial-distribution 20 1/4) 10) (pdf-binomial 10 :prob 1/4 :size 20)))
@@ -217,8 +223,11 @@
   (is (= (cdf (neg-binomial-distribution 20 1/2) 10) (cdf-neg-binomial 10 :prob 1/2 :size 20))))
 
 (deftest normal-distribution-tests
-  (is (= (pdf (normal-distribution -2 (Math/sqrt 0.5)) 1.96) (pdf-normal 1.96 :mean -2 :sd (Math/sqrt 0.5))))
-  (is (= (cdf (normal-distribution -2 (Math/sqrt 0.5)) 1.96) (cdf-normal 1.96 :mean -2 :sd (Math/sqrt 0.5)))))
+  (let [dist (normal-distribution -2 (Math/sqrt 0.5))]
+    (is (= (pdf dist 1.96) (pdf-normal 1.96 :mean -2 :sd (Math/sqrt 0.5))))
+    (is (= (cdf dist 1.96) (cdf-normal 1.96 :mean -2 :sd (Math/sqrt 0.5)))))
+
+)
 
 (deftest poisson-distribution-tests
   (is (= (pdf (poisson-distribution 10) 5) (pdf-poisson 5 :lambda 10)))

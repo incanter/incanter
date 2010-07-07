@@ -118,9 +118,8 @@
 
 	Examples:
 		(cdf [2 1 2 3] 2) ; returns the value 3/4 \n")
-;  (mean [d] "TODO")
-;  (variance [d] "TODO")
-
+  (mean [d] "mean")
+  (variance [d] "variance")
 )
 ;; Notes: other possible methods include moment generating function, transformations/change of vars
 
@@ -147,9 +146,9 @@
   (draw [d] (nth d (rand-int (count d))))
                                         ; (draw [d n] (repeatedly n #(draw d))) 
   (support [d] (set d))
-  ;; (mean [d] (if-not (every? number? d) nil
-  ;;                   (/ (reduce + d)
-  ;;                      (count d))))
+  (mean [d] nil)
+  (variance [d] nil)
+;  (mean [d] (/ (reduce + d) (count d)))
 )
 
 ;; Sets (e.g. #{1 2 3}) are not seqs, so need their own implementation
@@ -158,7 +157,11 @@
   	(pdf [d v] (if (get d v) (/ 1 (count d)) 0))
     (cdf [d v] nil) ; should this throw an exception? ; or just sort ascendingly then find P[X \leq x] (but then what is a comparator is not defined)?
     (draw [d] (nth (support d) (rand-int (count d))))
-    (support [d] (vec d)))
+    (support [d] (vec d))
+    (mean [d] nil) 
+;    (mean [d] (/ (reduce + d) (count d)))
+    (variance [d] nil)
+)
 
 (defn- take-to-first
   "Returns a lazy sequence of successive items from coll up to
@@ -207,23 +210,28 @@
                                     (reduce + (vals d)))))))
                nil))
   (draw [d] (nth (keys d) (roulette-wheel (vals d))))
-  (support [d] (keys d)))
+  (support [d] (keys d))
+;  (mean [d] (/ (reduce + d) (count d)))
+  (mean [d] nil)
+  (variance [d] nil)
+)
 
 ; defrecord expands to have a (contains? ...) (or .contains method) that causes
 ; a reflection warning. Note much to do about that for now. Perhaps it will be
 ; fixed in clojure.core later.
 (defrecord UniformInt [start end]
   Distribution
-  	(pdf [d v] (/ 1 (- end start)))
-		(cdf [d v] (* v (pdf d v)))
-		(draw [d]
-		; for simplicity, cast to BigInt to use the random bitstream
-    ; a better implementation would handle different types differently
+  (pdf [d v] (/ 1 (- end start)))
+  (cdf [d v] (* v (pdf d v)))
+  (draw [d] ; for simplicity, cast to BigInt to use the random bitstream a better implementation would handle different types differently
     	(let [r (bigint (- end start))
-            f #(+ start (BigInteger. (.bitLength r) (Random.)))] ; TODO replace with reused, threadsafe random
-        (loop [candidate (f)] ; rejection sampler, P(accept) > .5, so don't fret
-					(if (< candidate end) candidate (recur (f))))))
-		(support [d] (range start end)))
+              f #(+ start (BigInteger. (.bitLength r) (Random.)))] ; TODO replace with reused, threadsafe random
+          (loop [candidate (f)] ; rejection sampler, P(accept) > .5, so don't fret
+            (if (< candidate end) candidate (recur (f))))))
+  (support [d] (range start end))
+  (mean [d] (/ (reduce + (support d)) (count d)))
+  (variance [d] nil) ; TODO
+)
 
 (defn integer-distribution
 "
@@ -297,10 +305,13 @@
 ; fixed in clojure.core later.
 (defrecord Combination [n k u]
   Distribution
-  	(pdf [d v] (/ 1 (nCk n k)))
-  	(cdf [d v] nil) ; TODO: this requires encoding combinations
-  	(draw [d] (res-sampler n k))
-  	(support [d] (map #(decode-combinadic n k %) (range 0 (nCk n k)))))
+  (pdf [d v] (/ 1 (nCk n k)))
+  (cdf [d v] nil)            ; TODO: this requires encoding combinations
+  (draw [d] (res-sampler n k))
+  (support [d] (map #(decode-combinadic n k %) (range 0 (nCk n k))))
+  (mean [d] nil)
+  (variance [d] nil)
+)
 
 (defn combination-distribution
 "
@@ -404,16 +415,27 @@
 ; quickly using the extenders map. This can be easily pulled out for each distribution
 ; later, and appropriate type hints inserted.
 (defvar- colt-extenders
-	{:pdf (fn [d v] (.pdf d v))
+  {:pdf (fn [d v] (.pdf d v))
    :cdf (fn [d v] (.cdf d v))
    :draw (fn [#^cern.jet.random.tdouble.AbstractDoubleDistribution d] (.nextDouble d))
-   :support (fn [d] [inf-, inf+])})
+   :support (fn [d] [inf-, inf+])
+   :mean (fn [d] nil)
+   :variance (fn [d] nil)})
 
+(defrecord Normal-rec [mean sd]
+  Distribution
+  (pdf [d v] (.pdf (Normal. mean sd (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (Normal. mean sd (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.Normal/staticNextDouble mean sd))
+  (support [d] [inf-, inf+])
+  (mean [d] mean)
+  (variance [d] (* sd sd))
+)
 ; bootstrap by extending the colt object to implement this protocol
 ; future versions could implement a Box-Muller transform in clojure for (draw)
 ; I think clojure.contrib.probabilities would have an example implementation.
 ; I'm interested to know how pdf/cdf are implemented in colt...
-(extend cern.jet.random.tdouble.Normal Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.Normal Distribution colt-extenders)
 
 (defn normal-distribution
 "
@@ -437,11 +459,22 @@
       (pdf (normal-distribution -2 (sqrt 0.5)) 1.96)
 "
 	([] (normal-distribution 0 1))
-  ([mean sd] (Normal. mean sd (DoubleMersenneTwister.))))
+  ([mean sd] (Normal-rec. mean sd)))
 
 ;; distributions created using code and default values from http://github.com/markmfredrickson/incanter/blob/distributions/modules/incanter-core/src/incanter/stats.clj
 
-(extend cern.jet.random.tdouble.Beta Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.Beta Distribution colt-extenders)
+(defrecord Beta-rec [alpha beta]
+  Distribution
+  (pdf [d v] (.pdf (Beta. alpha beta (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (Beta. alpha beta (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.Beta/staticNextDouble alpha beta))
+  (support [d] [0,1])
+  (mean [d] (/ alpha (+ alpha beta)))
+  (variance [d] (/ (* alpha beta)
+                   (* (+ alpha beta)
+                      (+ alpha beta)
+                      (+ alpha beta 1)))))
 (defn beta-distribution
   "Returns a Beta distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -459,9 +492,17 @@
   Example:
     (pdf (beta-distribution 1 2) 0.5)"
   ([] (beta-distribution 1 1))
-  ([alpha beta] (Beta. alpha beta (DoubleMersenneTwister.))))
+  ([alpha beta] (Beta-rec. alpha beta)))
 
-(extend cern.jet.random.tdouble.Binomial Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.Binomial Distribution colt-extenders)
+(defrecord Binomial-rec [n p]
+  Distribution
+  (pdf [d v] (.pdf (Binomial. n p (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (Binomial. n p (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.Binomial/staticNextInt n p))
+  (support [d] (range (+ n 1)))
+  (mean [d] (* n p))
+  (variance [d] (* n p (- 1 p))))
 (defn binomial-distribution
   "Returns a Binomial distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -479,9 +520,17 @@
   Example:
     (pdf (binomial-distribution 20 1/4) 10)"
   ([] (binomial-distribution 1 1/2))
-  ([n p] (Binomial. n p (DoubleMersenneTwister.))))
+  ([n p] (Binomial-rec. n p)))
 
-(extend cern.jet.random.tdouble.ChiSquare Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.ChiSquare Distribution colt-extenders)
+(defrecord ChiSquare-rec [df]
+  Distribution
+  (pdf [d v] (.pdf (ChiSquare. df (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (ChiSquare. df (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.ChiSquare/staticNextDouble df))
+  (support [d] [0,inf+])
+  (mean [d] df)
+  (variance [d] (* 2 df)))
 (defn chisq-distribution
   "Returns a Chi-square distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -498,9 +547,17 @@
   Example:
     (pdf (chisq-distribution 2) 5.0)"
   ([] (chisq-distribution 1))
-  ([df] (ChiSquare. df (DoubleMersenneTwister.))))
+  ([df] (ChiSquare-rec. df)))
 
-(extend cern.jet.random.tdouble.Exponential Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.Exponential Distribution colt-extenders)
+(defrecord Exponential-rec [rate]
+  Distribution
+  (pdf [d v] (.pdf (Exponential. rate (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (Exponential. rate (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.Exponential/staticNextDouble rate))
+  (support [d] [0,inf+])
+  (mean [d] (/ 1 rate))
+  (variance [d] (/ 1 (* rate rate))))
 (defn exponential-distribution
   "Returns a Exponential distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -517,7 +574,7 @@
   Example:
     (pdf (exponential-distribution 1/2) 2.0)"
   ([] (exponential-distribution 1))
-  ([rate] (Exponential. rate (DoubleMersenneTwister.))))
+  ([rate] (Exponential-rec. rate)))
 
 (defrecord F [df1 df2]
   Distribution
@@ -532,7 +589,14 @@
               (/ df1 2)
               (/ df2 2)))
   (draw [d] nil)                        ; TODO
-  (support [d] [0,inf+]))
+  (support [d] [0,inf+])
+  (mean [d] (if (> df2 2)
+              (/ df2 (- df2 2))
+              nil))
+  (variance [d] (if (> df2 4)
+                  (/ (* 2 df2 df2 (+ df1 df2 -2))
+                     (* df1 (- df2 2) (- df2 2) (- df2 4)))))
+)
 
 (defn f-distribution
   "Returns a F-distribution that implements the incanter.distributions.Distribution protocol.
@@ -558,7 +622,10 @@
   (pdf [d v] (.pdf (Gamma. shape rate (DoubleMersenneTwister.)) v))
   (cdf [d v] (Probability/gamma rate shape v)) ; TODO decide on :lower-tail
   (draw [d] (cern.jet.random.tdouble.Gamma/staticNextDouble shape rate))
-  (support [d] [0,inf+]))
+  (support [d] [0,inf+])
+  (mean [d] (* shape rate))
+  (variance [d] (* shape rate rate))
+)
 
 ;(extend cern.jet.random.tdouble.Gamma Distribution colt-extenders)
 (defn gamma-distribution
@@ -580,7 +647,17 @@
   ([] (gamma-distribution 1 1))
   ([shape rate] (Gamma-rec. shape rate)))
 
-(extend cern.jet.random.tdouble.NegativeBinomial Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.NegativeBinomial Distribution colt-extenders)
+(defrecord NegativeBinomial-rec [size prob]
+  Distribution
+  (pdf [d v] (.pdf (NegativeBinomial. size prob (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (NegativeBinomial. size prob (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.NegativeBinomial/staticNextInt size prob))
+  (support [d] [0,inf+])
+  (mean [d] (/ (* size prob)
+               (- 1 prob)))
+  (variance [d] (/ (* size prob)
+                   (* (- 1 prob) (- 1 prob)))))
 (defn neg-binomial-distribution
   "Returns a Negative binomial distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -598,9 +675,17 @@
   Example:
     (pdf (neg-binomial-distribution 20 1/2) 10)"
   ([] (neg-binomial-distribution 10 1/2))
-  ([size prob] (NegativeBinomial. size prob (DoubleMersenneTwister.))))
+  ([size prob] (NegativeBinomial-rec. size prob)))
 
-(extend cern.jet.random.tdouble.Poisson Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.Poisson Distribution colt-extenders)
+(defrecord Poisson-rec [lambda]
+  Distribution
+  (pdf [d v] (.pdf (Poisson. lambda (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (Poisson. lambda (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.Poisson/staticNextInt lambda))
+  (support [d] [0,inf+])
+  (mean [d] lambda)
+  (variance [d] lambda))
 (defn poisson-distribution
   "Returns a Poisson distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -617,9 +702,19 @@
   Example:
     (pdf (poisson-distribution 10) 5)"
   ([] (poisson-distribution 1))
-  ([lambda] (Poisson. lambda (DoubleMersenneTwister.))))
+  ([lambda] (Poisson-rec. lambda)))
 
-(extend cern.jet.random.tdouble.StudentT Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.StudentT Distribution colt-extenders)
+(defrecord StudentT-rec [df]
+  Distribution
+  (pdf [d v] (.pdf (StudentT. df (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (StudentT. df (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.StudentT/staticNextDouble df))
+  (support [d] [inf-,inf+])
+  (mean [d] (if (> df 1) 0 nil))
+  (variance [d] (cond (> df 2) (/ df (- df 2))
+                      (and (> df 1) (<= df 2)) inf+
+                      :else nil)))
 (defn t-distribution
   "Returns a Student-t distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -636,9 +731,19 @@
   Example:
     (pdf (t-distribution 10) 1.2)"
   ([] (t-distribution 1))
-  ([df] (StudentT. df (DoubleMersenneTwister.))))
+  ([df] (StudentT-rec. df)))
 
-(extend cern.jet.random.tdouble.DoubleUniform Distribution colt-extenders)
+;(extend cern.jet.random.tdouble.DoubleUniform Distribution colt-extenders)
+(defrecord DoubleUniform-rec [min max]
+  Distribution
+  (pdf [d v] (.pdf (DoubleUniform. min max (DoubleMersenneTwister.)) v))
+  (cdf [d v] (.cdf (DoubleUniform. min max (DoubleMersenneTwister.)) v))
+  (draw [d] (cern.jet.random.tdouble.DoubleUniform/staticNextDouble))
+  (support [d] [min,max])
+  (mean [d] (/ (+ min max)
+               2))
+  (variance [d] (/ (* (- max min) (- max min))
+                   12)))
 (defn uniform-distribution
   "Returns a Uniform distribution that implements the incanter.distributions.Distribution protocol.
 
@@ -656,4 +761,4 @@
   Example:
     (pdf (uniform-distribution 1.0 10.0) 5)"
   ([] (uniform-distribution 0.0 1.0)) ; since "0 1" not implicitly promoted, otheriwse no matching ctor...
-  ([min max] (DoubleUniform. min max (DoubleMersenneTwister.))))
+  ([min max] (DoubleUniform-rec. min max)))
