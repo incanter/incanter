@@ -232,7 +232,31 @@
      ;; change it back to the default
      (set-theme chart :default)
 
-   
+
+     ;; Example using JFreeTheme
+     (use '(incanter core stats charts datasets))
+
+     (import '(org.jfree.chart StandardChartTheme)
+             '(org.jfree.chart.plot DefaultDrawingSupplier)
+             '(java.awt Color))
+
+     (def all-red-theme
+       (doto
+         (StandardChartTheme/createJFreeTheme)
+         (.setDrawingSupplier
+         (proxy [DefaultDrawingSupplier] []
+           (getNextPaint [] Color/red)))))
+
+     (def data (get-dataset :airline-passengers))
+
+     (def chart (bar-chart :month :passengers :group-by :year :legend true :data data))
+
+     (doto chart
+       ;; has no effect
+       (set-theme all-red-theme)
+       view)
+
+
     References:
        http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html
        http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html 
