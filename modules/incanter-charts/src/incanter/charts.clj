@@ -41,6 +41,7 @@
             (org.jfree.chart ChartFactory
                              ChartUtilities
                              ChartFrame
+			     ChartTheme
 			     StandardChartTheme)
             (org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
@@ -250,6 +251,8 @@
 		    (cond
 		     (= theme :bw)
 		       set-theme-bw
+		     (instance? ChartTheme theme)
+		       #(.apply theme %)  
 		     :default
 		       set-theme-default))
 	   ;; bar-painter
