@@ -586,7 +586,7 @@ Examples:
     view)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d1696d0094b06450ccbe99257ee84bd3c6f99bfb/modules/incanter-charts/src/incanter/charts.clj#L3271" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/3c2c6ea6778554158a969d32a3e7c701f891986b/modules/incanter-charts/src/incanter/charts.clj#L3295" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1430,7 +1430,7 @@ References:
    (def cw2 (view chart2))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d1696d0094b06450ccbe99257ee84bd3c6f99bfb/modules/incanter-charts/src/incanter/charts.clj#L61" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/3c2c6ea6778554158a969d32a3e7c701f891986b/modules/incanter-charts/src/incanter/charts.clj#L61" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1512,6 +1512,30 @@ Examples:
   (set-theme chart :default)
 
 
+  ;; Example using JFreeTheme
+  (use '(incanter core stats charts datasets))
+
+  (import '(org.jfree.chart StandardChartTheme)
+          '(org.jfree.chart.plot DefaultDrawingSupplier)
+          '(java.awt Color))
+
+  (def all-red-theme
+    (doto
+      (StandardChartTheme/createJFreeTheme)
+      (.setDrawingSupplier
+      (proxy [DefaultDrawingSupplier] []
+        (getNextPaint [] Color/red)))))
+
+  (def data (get-dataset :airline-passengers))
+
+  (def chart (bar-chart :month :passengers :group-by :year :legend true :data data))
+
+  (doto chart
+    ;; has no effect
+    (set-theme all-red-theme)
+    view)
+
+
  References:
     <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html</a>
     <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html</a> </pre>
@@ -1589,7 +1613,7 @@ Examples:
 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d1696d0094b06450ccbe99257ee84bd3c6f99bfb/modules/incanter-charts/src/incanter/charts.clj#L144" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/3c2c6ea6778554158a969d32a3e7c701f891986b/modules/incanter-charts/src/incanter/charts.clj#L144" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
