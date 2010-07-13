@@ -15,7 +15,7 @@
 
 ;; CHANGE LOG
 
-(ns #^{:doc "Distributions. TODO: provide a useful string" :author "Mark M. Fredrickson"}
+(ns #^{:doc "Probability functions (pdf, cdf, draw, etc.) for common distributions, and for collections, sets, and maps." :author "Mark M. Fredrickson and William Leung"}
 	incanter.distributions
   (:import java.util.Random
            (cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT)
@@ -136,31 +136,47 @@
   [d v]
 	(reduce + (map #(pdf d %) (filter #(>= v %) (support d)))))
 
-;(defn- draw-nr)
-
 ;; Extending all sequence types to be distributions
 (extend-type clojure.lang.Sequential
   Distribution
   (pdf [d v] (get (tabulate d) v 0))
-  (cdf [d v] (simple-cdf d v))
+  (cdf [d v] (simple-cdf d v)) ; TODO check comparable elements
   (draw [d] (nth d (rand-int (count d))))
                                         ; (draw [d n] (repeatedly n #(draw d))) 
   (support [d] (set d))
-  (mean [d] nil)
-  (variance [d] nil)
-;  (mean [d] (/ (reduce + d) (count d)))
+  (mean [d] (if (or (empty? d)
+                    (not (every? #(isa? (class %) java.lang.Number) d)))
+              nil
+              (/ (reduce + d)
+                 (count d))))
+  (variance [d] (if (or (empty? d)
+                        (not (every? #(isa? (class %) java.lang.Number) d)))
+                  nil
+                  (let [mu (mean d)]
+                    (/ (reduce + (map #(* (- % mu) (- % mu)) d))
+                       (count d)))))
 )
 
-;; Sets (e.g. #{1 2 3}) are not seqs, so need their own implementation
-(extend-type clojure.lang.PersistentHashSet
-	Distribution
-  	(pdf [d v] (if (get d v) (/ 1 (count d)) 0))
-    (cdf [d v] nil) ; should this throw an exception? ; or just sort ascendingly then find P[X \leq x] (but then what is a comparator is not defined)?
-    (draw [d] (nth (support d) (rand-int (count d))))
-    (support [d] (vec d))
-    (mean [d] nil) 
-;    (mean [d] (/ (reduce + d) (count d)))
-    (variance [d] nil)
+;; Sets (e.g. #{1 2 3}) are not seqs, so they need their own implementation
+(extend-type clojure.lang.APersistentSet
+  Distribution
+  (pdf [d v] (if (get d v) (/ 1 (count d)) 0))
+  (cdf [d v] (if-not (isa? (class d) clojure.lang.PersistentTreeSet)
+               nil
+               (cdf (vec d) v)))
+  (draw [d] (nth (support d) (rand-int (count d))))
+  (support [d] d)
+  (mean [d] (if (or (empty? d)
+                    (not (every? #(isa? (class %) java.lang.Number) d)))
+              nil
+              (/ (reduce + d)
+                 (count d))))
+  (variance [d] (if (or (empty? d)
+                        (not (every? #(isa? (class %) java.lang.Number) d)))
+                  nil
+                  (let [mu (mean d)]
+                    (/ (reduce + (map #(* (- % mu) (- % mu)) d))
+                       (count d)))))
 )
 
 (defn- take-to-first
@@ -197,7 +213,8 @@
   (pdf [d v] (if-not (contains? d v)
                0
                (/ (get d v) (reduce + (vals d)))))
-  (cdf [d v] (if (instance? clojure.lang.PersistentTreeMap d)
+  (cdf [d v] (if-not (isa? (class d) clojure.lang.PersistentTreeMap) ; isa? stronger than instance?
+               nil
                (let [nd (count (support d))
                      compd (.comparator d)
                      fkey (first (keys d))]
@@ -207,13 +224,24 @@
                                (if-not (contains? d v)
                                  (if (= -1 (.compare compd v fkey)) 0 1)
                                  (/ (reduce + (vals upto))
-                                    (reduce + (vals d)))))))
-               nil))
+                                    (reduce + (vals d)))))))))
   (draw [d] (nth (keys d) (roulette-wheel (vals d))))
   (support [d] (keys d))
-;  (mean [d] (/ (reduce + d) (count d)))
-  (mean [d] nil)
-  (variance [d] nil)
+  (mean [d] (if (empty? d)
+              nil
+              (let [vs (vals d)]
+                (if-not (every? #(isa? (class %) java.lang.Number) vs)
+                  nil
+                  (/ (reduce + vs)
+                     (count d))))))
+  (variance [d] (if (empty? d)
+                  nil
+                  (let [vs (vals d)]
+                    (if-not (every? #(isa? (class %) java.lang.Number) vs)
+                      nil
+                      (let [mu (mean d)]
+                        (/ (reduce + (map #(* (- (val %) mu) (- (val %) mu)) d))
+                           (count d)))))))
 )
 
 ; defrecord expands to have a (contains? ...) (or .contains method) that causes
@@ -229,8 +257,12 @@
           (loop [candidate (f)] ; rejection sampler, P(accept) > .5, so don't fret
             (if (< candidate end) candidate (recur (f))))))
   (support [d] (range start end))
-  (mean [d] (/ (reduce + (support d)) (count d)))
-  (variance [d] nil) ; TODO
+  (mean [d] (/ (reduce + (support d))
+               (- end start)))
+  (variance [d] (let [vals (support d)
+                      mu (mean vals)]
+                  (/ (reduce + (map #(* (- % mu) (- % mu)) vals))
+                     (- end start))))
 )
 
 (defn integer-distribution
