@@ -76,6 +76,8 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/integer-distribution">integer-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/mean">mean</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/neg-binomial-distribution">neg-binomial-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/normal-distribution">normal-distribution</a>
@@ -84,6 +86,8 @@ namespace.
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/poisson-distribution">poisson-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/roulette-wheel">roulette-wheel</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/support">support</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/t-distribution">t-distribution</a>
@@ -91,6 +95,8 @@ namespace.
       <a href="#incanter.distributions/test-statistic-distribution">test-statistic-distribution</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.distributions/uniform-distribution">uniform-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/variance">variance</a>
     </div>
     <br />
   </div>
@@ -98,14 +104,14 @@ namespace.
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">distributions</span>
   <span id="branch-name">(master branch)</span></h1>
-<span id="author-line">by <span id="author-name">Mark M. Fredrickson</span><br /></span>
+<span id="author-line">by <span id="author-name">Mark M. Fredrickson and William Leung</span><br /></span>
 <br />Usage:
 <pre>
 (ns your-namespace
   (:require <span id="long-name">incanter.distributions</span>))
 </pre><pre>
 </pre><h2>Overview</h2>
-<pre id="namespace-docstr">Distributions. TODO: provide a useful string</pre>
+<pre id="namespace-docstr">Probability functions (pdf, cdf, draw, etc.) for common distributions, and for collections, sets, and maps.</pre>
 
 
 <br />
@@ -138,7 +144,7 @@ namespace.
 		(cdf [2 1 2 3] 2) ; returns the value 3/4 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L31" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L31" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -164,7 +170,7 @@ Example:
   (pdf (beta-distribution 1 2) 0.5)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L389" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L510" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -190,7 +196,7 @@ Example:
   (pdf (binomial-distribution 20 1/4) 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L409" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L538" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -239,7 +245,7 @@ Example:
   (pdf (chisq-distribution 2) 5.0)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L429" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L566" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -271,7 +277,7 @@ Example:
 		</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L249" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L348" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -316,7 +322,7 @@ Example:
   (pdf (exponential-distribution 1/2) 2.0)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L448" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L593" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -342,7 +348,7 @@ Example:
   (pdf (f-distribution 5 2) 1.0)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L481" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L633" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -368,7 +374,7 @@ Example:
   (pdf (gamma-distribution 1 2) 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L508" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L663" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -406,7 +412,18 @@ Example:
 		(draw (integer-distribution (bit-shift-left 2 1000))) ; probably a very large value</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L172" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L268" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/mean">mean</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (mean d)
+</pre>
+  <pre id="var-docstr">mean</pre>
+  
+  
+  
 </div><div id="var-entry">
   <br />
   <hr />
@@ -432,7 +449,7 @@ Example:
   (pdf (neg-binomial-distribution 20 1/2) 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L528" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L693" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -462,7 +479,7 @@ Example:
       (pdf (normal-distribution -2 (sqrt 0.5)) 1.96)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L362" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L472" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -511,7 +528,18 @@ Example:
   (pdf (poisson-distribution 10) 5)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L548" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L721" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/roulette-wheel">roulette-wheel</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (roulette-wheel freqs)
+</pre>
+  <pre id="var-docstr">Perform a roulette wheel selection given a list of frequencies</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L195" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -526,7 +554,7 @@ Example:
   Returns the support of the probability distribution d.
 	For discrete distributions, the support is a set (i.e. #{1 2 3}).
 	For continuous distributions, the support is a 2 element vector
-	discribing the range. For example, the uniform distribution over
+	describing the range. For example, the uniform distribution over
 	the unit interval would return the vector [0 1].
 
 	This function is marked as experimental to note that the output
@@ -569,7 +597,7 @@ Example:
   (pdf (t-distribution 10) 1.2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L567" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L750" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -624,7 +652,7 @@ Example:
 		</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L280" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L379" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -650,7 +678,18 @@ Example:
   (pdf (uniform-distribution 1.0 10.0) 5)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f3befbdecda599896f29151884530cd490643f52/modules/incanter-core/src/incanter/distributions.clj#L586" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L779" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/variance">variance</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (variance d)
+</pre>
+  <pre id="var-docstr">variance</pre>
+  
+  
+  
 </div>
 
 
