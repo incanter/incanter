@@ -16,7 +16,7 @@
 
 
 
-(ns #^{:doc "This is the core charting library for Incanter.
+(ns ^{:doc "This is the core charting library for Incanter.
             It provides basic scatter plots, histograms, box plots
             xy plots, bar charts, line charts, as well as
             specialized charts like trace plots and Bland-Altman
@@ -27,8 +27,7 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  ;(:gen-class)
-  (:use [incanter.core :only ($ matrix? to-list plus minus div group-by
+  (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
                               bind-columns view save $group-by conj-cols 
 			      grid-apply set-data)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
@@ -42,6 +41,7 @@
             (org.jfree.chart ChartFactory
                              ChartUtilities
                              ChartFrame
+			     ChartTheme
 			     StandardChartTheme)
             (org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
@@ -56,6 +56,158 @@
                                          XYTextAnnotation
                                          XYPolygonAnnotation)))
 
+
+
+(defmulti set-background-default 
+"
+
+  Examples:
+    (use '(incanter core stats charts datasets))
+
+    (doto (histogram (sample-normal 1000) :title (str :Test-Tittle))
+      set-theme-bw
+      view)
+
+ 
+    (doto (histogram (sample-normal 1000))
+      set-background-default
+      (add-histogram (sample-normal 1000 :mean 1))
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (set-stroke :dash 5)
+      (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-background-default
+      (set-stroke :dash 5)
+      (add-function sin 0 25)
+      view)
+
+
+    (doto (xy-plot :speed :dist :data (get-dataset :cars) :legend true)
+      set-background-default
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-background-default
+      view)
+
+   
+    (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                    :legend true)
+      view set-background-default
+      (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+      (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))
+
+
+    (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-background-default
+      (add-categories [:a :b :c] [5 25 40]))
+  
+
+    (doto (line-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-background-default
+      (add-categories [:a :b :c] [5 25 40]))
+ 
+    ;; time-series-plot
+    (def epoch 0)
+    (defn num-years-to-milliseconds [x]
+      (* 365 24 60 60 1000 x))
+    (def dates (map num-years-to-milliseconds (range 100)))
+    (def chart1 (time-series-plot dates (range 100)))
+    (def cw1 (view chart1))
+    (add-lines chart1 dates (mult 1/2 (range 100)))
+
+    (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))
+    (def cw2 (view chart2))
+
+
+"
+(fn [chart] (type (.getPlot chart))))
+
+
+(defmulti set-theme-default
+  (fn [chart & options] (type (-> chart .getPlot .getDataset))))
+
+
+(defmulti set-theme-bw 
+"
+
+  Examples:
+    (use '(incanter core stats charts datasets))
+
+    (doto (histogram (sample-normal 1000))
+      set-theme-bw
+      view)
+
+ 
+    (doto (histogram (sample-normal 1000))
+      set-theme-bw
+      (add-histogram (sample-normal 1000 :mean 1))
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (set-stroke :dash 5)
+      (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))
+      view)
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (set-stroke :dash 5)
+      (add-function sin 0 25)
+      view)
+
+
+    (doto (xy-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      view)
+
+
+    (doto (scatter-plot :speed :dist :data (get-dataset :cars))
+      set-theme-bw
+      (add-lines :speed :dist :data (get-dataset :cars))
+      view)
+
+   
+    (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+                    :legend true)
+      view
+      (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+      (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+      set-theme-bw)
+
+
+    (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-theme-bw
+      (add-categories [:a :b :c] [5 25 40]))
+  
+
+    (doto (line-chart [:a :b :c] [10 20 30] :legend true)
+      view
+      set-theme-bw
+      (add-categories [:a :b :c] [5 25 40]))
+ 
+
+"
+(fn [chart & options] (type (-> chart .getPlot .getDataset))))
 
 
 
@@ -80,25 +232,68 @@
      ;; change it back to the default
      (set-theme chart :default)
 
-   
+
+     ;; Example using JFreeTheme
+     (use '(incanter core stats charts datasets))
+
+     (import '(org.jfree.chart StandardChartTheme)
+             '(org.jfree.chart.plot DefaultDrawingSupplier)
+             '(java.awt Color))
+
+     (def all-red-theme
+       (doto
+         (StandardChartTheme/createJFreeTheme)
+         (.setDrawingSupplier
+         (proxy [DefaultDrawingSupplier] []
+           (getNextPaint [] Color/red)))))
+
+     (def data (get-dataset :airline-passengers))
+
+     (def chart (bar-chart :month :passengers :group-by :year :legend true :data data))
+
+     (doto chart
+       ;; has no effect
+       (set-theme all-red-theme)
+       view)
+
+
     References:
        http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html
        http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html 
 
 "
   ([chart theme]
-     (let [_theme (if (keyword? theme) 
+     (let [built-in-theme? (some #{theme} #{:dark :legacy :gradient})
+	   _theme (if built-in-theme? 
 		    (cond
-		      (= theme :dark)
-		        (StandardChartTheme/createDarknessTheme)
-		      (= theme :legacy)
-		        (StandardChartTheme/createLegacyTheme)
-			:default
-			  (StandardChartTheme/createJFreeTheme))
-		    theme)]
+		     (= theme :dark)
+		       (StandardChartTheme/createDarknessTheme)
+		     (= theme :legacy)
+		       (StandardChartTheme/createLegacyTheme)
+		     :default
+		       (StandardChartTheme/createJFreeTheme))
+		    (cond
+		     (= theme :bw)
+		       set-theme-bw
+		     (instance? ChartTheme theme)
+		       #(.apply theme %)  
+		     :default
+		       set-theme-default))
+	   ;; bar-painter
+	   ;; (org.jfree.chart.renderer.xy.StandardXYBarPainter.)
+	   ]
        (do
-	 (.setShadowVisible _theme false)
-	 (.apply _theme chart)
+	 (if built-in-theme? 
+	   (do
+	     (.setShadowVisible _theme false)
+	     (.apply _theme chart))
+	   (do
+	     ;; (doto (-> chart .getPlot .getRenderer)
+;; 	       (.setBarPainter bar-painter)
+;; 	       (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+;; 	       (.setShadowVisible false)
+;; 	       (.setDrawBarOutline true))
+	     (_theme chart)))
 	 chart))))
 
 
@@ -114,6 +309,7 @@
 	  series-lab (or (:series-label opts) (str 'x))]
       (do
         (.addSeries (.getDataset data-plot) series-lab (double-array _x) nbins)
+	(.setSeriesOutlinePaint (-> chart .getPlot .getRenderer) n java.awt.Color/lightGray)
         (.setSeriesRenderingOrder data-plot org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
         (.fireChartChanged chart)
         chart))))
@@ -301,8 +497,35 @@
 
 
 
+(defmulti add-lines* (fn [chart x y & options] (type (-> chart .getPlot .getDataset))))
 
-(defn add-lines*
+
+(defmethod add-lines* org.jfree.data.xy.XYSeriesCollection
+  ([chart x y & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	   _x (if (coll? x) (to-list x) ($ x data))
+	   _y (if (coll? y) (to-list y) ($ y data))
+	   data-plot (.getPlot chart)
+	   n (.getDatasetCount data-plot)
+	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+	   data-series (XYSeries. series-lab)
+           line-renderer (XYLineAndShapeRenderer. true false)
+           ;; data-set (.getDataset data-plot)
+	   data-set (XYSeriesCollection.)]
+    (do
+      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+      (.addSeries data-set data-series)
+      (doto data-plot
+	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+	(.setDataset n data-set)
+	(.setRenderer n line-renderer))
+      chart))))
+
+
+;; doesn't work
+(defmethod add-lines* org.jfree.data.statistics.HistogramDataset
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
 	   data (:data opts)
@@ -316,11 +539,12 @@
            data-set (XYSeriesCollection.)]
     (do
       (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
-      (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-      (.setDatasetRenderingOrder data-plot org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
       (.addSeries data-set data-series)
-      (.setDataset data-plot (.getDatasetCount data-plot) data-set)
-      (.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)
+      (doto data-plot
+	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)     
+	(.setDataset n data-set)
+	(.setRenderer n line-renderer))
       chart))))
 
 
@@ -466,8 +690,8 @@
 	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
 	(.addSeries data-set data-series)
-	(.setDataset data-plot (.getDatasetCount data-plot) data-set)
-	(.setRenderer data-plot (dec (.getDatasetCount data-plot)) line-renderer)
+	(.setDataset data-plot n data-set)
+	(.setRenderer data-plot n line-renderer)
 	chart))))
 
 
@@ -702,7 +926,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
 	  __x (if x-groups (first x-groups) _x)
            __y (if y-groups (first y-groups) _y)
-	  main-title (or (:main-title opts) "XY Plot")
+	  main-title (or (:main-title opts) "")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts) 
@@ -794,7 +1018,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "XY Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) 
@@ -849,7 +1073,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Time Series Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -883,7 +1107,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
           __x (if x-groups (first x-groups) _x)
           __y (if y-groups (first y-groups) _y)
-	  main-title (or (:title opts) "Scatter Plot")
+	  main-title (or (:title opts) "")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts) 
@@ -912,6 +1136,8 @@
 			    (nth x-groups i)
 			    (nth y-groups i)
 			    :series-label (format "%s, %s (%s)" 'x 'y i))))]
+      (.setSeriesShape (-> chart .getPlot .getRenderer) 0 (java.awt.geom.Ellipse2D$Double. -3 -3 6 6))
+      (.setSeriesShape (-> chart .getPlot .getRenderer) 1 (java.awt.geom.Rectangle2D$Double. -3 -3 6 6))
       (set-theme chart theme)
       chart)))
 
@@ -930,6 +1156,9 @@
     :legend (default false) prints legend
     :series-label (default x expression)
     :group-by (default nil) -- a vector of values used to group the x and y values into series.
+    :density? (default false) -- chart will represent density instead of frequency.
+    :nbins (default 10) -- number of bins (i.e. bars)
+    :gradient? (default false) -- use gradient on bars
 
   See also:
     view, save, add-points, add-lines
@@ -979,7 +1208,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Scatter Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1003,7 +1232,7 @@
           nbins (or (:nbins opts) 10)
 	  theme (or (:theme opts) :default)
           density? (true? (:density opts))
-          main-title (or (:title opts) "Histogram")
+          main-title (or (:title opts) "")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts)
                      (if density? "Density" "Frequency"))
@@ -1013,15 +1242,17 @@
       (do
         (.addSeries dataset series-lab (double-array _x) nbins)
         (when density? (.setType dataset org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1))
-        (set-theme (org.jfree.chart.ChartFactory/createHistogram
-		    main-title
-		    x-lab
-		    y-lab
-		    dataset
-		    org.jfree.chart.plot.PlotOrientation/VERTICAL
-		    legend?			; no legend
-		    true				; tooltips
-		    false) theme)))))
+        (let [chart (-> (org.jfree.chart.ChartFactory/createHistogram
+			  main-title
+			  x-lab
+			  y-lab
+			  dataset
+			  org.jfree.chart.plot.PlotOrientation/VERTICAL
+			  legend?		; no legend
+			  true			; tooltips
+			  false)
+			(set-theme theme))]
+	  chart)))))
 
 
 
@@ -1078,7 +1309,7 @@
 "
   ([x & options]
     `(let [opts# ~(if options (apply assoc {} options) {})
-           main-title# (or (:title opts#) "Histogram")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
 	   series-lab# (or (:series-label opts#) (str '~x))
            args# (concat [~x] (apply concat (seq (apply assoc opts# 
@@ -1096,7 +1327,7 @@
 	  data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-	  main-title (or (:title opts) "Line Chart")
+	  main-title (or (:title opts) "")
 	  group-by (when (:group-by opts) 
 		     (if (coll? (:group-by opts)) 
 		       (to-list (:group-by opts))
@@ -1151,6 +1382,7 @@
     :series-label
     :group-by (default nil) -- a vector of values used to group the values into
                                series within each category.
+    :gradient? (default false) -- use gradient on bars
 
 
   See also:
@@ -1213,7 +1445,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Line Chart")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1236,7 +1468,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "Bar Chart")
+           main-title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts) 
 		     (if (coll? (:group-by opts)) 
@@ -1355,7 +1587,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Bar Chart")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1371,13 +1603,425 @@
 
 
 
+
+(defn area-chart*
+  ([categories values & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+           main-title (or (:title opts) "")
+	   theme (or (:theme opts) :default)
+           _group-by (when (:group-by opts) 
+		     (if (coll? (:group-by opts)) 
+		       (to-list (:group-by opts))
+		       ($ (:group-by opts) data)))
+           x-label (or (:x-label opts) (str 'categories))
+           y-label (or (:y-label opts) (str 'values))
+	   series-label (:series-label opts)
+           vertical? (if (false? (:vertical opts)) false true)
+           legend? (true? (:legend opts))
+           dataset (DefaultCategoryDataset.)
+           chart (org.jfree.chart.ChartFactory/createAreaChart
+                     main-title
+                     x-label
+                     y-label
+                     dataset
+                     (if vertical?
+                       org.jfree.chart.plot.PlotOrientation/VERTICAL
+                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                     legend?
+                     true
+                     false)]
+        (do
+          (doseq [i (range 0 (count _values))] 
+	    (.addValue dataset
+		       (nth _values i)
+		       (cond 
+			_group-by
+			  (nth _group-by i)
+			series-label
+			  series-label
+			:else
+			  (str 'values))
+		       (nth _categories i)))
+          (set-theme chart theme)
+	  chart))))
+
+
+
+(defmacro area-chart
+" Returns a JFreeChart object representing an area-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default '') main title
+    :x-label (default 'Categories')
+    :y-label (default 'Value')
+    :series-label
+    :legend (default false) prints legend
+    :vertical (default true) the orientation of the plot
+    :group-by (default nil) -- a vector of values used to group the values into
+                               series within each category.
+
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (with-data (get-dataset :co2)
+      (view (area-chart :Type :uptake
+                       :title \"CO2 Uptake\"
+                       :group-by :Treatment
+                       :x-label \"Grass Types\" :y-label \"Uptake\"
+                      :legend true)))
+
+
+    (def data (get-dataset :airline-passengers))
+    (view (area-chart :year :passengers :group-by :month :legend true :data data))
+
+    (with-data  (get-dataset :airline-passengers)
+      (view (area-chart :month :passengers :group-by :year :legend true)))
+
+
+    (def data (get-dataset :austres))
+    (view data)
+    (def plot (area-chart :year :population :group-by :quarter :legend true :data data))
+    (view plot)
+    (save plot \"/tmp/austres_plot.png\" :width 1000)
+    (view \"file:///tmp/austres_plot.png\")
+
+
+    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def values (sample-uniform 12 :integers true :max 100))
+    (view (area-chart years values :group-by seasons :legend true))
+
+    (view (area-chart [\"a\" \"b\" \"c\"] [10 20 30]))
+    (view (area-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
+                     :legend true
+                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
+
+    ;; add a series label
+    (def plot (area-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
+    (view plot) 
+    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
+ 
+    (view (area-chart (sample \"abcdefghij\" :size 10 :replacement true)
+                     (sample-uniform 10 :max 50) :legend true))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([categories values & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "")
+           x-lab# (or (:x-label opts#) (str '~categories))
+           y-lab# (or (:y-label opts#) (str '~values))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s (0)" '~categories) 
+						   (format "%s" '~categories)))
+	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply area-chart* args#))))
+
+
+(defn stacked-area-chart*
+  ([categories values & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+           main-title (or (:title opts) "")
+	   theme (or (:theme opts) :default)
+           _group-by (when (:group-by opts) 
+		     (if (coll? (:group-by opts)) 
+		       (to-list (:group-by opts))
+		       ($ (:group-by opts) data)))
+           x-label (or (:x-label opts) (str 'categories))
+           y-label (or (:y-label opts) (str 'values))
+	   series-label (:series-label opts)
+           vertical? (if (false? (:vertical opts)) false true)
+           legend? (true? (:legend opts))
+           dataset (DefaultCategoryDataset.)
+           chart (org.jfree.chart.ChartFactory/createStackedAreaChart
+                     main-title
+                     x-label
+                     y-label
+                     dataset
+                     (if vertical?
+                       org.jfree.chart.plot.PlotOrientation/VERTICAL
+                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                     legend?
+                     true
+                     false)]
+        (do
+          (doseq [i (range 0 (count _values))] 
+	    (.addValue dataset
+		       (nth _values i)
+		       (cond 
+			_group-by
+			  (nth _group-by i)
+			series-label
+			  series-label
+			:else
+			  (str 'values))
+		       (nth _categories i)))
+          (set-theme chart theme)
+	  chart))))
+
+
+
+(defmacro stacked-area-chart
+" Returns a JFreeChart object representing an stacked-area-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default '') main title
+    :x-label (default 'Categories')
+    :y-label (default 'Value')
+    :series-label
+    :legend (default false) prints legend
+    :vertical (default true) the orientation of the plot
+    :group-by (default nil) -- a vector of values used to group the values into
+                               series within each category.
+
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (with-data (get-dataset :co2)
+      (view (stacked-area-chart :Type :uptake
+                       :title \"CO2 Uptake\"
+                       :group-by :Treatment
+                       :x-label \"Grass Types\" :y-label \"Uptake\"
+                      :legend true)))
+
+
+    (def data (get-dataset :airline-passengers))
+    (view (stacked-area-chart :year :passengers :group-by :month :legend true :data data))
+
+    (with-data  (get-dataset :airline-passengers)
+      (view (stacked-area-chart :month :passengers :group-by :year :legend true)))
+
+
+    (def data (get-dataset :austres))
+    (view data)
+    (def plot (stacked-area-chart :year :population :group-by :quarter :legend true :data data))
+    (view plot)
+    (save plot \"/tmp/austres_plot.png\" :width 1000)
+    (view \"file:///tmp/austres_plot.png\")
+
+
+    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def values (sample-uniform 12 :integers true :max 100))
+    (view (stacked-area-chart years values :group-by seasons :legend true))
+
+    (view (stacked-area-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
+                     :legend true
+                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([categories values & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "")
+           x-lab# (or (:x-label opts#) (str '~categories))
+           y-lab# (or (:y-label opts#) (str '~values))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s (0)" '~categories) 
+						   (format "%s" '~categories)))
+	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply stacked-area-chart* args#))))
+
+
+
+(defn stacked-bar-chart*
+  ([categories values & options]
+     (let [opts (when options (apply assoc {} options))
+	   data (:data opts)
+	  _values (if (coll? values) (to-list values) ($ values data))
+	  _categories (if (coll? categories) (to-list categories) ($ categories data))
+           main-title (or (:title opts) "")
+	   theme (or (:theme opts) :default)
+           _group-by (when (:group-by opts) 
+		     (if (coll? (:group-by opts)) 
+		       (to-list (:group-by opts))
+		       ($ (:group-by opts) data)))
+           x-label (or (:x-label opts) (str 'categories))
+           y-label (or (:y-label opts) (str 'values))
+	   series-label (:series-label opts)
+           vertical? (if (false? (:vertical opts)) false true)
+           legend? (true? (:legend opts))
+           dataset (DefaultCategoryDataset.)
+           chart (org.jfree.chart.ChartFactory/createStackedBarChart
+                     main-title
+                     x-label
+                     y-label
+                     dataset
+                     (if vertical?
+                       org.jfree.chart.plot.PlotOrientation/VERTICAL
+                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                     legend?
+                     true
+                     false)]
+        (do
+          (doseq [i (range 0 (count _values))] 
+	    (.addValue dataset
+		       (nth _values i)
+		       (cond 
+			_group-by
+			  (nth _group-by i)
+			series-label
+			  series-label
+			:else
+			  (str 'values))
+		       (nth _categories i)))
+          (set-theme chart theme)
+	  chart))))
+
+
+(defmacro stacked-bar-chart
+" Returns a JFreeChart object representing an stacked-bar-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default '') main title
+    :x-label (default 'Categories')
+    :y-label (default 'Value')
+    :series-label
+    :legend (default false) prints legend
+    :vertical (default true) the orientation of the plot
+    :group-by (default nil) -- a vector of values used to group the values into
+                               series within each category.
+
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (with-data (get-dataset :co2)
+      (view (stacked-bar-chart :Type :uptake
+                       :title \"CO2 Uptake\"
+                       :group-by :Treatment
+                       :x-label \"Grass Types\" :y-label \"Uptake\"
+                      :legend true)))
+
+
+    (def data (get-dataset :airline-passengers))
+    (view (stacked-bar-chart :year :passengers :group-by :month :legend true :data data))
+
+    (with-data  (get-dataset :airline-passengers)
+      (view (stacked-bar-chart :month :passengers :group-by :year :legend true)))
+
+
+    (def data (get-dataset :austres))
+    (view data)
+    (def plot (stacked-bar-chart :year :population :group-by :quarter :legend true :data data))
+    (view plot)
+    (save plot \"/tmp/austres_plot.png\" :width 1000)
+    (view \"file:///tmp/austres_plot.png\")
+
+
+    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def values (sample-uniform 12 :integers true :max 100))
+    (view (stacked-bar-chart years values :group-by seasons :legend true))
+
+    (view (stacked-bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))
+    (view (stacked-bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]
+                     :legend true
+                     :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))
+
+    ;; add a series label
+    (def plot (stacked-bar-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))
+    (view plot) 
+    (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")  
+ 
+    (view (stacked-bar-chart (sample \"abcdefghij\" :size 10 :replacement true)
+                     (sample-uniform 10 :max 50) :legend true))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+"
+  ([categories values & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#) 
+           main-title# (or (:title opts#) "")
+           x-lab# (or (:x-label opts#) (str '~categories))
+           y-lab# (or (:y-label opts#) (str '~values))
+           series-lab# (or (:series-label opts#) (if group-by#
+						   (format "%s (0)" '~categories) 
+						   (format "%s" '~categories)))
+	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts# 
+							   [:group-by group-by# 
+							    :main-title main-title# 
+							    :x-label x-lab# 
+							    :y-label y-lab# 
+							    :series-label series-lab#]))))]
+        (apply stacked-bar-chart* args#))))
+
+
+
 (defn pie-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "Bar Chart")
+           main-title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            legend? (true? (:legend opts))
            dataset (DefaultPieDataset.)
@@ -1438,7 +2082,7 @@
 "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
-	   main-title# (or (:title opts#) "Bar Chart")
+	   main-title# (or (:title opts#) "")
 	   args# (concat [~categories ~values] 
 			 (apply concat (seq (apply assoc opts# 
 						   [:main-title main-title#]))))]
@@ -1461,7 +2105,7 @@
 	  __x (if x-groups
                 (first x-groups)
                 _x)
-	  main-title (or (:title opts) "Boxplot")
+	  main-title (or (:title opts) "")
 	  x-label (or (:x-label opts) "")
 	  y-label (or (:y-label opts) (str 'x))
 	  series-label (or (:series-label opts) (str 'x))
@@ -1537,7 +2181,7 @@
   ([x & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Bar Chart")
+           main-title# (or (:title opts#) "")
 	   x-lab# (or (:x-label opts#) "")
            y-lab# (or (:y-label opts#) (str '~x))
            series-lab# (or (:series-label opts#) (str '~x))
@@ -1559,7 +2203,7 @@
    (let [opts (when options (apply assoc {} options))
 	 step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
 	 _x (range min-range max-range step-size)
-	 main-title (or (:title opts) "Function Plot")
+	 main-title (or (:title opts) "")
 	 x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
 	 y-lab (or (:y-label opts) (str 'function))
 	 series-lab (or (:series-label opts) (format "%s" 'function))
@@ -1606,7 +2250,7 @@
   ([function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#) 
-           main-title# (or (:title opts#) "Function Plot")
+           main-title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
            y-lab# (or (:y-label opts#) (str '~function))
            series-lab# (or (:series-label opts#) (format "%s" '~function))
@@ -1625,10 +2269,11 @@
   ([function x-min x-max y-min y-max & options]
      (let [opts (when options (apply assoc {} options))
 	   color? (if (false? (:color? opts)) false true)
-	   title (or (:title opts) "Heat Map")
-	   x-label (or (:x-label opts) "x")
-	   y-label (or (:y-label opts) "y")
+	   title (or (:title opts) "")
+	   x-label (or (:x-label opts) "")
+	   y-label (or (:y-label opts) "")
 	   z-label (or (:z-label opts) "z scale")
+	   theme (or (:theme opts) :default)
 	   xyz-dataset (org.jfree.data.xy.DefaultXYZDataset.)
 	   data (into-array (map double-array 
 				 (grid-apply function x-min x-max y-min y-max)))
@@ -1685,7 +2330,8 @@
 	(.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
 	(.setTitle chart title)
 	(.addSubtitle chart legend)
-	(org.jfree.chart.ChartUtilities/applyCurrentTheme chart))
+	(org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
+	(set-theme chart theme))
        chart)))
 
 
@@ -1937,6 +2583,29 @@
 
 
 
+(defn add-image
+" Adds an image to the chart at the given coordinates.
+
+  Arguments:
+    chart -- the chart to add the polygon to.
+    x, y -- the coordinates to place the image
+    img -- a java.awt.Image object
+
+
+  Examples:
+    (use '(incanter core charts latex))   
+
+     (doto (function-plot sin -10 10)
+      (add-image 0 0 (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))
+      view)
+
+"
+  ([chart x y img & options]
+    (let [opts (when options (apply assoc {} options))
+	  anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
+      (.addAnnotation (.getPlot chart) anno))))
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2160,15 +2829,15 @@
 	   label (JLabel. (label-txt (first slider-values)) JLabel/CENTER)
 	   slider (doto (JSlider. JSlider/HORIZONTAL 0 max-idx 0)
 		    (.addChangeListener (proxy [javax.swing.event.ChangeListener] []
-					  (stateChanged [#^javax.swing.event.ChangeEvent event]
+					  (stateChanged [^javax.swing.event.ChangeEvent event]
 							(let [source (.getSource event)
 							      value (nth slider-values (.getValue source))]
 							  (do
 							    (.setText label (label-txt value))
 							    (updater-fn value)))))))
-		      panel (doto (JPanel. (BorderLayout.))
-			      (.add label BorderLayout/NORTH)
-			      (.add slider BorderLayout/CENTER))
+	   panel (doto (JPanel. (BorderLayout.))
+		   (.add label BorderLayout/NORTH)
+		   (.add slider BorderLayout/CENTER))
 	   frame (JFrame. "Slider Control")
 	   width 500
 	   height 70] 
@@ -2176,7 +2845,7 @@
 	 (.setDefaultCloseOperation JFrame/DISPOSE_ON_CLOSE)
 	 (.add panel BorderLayout/CENTER)
 	 (.setSize width height)
-	 (.setVisible true)
+	 ;; (.setVisible true)
 	 (.setVisible true))
        frame)))
 
@@ -2205,7 +2874,7 @@
 	   slider-fns (map #(fn [v] 
 			      (do 
 				(dosync (ref-set (nth refs %) v)) 
-				(apply f (map deref refs)))) 
+				(apply f (map deref refs))))
 			   (range (count refs)))
 	   _ ((first slider-fns) (first init-values))]
        (if slider-labels 
@@ -2337,6 +3006,320 @@
 	(set-x-label chart# (str '~(first expression)))
 	(set-y-label chart# (str '~(second expression))))))
 
+
+
+;;; CHART CUSTOMIZATION
+
+(defn set-stroke
+"
+  Examples:
+    (use '(incanter core charts))
+
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (set-stroke :width 4 :dash 5)
+      view)
+   
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (add-categories [:a :b :c :d] [20 5 30 15])
+      (set-stroke :width 4 :dash 5)
+      (set-stroke :series 1 :width 2 :dash 10)
+      view)
+
+
+    (doto (function-plot sin -10 10 :step-size 0.1)
+      (set-stroke :width 3 :dash 5)
+      view)
+       
+"
+([chart & options]
+   (let [{:keys [width dash series dataset] 
+	  :or {width 1.0 dash 1.0 series 0 dataset 0}} (apply hash-map options)
+	 renderer (-> chart .getPlot (.getRenderer dataset))
+	 stroke (java.awt.BasicStroke. width 
+				       java.awt.BasicStroke/CAP_ROUND 
+				       java.awt.BasicStroke/JOIN_ROUND 
+				       1.0 
+				       (float-array 1.0 dash) 
+				       0.0)]
+     (.setSeriesStroke renderer series stroke)
+     chart)))
+
+
+(defn set-stroke-color
+"
+  Examples:
+    (use '(incanter core charts))
+
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (set-stroke :width 4 :dash 5)
+      (set-stroke-color java.awt.Color/blue)
+      view)
+   
+    (doto (function-plot sin -10 10 :step-size 0.1)
+      (set-stroke :width 3 :dash 5)
+      (set-stroke-color java.awt.Color/gray)
+      view)
+       
+"
+([chart color & options]
+   (let [{:keys [series] 
+	  :or {series 0}} (apply hash-map options)
+	 renderer (-> chart .getPlot .getRenderer)]
+     (.setSeriesPaint renderer series color)
+     chart)))
+
+
+
+
+
+;;;; DEFAULT THEME METHODS
+
+(defmethod set-theme-default org.jfree.data.category.DefaultCategoryDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)
+	   bar-painter (org.jfree.chart.renderer.category.StandardBarPainter.)]
+       (when (some #{(type (.getRenderer (.getPlot chart)))}
+		#{org.jfree.chart.renderer.category.BarRenderer 
+		  org.jfree.chart.renderer.category.StackedBarRenderer})  
+	 (doto renderer
+	   (.setBarPainter bar-painter)
+	   (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+	   (.setShadowVisible false)
+	   (.setDrawBarOutline false)))
+       (set-background-default chart)
+       chart)))
+
+
+(defmethod set-theme-default org.jfree.data.statistics.HistogramDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)
+	   bar-painter (org.jfree.chart.renderer.xy.StandardXYBarPainter.)]
+       (doto renderer
+	 (.setBarPainter bar-painter)
+	 (.setSeriesOutlinePaint 0 java.awt.Color/lightGray)
+	 (.setShadowVisible false)
+	 (.setDrawBarOutline true))
+       (set-background-default chart)
+       chart)))
+
+
+
+(defmethod set-theme-default :default
+  ([chart]
+     (set-background-default chart)))
+
+
+;;;; BW THEME METHODS
+
+(defmethod set-theme-bw org.jfree.data.xy.XYSeriesCollection
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+(defmethod set-theme-bw org.jfree.data.statistics.HistogramDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+(defmethod set-theme-bw org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+(defmethod set-theme-bw org.jfree.data.category.DefaultCategoryDataset
+  ([chart]
+     (let [plot (.getPlot chart)
+	   renderer (.getRenderer plot)]
+       (do
+	  (doto plot
+ 	   (.setBackgroundPaint java.awt.Color/white)
+ 	   (.setRangeGridlinePaint (java.awt.Color. 235 235 235))
+ 	   (.setDomainGridlinePaint (java.awt.Color. 235 235 235)))
+	 (doto renderer
+	   (.setOutlinePaint java.awt.Color/white)
+	   (.setPaint java.awt.Color/gray))
+	 chart))))
+
+
+
+
+;;;;; DEFAULT PLOT BACKGROUND SETTINGS
+
+
+(defmethod set-background-default org.jfree.chart.plot.XYPlot
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)
+	   plot (.getPlot chart)]
+       (doto plot
+	 (.setRangeGridlineStroke grid-stroke)
+	 (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/lightGray)
+	 (.setBackgroundPaint (java.awt.Color. 235 235 235))
+	 (.setRangeGridlinePaint java.awt.Color/white)
+	 (.setDomainGridlinePaint java.awt.Color/white)
+	 (.setOutlineVisible false)
+	 (-> .getDomainAxis (.setAxisLineVisible false))
+	 (-> .getRangeAxis (.setAxisLineVisible false))
+	 (-> .getDomainAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getDomainAxis (.setTickLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (.setDomainMinorGridlinesVisible true)
+	 ;; (.setRangeMinorGridlinesVisible true)
+	 (.setDomainZeroBaselineVisible false)
+	 )
+       (if (= (-> plot .getDataset type) 
+	      org.jfree.data.statistics.HistogramDataset)
+	 (-> plot .getRenderer (.setPaint java.awt.Color/gray)))
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+(defmethod set-background-default org.jfree.chart.plot.CategoryPlot
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1 
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)]
+       (doto (.getPlot chart)
+	 (.setRangeGridlineStroke grid-stroke)
+	 (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/lightGray)
+	 (.setBackgroundPaint (java.awt.Color. 235 235 235))
+	 (.setRangeGridlinePaint java.awt.Color/white)
+	 (.setDomainGridlinePaint java.awt.Color/white)
+	 (.setOutlineVisible false)
+	 (-> .getDomainAxis (.setAxisLineVisible false))
+	 (-> .getRangeAxis (.setAxisLineVisible false))
+	 (-> .getDomainAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setLabelPaint java.awt.Color/gray))
+	 (-> .getDomainAxis (.setTickLabelPaint java.awt.Color/gray))
+	 (-> .getRangeAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (.setRangeMinorGridlinesVisible true)
+	 )
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+(defmethod set-background-default org.jfree.chart.plot.PiePlot
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1.5 
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)]
+       (doto (.getPlot chart)
+	 ;; (.setRangeGridlineStroke grid-stroke)
+	 ;; (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/white)
+	 (.setShadowPaint java.awt.Color/white)
+	 (.setLabelShadowPaint java.awt.Color/white)
+	 (.setLabelPaint java.awt.Color/darkGray)
+	 (.setLabelOutlinePaint java.awt.Color/gray)
+	 (.setLabelBackgroundPaint (java.awt.Color. 235 235 235))
+	 (.setLabelLinksVisible false)
+	 (.setOutlineVisible false))
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+(defmethod set-background-default :default
+  ([chart]
+     (let [grid-stroke (java.awt.BasicStroke. 1.5 
+					      java.awt.BasicStroke/CAP_ROUND 
+					      java.awt.BasicStroke/JOIN_ROUND 
+					      1.0 
+					      (float-array 2.0 1.0) 
+					      0.0)]
+       (doto (.getPlot chart)
+	 ;; (.setRangeGridlineStroke grid-stroke)
+	 ;; (.setDomainGridlineStroke grid-stroke)
+	 (.setBackgroundPaint java.awt.Color/lightGray)
+	 (.setBackgroundPaint (java.awt.Color. 235 235 235))
+	 ;; (.setRangeGridlinePaint java.awt.Color/white)
+	 ;; (.setDomainGridlinePaint java.awt.Color/white)
+	 (.setOutlineVisible false)
+	 ;; (-> .getDomainAxis (.setAxisLineVisible false))
+	 ;; (-> .getRangeAxis (.setAxisLineVisible false))
+	 ;; (-> .getDomainAxis (.setLabelPaint java.awt.Color/gray))
+	 ;; (-> .getRangeAxis (.setLabelPaint java.awt.Color/gray))
+	 ;; (-> .getDomainAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (-> .getRangeAxis (.setTickLabelPaint java.awt.Color/gray))
+	 ;; (.setRangeMinorGridlinesVisible true)
+	 )
+       (-> chart .getTitle (.setPaint java.awt.Color/gray))
+       chart)))
+
+
+
+(defmulti add-subtitle
+"Adds a JFreeChart title object to a chart as a subtitle.
+
+  Examples:
+    (use '(incanter core charts latex))
+
+    (doto (function-plot sin -10 10)
+      (add-subtitle \"subtitle\")
+      (add-subtitle (latex \" \\\\frac{(a+b)^2} {(a-b)^2}\"))
+      view)
+
+"
+  (fn [chart title] (type title)))
+
+(defmethod add-subtitle java.awt.image.BufferedImage
+  ([chart title]
+     (.addSubtitle chart (org.jfree.chart.title.ImageTitle. title))
+     chart))
+
+(defmethod add-subtitle java.lang.String
+  ([chart title]
+     (.addSubtitle chart (org.jfree.chart.title.TextTitle. title))
+     chart))
+
+(defmethod add-subtitle :default
+  ([chart title]
+     (.addSubtitle chart title)
+     chart))
 
 
 

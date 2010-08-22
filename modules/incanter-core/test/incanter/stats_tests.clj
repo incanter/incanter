@@ -21,9 +21,7 @@
 
 (ns incanter.stats-tests
   (:use clojure.test 
-        (incanter core stats))
- (:use incanter.stats)
- (:use incanter.stats))
+        (incanter core stats)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.stats.clj
@@ -32,11 +30,6 @@
 
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3] 
-                [4 5 6] 
-                [7 8 9] 
-                [10 11 12]]))
-
-(def V (matrix [[1 2 3] 
                 [4 5 6] 
                 [7 8 9] 
                 [10 11 12]]))
@@ -90,21 +83,7 @@
 
 (deftest median-test
   ;; calculate the median of a variable
-  (is (= (median x) 113)))
-  
- 
-(deftest sample-normal-tests
-  ;; generate a sample of standard normal data
-  (def std-normal-data (sample-normal 1000))
-  (is (= (count std-normal-data) 1000))
-  (is (= (Math/round (mean std-normal-data)) 0))
-  (is (= (Math/round (sd std-normal-data)) 1))
-  
-  ;; generate a sample of normal data with mean = 10 and sd = 5
-  (def nonstd-normal-data (sample-normal 1000 :mean 10 :sd 5))
-  (is (= (count nonstd-normal-data) 1000))
-  (is (= (Math/round (mean nonstd-normal-data)) 10))
-  (is (= (Math/round (sd nonstd-normal-data)) 5)))
+  (is (= (median x) 113.0)))
 
 (deftest sample-tests
   ;; test sample function
@@ -116,7 +95,7 @@
   (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))) 
 
 (deftest sample-mean
- (is (= 3 
+ (is (= 3.0 
       (mean [2 3 4]))))
 
 (deftest stdev-test
@@ -125,17 +104,9 @@
 
 (deftest simple-regresssion-tests
  (let [r (simple-regression [2 4] [1 3])]
-  (is (= 3
+  (is (= 3.0
 	 (predict r 2)))))	 
 
-(deftest smooth-discrete-probs-test
-  (is (= {1 0.19047619047619047, 
-	  2 0.3333333333333334, 
-	  3 0.47619047619047616}
-	 (smooth-discrete-probs 
-	  {1 0.2
-	   3 0.5}
-	  [1 2 3]))))
 
 (deftest odds-ratio-test
   (let [p1 9/10
@@ -257,7 +228,7 @@
 
 (deftest manhattan
   (is 
-   (= (+ 1 1 2 1 1) 
+   (= (+ 1.0 1 2 1 1) 
       (manhattan-distance [2 4 3 1 6]
 			  [3 5 1 2 5]))))
 
@@ -278,3 +249,5 @@
    (=  0.8591549295774648
        (tanimoto-coefficient  [2 4 3 1 6]
 			      [3 5 1 2 5]))))
+
+

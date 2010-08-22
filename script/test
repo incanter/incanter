@@ -12,10 +12,14 @@ lein test
 cd ../incanter-processing
 lein test
 
-#cd ../incanter-mongodb
-#lein test
+cd ../incanter-mongodb
+lein test
 
-#cd ../incanter-pdf
-#lein test
+cd ../incanter-pdf
+lein test
 
+cd ../incanter-latex
+lein test
 
+cd ../incanter-excel
+lein test

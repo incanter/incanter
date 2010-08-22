@@ -25,52 +25,45 @@ Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.o
 
 h2. Getting started with Clojure
 
-For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get the newly released book "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway.
+For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="http://apress.com/book/view/1430272317">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
 
 *Other Clojure resources*
 
 * "Clojure website":http://clojure.org
+* "Getting Started with Clojure":http://www.assembla.com/wiki/show/clojure/Getting_Started
 * "Clojure Google group":http://groups.google.com/group/clojure
 * "clojure.blip.tv":http://clojure.blip.tv
-* "Clojure Programming Wikibook":http://en.wikibooks.org/wiki/Clojure_Programming
-* "Learning Clojure Wikibook":http://en.wikibooks.org/wiki/Learning_Clojure
+* "Disclojure blog":http://disclojure.org/
+* "Full Disclojure screencasts":http://vimeo.com/channels/fulldisclojure
 
 
 <a name="getstarted"></a>
 
 h2. Getting started with Incanter
 
-Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://incanter-blog.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download a pre-built version of either <a href="http://incanter.org/downloads/incanter-latest.zip">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
+Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://data-sorcery.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download either an <a href="http://incanter.org/downloads/">Incanter executable</a> or a pre-built version of <a href="http://incanter.org/downloads/">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
-Start the Clojure shell (aka the REPL) from the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
+Start the Clojure REPL (aka the shell) by double-clicking on the downloaded executable or, if you downloaded the pre-built distribution, running one of the scripts in the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
 
-NOTE: If you want the latest version of Incanter, clone the repository with git, and run @lein deps@ to download the necessary dependencies before using @script/repl@ or @script/swank@ (or @script\repl.bat@, @script\swank.bat@).
 
-From the Clojure shell, load the Incanter libraries: 
+From the Clojure REPL, load the Incanter libraries: 
 <pre><code>user=> (use '(incanter core stats charts))</code></pre>
 
 Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: 
 <pre><code>user=> (view (histogram (sample-normal 1000)))</code></pre>
-<img src="http://incanter.org/images/examples/normal_hist.png" />
+<img src="http://incanter.org/images/examples/newtheme/hist-norm.png" />
 
 Try another simple example, a plot of the sine function over the range -4 to 4:
-<pre><code>user=> (view (function-plot sin -4 4))</code></pre>
-<img src="http://incanter.org/images/examples/sin-plot.png" />
+<pre><code>user=> (view (function-plot sin -10 10))</code></pre>
+<img src="http://incanter.org/images/examples/newtheme/xy-sin.png" />
 
 
 The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
 
 *More Incanter examples*
 
-* See the <a href="http://incanter.wordpress.com">Incanter blog</a>
-* See Incanter wiki
-** "Sample plots":http://wiki.github.com/liebke/incanter/sample-plots-in-incanter
-** "Matrices":http://wiki.github.com/liebke/incanter/matrices
-** "Datasets":http://wiki.github.com/liebke/incanter/datasets
-** "Statistics examples":http://wiki.github.com/liebke/incanter/statistics-examples
-** "Probability distributions":http://wiki.github.com/liebke/incanter/probability-distributions
-* See the @examples/@ directory for additional usage examples.
-**  @script/clj examples/run_prob_plots.clj@ to generate example probability distribution plots
+* See the <a href="http://data-sorcery.org">Data-Sorcery blog</a>
+* See the <a href="http://data-sorcery.org/contents">Documentation table of contents</a>
 
 
 
@@ -81,7 +74,7 @@ h2. Documentation
 The following documentation covers the Incanter and Clojure APIs and the APIs of the underlying java libraries.
 
 *Incanter documentation*
-* "Doc Index":http://incanter-blog.org/contents/
+* "Doc Index":http://data-sorcery.org/contents/
 * "API":http://liebke.github.com/incanter
 
 
@@ -99,10 +92,19 @@ h2. Building Incanter
 
 To build and test Incanter, you will need to have <a href="http://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
 
-* First, clone the Incanter Github repository: @git clone git://github.com/liebke/incanter.git@
-* cd into the incanter directory
-* use Leiningen to download the necessary dependencies: @lein deps@
-* You can now use the @script/repl@ and @script/swank@ scripts (or on Windows @repl.bat@ and @swank.bat@) to start a REPL and Swank server respectively.
+1. Clone the repository with git: @git clone git://github.com/liebke/incanter.git@
+
+2. Install Leiningen
+  a. Download the lein script: @wget http://github.com/technomancy/leiningen/raw/stable/bin/lein@
+     (use <a href="http://github.com/technomancy/leiningen/raw/stable/bin/lein.bat">lein.bat</a> on Windows)
+  b. Place it on your path and chmod it to be executable: @chmod +x lein@
+  c. Run: @lein self-install@
+
+3. From the incanter directory, download the necessary dependencies: @lein deps@ 
+
+4. Start a REPL: @script/repl@ or @script\repl.bat@, or start a Swank server: @script/swank@ or @script\swank.bat@
+
+Other tasks:
 * If you want to run the tests for each of Incanter's modules, use @script/test@ 
 * Each of Incanter's modules are independent Leiningen projects. Just cd into modules/incanter-* and use Leiningen to build each one as a standalone library.
 * @script/install@ uses Leiningen to build all the modules and install them in your local ~/.m2 repository.
@@ -123,6 +125,7 @@ h2. Incanter dependencies
 * "OpenCSV":http://opencsv.sourceforge.net/
 * "iText":http://itextpdf.com/
 * "Congomongo":http://github.com/somnium/congomongo
-* "Clojure-json":http://github.com/danlarkin/clojure-json
+* "JLaTeXMath":http://forge.scilab.org/index.php/p/jlatexmath/
+* "Apache POI":http://poi.apache.org/
 * "JLine":http://jline.sourceforge.net/
 

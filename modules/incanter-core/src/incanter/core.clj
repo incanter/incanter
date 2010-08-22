@@ -16,7 +16,7 @@
 
 
 
-(ns #^{:doc "This is the core numerics library for Incanter.
+(ns ^{:doc "This is the core numerics library for Incanter.
             It provides functions for vector- and matrix-based
             mathematical operations and the core data manipulation
             functions for Incanter.
@@ -29,19 +29,20 @@
        :author "David Edgar Liebke"}
 
   incanter.core
-  ;(:gen-class)
-  (:use (incanter internal))
+
+  (:use [incanter internal]
+	[incanter.infix :only (infix-to-prefix defop)])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
                                      DoubleFactory1D)
-           (cern.colt.matrix.tdouble.algo DoubleAlgebra
+           (cern.colt.matrix.tdouble.algo DenseDoubleAlgebra
                                           DoubleFormatter)
-           (cern.colt.matrix.tdouble.algo.decomposition DoubleCholeskyDecomposition
-                                                        DoubleSingularValueDecompositionDC
-                                                        DoubleEigenvalueDecomposition
-                                                        DoubleLUDecomposition
-                                                        DoubleQRDecomposition)
+           (cern.colt.matrix.tdouble.algo.decomposition DenseDoubleCholeskyDecomposition
+                                                        DenseDoubleSingularValueDecomposition
+                                                        DenseDoubleEigenvalueDecomposition
+                                                        DenseDoubleLUDecomposition
+                                                        DenseDoubleQRDecomposition)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
            (cern.colt.list.tdouble DoubleArrayList)
@@ -50,10 +51,12 @@
            (java.util Vector)))
 
 
- (def #^{:doc "This variable is bound to a dataset when the with-data macro is used.
+ (def ^{:doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."} 
       $data)
 
+(defrecord Dataset [column-names rows])
+(derive incanter.core.Dataset ::dataset)
 
 (defn matrix
 "
@@ -90,10 +93,10 @@
   ([data]
    (make-matrix data))
 
-  ([data #^Integer ncol]
+  ([data ^Integer ncol]
    (make-matrix data ncol))
 
-  ([init-val #^Integer rows #^Integer cols]
+  ([init-val ^Integer rows ^Integer cols]
    (make-matrix init-val rows cols)))
 
 
@@ -103,26 +106,26 @@
 
 
 (defn dataset?
-" Determines if obj is of type ::dataset."
-  ([obj] (= (type obj) ::dataset)))
+" Determines if obj is of type incanter.core.Dataset."
+  ([obj] (= (type obj) incanter.core.Dataset)))
 
 
 (defn nrow
-  #^{:tag Integer 
+  ^{:tag Integer 
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
-    (matrix? mat) (.rows #^Matrix mat)
+    (matrix? mat) (.rows ^Matrix mat)
     (dataset? mat) (count (:rows mat))
     (coll? mat) (count mat))))
 
 
 (defn ncol
-  #^{:tag Integer 
+  ^{:tag Integer 
      :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
-    (matrix? mat) (.columns #^Matrix mat)
+    (matrix? mat) (.columns ^Matrix mat)
     (dataset? mat) (count (:column-names mat))
     (coll? mat) 1 )))
 
@@ -142,7 +145,7 @@
       (identity-matrix 4)
 
 "
-([#^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
+([^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
 
 
 (defn diag
@@ -170,7 +173,7 @@
       m)))
 
 
-(defn #^Matrix trans
+(defn ^Matrix trans
 "   Returns the transpose of the given matrix. Equivalent to R's t function
 
     Examples:
@@ -184,9 +187,9 @@
   ([mat]
    (cond
     (matrix? mat)
-      (.viewDice #^Matrix mat)
+      (.viewDice ^Matrix mat)
     (coll? mat)
-      (.viewDice #^Matrix (matrix #^double-array mat)))))
+      (.viewDice ^Matrix (matrix ^double-array mat)))))
 
 
 
@@ -259,7 +262,7 @@
 ;; (defmethod sel [nil true] [])
 
 (defmethod sel [incanter.Matrix false]
-  ([#^Matrix mat rows columns]
+  ([^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
          cols (if (number? columns) [columns] columns)
 	 all-rows? (or (true? rws) (= rws :all))
@@ -278,7 +281,7 @@
 
 
 (defmethod sel [incanter.Matrix true]
-  ([#^Matrix mat & options]
+  ([^Matrix mat & options]
    (let [opts (when options (apply assoc {} options))
          except-rows (:except-rows opts)
          except-columns (:except-cols opts)
@@ -594,7 +597,7 @@
     http://en.wikipedia.org/wiki/Factorial
 
 "
-  ([#^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
+  ([^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
 
 
 
@@ -629,7 +632,7 @@
   type)
 
 (defmethod to-list Matrix
- ([#^Matrix mat]
+ ([^Matrix mat]
   (cond
     (= (.columns mat) 1)
       (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
@@ -650,9 +653,9 @@
 
 (defmethod to-list nil [s] nil)
 
-(defn #^Matrix copy
+(defn ^Matrix copy
   "Returns a copy of the given matrix."
-  ([#^Matrix mat] (.copy mat)))
+  ([^Matrix mat] (.copy mat)))
 
 
 (defn mmult
@@ -676,7 +679,7 @@
      (reduce (fn [A B]
               (let [a (if (matrix? A) A (matrix A))
                     b (if (matrix? B) B (matrix B))
-                    result (Matrix. (.zMult #^Matrix a #^Matrix b nil))]
+                    result (Matrix. (.zMult ^Matrix a ^Matrix b nil))]
                 (if (and (= (.rows result) 1) (= (.columns result) 1))
                   (.getQuick result 0 0)
                   result)))
@@ -728,10 +731,10 @@
 
 
 "
-  ([#^Matrix A & B]
+  ([^Matrix A & B]
    (if B
-    (Matrix. (.solve (DoubleAlgebra.) A (first B)))
-    (Matrix. (.inverse (DoubleAlgebra.) A)))))
+    (Matrix. (.solve (DenseDoubleAlgebra.) A (first B)))
+    (Matrix. (.inverse (DenseDoubleAlgebra.) A)))))
 
 
 
@@ -743,8 +746,8 @@
     http://en.wikipedia.org/wiki/LU_decomposition
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
-  ;([mat] (.det (cern.colt.matrix.linalg.LUDecomposition. mat))))
-  ([mat] (.det DoubleAlgebra/DEFAULT mat)))
+  ;([mat] (.det (cern.colt.matrix.linalg.DenseLUDecomposition. mat))))
+  ([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
 
 
 (defn trace
@@ -752,9 +755,9 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_trace
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DoubleAlgebra.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
 "
-  ([mat] (.trace DoubleAlgebra/DEFAULT mat)))
+  ([mat] (.trace DenseDoubleAlgebra/DEFAULT mat)))
 
 
 
@@ -852,13 +855,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn #^Matrix decomp-cholesky
+(defn ^Matrix decomp-cholesky
 " Returns the Cholesky decomposition of the given matrix. Equivalent to R's
   chol function.
 
   Returns:
     a matrix of the triangular factor (note: the result from
-    cern.colt.matrix.linalg.CholeskyDecomposition is transposed so
+    cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
     that it matches the result return from R's chol function.
 
 
@@ -877,9 +880,9 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
     http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
-  ([#^Matrix mat]
-    (.viewDice (.getL (DoubleCholeskyDecomposition. mat)))))
-    ;(Matrix. (.viewDice (.getL (CholeskyDecomposition. mat)))))
+  ([^Matrix mat]
+    (Matrix. (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat))))))
+    ;(Matrix. (.viewDice (.getL (DenseCholeskyDecomposition. mat)))))
 
 
 
@@ -906,7 +909,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
-    (let [result (DoubleSingularValueDecompositionDC. mat, true, true)]
+    (let [result (DenseDoubleSingularValueDecomposition. mat, true, true)]
       {:S (diag (Matrix. (.getS result)))
        :U (Matrix. (.getU result))
        :V (Matrix. (.getV result))})))
@@ -934,7 +937,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
 "
   ([mat]
-    (let [result (DoubleEigenvalueDecomposition. mat)]
+    (let [result (DenseDoubleEigenvalueDecomposition. mat)]
       {:values (diag (Matrix. (.getD result)))
        :vectors (Matrix. (.getV result))})))
 
@@ -960,7 +963,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
   ([mat]
-    (let [result (DoubleLUDecomposition. mat)]
+    (let [result (DenseDoubleLUDecomposition. mat)]
       {:L (Matrix. (.getL result))
        :U (Matrix. (.getU result))})))
 
@@ -984,12 +987,12 @@
 
   References:
     http://en.wikipedia.org/wiki/QR_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleQRDecomposition.html
+    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
 "
   ([mat]
-    (let [result (DoubleQRDecomposition. mat)]
-      {:Q (Matrix. (.getQ result))
-       :R (Matrix. (.getR result))})))
+    (let [result (DenseDoubleQRDecomposition. mat)]
+      {:Q (Matrix. (.getQ result false))
+       :R (Matrix. (.getR result false))})))
 
 
 (defn condition
@@ -1008,7 +1011,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
-    (.cond (DoubleSingularValueDecompositionDC. mat, true, true))))
+    (.cond (DenseDoubleSingularValueDecomposition. mat, true, true))))
 
 
 (defn rank
@@ -1028,7 +1031,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
-    (.rank (DoubleSingularValueDecompositionDC. mat, true, true))))
+    (.rank (DenseDoubleSingularValueDecomposition. mat, true, true))))
 
 
 
@@ -1041,7 +1044,7 @@
   " Returns a vector-of-vectors if the given matrix is two-dimensional
     and a flat vector if the matrix is one-dimensional. This is a bit
     slower than the to-list function. "
- ([#^Matrix mat]
+ ([^Matrix mat]
   (into [] (cond
              (= (.columns mat) 1)
               (first (map #(into [] (seq %)) (seq (.toArray (.viewDice mat)))))
@@ -1062,7 +1065,7 @@
       (number? coll)
         1
       (matrix? coll)
-        (* (.rows #^Matrix coll) (.columns #^Matrix coll))
+        (* (.rows ^Matrix coll) (.columns ^Matrix coll))
       (coll? coll)
         (count coll)
       :else
@@ -1072,7 +1075,7 @@
 
 
 
-(defn group-by
+(defn group-on
 " Groups the given matrix by the values in the columns indicated by the
   'on-cols' argument, returning a sequence of matrices. The returned
   matrices are sorted by the value of the group column ONLY when there
@@ -1082,24 +1085,24 @@
 
     (use '(incanter core datasets))
     (def plant-growth (to-matrix (get-dataset :plant-growth)))
-    (group-by plant-growth 1)
+    (group-on plant-growth 1)
     ;; only return the first column
-    (group-by plant-growth 1 :cols 0)
+    (group-on plant-growth 1 :cols 0)
     ;; don't return the second column
-    (group-by plant-growth 1 :except-cols 1)
+    (group-on plant-growth 1 :except-cols 1)
 
     (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))
-    (group-by plant-growth-dummies [1 2])
+    (group-on plant-growth-dummies [1 2])
     ;; return only the first column
-    (group-by plant-growth-dummies [1 2] :cols 0)
+    (group-on plant-growth-dummies [1 2] :cols 0)
     ;; don't return the last two columns
-    (group-by plant-growth-dummies [1 2] :except-cols [1 2])
+    (group-on plant-growth-dummies [1 2] :except-cols [1 2])
 
     ;; plot the plant groups
     (use 'incanter.charts)
     ;; can use destructuring if you know the number of groups
     ;; groups are sorted only if the group is based on a single column value
-    (let [[ctrl trt1 trt2] (group-by plant-growth 1 :cols 0)]
+    (let [[ctrl trt1 trt2] (group-on plant-growth 1 :cols 0)]
       (doto (box-plot ctrl)
             (add-box-plot trt1)
             (add-box-plot trt2)
@@ -1140,9 +1143,8 @@
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 (defn dataset
-" Returns a map of type ::dataset constructed from the given column-names and
+" Returns a map of type incanter.core.dataset constructed from the given column-names and
   data. The data is either a sequence of sequences or a sequence of hash-maps.
 "
   ([column-names & data]
@@ -1160,10 +1162,7 @@
                         dat
                       :else 
                         (map #(apply assoc {} (interleave column-names %)) dat))] 
-      (with-meta
-        {:column-names (into [] column-names)
-         :rows rows}
-        {:type :incanter.core/dataset}))))
+      (Dataset. (into [] column-names) rows))))
 
 
 (defn- get-column-id [dataset column-key]
@@ -1234,8 +1233,12 @@
                  (if (map? (query-map k))
                    (reduce _and
                            (for [sk (keys (query-map k))]
-                             (if (nil? (ops sk)) 
-                               (throw (Exception. (str "Invalid key in query-map: " sk)))
+                             (cond 
+			      (fn? sk)
+			        (sk (row k) ((query-map k) sk))
+			      (nil? (ops sk)) 
+                                (throw (Exception. (str "Invalid key in query-map: " sk)))
+			      :else
                                ((ops sk) (row k) ((query-map k) sk)))))
                    (= (row k) (query-map k)))))))))
 
@@ -1657,6 +1660,7 @@
     ;; iris measurements are positive, the built-in mean function could have 
     ;; been used instead.
 
+    (use 'incanter.stats)
     ($rollup #(mean (abs %)) :Sepal.Width :Species iris)
 
     ($rollup sd :Sepal.Length :Species iris)
@@ -1666,6 +1670,7 @@
     (def hair-eye-color (get-dataset :hair-eye-color))
     ($rollup :mean :count [:hair :eye] hair-eye-color)
 
+    (use 'incanter.charts)
     (with-data ($rollup :mean :Sepal.Length :Species iris)
       (view (bar-chart :Species :Sepal.Length)))
 
@@ -1692,7 +1697,6 @@
 		    (fn [row] 
 		      (map-get row col-name)))
 	   rows (:rows data)
-	   n (nrow data)
 	   rollup-fns {:max (fn [col-data] (apply max col-data))
 		       :min (fn [col-data] (apply min col-data))
 		       :sum (fn [col-data] (apply + col-data))
@@ -1701,14 +1705,14 @@
 	   rollup-fn (if (keyword? summary-fun)
 		       (rollup-fns summary-fun)
 		       summary-fun)]
-       (loop [r 0 reduced-rows {}]
-	 (if (= r n)
+       (loop [cur rows reduced-rows {}]
+	 (if (empty? cur)
 	   (let [group-cols (to-dataset (keys reduced-rows))
 		 res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
 	     (col-names res (concat (col-names group-cols)
 				    (if (coll? col-name) col-name [col-name]))))
-	   (recur (inc r) 
-		  (let [row (nth rows r)
+	   (recur (next cur)
+		  (let [row (first cur)
 			k (submap row group-by)
 			a (reduced-rows k)
 			b (key-fn row)]
@@ -1743,6 +1747,59 @@
        (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
 
 
+
+(defmacro $fn
+" A simple macro used as syntactic sugar for defining predicate functions to be used
+  in the $where function. The supplied arguments should be column names of a dataset. 
+  This macro performs map destructuring on the arguments.
+  
+  For instance, 
+  ($fn [speed] (< speed 10)) => (fn [{:keys [speed]}] (< speed 10))
+
+  Examples:
+    (use '(incanter core datasets))
+    (view ($where ($fn [speed dist] (or (> speed 20) (< dist 10))) (get-dataset :cars)))
+
+    (view ($where ($fn [speed dist] (< (/ dist speed) 2)) (get-dataset :cars)))
+
+    (use '(incanter core datasets charts))
+    (with-data (get-dataset :cars)
+      (doto (scatter-plot :speed :dist :data ($where ($fn [speed dist] (< (/ dist speed) 2))))
+        (add-points :speed :dist :data ($where ($fn [speed dist] (>= (/ dist speed) 2))))
+        (add-lines ($ :speed) (mult 2 ($ :speed)))
+        view))
+
+
+    (let [passed? ($fn [speed dist] (< (/ dist speed) 2))
+          failed? (complement passed?)]
+      (with-data (get-dataset :cars)
+        (doto (scatter-plot :speed :dist :data ($where passed?))
+          (add-points :speed :dist :data ($where failed?))
+          (add-lines ($ :speed) (mult 2 ($ :speed)))
+          view)))
+
+
+    (use '(incanter core stats charts))
+    (let [above-sine? ($fn [col-0 col-1] (> col-1 (sin col-0)))
+          below-sine? (complement above-sine?)]
+      (with-data (conj-cols (sample-uniform 1000 :min -5 :max 5) 
+                            (sample-uniform 1000 :min -1 :max 1))
+        (doto (function-plot sin -5 5)
+          (add-points :col-0 :col-1 :data ($where above-sine?))
+          (add-points :col-0 :col-1 :data ($where below-sine?))
+          view)))
+
+
+    (view ($where ($fn [] (> (rand) 0.9)) (get-dataset :cars)))
+
+    (view ($where ($fn [Species] ($in Species #{\"virginica\" \"setosa\"})) (get-dataset :iris)))
+
+"
+  ([col-bindings body]
+     `(fn [{:keys ~col-bindings}] ~body)))
+
+
+
 (defn $group-by
 "Returns a map of datasets keyed by a query-map corresponding the group.
 
@@ -1773,6 +1830,33 @@
 			k-rows (grouped-rows k)]
 		    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
 
+
+(defn matrix-map
+ "Like clojure.core/map, but will work on matrices of any dimension:
+ 1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m
+
+  Examples:
+    (use '(incanter core))
+    (def mat (matrix (range 9) 3))
+    (matrix-map #(mod % 2) mat)
+    (matrix-map #(mod % 2) (first mat))
+    (matrix-map #(mod % 2) ($ 1 0 mat))
+    (matrix-map #(mod % 2) [1 2 3 4])
+    (matrix-map #(mod % 2) 9)
+
+"
+ ([f m]
+    (if (sequential? m)
+      (if (sequential? (first m))
+        (map (fn [& a] (apply map f a)) m)
+        (map f m))
+      (f m)))
+ ([f m & ms]
+    (if (sequential? m)
+      (if (sequential? (first m))
+        (apply map (fn [& a] (apply map f a)) m ms)
+        (apply map f m ms))
+      (apply f m ms))))
 
 
 (defn $map 
@@ -2372,6 +2456,19 @@
        (.setVisible true))))
 
 
+(defmethod view java.awt.Image
+  ([obj & options]
+     (let [icon (javax.swing.ImageIcon. obj)
+	   label (javax.swing.JLabel. icon)
+	   height (+ 15 (.getIconHeight icon))
+	   width (+ 15 (.getIconWidth icon))] 
+       (doto (javax.swing.JFrame. "Incanter Image")
+	 (.add (javax.swing.JScrollPane. label))
+	 (.setSize height width)
+	 .pack
+	 (.setVisible true)))))
+
+
 
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
 (defmethod view String
@@ -2505,6 +2602,8 @@
       (type obj))))
 
 
+
+
 (defn grid-apply
 " Applies the given function f, that accepts two arguments, to a grid 
   defined by rectangle bounded x-min, y-min, x-max, y-max and returns a 
@@ -2518,4 +2617,124 @@
 			    (conj (second %1) (second %2))
 			    (conj (nth %1 2) (nth %2 2)))]
        (reduce transpose [[] [] []] xyz))))
+
+
+
+
+
+(defop '- 50 'incanter.core/minus)
+(defop '+ 60 'incanter.core/plus)
+(defop '/ 70 'incanter.core/div)
+(defop '* 80 'incanter.core/mult)
+(defop '<*> 80 'incanter.core/mmult)
+(defop '<x> 80 'incanter.core/kronecker)
+(defop '** 100 'incanter.core/pow)
+
+(defmacro $=
+  "Formula macro translates from infix to prefix
+
+
+   Examples:
+
+    (use 'incanter.core)
+    ($= 7 + 8)
+    ($= [1 2 3] + [4 5 6])
+    ($= [1 2 3] + (sin [4 5 6]))
+    ($= [1 2 3] <*> (trans [1 2 3]))
+    ($= [1 2 3] * [1 2 3])
+    ($= [1 2 3] <x> [1 2 3])
+    ($= 9 * 8 ** 3)
+    ($= (sin Math/PI) * 10)
+
+    ($= 10 + 20 * (4 - 5) / 6)
+
+    ($= 20 * (4 - 5) / 6)
+
+    (let [x 10
+          y -5]
+      ($= x + y / -10))
+
+    ($= 3 ** 3)
+
+    ($= [1 2 3] * [1 2 3])
+    ($= [1 2 3] / (sq [1 2 3]) + [5 6 7])
+
+    ($= (sqrt 5 * 5 + 3 * 3))
+    ($= (sq [1 2 3] + [1 2 3]))
+    ($= ((5 + 4) * 5))
+    ($= ((5 + 4 * (3 - 4)) / (5 + 8) * 6))
+    ($= [1 2 3] + 5)
+    ($= (matrix [[1 2] [4 5]]) + 6)
+    ($= (trans [[1 2] [4 5]]) + 6)
+
+    ($= (trans [[1 2] [4 5]]) <*> (matrix [[1 2] [4 5]]))
+    
+
+    (use '(incanter core charts))
+    (defn f [x] ($= x ** 2 + 3 * x + 5))
+    (f 5)
+    (view (function-plot f -10 10))
+    (view (function-plot #($= % ** 2 + 3 * % + 5) -10 10))
+    (view (function-plot (fn [x] ($= x ** 2 + 3 * x + 5)) -10 10))
+    (let [x (range -10 10 0.1)] 
+      (view (xy-plot x ($= x ** 3 - 5 * x ** 2 + 3 * x + 5))))
+
+    ($= (5 + 7))
+    ($= (trans [1 2 3 4]) <*> [1 2 3 4])
+    ($= [1 2 3 4] <*> (trans [1 2 3 4]))
+
+    ($= [1 2 3 4] <*> (trans [1 2 3 4]))
+    ($= [1 2 3 4] <x> (trans [1 2 3 4]))
+
+
+    ;; kronecker product example
+    ($= (matrix [[1 2] [3 4] [5 6]]) <x> 4)
+    ($= (matrix [[1 2] [3 4] [5 6]]) <x> (matrix [[1 2] [3 4]]))
+    ($= [1 2 3 4] <x> 4)
+
+    ($= 3 > (5 * 2/7))
+
+    (use '(incanter core datasets charts))
+    (with-data (get-dataset :cars)
+      (doto (scatter-plot :speed :dist :data ($where ($fn [speed dist] ($= dist / speed < 2))))
+        (add-points :speed :dist :data ($where ($fn [speed dist] ($= dist / speed >= 2))))
+        (add-lines ($ :speed) ($= 2 * ($ :speed)))
+        view))
+
+   
+
+"
+  ([& equation]
+     (infix-to-prefix equation)))
+
+
+(defn get-input-reader
+  "Returns a java.io.FileReader when given a filename, or a
+   java.io.InputStreamReader when given a URL."
+  [location] 
+  (try
+    (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
+  (catch java.net.MalformedURLException _
+    (java.io.FileReader. location))))
+
+(defn get-input-stream
+  "Returns a java.io.FileInputStream when given a filename, or a
+   java.io.InputStream when given a URL."
+  [location] 
+  (try
+    (.openStream (java.net.URL. location))
+    (catch java.net.MalformedURLException _
+      (java.io.FileInputStream. location))))
+
+
+
+;; PRINT METHOD FOR INCANTER DATASETS
+(defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
+  (do
+    (.write w (str (:column-names o)))
+    (.write w "\n")
+    (doseq [row (:rows o)]
+      (.write w (str (apply vector (map #(get row %) (:column-names o)))))
+      (.write w "\n"))))
+
 

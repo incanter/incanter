@@ -1,38 +1,17 @@
 #!/bin/sh
 
-cd ./modules/incanter-core
 lein clean
+cd modules
+for f in core io charts processing mongodb pdf latex excel ; do
+    cd incanter-$f
+    lein clean
+    lein deps
+    jsrc=`find src -name \*.java`
+    if [ -n "$jsrc" ] ; then
+        lein compile-java
+    fi
+    lein install
+    cd ..
+done
+cd ..
 lein deps
-lein compile-java
-lein install
-
-cd ../incanter-io
-lein clean
-lein deps
-lein install
-
-cd ../incanter-charts
-lein clean
-lein deps
-lein install
-
-cd ../incanter-processing
-lein clean
-lein deps
-lein install
-
-cd ../incanter-mongodb
-lein clean
-lein deps
-lein install
-
-cd ../incanter-pdf
-lein clean
-lein deps
-lein install
-
-cd ../../
-lein clean
-lein deps
-lein install
-
