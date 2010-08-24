@@ -8,7 +8,7 @@ for f in core io charts processing mongodb pdf latex excel ; do
     lein deps
     jsrc=`find src -name \*.java`
     if [ -n "$jsrc" ] ; then
-        lein compile-java
+        lein javac
     fi
     lein install
     cd ..
