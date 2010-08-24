@@ -57,11 +57,7 @@ namespace.
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.excel/read-xls">read-xls</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.excel/save-xls">save-xls</a>
-    </div>
+    
     <br />
   </div>
 </div>
@@ -81,53 +77,7 @@ namespace.
 
 <br />
 <h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.excel/read-xls">read-xls</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (read-xls filename &amp; options)
-</pre>
-  <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
-empty upon import.
-Options are:
-:sheet either a String for the tab name or an int for the sheet index -- defaults to 0
 
- Examples:
-   (use '(incanter core io excel))
-   (view (read-xls "<a href="http://incanter.org/data/aus-airline-passengers.xls">http://incanter.org/data/aus-airline-passengers.xls</a>"))
-
-   (use '(incanter core charts excel))
-   ;; read .xls file of Australian airline passenger data from the 1950s.
-   (with-data (read-xls "<a href="http://incanter.org/data/aus-airline-passengers.xls">http://incanter.org/data/aus-airline-passengers.xls</a>")
-   (view $data)
-   ;; time-series-plot needs time in millisecs
-   ;; create a function, to-millis, to convert a sequence of Date objects
-   ;; to a sequence of milliseconds
-   (let [to-millis (fn [dates] (map #(.getTime %) dates))] 
-     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
-  
-  
-  <a href="http://github.com/liebke/incanter/blob/4d483ca625c9fce51ac71a4cf5cbb2fa46202ec2/modules/incanter-excel/src/incanter/excel.clj#L122" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.excel/save-xls">save-xls</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (save-xls dataset filename &amp; options)
-</pre>
-  <pre id="var-docstr">Save a dataset to an Excel file.
-Options are:
-:sheet defaults to "dataset" if not provided.
-:use-bold defaults to true.  Set the header line in bold.
-
-Examples:
-  (use '(incanter core datasets excel))
-  (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
-  
-  
-  <a href="http://github.com/liebke/incanter/blob/4d483ca625c9fce51ac71a4cf5cbb2fa46202ec2/modules/incanter-excel/src/incanter/excel.clj#L43" id="var-source">Source</a>
-</div>
 
 
 </div>
