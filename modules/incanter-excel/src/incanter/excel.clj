@@ -31,7 +31,8 @@
 (defn- write-line [^HSSFSheet sheet row-num line ^CellStyle style]
    (let [^HSSFRow xl-line (. sheet createRow row-num)]
      (do-loop
-      #(doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style))
+      #(if (not (nil? %2))
+         (doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style)))
       0
       line)))
 
