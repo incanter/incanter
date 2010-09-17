@@ -2622,9 +2622,9 @@
 
 
 
-(defop '- 50 'incanter.core/minus)
+(defop '- 60 'incanter.core/minus)
 (defop '+ 60 'incanter.core/plus)
-(defop '/ 70 'incanter.core/div)
+(defop '/ 80 'incanter.core/div)
 (defop '* 80 'incanter.core/mult)
 (defop '<*> 80 'incanter.core/mmult)
 (defop '<x> 80 'incanter.core/kronecker)
