@@ -1874,7 +1874,7 @@
 
 (defn permute
 " If provided a single argument, returns a permuted version of the
-  given collection. (perm x) is the same as (sample x).
+  given collection. (permute x) is the same as (sample x).
 
   If provided two arguments, returns two lists that are permutations
   across the given collections. In other words, each of the new collections
