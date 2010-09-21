@@ -517,7 +517,9 @@
        (do
          (iter {for x in _x}
                {for y in _y}
-               (.add data-series (double x) (double y)))
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
@@ -542,8 +544,10 @@
            data-set (XYSeriesCollection.)]
     (do
       (iter {for x in _x}
-               {for y in _y}
-               (.add data-series (double x) (double y)))
+            {for y in _y}
+            (if (and (not (nil? x))
+                     (not (nil? y)))
+              (.add data-series (double x) (double y))))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
@@ -692,8 +696,10 @@
 	  data-set (XYSeriesCollection.)]
       (do
 	(iter {for x in _x}
-               {for y in _y}
-               (.add data-series (double x) (double y)))
+              {for y in _y}
+              (if (and (not (nil? x))
+                       (not (nil? y)))
+                (.add data-series (double x) (double y))))
 	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
 	(.addSeries data-set data-series)
@@ -947,7 +953,9 @@
 	  chart (do
                   (iter {for x in __x}
                         {for y in __y}
-                        (.add data-series (double x) (double y)))
+                        (if (and (not (nil? x))
+                                 (not (nil? y)))
+                          (.add data-series (double x) (double y))))
               (.addSeries dataset data-series)
                     (create-plot
                         main-title
@@ -1129,7 +1137,8 @@
 	  chart (do
                   (iter {for x in __x}
                         {for y in __y}
-                        (.add data-series (double x) (double y)))
+                        (if (and (not (nil? x)) (not (nil? y)))
+                          (.add data-series (double x) (double y))))
 		  (.addSeries _dataset data-series)
 		  (org.jfree.chart.ChartFactory/createScatterPlot
 		   main-title
