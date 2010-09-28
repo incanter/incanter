@@ -119,6 +119,12 @@ Examples:
 (defmethod get-cell-value :date                  [cell] (. cell getDateCellValue))
 (defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
 
+(defn- cell-iterator [^HSSFRow row]
+  (for [idx (range (.getFirstCellNum row) (.getLastCellNum row))]
+    (if-let [cell (.getCell row idx)]
+      cell
+      (.createCell row idx Cell/CELL_TYPE_BLANK))))
+
 (defn ^{:doc "Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.
 Options are:
@@ -147,9 +153,8 @@ Options are:
 	(let [workbook  (HSSFWorkbook. in-fs)
 	      sheet     (get-workbook-sheet workbook sheet-pointer)
 	      rows-it   (iterator-seq (. sheet iterator))
-	      rowi      (. (first rows-it) iterator)
-	      colnames  (doall (map get-cell-value (iterator-seq rowi)))
-	      data      (map #(iterator-seq (. % iterator)) (rest rows-it))]
+	      rowi      (cell-iterator (first rows-it))
+	      colnames  (doall (map get-cell-value rowi))
+	      data      (map #(cell-iterator %) (rest rows-it))]
 	  (dataset colnames
 		   (map (fn [d] (map get-cell-value d)) data))))))
-
