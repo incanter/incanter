@@ -1,30 +1,39 @@
 #!/bin/sh
 
 cd ./modules/incanter-core
+lein deps
 lein push
 
 cd ../incanter-io
+lein deps
 lein push
 
 cd ../incanter-charts
+lein deps
 lein push
 
 cd ../incanter-processing
+lein deps
 lein push
 
 cd ../incanter-mongodb
+lein deps
 lein push
 
 cd ../incanter-pdf
+lein deps
 lein push
 
 cd ../incanter-latex
+lein deps
 lein push
 
 cd ../incanter-excel
+lein deps
 lein push
 
 cd ../..
+lein deps
 lein push
 
 
