@@ -57,7 +57,51 @@ namespace.
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
-    
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/Distribution">Distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/beta-distribution">beta-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/binomial-distribution">binomial-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/cdf">cdf</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/chisq-distribution">chisq-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/combination-distribution">combination-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/draw">draw</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/exponential-distribution">exponential-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/f-distribution">f-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/gamma-distribution">gamma-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/integer-distribution">integer-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/mean">mean</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/neg-binomial-distribution">neg-binomial-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/normal-distribution">normal-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/pdf">pdf</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/poisson-distribution">poisson-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/roulette-wheel">roulette-wheel</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/support">support</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/t-distribution">t-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/test-statistic-distribution">test-statistic-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/uniform-distribution">uniform-distribution</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.distributions/variance">variance</a>
+    </div>
     <br />
   </div>
 </div>
@@ -77,7 +121,581 @@ namespace.
 
 <br />
 <h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/Distribution">Distribution</h2>
+  <span id="var-type">var</span><br />
+  <pre id="var-usage"></pre>
+  <pre id="var-docstr">
+  The distribution protocol defines operations on probability distributions.
+	Distributions may be univariate (defined over scalars) or multivariate
+	(defined over vectors). Distributions may be discrete or continuous.
 
+	For a list of types that implement the protocol run (extenders Distribution).
+	Implementations are provided for the various Clojure collection datatypes.
+	See the example below for using the distribution methods on these types.
+
+	See also:
+		pdf, cdf, draw, support
+
+	References:
+		<a href="http://en.wikipedia.org/wiki/Probability_distribution">http://en.wikipedia.org/wiki/Probability_distribution</a>
+
+	Examples:
+	  (support [1 3 4 2 1 3 4 2]) ; returns the set #{1 2 3 4}
+		(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}
+		(pdf [2 1 2] 1) ; returns the value 1/3
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 </pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L31" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/beta-distribution">beta-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (beta-distribution)
+       (beta-distribution alpha beta)
+</pre>
+  <pre id="var-docstr">Returns a Beta distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  alpha      (default 1)
+  beta       (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html</a>
+  <a href="http://en.wikipedia.org/wiki/Beta_distribution">http://en.wikipedia.org/wiki/Beta_distribution</a>
+
+Example:
+  (pdf (beta-distribution 1 2) 0.5)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L510" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/binomial-distribution">binomial-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (binomial-distribution)
+       (binomial-distribution n p)
+</pre>
+  <pre id="var-docstr">Returns a Binomial distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  size       (default 1)
+  prob       (default 1/2)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html</a>
+  <a href="http://en.wikipedia.org/wiki/Binomial_distribution">http://en.wikipedia.org/wiki/Binomial_distribution</a>
+
+Example:
+  (pdf (binomial-distribution 20 1/4) 10)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L538" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/cdf">cdf</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (cdf d v)
+</pre>
+  <pre id="var-docstr">
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns the value of the cumulative density function for the
+  distribution d at support v.
+
+	See also:
+	  Distribution, pdf, draw, support
+
+	References:
+	  <a href="http://en.wikipedia.org/wiki/Cumulative_distribution_function">http://en.wikipedia.org/wiki/Cumulative_distribution_function</a>
+
+	Examples:
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 </pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/chisq-distribution">chisq-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (chisq-distribution)
+       (chisq-distribution df)
+</pre>
+  <pre id="var-docstr">Returns a Chi-square distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  df         (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html</a>
+  <a href="http://en.wikipedia.org/wiki/Chi_square_distribution">http://en.wikipedia.org/wiki/Chi_square_distribution</a>
+
+Example:
+  (pdf (chisq-distribution 2) 5.0)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L566" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/combination-distribution">combination-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (combination-distribution n k)
+</pre>
+  <pre id="var-docstr">
+	Create a distribution of all the k-sized combinations of n integers.
+	Can be considered a multivariate distribution over k-dimensions, where
+	each dimension is a discrete random variable on the (0, n] range (though
+	these variables are decidedly non-independent).
+
+	A draw from this distribution can also be considered a sample without
+	replacement from any finite set, where the values in the returned
+	vector represent the indices of the items in the set.
+
+	Arguments:
+		n		The number of possible items from which to select.
+		k		The size of a sample (without replacement) to draw.
+
+	See also:
+		test-statistic-distribution, integer-distribution, pdf, cdf, draw, support
+
+	References:
+		<a href="http://en.wikipedia.org/wiki/Combination">http://en.wikipedia.org/wiki/Combination</a>
+
+	Examples:
+		</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L348" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/draw">draw</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (draw d)
+</pre>
+  <pre id="var-docstr">
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns a randomly drawn value from the support of distribution d. 
+
+	See also:
+	  Distribution, pdf, cdf, support
+
+	Examples:
+		(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/exponential-distribution">exponential-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (exponential-distribution)
+       (exponential-distribution rate)
+</pre>
+  <pre id="var-docstr">Returns a Exponential distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  rate       (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html</a>
+  <a href="http://en.wikipedia.org/wiki/Exponential_distribution">http://en.wikipedia.org/wiki/Exponential_distribution</a>
+
+Example:
+  (pdf (exponential-distribution 1/2) 2.0)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L593" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/f-distribution">f-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (f-distribution)
+       (f-distribution df1 df2)
+</pre>
+  <pre id="var-docstr">Returns a F-distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  df1        (default 1)
+  df2        (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://en.wikipedia.org/wiki/F_distribution">http://en.wikipedia.org/wiki/F_distribution</a>
+  <a href="http://mathworld.wolfram.com/F-Distribution.html">http://mathworld.wolfram.com/F-Distribution.html</a>
+
+Example:
+  (pdf (f-distribution 5 2) 1.0)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L633" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/gamma-distribution">gamma-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (gamma-distribution)
+       (gamma-distribution shape rate)
+</pre>
+  <pre id="var-docstr">Returns a Gamma distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  shape      (default 1)
+  rate       (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html</a>
+  <a href="http://en.wikipedia.org/wiki/Gamma_distribution">http://en.wikipedia.org/wiki/Gamma_distribution</a>
+
+Example:
+  (pdf (gamma-distribution 1 2) 10)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L663" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/integer-distribution">integer-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (integer-distribution)
+       (integer-distribution end)
+       (integer-distribution start end)
+</pre>
+  <pre id="var-docstr">
+  Create a uniform distribution over a set of integers over
+	the (start, end] interval. An alternative method of creating
+	a distribution would be to just use a sequence of integers
+	(e.g. (draw (range 100000))). For large sequences, like the one
+	in the example, using a sequence will be require realizing the
+	entire sequence before a draw can be taken. This less efficient than
+	computing random draws based on the end points of the distribution.
+
+	Arguments:
+		start	The lowest end of the interval, such that (&gt;= (draw d) start)
+					is always true. (Default 0)
+		end		The value at the upper end of the interval, such that
+					(&gt; end (draw d)) is always true. Note the strict inequality.
+					(Default 1)
+
+	See also:
+		pdf, cdf, draw, support
+
+	References:
+		<a href="http://en.wikipedia.org/wiki/Uniform_distribution_">http://en.wikipedia.org/wiki/Uniform_distribution_</a>(discrete)
+
+	Examples:
+		(pdf (integer-distribution 0 10) 3) ; returns 1/10 for any value
+		(draw (integer-distribution -5 5))
+		(draw (integer-distribution (bit-shift-left 2 1000))) ; probably a very large value</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L268" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/mean">mean</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (mean d)
+</pre>
+  <pre id="var-docstr">mean</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/neg-binomial-distribution">neg-binomial-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (neg-binomial-distribution)
+       (neg-binomial-distribution size prob)
+</pre>
+  <pre id="var-docstr">Returns a Negative binomial distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  size       (default 10)
+  prob       (default 1/2)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html</a>
+  <a href="http://en.wikipedia.org/wiki/Negative_binomial_distribution">http://en.wikipedia.org/wiki/Negative_binomial_distribution</a>
+
+Example:
+  (pdf (neg-binomial-distribution 20 1/2) 10)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L693" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/normal-distribution">normal-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (normal-distribution)
+       (normal-distribution mean sd)
+</pre>
+  <pre id="var-docstr">
+	Returns a Normal distribution that implements the
+  incanter.distributions.Distribution protocol.
+
+	Arguments:
+		mean	The mean of the distribution. One of two parameters
+					that summarize the Normal distribution (default 0).
+		sd		The standard deviation of the distribution.
+				 	The second parameter that describes the Normal (default 1).
+
+  See also:
+      Distribution, pdf, cdf, draw, support
+
+  References:
+      <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html</a>
+      <a href="http://en.wikipedia.org/wiki/Normal_distribution">http://en.wikipedia.org/wiki/Normal_distribution</a>
+
+  Example:
+      (pdf (normal-distribution -2 (sqrt 0.5)) 1.96)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L472" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/pdf">pdf</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (pdf d v)
+</pre>
+  <pre id="var-docstr">
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns the value of the probability density/mass function for the
+  distribution d at support v.
+
+	See also:
+	  Distribution, cdf, draw, support
+
+	References:
+	  <a href="http://en.wikipedia.org/wiki/Probability_density_function">http://en.wikipedia.org/wiki/Probability_density_function</a>
+
+	Examples:
+		(pdf [2 1 2] 1) ; returns the value 1/3</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/poisson-distribution">poisson-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (poisson-distribution)
+       (poisson-distribution lambda)
+</pre>
+  <pre id="var-docstr">Returns a Poisson distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  lambda     (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html</a>
+  <a href="http://en.wikipedia.org/wiki/Poisson_distribution">http://en.wikipedia.org/wiki/Poisson_distribution</a>
+
+Example:
+  (pdf (poisson-distribution 10) 5)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L721" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/roulette-wheel">roulette-wheel</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (roulette-wheel freqs)
+</pre>
+  <pre id="var-docstr">Perform a roulette wheel selection given a list of frequencies</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L195" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/support">support</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (support d)
+</pre>
+  <pre id="var-docstr">
+	**** EXPERIMENTAL ****
+  A function of the incanter.distribution.Distribution protocol.
+
+  Returns the support of the probability distribution d.
+	For discrete distributions, the support is a set (i.e. #{1 2 3}).
+	For continuous distributions, the support is a 2 element vector
+	describing the range. For example, the uniform distribution over
+	the unit interval would return the vector [0 1].
+
+	This function is marked as experimental to note that the output
+	format might need to adapt to more complex support structures.
+	For example, what would best describe a mixture of continuous
+	distributions?
+
+	See also:
+	  Distribution, pdf, draw, support
+
+	References:
+	  <a href="http://en.wikipedia.org/wiki/Cumulative_distribution_function">http://en.wikipedia.org/wiki/Cumulative_distribution_function</a>
+
+	Examples:
+		(cdf [2 1 2 3] 2) ; returns the value 3/4 </pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/t-distribution">t-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (t-distribution)
+       (t-distribution df)
+</pre>
+  <pre id="var-docstr">Returns a Student-t distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  df         (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html</a>
+  <a href="http://en.wikipedia.org/wiki/Student-t_distribution">http://en.wikipedia.org/wiki/Student-t_distribution</a>
+
+Example:
+  (pdf (t-distribution 10) 1.2)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L750" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/test-statistic-distribution">test-statistic-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (test-statistic-distribution test-statistic n k)
+</pre>
+  <pre id="var-docstr">
+	Create a distribution of the test-statistic over the possible
+	random samples of treatment units from the possible units.
+
+	There are two methods for generating the distribution. The
+	first method is enumerating all possible randomizations and
+	performing the test statistic on each. This gives the exact
+	distribution, but is only feasible for small problems.
+
+	The second method uses a combination-distribution to sample
+	for the space of possible treatment assignments and applies
+	the test statistic the sampled randomizations. While the
+	resulting distribution is not exact, it is tractable for
+	larger problems.
+
+	The algorithm automatically chooses between the two methods
+	by computing the number of possible randomizations and
+	comparing it to *test-statistic-iterations*. If the exact
+	distribution requires fewer than *test-statistic-iterations*
+	the enumeration method is used. Otherwise, it draws
+	*test-statistic-iterations* total samples for the simulated
+	method.
+
+	By default, the algorithm uses parallel computation. This is
+	controlled by the function *test-statistic-map*, which is
+	bound to pmap by default. Bind it to map to use a single
+	thread for computation.
+
+	Arguments:
+		test-statistic	A function that takes two vectors and summarizes
+				the difference between them
+		n		The number of total units in the pool
+		k	  The number of treatment units per sample
+
+	See also:
+		combination-distribution, pdf, cdf, draw, support
+
+	References:
+		<a href="http://en.wikipedia.org/wiki/Sampling_distribution">http://en.wikipedia.org/wiki/Sampling_distribution</a>
+		<a href="http://en.wikipedia.org/wiki/Exact_test">http://en.wikipedia.org/wiki/Exact_test</a>
+		<a href="http://en.wikipedia.org/wiki/Randomization_test">http://en.wikipedia.org/wiki/Randomization_test</a>
+		<a href="http://en.wikipedia.org/wiki/Lady_tasting_tea">http://en.wikipedia.org/wiki/Lady_tasting_tea</a>
+
+	Examples:
+		</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L379" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/uniform-distribution">uniform-distribution</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (uniform-distribution)
+       (uniform-distribution min max)
+</pre>
+  <pre id="var-docstr">Returns a Uniform distribution that implements the incanter.distributions.Distribution protocol.
+
+Arguments:
+  min        (default 0)
+  max        (default 1)
+
+See also:
+  Distribution, pdf, cdf, draw, support
+
+References:
+  <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html">http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html</a>
+  <a href="http://en.wikipedia.org/wiki/Uniform_distribution">http://en.wikipedia.org/wiki/Uniform_distribution</a>
+
+Example:
+  (pdf (uniform-distribution 1.0 10.0) 5)</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/78901e1bab23ad2ac52bb82c09cc2373be500116/modules/incanter-core/src/incanter/distributions.clj#L779" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.distributions/variance">variance</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (variance d)
+</pre>
+  <pre id="var-docstr">variance</pre>
+  
+  
+  
+</div>
 
 
 </div>

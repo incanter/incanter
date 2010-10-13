@@ -57,7 +57,17 @@ namespace.
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
-    
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.optimize/derivative">derivative</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.optimize/gradient">gradient</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.optimize/hessian">hessian</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.optimize/integrate">integrate</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.optimize/non-linear-model">non-linear-model</a>
+    </div>
     <br />
   </div>
 </div>
@@ -77,7 +87,248 @@ namespace.
 
 <br />
 <h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.optimize/derivative">derivative</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (derivative f &amp; options)
+</pre>
+  <pre id="var-docstr">
+Returns a function that approximates the derivative of the given function.
 
+Options:
+  :dx (default 0.0001)
+
+Examples:
+
+  (use '(incanter core optimize charts stats))
+  (defn cube [x] (* x x x))
+  (def cube-deriv (derivative cube))
+  (cube-deriv 2) ; value: 12.000600010022566
+  (cube-deriv 3) ; value: 27.00090001006572
+  (cube-deriv 4) ; value: 48.00120000993502
+
+  (def x (range -3 3 0.1))
+  (def plot (xy-plot x (map cube x)))
+  (view plot)
+  (add-lines plot x (map cube-deriv x))
+
+  ;; get the second derivative function
+  (def cube-deriv2 (derivative cube-deriv))
+  (add-lines plot x (map cube-deriv2 x))
+
+  ;; plot the normal pdf and its derivatives
+  (def plot (xy-plot x (pdf-normal x)))
+  (view plot)
+  (def pdf-deriv (derivative pdf-normal))
+  (add-lines plot x (pdf-deriv x))
+
+  ;; plot the second derivative function
+  (def pdf-deriv2 (derivative pdf-deriv))
+  (add-lines plot x (pdf-deriv2 x))</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L67" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.optimize/gradient">gradient</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (gradient f start &amp; options)
+</pre>
+  <pre id="var-docstr">
+Returns a function that calculates a 5-point approximation to
+the gradient of the given function. The vector of start values are
+used to determine the number of parameters required by the function, and
+to scale the step-size. The generated function accepts a vector of
+parameter values and a vector of x data points and returns a matrix,
+where each row is the gradient evaluated at the corresponding x value.
+
+Examples:
+
+  (use '(incanter core optimize datasets charts))
+  (defn f [theta x]
+    (+ (nth theta 0)
+          (div (* x (- (nth theta 1) (nth theta 0)))
+               (+ (nth theta 2) x))))
+
+  (def start [20 200 100])
+  (def data (to-matrix (get-dataset :thurstone)))
+  (def x (sel data :cols 1))
+  (def y (sel data :cols 0))
+  ;; view the data
+  (view (scatter-plot x y))
+
+  (def grad (gradient f start))
+  (time (doall (grad start x)))</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L250" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.optimize/hessian">hessian</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (hessian f start &amp; options)
+</pre>
+  <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
+of the given function. The vector of start values are used to determine
+the number of parameters required by the function, and to scale the
+step-size. The generated function accepts a vector of
+parameter values and a vector of x data points and returns a matrix,
+where each row with p*(p+1)/2 columns, one for each unique entry in
+the Hessian evaluated at the corresponding x value.
+
+Examples:
+
+  (use '(incanter core optimize datasets charts))
+  (defn f [theta x]
+    (+ (nth theta 0)
+          (div (* x (- (nth theta 1) (nth theta 0)))
+               (+ (nth theta 2) x))))
+
+  (def start [20 200 100])
+  (def data (to-matrix (get-dataset :thurstone)))
+  (def x (sel data :cols 1))
+  (def y (sel data :cols 0))
+  ;; view the data
+  (view (scatter-plot x y))
+
+  (time (def hess (hessian f start)))
+  (time (doall (hess start x)))</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L299" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.optimize/integrate">integrate</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (integrate f a b)
+</pre>
+  <pre id="var-docstr"> Integrate a function f from a to b
+
+
+Examples:
+  (defn f1 [x] 1)
+  (defn f2 [x] (Math/pow x 2))
+  (defn f3 [x] (* x (Math/exp (Math/pow x 2))))
+
+  (integrate f1 0 5)
+  (integrate f2 0 1)
+  (integrate f3 0 1)
+
+  ;; normal distribution
+  (def std 1)
+  (def mu 0)
+  (defn normal [x]
+    (/ 1
+      (* (* std (Math/sqrt (* 2 Math/PI)))
+        (Math/exp (/ (Math/pow (- (- x mu)) 2)
+        (* 2 (Math/pow std 2)))))))
+
+  (integrate normal 1.96 10)
+
+
+Reference:
+  <a href="http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html">http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html</a>
+  <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L25" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.optimize/non-linear-model">non-linear-model</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (non-linear-model f y x start &amp; options)
+</pre>
+  <pre id="var-docstr">
+Determine the nonlinear least-squares estimates of the
+parameters of a nonlinear model.
+Based on R's nls (non-linear least squares) function.
+
+Arguments:
+  f -- model function, takes two argumetns the first a list of parameters
+       that are to be estimated, and an x value.
+  y -- sequence of dependent data
+  x -- sequence of independent data
+  start -- start values for the parameters to be estimated
+
+Options:
+  :method (default :gauss-newton) other option :newton-raphson
+  :tol (default 1E-5)
+  :max-iter (default 200)
+
+Returns: a hash-map containing the following fields:
+  :method -- the method used
+  :coefs  -- the parameter estimates
+  :gradient  -- the estimated gradient
+  :hessian -- the estimated hessian, if available
+  :iterations -- the number of iterations performed
+  :fitted -- the fitted values of y (i.e. y-hat)
+  :rss -- the residual sum-of-squares
+  :x -- the independent data values
+  :y -- the dependent data values
+
+
+Examples:
+
+  ;; example 1
+  (use '(incanter core optimize datasets charts))
+  ;; define the Michaelis-Menton model function
+  ;; y = a + (b - a)*x/(c + x)
+  (defn f [theta x]
+    (let [[a b c] theta]
+      (plus a (div (mult x (minus b a)) (plus c x)))))
+
+  (def start [20 200 100])
+  (def data (to-matrix (get-dataset :thurstone)))
+  (def x (sel data :cols 1))
+  (def y (sel data :cols 0))
+  ;; view the data
+  (def plot (scatter-plot x y))
+  (view plot)
+
+  (def nlm (non-linear-model f y x start))
+  (add-lines plot x (:fitted nlm))
+
+
+  ;; example 2
+  (use '(incanter core optimize datasets charts))
+  ;; Chwirut data set from NIST
+  ;; <a href="http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat">http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat</a>
+  (def data (to-matrix (get-dataset :chwirut)))
+  (def x (sel data :cols 1))
+  (def y (sel data :cols 0))
+
+  ;; define model function: y = exp(-b1*x)/(b2+b3*x) + e
+  (defn f [theta x]
+    (let [[b1 b2 b3] theta]
+      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))
+
+  (def plot (scatter-plot x y :legend true))
+  (view plot)
+
+  ;; the newton-raphson algorithm fails to converge to the correct solution
+  ;; using first set of start values from NIST, but the default gauss-newton
+  ;; algorith converges to the correct solution.
+
+  (def start1 [0.1 0.01 0.02])
+  (add-lines plot x (f start1 x))
+  (def nlm1 (non-linear-model f y x start1))
+  (add-lines plot x (:fitted nlm1))
+
+  ;; both algorithms converges with second set of start values from NIST
+  (def start2 [0.15 0.008 0.010])
+  (add-lines plot x (f start2 x))
+  (def nlm2 (non-linear-model f y x start2))
+  (add-lines plot x (:fitted nlm2))</pre>
+  
+  
+  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L590" id="var-source">Source</a>
+</div>
 
 
 </div>
