@@ -66,21 +66,17 @@
     (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 
 "
-  ([^Integer size linear-model]
-    (let [x (:x linear-model)
-          y (:y linear-model)
-          pars (:coefs linear-model)
-          xtxi (solve (mmult (trans x) x))
-          resid (:residuals linear-model)
+  ([^Integer size {:keys [x y coefs residuals]}]
+    (let [xtxi (solve (mmult (trans x) x))
           shape (/ (- (nrow x) (ncol x)) 2)
-          rate (mult 1/2 (mmult (trans resid) resid))
+          rate (mult 1/2 (mmult (trans residuals) residuals))
           s-sq (div 1 (sample-gamma size :shape shape :rate rate))]
       {:coefs
         (matrix
           ;(pmap ;; run a parallel map over the values of s-sq
           (map
             (fn [s2]
-              (to-list (plus (trans pars)
+              (to-list (plus (trans coefs)
                   (mmult (trans (sample-normal (ncol x)))
                     (decomp-cholesky (mult s2 xtxi))))))
             (to-list (trans s-sq))))
