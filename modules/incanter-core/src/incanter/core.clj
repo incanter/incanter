@@ -31,7 +31,7 @@
   incanter.core
 
   (:use [incanter internal]
-	[incanter.infix :only (infix-to-prefix defop)])
+        [incanter.infix :only (infix-to-prefix defop)])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
@@ -265,8 +265,8 @@
   ([^Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
          cols (if (number? columns) [columns] columns)
-	 all-rows? (or (true? rws) (= rws :all))
-	 all-cols? (or (true? cols) (= cols :all))]
+         all-rows? (or (true? rws) (= rws :all))
+         all-cols? (or (true? cols) (= cols :all))]
     (cond
       (and (number? rows) (number? columns))
         (.getQuick mat rows columns)
@@ -281,28 +281,18 @@
 
 
 (defmethod sel [incanter.Matrix true]
-  ([^Matrix mat & options]
-   (let [opts (when options (apply assoc {} options))
-         except-rows (:except-rows opts)
-         except-columns (:except-cols opts)
-         rows (cond
-                (:rows opts)
-                  (:rows opts)
-                except-rows
-                  (except-for (.rows mat) except-rows)
-                :else
-                  true)
+  ([^Matrix mat & {:keys [rows cols except-rows except-cols filter]}]
+   (let [rows (cond
+                rows rows
+                except-rows (except-for (.rows mat) except-rows)
+                :else true)
          cols (cond
-                (:cols opts)
-                  (:cols opts)
-                except-columns
-                  (except-for (.columns mat) except-columns)
-                :else
-                  true)
-         row-filter (:filter opts)
-         mat (if (nil? row-filter) mat (matrix (filter row-filter mat)))
-	 all-rows? (or (true? rows) (= rows :all))
-	 all-cols? (or (true? cols) (= cols :all))]
+                cols cols
+                except-cols (except-for (.columns mat) except-cols)
+                :else true)
+         mat (if (nil? filter) mat (matrix (filter filter mat)))
+         all-rows? (or (true? rows) (= rows :all))
+         all-cols? (or (true? cols) (= cols :all))]
      (cond
        (and (number? rows) (number? cols))
          (.getQuick mat rows cols)
@@ -441,7 +431,6 @@
       (minus [1 2 3])
 
 "
-   ;([& args] (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args)))
    ([& args] (if (= (count args) 1)
                (combine-with 0 (first args) clojure.core/- minus)
                (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args))))
@@ -746,7 +735,6 @@
     http://en.wikipedia.org/wiki/LU_decomposition
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
-  ;([mat] (.det (cern.colt.matrix.linalg.DenseLUDecomposition. mat))))
   ([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
 
 
@@ -779,7 +767,6 @@
   "
   ([mat]
    (mapcat identity (trans mat))))
-   ;(reduce #(concat %1 (to-list %2)) '() (trans mat))))
 
 
 (defn half-vectorize
@@ -821,8 +808,8 @@
   "Returns the product of the given sequence."
   ([x]
     (let [xx (if (or (nil? x) (empty? x)) 
-	       [1] 
-	       (to-list x))]
+               [1] 
+               (to-list x))]
       (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
 
 
@@ -882,7 +869,6 @@
 "
   ([^Matrix mat]
     (Matrix. (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat))))))
-    ;(Matrix. (.viewDice (.getL (DenseCholeskyDecomposition. mat)))))
 
 
 
@@ -1109,11 +1095,8 @@
             view))
 
 "
-  ([mat on-cols & options]
-    (let [opts (when options (apply assoc {} options))
-          cols (:cols opts)
-          except-cols (:except-cols opts)
-          groups (if (coll? on-cols)
+  ([mat on-cols & {:keys [cols except-cols]}]
+    (let [groups (if (coll? on-cols)
                    (into #{} (to-list (sel mat :cols on-cols)))
                    (sort (into #{} (to-list (sel mat :cols on-cols)))))
           filter-fn (fn [group]
@@ -1168,10 +1151,10 @@
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)
         col-key (if (and
-		     (keyword? column-key) ;; if the given column name is a keyword, and
-		     (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
-		  (name column-key) ;; convert the keyword to a string
-		  column-key) ;; otherwise use the given column key
+                     (keyword? column-key) ;; if the given column name is a keyword, and
+                     (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
+                  (name column-key) ;; convert the keyword to a string
+                  column-key) ;; otherwise use the given column key
         id (if (number? col-key)
              (if (some #(= col-key %) headers)
                col-key
@@ -1196,7 +1179,7 @@
 
 (defn- submap [m ks]
   (zipmap (if (coll? ks) ks [ks]) 
-	  (map #(map-get m %) (if (coll? ks) ks [ks]))))
+          (map #(map-get m %) (if (coll? ks) ks [ks]))))
 
 
 
@@ -1220,13 +1203,13 @@
 "
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
-	 nin-fn (complement in-fn)
-	 ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
-	      :in in-fn :nin nin-fn :fn (fn [v f] (f v))
-	      :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
-	      :$in in-fn :$nin nin-fn  
-	      :$fn (fn [v f] (f v))}
-	 _and (fn [a b] (and a b))] 
+         nin-fn (complement in-fn)
+         ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
+              :in in-fn :nin nin-fn :fn (fn [v f] (f v))
+              :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+              :$in in-fn :$nin nin-fn  
+              :$fn (fn [v f] (f v))}
+         _and (fn [a b] (and a b))] 
      (fn [row] 
        (reduce _and
                (for [k (keys query-map)]
@@ -1234,11 +1217,11 @@
                    (reduce _and
                            (for [sk (keys (query-map k))]
                              (cond 
-			      (fn? sk)
-			        (sk (row k) ((query-map k) sk))
-			      (nil? (ops sk)) 
+                              (fn? sk)
+                                (sk (row k) ((query-map k) sk))
+                              (nil? (ops sk)) 
                                 (throw (Exception. (str "Invalid key in query-map: " sk)))
-			      :else
+                              :else
                                ((ops sk) (row k) ((query-map k) sk)))))
                    (= (row k) (query-map k)))))))))
 
@@ -1300,60 +1283,47 @@
 "
   ([data except-cols]
      (let [colnames (:column-names data)
-	   _except-cols (if (coll? except-cols)
-			  (map #(get-column-id data %) except-cols)
-			  [(get-column-id data except-cols)])
-	   except-names  (if (some number? _except-cols)
-			   (map #(nth colnames %) _except-cols)
-			   _except-cols)]
+           _except-cols (if (coll? except-cols)
+                          (map #(get-column-id data %) except-cols)
+                          [(get-column-id data except-cols)])
+           except-names  (if (some number? _except-cols)
+                           (map #(nth colnames %) _except-cols)
+                           _except-cols)]
        (for [name colnames :when (not (some #{name} except-names))] 
-	 name))))
+         name))))
 
 
 (defmethod sel [::dataset true]
-  ([data & options]
-    (let [opts (when options (apply assoc {} options))
-	  except-rows (:except-rows opts)
-	  except-cols (:except-cols opts)
-          rows (cond
-		(:rows opts)
-		  (:rows opts) 
-		except-rows
-		  (except-for (nrow data) except-rows)
-		:else
-		  true)
+  ([data & {:keys [rows cols except-rows except-cols filter]}]
+    (let [rows (cond
+                 rows rows
+                 except-rows (except-for (nrow data) except-rows)
+                :else true)
           cols (cond 
-		(:cols opts)
-                  (cond 
-		    (coll? (:cols opts))
-		      (:cols opts)
-		    (or (= :all (:cols opts)) (true? (:cols opts)))
-		      (:column-names data)
-		    :else
-		      [(:cols opts)])
-		except-cols
-		  (except-for-cols data except-cols)
-		:else
-		  (:column-names data))
-          row-filter (:filter opts)
+                 cols (cond 
+                        (coll? cols) cols
+                        (or (= :all cols) (true? cols)) (:column-names data)
+                        :else [cols])
+                except-cols (except-for-cols data except-cols)
+                :else (:column-names data))
           selected-rows (cond
                           (or (= rows :all) (true? rows)) 
-			    (:rows data)
+                            (:rows data)
                           (number? rows) 
-			    (list (nth (:rows data) rows))
+                            (list (nth (:rows data) rows))
                           (coll? rows) 
-			    (map #(nth (:rows data) %) rows))
+                            (map #(nth (:rows data) %) rows))
           _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
-          result (if (nil? row-filter) _data (filter row-filter _data))]
+          result (if (nil? filter) _data (clojure.core/filter filter _data))]
       (cond 
         (= (count cols) 1)
           (if (= (count result) 1) 
-	    (ffirst result)
-	    (mapcat identity result))
-	(= (count result) 1)
-	  (first result)
-	:else
-	(dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
+            (ffirst result)
+            (mapcat identity result))
+        (= (count result) 1)
+          (first result)
+        :else
+        (dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
 
 
 (defn to-dataset
@@ -1374,44 +1344,43 @@
      (to-dataset [{\"a\" 1 \"b\" 2 \"c\" 3} {\"a\" 1 \"b\" 2 \"c\" 3}])
 
 "
-  ([obj & options]
-     (let [opts (when options (apply assoc {} options))
-	   transpose? (true? (:transpose opts))
-	   colnames (cond
-		     (dataset? obj)
-		       (:column-names obj)
-		     (map? obj)
-		       (keys obj)
-		     (coll? obj)
-		       (cond 
-			(map? (first obj))
-			  (keys (first obj))
-			(coll? (first obj))
-			  (map #(keyword (str "col-" %)) (range (length (first obj))))
-			transpose?
-			  (map #(keyword (str "col-" %)) (range (length obj)))
-			:else
-			  [:col-0])
-		     :else
-		       [:col-0]) 
-	   rows (cond
-		 (dataset? obj)
-		   (:rows obj)
-		 (map? obj)
-		   ;; see if any of the values are collections
-		   (if (reduce #(or %1 %2) (map coll? (vals obj))) 
-		     (vals obj)
-		     [(vals obj)])
-		   (coll? obj)
-		     (cond
-		       (coll? (first obj)) 
-		         obj
-		       transpose?
-		         [obj]
-		       :else
-		         obj)
-		   :else
-		     [obj])]
+  ([obj & {:keys [transpose]}]
+     (let [transpose? (true? transpose)
+           colnames (cond
+                     (dataset? obj)
+                       (:column-names obj)
+                     (map? obj)
+                       (keys obj)
+                     (coll? obj)
+                       (cond 
+                        (map? (first obj))
+                          (keys (first obj))
+                        (coll? (first obj))
+                          (map #(keyword (str "col-" %)) (range (length (first obj))))
+                        transpose?
+                          (map #(keyword (str "col-" %)) (range (length obj)))
+                        :else
+                          [:col-0])
+                     :else
+                       [:col-0]) 
+           rows (cond
+                 (dataset? obj)
+                   (:rows obj)
+                 (map? obj)
+                   ;; see if any of the values are collections
+                   (if (reduce #(or %1 %2) (map coll? (vals obj))) 
+                     (vals obj)
+                     [(vals obj)])
+                   (coll? obj)
+                     (cond
+                       (coll? (first obj)) 
+                         obj
+                       transpose?
+                         [obj]
+                       :else
+                         obj)
+                   :else
+                     [obj])]
          (dataset colnames rows))))
 
 
@@ -1462,10 +1431,10 @@
   ([& args]
      (reduce (fn [A B] 
                    (let [a (to-dataset A :transpose true)
-			 b (to-dataset B :transpose true)]
-		     (dataset (:column-names a) 
-			      (concat (to-list a) (to-list b)))))
-	     args)))
+                         b (to-dataset B :transpose true)]
+                     (dataset (:column-names a) 
+                              (concat (to-list a) (to-list b)))))
+             args)))
 
 
 
@@ -1582,18 +1551,18 @@
          ($ cols data $data)))
   ([rows cols data]
      (let [except-rows? (and (vector? rows) (= :not (first rows)))
-	   except-cols? (and (vector? cols) (= :not (first cols)))
-	   _rows (if except-rows?
-		   (if (coll? (second rows))
-		     (conj [:except-rows] (second rows))
-		     (conj [:except-rows] (rest rows)))		     
-		   [:rows rows])
-	   _cols (if except-cols?
-		   (if (coll? (second cols)) 
-		     (conj [:except-cols] (second cols))
-		     (conj [:except-cols] (rest cols)))
-		   [:cols cols])
-	   args (concat _rows _cols)]
+           except-cols? (and (vector? cols) (= :not (first cols)))
+           _rows (if except-rows?
+                   (if (coll? (second rows))
+                     (conj [:except-rows] (second rows))
+                     (conj [:except-rows] (rest rows)))              
+                   [:rows rows])
+           _cols (if except-cols?
+                   (if (coll? (second cols)) 
+                     (conj [:except-cols] (second cols))
+                     (conj [:except-cols] (rest cols)))
+                   [:cols cols])
+           args (concat _rows _cols)]
        (apply sel data args))))
 
 
@@ -1692,31 +1661,31 @@
      ($rollup summary-fun col-name group-by $data))
   ([summary-fun col-name group-by data]
      (let [key-fn (if (coll? col-name) 
-		    (fn [row] 
-		      (into [] (map #(map-get row %) col-name)))
-		    (fn [row] 
-		      (map-get row col-name)))
-	   rows (:rows data)
-	   rollup-fns {:max (fn [col-data] (apply max col-data))
-		       :min (fn [col-data] (apply min col-data))
-		       :sum (fn [col-data] (apply + col-data))
-		       :count count
-		       :mean (fn [col-data] (/ (apply + col-data) (count col-data)))}
-	   rollup-fn (if (keyword? summary-fun)
-		       (rollup-fns summary-fun)
-		       summary-fun)]
+                    (fn [row] 
+                      (into [] (map #(map-get row %) col-name)))
+                    (fn [row] 
+                      (map-get row col-name)))
+           rows (:rows data)
+           rollup-fns {:max (fn [col-data] (apply max col-data))
+                       :min (fn [col-data] (apply min col-data))
+                       :sum (fn [col-data] (apply + col-data))
+                       :count count
+                       :mean (fn [col-data] (/ (apply + col-data) (count col-data)))}
+           rollup-fn (if (keyword? summary-fun)
+                       (rollup-fns summary-fun)
+                       summary-fun)]
        (loop [cur rows reduced-rows {}]
-	 (if (empty? cur)
-	   (let [group-cols (to-dataset (keys reduced-rows))
-		 res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
-	     (col-names res (concat (col-names group-cols)
-				    (if (coll? col-name) col-name [col-name]))))
-	   (recur (next cur)
-		  (let [row (first cur)
-			k (submap row group-by)
-			a (reduced-rows k)
-			b (key-fn row)]
-		    (assoc reduced-rows k (if a (conj a b) [b])))))))))
+         (if (empty? cur)
+           (let [group-cols (to-dataset (keys reduced-rows))
+                 res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
+             (col-names res (concat (col-names group-cols)
+                                    (if (coll? col-name) col-name [col-name]))))
+           (recur (next cur)
+                  (let [row (first cur)
+                        k (submap row group-by)
+                        a (reduced-rows k)
+                        b (key-fn row)]
+                    (assoc reduced-rows k (if a (conj a b) [b])))))))))
 
 
 (defn $order
@@ -1740,10 +1709,10 @@
      ($order cols order $data))
   ([cols order data]
      (let [key-cols (if (coll? cols) cols [cols])
-	   key-fn (fn [row] (into [] (map #(map-get row %) key-cols)))
-	   comp-fn (if (= order :desc)
-		     (comparator (fn [a b] (pos? (compare a b))))
-		     compare)]
+           key-fn (fn [row] (into [] (map #(map-get row %) key-cols)))
+           comp-fn (if (= order :desc)
+                     (comparator (fn [a b] (pos? (compare a b))))
+                     compare)]
        (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
 
 
@@ -1818,17 +1787,17 @@
      ($group-by cols $data))
   ([cols data]
      (let [n (nrow data)
-	   rows (:rows data)]
+           rows (:rows data)]
        (loop [r 0 grouped-rows {}]
-	 (if (= r n) 
-	   (let [group-cols (keys grouped-rows)
- 		 res (apply assoc {} (interleave group-cols (map to-dataset (vals grouped-rows))))]
- 	     res)
-	   (recur (inc r) 
-		  (let [row (nth rows r)
-			k (submap row cols)
-			k-rows (grouped-rows k)]
-		    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
+         (if (= r n) 
+           (let [group-cols (keys grouped-rows)
+                 res (apply assoc {} (interleave group-cols (map to-dataset (vals grouped-rows))))]
+             res)
+           (recur (inc r) 
+                  (let [row (nth rows r)
+                        k (submap row cols)
+                        k-rows (grouped-rows k)]
+                    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
 
 
 (defn matrix-map
@@ -1951,17 +1920,17 @@
      ($join [left-keys right-keys] left-data $data))
   ([[left-keys right-keys] left-data right-data]
      (let [left-keys (if (coll? left-keys) left-keys [left-keys])
-	   right-keys (if (coll? right-keys) right-keys [right-keys])
-	   index (apply hash-map 
-			(interleave 
-			 (map (fn [row] 
-				(apply hash-map 
-				       (interleave right-keys 
-						   (map #(map-get (submap row left-keys) %) 
-							left-keys)))) 
-			      (:rows left-data))
-			 (map #(reduce dissoc % left-keys) (:rows left-data))))
-	   rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
+           right-keys (if (coll? right-keys) right-keys [right-keys])
+           index (apply hash-map 
+                        (interleave 
+                         (map (fn [row] 
+                                (apply hash-map 
+                                       (interleave right-keys 
+                                                   (map #(map-get (submap row left-keys) %) 
+                                                        left-keys)))) 
+                              (:rows left-data))
+                         (map #(reduce dissoc % left-keys) (:rows left-data))))
+           rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
 
@@ -1990,7 +1959,7 @@
 
 
       (def data (to-dataset [{:subject \"John Smith\" :time 1 :age 33 :weight 90 :height 1.87}
-		             {:subject \"Mary Smith\" :time 1 :height 1.54}]))
+                             {:subject \"Mary Smith\" :time 1 :height 1.54}]))
       (view data)
       (view (deshape :group-by [:subject :time] :merge [:age :weight :height] :data data))
       (view (deshape :merge [:age :weight :height] :data data))
@@ -2001,35 +1970,33 @@
 
 
 "
-  ([& options]
-     (let [opts (when options (apply assoc {} options))
-	   data (or (:data opts) $data)
+  ([& {:keys [data remove-na group-by merge] :or {remove-na true}}]
+     (let [data (or data $data)
            colnames (col-names data)
-	   remove-na? (if (false? (:remove-na opts)) false true)
-	   _group-by (into #{} (when (:group-by opts)
-				 (if (coll? (:group-by opts)) 
-				   (:group-by opts)
-				   [(:group-by opts)])))
-	   _merge (into #{} (when (:merge opts)
-			      (if (coll? (:merge opts)) 
-				(:merge opts)
-				[(:merge opts)])))
+           _group-by (into #{} (when group-by
+                                 (if (coll? group-by) 
+                                   group-by 
+                                   [group-by])))
+           _merge (into #{} (when merge
+                                (if (coll? merge) 
+                                  merge
+                                  [merge])))
            __group-by (if (empty? _group-by)
-			(clojure.set/difference (into #{} (col-names data)) _merge)
-			_group-by)
-	   __merge (if (empty? _merge)
-			(clojure.set/difference (into #{} (col-names data)) _group-by)
-			_merge)
-	   deshaped-data (mapcat (fn [row] 
-				   (let [base-map (zipmap __group-by 
-							  (map #(map-get row % colnames) __group-by))]
-				     (filter identity 
-					     (map (fn [k] 
-						    (if (and remove-na? (nil? (map-get row k colnames)))
-						      nil
-						      (assoc base-map :variable k :value (map-get row k colnames)))) 
-						  __merge))))
-				 (:rows data))]
+                        (clojure.set/difference (into #{} (col-names data)) _merge)
+                        _group-by)
+           __merge (if (empty? _merge)
+                        (clojure.set/difference (into #{} (col-names data)) _group-by)
+                        _merge)
+           deshaped-data (mapcat (fn [row] 
+                                   (let [base-map (zipmap __group-by 
+                                                          (map #(map-get row % colnames) __group-by))]
+                                     (filter identity 
+                                             (map (fn [k] 
+                                                    (if (and remove-na (nil? (map-get row k colnames)))
+                                                      nil
+                                                      (assoc base-map :variable k :value (map-get row k colnames)))) 
+                                                  __merge))))
+                                 (:rows data))]
        (to-dataset deshaped-data))))
 
 
@@ -2128,15 +2095,12 @@
     (categorical-var :levels [1 2 3])
 
 "
-  ([& args]
-   (let [opts (when args (apply assoc {} args))
-         data (:data opts)
-         ordered? (if (false? (:ordered? opts)) true false)
-         labels (or (:labels opts)
+  ([& {:keys [data ordered? labels levels] :or {ordered? false}}]
+     (let [labels (or labels
                     (if (nil? data)
-                      (:levels opts)
+                      levels
                       (sort (into #{} data))))
-         levels (or (:levels opts) (range (count labels)))]
+           levels (or levels (range (count labels)))]
     {:ordered? ordered?
      :labels labels
      :levels levels
@@ -2200,12 +2164,10 @@
                                 of binary dummy variables, otherwise converts
                                 them into numeric codes.
 "
-  ([dataset & options]
-    (let [opts (when options (apply assoc {} options))
-          dummies? (if (true? (:dummies opts)) true false)]
-      (reduce bind-columns
-              (map #(string-to-categorical dataset % dummies?)
-                    (range (count (keys (:column-names dataset)))))))))
+  ([dataset & {:keys [dummies] :or {dummies false}}]
+     (reduce bind-columns
+            (map #(string-to-categorical dataset % dummies)
+                 (range (count (keys (:column-names dataset))))))))
 
 
 ;(defn- transpose-seq [coll]
@@ -2321,13 +2283,11 @@
 
 
 "
-  ([data & options]
-   (let [opts (when options (apply assoc {} options))
-         lower? (if (false? (:lower opts)) false true)
-         n (count data)
+  ([data & {:keys [lower] :or {lower true}}]
+   (let [n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
          mat (incanter.Matrix. p p 0)
-         indices (if lower?
+         indices (if lower
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
      (doseq [idx (range n)]
@@ -2416,11 +2376,10 @@
 
 
 (defmethod view incanter.Matrix
-  ([obj & options]
-    (let [opts (when options (apply assoc {} options))
-          col-names (or (:column-names opts) (range (ncol obj)))
-          m (ncol obj)
-          n (nrow obj)]
+  ([obj & {:keys [column-names]}]
+     (let [col-names (or column-names (range (ncol obj)))
+           m (ncol obj)
+           n (nrow obj)]
       (doto (JFrame. "Incanter Matrix")
         (.add (JScrollPane.
                 (JTable.
@@ -2459,14 +2418,14 @@
 (defmethod view java.awt.Image
   ([obj & options]
      (let [icon (javax.swing.ImageIcon. obj)
-	   label (javax.swing.JLabel. icon)
-	   height (+ 15 (.getIconHeight icon))
-	   width (+ 15 (.getIconWidth icon))] 
+           label (javax.swing.JLabel. icon)
+           height (+ 15 (.getIconHeight icon))
+           width (+ 15 (.getIconWidth icon))] 
        (doto (javax.swing.JFrame. "Incanter Image")
-	 (.add (javax.swing.JScrollPane. label))
-	 (.setSize height width)
-	 .pack
-	 (.setVisible true)))))
+         (.add (javax.swing.JScrollPane. label))
+         (.setSize height width)
+         .pack
+         (.setVisible true)))))
 
 
 
@@ -2488,8 +2447,8 @@
   ([data]
    (let [col-names (:column-names data)
          column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-	 table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
-							   (java.util.Vector. col-names))]
+         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
+                                                           (java.util.Vector. col-names))]
      
      (javax.swing.JTable. table-model))))
 
@@ -2514,7 +2473,7 @@
           table (data-table data)]
       (view table)
       (sliders [species [\"setosa\" \"virginica\" \"versicolor\"]
-	        min-petal-length (range 0 8 0.1)]
+                min-petal-length (range 0 8 0.1)]
         (set-data table ($where {:Species species 
                                  :Petal.Length {:gt min-petal-length}} 
                                 data))))
@@ -2526,9 +2485,9 @@
 (defmethod set-data javax.swing.JTable
 ([table data] 
    (let [col-names (:column-names data)
-	 column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-	 table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
-							   (java.util.Vector. col-names))] 
+         column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
+         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
+                                                           (java.util.Vector. col-names))] 
      (.setModel table table-model))))
 
 
@@ -2611,20 +2570,20 @@
   and z calculated by applying f to the combinations of x and y."
   ([f x-min x-max y-min y-max]
      (let [x-vals (range x-min x-max (/ (- x-max x-min) 100))
-	   y-vals (range y-min y-max (/ (- y-max y-min) 100))
-	   xyz (for [_x x-vals _y y-vals] [_x _y (f _x _y)])
-	   transpose #(list (conj (first %1) (first %2))
-			    (conj (second %1) (second %2))
-			    (conj (nth %1 2) (nth %2 2)))]
+           y-vals (range y-min y-max (/ (- y-max y-min) 100))
+           xyz (for [_x x-vals _y y-vals] [_x _y (f _x _y)])
+           transpose #(list (conj (first %1) (first %2))
+                            (conj (second %1) (second %2))
+                            (conj (nth %1 2) (nth %2 2)))]
        (reduce transpose [[] [] []] xyz))))
 
 
 
 
 
-(defop '- 50 'incanter.core/minus)
+(defop '- 60 'incanter.core/minus)
 (defop '+ 60 'incanter.core/plus)
-(defop '/ 70 'incanter.core/div)
+(defop '/ 80 'incanter.core/div)
 (defop '* 80 'incanter.core/mult)
 (defop '<*> 80 'incanter.core/mmult)
 (defop '<x> 80 'incanter.core/kronecker)

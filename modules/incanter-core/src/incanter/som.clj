@@ -188,14 +188,13 @@
     http://en.wikipedia.org/wiki/Self-organizing_map
 
 "
-  ([data & options]
-   (let [opts (when options (apply assoc {} options))
-         alpha-init (or (:alpha opts) 0.5)
-         beta-init (or (:beta opts) 3)
-         total-cycles (or (:cycles opts) 10)]
-    (loop [r 1 som (som-initialize-linear data) fit []]
-      (if (= r total-cycles)
-        (assoc som :fit fit)
-        (let [new-som (som-update-weights r total-cycles (som-update-cells data som)
-                                          alpha-init beta-init)]
-          (recur (inc r) new-som (conj fit (som-fitness data new-som)))))))))
+([data & {:keys [alpha beta cycles]
+          :or {alpha 0.5
+               beta 3
+               cycles 10}}]
+   (loop [r 1 som (som-initialize-linear data) fit []]
+     (if (= r total-cycles)
+       (assoc som :fit fit)
+       (let [new-som (som-update-weights r total-cycles (som-update-cells data som)
+                                         alpha-init beta-init)]
+         (recur (inc r) new-som (conj fit (som-fitness data new-som))))))))

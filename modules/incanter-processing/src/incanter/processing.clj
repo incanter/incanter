@@ -313,13 +313,7 @@
 "
 ([rgb]
   (.getRGB (java.awt.Color. (int rgb))))
-;; (cond
-;;   (string? rgb)
-;;     (.getRGB (java.awt.Color/decode rgb))
-;;   (or (integer? rgb) (float? rgb))
-;;     (.getRGB (java.awt.Color. (int rgb)))))
 ([rgb alpha?]
-  ;;(.getRGB (java.awt.Color. (color rgb) alpha?)))
   (.getRGB (java.awt.Color. (int rgb) alpha?)))
 ([x y z]
  (if (or (float? x) (float? y) (float? z))
@@ -1665,17 +1659,13 @@
 
 
 (defmethod view :sketch
-  ([sketch & options]
-    (let [opts (when options (apply assoc {} options))
-          title (or (:title opts) "Processing Sketch")
-          width (or (:width opts) (.width (.getSize sketch)))
-          height (or (:height opts) (+ 22 (.height (.getSize sketch))))
-          exit-on-close? (true? (:exit-on-close opts))
-          [width height] (or (:size opts)
-                             [(.width (.getSize sketch))
-                              (.height (.getSize sketch))])
-          frame (javax.swing.JFrame. title)
-          ]
+  ([sketch & {:keys [title width height exit-on-close size]
+              :or {title "Processing Sketch"}}]
+    (let [width (or width (.width (.getSize sketch)))
+          height (or height (+ 22 (.height (.getSize sketch))))
+          exit-on-close? (true? exit-on-close)
+          [width height] (or size [(.width (.getSize sketch)) (.height (.getSize sketch))])
+          frame (javax.swing.JFrame. title)]
       (doto frame
             (.add sketch)
             (.setDefaultCloseOperation (if exit-on-close?
