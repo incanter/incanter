@@ -91,7 +91,7 @@ and subtitles.
   <hr />
   <h2 id="incanter.latex/add-latex">add-latex</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; options)
+  <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; {:keys [color], :or {color java.awt.Color/darkGray}})
 </pre>
   <pre id="var-docstr"> Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
 
@@ -113,13 +113,13 @@ Examples:
       view)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-latex/src/incanter/latex.clj#L83" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L79" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.latex/add-latex-subtitle">add-latex-subtitle</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; options)
+  <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; {:keys [color], :or {color java.awt.Color/darkGray}})
 </pre>
   <pre id="var-docstr"> Adds the given LaTeX equation as a subtitle to the chart.
 
@@ -136,13 +136,13 @@ Examples:
     view)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-latex/src/incanter/latex.clj#L58" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L56" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.latex/latex">latex</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (latex latex-txt &amp; options)
+  <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color], :or {color java.awt.Color/black}})
 </pre>
   <pre id="var-docstr"> Returns the given LaTeX equation rendered as an java.awt.Image.
 
@@ -165,7 +165,7 @@ Examples:
                  \\end{pmatrix}"))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-latex/src/incanter/latex.clj#L12" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L12" id="var-source">Source</a>
 </div>
 
 

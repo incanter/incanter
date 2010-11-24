@@ -84,7 +84,7 @@ namespace.
   <hr />
   <h2 id="incanter.io/read-dataset">read-dataset</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (read-dataset filename &amp; options)
+  <pre id="var-usage">Usage: (read-dataset filename &amp; {:keys [delim keyword-headers quote skip header compress-delim], :or {delim ,, quote ", skip 0, header false, keyword-headers true}})
 </pre>
   <pre id="var-docstr">
   Returns a dataset read from a file or a URL.
@@ -99,7 +99,7 @@ namespace.
 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/237b337185fd9798937ce0c416df5b7179a04e1a/modules/incanter-io/src/incanter/io.clj#L38" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/601e57d24a0653a6ca55bed5cd7d33098b7c0780/modules/incanter-io/src/incanter/io.clj#L38" id="var-source">Source</a>
 </div>
 
 

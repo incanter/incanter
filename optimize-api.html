@@ -92,7 +92,7 @@ namespace.
   <hr />
   <h2 id="incanter.optimize/derivative">derivative</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (derivative f &amp; options)
+  <pre id="var-usage">Usage: (derivative f &amp; {:keys [dx], :or {dx 1.0E-4}})
 </pre>
   <pre id="var-docstr">
 Returns a function that approximates the derivative of the given function.
@@ -129,13 +129,13 @@ Examples:
   (add-lines plot x (pdf-deriv2 x))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L67" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L67" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.optimize/gradient">gradient</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (gradient f start &amp; options)
+  <pre id="var-usage">Usage: (gradient f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
   <pre id="var-docstr">
 Returns a function that calculates a 5-point approximation to
@@ -164,13 +164,13 @@ Examples:
   (time (doall (grad start x)))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L250" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L243" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.optimize/hessian">hessian</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (hessian f start &amp; options)
+  <pre id="var-usage">Usage: (hessian f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
   <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
 of the given function. The vector of start values are used to determine
@@ -199,7 +199,7 @@ Examples:
   (time (doall (hess start x)))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L299" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L290" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -236,13 +236,13 @@ Reference:
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L25" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L25" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.optimize/non-linear-model">non-linear-model</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (non-linear-model f y x start &amp; options)
+  <pre id="var-usage">Usage: (non-linear-model f y x start &amp; {:keys [max-iter tol method], :or {max-iter 200, tol 1.0E-5, method :guass-newton}})
 </pre>
   <pre id="var-docstr">
 Determine the nonlinear least-squares estimates of the
@@ -327,7 +327,7 @@ Examples:
   (add-lines plot x (:fitted nlm2))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-core/src/incanter/optimize.clj#L590" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L577" id="var-source">Source</a>
 </div>
 
 

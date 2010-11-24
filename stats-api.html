@@ -299,13 +299,13 @@ References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1552" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1451" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/bootstrap">bootstrap</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (bootstrap data statistic &amp; options)
+  <pre id="var-usage">Usage: (bootstrap data statistic &amp; {:keys [size replacement smooth? smooth-sd], :or {replacement true, smooth? false, smooth-sd (/ (sqrt (count data)))}})
 </pre>
   <pre id="var-docstr"> Returns a bootstrap sample of the given statistic on the given data.
 
@@ -402,13 +402,13 @@ Examples:
   (quantile smooth-samp :probs [0.025 0.975])</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1704" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1595" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-beta">cdf-beta</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-beta x &amp; options)
+  <pre id="var-usage">Usage: (cdf-beta x &amp; {:keys [alpha beta lower-tail?], :or [alpha 1 beta 1 lower-tail? false]})
 </pre>
   <pre id="var-docstr"> Returns the Beta cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pbeta function.
@@ -431,13 +431,13 @@ Example:
     (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L476" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L446" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-binomial">cdf-binomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-binomial x &amp; options)
+  <pre id="var-usage">Usage: (cdf-binomial x &amp; {:keys [size prob lower-tail?], :or {size 1, prob 1/2, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the Bionomial cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pbinom
@@ -459,13 +459,13 @@ Example:
     (cdf-binomial 10 :prob 1/4 :size 20)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1098" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1022" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-chisq">cdf-chisq</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-chisq x &amp; options)
+  <pre id="var-usage">Usage: (cdf-chisq x &amp; {:keys [df lower-tail?], :or {df 1, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the Chi Square cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pchisq function.
@@ -487,7 +487,7 @@ Example:
     (cdf-chisq 5.0 :df 2 :lower-tail false)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L671" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L622" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -523,13 +523,13 @@ Examples:
   (view (scatter-plot exam1 (map ecdf exam1)))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1402" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1302" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-exp">cdf-exp</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-exp x &amp; options)
+  <pre id="var-usage">Usage: (cdf-exp x &amp; {:keys [rate], :or {rate 1}})
 </pre>
   <pre id="var-docstr"> Returns the Exponential cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pexp
@@ -549,13 +549,13 @@ Example:
     (cdf-exp 2.0 :rate 1/2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L890" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L825" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-f">cdf-f</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-f x &amp; options)
+  <pre id="var-usage">Usage: (cdf-f x &amp; {:keys [df1 df2 lower-tail?], :or {df1 1, df2 1, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the F-distribution cdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pf function.
@@ -563,6 +563,7 @@ of values, if x is a sequence. This is equivalent to R's pf function.
 Options:
   :df1 (default 1)
   :df2 (default 1)
+  :lower-tail? (default true)
 
 See also:
     pdf-f and quantile-f
@@ -576,13 +577,13 @@ Example:
     (cdf-f 1.0 :df1 5 :df2 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L118" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L115" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-gamma">cdf-gamma</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-gamma x &amp; options)
+  <pre id="var-usage">Usage: (cdf-gamma x &amp; {:keys [shape rate lower-tail?], :or {shape 1, rate 1, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the Gamma cdf for the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pgamma function.
@@ -605,13 +606,13 @@ Example:
     (cdf-gamma 3 :shape 1 :lower-tail false)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L575" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L535" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-neg-binomial">cdf-neg-binomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-neg-binomial x &amp; options)
+  <pre id="var-usage">Usage: (cdf-neg-binomial x &amp; {:keys [size prob lower-tail?], :or {size 10, prob 1/2, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the Negative Binomial cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dnbinom
@@ -619,6 +620,7 @@ of values, if x is a sequence. Same as R's dnbinom
 Options:
   :size (default 10)
   :prob (default 1/2)
+  :lower-tail? (default true)
 
 See also:
     cdf-neg-binomial and sample-neg-binomial
@@ -632,13 +634,13 @@ Example:
     (cdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1337" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1242" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-normal">cdf-normal</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-normal x &amp; options)
+  <pre id="var-usage">Usage: (cdf-normal x &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
   <pre id="var-docstr"> Returns the Normal cdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pnorm function.
@@ -659,13 +661,13 @@ Example:
     (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L192" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L186" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-poisson">cdf-poisson</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-poisson x &amp; options)
+  <pre id="var-usage">Usage: (cdf-poisson x &amp; {:keys [lambda lower-tail?], :or {lambda 1, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the Poisson cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's ppois
@@ -686,13 +688,13 @@ Example:
     (cdf-poisson 5 :lambda 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1244" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1157" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-t">cdf-t</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-t x &amp; options)
+  <pre id="var-usage">Usage: (cdf-t x &amp; {:keys [df lower-tail?], :or {df 1, lower-tail? true}})
 </pre>
   <pre id="var-docstr"> Returns the Student's t cdf for the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pt function.
@@ -712,13 +714,13 @@ Example:
     (cdf-t 1.2 :df 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L761" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L705" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/cdf-uniform">cdf-uniform</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cdf-uniform x &amp; options)
+  <pre id="var-usage">Usage: (cdf-uniform x &amp; {:keys [min max], :or {min 0.0, max 1.0}})
 </pre>
   <pre id="var-docstr"> Returns the Uniform cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's punif function.
@@ -740,7 +742,7 @@ Example:
     (cdf-uniform 5 :min 1 :max 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L378" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L355" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -751,13 +753,13 @@ Example:
   <pre id="var-docstr">In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2962" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2828" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/chisq-test">chisq-test</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (chisq-test &amp; options)
+  <pre id="var-usage">Usage: (chisq-test &amp; {:keys [x y correct table probs freq], :or {correct true}})
 </pre>
   <pre id="var-docstr">
 Performs chi-squared contingency table tests and goodness-of-fit tests.
@@ -842,7 +844,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Yates">http://en.wikipedia.org/wiki/Yates</a>'_chi-square_test</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2328" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2207" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -862,7 +864,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Correlation">http://en.wikipedia.org/wiki/Correlation</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1528" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1427" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -876,7 +878,7 @@ References:
 It is worth noting that if the relationship between values of  and values of overline y_x is linear (which is certainly true when there are only two possibilities for x) this will give the same result as the square of the correlation coefficient, otherwise the correlation ratio will be larger in magnitude. It can therefore be used for judging non-linear relationships.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2729" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2595" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -914,7 +916,7 @@ suggesting that most of the overall dispersion is a result of differences betwee
 Observe that for η = 1 the overall sample dispersion is purely due to dispersion among the categories and not at all due to dispersion within the individual categories. For a quick comprehension simply imagine all Algebra, Geometry, and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2691" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2557" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -944,7 +946,7 @@ Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
                            = 0.938572618717</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2983" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2849" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -969,7 +971,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Covariance">http://en.wikipedia.org/wiki/Covariance</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1476" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1376" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -987,13 +989,13 @@ References:
 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1831" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1720" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/detabulate">detabulate</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (detabulate &amp; options)
+  <pre id="var-usage">Usage: (detabulate &amp; {:keys [table row-labels col-labels]})
 </pre>
   <pre id="var-docstr"> Take a contingency table of counts and returns a matrix of observations.
 
@@ -1022,7 +1024,7 @@ Examples:
   (tabulate (detabulate :table (:table (tabulate data))))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2546" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2416" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1035,7 +1037,7 @@ Examples:
 Dice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3061" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2927" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1061,7 +1063,7 @@ Each set has four elements, and the intersection of these two sets has only one 
 Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3087" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2953" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1072,7 +1074,7 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
   <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Discordant_pairs">http://en.wikipedia.org/wiki/Discordant_pairs</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2838" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2704" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1085,7 +1087,7 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
 the Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2955" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2821" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1099,7 +1101,7 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
 The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2861" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2727" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1112,7 +1114,7 @@ The gamma coefficient is given as a measure of association that is highly resist
 In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3112" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2978" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1136,7 +1138,7 @@ Examples:
   (sum (mult x (indicator #(pos? %) x)))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L47" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L47" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1150,7 +1152,7 @@ Examples:
 The Jaccard distance, which measures dissimilarity between sample sets, is complementary to the Jaccard coefficient and is obtained by subtracting the Jaccard coefficient from 1, or, equivalently, by dividing the difference of the sizes of the union and the intersection of two sets by the size of the union.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3050" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2916" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1166,7 +1168,7 @@ The Jaccard index, also known as the Jaccard similarity coefficient (originally 
 The Jaccard coefficient measures similarity between sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3039" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2905" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1182,7 +1184,7 @@ best explanation and example is in "cluster analysis for researchers" page 165.
 <a href="http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175">http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2789" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2655" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1217,7 +1219,7 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
  [{:observation [1 2 3]} {} ... {}] -&gt; W</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2870" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2736" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1241,7 +1243,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Kurtosis">http://en.wikipedia.org/wiki/Kurtosis</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1589" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1488" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1258,7 +1260,7 @@ If q = 2 or q = 3 the Lee distance coincides with the Hamming distance.
 The metric space induced by the Lee distance is a discrete analog of the elliptic space.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3127" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2993" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1289,13 +1291,13 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
     * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3174" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L3040" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/linear-model">linear-model</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (linear-model y x &amp; options)
+  <pre id="var-usage">Usage: (linear-model y x &amp; {:keys [intercept], :or {intercept true}})
 </pre>
   <pre id="var-docstr">
 Returns the results of performing a OLS linear regression of y on x.
@@ -1348,13 +1350,13 @@ References:
   <a href="http://en.wikipedia.org/wiki/Coefficient_of_determination">http://en.wikipedia.org/wiki/Coefficient_of_determination</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2009" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1894" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/mahalanobis-distance">mahalanobis-distance</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (mahalanobis-distance x &amp; options)
+  <pre id="var-usage">Usage: (mahalanobis-distance x &amp; {:keys [y W centroid]})
 </pre>
   <pre id="var-docstr">Returns the Mahalanobis distance between x, which is 
   either a vector or matrix of row vectors, and the 
@@ -1414,7 +1416,7 @@ References:
 </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3277" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L3143" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1427,7 +1429,7 @@ References:
 usual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2972" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2838" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1446,7 +1448,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Mean">http://en.wikipedia.org/wiki/Mean</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1442" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1342" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1465,7 +1467,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Median">http://en.wikipedia.org/wiki/Median</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1571" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1470" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1483,7 +1485,7 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 In the limiting case of p reaching infinity we obtain the Chebyshev distance.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2931" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2797" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1496,7 +1498,7 @@ In the limiting case of p reaching infinity we obtain the Chebyshev distance.</p
 this is using actual sets here, discards dupicate n-grams?</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3073" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2939" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1510,7 +1512,7 @@ this is using actual sets here, discards dupicate n-grams?</pre>
 Kendall tau distance is the total number of discordant pairs.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2848" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2714" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1533,7 +1535,7 @@ Relation to statistical independence
 If X and Y are independent, their joint probabilities can be expressed in terms of their marginal probabilities.  In this case, the odds ratio equals one, and conversely the odds ratio can only equal one if the joint probabilities can be factored in this way. Thus the odds ratio equals one if and only if X and Y are independent.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2671" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2537" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1544,7 +1546,7 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
   <pre id="var-docstr">confusing ass name.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2825" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2691" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1555,13 +1557,13 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
   <pre id="var-docstr">returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2813" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2679" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-beta">pdf-beta</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-beta x &amp; options)
+  <pre id="var-usage">Usage: (pdf-beta x &amp; {:keys [alpha beta], :or [alpha 1 beta 1]})
 </pre>
   <pre id="var-docstr"> Returns the Beta pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dbeta function.
@@ -1582,13 +1584,13 @@ Example:
     (pdf-beta 0.5 :alpha 1 :beta 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L447" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L420" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-binomial">pdf-binomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-binomial x &amp; options)
+  <pre id="var-usage">Usage: (pdf-binomial x &amp; {:keys [size prob], :or {size 1, prob 1/2}})
 </pre>
   <pre id="var-docstr"> Returns the Bionomial pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dbinom
@@ -1609,13 +1611,13 @@ Example:
     (pdf-binomial 10 :prob 1/4 :size 20)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1068" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L995" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-chisq">pdf-chisq</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-chisq x &amp; options)
+  <pre id="var-usage">Usage: (pdf-chisq x &amp; {:keys [df], :or {df 1}})
 </pre>
   <pre id="var-docstr"> Returns the Chi Square pdf of the given value of x.  It will return a sequence
 of values, if x is a sequence. Same as R's dchisq function.
@@ -1635,13 +1637,13 @@ Example:
     (pdf-chisq 5.0 :df 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L643" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L596" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-exp">pdf-exp</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-exp x &amp; options)
+  <pre id="var-usage">Usage: (pdf-exp x &amp; {:keys [rate], :or {rate 1}})
 </pre>
   <pre id="var-docstr"> Returns the Exponential pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dexp
@@ -1661,13 +1663,13 @@ Example:
     (pdf-exp 2.0 :rate 1/2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L863" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L800" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-f">pdf-f</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-f x &amp; options)
+  <pre id="var-usage">Usage: (pdf-f x &amp; {:keys [df1 df2], :or {df1 1, df2 1}})
 </pre>
   <pre id="var-docstr"> Returns the F pdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's df function.
@@ -1688,13 +1690,13 @@ Example:
     (pdf-f 1.0 :df1 5 :df2 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L81" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L81" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-gamma">pdf-gamma</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-gamma x &amp; options)
+  <pre id="var-usage">Usage: (pdf-gamma x &amp; {:keys [shape rate], :or {shape 1, rate 1}})
 </pre>
   <pre id="var-docstr"> Returns the Gamma pdf for the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dgamma function.
@@ -1715,13 +1717,13 @@ Example:
     (pdf-gamma 10 :shape 1 :rate 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L545" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L508" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-neg-binomial">pdf-neg-binomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-neg-binomial x &amp; options)
+  <pre id="var-usage">Usage: (pdf-neg-binomial x &amp; {:keys [size prob], :or {size 10, prob 1/2}})
 </pre>
   <pre id="var-docstr"> Returns the Negative Binomial pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dnbinom
@@ -1742,13 +1744,13 @@ Example:
     (pdf-neg-binomial 10 :prob 1/2 :size 20)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1306" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1214" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-normal">pdf-normal</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-normal x &amp; options)
+  <pre id="var-usage">Usage: (pdf-normal x &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
   <pre id="var-docstr"> Returns the Normal pdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dnorm function.
@@ -1769,13 +1771,13 @@ Example:
     (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L162" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L159" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-poisson">pdf-poisson</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-poisson x &amp; options)
+  <pre id="var-usage">Usage: (pdf-poisson x &amp; {:keys [lambda], :or {lambda 1}})
 </pre>
   <pre id="var-docstr"> Returns the Poisson pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dpois
@@ -1795,13 +1797,13 @@ Example:
     (pdf-poisson 5 :lambda 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1216" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1131" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-t">pdf-t</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-t x &amp; options)
+  <pre id="var-usage">Usage: (pdf-t x &amp; {:keys [df], :or {df 1}})
 </pre>
   <pre id="var-docstr"> Returns the Student's t pdf for the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dt function.
@@ -1821,13 +1823,13 @@ Example:
     (pdf-t 1.2 :df 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L734" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L680" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/pdf-uniform">pdf-uniform</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (pdf-uniform x &amp; options)
+  <pre id="var-usage">Usage: (pdf-uniform x &amp; {:keys [min max], :or {min 0.0, max 1.0}})
 </pre>
   <pre id="var-docstr"> Returns the Uniform pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dunif function.
@@ -1849,7 +1851,7 @@ Example:
     (pdf-uniform 5 :min 1 :max 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L348" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L328" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1872,7 +1874,7 @@ Examples:
   (permute (range 10) (range 10 20))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1875" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1760" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1884,7 +1886,7 @@ Examples:
 and returns the predicted value based on the linear-model.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2659" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2525" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1940,7 +1942,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Principal_component_analysis">http://en.wikipedia.org/wiki/Principal_component_analysis</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2488" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2358" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -1951,13 +1953,13 @@ References:
   <pre id="var-docstr">the joint PMF of independent variables is equal to the product of their marginal PMFs.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2912" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2778" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/quantile">quantile</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (quantile x &amp; options)
+  <pre id="var-usage">Usage: (quantile x &amp; {:keys [probs], :or {probs (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0]))}})
 </pre>
   <pre id="var-docstr">
 Returns the quantiles of the data, x. By default it returns the min,
@@ -1976,13 +1978,13 @@ References:
   <a href="http://en.wikipedia.org/wiki/Quantile">http://en.wikipedia.org/wiki/Quantile</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1629" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1528" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/quantile-normal">quantile-normal</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (quantile-normal probability &amp; options)
+  <pre id="var-usage">Usage: (quantile-normal probability &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
   <pre id="var-docstr"> Returns the inverse of the Normal CDF for the given probability.
 It will return a sequence of values, if given a sequence of
@@ -2008,13 +2010,13 @@ Example:
     (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L221" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L212" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/quantile-t">quantile-t</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (quantile-t probability &amp; options)
+  <pre id="var-usage">Usage: (quantile-t probability &amp; {:keys [df], :or {df 1}})
 </pre>
   <pre id="var-docstr"> Returns the inverse of the Student's t CDF for the given probability
 (i.e. the quantile).  It will return a sequence of values, if x is
@@ -2041,7 +2043,7 @@ Example:
     (map #(quantile-t 0.025 :df %) df)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L791" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L732" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2053,13 +2055,13 @@ Example:
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2739" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2605" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample">sample</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample x &amp; options)
+  <pre id="var-usage">Usage: (sample x &amp; {:keys [size replacement], :or {size (count x), replacement true}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from the given collection. If replacement
 is set to false it returns a set, otherwise it returns a list.
@@ -2078,13 +2080,13 @@ Examples:
   (sample (seq "abcdefghijklmnopqrstuvwxyz")  :size 4 :replacement false) ; choose 4 random letters.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1664" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1558" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-beta">sample-beta</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-beta size &amp; options)
+  <pre id="var-usage">Usage: (sample-beta size &amp; {:keys [alpha beta], :or [alpha 1 beta 1]})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Beta distribution.
 This is equivalent to R's rbeta function.
@@ -2105,13 +2107,13 @@ Example:
     (sample-beta 1000 :alpha 1 :beta 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L513" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L479" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-binomial">sample-binomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-binomial size &amp; options)
+  <pre id="var-usage">Usage: (sample-binomial size &amp; {:keys [size prob], :or {size 1, prob 1/2}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Binomial distribution.
 Same as R's rbinom
@@ -2131,13 +2133,13 @@ Example:
     (sample-binomial 1000 :prob 1/4 :size 20)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1132" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1052" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-chisq">sample-chisq</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-chisq size &amp; options)
+  <pre id="var-usage">Usage: (sample-chisq size &amp; {:keys [df], :or {df 1}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Chi Square distribution
 Same as R's rchisq function.
@@ -2156,7 +2158,7 @@ Example:
     (sample-chisq 1000 :df 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L704" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L652" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2194,13 +2196,13 @@ Examples:
   (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1017" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L944" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-exp">sample-exp</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-exp size &amp; options)
+  <pre id="var-usage">Usage: (sample-exp size &amp; {:keys [rate], :or {rate 1}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Exponential distribution.
 Same as R's rexp
@@ -2219,13 +2221,13 @@ Example:
     (sample-exp 1000 :rate 1/2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L917" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L850" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-gamma">sample-gamma</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-gamma size &amp; options)
+  <pre id="var-usage">Usage: (sample-gamma size &amp; {:keys [shape rate], :or {shape 1, rate 1}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Gamma distribution.
 This is equivalent to R's rgamma function.
@@ -2245,13 +2247,13 @@ Example:
     (sample-gamma 1000 :shape 1 :rate 2)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L610" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L566" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-inv-wishart">sample-inv-wishart</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-inv-wishart &amp; options)
+  <pre id="var-usage">Usage: (sample-inv-wishart &amp; {:keys [scale p df], :or {p 2}})
 </pre>
   <pre id="var-docstr">
 Returns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution
@@ -2273,55 +2275,55 @@ References:
   <a href="http://en.wikipedia.org/wiki/Inverse-Wishart_distribution">http://en.wikipedia.org/wiki/Inverse-Wishart_distribution</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L986" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L916" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-multinomial">sample-multinomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-multinomial size &amp; options)
+  <pre id="var-usage">Usage: (sample-multinomial size &amp; {:keys [probs categories], :or {probs [0.5 0.5]}})
 </pre>
   <pre id="var-docstr"> Returns a sequence representing a sample from a multinomial distribution.
 
-  Arguments: size -- number of values to return
+Arguments: size -- number of values to return
 
-  Options:
-    :categories (default [0 1]) -- the values returned
-    :probs (default [0.5 0.5]) -- the probabilities associated with each category
-
-
-  References:
-    <a href="http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution">http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution</a>
+Options:
+  :categories (default [0 1]) -- the values returned
+  :probs (default [0.5 0.5]) -- the probabilities associated with each category
 
 
-  Examples:
-    (use '(incanter core stats charts))
+References:
+  <a href="http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution">http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution</a>
 
-    (sample-multinomial 10)
-    (sample-multinomial 10 :probs [0.25 0.5 0.25])
 
-    ;; estimate sample proportions
-    (def sample-size 1000.0)
-    (def categories [:red :yellow :blue :green])
-    (def data (to-dataset (sample-multinomial sample-size 
-			   	              :categories categories
-				              :probs [0.5 0.25 0.2 0.05])))
+Examples:
+  (use '(incanter core stats charts))
 
-    ;; check the sample proportions
-    (view (pie-chart categories
-                     (map #(div (count ($ :col-0 ($where {:col-0 %} data))) 
-                                sample-size)
-                          categories)))
-                      </pre>
+  (sample-multinomial 10)
+  (sample-multinomial 10 :probs [0.25 0.5 0.25])
+
+  ;; estimate sample proportions
+  (def sample-size 1000.0)
+  (def categories [:red :yellow :blue :green])
+  (def data (to-dataset (sample-multinomial sample-size 
+                                            :categories categories
+                                            :probs [0.5 0.25 0.2 0.05])))
+
+  ;; check the sample proportions
+  (view (pie-chart categories
+                   (map #(div (count ($ :col-0 ($where {:col-0 %} data))) 
+                              sample-size)
+                        categories)))
+                    </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1165" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1082" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-mvn">sample-mvn</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-mvn size &amp; options)
+  <pre id="var-usage">Usage: (sample-mvn size &amp; {:keys [mean sigma]})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Multivariate Normal
 distribution. This is equivalent to R's mvtnorm::rmvnorm function.
@@ -2358,13 +2360,13 @@ References:
   <a href="http://en.wikipedia.org/wiki/Multivariate_normal">http://en.wikipedia.org/wiki/Multivariate_normal</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L288" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L273" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-neg-binomial">sample-neg-binomial</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-neg-binomial size &amp; options)
+  <pre id="var-usage">Usage: (sample-neg-binomial nsize &amp; {:keys [size prob], :or {size 10, prob 1/2}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Negative Binomial distribution.
 Same as R's rnbinom
@@ -2384,13 +2386,13 @@ Example:
     (sample-neg-binomial 1000 :prob 1/2 :size 20)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1370" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1273" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-normal">sample-normal</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-normal size &amp; options)
+  <pre id="var-usage">Usage: (sample-normal size &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Normal distribution
 This is equivalent to R's rnorm function.
@@ -2410,7 +2412,7 @@ Example:
     (sample-normal 1000 :mean -2 :sd (sqrt 0.5))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L256" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L244" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2500,13 +2502,13 @@ Examples:
     <a href="http://en.wikipedia.org/wiki/Resampling_">http://en.wikipedia.org/wiki/Resampling_</a>(statistics)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1903" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1788" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-poisson">sample-poisson</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-poisson size &amp; options)
+  <pre id="var-usage">Usage: (sample-poisson size &amp; {:keys [lambda], :or {lambda 1}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Poisson distribution.
 Same as R's rpois
@@ -2525,13 +2527,13 @@ Example:
     (sample-poisson 1000 :lambda 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1276" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1186" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-t">sample-t</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-t size &amp; options)
+  <pre id="var-usage">Usage: (sample-t size &amp; {:keys [df], :or {df 1}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Student's t distribution.
 Same as R's rt function.
@@ -2550,13 +2552,13 @@ Example:
     (cdf-t 1000 :df 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L831" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L770" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-uniform">sample-uniform</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-uniform size &amp; options)
+  <pre id="var-usage">Usage: (sample-uniform size &amp; {:keys [min max integers], :or {min 0.0, max 1.0, integers false}})
 </pre>
   <pre id="var-docstr"> Returns a sample of the given size from a Uniform distribution.
 This is equivalent to R's runif function.
@@ -2578,13 +2580,13 @@ Example:
     (sample-uniform 1000 :min 1 :max 10)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L408" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L382" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sample-wishart">sample-wishart</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-wishart &amp; options)
+  <pre id="var-usage">Usage: (sample-wishart &amp; {:keys [scale p df], :or {p 2}})
 </pre>
   <pre id="var-docstr">
 Returns a p-by-p symmetric distribution drawn from a Wishart distribution
@@ -2606,7 +2608,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Wishart_distribution#">http://en.wikipedia.org/wiki/Wishart_distribution#</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L949" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L880" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2626,19 +2628,19 @@ References:
   <a href="http://en.wikipedia.org/wiki/Standard_deviation">http://en.wikipedia.org/wiki/Standard_deviation</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1508" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1408" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/simple-regression">simple-regression</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (simple-regression y x &amp; options)
+  <pre id="var-usage">Usage: (simple-regression y x &amp; {:keys [intercept], :or {intercept true}})
 </pre>
   <pre id="var-docstr">A stripped version of linear-model that returns a map containing only
 the coefficients.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2641" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2509" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2660,7 +2662,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Skewness">http://en.wikipedia.org/wiki/Skewness</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1610" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1509" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2682,7 +2684,7 @@ This function assumes you pass in a and b as sets.
 The sorensen index extended to abundance instead of incidence of species is called the Czekanowski index.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3148" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L3014" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2696,7 +2698,7 @@ The sorensen index extended to abundance instead of incidence of species is call
 In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2746" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2612" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2710,7 +2712,7 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
 returns the squares of the difference between each observation and the sample mean.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2618" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2486" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2724,7 +2726,7 @@ returns the squares of the difference between each observation and the sample me
 returns the sum of the squares of the difference between each observation and the sample mean.</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2631" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2499" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2737,13 +2739,13 @@ returns the sum of the squares of the difference between each observation and th
 (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -&gt; 5/2</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2902" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2768" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/sweep">sweep</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sweep x &amp; options)
+  <pre id="var-usage">Usage: (sweep x &amp; {:keys [stat fun], :or {stat-fn mean, fun minus}})
 </pre>
   <pre id="var-docstr"> Return an array obtained from an input array by sweeping out a
 summary statistic. Based to R's sweep function.
@@ -2765,13 +2767,13 @@ summary statistic. Based to R's sweep function.
     (sweep x :stat sd :fun div) ;; divide data by its sd</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1844" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1733" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.stats/t-test">t-test</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (t-test x &amp; options)
+  <pre id="var-usage">Usage: (t-test x &amp; {:keys [y mu paired conf-level alternative var-equal], :or {paired false, alternative :two-sided, conf-level 0.95, var-equal false}})
 </pre>
   <pre id="var-docstr">
 Argument:
@@ -2801,7 +2803,7 @@ References:
   <a href="http://www.socialresearchmethods.net/kb/stat_t.php">http://www.socialresearchmethods.net/kb/stat_t.php</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2131" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2014" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2861,7 +2863,7 @@ Examples:
   (tabulate data)</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2227" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2107" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2876,7 +2878,7 @@ Examples:
 The cosine similarity metric may be extended such that it yields the Jaccard coefficient in the case of binary attributes. This is the Tanimoto coefficient. </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L3018" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2884" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2895,7 +2897,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance</a></pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L1460" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L1360" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -2907,7 +2909,7 @@ References:
 y is within z of x in metric space.  </pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/d9d307e2288c6659586b6d01e85042b76831cb18/modules/incanter-core/src/incanter/stats.clj#L2611" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/50d711eecd29896c63043b7ce3e0f32fe2e38dd7/modules/incanter-core/src/incanter/stats.clj#L2479" id="var-source">Source</a>
 </div>
 
 

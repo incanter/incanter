@@ -86,7 +86,7 @@ namespace.
   <hr />
   <h2 id="incanter.excel/read-xls">read-xls</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (read-xls filename &amp; options)
+  <pre id="var-usage">Usage: (read-xls filename &amp; {:keys [sheet], :or {sheet 0}})
 </pre>
   <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.
@@ -108,13 +108,13 @@ Options are:
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/4d483ca625c9fce51ac71a4cf5cbb2fa46202ec2/modules/incanter-excel/src/incanter/excel.clj#L122" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-excel/src/incanter/excel.clj#L121" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.excel/save-xls">save-xls</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (save-xls dataset filename &amp; options)
+  <pre id="var-usage">Usage: (save-xls dataset filename &amp; {:keys [use-bold sheet], :or {use-bold true, sheet dataset}})
 </pre>
   <pre id="var-docstr">Save a dataset to an Excel file.
 Options are:
@@ -126,7 +126,7 @@ Examples:
   (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/4d483ca625c9fce51ac71a4cf5cbb2fa46202ec2/modules/incanter-excel/src/incanter/excel.clj#L43" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-excel/src/incanter/excel.clj#L43" id="var-source">Source</a>
 </div>
 
 

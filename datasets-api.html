@@ -84,7 +84,7 @@ namespace.
   <hr />
   <h2 id="incanter.datasets/get-dataset">get-dataset</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (get-dataset dataset-key &amp; options)
+  <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (System/getProperty incanter.home) (System/getenv INCANTER_HOME)), from-repo false}})
 </pre>
   <pre id="var-docstr"> Returns the sample dataset associated with the given key. Most datasets
 are from R's sample data sets, as are the descriptions below.
@@ -170,7 +170,7 @@ Datasets:
    (def data2 (get-dataset :cars :incanter.home "/usr/local/packages/incanter"))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/f7d34f60a2798bebf1cfa490b567e20ae4dc35c6/modules/incanter-io/src/incanter/datasets.clj#L91" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/601e57d24a0653a6ca55bed5cd7d33098b7c0780/modules/incanter-io/src/incanter/datasets.clj#L91" id="var-source">Source</a>
 </div>
 
 
