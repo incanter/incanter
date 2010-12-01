@@ -68,12 +68,9 @@ namespace.
   - <span id="header-project">Incanter</span> <span id="header-version">next</span> (<span id="header-status">in development</span>)
   </h1>
 
-<br />Usage:
-<pre>
-(ns your-namespace
-  (:require <span id="long-name">incanter.datasets</span>))
-</pre><pre>
-</pre><h2>Overview</h2>
+<br />Full namespace name: <span id="long-name">incanter.datasets</span>
+<p></p>
+<h2>Overview</h2>
 <pre id="namespace-docstr"></pre>
 
 
@@ -84,7 +81,7 @@ namespace.
   <hr />
   <h2 id="incanter.datasets/get-dataset">get-dataset</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (System/getProperty incanter.home) (System/getenv INCANTER_HOME)), from-repo false}})
+  <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (System/getProperty incanter.home) (System/getenv INCANTER_HOME)), from-repo true}})
 </pre>
   <pre id="var-docstr"> Returns the sample dataset associated with the given key. Most datasets
 are from R's sample data sets, as are the descriptions below.
@@ -170,7 +167,7 @@ Datasets:
    (def data2 (get-dataset :cars :incanter.home "/usr/local/packages/incanter"))</pre>
   
   
-  <a href="http://github.com/liebke/incanter/blob/601e57d24a0653a6ca55bed5cd7d33098b7c0780/modules/incanter-io/src/incanter/datasets.clj#L91" id="var-source">Source</a>
+  <a href="http://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-io/src/incanter/datasets.clj#L91" id="var-source">Source</a>
 </div>
 
 
