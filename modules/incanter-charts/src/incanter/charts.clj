@@ -30,7 +30,8 @@
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
                               bind-columns view save $group-by conj-cols 
 			      grid-apply set-data)]
-        [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
+        [incanter.stats :only (quantile quantile-normal cumulative-mean sd)]
+        iterate)
   (:import  (java.io File)
             (javax.imageio ImageIO)
 	    (javax.swing JSlider JFrame JLabel JPanel)
@@ -513,8 +514,12 @@
            line-renderer (XYLineAndShapeRenderer. true false)
            ;; data-set (.getDataset data-plot)
 	   data-set (XYSeriesCollection.)]
-    (do
-      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+       (do
+         (iter {for x in _x}
+               {for y in _y}
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
@@ -538,7 +543,11 @@
            line-renderer (XYLineAndShapeRenderer. true false)
            data-set (XYSeriesCollection.)]
     (do
-      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+      (iter {for x in _x}
+            {for y in _y}
+            (if (and (not (nil? x))
+                     (not (nil? y)))
+              (.add data-series (double x) (double y))))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
@@ -686,7 +695,11 @@
 	  line-renderer (XYLineAndShapeRenderer. false true)
 	  data-set (XYSeriesCollection.)]
       (do
-	(doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+	(iter {for x in _x}
+              {for y in _y}
+              (if (and (not (nil? x))
+                       (not (nil? y)))
+                (.add data-series (double x) (double y))))
 	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
 	(.addSeries data-set data-series)
@@ -938,9 +951,12 @@
 	  data-series (XYSeries. series-lab)
 	  dataset (XYSeriesCollection.)
 	  chart (do
-              (doseq [i (range (count __x))] 
-		        (.add data-series (nth __x i)  (nth __y i)))
-               (.addSeries dataset data-series)
+                  (iter {for x in __x}
+                        {for y in __y}
+                        (if (and (not (nil? x))
+                                 (not (nil? y)))
+                          (.add data-series (double x) (double y))))
+              (.addSeries dataset data-series)
                     (create-plot
                         main-title
                         x-lab
@@ -1119,7 +1135,10 @@
 	  data-series (XYSeries. series-lab)
 	  _dataset (XYSeriesCollection.)
 	  chart (do
-		  (doseq [i (range (count __x))] (.add data-series (nth __x i)  (nth __y i)))
+                  (iter {for x in __x}
+                        {for y in __y}
+                        (if (and (not (nil? x)) (not (nil? y)))
+                          (.add data-series (double x) (double y))))
 		  (.addSeries _dataset data-series)
 		  (org.jfree.chart.ChartFactory/createScatterPlot
 		   main-title
