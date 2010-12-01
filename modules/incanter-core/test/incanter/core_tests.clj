@@ -458,3 +458,9 @@
 	 '(1 0 1 0) (matrix-map #(mod % 2) [1 2 3 4]) 
 	 1 (matrix-map #(mod % 2) 9))))
 
+(deftest infix-test
+ (is (= ($= 10 - 1 + 10) 19))
+ (is (= ($= 1 / 2 * 3) 3/2)))
+
+
+

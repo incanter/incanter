@@ -141,13 +141,12 @@
 
     http://en.wikipedia.org/wiki/Truncated_normal_distribution
 "
-  ([& options]
-    (let [opts (when options (apply assoc {} options))
-          mu (or (:mean opts) 0)
-          sd (or (:sd opts) 1)
-          sigma-sq (* sd sd)
-          a (or (:a opts) Double/NEGATIVE_INFINITY)
-          b (or (:b opts) Double/POSITIVE_INFINITY)
+  ([& {:keys [mean sd a b]
+       :or {mean 0
+            sd 1
+            a Double/NEGATIVE_INFINITY
+            b Double/POSITIVE_INFINITY}}]
+    (let [sigma-sq (* sd sd)
           lambda (fn [alpha] (/ (pdf-normal alpha) (- 1 (cdf-normal alpha))))
           delta (fn [alpha] (* (lambda alpha) (- (lambda alpha) alpha)))
           ;one-tail-var (fn [alpha s-sq]
@@ -156,8 +155,8 @@
           ;                  (+ (- 1 (delta alpha))
           ;                     (* (pow (- alpha (lambda alpha)) 2)
           ;                        (cdf-normal alpha)))))
-          a-std (if (= a Double/NEGATIVE_INFINITY) Double/NEGATIVE_INFINITY (/ (- a mu) sd))
-          b-std (if (= b Double/POSITIVE_INFINITY) Double/POSITIVE_INFINITY (/ (- b mu) sd))
+          a-std (if (= a Double/NEGATIVE_INFINITY) Double/NEGATIVE_INFINITY (/ (- a mean) sd))
+          b-std (if (= b Double/POSITIVE_INFINITY) Double/POSITIVE_INFINITY (/ (- b mean) sd))
           pdf-a (if (= a Double/NEGATIVE_INFINITY) 0 (pdf-normal a-std))
           pdf-b (if (= b Double/POSITIVE_INFINITY) 0 (pdf-normal b-std))
           cdf-a (if (= a Double/NEGATIVE_INFINITY) 0 (cdf-normal a-std))

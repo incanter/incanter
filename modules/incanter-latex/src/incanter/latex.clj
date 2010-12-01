@@ -32,23 +32,21 @@
 
 
 "
-  ([latex-txt & options]
-     (let [opts (apply hash-map options)
-	   color (or (:color opts) java.awt.Color/black)
-	   formula (org.scilab.forge.jlatexmath.TeXFormula. latex-txt)
-	   icon (doto (.createTeXIcon formula TeXConstants/STYLE_DISPLAY 20)
-		  (.setInsets (java.awt.Insets. 5 5 5 5)))
-	   image (java.awt.image.BufferedImage. (.getIconWidth icon) 
-						(.getIconHeight icon) 
-						java.awt.image.BufferedImage/TYPE_INT_ARGB)
-	   g2 (doto (.createGraphics image)
-		(.setColor (java.awt.Color. 0 0 0 0))
-		(.fillRect 0 0 (.getIconWidth icon) (.getIconHeight icon)))
-	   label (doto (javax.swing.JLabel.)
-		   (.setForeground color))]
+([latex-txt & {:keys [color] :or {color java.awt.Color/black}}]
+     (let [formula (org.scilab.forge.jlatexmath.TeXFormula. latex-txt)
+           icon (doto (.createTeXIcon formula TeXConstants/STYLE_DISPLAY 20)
+                  (.setInsets (java.awt.Insets. 5 5 5 5)))
+           image (java.awt.image.BufferedImage. (.getIconWidth icon) 
+                                                (.getIconHeight icon) 
+                                                java.awt.image.BufferedImage/TYPE_INT_ARGB)
+           g2 (doto (.createGraphics image)
+                (.setColor (java.awt.Color. 0 0 0 0))
+                (.fillRect 0 0 (.getIconWidth icon) (.getIconHeight icon)))
+           label (doto (javax.swing.JLabel.)
+                   (.setForeground color))]
        (do
-	 (.paintIcon icon label g2 0 0)
-	 image))))
+         (.paintIcon icon label g2 0 0)
+         image))))
 
 
 
@@ -71,11 +69,9 @@
       view)
 
 "
-  ([chart latex-str & options]
-     (let [opts (apply hash-map options)
-	   color (or (:color opts) java.awt.Color/darkGray)] 
-       (.addSubtitle chart (org.jfree.chart.title.ImageTitle. (latex latex-str :color color)))
-       chart)))
+([chart latex-str & {:keys [color] :or {color java.awt.Color/darkGray}}]
+   (.addSubtitle chart (org.jfree.chart.title.ImageTitle. (latex latex-str :color color)))
+   chart))
 
 
 
@@ -101,12 +97,10 @@
         view)
 
 "
-  ([chart x y latex-str & options]
-    (let [opts (apply hash-map options)
-	  color (or (:color opts) java.awt.Color/darkGray)
-	  img (latex latex-str :color color)
-	  anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
-      (.addAnnotation (.getPlot chart) anno)
-      chart)))
+([chart x y latex-str & {:keys [color] :or {color java.awt.Color/darkGray}}]
+   (let [img (latex latex-str :color color)
+         anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
+     (.addAnnotation (.getPlot chart) anno)
+     chart)))
 
 

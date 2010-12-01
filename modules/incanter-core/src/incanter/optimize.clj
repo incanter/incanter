@@ -100,11 +100,8 @@
     (add-lines plot x (pdf-deriv2 x))
 
 "
-  ([f & options]
-    (let [opts (when options (apply assoc {} options))
-          dx (or (:dx opts) 0.0001)
-          f-prime (fn [x] (div (minus (f (plus x dx)) (f x)) dx))]
-      f-prime)))
+  ([f & {:keys [dx] :or {dx 0.0001}}]
+     (fn [x] (div (minus (f (plus x dx)) (f x)) dx))))
 
 
 
@@ -129,12 +126,10 @@
     http://en.wikipedia.org/wiki/Partial_derivative
 
 "
-  ([fx i & options]
-    (let [opts (when options (apply assoc {} options))
-          dx (or (:dx opts) 0.0001)]
-      (fn [theta]
-        (let [theta-next (assoc theta i (+ (theta i) dx))]
-          (/ (- (fx theta-next) (fx theta)) dx))))))
+([fx i & {:keys [dx] :or {dx 0.0001}}]
+   (fn [theta]
+      (let [theta-next (assoc theta i (+ (theta i) dx))]
+        (/ (- (fx theta-next) (fx theta)) dx)))))
 
 
 
@@ -229,19 +224,17 @@
 
 
 "
-  ([f start & options]
-    (let [opts (when options (apply assoc {} options))
-          tol (or (:tol opts) 1E-4)
-          dx (or (:dx opts) (mult start tol))
+  ([f start & {:keys [tol dx] :or {tol 1E-4}}]
+    (let [tdx (or dx (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))
          ]
       (fn [theta x]
         (reduce bind-columns
                 (for [i (range p)]
-                  (div (map - (map (partial f (plus theta (mult (nth e i) (nth dx i)))) x)
+                  (div (map - (map (partial f (plus theta (mult (nth e i) (nth tdx i)))) x)
                               (map (partial f theta) x))
-                       (nth dx i))))))))
+                       (nth tdx i))))))))
 
 
 
@@ -276,22 +269,20 @@
 
 
 "
-  ([f start & options]
-    (let [opts (when options (apply assoc {} options))
-          tol (or (:tol opts) 1E-4)
-          dx (or (:dx opts) (mult start tol))
+([f start & {:keys [tol dx] :or {tol 1E-4}}]
+    (let [tdx (or dx (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))]
       (fn [theta x]
         (reduce bind-columns
                 (for [i (range p)]
-                  (let [h (mult (nth e i) dx)]
+                  (let [h (mult (nth e i) tdx)]
                     (div
                       (map + (map (partial f (minus theta (mult 2 h))) x)
                             (map - (mult 8 (map (partial f (minus theta h)) x)))
                             (mult 8 (map (partial f (plus theta h)) x))
                             (map - (map (partial f (plus theta (mult 2 h))) x)))
-                      (* 12 (nth dx i))))))))))
+                      (* 12 (nth tdx i))))))))))
 
 
 
@@ -325,25 +316,23 @@
 
 
 "
-  ([f start & options]
-    (let [opts (when options (apply assoc {} options))
-          tol (or (:tol opts) 1E-4)
-          dx (or (:dx opts) (mult start tol))
+  ([f start & {:keys [tol dx] :or {tol 1E-4}}]
+    (let [tdx (or dx (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))]
       (fn [theta x]
         (reduce bind-columns
                 (for [i (range p) j (range p) :when (<= i j)]
-                  (let [hi (mult (nth e i) dx)
-                        hj (mult (nth e j) dx)
-                        hij (mult (plus (nth e i) (nth e j)) dx)]
+                  (let [hi (mult (nth e i) tdx)
+                        hj (mult (nth e j) tdx)
+                        hij (mult (plus (nth e i) (nth e j)) tdx)]
                     (div
                       (map +
                         (map - (map (partial f theta) x)
                                (map (partial f (plus theta hi)) x)
                                (map (partial f (plus theta hj)) x))
                         (map (partial f (plus theta hij)) x))
-                      (* (nth dx i) (nth dx j))))))))))
+                      (* (nth tdx i) (nth tdx j))))))))))
 
 
 
@@ -503,11 +492,10 @@
 
 
 "
-  ([f df d2f start x y & options]
-    (let [opts (when options (apply assoc {} options))
-          max-iter (or (:max-iter opts) 200)
-          tol (or (:tol opts) 1E-5)
-          g (nls-gradient f df start x y)]
+  ([f df d2f start x y & {:keys [max-iter tol]
+                          :or {max-iter 200
+                               tol 1E-5}}]
+    (let [g (nls-gradient f df start x y)]
       (loop [i (int 0)
              th start]
         (let [H (solve (nls-hessian f df d2f th x y))
@@ -560,14 +548,13 @@
 
 
 "
-  ([f start x y & options]
-    (let [opts (when options (apply assoc {} options))
-          max-iter (or (:max-iter opts) 200)
-          tol (or (:tol opts) 1E-5)
-          grad (gradient f start)
+([f start x y & {:keys [max-iter tol]
+                 :or {max-iter 200
+                      tol 1E-5}}]
+    (let [grad (gradient f start)
           ;; g
-	  ;; (grad start x)
-	  ]
+          ;; (grad start x)
+          ]
       (loop [i (int 0)
              th start]
         (let [y-hat (map (partial f th) x)
@@ -672,12 +659,11 @@
 
 
 "
-  ([f y x start & options]
-    (let [opts (when options (apply assoc {} options))
-          method (or (:method opts) :guass-newton) ;; other option is :newton-raphson
-          tol (or (:tol opts) 1E-5)
-          max-iter (or (:max-iter opts) 200)
-          nls (if (= method :newton-raphson)
+([f y x start & {:keys [max-iter tol method]
+                 :or {max-iter 200
+                      tol 1E-5
+                      method :guass-newton}}] ;; other option is :newton-raphson
+    (let [nls (if (= method :newton-raphson)
                 (nls-newton-raphson f (gradient f start) (hessian f start) start x y :tol tol :max-iter max-iter)
                 (nls-gauss-newton f start x y :tol tol :max-iter max-iter))
           fitted (map #(f (:theta nls) %) x)]
@@ -690,5 +676,4 @@
        :fitted fitted
        :x x
        :y y})))
-
 
