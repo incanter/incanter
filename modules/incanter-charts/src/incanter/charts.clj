@@ -30,8 +30,7 @@
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
                               bind-columns view save $group-by conj-cols 
 			      grid-apply set-data)]
-        [incanter.stats :only (quantile quantile-normal cumulative-mean sd)]
-        iterate)
+        [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
   (:import  (java.io File)
             (javax.imageio ImageIO)
 	    (javax.swing JSlider JFrame JLabel JPanel)
@@ -514,19 +513,19 @@
            line-renderer (XYLineAndShapeRenderer. true false)
            ;; data-set (.getDataset data-plot)
 	   data-set (XYSeriesCollection.)]
-       (do
-         (iter {for x in _x}
-               {for y in _y}
+       (dorun
+        (map (fn [x y]
                (if (and (not (nil? x))
                         (not (nil? y)))
                  (.add data-series (double x) (double y))))
+             _x _y))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
 	(.setDataset n data-set)
 	(.setRenderer n line-renderer))
-      chart))))
+      chart)))
 
 
 ;; doesn't work
@@ -542,19 +541,19 @@
 	   data-series (XYSeries. series-lab)
            line-renderer (XYLineAndShapeRenderer. true false)
            data-set (XYSeriesCollection.)]
-    (do
-      (iter {for x in _x}
-            {for y in _y}
-            (if (and (not (nil? x))
-                     (not (nil? y)))
-              (.add data-series (double x) (double y))))
-      (.addSeries data-set data-series)
-      (doto data-plot
-	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)     
-	(.setDataset n data-set)
-	(.setRenderer n line-renderer))
-      chart))))
+       (dorun
+        (map (fn [x y]
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
+             _x _y))
+       (.addSeries data-set data-series)
+       (doto data-plot
+         (.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+         (.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)     
+         (.setDataset n data-set)
+         (.setRenderer n line-renderer))
+       chart)))
 
 
 
@@ -684,28 +683,28 @@
 
 (defn add-points*
   ([chart x y & options]
-    (let [opts (when options (apply assoc {} options))
-	  data (:data opts)
-	  _x (if (coll? x) (to-list x) ($ x data))
-	  _y (if (coll? y) (to-list y) ($ y data))
-	  data-plot (.getPlot chart)
-	  n (.getDatasetCount data-plot)
-	  series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
-	  data-series (XYSeries. series-lab)
-	  line-renderer (XYLineAndShapeRenderer. false true)
-	  data-set (XYSeriesCollection.)]
-      (do
-	(iter {for x in _x}
-              {for y in _y}
-              (if (and (not (nil? x))
-                       (not (nil? y)))
-                (.add data-series (double x) (double y))))
-	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
-	(.addSeries data-set data-series)
-	(.setDataset data-plot n data-set)
-	(.setRenderer data-plot n line-renderer)
-	chart))))
+     (let [opts (when options (apply assoc {} options))
+           data (:data opts)
+           _x (if (coll? x) (to-list x) ($ x data))
+           _y (if (coll? y) (to-list y) ($ y data))
+           data-plot (.getPlot chart)
+           n (.getDatasetCount data-plot)
+           series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+           data-series (XYSeries. series-lab)
+           line-renderer (XYLineAndShapeRenderer. false true)
+           data-set (XYSeriesCollection.)]
+       (dorun
+        (map (fn [x y]
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
+             _x _y))
+       (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+       (.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+       (.addSeries data-set data-series)
+       (.setDataset data-plot n data-set)
+       (.setRenderer data-plot n line-renderer)
+       chart)))
 
 
 
@@ -951,20 +950,21 @@
 	  data-series (XYSeries. series-lab)
 	  dataset (XYSeriesCollection.)
 	  chart (do
-                  (iter {for x in __x}
-                        {for y in __y}
+                  (dorun
+                   (map (fn [x y]
                         (if (and (not (nil? x))
                                  (not (nil? y)))
                           (.add data-series (double x) (double y))))
-              (.addSeries dataset data-series)
-                    (create-plot
-                        main-title
-                        x-lab
-                        y-lab
-                        dataset
-                        legend?
-                        true  ; tooltips
-                        false))
+                        __x __y))
+                  (.addSeries dataset data-series)
+                  (create-plot
+                   main-title
+                   x-lab
+                   y-lab
+                   dataset
+                   legend?
+                   true  ; tooltips
+                   false))
            _ (when x-groups
                 (doseq [i (range 1 (count x-groups))]
                   (add-lines chart (nth x-groups i)
@@ -1135,10 +1135,11 @@
 	  data-series (XYSeries. series-lab)
 	  _dataset (XYSeriesCollection.)
 	  chart (do
-                  (iter {for x in __x}
-                        {for y in __y}
-                        (if (and (not (nil? x)) (not (nil? y)))
-                          (.add data-series (double x) (double y))))
+                  (dorun
+                   (map (fn [x y]
+                          (if (and (not (nil? x)) (not (nil? y)))
+                            (.add data-series (double x) (double y))))
+                        __x __y))
 		  (.addSeries _dataset data-series)
 		  (org.jfree.chart.ChartFactory/createScatterPlot
 		   main-title
