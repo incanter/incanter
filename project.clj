@@ -11,5 +11,5 @@
                  [swank-clojure "1.3.0-SNAPSHOT"]
                  [swingrepl "1.0.0-SNAPSHOT"]
                  [jline "0.9.94"]]
-  :dev-dependencies [[lein-clojars "0.5.0-SNAPSHOT"]]
+  :dev-dependencies [[lein-clojars "0.6.0"]]
   :main incanter.main)

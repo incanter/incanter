@@ -55,10 +55,10 @@ incanter.io
                      keyword-headers true}}]
      (let [compress-delim? (or compress-delim (if (= delim \space) true false))]
      (with-open [reader ^CSVReader (CSVReader.
-                    (get-input-reader filename)
-                    delim
-                    quote
-                    skip)]
+				    (get-input-reader filename)
+				    delim
+				    quote
+				    skip)]
        (let [data-lines (map seq (seq (.readAll reader)))
              raw-data (filter #(> (count (filter (fn [field] (not= field "")) %)) 0) 
                               (if compress-delim? 

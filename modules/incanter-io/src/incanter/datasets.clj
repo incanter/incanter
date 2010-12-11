@@ -20,7 +20,7 @@
   (:use [incanter.io :only (read-dataset)]))
 
 
-(def **datasets-base-url** "http://github.com/liebke/incanter/raw/master/")
+(def **datasets-base-url** "https://github.com/liebke/incanter/raw/master/")
 
 
 (def **datasets**
@@ -177,7 +177,7 @@
   ([dataset-key & {:keys [incanter-home from-repo]
                    :or {incanter-home (or (System/getProperty "incanter.home")
                                           (System/getenv "INCANTER_HOME"))
-                        from-repo false}}]
+                        from-repo true}}]
     (let [ds (**datasets** dataset-key)
           filename (if (or (nil? incanter-home) from-repo) 
                      (str **datasets-base-url** (ds :filename)) 

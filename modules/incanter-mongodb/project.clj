@@ -3,4 +3,4 @@
   :dependencies [[incanter/incanter-core "1.2.3"]
                  [org.clojars.bmabey/congomongo "0.1.2-SNAPSHOT"]]
                  ;[congomongo "0.1.2-SNAPSHOT"]]
-  :dev-dependencies [[lein-clojars "0.5.0-SNAPSHOT"]])
+  :dev-dependencies [[lein-clojars "0.6.0"]])

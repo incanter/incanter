@@ -1166,16 +1166,16 @@
 (defn- map-get 
   ([m k] 
      (if (keyword? k)
-       (or (m k) (m (name k))) 
-       (m k)))
+       (or (get m k) (get m (name k))) 
+       (get m k)))
   ([m k colnames]
      (cond 
       (keyword? k)
-        (or (m k) (m (name k))) 
+        (or (get m k) (get m (name k))) 
       (number? k)
-        (m (nth colnames k))
+        (get m (nth colnames k))
       :else
-        (m k))))
+        (get m k))))
 
 (defn- submap [m ks]
   (zipmap (if (coll? ks) ks [ks]) 
