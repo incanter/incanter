@@ -249,8 +249,10 @@
   {:arglists ([chart x & options]),
    :name "add-box-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L175",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-box-plot",
    :doc
@@ -261,8 +263,10 @@
   {:arglists ([chart categories values & options]),
    :name "add-categories",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L245",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-categories",
    :doc
@@ -273,8 +277,10 @@
   {:arglists ([chart function min-range max-range & options]),
    :name "add-function",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L391",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-function",
    :doc
@@ -285,8 +291,10 @@
   {:arglists ([chart x & options]),
    :name "add-histogram",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L119",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-histogram",
    :doc
@@ -297,8 +305,10 @@
   {:arglists ([chart x y & options]),
    :name "add-lines",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L324",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-lines",
    :doc
@@ -309,8 +319,10 @@
   {:arglists ([chart x y & options]),
    :name "add-pointer",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1430",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-pointer",
    :doc
@@ -321,8 +333,10 @@
   {:arglists ([chart x y & options]),
    :name "add-points",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L470",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-points",
    :doc
@@ -333,8 +347,10 @@
   {:arglists ([chart coords & options]),
    :name "add-polygon",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1564",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-polygon",
    :doc
@@ -345,8 +361,10 @@
   {:arglists ([chart x y text & options]),
    :name "add-text",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1519",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-text",
    :doc
@@ -357,8 +375,10 @@
   {:arglists ([categories values & options]),
    :name "bar-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1155",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bar-chart",
    :doc
@@ -369,8 +389,10 @@
   {:arglists ([x1 x2 & options]),
    :name "bland-altman-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1713",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bland-altman-plot",
    :doc
@@ -381,8 +403,10 @@
   {:arglists ([x & options]),
    :name "box-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1298",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/box-plot",
    :doc
@@ -393,8 +417,10 @@
   {:arglists ([chart]),
    :name "clear-background",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L558",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/clear-background",
    :doc
@@ -405,8 +431,10 @@
   {:arglists ([function min-range max-range & options]),
    :name "function-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1380",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/function-plot",
    :doc
@@ -417,8 +445,10 @@
   {:arglists ([x & options]),
    :name "histogram",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L904",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/histogram",
    :doc
@@ -429,8 +459,10 @@
   {:arglists ([categories values & options]),
    :name "line-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1013",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/line-chart",
    :doc
@@ -441,8 +473,10 @@
   {:arglists ([x & options]),
    :name "qq-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1674",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/qq-plot",
    :doc
@@ -453,8 +487,10 @@
   {:arglists ([x y & options]),
    :name "scatter-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L799",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/scatter-plot",
    :doc
@@ -465,8 +501,10 @@
   {:arglists ([chart alpha]),
    :name "set-alpha",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L530",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-alpha",
    :doc
@@ -477,8 +515,10 @@
   {:arglists ([chart alpha]),
    :name "set-background-alpha",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L544",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha",
    :doc
@@ -489,8 +529,10 @@
   {:arglists ([chart theme]),
    :name "set-theme",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L58",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme",
    :doc
@@ -501,8 +543,10 @@
   {:arglists ([chart title]),
    :name "set-title",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L573",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-title",
    :doc
@@ -513,8 +557,10 @@
   {:arglists ([chart label]),
    :name "set-x-label",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L586",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-label",
    :doc
@@ -525,8 +571,10 @@
   {:arglists ([chart label]),
    :name "set-y-label",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L599",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-label",
    :doc
@@ -537,8 +585,10 @@
   {:arglists ([x & options]),
    :name "trace-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L1633",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/trace-plot",
    :doc
@@ -549,8 +599,10 @@
   {:arglists ([x y & options]),
    :name "xy-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj#L672",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/7db2c64f4c511df03e3051ac3858ba71fad7ebda/modules/incanter-charts/src/main/clojure/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/xy-plot",
    :doc
@@ -561,8 +613,10 @@
   {:arglists ([[s e] [s1 e1]]),
    :name "are-overlapping?",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L256",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/are-overlapping?",
    :doc "",
@@ -572,8 +626,10 @@
   {:arglists ([start end]),
    :name "before?",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L244",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/before?",
    :doc "",
@@ -583,8 +639,10 @@
   {:arglists ([the-date unit]),
    :name "beginning-of",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L346",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/beginning-of",
    :doc
@@ -595,8 +653,10 @@
   {:arglists ([& args]),
    :name "date",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L135",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/date",
    :doc
@@ -607,8 +667,10 @@
   {:arglists ([units from to] [units from]),
    :name "date-seq",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L360",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/date-seq",
    :doc
@@ -619,8 +681,10 @@
   {:arglists ([d t]),
    :name "date-time",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L303",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/date-time",
    :doc "",
@@ -630,8 +694,10 @@
   {:arglists ([d]),
    :name "date>",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L158",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/date>",
    :doc "",
@@ -641,8 +707,10 @@
   {:arglists ([fname [arg] & body]),
    :name "def-date-format",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L371",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/def-date-format",
    :doc "",
@@ -652,8 +720,10 @@
   {:arglists ([fname [arg] & body]),
    :name "def-date-parser",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L377",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/def-date-parser",
    :doc "",
@@ -663,8 +733,10 @@
   {:arglists ([the-date amount units] [the-date units]),
    :name "earlier",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L307",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/earlier",
    :doc
@@ -675,8 +747,10 @@
   {:arglists ([date-a date-b]),
    :name "earlier?",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L320",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/earlier?",
    :doc "Is date-a earlier than date-b?",
@@ -686,8 +760,10 @@
   {:arglists ([the-date unit]),
    :name "end-of",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L354",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/end-of",
    :doc
@@ -695,8 +771,10 @@
    :var-type "function",
    :line 354,
    :file "incanter/chrono.clj"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L125",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/format-date",
    :namespace "incanter.chrono",
@@ -709,8 +787,10 @@
   {:arglists ([r d]),
    :name "hours-around",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L240",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/hours-around",
    :doc "",
@@ -720,8 +800,10 @@
   {:arglists ([start end]),
    :name "hours-between",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L225",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/hours-between",
    :doc "",
@@ -731,8 +813,10 @@
   {:arglists ([d h]),
    :name "hours-from",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L232",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/hours-from",
    :doc "",
@@ -742,8 +826,10 @@
   {:arglists ([d [s e]]),
    :name "is-within?",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L252",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/is-within?",
    :doc "",
@@ -753,8 +839,10 @@
   {:arglists ([str-d] [y m d h min sec mill zone]),
    :name "joda-date",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L171",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/joda-date",
    :doc "",
@@ -764,8 +852,10 @@
   {:arglists ([d]),
    :name "joda-guard",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L213",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/joda-guard",
    :doc "",
@@ -775,8 +865,10 @@
   {:arglists ([& args]),
    :name "joda-proxy",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L177",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/joda-proxy",
    :doc "joda-date object wraped in a proxy of goodness.",
@@ -786,8 +878,10 @@
   {:arglists ([d]),
    :name "joda-str",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L207",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/joda-str",
    :doc "",
@@ -797,8 +891,10 @@
   {:arglists ([the-date amount units] [the-date units]),
    :name "later",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L291",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/later",
    :doc
@@ -809,8 +905,10 @@
   {:arglists ([date-a date-b]),
    :name "later?",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L315",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/later?",
    :doc "Is date-a later than date-b?",
@@ -820,8 +918,10 @@
   {:arglists ([start end]),
    :name "minutes-between",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L218",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/minutes-between",
    :doc "",
@@ -831,8 +931,10 @@
   {:arglists ([d m]),
    :name "minutes-from",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L236",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/minutes-from",
    :doc "",
@@ -842,16 +944,20 @@
   {:arglists ([]),
    :name "now",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L277",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/now",
    :doc "Returns a new date object with the current date and time.",
    :var-type "function",
    :line 277,
    :file "incanter/chrono.clj"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L130",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/parse-date",
    :namespace "incanter.chrono",
@@ -864,8 +970,10 @@
   {:arglists ([date-a date-b] [date-a date-b units]),
    :name "time-between",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L324",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/time-between",
    :doc
@@ -876,8 +984,10 @@
   {:arglists ([offset]),
    :name "time-zone",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L167",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/time-zone",
    :doc "",
@@ -887,8 +997,10 @@
   {:arglists ([]),
    :name "today",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L282",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/today",
    :doc
@@ -896,8 +1008,10 @@
    :var-type "function",
    :line 282,
    :file "incanter/chrono.clj"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L94",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/units-in-seconds",
    :namespace "incanter.chrono",
@@ -906,8 +1020,10 @@
    :var-type "var",
    :doc "Number of seconds in each unit",
    :name "units-in-seconds"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L84",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/units-to-calendar-units",
    :namespace "incanter.chrono",
@@ -919,8 +1035,10 @@
   {:arglists ([[start end]]),
    :name "valid-range?",
    :namespace "incanter.chrono",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj#L248",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/1ae4ebf82c0648848316cb6167fe5410f928483a/modules/incanter-chrono/src/main/clojure/incanter/chrono.clj",
    :wiki-url
    "http://liebke.github.com/incanter//chrono-api.html#incanter.chrono/valid-range?",
    :doc "",
@@ -930,8 +1048,10 @@
   {:arglists ([features]),
    :name "categorical-classifiers",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L28",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/categorical-classifiers",
    :doc "makes a categorical classifier for use with |each.",
@@ -941,8 +1061,10 @@
   {:arglists ([x]),
    :name "category-classifier",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L35",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/category-classifier",
    :doc "",
@@ -952,8 +1074,10 @@
   {:arglists ([x] [s x]),
    :name "category-map-classifier",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L40",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/category-map-classifier",
    :doc "",
@@ -963,8 +1087,10 @@
   {:arglists ([transformer classifier count-all]),
    :name "classification-workflow",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L106",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/classification-workflow",
    :doc
@@ -975,8 +1101,10 @@
   {:arglists ([fns classify]),
    :name "classifier",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L15",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/classifier",
    :doc "",
@@ -986,8 +1114,10 @@
   {:arglists ([fns data]),
    :name "classify-one-to-all",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L83",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/classify-one-to-all",
    :doc
@@ -998,8 +1128,10 @@
   {:arglists ([fns data]),
    :name "classify-one-to-each",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L68",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/classify-one-to-each",
    :doc
@@ -1010,8 +1142,10 @@
   {:arglists ([fns data]),
    :name "classify-one-to-one",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L53",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/classify-one-to-one",
    :doc
@@ -1022,8 +1156,10 @@
   {:arglists ([maps]),
    :name "collect-vals",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L300",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/collect-vals",
    :doc "",
@@ -1033,8 +1169,10 @@
   {:arglists ([trd tst]),
    :name "confusion-matrix",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L213",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/confusion-matrix",
    :doc
@@ -1045,8 +1183,10 @@
   {:arglists ([results]),
    :name "confusion-matrix-by-time",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L314",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/confusion-matrix-by-time",
    :doc "",
@@ -1056,8 +1196,10 @@
   {:arglists ([test & train]),
    :name "confusion-matrix-from-counts",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L257",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/confusion-matrix-from-counts",
    :doc
@@ -1068,8 +1210,10 @@
   {:arglists ([& xs]),
    :name "cross-validation-confusion-matrix",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L269",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/cross-validation-confusion-matrix",
    :doc
@@ -1080,8 +1224,10 @@
   {:arglists ([class-mappings]),
    :name "equivalence-classes",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L126",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/equivalence-classes",
    :doc
@@ -1092,8 +1238,10 @@
   {:arglists ([f coll]),
    :name "heterogenious-group-by",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L115",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/heterogenious-group-by",
    :doc
@@ -1104,8 +1252,10 @@
   {:arglists ([keys]),
    :name "map-of-vectors",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L289",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/map-of-vectors",
    :doc "",
@@ -1115,8 +1265,10 @@
   {:arglists ([class-mappings x]),
    :name "merge-equivalence-classes",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L150",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/merge-equivalence-classes",
    :doc
@@ -1127,8 +1279,10 @@
   {:arglists ([class-mappings coll]),
    :name "merge-levels",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L138",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/merge-levels",
    :doc "",
@@ -1138,8 +1292,10 @@
   {:arglists ([prob-map]),
    :name "model-from-maps",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L193",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/model-from-maps",
    :doc "creates a model from probability report maps.",
@@ -1149,8 +1305,10 @@
   {:arglists ([m]),
    :name "most-likely",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L198",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/most-likely",
    :doc
@@ -1161,8 +1319,10 @@
   {:arglists ([list-of-lists]),
    :name "n-times-k-fold-cross-validation-confusion-matrix",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L282",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/n-times-k-fold-cross-validation-confusion-matrix",
    :doc "",
@@ -1172,8 +1332,10 @@
   {:arglists ([ranges]),
    :name "numerical-classifiers",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L21",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/numerical-classifiers",
    :doc
@@ -1184,8 +1346,10 @@
   {:arglists ([m]),
    :name "precision",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L231",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/precision",
    :doc "computes precision by class label from confusion matrix.",
@@ -1195,8 +1359,10 @@
   {:arglists ([prob-map-tuple]),
    :name "prob-map-tuples-by-time",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L307",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/prob-map-tuples-by-time",
    :doc
@@ -1207,8 +1373,10 @@
   {:arglists ([k a b] [a b]),
    :name "probs-only",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L174",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/probs-only",
    :doc
@@ -1219,8 +1387,10 @@
   {:arglists ([[a-and-b b] report]),
    :name "process-prob-map",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L181",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/process-prob-map",
    :doc
@@ -1231,8 +1401,10 @@
   {:arglists ([m]),
    :name "recall",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L241",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/recall",
    :doc "computes recall by class label from confusion matrix.",
@@ -1242,8 +1414,10 @@
   {:arglists ([maps]),
    :name "vectorize",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L295",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/vectorize",
    :doc "",
@@ -1253,8 +1427,10 @@
   {:arglists ([features]),
    :name "wrapper-classifiers",
    :namespace "incanter.classification",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj#L46",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/classification.clj",
    :wiki-url
    "http://liebke.github.com/incanter//classification-api.html#incanter.classification/wrapper-classifiers",
    :doc

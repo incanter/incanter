@@ -269,8 +269,10 @@
   {:arglists ([chart x & options]),
    :name "add-box-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L375",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-box-plot",
    :doc
@@ -281,8 +283,10 @@
   {:arglists ([chart categories values & options]),
    :name "add-categories",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L445",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-categories",
    :doc
@@ -293,8 +297,10 @@
   {:arglists ([chart function min-range max-range & options]),
    :name "add-function",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L628",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-function",
    :doc
@@ -305,8 +311,10 @@
   {:arglists ([chart x & options]),
    :name "add-histogram",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L319",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-histogram",
    :doc
@@ -317,8 +325,10 @@
   {:arglists ([chart x y img & options]),
    :name "add-image",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2606",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-image",
    :doc
@@ -329,8 +339,10 @@
   {:arglists ([chart x y & options]),
    :name "add-lines",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L560",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-lines",
    :doc
@@ -341,8 +353,10 @@
   {:arglists ([chart x y & options]),
    :name "add-pointer",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2409",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-pointer",
    :doc
@@ -353,8 +367,10 @@
   {:arglists ([chart x y & options]),
    :name "add-points",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L711",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-points",
    :doc
@@ -365,8 +381,10 @@
   {:arglists ([chart coords & options]),
    :name "add-polygon",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2543",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-polygon",
    :doc
@@ -391,8 +409,10 @@
   {:arglists ([chart x y text & options]),
    :name "add-text",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2498",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-text",
    :doc
@@ -403,8 +423,10 @@
   {:arglists ([categories values & options]),
    :name "area-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1673",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/area-chart",
    :doc
@@ -415,8 +437,10 @@
   {:arglists ([categories values & options]),
    :name "bar-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1531",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bar-chart",
    :doc
@@ -427,8 +451,10 @@
   {:arglists ([x1 x2 & options]),
    :name "bland-altman-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2715",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bland-altman-plot",
    :doc
@@ -439,8 +465,10 @@
   {:arglists ([x & options]),
    :name "box-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2160",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/box-plot",
    :doc
@@ -451,8 +479,10 @@
   {:arglists ([chart]),
    :name "clear-background",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L799",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/clear-background",
    :doc
@@ -463,8 +493,10 @@
   {:arglists ([[& slider-bindings] expression & options]),
    :name "dynamic-scatter-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2998",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-scatter-plot",
    :doc
@@ -475,8 +507,10 @@
   {:arglists ([[& slider-bindings] expression & options]),
    :name "dynamic-xy-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2967",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-xy-plot",
    :doc
@@ -487,8 +521,10 @@
   {:arglists ([function min-range max-range & options]),
    :name "function-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2242",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/function-plot",
    :doc
@@ -499,8 +535,10 @@
   {:arglists ([chart] [chart series-idx]),
    :name "get-series",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2796",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/get-series",
    :doc "get-series",
@@ -510,8 +548,10 @@
   {:arglists ([function x-min x-max y-min y-max & options]),
    :name "heat-map",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2358",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/heat-map",
    :doc
@@ -522,8 +562,10 @@
   {:arglists ([x & options]),
    :name "histogram",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1279",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/histogram",
    :doc
@@ -534,8 +576,10 @@
   {:arglists ([categories values & options]),
    :name "line-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1388",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/line-chart",
    :doc
@@ -546,8 +590,10 @@
   {:arglists ([categories values & options]),
    :name "pie-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2062",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/pie-chart",
    :doc
@@ -558,8 +604,10 @@
   {:arglists ([x & options]),
    :name "qq-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2676",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/qq-plot",
    :doc
@@ -570,8 +618,10 @@
   {:arglists ([] [x y & options]),
    :name "scatter-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1167",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/scatter-plot",
    :doc
@@ -582,8 +632,10 @@
   {:arglists ([chart alpha]),
    :name "set-alpha",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L771",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-alpha",
    :doc
@@ -594,8 +646,10 @@
   {:arglists ([chart alpha]),
    :name "set-background-alpha",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L785",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha",
    :doc
@@ -620,8 +674,10 @@
   {:arglists ([chart & options]),
    :name "set-stroke",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L3033",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke",
    :doc
@@ -632,8 +688,10 @@
   {:arglists ([chart color & options]),
    :name "set-stroke-color",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L3068",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke-color",
    :doc
@@ -644,8 +702,10 @@
   {:arglists ([chart theme]),
    :name "set-theme",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L214",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme",
    :doc
@@ -670,8 +730,10 @@
   {:arglists ([chart title]),
    :name "set-title",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L814",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-title",
    :doc
@@ -682,8 +744,10 @@
   {:arglists ([chart label]),
    :name "set-x-label",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L827",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-label",
    :doc
@@ -694,8 +758,10 @@
   {:arglists ([chart lower upper]),
    :name "set-x-range",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L854",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-range",
    :doc
@@ -706,8 +772,10 @@
   {:arglists ([chart label]),
    :name "set-y-label",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L840",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-label",
    :doc
@@ -718,8 +786,10 @@
   {:arglists ([chart lower upper]),
    :name "set-y-range",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L874",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-range",
    :doc
@@ -732,8 +802,10 @@
     [updater-fn slider-values slider-label]),
    :name "slider",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2828",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/slider",
    :doc
@@ -744,8 +816,10 @@
   {:arglists ([[& slider-bindings] body]),
    :name "sliders",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2905",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders",
    :doc
@@ -757,8 +831,10 @@
    ([f [& slider-values]] [f [& slider-values] [& slider-labels]]),
    :name "sliders*",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2874",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders*",
    :doc
@@ -769,8 +845,10 @@
   {:arglists ([categories values & options]),
    :name "stacked-area-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1813",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-area-chart",
    :doc
@@ -781,8 +859,10 @@
   {:arglists ([categories values & options]),
    :name "stacked-bar-chart",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1943",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-bar-chart",
    :doc
@@ -793,8 +873,10 @@
   {:arglists ([x y & options]),
    :name "time-series-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L1052",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/time-series-plot",
    :doc
@@ -805,8 +887,10 @@
   {:arglists ([x & options]),
    :name "trace-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L2635",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/trace-plot",
    :doc
@@ -817,8 +901,10 @@
   {:arglists ([] [x y & options]),
    :name "xy-plot",
    :namespace "incanter.charts",
-   :source-url nil,
-   :raw-source-url nil,
+   :source-url
+   "https://github.com/liebke/incanter/blob/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj#L978",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/a28385cf3cafa7bcf204d2947f951c00c2ac6ef9/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/xy-plot",
    :doc
@@ -1875,8 +1961,10 @@
    :line 2215,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj#L2501",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/save",
    :namespace "incanter.core",
@@ -1886,8 +1974,10 @@
    :doc
    " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
    :name "save"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj#L211",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sel",
    :namespace "incanter.core",
@@ -1897,8 +1987,10 @@
    :doc
    "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
    :name "sel"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj#L2457",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/set-data",
    :namespace "incanter.core",
@@ -2084,8 +2176,10 @@
    :line 2111,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj#L618",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-list",
    :namespace "incanter.core",
@@ -2095,8 +2189,10 @@
    :doc
    " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
    :name "to-list"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj#L2048",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-map",
    :namespace "incanter.core",
@@ -2181,8 +2277,10 @@
    :line 752,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
-  {:raw-source-url nil,
-   :source-url nil,
+  {:raw-source-url
+   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-core/src/incanter/core.clj#L2304",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/view",
    :namespace "incanter.core",
