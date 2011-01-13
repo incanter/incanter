@@ -1204,9 +1204,18 @@
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
          nin-fn (complement in-fn)
-         ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
+         ops {:gt #(> (compare %1 %2) 0)
+              :lt #(< (compare %1 %2) 0)
+              :eq =
+              :ne not=
+              :gte #(>= (compare %1 %2) 0)
+              :lte #(<= (compare %1 %2) 0)
               :in in-fn :nin nin-fn :fn (fn [v f] (f v))
-              :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+              :$gt #(> (compare %1 %2) 0)
+              :$lt #(< (compare %1 %2) 0)
+              :$eq = :$ne not=
+              :$gte #(>= (compare %1 %2) 0)
+              :$lte #(<= (compare %1 %2) 0)
               :$in in-fn :$nin nin-fn  
               :$fn (fn [v f] (f v))}
          _and (fn [a b] (and a b))] 

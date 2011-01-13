@@ -5,4 +5,4 @@
                  [incanter/parallelcolt "0.9.4"]]
   :dev-dependencies [[lein-javac "1.2.1-SNAPSHOT"]
                      [lein-clojars "0.6.0"]]
-  :java-source-path [["src"]])
+  :java-source-path "src")
