@@ -1400,10 +1400,10 @@ altering later ones."
      (let [new-name (fn new-name [x]
                       (if (not (contains? seen x))
                         x
-                        (let [match (re-matches #"(.*\.)([0-9]+)" (.getName x))]
+                        (let [match (re-matches #"(.*\-)([0-9]+)" (.getName x))]
                           (if match
                             (new-name (keyword (str (second match) (inc (Integer/parseInt (nth match 2))))))
-                            (new-name (keyword (str (.getName x) ".1")))))))]
+                            (new-name (keyword (str (.getName x) "-1")))))))]
        
        (if (empty? coll) ()
            (let [name (new-name (first coll))]
