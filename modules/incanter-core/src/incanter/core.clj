@@ -1392,11 +1392,29 @@
                      [obj])]
          (dataset colnames rows))))
 
+(defn make-unique
+  "Take a sequence of keywords and make them unique by possibly
+altering later ones."
+  ([coll] (make-unique coll #{}))
+  ([coll seen]
+     (let [new-name (fn new-name [x]
+                      (if (not (contains? seen x))
+                        x
+                        (let [match (re-matches #"(.*\.)([0-9]+)" (.getName x))]
+                          (if match
+                            (new-name (keyword (str (second match) (inc (Integer/parseInt (nth match 2))))))
+                            (new-name (keyword (str (.getName x) ".1")))))))]
+       
+       (if (empty? coll) ()
+           (let [name (new-name (first coll))]
+             (cons name
+                   (make-unique (rest coll) (conj seen name))))))))
 
 (defn conj-cols
   "Returns a dataset created by merging the given datasets and/or collections.
-   There must be the same number of rows in each dataset and/or collections. 
-    Column names are not preserved in order to prevent naming conflicts.
+   There must be the same number of rows in each dataset and/or
+    collections.  Column names may be changed in order to prevent
+    naming conflicts in the conjed dataset.
 
     Examples:
       (use '(incanter core datasets))
@@ -1415,8 +1433,7 @@
                            b (to-dataset B)
                            ncol-a (ncol a)
                            ncol-b (ncol b)
-                           colnames (map #(keyword (str "col-" %))
-                                                    (range (+ ncol-a ncol-b)))]
+                           colnames (make-unique (concat (col-names a) (col-names b)))]
                       (dataset colnames
                                     (map concat (to-list a) (to-list b)))))
              args)))
