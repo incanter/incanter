@@ -1410,6 +1410,27 @@ altering later ones."
              (cons name
                    (make-unique (rest coll) (conj seen name))))))))
 
+
+(defn col-names
+  "If given a dataset, it returns its column names. If given a dataset and a sequence
+   of column names, it returns a dataset with the given column names.
+
+   Examples:
+     (use '(incanter core datasets))
+     (def data (get-dataset :cars))
+     (col-names data)
+
+     (def renamed-data (col-names data [:x1 :x2]))
+     (col-names renamed-data)
+
+ 
+    "
+  ([data] (:column-names data)) 
+  ([data colnames]
+     (dataset colnames (to-list data))))
+
+
+
 (defn conj-cols
   "Returns a dataset created by merging the given datasets and/or collections.
    There must be the same number of rows in each dataset and/or
@@ -1461,27 +1482,6 @@ altering later ones."
                      (dataset (:column-names a) 
                               (concat (to-list a) (to-list b)))))
              args)))
-
-
-
-(defn col-names
-  "If given a dataset, it returns its column names. If given a dataset and a sequence
-   of column names, it returns a dataset with the given column names.
-
-   Examples:
-     (use '(incanter core datasets))
-     (def data (get-dataset :cars))
-     (col-names data)
-
-     (def renamed-data (col-names data [:x1 :x2]))
-     (col-names renamed-data)
-
- 
-    "
-  ([data] (:column-names data)) 
-  ([data colnames]
-     (dataset colnames (to-list data))))
-
 
 
 
