@@ -565,6 +565,7 @@
 
   Options:
     :series-label (default x expression)
+    :points (default false)
 
   Examples:
 
@@ -995,6 +996,7 @@
     :legend (default false) prints legend
     :series-label (default x expression)
     :group-by (default nil) -- a vector of values used to group the x and y values into series.
+    :points (default false) includes point-markers
 
   See also:
     view, save, add-points, add-lines
