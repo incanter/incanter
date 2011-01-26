@@ -510,7 +510,8 @@
 	   n (.getDatasetCount data-plot)
 	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
 	   data-series (XYSeries. series-lab)
-           line-renderer (XYLineAndShapeRenderer. true false)
+	   points? (true? (:points opts))
+           line-renderer (XYLineAndShapeRenderer. true points?)
            ;; data-set (.getDataset data-plot)
 	   data-set (XYSeriesCollection.)]
        (dorun
@@ -539,7 +540,8 @@
 	   n (.getDatasetCount data-plot)
 	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
 	   data-series (XYSeries. series-lab)
-           line-renderer (XYLineAndShapeRenderer. true false)
+	   points? (true? (:points opts))
+           line-renderer (XYLineAndShapeRenderer. true points?)
            data-set (XYSeriesCollection.)]
        (dorun
         (map (fn [x y]
@@ -947,6 +949,7 @@
 			    (format "%s, %s" 'x 'y)))
 	  theme (or (:theme opts) :default)
 	  legend? (true? (:legend opts))
+	  points? (true? (:points opts))
 	  data-series (XYSeries. series-lab)
 	  dataset (XYSeriesCollection.)
 	  chart (do
@@ -969,7 +972,9 @@
                 (doseq [i (range 1 (count x-groups))]
                   (add-lines chart (nth x-groups i)
                              (nth y-groups i)
-                             :series-label (format "%s, %s (%s)" 'x 'y i))))]
+                             :series-label (format "%s, %s (%s)" 'x 'y i)
+			     :points points?)))]
+      (.setRenderer (.getPlot chart) 0 (XYLineAndShapeRenderer. true points?))
       (set-theme chart theme)  
       chart)))
 
