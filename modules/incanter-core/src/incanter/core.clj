@@ -586,7 +586,7 @@
     http://en.wikipedia.org/wiki/Factorial
 
 "
-  ([^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
+([^Integer k] {:pre [(and (number? k) (not (neg? k)))]} (DoubleArithmetic/factorial k)))
 
 
 
