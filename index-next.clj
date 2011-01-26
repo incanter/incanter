@@ -916,9 +916,9 @@
    :name "$",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1488",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1488",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$",
    :doc
@@ -931,9 +931,9 @@
    :name "$=",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2618",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2618",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$=",
    :doc
@@ -943,9 +943,9 @@
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L54",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L54",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$data",
    :namespace "incanter.core",
@@ -960,9 +960,9 @@
    :name "$fn",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1746",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1746",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$fn",
    :doc
@@ -975,9 +975,9 @@
    :name "$group-by",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1798",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1798",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$group-by",
    :doc
@@ -992,9 +992,9 @@
    :name "$join",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1896",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1896",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$join",
    :doc
@@ -1007,9 +1007,9 @@
    :name "$map",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1857",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1857",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$map",
    :doc
@@ -1022,9 +1022,9 @@
    :name "$order",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1717",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1717",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$order",
    :doc
@@ -1039,9 +1039,9 @@
    :name "$rollup",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1628",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1628",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$rollup",
    :doc
@@ -1054,9 +1054,9 @@
    :name "$where",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1596",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1596",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$where",
    :doc
@@ -1069,9 +1069,9 @@
    :name "abs",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L534",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L534",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/abs",
    :doc
@@ -1084,9 +1084,9 @@
    :name "acos",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L558",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L558",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/acos",
    :doc
@@ -1099,9 +1099,9 @@
    :name "asin",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L546",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L546",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/asin",
    :doc
@@ -1114,9 +1114,9 @@
    :name "atan",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L570",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L570",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/atan",
    :doc
@@ -1129,9 +1129,9 @@
    :name "atan2",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L491",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L491",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/atan2",
    :doc
@@ -1144,9 +1144,9 @@
    :name "beta",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2219",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2219",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/beta",
    :doc
@@ -1159,9 +1159,9 @@
    :name "bind-columns",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L357",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L357",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/bind-columns",
    :doc
@@ -1174,9 +1174,9 @@
    :name "bind-rows",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L318",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L318",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/bind-rows",
    :doc
@@ -1190,9 +1190,9 @@
    :name "categorical-var",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2107",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2107",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/categorical-var",
    :doc
@@ -1205,9 +1205,9 @@
    :name "choose",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L593",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L593",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/choose",
    :doc
@@ -1220,9 +1220,9 @@
    :name "col-names",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1414",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1414",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/col-names",
    :doc
@@ -1235,9 +1235,9 @@
    :name "condition",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L984",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L984",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/condition",
    :doc
@@ -1250,9 +1250,9 @@
    :name "conj-cols",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1434",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1434",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/conj-cols",
    :doc
@@ -1265,9 +1265,9 @@
    :name "conj-rows",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1463",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1463",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/conj-rows",
    :doc
@@ -1280,9 +1280,9 @@
    :name "copy",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L645",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L645",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/copy",
    :doc "Returns a copy of the given matrix.",
@@ -1294,9 +1294,9 @@
    :name "cos",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L552",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L552",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/cos",
    :doc
@@ -1309,9 +1309,9 @@
    :name "cumulative-sum",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L817",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L817",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/cumulative-sum",
    :doc
@@ -1324,9 +1324,9 @@
    :name "data-table",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2471",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2471",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/data-table",
    :doc "Creates a javax.swing.JTable given an Incanter dataset.",
@@ -1338,9 +1338,9 @@
    :name "dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1129",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1129",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/dataset",
    :doc
@@ -1353,9 +1353,9 @@
    :name "dataset?",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L108",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L108",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/dataset?",
    :doc " Determines if obj is of type incanter.core.Dataset.",
@@ -1367,9 +1367,9 @@
    :name "decomp-cholesky",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L845",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L845",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-cholesky",
    :doc
@@ -1382,9 +1382,9 @@
    :name "decomp-eigenvalue",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L905",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L905",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-eigenvalue",
    :doc
@@ -1397,9 +1397,9 @@
    :name "decomp-lu",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L931",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L931",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-lu",
    :doc
@@ -1412,9 +1412,9 @@
    :name "decomp-qr",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L957",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L957",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-qr",
    :doc
@@ -1427,9 +1427,9 @@
    :name "decomp-svd",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L875",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L875",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-svd",
    :doc
@@ -1443,9 +1443,9 @@
    :name "deshape",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1964",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1964",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/deshape",
    :doc
@@ -1458,9 +1458,9 @@
    :name "det",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L730",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L730",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/det",
    :doc
@@ -1473,9 +1473,9 @@
    :name "diag",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L151",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L151",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/diag",
    :doc
@@ -1488,9 +1488,9 @@
    :name "dim",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L134",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L134",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/dim",
    :doc
@@ -1503,9 +1503,9 @@
    :name "div",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L461",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L461",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/div",
    :doc
@@ -1518,9 +1518,9 @@
    :name "exp",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L528",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L528",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/exp",
    :doc
@@ -1533,9 +1533,9 @@
    :name "factorial",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L576",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L576",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/factorial",
    :doc
@@ -1548,9 +1548,9 @@
    :name "gamma",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2209",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2209",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/gamma",
    :doc
@@ -1563,9 +1563,9 @@
    :name "get-categories",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2031",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2031",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/get-categories",
    :doc
@@ -1578,9 +1578,9 @@
    :name "get-input-reader",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2696",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2696",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/get-input-reader",
    :doc
@@ -1593,9 +1593,9 @@
    :name "get-input-stream",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2705",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2705",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/get-input-stream",
    :doc
@@ -1608,9 +1608,9 @@
    :name "grid-apply",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2592",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2592",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/grid-apply",
    :doc
@@ -1623,9 +1623,9 @@
    :name "group-on",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1064",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1064",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/group-on",
    :doc
@@ -1638,9 +1638,9 @@
    :name "half-vectorize",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L772",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L772",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/half-vectorize",
    :doc
@@ -1653,9 +1653,9 @@
    :name "identity-matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L141",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L141",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/identity-matrix",
    :doc
@@ -1668,9 +1668,9 @@
    :name "incomplete-beta",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2229",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2229",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/incomplete-beta",
    :doc
@@ -1683,9 +1683,9 @@
    :name "kronecker",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L678",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L678",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/kronecker",
    :doc
@@ -1698,9 +1698,9 @@
    :name "length",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1043",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1043",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/length",
    :doc
@@ -1713,9 +1713,9 @@
    :name "log",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L510",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L510",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/log",
    :doc
@@ -1728,9 +1728,9 @@
    :name "log10",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L522",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L522",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/log10",
    :doc
@@ -1743,9 +1743,9 @@
    :name "log2",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L516",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L516",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/log2",
    :doc
@@ -1758,9 +1758,9 @@
    :name "make-unique",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1395",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1395",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/make-unique",
    :doc
@@ -1773,9 +1773,9 @@
    :name "matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L61",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L61",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/matrix",
    :doc
@@ -1788,9 +1788,9 @@
    :name "matrix-map",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1829",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1829",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/matrix-map",
    :doc
@@ -1803,9 +1803,9 @@
    :name "matrix?",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L103",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L103",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/matrix?",
    :doc " Test if obj is 'derived' incanter.Matrix.",
@@ -1817,9 +1817,9 @@
    :name "minus",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L413",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L413",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/minus",
    :doc
@@ -1832,9 +1832,9 @@
    :name "mmult",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L650",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L650",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/mmult",
    :doc
@@ -1847,9 +1847,9 @@
    :name "mult",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L440",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L440",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/mult",
    :doc
@@ -1862,9 +1862,9 @@
    :name "plus",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L392",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L392",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/plus",
    :doc
@@ -1877,9 +1877,9 @@
    :name "pow",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L485",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L485",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/pow",
    :doc
@@ -1892,9 +1892,9 @@
    :name "prod",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L807",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L807",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/prod",
    :doc "Returns the product of the given sequence.",
@@ -1906,9 +1906,9 @@
    :name "query-dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1238",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1238",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/query-dataset",
    :doc
@@ -1921,9 +1921,9 @@
    :name "query-to-pred",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1187",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1187",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/query-to-pred",
    :doc
@@ -1936,9 +1936,9 @@
    :name "quit",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2521",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2521",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/quit",
    :doc " Exits the Clojure shell.",
@@ -1950,9 +1950,9 @@
    :name "rank",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1003",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1003",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/rank",
    :doc
@@ -1965,9 +1965,9 @@
    :name "regularized-beta",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2241",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2241",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/regularized-beta",
    :doc
@@ -1977,9 +1977,9 @@
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2527",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2527",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/save",
    :namespace "incanter.core",
@@ -1990,9 +1990,9 @@
    " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
    :name "save"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L211",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L211",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sel",
    :namespace "incanter.core",
@@ -2003,9 +2003,9 @@
    "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
    :name "sel"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2483",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2483",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/set-data",
    :namespace "incanter.core",
@@ -2019,9 +2019,9 @@
    :name "sin",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L540",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L540",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sin",
    :doc
@@ -2034,9 +2034,9 @@
    :name "solve",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L711",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L711",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/solve",
    :doc
@@ -2049,9 +2049,9 @@
    :name "solve-quadratic",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2259",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2259",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/solve-quadratic",
    :doc
@@ -2064,9 +2064,9 @@
    :name "sq",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L504",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L504",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sq",
    :doc
@@ -2079,9 +2079,9 @@
    :name "sqrt",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L498",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L498",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sqrt",
    :doc
@@ -2094,9 +2094,9 @@
    :name "sum",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L800",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L800",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sum",
    :doc "Returns the sum of the given sequence.",
@@ -2108,9 +2108,9 @@
    :name "sum-of-squares",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L793",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L793",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sum-of-squares",
    :doc "Returns the sum-of-squares of the given sequence.",
@@ -2122,9 +2122,9 @@
    :name "symmetric-matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2286",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2286",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/symmetric-matrix",
    :doc
@@ -2137,9 +2137,9 @@
    :name "tan",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L564",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L564",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/tan",
    :doc
@@ -2152,9 +2152,9 @@
    :name "to-dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1338",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1338",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-dataset",
    :doc
@@ -2167,9 +2167,9 @@
    :name "to-labels",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2147",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2147",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-labels",
    :doc "\n",
@@ -2181,9 +2181,9 @@
    :name "to-levels",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2137",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2137",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-levels",
    :doc "\n",
@@ -2192,9 +2192,9 @@
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L618",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L618",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-list",
    :namespace "incanter.core",
@@ -2205,9 +2205,9 @@
    " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
    :name "to-list"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2074",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2074",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-map",
    :namespace "incanter.core",
@@ -2221,9 +2221,9 @@
    :name "to-matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2184",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2184",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-matrix",
    :doc
@@ -2236,9 +2236,9 @@
    :name "to-vect",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L1029",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L1029",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-vect",
    :doc
@@ -2251,9 +2251,9 @@
    :name "trace",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L741",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L741",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/trace",
    :doc
@@ -2266,9 +2266,9 @@
    :name "trans",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L176",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L176",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/trans",
    :doc
@@ -2281,9 +2281,9 @@
    :name "vectorize",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L752",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L752",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/vectorize",
    :doc
@@ -2293,9 +2293,9 @@
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/core.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2330",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2330",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/view",
    :namespace "incanter.core",
@@ -2309,9 +2309,9 @@
    :name "with-data",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj#L2050",
+   "https://github.com/liebke/incanter/blob/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj#L2050",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5a2505dafdc1b14d6eb2737c067f6b05ab6c49ce/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/c641fe1952c96adcd90e208aa39814fe926e1ab8/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/with-data",
    :doc
