@@ -36,10 +36,7 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability)
-           (incanter.random Weibull))
-  (:use [incanter.probability :only [gt lt binary]])
-  (:use [incanter.transformations :only [map-map same-length? sort-map]])
-  (:use [incanter.internal :only [tree-comp-each]])
+           (incanter Weibull))
   (:use [clojure.contrib.map-utils :only [deep-merge-with]])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns

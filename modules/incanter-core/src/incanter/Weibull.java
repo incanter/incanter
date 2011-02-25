@@ -1,4 +1,4 @@
-package incanter.random;
+package incanter;
 
 import cern.jet.random.tdouble.*;
 import cern.jet.random.tdouble.engine.*;
