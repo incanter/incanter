@@ -31,7 +31,8 @@
 (defn- write-line [^HSSFSheet sheet row-num line ^CellStyle style]
    (let [^HSSFRow xl-line (. sheet createRow row-num)]
      (do-loop
-      #(doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style))
+      #(if (not (nil? %2))
+         (doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style)))
       0
       line)))
 
@@ -51,17 +52,16 @@ Examples:
 
 "}
   save-xls
-  [^:incanter.core/dataset dataset  ^String filename  & options]
+  [^:incanter.core/dataset dataset  ^String filename  & {:keys [use-bold sheet]
+                                                         :or {use-bold true sheet "dataset"}}]
   (write-file
-   (let [opts (when options (apply assoc {} options))
-	 bold-header (or (:use-bold opts) true)
-	 workbook-blob (let [w (HSSFWorkbook.)]
-			 {:workbook w
-			  :normal  (make-font true w)
-			  :bold    (make-font false w)})
-	 workbook-sheet (. (:workbook workbook-blob) createSheet (or (:sheet opts) "dataset"))
-	 align-row (fn [row cols] (map #(get row %1) cols))]
-     (write-line workbook-sheet 0 (:column-names dataset) (if bold-header (:bold workbook-blob) (:normal workbook-blob)))
+   (let [workbook-blob (let [w (HSSFWorkbook.)]
+                         {:workbook w
+                          :normal  (make-font true w)
+                          :bold    (make-font false w)})
+         workbook-sheet (. (:workbook workbook-blob) createSheet sheet)
+         align-row (fn [row cols] (map #(get row %1) cols))]
+     (write-line workbook-sheet 0 (:column-names dataset) (if use-bold (:bold workbook-blob) (:normal workbook-blob)))
      (do-loop
       #(write-line workbook-sheet %1 (align-row %2 (:column-names dataset)) (:normal workbook-blob))
       1
@@ -70,18 +70,18 @@ Examples:
    filename))
 
 (defmulti ^ {:private true
-	     :doc "Retrieve the Excel workbook based on either the index or the sheet name."}
+             :doc "Retrieve the Excel workbook based on either the index or the sheet name."}
   get-workbook-sheet
   (fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
 
 (defmethod get-workbook-sheet :indexed [wbk index-or-name]
-	   (. wbk getSheetAt index-or-name))
+           (. wbk getSheetAt index-or-name))
 
 (defmethod get-workbook-sheet :named [wbk index-or-name]
  (. wbk getSheet (str index-or-name)))
 
 (defmulti ^ {:private true
-	     :doc "Get the value after the evaluating the formula.  See http://poi.apache.org/spreadsheet/eval.html#Evaluate"}
+             :doc "Get the value after the evaluating the formula.  See http://poi.apache.org/spreadsheet/eval.html#Evaluate"}
   get-cell-formula-value
   (fn [evaled-cell evaled-type]
     evaled-type))
@@ -95,29 +95,35 @@ Examples:
 (defmulti ^ {:private true
               :doc "Get the cell value depending on the cell type."}
           get-cell-value
-	(fn [cell]
-		(let [ct (. cell getCellType)]
-			(if (not (= Cell/CELL_TYPE_NUMERIC ct))
-				ct
-				(if (DateUtil/isCellDateFormatted cell)
-					:date
-					ct)))))
+        (fn [cell]
+                (let [ct (. cell getCellType)]
+                        (if (not (= Cell/CELL_TYPE_NUMERIC ct))
+                                ct
+                                (if (DateUtil/isCellDateFormatted cell)
+                                        :date
+                                        ct)))))
 
 (defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
 (defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]
-	   (let [val (. (.. cell getSheet getWorkbook getCreationHelper createFormulaEvaluator) evaluate cell)
-		 evaluated-type   (. val getCellType)]
-	     (get-cell-formula-value val (if (= Cell/CELL_TYPE_NUMERIC evaluated-type)
-					   (if (DateUtil/isCellInternalDateFormatted cell) ; Check the original for date formatting hints
-					     :date
-					     :number)
-					   evaluated-type))))
+           (let [val (. (.. cell getSheet getWorkbook getCreationHelper createFormulaEvaluator) evaluate cell)
+                 evaluated-type   (. val getCellType)]
+             (get-cell-formula-value val (if (= Cell/CELL_TYPE_NUMERIC evaluated-type)
+                                           (if (DateUtil/isCellInternalDateFormatted cell) ; Check the original for date formatting hints
+                                             :date
+                                             :number)
+                                           evaluated-type))))
 
 (defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell] (. cell getStringCellValue))
 (defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue))
 (defmethod get-cell-value :date                  [cell] (. cell getDateCellValue))
 (defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
+
+(defn- cell-iterator [^HSSFRow row]
+  (for [idx (range (.getFirstCellNum row) (.getLastCellNum row))]
+    (if-let [cell (.getCell row idx)]
+      cell
+      (.createCell row idx Cell/CELL_TYPE_BLANK))))
 
 (defn ^{:doc "Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.
@@ -140,16 +146,14 @@ Options are:
 
 "}
   read-xls
-  [^String filename  & options]
-    (let [opts (when options (apply assoc {} options))
-          sheet-pointer (or (:sheet opts) 0)]
+  [^String filename  & {:keys [sheet] :or {sheet 0}}]
       (with-open [in-fs (get-input-stream filename)]
 	(let [workbook  (HSSFWorkbook. in-fs)
-	      sheet     (get-workbook-sheet workbook sheet-pointer)
-	      rows-it   (iterator-seq (. sheet iterator))
-	      rowi      (. (first rows-it) iterator)
-	      colnames  (doall (map get-cell-value (iterator-seq rowi)))
-	      data      (map #(iterator-seq (. % iterator)) (rest rows-it))]
+	      wsheet     (get-workbook-sheet workbook sheet)
+	      rows-it   (iterator-seq (. wsheet iterator))
+	      rowi      (cell-iterator (first rows-it))
+	      colnames  (doall (map get-cell-value rowi))
+	      data      (map #(cell-iterator %) (rest rows-it))]
 	  (dataset colnames
-		   (map (fn [d] (map get-cell-value d)) data))))))
+		   (map (fn [d] (map get-cell-value d)) data)))))
 

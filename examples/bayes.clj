@@ -26,27 +26,22 @@
 "
   This function implments the Gibbs sampling example using full conditional in OLS
   from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the Social
-  Sciences (page 171). This version is purely function with no immutability.
+  Sciences (page 171). This version is purely functional with no immutability.
 "
   (let [lm (linear-model y x :intercept false)
         pars (trans (:coefs lm))
         xtxi (solve (mmult (trans x) x))
         nx (ncol x)
-        shape (/ (- (nrow x) (ncol x)) 2)
-       ]
-      (loop [
-             coefs (transient [[0 0 0 0 0 0 0 0 0]])
+        shape (/ (- (nrow x) (ncol x)) 2)]
+      (loop [coefs (transient [[0 0 0 0 0 0 0 0 0]])
              variances (transient [1]) 
-             i 0
-            ]
+             i 0]
         (if (= i N)
           {:coef (matrix (persistent! coefs)) :var (persistent! variances)}
-          (let [
-                b (to-list (plus pars (mmult (trans (sample-normal nx)) 
+          (let [b (to-list (plus pars (mmult (trans (sample-normal nx)) 
                                              (decomp-cholesky (mult xtxi (variances i))))))
                 resid (minus y (mmult x b))
-                s2 (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans resid) resid) 0.5) ))
-               ]
+                s2 (/ 1 (sample-gamma 1 :shape shape :rate (mult (mmult (trans resid) resid) 0.5) ))]
             (recur (conj! coefs b) (conj! variances s2) (inc i)))))))
 
 
@@ -65,8 +60,7 @@
         b (ref [[0 0 0 0 0 0 0 0 0]])
         s2 (ref [1])
         resid (ref 0)
-        shape (/ (- (nrow x) (ncol x)) 2)
-       ]
+        shape (/ (- (nrow x) (ncol x)) 2)]
     (do
       (dotimes [i N]
         (dosync
@@ -125,17 +119,13 @@
                   (< (- (post-fn x y cand-b cand-s2) 
                         (post-fn x y old-b old-s2))
                      (log (rand))))
-        ncol-x (ncol x)
-       ]
-    (loop [
-           coefs (transient [[0 0 0 0 0 0 0 0 0]])
+        ncol-x (ncol x)]
+    (loop [coefs (transient [[0 0 0 0 0 0 0 0 0]])
            variances (transient [1])
-           i 0
-          ]
+           i 0]
       (if (= i N)
           {:coef (matrix (persistent! coefs)) :var (persistent! variances)}
-          (let [
-                old-b (coefs i)
+          (let [old-b (coefs i)
                 old-s2 (variances i)
                 cand-b (into [] (map #(+ (sample-normal 1 :mean 0 :sd %1) %2) b-scale old-b))
                 new-b (loop [b old-b j 0]
@@ -149,8 +139,7 @@
                 cand-s2 (+ (sample-normal 1 :mean 0 :sd s2-scale) old-s2)
                 new-s2 (if (or (< cand-s2 0) (reject? x y new-b cand-s2 new-b old-s2)) 
                          old-s2 
-                         cand-s2)
-               ]
+                         cand-s2)]
         (recur (conj! coefs new-b) (conj! variances new-s2) (inc i)))))))
 
 

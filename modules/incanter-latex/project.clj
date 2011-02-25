@@ -1,7 +1,7 @@
-(defproject incanter/incanter-latex "1.2.3-SNAPSHOT"
+(defproject incanter/incanter-latex "1.2.3"
   :description "Library for rendering LaTeX math equations using the jLateXMath library."
-  :dependencies [[incanter/incanter-charts "1.2.3-SNAPSHOT"]
+  :dependencies [[incanter/incanter-charts "1.2.3"]
                  [net.sf.alxa/jlatexmath "0.9.1-SNAPSHOT"]]
-  :dev-dependencies [[leiningen/lein-swank "1.1.0"]
-                     [lein-clojars "0.5.0-SNAPSHOT"]]
-  :repositories [["alxa-repo" "http://alxa.sourceforge.net/m2"]])
+  :dev-dependencies [[swank-clojure "1.3.0-SNAPSHOT"]
+                     [lein-clojars "0.6.0"]]
+  :repositories {"alxa-repo" "http://alxa.sourceforge.net/m2"})

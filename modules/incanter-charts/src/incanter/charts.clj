@@ -510,18 +510,23 @@
 	   n (.getDatasetCount data-plot)
 	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
 	   data-series (XYSeries. series-lab)
-           line-renderer (XYLineAndShapeRenderer. true false)
+	   points? (true? (:points opts))
+           line-renderer (XYLineAndShapeRenderer. true points?)
            ;; data-set (.getDataset data-plot)
 	   data-set (XYSeriesCollection.)]
-    (do
-      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
+       (dorun
+        (map (fn [x y]
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
+             _x _y))
       (.addSeries data-set data-series)
       (doto data-plot
 	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
 	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
 	(.setDataset n data-set)
 	(.setRenderer n line-renderer))
-      chart))))
+      chart)))
 
 
 ;; doesn't work
@@ -535,17 +540,22 @@
 	   n (.getDatasetCount data-plot)
 	   series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
 	   data-series (XYSeries. series-lab)
-           line-renderer (XYLineAndShapeRenderer. true false)
+	   points? (true? (:points opts))
+           line-renderer (XYLineAndShapeRenderer. true points?)
            data-set (XYSeriesCollection.)]
-    (do
-      (doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
-      (.addSeries data-set data-series)
-      (doto data-plot
-	(.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-	(.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)     
-	(.setDataset n data-set)
-	(.setRenderer n line-renderer))
-      chart))))
+       (dorun
+        (map (fn [x y]
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
+             _x _y))
+       (.addSeries data-set data-series)
+       (doto data-plot
+         (.setSeriesRenderingOrder org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+         (.setDatasetRenderingOrder org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)     
+         (.setDataset n data-set)
+         (.setRenderer n line-renderer))
+       chart)))
 
 
 
@@ -555,6 +565,7 @@
 
   Options:
     :series-label (default x expression)
+    :points (default false)
 
   Examples:
 
@@ -675,24 +686,28 @@
 
 (defn add-points*
   ([chart x y & options]
-    (let [opts (when options (apply assoc {} options))
-	  data (:data opts)
-	  _x (if (coll? x) (to-list x) ($ x data))
-	  _y (if (coll? y) (to-list y) ($ y data))
-	  data-plot (.getPlot chart)
-	  n (.getDatasetCount data-plot)
-	  series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
-	  data-series (XYSeries. series-lab)
-	  line-renderer (XYLineAndShapeRenderer. false true)
-	  data-set (XYSeriesCollection.)]
-      (do
-	(doseq [i (range (count _x))] (.add data-series (nth _x i)  (nth _y i)))
-	(.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
-	(.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
-	(.addSeries data-set data-series)
-	(.setDataset data-plot n data-set)
-	(.setRenderer data-plot n line-renderer)
-	chart))))
+     (let [opts (when options (apply assoc {} options))
+           data (:data opts)
+           _x (if (coll? x) (to-list x) ($ x data))
+           _y (if (coll? y) (to-list y) ($ y data))
+           data-plot (.getPlot chart)
+           n (.getDatasetCount data-plot)
+           series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+           data-series (XYSeries. series-lab)
+           line-renderer (XYLineAndShapeRenderer. false true)
+           data-set (XYSeriesCollection.)]
+       (dorun
+        (map (fn [x y]
+               (if (and (not (nil? x))
+                        (not (nil? y)))
+                 (.add data-series (double x) (double y))))
+             _x _y))
+       (.setSeriesRenderingOrder (.getPlot chart) org.jfree.chart.plot.SeriesRenderingOrder/FORWARD)
+       (.setDatasetRenderingOrder (.getPlot chart) org.jfree.chart.plot.DatasetRenderingOrder/FORWARD)
+       (.addSeries data-set data-series)
+       (.setDataset data-plot n data-set)
+       (.setRenderer data-plot n line-renderer)
+       chart)))
 
 
 
@@ -935,25 +950,32 @@
 			    (format "%s, %s" 'x 'y)))
 	  theme (or (:theme opts) :default)
 	  legend? (true? (:legend opts))
+	  points? (true? (:points opts))
 	  data-series (XYSeries. series-lab)
 	  dataset (XYSeriesCollection.)
 	  chart (do
-              (doseq [i (range (count __x))] 
-		        (.add data-series (nth __x i)  (nth __y i)))
-               (.addSeries dataset data-series)
-                    (create-plot
-                        main-title
-                        x-lab
-                        y-lab
-                        dataset
-                        legend?
-                        true  ; tooltips
-                        false))
+                  (dorun
+                   (map (fn [x y]
+                        (if (and (not (nil? x))
+                                 (not (nil? y)))
+                          (.add data-series (double x) (double y))))
+                        __x __y))
+                  (.addSeries dataset data-series)
+                  (create-plot
+                   main-title
+                   x-lab
+                   y-lab
+                   dataset
+                   legend?
+                   true  ; tooltips
+                   false))
            _ (when x-groups
                 (doseq [i (range 1 (count x-groups))]
                   (add-lines chart (nth x-groups i)
                              (nth y-groups i)
-                             :series-label (format "%s, %s (%s)" 'x 'y i))))]
+                             :series-label (format "%s, %s (%s)" 'x 'y i)
+			     :points points?)))]
+      (.setRenderer (.getPlot chart) 0 (XYLineAndShapeRenderer. true points?))
       (set-theme chart theme)  
       chart)))
 
@@ -974,6 +996,7 @@
     :legend (default false) prints legend
     :series-label (default x expression)
     :group-by (default nil) -- a vector of values used to group the x and y values into series.
+    :points (default false) includes point-markers
 
   See also:
     view, save, add-points, add-lines
@@ -1119,7 +1142,11 @@
 	  data-series (XYSeries. series-lab)
 	  _dataset (XYSeriesCollection.)
 	  chart (do
-		  (doseq [i (range (count __x))] (.add data-series (nth __x i)  (nth __y i)))
+                  (dorun
+                   (map (fn [x y]
+                          (if (and (not (nil? x)) (not (nil? y)))
+                            (.add data-series (double x) (double y))))
+                        __x __y))
 		  (.addSeries _dataset data-series)
 		  (org.jfree.chart.ChartFactory/createScatterPlot
 		   main-title

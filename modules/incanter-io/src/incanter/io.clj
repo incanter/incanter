@@ -47,54 +47,49 @@ incanter.io
       :compress-delim (default true if delim = \\space, false otherwise) means
                       compress multiple adjacent delimiters into a single delimiter
   "
-  ([filename & options]
-   (let [opts (when options (apply assoc {} options))
-         delim (or (:delim opts) \,) ; comma delim default
-         quote-char (or (:quote opts) \")
-	 keyword-headers? (or (:keyword-headers opts) true)
-         skip (or (:skip opts) 0)
-         header? (or (:header opts) false)
-         compress-delim? (or (:compress-delim opts)
-                             (if (= delim \space) true false))]
+  ([filename & {:keys [delim keyword-headers quote skip header compress-delim]
+                :or {delim \,
+                     quote \"
+                     skip 0
+                     header false
+                     keyword-headers true}}]
+     (let [compress-delim? (or compress-delim (if (= delim \space) true false))]
      (with-open [reader ^CSVReader (CSVReader.
-                    (get-input-reader filename)
-                    delim
-                    quote-char
-                    skip)]
+				    (get-input-reader filename)
+				    delim
+				    quote
+				    skip)]
        (let [data-lines (map seq (seq (.readAll reader)))
              raw-data (filter #(> (count (filter (fn [field] (not= field "")) %)) 0) 
-			      (if compress-delim? 
+                              (if compress-delim? 
                                 (map (fn [line] (filter #(not= % "") line)) data-lines)
                                 data-lines))
              parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) 
-				       raw-data))]
-    (if header?
+                                       raw-data))]
+    (if header
       ; have header row
-      (dataset (if keyword-headers?
-		 (map keyword (first parsed-data))
-		 (first parsed-data)) 
-	       (rest parsed-data))
+      (dataset (if keyword-headers
+                 (map keyword (first parsed-data))
+                 (first parsed-data)) 
+               (rest parsed-data))
       ; no header row so build a default one
       (let [col-count (count (first parsed-data))
             col-names (apply vector (map str 
-					 (repeat col-count "col") 
-					 (iterate inc 0)))]
-        (dataset (if keyword-headers?
-		   (map keyword col-names) 
-		   col-names) 
-		 parsed-data))))))))
+                                         (repeat col-count "col") 
+                                         (iterate inc 0)))]
+        (dataset (if keyword-headers
+                   (map keyword col-names) 
+                   col-names) 
+                 parsed-data))))))))
 
 
 
 
-(defmethod save incanter.Matrix [mat filename & options]
-  (let [opts (when options (apply assoc {} options))
-        delim (or (:delim opts) \,)
-        header (or (:header opts) nil)
-        append? (if (true? (:append opts)) true false)
-        file-writer (java.io.FileWriter. filename append?)]
+(defmethod save incanter.Matrix [mat filename & {:keys [delim header append]
+                                                 :or {append false delim \,}}]
+  (let [file-writer (java.io.FileWriter. filename append)]
     (do
-      (when (and header (not append?))
+      (when (and header (not append))
         (.write file-writer (str (first header)))
         (doseq [column-name (rest header)]
           (.write file-writer (str delim column-name)))
@@ -113,16 +108,14 @@ incanter.io
 
 
 
-(defmethod save :incanter.core/dataset [dataset filename & options]
-  (let [opts (when options (apply assoc {} options))
-        delim (or (:delim opts) \,)
-        header (or (:header opts) (map #(if (keyword? %) (name %) %) (:column-names dataset)))
-        append? (if (true? (:append opts)) true false)
-        file-writer (java.io.FileWriter. filename append?)
+(defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
+                                                            :or {append false delim \,}}]
+  (let [header (or header (map #(if (keyword? %) (name %) %) (:column-names dataset)))
+        file-writer (java.io.FileWriter. filename append)
         rows (:rows dataset)
         columns (:column-names dataset)]
     (do
-      (when (and header (not append?))
+      (when (and header (not append))
         (.write file-writer (str (first header)))
         (doseq [column-name (rest header)]
           (.write file-writer (str delim column-name)))
@@ -137,12 +130,11 @@ incanter.io
       (.close file-writer))))
 
 
-
 (defmethod save java.awt.image.BufferedImage
   ([img filename & options]
      (javax.imageio.ImageIO/write img 
-				  "png" 
-				  (.getAbsoluteFile (java.io.File. filename)))))
+                                  "png" 
+                                  (.getAbsoluteFile (java.io.File. filename)))))
 
 
 

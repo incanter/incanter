@@ -101,11 +101,8 @@
   Example:
       (pdf-f 1.0 :df1 5 :df2 2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          df1 (or (:df1 opts) 1)
-          df2 (or (:df2 opts) 1)
-          pdf-fx (fn [x]
+  ([x & {:keys [df1 df2] :or {df1 1 df2 1}}]
+    (let [pdf-fx (fn [x]
                    (* (/ (gamma (/ (+ df1 df2) 2))
                          (* (gamma (/ df1 2)) (gamma (/ df2 2))))
                        (pow (/ df1 df2) (/ df1 2))
@@ -126,6 +123,7 @@
   Options:
     :df1 (default 1)
     :df2 (default 1)
+    :lower-tail? (default true)
 
   See also:
       pdf-f and quantile-f
@@ -138,12 +136,11 @@
   Example:
       (cdf-f 1.0 :df1 5 :df2 2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          df1 (or (:df1 opts) 1)
-          df2 (or (:df2 opts) 1)
-          cdf-fx (if lower-tail?
+  ([x & {:keys [df1 df2 lower-tail?]
+         :or {df1 1
+              df2 1
+              lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
                    (fn [x1] (regularized-beta
                               (/ (* df1 x1) (+ df2 (* df1 x1)))
                               (/ df1 2)
@@ -182,11 +179,8 @@
   Example:
       (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          mean (or (:mean opts) 0)
-          sd (or (:sd opts) 1)
-          dist (Normal. mean sd (DoubleMersenneTwister.))]
+  ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
+    (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -212,11 +206,8 @@
   Example:
       (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          mean (or (:mean opts) 0)
-          sd (or (:sd opts) 1)
-          dist (Normal. mean sd (DoubleMersenneTwister.))]
+  ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
+    (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -246,11 +237,8 @@
       (quantile-normal 0.975)
       (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))
 "
-  ([probability & options]
-    (let [opts (when options (apply assoc {} options))
-          mean (or (:mean opts) 0)
-          sd (or (:sd opts) 1)
-          x (if (coll? probability)
+  ([probability & {:keys [mean sd] :or {mean 0 sd 1}}]
+    (let [x (if (coll? probability)
               (map #(Probability/normalInverse %) probability)
               (Probability/normalInverse probability))]
       (plus mean (mult sd x)))))
@@ -275,13 +263,10 @@
   Example:
       (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
 "
-  ([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          mean (or (:mean opts) 0)
-          sd (or (:sd opts) 1)]
-      (if (= size 1)
-        (Normal/staticNextDouble mean sd)
-        (for [_ (range size)] (Normal/staticNextDouble mean sd))))))
+  ([^Integer size & {:keys [mean sd] :or {mean 0 sd 1}}]
+     (if (= size 1)
+      (Normal/staticNextDouble mean sd)
+      (for [_ (range size)] (Normal/staticNextDouble mean sd)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -325,14 +310,9 @@
     http://en.wikipedia.org/wiki/Multivariate_normal
 
 "
-([^Integer size & options]
-   (let [opts (when options (apply assoc {} options))
-         mean (or (:mean opts)
-                  (if (:sigma opts)
-                    (repeat (ncol (:sigma opts)) 0)
-                    [0]))
-         sigma (or (:sigma opts)
-                   (identity-matrix (count mean)))
+([^Integer size & {:keys [mean sigma]}]
+   (let [mean (or mean (if sigma (repeat (ncol sigma) 0) [0]))
+         sigma (or sigma (identity-matrix (count mean)))
          p (count mean)
          chol (decomp-cholesky sigma)
          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
@@ -369,14 +349,11 @@
       (pdf-uniform 5)
       (pdf-uniform 5 :min 1 :max 10)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          min (double (or (:min opts) 0.0))
-          max (double (or (:max opts) 1.0))
-          dist (DoubleUniform. min max (DoubleMersenneTwister.))]
-      (if (coll? x)
-        (map #(.pdf dist %) x)
-        (.pdf dist x)))))
+([x & {:keys [min max] :or {min 0.0 max 1.0}}]
+   (let [dist (DoubleUniform. min max (DoubleMersenneTwister.))]
+     (if (coll? x)
+       (map #(.pdf dist %) x)
+       (.pdf dist x)))))
 
 
 (defn cdf-uniform
@@ -399,14 +376,11 @@
       (cdf-uniform 5)
       (cdf-uniform 5 :min 1 :max 10)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          min (double (or (:min opts) 0.0))
-          max (double (or (:max opts) 1.0))
-          dist (DoubleUniform. min max (DoubleMersenneTwister.))]
-      (if (coll? x)
-        (map #(.cdf dist %) x)
-        (.cdf dist x)))))
+([x & {:keys [min max] :or {min 0.0 max 1.0}}]
+   (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister.))]
+     (if (coll? x)
+       (map #(.cdf dist %) x)
+       (.cdf dist x)))))
 
 
 (defn sample-uniform
@@ -429,17 +403,16 @@
       (sample-uniform 1000)
       (sample-uniform 1000 :min 1 :max 10)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          min-val (double (or (:min opts) 0.0))
-          max-val (double (or (:max opts) 1.0))
-          ints? (if (true? (:integers opts)) true false)
+([^Integer size & {:keys [min max integers]
+                   :or {min 0.0 max 1.0 integers false}}]
+    (let [min-val (double min)
+          max-val (double max)
           dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
       (if (= size 1)
-        (if ints?
+        (if integers
           (DoubleUniform/staticNextIntFromTo min-val max-val)
           (DoubleUniform/staticNextDoubleFromTo min-val max-val))
-        (if ints?
+        (if integers
           (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
           (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val)))))))
 
@@ -467,11 +440,8 @@
   Example:
       (pdf-beta 0.5 :alpha 1 :beta 2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          alpha (or (:alpha opts) 1)
-          beta (or (:beta opts) 1)
-          dist (Beta. alpha beta (DoubleMersenneTwister.))]
+  ([x & {:keys [alpha beta] :or [alpha 1 beta 1]}]
+    (let [dist (Beta. alpha beta (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -498,12 +468,8 @@
       (cdf-beta 0.5 :alpha 1 :beta 2)
       (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          alpha (or (:alpha opts) 1)
-          beta (or (:beta opts) 1)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
+([x & {:keys [alpha beta lower-tail?] :or [alpha 1 beta 1 lower-tail? false]}]
+    (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/beta alpha beta x1))
                   (fn [x1] (- 1 (Probability/betaComplemented alpha beta x1))))]
       (if (coll? x)
@@ -533,13 +499,10 @@
   Example:
       (sample-beta 1000 :alpha 1 :beta 2)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          alpha (or (:alpha opts) 1)
-          beta (or (:beta opts) 1)]
-      (if (= size 1)
-        (Beta/staticNextDouble alpha beta)
-        (for [_ (range size)] (Beta/staticNextDouble alpha beta))))))
+([^Integer size & {:keys [alpha beta] :or [alpha 1 beta 1]}]
+   (if (= size 1)
+      (Beta/staticNextDouble alpha beta)
+      (for [_ (range size)] (Beta/staticNextDouble alpha beta)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -650,11 +613,8 @@
   Example:
       (pdf-gamma 10 :shape 1 :rate 2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          shape (or (:shape opts) 1)
-          rate (or (:rate opts) 1)
-          dist (Gamma. shape rate (DoubleMersenneTwister.))]
+  ([x & {:keys [shape rate] :or {shape 1 rate 1}}]
+    (let [dist (Gamma. shape rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -682,12 +642,8 @@
       (cdf-gamma 10 :shape 1 :rate 2)
       (cdf-gamma 3 :shape 1 :lower-tail false)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          shape (or (:shape opts) 1)
-          rate (or (:rate opts) 1)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
+([x & {:keys [shape rate lower-tail?] :or {shape 1 rate 1 lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/gamma rate shape x1))
                   (fn [x1] (Probability/gammaComplemented rate shape x1)))]
       (if (coll? x)
@@ -714,13 +670,10 @@
   Example:
       (sample-gamma 1000 :shape 1 :rate 2)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          shape (or (:shape opts) 1)
-          rate (or (:rate opts) 1)]
-      (if (= size 1)
-        (Gamma/staticNextDouble shape rate)
-        (for [_ (range size)] (Gamma/staticNextDouble shape rate))))))
+([^Integer size & {:keys [shape rate] :or {shape 1 rate 1}}]
+   (if (= size 1)
+      (Gamma/staticNextDouble shape rate)
+      (for [_ (range size)] (Gamma/staticNextDouble shape rate)))))
 
 
 
@@ -747,10 +700,8 @@
   Example:
       (pdf-chisq 5.0 :df 2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)
-          dist (ChiSquare. df (DoubleMersenneTwister.))]
+  ([x & {:keys [df] :or {df 1}}]
+    (let [dist (ChiSquare. df (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -777,11 +728,8 @@
       (cdf-chisq 5.0 :df 2)
       (cdf-chisq 5.0 :df 2 :lower-tail false)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
+([x & {:keys [df lower-tail?] :or {df 1 lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/chiSquare df x1))
                   (fn [x1] (Probability/chiSquareComplemented df x1)))]
       (if (coll? x)
@@ -807,12 +755,10 @@
   Example:
       (sample-chisq 1000 :df 2)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)]
-      (if (= size 1)
-        (ChiSquare/staticNextDouble df)
-        (for [_ (range size)] (ChiSquare/staticNextDouble df))))))
+([^Integer size & {:keys [df] :or {df 1}}]
+   (if (= size 1)
+      (ChiSquare/staticNextDouble df)
+      (for [_ (range size)] (ChiSquare/staticNextDouble df)))))
 
 
 
@@ -838,10 +784,8 @@
   Example:
       (pdf-t 1.2 :df 10)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)
-          dist (StudentT. df (DoubleMersenneTwister.))]
+  ([x & {:keys [df] :or {df 1}}]
+    (let [dist (StudentT. df (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -865,11 +809,8 @@
   Example:
       (cdf-t 1.2 :df 10)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
+  ([x & {:keys [df lower-tail?] :or {df 1 lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/studentT df x1))
                   (fn [x1] (- 1 (Probability/studentT df x1))))]
       (if (coll? x)
@@ -902,10 +843,8 @@
       (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])
       (map #(quantile-t 0.025 :df %) df)
 "
-  ([probability & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)
-          to-alpha (fn [prob] ;; need to convert the probability to an alpha value
+  ([probability & {:keys [df] :or {df 1}}]
+    (let [to-alpha (fn [prob] ;; need to convert the probability to an alpha value
                      (if (< prob 1/2)
                       (* 2 prob)
                       (* 2 (- 1 prob))))
@@ -934,12 +873,10 @@
   Example:
       (cdf-t 1000 :df 10)
 "
-  ([size & options]
-    (let [opts (when options (apply assoc {} options))
-          df (or (:df opts) 1)]
-      (if (= size 1)
-        (StudentT/staticNextDouble df)
-        (for [_ (range size)] (StudentT/staticNextDouble df))))))
+  ([size & {:keys [df] :or {df 1}}]
+     (if (= size 1)
+      (StudentT/staticNextDouble df)
+      (for [_ (range size)] (StudentT/staticNextDouble df)))))
 
 
 
@@ -967,10 +904,8 @@
   Example:
       (pdf-exp 2.0 :rate 1/2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          rate (or (:rate opts) 1)
-          dist (Exponential. rate (DoubleMersenneTwister.))]
+  ([x & {:keys [rate] :or {rate 1}}]
+    (let [dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -994,10 +929,8 @@
   Example:
       (cdf-exp 2.0 :rate 1/2)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          rate (or (:rate opts) 1)
-          dist (Exponential. rate (DoubleMersenneTwister.))]
+  ([x & {:keys [rate] :or {rate 1}}]
+    (let [dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -1020,12 +953,10 @@
   Example:
       (sample-exp 1000 :rate 1/2)
 "
-  ([size & options]
-    (let [opts (when options (apply assoc {} options))
-          rate (or (:rate opts) 1)]
-      (if (= size 1)
-        (Exponential/staticNextDouble rate)
-        (for [_ (range size)] (Exponential/staticNextDouble rate))))))
+([size & {:keys [rate] :or {rate 1}}]
+   (if (= size 1)
+     (Exponential/staticNextDouble rate)
+     (for [_ (range size)] (Exponential/staticNextDouble rate)))))
 
 
 
@@ -1056,19 +987,18 @@
     http://en.wikipedia.org/wiki/Wishart_distribution#
 
 "
-  ([& options]
-    (let [opts (when options (apply assoc {} options))
-          scale (or (:scale opts) (when (:p opts) (identity-matrix (:p opts))))
-          p (count scale)
-          df (or (:df opts) p)
-          diagonal (for [i (range 1 (inc p))]
-                     (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
-          mat (diag diagonal)
-          indices (for [i (range p) j (range p) :when (< j i)] [i j])
-          _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
-          chol (decomp-cholesky scale)
-          x (mmult chol mat (trans mat) (trans chol))]
-        x)))
+([& {:keys [scale p df] :or {p 2}}]
+   (let [scale (or scale (when p (identity-matrix p)))
+         p (count scale)
+         df (or df p)
+         diagonal (for [i (range 1 (inc p))]
+                    (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
+         mat (diag diagonal)
+         indices (for [i (range p) j (range p) :when (< j i)] [i j])
+         _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
+         chol (decomp-cholesky scale)
+         x (mmult chol mat (trans mat) (trans chol))]
+     x)))
 
 
 
@@ -1093,14 +1023,11 @@
     http://en.wikipedia.org/wiki/Inverse-Wishart_distribution
 
 "
-  ([& options]
-    (let [opts (when options (apply assoc {} options))
-          scale (or (:scale opts) (when (:p opts) (identity-matrix (:p opts))))
-          p (count scale)
-          df (or (:df opts) p)]
-      (solve (sample-wishart :p p :df df :scale scale)))))
-
-
+([& {:keys [scale p df] :or {p 2}}]
+   (let [scale (or scale (when p (identity-matrix p)))
+         p (count scale)
+         df (or df p)]
+     (solve (sample-wishart :p p :df df :scale scale)))))
 
 
 (defn sample-dirichlet
@@ -1173,11 +1100,8 @@
   Example:
       (pdf-binomial 10 :prob 1/4 :size 20)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          n (or (:size opts) 1)
-          p (or (:prob opts) 1/2)
-          dist (Binomial. n p (DoubleMersenneTwister.))]
+  ([x & {:keys [size prob] :or {size 1 prob 1/2}}]
+    (let [dist (Binomial. size prob (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1204,14 +1128,10 @@
   Example:
       (cdf-binomial 10 :prob 1/4 :size 20)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          n (or (:size opts) 1)
-          p (or (:prob opts) 1/2)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/binomial x1 n p))
-                  (fn [x1] (Probability/binomialComplemented x1 n p)))]
+([x & {:keys [size prob lower-tail?] :or {size 1 prob 1/2 lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
+                  (fn [x1] (Probability/binomial x1 size prob))
+                  (fn [x1] (Probability/binomialComplemented x1 size prob)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1236,13 +1156,10 @@
   Example:
       (sample-binomial 1000 :prob 1/4 :size 20)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          n (or (:size opts) 1)
-          p (or (:prob opts) 1/2)]
-      (if (= size 1)
-        (Binomial/staticNextInt n p)
-        (for [_ (range size)] (Binomial/staticNextInt n p))))))
+([^Integer size & {:keys [size prob] :or {size 1 prob 1/2}}]
+   (if (= size 1)
+      (Binomial/staticNextInt size prob)
+      (for [_ (range size)] (Binomial/staticNextInt size prob)))))
 
 
 
@@ -1275,8 +1192,8 @@
     (def sample-size 1000.0)
     (def categories [:red :yellow :blue :green])
     (def data (to-dataset (sample-multinomial sample-size 
-			   	              :categories categories
-				              :probs [0.5 0.25 0.2 0.05])))
+                                              :categories categories
+                                              :probs [0.5 0.25 0.2 0.05])))
 
     ;; check the sample proportions
     (view (pie-chart categories
@@ -1286,16 +1203,14 @@
                       
 
 "
-  ([size & options]
-     (let [opts (when options (apply assoc {} options))
-	   probs (or (:probs opts) [0.5 0.5])
-	   categories (or (:categories opts) (range (count probs)))
-	   cumulative-probs (cumulative-sum probs)]
+([size & {:keys [probs categories] :or {probs [0.5 0.5]}}]
+     (let [categories (or categories (range (count probs)))
+           cumulative-probs (cumulative-sum probs)]
        (for [x (sample-uniform size)] 
-	 (loop [i 0]
-	   (if (>= (nth cumulative-probs i) x)
-	     (nth categories i)
-	     (recur (inc i))))))))
+         (loop [i 0]
+           (if (>= (nth cumulative-probs i) x)
+             (nth categories i)
+             (recur (inc i))))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1320,10 +1235,8 @@
   Example:
       (pdf-poisson 5 :lambda 10)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          lambda (or (:lambda opts) 1)
-          dist (Poisson. lambda (DoubleMersenneTwister.))]
+  ([x & {:keys [lambda] :or {lambda 1}}]
+    (let [dist (Poisson. lambda (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1349,11 +1262,8 @@
   Example:
       (cdf-poisson 5 :lambda 10)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          lambda (or (:lambda opts) 1)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
+  ([x & {:keys [lambda lower-tail?] :or {lambda 1 lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/poisson x1 lambda))
                   (fn [x1] (Probability/poissonComplemented x1 lambda)))]
       (if (coll? x)
@@ -1379,12 +1289,10 @@
   Example:
       (sample-poisson 1000 :lambda 10)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          lambda (or (:lambda opts) 1)]
-     (if (= size 1)
-        (Poisson/staticNextInt lambda)
-        (for [_ (range size)] (Poisson/staticNextInt lambda))))))
+([^Integer size & {:keys [lambda] :or {lambda 1}}]
+   (if (= size 1)
+      (Poisson/staticNextInt lambda)
+      (for [_ (range size)] (Poisson/staticNextInt lambda)))))
 
 
 
@@ -1411,11 +1319,8 @@
   Example:
       (pdf-neg-binomial 10 :prob 1/2 :size 20)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          size (or (:size opts) 10)
-          prob (or (:prob opts) 1/2)
-          dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
+  ([x & {:keys [size prob] :or {size 10 prob 1/2}}]
+    (let [dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1430,6 +1335,7 @@
   Options:
     :size (default 10)
     :prob (default 1/2)
+    :lower-tail? (default true)
 
   See also:
       cdf-neg-binomial and sample-neg-binomial
@@ -1442,12 +1348,8 @@
   Example:
       (cdf-neg-binomial 10 :prob 1/2 :size 20)
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          size (or (:size opts) 10)
-          prob (or (:prob opts) 1/2)
-          lower-tail? (if (false? (:lower-tail opts)) false true)
-          cdf-fx (if lower-tail?
+([x & {:keys [size prob lower-tail?] :or {size 10 prob 1/2 lower-tail? true}}]
+    (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/negativeBinomial x1 size prob))
                   (fn [x1] (Probability/negativeBinomialComplemented x1 size prob)))]
       (if (coll? x)
@@ -1456,6 +1358,7 @@
 
 
 
+;; TODO: may be this is a bug, that we have 2 size? in param and in options
 (defn sample-neg-binomial
 " Returns a sample of the given size from a Negative Binomial distribution.
   Same as R's rnbinom
@@ -1474,13 +1377,10 @@
   Example:
       (sample-neg-binomial 1000 :prob 1/2 :size 20)
 "
-([^Integer size & options]
-    (let [opts (when options (apply assoc {} options))
-          size (or (:size opts) 10)
-          prob (or (:prob opts) 1/2)]
-     (if (= size 1)
-        (NegativeBinomial/staticNextInt size prob)
-        (for [_ (range size)] (NegativeBinomial/staticNextInt size prob))))))
+([^Integer nsize & {:keys [size prob] :or {size 10 prob 1/2}}]
+   (if (= size 1)
+      (NegativeBinomial/staticNextInt size prob)
+      (for [_ (range size)] (NegativeBinomial/staticNextInt size prob)))))
 
 
 
@@ -1608,7 +1508,6 @@
 "
   ([x]
     ;; population sd, not the sample sd
-    ;(DoubleDescriptive/sampleStandardDeviation (length x) (variance x))))
     ;; return the sample standard deviation
     (sqrt (variance x))))
 
@@ -1733,17 +1632,12 @@
     http://en.wikipedia.org/wiki/Quantile
 
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          _x (to-list x)
-          data (DoubleArrayList. (double-array (sort _x)))
-          probs (cond
-                  (number? (:probs opts))
-                    (:probs opts)
-                  (coll? (:probs opts))
-                    (DoubleArrayList. (double-array (:probs opts)))
-                  :default
-                    (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0])))]
+([x & {:keys [probs] :or {probs (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0]))}}]
+   (let [_x (to-list x)
+         data (DoubleArrayList. (double-array (sort _x)))
+         probs (if (coll? probs)
+                 (DoubleArrayList. (double-array probs))
+                 probs)]
         (if (number? probs)
           (DoubleDescriptive/quantile data probs)
           (seq (.elements (DoubleDescriptive/quantiles data probs)))))))
@@ -1768,14 +1662,11 @@
     (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.
 
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          size (or (:size opts) (count x))
-          replacement? (if (false? (:replacement opts)) false true)
-          max-idx (dec (count x))]
+  ([x & {:keys [size replacement] :or {size (count x) replacement true}}]
+    (let [max-idx (dec (count x))]
       (if (= size 1)
         (nth x (rand-int (inc max-idx)))
-        (if replacement?
+        (if replacement
           (map #(nth x %) (sample-uniform size :min 0 :max max-idx :integers true))
           (if (> size (count x))
             (throw (Exception. "'size' can't be larger than (count x) without replacement!"))
@@ -1887,15 +1778,13 @@
 
 
 "
-  ([data statistic & options]
-    (let [opts (when options (apply assoc {} options))
-          size (:size opts)
-          replacement (if (false? (:replacement opts)) false true)
-          n (or (:n opts) (count data))
-          smooth? (true? (:smooth opts))
-          smooth-sd (or (:smooth-sd opts) (/ (sqrt n)))
-          B1 100
-          B2 25
+  ([data statistic & {:keys [size replacement smooth? smooth-sd]
+                      :or {replacement true
+                           smooth? false
+                           smooth-sd (/ (sqrt (count data)))}}]
+     (let [n (count data)
+           B1 100
+           B2 25
           max-iter 10
           D 0.01
           samp (if (nil? size)
@@ -1951,19 +1840,15 @@
       (sweep x :stat sd :fun div) ;; divide data by its sd
 
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          stat-fn (or (:stat opts) mean)
-          fun (or (:fun opts) minus)
-          stat (stat-fn x)]
-      (fun x stat))))
+  ([x & {:keys [stat fun] :or {stat-fn mean fun minus}}]
+     (fun x (stat x))))
 
 
 
 
 (defn permute
 " If provided a single argument, returns a permuted version of the
-  given collection. (perm x) is the same as (sample x).
+  given collection. (permute x) is the same as (sample x).
 
   If provided two arguments, returns two lists that are permutations
   across the given collections. In other words, each of the new collections
@@ -2147,10 +2032,8 @@
     http://en.wikipedia.org/wiki/Coefficient_of_determination
 
 "
-  ([y x & options]
-    (let [opts (when options (apply assoc {} options))
-          intercept? (if (false? (:intercept opts)) false true)
-          _x (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
+  ([y x & {:keys [intercept] :or {intercept true}}]
+    (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
           xtx (mmult (trans _x) _x)
           xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
           xty (mmult (trans _x) y)
@@ -2169,7 +2052,7 @@
           r-square (/ ssr sst)
           n (nrow y)
           p (ncol _x)
-          p-1 (if intercept? (- p 1) p)
+          p-1 (if intercept (- p 1) p)
           adj-r-square (- 1 (* (- 1 r-square) (/ (- n 1) (- n p 1))))
           mse (/ sse (- n p))
           msr (/ ssr p-1)
@@ -2246,16 +2129,13 @@
     http://www.socialresearchmethods.net/kb/stat_t.php
 
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          y (or (:y opts) nil)
-          one-sample? (nil? y)
-          mu (or (:mu opts)
-                 (if y (mean y) 0))
-          paired? (if (true? (:paired opts)) true false)
-          var-equal? (if (true? (:var-equal opts)) true false)
-          conf-level (or (:conf-level opts) 0.95)
-          alternative (or (:alternative opts) :two-sided)
+([x & {:keys [y mu paired conf-level alternative var-equal]
+       :or {paired false
+            alternative :two-sided
+            conf-level 0.95
+            var-equal false}}]
+    (let [one-sample? (nil? y)
+          mu (or mu (if y (mean y) 0))
           x-mean (mean x)
           x-var (variance x)
           n1 (count x)
@@ -2309,8 +2189,31 @@
                     (if (= alternative :greater)
                       Double/POSITIVE_INFINITY
                       (- (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))])
-      })))
+       })))
 
+(defn f-test
+  "
+Test for different variances between 2 samples
+
+  Argument:
+    x : 1st sample to test
+    y : 2nd sample to test
+
+  Options:
+
+  References:
+    http://en.wikipedia.org/wiki/F-test
+    http://people.richland.edu/james/lecture/m170/ch13-f.html
+
+"
+  ([x y]
+     (let [x-var (variance x)
+           y-var (variance y)
+           pval (* 2 (- 1.0
+                        (if (> x-var y-var)
+                          (cdf-f (/ x-var y-var) :df1 (dec (count x)) :df2 (dec (count y)))
+                          (cdf-f (/ y-var x-var) :df1 (dec (count y)) :df2 (dec (count x))))))]
+       pval)))
 
 
 (defn tabulate
@@ -2367,8 +2270,7 @@
 
 "
   ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          _x (if (matrix? x) x (matrix x))
+    (let [_x (if (matrix? x) x (matrix x))
           p (ncol _x)
           n (nrow _x)
           levels (for [i (range p)] (sort (seq (into #{} (sel _x :cols i)))))
@@ -2498,21 +2400,15 @@
     http://en.wikipedia.org/wiki/Yates'_chi-square_test
 
 "
-  ([& options]
-    (let [opts (when options (apply assoc {} options))
-          correct (if (false? (:correct opts)) false true)
-          x (:x opts)
-          y (:y opts)
-          table? (if (:table opts) true false)
+([& {:keys [x y correct table probs freq] :or {correct true }}]
+    (let [table? (if table true false)
           xtab (when (or x y)
                  (if y
                    (tabulate (bind-columns x y))
                    (tabulate x)))
           table (cond
-                  table?
-                   (:table opts)
-                  (and x y)
-                    (:table xtab))
+                  table? table
+                  (and x y) (:table xtab))
           two-samp? (if (or (and x y)
                             (and table?
                                  (and (> (nrow table) 1) (> (ncol table) 1))))
@@ -2544,12 +2440,9 @@
           df (if two-samp? (* (dec (nrow table)) (dec (ncol table))) (dec n))
           probs (when (not two-samp?)
                   (cond
-                    (:probs opts)
-                      (:probs opts)
-                    (:freq opts)
-                      (div (:freq opts) (sum (:freq opts)))
-                    :else
-                      (repeat n (/ n))))
+                    (not (nil? probs)) probs
+                    (not (nil? freq)) (div freq (sum freq))
+                    :else (repeat n (/ n))))
           E (if two-samp?
               (for [r r-levels c c-levels]
                 (/ (* (c-margins c) (r-margins r)) N))
@@ -2660,15 +2553,13 @@
     (tabulate (detabulate :table (:table (tabulate data))))
 
 "
-  ([& options]
-    (let [opts (when options (apply assoc {} options))
-          table (:table opts)
-          row-labels (when table (or (:row-labels opts) (range (nrow table))))
-          col-labels (when table (or (:col-labels opts) (range (ncol table))))
-          data (apply bind-rows
-                      (apply concat
-                             (for [r row-labels c col-labels]
-                                  (repeat (sel table :rows r :cols c) [r c]))))]
+  ([& {:keys [table row-labels col-labels]}]
+     (let [row-labels (when table (or row-labels (range (nrow table))))
+           col-labels (when table (or col-labels (range (ncol table))))
+           data (apply bind-rows
+                       (apply concat
+                              (for [r row-labels c col-labels]
+                                (repeat (sel table :rows r :cols c) [r c]))))]
        data)))
 
 ;;TODO: finish gamma, kendall's-w and 
@@ -2730,10 +2621,8 @@ returns the sum of the squares of the difference between each observation and th
 (defn simple-regression
 "A stripped version of linear-model that returns a map containing only
 the coefficients."
- ([y x & options]
-   (let [opts (when options (apply assoc {} options))
-         intercept? (if (false? (:intercept opts)) false true)
-         _x (if intercept? (bind-columns (replicate (nrow x) 1) x) x)
+ ([y x & {:keys [intercept] :or {intercept true}}]
+   (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
          xtx (mmult (trans _x) _x)
          xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
          xty (mmult (trans _x) y)
@@ -3212,7 +3101,7 @@ In information theory, the Hamming distance between two strings of equal length 
   #(bool-to-binary (not (apply = %)))
   (map vector a b)))))
 
-;;TODO: not exactly sure if this is right. :-)
+;;TODO: not exactly sure if this is right.
 (defn lee-distance
 "http://en.wikipedia.org/wiki/Lee_distance
 
@@ -3309,7 +3198,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
                            (+ ((d i) 
                                (- j 1)) 1) ;;insertion
                            (+ ((d (- i 1)) 
-                               (- j 1)) 1))) ;;substitution))
+                               (- j 1)) 1))) ;;substitution
                       }}))
                init
                (for [j (range 1 (+ 1 n))
@@ -3344,7 +3233,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
                            (+ ((d i) 
                                (- j 1)) 1) ;;insertion
                            (+ ((d (- i 1)) 
-                               (- j 1)) cost)) ;;substitution))
+                               (- j 1)) cost)) ;;substitution
                       
                         val (if (and (> i 1)
                                (> j 1)
@@ -3421,11 +3310,10 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
                                   [0 1]]))
  
 "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          y (or (:y opts) x)
-          W (or (:W opts) (solve (covariance y)))
-          centroid (or (:centroid opts) (map mean (trans y)))
+  ([x & {:keys [y W centroid]}]
+    (let [y (or y x)
+          W (or W (solve (covariance y)))
+          centroid (or centroid (map mean (trans y)))
           x-centroid (if (matrix? x)
                        (map #(minus (trans %) centroid) x)
                        (minus x centroid))
