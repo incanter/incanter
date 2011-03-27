@@ -2100,8 +2100,31 @@
                     (if (= alternative :greater)
                       Double/POSITIVE_INFINITY
                       (- (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))])
-      })))
+       })))
 
+(defn f-test
+  "
+Test for different variances between 2 samples
+
+  Argument:
+    x : 1st sample to test
+    y : 2nd sample to test
+
+  Options:
+
+  References:
+    http://en.wikipedia.org/wiki/F-test
+    http://people.richland.edu/james/lecture/m170/ch13-f.html
+
+"
+  ([x y]
+     (let [x-var (variance x)
+           y-var (variance y)
+           pval (* 2 (- 1.0
+                        (if (> x-var y-var)
+                          (cdf-f (/ x-var y-var) :df1 (dec (count x)) :df2 (dec (count y)))
+                          (cdf-f (/ y-var x-var) :df1 (dec (count y)) :df2 (dec (count x))))))]
+       pval)))
 
 
 (defn tabulate

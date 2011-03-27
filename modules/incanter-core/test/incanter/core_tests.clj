@@ -452,15 +452,18 @@
 (deftest matrix-map-test
   (let [mat (matrix (range 9) 3)]
     (are [x y] (= x y)
-	 '((0.0 1.0 0.0) (1.0 0.0 1.0) (0.0 1.0 0.0)) (matrix-map #(mod % 2) mat)
-	 '(0.0 1.0 0.0) (matrix-map #(mod % 2) (first mat))
-	 1.0 (matrix-map #(mod % 2) ($ 1 0 mat))
-	 '(1 0 1 0) (matrix-map #(mod % 2) [1 2 3 4]) 
-	 1 (matrix-map #(mod % 2) 9))))
+         '((0.0 1.0 0.0) (1.0 0.0 1.0) (0.0 1.0 0.0)) (matrix-map #(mod % 2) mat)
+         '(0.0 1.0 0.0) (matrix-map #(mod % 2) (first mat))
+         1.0 (matrix-map #(mod % 2) ($ 1 0 mat))
+         '(1 0 1 0) (matrix-map #(mod % 2) [1 2 3 4]) 
+         1 (matrix-map #(mod % 2) 9))))
 
 (deftest infix-test
  (is (= ($= 10 - 1 + 10) 19))
  (is (= ($= 1 / 2 * 3) 3/2)))
 
 
-
+(deftest factorial-test
+  (is (factorial 5) 120.0)
+  (is (factorial 0) 1.0)
+  (is (thrown? AssertionError (factorial -1))))

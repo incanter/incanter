@@ -586,7 +586,7 @@
     http://en.wikipedia.org/wiki/Factorial
 
 "
-  ([^Integer k] {:pre [(and (number? k) (pos? k))]} (DoubleArithmetic/factorial k)))
+([^Integer k] {:pre [(and (number? k) (not (neg? k)))]} (DoubleArithmetic/factorial k)))
 
 
 
@@ -1204,9 +1204,18 @@
   ([query-map]
    (let [in-fn (fn [value val-set] (some val-set [value]))
          nin-fn (complement in-fn)
-         ops {:gt > :lt < :eq = :ne not= :gte >= :lte <=
+         ops {:gt #(> (compare %1 %2) 0)
+              :lt #(< (compare %1 %2) 0)
+              :eq =
+              :ne not=
+              :gte #(>= (compare %1 %2) 0)
+              :lte #(<= (compare %1 %2) 0)
               :in in-fn :nin nin-fn :fn (fn [v f] (f v))
-              :$gt > :$lt < :$eq = :$ne not= :$gte >= :$lte <= 
+              :$gt #(> (compare %1 %2) 0)
+              :$lt #(< (compare %1 %2) 0)
+              :$eq = :$ne not=
+              :$gte #(>= (compare %1 %2) 0)
+              :$lte #(<= (compare %1 %2) 0)
               :$in in-fn :$nin nin-fn  
               :$fn (fn [v f] (f v))}
          _and (fn [a b] (and a b))] 
@@ -1383,11 +1392,50 @@
                      [obj])]
          (dataset colnames rows))))
 
+(defn make-unique
+  "Take a sequence of keywords and make them unique by possibly
+altering later ones."
+  ([coll] (make-unique coll #{}))
+  ([coll seen]
+     (let [new-name (fn new-name [x]
+                      (if (not (contains? seen x))
+                        x
+                        (let [match (re-matches #"(.*\-)([0-9]+)" (.getName x))]
+                          (if match
+                            (new-name (keyword (str (second match) (inc (Integer/parseInt (nth match 2))))))
+                            (new-name (keyword (str (.getName x) "-1")))))))]
+       
+       (if (empty? coll) ()
+           (let [name (new-name (first coll))]
+             (cons name
+                   (make-unique (rest coll) (conj seen name))))))))
+
+
+(defn col-names
+  "If given a dataset, it returns its column names. If given a dataset and a sequence
+   of column names, it returns a dataset with the given column names.
+
+   Examples:
+     (use '(incanter core datasets))
+     (def data (get-dataset :cars))
+     (col-names data)
+
+     (def renamed-data (col-names data [:x1 :x2]))
+     (col-names renamed-data)
+
+ 
+    "
+  ([data] (:column-names data)) 
+  ([data colnames]
+     (dataset colnames (to-list data))))
+
+
 
 (defn conj-cols
   "Returns a dataset created by merging the given datasets and/or collections.
-   There must be the same number of rows in each dataset and/or collections. 
-    Column names are not preserved in order to prevent naming conflicts.
+   There must be the same number of rows in each dataset and/or
+    collections.  Column names may be changed in order to prevent
+    naming conflicts in the conjed dataset.
 
     Examples:
       (use '(incanter core datasets))
@@ -1406,8 +1454,7 @@
                            b (to-dataset B)
                            ncol-a (ncol a)
                            ncol-b (ncol b)
-                           colnames (map #(keyword (str "col-" %))
-                                                    (range (+ ncol-a ncol-b)))]
+                           colnames (make-unique (concat (col-names a) (col-names b)))]
                       (dataset colnames
                                     (map concat (to-list a) (to-list b)))))
              args)))
@@ -1435,27 +1482,6 @@
                      (dataset (:column-names a) 
                               (concat (to-list a) (to-list b)))))
              args)))
-
-
-
-(defn col-names
-  "If given a dataset, it returns its column names. If given a dataset and a sequence
-   of column names, it returns a dataset with the given column names.
-
-   Examples:
-     (use '(incanter core datasets))
-     (def data (get-dataset :cars))
-     (col-names data)
-
-     (def renamed-data (col-names data [:x1 :x2]))
-     (col-names renamed-data)
-
- 
-    "
-  ([data] (:column-names data)) 
-  ([data colnames]
-     (dataset colnames (to-list data))))
-
 
 
 
