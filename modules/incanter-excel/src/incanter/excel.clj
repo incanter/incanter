@@ -23,8 +23,10 @@
 
 (defmulti write-cell #(let [c (. % getClass)]
   (cond (isa? c Number) :numeric
+        (keyword? %)    :keyword
         :else           :other )))
 
+(defmethod write-cell :keyword [k] (name k))
 (defmethod write-cell :other   [o] (str o))
 (defmethod write-cell :numeric [n] (. n doubleValue))
 
