@@ -29,7 +29,7 @@
     (try
       (let [dset (dataset [:a :b :c]
                           [[1 2 3]])
-            result (do (save-xls dset fname) (read-xls fname))]
+            result (do (save-xls dset fname) (read-xls fname :header-keywords true))]
         (is (dataset? result))
         (is (= (:column-names dset) (:column-names result))))
       (finally (. ffile delete)))))

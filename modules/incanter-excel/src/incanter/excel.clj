@@ -148,7 +148,7 @@ Options are:
 
 "}
   read-xls
-  [^String filename  & {:keys [sheet] :or {sheet 0}}]
+  [^String filename  & {:keys [sheet header-keywords] :or {sheet 0 header-keywords false}}]
       (with-open [in-fs (get-input-stream filename)]
 	(let [workbook  (HSSFWorkbook. in-fs)
 	      wsheet     (get-workbook-sheet workbook sheet)
@@ -156,6 +156,9 @@ Options are:
 	      rowi      (cell-iterator (first rows-it))
 	      colnames  (doall (map get-cell-value rowi))
 	      data      (map #(cell-iterator %) (rest rows-it))]
-	  (dataset colnames
-		   (map (fn [d] (map get-cell-value d)) data)))))
+	  (dataset
+           (if header-keywords
+             (map keyword colnames)
+             colnames)
+           (map (fn [d] (map get-cell-value d)) data)))))
 
