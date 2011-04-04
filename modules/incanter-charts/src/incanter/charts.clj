@@ -3082,6 +3082,11 @@
       (set-stroke-color java.awt.Color/blue)
       view)
    
+    (doto (xy-plot [1 2 3] [4 5 6])
+      (add-points [1 2 3] [4.1 5.1 6.1])
+      (set-stroke-color java.awt.Color/black :series 0)
+      (set-stroke-color java.awt.Color/red :series 1))
+
     (doto (function-plot sin -10 10 :step-size 0.1)
       (set-stroke :width 3 :dash 5)
       (set-stroke-color java.awt.Color/gray)
@@ -3089,9 +3094,9 @@
        
 "
 ([chart color & options]
-   (let [{:keys [series] 
-	  :or {series 0}} (apply hash-map options)
-	 renderer (-> chart .getPlot .getRenderer)]
+   (let [{:keys [series dataset]
+	  :or {series 0 dataset 0}} (apply hash-map options)
+	  renderer (-> chart .getPlot (.getRenderer dataset))]
      (.setSeriesPaint renderer series color)
      chart)))
 
