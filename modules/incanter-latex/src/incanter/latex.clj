@@ -14,6 +14,8 @@
 
   Options:
     :color (default java.awt.Color/black) -- the text color
+    :background (default java.awt.Clolor/white) -- the background color
+    :border (default [5 5 5 5]) -- image border
 
   Examples:
     (use '(incanter core charts stats latex))
@@ -32,15 +34,17 @@
 
 
 "
-([latex-txt & {:keys [color] :or {color java.awt.Color/black}}]
+([latex-txt & {:keys [color background border] :or {color java.awt.Color/black
+                                                    background java.awt.Color/white
+                                                    border [5 5 5 5]}}]
      (let [formula (org.scilab.forge.jlatexmath.TeXFormula. latex-txt)
            icon (doto (.createTeXIcon formula TeXConstants/STYLE_DISPLAY 20)
-                  (.setInsets (java.awt.Insets. 5 5 5 5)))
+                  (.setInsets (apply #(java.awt.Insets. %1 %2 %3 %4) border)))
            image (java.awt.image.BufferedImage. (.getIconWidth icon) 
                                                 (.getIconHeight icon) 
                                                 java.awt.image.BufferedImage/TYPE_INT_ARGB)
            g2 (doto (.createGraphics image)
-                (.setColor (java.awt.Color. 0 0 0 0))
+                (.setColor background)
                 (.fillRect 0 0 (.getIconWidth icon) (.getIconHeight icon)))
            label (doto (javax.swing.JLabel.)
                    (.setForeground color))]
