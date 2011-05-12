@@ -1751,7 +1751,7 @@
       (sweep x :stat sd :fun div) ;; divide data by its sd
 
 "
-  ([x & {:keys [stat fun] :or {stat-fn mean fun minus}}]
+  ([x & {:keys [stat fun] :or {stat mean fun minus}}]
      (fun x (stat x))))
 
 
