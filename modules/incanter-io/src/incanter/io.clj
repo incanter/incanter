@@ -131,9 +131,9 @@ incanter.io
 
 
 (defmethod save java.awt.image.BufferedImage
-  ([img filename & options]
+  ([img filename & {:keys [format] :or {format "png"}}]
      (javax.imageio.ImageIO/write img 
-                                  "png" 
+                                  format 
                                   (.getAbsoluteFile (java.io.File. filename)))))
 
 
