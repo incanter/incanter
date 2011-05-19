@@ -1865,9 +1865,6 @@ altering later ones."
     (use '(incanter core datasets))
     (def cars (get-dataset :cars))
 
-    ($map \"speed\" (fn [s] (/ s)) cars)
-    ($map [\"speed\" \"dist\"] (fn [s d] (/ s d)) cars)
-
     ($map (fn [s] (/ s)) :speed cars)
     ($map (fn [s d] (/ s d)) [:speed :dist] cars)
 
@@ -1887,7 +1884,7 @@ altering later ones."
      (let [rows (:rows data)]
        (if (coll? col-keys)
          (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
-         (map (fn [row] (fun (map-get  row col-keys))) (:rows data)))))
+         (map (fn [row] (fun (map-get row col-keys))) (:rows data)))))
   ([fun col-keys]
      ($map fun col-keys $data)))
 
