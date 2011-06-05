@@ -2941,7 +2941,7 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
   (apply
    tree-comp-each
    max 
-  (fn [[x y]] (- x y))
+   (fn [[x y]] (abs (- x y)))
   (map vector a b))))
 
 (defn manhattan-distance
