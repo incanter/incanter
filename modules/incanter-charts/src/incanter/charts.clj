@@ -3056,15 +3056,21 @@
     (doto (function-plot sin -10 10 :step-size 0.1)
       (set-stroke :width 3 :dash 5)
       view)
-       
+
+    (doto (line-chart [:a :b :c :d] [10 20 5 35])
+      (add-categories [:a :b :c :d] [20 5 30 15])
+      (set-stroke :series 0 :width 4 :dash 5)
+      (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))
 "
-([chart & options]
-   (let [{:keys [width dash series dataset] 
-	  :or {width 1.0 dash 1.0 series 0 dataset 0}} (apply hash-map options)
+ ([chart & options]
+   (let [{:keys [width dash series dataset cap join]
+	  :or {width 1.0 dash 1.0 series 0 dataset 0
+               cap java.awt.BasicStroke/CAP_ROUND
+               join java.awt.BasicStroke/JOIN_ROUND}} (apply hash-map options)
 	 renderer (-> chart .getPlot (.getRenderer dataset))
 	 stroke (java.awt.BasicStroke. width 
-				       java.awt.BasicStroke/CAP_ROUND 
-				       java.awt.BasicStroke/JOIN_ROUND 
+                                       cap
+                                       join
 				       1.0 
 				       (float-array 1.0 dash) 
 				       0.0)]
