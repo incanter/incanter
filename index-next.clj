@@ -270,9 +270,9 @@
    :name "add-box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L375",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L375",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-box-plot",
    :doc
@@ -284,9 +284,9 @@
    :name "add-categories",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L445",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L445",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-categories",
    :doc
@@ -298,9 +298,9 @@
    :name "add-function",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L631",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L631",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-function",
    :doc
@@ -312,9 +312,9 @@
    :name "add-histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L319",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L319",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-histogram",
    :doc
@@ -326,9 +326,9 @@
    :name "add-image",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2613",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2613",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-image",
    :doc
@@ -340,9 +340,9 @@
    :name "add-lines",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L562",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L562",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-lines",
    :doc
@@ -354,9 +354,9 @@
    :name "add-pointer",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2416",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2416",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-pointer",
    :doc
@@ -368,9 +368,9 @@
    :name "add-points",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L714",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L714",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-points",
    :doc
@@ -382,9 +382,9 @@
    :name "add-polygon",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2550",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2550",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-polygon",
    :doc
@@ -393,13 +393,13 @@
    :line 2550,
    :file "incanter/charts.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L3322",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L3333",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-subtitle",
    :namespace "incanter.charts",
-   :line 3322,
+   :line 3333,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-charts/src/incanter/charts.clj",
    :var-type "multimethod",
@@ -410,9 +410,9 @@
    :name "add-text",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2505",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2505",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-text",
    :doc
@@ -424,9 +424,9 @@
    :name "area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1680",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1680",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/area-chart",
    :doc
@@ -438,9 +438,9 @@
    :name "bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1538",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1538",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bar-chart",
    :doc
@@ -452,9 +452,9 @@
    :name "bland-altman-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2722",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2722",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bland-altman-plot",
    :doc
@@ -466,9 +466,9 @@
    :name "box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2167",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2167",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/box-plot",
    :doc
@@ -480,9 +480,9 @@
    :name "clear-background",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L802",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L802",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/clear-background",
    :doc
@@ -494,9 +494,9 @@
    :name "dynamic-scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L3005",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L3005",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-scatter-plot",
    :doc
@@ -508,9 +508,9 @@
    :name "dynamic-xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2974",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2974",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-xy-plot",
    :doc
@@ -522,9 +522,9 @@
    :name "function-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2249",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2249",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/function-plot",
    :doc
@@ -536,9 +536,9 @@
    :name "get-series",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2803",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2803",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/get-series",
    :doc "get-series",
@@ -549,9 +549,9 @@
    :name "heat-map",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2365",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2365",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/heat-map",
    :doc
@@ -563,9 +563,9 @@
    :name "histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1286",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1286",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/histogram",
    :doc
@@ -577,9 +577,9 @@
    :name "line-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1395",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1395",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/line-chart",
    :doc
@@ -591,9 +591,9 @@
    :name "pie-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2069",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2069",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/pie-chart",
    :doc
@@ -605,9 +605,9 @@
    :name "qq-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2683",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2683",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/qq-plot",
    :doc
@@ -619,9 +619,9 @@
    :name "scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1174",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1174",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/scatter-plot",
    :doc
@@ -633,9 +633,9 @@
    :name "set-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L774",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L774",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-alpha",
    :doc
@@ -647,9 +647,9 @@
    :name "set-background-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L788",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L788",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha",
    :doc
@@ -658,9 +658,9 @@
    :line 788,
    :file "incanter/charts.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L61",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L61",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-default",
    :namespace "incanter.charts",
@@ -675,13 +675,13 @@
    :name "set-stroke",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L3040",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L3040",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke",
    :doc
-   "\nExamples:\n  (use '(incanter core charts))\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (set-stroke :width 4 :dash 5)\n    view)\n \n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (add-categories [:a :b :c :d] [20 5 30 15])\n    (set-stroke :width 4 :dash 5)\n    (set-stroke :series 1 :width 2 :dash 10)\n    view)\n\n\n  (doto (function-plot sin -10 10 :step-size 0.1)\n    (set-stroke :width 3 :dash 5)\n    view)\n     ",
+   "\nExamples:\n  (use '(incanter core charts))\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (set-stroke :width 4 :dash 5)\n    view)\n \n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (add-categories [:a :b :c :d] [20 5 30 15])\n    (set-stroke :width 4 :dash 5)\n    (set-stroke :series 1 :width 2 :dash 10)\n    view)\n\n\n  (doto (function-plot sin -10 10 :step-size 0.1)\n    (set-stroke :width 3 :dash 5)\n    view)\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (add-categories [:a :b :c :d] [20 5 30 15])\n    (set-stroke :series 0 :width 4 :dash 5)\n    (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))",
    :var-type "function",
    :line 3040,
    :file "incanter/charts.clj"}
@@ -689,23 +689,23 @@
    :name "set-stroke-color",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L3075",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L3081",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke-color",
    :doc
-   "\nExamples:\n  (use '(incanter core charts))\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (set-stroke :width 4 :dash 5)\n    (set-stroke-color java.awt.Color/blue)\n    view)\n \n  (doto (function-plot sin -10 10 :step-size 0.1)\n    (set-stroke :width 3 :dash 5)\n    (set-stroke-color java.awt.Color/gray)\n    view)\n     ",
+   "\nExamples:\n  (use '(incanter core charts))\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (set-stroke :width 4 :dash 5)\n    (set-stroke-color java.awt.Color/blue)\n    view)\n \n  (doto (xy-plot [1 2 3] [4 5 6])\n    (add-points [1 2 3] [4.1 5.1 6.1])\n    (set-stroke-color java.awt.Color/black :series 0)\n    (set-stroke-color java.awt.Color/red :series 1))\n\n  (doto (function-plot sin -10 10 :step-size 0.1)\n    (set-stroke :width 3 :dash 5)\n    (set-stroke-color java.awt.Color/gray)\n    view)\n     ",
    :var-type "function",
-   :line 3075,
+   :line 3081,
    :file "incanter/charts.clj"}
   {:arglists ([chart theme]),
    :name "set-theme",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L214",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L214",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme",
    :doc
@@ -714,9 +714,9 @@
    :line 214,
    :file "incanter/charts.clj"}
   {:raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L144",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L144",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme-bw",
    :namespace "incanter.charts",
@@ -731,9 +731,9 @@
    :name "set-title",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L817",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L817",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-title",
    :doc
@@ -745,9 +745,9 @@
    :name "set-x-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L830",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L830",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-label",
    :doc
@@ -759,9 +759,9 @@
    :name "set-x-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L857",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L857",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-range",
    :doc
@@ -773,9 +773,9 @@
    :name "set-y-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L843",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L843",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-label",
    :doc
@@ -787,9 +787,9 @@
    :name "set-y-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L877",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L877",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-range",
    :doc
@@ -803,9 +803,9 @@
    :name "slider",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2835",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2835",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/slider",
    :doc
@@ -817,9 +817,9 @@
    :name "sliders",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2912",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2912",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders",
    :doc
@@ -832,9 +832,9 @@
    :name "sliders*",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2881",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2881",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders*",
    :doc
@@ -846,9 +846,9 @@
    :name "stacked-area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1820",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1820",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-area-chart",
    :doc
@@ -860,9 +860,9 @@
    :name "stacked-bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1950",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1950",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-bar-chart",
    :doc
@@ -874,9 +874,9 @@
    :name "time-series-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L1059",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L1059",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/time-series-plot",
    :doc
@@ -888,9 +888,9 @@
    :name "trace-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L2642",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L2642",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/trace-plot",
    :doc
@@ -902,9 +902,9 @@
    :name "xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj#L984",
+   "https://github.com/liebke/incanter/blob/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj#L984",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8736bc3cae44491172031b381c6e165c0bd1139c/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/3a94013260439a96f81a957b0d2b588d858ef8a8/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/xy-plot",
    :doc
@@ -2745,15 +2745,15 @@
    :name "read-dataset",
    :namespace "incanter.io",
    :source-url
-   "https://github.com/liebke/incanter/blob/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-io/src/incanter/io.clj#L38",
+   "https://github.com/liebke/incanter/blob/c26b167e0fa009e58d39bf8c17300be3871d8a53/modules/incanter-io/src/incanter/io.clj#L39",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/23c8e611fde12f982f44d8f36ea5a2e3d610d89b/modules/incanter-io/src/incanter/io.clj",
+   "https://github.com/liebke/incanter/raw/c26b167e0fa009e58d39bf8c17300be3871d8a53/modules/incanter-io/src/incanter/io.clj",
    :wiki-url
    "http://liebke.github.com/incanter//io-api.html#incanter.io/read-dataset",
    :doc
    "\n  Returns a dataset read from a file or a URL.\n\n  Options:\n    :delim (default \\,), other options (\\tab \\space \\|  etc)\n    :quote (default \\\") character used for quoting strings\n    :skip (default 0) the number of lines to skip at the top of the file.\n    :header (default false) indicates the file has a header line\n    :compress-delim (default true if delim = \\space, false otherwise) means\n                    compress multiple adjacent delimiters into a single delimiter\n",
    :var-type "function",
-   :line 38,
+   :line 39,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/incanter/io.clj"}
   {:arglists
@@ -2766,15 +2766,15 @@
    :name "add-latex",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L79",
+   "https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L83",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/add-latex",
    :doc
    " Adds an LaTeX equation annotation to the chart at the given x,y coordinates.\n\nArguments:\n  chart -- the chart to add the polygon to.\n  x, y -- the coordinates to place the image\n  latex-str -- a string of latex code\n\n\nOptions:\n  :color (default java.awt.Color/darkGray) -- the text color\n\n\nExamples:\n  (use '(incanter core charts stats latex))   \n\n    (doto (function-plot pdf-normal -3 3)\n      (add-latex 0 0.1 \"f(x)=\\\\frac{1}{\\\\sqrt{2\\\\pi \\\\sigma^2}} e^{\\\\frac{-(x - \\\\mu)^2}{2 \\\\sigma^2}}\")\n      view)",
    :var-type "function",
-   :line 79,
+   :line 83,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-latex/src/incanter/latex.clj"}
   {:arglists
@@ -2785,29 +2785,35 @@
    :name "add-latex-subtitle",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L56",
+   "https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L60",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/add-latex-subtitle",
    :doc
    " Adds the given LaTeX equation as a subtitle to the chart.\n\n\nOptions:\n  :color (default java.awt.Color/darkGray) -- the text color\n\n\nExamples:\n  (use '(incanter core charts stats latex))\n\n  (doto (function-plot pdf-normal -3 3)\n    (add-latex-subtitle \"f(x)=\\\\frac{1}{\\\\sqrt{2\\\\pi \\\\sigma^2}} e^{\\\\frac{-(x - \\\\mu)^2}{2 \\\\sigma^2}}\")\n    view)",
    :var-type "function",
-   :line 56,
+   :line 60,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-latex/src/incanter/latex.clj"}
   {:arglists
-   ([latex-txt & {:keys [color], :or {color java.awt.Color/black}}]),
+   ([latex-txt
+     &
+     {:keys [color background border],
+      :or
+      {color java.awt.Color/black,
+       background java.awt.Color/white,
+       border [5 5 5 5]}}]),
    :name "latex",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L12",
+   "https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L12",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/latex",
    :doc
-   " Returns the given LaTeX equation rendered as an java.awt.Image.\n\nOptions:\n  :color (default java.awt.Color/black) -- the text color\n\nExamples:\n  (use '(incanter core charts stats latex))\n\n  (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))\n  (save latex-img \"/tmp/latex-example1.png\")\n  (view \"file:///tmp/latex-example1.png\")\n\n  (view (latex \"f(x)=\\\\frac {1} {\\\\sqrt {2\\\\pi \\\\sigma ^2}} e^{\\\\frac {-(x - \\\\mu)^2}{2 \\\\sigma ^2}}\"))\n\n  (view (latex \"\\\\begin{pmatrix}\n                 a & b & c \\\\\\\\\n                 d & e & f \\\\\\\\\n                 g & h & i\n                 \\\\end{pmatrix}\"))",
+   " Returns the given LaTeX equation rendered as an java.awt.Image.\n\nOptions:\n  :color (default java.awt.Color/black) -- the text color\n  :background (default java.awt.Clolor/white) -- the background color\n  :border (default [5 5 5 5]) -- image border\n\nExamples:\n  (use '(incanter core charts stats latex))\n\n  (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))\n  (save latex-img \"/tmp/latex-example1.png\")\n  (view \"file:///tmp/latex-example1.png\")\n\n  (view (latex \"f(x)=\\\\frac {1} {\\\\sqrt {2\\\\pi \\\\sigma ^2}} e^{\\\\frac {-(x - \\\\mu)^2}{2 \\\\sigma ^2}}\"))\n\n  (view (latex \"\\\\begin{pmatrix}\n                 a & b & c \\\\\\\\\n                 d & e & f \\\\\\\\\n                 g & h & i\n                 \\\\end{pmatrix}\"))",
    :var-type "function",
    :line 12,
    :file
@@ -5478,15 +5484,15 @@
    :name "auto-correlation",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1451",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1537",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/auto-correlation",
    :doc
    "\nReturns the auto-correlation of x with given lag, mean, and variance.\nIf no mean or variance is provided, the they are calculated from x.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html",
    :var-type "function",
-   :line 1451,
+   :line 1537,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5501,15 +5507,15 @@
    :name "bootstrap",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1595",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1681",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/bootstrap",
    :doc
    " Returns a bootstrap sample of the given statistic on the given data.\n\nArguments:\n  data -- vector of data to resample from\n  statistic -- a function that returns a value given a vector of data\n\nOptions:\n  :size -- the number of bootstrap samples to return\n  :smooth -- (default false) smoothing option\n  :smooth-sd -- (default (/ (sqrt (count data)))) determines the standard\n                deviation of the noise to use for smoothing\n  :replacement -- (default true) determines if sampling of the data\n                  should be done with replacement\n\n\nReferences:\n  1. Clifford E. Lunneborg, Data Analysis by Resampling Concepts and Applications, 2000, pages 105-117\n  2. http://en.wikipedia.org/wiki/Bootstrapping_(statistics)\n\n\nExamples:\n\n  ;; example from Data Analysis by Resampling Concepts and Applications\n  ;; Clifford E. Lunneborg (pages 119-122)\n\n  (use '(incanter core stats charts))\n\n  ;; weights (in grams) of 50 randoincanter. sampled bags of preztels\n  (def weights [464 447 446 454 450 457 450 442\n                433 452 449 454 450 438 448 449\n                457 451 456 452 450 463 464 453\n                452 447 439 449 468 443 433 460\n                452 447 447 446 450 459 466 433\n                445 453 454 446 464 450 456 456\n                447 469])\n\n  ;; calculate the sample median, 450\n  (median weights)\n\n  ;; generate bootstrap sample\n  (def t* (bootstrap weights median :size 2000))\n\n  ;; view histogram of bootstrap histogram\n  (view (histogram t*))\n\n  ;; calculate the mean of the bootstrap median ~ 450.644\n  (mean t*)\n\n  ;; calculate the standard error ~ 1.083\n  (def se (sd t*))\n\n  ;; 90% standard normal CI ~ (448.219 451.781)\n  (plus (median weights) (mult (quantile-normal [0.05 0.95]) se))\n\n  ;; 90% symmetric percentile CI ~ (449.0 452.5)\n  (quantile t* :probs [0.05 0.95])\n\n\n  ;; 90% non-symmetric percentile CI ~ (447.5 451.0)\n  (minus (* 2 (median weights)) (quantile t* :probs [0.95 0.05]))\n\n  ;; calculate bias\n  (- (mean t*) (median weights)) ;; ~ 0.644\n\n  ;; example with smoothing\n  ;; Newcomb's speed of light data\n\n  (use '(incanter core stats charts))\n\n  ;; A numeric vector giving the Third Series of measurements of the\n  ;; passage time of light recorded by Newcomb in 1882. The given\n  ;; values divided by 1000 plus 24 give the time in millionths of a\n  ;; second for light to traverse a known distance. The 'true' value is\n  ;; now considered to be 33.02.\n\n  (def speed-of-light [28 -44  29  30  24  28  37  32  36  27  26  28  29\n                       26  27  22  23  20  25 25  36  23  31  32  24  27\n                       33  16  24  29  36  21  28  26  27  27  32  25 28\n                       24  40  21  31  32  28  26  30  27  26  24  32  29\n                       34  -2  25  19  36 29  30  22  28  33  39  25  16  23])\n\n  ;; view histogram of data to see outlier observations\n  (view (histogram speed-of-light :nbins 30))\n\n  (def samp (bootstrap speed-of-light median :size 10000))\n  (view (histogram samp :density true :nbins 30))\n  (mean samp)\n  (quantile samp :probs [0.025 0.975])\n\n  (def smooth-samp (bootstrap speed-of-light median :size 10000 :smooth true))\n  (view (histogram smooth-samp :density true :nbins 30))\n  (mean smooth-samp)\n  (quantile smooth-samp :probs [0.025 0.975])",
    :var-type "function",
-   :line 1595,
+   :line 1681,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5520,15 +5526,15 @@
    :name "cdf-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L446",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L447",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-beta",
    :doc
    " Returns the Beta cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pbeta function.\n\nOptions:\n  :alpha (default 1)\n  :beta (default 1)\n  :lower-tail (default true)\n\nSee also:\n    pdf-beta and sample-beta\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html\n    http://en.wikipedia.org/wiki/Beta_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-beta 0.5 :alpha 1 :beta 2)\n    (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)",
    :var-type "function",
-   :line 446,
+   :line 447,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5539,15 +5545,15 @@
    :name "cdf-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1022",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1108",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-binomial",
    :doc
    " Returns the Bionomial cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pbinom\n\nOptions:\n  :size (default 1)\n  :prob (default 1/2)\n  :lower-tail (default true)\n\nSee also:\n    pdf-binomial and sample-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html\n    http://en.wikipedia.org/wiki/Binomial_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-binomial 10 :prob 1/4 :size 20)",
    :var-type "function",
-   :line 1022,
+   :line 1108,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5555,45 +5561,45 @@
    :name "cdf-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L622",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L708",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-chisq",
    :doc
    " Returns the Chi Square cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pchisq function.\n\nOptions:\n  :df (default 1)\n  :lower-tail (default true)\n\nSee also:\n    pdf-chisq and sample-chisq\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html\n    http://en.wikipedia.org/wiki/Chi_square_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-chisq 5.0 :df 2)\n    (cdf-chisq 5.0 :df 2 :lower-tail false)",
    :var-type "function",
-   :line 622,
+   :line 708,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "cdf-empirical",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1302",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1388",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-empirical",
    :doc
    " Returns a step-function representing the empirical cdf of the given data.\nEquivalent to R's ecdf function.\n\nThe following description is from the ecdf help in R: The e.c.d.f.\n(empirical cumulative distribution function) Fn is a step function\nwith jumps i/n at observation values, where i is the number of tied\nobservations at that value.  Missing values are ignored.\n\nFor observations 'x'= (x1,x2, ... xn), Fn is the fraction of\nobservations less or equal to t, i.e.,\n\nFn(t) = #{x_i <= t} / n  =  1/n sum(i=1,n) Indicator(xi <= t).\n\n\nExamples:\n  (use '(incanter core stats charts))\n\n  (def exam1 [192 160 183 136 162 165 181 188 150 163 192 164 184\n              189 183 181 188 191 190 184 171 177 125 192 149 188\n              154 151 159 141 171 153 169 168 168 157 160 190 166 150])\n\n  ;; the ecdf function returns an empirical cdf function for the given data\n  (def ecdf (cdf-empirical exam1))\n\n  ;; plot the data's empircal cdf\n  (view (scatter-plot exam1 (map ecdf exam1)))",
    :var-type "function",
-   :line 1302,
+   :line 1388,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [rate], :or {rate 1}}]),
    :name "cdf-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L825",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L911",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-exp",
    :doc
    " Returns the Exponential cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pexp\n\nOptions:\n  :rate (default 1)\n\nSee also:\n    pdf-exp and sample-exp\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html\n    http://en.wikipedia.org/wiki/Exponential_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-exp 2.0 :rate 1/2)",
    :var-type "function",
-   :line 825,
+   :line 911,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5604,15 +5610,15 @@
    :name "cdf-f",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L115",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L116",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-f",
    :doc
    " Returns the F-distribution cdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pf function.\n\nOptions:\n  :df1 (default 1)\n  :df2 (default 1)\n  :lower-tail? (default true)\n\nSee also:\n    pdf-f and quantile-f\n\nReferences:\n    http://en.wikipedia.org/wiki/F_distribution\n    http://mathworld.wolfram.com/F-Distribution.html\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-f 1.0 :df1 5 :df2 2)",
    :var-type "function",
-   :line 115,
+   :line 116,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5623,15 +5629,15 @@
    :name "cdf-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L535",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L621",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-gamma",
    :doc
    " Returns the Gamma cdf for the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pgamma function.\n\nOptions:\n  :shape (default 1)\n  :rate (default 1)\n  :lower-tail (default true)\n\nSee also:\n    pdf-gamma and sample-gamma\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html\n    http://en.wikipedia.org/wiki/Gamma_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-gamma 10 :shape 1 :rate 2)\n    (cdf-gamma 3 :shape 1 :lower-tail false)",
    :var-type "function",
-   :line 535,
+   :line 621,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5642,30 +5648,30 @@
    :name "cdf-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1242",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1328",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-neg-binomial",
    :doc
    " Returns the Negative Binomial cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dnbinom\n\nOptions:\n  :size (default 10)\n  :prob (default 1/2)\n  :lower-tail? (default true)\n\nSee also:\n    cdf-neg-binomial and sample-neg-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html\n    http://en.wikipedia.org/wiki/Negative_binomial_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-neg-binomial 10 :prob 1/2 :size 20)",
    :var-type "function",
-   :line 1242,
+   :line 1328,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "cdf-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L186",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L187",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-normal",
    :doc
    " Returns the Normal cdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nSee also:\n    pdf-normal, quantile-normal, sample-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))",
    :var-type "function",
-   :line 186,
+   :line 187,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5675,15 +5681,15 @@
    :name "cdf-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1157",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1243",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-poisson",
    :doc
    " Returns the Poisson cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's ppois\n\nOptions:\n  :lambda (default 1)\n  :lower-tail (default true)\n\nSee also:\n    cdf-poisson and sample-poisson\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html\n    http://en.wikipedia.org/wiki/Poisson_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-poisson 5 :lambda 10)",
    :var-type "function",
-   :line 1157,
+   :line 1243,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5691,45 +5697,60 @@
    :name "cdf-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L705",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L791",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-t",
    :doc
    " Returns the Student's t cdf for the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pt function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    pdf-t, quantile-t, and sample-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-t 1.2 :df 10)",
    :var-type "function",
-   :line 705,
+   :line 791,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [min max], :or {min 0.0, max 1.0}}]),
    :name "cdf-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L355",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L356",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-uniform",
    :doc
    " Returns the Uniform cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's punif function.\n\nOptions:\n  :min (default 0)\n  :max (default 1)\n\nSee also:\n    pdf-uniform and sample-uniform\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html\n    http://en.wikipedia.org/wiki/Uniform_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-uniform 5)\n    (cdf-uniform 5 :min 1 :max 10)",
    :var-type "function",
-   :line 355,
+   :line 356,
+   :file
+   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
+  {:arglists ([x & options]),
+   :name "cdf-weibull",
+   :namespace "incanter.stats",
+   :source-url
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L536",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-weibull",
+   :doc
+   " Returns the Weibull cdf for the given value of x. It will return a sequence\nof values, if x is a sequence.\n\nOptions:\n  :shape (default 1)\n  :scale (default 1)\n\nSee also:\n    pdf-weibull and sample-weibull\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html\n    http://en.wikipedia.org/wiki/Weibull_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-weibull 10 :shape 1 :scale 0.2)",
+   :var-type "function",
+   :line 536,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "chebyshev-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2851",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2937",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/chebyshev-distance",
    :doc
    "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.",
    :var-type "function",
-   :line 2851,
+   :line 2937,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -5737,733 +5758,748 @@
    :name "chisq-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2230",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2316",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/chisq-test",
    :doc
    "\nPerforms chi-squared contingency table tests and goodness-of-fit tests.\n\nIf the optional argument :y is not provided then a goodness-of-fit test\nis performed. In this case, the hypothesis tested is whether the\npopulation probabilities equal those in :probs, or are all equal if\n:probs is not given.\n\nIf :y is provided, it must be a sequence of integers that is the\nsame length as x. A contingency table is computed from x and :y.\nThen, Pearson's chi-squared test of the null hypothesis that the joint\ndistribution of the cell counts in a 2-dimensional contingency\ntable is the product of the row and column marginals is performed.\nBy default the Yates' continuity correction for 2x2 contingency\ntables is performed, this can be disabled by setting the :correct\noption to false.\n\n\nOptions:\n  :x -- a sequence of numbers.\n  :y -- a sequence of numbers\n  :table -- a contigency table. If one dimensional, the test is a goodness-of-fit\n  :probs (when (nil? y) -- (repeat n-levels (/ n-levels)))\n  :freq (default nil) -- if given, these are rescaled to probabilities\n  :correct (default true) -- use Yates' correction for continuity for 2x2 contingency tables\n\n\nReturns:\n  :X-sq -- the Pearson X-squared test statistics\n  :p-value -- the p-value for the test statistic\n  :df -- the degress of freedom\n\n\nExamples:\n  (use '(incanter core stats))\n  (chisq-test :x [1 2 3 2 3 2 4 3 5]) ;; X-sq 2.6667\n  ;; create a one-dimensional table of this data\n  (def table (matrix [1 3 3 1 1]))\n  (chisq-test :table table) ;; X-sq 2.6667\n  (chisq-test :table (trans table)) ;; throws exception\n\n  (chisq-test :x [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25\n\n  (use '(incanter core stats datasets))\n  (def math-prog (to-matrix (get-dataset :math-prog)))\n  (def x (sel math-prog :cols 1))\n  (def y (sel math-prog :cols 2))\n  (chisq-test :x x :y y) ;; X-sq = 1.24145, df=1, p-value = 0.26519\n  (chisq-test :x x :y y :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617\n\n  (def table (matrix [[31 12] [9 8]]))\n  (chisq-test :table table) ;; X-sq = 1.24145, df=1, p-value = 0.26519\n  (chisq-test :table table :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617\n  ;; use the detabulate function to create data rows corresponding to the table\n  (def detab (detabulate :table table))\n  (chisq-test :x (sel detab :cols 0) :y (sel detab :cols 1))\n\n  ;; look at the hair-eye-color data\n  ;; turn the count data for males into a contigency table\n  (def male (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16)) 4))\n  (chisq-test :table male) ;; X-sq = 41.280, df = 9, p-value = 4.44E-6\n  ;; turn the count data for females into a contigency table\n  (def female (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16 32)) 4))\n  (chisq-test :table female) ;; X-sq = 106.664, df = 9, p-value = 7.014E-19,\n\n\n  ;; supply probabilities to goodness-of-fit test\n  (def table [89 37 30 28 2])\n  (def probs [0.40 0.20 0.20 0.19 0.01])\n  (chisq-test :table table :probs probs) ;; X-sq = 5.7947, df = 4, p-value = 0.215\n\n  ;; use frequencies instead of probabilities\n  (def freq [40 20 20 15 5])\n  (chisq-test :table table :freq freq) ;; X-sq = 9.9901, df = 4, p-value = 0.04059\n\n\n\nReferences:\n  http://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm\n  http://en.wikipedia.org/wiki/Pearson's_chi-square_test\n  http://en.wikipedia.org/wiki/Yates'_chi-square_test",
    :var-type "function",
-   :line 2230,
+   :line 2316,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x y] [mat]),
    :name "correlation",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1427",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1513",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/correlation",
    :doc
    "\nReturns the sample correlation of x and y, or the correlation\nmatrix of the given matrix.\n\nExamples:\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Correlation",
    :var-type "function",
-   :line 1427,
+   :line 1513,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "correlation-linearity-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2618",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2704",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/correlation-linearity-test",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Correlation_ratio\n\nIt is worth noting that if the relationship between values of  and values of overline y_x is linear (which is certainly true when there are only two possibilities for x) this will give the same result as the square of the correlation coefficient, otherwise the correlation ratio will be larger in magnitude. It can therefore be used for judging non-linear relationships.",
    :var-type "function",
-   :line 2618,
+   :line 2704,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& xs]),
    :name "correlation-ratio",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2580",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2666",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/correlation-ratio",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Correlation_ratio\n\nIn statistics, the correlation ratio is a measure of the relationship between the statistical dispersion within individual categories and the dispersion across the whole population or sample. i.e. the weighted variance of the category means divided by the variance of all samples.\n\nExample\n\nSuppose there is a distribution of test scores in three topics (categories):\n\n    * Algebra: 45, 70, 29, 15 and 21 (5 scores)\n    * Geometry: 40, 20, 30 and 42 (4 scores)\n    * Statistics: 65, 95, 80, 70, 85 and 73 (6 scores).\n\nThen the subject averages are 36, 33 and 78, with an overall average of 52.\n\nThe sums of squares of the differences from the subject averages are 1952 for Algebra, 308 for Geometry and 600 for Statistics, adding to 2860, while the overall sum of squares of the differences from the overall average is 9640. The difference between these of 6780 is also the weighted sum of the square of the differences between the subject averages and the overall average:\n\n    5(36 − 52)2 + 4(33 − 52)2 + 6(78 − 52)2 = 6780\n\nThis gives\n\n    eta^2 =6780/9640=0.7033\n\nsuggesting that most of the overall dispersion is a result of differences between topics, rather than within topics. Taking the square root\n\n    eta = sqrt 6780/9640=0.8386\n\nObserve that for η = 1 the overall sample dispersion is purely due to dispersion among the categories and not at all due to dispersion within the individual categories. For a quick comprehension simply imagine all Algebra, Geometry, and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.",
    :var-type "function",
-   :line 2580,
+   :line 2666,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "cosine-similarity",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2872",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2958",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cosine-similarity",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Cosine_similarity\nhttp://www.appliedsoftwaredesign.com/cosineSimilarityCalculator.php\n\nThe Cosine Similarity of two vectors a and b is the ratio: a dot b / ||a|| ||b||\n\nLet d1 = {2 4 3 1 6}\nLet d2 = {3 5 1 2 5}\n\nCosine Similarity (d1, d2) =  dot(d1, d2) / ||d1|| ||d2||\n\ndot(d1, d2) = (2)*(3) + (4)*(5) + (3)*(1) + (1)*(2) + (6)*(5) = 61\n\n||d1|| = sqrt((2)^2 + (4)^2 + (3)^2 + (1)^2 + (6)^2) = 8.12403840464\n\n||d2|| = sqrt((3)^2 + (5)^2 + (1)^2 + (2)^2 + (5)^2) = 8\n\nCosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)\n                           = 61 / 64.9923072371\n                           = 0.938572618717",
    :var-type "function",
-   :line 2872,
+   :line 2958,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x y] [mat]),
    :name "covariance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1376",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1462",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/covariance",
    :doc
    "\nReturns the sample covariance of x and y.\n\nExamples:\n  ;; create some data that covaries\n  (def x (sample-normal 100))\n  (def err (sample-normal 100))\n  (def y (plus (mult 5 x) err))\n  ;; estimate the covariance of x and y\n  (covariance x y)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Covariance",
    :var-type "function",
-   :line 1376,
+   :line 1462,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([coll]),
    :name "cumulative-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1720",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1806",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cumulative-mean",
    :doc
    " Returns a sequence of cumulative means for the given collection. For instance\n  The first value equals the first value of the argument, the second value is\n  the mean of the first two arguments, the third is the mean of the first three\n  arguments, etc.\n\n  Examples:\n    (cumulative-mean (sample-normal 100))\n",
    :var-type "function",
-   :line 1720,
+   :line 1806,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& {:keys [table row-labels col-labels]}]),
    :name "detabulate",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2439",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2525",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/detabulate",
    :doc
    " Take a contingency table of counts and returns a matrix of observations.\n\nExamples:\n\n  (use '(incanter core stats datasets))\n\n  (def by-gender (group-on (get-dataset :hair-eye-color) 2))\n  (def table (matrix (sel (first by-gender) :cols 3) 4))\n\n  (detabulate :table table)\n  (tabulate (detabulate :table table))\n\n  ;; example 2\n  (def data (matrix [[1 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [0 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [1 1]]))\n  (tabulate data)\n\n  (tabulate (detabulate :table (:table (tabulate data))))",
    :var-type "function",
-   :line 2439,
+   :line 2525,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "dice-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2950",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3036",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/dice-coefficient",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Dice%27s_coefficient\nDice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.",
    :var-type "function",
-   :line 2950,
+   :line 3036,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "dice-coefficient-str",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2976",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3062",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/dice-coefficient-str",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Dice%27s_coefficient\n\nWhen taken as a string similarity measure, the coefficient may be calculated for two strings, x and y using bigrams.  here nt is the number of character bigrams found in both strings, nx is the number of bigrams in string x and ny is the number of bigrams in string y. For example, to calculate the similarity between:\n\n    night\n    nacht\n\nWe would find the set of bigrams in each word:\n\n    {ni,ig,gh,ht}\n    {na,ac,ch,ht}\n\nEach set has four elements, and the intersection of these two sets has only one element: ht.\n\nPlugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.",
    :var-type "function",
-   :line 2976,
+   :line 3062,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "discordant-pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2727",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2813",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/discordant-pairs",
    :doc "http://en.wikipedia.org/wiki/Discordant_pairs",
    :var-type "function",
-   :line 2727,
+   :line 2813,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "euclidean-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2844",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2930",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/euclidean-distance",
    :doc
    "http://en.wikipedia.org/wiki/Euclidean_distance\n\nthe Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric.",
    :var-type "function",
-   :line 2844,
+   :line 2930,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x y]),
    :name "f-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2105",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2191",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/f-test",
    :doc
    "\nTest for different variances between 2 samples\n\n  Argument:\n    x : 1st sample to test\n    y : 2nd sample to test\n\n  Options:\n\n  References:\n    http://en.wikipedia.org/wiki/F-test\n    http://people.richland.edu/james/lecture/m170/ch13-f.html",
    :var-type "function",
-   :line 2105,
+   :line 2191,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([]),
    :name "gamma-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2750",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2836",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/gamma-coefficient",
    :doc
    "\nhttp://www.statsdirect.com/help/nonparametric_methods/kend.htm\n\nThe gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):",
    :var-type "function",
-   :line 2750,
+   :line 2836,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "hamming-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L3001",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3087",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/hamming-distance",
    :doc
    "http://en.wikipedia.org/wiki/Hamming_distance\n\nIn information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other.",
    :var-type "function",
-   :line 3001,
+   :line 3087,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([pred coll]),
    :name "indicator",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L47",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L48",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/indicator",
    :doc
    "\nReturns a sequence of ones and zeros, where ones\nare returned when the given predicate is true for\ncorresponding element in the given collection, and\nzero otherwise.\n\nExamples:\n  (use 'incanter.stats)\n\n  (indicator #(neg? %) (sample-normal 10))\n\n  ;; return the sum of the positive values in a normal sample\n  (def x (sample-normal 100))\n  (sum (mult x (indicator #(pos? %) x)))",
    :var-type "function",
-   :line 47,
+   :line 48,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "jaccard-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2939",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3025",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/jaccard-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Jaccard_index\n\nThe Jaccard distance, which measures dissimilarity between sample sets, is complementary to the Jaccard coefficient and is obtained by subtracting the Jaccard coefficient from 1, or, equivalently, by dividing the difference of the sizes of the union and the intersection of two sets by the size of the union.",
    :var-type "function",
-   :line 2939,
+   :line 3025,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "jaccard-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2928",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3014",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/jaccard-index",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Jaccard_index\n\nThe Jaccard index, also known as the Jaccard similarity coefficient (originally coined coefficient de communauté by Paul Jaccard), is a statistic used for comparing the similarity and diversity of sample sets.\n\nThe Jaccard coefficient measures similarity between sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets.",
    :var-type "function",
-   :line 2928,
+   :line 3014,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "kendalls-tau",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2678",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2764",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/kendalls-tau",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient\nhttp://www.statsdirect.com/help/nonparametric_methods/kend.htm\nhttp://mail.scipy.org/pipermail/scipy-dev/2009-March/011589.html\nbest explanation and example is in \"cluster analysis for researchers\" page 165.\nhttp://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175",
    :var-type "function",
-   :line 2678,
+   :line 2764,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([]),
    :name "kendalls-w",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2759",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2845",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/kendalls-w",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Kendall%27s_W\nhttp://faculty.chass.ncsu.edu/garson/PA765/friedman.htm\n\nSuppose that object i is given the rank ri,j by judge number j, where there are in total n objects and m judges. Then the total rank given to object i is\n\n    Ri = sum Rij\n\nand the mean value of these total ranks is\n\n    Rbar = 1/2 m (n + 1)\n\nThe sum of squared deviations, S, is defined as\n\n    S=sum1-n (Ri - Rbar)\n\nand then Kendall's W is defined as[1]\n\n    W= 12S / m^2(n^3-n)\n\nIf the test statistic W is 1, then all the survey respondents have been unanimous, and each respondent has assigned the same order to the list of concerns. If W is 0, then there is no overall trend of agreement among the respondents, and their responses may be regarded as essentially random. Intermediate values of W indicate a greater or lesser degree of unanimity among the various responses.\n\nLegendre[2] discusses a variant of the W statistic which accommodates ties in the rankings and also describes methods of making significance tests based on W.\n\n [{:observation [1 2 3]} {} ... {}] -> W",
    :var-type "function",
-   :line 2759,
+   :line 2845,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "kurtosis",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1488",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1574",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/kurtosis",
    :doc
    "\nReturns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\"\nof the probability distribution of a real-valued random variable. Higher kurtosis\nmeans more of the variance is due to infrequent extreme deviations, as opposed to\nfrequent modestly-sized deviations.\" (Wikipedia)\n\nExamples:\n\n  (kurtosis (sample-normal 100000)) ;; approximately 0\n  (kurtosis (sample-gamma 100000)) ;; approximately 6\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Kurtosis",
    :var-type "function",
-   :line 1488,
+   :line 1574,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b q]),
    :name "lee-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L3016",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3102",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/lee-distance",
    :doc
    "http://en.wikipedia.org/wiki/Lee_distance\n\nIn coding theory, the Lee distance is a distance between two strings x1x2...xn and y1y2...yn of equal length n over the q-ary alphabet {0,1,…,q-1} of size q >= 2. It is metric.\n\nIf q = 2 or q = 3 the Lee distance coincides with the Hamming distance.\n\nThe metric space induced by the Lee distance is a discrete analog of the elliptic space.",
    :var-type "function",
-   :line 3016,
+   :line 3102,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "levenshtein-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L3063",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3149",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/levenshtein-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Levenshtein_distance\n\ninternal representation is a table d with m+1 rows and n+1 columns\n\nwhere m is the length of a and m is the length of b.\n\nIn information theory and computer science, the Levenshtein distance is a metric for measuring the amount of difference between two sequences (i.e., the so called edit distance). The Levenshtein distance between two strings is given by the minimum number of operations needed to transform one string into the other, where an operation is an insertion, deletion, or substitution of a single character.\n\nFor example, the Levenshtein distance between \"kitten\" and \"sitting\" is 3, since the following three edits change one into the other, and there is no way to do it with fewer than three edits:\n\n   1. kitten → sitten (substitution of 's' for 'k')\n   2. sitten → sittin (substitution of 'i' for 'e')\n   3. sittin → sitting (insert 'g' at the end).\n\nThe Levenshtein distance has several simple upper and lower bounds that are useful in applications which compute many of them and compare them. These include:\n\n    * It is always at least the difference of the sizes of the two strings.\n    * It is at most the length of the longer string.\n    * It is zero if and only if the strings are identical.\n    * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.",
    :var-type "function",
-   :line 3063,
+   :line 3149,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([y x & {:keys [intercept], :or {intercept true}}]),
    :name "linear-model",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1894",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1980",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/linear-model",
    :doc
    "\nReturns the results of performing a OLS linear regression of y on x.\n\nArguments:\n  y is a vector (or sequence) of values for the dependent variable\n  x is a vector or matrix of values for the independent variables\n\nOptions:\n  :intercept (default true) indicates weather an intercept term should be included\n\nReturns:\n  a map, of type ::linear-model, containing:\n    :design-matrix -- a matrix containing the independent variables, and an intercept columns\n    :coefs -- the regression coefficients\n    :t-tests -- t-test values of coefficients\n    :t-probs -- p-values for t-test values of coefficients\n    :coefs-ci -- 95% percentile confidence interval\n    :fitted -- the predicted values of y\n    :residuals -- the residuals of each observation\n    :std-errors -- the standard errors of the coeffients\n    :sse -- the sum of squared errors, also called the residual sum of squares\n    :ssr -- the regression sum of squares, also called the explained sum of squares\n    :sst -- the total sum of squares (proportional to the sample variance)\n    :r-square -- coefficient of determination\n\nExamples:\n  (use '(incanter core stats datasets charts))\n  (def iris (to-matrix (get-dataset :iris) :dummies true))\n  (def y (sel iris :cols 0))\n  (def x (sel iris :cols (range 1 6)))\n  (def iris-lm (linear-model y x)) ; with intercept term\n\n  (keys iris-lm) ; see what fields are included\n  (:coefs iris-lm)\n  (:sse iris-lm)\n  (quantile (:residuals iris-lm))\n  (:r-square iris-lm)\n  (:adj-r-square iris-lm)\n  (:f-stat iris-lm)\n  (:f-prob iris-lm)\n  (:df iris-lm)\n\n  (def x1 (range 0.0 3 0.1))\n  (view (xy-plot x1 (cdf-f x1 :df1 4 :df2 144)))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/OLS_Regression\n  http://en.wikipedia.org/wiki/Coefficient_of_determination",
    :var-type "function",
-   :line 1894,
+   :line 1980,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [y W centroid]}]),
    :name "mahalanobis-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L3166",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3252",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/mahalanobis-distance",
    :doc
    "Returns the Mahalanobis distance between x, which is \n  either a vector or matrix of row vectors, and the \n  centroid of the observations in the matrix :y.\n \n Arguments:\n   x -- either a vector or a matrix of row vectors\n \n Options:\n   :y -- Defaults to x, must be a matrix of row vectors which will be used to calculate a centroid\n   :W -- Defaults to (solve (covariance y)), if an identity matrix is provided, the mahalanobis-distance\n         function will be equal to the Euclidean distance.\n   :centroid -- Defaults to (map mean (trans y))\n\n\n References:\n   http://en.wikipedia.org/wiki/Mahalanobis_distance\n\n\n Examples:\n\n   (use '(incanter core stats charts))\n\n   ;; generate some multivariate normal data with a single outlier.\n   (def data (bind-rows\n               (bind-columns \n                 (sample-mvn 100 \n                             :sigma (matrix [[1 0.9] \n                                             [0.9 1]])))\n               [-1.75 1.75]))\n\n   ;; view a scatter plot of the data\n   (let [[x y] (trans data)]\n     (doto (scatter-plot x y)\n       (add-points [(mean x)] [(mean y)])\n       (add-pointer -1.75 1.75 :text \"Outlier\")\n       (add-pointer (mean x) (mean y) :text \"Centroid\")\n       view))\n\n   ;; calculate the distances of each point from the centroid.\n   (def dists (mahalanobis-distance data))\n   ;; view a bar-chart of the distances\n   (view (bar-chart (range 102) dists))\n\n   ;; Now contrast with the Euclidean distance.\n   (def dists (mahalanobis-distance data :W (matrix [[1 0] [0 1]])))\n   ;; view a bar-chart of the distances\n   (view (bar-chart (range 102) dists))\n\n\n   ;; another example\n   (mahalanobis-distance [-1.75 1.75] :y data)\n   (mahalanobis-distance [-1.75 1.75] \n                     :y data \n                     :W (matrix [[1 0] \n                                 [0 1]]))\n",
    :var-type "function",
-   :line 3166,
+   :line 3252,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "manhattan-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2861",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2947",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/manhattan-distance",
    :doc
    "http://en.wikipedia.org/wiki/Manhattan_distance\n\nusual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length",
    :var-type "function",
-   :line 2861,
+   :line 2947,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1342",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1428",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/mean",
    :doc
    "\nReturns the mean of the data, x.\n\nExamples:\n  (mean (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Mean",
    :var-type "function",
-   :line 1342,
+   :line 1428,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "median",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1470",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1556",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/median",
    :doc
    "\nReturns the median of the data, x.\n\nExamples:\n  (median (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Median",
    :var-type "function",
-   :line 1470,
+   :line 1556,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b p]),
    :name "minkowski-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2820",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2906",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/minkowski-distance",
    :doc
    "http://en.wikipedia.org/wiki/Minkowski_distance\nhttp://en.wikipedia.org/wiki/Lp_space\n\nThe Minkowski distance is a metric on Euclidean space which can be considered as a generalization of both the Euclidean distance and the Manhattan distance.\n\nMinkowski distance is typically used with p being 1 or 2. The latter is the Euclidean distance, while the former is sometimes known as the Manhattan distance.\n\nIn the limiting case of p reaching infinity we obtain the Chebyshev distance.",
    :var-type "function",
-   :line 2820,
+   :line 2906,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([n s]),
    :name "n-grams",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2962",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3048",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/n-grams",
    :doc
    "returns a set of the unique n-grams in a string.\n\nthis is using actual sets here, discards dupicate n-grams?",
    :var-type "function",
-   :line 2962,
+   :line 3048,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "normalized-kendall-tau-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2737",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2823",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/normalized-kendall-tau-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Kendall_tau_distance\n\nKendall tau distance is the total number of discordant pairs.",
    :var-type "function",
-   :line 2737,
+   :line 2823,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([p1 p2]),
    :name "odds-ratio",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2560",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2646",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/odds-ratio",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Odds_ratio\n\nDefinition in terms of group-wise odds\n\nThe odds ratio is the ratio of the odds of an event occurring in one group to the odds of it occurring in another group, or to a sample-based estimate of that ratio.\n\n\nSuppose that in a sample of 100 men, 90 have drunk wine in the previous week, while in a sample of 100 women only 20 have drunk wine in the same period. The odds of a man drinking wine are 90 to 10, or 9:1, while the odds of a woman drinking wine are only 20 to 80, or 1:4 = 0.25:1. The odds ratio is thus 9/0.25, or 36, showing that men are much more likely to drink wine than women. \n\nRelation to statistical independence\n\nIf X and Y are independent, their joint probabilities can be expressed in terms of their marginal probabilities.  In this case, the odds ratio equals one, and conversely the odds ratio can only equal one if the joint probabilities can be factored in this way. Thus the odds ratio equals one if and only if X and Y are independent.",
    :var-type "function",
-   :line 2560,
+   :line 2646,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "pairings",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2714",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2800",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pairings",
    :doc "confusing ass name.",
    :var-type "function",
-   :line 2714,
+   :line 2800,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2702",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2788",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pairs",
    :doc
    "returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list.",
    :var-type "function",
-   :line 2702,
+   :line 2788,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [alpha beta], :or [alpha 1 beta 1]}]),
    :name "pdf-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L420",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L421",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-beta",
    :doc
    " Returns the Beta pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dbeta function.\n\nOptions:\n  :alpha (default 1)\n  :beta (default 1)\n\nSee also:\n    cdf-beta and sample-beta\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html\n    http://en.wikipedia.org/wiki/Beta_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-beta 0.5 :alpha 1 :beta 2)",
    :var-type "function",
-   :line 420,
+   :line 421,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [size prob], :or {size 1, prob 1/2}}]),
    :name "pdf-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L995",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1081",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-binomial",
    :doc
    " Returns the Bionomial pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dbinom\n\nOptions:\n  :size (default 1)\n  :prob (default 1/2)\n\nSee also:\n    cdf-binomial and sample-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html\n    http://en.wikipedia.org/wiki/Binomial_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-binomial 10 :prob 1/4 :size 20)",
    :var-type "function",
-   :line 995,
+   :line 1081,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [df], :or {df 1}}]),
    :name "pdf-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L596",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L682",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-chisq",
    :doc
    " Returns the Chi Square pdf of the given value of x.  It will return a sequence\nof values, if x is a sequence. Same as R's dchisq function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    cdf-chisq and sample-chisq\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html\n    http://en.wikipedia.org/wiki/Chi_square_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-chisq 5.0 :df 2)",
    :var-type "function",
-   :line 596,
+   :line 682,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [rate], :or {rate 1}}]),
    :name "pdf-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L800",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L886",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-exp",
    :doc
    " Returns the Exponential pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dexp\n\nOptions:\n  :rate (default 1)\n\nSee also:\n    cdf-exp and sample-exp\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html\n    http://en.wikipedia.org/wiki/Exponential_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-exp 2.0 :rate 1/2)",
    :var-type "function",
-   :line 800,
+   :line 886,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [df1 df2], :or {df1 1, df2 1}}]),
    :name "pdf-f",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L81",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L82",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-f",
    :doc
    " Returns the F pdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's df function.\n\nOptions:\n  :df1 (default 1)\n  :df2 (default 1)\n\nSee also:\n    cdf-f and quantile-f\n\nReferences:\n    http://en.wikipedia.org/wiki/F_distribution\n    http://mathworld.wolfram.com/F-Distribution.html\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-f 1.0 :df1 5 :df2 2)",
    :var-type "function",
-   :line 81,
+   :line 82,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [shape rate], :or {shape 1, rate 1}}]),
    :name "pdf-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L508",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L594",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-gamma",
    :doc
    " Returns the Gamma pdf for the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dgamma function.\n\nOptions:\n  :shape (default 1)\n  :rate (default 1)\n\nSee also:\n    cdf-gamma and sample-gamma\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html\n    http://en.wikipedia.org/wiki/Gamma_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-gamma 10 :shape 1 :rate 2)",
    :var-type "function",
-   :line 508,
+   :line 594,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [size prob], :or {size 10, prob 1/2}}]),
    :name "pdf-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1214",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1300",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-neg-binomial",
    :doc
    " Returns the Negative Binomial pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dnbinom\n\nOptions:\n  :size (default 10)\n  :prob (default 1/2)\n\nSee also:\n    cdf-neg-binomial and sample-neg-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html\n    http://en.wikipedia.org/wiki/Negative_binomial_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-neg-binomial 10 :prob 1/2 :size 20)",
    :var-type "function",
-   :line 1214,
+   :line 1300,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "pdf-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L159",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L160",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-normal",
    :doc
    " Returns the Normal pdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nSee also:\n    cdf-normal, quantile-normal, sample-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))",
    :var-type "function",
-   :line 159,
+   :line 160,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [lambda], :or {lambda 1}}]),
    :name "pdf-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1131",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1217",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-poisson",
    :doc
    " Returns the Poisson pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dpois\n\nOptions:\n  :lambda (default 1)\n\nSee also:\n    cdf-poisson and sample-poisson\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html\n    http://en.wikipedia.org/wiki/Poisson_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-poisson 5 :lambda 10)",
    :var-type "function",
-   :line 1131,
+   :line 1217,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [df], :or {df 1}}]),
    :name "pdf-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L680",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L766",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-t",
    :doc
    " Returns the Student's t pdf for the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dt function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    cdf-t, quantile-t, and sample-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-t 1.2 :df 10)",
    :var-type "function",
-   :line 680,
+   :line 766,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [min max], :or {min 0.0, max 1.0}}]),
    :name "pdf-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L328",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L329",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-uniform",
    :doc
    " Returns the Uniform pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dunif function.\n\nOptions:\n  :min (default 0)\n  :max (default 1)\n\nSee also:\n    cdf-uniform and sample-uniform\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html\n    http://en.wikipedia.org/wiki/Uniform_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-uniform 5)\n    (pdf-uniform 5 :min 1 :max 10)",
    :var-type "function",
-   :line 328,
+   :line 329,
+   :file
+   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
+  {:arglists ([x & options]),
+   :name "pdf-weibull",
+   :namespace "incanter.stats",
+   :source-url
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L508",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-weibull",
+   :doc
+   " Returns the Weibull pdf for the given value of x. It will return a sequence\nof values, if x is a sequence.\n\nOptions:\n    :scale (default 1)\n    :shape (default 1)\n\nSee also:\n    cdf-weibull and sample-weibull\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html\n    http://en.wikipedia.org/wiki/Weibull_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-weibull 2 :alpha 1 :beta 0.5)",
+   :var-type "function",
+   :line 508,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x] [x y]),
    :name "permute",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1760",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1846",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/permute",
    :doc
    " If provided a single argument, returns a permuted version of the\ngiven collection. (permute x) is the same as (sample x).\n\nIf provided two arguments, returns two lists that are permutations\nacross the given collections. In other words, each of the new collections\nwill contain elements from both of the given collections. Useful for\npermutation tests or randomization tests.\n\nExamples:\n\n  (permute (range 10))\n  (permute (range 10) (range 10 20))",
    :var-type "function",
-   :line 1760,
+   :line 1846,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([model x]),
    :name "predict",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2548",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2634",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/predict",
    :doc
    "Takes a linear-model and an x value (either a scalar or vector)\nand returns the predicted value based on the linear-model.",
    :var-type "function",
-   :line 2548,
+   :line 2634,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "principal-components",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2381",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2467",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/principal-components",
    :doc
    "\nPerforms a principal components analysis on the given data matrix.\nEquivalent to R's prcomp function.\n\nReturns:\n  A map with the following fields:\n  :std-dev -- the standard deviations of the principal compoenents\n      (i.e. the square roots of the eigenvalues of the correlation\n      matrix, though the calculation is actually done with the\n      singular values of the data matrix.\n  :rotation -- the matrix of variable loadings (i.e. a matrix\n      whose columns contain the eigenvectors).\n\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (doto (scatter-plot (sel x1 :rows (range 50)) (sel x2 :rows (range 50))\n                      :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\")\n        (add-points (sel x1 :rows (range 50 100)) (sel x2 :rows (range 50 100)))\n        (add-points (sel x1 :rows (range 100 150)) (sel x2 :rows (range 100 150)))\n        view)\n\n\n  ;; alternatively, the :group-by option can be used in scatter-plot\n  (view (scatter-plot x1 x2\n                      :group-by (sel iris :cols 4)\n                      :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Principal_component_analysis",
    :var-type "function",
-   :line 2381,
+   :line 2467,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([j]),
    :name "product-marginal-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2801",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2887",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/product-marginal-test",
    :doc
    "the joint PMF of independent variables is equal to the product of their marginal PMFs.",
    :var-type "function",
-   :line 2801,
+   :line 2887,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -6476,60 +6512,60 @@
    :name "quantile",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1528",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1614",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/quantile",
    :doc
    "\nReturns the quantiles of the data, x. By default it returns the min,\n25th-percentile, 50th-percentile, 75th-percentile, and max value.\n\nOptions:\n  :probs (default [0.0 0.25 0.5 0.75 1.0])\n\nExamples:\n  (quantile (sample-normal 100))\n  (quantile (sample-normal 100) :probs [0.025 0.975])\n  (quantile (sample-normal 100) :probs 0.975)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Quantile",
    :var-type "function",
-   :line 1528,
+   :line 1614,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([probability & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "quantile-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L212",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L213",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/quantile-normal",
    :doc
    " Returns the inverse of the Normal CDF for the given probability.\nIt will return a sequence of values, if given a sequence of\nprobabilities. This is equivalent to R's qnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nReturns:\n  a value x, where (cdf-normal x) = probability\n\nSee also:\n    pdf-normal, cdf-normal, and sample-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n    http://en.wikipedia.org/wiki/Quantile\n\nExample:\n    (quantile-normal 0.975)\n    (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))",
    :var-type "function",
-   :line 212,
+   :line 213,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([probability & {:keys [df], :or {df 1}}]),
    :name "quantile-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L732",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L818",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/quantile-t",
    :doc
    " Returns the inverse of the Student's t CDF for the given probability\n(i.e. the quantile).  It will return a sequence of values, if x is\na sequence of probabilities. This is equivalent to R's qt function.\n\nOptions:\n  :df (default 1)\n\nReturns:\n  a value x, where (cdf-t x) = probability\n\nSee also:\n   pdf-t, cdf-t, and sample-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n    http://en.wikipedia.org/wiki/Quantile\n\nExample:\n    (quantile-t 0.975)\n    (quantile-t [0.025 0.975] :df 25)\n    (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])\n    (map #(quantile-t 0.025 :df %) df)",
    :var-type "function",
-   :line 732,
+   :line 818,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "rank-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2628",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2714",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/rank-index",
    :doc
    "\ngiven a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.",
    :var-type "function",
-   :line 2628,
+   :line 2714,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -6540,120 +6576,120 @@
    :name "sample",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1558",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1644",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample",
    :doc
    " Returns a sample of the given size from the given collection. If replacement\nis set to false it returns a set, otherwise it returns a list.\n\nArguments:\n  x -- collection to be sampled from\n\nOptions:\n  :size -- (default (count x) sample size\n  :replacement (default true) -- sample with replacement\n\n\nExamples:\n  (sample (range 10)) ; permutation of numbers zero through ten\n  (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.\n  (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.",
    :var-type "function",
-   :line 1558,
+   :line 1644,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [alpha beta], :or [alpha 1 beta 1]}]),
    :name "sample-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L479",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L480",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-beta",
    :doc
    " Returns a sample of the given size from a Beta distribution.\nThis is equivalent to R's rbeta function.\n\nOptions:\n  :alpha (default 1)\n  :beta (default 1)\n  These default values produce a Uniform distribution.\n\nSee also:\n    pdf-beta and cdf-beta\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html\n    http://en.wikipedia.org/wiki/Beta_distribution\n\nExample:\n    (sample-beta 1000 :alpha 1 :beta 2)",
    :var-type "function",
-   :line 479,
+   :line 480,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [size prob], :or {size 1, prob 1/2}}]),
    :name "sample-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1052",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1138",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-binomial",
    :doc
    " Returns a sample of the given size from a Binomial distribution.\nSame as R's rbinom\n\nOptions:\n  :size (default 1)\n  :prob (default 1/2)\n\nSee also:\n    cdf-binomial and sample-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html\n    http://en.wikipedia.org/wiki/Binomial_distribution\n\nExample:\n    (sample-binomial 1000 :prob 1/4 :size 20)",
    :var-type "function",
-   :line 1052,
+   :line 1138,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [df], :or {df 1}}]),
    :name "sample-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L652",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L738",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-chisq",
    :doc
    " Returns a sample of the given size from a Chi Square distribution\nSame as R's rchisq function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    pdf-chisq and cdf-chisq\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html\n    http://en.wikipedia.org/wiki/Chi_square_distribution\n\nExample:\n    (sample-chisq 1000 :df 2)",
    :var-type "function",
-   :line 652,
+   :line 738,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size alpha]),
    :name "sample-dirichlet",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L944",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1030",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-dirichlet",
    :doc
    "\nExamples:\n  (use '(incanter core stats charts))\n\n  ;; a total of 1447 adults were polled to indicate their preferences for\n  ;; candidate 1 (y1=727), candidate 2 (y2=583), or some other candidate or no\n  ;; preference (y3=137).\n\n  ;; the counts y1, y2, and y3 are assumed to have a multinomial distribution\n  ;; If a uniform prior distribution is assigned to the multinomial vector\n  ;; theta = (th1, th2, th3), then the posterior distribution of theta is\n  ;; proportional to g(theta) = th1^y1 * th2^y2 * th3^y3, which is a\n  ;; dirichlet distribution with parameters (y1+1, y2+1, y3+1)\n  (def  theta (sample-dirichlet 1000 [(inc 727) (inc 583) (inc 137)]))\n  ;; view means, 95% CI, and histograms of the proportion parameters\n  (mean (sel theta :cols 0))\n  (quantile (sel theta :cols 0) :probs [0.0275 0.975])\n  (view (histogram (sel theta :cols 0)))\n  (mean (sel theta :cols 1))\n  (quantile (sel theta :cols 1) :probs [0.0275 0.975])\n  (view (histogram (sel theta :cols 1)))\n  (mean (sel theta :cols 2))\n  (quantile (sel theta :cols 2) :probs [0.0275 0.975])\n  (view (histogram (sel theta :cols 2)))\n\n  ;; view  a histogram of the difference in proportions between the first\n  ;; two candidates\n  (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))",
    :var-type "function",
-   :line 944,
+   :line 1030,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [rate], :or {rate 1}}]),
    :name "sample-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L850",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L936",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-exp",
    :doc
    " Returns a sample of the given size from a Exponential distribution.\nSame as R's rexp\n\nOptions:\n  :rate (default 1)\n\nSee also:\n    pdf-exp, and cdf-exp\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html\n    http://en.wikipedia.org/wiki/Exponential_distribution\n\nExample:\n    (sample-exp 1000 :rate 1/2)",
    :var-type "function",
-   :line 850,
+   :line 936,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [shape rate], :or {shape 1, rate 1}}]),
    :name "sample-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L566",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L652",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-gamma",
    :doc
    " Returns a sample of the given size from a Gamma distribution.\nThis is equivalent to R's rgamma function.\n\nOptions:\n  :shape (default 1)\n  :rate (default 1)\n\nSee also:\n    pdf-gamma, cdf-gamma, and quantile-gamma\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html\n    http://en.wikipedia.org/wiki/Gamma_distribution\n\nExample:\n    (sample-gamma 1000 :shape 1 :rate 2)",
    :var-type "function",
-   :line 566,
+   :line 652,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& {:keys [scale p df], :or {p 2}}]),
    :name "sample-inv-wishart",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L916",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1002",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-inv-wishart",
    :doc
    "\nReturns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution\n\nOptions:\n  :p (default 2) -- number of dimensions of resulting matrix\n  :df (default p) -- degree of freedoms (aka n), df <= p\n  :scale (default (identity-matrix p)) -- positive definite matrix (aka V)\n\nExamples:\n  (use 'incanter.stats)\n  (sample-inv-wishart :df 10  :p 4)\n\n  ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)\n  (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Inverse-Wishart_distribution",
    :var-type "function",
-   :line 916,
+   :line 1002,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -6661,105 +6697,105 @@
    :name "sample-multinomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1082",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1168",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-multinomial",
    :doc
    " Returns a sequence representing a sample from a multinomial distribution.\n\nArguments: size -- number of values to return\n\nOptions:\n  :categories (default [0 1]) -- the values returned\n  :probs (default [0.5 0.5]) -- the probabilities associated with each category\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution\n\n\nExamples:\n  (use '(incanter core stats charts))\n\n  (sample-multinomial 10)\n  (sample-multinomial 10 :probs [0.25 0.5 0.25])\n\n  ;; estimate sample proportions\n  (def sample-size 1000.0)\n  (def categories [:red :yellow :blue :green])\n  (def data (to-dataset (sample-multinomial sample-size \n                                            :categories categories\n                                            :probs [0.5 0.25 0.2 0.05])))\n\n  ;; check the sample proportions\n  (view (pie-chart categories\n                   (map #(div (count ($ :col-0 ($where {:col-0 %} data))) \n                              sample-size)\n                        categories)))\n                    ",
    :var-type "function",
-   :line 1082,
+   :line 1168,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [mean sigma]}]),
    :name "sample-mvn",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L273",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L274",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-mvn",
    :doc
    " Returns a sample of the given size from a Multivariate Normal\ndistribution. This is equivalent to R's mvtnorm::rmvnorm function.\n\nArguments:\n  size -- the size of the sample to return\n\nOptions:\n  :mean (default (repeat (ncol sigma) 0))\n  :sigma (default (identity-matrix (count mean)))\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (def mvn-samp (sample-mvn 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))\n  (covariance mvn-samp)\n  (def means (map mean (trans mvn-samp)))\n\n  ;; plot scatter-plot of points\n  (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))\n  (view mvn-plot)\n  ;; add centroid to plot\n  (add-points mvn-plot [(first means)] [(second means)])\n\n  ;; add regression line to scatter plot\n  (def x (sel mvn-samp :cols 0))\n  (def y (sel mvn-samp :cols 1))\n  (def lm (linear-model y x))\n  (add-lines mvn-plot x (:fitted lm))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Multivariate_normal",
    :var-type "function",
-   :line 273,
+   :line 274,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([nsize & {:keys [size prob], :or {size 10, prob 1/2}}]),
    :name "sample-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1273",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1359",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-neg-binomial",
    :doc
    " Returns a sample of the given size from a Negative Binomial distribution.\nSame as R's rnbinom\n\nOptions:\n  :size (default 10)\n  :prob (default 1/2)\n\nSee also:\n    pdf-neg-binomial and cdf-neg-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html\n    http://en.wikipedia.org/wiki/Negative_binomial_distribution\n\nExample:\n    (sample-neg-binomial 1000 :prob 1/2 :size 20)",
    :var-type "function",
-   :line 1273,
+   :line 1359,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "sample-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L244",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L245",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-normal",
    :doc
    " Returns a sample of the given size from a Normal distribution\nThis is equivalent to R's rnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nSee also:\n    pdf-normal, cdf-normal, quantile-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n\nExample:\n    (sample-normal 1000 :mean -2 :sd (sqrt 0.5))",
    :var-type "function",
-   :line 244,
+   :line 245,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([n x] [n x y]),
    :name "sample-permutations",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1788",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1874",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-permutations",
    :doc
    " If provided a two arguments (n x), it returns a list of n permutations\nof x. If provided three (n x y) arguments, returns a list with two with n permutations of\neach arguments, where each permutation is drawn from the pooled arguments.\n\nArguments:\n  n -- number of randomized versions of the original two groups to return\n  x -- group 1\n  y -- (default nil) group 2\n\n\nExamples:\n\n  (use '(incanter core stats))\n  (sample-permutations 10 (range 10))\n  (sample-permutations 10 (range 10) (range 10 20))\n\n  ;; extended example with plant-growth data\n  (use '(incanter core stats datasets charts))\n\n  ;; load the plant-growth dataset\n  (def data (to-matrix (get-dataset :plant-growth)))\n\n  ;; break the first column of the data into groups based on treatment (second column).\n  (def groups (group-on data 1 :cols 0))\n\n  ;; define a function for the statistic of interest\n  (defn means-diff [x y] (minus (mean x) (mean y)))\n\n  ;; calculate the difference in sample means between the two groups\n  (def samp-mean-diff (means-diff (first groups) (second groups))) ;; 0.371\n\n  ;; create 500 permuted versions of the original two groups\n  (def permuted-groups (sample-permutations 1000 (first groups) (second groups)))\n\n  ;; calculate the difference of means of the 500 samples\n  (def permuted-means-diffs1 (map means-diff (first permuted-groups) (second permuted-groups)))\n\n  ;; use an indicator function that returns 1 when the randomized means diff is greater\n  ;; than the original sample mean, and zero otherwise. Then take the mean of this sequence\n  ;; of ones and zeros. That is the proportion of times you would see a value more extreme\n  ;; than the sample mean (i.e. the p-value).\n  (mean (indicator #(> % samp-mean-diff) permuted-means-diffs1)) ;; 0.088\n\n  ;; calculate the 95% confidence interval of the null hypothesis. If the\n  ;; sample difference in means is outside of this range, that is evidence\n  ;; that the two means are statistically significantly different.\n  (quantile permuted-means-diffs1 :probs [0.025 0.975]) ;; (-0.606 0.595)\n\n  ;; Plot a histogram of the permuted-means-diffs using the density option,\n  ;; instead of the default frequency, and then add a normal pdf curve with\n  ;; the mean and sd of permuted-means-diffs data for a visual comparison.\n  (doto (histogram permuted-means-diffs1 :density true)\n        (add-lines (range -1 1 0.01) (pdf-normal (range -1 1 0.01)\n                                                 :mean (mean permuted-means-diffs1)\n                                                 :sd (sd permuted-means-diffs1)))\n        view)\n\n  ;; compare the means of treatment 2 and control\n  (def permuted-groups (sample-permutations 1000 (first groups) (last groups)))\n  (def permuted-means-diffs2 (map means-diff (first permuted-groups) (second permuted-groups)))\n  (def samp-mean-diff (means-diff (first groups) (last groups))) ;; -0.4939\n  (mean (indicator #(< % samp-mean-diff) permuted-means-diffs2)) ;; 0.022\n  (quantile permuted-means-diffs2 :probs [0.025 0.975]) ;; (-0.478 0.466)\n\n  ;; compare the means of treatment 1 and treatment 2\n  (def permuted-groups (sample-permutations 1000 (second groups) (last groups)))\n  (def permuted-means-diffs3 (map means-diff (first permuted-groups) (second permuted-groups)))\n  (def samp-mean-diff (means-diff (second groups) (last groups))) ;; -0.865\n  (mean (indicator #(< % samp-mean-diff) permuted-means-diffs3)) ;;  0.002\n  (quantile permuted-means-diffs3 :probs [0.025 0.975]) ;; (-0.676 0.646)\n\n  (doto (box-plot permuted-means-diffs1)\n        (add-box-plot permuted-means-diffs2)\n        (add-box-plot permuted-means-diffs3)\n        view)\n\n\n  Further Reading:\n    http://en.wikipedia.org/wiki/Resampling_(statistics)",
    :var-type "function",
-   :line 1788,
+   :line 1874,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [lambda], :or {lambda 1}}]),
    :name "sample-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1186",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1272",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-poisson",
    :doc
    " Returns a sample of the given size from a Poisson distribution.\nSame as R's rpois\n\nOptions:\n  :lambda (default 1)\n\nSee also:\n    pdf-poisson and cdf-poisson\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html\n    http://en.wikipedia.org/wiki/Poisson_distribution\n\nExample:\n    (sample-poisson 1000 :lambda 10)",
    :var-type "function",
-   :line 1186,
+   :line 1272,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [df], :or {df 1}}]),
    :name "sample-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L770",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L856",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-t",
    :doc
    " Returns a sample of the given size from a Student's t distribution.\nSame as R's rt function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    pdf-t, cdf-t, and quantile-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n\nExample:\n    (cdf-t 1000 :df 10)",
    :var-type "function",
-   :line 770,
+   :line 856,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -6770,165 +6806,180 @@
    :name "sample-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L382",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L383",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-uniform",
    :doc
    " Returns a sample of the given size from a Uniform distribution.\nThis is equivalent to R's runif function.\n\nOptions:\n  :min (default 0)\n  :max (default 1)\n  :integers (default false)\n\nSee also:\n    pdf-uniform and cdf-uniform\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html\n    http://en.wikipedia.org/wiki/Uniform_distribution\n\nExample:\n    (sample-uniform 1000)\n    (sample-uniform 1000 :min 1 :max 10)",
    :var-type "function",
-   :line 382,
+   :line 383,
+   :file
+   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
+  {:arglists ([size & options]),
+   :name "sample-weibull",
+   :namespace "incanter.stats",
+   :source-url
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L564",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-weibull",
+   :doc
+   " Returns a sample of the given size from a Weibull distribution\n\nOptions:\n  :shape (default 1)\n  :scale (default 1)\n\nSee also:\n    pdf-weibull, cdf-weibull\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html\n    http://en.wikipedia.org/wiki/Weibull_distribution\n\nExample:\n    (sample-weibull 1000 :shape 1 :scale 0.2)",
+   :var-type "function",
+   :line 564,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& {:keys [scale p df], :or {p 2}}]),
    :name "sample-wishart",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L880",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L966",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-wishart",
    :doc
    "\nReturns a p-by-p symmetric distribution drawn from a Wishart distribution\n\nOptions:\n  :p (default 2) -- number of dimensions of resulting matrix\n  :df (default p) -- degree of freedoms (aka n), df <= p\n  :scale (default (identity-matrix p)) -- positive definite matrix (aka V)\n\nExamples:\n  (use 'incanter.stats)\n  (sample-wishart :df 10  :p 4)\n\n  ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)\n  (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Wishart_distribution#",
    :var-type "function",
-   :line 880,
+   :line 966,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "sd",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1408",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1494",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sd",
    :doc
    "\nReturns the sample standard deviation of the data, x. Equivalent to\nR's sd function.\n\nExamples:\n  (sd (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Standard_deviation",
    :var-type "function",
-   :line 1408,
+   :line 1494,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([y x & {:keys [intercept], :or {intercept true}}]),
    :name "simple-regression",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2532",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2618",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/simple-regression",
    :doc
    "A stripped version of linear-model that returns a map containing only\nthe coefficients.",
    :var-type "function",
-   :line 2532,
+   :line 2618,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "skewness",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1509",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1595",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/skewness",
    :doc
    "\nReturns the skewness of the data, x. \"Skewness is a measure of the asymmetry\nof the probability distribution of a real-valued random variable.\" (Wikipedia)\n\nExamples:\n\n  (skewness (sample-normal 100000)) ;; approximately 0\n  (skewness (sample-gamma 100000)) ;; approximately 2\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Skewness",
    :var-type "function",
-   :line 1509,
+   :line 1595,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "sorensen-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L3037",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L3123",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sorensen-index",
    :doc
    "\nhttp://en.wikipedia.org/wiki/S%C3%B8rensen_similarity_index#cite_note-4\n\nThe Sørensen index, also known as Sørensen’s similarity coefficient, is a statistic used for comparing the similarity of two samples. where A and B are the species numbers in samples A and B, respectively, and C is the number of species shared by the two samples. \n\n The Sørensen index is identical to Dice's coefficient which is always in [0, 1] range. Sørensen index used as a distance measure, 1 − QS, is identical to Hellinger distance and Bray–Curtis dissimilarity.\n\nThe Sørensen coefficient is mainly useful for ecological community data (e.g. Looman & Campbell, 1960[3]). Justification for its use is primarily empirical rather than theoretical (although it can be justified theoretically as the intersection of two fuzzy sets[4]). As compared to Euclidean distance, Sørensen distance retains sensitivity in more heterogeneous data sets and gives less weight to outliers\n\nThis function assumes you pass in a and b as sets.\n\nThe sorensen index extended to abundance instead of incidence of species is called the Czekanowski index.",
    :var-type "function",
-   :line 3037,
+   :line 3123,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "spearmans-rho",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2635",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2721",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/spearmans-rho",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient\n\nIn statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.",
    :var-type "function",
-   :line 2635,
+   :line 2721,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x] [x m]),
    :name "square-devs-from-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2509",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2595",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/square-devs-from-mean",
    :doc
    "takes either a sample or a sample and a precalculated mean.\n\nreturns the squares of the difference between each observation and the sample mean.",
    :var-type "function",
-   :line 2509,
+   :line 2595,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x] [x m]),
    :name "sum-of-square-devs-from-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2522",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2608",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sum-of-square-devs-from-mean",
    :doc
    "takes either a sample or a sample and a precalculated mean.\n\nreturns the sum of the squares of the difference between each observation and the sample mean.",
    :var-type "function",
-   :line 2522,
+   :line 2608,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([vs]),
    :name "sum-variance-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2791",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2877",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sum-variance-test",
    :doc
    "the variance of the sum of n independent variables is equal to the sum of their variances.\n\n(variance-independence-test [[1 2 3 4] [1 2 3 4]]) -> 5/2",
    :var-type "function",
-   :line 2791,
+   :line 2877,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
-  {:arglists ([x & {:keys [stat fun], :or {stat-fn mean, fun minus}}]),
+  {:arglists ([x & {:keys [stat fun], :or {stat mean, fun minus}}]),
    :name "sweep",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1733",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1819",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sweep",
    :doc
    " Return an array obtained from an input array by sweeping out a\nsummary statistic. Based to R's sweep function.\n\n  Arguments:\n    x is an sequence\n\n\n  Options:\n        :stat (default mean) the statistic to sweep out\n        :fun (defaul minus) the function used to sweep the stat out\n\n  Example:\n\n    (use '(incanter core stats))\n\n    (def x (sample-normal 30 :mean 10 :sd 5))\n    (sweep x) ;; center the data around mean\n    (sweep x :stat sd :fun div) ;; divide data by its sd",
    :var-type "function",
-   :line 1733,
+   :line 1819,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
@@ -6943,74 +6994,74 @@
    :name "t-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2014",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2100",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/t-test",
    :doc
    "\nArgument:\n  x : sample to test\n\nOptions:\n  :y (default nil)\n  :mu (default (mean y) or 0) population mean\n  :alternative (default :two-sided) other choices :less :greater\n  :var-equal TODO (default false) variance equal\n  :paired TODO (default false) paired test\n  :conf-level (default 0.95) for returned confidence interval\n\nExamples:\n\n  (t-test (range 1 11) :mu 0)\n  (t-test (range 1 11) :mu 0 :alternative :less)\n  (t-test (range 1 11) :mu 0 :alternative :greater)\n\n  (t-test (range 1 11) :y (range 7 21))\n  (t-test (range 1 11) :y (range 7 21) :alternative :less)\n  (t-test (range 1 11) :y (range 7 21) :alternative :greater)\n  (t-test (range 1 11) :y (conj (range 7 21) 200))\n\nReferences:\n  http://en.wikipedia.org/wiki/T_test\n  http://www.socialresearchmethods.net/kb/stat_t.php",
    :var-type "function",
-   :line 2014,
+   :line 2100,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "tabulate",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2130",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2216",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/tabulate",
    :doc
    " Cross-tabulates the values of the given numeric matrix.\n\nReturns a hash-map with the following fields:\n  :table -- the table of counts for each combination of values,\n            this table is only returned if x has two-columns\n  :levels -- a sequence of sequences, where each sequence list\n             the levels (possible values) of the corresponding\n             column of x.\n  :margins -- a sequence of sequences, where each sequence\n              represents the marginal total for each level\n              of the corresponding column of x.\n  :counts -- a hash-map, where vectors of unique combinations\n             of the cross-tabulated levels are the keys and the\n             values are the total count of each combination.\n  :N  -- the grand-total for the contingency table\n\n\nExamples:\n\n  (use '(incanter core stats))\n  (tabulate [1 2 3 2 3 2 4 3 5])\n  (tabulate (sample-poisson 100 :lambda 5))\n\n  (use '(incanter core stats datasets))\n  (def math-prog (to-matrix (get-dataset :math-prog)))\n  (tabulate (sel math-prog :cols [1 2]))\n\n\n  (def data (matrix [[1 0 1]\n                     [1 1 1]\n                     [1 1 1]\n                     [1 0 1]\n                     [0 0 0]\n                     [1 1 1]\n                     [1 1 1]\n                     [1 0 1]\n                     [1 1 0]]))\n  (tabulate data)\n\n\n  (def data (matrix [[1 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [0 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [1 1]]))\n  (tabulate data)",
    :var-type "function",
-   :line 2130,
+   :line 2216,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "tanimoto-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2907",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2993",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/tanimoto-coefficient",
    :doc
    "\n\nhttp://en.wikipedia.org/wiki/Jaccard_index\n\nThe cosine similarity metric may be extended such that it yields the Jaccard coefficient in the case of binary attributes. This is the Tanimoto coefficient. ",
    :var-type "function",
-   :line 2907,
+   :line 2993,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "variance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L1360",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L1446",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/variance",
    :doc
    "\nReturns the sample variance of the data, x. Equivalent to R's var function.\n\nExamples:\n  (variance (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance",
    :var-type "function",
-   :line 1360,
+   :line 1446,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([z x y]),
    :name "within",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj#L2502",
+   "https://github.com/liebke/incanter/blob/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj#L2588",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/43341be11df3bd75d76dbe519a06481d69ece4b1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/bc03177d9b40916c01c9fc5d4c5dd709fc44687c/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/within",
    :doc "\ny is within z of x in metric space.  ",
    :var-type "function",
-   :line 2502,
+   :line 2588,
    :file
    "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([exp v] [exp v degree]),

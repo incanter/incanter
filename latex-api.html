@@ -107,7 +107,7 @@ Examples:
       view)</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L79" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L83" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -130,18 +130,20 @@ Examples:
     view)</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L56" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L60" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.latex/latex">latex</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color], :or {color java.awt.Color/black}})
+  <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color background border], :or {color java.awt.Color/black, background java.awt.Color/white, border [5 5 5 5]}})
 </pre>
   <pre id="var-docstr"> Returns the given LaTeX equation rendered as an java.awt.Image.
 
 Options:
   :color (default java.awt.Color/black) -- the text color
+  :background (default java.awt.Clolor/white) -- the background color
+  :border (default [5 5 5 5]) -- image border
 
 Examples:
   (use '(incanter core charts stats latex))
@@ -159,7 +161,7 @@ Examples:
                  \\end{pmatrix}"))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-latex/src/incanter/latex.clj#L12" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L12" id="var-source">Source</a>
 </div>
 
 
