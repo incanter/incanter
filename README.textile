@@ -90,13 +90,13 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 h2. Building Incanter
 
-To build and test Incanter, you will need to have <a href="http://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
+To build and test Incanter, you will need to have <a href="https://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
 
 1. Clone the repository with git: @git clone git://github.com/liebke/incanter.git@
 
 2. Install Leiningen
-  a. Download the lein script: @wget http://github.com/technomancy/leiningen/raw/stable/bin/lein@
-     (use <a href="http://github.com/technomancy/leiningen/raw/stable/bin/lein.bat">lein.bat</a> on Windows)
+  a. Download the lein script: @wget https://github.com/technomancy/leiningen/raw/stable/bin/lein@
+     (use <a href="https://github.com/technomancy/leiningen/raw/stable/bin/lein.bat">lein.bat</a> on Windows)
   b. Place it on your path and chmod it to be executable: @chmod +x lein@
   c. Run: @lein self-install@
 
@@ -124,7 +124,7 @@ h2. Incanter dependencies
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
 * "OpenCSV":http://opencsv.sourceforge.net/
 * "iText":http://itextpdf.com/
-* "Congomongo":http://github.com/somnium/congomongo
+* "Congomongo":https://github.com/aboekhoff/congomongo
 * "JLaTeXMath":http://forge.scilab.org/index.php/p/jlatexmath/
 * "Apache POI":http://poi.apache.org/
 * "JLine":http://jline.sourceforge.net/
