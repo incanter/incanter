@@ -2720,3 +2720,13 @@ altering later ones."
       (.write w "\n"))))
 
 
+(defn- block-diag2 [block0 block1]
+  (.composeDiagonal DoubleFactory2D/dense block0 block1))
+(defn block-diag [blocks]
+  (new Matrix (reduce block-diag2 blocks)))
+
+(defn block-matrix [blocks]
+  (let [element-class (-> blocks first first class)
+	native-rows (for [row blocks] (into-array element-class row))
+	native-blocks (into-array (-> native-rows first class) native-rows)]
+   (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
