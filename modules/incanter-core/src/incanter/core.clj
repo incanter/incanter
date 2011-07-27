@@ -2729,4 +2729,18 @@ altering later ones."
   (let [element-class (-> blocks first first class)
 	native-rows (for [row blocks] (into-array element-class row))
 	native-blocks (into-array (-> native-rows first class) native-rows)]
-   (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
+    (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
+
+(defn separate-blocks [matrix partitions]
+  (let [rows (for [p partitions]
+	       (sel matrix :rows (apply range p)))]
+    (for [row rows]
+      (for [p partitions]
+	       (sel row :cols (apply range p))))))
+
+(defn diagonal-blocks [matrix partitions]
+  (for [p partitions]
+    (let [indices (apply range p)]
+      (sel
+       (sel matrix :rows indices)
+       :cols indices))))
