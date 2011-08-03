@@ -29,10 +29,11 @@ incanter.io
   (:use [incanter.core :only (dataset save get-input-reader)]))
 
 (defn- parse-string [value]
-  (try (Integer/parseInt value)
-    (catch NumberFormatException _
-      (try (Double/parseDouble value)
-        (catch NumberFormatException _ value)))))
+  (if (re-matches #"\d+" value)
+    (try (Integer/parseInt value)
+         (catch NumberFormatException _ value))
+    (try (Double/parseDouble value)
+         (catch NumberFormatException _ value))))
 
 
 (defn read-dataset
@@ -131,9 +132,9 @@ incanter.io
 
 
 (defmethod save java.awt.image.BufferedImage
-  ([img filename & options]
+  ([img filename & {:keys [format] :or {format "png"}}]
      (javax.imageio.ImageIO/write img 
-                                  "png" 
+                                  format 
                                   (.getAbsoluteFile (java.io.File. filename)))))
 
 

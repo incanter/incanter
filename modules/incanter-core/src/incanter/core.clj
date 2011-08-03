@@ -1865,9 +1865,6 @@ altering later ones."
     (use '(incanter core datasets))
     (def cars (get-dataset :cars))
 
-    ($map \"speed\" (fn [s] (/ s)) cars)
-    ($map [\"speed\" \"dist\"] (fn [s d] (/ s d)) cars)
-
     ($map (fn [s] (/ s)) :speed cars)
     ($map (fn [s d] (/ s d)) [:speed :dist] cars)
 
@@ -1887,7 +1884,7 @@ altering later ones."
      (let [rows (:rows data)]
        (if (coll? col-keys)
          (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
-         (map (fn [row] (fun (map-get  row col-keys))) (:rows data)))))
+         (map (fn [row] (fun (map-get row col-keys))) (:rows data)))))
   ([fun col-keys]
      ($map fun col-keys $data)))
 
@@ -2723,3 +2720,30 @@ altering later ones."
       (.write w "\n"))))
 
 
+(defn- block-diag2 [block0 block1]
+  (.composeDiagonal DoubleFactory2D/dense block0 block1))
+(defn block-diag
+  "Blocks should be a sequence of matrices."
+  [blocks]
+  (new Matrix (reduce block-diag2 blocks)))
+
+(defn block-matrix
+  "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
+  [blocks]
+  (let [element-class (-> blocks first first class)
+	native-rows (for [row blocks] (into-array element-class row))
+	native-blocks (into-array (-> native-rows first class) native-rows)]
+    (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
+
+(defn separate-blocks
+  "Partitions should be a sequence of [start,size] pairs."
+  [matrix partitions]
+  (for [p partitions]
+    (for [q partitions]
+      (.viewPart matrix (first p) (first q) (second p) (second q)))))
+
+(defn diagonal-blocks
+  "Partitions should be a sequence of [start,size] pairs."
+  [matrix partitions]
+  (for [p partitions]
+    (.viewPart matrix (first p) (first p) (second p) (second p))))

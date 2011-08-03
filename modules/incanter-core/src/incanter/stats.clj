@@ -35,7 +35,8 @@
                                     StudentT)
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
-                                  Probability))
+                                  Probability)
+           (incanter Weibull))
   (:use [clojure.contrib.map-utils :only [deep-merge-with]])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns
@@ -499,6 +500,91 @@
    (if (= size 1)
       (Beta/staticNextDouble alpha beta)
       (for [_ (range size)] (Beta/staticNextDouble alpha beta)))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; WEIBULL DISTRIBUTION FUNCTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn pdf-weibull
+" Returns the Weibull pdf for the given value of x. It will return a sequence
+  of values, if x is a sequence.
+
+  Options:
+      :scale (default 1)
+      :shape (default 1)
+
+  See also:
+      cdf-weibull and sample-weibull
+
+  References:
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html
+      http://en.wikipedia.org/wiki/Weibull_distribution
+      http://en.wikipedia.org/wiki/Probability_density_function
+
+  Example:
+      (pdf-weibull 2 :alpha 1 :beta 0.5)
+"
+([x & options]
+   (let [opts (when options (apply assoc {} options))
+         scale (or (:scale opts) 1)
+         shape (or (:shape opts) 1)
+         dist (Weibull. scale shape (DoubleMersenneTwister.))]
+     (if (coll? x)
+       (map #(.pdf dist %) x)
+       (.pdf dist x)))))
+
+(defn cdf-weibull
+" Returns the Weibull cdf for the given value of x. It will return a sequence
+  of values, if x is a sequence.
+
+  Options:
+    :shape (default 1)
+    :scale (default 1)
+
+  See also:
+      pdf-weibull and sample-weibull
+
+  References:
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html
+      http://en.wikipedia.org/wiki/Weibull_distribution
+      http://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+  Example:
+      (cdf-weibull 10 :shape 1 :scale 0.2)
+"
+  ([x & options]
+    (let [opts (when options (apply assoc {} options))
+          scale (or (:scale opts) 1)
+          shape (or (:shape opts) 1)
+          dist (Weibull. scale shape (DoubleMersenneTwister.))]
+      (if (coll? x)
+        (map #(.cdf dist %) x)
+        (.cdf dist x)))))
+
+(defn sample-weibull
+" Returns a sample of the given size from a Weibull distribution
+
+  Options:
+    :shape (default 1)
+    :scale (default 1)
+
+  See also:
+      pdf-weibull, cdf-weibull
+
+  References:
+      http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html
+      http://en.wikipedia.org/wiki/Weibull_distribution
+
+  Example:
+      (sample-weibull 1000 :shape 1 :scale 0.2)
+"
+  ([size & options]
+    (let [opts (when options (apply assoc {} options))
+          scale (or (:scale opts) 1)
+          shape (or (:shape opts) 1)]
+      (if (= size 1)
+        (Weibull/staticNextDouble scale shape)
+        (for [_ (range size)] (Weibull/staticNextDouble scale shape))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1751,7 +1837,7 @@
       (sweep x :stat sd :fun div) ;; divide data by its sd
 
 "
-  ([x & {:keys [stat fun] :or {stat-fn mean fun minus}}]
+  ([x & {:keys [stat fun] :or {stat mean fun minus}}]
      (fun x (stat x))))
 
 
@@ -2855,7 +2941,7 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
   (apply
    tree-comp-each
    max 
-  (fn [[x y]] (- x y))
+   (fn [[x y]] (abs (- x y)))
   (map vector a b))))
 
 (defn manhattan-distance
