@@ -23,8 +23,10 @@
 
 (defmulti write-cell #(let [c (. % getClass)]
   (cond (isa? c Number) :numeric
+        (keyword? %)    :keyword
         :else           :other )))
 
+(defmethod write-cell :keyword [k] (name k))
 (defmethod write-cell :other   [o] (str o))
 (defmethod write-cell :numeric [n] (. n doubleValue))
 
@@ -129,6 +131,7 @@ Examples:
 empty upon import.
 Options are:
 :sheet either a String for the tab name or an int for the sheet index -- defaults to 0
+:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)
 
  Examples:
    (use '(incanter core io excel))
@@ -146,7 +149,7 @@ Options are:
 
 "}
   read-xls
-  [^String filename  & {:keys [sheet] :or {sheet 0}}]
+  [^String filename  & {:keys [sheet header-keywords] :or {sheet 0 header-keywords false}}]
       (with-open [in-fs (get-input-stream filename)]
 	(let [workbook  (HSSFWorkbook. in-fs)
 	      wsheet     (get-workbook-sheet workbook sheet)
@@ -154,6 +157,8 @@ Options are:
 	      rowi      (cell-iterator (first rows-it))
 	      colnames  (doall (map get-cell-value rowi))
 	      data      (map #(cell-iterator %) (rest rows-it))]
-	  (dataset colnames
-		   (map (fn [d] (map get-cell-value d)) data)))))
-
+	  (dataset
+           (if header-keywords
+             (map keyword colnames)
+             colnames)
+           (map (fn [d] (map get-cell-value d)) data)))))
