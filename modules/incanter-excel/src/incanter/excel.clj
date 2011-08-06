@@ -131,6 +131,7 @@ Examples:
 empty upon import.
 Options are:
 :sheet either a String for the tab name or an int for the sheet index -- defaults to 0
+:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)
 
  Examples:
    (use '(incanter core io excel))
@@ -161,4 +162,3 @@ Options are:
              (map keyword colnames)
              colnames)
            (map (fn [d] (map get-cell-value d)) data)))))
-
