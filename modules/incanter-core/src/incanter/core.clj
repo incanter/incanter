@@ -107,7 +107,7 @@
 
 (defn dataset?
 " Determines if obj is of type incanter.core.Dataset."
-  ([obj] (= (type obj) incanter.core.Dataset)))
+  ([obj] (isa? (type obj) incanter.core.Dataset)))
 
 
 (defn nrow
