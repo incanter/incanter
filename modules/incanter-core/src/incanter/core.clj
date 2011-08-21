@@ -1567,14 +1567,12 @@ altering later ones."
 "
   ([cols] 
      ($ :all cols $data))
-  ([cols data] 
-     (cond
-       (nil? data) 
-         ($ :all cols $data)
-       (or (matrix? data) (dataset? data))
-         ($ :all cols data)
-       :else ;; data is actually a col index and cols is a row index
-         ($ cols data $data)))
+  ([arg1 arg2]
+     (let [rows-cols-data
+	   (cond (nil? arg2) [:all arg1 $data]
+	         (or (matrix? arg2) (dataset? arg2)) [:all arg1 arg2]
+	         :else [arg1 arg2 $data])]
+       (apply $ rows-cols-data)))
   ([rows cols data]
      (let [except-rows? (and (vector? rows) (= :not (first rows)))
            except-cols? (and (vector? cols) (= :not (first cols)))

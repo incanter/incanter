@@ -17,7 +17,10 @@
   (is (= (sel dataset4 :cols "c") [3 6]))
   (is (= (sel dataset5 :rows 1 :cols :a) nil)))
 
-(def cars (dataset [:speed :weight :colour] [[60, 6000, :green] [70, 7000, :silver]]))
+(def car0 [60, 6000, :green])
+(def car1 [70, 7000, :silver])
+
+(def cars (dataset [:speed :weight :colour] [car0 car1]))
 (def cars-without-weight (dataset [:speed :colour] [[60, :green] [70, :silver]]))
 
 (deftest select-col-from-dataset
@@ -28,6 +31,24 @@
 (deftest unselect-column-from-dataset
   (is (= ($ [:not :weight] cars) (dataset [:speed :colour] [[60, :green] [70, :silver]]))))
 
+(deftest select-row-from-dataset
+  (is (= ($ 0 :all cars) car0))
+  (is (= ($ 1 :all cars) car1)))
+
+(deftest unselect-row-from-dataset
+  (is (= ($ [:not 0] :all cars) car1))
+  (is (= ($ [:not 1] :all cars) car0)))
+
+(deftest select-all-returns-input
+  (is (= ($ :all cars) cars)))
+  
 (deftest picks-up-dataset-from-scope
   (with-data cars
-    (is (= ($ :speed) [60 70]))))
+    (is (= ($ :speed) [60 70]))
+    (is (= ($ :speed nil) [60 70]))))
+
+
+;; (deftest selects-on-badly-named-atoms
+;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
+;;     (is (= ($ :first
+;;     ))
