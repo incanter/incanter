@@ -41,8 +41,8 @@
 
 (deftest select-all-returns-input
   (is (= ($ :all cars) cars)))
-  
-(deftest picks-up-dataset-from-scope
+
+(testing "picks up data from scope"
   (with-data cars
     (is (= ($ :speed) [60 70]))
     (is (= ($ :speed nil) [60 70]))))
