@@ -258,6 +258,10 @@
 
 (deftest combination-distribution-tests
   (let [cd (combination-distribution 5 3)]
+    (is (thrown? AssertionError (combination-distribution 0 5))) ; wrong argment order
+    (is (thrown? AssertionError (combination-distribution 3 -1))) ; wrong argment sign
+    (is (thrown? AssertionError (combination-distribution -2 -5))) ; wrong argment sign
+    
     (is (= 3 (count (draw cd))))
 		(is (= 3 (count (set (draw cd)))))))
 
