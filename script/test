@@ -1,25 +1,25 @@
 #!/bin/sh
 
 cd ./modules/incanter-core
-lein test && lein install
+lein deps && lein test && lein install
 
 cd ../incanter-io
-lein test && lein install
+lein deps && lein test && lein install
 
 cd ../incanter-charts
-lein test && lein install
+lein deps && lein test && lein install
 
 cd ../incanter-processing
-lein test
+lein deps && lein test
 
 cd ../incanter-mongodb
-lein test
+lein deps && lein test
 
 cd ../incanter-pdf
-lein test
+lein deps && lein test
 
 cd ../incanter-latex
-lein test
+lein deps && lein test
 
 cd ../incanter-excel
-lein test
+lein deps && lein test
