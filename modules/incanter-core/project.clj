@@ -3,6 +3,5 @@
   :dependencies [[org.clojure/clojure "1.2.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
                  [incanter/parallelcolt "0.9.4"]]
-  :dev-dependencies [[lein-javac "1.2.1-SNAPSHOT"]
-                     [lein-clojars "0.6.0"]]
+  :dev-dependencies [[lein-clojars "0.6.0"]]
   :java-source-path "src")
