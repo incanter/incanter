@@ -1579,9 +1579,10 @@ altering later ones."
      (let [except-rows? (and (vector? rows) (= :not (first rows)))
            except-cols? (and (vector? cols) (= :not (first cols)))
            _rows (if except-rows?
-                   (if (coll? (second rows))
-                     (conj [:except-rows] (second rows))
-                     (conj [:except-rows] (rest rows)))              
+		   (conj [:except-rows] 
+			 (if (coll? (second rows))
+			   (second rows)
+			   (rest rows)))
                    [:rows rows])
            _cols (if except-cols?
                    (if (coll? (second cols)) 
