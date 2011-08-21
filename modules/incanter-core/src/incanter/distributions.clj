@@ -296,7 +296,7 @@
   ([] (integer-distribution 0 1))
   ([end] (integer-distribution 0 end))
   ([start end]
-     (assert (> end start))
+     {:pre [(> end start)]}
      (UniformInt. start end)))
 
 ;;;; Combination Sampling: Draws from the nCk possible combinations ;;;;
