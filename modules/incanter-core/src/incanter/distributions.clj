@@ -369,8 +369,8 @@
 	Examples:
 		
 "  
-  [n k]
-  	(assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
+  [n k] 
+    {:pre [(>= n k) (and (<= 0 n) (<= 0 k))] }
   	(Combination. n k (integer-distribution 0 (nCk n k))))
 
 (def *test-statistic-iterations* 1000)
