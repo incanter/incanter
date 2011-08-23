@@ -2450,7 +2450,7 @@ Test for different variances between 2 samples
       {:X-sq X-sq
        :df df
        :two-samp? two-samp?
-       :p-value (cdf-chisq X-sq :df df :lower-tail false)
+       :p-value (cdf-chisq X-sq :df df :lower-tail? false)
        :probs probs
        :N N
        :table table
