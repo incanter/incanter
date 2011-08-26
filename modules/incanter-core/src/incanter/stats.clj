@@ -2417,14 +2417,14 @@ Test for different variances between 2 samples
                      (second (:levels xtab)))
           r-margins (if table?
                       (if two-samp?
-                        (apply hash-map (interleave r-levels (map sum (trans table))))
+                        (apply hash-map (interleave r-levels (map sum table)))
                         (if (> (nrow table) 1)
                           (to-list table)
                           (throw (Exception. "One dimensional tables must have only a single column"))))
                       (second (:margins xtab)))
           c-margins (if table?
                       (if two-samp?
-                        (apply hash-map (interleave c-levels (map sum table)))
+                        (apply hash-map (interleave c-levels (map sum (trans table))))
                         0)
                       (first (:margins xtab)))
 
@@ -2440,7 +2440,7 @@ Test for different variances between 2 samples
                     (not (nil? freq)) (div freq (sum freq))
                     :else (repeat n (/ n))))
           E (if two-samp?
-              (for [r r-levels c c-levels]
+              (for [c c-levels r r-levels]
                 (/ (* (c-margins c) (r-margins r)) N))
               (mult N probs))
           X-sq (if (and correct (and (= (count r-levels) 2) (= (count c-levels) 2)))
@@ -2450,7 +2450,7 @@ Test for different variances between 2 samples
       {:X-sq X-sq
        :df df
        :two-samp? two-samp?
-       :p-value (cdf-chisq X-sq :df df :lower-tail false)
+       :p-value (cdf-chisq X-sq :df df :lower-tail? false)
        :probs probs
        :N N
        :table table
