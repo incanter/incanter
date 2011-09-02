@@ -107,7 +107,7 @@
 
 (defn dataset?
 " Determines if obj is of type incanter.core.Dataset."
-  ([obj] (= (type obj) incanter.core.Dataset)))
+  ([obj] (isa? (type obj) incanter.core.Dataset)))
 
 
 (defn nrow
@@ -1956,7 +1956,16 @@ altering later ones."
            rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
-
+;; credit to Xavier Shay
+(defn transform-col
+" Apply function f to the specified column of data and replace the column
+  with new values."
+  [column f data] 
+  (let [new-col-names (sort-by (partial = column) (col-names data))
+        new-dataset (conj-cols
+                      (sel data :except-cols column)
+                      ($map f column data))]
+    ($ (col-names data) (col-names new-dataset new-col-names))))
 
 (defn deshape
 " Returns a dataset where the columns identified by :merge are collapsed into 
@@ -2720,3 +2729,30 @@ altering later ones."
       (.write w "\n"))))
 
 
+(defn- block-diag2 [block0 block1]
+  (.composeDiagonal DoubleFactory2D/dense block0 block1))
+(defn block-diag
+  "Blocks should be a sequence of matrices."
+  [blocks]
+  (new Matrix (reduce block-diag2 blocks)))
+
+(defn block-matrix
+  "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
+  [blocks]
+  (let [element-class (-> blocks first first class)
+	native-rows (for [row blocks] (into-array element-class row))
+	native-blocks (into-array (-> native-rows first class) native-rows)]
+    (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
+
+(defn separate-blocks
+  "Partitions should be a sequence of [start,size] pairs."
+  [matrix partitions]
+  (for [p partitions]
+    (for [q partitions]
+      (.viewPart matrix (first p) (first q) (second p) (second q)))))
+
+(defn diagonal-blocks
+  "Partitions should be a sequence of [start,size] pairs."
+  [matrix partitions]
+  (for [p partitions]
+    (.viewPart matrix (first p) (first p) (second p) (second p))))

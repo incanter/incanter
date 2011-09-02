@@ -62,22 +62,21 @@
     (sum (mult x (indicator #(pos? %) x)))
 
 "
-  ([pred coll]
-    (for [el coll] (if (pred el) 1 0))))
-
-
-
+  [pred coll]
+  (let [pred-int (fn [pred el]
+                   (if (pred el) 1 0))]
+    (if (coll? coll)
+      (map (partial pred-int pred) coll)
+      (pred-int pred coll))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CONTINOUS DISTRIBUTION FUNCTIONS
+;; CONTINUOUS DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; F DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 
 (defn pdf-f
 " Returns the F pdf of the given value, x. It will return a sequence
@@ -102,9 +101,9 @@
     (let [pdf-fx (fn [x]
                    (* (/ (gamma (/ (+ df1 df2) 2))
                          (* (gamma (/ df1 2)) (gamma (/ df2 2))))
-                       (pow (/ df1 df2) (/ df1 2))
-                       (pow x (- (/ df1 2) 1))
-                       (pow (+ 1 (* (/ df1 df2) x))
+                      (pow (/ df1 df2) (/ df1 2))
+                      (pow x (- (/ df1 2) 1))
+                      (pow (+ 1 (* (/ df1 df2) x))
                            (- 0 (/ (+ df1 df2) 2)))))
          ]
       (if (coll? x)
@@ -2418,14 +2417,14 @@ Test for different variances between 2 samples
                      (second (:levels xtab)))
           r-margins (if table?
                       (if two-samp?
-                        (apply hash-map (interleave r-levels (map sum (trans table))))
+                        (apply hash-map (interleave r-levels (map sum table)))
                         (if (> (nrow table) 1)
                           (to-list table)
                           (throw (Exception. "One dimensional tables must have only a single column"))))
                       (second (:margins xtab)))
           c-margins (if table?
                       (if two-samp?
-                        (apply hash-map (interleave c-levels (map sum table)))
+                        (apply hash-map (interleave c-levels (map sum (trans table))))
                         0)
                       (first (:margins xtab)))
 
@@ -2441,7 +2440,7 @@ Test for different variances between 2 samples
                     (not (nil? freq)) (div freq (sum freq))
                     :else (repeat n (/ n))))
           E (if two-samp?
-              (for [r r-levels c c-levels]
+              (for [c c-levels r r-levels]
                 (/ (* (c-margins c) (r-margins r)) N))
               (mult N probs))
           X-sq (if (and correct (and (= (count r-levels) 2) (= (count c-levels) 2)))
@@ -2451,7 +2450,7 @@ Test for different variances between 2 samples
       {:X-sq X-sq
        :df df
        :two-samp? two-samp?
-       :p-value (cdf-chisq X-sq :df df :lower-tail false)
+       :p-value (cdf-chisq X-sq :df df :lower-tail? false)
        :probs probs
        :N N
        :table table
@@ -2725,8 +2724,8 @@ http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
 In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.
 "
 [a b]
-(let [_ (assert (= (count a) (count b)))
-      n (count a)
+{:pre [(= (count a) (count b))]}
+(let [n (count a)
       arank (rank-index a)
       brank (rank-index b)
       dsos (apply 
@@ -2770,20 +2769,20 @@ best explanation and example is in \"cluster analysis for researchers\" page 165
 http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175
 "
 [a b]
-(let [_ (assert (= (count a) (count b)))
-      n (count a)
+{:pre [(= (count a) (count b))]}
+(let [n (count a)
       ranked (reverse (sort-map (zipmap a b)))
       ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
       dcd (second
-           (reduce
-           (fn [[vals total] [k v]]
-             (let [diff (- (count (filter #(> % v) vals))
-                           (count (filter #(< % v) vals)))]
-               [(conj vals v) (+ total diff)]))
-           [[] 0]
-           ranked))]
-(/ (* 2 dcd)
-   (* n (- n 1)))))
+            (reduce
+             (fn [[vals total] [k v]]
+               (let [diff (- (count (filter #(> % v) vals))
+                             (count (filter #(< % v) vals)))]
+                 [(conj vals v) (+ total diff)]))
+             [[] 0]
+             ranked))]
+  (/ (* 2 dcd)
+     (* n (- n 1)))))
 
 (defn pairs 
 "returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list."
@@ -2913,19 +2912,18 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 
 In the limiting case of p reaching infinity we obtain the Chebyshev distance."
  [a b p]
-(let [_ (assert (= (count a) (count b)))]
-
+ {:pre [(= (count a) (count b))]}
  (pow
-  (apply
-   tree-comp-each
-   + 
-  (fn [[x y]] 
-    (pow 
-     (abs 
-      (- x y)) 
-     p))
-  (map vector a b))
-  (/ 1 p))))
+   (apply
+     tree-comp-each
+     + 
+     (fn [[x y]] 
+       (pow 
+         (abs 
+           (- x y)) 
+         p))
+     (map vector a b))
+   (/ 1 p)))
 
 (defn euclidean-distance
 "http://en.wikipedia.org/wiki/Euclidean_distance
@@ -2937,12 +2935,12 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
 (defn chebyshev-distance
 "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance."
 [a b]
-(let [_ (assert (= (count a) (count b)))]
-  (apply
-   tree-comp-each
-   max 
-  (fn [[x y]] (- x y))
-  (map vector a b))))
+{:pre [(= (count a) (count b))]}
+(apply
+  tree-comp-each
+  max 
+  (fn [[x y]] (abs (- x y)))
+  (map vector a b)))
 
 (defn manhattan-distance
 "http://en.wikipedia.org/wiki/Manhattan_distance
@@ -3091,12 +3089,12 @@ In information theory, the Hamming distance between two strings of equal length 
 [a b]
 (if (and (integer? a) (integer? b))
   (hamming-distance (str a) (str b))
-(let [_ (assert (= (count a) (count b)))]
-(apply
- tree-comp-each 
-  + 
-  #(bool-to-binary (not (apply = %)))
-  (map vector a b)))))
+  (let [_ (assert (= (count a) (count b)))]
+    (apply
+      tree-comp-each 
+      + 
+      #(bool-to-binary (not (apply = %)))
+      (map vector a b)))))
 
 ;;TODO: not exactly sure if this is right.
 (defn lee-distance
@@ -3111,14 +3109,14 @@ The metric space induced by the Lee distance is a discrete analog of the ellipti
 [a b q]
 (if (and (integer? a) (integer? b))
   (lee-distance (str a) (str b) q)
-(let [_ (assert (= (count a) (count b)))]
-(apply
- tree-comp-each 
-  + 
-  (fn [x]
-    (let [diff (abs (apply - (map int x)))]
-      (min diff (- q diff))))
-  (map vector a b)))))
+  (let [_ (assert (= (count a) (count b)))]
+    (apply
+      tree-comp-each 
+      + 
+      (fn [x]
+        (let [diff (abs (apply - (map int x)))]
+          (min diff (- q diff))))
+      (map vector a b)))))
 
 (defn sorensen-index
 "

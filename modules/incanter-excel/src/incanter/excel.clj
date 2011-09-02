@@ -1,50 +1,23 @@
 (ns 
   ^{
-    :doc "Excel module for reading and writing Incanter datasets."
+    :doc "Excel module for reading and writing Incanter datasets.  Recognises both old and new
+Excel file formats (.xls and .xlsx)."
     :author "David James Humphreys"}
   incanter.excel
   (:import
-    [org.apache.poi.hssf.usermodel HSSFWorkbook HSSFCell HSSFFont HSSFRow HSSFSheet]
-    [org.apache.poi.ss.usermodel Font CellStyle Cell DateUtil]
-    org.apache.poi.hssf.model.Sheet
     [java.io FileOutputStream FileInputStream])
   (:use
-    [incanter.core :only [dataset get-input-stream]]))
+   [incanter.core :only [dataset get-input-stream]]
+   [incanter.excel.cells :only [read-line-values write-line-values]]
+   [incanter.excel.workbook :only [get-workbook-sheet make-workbook-map write-workbook create-workbook-object]]))
 
-(defn- do-loop [fun start-number data]
-  (dorun (map fun (iterate inc start-number) (seq data))))
-
-(defn- make-font [normal? ^HSSFWorkbook w]
-  (let [f (. w createFont)
-        c (. w createCellStyle)]
-    (. f setBoldweight (if normal? Font/BOLDWEIGHT_NORMAL Font/BOLDWEIGHT_BOLD))
-    (. c setFont f)
-    c))
-
-(defmulti write-cell #(let [c (. % getClass)]
-  (cond (isa? c Number) :numeric
-        :else           :other )))
-
-(defmethod write-cell :other   [o] (str o))
-(defmethod write-cell :numeric [n] (. n doubleValue))
-
-(defn- write-line [^HSSFSheet sheet row-num line ^CellStyle style]
-   (let [^HSSFRow xl-line (. sheet createRow row-num)]
-     (do-loop
-      #(if (not (nil? %2))
-         (doto (. xl-line createCell %1) (.setCellValue (write-cell %2)) (.setCellStyle style)))
-      0
-      line)))
-
-(defn- write-file
-  [^HSSFWorkbook workbook ^String filename]
-  (with-open [f (FileOutputStream. filename)]
-    (. workbook write f)))
-
-(defn ^{:doc "Save a dataset to an Excel file.
+(defn ^{:doc "Save a dataset to an Excel file.  Can save in both older and newer
+Excel formats, uses the filename suffix or :override-format option.
 Options are:
 :sheet defaults to \"dataset\" if not provided.
 :use-bold defaults to true.  Set the header line in bold.
+:override-format If nil use the filename suffix to guess the Excel file format.
+If :xls or :xlsx override the suffix check.
 
 Examples:
   (use '(incanter core datasets excel))
@@ -52,83 +25,29 @@ Examples:
 
 "}
   save-xls
-  [^:incanter.core/dataset dataset  ^String filename  & {:keys [use-bold sheet]
-                                                         :or {use-bold true sheet "dataset"}}]
-  (write-file
-   (let [workbook-blob (let [w (HSSFWorkbook.)]
-                         {:workbook w
-                          :normal  (make-font true w)
-                          :bold    (make-font false w)})
-         workbook-sheet (. (:workbook workbook-blob) createSheet sheet)
+  [^:incanter.core/dataset dataset  ^String filename  & {:keys [use-bold sheet override-format]
+                                                         :or {use-bold true sheet "dataset" override-format nil}}]
+  (write-workbook
+   (let [workbook-blob (make-workbook-map (create-workbook-object filename override-format) sheet)
          align-row (fn [row cols] (map #(get row %1) cols))]
-     (write-line workbook-sheet 0 (:column-names dataset) (if use-bold (:bold workbook-blob) (:normal workbook-blob)))
-     (do-loop
-      #(write-line workbook-sheet %1 (align-row %2 (:column-names dataset)) (:normal workbook-blob))
-      1
-      (:rows dataset))
+     (write-line-values workbook-blob use-bold 0 (:column-names dataset))
+     (dorun
+      (map
+       (partial write-line-values workbook-blob false)
+       (iterate inc 1)
+       (seq (map #(align-row % (:column-names dataset)) (:rows dataset)))))
      (:workbook workbook-blob))
    filename))
 
-(defmulti ^ {:private true
-             :doc "Retrieve the Excel workbook based on either the index or the sheet name."}
-  get-workbook-sheet
-  (fn [wbk index-or-name] (if (integer? index-or-name) :indexed :named)))
-
-(defmethod get-workbook-sheet :indexed [wbk index-or-name]
-           (. wbk getSheetAt index-or-name))
-
-(defmethod get-workbook-sheet :named [wbk index-or-name]
- (. wbk getSheet (str index-or-name)))
-
-(defmulti ^ {:private true
-             :doc "Get the value after the evaluating the formula.  See http://poi.apache.org/spreadsheet/eval.html#Evaluate"}
-  get-cell-formula-value
-  (fn [evaled-cell evaled-type]
-    evaled-type))
-(defmethod get-cell-formula-value Cell/CELL_TYPE_BOOLEAN [evaled-cell evaled-type] (. evaled-cell getBooleanValue))
-(defmethod get-cell-formula-value Cell/CELL_TYPE_STRING  [evaled-cell evaled-type] (. evaled-cell getStringValue))
-(defmethod get-cell-formula-value :number  [evaled-cell evaled-type] (. evaled-cell getNumberValue))
-(defmethod get-cell-formula-value :date    [evaled-cell evaled-type] (DateUtil/getJavaDate (. evaled-cell getNumberValue)))
-(defmethod get-cell-formula-value :default [evaled-cell evaled-type] (str "Unknown cell type " (. evaled-cell getCellType)))
-
-
-(defmulti ^ {:private true
-              :doc "Get the cell value depending on the cell type."}
-          get-cell-value
-        (fn [cell]
-                (let [ct (. cell getCellType)]
-                        (if (not (= Cell/CELL_TYPE_NUMERIC ct))
-                                ct
-                                (if (DateUtil/isCellDateFormatted cell)
-                                        :date
-                                        ct)))))
-
-(defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
-(defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]
-           (let [val (. (.. cell getSheet getWorkbook getCreationHelper createFormulaEvaluator) evaluate cell)
-                 evaluated-type   (. val getCellType)]
-             (get-cell-formula-value val (if (= Cell/CELL_TYPE_NUMERIC evaluated-type)
-                                           (if (DateUtil/isCellInternalDateFormatted cell) ; Check the original for date formatting hints
-                                             :date
-                                             :number)
-                                           evaluated-type))))
-
-(defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell] (. cell getBooleanCellValue))
-(defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell] (. cell getStringCellValue))
-(defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell] (. cell getNumericCellValue))
-(defmethod get-cell-value :date                  [cell] (. cell getDateCellValue))
-(defmethod get-cell-value :default [cell] (str "Unknown cell type " (. cell getCellType)))
-
-(defn- cell-iterator [^HSSFRow row]
-  (for [idx (range (.getFirstCellNum row) (.getLastCellNum row))]
-    (if-let [cell (.getCell row idx)]
-      cell
-      (.createCell row idx Cell/CELL_TYPE_BLANK))))
-
 (defn ^{:doc "Read an Excel file into a dataset. Note: cells containing formulas will be
-empty upon import.
+empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
+or :override-format option.
+
 Options are:
 :sheet either a String for the tab name or an int for the sheet index -- defaults to 0
+:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)
+:override-format If nil use the filename suffix to guess the Excel file format.  If :xls
+or :xlsx override the suffix check.
 
  Examples:
    (use '(incanter core io excel))
@@ -146,14 +65,19 @@ Options are:
 
 "}
   read-xls
-  [^String filename  & {:keys [sheet] :or {sheet 0}}]
+  [^String filename & {:keys [sheet header-keywords override-format]
+                       :or {sheet 0 header-keywords false override-format nil}}]
       (with-open [in-fs (get-input-stream filename)]
-	(let [workbook  (HSSFWorkbook. in-fs)
-	      wsheet     (get-workbook-sheet workbook sheet)
-	      rows-it   (iterator-seq (. wsheet iterator))
-	      rowi      (cell-iterator (first rows-it))
-	      colnames  (doall (map get-cell-value rowi))
-	      data      (map #(cell-iterator %) (rest rows-it))]
-	  (dataset colnames
-		   (map (fn [d] (map get-cell-value d)) data)))))
-
+	(let [rows-it   (iterator-seq
+                         (. (get-workbook-sheet
+                             (create-workbook-object filename override-format in-fs)
+                             sheet)
+                            iterator))
+	      colnames  (read-line-values (first rows-it))]
+	  (dataset
+           (if header-keywords
+             (map keyword colnames)
+             colnames)
+           (map
+            read-line-values
+            (rest rows-it))))))

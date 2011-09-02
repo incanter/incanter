@@ -44,6 +44,8 @@
   (is (= (sel dataset4 :cols "c") [3 6]))
   (is (= (sel dataset5 :rows 1 :cols :a) nil)))
 
+(deftest dataset-transforms
+  (is (= (transform-col :b (partial * 2) dataset1) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
 
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3] 
