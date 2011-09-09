@@ -129,3 +129,53 @@ h2. Incanter dependencies
 * "Apache POI":http://poi.apache.org/
 * "JLine":http://jline.sourceforge.net/
 
+h2. Problems Moving to Clojure 1.3
+
+h3. Leiningen
+
+* Complains that class clojure.set not found (called from
+  incanter.core as clojure.set/difference). This didn't happen when
+  building under cake, for some reason. Workaround: change call from
+  clojure.set/difference to just difference, add :use in ns decl.
+
+h3. Contrib migration
+
+* From clojure.contrib.core, defvar and defvar- didn't make it into
+  core.incubator. Scope: only used by distributions.clj. Workaround:
+  changed defvar- calls to just def.
+
+* clojure.contrib.combinatorics: moved to math.combinatorics, but no
+  release made yet. Workaround: added pom.xml to local clone of
+  https://github.com/clojure/math.combinatorics.git. Built using "mvn
+  install" to put jar in local repository.
+
+h3. Sequences
+
+* Matrix.java no longer accepted as seq. Previously, implementing ISeq
+  was sufficient, now it appears the marker interface
+  clojure.lang.Sequential is also needed. Workaround: added Sequential
+  to Matrix's implements clause. Open question: Should this be
+  Sequential vs. Seqable?
+
+h3. Numerics
+
+* Integer overflow in distributions_tests.clj, function
+  (large-integer-tests). The test uses @(reduce
+  * (repeat 100 2))@ and @(reduce * (repeat 100 3))@. Workaround:
+  change * to *' in the test. Open question: propagating number
+  promotion looks to be a big pain. Should we add ticks to all the
+  arithmetic operators, or should be force them to bigint by adding an
+  "N" to the original literals?
+
+* Promotion problems: 
+** Test failure in (dice-string) (stats_tests.clj:184), comparing a double (0.25) to a Ratio (1/4).
+** Test failure in (chebyshev) (stats_tests.clj:236), comparing an integer to a double.
+** Workaround: Change from equality operator (=) to equivalence operator (==). This should probably be done comprehensively.
+
+h3. Dynamic vars
+
+* Compiler complains about @*test-statistic-iterations*@ and
+  @*test-statistic-map*@ looking like dynamic vars, but not being
+  declared as such. They aren't rebound in incanter-core, but the
+  docstring for test-statistic-distribution implies than an
+  application can rebind them, so I'm adding @^:dynamic@ to the decls.

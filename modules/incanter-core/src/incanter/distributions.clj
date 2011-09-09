@@ -21,9 +21,8 @@
            (cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT)
            (cern.jet.stat.tdouble Probability)
            (cern.jet.random.tdouble.engine DoubleMersenneTwister))
-  (:use [clojure.contrib.def :only (defvar defvar-)]
-        [clojure.set :only (intersection)]
-        [clojure.contrib.combinatorics :only (combinations)]
+  (:use [clojure.set :only (intersection difference)]
+        [clojure.math.combinatorics :only (combinations)]
         [incanter.core :only (gamma pow regularized-beta)]))
 
 ;; NOTE: as of this writing, (doc pdf/cdf/...) do not show the doc strings.
@@ -373,8 +372,8 @@
   	(assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
   	(Combination. n k (integer-distribution 0 (nCk n k))))
 
-(def *test-statistic-iterations* 1000)
-(def *test-statistic-map* pmap)
+(def ^:dynamic *test-statistic-iterations* 1000)
+(def ^:dynamic *test-statistic-map* pmap)
 
 (defn test-statistic-distribution
 "
@@ -437,8 +436,8 @@
 ;; NORMAL DISTRIBUTION 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar- inf+ Double/POSITIVE_INFINITY)
-(defvar- inf- Double/NEGATIVE_INFINITY)
+(def inf+ Double/POSITIVE_INFINITY)
+(def inf- Double/NEGATIVE_INFINITY)
 
 ; NOTE: the pdf and cdf functions require a reflection call. They could be made
 ; to note reflect by type hinting the d argument:
@@ -446,7 +445,7 @@
 ; for now, I'm skipping this optimization so that more distributions can be boostrapped
 ; quickly using the extenders map. This can be easily pulled out for each distribution
 ; later, and appropriate type hints inserted.
-(defvar- colt-extenders
+(def colt-extenders
   {:pdf (fn [d v] (.pdf d v))
    :cdf (fn [d v] (.cdf d v))
    :draw (fn [#^cern.jet.random.tdouble.AbstractDoubleDistribution d] (.nextDouble d))

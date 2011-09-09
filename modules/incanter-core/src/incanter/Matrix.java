@@ -32,8 +32,9 @@ import clojure.lang.Counted;
 import clojure.lang.IPersistentCollection;
 import clojure.lang.IPersistentMap;
 import clojure.lang.Seqable;
+import clojure.lang.Sequential;
 
-public class Matrix extends DenseColumnDoubleMatrix2D implements ISeq, Counted, IObj {
+public class Matrix extends DenseColumnDoubleMatrix2D implements Sequential, ISeq, Counted, IObj {
 
         public boolean oneDimensional = false;
         IPersistentMap meta;

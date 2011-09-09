@@ -31,7 +31,8 @@
   incanter.core
 
   (:use [incanter internal]
-        [incanter.infix :only (infix-to-prefix defop)])
+        [incanter.infix :only (infix-to-prefix defop)]
+        [clojure.set :only (difference)])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
@@ -2014,10 +2015,10 @@ altering later ones."
                                   merge
                                   [merge])))
            __group-by (if (empty? _group-by)
-                        (clojure.set/difference (into #{} (col-names data)) _merge)
+                        (difference (into #{} (col-names data)) _merge)
                         _group-by)
            __merge (if (empty? _merge)
-                        (clojure.set/difference (into #{} (col-names data)) _group-by)
+                        (difference (into #{} (col-names data)) _group-by)
                         _merge)
            deshaped-data (mapcat (fn [row] 
                                    (let [base-map (zipmap __group-by 
