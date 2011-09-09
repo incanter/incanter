@@ -172,6 +172,10 @@ h3. Numerics
 ** Test failure in (chebyshev) (stats_tests.clj:236), comparing an integer to a double.
 ** Workaround: Change from equality operator (=) to equivalence operator (==). This should probably be done comprehensively.
 
+* Bit ops no longer support doubles. Appears to only affect
+  incanter.core/get-dummies, which was passing a double but didn't
+  need to. Have made that explicitly an integer.
+
 h3. Dynamic vars
 
 * Compiler complains about @*test-statistic-iterations*@ and
