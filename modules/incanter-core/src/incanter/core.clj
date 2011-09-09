@@ -52,9 +52,10 @@
            (java.util Vector)))
 
 
- (def ^{:doc "This variable is bound to a dataset when the with-data macro is used.
+(def ^{:dynamic true
+       :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."} 
-      $data)
+     $data)
 
 (defrecord Dataset [column-names rows])
 (derive incanter.core.Dataset ::dataset)

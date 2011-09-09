@@ -183,3 +183,18 @@ h3. Dynamic vars
   declared as such. They aren't rebound in incanter-core, but the
   docstring for test-statistic-distribution implies than an
   application can rebind them, so I'm adding @^:dynamic@ to the decls.
+* $data was not declared as dynamic, could not be rebound. Workaround:
+  added ^{:dynamic true} to metadata. Open question: does rebinding
+  this fit in the 1.3 model for vars? Check with Stu about threading.
+
+
+h3. Missing tests
+
+These are things I caught by running examples by hand, but were not
+picked up by any test cases.
+
+* $data not used in -core
+
+* Running the first "with-data" function on
+  http://data-sorcery.org/2010/01/03/datasets_mongodb/ revealed that
+  "sel" was not being exercised in -core.
