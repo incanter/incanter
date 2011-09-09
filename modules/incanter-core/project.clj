@@ -1,4 +1,4 @@
-(defproject incanter/incanter-core "1.2.3"
+(defproject incanter/incanter-core "1.3.0-SNAPSHOT"
   :description "Incanter-core is the core module of the Incanter project."
   :dependencies [[org.clojure/clojure "1.3.0-beta3"]
                  [org.clojure/math.combinatorics "0.1.0-SNAPSHOT"]

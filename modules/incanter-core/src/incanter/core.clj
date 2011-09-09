@@ -2161,7 +2161,7 @@ altering later ones."
 
 
 (defn- get-dummies [n]
-  (let [nbits (dec (Math/ceil (log2 n)))]
+  (let [nbits (int (dec (Math/ceil (log2 n))))]
     (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
          (range n))))
 
@@ -2171,7 +2171,8 @@ altering later ones."
         levels (:levels cat-var)
         encoded-data (to-levels coll :categorical-var cat-var)
         bit-map (get-dummies (count levels))]
-    (for [item encoded-data] (nth bit-map item))))
+    (for [item encoded-data]
+      (nth bit-map item))))
 
 
 (defn- get-columns [dataset column-keys]
@@ -2181,6 +2182,7 @@ altering later ones."
 
 (defn- string-to-categorical [dataset column-key dummies?]
   (let [col (first (get-columns dataset [column-key]))]
+
     (if (some string? col)
       (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
