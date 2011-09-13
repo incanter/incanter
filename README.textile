@@ -198,3 +198,13 @@ picked up by any test cases.
 * Running the first "with-data" function on
   http://data-sorcery.org/2010/01/03/datasets_mongodb/ revealed that
   "sel" was not being exercised in -core.
+
+h3. Possible behavior changes
+
+* @read-dataset@ with a URL that redirects gives a dataset with the
+  redirect response as the rows, rather than following the
+  redirect. Is this how it was under clojure 1.2?
+
+* @$where@ has some examples on the web that use strings as the column
+  keys. I couldn't get that to work, had to use keywords
+  instead. Intended change or accidental?
