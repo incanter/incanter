@@ -3,4 +3,4 @@
   :dependencies [[incanter/incanter-core "1.3.0-SNAPSHOT"]
                  [net.sf.opencsv/opencsv "2.0.1"]
                  [org.danlarkin/clojure-json "1.1-SNAPSHOT"]]
-  :dev-dependencies [[lein-clojars "0.6.0"]])
+  :dev-dependencies [[lein-clojars "0.7.0"]])

@@ -4,7 +4,7 @@
                  [org.clojure/math.combinatorics "0.0.1-SNAPSHOT"]
                  [incanter/parallelcolt "0.9.4"]]
   :dev-dependencies [[lein-javac "1.2.1-SNAPSHOT"]
-                     [lein-clojars "0.6.0"]]
+                     [lein-clojars "0.7.0"]]
   :java-source-path "src"
   ;;; Set a custom repository because math.combinatorics isn't into
   ;;; Clojars or Maven central yet.

@@ -10,6 +10,6 @@
                  [incanter/incanter-excel "1.3.0-SNAPSHOT"]
                  [swingrepl "1.3.0"]
                  [jline "0.9.94"]]
-  :dev-dependencies [[lein-clojars "0.6.0"]
+  :dev-dependencies [[lein-clojars "0.7.0"]
                      [swank-clojure "1.3.0-SNAPSHOT"]]
   :main incanter.main)
