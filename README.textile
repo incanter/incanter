@@ -131,32 +131,6 @@ h2. Incanter dependencies
 
 h2. Problems Moving to Clojure 1.3
 
-h3. Leiningen
-
-* Complains that class clojure.set not found (called from
-  incanter.core as clojure.set/difference). This didn't happen when
-  building under cake, for some reason. Workaround: change call from
-  clojure.set/difference to just difference, add :use in ns decl.
-
-h3. Contrib migration
-
-* From clojure.contrib.core, defvar and defvar- didn't make it into
-  core.incubator. Scope: only used by distributions.clj. Workaround:
-  changed defvar- calls to just def.
-
-* clojure.contrib.combinatorics: moved to math.combinatorics, but no
-  release made yet. Workaround: added pom.xml to local clone of
-  https://github.com/clojure/math.combinatorics.git. Built using "mvn
-  install" to put jar in local repository.
-
-h3. Sequences
-
-* Matrix.java no longer accepted as seq. Previously, implementing ISeq
-  was sufficient, now it appears the marker interface
-  clojure.lang.Sequential is also needed. Workaround: added Sequential
-  to Matrix's implements clause. Open question: Should this be
-  Sequential vs. Seqable?
-
 h3. Numerics
 
 * Integer overflow in distributions_tests.clj, function
@@ -176,6 +150,23 @@ h3. Numerics
   incanter.core/get-dummies, which was passing a double but didn't
   need to. Have made that explicitly an integer.
 
+* @(matrix)@ promotes to double. 
+
+* Equality tests are now problematic. Either use = and double or
+  bigint literals, or use == and don't force precision on literals.
+* However, matrix-to-list or lazy-seq-to-list compares don't work with
+  ==. Symmetry is broken and and clojure lists don't look like numeric
+  lists, and clojure vectors don't look like algebraic vectors.
+
+
+h3. Sequences
+
+* Matrix.java no longer accepted as seq. Previously, implementing ISeq
+  was sufficient, now it appears the marker interface
+  clojure.lang.Sequential is also needed. Workaround: added Sequential
+  to Matrix's implements clause. Open question: Should this be
+  Sequential vs. Seqable?
+
 h3. Dynamic vars
 
 * Compiler complains about @*test-statistic-iterations*@ and
@@ -187,6 +178,23 @@ h3. Dynamic vars
   added ^{:dynamic true} to metadata. Open question: does rebinding
   this fit in the 1.3 model for vars? Check with Stu about threading.
 
+h3. Leiningen
+
+* Complains that class clojure.set not found (called from
+  incanter.core as clojure.set/difference). This didn't happen when
+  building under cake, for some reason. Workaround: change call from
+  clojure.set/difference to just difference, add :use in ns decl.
+
+h3. Contrib migration
+
+* From clojure.contrib.core, defvar and defvar- didn't make it into
+  core.incubator. Scope: only used by distributions.clj. Workaround:
+  changed defvar- calls to just def.
+
+* clojure.contrib.combinatorics: moved to math.combinatorics, but no
+  release made yet. Workaround: added pom.xml to local clone of
+  https://github.com/clojure/math.combinatorics.git. Built using "mvn
+  install" to put jar in local repository.
 
 h3. Missing tests
 
