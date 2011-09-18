@@ -1567,21 +1567,20 @@ altering later ones."
 "
   ([cols] 
      ($ :all cols $data))
-  ([cols data] 
-     (cond
-       (nil? data) 
-         ($ :all cols $data)
-       (or (matrix? data) (dataset? data))
-         ($ :all cols data)
-       :else ;; data is actually a col index and cols is a row index
-         ($ cols data $data)))
+  ([arg1 arg2]
+     (let [rows-cols-data
+	   (cond (nil? arg2) [:all arg1 $data]
+	         (or (matrix? arg2) (dataset? arg2)) [:all arg1 arg2]
+	         :else [arg1 arg2 $data])]
+       (apply $ rows-cols-data)))
   ([rows cols data]
      (let [except-rows? (and (vector? rows) (= :not (first rows)))
            except-cols? (and (vector? cols) (= :not (first cols)))
            _rows (if except-rows?
-                   (if (coll? (second rows))
-                     (conj [:except-rows] (second rows))
-                     (conj [:except-rows] (rest rows)))              
+		   (conj [:except-rows] 
+			 (if (coll? (second rows))
+			   (second rows)
+			   (rest rows)))
                    [:rows rows])
            _cols (if except-cols?
                    (if (coll? (second cols)) 
@@ -1956,6 +1955,14 @@ altering later ones."
            rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
+;; credit to M.Brandmeyer
+(defn transform-col
+" Apply function f & args to the specified column of dataset and replace the column
+  with the resulting new values."
+  [dataset column f & args]
+  (->> (map #(apply update-in % [column] f args) (:rows dataset))
+    vec
+    (assoc dataset :rows)))
 
 
 (defn deshape
