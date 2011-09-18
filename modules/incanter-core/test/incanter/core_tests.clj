@@ -44,7 +44,7 @@
 (def summary-ds4 (to-dataset [[:a] ["b"] [:c]]))
 (def summary-ds5 (to-dataset [[1] [2.1] [:c]]))
 (def summary-ds6 (to-dataset [[1] [2.1] ["c"]]))
-
+(def summary-ds7 (to-dataset [[1] [2.1] [nil]]))
 
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
@@ -70,6 +70,7 @@
   (is (summarizable? 0 summary-ds4))
   (is (not (summarizable? 0 summary-ds5)))
   (is (not (summarizable? 0 summary-ds6)))
+  (is (summarizable? 0 summary-ds7))
   )
 
 ;; define a simple matrix for testing

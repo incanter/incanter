@@ -2539,7 +2539,7 @@ of each type"
 
 
 (defn- count-col-types
-  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column."
+  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column. Counts nils."
   ([col ds]
    (count-types ($ col ds))))
 
@@ -2553,7 +2553,7 @@ of each type"
 (defn summarizable? 
   "Takes in a column (number or name) and a dataset. Returns true if summarizable"
   ([col ds]
-   (let [type-counts (count-col-types col ds) 
+   (let [type-counts (dissoc (count-col-types col ds) nil)
          ds-col ($ col ds)]
     (if (= 1 (count type-counts))
         true
