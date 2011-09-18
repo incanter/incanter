@@ -1955,7 +1955,16 @@ altering later ones."
            rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
-
+;; credit to Xavier Shay
+(defn transform-col
+" Apply function f to the specified column of data and replace the column
+  with new values."
+  [column f data] 
+  (let [new-col-names (sort-by (partial = column) (col-names data))
+        new-dataset (conj-cols
+                      (sel data :except-cols column)
+                      ($map f column data))]
+    ($ (col-names data) (col-names new-dataset new-col-names))))
 
 (defn deshape
 " Returns a dataset where the columns identified by :merge are collapsed into 

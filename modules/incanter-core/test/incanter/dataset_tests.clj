@@ -51,4 +51,4 @@
 ;; (deftest selects-on-badly-named-atoms
 ;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
 ;;     (is (= ($ :first
-;;     ))
+;;     )))))
