@@ -313,7 +313,12 @@
        (and all-rows? all-cols?)
          mat))))
 
-
+(defn head 
+  "Returns the head of the dataset. 10 or full dataset by default."
+  ([len mat]
+     ($ (range (min len (nrow mat))) :all mat))
+  ([mat]
+     (head 10 mat)))
 
 (defn bind-rows
 "   Returns the matrix resulting from concatenating the given matrices
