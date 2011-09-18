@@ -295,7 +295,7 @@
   ([] (integer-distribution 0 1))
   ([end] (integer-distribution 0 end))
   ([start end]
-     (assert (> end start))
+     {:pre [(> end start)]}
      (UniformInt. start end)))
 
 ;;;; Combination Sampling: Draws from the nCk possible combinations ;;;;
@@ -310,14 +310,13 @@
   "Decodes a 0 to nCk - 1 integer into its combinadic form, a set of
 	k-tuple of indices, where each index i is 0 < i < n - 1"
   [n k c]
-  (let [max-c (nCk n k)]
-      (assert (and (<= 0 c) (> max-c c)))
-      (loop [candidate (dec n) ks (range k 0 -1) remaining c tuple '()]
-        (if (empty? ks) tuple ;; <- return value of function
-            (let [k (first ks)
-                  v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
-              (assert (not (nil? v)))
-              (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v)))))))
+  {:pre [(<= 0 c) (> (nCk n k) c)] }
+    (loop [candidate (dec n) ks (range k 0 -1) remaining c tuple '()]
+      (if (empty? ks) tuple ;; <- return value of function
+          (let [k (first ks)
+                v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
+            (assert (not (nil? v)))
+            (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v))))))
 
 
 
@@ -368,8 +367,8 @@
 	Examples:
 		
 "  
-  [n k]
-  	(assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
+  [n k] 
+    {:pre [(>= n k) (and (<= 0 n) (<= 0 k))] }
   	(Combination. n k (integer-distribution 0 (nCk n k))))
 
 (def ^:dynamic *test-statistic-iterations* 1000)

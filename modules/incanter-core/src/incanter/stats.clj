@@ -1657,12 +1657,12 @@
 
 
 
-(defn sample
+(defmulti sample
 " Returns a sample of the given size from the given collection. If replacement
   is set to false it returns a set, otherwise it returns a list.
 
   Arguments:
-    x -- collection to be sampled from
+    coll -- collection or dataset to be sampled from
 
   Options:
     :size -- (default (count x) sample size
@@ -1675,23 +1675,37 @@
     (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.
 
 "
-  ([x & {:keys [size replacement] :or {size (count x) replacement true}}]
-    (let [max-idx (dec (count x))]
-      (if (= size 1)
-        (nth x (rand-int (inc max-idx)))
-        (if replacement
-          (map #(nth x %) (sample-uniform size :min 0 :max max-idx :integers true))
-          (if (> size (count x))
-            (throw (Exception. "'size' can't be larger than (count x) without replacement!"))
-            (map #(nth x %)
-                 (loop [samp-indices [] indices-set #{}]
-                   (if (= (count samp-indices) size)
-                     samp-indices
-                     (let [i (sample-uniform 1 :min 0 :max max-idx :integers true)]
-                       (if (contains? indices-set i)
-                         (recur samp-indices indices-set)
-                         (recur (conj samp-indices i) (conj indices-set i)))))))))))))
+  (fn [coll & _]
+    (cond
+      (instance? incanter.core.Dataset coll) ::dataset
+      :else ::coll)))
 
+(defmethod sample ::coll
+  [x & {:keys [size replacement] :or {size (count x) replacement true}}]
+  (let [max-idx (dec (count x))]
+    (if (= size 1)
+      (nth x (rand-int (inc max-idx)))
+      (if replacement
+        (map #(nth x %) (sample-uniform size :min 0 :max max-idx :integers true))
+        (if (> size (count x))
+          (throw (Exception. "'size' can't be larger than (count x) without replacement!"))
+          (map #(nth x %)
+               (loop [samp-indices [] indices-set #{}]
+                 (if (= (count samp-indices) size)
+                   samp-indices
+                   (let [i (sample-uniform 1 :min 0 :max max-idx :integers true)]
+                     (if (contains? indices-set i)
+                       (recur samp-indices indices-set)
+                       (recur (conj samp-indices i) (conj indices-set i))))))))))))
+
+(defmethod sample ::dataset
+  [ds & options]  
+  (let [r  (range (nrow ds))
+        r  (apply sample r options)
+        r  (if (seq? r)
+             (sort r)
+             r)]
+    (sel ds :rows r)))
 
 
 (defn bootstrap

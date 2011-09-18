@@ -775,7 +775,7 @@
 
 (defn line
   ""
-  ([^PApplet sketch p1 p2] (apply line (concat p1 p2)))
+  ([^PApplet sketch p1 p2] (apply line sketch (concat p1 p2)))
   ([^PApplet sketch x1 y1 x2 y2] (.line sketch (float x1) (float y1) (float x2) (float y2)))
   ([^PApplet sketch x1 y1 z1 x2 y2 z2] (.line sketch (float x1) (float y1) (float z1) (float x2) (float y2) (float z2))))
 

@@ -64,7 +64,7 @@
 (def x (sel test-mat :cols 0))
 (def y (sel test-mat :cols 1))
 
-
+(def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6] [7 8 9] [10 11 12]]))
   
 (deftest mean-test
   (is (= (map mean (trans test-mat)) [108.0 130.0])))
@@ -92,7 +92,9 @@
   (is (= (count (sample (range 10) :size 5)) 5))
   (is (= (count (sample (range 10) :size 5 :replacement false)) 5))
   (is (= (count (sample (range 10) :replacement false)) (count (range 10))))
-  (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))) 
+  (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))
+  (is (= (nrow (sample test-mat :size 3)) 3))
+  (is (= (nrow (sample dataset1 :size 3)) 3)))
 
 (deftest sample-mean
  (is (= 3.0 
