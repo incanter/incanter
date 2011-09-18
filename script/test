@@ -1,13 +1,13 @@
 #!/bin/sh
 
 cd ./modules/incanter-core
-lein test
+lein test && lein install
 
 cd ../incanter-io
-lein test
+lein test && lein install
 
 cd ../incanter-charts
-lein test
+lein test && lein install
 
 cd ../incanter-processing
 lein test
