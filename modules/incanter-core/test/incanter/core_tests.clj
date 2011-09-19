@@ -36,6 +36,16 @@
 (def dataset5 (dataset ["a" "b" "c"] [{"a" 1 "b" 2 "c" 3} {"b" 5 "c" 6}]))
 (def dataset6 (dataset [:a :b :c] [[1 2 3]]))
 
+
+(def summary-ds0 (to-dataset [[1] [4] [7]]))
+(def summary-ds1 (to-dataset [[1] [3.142] [7]]))
+(def summary-ds2 (to-dataset [["a"] ["b"] ["c"]]))
+(def summary-ds3 (to-dataset [[:a] [:b] [:c]]))
+(def summary-ds4 (to-dataset [[:a] ["b"] [:c]]))
+(def summary-ds5 (to-dataset [[1] [2.1] [:c]]))
+(def summary-ds6 (to-dataset [[1] [2.1] ["c"]]))
+(def summary-ds7 (to-dataset [[1] [2.1] [nil]]))
+
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
   (is (= (sel dataset2 :cols :b) [2 5]))
@@ -51,6 +61,17 @@
       "Single-row special case")
   (is (= (transform-col dataset1 :b (partial + 10))) (dataset [:a :b :c] [[1 12 3] [4 15 6]]))
   (is (= (transform-col dataset1 :b * 2) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
+
+(deftest summary-datasets 
+  (is (summarizable? 0 summary-ds0))
+  (is (summarizable? 0 summary-ds1))
+  (is (summarizable? 0 summary-ds2))
+  (is (summarizable? 0 summary-ds3))
+  (is (summarizable? 0 summary-ds4))
+  (is (not (summarizable? 0 summary-ds5)))
+  (is (not (summarizable? 0 summary-ds6)))
+  (is (summarizable? 0 summary-ds7))
+  )
 
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3] 
