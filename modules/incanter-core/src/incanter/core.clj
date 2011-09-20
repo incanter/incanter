@@ -2535,6 +2535,44 @@ altering later ones."
   ([] (System/exit 0)))
 
 
+(defn- count-types 
+  "Helper function. Takes in a seq (usually from a column from an Incanter dataset) and returns a map of types -> counts of the occurance 
+of each type" 
+  ([my-col] 
+   (reduce 
+    (fn [counts x] 
+     (let [t (type x) c (get counts t)] (assoc counts t (inc (if (nil? c) 0 c)))))
+    {}
+    my-col)))
+
+
+(defn- count-col-types
+  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column. Counts nils."
+  ([col ds]
+   (count-types ($ col ds))))
+
+
+(defn- stat-summarizable?
+  "Placeholder stub function, for more advanced cases where we want to automatically ignore occasional bad values in a column."
+  ([types] 
+    false))
+
+
+(defn summarizable? 
+  "Takes in a column (number or name) and a dataset. Returns true if summarizable"
+  ([col ds]
+   (let [type-counts (dissoc (count-col-types col ds) nil)
+         ds-col ($ col ds)]
+    (if (= 1 (count type-counts))
+        true
+        (if (every? #(.isAssignableFrom java.lang.Number %) (keys type-counts))
+            true
+            (if (and (= 2 (count type-counts)) (contains? type-counts java.lang.String) (contains? type-counts clojure.lang.Keyword))
+                true 
+                (stat-summarizable? type-counts)))))))
+
+
+
 
 (defmulti save
 " Save is a multi-function that is used to write matrices, datasets and
