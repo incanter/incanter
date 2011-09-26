@@ -32,10 +32,12 @@ namespace.
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
     </ul>
-    <span class="toc-header">Namespaces</span>
-    <ul id="left-sidebar-list">
-      <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
-    </ul>
+    <div class="NamespaceTOC">
+      <span class="toc-header">Namespaces</span>
+      <ul id="left-sidebar-list">
+        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li>
+      </ul>
+    </div>
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
@@ -60,6 +62,20 @@ namespace.
       <a href="#incanter.excel/save-xls">save-xls</a>
     </div>
     <br />
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#excel.cells">excel.cells</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.excel.cells/get-cell-value">get-cell-value</a>
+    </div>
+    <br />
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#excel.workbook">excel.workbook</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</a>
+    </div>
+    <br />
   </div>
 </div>
 </div>
@@ -70,7 +86,8 @@ namespace.
 <br />Full namespace name: <span id="long-name">incanter.excel</span>
 <p></p>
 <h2>Overview</h2>
-<pre id="namespace-docstr">Excel module for reading and writing Incanter datasets.</pre>
+<pre id="namespace-docstr">Excel module for reading and writing Incanter datasets.  Recognises both old and new
+Excel file formats (.xls and .xlsx).</pre>
 
 
 <br />
@@ -80,12 +97,17 @@ namespace.
   <hr />
   <h2 id="incanter.excel/read-xls">read-xls</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (read-xls filename &amp; {:keys [sheet], :or {sheet 0}})
+  <pre id="var-usage">Usage: (read-xls filename &amp; {:keys [sheet header-keywords override-format], :or {sheet 0, header-keywords false, override-format nil}})
 </pre>
   <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
-empty upon import.
+empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
+or :override-format option.
+
 Options are:
 :sheet either a String for the tab name or an int for the sheet index -- defaults to 0
+:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)
+:override-format If nil use the filename suffix to guess the Excel file format.  If :xls
+or :xlsx override the suffix check.
 
  Examples:
    (use '(incanter core io excel))
@@ -102,25 +124,67 @@ Options are:
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/232c1878920cca5c645f8fe500e2aa583df2ed79/modules/incanter-excel/src/incanter/excel.clj#L128" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj#L42" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.excel/save-xls">save-xls</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (save-xls dataset filename &amp; {:keys [use-bold sheet], :or {use-bold true, sheet dataset}})
+  <pre id="var-usage">Usage: (save-xls dataset filename &amp; {:keys [use-bold sheet override-format], :or {use-bold true, sheet dataset, override-format nil}})
 </pre>
-  <pre id="var-docstr">Save a dataset to an Excel file.
+  <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
+Excel formats, uses the filename suffix or :override-format option.
 Options are:
 :sheet defaults to "dataset" if not provided.
 :use-bold defaults to true.  Set the header line in bold.
+:override-format If nil use the filename suffix to guess the Excel file format.
+If :xls or :xlsx override the suffix check.
 
 Examples:
   (use '(incanter core datasets excel))
   (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/232c1878920cca5c645f8fe500e2aa583df2ed79/modules/incanter-excel/src/incanter/excel.clj#L44" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj#L14" id="var-source">Source</a>
+</div>
+<h2 id="namespace-name">excel.cells</h2>
+<pre id="namespace-docstr">Functions for reading and writing to cells.</pre>
+
+
+<br />
+<div id="var-entry">
+  <hr />
+  <h2 id="incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</h2>
+  <span id="var-type">multimethod</span><br />
+  <pre id="var-usage">No usage documentation available</pre>
+  <pre id="var-docstr">Get the value after the evaluating the formula.  See <a href="http://poi.apache.org/spreadsheet/eval.html#Evaluate">http://poi.apache.org/spreadsheet/eval.html#Evaluate</a></pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel/cells.clj#L14" id="var-source">Source</a>
+</div><div id="var-entry">
+  <hr />
+  <h2 id="incanter.excel.cells/get-cell-value">get-cell-value</h2>
+  <span id="var-type">multimethod</span><br />
+  <pre id="var-usage">No usage documentation available</pre>
+  <pre id="var-docstr">Get the cell value depending on the cell type.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel/cells.clj#L20" id="var-source">Source</a>
+</div>
+<h2 id="namespace-name">excel.workbook</h2>
+<pre id="namespace-docstr"></pre>
+
+
+<br />
+<div id="var-entry">
+  <hr />
+  <h2 id="incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</h2>
+  <span id="var-type">var</span><br />
+  <pre id="var-usage"></pre>
+  <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel/workbook.clj#L10" id="var-source">Source</a>
 </div>
 
 

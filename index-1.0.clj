@@ -110,7 +110,7 @@
    :var-type "function",
    :line 36,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/bayes.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/bayes.clj"}
   {:arglists ([size counts]),
    :name "sample-multinomial-params",
    :namespace "incanter.bayes",
@@ -125,7 +125,7 @@
    :var-type "function",
    :line 100,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/bayes.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/bayes.clj"}
   {:arglists ([size counts]),
    :name "sample-proportions",
    :namespace "incanter.bayes",
@@ -140,7 +140,7 @@
    :var-type "function",
    :line 93,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/bayes.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/bayes.clj"}
   {:arglists ([a mu sigma]),
    :name "censored-mean-lower",
    :namespace "incanter.censored",
@@ -155,7 +155,7 @@
    :var-type "function",
    :line 57,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([a b mu sigma]),
    :name "censored-mean-two-sided",
    :namespace "incanter.censored",
@@ -170,7 +170,7 @@
    :var-type "function",
    :line 22,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([b mu sigma]),
    :name "censored-mean-upper",
    :namespace "incanter.censored",
@@ -185,7 +185,7 @@
    :var-type "function",
    :line 85,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([a mu sigma]),
    :name "censored-variance-lower",
    :namespace "incanter.censored",
@@ -200,7 +200,7 @@
    :var-type "function",
    :line 68,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([a b mu sigma]),
    :name "censored-variance-two-sided",
    :namespace "incanter.censored",
@@ -215,7 +215,7 @@
    :var-type "function",
    :line 37,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([b mu sigma]),
    :name "censored-variance-upper",
    :namespace "incanter.censored",
@@ -230,7 +230,7 @@
    :var-type "function",
    :line 95,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([& options]),
    :name "truncated-variance",
    :namespace "incanter.censored",
@@ -245,7 +245,7 @@
    :var-type "function",
    :line 112,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/censored.clj"}
   {:arglists ([chart x & options]),
    :name "add-box-plot",
    :namespace "incanter.charts",
@@ -1452,7 +1452,7 @@
    :var-type "function",
    :line 1487,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:raw-source-url
    "https://github.com/liebke/incanter/raw/b7407dfedcb5543e14341c8b7b9cf102b02e5109/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :source-url
@@ -1462,7 +1462,7 @@
    :namespace "incanter.core",
    :line 53,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :var-type "var",
    :doc
    "This variable is bound to a dataset when the with-data macro is used.\nfunctions like $ and $where can use $data as a default argument.",
@@ -1481,7 +1481,7 @@
    :var-type "function",
    :line 1743,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists
    ([[left-keys right-keys] left-data]
     [[left-keys right-keys] left-data right-data]),
@@ -1498,7 +1498,7 @@
    :var-type "function",
    :line 1814,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([fun col-keys data] [fun col-keys]),
    :name "$map",
    :namespace "incanter.core",
@@ -1513,7 +1513,7 @@
    :var-type "function",
    :line 1775,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([cols order] [cols order data]),
    :name "$order",
    :namespace "incanter.core",
@@ -1528,7 +1528,7 @@
    :var-type "function",
    :line 1715,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists
    ([summary-fun col-name group-by]
     [summary-fun col-name group-by data]),
@@ -1545,7 +1545,7 @@
    :var-type "function",
    :line 1627,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([query-map] [query-map data]),
    :name "$where",
    :namespace "incanter.core",
@@ -1560,7 +1560,7 @@
    :var-type "function",
    :line 1595,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "abs",
    :namespace "incanter.core",
@@ -1575,7 +1575,7 @@
    :var-type "function",
    :line 542,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "acos",
    :namespace "incanter.core",
@@ -1590,7 +1590,7 @@
    :var-type "function",
    :line 566,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "asin",
    :namespace "incanter.core",
@@ -1605,7 +1605,7 @@
    :var-type "function",
    :line 554,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "atan",
    :namespace "incanter.core",
@@ -1620,7 +1620,7 @@
    :var-type "function",
    :line 578,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "atan2",
    :namespace "incanter.core",
@@ -1635,7 +1635,7 @@
    :var-type "function",
    :line 499,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([a b]),
    :name "beta",
    :namespace "incanter.core",
@@ -1650,7 +1650,7 @@
    :var-type "function",
    :line 2144,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "bind-columns",
    :namespace "incanter.core",
@@ -1665,7 +1665,7 @@
    :var-type "function",
    :line 364,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "bind-rows",
    :namespace "incanter.core",
@@ -1680,7 +1680,7 @@
    :var-type "function",
    :line 325,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "categorical-var",
    :namespace "incanter.core",
@@ -1695,7 +1695,7 @@
    :var-type "function",
    :line 2027,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([n k]),
    :name "choose",
    :namespace "incanter.core",
@@ -1710,7 +1710,7 @@
    :var-type "function",
    :line 601,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([data] [data colnames]),
    :name "col-names",
    :namespace "incanter.core",
@@ -1725,7 +1725,7 @@
    :var-type "function",
    :line 1466,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "condition",
    :namespace "incanter.core",
@@ -1740,7 +1740,7 @@
    :var-type "function",
    :line 993,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "conj-cols",
    :namespace "incanter.core",
@@ -1755,7 +1755,7 @@
    :var-type "function",
    :line 1412,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "conj-rows",
    :namespace "incanter.core",
@@ -1770,7 +1770,7 @@
    :var-type "function",
    :line 1441,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "copy",
    :namespace "incanter.core",
@@ -1784,7 +1784,7 @@
    :var-type "function",
    :line 653,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "cos",
    :namespace "incanter.core",
@@ -1799,7 +1799,7 @@
    :var-type "function",
    :line 560,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([coll]),
    :name "cumulative-sum",
    :namespace "incanter.core",
@@ -1814,7 +1814,7 @@
    :var-type "function",
    :line 825,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([column-names & data]),
    :name "dataset",
    :namespace "incanter.core",
@@ -1829,7 +1829,7 @@
    :var-type "function",
    :line 1142,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([obj]),
    :name "dataset?",
    :namespace "incanter.core",
@@ -1843,7 +1843,7 @@
    :var-type "function",
    :line 105,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-cholesky",
    :namespace "incanter.core",
@@ -1858,7 +1858,7 @@
    :var-type "function",
    :line 853,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-eigenvalue",
    :namespace "incanter.core",
@@ -1873,7 +1873,7 @@
    :var-type "function",
    :line 914,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-lu",
    :namespace "incanter.core",
@@ -1888,7 +1888,7 @@
    :var-type "function",
    :line 940,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-qr",
    :namespace "incanter.core",
@@ -1903,7 +1903,7 @@
    :var-type "function",
    :line 966,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-svd",
    :namespace "incanter.core",
@@ -1918,7 +1918,7 @@
    :var-type "function",
    :line 884,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& options]),
    :name "deshape",
    :namespace "incanter.core",
@@ -1933,7 +1933,7 @@
    :var-type "function",
    :line 1882,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "det",
    :namespace "incanter.core",
@@ -1948,7 +1948,7 @@
    :var-type "function",
    :line 738,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([m]),
    :name "diag",
    :namespace "incanter.core",
@@ -1963,7 +1963,7 @@
    :var-type "function",
    :line 148,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "dim",
    :namespace "incanter.core",
@@ -1978,7 +1978,7 @@
    :var-type "function",
    :line 131,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "div",
    :namespace "incanter.core",
@@ -1993,7 +1993,7 @@
    :var-type "function",
    :line 469,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "exp",
    :namespace "incanter.core",
@@ -2008,7 +2008,7 @@
    :var-type "function",
    :line 536,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([k]),
    :name "factorial",
    :namespace "incanter.core",
@@ -2023,7 +2023,7 @@
    :var-type "function",
    :line 584,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([x]),
    :name "gamma",
    :namespace "incanter.core",
@@ -2038,7 +2038,7 @@
    :var-type "function",
    :line 2134,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([cols data]),
    :name "get-categories",
    :namespace "incanter.core",
@@ -2053,7 +2053,7 @@
    :var-type "function",
    :line 1951,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat on-cols & options]),
    :name "group-by",
    :namespace "incanter.core",
@@ -2068,7 +2068,7 @@
    :var-type "function",
    :line 1073,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "half-vectorize",
    :namespace "incanter.core",
@@ -2083,7 +2083,7 @@
    :var-type "function",
    :line 782,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([n]),
    :name "identity-matrix",
    :namespace "incanter.core",
@@ -2098,7 +2098,7 @@
    :var-type "function",
    :line 138,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([x a b]),
    :name "incomplete-beta",
    :namespace "incanter.core",
@@ -2113,7 +2113,7 @@
    :var-type "function",
    :line 2154,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "kronecker",
    :namespace "incanter.core",
@@ -2128,7 +2128,7 @@
    :var-type "function",
    :line 686,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([coll]),
    :name "length",
    :namespace "incanter.core",
@@ -2143,7 +2143,7 @@
    :var-type "function",
    :line 1052,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "log",
    :namespace "incanter.core",
@@ -2158,7 +2158,7 @@
    :var-type "function",
    :line 518,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "log10",
    :namespace "incanter.core",
@@ -2173,7 +2173,7 @@
    :var-type "function",
    :line 530,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "log2",
    :namespace "incanter.core",
@@ -2188,7 +2188,7 @@
    :var-type "function",
    :line 524,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([data] [data ncol] [init-val rows cols]),
    :name "matrix",
    :namespace "incanter.core",
@@ -2203,7 +2203,7 @@
    :var-type "function",
    :line 58,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([obj]),
    :name "matrix?",
    :namespace "incanter.core",
@@ -2217,7 +2217,7 @@
    :var-type "function",
    :line 100,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "minus",
    :namespace "incanter.core",
@@ -2232,7 +2232,7 @@
    :var-type "function",
    :line 420,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "mmult",
    :namespace "incanter.core",
@@ -2247,7 +2247,7 @@
    :var-type "function",
    :line 658,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "mult",
    :namespace "incanter.core",
@@ -2262,7 +2262,7 @@
    :var-type "function",
    :line 448,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "plus",
    :namespace "incanter.core",
@@ -2277,7 +2277,7 @@
    :var-type "function",
    :line 399,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([& args]),
    :name "pow",
    :namespace "incanter.core",
@@ -2292,7 +2292,7 @@
    :var-type "function",
    :line 493,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([x]),
    :name "prod",
    :namespace "incanter.core",
@@ -2306,7 +2306,7 @@
    :var-type "function",
    :line 817,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([data query-map]),
    :name "query-dataset",
    :namespace "incanter.core",
@@ -2321,7 +2321,7 @@
    :var-type "function",
    :line 1240,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([query-map]),
    :name "query-to-pred",
    :namespace "incanter.core",
@@ -2336,7 +2336,7 @@
    :var-type "function",
    :line 1203,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([]),
    :name "quit",
    :namespace "incanter.core",
@@ -2350,7 +2350,7 @@
    :var-type "function",
    :line 2377,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "rank",
    :namespace "incanter.core",
@@ -2365,7 +2365,7 @@
    :var-type "function",
    :line 1012,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([x a b]),
    :name "regularized-beta",
    :namespace "incanter.core",
@@ -2380,7 +2380,7 @@
    :var-type "function",
    :line 2166,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:raw-source-url
    "https://github.com/liebke/incanter/raw/b7407dfedcb5543e14341c8b7b9cf102b02e5109/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :source-url
@@ -2390,7 +2390,7 @@
    :namespace "incanter.core",
    :line 2383,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :var-type "multimethod",
    :doc
    " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
@@ -2404,7 +2404,7 @@
    :namespace "incanter.core",
    :line 208,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :var-type "multimethod",
    :doc
    "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
@@ -2423,7 +2423,7 @@
    :var-type "function",
    :line 548,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A & B]),
    :name "solve",
    :namespace "incanter.core",
@@ -2438,7 +2438,7 @@
    :var-type "function",
    :line 719,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([a b c]),
    :name "solve-quadratic",
    :namespace "incanter.core",
@@ -2453,7 +2453,7 @@
    :var-type "function",
    :line 2184,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "sq",
    :namespace "incanter.core",
@@ -2468,7 +2468,7 @@
    :var-type "function",
    :line 512,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "sqrt",
    :namespace "incanter.core",
@@ -2483,7 +2483,7 @@
    :var-type "function",
    :line 506,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([x]),
    :name "sum",
    :namespace "incanter.core",
@@ -2497,7 +2497,7 @@
    :var-type "function",
    :line 810,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([x]),
    :name "sum-of-squares",
    :namespace "incanter.core",
@@ -2511,7 +2511,7 @@
    :var-type "function",
    :line 803,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([data & options]),
    :name "symmetric-matrix",
    :namespace "incanter.core",
@@ -2526,7 +2526,7 @@
    :var-type "function",
    :line 2211,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([A]),
    :name "tan",
    :namespace "incanter.core",
@@ -2541,7 +2541,7 @@
    :var-type "function",
    :line 572,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([obj & options]),
    :name "to-dataset",
    :namespace "incanter.core",
@@ -2556,7 +2556,7 @@
    :var-type "function",
    :line 1353,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([coll cat-var]),
    :name "to-labels",
    :namespace "incanter.core",
@@ -2570,7 +2570,7 @@
    :var-type "function",
    :line 2070,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([coll & options]),
    :name "to-levels",
    :namespace "incanter.core",
@@ -2584,7 +2584,7 @@
    :var-type "function",
    :line 2060,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:raw-source-url
    "https://github.com/liebke/incanter/raw/b7407dfedcb5543e14341c8b7b9cf102b02e5109/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :source-url
@@ -2594,7 +2594,7 @@
    :namespace "incanter.core",
    :line 626,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :var-type "multimethod",
    :doc
    " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
@@ -2608,7 +2608,7 @@
    :namespace "incanter.core",
    :line 1994,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :var-type "multimethod",
    :doc
    "Takes a dataset or matrix and returns a hash-map where the keys are \n keyword versions of the column names, for datasets, or numbers, for \n matrices, and the values are sequence of the column values.\n\nExamples:\n  (use '(incanter core datasets))\n\n  (to-map (get-dataset :cars))\n\n  (to-map (matrix (range 9) 3))",
@@ -2627,7 +2627,7 @@
    :var-type "function",
    :line 2107,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "to-vect",
    :namespace "incanter.core",
@@ -2642,7 +2642,7 @@
    :var-type "function",
    :line 1038,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "trace",
    :namespace "incanter.core",
@@ -2657,7 +2657,7 @@
    :var-type "function",
    :line 750,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "trans",
    :namespace "incanter.core",
@@ -2672,7 +2672,7 @@
    :var-type "function",
    :line 173,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([mat]),
    :name "vectorize",
    :namespace "incanter.core",
@@ -2687,7 +2687,7 @@
    :var-type "function",
    :line 761,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:raw-source-url
    "https://github.com/liebke/incanter/raw/b7407dfedcb5543e14341c8b7b9cf102b02e5109/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :source-url
@@ -2697,7 +2697,7 @@
    :namespace "incanter.core",
    :line 2257,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj",
    :var-type "multimethod",
    :doc
    " This is a general 'view' function. When given an Incanter matrix/dataset\nor a Clojure numeric collection, it will display it in a Java Swing\nJTable. When given an Incanter chart object, it will display it in a new\nwindow. When given a URL string, it will open the location with the\nplatform's default web browser.\n\nWhen viewing charts, a :width (default 500) and :height (default 400) \noption can be provided.\n\nWhen viewing an incanter.processing sketch, set the :exit-on-close option\nto true (default is false) to kill the animation processes when you\nclose the window (this will also kill your REPL or Swank server), \notherwise those processing will continue to run in the background.\n\n\n\nExamples:\n\n  (use '(incanter core stats datasets charts))\n\n  ;; view matrices\n  (def rand-mat (matrix (sample-normal 100) 4))\n  (view rand-mat)\n\n  ;; view numeric collections\n  (view [1 2 3 4 5])\n  (view (sample-normal 100))\n\n  ;; view Incanter datasets\n  (view (get-dataset :iris))\n\n  ;; convert dataset to matrix, changing Species names to numeric codes\n  (view (to-matrix (get-dataset :iris)))\n\n  ;; convert dataset to matrix, changing Species names to dummy variables\n  (view (to-matrix (get-dataset :iris) :dummies true))\n\n  ;; view a chart\n  (view (histogram (sample-normal 1000)))\n\n  ;; view a URL\n  (view \"http://incanter.org\")\n\n  ;; view a PNG file\n  (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")\n  (view \"file:///tmp/norm_hist.png\")",
@@ -2716,7 +2716,7 @@
    :var-type "macro",
    :line 1970,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/core.clj"}
   {:arglists ([dataset-key & options]),
    :name "get-dataset",
    :namespace "incanter.datasets",
@@ -2731,7 +2731,7 @@
    :var-type "function",
    :line 92,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/datasets.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/datasets.clj"}
   {:arglists ([x val queue]),
    :name "mean-state",
    :namespace "incanter.incremental-stats",
@@ -2745,7 +2745,7 @@
    :var-type "function",
    :line 14,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
   {:arglists ([f]),
    :name "tuplize-apply",
    :namespace "incanter.incremental-stats",
@@ -2759,7 +2759,7 @@
    :var-type "function",
    :line 65,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
   {:arglists ([x] [x & xs]),
    :name "update-mean",
    :namespace "incanter.incremental-stats",
@@ -2773,7 +2773,7 @@
    :var-type "function",
    :line 43,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
   {:arglists ([x]),
    :name "update-sample",
    :namespace "incanter.incremental-stats",
@@ -2787,7 +2787,7 @@
    :var-type "function",
    :line 37,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/incremental_stats.clj"}
   {:arglists ([counts]),
    :name "entropy",
    :namespace "incanter.information-theory",
@@ -2801,7 +2801,7 @@
    :var-type "function",
    :line 57,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
   {:arglists ([data]),
    :name "gain",
    :namespace "incanter.information-theory",
@@ -2816,7 +2816,7 @@
    :var-type "function",
    :line 69,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
   {:arglists ([counts]),
    :name "gini-impurity",
    :namespace "incanter.information-theory",
@@ -2831,7 +2831,7 @@
    :var-type "function",
    :line 21,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
   {:arglists ([p-counts q-counts]),
    :name "kl-divergence",
    :namespace "incanter.information-theory",
@@ -2846,7 +2846,7 @@
    :var-type "function",
    :line 32,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
   {:arglists ([joint individuals]),
    :name "mutual-information",
    :namespace "incanter.information-theory",
@@ -2861,7 +2861,7 @@
    :var-type "function",
    :line 97,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
   {:arglists ([joint individuals]),
    :name "total-correlation",
    :namespace "incanter.information-theory",
@@ -2876,7 +2876,7 @@
    :var-type "function",
    :line 88,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/information_theory.clj"}
   {:arglists ([obj]),
    :name "is-matrix",
    :namespace "incanter.internal",
@@ -2891,7 +2891,7 @@
    :var-type "function",
    :line 32,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/internal.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/internal.clj"}
   {:arglists ([f n d]),
    :name "safe",
    :namespace "incanter.internal",
@@ -2905,7 +2905,7 @@
    :var-type "function",
    :line 227,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/internal.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/internal.clj"}
   {:arglists ([& fns]),
    :name "vector-comp",
    :namespace "incanter.internal",
@@ -2920,7 +2920,7 @@
    :var-type "function",
    :line 202,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/internal.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/internal.clj"}
   {:arglists ([c f]),
    :name "clj-to-json-file",
    :namespace "incanter.io",
@@ -2934,7 +2934,7 @@
    :var-type "function",
    :line 208,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([& x]),
    :name "columns",
    :namespace "incanter.io",
@@ -2948,7 +2948,7 @@
    :var-type "function",
    :line 329,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([v]),
    :name "csv-line",
    :namespace "incanter.io",
@@ -2962,7 +2962,7 @@
    :var-type "function",
    :line 250,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([m]),
    :name "csv-table",
    :namespace "incanter.io",
@@ -2976,7 +2976,7 @@
    :var-type "function",
    :line 261,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([filename stuff]),
    :name "into-file",
    :namespace "incanter.io",
@@ -2990,7 +2990,7 @@
    :var-type "function",
    :line 244,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([f]),
    :name "json-from-classpath",
    :namespace "incanter.io",
@@ -3004,7 +3004,7 @@
    :var-type "function",
    :line 228,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([f]),
    :name "load-resource",
    :namespace "incanter.io",
@@ -3018,7 +3018,7 @@
    :var-type "function",
    :line 216,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([table sample & columns]),
    :name "query",
    :namespace "incanter.io",
@@ -3032,7 +3032,7 @@
    :var-type "function",
    :line 302,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([filename & options]),
    :name "read-dataset",
    :namespace "incanter.io",
@@ -3047,7 +3047,7 @@
    :var-type "function",
    :line 92,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([f]),
    :name "read-from-classpath",
    :namespace "incanter.io",
@@ -3061,7 +3061,7 @@
    :var-type "function",
    :line 223,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([f]),
    :name "read-json-file",
    :namespace "incanter.io",
@@ -3075,7 +3075,7 @@
    :var-type "function",
    :line 196,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([c]),
    :name "sql-order-by",
    :namespace "incanter.io",
@@ -3089,7 +3089,7 @@
    :var-type "function",
    :line 319,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([d q]),
    :name "sql-query",
    :namespace "incanter.io",
@@ -3103,7 +3103,7 @@
    :var-type "function",
    :line 295,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([& x]),
    :name "sql-select",
    :namespace "incanter.io",
@@ -3117,7 +3117,7 @@
    :var-type "function",
    :line 309,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([pred]),
    :name "sql-where",
    :namespace "incanter.io",
@@ -3131,7 +3131,7 @@
    :var-type "function",
    :line 324,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([dbinfo query f]),
    :name "with-mysql-results",
    :namespace "incanter.io",
@@ -3146,7 +3146,7 @@
    :var-type "function",
    :line 274,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-io/src/main/clojure/incanter/io.clj"}
   {:arglists ([& args]),
    :name "fetch-dataset",
    :namespace "incanter.mongodb",
@@ -3161,7 +3161,7 @@
    :var-type "function",
    :line 72,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-mongodb/src/main/clojure/incanter/mongodb.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-mongodb/src/main/clojure/incanter/mongodb.clj"}
   {:arglists ([mongodb-coll dataset]),
    :name "insert-dataset",
    :namespace "incanter.mongodb",
@@ -3176,7 +3176,7 @@
    :var-type "function",
    :line 104,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-mongodb/src/main/clojure/incanter/mongodb.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-mongodb/src/main/clojure/incanter/mongodb.clj"}
   {:arglists ([f & options]),
    :name "derivative",
    :namespace "incanter.optimize",
@@ -3191,7 +3191,7 @@
    :var-type "function",
    :line 68,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
   {:arglists ([f start & options]),
    :name "gradient",
    :namespace "incanter.optimize",
@@ -3206,7 +3206,7 @@
    :var-type "function",
    :line 251,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
   {:arglists ([f start & options]),
    :name "hessian",
    :namespace "incanter.optimize",
@@ -3221,7 +3221,7 @@
    :var-type "function",
    :line 300,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
   {:arglists ([f a b]),
    :name "integrate",
    :namespace "incanter.optimize",
@@ -3236,7 +3236,7 @@
    :var-type "function",
    :line 26,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
   {:arglists ([f y x start & options]),
    :name "non-linear-model",
    :namespace "incanter.optimize",
@@ -3251,7 +3251,7 @@
    :var-type "function",
    :line 588,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/optimize.clj"}
   {:arglists ([[x y] [p q]] [x]),
    :name "+cond-prob-tuples",
    :namespace "incanter.probability",
@@ -3266,7 +3266,7 @@
    :var-type "function",
    :line 39,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([a given b & bs] [a given b]),
    :name "P",
    :namespace "incanter.probability",
@@ -3280,7 +3280,7 @@
    :var-type "function",
    :line 194,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([pred]),
    :name "binary",
    :namespace "incanter.probability",
@@ -3295,7 +3295,7 @@
    :var-type "function",
    :line 11,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([f x y]),
    :name "comb-merge",
    :namespace "incanter.probability",
@@ -3310,7 +3310,7 @@
    :var-type "function",
    :line 48,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([a b]),
    :name "cond-prob-tuple",
    :namespace "incanter.probability",
@@ -3325,7 +3325,7 @@
    :var-type "function",
    :line 165,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([exp act]),
    :name "count-missing",
    :namespace "incanter.probability",
@@ -3339,7 +3339,7 @@
    :var-type "function",
    :line 17,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([f]),
    :name "map-counter",
    :namespace "incanter.probability",
@@ -3354,7 +3354,7 @@
    :var-type "function",
    :line 27,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([j]),
    :name "marginals",
    :namespace "incanter.probability",
@@ -3369,7 +3369,7 @@
    :var-type "function",
    :line 72,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([range item]),
    :name "range-classifier",
    :namespace "incanter.probability",
@@ -3384,7 +3384,7 @@
    :var-type "function",
    :line 128,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([m]),
    :name "summate",
    :namespace "incanter.probability",
@@ -3398,7 +3398,7 @@
    :var-type "function",
    :line 57,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([j]),
    :name "summate-level",
    :namespace "incanter.probability",
@@ -3413,7 +3413,7 @@
    :var-type "function",
    :line 66,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([f]),
    :name "vector-counter",
    :namespace "incanter.probability",
@@ -3428,7 +3428,7 @@
    :var-type "function",
    :line 33,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([a b]),
    :name "|",
    :namespace "incanter.probability",
@@ -3443,7 +3443,7 @@
    :var-type "function",
    :line 179,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([a bs]),
    :name "|each",
    :namespace "incanter.probability",
@@ -3458,7 +3458,7 @@
    :var-type "function",
    :line 187,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/probability.clj"}
   {:arglists ([sketch what]),
    :name "alpha",
    :namespace "incanter.processing",
@@ -3472,7 +3472,7 @@
    :var-type "function",
    :line 36,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch rgb]),
    :name "ambient",
    :namespace "incanter.processing",
@@ -3486,7 +3486,7 @@
    :var-type "function",
    :line 52,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch red green blue] [sketch red green blue x y z]),
    :name "ambient-light",
    :namespace "incanter.processing",
@@ -3500,7 +3500,7 @@
    :var-type "function",
    :line 64,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch n00 n01 n02 n10 n11 n12]
     [sketch
@@ -3532,7 +3532,7 @@
    :var-type "function",
    :line 73,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch a b c d start stop]),
    :name "arc",
    :namespace "incanter.processing",
@@ -3546,7 +3546,7 @@
    :var-type "function",
    :line 87,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch gray] [sketch gray alpha] [sketch r g b] [sketch r g b a]),
    :name "background",
@@ -3562,7 +3562,7 @@
    :var-type "function",
    :line 112,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch img]),
    :name "background-image",
    :namespace "incanter.processing",
@@ -3576,7 +3576,7 @@
    :var-type "function",
    :line 198,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "begin-camera",
    :namespace "incanter.processing",
@@ -3590,7 +3590,7 @@
    :var-type "function",
    :line 202,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch rawGfx] [sketch renderer filename]),
    :name "begin-raw",
    :namespace "incanter.processing",
@@ -3604,7 +3604,7 @@
    :var-type "function",
    :line 206,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch kind]),
    :name "begin-shape",
    :namespace "incanter.processing",
@@ -3618,7 +3618,7 @@
    :var-type "function",
    :line 214,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch x1 y1 x2 y2 x3 y3 x4 y4]
     [sketch x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4]),
@@ -3634,7 +3634,7 @@
    :var-type "function",
    :line 219,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch detail]),
    :name "bezier-detail",
    :namespace "incanter.processing",
@@ -3648,7 +3648,7 @@
    :var-type "function",
    :line 234,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch a b c d t]),
    :name "bezier-point",
    :namespace "incanter.processing",
@@ -3662,7 +3662,7 @@
    :var-type "function",
    :line 239,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch a b c d t]),
    :name "bezier-tangent",
    :namespace "incanter.processing",
@@ -3676,7 +3676,7 @@
    :var-type "function",
    :line 244,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch x2 y2 x3 y3 x4 y4]
     [sketch x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4]),
@@ -3692,7 +3692,7 @@
    :var-type "function",
    :line 249,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch sx1 sy1 sx2 sy2 dx1 dy1 dx2 dy2 mode]
     [sketch src sx1 sy1 sx2 sy2 dx1 dy1 dx2 dy2 mode]),
@@ -3708,7 +3708,7 @@
    :var-type "function",
    :line 264,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([c1 c2 mode]),
    :name "blend-color",
    :namespace "incanter.processing",
@@ -3722,7 +3722,7 @@
    :var-type "function",
    :line 275,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "blue",
    :namespace "incanter.processing",
@@ -3736,7 +3736,7 @@
    :var-type "function",
    :line 280,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch size] [sketch w h d]),
    :name "box",
    :namespace "incanter.processing",
@@ -3750,7 +3750,7 @@
    :var-type "function",
    :line 285,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "brightness",
    :namespace "incanter.processing",
@@ -3764,7 +3764,7 @@
    :var-type "function",
    :line 290,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch]
     [sketch eyeX eyeY eyeZ centerX centerY centerZ upX upY upZ]),
@@ -3780,7 +3780,7 @@
    :var-type "function",
    :line 294,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "can-draw?",
    :namespace "incanter.processing",
@@ -3794,7 +3794,7 @@
    :var-type "function",
    :line 300,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([n]),
    :name "ceil",
    :namespace "incanter.processing",
@@ -3808,7 +3808,7 @@
    :var-type "function",
    :line 304,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch c] [sketch c x y] [sketch c x y z]),
    :name "char->text",
    :namespace "incanter.processing",
@@ -3822,7 +3822,7 @@
    :var-type "function",
    :line 1350,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([rgb] [rgb alpha?] [x y z] [x y z alpha]),
    :name "color",
    :namespace "incanter.processing",
@@ -3837,7 +3837,7 @@
    :var-type "function",
    :line 322,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch mode]
     [sketch mode max]
@@ -3855,7 +3855,7 @@
    :var-type "function",
    :line 409,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([amt low high]),
    :name "constrain",
    :namespace "incanter.processing",
@@ -3869,7 +3869,7 @@
    :var-type "function",
    :line 423,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch [sx1 sy1 sx2 sy2] [dx1 dy1 dx2 dy2]]
     [sketch img [sx1 sy1 sx2 sy2] [dx1 dy1 dx2 dy2]]),
@@ -3885,7 +3885,7 @@
    :var-type "function",
    :line 438,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch name size]
     [sketch name size smooth]
@@ -3902,7 +3902,7 @@
    :var-type "function",
    :line 449,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch w h renderer] [sketch w h renderer path]),
    :name "create-graphics",
    :namespace "incanter.processing",
@@ -3916,7 +3916,7 @@
    :var-type "function",
    :line 505,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch w h format]),
    :name "create-image",
    :namespace "incanter.processing",
@@ -3930,7 +3930,7 @@
    :var-type "function",
    :line 512,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([filename]),
    :name "create-input",
    :namespace "incanter.processing",
@@ -3944,7 +3944,7 @@
    :var-type "function",
    :line 516,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "create-input-raw",
    :namespace "incanter.processing",
@@ -3958,7 +3958,7 @@
    :var-type "function",
    :line 521,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([filename]),
    :name "create-output",
    :namespace "incanter.processing",
@@ -3972,7 +3972,7 @@
    :var-type "function",
    :line 526,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([filename]),
    :name "create-path",
    :namespace "incanter.processing",
@@ -3986,7 +3986,7 @@
    :var-type "function",
    :line 531,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "create-reader",
    :namespace "incanter.processing",
@@ -4000,7 +4000,7 @@
    :var-type "function",
    :line 535,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "create-writer",
    :namespace "incanter.processing",
@@ -4014,7 +4014,7 @@
    :var-type "function",
    :line 539,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch cur-type]),
    :name "cursor",
    :namespace "incanter.processing",
@@ -4028,7 +4028,7 @@
    :var-type "function",
    :line 543,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch img] [sketch img hx hy]),
    :name "cursor-image",
    :namespace "incanter.processing",
@@ -4042,7 +4042,7 @@
    :var-type "function",
    :line 548,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch x1 y1 x2 y2 x3 y3 x4 y4]
     [sketch x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4]),
@@ -4058,7 +4058,7 @@
    :var-type "function",
    :line 553,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch detail]),
    :name "curve-detail",
    :namespace "incanter.processing",
@@ -4072,7 +4072,7 @@
    :var-type "function",
    :line 568,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch a b c d t]),
    :name "curve-point",
    :namespace "incanter.processing",
@@ -4086,7 +4086,7 @@
    :var-type "function",
    :line 573,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch a b c d t]),
    :name "curve-tangent",
    :namespace "incanter.processing",
@@ -4100,7 +4100,7 @@
    :var-type "function",
    :line 578,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch ti]),
    :name "curve-tightness",
    :namespace "incanter.processing",
@@ -4114,7 +4114,7 @@
    :var-type "function",
    :line 583,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y] [sketch x y z]),
    :name "curve-vertex",
    :namespace "incanter.processing",
@@ -4128,7 +4128,7 @@
    :var-type "function",
    :line 587,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "day",
    :namespace "incanter.processing",
@@ -4142,7 +4142,7 @@
    :var-type "function",
    :line 595,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([radians]),
    :name "degrees",
    :namespace "incanter.processing",
@@ -4156,7 +4156,7 @@
    :var-type "function",
    :line 600,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch nap-time]),
    :name "delay-frame",
    :namespace "incanter.processing",
@@ -4170,7 +4170,7 @@
    :var-type "function",
    :line 604,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "destroy",
    :namespace "incanter.processing",
@@ -4184,7 +4184,7 @@
    :var-type "function",
    :line 608,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch r g b nx ny nz]),
    :name "directional-light",
    :namespace "incanter.processing",
@@ -4198,7 +4198,7 @@
    :var-type "function",
    :line 614,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "displayable?",
    :namespace "incanter.processing",
@@ -4212,7 +4212,7 @@
    :var-type "function",
    :line 619,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([a b x y] [a b c x y z]),
    :name "dist",
    :namespace "incanter.processing",
@@ -4226,7 +4226,7 @@
    :var-type "function",
    :line 623,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch a b c d]),
    :name "ellipse",
    :namespace "incanter.processing",
@@ -4240,7 +4240,7 @@
    :var-type "function",
    :line 630,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch mode]),
    :name "ellipse-mode",
    :namespace "incanter.processing",
@@ -4254,7 +4254,7 @@
    :var-type "function",
    :line 635,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch gray] [sketch x y z]),
    :name "emissive",
    :namespace "incanter.processing",
@@ -4268,7 +4268,7 @@
    :var-type "function",
    :line 641,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "end-camera",
    :namespace "incanter.processing",
@@ -4282,7 +4282,7 @@
    :var-type "function",
    :line 653,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "end-raw",
    :namespace "incanter.processing",
@@ -4296,7 +4296,7 @@
    :var-type "function",
    :line 657,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch mode]),
    :name "end-shape",
    :namespace "incanter.processing",
@@ -4310,7 +4310,7 @@
    :var-type "function",
    :line 661,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "exit",
    :namespace "incanter.processing",
@@ -4324,7 +4324,7 @@
    :var-type "function",
    :line 668,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([font-name size smooth filename] [font-name size filename]),
    :name "export-font",
@@ -4340,7 +4340,7 @@
    :var-type "function",
    :line 470,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch gray]
     [sketch gray alpha]
@@ -4359,7 +4359,7 @@
    :var-type "function",
    :line 678,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch kind] [sketch kind param]),
    :name "filter-kind",
    :namespace "incanter.processing",
@@ -4373,7 +4373,7 @@
    :var-type "function",
    :line 764,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "frame-count",
    :namespace "incanter.processing",
@@ -4387,7 +4387,7 @@
    :var-type "function",
    :line 778,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch new-rate]),
    :name "framerate",
    :namespace "incanter.processing",
@@ -4401,7 +4401,7 @@
    :var-type "function",
    :line 772,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch l r b t near far]),
    :name "frustum",
    :namespace "incanter.processing",
@@ -4415,7 +4415,7 @@
    :var-type "function",
    :line 783,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch x y] [sketch x y w h]),
    :name "get-pixel",
    :namespace "incanter.processing",
@@ -4429,7 +4429,7 @@
    :var-type "function",
    :line 788,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "green",
    :namespace "incanter.processing",
@@ -4443,7 +4443,7 @@
    :var-type "function",
    :line 794,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "height",
    :namespace "incanter.processing",
@@ -4457,7 +4457,7 @@
    :var-type "function",
    :line 1490,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch which]),
    :name "hint",
    :namespace "incanter.processing",
@@ -4471,7 +4471,7 @@
    :var-type "function",
    :line 801,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "hour",
    :namespace "incanter.processing",
@@ -4485,7 +4485,7 @@
    :var-type "function",
    :line 805,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "hue",
    :namespace "incanter.processing",
@@ -4499,7 +4499,7 @@
    :var-type "function",
    :line 809,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch img x y]
     [sketch img x y c d]
@@ -4516,7 +4516,7 @@
    :var-type "function",
    :line 813,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch mode]),
    :name "image-mode",
    :namespace "incanter.processing",
@@ -4530,7 +4530,7 @@
    :var-type "function",
    :line 819,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([c1 c2 amt]),
    :name "lerp-color",
    :namespace "incanter.processing",
@@ -4545,7 +4545,7 @@
    :var-type "function",
    :line 835,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y z]),
    :name "light-specular",
    :namespace "incanter.processing",
@@ -4559,7 +4559,7 @@
    :var-type "function",
    :line 859,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "lights",
    :namespace "incanter.processing",
@@ -4573,7 +4573,7 @@
    :var-type "function",
    :line 855,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch p1 p2] [sketch x1 y1 x2 y2] [sketch x1 y1 z1 x2 y2 z2]),
    :name "line",
@@ -4588,7 +4588,7 @@
    :var-type "function",
    :line 864,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "list-fonts",
    :namespace "incanter.processing",
@@ -4602,7 +4602,7 @@
    :var-type "function",
    :line 458,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([filename]),
    :name "load-bytes",
    :namespace "incanter.processing",
@@ -4616,7 +4616,7 @@
    :var-type "function",
    :line 872,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "load-font",
    :namespace "incanter.processing",
@@ -4630,7 +4630,7 @@
    :var-type "function",
    :line 876,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "load-image",
    :namespace "incanter.processing",
@@ -4644,7 +4644,7 @@
    :var-type "function",
    :line 880,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "load-matrix",
    :namespace "incanter.processing",
@@ -4658,7 +4658,7 @@
    :var-type "function",
    :line 884,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "load-pixels",
    :namespace "incanter.processing",
@@ -4672,7 +4672,7 @@
    :var-type "function",
    :line 888,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "load-shape",
    :namespace "incanter.processing",
@@ -4686,7 +4686,7 @@
    :var-type "function",
    :line 892,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename]),
    :name "load-strings",
    :namespace "incanter.processing",
@@ -4700,7 +4700,7 @@
    :var-type "function",
    :line 897,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch alpha-array]),
    :name "mask",
    :namespace "incanter.processing",
@@ -4714,7 +4714,7 @@
    :var-type "function",
    :line 917,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch img]),
    :name "mask-image",
    :namespace "incanter.processing",
@@ -4728,7 +4728,7 @@
    :var-type "function",
    :line 921,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "millis",
    :namespace "incanter.processing",
@@ -4742,7 +4742,7 @@
    :var-type "function",
    :line 928,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "minute",
    :namespace "incanter.processing",
@@ -4756,7 +4756,7 @@
    :var-type "function",
    :line 934,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y z]),
    :name "model-x",
    :namespace "incanter.processing",
@@ -4770,7 +4770,7 @@
    :var-type "function",
    :line 938,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y z]),
    :name "model-y",
    :namespace "incanter.processing",
@@ -4784,7 +4784,7 @@
    :var-type "function",
    :line 942,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y z]),
    :name "model-z",
    :namespace "incanter.processing",
@@ -4798,7 +4798,7 @@
    :var-type "function",
    :line 946,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "month",
    :namespace "incanter.processing",
@@ -4812,7 +4812,7 @@
    :var-type "function",
    :line 950,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([mouse-event]),
    :name "mouse-x",
    :namespace "incanter.processing",
@@ -4826,7 +4826,7 @@
    :var-type "function",
    :line 966,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([mouse-event]),
    :name "mouse-y",
    :namespace "incanter.processing",
@@ -4840,7 +4840,7 @@
    :var-type "function",
    :line 971,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-cursor",
    :namespace "incanter.processing",
@@ -4854,7 +4854,7 @@
    :var-type "function",
    :line 975,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-fill",
    :namespace "incanter.processing",
@@ -4868,7 +4868,7 @@
    :var-type "function",
    :line 979,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-lights",
    :namespace "incanter.processing",
@@ -4882,7 +4882,7 @@
    :var-type "function",
    :line 998,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-loop",
    :namespace "incanter.processing",
@@ -4896,7 +4896,7 @@
    :var-type "function",
    :line 1002,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-smooth",
    :namespace "incanter.processing",
@@ -4910,7 +4910,7 @@
    :var-type "function",
    :line 1015,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-stroke",
    :namespace "incanter.processing",
@@ -4924,7 +4924,7 @@
    :var-type "function",
    :line 1019,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "no-tint",
    :namespace "incanter.processing",
@@ -4938,7 +4938,7 @@
    :var-type "function",
    :line 1023,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x] [sketch x y] [sketch x y z]),
    :name "noise",
    :namespace "incanter.processing",
@@ -4952,7 +4952,7 @@
    :var-type "function",
    :line 983,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch int detail] [sketch int detail falloff]),
    :name "noise-detail",
    :namespace "incanter.processing",
@@ -4966,7 +4966,7 @@
    :var-type "function",
    :line 989,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "noise-seed",
    :namespace "incanter.processing",
@@ -4980,7 +4980,7 @@
    :var-type "function",
    :line 994,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([val start stop]),
    :name "norm",
    :namespace "incanter.processing",
@@ -4994,7 +4994,7 @@
    :var-type "function",
    :line 1006,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch nx ny nz]),
    :name "normal",
    :namespace "incanter.processing",
@@ -5008,7 +5008,7 @@
    :var-type "function",
    :line 1011,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch num x y] [sketch num x y z]),
    :name "num->text",
    :namespace "incanter.processing",
@@ -5022,7 +5022,7 @@
    :var-type "function",
    :line 1356,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([filename]),
    :name "open",
    :namespace "incanter.processing",
@@ -5036,7 +5036,7 @@
    :var-type "function",
    :line 1027,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch l r b t near far]),
    :name "ortho",
    :namespace "incanter.processing",
@@ -5050,7 +5050,7 @@
    :var-type "function",
    :line 1033,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch fovy aspect z-near z-far]),
    :name "perspective",
    :namespace "incanter.processing",
@@ -5064,7 +5064,7 @@
    :var-type "function",
    :line 1046,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y] [sketch x y z]),
    :name "point",
    :namespace "incanter.processing",
@@ -5078,7 +5078,7 @@
    :var-type "function",
    :line 1058,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch r g b x y z]),
    :name "point-light",
    :namespace "incanter.processing",
@@ -5092,7 +5092,7 @@
    :var-type "function",
    :line 1063,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "pop-matrix",
    :namespace "incanter.processing",
@@ -5106,7 +5106,7 @@
    :var-type "function",
    :line 1068,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "print-camera",
    :namespace "incanter.processing",
@@ -5120,7 +5120,7 @@
    :var-type "function",
    :line 1076,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "print-matrix",
    :namespace "incanter.processing",
@@ -5134,7 +5134,7 @@
    :var-type "function",
    :line 1082,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "print-projection",
    :namespace "incanter.processing",
@@ -5148,7 +5148,7 @@
    :var-type "function",
    :line 1086,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "push-matrix",
    :namespace "incanter.processing",
@@ -5162,7 +5162,7 @@
    :var-type "function",
    :line 1090,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x1 y1 x2 y2 x3 y3 x4 y4]),
    :name "quad",
    :namespace "incanter.processing",
@@ -5176,7 +5176,7 @@
    :var-type "function",
    :line 1094,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([deg]),
    :name "radians",
    :namespace "incanter.processing",
@@ -5190,7 +5190,7 @@
    :var-type "function",
    :line 1099,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x1 y1 x2 y2]),
    :name "rect",
    :namespace "incanter.processing",
@@ -5204,7 +5204,7 @@
    :var-type "function",
    :line 1110,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch mode]),
    :name "rect-mode",
    :namespace "incanter.processing",
@@ -5218,7 +5218,7 @@
    :var-type "function",
    :line 1115,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "red",
    :namespace "incanter.processing",
@@ -5232,7 +5232,7 @@
    :var-type "function",
    :line 1119,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "redraw",
    :namespace "incanter.processing",
@@ -5246,7 +5246,7 @@
    :var-type "function",
    :line 1123,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([val istart istop ostart ostop]),
    :name "remap",
    :namespace "incanter.processing",
@@ -5260,7 +5260,7 @@
    :var-type "function",
    :line 912,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch filename] [sketch filename extension]),
    :name "request-image",
    :namespace "incanter.processing",
@@ -5274,7 +5274,7 @@
    :var-type "function",
    :line 1136,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "reset-matrix",
    :namespace "incanter.processing",
@@ -5288,7 +5288,7 @@
    :var-type "function",
    :line 1141,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([arr]),
    :name "reverse-array",
    :namespace "incanter.processing",
@@ -5302,7 +5302,7 @@
    :var-type "function",
    :line 1145,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch angle] [sketch angle vx vy vz]),
    :name "rotate",
    :namespace "incanter.processing",
@@ -5316,7 +5316,7 @@
    :var-type "function",
    :line 1149,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch angle]),
    :name "rotate-x",
    :namespace "incanter.processing",
@@ -5330,7 +5330,7 @@
    :var-type "function",
    :line 1154,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch angle]),
    :name "rotate-y",
    :namespace "incanter.processing",
@@ -5344,7 +5344,7 @@
    :var-type "function",
    :line 1158,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch angle]),
    :name "rotate-z",
    :namespace "incanter.processing",
@@ -5358,7 +5358,7 @@
    :var-type "function",
    :line 1162,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([what]),
    :name "round",
    :namespace "incanter.processing",
@@ -5372,7 +5372,7 @@
    :var-type "function",
    :line 1166,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch what]),
    :name "saturation",
    :namespace "incanter.processing",
@@ -5386,7 +5386,7 @@
    :var-type "function",
    :line 1172,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch font filename]),
    :name "save-font",
    :namespace "incanter.processing",
@@ -5400,7 +5400,7 @@
    :var-type "function",
    :line 463,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch] [sketch what]),
    :name "save-frame",
    :namespace "incanter.processing",
@@ -5414,7 +5414,7 @@
    :var-type "function",
    :line 1187,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch s] [sketch sx sy]),
    :name "scale",
    :namespace "incanter.processing",
@@ -5428,7 +5428,7 @@
    :var-type "function",
    :line 1196,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y] [sketch x y y]),
    :name "screen-x",
    :namespace "incanter.processing",
@@ -5442,7 +5442,7 @@
    :var-type "function",
    :line 1201,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y] [sketch x y z]),
    :name "screen-y",
    :namespace "incanter.processing",
@@ -5456,7 +5456,7 @@
    :var-type "function",
    :line 1206,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y z]),
    :name "screen-z",
    :namespace "incanter.processing",
@@ -5470,7 +5470,7 @@
    :var-type "function",
    :line 1211,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "seconds",
    :namespace "incanter.processing",
@@ -5484,7 +5484,7 @@
    :var-type "function",
    :line 1215,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch dx dy src]),
    :name "set-image-at",
    :namespace "incanter.processing",
@@ -5498,7 +5498,7 @@
    :var-type "function",
    :line 1227,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x y c]),
    :name "set-pixel",
    :namespace "incanter.processing",
@@ -5512,7 +5512,7 @@
    :var-type "function",
    :line 1223,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch shine]),
    :name "shininess",
    :namespace "incanter.processing",
@@ -5526,7 +5526,7 @@
    :var-type "function",
    :line 1236,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch w h] [sketch w h renderer]),
    :name "size",
    :namespace "incanter.processing",
@@ -5540,7 +5540,7 @@
    :var-type "function",
    :line 1244,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "smooth",
    :namespace "incanter.processing",
@@ -5554,7 +5554,7 @@
    :var-type "function",
    :line 1252,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch gray] [sketch gray alpha] [sketch x y z] [sketch x y z a]),
    :name "specular",
@@ -5569,7 +5569,7 @@
    :var-type "function",
    :line 1258,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch r]),
    :name "sphere",
    :namespace "incanter.processing",
@@ -5583,7 +5583,7 @@
    :var-type "function",
    :line 1265,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch res] [sketch ures vres]),
    :name "sphere-detail",
    :namespace "incanter.processing",
@@ -5597,7 +5597,7 @@
    :var-type "function",
    :line 1269,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch r g b x y z nx ny nz angle concentration]
     [sketch [r g b] [x y z] [nx ny nz] angle concentration]),
@@ -5613,7 +5613,7 @@
    :var-type "function",
    :line 1278,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "start-loop",
    :namespace "incanter.processing",
@@ -5627,7 +5627,7 @@
    :var-type "function",
    :line 904,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch s] [sketch s x y] [sketch s x y z]),
    :name "string->text",
    :namespace "incanter.processing",
@@ -5641,7 +5641,7 @@
    :var-type "function",
    :line 1361,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch s x1 y1 x2 y2] [sketch s x1 y1 x2 y2 z]),
    :name "string->text-in",
    :namespace "incanter.processing",
@@ -5655,7 +5655,7 @@
    :var-type "function",
    :line 1367,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch gray]
     [sketch gray alpha]
@@ -5673,7 +5673,7 @@
    :var-type "function",
    :line 1295,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch cap]),
    :name "stroke-cap",
    :namespace "incanter.processing",
@@ -5687,7 +5687,7 @@
    :var-type "function",
    :line 1319,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch jn]),
    :name "stroke-join",
    :namespace "incanter.processing",
@@ -5701,7 +5701,7 @@
    :var-type "function",
    :line 1323,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch weight]),
    :name "stroke-weight",
    :namespace "incanter.processing",
@@ -5715,7 +5715,7 @@
    :var-type "function",
    :line 1327,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch s]
     [sketch s x y]
@@ -5734,7 +5734,7 @@
    :var-type "function",
    :line 1336,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch align] [sketch align-x align-y]),
    :name "text-align",
    :namespace "incanter.processing",
@@ -5748,7 +5748,7 @@
    :var-type "function",
    :line 1374,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "text-ascent",
    :namespace "incanter.processing",
@@ -5762,7 +5762,7 @@
    :var-type "function",
    :line 1379,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "text-descend",
    :namespace "incanter.processing",
@@ -5776,7 +5776,7 @@
    :var-type "function",
    :line 1383,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch which] [sketch which size]),
    :name "text-font",
    :namespace "incanter.processing",
@@ -5790,7 +5790,7 @@
    :var-type "function",
    :line 1387,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch leading]),
    :name "text-leading",
    :namespace "incanter.processing",
@@ -5804,7 +5804,7 @@
    :var-type "function",
    :line 1392,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch mode]),
    :name "text-mode",
    :namespace "incanter.processing",
@@ -5818,7 +5818,7 @@
    :var-type "function",
    :line 1396,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch size]),
    :name "text-size",
    :namespace "incanter.processing",
@@ -5832,7 +5832,7 @@
    :var-type "function",
    :line 1400,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:raw-source-url
    "https://github.com/liebke/incanter/raw/a47ff703a16cea11308f8ed6bd582d1b659a3e5c/modules/incanter-processing/src/main/clojure/incanter/processing.clj",
    :source-url
@@ -5842,7 +5842,7 @@
    :namespace "incanter.processing",
    :line 1412,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj",
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj",
    :var-type "multimethod",
    :doc "",
    :name "text-width"}
@@ -5859,7 +5859,7 @@
    :var-type "function",
    :line 1404,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch mode]),
    :name "texture-mode",
    :namespace "incanter.processing",
@@ -5873,7 +5873,7 @@
    :var-type "function",
    :line 1408,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch gray] [sketch gray alpha] [sketch x y z] [sketch x y z a]),
    :name "tint",
@@ -5888,7 +5888,7 @@
    :var-type "function",
    :line 1423,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([v] [sketch tx ty] [sketch tx ty tz]),
    :name "translate",
    :namespace "incanter.processing",
@@ -5902,7 +5902,7 @@
    :var-type "function",
    :line 1451,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch x1 y1 x2 y2 x3 y3]),
    :name "triangle",
    :namespace "incanter.processing",
@@ -5916,7 +5916,7 @@
    :var-type "function",
    :line 1457,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists
    ([sketch x y] [sketch x y z] [sketch x y u v] [sketch x y z u v]),
    :name "vertex",
@@ -5931,7 +5931,7 @@
    :var-type "function",
    :line 1477,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([sketch]),
    :name "width",
    :namespace "incanter.processing",
@@ -5945,7 +5945,7 @@
    :var-type "function",
    :line 1486,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([rotation & body]),
    :name "with-rotation",
    :namespace "incanter.processing",
@@ -5960,7 +5960,7 @@
    :var-type "macro",
    :line 1510,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([translation-vector & body]),
    :name "with-translation",
    :namespace "incanter.processing",
@@ -5975,7 +5975,7 @@
    :var-type "macro",
    :line 1501,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([]),
    :name "year",
    :namespace "incanter.processing",
@@ -5989,7 +5989,7 @@
    :var-type "function",
    :line 1495,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-processing/src/main/clojure/incanter/processing.clj"}
   {:arglists ([data & options]),
    :name "som-batch-train",
    :namespace "incanter.som",
@@ -6004,7 +6004,7 @@
    :var-type "function",
    :line 137,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/som.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/som.clj"}
   {:arglists ([data statistic & options]),
    :name "bootstrap",
    :namespace "incanter.stats",
@@ -6019,7 +6019,7 @@
    :var-type "function",
    :line 1638,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-beta",
    :namespace "incanter.stats",
@@ -6034,7 +6034,7 @@
    :var-type "function",
    :line 480,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-binomial",
    :namespace "incanter.stats",
@@ -6049,7 +6049,7 @@
    :var-type "function",
    :line 1102,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-chisq",
    :namespace "incanter.stats",
@@ -6064,7 +6064,7 @@
    :var-type "function",
    :line 675,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "cdf-empirical",
    :namespace "incanter.stats",
@@ -6079,7 +6079,7 @@
    :var-type "function",
    :line 1354,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-exp",
    :namespace "incanter.stats",
@@ -6094,7 +6094,7 @@
    :var-type "function",
    :line 894,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-f",
    :namespace "incanter.stats",
@@ -6109,7 +6109,7 @@
    :var-type "function",
    :line 122,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-gamma",
    :namespace "incanter.stats",
@@ -6124,7 +6124,7 @@
    :var-type "function",
    :line 579,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-neg-binomial",
    :namespace "incanter.stats",
@@ -6139,7 +6139,7 @@
    :var-type "function",
    :line 1289,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-normal",
    :namespace "incanter.stats",
@@ -6154,7 +6154,7 @@
    :var-type "function",
    :line 196,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-poisson",
    :namespace "incanter.stats",
@@ -6169,7 +6169,7 @@
    :var-type "function",
    :line 1196,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-t",
    :namespace "incanter.stats",
@@ -6184,7 +6184,7 @@
    :var-type "function",
    :line 765,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-uniform",
    :namespace "incanter.stats",
@@ -6199,7 +6199,7 @@
    :var-type "function",
    :line 382,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "chebyshev-distance",
    :namespace "incanter.stats",
@@ -6214,7 +6214,7 @@
    :var-type "function",
    :line 2883,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([& options]),
    :name "chisq-test",
    :namespace "incanter.stats",
@@ -6229,7 +6229,7 @@
    :var-type "function",
    :line 2262,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x y] [mat]),
    :name "correlation",
    :namespace "incanter.stats",
@@ -6244,7 +6244,7 @@
    :var-type "function",
    :line 1480,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "correlation-linearity-test",
    :namespace "incanter.stats",
@@ -6259,7 +6259,7 @@
    :var-type "function",
    :line 2682,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([& xs]),
    :name "correlation-ratio",
    :namespace "incanter.stats",
@@ -6274,7 +6274,7 @@
    :var-type "function",
    :line 2644,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "cosine-similarity",
    :namespace "incanter.stats",
@@ -6289,7 +6289,7 @@
    :var-type "function",
    :line 2904,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x y] [mat]),
    :name "covariance",
    :namespace "incanter.stats",
@@ -6304,7 +6304,7 @@
    :var-type "function",
    :line 1428,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([coll]),
    :name "cumulative-mean",
    :namespace "incanter.stats",
@@ -6319,7 +6319,7 @@
    :var-type "function",
    :line 1765,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([& options]),
    :name "detabulate",
    :namespace "incanter.stats",
@@ -6334,7 +6334,7 @@
    :var-type "function",
    :line 2480,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "dice-coefficient",
    :namespace "incanter.stats",
@@ -6349,7 +6349,7 @@
    :var-type "function",
    :line 2982,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "dice-coefficient-str",
    :namespace "incanter.stats",
@@ -6364,7 +6364,7 @@
    :var-type "function",
    :line 3008,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "discordant-pairs",
    :namespace "incanter.stats",
@@ -6378,7 +6378,7 @@
    :var-type "function",
    :line 2767,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "euclidean-distance",
    :namespace "incanter.stats",
@@ -6393,7 +6393,7 @@
    :var-type "function",
    :line 2876,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([]),
    :name "gamma-coefficient",
    :namespace "incanter.stats",
@@ -6408,7 +6408,7 @@
    :var-type "function",
    :line 2790,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "hamming-distance",
    :namespace "incanter.stats",
@@ -6423,7 +6423,7 @@
    :var-type "function",
    :line 3031,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([pred coll]),
    :name "indicator",
    :namespace "incanter.stats",
@@ -6438,7 +6438,7 @@
    :var-type "function",
    :line 51,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "jaccard-distance",
    :namespace "incanter.stats",
@@ -6453,7 +6453,7 @@
    :var-type "function",
    :line 2971,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "jaccard-index",
    :namespace "incanter.stats",
@@ -6468,7 +6468,7 @@
    :var-type "function",
    :line 2960,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "kendalls-tau",
    :namespace "incanter.stats",
@@ -6483,7 +6483,7 @@
    :var-type "function",
    :line 2718,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([]),
    :name "kendalls-w",
    :namespace "incanter.stats",
@@ -6498,7 +6498,7 @@
    :var-type "function",
    :line 2799,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "kurtosis",
    :namespace "incanter.stats",
@@ -6513,7 +6513,7 @@
    :var-type "function",
    :line 1523,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b q]),
    :name "lee-distance",
    :namespace "incanter.stats",
@@ -6528,7 +6528,7 @@
    :var-type "function",
    :line 3046,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "levenshtein-distance",
    :namespace "incanter.stats",
@@ -6543,7 +6543,7 @@
    :var-type "function",
    :line 3093,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([y x & options]),
    :name "linear-model",
    :namespace "incanter.stats",
@@ -6558,7 +6558,7 @@
    :var-type "function",
    :line 1943,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "mahalanobis-distance",
    :namespace "incanter.stats",
@@ -6573,7 +6573,7 @@
    :var-type "function",
    :line 3196,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "manhattan-distance",
    :namespace "incanter.stats",
@@ -6588,7 +6588,7 @@
    :var-type "function",
    :line 2893,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "mean",
    :namespace "incanter.stats",
@@ -6603,7 +6603,7 @@
    :var-type "function",
    :line 1394,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "median",
    :namespace "incanter.stats",
@@ -6618,7 +6618,7 @@
    :var-type "function",
    :line 1505,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b p]),
    :name "minkowski-distance",
    :namespace "incanter.stats",
@@ -6633,7 +6633,7 @@
    :var-type "function",
    :line 2852,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([n s]),
    :name "n-grams",
    :namespace "incanter.stats",
@@ -6648,7 +6648,7 @@
    :var-type "function",
    :line 2994,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "normalized-kendall-tau-distance",
    :namespace "incanter.stats",
@@ -6663,7 +6663,7 @@
    :var-type "function",
    :line 2777,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([p1 p2]),
    :name "odds-ratio",
    :namespace "incanter.stats",
@@ -6678,7 +6678,7 @@
    :var-type "function",
    :line 2624,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "pairings",
    :namespace "incanter.stats",
@@ -6692,7 +6692,7 @@
    :var-type "function",
    :line 2754,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "pairs",
    :namespace "incanter.stats",
@@ -6707,7 +6707,7 @@
    :var-type "function",
    :line 2742,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-beta",
    :namespace "incanter.stats",
@@ -6722,7 +6722,7 @@
    :var-type "function",
    :line 451,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-binomial",
    :namespace "incanter.stats",
@@ -6737,7 +6737,7 @@
    :var-type "function",
    :line 1072,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-chisq",
    :namespace "incanter.stats",
@@ -6752,7 +6752,7 @@
    :var-type "function",
    :line 647,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-exp",
    :namespace "incanter.stats",
@@ -6767,7 +6767,7 @@
    :var-type "function",
    :line 867,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-f",
    :namespace "incanter.stats",
@@ -6782,7 +6782,7 @@
    :var-type "function",
    :line 85,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-gamma",
    :namespace "incanter.stats",
@@ -6797,7 +6797,7 @@
    :var-type "function",
    :line 549,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-neg-binomial",
    :namespace "incanter.stats",
@@ -6812,7 +6812,7 @@
    :var-type "function",
    :line 1258,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-normal",
    :namespace "incanter.stats",
@@ -6827,7 +6827,7 @@
    :var-type "function",
    :line 166,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-poisson",
    :namespace "incanter.stats",
@@ -6842,7 +6842,7 @@
    :var-type "function",
    :line 1168,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-t",
    :namespace "incanter.stats",
@@ -6857,7 +6857,7 @@
    :var-type "function",
    :line 738,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-uniform",
    :namespace "incanter.stats",
@@ -6872,7 +6872,7 @@
    :var-type "function",
    :line 352,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x] [x y]),
    :name "permute",
    :namespace "incanter.stats",
@@ -6887,7 +6887,7 @@
    :var-type "function",
    :line 1809,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([model x]),
    :name "predict",
    :namespace "incanter.stats",
@@ -6902,7 +6902,7 @@
    :var-type "function",
    :line 2593,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "principal-components",
    :namespace "incanter.stats",
@@ -6917,7 +6917,7 @@
    :var-type "function",
    :line 2422,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([j]),
    :name "product-marginal-test",
    :namespace "incanter.stats",
@@ -6932,7 +6932,7 @@
    :var-type "function",
    :line 2841,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "quantile",
    :namespace "incanter.stats",
@@ -6947,7 +6947,7 @@
    :var-type "function",
    :line 1563,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([probability & options]),
    :name "quantile-normal",
    :namespace "incanter.stats",
@@ -6962,7 +6962,7 @@
    :var-type "function",
    :line 225,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([probability & options]),
    :name "quantile-t",
    :namespace "incanter.stats",
@@ -6977,7 +6977,7 @@
    :var-type "function",
    :line 795,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "rank-index",
    :namespace "incanter.stats",
@@ -6992,7 +6992,7 @@
    :var-type "function",
    :line 2692,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "sample",
    :namespace "incanter.stats",
@@ -7007,7 +7007,7 @@
    :var-type "function",
    :line 1598,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-beta",
    :namespace "incanter.stats",
@@ -7022,7 +7022,7 @@
    :var-type "function",
    :line 517,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-binomial",
    :namespace "incanter.stats",
@@ -7037,7 +7037,7 @@
    :var-type "function",
    :line 1136,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-chisq",
    :namespace "incanter.stats",
@@ -7052,7 +7052,7 @@
    :var-type "function",
    :line 708,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size alpha]),
    :name "sample-dirichlet",
    :namespace "incanter.stats",
@@ -7067,7 +7067,7 @@
    :var-type "function",
    :line 1021,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-exp",
    :namespace "incanter.stats",
@@ -7082,7 +7082,7 @@
    :var-type "function",
    :line 921,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-gamma",
    :namespace "incanter.stats",
@@ -7097,7 +7097,7 @@
    :var-type "function",
    :line 614,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([& options]),
    :name "sample-inv-wishart",
    :namespace "incanter.stats",
@@ -7112,7 +7112,7 @@
    :var-type "function",
    :line 990,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-mvn",
    :namespace "incanter.stats",
@@ -7127,7 +7127,7 @@
    :var-type "function",
    :line 292,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-neg-binomial",
    :namespace "incanter.stats",
@@ -7142,7 +7142,7 @@
    :var-type "function",
    :line 1322,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-normal",
    :namespace "incanter.stats",
@@ -7157,7 +7157,7 @@
    :var-type "function",
    :line 260,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([n x] [n x y]),
    :name "sample-permutations",
    :namespace "incanter.stats",
@@ -7172,7 +7172,7 @@
    :var-type "function",
    :line 1837,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-poisson",
    :namespace "incanter.stats",
@@ -7187,7 +7187,7 @@
    :var-type "function",
    :line 1228,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-t",
    :namespace "incanter.stats",
@@ -7202,7 +7202,7 @@
    :var-type "function",
    :line 835,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-uniform",
    :namespace "incanter.stats",
@@ -7217,7 +7217,7 @@
    :var-type "function",
    :line 412,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([& options]),
    :name "sample-wishart",
    :namespace "incanter.stats",
@@ -7232,7 +7232,7 @@
    :var-type "function",
    :line 953,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "sd",
    :namespace "incanter.stats",
@@ -7247,7 +7247,7 @@
    :var-type "function",
    :line 1460,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([y x & options]),
    :name "simple-regression",
    :namespace "incanter.stats",
@@ -7262,7 +7262,7 @@
    :var-type "function",
    :line 2575,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "skewness",
    :namespace "incanter.stats",
@@ -7277,7 +7277,7 @@
    :var-type "function",
    :line 1544,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([probs buckets]),
    :name "smooth-discrete-probs",
    :namespace "incanter.stats",
@@ -7292,7 +7292,7 @@
    :var-type "function",
    :line 2603,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "sorensen-index",
    :namespace "incanter.stats",
@@ -7307,7 +7307,7 @@
    :var-type "function",
    :line 3067,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "spearmans-rho",
    :namespace "incanter.stats",
@@ -7322,7 +7322,7 @@
    :var-type "function",
    :line 2699,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x] [x m]),
    :name "square-devs-from-mean",
    :namespace "incanter.stats",
@@ -7337,7 +7337,7 @@
    :var-type "function",
    :line 2552,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x] [x m]),
    :name "sum-of-square-devs-from-mean",
    :namespace "incanter.stats",
@@ -7352,7 +7352,7 @@
    :var-type "function",
    :line 2565,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([vs]),
    :name "sum-variance-test",
    :namespace "incanter.stats",
@@ -7367,7 +7367,7 @@
    :var-type "function",
    :line 2831,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "sweep",
    :namespace "incanter.stats",
@@ -7382,7 +7382,7 @@
    :var-type "function",
    :line 1778,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "t-test",
    :namespace "incanter.stats",
@@ -7397,7 +7397,7 @@
    :var-type "function",
    :line 2065,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "tabulate",
    :namespace "incanter.stats",
@@ -7412,7 +7412,7 @@
    :var-type "function",
    :line 2161,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "tanimoto-coefficient",
    :namespace "incanter.stats",
@@ -7427,7 +7427,7 @@
    :var-type "function",
    :line 2939,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([x]),
    :name "variance",
    :namespace "incanter.stats",
@@ -7442,7 +7442,7 @@
    :var-type "function",
    :line 1412,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([z x y]),
    :name "within",
    :namespace "incanter.stats",
@@ -7456,7 +7456,7 @@
    :var-type "function",
    :line 2545,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/stats.clj"}
   {:arglists ([m]),
    :name "all-keys",
    :namespace "incanter.transformations",
@@ -7471,7 +7471,7 @@
    :var-type "function",
    :line 82,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
   {:arglists ([m]),
    :name "bottom-level?",
    :namespace "incanter.transformations",
@@ -7486,7 +7486,7 @@
    :var-type "function",
    :line 96,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
   {:arglists ([f nested-map]),
    :name "flatten-with",
    :namespace "incanter.transformations",
@@ -7501,7 +7501,7 @@
    :var-type "function",
    :line 127,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
   {:arglists ([m]),
    :name "levels-deep",
    :namespace "incanter.transformations",
@@ -7516,7 +7516,7 @@
    :var-type "function",
    :line 106,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"}
   {:arglists ([z]),
    :name "table-to-vectors",
    :namespace "incanter.transformations",
@@ -7531,4 +7531,4 @@
    :var-type "function",
    :line 7,
    :file
-   "/home/tom/src/clj/autodoc-stable/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"})}
+   "/home/tom/src/clj/autodoc/../autodoc-work-area/incanter/src/modules/incanter-core/src/main/clojure/incanter/transformations.clj"})}
