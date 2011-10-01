@@ -31,7 +31,8 @@
   incanter.core
 
   (:use [incanter internal]
-        [incanter.infix :only (infix-to-prefix defop)])
+        [incanter.infix :only (infix-to-prefix defop)]
+        [clojure.set :only (difference)])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
@@ -51,9 +52,10 @@
            (java.util Vector)))
 
 
- (def ^{:doc "This variable is bound to a dataset when the with-data macro is used.
+(def ^{:dynamic true
+       :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."} 
-      $data)
+     $data)
 
 (defrecord Dataset [column-names rows])
 (derive incanter.core.Dataset ::dataset)
@@ -312,8 +314,6 @@
          (.viewSelection mat (int-array rows) (int-array cols))
        (and all-rows? all-cols?)
          mat))))
-
-
 
 (defn bind-rows
 "   Returns the matrix resulting from concatenating the given matrices
@@ -1567,21 +1567,20 @@ altering later ones."
 "
   ([cols] 
      ($ :all cols $data))
-  ([cols data] 
-     (cond
-       (nil? data) 
-         ($ :all cols $data)
-       (or (matrix? data) (dataset? data))
-         ($ :all cols data)
-       :else ;; data is actually a col index and cols is a row index
-         ($ cols data $data)))
+  ([arg1 arg2]
+     (let [rows-cols-data
+	   (cond (nil? arg2) [:all arg1 $data]
+	         (or (matrix? arg2) (dataset? arg2)) [:all arg1 arg2]
+	         :else [arg1 arg2 $data])]
+       (apply $ rows-cols-data)))
   ([rows cols data]
      (let [except-rows? (and (vector? rows) (= :not (first rows)))
            except-cols? (and (vector? cols) (= :not (first cols)))
            _rows (if except-rows?
-                   (if (coll? (second rows))
-                     (conj [:except-rows] (second rows))
-                     (conj [:except-rows] (rest rows)))              
+		   (conj [:except-rows] 
+			 (if (coll? (second rows))
+			   (second rows)
+			   (rest rows)))
                    [:rows rows])
            _cols (if except-cols?
                    (if (coll? (second cols)) 
@@ -1592,6 +1591,12 @@ altering later ones."
        (apply sel data args))))
 
 
+(defn head 
+  "Returns the head of the dataset. 10 or full dataset by default."
+  ([len mat]
+     ($ (range (min len (nrow mat))) :all mat))
+  ([mat]
+     (head 10 mat)))
 
 (defn $where 
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
@@ -2013,10 +2018,10 @@ altering later ones."
                                   merge
                                   [merge])))
            __group-by (if (empty? _group-by)
-                        (clojure.set/difference (into #{} (col-names data)) _merge)
+                        (difference (into #{} (col-names data)) _merge)
                         _group-by)
            __merge (if (empty? _merge)
-                        (clojure.set/difference (into #{} (col-names data)) _group-by)
+                        (difference (into #{} (col-names data)) _group-by)
                         _merge)
            deshaped-data (mapcat (fn [row] 
                                    (let [base-map (zipmap __group-by 
@@ -2159,7 +2164,7 @@ altering later ones."
 
 
 (defn- get-dummies [n]
-  (let [nbits (dec (Math/ceil (log2 n)))]
+  (let [nbits (int (dec (Math/ceil (log2 n))))]
     (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
          (range n))))
 
@@ -2169,7 +2174,8 @@ altering later ones."
         levels (:levels cat-var)
         encoded-data (to-levels coll :categorical-var cat-var)
         bit-map (get-dummies (count levels))]
-    (for [item encoded-data] (nth bit-map item))))
+    (for [item encoded-data]
+      (nth bit-map item))))
 
 
 (defn- get-columns [dataset column-keys]
@@ -2179,6 +2185,7 @@ altering later ones."
 
 (defn- string-to-categorical [dataset column-key dummies?]
   (let [col (first (get-columns dataset [column-key]))]
+
     (if (some string? col)
       (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
@@ -2526,6 +2533,44 @@ altering later ones."
 (defn quit
 " Exits the Clojure shell."
   ([] (System/exit 0)))
+
+
+(defn- count-types 
+  "Helper function. Takes in a seq (usually from a column from an Incanter dataset) and returns a map of types -> counts of the occurance 
+of each type" 
+  ([my-col] 
+   (reduce 
+    (fn [counts x] 
+     (let [t (type x) c (get counts t)] (assoc counts t (inc (if (nil? c) 0 c)))))
+    {}
+    my-col)))
+
+
+(defn- count-col-types
+  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column. Counts nils."
+  ([col ds]
+   (count-types ($ col ds))))
+
+
+(defn- stat-summarizable?
+  "Placeholder stub function, for more advanced cases where we want to automatically ignore occasional bad values in a column."
+  ([types] 
+    false))
+
+
+(defn summarizable? 
+  "Takes in a column (number or name) and a dataset. Returns true if summarizable"
+  ([col ds]
+   (let [type-counts (dissoc (count-col-types col ds) nil)
+         ds-col ($ col ds)]
+    (if (= 1 (count type-counts))
+        true
+        (if (every? #(.isAssignableFrom java.lang.Number %) (keys type-counts))
+            true
+            (if (and (= 2 (count type-counts)) (contains? type-counts java.lang.String) (contains? type-counts clojure.lang.Keyword))
+                true 
+                (stat-summarizable? type-counts)))))))
+
 
 
 

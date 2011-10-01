@@ -20,10 +20,10 @@
   (:use [incanter.io :only (read-dataset)]))
 
 
-(def **datasets-base-url** "https://github.com/liebke/incanter/raw/master/")
+(def ^:dynamic **datasets-base-url** "https://github.com/liebke/incanter/raw/master/")
 
 
-(def **datasets**
+(def ^:dynamic **datasets**
   {
    :iris {:filename "data/iris.dat"
           :delim \space

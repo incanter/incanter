@@ -184,7 +184,7 @@
 ;; Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.
 (deftest dice-string
   (is 
-   (= 0.25
+   (== 0.25
       (dice-coefficient-str "night" "nacht"))))
 
 (deftest get-ngrams
@@ -236,7 +236,7 @@
 
 (deftest chebyshev
   (is 
-   (= 2 
+   (== 2 
       (chebyshev-distance [2 4 3 1 6]
 			  [3 5 1 2 5]))))
 

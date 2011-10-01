@@ -21,9 +21,8 @@
            (cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT)
            (cern.jet.stat.tdouble Probability)
            (cern.jet.random.tdouble.engine DoubleMersenneTwister))
-  (:use [clojure.contrib.def :only (defvar defvar-)]
-        [clojure.set :only (intersection)]
-        [clojure.contrib.combinatorics :only (combinations)]
+  (:use [clojure.set :only (intersection difference)]
+        [clojure.math.combinatorics :only (combinations)]
         [incanter.core :only (gamma pow regularized-beta)]))
 
 ;; NOTE: as of this writing, (doc pdf/cdf/...) do not show the doc strings.
@@ -296,7 +295,7 @@
   ([] (integer-distribution 0 1))
   ([end] (integer-distribution 0 end))
   ([start end]
-     (assert (> end start))
+     {:pre [(> end start)]}
      (UniformInt. start end)))
 
 ;;;; Combination Sampling: Draws from the nCk possible combinations ;;;;
@@ -311,14 +310,13 @@
   "Decodes a 0 to nCk - 1 integer into its combinadic form, a set of
 	k-tuple of indices, where each index i is 0 < i < n - 1"
   [n k c]
-  (let [max-c (nCk n k)]
-      (assert (and (<= 0 c) (> max-c c)))
-      (loop [candidate (dec n) ks (range k 0 -1) remaining c tuple '()]
-        (if (empty? ks) tuple ;; <- return value of function
-            (let [k (first ks)
-                  v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
-              (assert (not (nil? v)))
-              (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v)))))))
+  {:pre [(<= 0 c) (> (nCk n k) c)] }
+    (loop [candidate (dec n) ks (range k 0 -1) remaining c tuple '()]
+      (if (empty? ks) tuple ;; <- return value of function
+          (let [k (first ks)
+                v (first (filter #(>= remaining (nCk % k)) (range candidate (- k 2) -1)))]
+            (assert (not (nil? v)))
+            (recur v (rest ks) (- remaining (nCk v k)) (conj tuple v))))))
 
 
 
@@ -369,12 +367,12 @@
 	Examples:
 		
 "  
-  [n k]
-  	(assert (>= n k)) (assert (and (<= 0 n) (<= 0 k)))
+  [n k] 
+    {:pre [(>= n k) (and (<= 0 n) (<= 0 k))] }
   	(Combination. n k (integer-distribution 0 (nCk n k))))
 
-(def *test-statistic-iterations* 1000)
-(def *test-statistic-map* pmap)
+(def ^:dynamic *test-statistic-iterations* 1000)
+(def ^:dynamic *test-statistic-map* pmap)
 
 (defn test-statistic-distribution
 "
@@ -437,8 +435,8 @@
 ;; NORMAL DISTRIBUTION 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar- inf+ Double/POSITIVE_INFINITY)
-(defvar- inf- Double/NEGATIVE_INFINITY)
+(def inf+ Double/POSITIVE_INFINITY)
+(def inf- Double/NEGATIVE_INFINITY)
 
 ; NOTE: the pdf and cdf functions require a reflection call. They could be made
 ; to note reflect by type hinting the d argument:
@@ -446,7 +444,7 @@
 ; for now, I'm skipping this optimization so that more distributions can be boostrapped
 ; quickly using the extenders map. This can be easily pulled out for each distribution
 ; later, and appropriate type hints inserted.
-(defvar- colt-extenders
+(def colt-extenders
   {:pdf (fn [d v] (.pdf d v))
    :cdf (fn [d v] (.cdf d v))
    :draw (fn [#^cern.jet.random.tdouble.AbstractDoubleDistribution d] (.nextDouble d))

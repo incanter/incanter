@@ -7,3 +7,5 @@ lib
 classes
 *.jar
 *.log
+.cake
+.lein-failures
