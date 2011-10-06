@@ -7,3 +7,4 @@ lib
 classes
 *.jar
 *.log
+.lein*

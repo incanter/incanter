@@ -1,4 +1,4 @@
-(defproject incanter "1.2.3"
+(defproject incanter "1.2.4"
   :description "Incanter is a Clojure-based, R-like statistical programming and data visualization environment."
   :dependencies [[incanter/incanter-core "1.2.3"]
                  [incanter/incanter-io "1.2.3"]
