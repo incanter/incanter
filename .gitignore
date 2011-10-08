@@ -7,5 +7,6 @@ lib
 classes
 *.jar
 *.log
+<<<<<<< HEAD
 .cake
-.lein-failures
+.lein*

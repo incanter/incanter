@@ -5,7 +5,8 @@
        :author "David Edgar Liebke"}
 
   incanter.latex
-  (:import [org.scilab.forge.jlatexmath TeXConstants TeXIcon TeXFormula]))
+  (:import [org.scilab.forge.jlatexmath TeXConstants TeXIcon TeXFormula])
+  (:use [incanter.core :only [dim]]))
 
 
 
@@ -107,4 +108,29 @@
      (.addAnnotation (.getPlot chart) anno)
      chart)))
 
+(defn to-latex
+  "Convert an Incanter Matrix into a string of LaTeX commands to render it.
 
+Options:
+  :mxtype (default pmatrix) -- the type of matrix to output, see LaTeX documentation for other options.
+Example:
+    (use '(incanter core latex))
+    (view (latex (to-latex (matrix [[1 0][0 1]]))))
+"
+  [mx &
+   {:keys [mxtype]
+    :or {mxtype "pmatrix"}}]
+  (let [dimensions (zipmap [:height :width] (dim mx))
+        write-row (fn [coll] (apply str (interpose " & " coll)))]
+   (str
+    "\\begin{" mxtype "}"
+    (apply
+     str
+     (interpose
+      "\\\\"
+      (map
+       write-row
+       (map
+        (partial nth mx)
+        (range (:height dimensions))))))
+    "\\end{" mxtype "}")))
