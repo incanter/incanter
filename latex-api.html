@@ -62,6 +62,8 @@ namespace.
       <a href="#incanter.latex/add-latex-subtitle">add-latex-subtitle</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.latex/latex">latex</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.latex/to-latex">to-latex</a>
     </div>
     <br />
   </div>
@@ -109,7 +111,7 @@ Examples:
       view)</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L83" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/e0309007aec6ac2c4085abca3ffbfa9dad7a54dd/modules/incanter-latex/src/incanter/latex.clj#L84" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -132,7 +134,7 @@ Examples:
     view)</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L60" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/e0309007aec6ac2c4085abca3ffbfa9dad7a54dd/modules/incanter-latex/src/incanter/latex.clj#L61" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -163,7 +165,24 @@ Examples:
                  \\end{pmatrix}"))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/b6f131eeceeb1214f47b9df984c68b8b0ef417a9/modules/incanter-latex/src/incanter/latex.clj#L12" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/e0309007aec6ac2c4085abca3ffbfa9dad7a54dd/modules/incanter-latex/src/incanter/latex.clj#L13" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.latex/to-latex">to-latex</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (to-latex mx &amp; {:keys [mxtype], :or {mxtype pmatrix}})
+</pre>
+  <pre id="var-docstr">Convert an Incanter Matrix into a string of LaTeX commands to render it.
+
+Options:
+  :mxtype (default pmatrix) -- the type of matrix to output, see LaTeX documentation for other options.
+Example:
+    (use '(incanter core latex))
+    (view (latex (to-latex (matrix [[1 0][0 1]]))))</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/e0309007aec6ac2c4085abca3ffbfa9dad7a54dd/modules/incanter-latex/src/incanter/latex.clj#L111" id="var-source">Source</a>
 </div>
 
 
