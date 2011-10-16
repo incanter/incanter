@@ -2527,66 +2527,6 @@ altering later ones."
   ([] (System/exit 0)))
 
 
-(defn- count-col-types
-  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column. Counts nils."
-  ([col ds]
-    (frequencies (map type ($ col ds)))))
-
-
-(defn- stat-summarizable
-  "Placeholder stub function, for more advanced cases where we want to automatically ignore occasional bad values in a column."
-  ([types] 
-    "Statistical summarizablity is currently stubbed out. Please contact the dev team if you're seeing this message."))
-
-
-(defn numeric-col-summarizer
-  "Returns a summarizer function which takes a purely numeric column with no non-numeric values"
-  ([col ds] {:min (reduce min ($ col ds)) :max (reduce max ($ col ds)) :mean (mean ($ col ds)) :median (median ($ col ds)) :is-numeric true}))
-
-
-(defn category-col-summarizer
-  "Returns a summarizer function which takes a category column and returns a list of the top 5 columns by volume, and a 
-   count of remaining rows"
-  ([col ds] (let [freqs (frequencies ($ col ds)) top-5 (take 5 (reverse (sort-by val freqs)))]
-    (into {:count (- (reduce + (map val freqs)) (reduce + (map val (into {} top-5)))) :is-numeric false} top-5))))
-
-
-(defn choose-singletype-col-summarizer
-  "Takes in a type, and returns a suitable column summarizer"
-  ([col-type]
-    (if (.isAssignableFrom java.lang.Number col-type)
-        numeric-col-summarizer
-        (if (or (.isAssignableFrom java.lang.String col-type) (.isAssignableFrom clojure.lang.Keyword col-type))
-          category-col-summarizer
-          ; FIXME Deal with date columns
-          (str "Don't know how to summarize a column of type: " col-type)
-          ))))
-
-
-(defn summarizer-fn 
-  "Takes in a column (number or name) and a dataset. Returns a function to summarize the column if summarizable, and a 
-   string describing why the column can't be summarized in the event that it can't"
-  ([col ds]
-   (let [type-counts (dissoc (count-col-types col ds) nil)]
-    (if (= 1 (count type-counts))
-        (choose-singletype-col-summarizer (nth (keys type-counts) 0))
-        (if (every? #(.isAssignableFrom java.lang.Number %) (keys type-counts))
-            numeric-col-summarizer
-            (if (and (= 2 (count type-counts)) (contains? type-counts java.lang.String) (contains? type-counts clojure.lang.Keyword))
-                category-col-summarizer
-                (stat-summarizable type-counts)))))))
-
-(defn summary
-  "Takes in a dataset. Returns a summary of that dataset (as a map of maps), having automatically figured out the relevant 
-   datatypes of columns. Will be slightly forgiving of mangled data in columns."
-  ([ds] 
-    (let [cols (:column-names ds)]
-      (map #(let [r (summarizer-fn %1 ds)]
-              (if (fn? r)
-                  (r %1 ds)
-                  r)) cols))))
-
-
 (defmulti save
 " Save is a multi-function that is used to write matrices, datasets and
   charts (in png format) to a file.
