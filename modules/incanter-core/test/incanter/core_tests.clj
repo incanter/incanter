@@ -46,6 +46,9 @@
 (def summary-ds6 (to-dataset [[1] [2.1] ["c"]]))
 (def summary-ds7 (to-dataset [[1] [2.1] [nil]]))
 
+(def summary-ds8 (to-dataset [["a"] ["b"] ["c"] ["d"] ["b"] ["e"] ["a"] ["b"] ["f"] ["a"] ["b"] ["e"]]))
+
+
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
   (is (= (sel dataset2 :cols :b) [2 5]))
