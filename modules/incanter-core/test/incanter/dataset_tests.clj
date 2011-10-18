@@ -47,6 +47,9 @@
     (is (= ($ :speed) [60 70]))
     (is (= ($ :speed nil) [60 70]))))
 
+(deftest test-head
+  (is (= (head 2 dataset1) ($ (range 2) :all dataset1)))
+  (is (= (head dataset1) ($ (range 2) :all dataset1))))
 
 ;; (deftest selects-on-badly-named-atoms
 ;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
