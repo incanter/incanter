@@ -2183,6 +2183,7 @@
        :y-mean y-mean
        :y-var y-var
        :n2 n2
+       ;;FIXME: This should never be *2!  This is wrong...
        :p-value (if (= alternative :two-sided) (* 2 one-sided-p) one-sided-p)
        :conf-int (if one-sample?
                    ;; one-sample confidence interval
@@ -2200,6 +2201,34 @@
                       Double/POSITIVE_INFINITY
                       (- (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))])
        })))
+
+(defn simple-t-test
+  "Perform a simple t-test on the data contained in coll."
+  [coll mu]
+  (let [m (mean coll)
+        c (count coll)]
+    (/ (- m mu)
+       (/ (sd coll)
+          (sqrt c)))))
+
+(defn simple-p-value
+  "Returns the p-value for the data contained in coll."
+  [coll mu]
+  (* 2
+     (cdf-t
+      (- (abs (simple-t-test coll mu)))
+      :df (dec (count coll)))))
+
+(defn simple-ci
+  "Get the confidence interval for the data."
+  [coll]
+  (let [m (mean coll)
+        c (count coll)
+        s (sd coll)
+        e (*
+           (quantile-t 0.975 :df (dec c))
+           (/ s (sqrt c)))]
+    {:lower (- m e) :upper (+ m e)}))
 
 (defn f-test
   "

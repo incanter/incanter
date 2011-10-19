@@ -276,4 +276,7 @@
   (is (summarizable? 0 summary-ds7))
   )
 
-
+(deftest simple-p-value-test
+  (testing "Basic p-value testing"
+    (is (= 1 (simple-p-value (range 1 11) 5.5)))
+    (is (< 0.999 (simple-p-value (range 1 11) 5.499)))))
