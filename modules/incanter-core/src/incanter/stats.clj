@@ -42,7 +42,7 @@
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
-                              matrix length sum sum-of-squares sel matrix?
+                              matrix length log10 sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]))
 
 (defn indicator
@@ -2502,6 +2502,44 @@ Test for different variances between 2 samples
        :col-margins c-margins
        :row-margins r-margins
        :E E})))
+
+;;;; START Benford's Law ;;;;
+(defn first-digit
+  [x]
+  (Character/digit (first (str x)) 10))
+
+;; define function for Benford's law
+(defn- benford-law [d] (log10 (+ 1 (div d))))
+;; calculate the probabilities for digits 1-9
+(def ^{:private true}
+      benford-probs (benford-law (range 1 11)))
+
+(defn get-counts [digits]
+  (map #(get (:counts (tabulate digits)) % 0) 
+       (range 1.0 10.0 1.0)))
+
+(defn benford-test
+"
+  Performs Benford's Law test using chisq-test.
+
+  Argument:
+  coll: -- a sequence of numbers
+
+  Returns:
+    :X-sq -- the Pearson X-squared test statistics
+    :p-value -- the p-value for the test statistic
+    :df -- the degress of freedom
+
+  Reference:
+  http://data-sorcery.org/2009/06/21/chi-square-goodness-of-fit/
+  http://en.wikipedia.org/wiki/Benford%27s_Law
+"
+  [coll]
+  (let [digits (map first-digit coll)]
+    (chisq-test :table (get-counts digits) 
+                :probs benford-probs)))
+
+;;;; END Benford's Law ;;;;
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
