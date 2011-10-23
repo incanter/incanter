@@ -40,10 +40,12 @@
 (defn write-line-values [{:keys [sheet bold normal workbook]} bold? row-number coll]
   (write-line sheet row-number coll (if bold? bold normal)))
 (defn cell-iterator [^Row row]
-  (for [idx (range (.getFirstCellNum row) (.getLastCellNum row))]
-    (if-let [cell (.getCell row idx)]
-      cell
-      (.createCell row idx Cell/CELL_TYPE_BLANK))))
+  (if row
+    (for [idx (range (.getFirstCellNum row) (.getLastCellNum row))]
+      (if-let [cell (.getCell row idx)]
+        cell
+        (.createCell row idx Cell/CELL_TYPE_BLANK)))
+    ()))
 
 (defn read-line-values [row-iterator-item]
   (doall (map get-cell-value (cell-iterator row-iterator-item))))
