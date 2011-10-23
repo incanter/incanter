@@ -3,9 +3,7 @@
            [org.apache.poi.ss.usermodel Workbook]
            [org.apache.poi.hssf.usermodel HSSFWorkbook]
            [org.apache.poi.xssf.usermodel XSSFWorkbook]
-
-           [java.io FileOutputStream])
-  )
+           [java.io FileOutputStream]))
 
 (defmulti ^ {:doc "Retrieve the Excel workbook based on either the index or the sheet name."}
   get-workbook-sheet
@@ -24,11 +22,16 @@
     (. c setFont f)
     c))
 
-(defn make-workbook-map [^Workbook w sheet]
-  {:workbook w
-   :normal (make-font true w)
-   :bold   (make-font false w)
-   :sheet  (. w createSheet sheet)})
+(defn create-sheet [blob ^String sheet]
+  (assoc blob :sheet (. (:workbook blob) createSheet sheet)))
+
+(defn make-workbook-map
+  ([^Workbook w]
+     {:workbook w
+      :normal (make-font true w)
+      :bold   (make-font false w)})
+  ([^Workbook w ^String sheet]
+     (create-sheet (make-workbook-map w) sheet)))
 
 (defn write-workbook
   [^Workbook workbook ^String filename]
@@ -50,3 +53,7 @@
       :else (if (. filename endsWith "xlsx")
               (XSSFWorkbook. filestream)
               (HSSFWorkbook. filestream)))))
+
+(defn get-all-sheets [^Workbook w]
+  (for [i (range 0 (. w getNumberOfSheets))]
+    (. w getSheetAt i)))
