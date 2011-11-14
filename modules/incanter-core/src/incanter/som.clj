@@ -193,8 +193,8 @@
                beta 3
                cycles 10}}]
    (loop [r 1 som (som-initialize-linear data) fit []]
-     (if (= r total-cycles)
+     (if (= r cycles)
        (assoc som :fit fit)
-       (let [new-som (som-update-weights r total-cycles (som-update-cells data som)
-                                         alpha-init beta-init)]
+       (let [new-som (som-update-weights r cycles (som-update-cells data som)
+                                         alpha beta)]
          (recur (inc r) new-som (conj fit (som-fitness data new-som))))))))
