@@ -2516,43 +2516,32 @@
    :arglists ([d]),
    :doc "variance",
    :name "variance"}
-  {:arglists
-   ([filename
-     &
-     {:keys [sheet header-keywords override-format],
-      :or {sheet 0, header-keywords false, override-format nil}}]),
-   :name "read-xls",
-   :namespace "incanter.excel",
-   :source-url
-   "https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj#L42",
+  {:file "modules/incanter-excel/src/incanter/excel.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj",
+   "https://github.com/liebke/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L96",
    :wiki-url
    "http://liebke.github.com/incanter//excel-api.html#incanter.excel/read-xls",
-   :doc
-   "Read an Excel file into a dataset. Note: cells containing formulas will be\nempty upon import.  Can read both older and newer Excel file formats, uses the filename suffix\nor :override-format option.\n\nOptions are:\n:sheet either a String for the tab name or an int for the sheet index -- defaults to 0\n:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)\n:override-format If nil use the filename suffix to guess the Excel file format.  If :xls\nor :xlsx override the suffix check.\n\n Examples:\n   (use '(incanter core io excel))\n   (view (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\"))\n\n   (use '(incanter core charts excel))\n   ;; read .xls file of Australian airline passenger data from the 1950s.\n   (with-data (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\")\n   (view $data)\n   ;; time-series-plot needs time in millisecs\n   ;; create a function, to-millis, to convert a sequence of Date objects\n   ;; to a sequence of milliseconds\n   (let [to-millis (fn [dates] (map #(.getTime %) dates))] \n     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))",
-   :var-type "function",
-   :line 42,
-   :file "modules/incanter-excel/src/incanter/excel.clj"}
-  {:arglists
-   ([dataset
-     filename
-     &
-     {:keys [use-bold sheet override-format],
-      :or {use-bold true, sheet "dataset", override-format nil}}]),
-   :name "save-xls",
    :namespace "incanter.excel",
-   :source-url
-   "https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj#L14",
+   :line 96,
+   :var-type "var",
+   :doc
+   "Read an Excel file into a dataset. Note: cells containing formulas will be\nempty upon import.  Can read both older and newer Excel file formats, uses the filename suffix\nor :override-format option.\n\nOptions are:\n:sheet either a String for the tab name or an int for the sheet index -- defaults to 0\n:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)\n:override-format If nil use the filename suffix to guess the Excel file format.  If :xls\nor :xlsx override the suffix check.\n:all-sheets? true to try to read in all sheets of data (false by default).\n\n Examples:\n   (use '(incanter core io excel))\n   (view (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\"))\n\n   (use '(incanter core charts excel))\n   ;; read .xls file of Australian airline passenger data from the 1950s.\n   (with-data (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\")\n   (view $data)\n   ;; time-series-plot needs time in millisecs\n   ;; create a function, to-millis, to convert a sequence of Date objects\n   ;; to a sequence of milliseconds\n   (let [to-millis (fn [dates] (map #(.getTime %) dates))] \n     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))",
+   :name "read-xls"}
+  {:file "modules/incanter-excel/src/incanter/excel.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj",
+   "https://github.com/liebke/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L25",
    :wiki-url
    "http://liebke.github.com/incanter//excel-api.html#incanter.excel/save-xls",
+   :namespace "incanter.excel",
+   :line 25,
+   :var-type "var",
    :doc
-   "Save a dataset to an Excel file.  Can save in both older and newer\nExcel formats, uses the filename suffix or :override-format option.\nOptions are:\n:sheet defaults to \"dataset\" if not provided.\n:use-bold defaults to true.  Set the header line in bold.\n:override-format If nil use the filename suffix to guess the Excel file format.\nIf :xls or :xlsx override the suffix check.\n\nExamples:\n  (use '(incanter core datasets excel))\n  (save-xls (get-dataset :cars) \"/tmp/cars.xls\")",
-   :var-type "function",
-   :line 14,
-   :file "modules/incanter-excel/src/incanter/excel.clj"}
+   "Save a dataset to an Excel file.  Can save in both older and newer\nExcel formats, uses the filename suffix or :override-format option.\n\nBy passing in a collection of datasets and names it is possible to write more than\none sheet at a time: e.g.\n  (save-xls [\"first sheet\" dataset1 \"second\" dataset2] my-file)\n\nOptions are:\n:sheet defaults to \"dataset\" if not provided.\n:use-bold defaults to true.  Set the header line in bold.\n:override-format If nil use the filename suffix to guess the Excel file format.\nIf :xls or :xlsx override the suffix check.\n\nExamples:\n  (use '(incanter core datasets excel))\n  (save-xls (get-dataset :cars) \"/tmp/cars.xls\")",
+   :name "save-xls"}
   {:arglists ([op prec & [trans]]),
    :name "defop",
    :namespace "incanter.infix",
@@ -5180,6 +5169,23 @@
    :var-type "function",
    :line 1396,
    :file "modules/incanter-processing/src/incanter/processing.clj"}
+  {:arglists
+   ([data
+     &
+     {:keys [alpha beta cycles], :or {alpha 0.5, beta 3, cycles 10}}]),
+   :name "som-batch-train",
+   :namespace "incanter.som",
+   :source-url
+   "https://github.com/liebke/incanter/blob/9b0206d6fa2ec0f986b801b8e3eebedbef618260/modules/incanter-core/src/incanter/som.clj#L136",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/9b0206d6fa2ec0f986b801b8e3eebedbef618260/modules/incanter-core/src/incanter/som.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//som-api.html#incanter.som/som-batch-train",
+   :doc
+   " Performs BL-SOM (batch-learning self organizing map) learning on\nthe given data, returning a hashmap containing resulting BL-SOM\nvalues.\n\n\nArguments:\n  data -- data matrix\n\nOptions:\n  :cycles -- number of cycles of learning\n  :alpha -- initial value of alpha learning parameter\n  :beta -- initial value of beta learning parameter\n\n\nReturns: A hashmap containing the following fields:\n\n  :fit -- array of fitness values for each cycle of SOM learning\n  :weights -- hashmap of weight vectors, keyed by lattice indices\n  :sets -- hashmap mapping data elements to lattice nodes\n           (key lattice index) (value list of row indices from data)\n  :dims -- dimensions of SOM lattice\n  :data-means -- column means of input data matrix\n\n\nExamples:\n\n  (use '(incanter core som stats charts datasets))\n  (def data (to-matrix (sel (get-dataset :iris)\n                         :cols [\"Sepal.Length\" \"Sepal.Width\" \"Petal.Length\" \"Petal.Width\"])))\n\n  (def som (som-batch-train data :cycles 10 :alpha 0.5 :beta 3))\n\n  ;; plot the fitness for each cycle of training\n  (view (xy-plot (range (count (:fit som))) (:fit som)))\n  ;; view indices of data items in each cell\n  (:sets som)\n  ;; view the species in each cell\n  (doseq [rws (vals (:sets som))]\n    (println (sel (get-dataset :iris) :cols \"Species\" :rows rws) \\newline))\n\n  ;; plot the means of the data vectors in each cell/cluster\n  (def cell-means (map #(map mean (trans (sel data :rows ((:sets som) %)))) (keys (:sets som))))\n  (def x (range (ncol data)))\n  (doto (xy-plot x (first cell-means))\n        view\n        (add-lines x (nth cell-means 1))\n        (add-lines x (nth cell-means 2)))\n\n\nReferences:\n\n  http://en.wikipedia.org/wiki/Self-organizing_map",
+   :var-type "function",
+   :line 136,
+   :file "modules/incanter-core/src/incanter/som.clj"}
   {:arglists ([x lag] [x lag mean variance]),
    :name "auto-correlation",
    :namespace "incanter.stats",
@@ -6702,13 +6708,13 @@
    :file "modules/incanter-core/src/incanter/symbolic.clj"}
   {:file "modules/incanter-excel/src/incanter/excel/workbook.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel/workbook.clj",
+   "https://github.com/liebke/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel/workbook.clj#L10",
+   "https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8",
    :wiki-url
    "http://liebke.github.com/incanter//excel-api.html#incanter.excel.workbook/get-workbook-sheet",
    :namespace "incanter.excel.workbook",
-   :line 10,
+   :line 8,
    :var-type "var",
    :doc
    "Retrieve the Excel workbook based on either the index or the sheet name.",

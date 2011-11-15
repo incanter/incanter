@@ -92,9 +92,8 @@ Excel file formats (.xls and .xlsx).</pre>
   <br />
   <hr />
   <h2 id="incanter.excel/read-xls">read-xls</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (read-xls filename &amp; {:keys [sheet header-keywords override-format], :or {sheet 0, header-keywords false, override-format nil}})
-</pre>
+  <span id="var-type">var</span><br />
+  <pre id="var-usage"></pre>
   <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
 or :override-format option.
@@ -104,6 +103,7 @@ Options are:
 :header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)
 :override-format If nil use the filename suffix to guess the Excel file format.  If :xls
 or :xlsx override the suffix check.
+:all-sheets? true to try to read in all sheets of data (false by default).
 
  Examples:
    (use '(incanter core io excel))
@@ -120,16 +120,20 @@ or :xlsx override the suffix check.
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj#L42" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L96" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.excel/save-xls">save-xls</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (save-xls dataset filename &amp; {:keys [use-bold sheet override-format], :or {use-bold true, sheet dataset, override-format nil}})
-</pre>
+  <span id="var-type">var</span><br />
+  <pre id="var-usage"></pre>
   <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
 Excel formats, uses the filename suffix or :override-format option.
+
+By passing in a collection of datasets and names it is possible to write more than
+one sheet at a time: e.g.
+  (save-xls ["first sheet" dataset1 "second" dataset2] my-file)
+
 Options are:
 :sheet defaults to "dataset" if not provided.
 :use-bold defaults to true.  Set the header line in bold.
@@ -141,7 +145,7 @@ Examples:
   (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel.clj#L14" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L25" id="var-source">Source</a>
 </div>
 <h2 id="namespace-name">excel.cells</h2>
 <pre id="namespace-docstr">Functions for reading and writing to cells.</pre>
@@ -162,7 +166,7 @@ Examples:
   <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7182005795c74c06983bd8ffcb2554358b2fbd9/modules/incanter-excel/src/incanter/excel/workbook.clj#L10" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8" id="var-source">Source</a>
 </div>
 
 
