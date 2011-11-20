@@ -31,7 +31,8 @@
   incanter.core
 
   (:use [incanter internal]
-        [incanter.infix :only (infix-to-prefix defop)])
+        [incanter.infix :only (infix-to-prefix defop)]
+        [clojure.set :only (difference)])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
@@ -51,9 +52,10 @@
            (java.util Vector)))
 
 
- (def ^{:doc "This variable is bound to a dataset when the with-data macro is used.
+(def ^{:dynamic true
+       :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."} 
-      $data)
+     $data)
 
 (defrecord Dataset [column-names rows])
 (derive incanter.core.Dataset ::dataset)
@@ -111,7 +113,7 @@
 
 
 (defn nrow
-  ^{:tag Integer 
+  ^{:tag Integer
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
@@ -121,7 +123,7 @@
 
 
 (defn ncol
-  ^{:tag Integer 
+  ^{:tag Integer
      :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
@@ -312,13 +314,6 @@
          (.viewSelection mat (int-array rows) (int-array cols))
        (and all-rows? all-cols?)
          mat))))
-
-(defn head 
-  "Returns the head of the dataset. 10 or full dataset by default."
-  ([len mat]
-     ($ (range (min len (nrow mat))) :all mat))
-  ([mat]
-     (head 10 mat)))
 
 (defn bind-rows
 "   Returns the matrix resulting from concatenating the given matrices
@@ -638,7 +633,7 @@
 
 (defmethod to-list ::dataset
   [data]
-    (map (fn [row] (map (fn [col] (row col)) 
+    (map (fn [row] (map (fn [col] (row col))
                                    (:column-names data)))
              (:rows data)))
 
@@ -812,8 +807,8 @@
 (defn prod
   "Returns the product of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) 
-               [1] 
+    (let [xx (if (or (nil? x) (empty? x))
+               [1]
                (to-list x))]
       (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
 
@@ -1148,8 +1143,8 @@
                         [dat]
                       (map? (first dat))
                         dat
-                      :else 
-                        (map #(apply assoc {} (interleave column-names %)) dat))] 
+                      :else
+                        (map #(apply assoc {} (interleave column-names %)) dat))]
       (Dataset. (into [] column-names) rows))))
 
 
@@ -1168,29 +1163,29 @@
     id))
 
 
-(defn- map-get 
-  ([m k] 
+(defn- map-get
+  ([m k]
      (if (keyword? k)
-       (or (get m k) (get m (name k))) 
+       (or (get m k) (get m (name k)))
        (get m k)))
   ([m k colnames]
-     (cond 
+     (cond
       (keyword? k)
-        (or (get m k) (get m (name k))) 
+        (or (get m k) (get m (name k)))
       (number? k)
         (get m (nth colnames k))
       :else
         (get m k))))
 
 (defn- submap [m ks]
-  (zipmap (if (coll? ks) ks [ks]) 
+  (zipmap (if (coll? ks) ks [ks])
           (map #(map-get m %) (if (coll? ks) ks [ks]))))
 
 
 
 
-(defn query-to-pred 
-  "Given a query-map, it returns a function that accepts a hash-map and returns true if it 
+(defn query-to-pred
+  "Given a query-map, it returns a function that accepts a hash-map and returns true if it
    satisfies the conditions specified in the provided query-map.
 
    Examples:
@@ -1221,35 +1216,35 @@
               :$eq = :$ne not=
               :$gte #(>= (compare %1 %2) 0)
               :$lte #(<= (compare %1 %2) 0)
-              :$in in-fn :$nin nin-fn  
+              :$in in-fn :$nin nin-fn
               :$fn (fn [v f] (f v))}
-         _and (fn [a b] (and a b))] 
-     (fn [row] 
+         _and (fn [a b] (and a b))]
+     (fn [row]
        (reduce _and
                (for [k (keys query-map)]
                  (if (map? (query-map k))
                    (reduce _and
                            (for [sk (keys (query-map k))]
-                             (cond 
+                             (cond
                               (fn? sk)
                                 (sk (row k) ((query-map k) sk))
-                              (nil? (ops sk)) 
+                              (nil? (ops sk))
                                 (throw (Exception. (str "Invalid key in query-map: " sk)))
                               :else
                                ((ops sk) (row k) ((query-map k) sk)))))
                    (= (row k) (query-map k)))))))))
 
 
-(defn query-dataset 
+(defn query-dataset
   "Queries the given dataset using the query-map, returning a new dataset.
     The query-map uses the the dataset's column-names as keys and a
-    simple variant of the MongoDB query language. 
+    simple variant of the MongoDB query language.
 
-    For instance, given a dataset with two columns, :x and :category,  to query 
+    For instance, given a dataset with two columns, :x and :category,  to query
     for rows where :x equals 10, use the following query-map: {:x 10}.
-    
+
     To indicate that :x should be between 10 and 20, use {:x {:$gt 10 :$lt 20}}.
-    
+
     To indicate that :category should also be either :red, :green, or :blue, use :$in
     {:x {:$gt 10 :$lt 20} :y {:$in #{:green :blue :red}}}
 
@@ -1258,14 +1253,14 @@
 
     The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in, :$nin, $fn.
 
-    A row predicate function can be used instead of a query-map. The function must accept 
-    a map, representing a row of the dataset, and return a boolean value indicating whether 
+    A row predicate function can be used instead of a query-map. The function must accept
+    a map, representing a row of the dataset, and return a boolean value indicating whether
     the row should be included in the new dataset.
 
    Examples:
       (use '(incanter core datasets))
       (def cars (get-dataset :cars))
-      
+
       (view (query-dataset cars {:speed 10}))
       (view (query-dataset cars {:speed {:$in #{17 14 19}}}))
       (view (query-dataset cars {:speed {:$lt 20 :$gt 10}}))
@@ -1280,8 +1275,8 @@
        (assoc data :rows
               (for [row (:rows data) :when (query-map row)] row))
        (let [qmap (into {}
-                        (for [k (keys query-map)] 
-                          (if (keyword? k) 
+                        (for [k (keys query-map)]
+                          (if (keyword? k)
                             (if (some #{k} (:column-names data))
                               [k (query-map k)]
                               [(name k) (query-map k)])
@@ -1303,7 +1298,7 @@
            except-names  (if (some number? _except-cols)
                            (map #(nth colnames %) _except-cols)
                            _except-cols)]
-       (for [name colnames :when (not (some #{name} except-names))] 
+       (for [name colnames :when (not (some #{name} except-names))]
          name))))
 
 
@@ -1313,25 +1308,25 @@
                  rows rows
                  except-rows (except-for (nrow data) except-rows)
                 :else true)
-          cols (cond 
-                 cols (cond 
+          cols (cond
+                 cols (cond
                         (coll? cols) cols
                         (or (= :all cols) (true? cols)) (:column-names data)
                         :else [cols])
                 except-cols (except-for-cols data except-cols)
                 :else (:column-names data))
           selected-rows (cond
-                          (or (= rows :all) (true? rows)) 
+                          (or (= rows :all) (true? rows))
                             (:rows data)
-                          (number? rows) 
+                          (number? rows)
                             (list (nth (:rows data) rows))
-                          (coll? rows) 
+                          (coll? rows)
                             (map #(nth (:rows data) %) rows))
           _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
           result (if (nil? filter) _data (clojure.core/filter filter _data))]
-      (cond 
+      (cond
         (= (count cols) 1)
-          (if (= (count result) 1) 
+          (if (= (count result) 1)
             (ffirst result)
             (mapcat identity result))
         (= (count result) 1)
@@ -1366,7 +1361,7 @@
                      (map? obj)
                        (keys obj)
                      (coll? obj)
-                       (cond 
+                       (cond
                         (map? (first obj))
                           (keys (first obj))
                         (coll? (first obj))
@@ -1376,18 +1371,18 @@
                         :else
                           [:col-0])
                      :else
-                       [:col-0]) 
+                       [:col-0])
            rows (cond
                  (dataset? obj)
                    (:rows obj)
                  (map? obj)
                    ;; see if any of the values are collections
-                   (if (reduce #(or %1 %2) (map coll? (vals obj))) 
+                   (if (reduce #(or %1 %2) (map coll? (vals obj)))
                      (vals obj)
                      [(vals obj)])
                    (coll? obj)
                      (cond
-                       (coll? (first obj)) 
+                       (coll? (first obj))
                          obj
                        transpose?
                          [obj]
@@ -1409,7 +1404,7 @@ altering later ones."
                           (if match
                             (new-name (keyword (str (second match) (inc (Integer/parseInt (nth match 2))))))
                             (new-name (keyword (str (.getName x) "-1")))))))]
-       
+
        (if (empty? coll) ()
            (let [name (new-name (first coll))]
              (cons name
@@ -1428,9 +1423,9 @@ altering later ones."
      (def renamed-data (col-names data [:x1 :x2]))
      (col-names renamed-data)
 
- 
+
     "
-  ([data] (:column-names data)) 
+  ([data] (:column-names data))
   ([data colnames]
      (dataset colnames (to-list data))))
 
@@ -1454,7 +1449,7 @@ altering later ones."
 
 "
   ([& args]
-     (reduce (fn [A B] 
+     (reduce (fn [A B]
                     (let [a (to-dataset A)
                            b (to-dataset B)
                            ncol-a (ncol a)
@@ -1481,16 +1476,16 @@ altering later ones."
 
 "
   ([& args]
-     (reduce (fn [A B] 
+     (reduce (fn [A B]
                    (let [a (to-dataset A :transpose true)
                          b (to-dataset B :transpose true)]
-                     (dataset (:column-names a) 
+                     (dataset (:column-names a)
                               (concat (to-list a) (to-list b)))))
              args)))
 
 
 
-(defn $ 
+(defn $
 "An alias to (sel (second args) :cols (first args)). If given only a single argument,
   it will use the $data binding for the first argument, which is set with
   the with-data macro.
@@ -1501,7 +1496,7 @@ altering later ones."
     (def cars (get-dataset :cars))
     ($ :speed cars)
 
-    
+
     (with-data cars
       (def lm (linear-model ($ :dist) ($ :speed)))
       (doto (scatter-plot ($ :speed) ($ :dist))
@@ -1510,7 +1505,7 @@ altering later ones."
 
     ;; standardize speed and dist and append the standardized variables to the original dataset
     (with-data (get-dataset :cars)
-      (view (conj-cols $data 
+      (view (conj-cols $data
                        (sweep (sweep ($ :speed)) :stat sd :fun div)
                        (sweep (sweep ($ :dist)) :stat sd :fun div))))
 
@@ -1538,17 +1533,17 @@ altering later ones."
      ($ [0 2] [:not (range 2)] mat)
      ($ [:not (range 2)] [0 2] mat)
 
-     (with-data mat 
+     (with-data mat
        ($ 0 0))
-     (with-data mat 
+     (with-data mat
        ($ [0 2] 2 mat))
-     (with-data mat 
+     (with-data mat
        ($ :all 1))
-     (with-data mat 
+     (with-data mat
        ($ [0 2] [0 2]))
-     (with-data mat 
+     (with-data mat
        ($ [:not 1] :all))
-     (with-data mat 
+     (with-data mat
        ($ [0 2] [:not 1]))
 
 
@@ -1570,32 +1565,37 @@ altering later ones."
 
 
 "
-  ([cols] 
+  ([cols]
      ($ :all cols $data))
   ([arg1 arg2]
      (let [rows-cols-data
-	   (cond (nil? arg2) [:all arg1 $data]
-	         (or (matrix? arg2) (dataset? arg2)) [:all arg1 arg2]
-	         :else [arg1 arg2 $data])]
+           (cond (nil? arg2) [:all arg1 $data]
+                 (or (matrix? arg2) (dataset? arg2)) [:all arg1 arg2]
+                 :else [arg1 arg2 $data])]
        (apply $ rows-cols-data)))
   ([rows cols data]
      (let [except-rows? (and (vector? rows) (= :not (first rows)))
            except-cols? (and (vector? cols) (= :not (first cols)))
            _rows (if except-rows?
-		   (conj [:except-rows] 
-			 (if (coll? (second rows))
-			   (second rows)
-			   (rest rows)))
+                   (conj [:except-rows]
+                         (if (coll? (second rows))
+                           (second rows)
+                           (rest rows)))
                    [:rows rows])
            _cols (if except-cols?
-                   (if (coll? (second cols)) 
+                   (if (coll? (second cols))
                      (conj [:except-cols] (second cols))
                      (conj [:except-cols] (rest cols)))
                    [:cols cols])
            args (concat _rows _cols)]
        (apply sel data args))))
 
-
+(defn head
+  "Returns the head of the dataset. 10 or full dataset by default."
+  ([len mat]
+     ($ (range (min len (nrow mat))) :all mat))
+  ([mat]
+     (head 10 mat)))
 
 (defn $where 
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
@@ -1611,20 +1611,20 @@ altering later ones."
 
     ;; use the with-data macro and the one arg version of $where
     (with-data cars
-      (view ($where {:speed {:$gt -10 :$lt 10}}))     
+      (view ($where {:speed {:$gt -10 :$lt 10}}))
       (view ($where {:dist {:$in #{10 12 16}}}))
       (view ($where {:dist {:$nin #{10 12 16}}})))
 
     ;; create a dataset where :speed greater than 10 or less than -10
     (with-data (get-dataset :cars)
-      (view (-> ($where {:speed {:$gt 20}}) 
+      (view (-> ($where {:speed {:$gt 20}})
                       (conj-rows ($where {:speed {:$lt 10}})))))
-       
+
 
 "
-  ([query-map] 
+  ([query-map]
     (query-dataset $data  query-map))
-  ([query-map data] 
+  ([query-map data]
      (query-dataset data query-map)))
 
 
@@ -1634,13 +1634,13 @@ altering later ones."
  to rollup the given column based on a set of group-by columns. The summary function
  should accept a single sequence of values and return a single summary value. Alternatively,
  you can provide a keyword identifer of a set of built-in functions including:
-   
+
    :max -- the maximum value of the data in each group
    :min -- the minimum value of the data in each group
    :sum -- the sum of the data in each group
    :count -- the number of elements in each group
    :mean -- the mean of the data in each group
-   
+
 
   Like the other '$' dataset functions, $rollup will use the dataset bound to $data
   (see the with-data macro) if a dataset is not provided as an argument.
@@ -1654,9 +1654,9 @@ altering later ones."
     ($rollup :count :Sepal.Length :Species iris)
     ($rollup :max :Sepal.Length :Species iris)
     ($rollup :min :Sepal.Length :Species iris)
-    
-    ;; The following is an example using a custom function, but since all the 
-    ;; iris measurements are positive, the built-in mean function could have 
+
+    ;; The following is an example using a custom function, but since all the
+    ;; iris measurements are positive, the built-in mean function could have
     ;; been used instead.
 
     (use 'incanter.stats)
@@ -1690,10 +1690,10 @@ altering later ones."
   ([summary-fun col-name group-by]
      ($rollup summary-fun col-name group-by $data))
   ([summary-fun col-name group-by data]
-     (let [key-fn (if (coll? col-name) 
-                    (fn [row] 
+     (let [key-fn (if (coll? col-name)
+                    (fn [row]
                       (into [] (map #(map-get row %) col-name)))
-                    (fn [row] 
+                    (fn [row]
                       (map-get row col-name)))
            rows (:rows data)
            rollup-fns {:max (fn [col-data] (apply max col-data))
@@ -1720,7 +1720,7 @@ altering later ones."
 
 (defn $order
   " Sorts a dataset by the given columns in either ascending (:asc)
-    or descending (:desc) order. If used within a the body of 
+    or descending (:desc) order. If used within a the body of
     the with-data macro, the data argument is optional, defaulting
     to the dataset bound to the variable $data.
 
@@ -1733,7 +1733,7 @@ altering later ones."
 
     (with-data (get-dataset :iris)
       (view ($order [:Petal.Length :Sepal.Length] :desc)))
-          
+
   "
   ([cols order]
      ($order cols order $data))
@@ -1749,10 +1749,10 @@ altering later ones."
 
 (defmacro $fn
 " A simple macro used as syntactic sugar for defining predicate functions to be used
-  in the $where function. The supplied arguments should be column names of a dataset. 
+  in the $where function. The supplied arguments should be column names of a dataset.
   This macro performs map destructuring on the arguments.
-  
-  For instance, 
+
+  For instance,
   ($fn [speed] (< speed 10)) => (fn [{:keys [speed]}] (< speed 10))
 
   Examples:
@@ -1781,7 +1781,7 @@ altering later ones."
     (use '(incanter core stats charts))
     (let [above-sine? ($fn [col-0 col-1] (> col-1 (sin col-0)))
           below-sine? (complement above-sine?)]
-      (with-data (conj-cols (sample-uniform 1000 :min -5 :max 5) 
+      (with-data (conj-cols (sample-uniform 1000 :min -5 :max 5)
                             (sample-uniform 1000 :min -1 :max 1))
         (doto (function-plot sin -5 5)
           (add-points :col-0 :col-1 :data ($where above-sine?))
@@ -1819,11 +1819,11 @@ altering later ones."
      (let [n (nrow data)
            rows (:rows data)]
        (loop [r 0 grouped-rows {}]
-         (if (= r n) 
+         (if (= r n)
            (let [group-cols (keys grouped-rows)
                  res (apply assoc {} (interleave group-cols (map to-dataset (vals grouped-rows))))]
              res)
-           (recur (inc r) 
+           (recur (inc r)
                   (let [row (nth rows r)
                         k (submap row cols)
                         k-rows (grouped-rows k)]
@@ -1858,11 +1858,11 @@ altering later ones."
       (apply f m ms))))
 
 
-(defn $map 
+(defn $map
   "This function returns a sequence resulting from mapping the given function over
     the value(s) for the given column key(s) of the given dataset.
     Like other '$*' functions, it will use $data as the default dataset
-    if none is provided, where $data is set using the with-data macro. 
+    if none is provided, where $data is set using the with-data macro.
 
   Examples:
 
@@ -1895,9 +1895,9 @@ altering later ones."
 
 
 (defn $join
-" 
+"
   Returns a dataset created by right-joining two datasets.
-  The join is based on one or more columns in the datasets. 
+  The join is based on one or more columns in the datasets.
   If used within the body of the with-data macro, the second
   dataset is optional, defaulting the the dataset bound to $data.
 
@@ -1908,11 +1908,11 @@ altering later ones."
 
 
 
-    (def lookup (dataset [:species :species-key] [[\"setosa\" :setosa] 
-                                                  [\"versicolor\" :versicolor] 
+    (def lookup (dataset [:species :species-key] [[\"setosa\" :setosa]
+                                                  [\"versicolor\" :versicolor]
                                                   [\"virginica\" :virginica]]))
     (view ($join [:species :Species] lookup iris))
-   
+
    (def hair-eye-color (get-dataset :hair-eye-color))
    (def lookup2 (conj-cols ($ [:hair :eye :gender] hair-eye-color) (range (nrow hair-eye-color))))
    (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2 hair-eye-color))
@@ -1948,13 +1948,13 @@ altering later ones."
   ([[left-keys right-keys] left-data right-data]
      (let [left-keys (if (coll? left-keys) left-keys [left-keys])
            right-keys (if (coll? right-keys) right-keys [right-keys])
-           index (apply hash-map 
-                        (interleave 
-                         (map (fn [row] 
-                                (apply hash-map 
-                                       (interleave right-keys 
-                                                   (map #(map-get (submap row left-keys) %) 
-                                                        left-keys)))) 
+           index (apply hash-map
+                        (interleave
+                         (map (fn [row]
+                                (apply hash-map
+                                       (interleave right-keys
+                                                   (map #(map-get (submap row left-keys) %)
+                                                        left-keys))))
                               (:rows left-data))
                          (map #(reduce dissoc % left-keys) (:rows left-data))))
            rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
@@ -1971,21 +1971,21 @@ altering later ones."
 
 
 (defn deshape
-" Returns a dataset where the columns identified by :merge are collapsed into 
+" Returns a dataset where the columns identified by :merge are collapsed into
   two columns called :variable and :value. The values in these columns are grouped
   by the columns identified by :group-by.
 
   Examples:
 
     (use '(incanter core charts datasets))
-    (with-data (->> (deshape :merge [:Ahmadinejad :Rezai :Karrubi :Mousavi] 
+    (with-data (->> (deshape :merge [:Ahmadinejad :Rezai :Karrubi :Mousavi]
                               :group-by :Region
                               :data (get-dataset :iran-election))
                     ($order :value :desc))
       (view $data)
       (view (bar-chart :variable :value :group-by :Region :legend true))
 
-      (view (bar-chart :Region :value :group-by :variable 
+      (view (bar-chart :Region :value :group-by :variable
                        :legend true :vertical false))
 
       (view (bar-chart :Region :value :legend true :vertical false
@@ -2001,7 +2001,7 @@ altering later ones."
       (view (deshape :group-by [:subject :time] :data data))
 
       (view (deshape :merge [:age :weight :height] :remove-na false :data data))
- 
+
 
 
 "
@@ -2009,27 +2009,27 @@ altering later ones."
      (let [data (or data $data)
            colnames (col-names data)
            _group-by (into #{} (when group-by
-                                 (if (coll? group-by) 
-                                   group-by 
+                                 (if (coll? group-by)
+                                   group-by
                                    [group-by])))
            _merge (into #{} (when merge
-                                (if (coll? merge) 
+                                (if (coll? merge)
                                   merge
                                   [merge])))
            __group-by (if (empty? _group-by)
-                        (clojure.set/difference (into #{} (col-names data)) _merge)
+                        (difference (into #{} (col-names data)) _merge)
                         _group-by)
            __merge (if (empty? _merge)
-                        (clojure.set/difference (into #{} (col-names data)) _group-by)
+                        (difference (into #{} (col-names data)) _group-by)
                         _merge)
-           deshaped-data (mapcat (fn [row] 
-                                   (let [base-map (zipmap __group-by 
+           deshaped-data (mapcat (fn [row]
+                                   (let [base-map (zipmap __group-by
                                                           (map #(map-get row % colnames) __group-by))]
-                                     (filter identity 
-                                             (map (fn [k] 
+                                     (filter identity
+                                             (map (fn [k]
                                                     (if (and remove-na (nil? (map-get row k colnames)))
                                                       nil
-                                                      (assoc base-map :variable k :value (map-get row k colnames)))) 
+                                                      (assoc base-map :variable k :value (map-get row k colnames))))
                                                   __merge))))
                                  (:rows data))]
        (to-dataset deshaped-data))))
@@ -2055,14 +2055,14 @@ altering later ones."
        (into #{} ($ cols data)))))
 
 
- 
-(defmacro with-data 
+
+(defmacro with-data
   "Binds the given data to $data and executes the body.
    Typically used with the $ and $where functions.
- 
+
   Examples:
     (use '(incanter core stats charts datasets))
-  
+
     (with-data  (get-dataset :cars)
       (def lm (linear-model ($ :dist) ($ :speed)))
       (doto (scatter-plot ($ :speed) ($ :dist))
@@ -2071,18 +2071,18 @@ altering later ones."
 
      ;; create a dataset where :speed greater than 10 or less than -10
      (with-data (get-dataset :cars)
-       (view (-> ($where {:speed {:$gt 20}}) 
+       (view (-> ($where {:speed {:$gt 20}})
                        (conj-rows ($where {:speed {:$lt 10}})))))
- 
+
 "
   ([data-binding & body]
      `(binding [$data ~data-binding]
               (do ~@body))))
- 
+
 
 (defmulti to-map
-  "Takes a dataset or matrix and returns a hash-map where the keys are 
-   keyword versions of the column names, for datasets, or numbers, for 
+  "Takes a dataset or matrix and returns a hash-map where the keys are
+   keyword versions of the column names, for datasets, or numbers, for
    matrices, and the values are sequence of the column values.
 
   Examples:
@@ -2163,7 +2163,7 @@ altering later ones."
 
 
 (defn- get-dummies [n]
-  (let [nbits (dec (Math/ceil (log2 n)))]
+  (let [nbits (int (dec (Math/ceil (log2 n))))]
     (map #(for [i (range nbits -1 -1)] (if (bit-test % i) 1 0))
          (range n))))
 
@@ -2173,7 +2173,8 @@ altering later ones."
         levels (:levels cat-var)
         encoded-data (to-levels coll :categorical-var cat-var)
         bit-map (get-dummies (count levels))]
-    (for [item encoded-data] (nth bit-map item))))
+    (for [item encoded-data]
+      (nth bit-map item))))
 
 
 (defn- get-columns [dataset column-keys]
@@ -2183,6 +2184,7 @@ altering later ones."
 
 (defn- string-to-categorical [dataset column-key dummies?]
   (let [col (first (get-columns dataset [column-key]))]
+
     (if (some string? col)
       (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
@@ -2343,12 +2345,12 @@ altering later ones."
     window. When given a URL string, it will open the location with the
     platform's default web browser.
 
-    When viewing charts, a :width (default 500) and :height (default 400) 
+    When viewing charts, a :width (default 500) and :height (default 400)
     option can be provided.
 
     When viewing an incanter.processing sketch, set the :exit-on-close option
     to true (default is false) to kill the animation processes when you
-    close the window (this will also kill your REPL or Swank server), 
+    close the window (this will also kill your REPL or Swank server),
     otherwise those processing will continue to run in the background.
 
 
@@ -2407,7 +2409,7 @@ altering later ones."
                           (map vector obj))
           colnames (range (count (first rows)))]
       (view (dataset colnames rows)))))
-  
+
 
 
 (defmethod view incanter.Matrix
@@ -2455,7 +2457,7 @@ altering later ones."
      (let [icon (javax.swing.ImageIcon. obj)
            label (javax.swing.JLabel. icon)
            height (+ 15 (.getIconHeight icon))
-           width (+ 15 (.getIconWidth icon))] 
+           width (+ 15 (.getIconWidth icon))]
        (doto (javax.swing.JFrame. "Incanter Image")
          (.add (javax.swing.JScrollPane. label))
          (.setSize height width)
@@ -2482,9 +2484,9 @@ altering later ones."
   ([data]
    (let [col-names (:column-names data)
          column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
+         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
                                                            (java.util.Vector. col-names))]
-     
+
      (javax.swing.JTable. table-model))))
 
 
@@ -2509,8 +2511,8 @@ altering later ones."
       (view table)
       (sliders [species [\"setosa\" \"virginica\" \"versicolor\"]
                 min-petal-length (range 0 8 0.1)]
-        (set-data table ($where {:Species species 
-                                 :Petal.Length {:gt min-petal-length}} 
+        (set-data table ($where {:Species species
+                                 :Petal.Length {:gt min-petal-length}}
                                 data))))
 
 "
@@ -2518,11 +2520,11 @@ altering later ones."
 
 
 (defmethod set-data javax.swing.JTable
-([table data] 
+([table data]
    (let [col-names (:column-names data)
          column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals)) 
-                                                           (java.util.Vector. col-names))] 
+         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+                                                           (java.util.Vector. col-names))]
      (.setModel table table-model))))
 
 
@@ -2530,6 +2532,23 @@ altering later ones."
 (defn quit
 " Exits the Clojure shell."
   ([] (System/exit 0)))
+
+
+(defn- count-types
+  "Helper function. Takes in a seq (usually from a column from an Incanter dataset) and returns a map of types -> counts of the occurance
+of each type"
+  ([my-col]
+   (reduce
+    (fn [counts x]
+     (let [t (type x) c (get counts t)] (assoc counts t (inc (if (nil? c) 0 c)))))
+    {}
+    my-col)))
+
+
+(defn- count-col-types
+  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column. Counts nils."
+  ([col ds]
+   (count-types ($ col ds))))
 
 
 (defmulti save
@@ -2598,9 +2617,9 @@ altering later ones."
 
 
 (defn grid-apply
-" Applies the given function f, that accepts two arguments, to a grid 
-  defined by rectangle bounded x-min, y-min, x-max, y-max and returns a 
-  sequence of three sequences representing the cartesian product of x and y 
+" Applies the given function f, that accepts two arguments, to a grid
+  defined by rectangle bounded x-min, y-min, x-max, y-max and returns a
+  sequence of three sequences representing the cartesian product of x and y
   and z calculated by applying f to the combinations of x and y."
   ([f x-min x-max y-min y-max]
      (let [x-vals (range x-min x-max (/ (- x-max x-min) 100))
@@ -2661,7 +2680,7 @@ altering later ones."
     ($= (trans [[1 2] [4 5]]) + 6)
 
     ($= (trans [[1 2] [4 5]]) <*> (matrix [[1 2] [4 5]]))
-    
+
 
     (use '(incanter core charts))
     (defn f [x] ($= x ** 2 + 3 * x + 5))
@@ -2669,7 +2688,7 @@ altering later ones."
     (view (function-plot f -10 10))
     (view (function-plot #($= % ** 2 + 3 * % + 5) -10 10))
     (view (function-plot (fn [x] ($= x ** 2 + 3 * x + 5)) -10 10))
-    (let [x (range -10 10 0.1)] 
+    (let [x (range -10 10 0.1)]
       (view (xy-plot x ($= x ** 3 - 5 * x ** 2 + 3 * x + 5))))
 
     ($= (5 + 7))
@@ -2694,7 +2713,7 @@ altering later ones."
         (add-lines ($ :speed) ($= 2 * ($ :speed)))
         view))
 
-   
+
 
 "
   ([& equation]
@@ -2704,7 +2723,7 @@ altering later ones."
 (defn get-input-reader
   "Returns a java.io.FileReader when given a filename, or a
    java.io.InputStreamReader when given a URL."
-  [location] 
+  [location]
   (try
     (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
   (catch java.net.MalformedURLException _
@@ -2713,7 +2732,7 @@ altering later ones."
 (defn get-input-stream
   "Returns a java.io.FileInputStream when given a filename, or a
    java.io.InputStream when given a URL."
-  [location] 
+  [location]
   (try
     (.openStream (java.net.URL. location))
     (catch java.net.MalformedURLException _
@@ -2742,8 +2761,8 @@ altering later ones."
   "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
   [blocks]
   (let [element-class (-> blocks first first class)
-	native-rows (for [row blocks] (into-array element-class row))
-	native-blocks (into-array (-> native-rows first class) native-rows)]
+        native-rows (for [row blocks] (into-array element-class row))
+        native-blocks (into-array (-> native-rows first class) native-rows)]
     (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
 
 (defn separate-blocks

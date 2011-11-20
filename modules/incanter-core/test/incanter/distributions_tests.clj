@@ -252,7 +252,7 @@
     (is (all? (repeatedly 100 #(> (:end u) (draw u)))))))
 
 (deftest large-integer-tests
-  (let [u (integer-distribution (reduce * (repeat 100 2)) (reduce * (repeat 100 3)))]
+  (let [u (integer-distribution (reduce *' (repeat 100 2)) (reduce *' (repeat 100 3)))]
     (is (all? (repeatedly 100 #(<= (:start u) (draw u)))))
 		(is (all? (repeatedly 100 #(> (:end u) (draw u)))))))
 
