@@ -4,7 +4,7 @@
                  [incanter/incanter-core "1.3.0-SNAPSHOT"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
-                 [congomongo "0.1.7-SNAPSHOT"
+                 [congomongo "0.1.7"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]]
   :dev-dependencies [[lein-clojars "0.7.0"]])
