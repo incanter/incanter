@@ -8,7 +8,11 @@
                  [incanter/incanter-pdf "1.3.0-SNAPSHOT"]
                  [incanter/incanter-latex "1.3.0-SNAPSHOT"]
                  [incanter/incanter-excel "1.3.0-SNAPSHOT"]
-                 [swingrepl "1.3.0"]
+                 [swingrepl "1.3.0"
+                  :exclusions [org.clojure/clojure
+                               org.clojure/clojure-contrib]]
                  [jline "0.9.94"]]
-  :dev-dependencies [[lein-clojars "0.7.0"]]
+  :dev-dependencies [[lein-clojars "0.7.0"
+                      :exclusions [org.clojure/clojure
+                                   org.clojure/clojure-contrib]]]
   :main incanter.main)
