@@ -901,9 +901,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn- create-xy-plot
-  [main-title x-lab y-lab dataset legend? tooltips? urls?]
+  [title x-lab y-lab dataset legend? tooltips? urls?]
   (org.jfree.chart.ChartFactory/createXYLineChart
-    main-title
+    title
     x-lab
     y-lab
     dataset
@@ -913,9 +913,9 @@
     urls?))
 
 (defn- create-time-series-plot
-  [main-title x-lab y-lab dataset legend? tooltips? urls?]
+  [title x-lab y-lab dataset legend? tooltips? urls?]
   (org.jfree.chart.ChartFactory/createTimeSeriesChart
-    main-title
+    title
     x-lab
     y-lab
     dataset
@@ -942,7 +942,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
 	  __x (if x-groups (first x-groups) _x)
            __y (if y-groups (first y-groups) _y)
-	  main-title (or (:main-title opts) "")
+	  title (or (:title opts) "")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts)
@@ -963,7 +963,7 @@
                         __x __y))
                   (.addSeries dataset data-series)
                   (create-plot
-                   main-title
+                   title
                    x-lab
                    y-lab
                    dataset
@@ -1043,7 +1043,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#)
@@ -1052,7 +1052,7 @@
 			     (format "%s, %s" '~x '~y)))
 	   args# (concat [~x ~y ~create-xy-plot] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1101,7 +1101,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1109,7 +1109,7 @@
 						   (format "%s, %s" '~x '~y)))
 	   args# (concat [~x ~y] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1135,7 +1135,7 @@
 			  (vals ($group-by :col-1 (conj-cols _y _group-by)))))
           __x (if x-groups (first x-groups) _x)
           __y (if y-groups (first y-groups) _y)
-	  main-title (or (:title opts) "")
+	  title (or (:title opts) "")
 	  x-lab (or (:x-label opts) (str 'x))
 	  y-lab (or (:y-label opts) (str 'y))
 	  series-lab (or (:series-label opts)
@@ -1154,7 +1154,7 @@
                         __x __y))
 		  (.addSeries _dataset data-series)
 		  (org.jfree.chart.ChartFactory/createScatterPlot
-		   main-title
+		   title
 		   x-lab
 		   y-lab
 		   _dataset
@@ -1240,7 +1240,7 @@
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1248,7 +1248,7 @@
 						   (format "%s, %s" '~x '~y)))
 	   args# (concat [~x ~y] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1264,7 +1264,7 @@
           nbins (or (:nbins opts) 10)
 	  theme (or (:theme opts) :default)
           density? (true? (:density opts))
-          main-title (or (:title opts) "")
+          title (or (:title opts) "")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts)
                      (if density? "Density" "Frequency"))
@@ -1275,7 +1275,7 @@
         (.addSeries dataset series-lab (double-array _x) nbins)
         (when density? (.setType dataset org.jfree.data.statistics.HistogramType/SCALE_AREA_TO_1))
         (let [chart (-> (org.jfree.chart.ChartFactory/createHistogram
-			  main-title
+			  title
 			  x-lab
 			  y-lab
 			  dataset
@@ -1341,11 +1341,11 @@
 "
   ([x & options]
     `(let [opts# ~(if options (apply assoc {} options) {})
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
 	   series-lab# (or (:series-label opts#) (str '~x))
            args# (concat [~x] (apply concat (seq (apply assoc opts#
-							[:main-title main-title#
+							[:title title#
 							 :x-label x-lab#
 							 :series-label series-lab#]))))]
         (apply histogram* args#))))
@@ -1359,7 +1359,7 @@
 	  data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-	  main-title (or (:title opts) "")
+	  title (or (:title opts) "")
 	  group-by (when (:group-by opts)
 		     (if (coll? (:group-by opts))
 		       (to-list (:group-by opts))
@@ -1372,7 +1372,7 @@
 	  legend? (true? (:legend opts))
 	  dataset (DefaultCategoryDataset.)
 	  chart (org.jfree.chart.ChartFactory/createLineChart
-		 main-title
+		 title
 		 x-label
 		 y-label
 		 dataset
@@ -1477,7 +1477,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1485,7 +1485,7 @@
 						   (format "%s, %s" '~categories '~values)))
 	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1500,7 +1500,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "")
+           title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
 		     (if (coll? (:group-by opts))
@@ -1513,7 +1513,7 @@
            legend? (true? (:legend opts))
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createBarChart
-                     main-title
+                     title
                      x-label
                      y-label
                      dataset
@@ -1619,7 +1619,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1627,7 +1627,7 @@
 						   (format "%s" '~categories)))
 	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1642,7 +1642,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "")
+           title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
 		     (if (coll? (:group-by opts))
@@ -1655,7 +1655,7 @@
            legend? (true? (:legend opts))
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createAreaChart
-                     main-title
+                     title
                      x-label
                      y-label
                      dataset
@@ -1761,7 +1761,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1769,7 +1769,7 @@
 						   (format "%s" '~categories)))
 	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1782,7 +1782,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "")
+           title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
 		     (if (coll? (:group-by opts))
@@ -1795,7 +1795,7 @@
            legend? (true? (:legend opts))
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createStackedAreaChart
-                     main-title
+                     title
                      x-label
                      y-label
                      dataset
@@ -1891,7 +1891,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1899,7 +1899,7 @@
 						   (format "%s" '~categories)))
 	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -1913,7 +1913,7 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "")
+           title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
 		     (if (coll? (:group-by opts))
@@ -1926,7 +1926,7 @@
            legend? (true? (:legend opts))
            dataset (DefaultCategoryDataset.)
            chart (org.jfree.chart.ChartFactory/createStackedBarChart
-                     main-title
+                     title
                      x-label
                      y-label
                      dataset
@@ -2031,7 +2031,7 @@
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~categories))
            y-lab# (or (:y-label opts#) (str '~values))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -2039,7 +2039,7 @@
 						   (format "%s" '~categories)))
 	   args# (concat [~categories ~values] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
-							    :main-title main-title#
+							    :title title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
@@ -2053,21 +2053,21 @@
 	   data (:data opts)
 	  _values (if (coll? values) (to-list values) ($ values data))
 	  _categories (if (coll? categories) (to-list categories) ($ categories data))
-           main-title (or (:title opts) "")
+           title (or (:title opts) "")
 	   theme (or (:theme opts) :default)
            legend? (true? (:legend opts))
            dataset (DefaultPieDataset.)
            chart (org.jfree.chart.ChartFactory/createPieChart
-                     main-title
-		     dataset
-		     legend?
-                     true
-                     false)]
+                  title
+                  dataset
+                  legend?
+                  true
+                  false)]
         (do
-	  (doseq [i (range 0 (count _values))]
-	    (.setValue dataset (nth _categories i) (nth _values i)))
-	  (set-theme chart theme)
-	  chart))))
+          (doseq [i (range 0 (count _values))]
+            (.setValue dataset (nth _categories i) (nth _values i)))
+          (set-theme chart theme)
+          chart))))
 
 
 
@@ -2114,10 +2114,10 @@
 "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
-	   main-title# (or (:title opts#) "")
+	   title# (or (:title opts#) "")
 	   args# (concat [~categories ~values]
 			 (apply concat (seq (apply assoc opts#
-						   [:main-title main-title#]))))]
+						   [:title title#]))))]
         (apply pie-chart* args#))))
 
 
@@ -2137,7 +2137,7 @@
 	  __x (if x-groups
                 (first x-groups)
                 _x)
-	  main-title (or (:title opts) "")
+	  title (or (:title opts) "")
 	  x-label (or (:x-label opts) "")
 	  y-label (or (:y-label opts) (str 'x))
 	  series-label (or (:series-label opts) (str 'x))
@@ -2147,7 +2147,7 @@
 	  legend? (true? (:legend opts))
 	  dataset (DefaultBoxAndWhiskerCategoryDataset.)
 	  chart (org.jfree.chart.ChartFactory/createBoxAndWhiskerChart
-		 main-title
+		 title
 		 x-label
 		 y-label
 		 dataset
@@ -2213,14 +2213,14 @@
   ([x & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
 	   x-lab# (or (:x-label opts#) "")
            y-lab# (or (:y-label opts#) (str '~x))
            series-lab# (or (:series-label opts#) (str '~x))
            category-lab# (or (:category-label opts#) 0)
 	   args# (concat [~x] (apply concat (seq (apply assoc opts#
 							[:group-by group-by#
-							 :main-title main-title#
+							 :title title#
 							 :x-label x-lab#
 							 :y-label y-lab#
 							 :category-label category-lab#
@@ -2235,7 +2235,7 @@
    (let [opts (when options (apply assoc {} options))
 	 step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
 	 _x (range min-range max-range step-size)
-	 main-title (or (:title opts) "")
+	 title (or (:title opts) "")
 	 x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
 	 y-lab (or (:y-label opts) (str 'function))
 	 series-lab (or (:series-label opts) (format "%s" 'function))
@@ -2244,7 +2244,7 @@
       (set-theme (xy-plot _x (map function _x)
 			  :x-label x-lab
 			  :y-label y-lab
-			  :title main-title
+			  :title title
 			  :series-label series-lab
 			  :legend legend?) theme))))
 
@@ -2282,14 +2282,14 @@
   ([function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
-           main-title# (or (:title opts#) "")
+           title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (format "%s < x < %s" '~min-range '~max-range))
            y-lab# (or (:y-label opts#) (str '~function))
            series-lab# (or (:series-label opts#) (format "%s" '~function))
 	   args# (concat [~function ~min-range ~max-range]
 			 (apply concat (seq (apply assoc opts#
 						   [:group-by group-by#
-						    :main-title main-title#
+						    :title title#
 						    :x-label x-lab#
 						    :y-label y-lab#
 						    :series-label series-lab#]))))]
