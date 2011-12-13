@@ -923,7 +923,8 @@
     tooltips?
     urls?))
 
-(defn xy-plot*
+
+(defn- create-xy-series-plot
   ([x y create-plot & options]
     (let [opts (when options (apply assoc {} options))
 	  data (:data opts)
@@ -979,7 +980,8 @@
       (set-theme chart theme)
       chart)))
 
-
+(defn xy-plot* [x y & options]
+  (apply create-xy-series-plot x y create-xy-plot options))
 
 (defmacro xy-plot
 " Returns a JFreeChart object representing a xy-plot of the given data.
@@ -1056,6 +1058,9 @@
 							    :series-label series-lab#]))))]
         (apply xy-plot* args#))))
 
+(defn time-series-plot* [x y & options]
+  (apply create-xy-series-plot x y create-time-series-plot options))
+
 (defmacro time-series-plot
 " Returns a JFreeChart object representing a time series plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
@@ -1102,13 +1107,13 @@
            series-lab# (or (:series-label opts#) (if group-by#
 						   (format "%s, %s (0)" '~x '~y)
 						   (format "%s, %s" '~x '~y)))
-	   args# (concat [~x ~y ~create-time-series-plot] (apply concat (seq (apply assoc opts#
+	   args# (concat [~x ~y] (apply concat (seq (apply assoc opts#
 							   [:group-by group-by#
 							    :main-title main-title#
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
-        (apply xy-plot* args#))))
+        (apply time-series-plot* args#))))
 
 
 
