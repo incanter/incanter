@@ -284,7 +284,7 @@
 
 (deftest simple-p-value-test
   (testing "Basic p-value testing"
-    (is (= 1 (simple-p-value (range 1 11) 5.5)))
+    (is (= 1.0 (simple-p-value (range 1 11) 5.5)))
     (is (< 0.999 (simple-p-value (range 1 11) 5.499)))))
 (deftest benford-law-test
   (let [coll [1131111 623946 325911 1799255 199654 299357 3819495 359578 285984 2214801 341104 1303129 444480 295177 450269 1758026 498061 422457 315689 1160446 573568 253962 515211 998573 677829 1289257 572988 482990 765723 337178]]
