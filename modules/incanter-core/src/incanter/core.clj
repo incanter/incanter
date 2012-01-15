@@ -2551,28 +2551,6 @@ of each type"
    (count-types ($ col ds))))
 
 
-(defn- stat-summarizable?
-  "Placeholder stub function, for more advanced cases where we want to automatically ignore occasional bad values in a column."
-  ([types]
-    false))
-
-
-(defn summarizable?
-  "Takes in a column (number or name) and a dataset. Returns true if summarizable"
-  ([col ds]
-   (let [type-counts (dissoc (count-col-types col ds) nil)
-         ds-col ($ col ds)]
-    (if (= 1 (count type-counts))
-        true
-        (if (every? #(.isAssignableFrom java.lang.Number %) (keys type-counts))
-            true
-            (if (and (= 2 (count type-counts)) (contains? type-counts java.lang.String) (contains? type-counts clojure.lang.Keyword))
-                true
-                (stat-summarizable? type-counts)))))))
-
-
-
-
 (defmulti save
 " Save is a multi-function that is used to write matrices, datasets and
   charts (in png format) to a file.

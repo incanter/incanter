@@ -231,6 +231,25 @@
   (.dispose hw1)
   (.dispose hw2))
 
+(deftest candle-stick-tests
+  (let [test-data (incanter.core/dataset [:date :high :low :open :volume :close]
+                                         (map
+                                          (fn [day]
+                                            (let [open (+ day (rand-int 10))
+                                                  close (+ day (rand-int 10))
+                                                  high (+ (max open close) (rand-int 10))
+                                                  low (- (min open close) (rand-int 10))
+                                                  volume (rand-int 1000000)]
+                                              {:date (java.util.Date. 2011 10 day)
+                                               :high high
+                                               :low low
+                                               :open open
+                                               :close close
+                                               :volume volume}))
+                                          (range 1 31)))
+        fw1 (view (candle-stick-plot :data test-data))]
+    (Thread/sleep wait-timeout)
+    (.dispose fw1)))
 
 
 
