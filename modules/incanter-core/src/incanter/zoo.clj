@@ -32,38 +32,74 @@
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]
-        [incanter.stats :only (mean)]))
+        [incanter.stats :only (mean median)]))
 
-;; Credit: http://www.learningclojure.com/2010/03/moving-average-of-list.html
+;;;;; Start of ROLL functions ;;;;;
+
 (defn partialsums [start coll]
   (lazy-seq
     (if-let [coll (seq coll)]
           (cons start (partialsums (+ start (first coll)) (rest coll)))
           (list start))))
 
-(defn sliding-window-sma [n coll]
+(defn big-n-roll-mean
+" 
+  Returns the unweighted mean of the previous n data points.
+  Optimised for larger n (e.g. n > 20) window.
+
+  References: 
+  http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
+  http://www.learningclojure.com/2010/03/moving-average-of-list.html
+"  
+  [n coll]
   (map #(/ % n)
        (let [start   (apply + (take n coll))
              diffseq (map   - (drop n coll) coll)]
          (partialsums start diffseq))))
 
-(defn partition-sma [n coll]
-  (map mean (partition n 1 coll)))
+(defn roll-apply 
+"
+  A generic function for applying a function to rolling window of a collection.
 
-(defn rollmean
+  Arguments:
+  f -- function to be applied
+  n -- size of rolling window
+  coll -- collection of data
+"  
+  [f n coll]
+  (map f (partition n 1 coll)))
+
+;;;;; TODO rolls, optimise each ;;;;;
+
+(defn roll-mean
 " 
   Returns the unweighted mean of the previous n data points.
-  
-  Arguments:
-  :small-n?  Algorithm is optimised for either small n (e.g. n < 20) 
-             or large n (e.g. n > 20). Default is true.
 
   References: 
   http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
 "  
-  [n coll & {:keys [small-n?]
-             :or   [small-n? true]}]
-  (if :small-n?
-    (partition-sma n coll)
-    (sliding-window-sma n coll)))
+  [n coll]
+    (roll-apply mean n coll))
 
+(defn roll-median
+"
+  Returns the rolling median of the previous n elements.
+"
+  [n coll]
+  (roll-apply median n coll))
+
+(defn roll-max
+"
+  Returns the rolling max of the previous n elements.
+"  
+  [n coll]
+  (roll-apply #(apply max %) n coll))
+
+(defn roll-min
+"
+  Returns the rolling min of the previous n elements.
+"  
+  [n coll]
+  (roll-apply #(apply min %) n coll))
+
+;;;;; End of ROLL functions ;;;;;
