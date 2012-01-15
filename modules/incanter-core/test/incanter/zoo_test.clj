@@ -7,7 +7,7 @@
 
 (deftest simple-moving-average-test
   (is (= sma-5
-         (take 10  (simple-moving-average 5 integers))))
+         (take 10  (rollmean 5 integers))))
   (is (= [2 3 4 5 6 7 8 9 10 11]
          (take 10 (map int (partition-sma 5 integers)))))
   (is (= [2 3 4 5 6 7 8 9 10 11]
