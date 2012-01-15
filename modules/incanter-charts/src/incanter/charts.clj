@@ -28,8 +28,8 @@
        :author "David Edgar Liebke"}
   incanter.charts
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                              bind-columns view save $group-by conj-cols
-			      grid-apply set-data)]
+                              bind-columns view save $group-by conj-cols 
+			      grid-apply set-data col-names)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)])
   (:import  (java.io File)
             (javax.imageio ImageIO)
@@ -46,7 +46,8 @@
             (org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder)
-            (org.jfree.data.xy XYSeries
+            (org.jfree.data.xy DefaultHighLowDataset
+                               XYSeries
                                XYSeriesCollection)
             (org.jfree.data.category DefaultCategoryDataset)
 	    (org.jfree.data.general DefaultPieDataset)
@@ -1056,7 +1057,86 @@
 							    :x-label x-lab#
 							    :y-label y-lab#
 							    :series-label series-lab#]))))]
-        (apply xy-plot* args#))))
+       (apply xy-plot* args#))))
+
+(defn candle-stick-plot* [& opts]
+  (let [options (apply assoc {} opts)
+        data (options :data)
+
+        ohlc-data
+        (DefaultHighLowDataset.
+          (or (options :series-label) "")
+          (into-array java.util.Date ($ (:date options) data))
+          (into-array Double/TYPE ($ (:high options) data))
+          (into-array Double/TYPE ($ (:low options) data))
+          (into-array Double/TYPE ($ (:open options) data))
+          (into-array Double/TYPE ($ (:close options) data))
+          (into-array Double/TYPE
+                      (if (some #{(:volume options)} (col-names data))
+                        ($ (:volume options) data)
+                        ;; Fill the volume data with NaN which don't get displayed ...
+                        ;; see also documentation on OHLCSeriesCollection which documents
+                        ;; the same behaviour
+                        (repeat (count ($ (:date options) data)) Double/NaN))))
+        
+        chart (ChartFactory/createCandlestickChart
+               (options :main-title)
+               (options :time-label)
+               (options :value-label)
+               ohlc-data
+               (true? (options :legend)))]
+    chart))
+
+(defmacro candle-stick-plot
+  [& options]
+  "Produces a candle stick chart
+
+   Options:
+    :data (default nil) If the :data option is provided a dataset, 
+                        column names can be used instead of sequences 
+                        of data as arguments to xy-plot.
+    :date Key for accessing the underlying date series (defaults to :date)
+    :high Key for accessing high value data (defaults to :high)
+    :low Key for accessing low value data (defaults to :low)
+    :open Key for accessing open value data (defaults to :open)
+    :close Key for accesing close value data (defaults to :close)
+    :volume Key for accessing volume data (defaults to :volume). Volume data is optional
+    :title (default 'Candle Chart Plot') main title
+    :time-label (default empty)
+    :value-label (default empty)
+    :legend (default false) prints legend
+    :series-label (default empty)
+
+   Example:
+   (candle-plot :data <dataset>) ;; uses default mappings so the dataset must have :date, :high, :low, :open, :close and :volume keys
+
+   ;; more customization
+   (candle-plot
+      :data dataset
+      :high :HighPrice
+      :low :LowPrice
+      :open :StartOfDay
+      :close :CoB
+      :volume :TransactionVolume
+      :legend true
+      :time-label \"CoB date\"
+      :value-label \"Price\"
+      :series-label \"Price time series\"
+      :title \"Price information\")"
+  
+  `(let [opts# ~(when options (apply assoc {} options))
+         main-title# (or (:title opts#) "Candle Chart Plot")
+         args#
+         (concat
+          (mapcat #(vector % (or (opts# %) %)) [:volume :high :low :open :close :date])
+          (apply concat
+                 (seq (apply assoc opts# 
+                             [:main-title main-title# 
+                              :time-label (or (opts# :time-label) "")
+                              :value-label (or (opts# :value-label) "")
+                              :series-label (or (opts# :series-label))]))))]
+     (apply candle-stick-plot* args#)))
+
 
 (defn time-series-plot* [x y & options]
   (apply create-xy-series-plot x y create-time-series-plot options))

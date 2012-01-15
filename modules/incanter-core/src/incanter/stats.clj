@@ -38,10 +38,10 @@
                                   Probability)
            (incanter Weibull))
   (:use [clojure.set :only [difference intersection union]])
-  (:use [incanter.core :only (abs plus minus div mult mmult to-list bind-columns
+  (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
-                              matrix length sum sum-of-squares sel matrix?
+                              matrix length log10 sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]))
 
 (defn- deep-merge-with
@@ -2200,6 +2200,7 @@
        :y-mean y-mean
        :y-var y-var
        :n2 n2
+       ;;FIXME: This should never be *2!  This is wrong...
        :p-value (if (= alternative :two-sided) (* 2 one-sided-p) one-sided-p)
        :conf-int (if one-sample?
                    ;; one-sample confidence interval
@@ -2217,6 +2218,34 @@
                       Double/POSITIVE_INFINITY
                       (- (- x-mean y-mean) (* qt (sqrt (+ (/ x-var n1) (/ y-var n2))))))])
        })))
+
+(defn simple-t-test
+  "Perform a simple t-test on the data contained in coll."
+  [coll mu]
+  (let [m (mean coll)
+        c (count coll)]
+    (/ (- m mu)
+       (/ (sd coll)
+          (sqrt c)))))
+
+(defn simple-p-value
+  "Returns the p-value for the data contained in coll."
+  [coll mu]
+  (* 2
+     (cdf-t
+      (- (abs (simple-t-test coll mu)))
+      :df (dec (count coll)))))
+
+(defn simple-ci
+  "Get the confidence interval for the data."
+  [coll]
+  (let [m (mean coll)
+        c (count coll)
+        s (sd coll)
+        e (*
+           (quantile-t 0.975 :df (dec c))
+           (/ s (sqrt c)))]
+    {:lower (- m e) :upper (+ m e)}))
 
 (defn f-test
   "
@@ -2491,6 +2520,121 @@ Test for different variances between 2 samples
        :row-margins r-margins
        :E E})))
 
+;;;; START Benford's Law ;;;;
+(defn first-digit
+  [x]
+  (Character/digit (first (str x)) 10))
+
+;; define function for Benford's law
+(defn- benford-law [d] (log10 (+ 1 (div d))))
+;; calculate the probabilities for digits 1-9
+(def ^{:private true}
+      benford-probs (map benford-law (range 1 11)))
+
+(defn get-counts [digits]
+  (map #(get (:counts (tabulate digits)) % 0) 
+       (range 1.0 10.0 1.0)))
+
+(defn benford-test
+"
+  Performs Benford's Law test using chisq-test.
+
+  Argument:
+  coll: -- a sequence of numbers
+
+  Returns:
+    :X-sq -- the Pearson X-squared test statistics
+    :p-value -- the p-value for the test statistic
+    :df -- the degress of freedom
+
+  Reference:
+  http://data-sorcery.org/2009/06/21/chi-square-goodness-of-fit/
+  http://en.wikipedia.org/wiki/Benford%27s_Law
+"
+  [coll]
+  (let [digits (map first-digit coll)]
+    (chisq-test :table (get-counts digits) 
+                :probs benford-probs)))
+
+;;;; END Benford's Law ;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Dataset Summarization Functions
+
+(defn- count-col-types
+  "Takes in a column name or number and a dataset. Returns a raw count of each type present in that column. Counts nils."
+  ([col ds]
+    (frequencies (map type ($ col ds)))))
+
+
+(defn- stat-summarizable
+  "Placeholder stub function, for more advanced cases where we want to automatically ignore occasional bad values in a column."
+  ([types] 
+    ; FIXME Add the column name
+    "Statistical summarizablity is currently stubbed out. Please contact the dev team if you're seeing this message."))
+
+
+(defn numeric-col-summarizer
+  "Returns a summarizer function which takes a purely numeric column with no non-numeric values"
+  ([col ds]
+              {:col col :min (reduce min (remove nil? ($ col ds))) :max (reduce max (remove nil? ($ col ds))) 
+               :mean (mean (remove nil? ($ col ds))) :median (median (remove nil? ($ col ds))) :is-numeric true}))
+
+
+(defn category-col-summarizer
+  "Returns a summarizer function which takes a category column and returns a list of the top 5 columns by volume, and a 
+   count of remaining rows"
+  ([col ds] 
+    (let [freqs (frequencies ($ col ds)) top-5 (take 5 (reverse (sort-by val freqs)))]
+      (into {:col col :count (- (reduce + (map val freqs)) (reduce + (map val (into {} top-5)))) :is-numeric false} top-5))))
+
+
+(defn choose-singletype-col-summarizer
+  "Takes in a type, and returns a suitable column summarizer"
+  ([col-type]
+    (if (.isAssignableFrom java.lang.Number col-type)
+        numeric-col-summarizer
+        (if (or (.isAssignableFrom java.lang.String col-type) (.isAssignableFrom clojure.lang.Keyword col-type))
+          category-col-summarizer
+          ; FIXME Deal with date columns
+          (str "Don't know how to summarize a column of type: " col-type)
+          ))))
+
+
+(defn summarizer-fn 
+  "Takes in a column (number or name) and a dataset. Returns a function to summarize the column if summarizable, and a 
+   string describing why the column can't be summarized in the event that it can't"
+  ([col ds]
+   (let [type-counts (dissoc (count-col-types col ds) nil)]
+    (if (= 1 (count type-counts))
+        (choose-singletype-col-summarizer (nth (keys type-counts) 0))
+        (if (every? #(.isAssignableFrom java.lang.Number %) (keys type-counts))
+            numeric-col-summarizer
+            (if (and (= 2 (count type-counts)) (contains? type-counts java.lang.String) (contains? type-counts clojure.lang.Keyword))
+                category-col-summarizer
+                (stat-summarizable type-counts)))))))
+
+(defn summarizable?
+  "Takes in a column name (or number) and a dataset. Returns true if the column can be summarized, and false otherwise"
+  ([col ds]
+    (fn? (summarizer-fn col ds))))
+
+
+(defn summary
+  "Takes in a dataset. Returns a summary of that dataset (as a map of maps), having automatically figured out the relevant 
+   datatypes of columns. Will be slightly forgiving of mangled data in columns."
+  ([ds] 
+    (let [cols (:column-names ds)]
+      (map #(let [r (summarizer-fn %1 ds)]
+              (if (fn? r)
+                  (r %1 ds)
+                  r)) cols))))
+
+; (def amt-fn (summarizer-fn (keyword "Amount Funded By Investors") loans))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 

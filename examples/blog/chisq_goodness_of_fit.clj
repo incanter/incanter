@@ -8,13 +8,13 @@
                          :header true))
 (view votes)
 
-(def regions (sel votes :cols "Region"))
+(def regions (sel votes :cols :Region))
 
 
-(def ahmadinejad-votes (sel votes :cols "Ahmadinejad"))
-(def mousavi-votes (sel votes :cols "Mousavi"))
-(def rezai-votes (sel votes :cols "Rezai"))
-(def karrubi-votes (sel votes :cols "Karrubi"))
+(def ahmadinejad-votes (sel votes :cols :Ahmadinejad))
+(def mousavi-votes (sel votes :cols :Mousavi))
+(def rezai-votes (sel votes :cols :Rezai))
+(def karrubi-votes (sel votes :cols :Karrubi))
 
 (defn first-digit [x] 
   (Character/digit (first (str x)) 10)) 

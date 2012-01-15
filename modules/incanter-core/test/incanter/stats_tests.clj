@@ -65,7 +65,20 @@
 (def y (sel test-mat :cols 1))
 
 (def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6] [7 8 9] [10 11 12]]))
-  
+
+(def summary-ds0 (to-dataset [[1] [4] [7]]))
+(def summary-ds1 (to-dataset [[1] [3.142] [7]]))
+(def summary-ds2 (to-dataset [["a"] ["b"] ["c"]]))
+(def summary-ds3 (to-dataset [[:a] [:b] [:c]]))
+(def summary-ds4 (to-dataset [[:a] ["b"] [:c]]))
+(def summary-ds5 (to-dataset [[1] [2.1] [:c]]))
+(def summary-ds6 (to-dataset [[1] [2.1] ["c"]]))
+(def summary-ds7 (to-dataset [[1] [2.1] [nil]]))
+
+(def summary-ds8 (to-dataset [["a"] ["b"] ["c"] ["d"] ["b"] ["e"] ["a"] ["b"] ["f"] ["a"] ["b"] ["e"]]))
+(def summary-ds9 (to-dataset [["a" 1.2] [":b" 3] [:c 0.1] ["d" 8] ["b" 9] ["e" 7.21] ["a" 1E1] ["b" 6.0000] ["f" 1e-2] ["a" 3.0] ["b" 4] ["e" 5]]))
+
+
 (deftest mean-test
   (is (= (map mean (trans test-mat)) [108.0 130.0])))
 
@@ -252,4 +265,29 @@
        (tanimoto-coefficient  [2 4 3 1 6]
 			      [3 5 1 2 5]))))
 
+(deftest benford-law-test
+  (let [coll [1131111 623946 325911 1799255 199654 299357 3819495 359578 285984 2214801 341104 1303129 444480 295177 450269 1758026 498061 422457 315689 1160446 573568 253962 515211 998573 677829 1289257 572988 482990 765723 337178]]
+    (is
+      (= 5.4456385557467595
+         (:X-sq (benford-test coll))))))
 
+(deftest summary-datasets 
+  (is (summarizable? 0 summary-ds0))
+  (is (summarizable? 0 summary-ds1))
+  (is (summarizable? 0 summary-ds2))
+  (is (summarizable? 0 summary-ds3))
+  (is (summarizable? 0 summary-ds4))
+  (is (not (summarizable? 0 summary-ds5)))
+  (is (not (summarizable? 0 summary-ds6)))
+  (is (summarizable? 0 summary-ds7))
+  )
+
+(deftest simple-p-value-test
+  (testing "Basic p-value testing"
+    (is (= 1 (simple-p-value (range 1 11) 5.5)))
+    (is (< 0.999 (simple-p-value (range 1 11) 5.499)))))
+(deftest benford-law-test
+  (let [coll [1131111 623946 325911 1799255 199654 299357 3819495 359578 285984 2214801 341104 1303129 444480 295177 450269 1758026 498061 422457 315689 1160446 573568 253962 515211 998573 677829 1289257 572988 482990 765723 337178]]
+    (is
+      (= 5.4456385557467595
+         (:X-sq (benford-test coll))))))
