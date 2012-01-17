@@ -10,7 +10,7 @@
   :dev-dependencies [[lein-clojars "0.7.0"
                       :exclusions [org.clojure/clojure
                                    org.clojure/clojure-contrib]]]
-  :java-source-path "src"
+  :java-source-path "java"
   ;;; Set a custom repository because math.combinatorics isn't into
   ;;; Clojars or Maven central yet.
   :repositories {"snapshots" {:url "http://oss.sonatype.org/content/repositories/snapshots"}}
