@@ -453,7 +453,7 @@
   Example:
       (pdf-beta 0.5 :alpha 1 :beta 2)
 "
-  ([x & {:keys [alpha beta] :or [alpha 1 beta 1]}]
+  ([x & {:keys [alpha beta] :or {alpha 1 beta 1}}]
     (let [dist (Beta. alpha beta (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
@@ -481,7 +481,7 @@
       (cdf-beta 0.5 :alpha 1 :beta 2)
       (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)
 "
-([x & {:keys [alpha beta lower-tail?] :or [alpha 1 beta 1 lower-tail? false]}]
+([x & {:keys [alpha beta lower-tail?] :or {alpha 1 beta 1 lower-tail? false}}]
     (let [cdf-fx (if lower-tail?
                   (fn [x1] (Probability/beta alpha beta x1))
                   (fn [x1] (- 1 (Probability/betaComplemented alpha beta x1))))]
@@ -512,7 +512,7 @@
   Example:
       (sample-beta 1000 :alpha 1 :beta 2)
 "
-([^Integer size & {:keys [alpha beta] :or [alpha 1 beta 1]}]
+([^Integer size & {:keys [alpha beta] :or {alpha 1 beta 1}}]
    (if (= size 1)
       (Beta/staticNextDouble alpha beta)
       (for [_ (range size)] (Beta/staticNextDouble alpha beta)))))
