@@ -32,15 +32,10 @@
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]
-        [incanter.stats :only (mean median)]))
+        [incanter.stats :only (mean median)]
+        incanter.backstage.zoo-commons))
 
 ;;;;; Start of ROLL functions ;;;;;
-
-(defn partialsums [start coll]
-  (lazy-seq
-    (if-let [coll (seq coll)]
-          (cons start (partialsums (+ start (first coll)) (rest coll)))
-          (list start))))
 
 (defn big-n-roll-mean
 " 
