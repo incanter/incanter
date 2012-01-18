@@ -37,10 +37,9 @@
 
 ;;;;; Start of ROLL functions ;;;;;
 
-(defn big-n-roll-mean
+(defn roll-mean
 " 
   Returns the unweighted mean of the previous n data points.
-  Optimised for larger n (e.g. n > 20) window.
 
   References: 
   http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
@@ -65,16 +64,6 @@
   (map f (partition n 1 coll)))
 
 ;;;;; TODO rolls, optimise each ;;;;;
-
-(defn roll-mean
-" 
-  Returns the unweighted mean of the previous n data points.
-
-  References: 
-  http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
-"  
-  [n coll]
-    (roll-apply mean n coll))
 
 (defn roll-median
 "
