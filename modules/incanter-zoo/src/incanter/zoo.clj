@@ -27,13 +27,13 @@
        :author "David Edgar Liebke"}
   incanter.zoo
   (:import (cern.colt.list.tdouble DoubleArrayList))
-  (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
-                              gamma pow sqrt diag trans regularized-beta ncol
-                              nrow identity-matrix decomp-cholesky decomp-svd
-                              matrix length log10 sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows)]
-        [incanter.stats :only (mean median)]
-        incanter.backstage.zoo-commons))
+  (:use incanter.backstage.zoo-commons
+        [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
+                                gamma pow sqrt diag trans regularized-beta ncol
+                                nrow identity-matrix decomp-cholesky decomp-svd
+                                matrix length log10 sum sum-of-squares sel matrix?
+                                cumulative-sum solve vectorize bind-rows)]
+        [incanter.stats :only (mean median)]))
 
 ;;;;; Start of ROLL functions ;;;;;
 
