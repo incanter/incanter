@@ -23,3 +23,6 @@ lein deps && lein test
 
 cd ../incanter-excel
 lein deps && lein test
+
+cd ../incanter-zoo
+lein deps && lein test
