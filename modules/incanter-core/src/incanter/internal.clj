@@ -40,7 +40,7 @@
       (Matrix. (double-array data))))
   ([data ncol]
     (cond
-      (coll? data)
+      (or (coll? data) (.isArray (class data)))
         (Matrix. (double-array data) ncol)
        (number? data)
         (Matrix. data ncol))) ; data is the number of rows in this case
