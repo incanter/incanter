@@ -27,25 +27,19 @@
        :author "David Edgar Liebke"}
   incanter.zoo
   (:import (cern.colt.list.tdouble DoubleArrayList))
-  (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
-                              gamma pow sqrt diag trans regularized-beta ncol
-                              nrow identity-matrix decomp-cholesky decomp-svd
-                              matrix length log10 sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows)]
+  (:use incanter.backstage.zoo-commons
+        [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
+                                gamma pow sqrt diag trans regularized-beta ncol
+                                nrow identity-matrix decomp-cholesky decomp-svd
+                                matrix length log10 sum sum-of-squares sel matrix?
+                                cumulative-sum solve vectorize bind-rows)]
         [incanter.stats :only (mean median)]))
 
 ;;;;; Start of ROLL functions ;;;;;
 
-(defn partialsums [start coll]
-  (lazy-seq
-    (if-let [coll (seq coll)]
-          (cons start (partialsums (+ start (first coll)) (rest coll)))
-          (list start))))
-
-(defn big-n-roll-mean
+(defn roll-mean
 " 
   Returns the unweighted mean of the previous n data points.
-  Optimised for larger n (e.g. n > 20) window.
 
   References: 
   http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
@@ -70,16 +64,6 @@
   (map f (partition n 1 coll)))
 
 ;;;;; TODO rolls, optimise each ;;;;;
-
-(defn roll-mean
-" 
-  Returns the unweighted mean of the previous n data points.
-
-  References: 
-  http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
-"  
-  [n coll]
-    (roll-apply mean n coll))
 
 (defn roll-median
 "
