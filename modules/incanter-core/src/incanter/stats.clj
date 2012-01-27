@@ -2188,7 +2188,7 @@
                           (if one-sample?
                             (if (neg? t-stat) true false)
                             (if (neg? t-stat) false true)))
-          one-sided-p (cdf-t t-stat :df df :lower-tail lower-tail?)
+          one-sided-p (cdf-t t-stat :df df :lower-tail? lower-tail?)
           qt (if (= alternative :two-sided)
                (quantile-t (/ (- 1 conf-level) 2) :df df)
                (quantile-t (- 1 conf-level) :df df))]
