@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>pdf - Incanter next API documentation</title>
+    <title>zoo - Incanter next API documentation</title>
     <link href="static/incanter.ico" rel="icon" />
     <link href="static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
@@ -57,24 +57,35 @@ namespace.
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.pdf/save-pdf">save-pdf</a>
+      <a href="#incanter.zoo/roll-apply">roll-apply</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/roll-max">roll-max</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/roll-mean">roll-mean</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/roll-median">roll-median</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/roll-min">roll-min</a>
     </div>
     <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">pdf</span>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">zoo</span>
   - <span id="header-project">Incanter</span> <span id="header-version">next</span> (<span id="header-status">in development</span>)
   </h1>
-
-<br />Full namespace name: <span id="long-name">incanter.pdf</span>
+<span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
+<br />Full namespace name: <span id="long-name">incanter.zoo</span>
 <p></p>
 <h2>Overview</h2>
-<pre id="namespace-docstr">This library currently has only a single function, save-pdf, which saves
-charts as a PDF file. To build this namespace make sure the you have the iText
-library (<a href="http://itextpdf.com/">http://itextpdf.com/</a>) as a declared dependency in your pom.xml or
-project.clj file:
-[com.lowagie/itext "1.4"] </pre>
+<pre id="namespace-docstr">This is a port of Zoo from R in order to create the basis
+of a library for time series data.
+
+This library is built on Parallel Colt 
+(<a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">http://sites.google.com/site/piotrwendykier/software/parallelcolt</a>),
+an extension of the Colt numerics library 
+(<a href="http://acs.lbl.gov/~hoschek/colt/">http://acs.lbl.gov/~hoschek/colt/</a>).
+</pre>
 
 
 <br />
@@ -82,27 +93,72 @@ project.clj file:
 <div id="var-entry">
   <br />
   <hr />
-  <h2 id="incanter.pdf/save-pdf">save-pdf</h2>
+  <h2 id="incanter.zoo/roll-apply">roll-apply</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (save-pdf chart filename &amp; {:keys [width height], :or {width 500, height 400}})
+  <pre id="var-usage">Usage: (roll-apply f n coll)
 </pre>
-  <pre id="var-docstr"> Save a chart object as a pdf document.
+  <pre id="var-docstr">
+A generic function for applying a function to rolling window of a collection.
 
 Arguments:
-  chart
-  filename
-
-Options:
-  :width (default 500)
-  :height (defualt 400)
-
-Examples:
-
-  (use '(incanter core charts pdf))
-  (save-pdf (function-plot sin -4 4) "./pdf-chart.pdf")</pre>
+f -- function to be applied
+n -- size of rolling window
+coll -- collection of data</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-pdf/src/incanter/pdf.clj#L19" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L54" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/roll-max">roll-max</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (roll-max n coll)
+</pre>
+  <pre id="var-docstr">
+Returns the rolling max of the previous n elements.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L75" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/roll-mean">roll-mean</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (roll-mean n coll)
+</pre>
+  <pre id="var-docstr"> 
+Returns the unweighted mean of the previous n data points.
+
+References: 
+<a href="http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average">http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average</a>
+<a href="http://www.learningclojure.com/2010/03/moving-average-of-list.html">http://www.learningclojure.com/2010/03/moving-average-of-list.html</a></pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L40" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/roll-median">roll-median</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (roll-median n coll)
+</pre>
+  <pre id="var-docstr">
+Returns the rolling median of the previous n elements.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L68" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/roll-min">roll-min</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (roll-min n coll)
+</pre>
+  <pre id="var-docstr">
+Returns the rolling min of the previous n elements.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L82" id="var-source">Source</a>
 </div>
 
 
