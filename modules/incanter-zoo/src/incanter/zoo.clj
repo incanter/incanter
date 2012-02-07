@@ -32,8 +32,11 @@
                                 gamma pow sqrt diag trans regularized-beta ncol
                                 nrow identity-matrix decomp-cholesky decomp-svd
                                 matrix length log10 sum sum-of-squares sel matrix?
-                                cumulative-sum solve vectorize bind-rows)]
-        [incanter.stats :only (mean median)]))
+                                cumulative-sum solve vectorize bind-rows to-dataset
+                                conj-cols $where)]
+        [incanter.stats :only (mean median)])
+  (:require [clj-time.core :as t]
+            [clj-time.coerce :as c]))
 
 ;;;;; Start of ROLL functions ;;;;;
 
@@ -87,3 +90,77 @@
   (roll-apply #(apply min %) n coll))
 
 ;;;;; End of ROLL functions ;;;;;
+
+;;;;; Start of Zoo value ;;;;;;
+
+;; Zoo values are simply datasets where there exists an :index column
+;; which is a clj-time (Joda) value.  They are created by passing
+;; a dataset to the zoo function which will return the zoo value.
+
+(defn coredata
+  "Return the :rows of a dataset, with :index dissoc'd.
+Intended to be used internally time series function to get at data."
+  [x]
+  (map #(dissoc % :index) (:rows x)))
+
+(defn zoo
+  "Return the given dataset as a zoo value which is simply a dataset
+that contains an :index column of clj-time values.  Hence the input
+ must contain an :index column that may be coerced with clj-time.coerce/from-string
+ into a clj-time value.  This could be improved a lot."
+  [x]
+  ($ (:column-names x)
+     (to-dataset
+      (conj-cols
+       (map (fn [{i :index :as v}]
+              (assoc v :index (c/from-string i)))
+            (:rows x))))))
+
+(defn $$
+  "This is the equivalent of :: in xts.  That is, it slices
+out the timeseries between ind-1 and ind-2.  These are strings that
+can be coerced into clj-time values. No column selection is supported"
+  ([ind ts]
+     ($where {:index (c/from-string ind)} ts))
+  ([ind-1 ind-2 ts]
+     ($where (fn [row]
+               ;; Extend by 1 milli, to close interval
+               (let [interval (t/extend
+                               (t/interval (c/from-string ind-1)
+                                           (c/from-string ind-2))
+                               (t/millis 1))]
+                 (t/within? interval (row :index))))
+             ts)))
+
+(defn lag
+  "Return the timeseries lagged by one unit. No time calculations
+are made in the index column. Both incomplete ends are dropped.
+Note that if we can guarantee that the timeseries is regular we
+can simply lag the index column using time operations."
+  [x]
+  ($ (:column-names x)
+     (conj-cols
+      (map #(select-keys % [:index]) (rest (:rows x)))
+      (to-dataset 
+       (-> x
+           coredata
+           drop-last)))))
+
+(comment
+  "This is just here for now to demo the zoo functions."
+  ;; First create a normal dataset
+  (def ds1 (to-dataset [{:index "2012-01-01" :temp 32}
+                        {:index "2012-01-02" :temp 35}
+                        {:index "2012-01-03" :temp 30}]))
+  ;; Turn it into a zoo.  Clearly we should just mirror the to-dataset
+  ;; with a to-zoo function
+  (def ts1 (zoo ds1))
+
+  ;; Slice out easily
+  ($$ "2012-01-01" ts1)
+  ($$ "2012-01-01" "2012-01-02" ts1)
+
+  ;; Lag easily.  Clearly there should be a k, maybe with negatives for lead.
+  (lag ts1)
+
+  )

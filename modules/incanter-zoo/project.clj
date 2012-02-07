@@ -6,7 +6,8 @@
                                org.clojure/clojure-contrib]]
                  [incanter/incanter-io "1.3.0-SNAPSHOT"
                   :exclusions [org.clojure/clojure
-                               org.clojure/clojure-contrib]]]
+                               org.clojure/clojure-contrib]]
+                 [clj-time "0.3.5"]]
   :dev-dependencies [[lein-clojars "0.7.0"
                       :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]])
