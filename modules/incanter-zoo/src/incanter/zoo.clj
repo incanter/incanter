@@ -33,7 +33,7 @@
                                 nrow identity-matrix decomp-cholesky decomp-svd
                                 matrix length log10 sum sum-of-squares sel matrix?
                                 cumulative-sum solve vectorize bind-rows to-dataset
-                                conj-cols $where)]
+                                conj-cols $where transform-col col-names)]
         [incanter.stats :only (mean median)])
   (:require [clj-time.core :as t]
             [clj-time.coerce :as c]))
@@ -146,12 +146,25 @@ can simply lag the index column using time operations."
            coredata
            drop-last)))))
 
+  (defn zoo-apply
+    "Behave as for roll-apply but accept a zoo and a column upon which to roll-apply f.
+Returns a zoo of the same length as input zoo with pre-pended nils"
+    [f n zoo column & args]
+    {:post [#(= (nrow zoo) (nrow %))]}
+    (col-names
+        (conj-cols
+         ($ [:index] zoo)
+         (concat (take (dec n) (cycle [nil]))
+                 (roll-apply f n ($ column zoo))))
+      [:index column]))
+
+
 (comment
   "This is just here for now to demo the zoo functions."
   ;; First create a normal dataset
-  (def ds1 (to-dataset [{:index "2012-01-01" :temp 32}
-                        {:index "2012-01-02" :temp 35}
-                        {:index "2012-01-03" :temp 30}]))
+  (def ds1 (to-dataset [{:index "2012-01-01" :temp 32 :press 100}
+                        {:index "2012-01-02" :temp 35 :press 98}
+                        {:index "2012-01-03" :temp 30 :press 102}]))
   ;; Turn it into a zoo.  Clearly we should just mirror the to-dataset
   ;; with a to-zoo function
   (def ts1 (zoo ds1))
@@ -163,4 +176,13 @@ can simply lag the index column using time operations."
   ;; Lag easily.  Clearly there should be a k, maybe with negatives for lead.
   (lag ts1)
 
+  ;; Demo zoo-apply
+  (zoo-apply #(apply min %) 2 ts1 :temp)
+
+  ;; Questions
+  ;; Should it be called roll-map not roll-apply to conform to Clojure rather than R naming ?
+  ;; Should roll-apply perhaps has (apply f args) etc internall ?
+
   )
+
+
