@@ -12,159 +12,183 @@
 ;; remove this notice, or any other, from this software.
 
 ;; CHANGE LOG
-;; March 11, 2009: First version
-
-
+ ;; March 11, 2009: First version
 
 (ns ^{:doc "This is a port of Zoo from R in order to create the basis
-            of a library for time series data.
+             of a library for time series data.
 
-            This library is built on Parallel Colt 
-            (http://sites.google.com/site/piotrwendykier/software/parallelcolt),
-            an extension of the Colt numerics library 
-            (http://acs.lbl.gov/~hoschek/colt/).
-            "
-       :author "David Edgar Liebke"}
-  incanter.zoo
-  (:import (cern.colt.list.tdouble DoubleArrayList))
-  (:use incanter.backstage.zoo-commons
-        [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
-                                gamma pow sqrt diag trans regularized-beta ncol
-                                nrow identity-matrix decomp-cholesky decomp-svd
-                                matrix length log10 sum sum-of-squares sel matrix?
-                                cumulative-sum solve vectorize bind-rows to-dataset
-                                conj-cols $where transform-col col-names)]
-        [incanter.stats :only (mean median)])
-  (:require [clj-time.core :as t]
-            [clj-time.coerce :as c]))
+             This library is built on Parallel Colt 
+             (http://sites.google.com/site/piotrwendykier/software/parallelcolt),
+             an extension of the Colt numerics library 
+             (http://acs.lbl.gov/~hoschek/colt/).
+             "
+        :author "David Edgar Liebke"}
+   incanter.zoo
+   (:import (cern.colt.list.tdouble DoubleArrayList))
+   (:use incanter.backstage.zoo-commons
+         [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
+                                 gamma pow sqrt diag trans regularized-beta ncol
+                                 nrow identity-matrix decomp-cholesky decomp-svd
+                                 matrix length log10 sum sum-of-squares sel matrix?
+                                 cumulative-sum solve vectorize bind-rows to-dataset
+                                 conj-cols $where transform-col col-names)]
+         [incanter.stats :only (mean median)])
+   (:require [clj-time.core :as t]
+             [clj-time.coerce :as c]))
 
-;;;;; Start of ROLL functions ;;;;;
+ ;;;;; Start of ROLL functions ;;;;;
 
-(defn roll-mean
-" 
-  Returns the unweighted mean of the previous n data points.
+ (defn roll-mean
+ " 
+   Returns the unweighted mean of the previous n data points.
 
-  References: 
-  http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
-  http://www.learningclojure.com/2010/03/moving-average-of-list.html
-"  
-  [n coll]
-  (map #(/ % n)
-       (let [start   (apply + (take n coll))
-             diffseq (map   - (drop n coll) coll)]
-         (partialsums start diffseq))))
+   References: 
+   http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average
+   http://www.learningclojure.com/2010/03/moving-average-of-list.html
+ "  
+   [n coll]
+   (map #(/ % n)
+        (let [start   (apply + (take n coll))
+              diffseq (map   - (drop n coll) coll)]
+          (partialsums start diffseq))))
 
-(defn roll-apply 
-"
-  A generic function for applying a function to rolling window of a collection.
+ (defn roll-apply 
+ "
+   A generic function for applying a function to rolling window of a collection.
 
-  Arguments:
-  f -- function to be applied
-  n -- size of rolling window
-  coll -- collection of data
-"  
-  [f n coll]
-  (map f (partition n 1 coll)))
+   Arguments:
+   f -- function to be applied
+   n -- size of rolling window
+   coll -- collection of data
+ "  
+   [f n coll]
+   (map f (partition n 1 coll)))
 
-;;;;; TODO rolls, optimise each ;;;;;
+ ;;;;; TODO rolls, optimise each ;;;;;
 
-(defn roll-median
-"
-  Returns the rolling median of the previous n elements.
-"
-  [n coll]
-  (roll-apply median n coll))
+ (defn roll-median
+ "
+   Returns the rolling median of the previous n elements.
+ "
+   [n coll]
+   (roll-apply median n coll))
 
-(defn roll-max
-"
-  Returns the rolling max of the previous n elements.
-"  
-  [n coll]
-  (roll-apply #(apply max %) n coll))
+ (defn roll-max
+ "
+   Returns the rolling max of the previous n elements.
+ "  
+   [n coll]
+   (roll-apply #(apply max %) n coll))
 
-(defn roll-min
-"
-  Returns the rolling min of the previous n elements.
-"  
-  [n coll]
-  (roll-apply #(apply min %) n coll))
+ (defn roll-min
+ "
+   Returns the rolling min of the previous n elements.
+ "  
+   [n coll]
+   (roll-apply #(apply min %) n coll))
 
-;;;;; End of ROLL functions ;;;;;
+ ;;;;; End of ROLL functions ;;;;;
 
-;;;;; Start of Zoo value ;;;;;;
+ ;;;;; Start of Zoo value ;;;;;;
 
-;; Zoo values are simply datasets where there exists an :index column
-;; which is a clj-time (Joda) value.  They are created by passing
-;; a dataset to the zoo function which will return the zoo value.
+ ;; Zoo values are simply datasets where there exists an :index column
+ ;; which is a clj-time (Joda) value.  They are created by passing
+ ;; a dataset to the zoo function which will return the zoo value.
 
-(defn coredata
-  "Return the :rows of a dataset, with :index dissoc'd.
-Intended to be used internally time series function to get at data."
+ (defn coredata
+   "Return the :rows of a dataset, with :index dissoc'd.
+ Intended to be used internally time series function to get at data."
+   [x]
+   (map #(dissoc % :index) (:rows x)))
+
+ (defn zoo
+   "Return the given dataset as a zoo value which is simply a dataset
+ that contains an :index column of clj-time values.  Hence the input
+  must contain an :index column that may be coerced with clj-time.coerce/from-string
+  into a clj-time value.  This could be improved a lot."
+   [x]
+   ($ (:column-names x)
+      (to-dataset
+       (conj-cols
+        (map (fn [{i :index :as v}]
+               (assoc v :index (c/from-string i)))
+             (:rows x))))))
+
+ (defn $$
+   "This is the equivalent of :: in xts.  That is, it slices
+ out the timeseries between ind-1 and ind-2.  These are strings that
+ can be coerced into clj-time values. No column selection is supported"
+   ([ind ts]
+      ($where {:index (c/from-string ind)} ts))
+   ([ind-1 ind-2 ts]
+      ($where (fn [row]
+                ;; Extend by 1 milli, to close interval
+                (let [interval (t/extend
+                                (t/interval (c/from-string ind-1)
+                                            (c/from-string ind-2))
+                                (t/millis 1))]
+                  (t/within? interval (row :index))))
+              ts)))
+
+(defn- nil-row
+  "Returns a map with the same keys as x, but with nils for
+each value.  Used for padding zoo."
   [x]
-  (map #(dissoc % :index) (:rows x)))
-
-(defn zoo
-  "Return the given dataset as a zoo value which is simply a dataset
-that contains an :index column of clj-time values.  Hence the input
- must contain an :index column that may be coerced with clj-time.coerce/from-string
- into a clj-time value.  This could be improved a lot."
-  [x]
-  ($ (:column-names x)
-     (to-dataset
-      (conj-cols
-       (map (fn [{i :index :as v}]
-              (assoc v :index (c/from-string i)))
-            (:rows x))))))
-
-(defn $$
-  "This is the equivalent of :: in xts.  That is, it slices
-out the timeseries between ind-1 and ind-2.  These are strings that
-can be coerced into clj-time values. No column selection is supported"
-  ([ind ts]
-     ($where {:index (c/from-string ind)} ts))
-  ([ind-1 ind-2 ts]
-     ($where (fn [row]
-               ;; Extend by 1 milli, to close interval
-               (let [interval (t/extend
-                               (t/interval (c/from-string ind-1)
-                                           (c/from-string ind-2))
-                               (t/millis 1))]
-                 (t/within? interval (row :index))))
-             ts)))
+  (zipmap (keys x) (cycle [nil])))
 
 (defn lag
   "Return the timeseries lagged by one unit. No time calculations
-are made in the index column. Both incomplete ends are dropped.
-Note that if we can guarantee that the timeseries is regular we
-can simply lag the index column using time operations."
-  [x]
-  ($ (:column-names x)
-     (conj-cols
-      (map #(select-keys % [:index]) (rest (:rows x)))
-      (to-dataset 
-       (-> x
-           coredata
-           drop-last)))))
-
-  (defn zoo-apply
-    "Behave as for roll-apply but accept a zoo and a column upon which to roll-apply f.
-Returns a zoo of the same length as input zoo with pre-pended nils"
-    [f n zoo column & args]
-    {:post [#(= (nrow zoo) (nrow %))]}
-    (col-names
+ are made in the index column. Both incomplete ends are dropped.
+ Note that if we can guarantee that the timeseries is regular we
+ can simply lag the index column using time operations.
+ *TODO* prepend nils to keep length constant"
+  ([x] (lag x 1))
+  ([x n]
+     ($ (:column-names x)
         (conj-cols
-         ($ [:index] zoo)
-         (concat (take (dec n) (cycle [nil]))
-                 (roll-apply f n ($ column zoo))))
-      [:index column]))
+         (map #(select-keys % [:index]) (rest (:rows x)))
+         (to-dataset
+          (concat
+           (nil-row (-> x coredata :rows first))
+           (->> x
+                coredata
+                (drop-last n))))))))
 
+(defn lag
+  "Return the timeseries lagged by one unit. No time calculations
+ are made in the index column. Both incomplete ends are dropped.
+ Note that if we can guarantee that the timeseries is regular we
+ can simply lag the index column using time operations.
+ *TODO* prepend nils to keep length constant"
+  ([x] (lag x 1))
+  ([x n]
+     (concat
+      (nil-row (-> x :rows first))
+      (->> x
+           coredata
+           (drop-last n)))))
+
+(defn zoo-apply
+  "Behave as for roll-apply but accept a zoo and a column upon which to roll-apply f.
+Returns a zoo of the same length as input zoo with pre-pended nils"
+  [f n zoo column & args]
+  {:post [#(= (nrow zoo) (nrow %))]}
+  (col-names
+   (conj-cols
+    ($ [:index] zoo)
+    (concat (take (dec n) (cycle [nil]))
+            (roll-apply f n ($ column zoo))))
+   [:index column]))
 
 (comment
   "This is just here for now to demo the zoo functions."
   ;; First create a normal dataset
   (def ds1 (to-dataset [{:index "2012-01-01" :temp 32 :press 100}
                         {:index "2012-01-02" :temp 35 :press 98}
-                        {:index "2012-01-03" :temp 30 :press 102}]))
+                        {:index "2012-01-03" :temp 30 :press 102}
+                        {:index "2012-01-04" :temp 31 :press 103}
+                        {:index "2012-01-05" :temp 32 :press 104}
+                        {:index "2012-01-06" :temp 33 :press 105}]))
   ;; Turn it into a zoo.  Clearly we should just mirror the to-dataset
   ;; with a to-zoo function
   (def ts1 (zoo ds1))
@@ -175,6 +199,7 @@ Returns a zoo of the same length as input zoo with pre-pended nils"
 
   ;; Lag easily.  Clearly there should be a k, maybe with negatives for lead.
   (lag ts1)
+  (lag ts1 2)
 
   ;; Demo zoo-apply
   (zoo-apply #(apply min %) 2 ts1 :temp)
