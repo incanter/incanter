@@ -146,7 +146,7 @@ each value.  Used for padding zoo."
       (map #(select-keys % [:index]) (:rows z))
       (to-dataset
        (concat
-        (take n (repeat (nil-row (-> ts1 coredata first))))
+        (take n (repeat (nil-row (-> z coredata first))))
         (->> z
              coredata
              (drop-last n)))))))
@@ -170,17 +170,31 @@ each value.  Used for padding zoo."
        (apply map =)
        (every? identity)))
 
-(defn zoo-row-map
-  "Accept a number of aligned zoo object and pass them row-wise into f, return a zoo
-of the output. f must accept and process maps.  The :index column is stripped
-out before f is applied, and then replaced afterwards with the :index of the first."
+(defn zoo-row-map-
+  "Accept a number of aligned zoo object and pass them row-wise into f, return a seq
+of maps of the output of the output. f must accept and return maps.  The :index column is stripped out before f is applied, and then replaced afterwards with the :index of the first."
   [f & zs]
   {:pre [(apply aligned? zs)]}
   (->> zs
        (map coredata)
        (apply (fn [& rows] (apply map f rows)))
-       (map #(assoc %2 :index %1) ($ :index (first zs)))
-       to-dataset))
+       (map #(assoc %2 :index %1) ($ :index (first zs)))))
+
+(defn zoo-row-map
+  "Accept a number of aligned zoo object and pass them row-wise into f, return a zoo. f must accept and return maps.  The :index column is stripped out before f is applied, and then replaced afterwards with the :index of the first."
+  [f & zs]
+  (to-dataset (apply zoo-row-map- f zs)))
+
+(defn- zoo-occupied?
+  "Helper function to see if a map contains more than just and :index"
+  [x]
+  (-> x (dissoc :index) empty? not))
+
+(defn zoo-row-map-occupied
+  "zoo-row-map- and remove the empties"
+  [f & zs]
+  (let [s (apply zoo-row-map- f zs)]
+    (filter occupied? s)))
 
 (comment
   "This is just here for now to demo the zoo functions."
@@ -219,8 +233,9 @@ out before f is applied, and then replaced afterwards with the :index of the fir
                       {k2 (- v1 v2)}
                       {k2 nil}))
                   m1 m2)))
-
+        
   ;; Now use it
+  (zoo-row-map- map-diff ts1 ts1)
   (zoo-row-map map-diff ts1 ts1)
   (zoo-row-map map-diff ts1 (lag ts1))
   
