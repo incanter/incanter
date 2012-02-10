@@ -99,42 +99,66 @@
   "Return the :rows of a dataset, with :index dissoc'd.
  Intended to be used internally time series function to get at data."
   [x]
-  (map #(dissoc % :index) (:rows x)))
+  (->> x ($ [:not :index]) :rows))
+
+;; Credit: http://stackoverflow.com/questions/3249334/test-whether-a-list-contains-a-specific-value-in-clojure
+(defn- in? 
+  "true if seq contains elm."
+  [seq elm]  
+  (some #(= elm %) seq))
+
+;; Single protocol that convert a value to a clj-time value
+(defprotocol TimeCoercible
+  (to-clj-time [x]))
+
+(extend-type java.lang.String
+  TimeCoercible
+  (to-clj-time [x] (c/from-string x)))
+
+(extend-protocol TimeCoercible
+  java.lang.String
+  (to-clj-time [x] (c/from-string x))
+  org.joda.time.DateTime
+  (to-clj-time [x] x)
+  java.lang.Long
+  (to-clj-time [x] (c/from-long x)))
 
 (defn zoo
   "Return the given dataset as a zoo value which is simply a dataset
  that contains an :index column of clj-time values.  Hence the input
-  must contain an :index column that may be coerced with clj-time.coerce/from-string
-  into a clj-time value.  This could be improved a lot."
+  must contain an :index column that may be coerced into a clj-time. See
+the TimeCoercible Protocol above."
   [x]
+  {:pre [(-> x :column-names (in? :index))]}
   ($ (:column-names x)
      (to-dataset
       (conj-cols
        (map (fn [{i :index :as v}]
-              (assoc v :index (c/from-string i)))
+              (assoc v :index (to-clj-time i)))
             (:rows x))))))
 
 (defn $$
   "This is the equivalent of :: in xts.  That is, it slices
- out the timeseries between ind-1 and ind-2.  These are strings that
+ out the timeseries between ind-1 and ind-2.  These are any values that
  can be coerced into clj-time values. No column selection is supported"
   ([ind ts]
      ($where {:index (c/from-string ind)} ts))
   ([ind-1 ind-2 ts]
      ($where (fn [row]
-               ;; Extend by 1 milli, to close interval
-               (let [interval (t/extend
-                               (t/interval (c/from-string ind-1)
-                                           (c/from-string ind-2))
-                               (t/millis 1))]
-                 (t/within? interval (row :index))))
+               (let [i1 (to-clj-time ind-1)
+                     i2 (to-clj-time ind-2)]
+                   ;; Extend by 1 milli, to close interval
+                   (let [interval (t/extend
+                                   (t/interval i1 i2)
+                                   (t/millis 1))]
+                     (t/within? interval (row :index)))))
              ts)))
 
 (defn- nil-row
   "Returns a map with the same keys as x, but with nils for
 each value.  Used for padding zoo."
   [x]
-  (zipmap (keys x) (cycle [nil])))
+  (zipmap (keys x) (repeat nil)))
 
 (defn lag
   "Return the timeseries lagged by n units or 1 if not specified. No time calculations
@@ -172,7 +196,7 @@ each value.  Used for padding zoo."
 
 (defn zoo-row-map-
   "Accept a number of aligned zoo object and pass them row-wise into f, return a seq
-of maps of the output of the output. f must accept and return maps.  The :index column is stripped out before f is applied, and then replaced afterwards with the :index of the first."
+of maps of the output of the output. f must accept and return maps.  The :index column is stripped out before f is applied, and then replaced afterwards."
   [f & zs]
   {:pre [(apply aligned? zs)]}
   (->> zs
@@ -185,16 +209,17 @@ of maps of the output of the output. f must accept and return maps.  The :index 
   [f & zs]
   (to-dataset (apply zoo-row-map- f zs)))
 
-(defn- zoo-occupied?
-  "Helper function to see if a map contains more than just and :index"
+(defn- index-only?
+  "Returns true if a map contains only an index"
   [x]
-  (-> x (dissoc :index) empty? not))
+  (-> x (dissoc :index) empty?))
 
 (defn zoo-row-map-occupied
-  "zoo-row-map- and remove the empties"
-  [f & zs]
-  (let [s (apply zoo-row-map- f zs)]
-    (filter occupied? s)))
+  "zoo-row-map- and remove the empties. This returns a seq of maps"
+  [f & s]
+  (->> s
+       (apply zoo-row-map- f)
+       (remove index-only?)))
 
 (comment
   "This is just here for now to demo the zoo functions."
@@ -212,6 +237,8 @@ of maps of the output of the output. f must accept and return maps.  The :index 
   ;; Slice out easily
   ($$ "2012-01-01" ts1)
   ($$ "2012-01-01" "2012-01-03" ts1)
+  ($$ "2012-01-01" (c/from-string "2012-01-03") ts1)  ;; Cool !
+  
 
   ;; Lag easily.  Clearly there should be a k, maybe with negatives for lead.
   (lag ts1)
