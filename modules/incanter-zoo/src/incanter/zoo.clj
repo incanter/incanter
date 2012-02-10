@@ -125,16 +125,17 @@
 
 (defn zoo
   "Return the given dataset as a zoo value which is simply a dataset
- that contains an :index column of clj-time values.  Hence the input
-  must contain an :index column that may be coerced into a clj-time. See
-the TimeCoercible Protocol above."
-  [x]
-  {:pre [(-> x :column-names (in? :index))]}
-  ($ (:column-names x)
+that contains an column of clj-time values specified by index-col, default :index.
+That column must contain values that can be coerced into Jodas using the TimeCoercible Protocol."
+  ([x] (zoo x :index))
+  ([x index-col]
+     {:pre [(-> x :column-names (in? index-col))]}
      (to-dataset
       (conj-cols
-       (map (fn [{i :index :as v}]
-              (assoc v :index (to-clj-time i)))
+       (map (fn [{i index-col :as v}]
+              (-> v
+                  (dissoc index-col)
+                  (assoc :index (to-clj-time i))))
             (:rows x))))))
 
 (defn $$
@@ -142,7 +143,7 @@ the TimeCoercible Protocol above."
  out the timeseries between ind-1 and ind-2.  These are any values that
  can be coerced into clj-time values. No column selection is supported"
   ([ind ts]
-     ($where {:index (c/from-string ind)} ts))
+     ($where {:index (to-clj-time ind)} ts))
   ([ind-1 ind-2 ts]
      ($where (fn [row]
                (let [i1 (to-clj-time ind-1)
@@ -230,10 +231,19 @@ of maps of the output of the output. f must accept and return maps.  The :index 
                         {:index "2012-01-04" :temp 31 :press 103}
                         {:index "2012-01-05" :temp 32 :press 104}
                         {:index "2012-01-06" :temp 33 :press 105}]))
+
+  (def ds2 (to-dataset [{:date "2012-01-01" :temp 32 :press 100}
+                        {:date "2012-01-02" :temp 35 :press 98}
+                        {:date "2012-01-03" :temp 30 :press 102}
+                        {:date "2012-01-04" :temp 31 :press 103}
+                        {:date "2012-01-05" :temp 32 :press 104}
+                        {:date "2012-01-06" :temp 33 :press 105}]))
+  
   ;; Turn it into a zoo.  Clearly we should just mirror the to-dataset
   ;; with a to-zoo function
   (def ts1 (zoo ds1))
-  
+  (def ts2 (zoo ds2 :date))
+
   ;; Slice out easily
   ($$ "2012-01-01" ts1)
   ($$ "2012-01-01" "2012-01-03" ts1)
