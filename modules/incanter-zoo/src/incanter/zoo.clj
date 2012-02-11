@@ -24,6 +24,7 @@
              "
         :author "David Edgar Liebke"}
    incanter.zoo
+   (:refer clojure :exclude [sort])
    (:import (cern.colt.list.tdouble DoubleArrayList))
    (:use incanter.backstage.zoo-commons
          [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
@@ -107,15 +108,11 @@
   [seq elm]  
   (some #(= elm %) seq))
 
-;; Single protocol that convert a value to a clj-time value
-(defprotocol TimeCoercible
+;; Single protocol that convert a value to a Joda value
+(defprotocol JodaCoercible
   (to-clj-time [x]))
 
-(extend-type java.lang.String
-  TimeCoercible
-  (to-clj-time [x] (c/from-string x)))
-
-(extend-protocol TimeCoercible
+(extend-protocol JodaCoercible
   java.lang.String
   (to-clj-time [x] (c/from-string x))
   org.joda.time.DateTime
@@ -222,6 +219,26 @@ of maps of the output of the output. f must accept and return maps.  The :index 
        (apply zoo-row-map- f)
        (remove index-only?)))
 
+(defn- row-sort
+  "Sorts a seq of rows by index"
+  [z]
+  (-> z
+      (apply sorted-set-by #(compare (:index %1) (:index %2)))
+      (into [])))
+
+(defn sort
+  "Sort a zoo so that the index increasing in time."
+  [z]
+  (update-in z [:rows] row-sort))
+
+(defn within-zoo?
+  "Is t between the first and last indices."
+  [t z]
+  (t/within? 
+   (t/interval (-> z :rows first :index)
+               (-> z :rows last :index))
+   t))
+
 (comment
   "This is just here for now to demo the zoo functions."
   ;; First create a normal dataset
@@ -254,6 +271,8 @@ of maps of the output of the output. f must accept and return maps.  The :index 
   (lag ts1)
   (lag ts1 2)
 
+  ;; ordering
+  
   ;; Demo zoo-apply
   (zoo-apply #(apply min %) 2 ts1 :temp)
 
