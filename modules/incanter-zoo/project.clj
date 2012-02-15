@@ -12,4 +12,5 @@
                       :exclusions [org.clojure/clojure
                                    org.clojure/clojure-contrib]]]
   :repositories {"snapshots" "http://tyrol:8081/nexus/content/repositories/snapshots"
-                 "releases"  "http://tyrol:8081/nexus/content/repositories/releases"})
+                 "releases"  "http://tyrol:8081/nexus/content/repositories/releases"}
+  )
