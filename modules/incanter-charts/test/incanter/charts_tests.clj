@@ -232,7 +232,7 @@
   (.dispose hw2))
 
 (deftest candle-stick-tests
-  (let [test-data (incanter.core/dataset [:date :high :low :open :volume :close]
+  (let [test-data1 (incanter.core/dataset [:date :high :low :open :volume :close]
                                          (map
                                           (fn [day]
                                             (let [open (+ day (rand-int 10))
@@ -247,9 +247,26 @@
                                                :close close
                                                :volume volume}))
                                           (range 1 31)))
-        fw1 (view (candle-stick-plot :data test-data))]
+        test-data2 (incanter.core/dataset [:date :high :low :open :volume :close]
+                                          (map
+                                           (fn [day]
+                                             (let [open (+ day (rand-int 10))
+                                                   close (+ day (rand-int 10))
+                                                   high (+ (max open close) (rand-int 10))
+                                                   low (- (min open close) (rand-int 10))
+                                                   volume (rand-int 1000000)]
+                                               {:date (str "2011-10-" day)
+                                                :high high
+                                                :low low
+                                                :open open
+                                                :close close
+                                                :volume volume}))
+                                          (range 1 31)))
+        fw1 (view (candle-stick-plot :data test-data1))
+        fw2 (view (candle-stick-plot :data test-data2))]
     (Thread/sleep wait-timeout)
-    (.dispose fw1)))
+    (.dispose fw1)
+    (.dispose fw2)))
 
 
 

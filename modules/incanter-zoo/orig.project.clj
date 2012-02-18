@@ -10,7 +10,4 @@
                  [clj-time "0.3.5"]]
   :dev-dependencies [[lein-clojars "0.7.0"
                       :exclusions [org.clojure/clojure
-                                   org.clojure/clojure-contrib]]]
-  :repositories {"snapshots" "http://tyrol:8081/nexus/content/repositories/snapshots"
-                 "releases"  "http://tyrol:8081/nexus/content/repositories/releases"}
-  )
+                               org.clojure/clojure-contrib]]])

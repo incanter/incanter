@@ -4,10 +4,11 @@
                  [incanter/incanter-core "1.3.0-SNAPSHOT"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
-	         [incanter/incanter-io "1.3.0-SNAPSHOT"
+                 [incanter/incanter-io "1.3.0-SNAPSHOT"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
-                 [incanter/jfreechart "1.0.13-no-gnujaxp"]]
+                 [incanter/jfreechart "1.0.13-no-gnujaxp"]
+                 [clj-time "0.3.7"]]
   :dev-dependencies [[lein-clojars "0.7.0"
                       :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]])
