@@ -377,7 +377,7 @@
 
 
 (defn- nls-gradient
-" Returns the gradient of the least sqaures function applied to the given function evaluated
+" Returns the gradient of the least squares function applied to the given function evaluated
   at x with the parameters theta. The function, f, must be of the form (f theta x),
   df must be of the form (df theta x) and return a vector representing the gradient of f.
 
@@ -414,7 +414,7 @@
 
 
 (defn- nls-hessian
-" Returns the Hessian matrix of the least sqaures function applied to f evaluated
+" Returns the Hessian matrix of the least squares function applied to f evaluated
   at x with the parameters theta. The function, f, must be of the form (f theta x),
   df must be of the form (df theta x) and return a vector representing the gradient of f,
   d2f must be of the form (d2f theta x) and return a matrix representing the hessian of f.
@@ -581,7 +581,7 @@
   Based on R's nls (non-linear least squares) function.
 
   Arguments:
-    f -- model function, takes two argumetns the first a list of parameters
+    f -- model function, takes two arguments the first a list of parameters
          that are to be estimated, and an x value.
     y -- sequence of dependent data
     x -- sequence of independent data
@@ -662,7 +662,7 @@
 ([f y x start & {:keys [max-iter tol method]
                  :or {max-iter 200
                       tol 1E-5
-                      method :guass-newton}}] ;; other option is :newton-raphson
+                      method :gauss-newton}}] ;; other option is :newton-raphson
     (let [nls (if (= method :newton-raphson)
                 (nls-newton-raphson f (gradient f start) (hessian f start) start x y :tol tol :max-iter max-iter)
                 (nls-gauss-newton f start x y :tol tol :max-iter max-iter))
