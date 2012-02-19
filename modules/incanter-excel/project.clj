@@ -1,7 +1,7 @@
-(defproject incanter/incanter-excel "1.3.0-SNAPSHOT"
+(defproject incanter/incanter-excel "1.3.0"
   :description "Incanter-excel provides access to reading and writing Excel files."
   :dependencies [[org.clojure/clojure "1.3.0"]
-                 [incanter/incanter-core "1.3.0-SNAPSHOT"
+                 [incanter/incanter-core "1.3.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
   		 [org.apache.poi/poi "3.6"]

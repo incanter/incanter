@@ -2,7 +2,7 @@
 
 lein clean
 cd modules
-for f in core io charts processing mongodb pdf latex excel ; do
+for f in core io charts processing mongodb pdf latex excel zoo; do
     cd incanter-$f
     lein clean
     lein deps

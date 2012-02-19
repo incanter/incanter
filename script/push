@@ -32,6 +32,10 @@ cd ../incanter-excel
 lein deps
 lein push
 
+cd ../incanter-zoo
+lein deps
+lein push
+
 cd ../..
 lein deps
 lein push
