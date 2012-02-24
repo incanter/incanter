@@ -57,6 +57,14 @@ namespace.
   <div style="margin-left: 1em;" class="toc-section">
     <a href="#toc0">Overview</a>
     <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/$$">$$</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/aligned?">aligned?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/coredata">coredata</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/lag">lag</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.zoo/roll-apply">roll-apply</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.zoo/roll-max">roll-max</a>
@@ -66,6 +74,18 @@ namespace.
       <a href="#incanter.zoo/roll-median">roll-median</a>
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a href="#incanter.zoo/roll-min">roll-min</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/within-zoo?">within-zoo?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/zoo">zoo</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/zoo-apply">zoo-apply</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/zoo-row-map">zoo-row-map</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/zoo-row-map-">zoo-row-map-</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#incanter.zoo/zoo-row-map-occupied">zoo-row-map-occupied</a>
     </div>
     <br />
   </div>
@@ -93,20 +113,70 @@ an extension of the Colt numerics library
 <div id="var-entry">
   <br />
   <hr />
+  <h2 id="incanter.zoo/$$">$$</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: ($$ ind ts)
+       ($$ ind cols ts)
+       ($$ ind-1 ind-2 cols ts)
+</pre>
+  <pre id="var-docstr">This is the equivalent of :: in xts.  That is, it slices  out the timeseries between ind-1 and ind-2.  These are any values that can be coerced into clj-time values.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L174" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/aligned?">aligned?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (aligned? &amp; zs)
+</pre>
+  <pre id="var-docstr">Is the :index column identical for all zs.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L124" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/coredata">coredata</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (coredata x)
+</pre>
+  <pre id="var-docstr">Return the :rows of a dataset, with :index dissoc'd.
+Intended to be used internally time series function to get at data.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L98" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/lag">lag</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (lag z)
+       (lag z n)
+</pre>
+  <pre id="var-docstr">Return the timeseries lagged by n units or 1 if not specified. No time calculations
+are made in the index column.  The output timeseries is of the same length as the input.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L198" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
   <h2 id="incanter.zoo/roll-apply">roll-apply</h2>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (roll-apply f n coll)
 </pre>
   <pre id="var-docstr">
-A generic function for applying a function to rolling window of a collection.
+  A generic function for applying a function to rolling window of a collection.
 
-Arguments:
-f -- function to be applied
-n -- size of rolling window
-coll -- collection of data</pre>
+  Arguments:
+  f -- function to be applied
+  n -- size of rolling window
+  coll -- collection of data
+</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L54" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L55" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -115,10 +185,11 @@ coll -- collection of data</pre>
   <pre id="var-usage">Usage: (roll-max n coll)
 </pre>
   <pre id="var-docstr">
-Returns the rolling max of the previous n elements.</pre>
+  Returns the rolling max of the previous n elements.
+</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L75" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L76" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -126,15 +197,16 @@ Returns the rolling max of the previous n elements.</pre>
   <span id="var-type">function</span><br />
   <pre id="var-usage">Usage: (roll-mean n coll)
 </pre>
-  <pre id="var-docstr"> 
-Returns the unweighted mean of the previous n data points.
+  <pre id="var-docstr">
+  Returns the unweighted mean of the previous n data points.
 
-References: 
-<a href="http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average">http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average</a>
-<a href="http://www.learningclojure.com/2010/03/moving-average-of-list.html">http://www.learningclojure.com/2010/03/moving-average-of-list.html</a></pre>
+  References: 
+  <a href="http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average">http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average</a>
+  <a href="http://www.learningclojure.com/2010/03/moving-average-of-list.html">http://www.learningclojure.com/2010/03/moving-average-of-list.html</a>
+</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L40" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L41" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -143,10 +215,11 @@ References:
   <pre id="var-usage">Usage: (roll-median n coll)
 </pre>
   <pre id="var-docstr">
-Returns the rolling median of the previous n elements.</pre>
+  Returns the rolling median of the previous n elements.
+</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L68" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L69" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -155,10 +228,80 @@ Returns the rolling median of the previous n elements.</pre>
   <pre id="var-usage">Usage: (roll-min n coll)
 </pre>
   <pre id="var-docstr">
-Returns the rolling min of the previous n elements.</pre>
+  Returns the rolling min of the previous n elements.
+</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/08306218d3a74dd0e9ab339b1f32d3e19c62eecc/modules/incanter-zoo/src/incanter/zoo.clj#L82" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L83" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/within-zoo?">within-zoo?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (within-zoo? t z)
+</pre>
+  <pre id="var-docstr">Is t between the first and last indices.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L150" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/zoo">zoo</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (zoo x)
+       (zoo x index-col)
+</pre>
+  <pre id="var-docstr">Return the given dataset as a zoo value which is simply a dataset
+that contains an column of clj-time values specified by index-col, default :index.
+That column must contain values that can be coerced into Jodas using the TimeCoercible Protocol.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L157" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/zoo-apply">zoo-apply</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (zoo-apply f n zoo column &amp; args)
+</pre>
+  <pre id="var-docstr">Behave as for roll-apply but accept a zoo and a single column upon which to roll-apply f. Returns a zoo of the same length as input zoo with pre-pended nils</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L213" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/zoo-row-map">zoo-row-map</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (zoo-row-map f &amp; zs)
+</pre>
+  <pre id="var-docstr">Accept a number of aligned zoo object and pass them row-wise into f, return a zoo. f must accept and return maps.  The :index column is stripped out before f is applied, and then replaced afterwards with the :index of the first.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L233" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/zoo-row-map-">zoo-row-map-</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (zoo-row-map- f &amp; zs)
+</pre>
+  <pre id="var-docstr">Accept a number of aligned zoo object and pass them row-wise into f, return a seq of maps of the output of the output. f must accept and return maps.  The :index column is stripped out before f is applied, and then replaced afterwards.</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L224" id="var-source">Source</a>
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="incanter.zoo/zoo-row-map-occupied">zoo-row-map-occupied</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (zoo-row-map-occupied f &amp; s)
+</pre>
+  <pre id="var-docstr">zoo-row-map- and remove the empties. This returns a seq of maps</pre>
+  
+  
+  <a href="https://github.com/liebke/incanter/blob/f8ec625b2d085ac1a5f486ec97c997e56ff92505/modules/incanter-zoo/src/incanter/zoo.clj#L243" id="var-source">Source</a>
 </div>
 
 

@@ -125,7 +125,7 @@ Examples:
   (add-lines plot x (pdf-deriv2 x))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L67" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/5140eafa2323ae8374ce153d81e03b7b616a04b8/modules/incanter-core/src/incanter/optimize.clj#L67" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -160,7 +160,7 @@ Examples:
   (time (doall (grad start x)))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L243" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/5140eafa2323ae8374ce153d81e03b7b616a04b8/modules/incanter-core/src/incanter/optimize.clj#L243" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -195,7 +195,7 @@ Examples:
   (time (doall (hess start x)))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L290" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/5140eafa2323ae8374ce153d81e03b7b616a04b8/modules/incanter-core/src/incanter/optimize.clj#L290" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
@@ -232,13 +232,13 @@ Reference:
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L25" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/5140eafa2323ae8374ce153d81e03b7b616a04b8/modules/incanter-core/src/incanter/optimize.clj#L25" id="var-source">Source</a>
 </div><div id="var-entry">
   <br />
   <hr />
   <h2 id="incanter.optimize/non-linear-model">non-linear-model</h2>
   <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (non-linear-model f y x start &amp; {:keys [max-iter tol method], :or {max-iter 200, tol 1.0E-5, method :guass-newton}})
+  <pre id="var-usage">Usage: (non-linear-model f y x start &amp; {:keys [max-iter tol method], :or {max-iter 200, tol 1.0E-5, method :gauss-newton}})
 </pre>
   <pre id="var-docstr">
 Determine the nonlinear least-squares estimates of the
@@ -246,7 +246,7 @@ parameters of a nonlinear model.
 Based on R's nls (non-linear least squares) function.
 
 Arguments:
-  f -- model function, takes two argumetns the first a list of parameters
+  f -- model function, takes two arguments the first a list of parameters
        that are to be estimated, and an x value.
   y -- sequence of dependent data
   x -- sequence of independent data
@@ -323,7 +323,7 @@ Examples:
   (add-lines plot x (:fitted nlm2))</pre>
   
   
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/optimize.clj#L577" id="var-source">Source</a>
+  <a href="https://github.com/liebke/incanter/blob/5140eafa2323ae8374ce153d81e03b7b616a04b8/modules/incanter-core/src/incanter/optimize.clj#L577" id="var-source">Source</a>
 </div>
 
 
