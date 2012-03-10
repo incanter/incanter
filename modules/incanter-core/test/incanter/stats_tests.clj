@@ -101,10 +101,10 @@
   (is (= (map variance (trans test-mat)) [1001.5833333333334 5416.666666666667])))
 
 (deftest variance-precision-test
-  (is (within 1E-13 7.3549E-10 (variance ($ :sensitive precision-ds0))))
-  (is (within 1E-19 7.315999E-16 (variance ($ :small precision-ds0))))
-  (is (within 1E-13 9.69728E-9 (variance ($ :medium precision-ds0))))
-  (is (within 0.001 736.786 (variance ($ :large precision-ds0)))))
+  (is (within 1E-13 7.354943E-10 (variance ($ :sensitive precision-ds0))))
+  (is (within 1E-19 7.315992E-16 (variance ($ :small precision-ds0))))
+  (is (within 1E-13 9.697281E-9 (variance ($ :medium precision-ds0))))
+  (is (within 0.001 736.7868 (variance ($ :large precision-ds0)))))
 
 (deftest sd-test
   ;; calculate the standard deviation of a variable
