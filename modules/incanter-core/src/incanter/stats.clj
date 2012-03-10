@@ -1471,7 +1471,8 @@
     http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance
 
 "
-  ([x] (DoubleDescriptive/sampleVariance (length x) (sum x) (sum-of-squares x))))
+([x] (let [xx (to-list x)]
+       (DoubleDescriptive/sampleVariance (DoubleArrayList. (double-array xx)) (mean x)))))
 
 
 
