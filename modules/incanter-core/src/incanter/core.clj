@@ -54,7 +54,7 @@
 
 (def ^{:dynamic true
        :doc "This variable is bound to a dataset when the with-data macro is used.
-              functions like $ and $where can use $data as a default argument."} 
+              functions like $ and $where can use $data as a default argument."}
      $data)
 
 (defrecord Dataset [column-names rows])
@@ -292,7 +292,7 @@
                 cols cols
                 except-cols (except-for (.columns mat) except-cols)
                 :else true)
-         mat (if (nil? filter) mat (matrix (filter filter mat)))
+         ^Matrix mat (if (nil? filter) mat (matrix (filter filter mat)))
          all-rows? (or (true? rows) (= rows :all))
          all-cols? (or (true? cols) (= cols :all))]
      (cond
@@ -373,7 +373,7 @@
 "
   ([& args]
    (reduce
-    (fn [A B] (.viewDice (bind-rows (trans A) (trans B))))
+    (fn [A B] (.viewDice ^Matrix (bind-rows (trans A) (trans B))))
     args)))
 
 
@@ -1597,7 +1597,7 @@ altering later ones."
   ([mat]
      (head 10 mat)))
 
-(defn $where 
+(defn $where
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
   it will use the $data binding for the first argument, which is set with
   the with-data macro.
