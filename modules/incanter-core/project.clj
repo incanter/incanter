@@ -15,4 +15,3 @@
   ;;; Clojars or Maven central yet.
   :repositories {"snapshots" {:url "http://oss.sonatype.org/content/repositories/snapshots"}}
   )
-
