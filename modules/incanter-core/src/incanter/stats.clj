@@ -1820,7 +1820,7 @@
                    (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
                          se1 (sd stats)
                          se2 (sd stats2)]
-                     (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
+                     (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (inc D) se1)))
                        stats2
                        (recur stats2 (inc k)))))
                  (for [_ (range size)] (statistic (sample data :size n :replacement replacement))))
@@ -2079,8 +2079,8 @@
           r-square (/ ssr sst)
           n (nrow y)
           p (ncol _x)
-          p-1 (if intercept (- p 1) p)
-          adj-r-square (- 1 (* (- 1 r-square) (/ (- n 1) (- n p 1))))
+          p-1 (if intercept (dec p) p)
+          adj-r-square (- 1 (* (- 1 r-square) (/ (dec 1) (- n p 1))))
           mse (/ sse (- n p))
           msr (/ ssr p-1)
           f-stat (/ msr mse)
@@ -2526,7 +2526,7 @@ Test for different variances between 2 samples
   (Character/digit (first (str x)) 10))
 
 ;; define function for Benford's law
-(defn- benford-law [d] (log10 (+ 1 (div d))))
+(defn- benford-law [d] (log10 (inc (div d))))
 ;; calculate the probabilities for digits 1-9
 (def ^{:private true}
       benford-probs (map benford-law (range 1 11)))
@@ -2890,7 +2890,7 @@ It is worth noting that if the relationship between values of  and values of ove
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.
 "
 [x]
-(zipmap (sort x) (range 1 (+ 1 (count x)))))
+(zipmap (sort x) (range 1 (inc (count x)))))
 
 (defn spearmans-rho
 "
@@ -2909,7 +2909,7 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
                           2))
            a b))]
   (- 1 (/ (* 6 dsos) 
-          (* n (- (pow n 2) 1))))))
+          (* n (dec (pow n 2)))))))
 
 
 
@@ -2957,7 +2957,7 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
              [[] 0]
              ranked))]
   (/ (* 2 dcd)
-     (* n (- n 1)))))
+     (* n (dec n)))))
 
 (defn pairs 
 "returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list."
@@ -3004,7 +3004,7 @@ Kendall tau distance is the total number of discordant pairs.
 (let [n (count a)
       discords (discordant-pairs a b)]
 (/ (* 2 discords)
-   (* n (- n 1)))))
+   (* n (dec n)))))
 
 
 (defn gamma-coefficient
@@ -3349,30 +3349,30 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
         init (apply deep-merge-with (fn [a b] b)
                     (concat 
                      ;;deletion
-                     (for [i (range 0 (+ 1 m))]
+                     (for [i (range 0 (inc m))]
                        {i {0 i}})
                      ;;insertion
-                     (for [j (range 0 (+ 1 n))]
+                     (for [j (range 0 (inc n))]
                        {0 {j j}})))
         table (reduce
                (fn [d [i j]]
                  (deep-merge-with 
                   (fn [a b] b) 
                   d 
-                  {i {j (if (= (nth a (- i 1))
-                               (nth b (- j 1)))
-                          ((d (- i 1)) (- j 1))
+                  {i {j (if (= (nth a (dec i))
+                               (nth b (dec j)))
+                          ((d (dec i)) (dec j))
                           (min 
-                           (+ ((d (- i 1)) 
+                           (+ ((d (dec i))
                                j) 1) ;;deletion
                            (+ ((d i) 
-                               (- j 1)) 1) ;;insertion
-                           (+ ((d (- i 1)) 
-                               (- j 1)) 1))) ;;substitution
+                               (dec j)) 1) ;;insertion
+                           (+ ((d (dec i))
+                               (dec j)) 1))) ;;substitution
                       }}))
                init
-               (for [j (range 1 (+ 1 n))
-                     i (range 1 (+ 1 m))] [i j]))]
+               (for [j (range 1 (inc n))
+                     i (range 1 (inc m))] [i j]))]
 
     ((table m) n)))
 
@@ -3384,41 +3384,40 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
         init (apply deep-merge-with (fn [a b] b)
                     (concat 
                      ;;deletion
-                     (for [i (range 0 (+ 1 m))]
+                     (for [i (range 0 (inc m))]
                        {i {0 i}})
                      ;;insertion
-                     (for [j (range 0 (+ 1 n))]
+                     (for [j (range 0 (inc n))]
                        {0 {j j}})))
         table (reduce
                (fn [d [i j]]
                  (deep-merge-with 
                   (fn [a b] b) 
                   d 
-                  (let [cost (bool-to-binary (not (= (nth a (- i 1))
-                                          (nth b (- j 1)))))
+                  (let [cost (bool-to-binary (not (= (nth a (dec i))
+                                          (nth b (dec j)))))
                         x
                           (min 
-                           (+ ((d (- i 1)) 
+                           (+ ((d (dec i))
                                j) 1) ;;deletion
-                           (+ ((d i) 
-                               (- j 1)) 1) ;;insertion
-                           (+ ((d (- i 1)) 
-                               (- j 1)) cost)) ;;substitution
+                           (inc ((d i) (dec j))) ;;insertion
+                           (+ ((d (dec i))
+                               (dec j)) cost)) ;;substitution
                       
                         val (if (and (> i 1)
                                (> j 1)
-                               (= (nth a (- i 1))
+                               (= (nth a (dec i))
                                   (nth b (- j 2)))
                                (= (nth a (- i 2))
-                                  (nth b (- j 1))))
+                                  (nth b (dec j))))
                         (min x (+ ((d (- i 2)) 
                                    (- j 2)) ;;transposition
                                   cost))
                         x)]
                     {i {j val}})))
                init
-               (for [j (range 1 (+ 1 n))
-                     i (range 1 (+ 1 m))] [i j]))]
+               (for [j (range 1 (inc n))
+                     i (range 1 (inc m))] [i j]))]
 
     ((table m) n)))
 
