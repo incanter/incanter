@@ -235,10 +235,10 @@
     (is (= 1 (damerau-levenshtein-distance b c)))
     (is (= 3 (damerau-levenshtein-distance a c)))))
 
-(deftest fast-abs-test
+(deftest scalar-abs-test
   (is
     (= 9223372036854775808
-       (fast-abs -9223372036854775808))))
+       (scalar-abs -9223372036854775808))))
 
 (deftest euclid
   (is 
