@@ -119,8 +119,8 @@
                    (* (/ (gamma (/ (+ df1 df2) 2))
                          (* (gamma (/ df1 2)) (gamma (/ df2 2))))
                       (pow (/ df1 df2) (/ df1 2))
-                      (pow x (- (/ df1 2) 1))
-                      (pow (+ 1 (* (/ df1 df2) x))
+                      (pow x (dec (/ df1 2)))
+                      (pow (inc (* (/ df1 df2) x))
                            (- 0 (/ (+ df1 df2) 2)))))
          ]
       (if (coll? x)
@@ -2166,9 +2166,9 @@
           x-mean (mean x)
           x-var (variance x)
           n1 (count x)
-          y-mean (if one-sample? nil (mean y))
-          y-var (if one-sample? nil (variance y))
-          n2 (if one-sample? nil (count y))
+          y-mean (when-not one-sample? (mean y))
+          y-var (when-not one-sample? (variance y))
+          n2 (when-not one-sample? (count y))
           t-stat (if one-sample?
                    (/ (- x-mean mu) (/ (sqrt x-var) (sqrt n1)))
                    ;; calculate Welch's t test
@@ -2492,9 +2492,9 @@ Test for different variances between 2 samples
           N (if table?
               (sum counts)
               (:N xtab))
-          n (when (not two-samp?) (count r-levels))
+          n (when-not two-samp? (count r-levels))
           df (if two-samp? (* (dec (nrow table)) (dec (ncol table))) (dec n))
-          probs (when (not two-samp?)
+          probs (when-not two-samp?
                   (cond
                     (not (nil? probs)) probs
                     (not (nil? freq)) (div freq (sum freq))
@@ -2967,7 +2967,7 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
           level-combos (for [bx (rest rb)]
                          [heada bx])
           all-combos (concat combos level-combos)]
-      (if (= 0 (count (rest ra)))
+      (if (zero? (count (rest ra)))
         all-combos
         (combine all-combos (rest ra) (rest rb))))) [] a b))
 
@@ -3398,8 +3398,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
                                           (nth b (dec j)))))
                         x
                           (min 
-                           (+ ((d (dec i))
-                               j) 1) ;;deletion
+                           (inc ((d (dec i)) j)) ;;deletion
                            (inc ((d i) (dec j))) ;;insertion
                            (+ ((d (dec i))
                                (dec j)) cost)) ;;substitution
