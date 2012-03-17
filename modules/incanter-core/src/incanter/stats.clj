@@ -15,7 +15,6 @@
 ;; March 11, 2009: First version
 
 
-
 (ns ^{:doc "This is the core statistical library for Incanter.
             It provides probability functions (cdf, pdf, quantile),
             random number generation, statistical tests, basic
@@ -43,6 +42,13 @@
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]))
+
+(defn scalar-abs
+  "Fast absolute value function"
+  [x]
+  (if (< x 0)
+    (*' -1 x)
+    x))
 
 (defn- deep-merge-with
   "Copied here from clojure.contrib.map-utils. The original may have
@@ -2090,7 +2096,7 @@
           coef-var (mult mse xtxi)
           std-errors (sqrt (diag coef-var))
           t-tests (div coefs std-errors)
-          t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
+          t-probs (mult 2 (cdf-t (scalar-abs t-tests) :df df2 :lower-tail false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
                        [(plus coefs t-95)
@@ -2233,7 +2239,7 @@
   [coll mu]
   (* 2
      (cdf-t
-      (- (abs (simple-t-test coll mu)))
+      (- (scalar-abs (simple-t-test coll mu)))
       :df (dec (count coll)))))
 
 (defn simple-ci
@@ -2504,7 +2510,7 @@ Test for different variances between 2 samples
                 (/ (* (c-margins c) (r-margins r)) N))
               (mult N probs))
           X-sq (if (and correct (and (= (count r-levels) 2) (= (count c-levels) 2)))
-                 (reduce + (map (fn [o e] (/ (pow (- (abs (- o e)) 0.5) 2) e)) counts E))
+                 (reduce + (map (fn [o e] (/ (pow (- (scalar-abs (- o e)) 0.5) 2) e)) counts E))
                  (reduce + (map (fn [o e] (/ (pow (- o e) 2) e)) counts E)))
          ]
       {:X-sq X-sq
@@ -2764,7 +2770,7 @@ Test for different variances between 2 samples
 y is within z of x in metric space.  
 "
 [z x y]
- (< (abs (- x y)) z))
+ (< (scalar-abs (- x y)) z))
 
 (defn square-devs-from-mean
 "takes either a sample or a sample and a precalculated mean.
@@ -3088,17 +3094,14 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 In the limiting case of p reaching infinity we obtain the Chebyshev distance."
  [a b p]
  {:pre [(= (count a) (count b))]}
- (pow
-   (apply
-     tree-comp-each
-     + 
-     (fn [[x y]] 
-       (pow 
-         (abs 
-           (- x y)) 
-         p))
-     (map vector a b))
-   (/ 1 p)))
+ (pow 
+   (reduce + 
+           (map 
+             #(pow 
+                (scalar-abs 
+                  (pow (- %1 %2) p)))
+           a b))
+ (/ 1 p)))
 
 (defn euclidean-distance
 "http://en.wikipedia.org/wiki/Euclidean_distance
@@ -3111,11 +3114,10 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
 "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance."
 [a b]
 {:pre [(= (count a) (count b))]}
-(apply
-  tree-comp-each
-  max 
-  (fn [[x y]] (abs (- x y)))
-  (map vector a b)))
+(reduce max 
+        (map 
+          #(scalar-abs (- %1 %2)) 
+          a b)))
 
 (defn manhattan-distance
 "http://en.wikipedia.org/wiki/Manhattan_distance
@@ -3289,7 +3291,7 @@ The metric space induced by the Lee distance is a discrete analog of the ellipti
       tree-comp-each 
       + 
       (fn [x]
-        (let [diff (abs (apply - (map int x)))]
+        (let [diff (scalar-abs (apply - (map int x)))]
           (min diff (- q diff))))
       (map vector a b)))))
 

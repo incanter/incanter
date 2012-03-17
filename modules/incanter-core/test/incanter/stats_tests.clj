@@ -235,6 +235,11 @@
     (is (= 1 (damerau-levenshtein-distance b c)))
     (is (= 3 (damerau-levenshtein-distance a c)))))
 
+(deftest scalar-abs-test
+  (is
+    (= 9223372036854775808
+       (scalar-abs -9223372036854775808))))
+
 (deftest euclid
   (is 
    (= 2.8284271247461903 
@@ -246,6 +251,12 @@
    (= (+ 1.0 1 2 1 1) 
       (manhattan-distance [2 4 3 1 6]
 			  [3 5 1 2 5]))))
+
+(deftest minkowski-3
+  (is 
+   (= 2.2894284851066637
+      (minkowski-distance 
+        [2 4 3 1 6] [3 5 1 2 5] 3))))
 
 (deftest chebyshev
   (is 
