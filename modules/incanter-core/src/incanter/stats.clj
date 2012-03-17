@@ -15,7 +15,6 @@
 ;; March 11, 2009: First version
 
 
-
 (ns ^{:doc "This is the core statistical library for Incanter.
             It provides probability functions (cdf, pdf, quantile),
             random number generation, statistical tests, basic
@@ -3077,6 +3076,13 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
 ;;TODO: add graphical approaches to similarity: http://en.wikipedia.org/wiki/SimRank
 ;;TODO: string similarity measures: http://en.wikipedia.org/wiki/String_metric
 
+(defn fast-abs
+  "Fast absolute value function"
+  [x]
+  (if (< x 0)
+    (*' -1 x)
+    x))
+
 (defn minkowski-distance
 "http://en.wikipedia.org/wiki/Minkowski_distance
 http://en.wikipedia.org/wiki/Lp_space
@@ -3088,17 +3094,14 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 In the limiting case of p reaching infinity we obtain the Chebyshev distance."
  [a b p]
  {:pre [(= (count a) (count b))]}
- (pow
-   (apply
-     tree-comp-each
-     + 
-     (fn [[x y]] 
-       (pow 
-         (abs 
-           (- x y)) 
-         p))
-     (map vector a b))
-   (/ 1 p)))
+ (pow 
+   (reduce + 
+           (map 
+             #(pow 
+                (fast-abs 
+                  (pow (- %1 %2) p)))
+           a b))
+ (/ 1 p)))
 
 (defn euclidean-distance
 "http://en.wikipedia.org/wiki/Euclidean_distance
