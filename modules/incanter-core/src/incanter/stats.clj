@@ -427,13 +427,9 @@
     (let [min-val (double min)
           max-val (double max)
           dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
-      (if (= size 1)
-        (if integers
-          (DoubleUniform/staticNextIntFromTo min-val max-val)
-          (DoubleUniform/staticNextDoubleFromTo min-val max-val))
-        (if integers
-          (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
-          (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val)))))))
+      (if integers
+        (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
+        (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1699,7 +1695,7 @@
                (loop [samp-indices [] indices-set #{}]
                  (if (= (count samp-indices) size)
                    samp-indices
-                   (let [i (sample-uniform 1 :min 0 :max max-idx :integers true)]
+                   (let [i (first (sample-uniform 1 :min 0 :max max-idx :integers true))]
                      (if (contains? indices-set i)
                        (recur samp-indices indices-set)
                        (recur (conj samp-indices i) (conj indices-set i))))))))))))
