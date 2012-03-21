@@ -15,7 +15,6 @@
 ;; March 11, 2009: First version
 
 
-
 (ns ^{:doc "This is the core statistical library for Incanter.
             It provides probability functions (cdf, pdf, quantile),
             random number generation, statistical tests, basic
@@ -43,6 +42,13 @@
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix?
                               cumulative-sum solve vectorize bind-rows)]))
+
+(defn scalar-abs
+  "Fast absolute value function"
+  [x]
+  (if (< x 0)
+    (*' -1 x)
+    x))
 
 (defn- deep-merge-with
   "Copied here from clojure.contrib.map-utils. The original may have
@@ -119,8 +125,8 @@
                    (* (/ (gamma (/ (+ df1 df2) 2))
                          (* (gamma (/ df1 2)) (gamma (/ df2 2))))
                       (pow (/ df1 df2) (/ df1 2))
-                      (pow x (- (/ df1 2) 1))
-                      (pow (+ 1 (* (/ df1 df2) x))
+                      (pow x (dec (/ df1 2)))
+                      (pow (inc (* (/ df1 df2) x))
                            (- 0 (/ (+ df1 df2) 2)))))
          ]
       (if (coll? x)
@@ -421,13 +427,9 @@
     (let [min-val (double min)
           max-val (double max)
           dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
-      (if (= size 1)
-        (if integers
-          (DoubleUniform/staticNextIntFromTo min-val max-val)
-          (DoubleUniform/staticNextDoubleFromTo min-val max-val))
-        (if integers
-          (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
-          (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val)))))))
+      (if integers
+        (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
+        (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1694,7 +1696,7 @@
                (loop [samp-indices [] indices-set #{}]
                  (if (= (count samp-indices) size)
                    samp-indices
-                   (let [i (sample-uniform 1 :min 0 :max max-idx :integers true)]
+                   (let [i (first (sample-uniform 1 :min 0 :max max-idx :integers true))]
                      (if (contains? indices-set i)
                        (recur samp-indices indices-set)
                        (recur (conj samp-indices i) (conj indices-set i))))))))))))
@@ -1821,7 +1823,7 @@
                    (let [stats2 (concat stats (for [_ (range B2)] (statistic (sample data :size n :replacement replacement))))
                          se1 (sd stats)
                          se2 (sd stats2)]
-                     (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (+ 1 D) se1)))
+                     (if (or (= k max-iter) (< (* (- 1 D) se1) se2 (* (inc D) se1)))
                        stats2
                        (recur stats2 (inc k)))))
                  (for [_ (range size)] (statistic (sample data :size n :replacement replacement))))
@@ -2080,8 +2082,8 @@
           r-square (/ ssr sst)
           n (nrow y)
           p (ncol _x)
-          p-1 (if intercept (- p 1) p)
-          adj-r-square (- 1 (* (- 1 r-square) (/ (- n 1) (- n p 1))))
+          p-1 (if intercept (dec p) p)
+          adj-r-square (- 1 (* (- 1 r-square) (/ (dec 1) (- n p 1))))
           mse (/ sse (- n p))
           msr (/ ssr p-1)
           f-stat (/ msr mse)
@@ -2091,7 +2093,7 @@
           coef-var (mult mse xtxi)
           std-errors (sqrt (diag coef-var))
           t-tests (div coefs std-errors)
-          t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
+          t-probs (mult 2 (cdf-t (scalar-abs t-tests) :df df2 :lower-tail false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
                        [(plus coefs t-95)
@@ -2167,9 +2169,9 @@
           x-mean (mean x)
           x-var (variance x)
           n1 (count x)
-          y-mean (if one-sample? nil (mean y))
-          y-var (if one-sample? nil (variance y))
-          n2 (if one-sample? nil (count y))
+          y-mean (when-not one-sample? (mean y))
+          y-var (when-not one-sample? (variance y))
+          n2 (when-not one-sample? (count y))
           t-stat (if one-sample?
                    (/ (- x-mean mu) (/ (sqrt x-var) (sqrt n1)))
                    ;; calculate Welch's t test
@@ -2234,7 +2236,7 @@
   [coll mu]
   (* 2
      (cdf-t
-      (- (abs (simple-t-test coll mu)))
+      (- (scalar-abs (simple-t-test coll mu)))
       :df (dec (count coll)))))
 
 (defn simple-ci
@@ -2493,9 +2495,9 @@ Test for different variances between 2 samples
           N (if table?
               (sum counts)
               (:N xtab))
-          n (when (not two-samp?) (count r-levels))
+          n (when-not two-samp? (count r-levels))
           df (if two-samp? (* (dec (nrow table)) (dec (ncol table))) (dec n))
-          probs (when (not two-samp?)
+          probs (when-not two-samp?
                   (cond
                     (not (nil? probs)) probs
                     (not (nil? freq)) (div freq (sum freq))
@@ -2505,7 +2507,7 @@ Test for different variances between 2 samples
                 (/ (* (c-margins c) (r-margins r)) N))
               (mult N probs))
           X-sq (if (and correct (and (= (count r-levels) 2) (= (count c-levels) 2)))
-                 (reduce + (map (fn [o e] (/ (pow (- (abs (- o e)) 0.5) 2) e)) counts E))
+                 (reduce + (map (fn [o e] (/ (pow (- (scalar-abs (- o e)) 0.5) 2) e)) counts E))
                  (reduce + (map (fn [o e] (/ (pow (- o e) 2) e)) counts E)))
          ]
       {:X-sq X-sq
@@ -2527,7 +2529,7 @@ Test for different variances between 2 samples
   (Character/digit (first (str x)) 10))
 
 ;; define function for Benford's law
-(defn- benford-law [d] (log10 (+ 1 (div d))))
+(defn- benford-law [d] (log10 (inc (div d))))
 ;; calculate the probabilities for digits 1-9
 (def ^{:private true}
       benford-probs (map benford-law (range 1 11)))
@@ -2765,7 +2767,7 @@ Test for different variances between 2 samples
 y is within z of x in metric space.  
 "
 [z x y]
- (< (abs (- x y)) z))
+ (< (scalar-abs (- x y)) z))
 
 (defn square-devs-from-mean
 "takes either a sample or a sample and a precalculated mean.
@@ -2891,7 +2893,7 @@ It is worth noting that if the relationship between values of  and values of ove
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.
 "
 [x]
-(zipmap (sort x) (range 1 (+ 1 (count x)))))
+(zipmap (sort x) (range 1 (inc (count x)))))
 
 (defn spearmans-rho
 "
@@ -2910,7 +2912,7 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
                           2))
            a b))]
   (- 1 (/ (* 6 dsos) 
-          (* n (- (pow n 2) 1))))))
+          (* n (dec (pow n 2)))))))
 
 
 
@@ -2958,7 +2960,7 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
              [[] 0]
              ranked))]
   (/ (* 2 dcd)
-     (* n (- n 1)))))
+     (* n (dec n)))))
 
 (defn pairs 
 "returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list."
@@ -2968,7 +2970,7 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
           level-combos (for [bx (rest rb)]
                          [heada bx])
           all-combos (concat combos level-combos)]
-      (if (= 0 (count (rest ra)))
+      (if (zero? (count (rest ra)))
         all-combos
         (combine all-combos (rest ra) (rest rb))))) [] a b))
 
@@ -3005,7 +3007,7 @@ Kendall tau distance is the total number of discordant pairs.
 (let [n (count a)
       discords (discordant-pairs a b)]
 (/ (* 2 discords)
-   (* n (- n 1)))))
+   (* n (dec n)))))
 
 
 (defn gamma-coefficient
@@ -3089,17 +3091,14 @@ Minkowski distance is typically used with p being 1 or 2. The latter is the Eucl
 In the limiting case of p reaching infinity we obtain the Chebyshev distance."
  [a b p]
  {:pre [(= (count a) (count b))]}
- (pow
-   (apply
-     tree-comp-each
-     + 
-     (fn [[x y]] 
-       (pow 
-         (abs 
-           (- x y)) 
-         p))
-     (map vector a b))
-   (/ 1 p)))
+ (pow 
+   (reduce + 
+           (map 
+             #(pow 
+                (scalar-abs 
+                  (pow (- %1 %2) p)))
+           a b))
+ (/ 1 p)))
 
 (defn euclidean-distance
 "http://en.wikipedia.org/wiki/Euclidean_distance
@@ -3112,11 +3111,10 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
 "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance."
 [a b]
 {:pre [(= (count a) (count b))]}
-(apply
-  tree-comp-each
-  max 
-  (fn [[x y]] (abs (- x y)))
-  (map vector a b)))
+(reduce max 
+        (map 
+          #(scalar-abs (- %1 %2)) 
+          a b)))
 
 (defn manhattan-distance
 "http://en.wikipedia.org/wiki/Manhattan_distance
@@ -3290,7 +3288,7 @@ The metric space induced by the Lee distance is a discrete analog of the ellipti
       tree-comp-each 
       + 
       (fn [x]
-        (let [diff (abs (apply - (map int x)))]
+        (let [diff (scalar-abs (apply - (map int x)))]
           (min diff (- q diff))))
       (map vector a b)))))
 
@@ -3350,30 +3348,30 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
         init (apply deep-merge-with (fn [a b] b)
                     (concat 
                      ;;deletion
-                     (for [i (range 0 (+ 1 m))]
+                     (for [i (range 0 (inc m))]
                        {i {0 i}})
                      ;;insertion
-                     (for [j (range 0 (+ 1 n))]
+                     (for [j (range 0 (inc n))]
                        {0 {j j}})))
         table (reduce
                (fn [d [i j]]
                  (deep-merge-with 
                   (fn [a b] b) 
                   d 
-                  {i {j (if (= (nth a (- i 1))
-                               (nth b (- j 1)))
-                          ((d (- i 1)) (- j 1))
+                  {i {j (if (= (nth a (dec i))
+                               (nth b (dec j)))
+                          ((d (dec i)) (dec j))
                           (min 
-                           (+ ((d (- i 1)) 
+                           (+ ((d (dec i))
                                j) 1) ;;deletion
                            (+ ((d i) 
-                               (- j 1)) 1) ;;insertion
-                           (+ ((d (- i 1)) 
-                               (- j 1)) 1))) ;;substitution
+                               (dec j)) 1) ;;insertion
+                           (+ ((d (dec i))
+                               (dec j)) 1))) ;;substitution
                       }}))
                init
-               (for [j (range 1 (+ 1 n))
-                     i (range 1 (+ 1 m))] [i j]))]
+               (for [j (range 1 (inc n))
+                     i (range 1 (inc m))] [i j]))]
 
     ((table m) n)))
 
@@ -3385,41 +3383,39 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
         init (apply deep-merge-with (fn [a b] b)
                     (concat 
                      ;;deletion
-                     (for [i (range 0 (+ 1 m))]
+                     (for [i (range 0 (inc m))]
                        {i {0 i}})
                      ;;insertion
-                     (for [j (range 0 (+ 1 n))]
+                     (for [j (range 0 (inc n))]
                        {0 {j j}})))
         table (reduce
                (fn [d [i j]]
                  (deep-merge-with 
                   (fn [a b] b) 
                   d 
-                  (let [cost (bool-to-binary (not (= (nth a (- i 1))
-                                          (nth b (- j 1)))))
+                  (let [cost (bool-to-binary (not (= (nth a (dec i))
+                                          (nth b (dec j)))))
                         x
                           (min 
-                           (+ ((d (- i 1)) 
-                               j) 1) ;;deletion
-                           (+ ((d i) 
-                               (- j 1)) 1) ;;insertion
-                           (+ ((d (- i 1)) 
-                               (- j 1)) cost)) ;;substitution
+                           (inc ((d (dec i)) j)) ;;deletion
+                           (inc ((d i) (dec j))) ;;insertion
+                           (+ ((d (dec i))
+                               (dec j)) cost)) ;;substitution
                       
                         val (if (and (> i 1)
                                (> j 1)
-                               (= (nth a (- i 1))
+                               (= (nth a (dec i))
                                   (nth b (- j 2)))
                                (= (nth a (- i 2))
-                                  (nth b (- j 1))))
+                                  (nth b (dec j))))
                         (min x (+ ((d (- i 2)) 
                                    (- j 2)) ;;transposition
                                   cost))
                         x)]
                     {i {j val}})))
                init
-               (for [j (range 1 (+ 1 n))
-                     i (range 1 (+ 1 m))] [i j]))]
+               (for [j (range 1 (inc n))
+                     i (range 1 (inc m))] [i j]))]
 
     ((table m) n)))
 
