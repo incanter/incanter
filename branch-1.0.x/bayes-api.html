@@ -55,20 +55,31 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.bayes/sample-model-params">sample-model-params</a>
+      <a class="toc-entry-anchor" href="#incanter.bayes/sample-model-params">sample-model-params</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.bayes/sample-multinomial-params">sample-multinomial-params</a>
+      <a class="toc-entry-anchor" href="#incanter.bayes/sample-multinomial-params">sample-multinomial-params</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.bayes/sample-proportions">sample-proportions</a>
+      <a class="toc-entry-anchor" href="#incanter.bayes/sample-proportions">sample-proportions</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">bayes</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span> (<span id="header-status">stable</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="bayes">bayes</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
 <br />Full namespace name: <span id="long-name">incanter.bayes</span>
@@ -80,15 +91,20 @@ basic Bayesian modeling and inference.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.bayes/sample-model-params">sample-model-params</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-model-params size linear-model)
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.bayes/sample-model-params">sample-model-params</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (sample-model-params size linear-model)
 </pre>
-  <pre id="var-docstr"> Returns a sample of the given size of the the parameters (coefficients and
+    <pre id="var-docstr"> Returns a sample of the given size of the the parameters (coefficients and
 error variance) of the given linear-model. The sample is generated using
 Gibbs sampling.
 
@@ -119,17 +135,17 @@ Examples:
 
   ;; show the 95% bayesian confidence interval for the firt coefficient
   (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L36" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.bayes/sample-multinomial-params">sample-multinomial-params</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-multinomial-params size counts)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L36" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.bayes/sample-multinomial-params">sample-multinomial-params</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (sample-multinomial-params size counts)
 </pre>
-  <pre id="var-docstr"> Returns a sample of multinomial proportion parameters.
+    <pre id="var-docstr"> Returns a sample of multinomial proportion parameters.
 The counts are assumed to have a multinomial distribution.
 A uniform prior distribution is assigned to the multinomial vector
 theta, then the posterior distribution of theta is
@@ -156,20 +172,21 @@ Examples:
   ;; view  a histogram of the difference in proportions between the first
   ;; two candidates
   (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L100" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.bayes/sample-proportions">sample-proportions</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (sample-proportions size counts)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L100" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.bayes/sample-proportions">sample-proportions</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (sample-proportions size counts)
 </pre>
-  <pre id="var-docstr"> sample-proportions has been renamed sample-multinomial-params</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L93" id="var-source">Source</a>
+    <pre id="var-docstr"> sample-proportions has been renamed sample-multinomial-params</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L93" id="var-source">Source</a>
+  </div>
 </div>
 
 

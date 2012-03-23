@@ -55,24 +55,37 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.transformations/all-keys">all-keys</a>
+      <a class="toc-entry-anchor" href="#incanter.transformations/all-keys">all-keys</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.transformations/bottom-level?">bottom-level?</a>
+      <a class="toc-entry-anchor" href="#incanter.transformations/bottom-level?">bottom-level?</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.transformations/flatten-with">flatten-with</a>
+      <a class="toc-entry-anchor" href="#incanter.transformations/flatten-with">flatten-with</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.transformations/levels-deep">levels-deep</a>
+      <a class="toc-entry-anchor" href="#incanter.transformations/levels-deep">levels-deep</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.transformations/table-to-vectors">table-to-vectors</a>
+      <a class="toc-entry-anchor" href="#incanter.transformations/table-to-vectors">table-to-vectors</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">transformations</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span> (<span id="header-status">stable</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="transformations">transformations</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.transformations</span>
@@ -82,55 +95,60 @@ namespace.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.transformations/all-keys">all-keys</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (all-keys m)
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.transformations/all-keys">all-keys</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (all-keys m)
 </pre>
-  <pre id="var-docstr">returns a set of all the keys from an arbitarily deeply nested map or seq of maps.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L82" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.transformations/bottom-level?">bottom-level?</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (bottom-level? m)
+    <pre id="var-docstr">returns a set of all the keys from an arbitarily deeply nested map or seq of maps.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L82" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.transformations/bottom-level?">bottom-level?</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (bottom-level? m)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 given a map; is this the bottom level in the map?
 
  (bottom-level? {:a 1}) -&gt; true
  (bottom-level? {:a {:b 1}}) -&gt; false</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L96" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.transformations/flatten-with">flatten-with</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (flatten-with f nested-map)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L96" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.transformations/flatten-with">flatten-with</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (flatten-with f nested-map)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 takes an arbitrarily deeply nested map, and flattens it to one level by merging keys. 
 
  (flatten-with str {:a {:b {:c 1}}}) -&gt; {":a:b:c" 1}</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L127" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.transformations/levels-deep">levels-deep</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (levels-deep m)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L127" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.transformations/levels-deep">levels-deep</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (levels-deep m)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 returns the number of levels of depth of nesting for a nested map.
 
  1  -&gt; 0
@@ -138,17 +156,17 @@ returns the number of levels of depth of nesting for a nested map.
  {0 1} -&gt; 1
  {1 {0 1}} -&gt; 2
  ...</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L106" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.transformations/table-to-vectors">table-to-vectors</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (table-to-vectors z)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L106" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.transformations/table-to-vectors">table-to-vectors</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (table-to-vectors z)
 </pre>
-  <pre id="var-docstr">takes a big vector that is composed of two vectors of alternating membership in the super vector.
+    <pre id="var-docstr">takes a big vector that is composed of two vectors of alternating membership in the super vector.
 
 splits out the individual vectors.
 
@@ -166,9 +184,10 @@ splits out the individual vectors.
  -&gt;
 
  [[106 86 100 101 99 103 97 113 112 110] [7 0 27 50 28 29 20 12 6 17]]</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L7" id="var-source">Source</a>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/transformations.clj#L7" id="var-source">Source</a>
+  </div>
 </div>
 
 

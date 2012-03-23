@@ -55,24 +55,37 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.optimize/derivative">derivative</a>
+      <a class="toc-entry-anchor" href="#incanter.optimize/derivative">derivative</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.optimize/gradient">gradient</a>
+      <a class="toc-entry-anchor" href="#incanter.optimize/gradient">gradient</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.optimize/hessian">hessian</a>
+      <a class="toc-entry-anchor" href="#incanter.optimize/hessian">hessian</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.optimize/integrate">integrate</a>
+      <a class="toc-entry-anchor" href="#incanter.optimize/integrate">integrate</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.optimize/non-linear-model">non-linear-model</a>
+      <a class="toc-entry-anchor" href="#incanter.optimize/non-linear-model">non-linear-model</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">optimize</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span> (<span id="header-status">stable</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="optimize">optimize</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.optimize</span>
@@ -82,15 +95,20 @@ namespace.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.optimize/derivative">derivative</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (derivative f &amp; options)
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.optimize/derivative">derivative</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (derivative f &amp; options)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 Returns a function that approximates the derivative of the given function.
 
 Options:
@@ -123,17 +141,17 @@ Examples:
   ;; plot the second derivative function
   (def pdf-deriv2 (derivative pdf-deriv))
   (add-lines plot x (pdf-deriv2 x))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L68" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.optimize/gradient">gradient</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (gradient f start &amp; options)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L68" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.optimize/gradient">gradient</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (gradient f start &amp; options)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 Returns a function that calculates a 5-point approximation to
 the gradient of the given function. The vector of start values are
 used to determine the number of parameters required by the function, and
@@ -158,17 +176,17 @@ Examples:
 
   (def grad (gradient f start))
   (time (doall (grad start x)))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L251" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.optimize/hessian">hessian</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (hessian f start &amp; options)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L251" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.optimize/hessian">hessian</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (hessian f start &amp; options)
 </pre>
-  <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
+    <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
 of the given function. The vector of start values are used to determine
 the number of parameters required by the function, and to scale the
 step-size. The generated function accepts a vector of
@@ -193,17 +211,17 @@ Examples:
 
   (time (def hess (hessian f start)))
   (time (doall (hess start x)))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L300" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.optimize/integrate">integrate</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (integrate f a b)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L300" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.optimize/integrate">integrate</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (integrate f a b)
 </pre>
-  <pre id="var-docstr"> Integrate a function f from a to b
+    <pre id="var-docstr"> Integrate a function f from a to b
 
 
 Examples:
@@ -230,17 +248,17 @@ Examples:
 Reference:
   <a href="http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html">http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html</a>
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L26" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.optimize/non-linear-model">non-linear-model</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (non-linear-model f y x start &amp; options)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L26" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.optimize/non-linear-model">non-linear-model</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (non-linear-model f y x start &amp; options)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 Determine the nonlinear least-squares estimates of the
 parameters of a nonlinear model.
 Based on R's nls (non-linear least squares) function.
@@ -321,9 +339,10 @@ Examples:
   (add-lines plot x (f start2 x))
   (def nlm2 (non-linear-model f y x start2))
   (add-lines plot x (:fitted nlm2))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L588" id="var-source">Source</a>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L588" id="var-source">Source</a>
+  </div>
 </div>
 
 

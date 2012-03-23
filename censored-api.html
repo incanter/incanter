@@ -55,28 +55,43 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/censored-mean-lower">censored-mean-lower</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/censored-mean-lower">censored-mean-lower</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/censored-mean-two-sided">censored-mean-two-sided</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/censored-mean-two-sided">censored-mean-two-sided</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/censored-mean-upper">censored-mean-upper</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/censored-mean-upper">censored-mean-upper</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/censored-variance-lower">censored-variance-lower</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/censored-variance-lower">censored-variance-lower</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/censored-variance-two-sided">censored-variance-two-sided</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/censored-variance-two-sided">censored-variance-two-sided</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/censored-variance-upper">censored-variance-upper</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/censored-variance-upper">censored-variance-upper</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.censored/truncated-variance">truncated-variance</a>
+      <a class="toc-entry-anchor" href="#incanter.censored/truncated-variance">truncated-variance</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">censored</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">next</span> (<span id="header-status">in development</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="censored">censored</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">next</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.censored</span>
@@ -86,89 +101,94 @@ namespace.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/censored-mean-lower">censored-mean-lower</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (censored-mean-lower a mu sigma)
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/censored-mean-lower">censored-mean-lower</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (censored-mean-lower a mu sigma)
 </pre>
-  <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
+    <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a'</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L56" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/censored-mean-two-sided">censored-mean-two-sided</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (censored-mean-two-sided a b mu sigma)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L56" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/censored-mean-two-sided">censored-mean-two-sided</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (censored-mean-two-sided a b mu sigma)
 </pre>
-  <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
+    <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a' and the upper
 tail censored at 'b'</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L21" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/censored-mean-upper">censored-mean-upper</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (censored-mean-upper b mu sigma)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L21" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/censored-mean-upper">censored-mean-upper</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (censored-mean-upper b mu sigma)
 </pre>
-  <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
+    <pre id="var-docstr"> Returns the mean of a normal distribution (with mean mu and standard
 deviation sigma) with the upper tail censored at 'b'</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L84" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/censored-variance-lower">censored-variance-lower</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (censored-variance-lower a mu sigma)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L84" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/censored-variance-lower">censored-variance-lower</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (censored-variance-lower a mu sigma)
 </pre>
-  <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
+    <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a'</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L67" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/censored-variance-two-sided">censored-variance-two-sided</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (censored-variance-two-sided a b mu sigma)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L67" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/censored-variance-two-sided">censored-variance-two-sided</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (censored-variance-two-sided a b mu sigma)
 </pre>
-  <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
+    <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a' and the upper
 tail censored at 'b'</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L36" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/censored-variance-upper">censored-variance-upper</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (censored-variance-upper b mu sigma)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L36" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/censored-variance-upper">censored-variance-upper</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (censored-variance-upper b mu sigma)
 </pre>
-  <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
+    <pre id="var-docstr"> Returns the variance of a normal distribution (with mean mu and standard
 deviation sigma) with the upper tail censored at 'b'</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L94" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.censored/truncated-variance">truncated-variance</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (truncated-variance &amp; {:keys [mean sd a b], :or {mean 0, sd 1, a Double/NEGATIVE_INFINITY, b Double/POSITIVE_INFINITY}})
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L94" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.censored/truncated-variance">truncated-variance</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (truncated-variance &amp; {:keys [mean sd a b], :or {mean 0, sd 1, a Double/NEGATIVE_INFINITY, b Double/POSITIVE_INFINITY}})
 </pre>
-  <pre id="var-docstr"> Returns the variance of a normal distribution truncated at a and b.
+    <pre id="var-docstr"> Returns the variance of a normal distribution truncated at a and b.
 
 Options:
   :mean (default 0) mean of untruncated normal distribution
@@ -199,9 +219,10 @@ References:
     Wiley-IEEE.
 
   <a href="http://en.wikipedia.org/wiki/Truncated_normal_distribution">http://en.wikipedia.org/wiki/Truncated_normal_distribution</a></pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L111" id="var-source">Source</a>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a5d2d5afca3244cc534f6d3b426850f5418473c1/modules/incanter-core/src/incanter/censored.clj#L111" id="var-source">Source</a>
+  </div>
 </div>
 
 

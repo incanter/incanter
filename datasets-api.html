@@ -55,16 +55,25 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.datasets/get-dataset">get-dataset</a>
+      <a class="toc-entry-anchor" href="#incanter.datasets/get-dataset">get-dataset</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">datasets</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">next</span> (<span id="header-status">in development</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="datasets">datasets</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">next</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.datasets</span>
@@ -74,15 +83,20 @@ namespace.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.datasets/get-dataset">get-dataset</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (System/getProperty incanter.home) (System/getenv INCANTER_HOME)), from-repo true}})
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.datasets/get-dataset">get-dataset</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (System/getProperty incanter.home) (System/getenv INCANTER_HOME)), from-repo true}})
 </pre>
-  <pre id="var-docstr"> Returns the sample dataset associated with the given key. Most datasets
+    <pre id="var-docstr"> Returns the sample dataset associated with the given key. Most datasets
 are from R's sample data sets, as are the descriptions below.
 
 Options:
@@ -164,9 +178,10 @@ Datasets:
  Examples:
    (def data (get-dataset :cars))
    (def data2 (get-dataset :cars :incanter.home "/usr/local/packages/incanter"))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/8d46e5b20b772aebe766f44bbeb6c052cb72e003/modules/incanter-io/src/incanter/datasets.clj#L91" id="var-source">Source</a>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/8d46e5b20b772aebe766f44bbeb6c052cb72e003/modules/incanter-io/src/incanter/datasets.clj#L91" id="var-source">Source</a>
+  </div>
 </div>
 
 

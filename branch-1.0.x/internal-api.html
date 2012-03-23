@@ -55,20 +55,31 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.internal/is-matrix">is-matrix</a>
+      <a class="toc-entry-anchor" href="#incanter.internal/is-matrix">is-matrix</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.internal/safe">safe</a>
+      <a class="toc-entry-anchor" href="#incanter.internal/safe">safe</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.internal/vector-comp">vector-comp</a>
+      <a class="toc-entry-anchor" href="#incanter.internal/vector-comp">vector-comp</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">internal</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span> (<span id="header-status">stable</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="internal">internal</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.internal</span>
@@ -78,40 +89,46 @@ namespace.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.internal/is-matrix">is-matrix</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (is-matrix obj)
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.internal/is-matrix">is-matrix</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (is-matrix obj)
 </pre>
-  <pre id="var-docstr"> Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix).</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/internal.clj#L32" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.internal/safe">safe</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (safe f n d)
+    <pre id="var-docstr"> Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix).</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/internal.clj#L32" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.internal/safe">safe</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (safe f n d)
 </pre>
-  <pre id="var-docstr">for safe division - returns zero for division by zero</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/internal.clj#L227" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.internal/vector-comp">vector-comp</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (vector-comp &amp; fns)
+    <pre id="var-docstr">for safe division - returns zero for division by zero</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/internal.clj#L227" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.internal/vector-comp">vector-comp</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (vector-comp &amp; fns)
 </pre>
-  <pre id="var-docstr">compose a list of functions such that they are each applied to the arguments to which the composed function is applied and the results of each application are inserted as slots in a vector.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/internal.clj#L202" id="var-source">Source</a>
+    <pre id="var-docstr">compose a list of functions such that they are each applied to the arguments to which the composed function is applied and the results of each application are inserted as slots in a vector.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/internal.clj#L202" id="var-source">Source</a>
+  </div>
 </div>
 
 

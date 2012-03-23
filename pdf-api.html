@@ -55,16 +55,25 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.pdf/save-pdf">save-pdf</a>
+      <a class="toc-entry-anchor" href="#incanter.pdf/save-pdf">save-pdf</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">pdf</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">next</span> (<span id="header-status">in development</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="pdf">pdf</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">next</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.pdf</span>
@@ -78,15 +87,20 @@ project.clj file:
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.pdf/save-pdf">save-pdf</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (save-pdf chart filename &amp; {:keys [width height], :or {width 500, height 400}})
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.pdf/save-pdf">save-pdf</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (save-pdf chart filename &amp; {:keys [width height], :or {width 500, height 400}})
 </pre>
-  <pre id="var-docstr"> Save a chart object as a pdf document.
+    <pre id="var-docstr"> Save a chart object as a pdf document.
 
 Arguments:
   chart
@@ -100,9 +114,10 @@ Examples:
 
   (use '(incanter core charts pdf))
   (save-pdf (function-plot sin -4 4) "./pdf-chart.pdf")</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-pdf/src/incanter/pdf.clj#L19" id="var-source">Source</a>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a7dff8a041ae1a123ebd35d05802af4cf88c8488/modules/incanter-pdf/src/incanter/pdf.clj#L19" id="var-source">Source</a>
+  </div>
 </div>
 
 

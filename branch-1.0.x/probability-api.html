@@ -55,42 +55,64 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/+cond-prob-tuples">+cond-prob-tuples</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/+cond-prob-tuples">+cond-prob-tuples</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/P">P</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/P">P</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/binary">binary</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/binary">binary</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/comb-merge">comb-merge</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/comb-merge">comb-merge</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/cond-prob-tuple">cond-prob-tuple</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/cond-prob-tuple">cond-prob-tuple</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/count-missing">count-missing</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/count-missing">count-missing</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/map-counter">map-counter</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/map-counter">map-counter</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/marginals">marginals</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/marginals">marginals</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/range-classifier">range-classifier</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/range-classifier">range-classifier</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/summate">summate</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/summate">summate</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/summate-level">summate-level</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/summate-level">summate-level</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/vector-counter">vector-counter</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/vector-counter">vector-counter</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/|">|</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/|">|</a>
+      
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.probability/|each">|each</a>
+      <a class="toc-entry-anchor" href="#incanter.probability/|each">|each</a>
+      
     </div>
-    <br />
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">probability</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span> (<span id="header-status">stable</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="probability">probability</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.probability</span>
@@ -100,174 +122,180 @@ namespace.
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/+cond-prob-tuples">+cond-prob-tuples</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (+cond-prob-tuples [x y] [p q])
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/+cond-prob-tuples">+cond-prob-tuples</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (+cond-prob-tuples [x y] [p q])
        (+cond-prob-tuples x)
 </pre>
-  <pre id="var-docstr">adds two conditional probability tuples. [[{}{}][{}{}]] -&gt; [{}{}]
+    <pre id="var-docstr">adds two conditional probability tuples. [[{}{}][{}{}]] -&gt; [{}{}]
 passes through a single conditional probability tuple. [[{}{}] -&gt; [{}{}]</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L39" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/P">P</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (P a given b &amp; bs)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L39" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/P">P</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (P a given b &amp; bs)
        (P a given b)
 </pre>
-  <pre id="var-docstr"></pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L194" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/binary">binary</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (binary pred)
+    <pre id="var-docstr"></pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L194" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/binary">binary</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (binary pred)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 a function for binary classification that takes a booleavn value and returns 1 for true and 0 for false.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L11" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/comb-merge">comb-merge</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (comb-merge f x y)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L11" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/comb-merge">comb-merge</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (comb-merge f x y)
 </pre>
-  <pre id="var-docstr">combinatorial merge takes two maps and a fn and and merges all combinations fo keys between the two maps using the fn.
+    <pre id="var-docstr">combinatorial merge takes two maps and a fn and and merges all combinations fo keys between the two maps using the fn.
 </pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L48" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/cond-prob-tuple">cond-prob-tuple</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (cond-prob-tuple a b)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L48" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/cond-prob-tuple">cond-prob-tuple</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (cond-prob-tuple a b)
 </pre>
-  <pre id="var-docstr">build [a&amp;b b] count tuples for calculating conditional probabilities p(a | b)</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L165" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/count-missing">count-missing</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (count-missing exp act)
+    <pre id="var-docstr">build [a&amp;b b] count tuples for calculating conditional probabilities p(a | b)</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L165" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/count-missing">count-missing</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (count-missing exp act)
 </pre>
-  <pre id="var-docstr">set based counting for keys in maps</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L17" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/map-counter">map-counter</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (map-counter f)
+    <pre id="var-docstr">set based counting for keys in maps</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L17" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/map-counter">map-counter</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (map-counter f)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 wraps a counting function for maps in apply and deep-merge-with, curreid fn expects a seq of maps to count.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L27" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/marginals">marginals</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (marginals j)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L27" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/marginals">marginals</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (marginals j)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 computes the marginal PMFs from the joint PMF.
 
 of the form:   {a {b n}} where n is the nubmer of co-occurances of a and b.
 
 for summation note that a variable, suppose it is x, is represented as a level of depth in the nested maps, so summation for margianl of x occurs on all branches stemming from maps at the level corresponding with x. </pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L72" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/range-classifier">range-classifier</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (range-classifier range item)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L72" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/range-classifier">range-classifier</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (range-classifier range item)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 classify one item based on what interval in a range the item falls into.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L128" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/summate">summate</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (summate m)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L128" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/summate">summate</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (summate m)
 </pre>
-  <pre id="var-docstr">summate all counts in a deeply nested map of counts.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L57" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/summate-level">summate-level</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (summate-level j)
+    <pre id="var-docstr">summate all counts in a deeply nested map of counts.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L57" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/summate-level">summate-level</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (summate-level j)
 </pre>
-  <pre id="var-docstr">given a nested map, summates all counts below the tree from each key-node in the map-tree.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L66" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/vector-counter">vector-counter</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (vector-counter f)
+    <pre id="var-docstr">given a nested map, summates all counts below the tree from each key-node in the map-tree.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L66" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/vector-counter">vector-counter</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (vector-counter f)
 </pre>
-  <pre id="var-docstr">
+    <pre id="var-docstr">
 wraps a counting function for vectors in apply and deep-merge-with, curreid fn expects a seq of vectors to count.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L33" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/|">|</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (| a b)
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L33" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/|">|</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (| a b)
 </pre>
-  <pre id="var-docstr">this is the core of the conditional probability based classification model.  this model takes a &amp; bs in the form a given bs.  a and bs are all functions, and the conditional probability classification model composes a new classifier function that ultimately returns the cond-prob-tuple: [{a's counts}{b's counts}].</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L179" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.probability/|each">|each</h2>
-  <span id="var-type">function</span><br />
-  <pre id="var-usage">Usage: (|each a bs)
+    <pre id="var-docstr">this is the core of the conditional probability based classification model.  this model takes a &amp; bs in the form a given bs.  a and bs are all functions, and the conditional probability classification model composes a new classifier function that ultimately returns the cond-prob-tuple: [{a's counts}{b's counts}].</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L179" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.probability/|each">|each</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (|each a bs)
 </pre>
-  <pre id="var-docstr">conditional probability where the bs are taken to be a map of feature-&gt;classifier-function paris, where we want to compute the conditional probability between a and each b independently.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L187" id="var-source">Source</a>
+    <pre id="var-docstr">conditional probability where the bs are taken to be a map of feature-&gt;classifier-function paris, where we want to compute the conditional probability between a and each b independently.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/a046fa9397aa8ec402475c32729903b3b0bd942e/modules/incanter-core/src/main/clojure/incanter/probability.clj#L187" id="var-source">Source</a>
+  </div>
 </div>
 
 

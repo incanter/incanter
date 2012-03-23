@@ -55,28 +55,37 @@ namespace.
                 <div id="right-sidebar"><div id="toc">
   <h1 class="nopad">Table of Contents</h1>
   <div style="margin-left: 1em;" class="toc-section">
-    <a href="#toc0">Overview</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.excel/read-xls">read-xls</a>
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.excel/save-xls">save-xls</a>
-    </div>
-    <br />
-  </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#excel.cells">excel.cells</a>
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
     
-    <br />
   </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#excel.workbook">excel.workbook</a>
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a href="#incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</a>
+      <a class="toc-entry-anchor" href="#incanter.excel/read-xls">read-xls</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel/save-xls">save-xls</a>
+      
     </div>
-    <br />
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#excel.cells" style="margin-top: 3px;">excel.cells</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#excel.workbook" style="margin-top: 3px;">excel.workbook</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</a>
+      
+    </div>
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">excel</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">next</span> (<span id="header-status">in development</span>)
+                <div id="content-tag"><h1 id="overview">API for <span id="excel">excel</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">next</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">David James Humphreys</span><br /></span>
 <br />Full namespace name: <span id="long-name">incanter.excel</span>
@@ -87,14 +96,19 @@ Excel file formats (.xls and .xlsx).</pre>
 
 
 <br />
-<h2>Public Variables and Functions</h2>
-<div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.excel/read-xls">read-xls</h2>
-  <span id="var-type">var</span><br />
-  <pre id="var-usage"></pre>
-  <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel/read-xls">read-xls</h2>
+    <span id="var-type">var</span><br />
+    <pre id="var-usage"></pre>
+    <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
 or :override-format option.
 
@@ -118,16 +132,16 @@ or :xlsx override the suffix check.
    ;; to a sequence of milliseconds
    (let [to-millis (fn [dates] (map #(.getTime %) dates))] 
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L96" id="var-source">Source</a>
-</div><div id="var-entry">
-  <br />
-  <hr />
-  <h2 id="incanter.excel/save-xls">save-xls</h2>
-  <span id="var-type">var</span><br />
-  <pre id="var-usage"></pre>
-  <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L96" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel/save-xls">save-xls</h2>
+    <span id="var-type">var</span><br />
+    <pre id="var-usage"></pre>
+    <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
 Excel formats, uses the filename suffix or :override-format option.
 
 By passing in a collection of datasets and names it is possible to write more than
@@ -143,30 +157,42 @@ If :xls or :xlsx override the suffix check.
 Examples:
   (use '(incanter core datasets excel))
   (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L25" id="var-source">Source</a>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel.clj#L25" id="var-source">Source</a>
+  </div>
 </div>
-<h2 id="namespace-name">excel.cells</h2>
+<br />
+<h2 id="excel.cells">excel.cells</h2>
 <pre id="namespace-docstr">Functions for reading and writing to cells.</pre>
 
 
 <br />
 
-<h2 id="namespace-name">excel.workbook</h2>
+
+
+<br />
+<h2 id="excel.workbook">excel.workbook</h2>
 <pre id="namespace-docstr"></pre>
 
 
 <br />
-<div id="var-entry">
-  <hr />
-  <h2 id="incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</h2>
-  <span id="var-type">var</span><br />
-  <pre id="var-usage"></pre>
-  <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
-  
-  
-  <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8" id="var-source">Source</a>
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</h2>
+    <span id="var-type">var</span><br />
+    <pre id="var-usage"></pre>
+    <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8" id="var-source">Source</a>
+  </div>
 </div>
 
 
