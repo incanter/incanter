@@ -86,4 +86,11 @@
     (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
     (is (= 50 (count (:rows cars-dataset)))) (str "Reading rows for " name " failed"))) ;; end of read-dataset-validation tests
 
-
+(def parse-string (ns-resolve 'incanter.io 'parse-string))
+(deftest parse-string-validation
+  
+  (testing "Parsing string values into numbers"
+    (is (= 1234 (parse-string "1234")))
+    (is (instance? java.lang.Long (parse-string "5678")))
+    (is (instance? java.lang.Long (parse-string "1330418008377")))
+    ))
