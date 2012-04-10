@@ -35,17 +35,17 @@
   ([data]
    (cond
      (coll? (first data))
-      (Matrix. (into-array (map double-array data)))
+      (Matrix. ^"[[D" (into-array (map double-array data)))
      (number? (first data))
       (Matrix. (double-array data))))
   ([data ncol]
     (cond
       (or (coll? data) (.isArray (class data)))
-        (Matrix. (double-array data) ncol)
+        (Matrix. (double-array data) (int ncol))
        (number? data)
-        (Matrix. data ncol))) ; data is the number of rows in this case
+        (Matrix. (int data) (int ncol)))) ; data is the number of rows in this case
   ([init-val rows cols]
-    (Matrix. rows cols init-val)))
+    (Matrix. (int rows) (int cols) ^Number init-val)))
 
 
 (defmacro hint
@@ -67,49 +67,68 @@
 
 
 (defmacro combine-with [A B op fun]
-  `(cond
-    (and (number? ~A) (number? ~B))
-       (~op ~A ~B)
-    (and (is-matrix ~A) (is-matrix ~B))
-      (.assign (hint "Matrix" (.copy (hint "Matrix" ~A)))
-               (hint "Matrix" ~B)
-               (hint "DoubleDoubleFunction" (. DoubleFunctions ~fun)))
-    (and (is-matrix ~A) (number? ~B))
-      (.assign (hint "Matrix" (.copy (hint "Matrix" ~A)))
-               (make-matrix ~B (.rows (hint "Matrix" ~A)) (.columns ~A))
-               (hint "DoubleDoubleFunction" (. DoubleFunctions ~fun)))
-    (and (number? ~A) (is-matrix ~B))
-      (.assign ^Matrix (make-matrix ~A (.rows ~B) (.columns ~B))
-               ^Matrix ~B
-               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
-    (and (coll? ~A) (is-matrix ~B))
-      (.assign ^Matrix (make-matrix ~A (.columns ~B))
-               ^Matrix (make-matrix ~B)
-               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
-    (and (is-matrix ~A) (coll? ~B))
-      (.assign ^Matrix (.copy ~A)
-               ^Matrix (make-matrix ~B)
-               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
-    (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
-      (.assign (make-matrix ~A)
-               (make-matrix ~B)
-               (. DoubleFunctions ~fun))
-    (and (coll? ~A) (number? ~B) (coll? (first ~A)))
-      (.assign (make-matrix ~A)
-               (make-matrix ~B)
-               (. DoubleFunctions ~fun))
-               ;;(. DoubleFunctions (~fun ~B)))
-    (and (number? ~A) (coll? ~B) (coll? (first ~B)))
-      (.assign (make-matrix ~A (.rows ~B) (.columns ~B))
-               (make-matrix ~B)
-               (. DoubleFunctions ~fun))
-    (and (coll? ~A) (coll? ~B))
-      (map ~op ~A ~B)
-    (and (number? ~A) (coll? ~B))
-      (map ~op (replicate (count ~B) ~A)  ~B)
-    (and (coll? ~A) (number? ~B))
-      (map ~op ~A (replicate (count ~A) ~B))
-  ))
+  (let [mA (with-meta (gensym "A") {:tag "Matrix"})
+        mB (with-meta (gensym "B") {:tag "Matrix"})
+        df (with-meta (gensym "fun") {:tag "DoubleDoubleFunction"})]
+   `(let [~df (. DoubleFunctions ~fun)]
+      (cond
+      (and (number? ~A) (number? ~B))
+         (~op ~A ~B)
+      (and (is-matrix ~A) (is-matrix ~B))
+        (let [~mA ~A
+              ~mB ~B] 
+          (.assign (hint "Matrix" (.copy ~mA))
+                    ~mB
+                    ~df))
+      (and (is-matrix ~A) (number? ~B))
+        (let [~mA ~A
+              ~mB (make-matrix ~B (.rows ~mA) (.columns ~mA))] 
+          (.assign (hint "Matrix" (.copy ~mA))
+                   ~mB
+                   ~df))
+      (and (number? ~A) (is-matrix ~B))
+        (let [~mB ~B
+              ~mA (make-matrix ~A (.rows ~mB) (.columns ~mB))]
+          (.assign ~mA
+                   ~mB
+                   ~df))
+      (and (coll? ~A) (is-matrix ~B))
+        (let [~mB ~B
+              ~mA (make-matrix ~A (.columns ~mB))]
+          (.assign ~mA
+                   ~mB
+                   ~df))
+      (and (is-matrix ~A) (coll? ~B))
+        (let [~mA ~A
+              ~mB (make-matrix ~B)]
+        (.assign (hint "Matrix" (.copy ~mA))
+                 ~mB
+                 ~df))
+      (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
+        (let [~mA (make-matrix ~A)
+              ~mB (make-matrix ~B)]
+          (.assign ~mA
+                   ~mB
+                   ~df))
+      (and (coll? ~A) (number? ~B) (coll? (first ~A)))
+        (let [~mA (make-matrix ~A)
+              ~mB (make-matrix ~B)]
+          (.assign ~mA
+                   ~mB
+                   ~df))
+      (and (number? ~A) (coll? ~B) (coll? (first ~B)))
+        (let [~mA (make-matrix ~A (.rows ~B) (.columns ~B))
+              ~mB (make-matrix ~B)]
+          (.assign ~mA
+                   ~mB
+                   ~df))        
+      (and (coll? ~A) (coll? ~B))
+        (map ~op ~A ~B)
+      (and (number? ~A) (coll? ~B))
+        (map ~op (replicate (count ~B) ~A)  ~B)
+      (and (coll? ~A) (number? ~B))
+        (map ~op ~A (replicate (count ~A) ~B))
+  ))))
 
 
 ;; PRINT METHOD FOR COLT MATRICES
