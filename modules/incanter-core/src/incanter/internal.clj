@@ -48,6 +48,10 @@
     (Matrix. rows cols init-val)))
 
 
+(defmacro hint
+  "Applies a type hint to a body"
+  [type body]
+  `~(with-meta body {:tag type}))
 
 
 (defmacro ^Matrix transform-with [A op fun]
@@ -67,13 +71,13 @@
     (and (number? ~A) (number? ~B))
        (~op ~A ~B)
     (and (is-matrix ~A) (is-matrix ~B))
-      (.assign ^Matrix (.copy ^Matrix ~A)
-               ^Matrix ~B
-               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
+      (.assign (hint "Matrix" (.copy (hint "Matrix" ~A)))
+               (hint "Matrix" ~B)
+               (hint "DoubleDoubleFunction" (. DoubleFunctions ~fun)))
     (and (is-matrix ~A) (number? ~B))
-      (.assign ^Matrix (.copy ^Matrix ~A)
-               (make-matrix ~B (.rows ~A) (.columns ~A))
-               ^DoubleDoubleFunction (. DoubleFunctions ~fun))
+      (.assign (hint "Matrix" (.copy (hint "Matrix" ~A)))
+               (make-matrix ~B (.rows (hint "Matrix" ~A)) (.columns ~A))
+               (hint "DoubleDoubleFunction" (. DoubleFunctions ~fun)))
     (and (number? ~A) (is-matrix ~B))
       (.assign ^Matrix (make-matrix ~A (.rows ~B) (.columns ~B))
                ^Matrix ~B
