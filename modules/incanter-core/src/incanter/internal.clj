@@ -28,18 +28,24 @@
 
 (defn is-matrix
   " Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
-  ([obj] (isa? (class obj) ::matrix)))
+  ([obj] (instance? Matrix obj)))
+;;  ([obj] (isa? (class obj) ::matrix)))
 
+(def double_arr_type (Class/forName "[D"))
 
 (defn make-matrix
   ([data]
-   (cond
+    (cond
+     (instance? double_arr_type data)
+      (Matrix. ^"[D" data)
      (coll? (first data))
       (Matrix. ^"[[D" (into-array (map double-array data)))
      (number? (first data))
       (Matrix. (double-array data))))
   ([data ncol]
     (cond
+      (instance? double_arr_type data)
+        (Matrix. ^"[D" data (int ncol))
       (or (coll? data) (.isArray (class data)))
         (Matrix. (double-array data) (int ncol))
        (number? data)
@@ -55,15 +61,20 @@
 
 
 (defmacro ^Matrix transform-with [A op fun]
-  `(cond
-    (is-matrix ~A)
-      (.assign (.copy ~A) (. DoubleFunctions ~fun))
-    (and (coll? ~A) (coll? (first ~A)))
-      (.assign ^Matrix (make-matrix ~A) (. DoubleFunctions ~fun))
-    (coll? ~A)
-      (map ~op ~A)
-    (number? ~A)
-      (~op ~A)))
+  (let [mA (with-meta (gensym "A") {:tag "Matrix"})
+        df (with-meta (gensym "fun") {:tag "DoubleFunction"})]
+   `(let [~df (. DoubleFunctions ~fun)]
+      (cond
+      (is-matrix ~A)
+        (let [~mA ~A]
+          (.assign (hint "Matrix" (.copy ~mA)) ~df))
+      (and (coll? ~A) (coll? (first ~A)))
+        (let [~mA (make-matrix ~A)]  
+          (.assign ~mA ~df))
+      (coll? ~A)
+        (map ~op ~A)
+      (number? ~A)
+        (~op ~A)))))
 
 
 (defmacro combine-with [A B op fun]

@@ -432,7 +432,7 @@
 
 "
    ([& args] (if (= (count args) 1)
-               (combine-with 0 (first args) clojure.core/- minus)
+               (combine-with (Integer. 0) (first args) clojure.core/- minus)
                (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args))))
 
 
@@ -478,7 +478,7 @@
 
 "
    ([& args] (if (= (count args) 1)
-               (combine-with 1 (first args) clojure.core// div)
+               (combine-with (Integer. 1) (first args) clojure.core// div)
                (reduce (fn [A B] (combine-with A B clojure.core// div)) args))))
 
 
@@ -722,7 +722,7 @@
 "
   ([^Matrix A & B]
    (if B
-    (Matrix. (.solve (DenseDoubleAlgebra.) A (first B)))
+    (Matrix. (.solve (DenseDoubleAlgebra.) A ^Matrix (first B)))
     (Matrix. (.inverse (DenseDoubleAlgebra.) A)))))
 
 
