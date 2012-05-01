@@ -29,7 +29,6 @@
 (defn is-matrix
   " Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
   ([obj] (instance? Matrix obj)))
-;;  ([obj] (isa? (class obj) ::matrix)))
 
 (def double_arr_type (Class/forName "[D"))
 
