@@ -87,51 +87,35 @@
       (and (is-matrix ~A) (is-matrix ~B))
         (let [~mA ~A
               ~mB ~B] 
-          (.assign (hint "Matrix" (.copy ~mA))
-                    ~mB
-                    ~df))
+          (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
       (and (is-matrix ~A) (number? ~B))
         (let [~mA ~A
               ~mB (make-matrix ~B (.rows ~mA) (.columns ~mA))] 
-          (.assign (hint "Matrix" (.copy ~mA))
-                   ~mB
-                   ~df))
+          (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
       (and (number? ~A) (is-matrix ~B))
         (let [~mB ~B
               ~mA (make-matrix ~A (.rows ~mB) (.columns ~mB))]
-          (.assign ~mA
-                   ~mB
-                   ~df))
+          (.assign ~mA ~mB ~df))
       (and (coll? ~A) (is-matrix ~B))
         (let [~mB ~B
               ~mA (make-matrix ~A (.columns ~mB))]
-          (.assign ~mA
-                   ~mB
-                   ~df))
+          (.assign ~mA ~mB ~df))
       (and (is-matrix ~A) (coll? ~B))
         (let [~mA ~A
               ~mB (make-matrix ~B)]
-        (.assign (hint "Matrix" (.copy ~mA))
-                 ~mB
-                 ~df))
+        (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
       (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
         (let [~mA (make-matrix ~A)
               ~mB (make-matrix ~B)]
-          (.assign ~mA
-                   ~mB
-                   ~df))
+          (.assign ~mA~mB ~df))
       (and (coll? ~A) (number? ~B) (coll? (first ~A)))
         (let [~mA (make-matrix ~A)
               ~mB (make-matrix ~B)]
-          (.assign ~mA
-                   ~mB
-                   ~df))
+          (.assign ~mA ~mB ~df))
       (and (number? ~A) (coll? ~B) (coll? (first ~B)))
         (let [~mA (make-matrix ~A (.rows ~B) (.columns ~B))
               ~mB (make-matrix ~B)]
-          (.assign ~mA
-                   ~mB
-                   ~df))        
+          (.assign ~mA ~mB ~df))        
       (and (coll? ~A) (coll? ~B))
         (map ~op ~A ~B)
       (and (number? ~A) (coll? ~B))
