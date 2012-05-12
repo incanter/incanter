@@ -1052,7 +1052,7 @@
                            (if group-by#
                              (format "%s, %s (0)" '~x '~y)
                              (format "%s, %s" '~x '~y)))
-           args# (concat [~x ~y ~create-xy-plot] (apply concat (seq (apply assoc opts#
+           args# (concat [~x ~y] (apply concat (seq (apply assoc opts#
                                                            [:group-by group-by#
                                                             :title title#
                                                             :x-label x-lab#
