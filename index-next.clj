@@ -280,9 +280,9 @@
    :name "add-box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L377",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L377",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-box-plot",
    :doc
@@ -294,9 +294,9 @@
    :name "add-categories",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L447",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L447",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-categories",
    :doc
@@ -308,9 +308,9 @@
    :name "add-function",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L633",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L633",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-function",
    :doc
@@ -322,9 +322,9 @@
    :name "add-histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L321",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L321",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-histogram",
    :doc
@@ -336,9 +336,9 @@
    :name "add-image",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2700",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2700",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-image",
    :doc
@@ -350,9 +350,9 @@
    :name "add-lines",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L564",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L564",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-lines",
    :doc
@@ -364,9 +364,9 @@
    :name "add-pointer",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2503",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2503",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-pointer",
    :doc
@@ -378,9 +378,9 @@
    :name "add-points",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L716",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L716",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-points",
    :doc
@@ -392,9 +392,9 @@
    :name "add-polygon",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2637",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2637",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-polygon",
    :doc
@@ -406,9 +406,9 @@
    :name "add-text",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2592",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2592",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-text",
    :doc
@@ -420,9 +420,9 @@
    :name "area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1767",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1767",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/area-chart",
    :doc
@@ -434,9 +434,9 @@
    :name "bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1625",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1625",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bar-chart",
    :doc
@@ -448,9 +448,9 @@
    :name "bland-altman-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2809",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2809",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bland-altman-plot",
    :doc
@@ -462,9 +462,9 @@
    :name "box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2254",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2254",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/box-plot",
    :doc
@@ -476,9 +476,9 @@
    :name "clear-background",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L804",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L804",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/clear-background",
    :doc
@@ -490,9 +490,9 @@
    :name "dynamic-scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L3092",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L3092",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-scatter-plot",
    :doc
@@ -504,9 +504,9 @@
    :name "dynamic-xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L3061",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L3061",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-xy-plot",
    :doc
@@ -518,9 +518,9 @@
    :name "function-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2336",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2336",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/function-plot",
    :doc
@@ -532,9 +532,9 @@
    :name "get-series",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2890",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2890",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/get-series",
    :doc "get-series",
@@ -545,9 +545,9 @@
    :name "heat-map",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2452",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2452",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/heat-map",
    :doc
@@ -559,9 +559,9 @@
    :name "histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1373",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1373",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/histogram",
    :doc
@@ -573,9 +573,9 @@
    :name "line-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1482",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1482",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/line-chart",
    :doc
@@ -587,9 +587,9 @@
    :name "pie-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2156",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2156",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/pie-chart",
    :doc
@@ -601,9 +601,9 @@
    :name "qq-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2770",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2770",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/qq-plot",
    :doc
@@ -615,9 +615,9 @@
    :name "scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1261",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1261",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/scatter-plot",
    :doc
@@ -629,9 +629,9 @@
    :name "set-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L776",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L776",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-alpha",
    :doc
@@ -643,9 +643,9 @@
    :name "set-background-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L790",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L790",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha",
    :doc
@@ -657,9 +657,9 @@
    :name "set-stroke",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L3127",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L3127",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke",
    :doc
@@ -671,9 +671,9 @@
    :name "set-stroke-color",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L3168",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L3168",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke-color",
    :doc
@@ -685,9 +685,9 @@
    :name "set-theme",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L216",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L216",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme",
    :doc
@@ -699,9 +699,9 @@
    :name "set-title",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L819",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L819",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-title",
    :doc
@@ -713,9 +713,9 @@
    :name "set-x-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L832",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L832",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-label",
    :doc
@@ -727,9 +727,9 @@
    :name "set-x-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L859",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L859",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-range",
    :doc
@@ -741,9 +741,9 @@
    :name "set-y-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L845",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L845",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-label",
    :doc
@@ -755,9 +755,9 @@
    :name "set-y-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L879",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L879",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-range",
    :doc
@@ -771,9 +771,9 @@
    :name "slider",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2922",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2922",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/slider",
    :doc
@@ -785,9 +785,9 @@
    :name "sliders",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2999",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2999",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders",
    :doc
@@ -800,9 +800,9 @@
    :name "sliders*",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2968",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2968",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders*",
    :doc
@@ -814,9 +814,9 @@
    :name "stacked-area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1907",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1907",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-area-chart",
    :doc
@@ -828,9 +828,9 @@
    :name "stacked-bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2037",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2037",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-bar-chart",
    :doc
@@ -842,9 +842,9 @@
    :name "time-series-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L1146",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L1146",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/time-series-plot",
    :doc
@@ -856,9 +856,9 @@
    :name "trace-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L2729",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L2729",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/trace-plot",
    :doc
@@ -870,9 +870,9 @@
    :name "xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj#L988",
+   "https://github.com/liebke/incanter/blob/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj#L988",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/e77716ae6dd1353031ab71a1acff27084776e870/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/9686670765661ca21e6ef5dcfc57a9227a740bb3/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/xy-plot",
    :doc
