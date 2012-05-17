@@ -3151,7 +3151,7 @@
 "
  ([chart & options]
    (let [{:keys [width dash series dataset cap join]
-          :or {width 1.0 dash 1.0 series 0 dataset 0
+          :or {width 1.0 dash 1.0 series :all dataset 0
                cap java.awt.BasicStroke/CAP_ROUND
                join java.awt.BasicStroke/JOIN_ROUND}} (apply hash-map options)
          renderer (-> chart .getPlot (.getRenderer dataset))
@@ -3161,7 +3161,11 @@
                                        1.0
                                        (float-array 1.0 dash)
                                        0.0)]
-     (.setSeriesStroke renderer series stroke)
+     (if (= :all series)
+       (doto renderer
+         (.setAutoPopulateSeriesStroke false)
+         (.setBaseStroke stroke))
+       (.setSeriesStroke renderer series stroke))
      chart)))
 
 
