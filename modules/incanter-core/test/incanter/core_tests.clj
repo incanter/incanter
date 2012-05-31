@@ -429,6 +429,26 @@
 ;; calculate the product of values in a vector or 1D matrix
 (is (= (prod [1 2 3 4 5 6]) 720.0)))
 
+(deftest decomp-svd-test
+  (let [m (matrix [[1 0] [0 1] [0 0]])
+        expect-full {:U (diag [1 1 1])
+                     :S '(1.0 1.0)
+                     :V (diag [1 1])}
+        expect-compact {:U m
+                        :S '(1.0 1.0)
+                        :V (diag [1 1])}
+        expect-values {:S '(1.0 1.0)}
+        check (fn [type mtest]
+                (let [mtrue (decomp-svd m :type type)]
+                  (testing (str "svd " type)
+                  (is (= (:U mtrue) (:U mtest)))
+                  (is (= (:S mtrue) (:S mtest)))
+                  (is (= (:V mtrue) (:V mtest))))))]
+    (check nil      expect-full)
+    (check :full    expect-full)
+    (check :compact expect-compact)
+    (check :values  expect-values)))
+
 
 (deftest test-metadata
   (let [md {:name "metadata test"}
