@@ -876,29 +876,42 @@
 " Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
   R's svd function.
 
+  Optional parameters:
+    :type -- one of :full, :compact, or :values.  default is :full
+      if :full, returns the full SVD
+      if :compact, returns the compact SVD
+      if :values, only the singular values are calculated
+
   Returns:
     a map containing:
-      :S -- the diagonal matrix of singular values
+      :S -- the diagonal matrix of singular values S (the diagonal in vector form)
       :U -- the left singular vectors U
       :V -- the right singular vectors V
-
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
   (decomp-foo foo)
+  (decomp-foo foo :type :full)
+  (decomp-foo foo :type :compact)
+  (decomp-foo foo :type :values)
 
 
   References:
     http://en.wikipedia.org/wiki/Singular_value_decomposition
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
-  ([mat]
-    (let [result (DenseDoubleSingularValueDecomposition. mat, true, true)]
-      {:S (diag (Matrix. (.getS result)))
-       :U (Matrix. (.getU result))
-       :V (Matrix. (.getV result))})))
+  ([mat & {:keys [type] :or {type :full}}]
+    (let [type (or type :full)
+          want-uv (not= type :values)
+          want-whole-uv (= type :full)
+          result (DenseDoubleSingularValueDecomposition. mat want-uv want-whole-uv)]
+      (if (= type :values)
+        {:S (diag (Matrix. (.getS result)))}
+        {:S (diag (Matrix. (.getS result)))
+         :U (Matrix. (.getU result))
+         :V (Matrix. (.getV result))}))))
 
 
 
