@@ -449,6 +449,21 @@
     (check :compact expect-compact)
     (check :values  expect-values)))
 
+(deftest decomp-qr-test
+  (let [m (matrix [[1 0] [0 1] [0 0]])
+        expect-full {:Q (diag [1 1 1])
+                     :R m}
+        expect-compact {:Q m
+                        :R (diag [1 1])}
+        check (fn [type mtest]
+                (let [mtrue (decomp-qr m :type type)]
+                  (testing (str "qr " type)
+                    (is (= (:Q mtrue) (:Q mtest)))
+                    (is (= (:R mtrue) (:R mtest))))))]
+    (check nil      expect-full)
+    (check :full    expect-full)
+    (check :compact expect-compact)))
+
 
 (deftest test-metadata
   (let [md {:name "metadata test"}
