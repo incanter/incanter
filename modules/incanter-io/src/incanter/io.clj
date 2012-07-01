@@ -30,7 +30,7 @@ incanter.io
 
 (defn- parse-string [value]
   (if (re-matches #"\d+" value)
-    (try (Integer/parseInt value)
+    (try (Long/parseLong value)
          (catch NumberFormatException _ value))
     (try (Double/parseDouble value)
          (catch NumberFormatException _ value))))
