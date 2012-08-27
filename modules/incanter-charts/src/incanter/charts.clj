@@ -298,13 +298,35 @@
              (_theme chart)))
          chart))))
 
+(defn- data-as-list [x data]
+  "data-as-list [x data]
 
+    If x is a collection, return it
+    If x is a single value, and data is undefined, return x in vector
+    If x is a single value, and data is defined, return ($ x data)"
+  (if (coll? x)
+    (to-list x)
+    (if data
+      (let [selected ($ x data)]
+        (if (coll? selected)
+          selected
+          [selected]))
+      [x])))
+
+(defn- in-coll [x]
+  "in-coll [x]
+
+    If x is a collection, return it
+    Otherwise return x in a vector"
+  (if (coll? x)
+    x
+    [x]))
 
 (defn add-histogram*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
+          _x (data-as-list x data)
           data-plot (.getPlot chart)
           n (.getDatasetCount data-plot)
           nbins (or (:nbins opts) 10)
@@ -362,7 +384,7 @@
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
+          _x (data-as-list x data)
           data-plot (.getCategoryPlot chart)
           n-col (.getColumnCount (.getDataset data-plot))
           n-row (.getRowCount (.getDataset data-plot))
@@ -418,12 +440,10 @@
   ([chart categories values & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
           _group-by (when (:group-by opts)
-                      (if (coll? (:group-by opts))
-                       (to-list (:group-by opts))
-                       ($ (:group-by opts) data)))
+                      (data-as-list (:group-by opts) data))                      
            _chart chart
            series-label (:series-label opts)
            data-plot (.getCategoryPlot _chart)
@@ -506,8 +526,8 @@
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
            data (:data opts)
-           _x (if (coll? x) (to-list x) ($ x data))
-           _y (if (coll? y) (to-list y) ($ y data))
+           _x (data-as-list x data)
+           _y (data-as-list y data)
            data-plot (.getPlot chart)
            n (.getDatasetCount data-plot)
            series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
@@ -536,8 +556,8 @@
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
            data (:data opts)
-           _x (if (coll? x) (to-list x) ($ x data))
-           _y (if (coll? y) (to-list y) ($ y data))
+           _x (data-as-list x data)
+           _y (data-as-list y data)
            data-plot (.getPlot chart)
            n (.getDatasetCount data-plot)
            series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
@@ -690,8 +710,8 @@
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
            data (:data opts)
-           _x (if (coll? x) (to-list x) ($ x data))
-           _y (if (coll? y) (to-list y) ($ y data))
+           _x (data-as-list x data)
+           _y (data-as-list y data)
            data-plot (.getPlot chart)
            n (.getDatasetCount data-plot)
            series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
@@ -930,20 +950,18 @@
   ([x y create-plot & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
-          _y (if (coll? y) (to-list y) ($ y data))
+          _x (data-as-list x data)
+          _y (data-as-list y data)
           _group-by (when (:group-by opts)
-                      (if (coll? (:group-by opts))
-                        (to-list (:group-by opts))
-                        ($ (:group-by opts) data)))
+                      (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (map #($ :col-0 %)
                           (vals ($group-by :col-1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
                      (map #($ :col-0 %)
                           (vals ($group-by :col-1 (conj-cols _y _group-by)))))
-          __x (if x-groups (first x-groups) _x)
-           __y (if y-groups (first y-groups) _y)
+          __x (in-coll (if x-groups (first x-groups) _x))
+          __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts) (str 'y))
@@ -1202,21 +1220,19 @@
 (defn scatter-plot*
   ([x y & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
-          _y (if (coll? y) (to-list y) ($ y data))
-          _group-by (when (:group-by opts)
-                      (if (coll? (:group-by opts))
-                        (to-list (:group-by opts))
-                        ($ (:group-by opts) data)))
+          data (:data opts)          
+          _x (data-as-list x data)
+          _y (data-as-list y data)
+          _group-by (when (:group-by opts)                      
+                      (data-as-list (:group-by opts) data))                     
           x-groups (when _group-by
                      (map #($ :col-0 %)
                           (vals ($group-by :col-1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
                      (map #($ :col-0 %)
                           (vals ($group-by :col-1 (conj-cols _y _group-by)))))
-          __x (if x-groups (first x-groups) _x)
-          __y (if y-groups (first y-groups) _y)
+          __x (in-coll (if x-groups (first x-groups) _x))
+          __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
           x-lab (or (:x-label opts) (str 'x))
           y-lab (or (:y-label opts) (str 'y))
@@ -1342,7 +1358,7 @@
   ([x & options]
     (let [opts (if options (apply assoc {} options) {})
           data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
+          _x (data-as-list x data)
           nbins (or (:nbins opts) 10)
           theme (or (:theme opts) :default)
           density? (true? (:density opts))
@@ -1439,13 +1455,11 @@
   ([categories values & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
           title (or (:title opts) "")
           group-by (when (:group-by opts)
-                     (if (coll? (:group-by opts))
-                       (to-list (:group-by opts))
-                       ($ (:group-by opts) data)))
+                     (data-as-list (:group-by opts) data))
           x-label (or (:x-label opts) (str 'categories))
           y-label (or (:y-label opts) (str 'values))
           series-label (:series-label opts)
@@ -1579,15 +1593,13 @@
 (defn bar-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+           data (:data opts)          
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
-                     (if (coll? (:group-by opts))
-                       (to-list (:group-by opts))
-                       ($ (:group-by opts) data)))
+                       (data-as-list (:group-by opts) data))                    
            x-label (or (:x-label opts) (str 'categories))
            y-label (or (:y-label opts) (str 'values))
            series-label (:series-label opts)
@@ -1722,14 +1734,12 @@
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
            data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
-                     (if (coll? (:group-by opts))
-                       (to-list (:group-by opts))
-                       ($ (:group-by opts) data)))
+                       (data-as-list (:group-by opts) data))                    
            x-label (or (:x-label opts) (str 'categories))
            y-label (or (:y-label opts) (str 'values))
            series-label (:series-label opts)
@@ -1862,14 +1872,12 @@
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
            data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
-                     (if (coll? (:group-by opts))
-                       (to-list (:group-by opts))
-                       ($ (:group-by opts) data)))
+                       (data-as-list (:group-by opts) data))
            x-label (or (:x-label opts) (str 'categories))
            y-label (or (:y-label opts) (str 'values))
            series-label (:series-label opts)
@@ -1993,14 +2001,12 @@
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
            data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
-                     (if (coll? (:group-by opts))
-                       (to-list (:group-by opts))
-                       ($ (:group-by opts) data)))
+                       (data-as-list (:group-by opts) data))
            x-label (or (:x-label opts) (str 'categories))
            y-label (or (:y-label opts) (str 'values))
            series-label (:series-label opts)
@@ -2132,9 +2138,9 @@
 (defn pie-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
-          _values (if (coll? values) (to-list values) ($ values data))
-          _categories (if (coll? categories) (to-list categories) ($ categories data))
+           data (:data opts)           
+          _values (data-as-list values data)
+          _categories (data-as-list categories data)
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            legend? (true? (:legend opts))
@@ -2208,17 +2214,13 @@
   ([x & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
+          _x (data-as-list x data)
           _group-by (when (:group-by opts)
-                      (if (coll? (:group-by opts))
-                        (to-list (:group-by opts))
-                        ($ (:group-by opts) data)))
+                      (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (map #($ :col-0 %)
                           (vals ($group-by :col-1 (conj-cols _x _group-by)))))
-          __x (if x-groups
-                (first x-groups)
-                _x)
+          __x (in-coll (if x-groups (first x-groups) _x))
           title (or (:title opts) "")
           x-label (or (:x-label opts) "")
           y-label (or (:y-label opts) (str 'x))
@@ -2743,7 +2745,7 @@
   ([x & options]
     (let [opts (when options (apply assoc {} options))
           data (:data opts)
-          _x (if (coll? x) (to-list x) ($ x data))
+          _x (data-as-list x data)
           title (or (:title opts) "Trace Plot")
           x-label (or (:x-label opts) "Iteration")
           y-label (or (:y-label opts) "Value")
@@ -2790,7 +2792,7 @@
   ([x & options]
    (let [opts (when options (apply assoc {} options))
          data (:data opts)
-         _x (if (coll? x) (to-list x) ($ x data))
+         _x (data-as-list x data)
          n (count _x)
          quants (for [k (range 1 n)] (/ k (inc n)))
          norm-quants (quantile-normal quants)
@@ -2830,8 +2832,8 @@
   ([x1 x2 & options]
       (let [opts (when options (apply assoc {} options))
             data (:data opts)
-            _x1 (if (coll? x1) (to-list x1) ($ x1 data))
-            _x2 (if (coll? x2) (to-list x2) ($ x2 data))
+            _x1 (data-as-list x1 data)
+            _x2 (data-as-list x2 data)
             plot (scatter-plot (div (plus _x1 _x2) 2) (minus _x1 _x2)
                                :title "Bland Altman Plot"
                                :legend false)
