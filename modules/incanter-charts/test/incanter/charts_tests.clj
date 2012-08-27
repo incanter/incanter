@@ -120,10 +120,6 @@
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (bland-altman-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
 
-(deftest bland-altman-plot-single-row
-  "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (bland-altman-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
-
 (deftest line-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (line-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
