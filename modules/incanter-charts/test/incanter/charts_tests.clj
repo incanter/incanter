@@ -60,6 +60,122 @@
    [148     250]]))
 
 
+(deftest bar-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest bar-chart-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest pie-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (pie-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest scatter-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (scatter-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest scatter-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (scatter-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest area-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest area-chart-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest stacked-area-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (stacked-area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest stacked-area-chart-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (stacked-area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest stacked-bar-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (stacked-bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest stacked-bar-chart-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (stacked-bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest box-plot-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3]]))))))
+
+(deftest box-plot-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest trace-plot-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (trace-plot :col-0 :data (to-dataset [[1 2 3]]))))))
+
+(deftest bland-altman-plot-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (bland-altman-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest bland-altman-plot-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (bland-altman-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest line-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (line-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest line-chart-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (line-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+
+(deftest histogram-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (histogram :col-0 :data (to-dataset [[1 2 3]]))))))
+
+(deftest xy-plot-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (xy-plot :col-0 :col1 :data (to-dataset [[1 2 3]]))))))
+
+(deftest add-histogram-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (let [data (to-dataset [[1 2 3]])
+        hist (histogram :col-0 :data data)]
+  (is (not (nil? (add-histogram hist :col-1 :data data))))))
+
+(deftest add-box-plot-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (let [data (to-dataset [[1 2 3]])
+        box (box-plot :col-0 :data data)]
+  (is (not (nil? (add-box-plot box :col-1 :data data))))))
+
+(deftest add-categories-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+   (let [data (to-dataset [[1 2 3]])
+         chart (line-chart :col-0 :col-1 :data data)]
+  (is (not (nil? (add-categories chart :col-2 :col-1 :data data))))))
+
+(deftest add-categories-single-row-with-group
+  "Asserting that no error is thrown, for a single item dataset"
+   (let [data (to-dataset [[1 2 3]])
+         chart (line-chart :col-0 :col-1 :data data)]
+  (is (not (nil? (add-categories chart :col-2 :col-1 :data data :group-by :col-0))))))
+
+(deftest add-lines-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+   (let [data (to-dataset [[1 2 3]])
+         plot (scatter-plot :col-0 :col-1 :data data)]
+  (is (not (nil? (add-lines plot :col-2 :col-1 :data data))))))
+
+(deftest add-points-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+   (let [data (to-dataset [[1 2 3]])
+         plot (scatter-plot :col-0 :col-1 :data data)]
+  (is (not (nil? (add-points plot :col-2 :col-1 :data data))))))
+
 (deftest histogram-tests
   (def hw1 (view (histogram (sample-normal 1000))))
   (def hw2 (view (histogram (sample-gamma 1000))))
@@ -107,7 +223,6 @@
   (.dispose sw1)
   (.dispose sw2)
   )
-
 
 (deftest boxplot-tests
   (def boxplt (box-plot (sample-gamma 1000)))
@@ -184,12 +299,10 @@
   (.dispose bw2)
   (.dispose bw3))
 
-
 (deftest pie-chart-tests
   (def pw1 (view (pie-chart ["a" "b" "c"] [10 20 30])))
   (Thread/sleep wait-timeout)
   (.dispose pw1))
-
 
 (deftest line-chart-tests
   (def data (get-dataset :airline-passengers))
