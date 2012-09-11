@@ -1,8 +1,27 @@
-#!/bin/sh
+#!/bin/bash
+
+# where is the lib directory?
+# called path
+scriptloc="$0"
+# absolute path to script
+scriptloc="$(readlink -f "$scriptloc")"
+# script directory
+scriptloc="$(dirname "$scriptloc")"
+#parent of script should be incanter directory containing /lib/*.jar
+scriptloc="$(dirname "$scriptloc")"
+
+# test that the lib directory exists (it should have jars in it)
+if ! [ -d "$scriptloc/lib" -a -r "$scriptloc/lib" ]
+then
+    echo "Can't find $scriptloc/lib. Is $scriptloc your Incanter home? Have you run 'lein deps'?" >&2
+    echo "https://github.com/liebke/incanter/wiki#getstarted" >&2
+    exit 1
+fi
+
 CLASSPATH=src:test:config:data:.
 
-for f in lib/*.jar; do
+for f in "$scriptloc"/lib/*.jar; do
     CLASSPATH="$CLASSPATH":$f
 done
 
-java -Xmx1G -cp "$CLASSPATH" jline.ConsoleRunner clojure.main -i script/run.clj -r
+java -Xmx1G -cp "$CLASSPATH" jline.ConsoleRunner clojure.main -i "$scriptloc"/script/run.clj -r
