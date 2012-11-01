@@ -6,7 +6,7 @@
 
   incanter.latex
   (:import [org.scilab.forge.jlatexmath TeXConstants TeXIcon TeXFormula])
-  (:use [incanter.core :only [dim]]))
+  (:use [incanter.core :only [dim sel]]))
 
 
 
@@ -121,6 +121,8 @@ Example:
    {:keys [mxtype]
     :or {mxtype "pmatrix"}}]
   (let [dimensions (zipmap [:height :width] (dim mx))
+        ;;safe-get-row (fn [mx-or-ds r] (nth mx-or-ds r))
+        safe-get-row (fn [mx-or-ds r] (sel mx-or-ds :rows r))
         write-row (fn [coll] (apply str (interpose " & " coll)))]
    (str
     "\\begin{" mxtype "}"
@@ -131,6 +133,6 @@ Example:
       (map
        write-row
        (map
-        (partial nth mx)
+        (partial safe-get-row mx)
         (range (:height dimensions))))))
     "\\end{" mxtype "}")))
