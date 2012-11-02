@@ -118,17 +118,23 @@ Example:
     (view (latex (to-latex (matrix [[1 0][0 1]]))))
 "
   [mx &
-   {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline newline]
-    :or {mxtype "pmatrix" preamble "" col-just [] row-names-tex-cmd [""] hline false table-newline "\\\\" newline ""}}]
+   {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline table-newline-suppress-last newline]
+    :or {mxtype "pmatrix" preamble "" col-just [] row-names-tex-cmd [""] hline false table-newline "\\\\" table-newline-suppress-last false newline ""}}]
   (let [dimensions (zipmap [:height :width] (dim mx))
-        ;;safe-get-row (fn [mx-or-ds r] (nth mx-or-ds r))
+        do-table-newline-last (if
+                               (or table-newline-suppress-last
+                                (and
+                                 (= table-newline "\\\\")
+                                 (> (:height dimensions) 0)))
+                               false
+                               true)
         safe-get-row (fn [mx-or-ds r] (sel mx-or-ds :rows r))
         write-row (fn [coll] (apply str (interpose " & " coll)))]
    (str
     "\\begin{" mxtype "}"
     preamble
     (when (seq col-just) (clojure.string/join (flatten ["{" col-just "}"])))
-    (clojure.string/join [newline (if hline hline "") newline])
+    (clojure.string/join (if hline [newline hline newline] [newline ""]))
     (apply
      str
      (interleave
@@ -139,8 +145,8 @@ Example:
         (partial safe-get-row mx)
         (range (:height dimensions))))
       (concat (drop-last (take (:height dimensions) (cycle [(clojure.string/join [table-newline newline])]))) [""])))
-    (if (> (:height dimensions) 0) table-newline "")
-    (clojure.string/join [newline (if hline hline "") newline])
+    (if do-table-newline-last table-newline "")
+    (clojure.string/join (if hline [newline hline newline] [newline ""]))
     "\\end{" mxtype "}")))
 
 
