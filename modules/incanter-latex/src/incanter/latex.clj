@@ -129,16 +129,16 @@ Example:
     preamble
     (when (seq col-just) (clojure.string/join (flatten ["{" col-just "}"])))
     (clojure.string/join [newline (if hline hline "") newline])
-    (interleave (take (:height dimensions) (cycle row-names-tex-cmd))
     (apply
      str
-     (interpose
-      (clojure.string/join [table-newline newline])
+     (interleave
+      (take (:height dimensions) (cycle row-names-tex-cmd))
       (map
        write-row
        (map
         (partial safe-get-row mx)
-        (range (:height dimensions)))))))
+        (range (:height dimensions))))
+      (concat (drop-last (take (:height dimensions) (cycle [(clojure.string/join [table-newline newline])]))) [""])))
     (if (> (:height dimensions) 0) table-newline "")
     (clojure.string/join [newline (if hline hline "") newline])
     "\\end{" mxtype "}")))
