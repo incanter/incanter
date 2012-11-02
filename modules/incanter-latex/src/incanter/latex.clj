@@ -118,21 +118,29 @@ Example:
     (view (latex (to-latex (matrix [[1 0][0 1]]))))
 "
   [mx &
-   {:keys [mxtype]
-    :or {mxtype "pmatrix"}}]
+   {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline newline]
+    :or {mxtype "pmatrix" preamble "" col-just [] row-names-tex-cmd [""] hline false table-newline "\\\\" newline ""}}]
   (let [dimensions (zipmap [:height :width] (dim mx))
         ;;safe-get-row (fn [mx-or-ds r] (nth mx-or-ds r))
         safe-get-row (fn [mx-or-ds r] (sel mx-or-ds :rows r))
         write-row (fn [coll] (apply str (interpose " & " coll)))]
    (str
     "\\begin{" mxtype "}"
+    preamble
+    (when (seq col-just) (clojure.string/join (flatten ["{" col-just "}"])))
+    (clojure.string/join [newline (if hline hline "") newline])
+    (interleave (take (:height dimensions) (cycle row-names-tex-cmd))
     (apply
      str
      (interpose
-      "\\\\"
+      (clojure.string/join [table-newline newline])
       (map
        write-row
        (map
         (partial safe-get-row mx)
-        (range (:height dimensions))))))
+        (range (:height dimensions)))))))
+    (if (> (:height dimensions) 0) table-newline "")
+    (clojure.string/join [newline (if hline hline "") newline])
     "\\end{" mxtype "}")))
+
+
