@@ -283,7 +283,7 @@
 
 
 (defmethod sel [incanter.Matrix true]
-  ([^Matrix mat & {:keys [rows cols except-rows except-cols filter]}]
+  ([^Matrix mat & {:keys [rows cols except-rows except-cols filter-fn]}]
    (let [rows (cond
                 rows rows
                 except-rows (except-for (.rows mat) except-rows)
@@ -292,7 +292,7 @@
                 cols cols
                 except-cols (except-for (.columns mat) except-cols)
                 :else true)
-         ^Matrix mat (if (nil? filter) mat (matrix (filter filter mat)))
+         ^Matrix mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
          all-rows? (or (true? rows) (= rows :all))
          all-cols? (or (true? cols) (= cols :all))]
      (cond
