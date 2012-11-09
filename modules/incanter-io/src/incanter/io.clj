@@ -26,7 +26,8 @@
 incanter.io
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
-  (:use [incanter.core :only (dataset save get-input-reader)]))
+  (:use [incanter.core :only (dataset save)])
+  (:require [clojure.java.io :as io]))
 
 (defn- parse-string [value]
   (if (re-matches #"\d+" value)
@@ -55,7 +56,7 @@ incanter.io
                      header false
                      keyword-headers true}}]
      (with-open [reader ^CSVReader (CSVReader.
-				    (get-input-reader filename)
+				    (io/reader filename)
 				    delim
 				    quote
 				    skip)]

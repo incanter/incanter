@@ -2733,26 +2733,6 @@ of each type"
      (infix-to-prefix equation)))
 
 
-(defn get-input-reader
-  "Returns a java.io.FileReader when given a filename, or a
-   java.io.InputStreamReader when given a URL."
-  [location]
-  (try
-    (java.io.InputStreamReader. (.openStream (java.net.URL. location)))
-  (catch java.net.MalformedURLException _
-    (java.io.FileReader. location))))
-
-(defn get-input-stream
-  "Returns a java.io.FileInputStream when given a filename, or a
-   java.io.InputStream when given a URL."
-  [location]
-  (try
-    (.openStream (java.net.URL. location))
-    (catch java.net.MalformedURLException _
-      (java.io.FileInputStream. location))))
-
-
-
 ;; PRINT METHOD FOR INCANTER DATASETS
 (defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
   (do

@@ -6,8 +6,9 @@ Excel file formats (.xls and .xlsx)."
   incanter.excel
   (:import
     [java.io FileOutputStream FileInputStream])
+  (:require [clojure.java.io :as io])
   (:use
-   [incanter.core :only [dataset get-input-stream dataset?]]
+   [incanter.core :only [dataset dataset?]]
    [incanter.excel.cells :only [read-line-values write-line-values]]
    [incanter.excel.workbook :only [get-workbook-sheet make-workbook-map write-workbook create-workbook-object create-sheet get-all-sheets]]))
 
@@ -134,7 +135,7 @@ or :xlsx override the suffix check.
   [^String filename
    & {:keys [sheet header-keywords override-format]
       :or {sheet 0 header-keywords false override-format nil}}]
-  (with-open [in-fs (get-input-stream filename)]
+  (with-open [in-fs (io/input-stream filename)]
     (let [rows-it   (iterator-seq
                      (. (get-workbook-sheet
                          (create-workbook-object filename override-format in-fs)
@@ -148,7 +149,7 @@ or :xlsx override the suffix check.
   [^String filename
    & {:keys [sheet header-keywords override-format all-sheets?]
       :or {sheet 0 header-keywords false override-format nil all-sheets? false}}]
-  (with-open [in-fs (get-input-stream filename)]
+  (with-open [in-fs (io/input-stream filename)]
     (let [workbook (create-workbook-object filename override-format in-fs)]
      (if all-sheets?
        (for [current-sheet (get-all-sheets workbook)]
