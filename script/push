@@ -12,13 +12,13 @@ for i in core io charts mongodb pdf latex excel zoo ; do
     if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
         OLDWD=`pwd`
         cd "incanter-$i"
-        lein push
+        lein deploy clojars
         cd "$OLDWD"
     fi
 done
 cd ..
 
-lein push
+lein deploy clojars
 
 cd "$TWD"
 

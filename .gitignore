@@ -7,6 +7,6 @@ lib
 classes
 *.jar
 *.log
-<<<<<<< HEAD
 .cake
 .lein*
+pom.xml.asc
