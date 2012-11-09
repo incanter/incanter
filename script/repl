@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -Xmx1G -cp "src:test:data:.:incanter.jar" jline.ConsoleRunner clojure.main -i script/run.clj -r

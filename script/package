@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -f incanter.jar ] && rm incanter.jar
+lein uberjar && cp target/incanter-*-standalone.jar incanter.jar

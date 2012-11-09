@@ -43,7 +43,7 @@ h2. Getting started with Incanter
 
 Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://data-sorcery.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download either an <a href="http://incanter.org/downloads/">Incanter executable</a> or a pre-built version of <a href="http://incanter.org/downloads/">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
 
-Start the Clojure REPL (aka the shell) by double-clicking on the downloaded executable or, if you downloaded the pre-built distribution, running one of the scripts in the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows. NOTE: The lein repl task uses Clojure 1.1, and Incanter 1.2.x requires Clojure 1.2, so use the repl script instead of lein.
+Start the Clojure REPL (aka the shell) by double-clicking on the downloaded executable or, if you downloaded the pre-built distribution, running one of the scripts in the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows.
 
 
 From the Clojure REPL, load the Incanter libraries: 
@@ -94,15 +94,15 @@ To build and test Incanter, you will need to have <a href="https://github.com/te
 
 1. Clone the repository with git: @git clone git://github.com/liebke/incanter.git@
 
-2. Install Leiningen
-  a. Download the lein script: @wget https://github.com/technomancy/leiningen/raw/stable/bin/lein@
-     (use <a href="https://github.com/technomancy/leiningen/raw/stable/bin/lein.bat">lein.bat</a> on Windows)
+2. Install Leiningen (version 2.x)
+  a. Download the lein script: @wget https://github.com/technomancy/leiningen/raw/preview/bin/lein@
+     (use <a href="https://github.com/technomancy/leiningen/raw/preview/bin/lein.bat">lein.bat</a> on Windows)
   b. Place it on your path and chmod it to be executable: @chmod +x lein@
   c. Run: @lein self-install@
 
 3. From the incanter directory, download the necessary dependencies: @lein deps@ 
 
-4. Start a REPL: @script/repl@ or @script\repl.bat@, or start a Swank server: @script/swank@ or @script\swank.bat@
+4. Start a REPL: @lein repl@ (it also starts nRepl server), or start a Swank server: @lein ritz 4005@
 
 Other tasks:
 * If you want to run the tests for each of Incanter's modules, use @script/test@ 
