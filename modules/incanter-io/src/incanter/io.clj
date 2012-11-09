@@ -54,19 +54,26 @@ incanter.io
                      skip 0
                      header false
                      keyword-headers true}}]
-     (let [compress-delim? (or compress-delim (if (= delim \space) true false))]
      (with-open [reader ^CSVReader (CSVReader.
 				    (get-input-reader filename)
 				    delim
 				    quote
 				    skip)]
-       (let [data-lines (map seq (seq (.readAll reader)))
-             raw-data (filter #(> (count (filter (fn [field] (not= field "")) %)) 0) 
-                              (if compress-delim? 
-                                (map (fn [line] (filter #(not= % "") line)) data-lines)
-                                data-lines))
-             parsed-data (into [] (map (fn [row] (into [] (map parse-string row))) 
-                                       raw-data))]
+       (let [compress-delim? (or compress-delim (= delim \space))
+             compress-delim (if compress-delim?
+                                 (fn [line] (filter #(not= % "") line))
+                                 (fn [x] x))
+             remove-empty #(when (some (fn [field] (not= field "")) %) %)
+             parse-data #(vec (map parse-string %))
+             parsed-data (vec
+                           (filter boolean
+                                   (loop [lines []]
+                                     (if-let [line (.readNext reader)]
+                                       (recur (conj lines (seq (-> line
+                                                                 compress-delim
+                                                                 remove-empty
+                                                                 parse-data))))
+                                       lines))))]
     (if header
       ; have header row
       (dataset (if keyword-headers
@@ -81,7 +88,7 @@ incanter.io
         (dataset (if keyword-headers
                    (map keyword col-names) 
                    col-names) 
-                 parsed-data))))))))
+                 parsed-data)))))))
 
 
 
