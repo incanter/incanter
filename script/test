@@ -1,28 +1,20 @@
 #!/bin/sh
 
-cd ./modules/incanter-core
-lein deps && lein test && lein install
+TWD=`pwd`
 
-cd ../incanter-io
-lein deps && lein test && lein install
+TOP_DIR=`dirname $0`/..
+cd "$TOP_DIR"
 
-cd ../incanter-charts
-lein deps && lein test && lein install
+cd modules
+for i in core io charts mongodb pdf latex excel zoo ; do
+    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
+        echo "testing in incanter-$i"
+        OLDWD=`pwd`
+        cd "incanter-$i"
+        lein test
+        cd "$OLDWD"
+    fi
+done
 
-cd ../incanter-processing
-lein deps && lein test
+cd "$TWD"
 
-cd ../incanter-mongodb
-lein deps && lein test
-
-cd ../incanter-pdf
-lein deps && lein test
-
-cd ../incanter-latex
-lein deps && lein test
-
-cd ../incanter-excel
-lein deps && lein test
-
-cd ../incanter-zoo
-lein deps && lein test

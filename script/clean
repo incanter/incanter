@@ -1,10 +1,19 @@
 #!/bin/sh
 
-cd modules
-for f in core io charts processing mongodb pdf latex excel zoo ; do
-    cd incanter-$f
-    lein clean
-    cd ..
-done
-cd ..
+TWD=`pwd`
 
+TOP_DIR=`dirname $0`/..
+cd "$TOP_DIR"
+
+for i in modules/* ; do
+    if [ -d "$i" -a -f "$i/project.clj" ] ; then
+        OLDWD=`pwd`
+        cd "$i"
+        lein clean
+        cd "$OLDWD"
+    fi
+done
+
+lein clean
+
+cd "$TWD"

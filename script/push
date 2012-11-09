@@ -1,43 +1,25 @@
 #!/bin/sh
 
-cd ./modules/incanter-core
-lein deps
+TWD=`pwd`
+
+TOP_DIR=`dirname $0`/..
+cd "$TOP_DIR"
+
+script/clean
+
+cd modules
+for i in core io charts mongodb pdf latex excel zoo ; do
+    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
+        OLDWD=`pwd`
+        cd "incanter-$i"
+        lein push
+        cd "$OLDWD"
+    fi
+done
+cd ..
+
 lein push
 
-cd ../incanter-io
-lein deps
-lein push
-
-cd ../incanter-charts
-lein deps
-lein push
-
-cd ../incanter-processing
-lein deps
-lein push
-
-cd ../incanter-mongodb
-lein deps
-lein push
-
-cd ../incanter-pdf
-lein deps
-lein push
-
-cd ../incanter-latex
-lein deps
-lein push
-
-cd ../incanter-excel
-lein deps
-lein push
-
-cd ../incanter-zoo
-lein deps
-lein push
-
-cd ../..
-lein deps
-lein push
+cd "$TWD"
 
 

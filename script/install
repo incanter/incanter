@@ -1,17 +1,21 @@
 #!/bin/sh
 
-lein clean
+TWD=`pwd`
+
+TOP_DIR=`dirname $0`/..
+cd "$TOP_DIR"
+
+script/clean
+
 cd modules
-for f in core io charts processing mongodb pdf latex excel zoo; do
-    cd incanter-$f
-    lein clean
-    lein deps
-    jsrc=`find src -name \*.java`
-    if [ -n "$jsrc" ] ; then
-        lein javac
+for i in core io charts mongodb pdf latex excel zoo ; do
+    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
+        OLDWD=`pwd`
+        cd "incanter-$i"
+        lein install
+        cd "$OLDWD"
     fi
-    lein install
-    cd ..
 done
-cd ..
-lein deps
+
+cd "$TWD"
+

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo "** Make sure to run lein deps first **"
-echo "Packaging executable incanter.jar file..."
-[ -f incanter.jar ] && rm incanter.jar
-lein uberjar && mv incanter-*-standalone.jar incanter.jar
-
