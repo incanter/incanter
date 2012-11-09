@@ -79,8 +79,7 @@ The following documentation covers the Incanter and Clojure APIs and the APIs of
 
 
 *Related API documentation*
-* "Clojure API":http://richhickey.github.com/clojure/
-* "Clojure-contrib API":http://richhickey.github.com/clojure-contrib/
+* "Clojure API":http://clojure.github.com/clojure/
 * "Parallel Colt Java API":http://incanter.org/docs/parallelcolt/api/
 * "JFreeChart Java API":http://www.jfree.org/jfreechart/api/javadoc/index.html
 * "Processing API":http://www.processing.org/reference/
