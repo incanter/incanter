@@ -128,13 +128,15 @@ Example:
                                  (> (:height dimensions) 0)))
                                false
                                true)
+        hline-tex (clojure.string/join (if hline [newline hline newline] [newline ""]))
         safe-get-row (fn [mx-or-ds r] (sel mx-or-ds :rows r))
         write-row (fn [coll] (apply str (interpose " & " coll)))]
    (str
     "\\begin{" mxtype "}"
     preamble
     (when (seq col-just) (clojure.string/join (flatten ["{" col-just "}"])))
-    (clojure.string/join (if hline [newline hline newline] [newline ""]))
+    (when (seq (:column-names mx)) (clojure.string/join (flatten [hline-tex (interpose " & " (:column-names mx)) table-newline])))
+    hline-tex
     (apply
      str
      (interleave
@@ -146,7 +148,7 @@ Example:
         (range (:height dimensions))))
       (concat (drop-last (take (:height dimensions) (cycle [(clojure.string/join [table-newline newline])]))) [""])))
     (if do-table-newline-last table-newline "")
-    (clojure.string/join (if hline [newline hline newline] [newline ""]))
+    hline-tex
     "\\end{" mxtype "}")))
 
 
