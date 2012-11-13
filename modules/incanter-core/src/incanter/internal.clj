@@ -17,6 +17,7 @@
 
 
 (ns incanter.internal
+  (:require [clatrix.core :as clx])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
@@ -35,12 +36,10 @@
 (defn make-matrix
   ([data]
     (cond
-     (instance? double_arr_type data)
-      (Matrix. ^"[D" data)
      (coll? (first data))
-      (Matrix. ^"[[D" (into-array (map double-array data)))
+      (clx/matrix data)
      (number? (first data))
-      (Matrix. (double-array data))))
+      (Matrix. (map vector data))))
   ([data ncol]
     (cond
       (instance? double_arr_type data)
