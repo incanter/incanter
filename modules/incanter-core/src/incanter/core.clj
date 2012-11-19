@@ -33,6 +33,7 @@
   (:use [incanter internal]
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)])
+  (:require [clatrix.core :as clx])
   (:import (incanter Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
@@ -103,7 +104,7 @@
 
 
 (defn matrix?
-  " Test if obj is 'derived' incanter.Matrix."
+  " Test if obj is 'derived' clatrix.core.Matrix"
   ([obj] (is-matrix obj)))
 
 
@@ -111,13 +112,12 @@
 " Determines if obj is of type incanter.core.Dataset."
   ([obj] (isa? (type obj) incanter.core.Dataset)))
 
-
 (defn nrow
   ^{:tag Integer
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
-    (matrix? mat) (.rows ^Matrix mat)
+    (matrix? mat) (first (clx/size ^clatrix.core.Matrix mat))
     (dataset? mat) (count (:rows mat))
     (coll? mat) (count mat))))
 
@@ -127,7 +127,7 @@
      :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
-    (matrix? mat) (.columns ^Matrix mat)
+    (matrix? mat) (last (clx/size ^clatrix.core.Matrix mat))
     (dataset? mat) (count (:column-names mat))
     (coll? mat) 1 )))
 
@@ -257,7 +257,7 @@
 
 
 "
-(fn [mat & options] [(type mat) (keyword? (first options))]))
+  (fn [mat & options] [(type mat) (keyword? (first options))]))
 
 
 ;; (defmethod sel [nil false] [])
@@ -281,6 +281,24 @@
       (and all-rows? all-cols?)
         mat))))
 
+
+(defmethod sel [clatrix.core.Matrix false]
+  ([^clatrix.core.Matrix mat rows columns]
+   (let [rws (if (number? rows) [rows] rows)
+         cols (if (number? columns) [columns] columns)
+         all-rows? (or (true? rws) (= rws :all))
+         all-cols? (or (true? cols) (= cols :all))]
+    (cond
+      (and (number? rows) (number? columns))
+        (clx/get mat rows columns)
+      (and all-rows? (coll? cols))
+        (clx/slice mat (int-array (range (clx/size mat))) (int-array cols))
+      (and (coll? rws) all-cols?)
+        (.viewSelection mat (int-array rws) (int-array (range (.columns mat))))
+      (and (coll? rws) (coll? cols))
+        (.viewSelection mat (int-array rws) (int-array cols))
+      (and all-rows? all-cols?)
+        mat))))
 
 (defmethod sel [incanter.Matrix true]
   ([^Matrix mat & {:keys [rows cols except-rows except-cols filter-fn]}]
@@ -315,6 +333,38 @@
        (and all-rows? all-cols?)
          mat))))
 
+(defmethod sel [clatrix.core.Matrix true]
+  ([mat & {:keys [rows cols except-rows except-cols filter-fn]}]
+   (let [rows (cond
+                rows rows
+                except-rows (except-for (.rows mat) except-rows)
+                :else true)
+         cols (cond
+                cols cols
+                except-cols (except-for (.columns mat) except-cols)
+                :else true)
+         mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
+         all-rows? (or (true? rows) (= rows :all))
+         all-cols? (or (true? cols) (= cols :all))]
+     (cond
+       (and (number? rows) (number? cols))
+         (clx/get mat rows cols)
+       (and all-rows? (coll? cols))
+         (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
+       (and all-rows? (number? cols))
+         (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
+       (and (coll? rows) (number? cols))
+         (.viewSelection mat (int-array rows) (int-array [cols]))
+       (and (coll? rows) all-cols?)
+         (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
+       (and (number? rows) all-cols?)
+         (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
+       (and (number? rows) (coll? cols))
+         (.viewSelection mat (int-array [rows]) (int-array cols))
+       (and (coll? rows) (coll? cols))
+         (.viewSelection mat (int-array rows) (int-array cols))
+       (and all-rows? all-cols?)
+         mat))))
 (defn bind-rows
 "   Returns the matrix resulting from concatenating the given matrices
     and/or sequences by their rows. Equivalent to R's rbind.
