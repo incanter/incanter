@@ -337,11 +337,11 @@
   ([mat & {:keys [rows cols except-rows except-cols filter-fn]}]
    (let [rows (cond
                 rows rows
-                except-rows (except-for (.rows mat) except-rows)
+                except-rows (except-for (nrow mat) except-rows)
                 :else true)
          cols (cond
                 cols cols
-                except-cols (except-for (.columns mat) except-cols)
+                except-cols (except-for (ncol mat) except-cols)
                 :else true)
          mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
          all-rows? (or (true? rows) (= rows :all))
@@ -350,21 +350,22 @@
        (and (number? rows) (number? cols))
          (clx/get mat rows cols)
        (and all-rows? (coll? cols))
-         (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
+         (clx/get mat (range (nrow mat)) cols)
        (and all-rows? (number? cols))
-         (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
+         (clx/get mat (range (nrow mat)) [cols])
        (and (coll? rows) (number? cols))
-         (.viewSelection mat (int-array rows) (int-array [cols]))
+         (clx/get mat rows [cols])
        (and (coll? rows) all-cols?)
-         (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
+         (clx/get mat rows (range (ncol mat)))
        (and (number? rows) all-cols?)
-         (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
+         (clx/get mat [rows] (range (ncol mat)))
        (and (number? rows) (coll? cols))
-         (.viewSelection mat (int-array [rows]) (int-array cols))
+         (clx/get mat [rows] cols)
        (and (coll? rows) (coll? cols))
-         (.viewSelection mat (int-array rows) (int-array cols))
+         (clx/get mat rows cols)
        (and all-rows? all-cols?)
          mat))))
+
 (defn bind-rows
 "   Returns the matrix resulting from concatenating the given matrices
     and/or sequences by their rows. Equivalent to R's rbind.
