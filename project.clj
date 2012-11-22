@@ -12,6 +12,7 @@
                  [incanter/incanter-pdf "1.4.0"]
                  [incanter/incanter-latex "1.4.0"]
                  [incanter/incanter-excel "1.4.0"]
+                 [incanter/incanter-interpolation "1.4.0"]
                  [swingrepl "1.3.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
@@ -20,7 +21,7 @@
   :plugins [[lein-ritz "0.5.0"]]
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
-             }  
+             }
   :repl-options {:init-ns incanter.main
                  :init (do
                          (set! *print-length* 500)
