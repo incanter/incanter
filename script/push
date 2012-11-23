@@ -2,6 +2,11 @@
 
 TWD=`pwd`
 
+LEIN=lein
+if [ -n "$LEINCMD" ] ; then
+    LEIN = $LEINCMD
+fi
+
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
 
@@ -12,13 +17,13 @@ for i in core io charts mongodb pdf latex excel zoo ; do
     if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
         OLDWD=`pwd`
         cd "incanter-$i"
-        lein deploy clojars
+        $LEIN deploy clojars
         cd "$OLDWD"
     fi
 done
 cd ..
 
-lein deploy clojars
+$LEIN deploy clojars
 
 cd "$TWD"
 
