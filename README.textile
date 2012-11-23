@@ -1,5 +1,7 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/incanter-banner.png" alt="Incanter" /></a>
 
+!https://secure.travis-ci.org/SnippyHolloW/incanter.png
+(Travis build status)!
 
 * <a href="#overview">Overview</a>
 * <a href="#clojure">Getting started with Clojure</a>
