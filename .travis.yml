@@ -1,4 +1,7 @@
 language: clojure
 lein: lein2
 install: LEINCMD=lein2 script/install
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 script: LEINCMD=lein2 script/test
