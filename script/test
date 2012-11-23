@@ -10,6 +10,8 @@ fi
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
 
+RESULTS=0
+
 cd modules
 for i in core io charts mongodb pdf latex excel zoo ; do
     if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
@@ -17,9 +19,14 @@ for i in core io charts mongodb pdf latex excel zoo ; do
         OLDWD=`pwd`
         cd "incanter-$i"
         $LEIN test
+        RES=$?
+        if [ $RES -ne 0 ] ; then
+            RESULTS=$RES
+        fi
         cd "$OLDWD"
     fi
 done
 
 cd "$TWD"
 
+exit $RESULTS

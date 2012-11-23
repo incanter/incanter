@@ -18,13 +18,19 @@ for i in core io charts mongodb pdf latex excel zoo ; do
         OLDWD=`pwd`
         cd "incanter-$i"
         $LEIN deploy clojars
+        RES=$?
+        if [ $RES -ne 0 ] ; then
+            cd "$TWD"
+            exit $RES
+        fi
         cd "$OLDWD"
     fi
 done
 cd ..
 
 $LEIN deploy clojars
-
+RES=$?
 cd "$TWD"
 
+exit $RES
 
