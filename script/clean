@@ -2,6 +2,10 @@
 
 TWD=`pwd`
 
+if [ -n "$LEINCMD" ] ; then
+    LEIN=$LEINCMD
+fi
+
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
 
@@ -9,11 +13,11 @@ for i in modules/* ; do
     if [ -d "$i" -a -f "$i/project.clj" ] ; then
         OLDWD=`pwd`
         cd "$i"
-        lein clean
+        $LEIN clean
         cd "$OLDWD"
     fi
 done
 
-lein clean
+$LEIN clean
 
 cd "$TWD"

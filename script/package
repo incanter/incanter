@@ -2,7 +2,7 @@
 
 LEIN=lein
 if [ -n "$LEINCMD" ] ; then
-    LEIN = $LEINCMD
+    LEIN=$LEINCMD
 fi
 
 [ -f incanter.jar ] && rm incanter.jar

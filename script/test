@@ -4,7 +4,7 @@ TWD=`pwd`
 
 LEIN=lein
 if [ -n "$LEINCMD" ] ; then
-    LEIN = $LEINCMD
+    LEIN=$LEINCMD
 fi
 
 TOP_DIR=`dirname $0`/..
