@@ -2,8 +2,15 @@
 
 TWD=`pwd`
 
+LEIN=lein
+if [ -n "$LEINCMD" ] ; then
+    LEIN=$LEINCMD
+fi
+
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
+
+RESULTS=0
 
 cd modules
 for i in core io charts mongodb pdf latex excel zoo ; do
@@ -11,10 +18,15 @@ for i in core io charts mongodb pdf latex excel zoo ; do
         echo "testing in incanter-$i"
         OLDWD=`pwd`
         cd "incanter-$i"
-        lein test
+        $LEIN test
+        RES=$?
+        if [ $RES -ne 0 ] ; then
+            RESULTS=$RES
+        fi
         cd "$OLDWD"
     fi
 done
 
 cd "$TWD"
 
+exit $RESULTS

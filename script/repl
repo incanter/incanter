@@ -1,3 +1,18 @@
 #!/bin/sh
 
-java -Xmx1G -cp "src:test:data:.:incanter.jar" jline.ConsoleRunner clojure.main -i script/run.clj -r
+TOP_DIR=`dirname $0`/..
+
+JAR_FOUND=0
+
+CP="$TOP_DIR/src:$TOP_DIR/test:$TOP_DIR/data:."
+for f in $TOP_DIR/target/incanter-*-standalone.jar; do
+    CP="$CP:$f"
+    JAR_FOUND=1
+done
+
+if [ $JAR_FOUND -eq 0 ] ; then
+    echo "run 'lein uberjar in the top-level Incanter directory first"
+    exit 1
+fi
+
+java -Xmx1G -cp "$CP" jline.ConsoleRunner clojure.main -i "$TOP_DIR/script/run.clj" -r

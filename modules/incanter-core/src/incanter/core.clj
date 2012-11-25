@@ -1021,29 +1021,37 @@
 (defn decomp-qr
 " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
+  Optional parameters:
+    :type -- one of :full, :compact.  default is :full
+      if :full, returns the full QR decomposition
+      if :compact, returns the compact (economy) QR decomposition
+
+  Returns:
+    a map containing:
+      :Q -- orthogonal factors
+      :R -- the upper triangular factors
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
   (decomp-qr foo)
-
-
-
-  Returns:
-    a map containing:
-      :Q -- orthogonal factor
-      :R -- the upper triangular factor
+  (decomp-qr foo :type :full)
+  (decomp-qr foo :type :compact)
 
   References:
     http://en.wikipedia.org/wiki/QR_decomposition
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
 "
-  ([mat]
-    (let [result (DenseDoubleQRDecomposition. mat)]
-      {:Q (Matrix. (.getQ result false))
-       :R (Matrix. (.getR result false))})))
-
+  ([mat & {:keys [type] :or {type :full}}]
+    (let [type (or type :full)
+          economy (case type
+                    :full false
+                    :compact true
+                    (throw (IllegalArgumentException. (str "Unknown type " type))))
+          result (DenseDoubleQRDecomposition. mat)]
+      {:Q (Matrix. (.getQ result economy))
+       :R (Matrix. (.getR result economy))})))
 
 (defn condition
 " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.
