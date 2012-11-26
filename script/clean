@@ -2,6 +2,7 @@
 
 TWD=`pwd`
 
+LEIN=lein
 if [ -n "$LEINCMD" ] ; then
     LEIN=$LEINCMD
 fi
