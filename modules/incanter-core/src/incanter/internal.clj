@@ -39,15 +39,11 @@
      (coll? (first data))
       (clx/matrix data)
      (number? (first data))
-      (Matrix. (map vector data))))
+      (clx/matrix (map vector data))))
   ([data ncol]
-    (cond
-      (instance? double_arr_type data)
-        (Matrix. ^"[D" data (int ncol))
-      (or (coll? data) (.isArray (class data)))
-        (Matrix. (double-array data) (int ncol))
-       (number? data)
-        (Matrix. (int data) (int ncol)))) ; data is the number of rows in this case
+   {:pre [(number? (first data))]}
+   (let [chunked  (partition ncol data)]
+     (make-matrix chunked)))
   ([init-val rows cols]
     (Matrix. (int rows) (int cols) ^Number init-val)))
 
