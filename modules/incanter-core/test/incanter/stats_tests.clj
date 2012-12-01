@@ -266,13 +266,13 @@
 
 (deftest cosine-sim
   (is 
-   (=  0.9242424242424241 ;;0.938572618717
+   (=  0.938572618717412
        (cosine-similarity  [2 4 3 1 6]
 			   [3 5 1 2 5]))))
 
 (deftest tanimoto-sim
   (is 
-   (=  0.8591549295774648
+   (=  0.8840579710144928
        (tanimoto-coefficient  [2 4 3 1 6]
 			      [3 5 1 2 5]))))
 
