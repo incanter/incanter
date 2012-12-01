@@ -45,7 +45,7 @@
    (let [chunked  (partition ncol data)]
      (make-matrix chunked)))
   ([init-val rows cols]
-    (Matrix. (int rows) (int cols) ^Number init-val)))
+    (clx/constant (int rows) (int cols) ^Number init-val)))
 
 
 (defmacro hint
