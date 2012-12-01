@@ -3159,7 +3159,7 @@ Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
  (map vector a b)))]
 (/ (:dot counts)
    (* (sqrt (:a counts))
-      (sqrt (:a counts))))))
+      (sqrt (:b counts))))))
 
 (defn tanimoto-coefficient
 "
@@ -3179,7 +3179,7 @@ The cosine similarity metric may be extended such that it yields the Jaccard coe
 (/ (:dot counts)
    (- 
     (+ (:a counts)
-       (:a counts))
+       (:b counts))
     (:dot counts)))))
 
 (defn jaccard-index 
