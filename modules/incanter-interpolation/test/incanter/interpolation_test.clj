@@ -2,10 +2,19 @@
   (:use clojure.test
         incanter.interpolation))
 
+(defn test-interpolation [xs ys]
+  (doseq [method [:linear]]
+    (testing (str "Test " (name method) " interpolation")
+      (let [interp-fn (interpolate xs ys method)]
+        (doseq [[x y] (map vector xs ys)]
+          (is (= (interp-fn x) y) (str "Test in " x " expecting " y)))))))
+
 (deftest interpolation
-  (let [xs (range 10)
-        ys (range 10 0 -1)
-        data (map vector xs ys)
-        interp-fn (interpolate xs ys)]
-    (doseq [[x y] data]
-      (is (= (interp-fn x) y) (str "Test in " x " expecting " y)))))
+  (test-interpolation (range 10)
+                      (range 10 0 -1)))
+
+(deftest interpolation-points
+  (test-interpolation (range 10)
+                      (map vector
+                           (range 10)
+                           (range 10 0 -1))))

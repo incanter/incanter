@@ -22,16 +22,18 @@
             (calc yl yr)))
         (out-of-range x points)))))
 
-(defn interpolate [xs ys]
-  (->> (map vector xs ys)
-       (sort-by first)
-       interpolate-linear))
+(defn interpolate [xs ys type]
+  (let [method (case type
+                 :linear interpolate-linear)]
+    (->> (map vector xs ys)
+         (sort-by first)
+         method)))
 
 
 
 #_(
 
-   ((interpolate [0 2 1] [[0 1] [2 3] [4 5]]) 1.5)
+   ((interpolate [0 2 1] [[0 1] [2 3] [4 5]] :linear) 1.5)
 
    (require '[incanter.core :as core])
    (require '[incanter.charts :as charts])
