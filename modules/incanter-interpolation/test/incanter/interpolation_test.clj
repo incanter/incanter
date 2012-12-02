@@ -3,11 +3,11 @@
         incanter.interpolation))
 
 (defn test-interpolation [xs ys]
-  (doseq [method [:linear]]
+  (doseq [method [:linear :lagrange]]
     (testing (str "Test " (name method) " interpolation")
       (let [interp-fn (interpolate xs ys method)]
         (doseq [[x y] (map vector xs ys)]
-          (is (= (interp-fn x) y) (str "Test in " x " expecting " y)))))))
+          (is (= (interp-fn x) y) (str "x = " x " expecting f(x) = " y)))))))
 
 (deftest interpolation
   (test-interpolation (range 10)
