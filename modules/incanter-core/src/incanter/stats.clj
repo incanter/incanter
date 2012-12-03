@@ -1097,7 +1097,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-binomial
-" Returns the Bionomial pdf of the given value of x. It will return a sequence
+" Returns the Binomial pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dbinom
 
   Options:
@@ -1124,7 +1124,7 @@
 
 
 (defn cdf-binomial
-" Returns the Bionomial cdf of the given value of x. It will return a sequence
+" Returns the Binomial cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pbinom
 
   Options:
@@ -1428,7 +1428,7 @@
     ;; the ecdf function returns an empirical cdf function for the given data
     (def ecdf (cdf-empirical exam1))
 
-    ;; plot the data's empircal cdf
+    ;; plot the data's empirical cdf
     (view (scatter-plot exam1 (map ecdf exam1)))
 
 
@@ -2396,7 +2396,7 @@ Test for different variances between 2 samples
   Options:
     :x -- a sequence of numbers.
     :y -- a sequence of numbers
-    :table -- a contigency table. If one dimensional, the test is a goodness-of-fit
+    :table -- a contingency table. If one dimensional, the test is a goodness-of-fit
     :probs (when (nil? y) -- (repeat n-levels (/ n-levels)))
     :freq (default nil) -- if given, these are rescaled to probabilities
     :correct (default true) -- use Yates' correction for continuity for 2x2 contingency tables
@@ -2433,10 +2433,10 @@ Test for different variances between 2 samples
     (chisq-test :x (sel detab :cols 0) :y (sel detab :cols 1))
 
     ;; look at the hair-eye-color data
-    ;; turn the count data for males into a contigency table
+    ;; turn the count data for males into a contingency table
     (def male (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16)) 4))
     (chisq-test :table male) ;; X-sq = 41.280, df = 9, p-value = 4.44E-6
-    ;; turn the count data for females into a contigency table
+    ;; turn the count data for females into a contingency table
     (def female (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16 32)) 4))
     (chisq-test :table female) ;; X-sq = 106.664, df = 9, p-value = 7.014E-19,
 
@@ -2647,7 +2647,7 @@ Test for different variances between 2 samples
 
   Returns:
     A map with the following fields:
-    :std-dev -- the standard deviations of the principal compoenents
+    :std-dev -- the standard deviations of the principal components
         (i.e. the square roots of the eigenvalues of the correlation
         matrix, though the calculation is actually done with the
         singular values of the data matrix.
@@ -2932,7 +2932,7 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
 (defn- kv-compare [[k1 v1] [k2 v2]] (key-compare k2 k1))
 
 ;;TDOO: doesn't seem to work? test and beat on it.
-;;use clojrue sorting: sort-by, sorted-map-by, etc. 
+;;use clojure sorting: sort-by, sorted-map-by, etc. 
 (defn- sort-map [m] (into {} (sort kv-compare m)))
 
 
@@ -2962,7 +2962,7 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
      (* n (dec n)))))
 
 (defn pairs 
-"returns unique pairs of a and b where members of a and b can not be paired with the correspoding slot in the other list."
+"returns unique pairs of a and b where members of a and b can not be paired with the corresponding slot in the other list."
 [a b]
 ((fn combine [combos ra rb]
     (let [heada (first ra)
@@ -3059,7 +3059,7 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
  (- (variance (apply map + vs))
     (apply + (map variance vs))))
 
-;;TODO: don't impliment until fully understanding whether thse are just f-divergences.
+;;TODO: don't implement until fully understanding whether these are just f-divergences.
 (defn product-marginal-test 
 "the joint PMF of independent variables is equal to the product of their marginal PMFs."
 [j]
@@ -3123,7 +3123,7 @@ usual metric of Euclidean geometry is replaced by a new metric in which the dist
 (minkowski-distance a b 1))
 
 
-;;TODO: factor out duplicaiton between cosine similarity and tanimoto.
+;;TODO: factor out duplication between cosine similarity and tanimoto.
 ;;perhaps switch to matrix representation?
 
 (defn cosine-similarity
@@ -3219,7 +3219,7 @@ Dice's coefficient (also known as the Dice coefficient) is a similarity measure 
 (defn n-grams
 "returns a set of the unique n-grams in a string.
 
-this is using actual sets here, discards dupicate n-grams?
+this is using actual sets here, discards duplicate n-grams?
 "
  [n s] 
 (into 

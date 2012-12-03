@@ -19,7 +19,7 @@
  
 ;; the newton-raphson algorithm fails to converge to the correct solution 
 ;; using first set of start values from NIST, but the default gauss-newton 
-;; algorith converges to the correct solution.
+;; algorithm converges to the correct solution.
 
 (def start1 [0.1 0.01 0.02])
 (add-lines plot x (f start1 x))

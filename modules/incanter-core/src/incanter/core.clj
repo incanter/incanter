@@ -509,7 +509,7 @@
 
 (defn log
   "Returns the natural log of the elements in the given matrix, sequence or number.
-   Equvalent to R's log function."
+   Equivalent to R's log function."
    ([A] (transform-with A #(Math/log %) log)))
 
 
@@ -858,7 +858,7 @@
   (use '(incanter core stats charts datasets))
   ;; load the iris dataset
   (def iris (to-matrix (get-dataset :iris)))
-  ;; take the Cholesky decompostion of the correlation matrix of the iris data.
+  ;; take the Cholesky decomposition of the correlation matrix of the iris data.
   (decomp-cholesky (correlation iris))
 
 
@@ -1654,7 +1654,7 @@ altering later ones."
 "Returns a dataset that uses the given summary function (or function identifier keyword)
  to rollup the given column based on a set of group-by columns. The summary function
  should accept a single sequence of values and return a single summary value. Alternatively,
- you can provide a keyword identifer of a set of built-in functions including:
+ you can provide a keyword identifier of a set of built-in functions including:
 
    :max -- the maximum value of the data in each group
    :min -- the minimum value of the data in each group
@@ -1694,7 +1694,7 @@ altering later ones."
     (with-data ($rollup :mean :Sepal.Length :Species iris)
       (view (bar-chart :Species :Sepal.Length)))
 
-     ;; the following exaples use the built-in data set called hair-eye-color.
+     ;; the following examples use the built-in data set called hair-eye-color.
 
      (with-data ($rollup :mean :count [:hair :eye] hair-eye-color)
        (view (bar-chart :hair :count :group-by :eye :legend true)))
