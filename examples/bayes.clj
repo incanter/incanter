@@ -24,7 +24,7 @@
 
 (defn bayes-regression-noref [N x y]
 "
-  This function implments the Gibbs sampling example using full conditional in OLS
+  This function implements the Gibbs sampling example using full conditional in OLS
   from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the Social
   Sciences (page 171). This version is purely functional with no immutability.
 "
@@ -49,7 +49,7 @@
 
 (defn bayes-regression-full [N x y]
 "
-  This function implments the Gibbs sampling example using full conditional in OLS
+  This function implements the Gibbs sampling example using full conditional in OLS
   from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the Social
   Sciences (page 171). This version uses immutability (i.e. references)
 "
@@ -76,7 +76,7 @@
 
 (defn bayes-regression [N x y]
 "
-  This function implments the Gibbs sampling example using the composition method
+  This function implements the Gibbs sampling example using the composition method
   in OLS from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the 
   Social Sciences (page 173)
 "
@@ -104,7 +104,7 @@
 
 (defn bayes-regression-mh [N x y]
 "
-  This function implments the Gibbs sampling example using Metropolis Hastings
+  This function implements the Gibbs sampling example using Metropolis Hastings
   in OLS from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the 
   Social Sciences (page 168)
 "

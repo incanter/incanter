@@ -794,7 +794,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn set-alpha
-" Sets the alpha level (transparancy) of the plot's foreground
+" Sets the alpha level (transparency) of the plot's foreground
   returns the modified chart object.
 
   References:
@@ -808,7 +808,7 @@
 
 
 (defn set-background-alpha
-" Sets the alpha level (transparancy) of the plot's background
+" Sets the alpha level (transparency) of the plot's background
   returns the modified chart object.
 
   References:
@@ -822,7 +822,7 @@
 
 
 (defn clear-background
-" Sets the alpha level (transparancy) of the plot's background to zero
+" Sets the alpha level (transparency) of the plot's background to zero
   removing the default grid, returns the modified chart object.
 
   References:
@@ -1119,7 +1119,7 @@
     :high Key for accessing high value data (defaults to :high)
     :low Key for accessing low value data (defaults to :low)
     :open Key for accessing open value data (defaults to :open)
-    :close Key for accesing close value data (defaults to :close)
+    :close Key for accessing close value data (defaults to :close)
     :volume Key for accessing volume data (defaults to :volume). Volume data is optional
     :title (default 'Candle Chart Plot') main title
     :time-label (default empty)
@@ -1165,7 +1165,7 @@
 " Returns a JFreeChart object representing a time series plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file. Sequence passed in for the x axis should be
-  number of milliseconds from the epoch (1 Janurary 1970).
+  number of milliseconds from the epoch (1 January 1970).
 
   Options:
     :data (default nil) If the :data option is provided a dataset,

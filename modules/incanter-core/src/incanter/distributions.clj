@@ -1,4 +1,4 @@
-;;; distributions.clj -- A common distribution protocol with several implmentations.
+;;; distributions.clj -- A common distribution protocol with several implementations.
 
 ;; by Mark Fredrickson http://www.markmfredrickson.com
 ;; May 10, 2010
@@ -790,5 +790,5 @@
 
   Example:
     (pdf (uniform-distribution 1.0 10.0) 5)"
-  ([] (uniform-distribution 0.0 1.0)) ; since "0 1" not implicitly promoted, otheriwse no matching ctor...
+  ([] (uniform-distribution 0.0 1.0)) ; since "0 1" not implicitly promoted, otherwise no matching ctor...
   ([min max] (DoubleUniform-rec. min max)))
