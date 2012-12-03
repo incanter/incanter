@@ -204,7 +204,7 @@
   (is (= #{"gh" "ht" "ni" "ig"}
 	 (bigrams "night"))))
 
-;;TODO: think about a hamming distance that measure how far someting is off for k-way classification rathern than jsut binary classification.
+;;TODO: think about a hamming distance that measure how far something is off for k-way classification rather than just binary classification.
 (deftest hamming-ints-and-strings
  (is (= 2
 	(hamming-distance 1011101 1001001)))

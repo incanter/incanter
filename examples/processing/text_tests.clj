@@ -29,7 +29,7 @@
 
 
 (use '(incanter core processing))
-;; use list-fonts to see the fonts availabe on the current system
+;; use list-fonts to see the fonts available on the current system
 ;; (list-fonts)
 
 (view
