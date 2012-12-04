@@ -358,14 +358,14 @@
   (is (= (div [1 2 3] (matrix [1 2 3]) (matrix [1 1 1])))))
 
 (deftest matrix-mapreduce-tests
-  ;; getting column sums
-  (is (= (map #(reduce + %) (trans A)) [22.0 26.0 30.0]))
-  (is (= (reduce plus A) (matrix [22 26 30] 3)))
-
   ;; getting row sums
   (is (= (reduce + (first A)) 6.0))
   (is (= (map #(reduce + %) A) [6.0 15.0 24.0 33.0]))
   (is (= (reduce plus (trans A)) (matrix [6 15 24  33] 4)))
+
+  ;; getting column sums
+  (is (= (reduce plus A) (matrix [22 26 30] 3)))
+  (is (= (map #(reduce + %) (trans A)) [22.0 26.0 30.0]))
 
   ;; getting column products
   (is (= (reduce mult A) (matrix [280 880 1944] 3)))
