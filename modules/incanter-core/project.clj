@@ -1,4 +1,4 @@
-(defproject incanter/incanter-core "1.4.0"
+(defproject incanter/incanter-core "1.5.0-SNAPSHOT"
   :description "Incanter-core is the core module of the Incanter project."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
@@ -9,5 +9,5 @@
                  [org.clojure/math.combinatorics "0.0.3"
                   :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.0"]
-                 [com.quantisan/clatrix "0.1.1-SNAPSHOT"]]
+                 [com.quantisan/clatrix "0.2.0-SNAPSHOT"]]
   :java-source-paths ["java"])
