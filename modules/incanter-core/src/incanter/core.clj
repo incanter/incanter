@@ -187,11 +187,9 @@
 
 "
   ([mat]
-   (cond
-    (matrix? mat)
-      (.viewDice ^Matrix mat)
-    (coll? mat)
-      (.viewDice ^Matrix (matrix ^double-array mat)))))
+   (if (matrix? mat)
+     (clx/t mat)
+     (clx/t (matrix mat)))))
 
 
 
