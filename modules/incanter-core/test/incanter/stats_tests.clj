@@ -204,7 +204,7 @@
   (is (= #{"gh" "ht" "ni" "ig"}
 	 (bigrams "night"))))
 
-;;TODO: think about a hamming distance that measure how far someting is off for k-way classification rathern than jsut binary classification.
+;;TODO: think about a hamming distance that measure how far something is off for k-way classification rather than just binary classification.
 (deftest hamming-ints-and-strings
  (is (= 2
 	(hamming-distance 1011101 1001001)))
@@ -266,13 +266,13 @@
 
 (deftest cosine-sim
   (is 
-   (=  0.9242424242424241 ;;0.938572618717
+   (=  0.938572618717412
        (cosine-similarity  [2 4 3 1 6]
 			   [3 5 1 2 5]))))
 
 (deftest tanimoto-sim
   (is 
-   (=  0.8591549295774648
+   (=  0.8840579710144928
        (tanimoto-coefficient  [2 4 3 1 6]
 			      [3 5 1 2 5]))))
 

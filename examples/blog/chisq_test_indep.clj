@@ -37,7 +37,7 @@
                  :x-label "Hair Color"        
                  :y-label "Number of females"))
 
-;; make contigency tables
+;; make contingency tables
 (def m-table (matrix m-count 4))
 (def f-table (matrix f-count 4))
 

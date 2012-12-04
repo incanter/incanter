@@ -62,7 +62,7 @@
     (map median (trans (:coefs param-samp)))
     (map sd (trans (:coefs param-samp)))
 
-    ;; show the 95% bayesian confidence interval for the firt coefficient
+    ;; show the 95% bayesian confidence interval for the first coefficient
     (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 
 "
