@@ -29,7 +29,7 @@
   incanter.charts
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
                               bind-columns view save $group-by conj-cols
-                              grid-apply set-data col-names)]
+                              grid-apply set-data col-names $data)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean sd)]
         [clj-time.coerce :only (to-date)])
   (:import  (java.io File)
@@ -325,7 +325,7 @@
 (defn add-histogram*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           data-plot (.getPlot chart)
           n (.getDatasetCount data-plot)
@@ -383,7 +383,7 @@
 (defn add-box-plot*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           data-plot (.getCategoryPlot chart)
           n-col (.getColumnCount (.getDataset data-plot))
@@ -439,7 +439,7 @@
 (defn add-categories*
   ([chart categories values & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
           _group-by (when (:group-by opts)
@@ -525,7 +525,7 @@
 (defmethod add-lines* org.jfree.data.xy.XYSeriesCollection
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
+           data (or (:data opts) $data)
            _x (data-as-list x data)
            _y (data-as-list y data)
            data-plot (.getPlot chart)
@@ -555,7 +555,7 @@
 (defmethod add-lines* org.jfree.data.statistics.HistogramDataset
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
+           data (or (:data opts) $data)
            _x (data-as-list x data)
            _y (data-as-list y data)
            data-plot (.getPlot chart)
@@ -709,7 +709,7 @@
 (defn add-points*
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
+           data (or (:data opts) $data)
            _x (data-as-list x data)
            _y (data-as-list y data)
            data-plot (.getPlot chart)
@@ -949,7 +949,7 @@
 (defn- create-xy-series-plot
   ([x y create-plot & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           _y (data-as-list y data)
           _group-by (when (:group-by opts)
@@ -1220,7 +1220,7 @@
 (defn scatter-plot*
   ([x y & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)          
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           _y (data-as-list y data)
           _group-by (when (:group-by opts)                      
@@ -1357,7 +1357,7 @@
 (defn histogram*
   ([x & options]
     (let [opts (if options (apply assoc {} options) {})
-          data (:data opts)
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           nbins (or (:nbins opts) 10)
           theme (or (:theme opts) :default)
@@ -1454,7 +1454,7 @@
 (defn line-chart*
   ([categories values & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
           title (or (:title opts) "")
@@ -1593,7 +1593,7 @@
 (defn bar-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)          
+           data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
            title (or (:title opts) "")
@@ -1733,7 +1733,7 @@
 (defn area-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
+           data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
            title (or (:title opts) "")
@@ -1871,7 +1871,7 @@
 (defn stacked-area-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
+           data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
            title (or (:title opts) "")
@@ -2000,7 +2000,7 @@
 (defn stacked-bar-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)
+           data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
            title (or (:title opts) "")
@@ -2138,7 +2138,7 @@
 (defn pie-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
-           data (:data opts)           
+           data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
            title (or (:title opts) "")
@@ -2213,7 +2213,7 @@
 (defn box-plot*
   ([x & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
@@ -2744,7 +2744,7 @@
 "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
-          data (:data opts)
+          data (or (:data opts) $data)
           _x (data-as-list x data)
           title (or (:title opts) "Trace Plot")
           x-label (or (:x-label opts) "Iteration")
@@ -2791,7 +2791,7 @@
 "
   ([x & options]
    (let [opts (when options (apply assoc {} options))
-         data (:data opts)
+         data (or (:data opts) $data)
          _x (data-as-list x data)
          n (count _x)
          quants (for [k (range 1 n)] (/ k (inc n)))
@@ -2831,7 +2831,7 @@
 "
   ([x1 x2 & options]
       (let [opts (when options (apply assoc {} options))
-            data (:data opts)
+            data (or (:data opts) $data)
             _x1 (data-as-list x1 data)
             _x2 (data-as-list x2 data)
             plot (scatter-plot (div (plus _x1 _x2) 2) (minus _x1 _x2)
