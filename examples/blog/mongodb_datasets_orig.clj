@@ -91,7 +91,7 @@
 	                          (conj-rows ($where {:speed {:$gt 20}}))))))
 
 ;; Note: congomongo doesn't seem to work with 'lein swank', 
-;; it thows a clojure.contrib.json error. It does work with 'lein repl'.
+;; it throws a clojure.contrib.json error. It does work with 'lein repl'.
 
 ;; Now read a data set from the Web.
 (def data (read-dataset "http://github.com/liebke/incanter/raw/master/data/airline_passengers.csv"
@@ -99,7 +99,7 @@
 (view data)
 
 
-;; Here's a quik start guide: http://www.mongodb.org/display/DOCS/Quickstart
+;; Here's a quick start guide: http://www.mongodb.org/display/DOCS/Quickstart
 ;; Briefly, download and unpack MongoDB
 ;; run the following commands:
 ;; $ mkdir -p /data/db
@@ -162,7 +162,7 @@
 ;; or use the $ column selector function
 (view ($ [:NAME :POPESTIMATE200] new-census))
 
-;; select the region names and populatione estimates for 2009 from the dataset
+;; select the region names and population estimates for 2009 from the dataset
 (def region-names (sel new-census :cols :NAME))
 (def popest-2009 (sel new-census :cols :POPESTIMATE2009))
 

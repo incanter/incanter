@@ -1,6 +1,6 @@
 (ns 
   ^{
-    :doc "Excel module for reading and writing Incanter datasets.  Recognises both old and new
+    :doc "Excel module for reading and writing Incanter datasets.  Recognizes both old and new
 Excel file formats (.xls and .xlsx)."
     :author "David James Humphreys"}
   incanter.excel

@@ -1,4 +1,4 @@
-(defproject incanter/incanter-excel "1.4.0"
+(defproject incanter/incanter-excel "1.4.1"
   :description "Incanter-excel provides access to reading and writing Excel files."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"

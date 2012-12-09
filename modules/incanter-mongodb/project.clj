@@ -1,4 +1,4 @@
-(defproject incanter/incanter-mongodb "1.4.0"
+(defproject incanter/incanter-mongodb "1.4.1"
   :description "Incanter-mongodb is the MongoDB module of the Incanter project."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"

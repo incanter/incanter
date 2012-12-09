@@ -110,12 +110,12 @@
           (.assign ~mA~mB ~df))
       (and (coll? ~A) (number? ~B) (coll? (first ~A)))
         (let [~mA (make-matrix ~A)
-              ~mB (make-matrix ~B)]
+              ~mB (make-matrix ~B (count ~A) (count (first ~A)))]
           (.assign ~mA ~mB ~df))
       (and (number? ~A) (coll? ~B) (coll? (first ~B)))
-        (let [~mA (make-matrix ~A (.rows ~B) (.columns ~B))
+        (let [~mA (make-matrix ~A (count ~B) (count (first ~B)))
               ~mB (make-matrix ~B)]
-          (.assign ~mA ~mB ~df))        
+          (.assign ~mA ~mB ~df))
       (and (coll? ~A) (coll? ~B))
         (map ~op ~A ~B)
       (and (number? ~A) (coll? ~B))
