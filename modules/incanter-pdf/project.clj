@@ -1,4 +1,4 @@
-(defproject incanter/incanter-pdf "1.4.0"
+(defproject incanter/incanter-pdf "1.4.1"
   :description "Incanter-pdf is the PDF module of the Incanter project."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"

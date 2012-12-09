@@ -1,4 +1,4 @@
-(defproject incanter/incanter-latex "1.4.0"
+(defproject incanter/incanter-latex "1.4.1"
   :description "Library for rendering LaTeX math equations using the jLateXMath library."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"

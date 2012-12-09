@@ -1,4 +1,4 @@
-(defproject incanter/incanter-charts "1.4.0"
+(defproject incanter/incanter-charts "1.4.1"
   :description "Incanter-charts is the JFreeChart module of the Incanter project."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
