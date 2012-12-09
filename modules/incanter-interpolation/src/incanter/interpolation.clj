@@ -20,7 +20,7 @@
                 (mult coef yr)))
         (out-of-range x points)))))
 
-(defn interpolate-lagrange [points]
+(defn interpolate-polynomial [points]
   (let [xs (map first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]
@@ -44,14 +44,12 @@
   (when-not (apply distinct? xs)
     (throw (IllegalArgumentException. "All x must be distinct."))))
 
-(defn interpolate [xs ys type]
+(defn interpolate [points type]
   (let [method (case type
                  :linear interpolate-linear
-                 :lagrange interpolate-lagrange)]
-    (validate-unique xs)
-    (->> (map vector xs ys)
-         (sort-by first)
-         method)))
+                 :polynomial interpolate-polynomial)]
+    (validate-unique (map first points))
+    (method (sort-by first points))))
 
 
 
@@ -61,20 +59,21 @@
 
    ((interpolate [1 2] [3 4] :lagrange) 1.5)
 
-   
 
    (do
      (require '[incanter.core :as core])
      (require '[incanter.charts :as charts])
-     (let [n 20
-          xs (take n (distinct (repeatedly #(rand-int (* n 2)))))
-          ys (repeatedly n #(rand-int (* n 2)))
-          min-x (apply min xs)
-          max-x (apply max xs)
-          f (interpolate xs ys :lagrange)]
-      (doto (charts/function-plot f min-x max-x)
-        (charts/add-points xs ys)
-        (core/view))))
+     (let [n 10
+           xs (take n (distinct (repeatedly #(rand-int (* n 2)))))
+           ys (repeatedly n #(rand-int (* n 2)))
+           points (map vector xs ys)
+           min-x (apply min xs)
+           max-x (apply max xs)
+           f (interpolate points :polynomial)]
+       (doto (charts/function-plot f min-x max-x)
+         (charts/add-points xs ys)
+         (core/view))))
+
 
 
    )
