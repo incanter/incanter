@@ -1,5 +1,6 @@
 (ns incanter.interpolation
-  (:use [incanter.core :only (plus minus mult div)]))
+  (:use [incanter.core :only (plus minus mult div)]
+        [incanter.cubic-splines :rename {interpolate interpolate-cubic}]))
 
 (defn out-of-range [x points]
   (throw (IllegalArgumentException.
@@ -47,7 +48,8 @@
 (defn interpolate [points type]
   (let [method (case type
                  :linear interpolate-linear
-                 :polynomial interpolate-polynomial)]
+                 :polynomial interpolate-polynomial
+                 :cubic-spline interpolate-cubic)]
     (validate-unique (map first points))
     (method (sort-by first points))))
 
@@ -63,16 +65,17 @@
    (do
      (require '[incanter.core :as core])
      (require '[incanter.charts :as charts])
-     (let [n 10
+     (let [n 20
            xs (take n (distinct (repeatedly #(rand-int (* n 2)))))
            ys (repeatedly n #(rand-int (* n 2)))
            points (map vector xs ys)
            min-x (apply min xs)
            max-x (apply max xs)
-           f (interpolate points :polynomial)]
+           f (interpolate points :cubic-spline)]
        (doto (charts/function-plot f min-x max-x)
          (charts/add-points xs ys)
          (core/view))))
+   
 
 
 
