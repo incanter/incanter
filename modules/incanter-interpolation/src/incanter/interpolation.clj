@@ -1,6 +1,6 @@
 (ns incanter.interpolation
   (:use [incanter.core :only (plus minus mult div)]
-        [incanter.cubic-splines :rename {interpolate interpolate-cubic}]))
+        [incanter.cubic-spline :rename {interpolate interpolate-cubic}]))
 
 (defn out-of-range [x points]
   (throw (IllegalArgumentException.

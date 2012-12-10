@@ -1,4 +1,4 @@
-(ns incanter.cubic-splines
+(ns incanter.cubic-spline
   (:use [incanter.core :only (plus minus div mult)]))
 
 
