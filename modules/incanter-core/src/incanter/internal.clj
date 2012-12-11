@@ -70,6 +70,11 @@
       (number? ~A)
         (~op ~A)))))
 
+(defn each-to-matrix [coll]
+  (map #(if (and (not (matrix? %)) (coll? %))
+          (matrix %)
+          %)
+       coll))
 
 (defmacro combine-with [A B op fun]
   (let [mA (with-meta (gensym "A") {:tag "Matrix"})

@@ -455,10 +455,7 @@
 
 
 "
-  ([& args] (apply clx/+ (map #(if (and (not (matrix? %)) (coll? %))
-                                 (matrix %)
-                                 %)
-                              args))))
+  ([& args] (apply clx/+ (each-to-matrix args))))
 
 
 (defn minus
