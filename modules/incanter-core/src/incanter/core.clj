@@ -60,6 +60,7 @@
 
 (defrecord Dataset [column-names rows])
 (derive incanter.core.Dataset ::dataset)
+(derive clatrix.core.Matrix ::matrix)
 
 (defn matrix
 "
@@ -663,15 +664,9 @@
     and a flat list if the matrix is one-dimensional."
   type)
 
-(defmethod to-list Matrix
- ([^Matrix mat]
-  (cond
-    (= (.columns mat) 1)
-      (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
-    (= (.rows mat) 1)
-      (first (map #(seq %) (seq (.toArray mat))))
-    :else
-      (map #(seq %) (seq (.toArray mat))))))
+(defmethod to-list ::matrix
+ ([^clatrix.core.Matrix mat]
+  (clx/as-vec mat)))
 
 
 (defmethod to-list ::dataset
