@@ -455,7 +455,10 @@
 
 
 "
-   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/+ plus)) args)))
+  ([& args] (apply clx/+ (map #(if (and (not (matrix? %)) (coll? %))
+                                 (matrix %)
+                                 %)
+                              args))))
 
 
 (defn minus
