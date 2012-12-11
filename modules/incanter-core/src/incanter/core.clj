@@ -479,9 +479,7 @@
       (minus [1 2 3])
 
 "
-   ([& args] (if (= (count args) 1)
-               (combine-with (Integer. 0) (first args) clojure.core/- minus)
-               (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args))))
+   ([& args] (apply clx/- (each-to-matrix args))))
 
 
 
