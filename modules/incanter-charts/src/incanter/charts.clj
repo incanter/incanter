@@ -531,7 +531,7 @@
            data-plot (.getPlot chart)
            n (.getDatasetCount data-plot)
            series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
-           data-series (XYSeries. series-lab)
+           data-series (XYSeries. series-lab (:auto-sort opts true))
            points? (true? (:points opts))
            line-renderer (XYLineAndShapeRenderer. true points?)
            ;; data-set (.getDataset data-plot)
@@ -588,6 +588,8 @@
   Options:
     :series-label (default x expression)
     :points (default false)
+    :auto-sort (default true) sort data by x
+
 
   Examples:
 
@@ -702,6 +704,54 @@
                                                    [:series-label series-lab#]))))]
         (apply add-function* args#))))
 
+
+
+
+
+(defn add-parametric*
+  ([chart function min-range max-range & options]
+    (let [opts (when options (apply assoc {} options))
+          step-size (or (:step-size opts)
+                        (float (/ (- max-range min-range) 500)))
+          t (range min-range max-range step-size)
+          [x y] (apply map vector (map function t))
+          series-lab (or (:series-label opts)
+                         (format "%s" 'function))]
+       (add-lines chart x y :series-label series-lab :auto-sort false))))
+
+
+
+
+(defmacro add-parametric
+" Adds a xy-plot of the given parametric function to the given chart, returning
+  a modified version of the chart.
+  Function takes 1 argument t and returns point [x y].
+
+  Options:
+    :series-label (default function expression)
+    :step-size (default (/ (- max-range min-range) 500))
+
+  See also:
+    parametric-plot, view, save, add-function, add-points, add-lines
+
+
+  Examples:
+
+    (use '(incanter core charts))
+
+    ;;; Plot square with circle inside.
+    (defn circle [t] [(cos t) (sin t)])
+    (doto (xy-plot [1 -1 -1 1 1] [1 1 -1 -1 1] :auto-sort false)
+          (add-parametric circle 0 (* 2 Math/PI))
+          (view))
+"
+  ([chart function min-range max-range & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           series-lab# (or (:series-label opts#) (str '~function))
+           args# (concat [~chart ~function ~min-range ~max-range]
+                         (apply concat (seq (apply assoc opts#
+                                                   [:series-label series-lab#]))))]
+        (apply add-parametric* args#))))
 
 
 
@@ -972,7 +1022,7 @@
           theme (or (:theme opts) :default)
           legend? (true? (:legend opts))
           points? (true? (:points opts))
-          data-series (XYSeries. series-lab)
+          data-series (XYSeries. series-lab (:auto-sort opts true))
           dataset (XYSeriesCollection.)
           chart (do
                   (dorun
@@ -1019,6 +1069,7 @@
     :series-label (default x expression)
     :group-by (default nil) -- a vector of values used to group the x and y values into series.
     :points (default false) includes point-markers
+    :auto-sort (default true) sort data by x
 
   See also:
     view, save, add-points, add-lines
@@ -2381,6 +2432,73 @@
 
 
 
+
+(defn parametric-plot*
+  ([function min-range max-range & options]
+   (let [opts (when options (apply assoc {} options))
+         step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
+         _t (range min-range max-range step-size)
+         [_x _y] (apply map vector (map function _t))
+         title (or (:title opts) "")
+         x-lab (or (:x-label opts) (format "%s < x < %s" (apply min _x) (apply max _x)))
+         y-lab (or (:y-label opts) (format "%s < y < %s" (apply min _y) (apply max _y)))
+         series-lab (or (:series-label opts) (format "%s" 'function))
+         theme (or (:theme opts) :default)
+         legend? (true? (:legend opts))]
+      (set-theme (xy-plot _x _y
+                          :x-label x-lab
+                          :y-label y-lab
+                          :title title
+                          :series-label series-lab
+                          :legend legend?
+                          :auto-sort false) theme))))
+
+
+
+
+(defmacro parametric-plot
+" Returns a xy-plot object of the given parametric function over the range indicated
+  by the min-range and max-range arguments. Use the 'view' function to
+  display the chart, or the 'save' function to write it to a file.
+  Function must take 1 argument - parameter t and return point [x y].
+
+  Options:
+    :title (default '') main title
+    :x-label (default 'min-x < x < max-x')
+    :y-label (default 'min-y < y < max-y')
+    :legend (default false) prints legend
+    :series-label (default function expression)
+    :step-size (default (/ (- max-range min-range) 500))
+
+  See also:
+    view, save, add-parametric, function-plot
+
+
+  Examples:
+
+    (use '(incanter core charts))
+
+    (defn circle [t] [(cos t) (sin t)])
+    (view (parametric-plot circle (- Math/PI) Math/PI))
+
+    (defn spiral [t] [(* t (cos t)) (* t (sin t))])
+    (view (parametric-plot spiral 0 (* 6 Math/PI)))
+"
+  ([function min-range max-range & options]
+    `(let [opts# ~(when options (apply assoc {} options))
+           group-by# (:group-by opts#)
+           title# (or (:title opts#) "")
+           series-lab# (or (:series-label opts#) (format "%s" '~function))
+           args# (concat [~function ~min-range ~max-range]
+                         (apply concat (seq (apply assoc opts#
+                                                   [:group-by group-by#
+                                                    :title title#
+                                                    :series-label series-lab#]))))]
+       (apply parametric-plot* args#))))
+
+
+
+
 (defn heat-map*
   ([function x-min x-max y-min y-max & options]
      (let [opts (when options (apply assoc {} options))
@@ -3451,3 +3569,4 @@
   ([chart title]
      (.addSubtitle chart title)
      chart))
+
