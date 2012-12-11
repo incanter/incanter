@@ -389,14 +389,13 @@
           B
         (nil? (seq B))
           A
-        (and (matrix? A) (matrix? B))
-          (conj A B)
-        (and (matrix? A) (coll? B))
-          (conj A B)
-        (and (coll? A) (matrix? B))
-          (conj (matrix A (count A)) B)
-        (and (coll? A) (coll? B))
-          (conj (matrix A (count A)) (matrix B (count B)))
+        (or (coll? A) (coll? B))
+          (conj (if (matrix? A)
+                  A
+                  (matrix A (count A)))
+                (if (matrix? B)
+                  B
+                  (matrix B (count B))))
         :else
           (throw (Exception. "Incompatible types"))))
       args)))
