@@ -71,8 +71,8 @@
         (~op ~A)))))
 
 (defn each-to-matrix [coll]
-  (map #(if (and (not (matrix? %)) (coll? %))
-          (matrix %)
+  (map #(if (and (not (is-matrix %)) (coll? %))
+          (make-matrix %)
           %)
        coll))
 

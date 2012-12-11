@@ -438,70 +438,67 @@
 
 
 (defn plus
-"   Performs element-by-element addition on multiple matrices, sequences
-    and/or numbers. Equivalent to R's + operator.
+  "
+  Performs element-by-element addition on multiple matrices, sequences
+  and/or numbers. Equivalent to R's + operator.
 
-    Examples:
+  Examples:
 
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (plus A A A)
-      (plus A 2)
-      (plus 2 A)
-      (plus [1 2 3] [1 2 3])
-      (plus [1 2 3] 2)
-      (plus 2 [1 2 3])
-
-
-"
-  ([& args] (apply clx/+ (each-to-matrix args))))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (plus A A A)
+  (plus A 2)
+  (plus 2 A)
+  (plus [1 2 3] [1 2 3])
+  (plus [1 2 3] 2)
+  (plus 2 [1 2 3])
+  "
+  [& args] (apply clx/+ (each-to-matrix args)))
 
 
 (defn minus
-"   Performs element-by-element subtraction on multiple matrices, sequences
-    and/or numbers. If only a single argument is provided, returns the
-    negative of the given matrix, sequence, or number. Equivalent to R's - operator.
+  "
+  Performs element-by-element subtraction on multiple matrices, sequences
+  and/or numbers. If only a single argument is provided, returns the
+  negative of the given matrix, sequence, or number. Equivalent to R's - operator.
 
+  Examples:
 
-    Examples:
-
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (minus A)
-      (minus A A A)
-      (minus A 2)
-      (minus 2 A)
-      (minus [1 2 3] [1 2 3])
-      (minus [1 2 3] 2)
-      (minus 2 [1 2 3])
-      (minus [1 2 3])
-
-"
-   ([& args] (apply clx/- (each-to-matrix args))))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (minus A)
+  (minus A A A)
+  (minus A 2)
+  (minus 2 A)
+  (minus [1 2 3] [1 2 3])
+  (minus [1 2 3] 2)
+  (minus 2 [1 2 3])
+  (minus [1 2 3])
+  "
+  [& args] (apply clx/- (each-to-matrix args)))
 
 
 
 (defn mult
-"   Performs element-by-element multiplication on multiple matrices, sequences
-    and/or numbers. Equivalent to R's * operator.
+  "
+  Performs element-by-element multiplication on multiple matrices, sequences
+  and/or numbers. Equivalent to R's * operator.
 
-    Examples:
+  Examples:
 
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (mult A A A)
-      (mult A 2)
-      (mult 2 A)
-      (mult [1 2 3] [1 2 3])
-      (mult [1 2 3] 2)
-      (mult 2 [1 2 3])
-
-
-"
-   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/* mult)) args)))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (mult A A A)
+  (mult A 2)
+  (mult 2 A)
+  (mult [1 2 3] [1 2 3])
+  (mult [1 2 3] 2)
+  (mult 2 [1 2 3])
+  "
+  [& args] (apply clx/* (each-to-matrix args)))
 
 
 (defn div
