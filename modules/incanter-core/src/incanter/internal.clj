@@ -77,52 +77,12 @@
        coll))
 
 (defmacro combine-with [A B op fun]
-  (let [mA (with-meta (gensym "A") {:tag "Matrix"})
-        mB (with-meta (gensym "B") {:tag "Matrix"})
-        df (with-meta (gensym "fun") {:tag "DoubleDoubleFunction"})]
-   `(let [~df (. DoubleFunctions ~fun)]
-      (cond
-      (and (number? ~A) (number? ~B))
-         (~op ~A ~B)
-      (and (is-matrix ~A) (is-matrix ~B))
-        (let [~mA ~A
-              ~mB ~B] 
-          (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
-      (and (is-matrix ~A) (number? ~B))
-        (let [~mA ~A
-              ~mB (make-matrix ~B (.rows ~mA) (.columns ~mA))] 
-          (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
-      (and (number? ~A) (is-matrix ~B))
-        (let [~mB ~B
-              ~mA (make-matrix ~A (.rows ~mB) (.columns ~mB))]
-          (.assign ~mA ~mB ~df))
-      (and (coll? ~A) (is-matrix ~B))
-        (let [~mB ~B
-              ~mA (make-matrix ~A (.columns ~mB))]
-          (.assign ~mA ~mB ~df))
-      (and (is-matrix ~A) (coll? ~B))
-        (let [~mA ~A
-              ~mB (make-matrix ~B)]
-        (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
-      (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
-        (let [~mA (make-matrix ~A)
-              ~mB (make-matrix ~B)]
-          (.assign ~mA~mB ~df))
-      (and (coll? ~A) (number? ~B) (coll? (first ~A)))
-        (let [~mA (make-matrix ~A)
-              ~mB (make-matrix ~B)]
-          (.assign ~mA ~mB ~df))
-      (and (number? ~A) (coll? ~B) (coll? (first ~B)))
-        (let [~mA (make-matrix ~A (.rows ~B) (.columns ~B))
-              ~mB (make-matrix ~B)]
-          (.assign ~mA ~mB ~df))        
-      (and (coll? ~A) (coll? ~B))
-        (map ~op ~A ~B)
-      (and (number? ~A) (coll? ~B))
-        (map ~op (replicate (count ~B) ~A)  ~B)
-      (and (coll? ~A) (number? ~B))
-        (map ~op ~A (replicate (count ~A) ~B))
-  ))))
+  `(cond
+    (and (number? ~A) (number? ~B))  
+    (~op ~A ~B)
+    (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
+    (map ~op ~A ~B)
+    :else (~fun ~A ~B)))
 
 
 ;; PRINT METHOD FOR COLT MATRICES

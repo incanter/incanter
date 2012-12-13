@@ -499,7 +499,7 @@
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
   "
-  [& args] (apply clx/* (each-to-matrix args)))
+  [& args] (apply #(combine-with %1 %2 clojure.core/* clx/*) (each-to-matrix args)))
 
 
 (defn div
@@ -534,9 +534,11 @@
 
 (defn atan2
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
-   Equivalent to R's atan2 function."
-   ([& args] (reduce (fn [A B] (combine-with A B #(Math/atan2 %1 %2)
-                                    cern.jet.math.tdouble.DoubleFunctions/atan2)) args)))
+  Equivalent to R's atan2 function."
+  ([& args] (reduce (fn [A B] (combine-with A B
+                                            #(Math/atan2 %1 %2) ;; TODO macro this
+                                            (fn [a b] (map (map #(Math/atan2 %1 %2)) a b))))
+                    args)))
 
 
 (defn sqrt
