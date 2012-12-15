@@ -2,10 +2,9 @@
   "SQL module for interacting with databases."
   (:use [incanter.core :only [dataset]]
         [clojureql.core :as ql :exclude [conj! disj! take drop distinct case compile sort]])
-  (:require [clojure.java.jdbc :as jdbc])
   )
 
-(defn window [psize wsize]
+(defn- window [psize wsize]
   (let [full-chunks (quot psize wsize)
         last-chunk  (rem psize wsize)]
     (for [x (range 0 (inc full-chunks))]
