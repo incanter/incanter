@@ -13,7 +13,7 @@ cd "$TOP_DIR"
 script/clean
 
 cd modules
-for i in core io charts mongodb pdf latex excel zoo ; do
+for i in core io charts mongodb pdf latex excel zoo sql; do
     if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
         OLDWD=`pwd`
         cd "incanter-$i"

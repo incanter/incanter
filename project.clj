@@ -5,13 +5,15 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
-  :dependencies [[incanter/incanter-core "1.4.0"]
-                 [incanter/incanter-io "1.4.0"]
-                 [incanter/incanter-charts "1.4.0"]
-                 [incanter/incanter-mongodb "1.4.0"]
-                 [incanter/incanter-pdf "1.4.0"]
-                 [incanter/incanter-latex "1.4.0"]
-                 [incanter/incanter-excel "1.4.0"]
+  :dependencies [[incanter/incanter-core "1.4.1"]
+                 [incanter/incanter-io "1.4.1"]
+                 [incanter/incanter-charts "1.4.1"]
+                 [incanter/incanter-mongodb "1.4.1"]
+                 [incanter/incanter-pdf "1.4.1"]
+                 [incanter/incanter-latex "1.4.1"]
+                 [incanter/incanter-excel "1.4.1"]
+                 [incanter/incanter-sql "1.4.1"]
+                 [incanter/incanter-zoo "1.4.1"]
                  [swingrepl "1.3.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
