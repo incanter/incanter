@@ -1,10 +1,9 @@
-(ns
-    ^ {:doc "SQL module for interacting with databases."}
-    incanter.sql
-  (:use
-   [incanter.core :only [dataset]]
-   clojure.contrib.sql
-   [clojureql.core :as ql :exclude [conj! disj! distinct]]))
+(ns incanter.sql
+  "SQL module for interacting with databases."
+  (:use [incanter.core :only [dataset]]
+        [clojureql.core :as ql :exclude [conj! disj! take drop distinct case compile sort]])
+  (:require [clojure.java.jdbc :as jdbc])
+  )
 
 (defn window [psize wsize]
   (let [full-chunks (quot psize wsize)

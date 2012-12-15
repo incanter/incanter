@@ -3,9 +3,10 @@
        incanter.sql
        incanter.core
        clojure.core
-       clojure.contrib.sql
+       [clojure.java.jdbc :exclude [resultset-seq]]
        [clojureql.core :as q :exclude [conj! disj! take drop distinct case compile sort]]
-       ))
+       )
+ )
 
 ;;HACK: Jack into the clojureql namespace to override the syntax of
 ;;the commands that are written.
@@ -192,7 +193,7 @@ verify the lazy fetching."
    (let [dset (read-dataset (q/table :TAB1))]
      (is (dataset? dset))
      (is (= [:my_id] (:column-names dset)))
-     (is (= 3 (:my_id (first (:rows dset))))))))
+     (is (= 3M (:my_id (first (:rows dset))))))))
 
 (deftest test-db-data-types
   (wrap-db-test
@@ -269,8 +270,8 @@ verify the lazy fetching."
            (is (dataset? ret))
            (let [retrows (:rows ret)]
              ;; Check the first row looks OK...
-             (is (= 1                 (:a (first retrows))))
-             (is (= {:a 20 :b "X120"} (nth retrows 19)))
+             (is (== 1                (:a (first retrows))))
+             (is (= {:a 20M :b "X120"} (nth retrows 19)))
 
              ;; Confirm the query count:
              ;; It's not 2, because we wanted to get the population
@@ -278,7 +279,7 @@ verify the lazy fetching."
              (is (= 3 (count @clojureql.core/statements-made)))
 
              ;; Now let's get something further out in the list
-             (is (= {:a 65 :b "X165"} (nth retrows 64)))
+             (is (= {:a 65M :b "X165"} (nth retrows 64)))
              ;; And check again
              (is (= 6 (count @clojureql.core/statements-made)))
 
