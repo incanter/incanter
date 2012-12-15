@@ -70,10 +70,12 @@
       (number? ~A)
         (~op ~A)))))
 
-(defn each-to-matrix [coll]
-  (map #(if (and (not (is-matrix %)) (coll? %))
-          (make-matrix %)
-          %)
+(defn pass-to-matrix
+  "Make each element in coll a row-first matrix else pass it back as-is"
+  [coll]
+  (map (fn [x] (if (and (not (is-matrix x)) (coll? x)) 
+                 (make-matrix x (count x)) 
+                 x))
        coll))
 
 (defmacro combine-with [A B op fun]
