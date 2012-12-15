@@ -499,10 +499,7 @@
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
   "
-  [& args] (let [out (reduce (fn [A B] (combine-with A B clojure.core/* clx/*)) (pass-to-matrix args))]
-             (if (matrix? out)
-               out
-               (matrix out (count out))))) ;; TODO: clean, special case for (reduce mult A)
+  [& args] (reduce (fn [A B] (combine-with A B clojure.core/* clx/*)) (pass-to-matrix args)))
 
 
 (defn div

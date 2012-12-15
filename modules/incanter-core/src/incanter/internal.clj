@@ -83,7 +83,8 @@
     (and (number? ~A) (number? ~B))  
     (~op ~A ~B)
     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
-    (map ~op ~A ~B)
+    (let [out# (map ~op ~A ~B)]
+      (make-matrix out# (count out#))) 
     :else (~fun ~A ~B)))
 
 
