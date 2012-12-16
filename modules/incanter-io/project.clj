@@ -5,8 +5,8 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
-  :dependencies [[incanter/incanter-core "1.4.0"]
-                 ;; TODO: switch to data.json?
+  :dependencies [[incanter/incanter-core "1.4.1"]
+                 ;; TODO: switch to data.csv?
                  [net.sf.opencsv/opencsv "2.3"]
                  ;; TODO: switch to data.json?
                  [org.danlarkin/clojure-json "1.1"
