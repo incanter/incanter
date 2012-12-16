@@ -455,7 +455,7 @@
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])
   "
-  [& args] (apply clx/+ (pass-to-matrix args)))
+  [& args] (reduce (fn [A B] (combine-with A B clojure.core/+ clx/+)) args))
 
 
 (defn minus
@@ -478,7 +478,7 @@
   (minus 2 [1 2 3])
   (minus [1 2 3])
   "
-  [& args] (apply clx/- (pass-to-matrix args)))
+  [& args] (reduce (fn [A B] (combine-with A B clojure.core/- clx/-)) args))
 
 
 
@@ -499,7 +499,7 @@
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
   "
-  [& args] (reduce (fn [A B] (combine-with A B clojure.core/* clx/*)) (pass-to-matrix args)))
+  [& args] (reduce (fn [A B] (combine-with A B clojure.core/* clx/*)) args))
 
 
 (defn div

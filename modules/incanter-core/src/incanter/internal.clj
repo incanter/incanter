@@ -70,23 +70,37 @@
       (number? ~A)
         (~op ~A)))))
 
-(defn pass-to-matrix
-  "Make each element in coll a row-first matrix else pass it back as-is"
-  [coll]
-  (map (fn [x] (if (and (not (is-matrix x)) (coll? x)) 
-                 (make-matrix x (count x)) 
-                 x))
-       coll))
-
 (defmacro combine-with [A B op fun]
   `(cond
-    (and (number? ~A) (number? ~B))  
-    (~op ~A ~B)
-    (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
-    (let [out# (map ~op ~A ~B)]
-      (make-matrix out# (count out#))) 
-    :else (~fun ~A ~B)))
-
+     (and (number? ~A) (number? ~B))
+     (~op ~A ~B)
+     (and (is-matrix ~A) (is-matrix ~B)  ;; TODO clean for use during reduce
+          ;(not (or (clx/vector? ~A) (clx/vector? ~B)))
+          (= 1 (clx/nrows ~A))
+          (= (clx/size ~A) (clx/size ~B)))
+     (make-matrix (vector (map ~op ~A ~B))) 
+     (and (is-matrix ~A) (is-matrix ~B))
+     (~fun ~A ~B)
+     (and (is-matrix ~A) (number? ~B))
+     (~fun ~A ~B)
+     (and (number? ~A) (is-matrix ~B))
+     (~fun ~A ~B)
+     (and (coll? ~A) (is-matrix ~B))
+     (~fun (make-matrix ~A (clx/ncols ~B)) ~B)
+     (and (is-matrix ~A) (coll? ~B))
+     (~fun ~A (make-matrix ~B))
+     (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
+     (~fun (make-matrix ~A) (make-matrix ~B))
+     (and (coll? ~A) (number? ~B) (coll? (first ~A)))
+     (~fun (make-matrix ~A) ~B)
+     (and (number? ~A) (coll? ~B) (coll? (first ~B)))
+     (~fun ~A (make-matrix ~B))
+     (and (coll? ~A) (coll? ~B))
+     (make-matrix (map ~op ~A ~B)) 
+     (and (number? ~A) (coll? ~B))
+     (make-matrix (map ~op (replicate (count ~B) ~A)  ~B)) 
+     (and (coll? ~A) (number? ~B))
+     (make-matrix (map ~op ~A (replicate (count ~A) ~B)))))
 
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, ^java.io.Writer w]
