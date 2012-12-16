@@ -1,4 +1,4 @@
-(defproject incanter-zoo "1.4.1"
+(defproject incanter/incanter-zoo "1.4.1"
   :description "Incanter Zoo is a port of Zoo from R."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
