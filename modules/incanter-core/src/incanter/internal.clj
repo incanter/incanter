@@ -86,7 +86,7 @@
      (and (number? ~A) (is-matrix ~B))
      (~fun ~A ~B)
      (and (coll? ~A) (is-matrix ~B))
-     (~fun (make-matrix ~A (clx/ncols ~B)) ~B)
+     (~fun (make-matrix ~A (clx/nrows ~B)) ~B) 
      (and (is-matrix ~A) (coll? ~B))
      (~fun ~A (make-matrix ~B))
      (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
