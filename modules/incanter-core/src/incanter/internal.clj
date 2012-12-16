@@ -70,45 +70,22 @@
       (number? ~A)
         (~op ~A)))))
 
-(defmacro combine-with [A B op fun] ;; TODO too much hackery
-  (let [a (gensym)
-        b (gensym)]
-    `(let [~a (if (and (is-matrix ~A) (= [1 1] (clx/size ~A))) 
-                (clx/get ~A 0 0)
-                ~A)
-           ~b (if (and (is-matrix ~B) (= [1 1] (clx/size ~B))) 
-                (clx/get ~B 0 0)
-                ~B)]
-       (cond
-         (and (number? ~a) (number? ~b))
-         (~op ~a ~b)
-         (and (is-matrix ~a) (is-matrix ~b)  ;; TODO clean for use during reduce
-              ;(not (or (clx/vector? ~a) (clx/vector? ~b)))
-              (= 1 (clx/nrows ~a))
-              (= (clx/size ~a) (clx/size ~b)))
-         (make-matrix (vector (map ~op ~a ~b))) 
-         (and (is-matrix ~a) (is-matrix ~b))
-         (~fun ~a ~b)
-         (and (is-matrix ~a) (number? ~b))
-         (~fun ~a ~b)
-         (and (number? ~a) (is-matrix ~b))
-         (~fun ~a ~b)
-         (and (coll? ~a) (is-matrix ~b))
-         (~fun (make-matrix ~a (clx/nrows ~b)) ~b) 
-         (and (is-matrix ~a) (coll? ~b))
-         (~fun ~a (make-matrix ~b))
-         (and (coll? ~a) (coll? ~b) (coll? (first ~a)))
-         (~fun (make-matrix ~a) (make-matrix ~b))
-         (and (coll? ~a) (number? ~b) (coll? (first ~a)))
-         (~fun (make-matrix ~a) ~b)
-         (and (number? ~a) (coll? ~b) (coll? (first ~b)))
-         (~fun ~a (make-matrix ~b))
-         (and (coll? ~a) (coll? ~b))
-         (make-matrix (map ~op ~a ~b)) 
-         (and (number? ~a) (coll? ~b))
-         (make-matrix (map ~op (replicate (count ~b) ~a)  ~b)) 
-         (and (coll? ~a) (number? ~b))
-         (make-matrix (map ~op ~a (replicate (count ~a) ~b)))))))
+(defn pass-to-matrix
+  "Make each element in coll a row-first matrix else pass it back as-is"
+  [coll]
+  (map (fn [x] (if (and (not (is-matrix x)) (coll? x)) 
+                 (make-matrix x (count x)) 
+                 x))
+       coll))
+
+(defmacro combine-with [A B op fun]
+  `(cond
+    (and (number? ~A) (number? ~B))  
+    (~op ~A ~B)
+    (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
+    (map ~op ~A ~B)
+    :else (~fun ~A ~B)))
+
 
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, ^java.io.Writer w]
