@@ -73,9 +73,10 @@
 (defn pass-to-matrix
   "Make each element in coll a row-first matrix else pass it back as-is"
   [coll]
-  (map (fn [x] (if (and (not (is-matrix x)) (coll? x)) 
-                 (make-matrix x (count x)) 
-                 x))
+  (map (fn [x]
+         (if (and (not (is-matrix x)) (coll? x)) 
+           (make-matrix x) 
+           x))
        coll))
 
 (defmacro combine-with [A B op fun]
