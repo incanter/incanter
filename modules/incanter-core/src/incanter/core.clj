@@ -947,11 +947,13 @@
   "
   [mat & {:keys [type] :or {type :full}}]
   (let [type (or type :full)
-        result (clx/svd mat)]
+        result (if (= type :full)
+                 (clx/svd mat :type :full)
+                 (clx/svd mat))]
     (if (= type :values)
       {:S (:values result)}
       {:S (:values result)
-       :U (:left result)
+       :U (if (= type :compact) mat (:left result)) 
        :V (:right result)})))
 
 (defn decomp-eigenvalue
