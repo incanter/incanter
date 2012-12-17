@@ -397,26 +397,24 @@
 
 
 (defn bind-columns
-"   Returns the matrix resulting from concatenating the given matrices
-    and/or sequences by their columns. Equivalent to R's cbind.
+  "   Returns the matrix resulting from concatenating the given matrices
+  and/or sequences by their columns. Equivalent to R's cbind.
 
-    Examples:
-      (def A (matrix [[1 2 3]
-                     [4 5 6]
-                     [7 8 9]]))
+  Examples:
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
 
-      (def B (matrix [10 11 12]))
+  (def B (matrix [10 11 12]))
 
-      (bind-columns A B)
+  (bind-columns A B)
 
-      (bind-columns [1 2 3 4] [5 6 7 8])
+  (bind-columns [1 2 3 4] [5 6 7 8])
 
 
-"
-  ([& args]
-   (reduce
-    (fn [A B] (.viewDice ^Matrix (bind-rows (trans A) (trans B))))
-    args)))
+  "
+  [& args]
+  (reduce clx/hstack (pass-to-matrix args)))
 
 
 
