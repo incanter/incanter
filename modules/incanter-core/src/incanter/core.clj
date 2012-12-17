@@ -152,28 +152,21 @@
 
 
 (defn diag
-"   If given a matrix, diag returns a sequence of its diagonal elements.
-    If given a sequence, it returns a matrix with the sequence's elements
-    on its diagonal. Equivalent to R's diag function.
+  "
+  If given a matrix, diag returns a sequence of its diagonal elements.
+  If given a sequence, it returns a matrix with the sequence's elements
+  on its diagonal. Equivalent to R's diag function.
 
-    Examples:
-      (diag [1 2 3 4])
+  Examples:
+  (diag [1 2 3 4])
 
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (diag A)
-
-
-"
-   ([m]
-    (cond
-     (matrix? m)
-      (seq (.toArray (.diagonal DoubleFactory2D/dense m)))
-     (coll? m)
-      (Matrix. (.diagonal DoubleFactory2D/dense (.make DoubleFactory1D/dense (double-array m))))
-     (number? m)
-      m)))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (diag A)
+  "
+  [m]
+  (clx/diag m))
 
 
 (defn ^Matrix trans
@@ -922,20 +915,21 @@
 
 
 (defn decomp-svd
-" Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
+  "
+  Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
   R's svd function.
 
   Optional parameters:
-    :type -- one of :full, :compact, or :values.  default is :full
-      if :full, returns the full SVD
-      if :compact, returns the compact SVD
-      if :values, only the singular values are calculated
+  :type -- one of :full, :compact, or :values.  default is :full
+  if :full, returns the full SVD
+  if :compact, returns the compact SVD
+  if :values, only the singular values are calculated
 
   Returns:
-    a map containing:
-      :S -- the diagonal matrix of singular values S (the diagonal in vector form)
-      :U -- the left singular vectors U
-      :V -- the right singular vectors V
+  a map containing:
+  :S -- the diagonal matrix of singular values S (the diagonal in vector form)
+  :U -- the left singular vectors U
+  :V -- the right singular vectors V
 
   Examples:
 
@@ -948,30 +942,26 @@
 
 
   References:
-    http://en.wikipedia.org/wiki/Singular_value_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
-"
-  ([mat & {:keys [type] :or {type :full}}]
-    (let [type (or type :full)
-          want-uv (not= type :values)
-          want-whole-uv (= type :full)
-          result (DenseDoubleSingularValueDecomposition. mat want-uv want-whole-uv)]
-      (if (= type :values)
-        {:S (diag (Matrix. (.getS result)))}
-        {:S (diag (Matrix. (.getS result)))
-         :U (Matrix. (.getU result))
-         :V (Matrix. (.getV result))}))))
-
-
+  http://en.wikipedia.org/wiki/Singular_value_decomposition
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
+  "
+  [mat & {:keys [type] :or {type :full}}]
+  (let [type (or type :full)
+        result (clx/svd mat)]
+    (if (= type :values)
+      {:S (:values result)}
+      {:S (:values result)
+       :U (:left result)
+       :V (:right result)})))
 
 (defn decomp-eigenvalue
-" Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
+  "
+  Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
 
   Returns:
-    a map containing:
-      :values -- vector of eigenvalues
-      :vectors -- the matrix of eigenvectors
-
+  a map containing:
+  :values -- vector of eigenvalues
+  :vectors -- the matrix of eigenvectors
 
   Examples:
 
@@ -979,15 +969,14 @@
   (def foo (matrix (range 9) 3))
   (decomp-eigenvalue foo)
 
-
   References:
-    http://en.wikipedia.org/wiki/Eigenvalue_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
-"
-  ([mat]
-    (let [result (DenseDoubleEigenvalueDecomposition. mat)]
-      {:values (diag (Matrix. (.getD result)))
-       :vectors (Matrix. (.getV result))})))
+  http://en.wikipedia.org/wiki/Eigenvalue_decomposition
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
+  "
+  [mat]
+  (let [result (clx/eigen mat)]
+    {:values (or (:values result) (:ivalues result))
+     :vectors (or (:vectors result) (:ivectors result))}))
 
 
 (defn decomp-lu
@@ -1011,9 +1000,9 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
   ([mat]
-    (let [result (DenseDoubleLUDecomposition. mat)]
-      {:L (Matrix. (.getL result))
-       :U (Matrix. (.getU result))})))
+    (let [result (clx/lu mat)]
+      {:L (:l result)
+       :U (:u result)})))
 
 
 (defn decomp-qr
