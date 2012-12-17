@@ -324,7 +324,7 @@
   (is (= (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 4 9])))
   (is (= (mult [1 2 3] 2.0) (matrix [2 4 6])))
   (is (= (mult 2.0 [1 2 3]) (matrix [2 4 6])))
-  (is (= (mult [1 2 3] (matrix [1 2 3]) (matrix [1 4 9])))))
+  (is (= (mult [1 2 3] (matrix [1 2 3])) (matrix [1 4 9]))))
 
 (deftest matrix-div-tests
   ;; element by element division on matrices
@@ -355,7 +355,7 @@
   (is (= (div [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 1 1])))
   (is (= (div [1 2 3] 2.0) (matrix [1/2 1 3/2])))
   (is (= (div 2.0 [1 2 3]) (matrix [2 1 0.6666666666666666])))
-  (is (= (div [1 2 3] (matrix [1 2 3]) (matrix [1 1 1])))))
+  (is (= (div [1 2 3] (matrix [1 2 3])) (matrix [1 1 1]))))
 
 (deftest matrix-mapreduce-tests
   ;; getting row sums

@@ -455,7 +455,7 @@
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])
   "
-  [& args] (apply clx/+ (pass-to-matrix args)))
+  [& args] (reduce clx/+ (pass-to-matrix args)))
 
 
 (defn minus
@@ -478,7 +478,7 @@
   (minus 2 [1 2 3])
   (minus [1 2 3])
   "
-  [& args] (apply clx/- (pass-to-matrix args)))
+  [& args] (reduce clx/- (pass-to-matrix args)))
 
 
 
@@ -499,10 +499,7 @@
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
   "
-  [& args] (let [out (reduce (fn [A B] (combine-with A B clojure.core/* clx/*)) (pass-to-matrix args))]
-             (if (matrix? out)
-               out
-               (matrix out (count out))))) ;; TODO: clean, special case for (reduce mult A)
+  [& args] (reduce clx/mult (pass-to-matrix args))) ;; TODO: clean, special case for (reduce mult A)
 
 
 (defn div
@@ -525,23 +522,32 @@
 
 "
    ([& args] (if (= (count args) 1)
-               (combine-with (Integer. 1) (first args) clojure.core// div)
-               (reduce (fn [A B] (combine-with A B clojure.core// div)) args))))
+               (clx/div (double 1) (first args))
+               (reduce clx/div (pass-to-matrix args)))))
 
 
 (defn pow
   " This is an element-by-element exponent function, raising the first argument
-    by the exponents in the remaining arguments. Equivalent to R's ^ operator."
-   ([& args] (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args)))
+  by the exponents in the remaining arguments. Equivalent to R's ^ operator."
+  [& args]
+  (reduce (fn [A B]
+            (combine-with A B
+                          #(Math/pow %1 %2)
+                          (fn [a b] (map (map #(Math/pow %1 %2))
+                                         a b))))
+          args))
 
 
 (defn atan2
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
   Equivalent to R's atan2 function."
-  ([& args] (reduce (fn [A B] (combine-with A B
-                                            #(Math/atan2 %1 %2) ;; TODO macro this
-                                            (fn [a b] (map (map #(Math/atan2 %1 %2)) a b))))
-                    args)))
+  [& args]
+  (reduce (fn [A B]
+            (combine-with A B
+                          #(Math/atan2 %1 %2) ;; TODO macro this
+                          (fn [a b] (map (map #(Math/atan2 %1 %2))
+                                         a b))))
+          args))
 
 
 (defn sqrt
