@@ -949,9 +949,9 @@
   (let [type (or type :full)
         result (if (= type :full)
                  (clx/svd mat :type :full)
-                 (clx/svd mat))]
+                 (clx/svd mat :type :sparse))]
     (if (= type :values)
-      {:S (:values result)}
+      {:S (:values (clx/svd mat :type :values))}
       {:S (:values result)
        :U (if (= type :compact) mat (:left result)) 
        :V (:right result)})))
