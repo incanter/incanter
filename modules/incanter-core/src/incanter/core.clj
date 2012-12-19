@@ -653,14 +653,7 @@
 
   "
     ([& args]
-     (reduce (fn [A B]
-              (let [a (if (matrix? A) A (matrix A))
-                    b (if (matrix? B) B (matrix B))
-                    result (Matrix. (.zMult ^Matrix a ^Matrix b nil))]
-                (if (and (= (.rows result) 1) (= (.columns result) 1))
-                  (.getQuick result 0 0)
-                  result)))
-            args)))
+     (reduce (fn [A B] (clx/* A B)) args)))
 
 
 (defn kronecker
