@@ -148,7 +148,7 @@
       (identity-matrix 4)
 
 "
-([^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
+([^Integer n] (clx/id n)))
 
 
 (defn diag
@@ -255,25 +255,6 @@
 ;; (defmethod sel [nil false] [])
 ;; (defmethod sel [nil true] [])
 
-(defmethod sel [incanter.Matrix false]
-  ([^Matrix mat rows columns]
-   (let [rws (if (number? rows) [rows] rows)
-         cols (if (number? columns) [columns] columns)
-         all-rows? (or (true? rws) (= rws :all))
-         all-cols? (or (true? cols) (= cols :all))]
-    (cond
-      (and (number? rows) (number? columns))
-        (.getQuick mat rows columns)
-      (and all-rows? (coll? cols))
-        (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
-      (and (coll? rws) all-cols?)
-        (.viewSelection mat (int-array rws) (int-array (range (.columns mat))))
-      (and (coll? rws) (coll? cols))
-        (.viewSelection mat (int-array rws) (int-array cols))
-      (and all-rows? all-cols?)
-        mat))))
-
-
 (defmethod sel [clatrix.core.Matrix false]
   ([^clatrix.core.Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
@@ -284,46 +265,13 @@
       (and (number? rows) (number? columns))
         (clx/get mat rows columns)
       (and all-rows? (coll? cols))
-        (clx/slice mat (int-array (range (clx/size mat))) (int-array cols))
+        (clx/get mat (range (nrow mat)) cols)
       (and (coll? rws) all-cols?)
-        (.viewSelection mat (int-array rws) (int-array (range (.columns mat))))
+        (clx/get mat rws (range (ncol mat)))
       (and (coll? rws) (coll? cols))
-        (.viewSelection mat (int-array rws) (int-array cols))
+        (clx/get mat rws cols)
       (and all-rows? all-cols?)
         mat))))
-
-(defmethod sel [incanter.Matrix true]
-  ([^Matrix mat & {:keys [rows cols except-rows except-cols filter-fn]}]
-   (let [rows (cond
-                rows rows
-                except-rows (except-for (.rows mat) except-rows)
-                :else true)
-         cols (cond
-                cols cols
-                except-cols (except-for (.columns mat) except-cols)
-                :else true)
-         ^Matrix mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
-         all-rows? (or (true? rows) (= rows :all))
-         all-cols? (or (true? cols) (= cols :all))]
-     (cond
-       (and (number? rows) (number? cols))
-         (.getQuick mat rows cols)
-       (and all-rows? (coll? cols))
-         (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
-       (and all-rows? (number? cols))
-         (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
-       (and (coll? rows) (number? cols))
-         (.viewSelection mat (int-array rows) (int-array [cols]))
-       (and (coll? rows) all-cols?)
-         (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
-       (and (number? rows) all-cols?)
-         (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
-       (and (number? rows) (coll? cols))
-         (.viewSelection mat (int-array [rows]) (int-array cols))
-       (and (coll? rows) (coll? cols))
-         (.viewSelection mat (int-array rows) (int-array cols))
-       (and all-rows? all-cols?)
-         mat))))
 
 (defmethod sel [clatrix.core.Matrix true]
   ([mat & {:keys [rows cols except-rows except-cols filter-fn]}]
