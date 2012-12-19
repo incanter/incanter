@@ -686,9 +686,6 @@
                                              (mult (sel a i j) b)))))))
             args)))
 
-
-
-
 (defn solve
 " Returns a matrix solution if A is square, least squares solution otherwise.
   Equivalent to R's solve function.
@@ -703,10 +700,8 @@
 "
   ([^Matrix A & B]
    (if B
-    (Matrix. (.solve (DenseDoubleAlgebra.) A ^Matrix (first B)))
-    (Matrix. (.inverse (DenseDoubleAlgebra.) A)))))
-
-
+    (clx/solve A B)
+    (clx/i A))))
 
 (defn det
 " Returns the determinant of the given matrix. Equivalent
@@ -945,19 +940,40 @@
       {:L (:l result)
        :U (:u result)})))
 
+(defn vector-length [u]
+  (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
+
+(defn inner-product [u v]
+  (apply + (mult u (trans v))))
+
+(defn proj [u v]
+  (mult (div (inner-product v u) (inner-product u u)) u))
+
+
+(defn orthonormal-base-stable [m]
+  (let [m (trans m)
+        vectors (reduce (fn [ac i]
+                          (let [vi (nth m i)]
+                            (conj ac (reduce (fn [aci j]
+                                               (minus aci (proj (nth ac j) vi)))
+                                             vi
+                                             (range 0 i)))))
+                        []
+                        (range 0 (nrow m)))]
+    (map (fn [v] (div v (vector-length v))) vectors)))
 
 (defn decomp-qr
-" Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
+  " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
   Optional parameters:
-    :type -- one of :full, :compact.  default is :full
-      if :full, returns the full QR decomposition
-      if :compact, returns the compact (economy) QR decomposition
+  :type -- one of :full, :compact.  default is :full
+  if :full, returns the full QR decomposition
+  if :compact, returns the compact (economy) QR decomposition
 
   Returns:
-    a map containing:
-      :Q -- orthogonal factors
-      :R -- the upper triangular factors
+  a map containing:
+  :Q -- orthogonal factors
+  :R -- the upper triangular factors
 
   Examples:
 
@@ -968,18 +984,26 @@
   (decomp-qr foo :type :compact)
 
   References:
-    http://en.wikipedia.org/wiki/QR_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
-"
-  ([mat & {:keys [type] :or {type :full}}]
-    (let [type (or type :full)
-          economy (case type
-                    :full false
-                    :compact true
-                    (throw (IllegalArgumentException. (str "Unknown type " type))))
-          result (DenseDoubleQRDecomposition. mat)]
-      {:Q (Matrix. (.getQ result economy))
-       :R (Matrix. (.getR result economy))})))
+  http://en.wikipedia.org/wiki/QR_decomposition
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
+  "
+  [m & {:keys [type] :or {type :full}}]  ;; TODO make work in matrix
+  (let [type (or type :full)
+        q (orthonormal-base-stable m)
+        m (trans m)]
+    {:Q (if (= type :full) q m) 
+     :R (if (= type :compact)
+          (matrix (reduce (fn [r j]
+                            (conj r
+                                  (reduce (fn [row i]
+                                            (if (< i j)
+                                              (conj row 0)
+                                              (conj row (inner-product (nth q j) (nth m i)))))
+                                          []
+                                          (range 0 (count q)))))
+                          []
+                          (range 0 (count q))))
+          m)}))
 
 (defn condition
 " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.

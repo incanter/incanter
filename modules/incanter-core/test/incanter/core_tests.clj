@@ -157,7 +157,7 @@
                   [99 99]
                   [99 99]])))
   ;; create a 3x2 matrix with initial value 0
-  (is (= (matrix 3 2)
+  (is (= (matrix 0 3 2)
          (matrix [[0 0]
                   [0 0]
                   [0 0]])))
