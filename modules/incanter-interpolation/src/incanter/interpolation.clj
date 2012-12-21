@@ -4,14 +4,14 @@
          [cubic-spline :rename {interpolate interpolate-cubic}]
          [b-spline :only (b-spline)]] ))
 
-(defn out-of-range [x points]
+(defn- out-of-range [x points]
   (throw (IllegalArgumentException.
           (format "x = %s is out of range [%s, %s]"
                   x
                   (apply min (map first points))
                   (apply max (map first points))))))
 
-(defn interpolate-linear [points]
+(defn- interpolate-linear [points]
   (let [pairs (partition 2 1 points)]
     (fn [x]
       (if-let [interv (->> pairs
@@ -23,7 +23,7 @@
                 (mult coef yr)))
         (out-of-range x points)))))
 
-(defn interpolate-polynomial [points]
+(defn- interpolate-polynomial [points]
   (let [xs (map first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]
@@ -43,11 +43,19 @@
            (map mult fs)
            (apply plus)))))
 
-(defn validate-unique [xs]
+(defn- validate-unique [xs]
   (when-not (apply distinct? xs)
     (throw (IllegalArgumentException. "All x must be distinct."))))
 
-(defn interpolate [points type]
+(defn interpolate
+"  Returns a function that interpolates given collection of points.
+   http://en.wikipedia.org/wiki/Interpolation
+
+   Arguments:
+     points -- collection of points. Each point is a vector where first element - x, second element f(x). Note that f(x) can be number or vector of numbers.
+     type -- type of interpolation - :linear, :polynomial or :cubic-spline. For most cases you should use :cubic-spline - it usually gives best result. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
+"
+  [points type]
   (let [method (case type
                  :linear interpolate-linear
                  :polynomial interpolate-polynomial
@@ -55,7 +63,13 @@
     (validate-unique (map first points))
     (method (sort-by first points))))
 
-(defn approximate [points]
+(defn approximate
+ "  Approximates given collection of points using B-spline. Returns parametric function f that takes values from 0 to 1. f(0) will give you first point, f(1) - last point.
+
+    Arguments:
+      points -- collection of points. Each point either a number of collection of numbers.
+"
+  [points]
   (b-spline points 3))
 
 #_(
