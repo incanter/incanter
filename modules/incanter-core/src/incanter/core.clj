@@ -2347,14 +2347,14 @@ altering later ones."
   ([data & {:keys [lower] :or {lower true}}]
    (let [n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
-         mat (incanter.Matrix. p p 0)
+         mat (matrix 0 p p)
          indices (if lower
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
      (doseq [idx (range n)]
       (let [[i j] (nth indices idx)]
-        (.set mat i j (nth data idx))
-        (.set mat j i (nth data idx))))
+        (clx/set mat i j (nth data idx))
+        (clx/set mat j i (nth data idx))))
      mat)))
 
 
