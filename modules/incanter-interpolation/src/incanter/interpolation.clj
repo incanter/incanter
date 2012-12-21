@@ -1,6 +1,8 @@
 (ns incanter.interpolation
-  (:use [incanter.core :only (plus minus mult div)]
-        [incanter.cubic-spline :rename {interpolate interpolate-cubic}]))
+  (:use [incanter
+         [core :only (plus minus mult div)]
+         [cubic-spline :rename {interpolate interpolate-cubic}]
+         [b-spline :only (b-spline)]] ))
 
 (defn out-of-range [x points]
   (throw (IllegalArgumentException.
@@ -53,7 +55,8 @@
     (validate-unique (map first points))
     (method (sort-by first points))))
 
-
+(defn approximate [points]
+  (b-spline points 3))
 
 #_(
 
@@ -75,8 +78,19 @@
        (doto (charts/function-plot f min-x max-x)
          (charts/add-points xs ys)
          (core/view))))
-   
 
+   (do
+     (require '[incanter.core :as core])
+     (require '[incanter.charts :as charts])
+     (let [n 5
+           zeros (vec (repeat n 0))
+           vectors (map #(assoc-in zeros [%] 1) (range n))
+           [f & fns] (map approximate vectors)
+           plot (charts/function-plot f 0 1)]
+       #_(doto (reduce #(charts/add-function %1 %2 0 1) plot fns)
+           (core/view))
+       (core/view (charts/function-plot (approximate [0 1 2 3 4 5]) 0 1))))
 
+   ((approximate [[0 0] [0 0] [0 0] [1 1]]) 0.9)
 
    )

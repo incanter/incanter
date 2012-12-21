@@ -3,17 +3,18 @@
         incanter.interpolation))
 
 (defn test-interpolation [xs ys]
-  (doseq [method [:linear :lagrange]]
+  (doseq [method [:linear :polynomial :cubic-spline]]
     (testing (str "Test " (name method) " interpolation")
-      (let [interp-fn (interpolate xs ys method)]
+      (let [points (map vector xs ys)
+            interp-fn (interpolate points method)]
         (doseq [[x y] (map vector xs ys)]
           (is (= (interp-fn x) y) (str "x = " x " expecting f(x) = " y)))))))
 
-(deftest interpolation
+(deftest interpolate-test
   (test-interpolation (range 10)
                       (range 10 0 -1)))
 
-(deftest interpolation-points
+(deftest interpolate-test-parametric
   (test-interpolation (range 10)
                       (map vector
                            (range 10)
