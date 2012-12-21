@@ -962,48 +962,48 @@
                         (range 0 (nrow m)))]
     (map (fn [v] (div v (vector-length v))) vectors)))
 
-(defn decomp-qr
-  " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
+;(defn decomp-qr
+  ;" Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
-  Optional parameters:
-  :type -- one of :full, :compact.  default is :full
-  if :full, returns the full QR decomposition
-  if :compact, returns the compact (economy) QR decomposition
+  ;Optional parameters:
+  ;:type -- one of :full, :compact.  default is :full
+  ;if :full, returns the full QR decomposition
+  ;if :compact, returns the compact (economy) QR decomposition
 
-  Returns:
-  a map containing:
-  :Q -- orthogonal factors
-  :R -- the upper triangular factors
+  ;Returns:
+  ;a map containing:
+  ;:Q -- orthogonal factors
+  ;:R -- the upper triangular factors
 
-  Examples:
+  ;Examples:
 
-  (use 'incanter.core)
-  (def foo (matrix (range 9) 3))
-  (decomp-qr foo)
-  (decomp-qr foo :type :full)
-  (decomp-qr foo :type :compact)
+  ;(use 'incanter.core)
+  ;(def foo (matrix (range 9) 3))
+  ;(decomp-qr foo)
+  ;(decomp-qr foo :type :full)
+  ;(decomp-qr foo :type :compact)
 
-  References:
-  http://en.wikipedia.org/wiki/QR_decomposition
-  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
-  "
-  [m & {:keys [type] :or {type :full}}]  ;; TODO make work in matrix
-  (let [type (or type :full)
-        q (orthonormal-base-stable m)
-        m (trans m)]
-    {:Q (if (= type :full) q m) 
-     :R (if (= type :compact)
-          (matrix (reduce (fn [r j]
-                            (conj r
-                                  (reduce (fn [row i]
-                                            (if (< i j)
-                                              (conj row 0)
-                                              (conj row (inner-product (nth q j) (nth m i)))))
-                                          []
-                                          (range 0 (count q)))))
-                          []
-                          (range 0 (count q))))
-          m)}))
+  ;References:
+  ;http://en.wikipedia.org/wiki/QR_decomposition
+  ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
+  ;"
+  ;[m & {:keys [type] :or {type :full}}]  ;; TODO make work in matrix
+  ;(let [type (or type :full)
+        ;q (orthonormal-base-stable m)
+        ;m (trans m)]
+    ;{:Q (if (= type :full) q m) 
+     ;:R (if (= type :compact)
+          ;(matrix (reduce (fn [r j]
+                            ;(conj r
+                                  ;(reduce (fn [row i]
+                                            ;(if (< i j)
+                                              ;(conj row 0)
+                                              ;(conj row (inner-product (nth q j) (nth m i)))))
+                                          ;[]
+                                          ;(range 0 (count q)))))
+                          ;[]
+                          ;(range 0 (count q))))
+          ;m)}))
 
 (defn condition
 " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.
