@@ -35,10 +35,7 @@
         [clojure.set :only (difference)])
   (:require [clatrix.core :as clx])
   (:import (clatrix.core Matrix)
-           (cern.colt.matrix.tdouble.algo DenseDoubleAlgebra
-                                          DoubleFormatter)
-           (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
-           (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
+           (cern.jet.math.tdouble DoubleArithmetic)
            (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.stat.tdouble DoubleDescriptive Gamma)
            (javax.swing JTable JScrollPane JFrame)
@@ -696,25 +693,25 @@
     (clx/solve A B)
     (clx/i A))))
 
-(defn det
-" Returns the determinant of the given matrix. Equivalent
-  to R's det function.
+;(defn det ;; TODO
+;" Returns the determinant of the given matrix. Equivalent
+  ;to R's det function.
 
-  References:
-    http://en.wikipedia.org/wiki/LU_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
-"
-  ([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
+  ;References:
+    ;http://en.wikipedia.org/wiki/LU_decomposition
+    ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
+;"
+  ;([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
 
 
 (defn trace
-" Returns the trace of the given matrix.
+  " Returns the trace of the given matrix.
 
   References:
-    http://en.wikipedia.org/wiki/Matrix_trace
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
-"
-  ([mat] (.trace DenseDoubleAlgebra/DEFAULT mat)))
+  http://en.wikipedia.org/wiki/Matrix_trace
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
+  "
+  [mat] (clx/trace mat))
 
 
 
