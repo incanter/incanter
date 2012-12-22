@@ -645,7 +645,7 @@
     (let [opts (when options (apply assoc {} options))
            step-size (or (:step-size opts)
                          (float (/ (- max-range min-range) 500)))
-           x (range min-range max-range step-size)
+           x (range min-range (+ step-size max-range) step-size)
            series-lab (or (:series-label opts)
                           (format "%s" 'function))]
        (add-lines chart x (map function x) :series-label series-lab))))
@@ -713,7 +713,7 @@
     (let [opts (when options (apply assoc {} options))
           step-size (or (:step-size opts)
                         (float (/ (- max-range min-range) 500)))
-          t (range min-range max-range step-size)
+          t (range min-range (+ step-size max-range) step-size)
           [x y] (apply map vector (map function t))
           series-lab (or (:series-label opts)
                          (format "%s" 'function))]
@@ -2369,7 +2369,7 @@
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
          step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
-         _x (range min-range max-range step-size)
+         _x (range min-range (+ step-size max-range) step-size)
          title (or (:title opts) "")
          x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
          y-lab (or (:y-label opts) (str 'function))
@@ -2437,7 +2437,7 @@
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
          step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
-         _t (range min-range max-range step-size)
+         _t (range min-range (+ step-size max-range) step-size)
          [_x _y] (apply map vector (map function _t))
          title (or (:title opts) "")
          x-lab (or (:x-label opts) (format "%s < x < %s" (apply min _x) (apply max _x)))
