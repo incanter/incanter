@@ -1017,12 +1017,13 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
-    (.cond (DenseDoubleSingularValueDecomposition. mat, true, true))))
+   (let [s (:S (decomp-svd mat))]
+     (/ (apply max s) (apply min s)))))
 
 
 (defn rank
-" Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
-
+  "
+  Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
 
   Examples:
 
@@ -1030,14 +1031,12 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   (def foo (matrix (range 9) 3))
   (rank foo)
 
-
-
   References:
-    http://en.wikipedia.org/wiki/Matrix_rank
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
-"
-  ([mat]
-    (.rank (DenseDoubleSingularValueDecomposition. mat, true, true))))
+  http://en.wikipedia.org/wiki/Matrix_rank
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
+  "
+  [mat]
+  (clx/rank mat))
 
 
 
