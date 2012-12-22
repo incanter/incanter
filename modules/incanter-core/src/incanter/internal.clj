@@ -18,14 +18,14 @@
 
 (ns incanter.internal
   (:require [clatrix.core :as clx])
-  (:import (incanter Matrix)
+  (:import (clatrix.core Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)))
 
 
 
-(derive Matrix ::matrix)
+(derive clatrix.core.Matrix ::matrix)
 
 (defn is-matrix
   " Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
@@ -54,21 +54,13 @@
   `~(with-meta body {:tag type}))
 
 
-(defmacro ^Matrix transform-with [A op fun]
-  (let [mA (with-meta (gensym "A") {:tag "Matrix"})
-        df (with-meta (gensym "fun") {:tag "DoubleFunction"})]
-   `(let [~df (. DoubleFunctions ~fun)]
-      (cond
-      (is-matrix ~A)
-        (let [~mA ~A]
-          (.assign (hint "Matrix" (.copy ~mA)) ~df))
-      (and (coll? ~A) (coll? (first ~A)))
-        (let [~mA (make-matrix ~A)]  
-          (.assign ~mA ~df))
-      (coll? ~A)
-        (map ~op ~A)
-      (number? ~A)
-        (~op ~A)))))
+(defmacro transform-with [A op fun]
+  `(cond
+     (is-matrix ~A) (~fun ~A)
+     (and (coll? ~A) (coll? (first ~A))) (let [mA# (make-matrix ~A)]  
+                                           (clx/matrix (clx/dotom ~fun mA#) nil))
+     (coll? ~A)   (map ~op ~A)
+     (number? ~A) (~op ~A)))
 
 (defn pass-to-matrix
   "Make each element in coll a row-first matrix else pass it back as-is"
@@ -85,7 +77,7 @@
     (~op ~A ~B)
     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
     (map ~op ~A ~B)
-    :else (~fun ~A ~B)))
+    :else (with-meta (~fun ~A ~B) nil)))
 
 
 ;; PRINT METHOD FOR COLT MATRICES

@@ -34,17 +34,12 @@
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)])
   (:require [clatrix.core :as clx])
-  (:import (incanter Matrix)
+  (:import (clatrix.core Matrix)
            (cern.colt.matrix.tdouble DoubleMatrix2D
                                      DoubleFactory2D
                                      DoubleFactory1D)
            (cern.colt.matrix.tdouble.algo DenseDoubleAlgebra
                                           DoubleFormatter)
-           (cern.colt.matrix.tdouble.algo.decomposition DenseDoubleCholeskyDecomposition
-                                                        DenseDoubleSingularValueDecomposition
-                                                        DenseDoubleEigenvalueDecomposition
-                                                        DenseDoubleLUDecomposition
-                                                        DenseDoubleQRDecomposition)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
            (cern.colt.list.tdouble DoubleArrayList)
@@ -465,7 +460,7 @@
                (reduce clx/div (pass-to-matrix args)))))
 
 
-(defn pow
+(defn pow  ;; TODO use jblas
   " This is an element-by-element exponent function, raising the first argument
   by the exponents in the remaining arguments. Equivalent to R's ^ operator."
   [& args]
@@ -492,7 +487,7 @@
 (defn sqrt
   "Returns the square-root of the elements in the given matrix, sequence or number.
    Equivalent to R's sqrt function."
-   ([A] (pow A 1/2)))
+   [A] (transform-with A #(Math/sqrt %) clx/sqrt!))
 
 
 (defn sq
@@ -504,67 +499,68 @@
 (defn log
   "Returns the natural log of the elements in the given matrix, sequence or number.
    Equivalent to R's log function."
-   ([A] (transform-with A #(Math/log %) log)))
+   ([A] (transform-with A #(Math/log %) clx/log!)))
 
 
 (defn log2
   "Returns the log base 2 of the elements in the given matrix, sequence or number.
    Equivalent to R's log2 function."
-   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
+   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) #(div (clx/log! %)
+                                                               (matrix (Math/log 2) (nrow %) (ncol %))))))
 
 
 (defn log10
   "Returns the log base 10 of the elements in the given matrix, sequence or number.
    Equivalent to R's log10 function."
-   ([A] (transform-with A #(Math/log10 %) (lg 10.0))))
+   ([A] (transform-with A #(Math/log10 %) clx/log10!)))
 
 
 (defn exp
   "Returns the exponential of the elements in the given matrix, sequence or number.
    Equivalent to R's exp function."
-   ([A] (transform-with A #(Math/exp %) exp)))
+   ([A] (transform-with A #(Math/exp %) clx/exp!)))
 
 
 (defn abs
   "Returns the absolute value of the elements in the given matrix, sequence or number.
    Equivalent to R's abs function."
-   ([A] (transform-with A #(Math/abs (float %)) abs)))
+   ([A] (transform-with A #(Math/abs (double %)) clx/abs!)))
 
 
 (defn sin
   "Returns the sine of the elements in the given matrix, sequence or number.
    Equivalent to R's sin function."
-   ([A] (transform-with A #(Math/sin %) sin)))
+   ([A] (transform-with A #(Math/sin %) clx/sin!)))
 
 
 (defn asin
   "Returns the arc sine of the elements in the given matrix, sequence or number.
    Equivalent to R's asin function."
-   ([A] (transform-with A #(Math/asin %) asin)))
+   ([A] (transform-with A #(Math/asin %) clx/asin!)))
 
 
 (defn cos
   "Returns the cosine of the elements in the given matrix, sequence or number.
    Equivalent to R's cos function."
-   ([A] (transform-with A #(Math/cos %) cos)))
+   ([A] (transform-with A #(Math/cos %) clx/cos!)))
 
 
 (defn acos
   "Returns the arc cosine of the elements in the given matrix, sequence or number.
    Equivalent to R's acos function."
-   ([A] (transform-with A #(Math/acos %) acos)))
+   ([A] (transform-with A #(Math/acos %) clx/acos!)))
 
 
 (defn tan
   "Returns the tangent of the elements in the given matrix, sequence or number.
    Equivalent to R's tan function."
-   ([A] (transform-with A #(Math/tan %) tan)))
+   ([A] (transform-with A #(Math/tan %) clx/tan!)))
 
 
 (defn atan
   "Returns the arc tangent of the elements in the given matrix, sequence or number.
    Equivalent to R's atan function."
-   ([A] (transform-with A #(Math/atan %) atan)))
+   ([A] (transform-with A #(Math/atan %) clx/atan!)))
 
 
 (defn factorial
@@ -632,7 +628,7 @@
 
 (defn ^Matrix copy
   "Returns a copy of the given matrix."
-  ([^Matrix mat] (.copy mat)))
+  ([^Matrix mat] (clx/matrix (clx/dotom .copy mat) nil)))
 
 
 (defn mmult
@@ -823,28 +819,28 @@
   chol function.
 
   Returns:
-    a matrix of the triangular factor (note: the result from
-    cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
-    that it matches the result return from R's chol function.
+a matrix of the triangular factor (note: the result from
+cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
+that it matches the result return from R's chol function.
 
 
 
-  Examples:
+Examples:
 
-  (use '(incanter core stats charts datasets))
-  ;; load the iris dataset
-  (def iris (to-matrix (get-dataset :iris)))
-  ;; take the Cholesky decomposition of the correlation matrix of the iris data.
-  (decomp-cholesky (correlation iris))
+(use '(incanter core stats charts datasets))
+;; load the iris dataset
+(def iris (to-matrix (get-dataset :iris)))
+;; take the Cholesky decomposition of the correlation matrix of the iris data.
+(decomp-cholesky (correlation iris))
 
 
 
-  References:
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
-    http://en.wikipedia.org/wiki/Cholesky_decomposition
+References:
+http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
+http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
-  ([^Matrix mat]
-    (Matrix. (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat))))))
+  [^Matrix mat]
+  (clx/cholesky mat))
 
 
 
@@ -1075,15 +1071,11 @@
       (number? coll)
         1
       (matrix? coll)
-        (* (.rows ^Matrix coll) (.columns ^Matrix coll))
+        (* (nrow coll) (ncol coll))
       (coll? coll)
         (count coll)
       :else
         1)))
-
-
-
-
 
 (defn group-on
 " Groups the given matrix by the values in the columns indicated by the
@@ -2436,7 +2428,7 @@ altering later ones."
 
 
 
-(defmethod view incanter.Matrix
+(defmethod view incanter.Matrix ;; TODO convert to clatrix
   ([obj & {:keys [column-names]}]
      (let [col-names (or column-names (range (ncol obj)))
            m (ncol obj)

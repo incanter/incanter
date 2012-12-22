@@ -489,8 +489,6 @@
                       (for [op [seq trans pow atan2]]
                         (meta (-> m op)))))))))
 
-
-
 (deftest matrix-map-test
   (let [mat (matrix (range 9) 3)]
     (are [x y] (= x y)
