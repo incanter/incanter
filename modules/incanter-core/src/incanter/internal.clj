@@ -77,7 +77,7 @@
     (~op ~A ~B)
     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
     (map ~op ~A ~B)
-    :else (with-meta (~fun ~A ~B) nil)))
+    :else (with-meta (~fun ~A ~B) nil))) ;; TODO fix meta
 
 
 ;; PRINT METHOD FOR COLT MATRICES

@@ -454,7 +454,7 @@
                (reduce clx/div (pass-to-matrix args)))))
 
 
-(defn pow  ;; TODO use jblas
+(defn pow  ;; TODO use jblas and fix meta
   " This is an element-by-element exponent function, raising the first argument
   by the exponents in the remaining arguments. Equivalent to R's ^ operator."
   [& args]
@@ -466,7 +466,7 @@
           args))
 
 
-(defn atan2
+(defn atan2 ;; TODO fix meta
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
   Equivalent to R's atan2 function."
   [& args]
