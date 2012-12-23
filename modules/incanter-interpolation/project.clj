@@ -1,4 +1,4 @@
-(defproject incanter/incanter-intepolation "1.4.2"
+(defproject incanter/incanter-intepolation "1.5.0-SNAPSHOT"
   :description "Incanter-interpolation is module for functions interpolation. Interpolates functions of 1 and 2 arguments."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
@@ -6,5 +6,5 @@
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [incanter/incanter-core "1.4.2"]
-                 [incanter/incanter-charts "1.4.2"]])
+                 [incanter/incanter-core "1.5.0-SNAPSHOT"]
+                 [incanter/incanter-charts "1.5.0-SNAPSHOT"]])

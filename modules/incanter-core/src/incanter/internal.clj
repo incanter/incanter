@@ -17,40 +17,35 @@
 
 
 (ns incanter.internal
-  (:import (incanter Matrix)
+  (:require [clatrix.core :as clx])
+  (:import (clatrix.core Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)))
 
 
 
-(derive Matrix ::matrix)
+(derive clatrix.core.Matrix ::matrix)
 
 (defn is-matrix
   " Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
-  ([obj] (instance? Matrix obj)))
+  ([obj] (clx/matrix? obj)))
 
 (def double_arr_type (Class/forName "[D"))
 
 (defn make-matrix
   ([data]
     (cond
-     (instance? double_arr_type data)
-      (Matrix. ^"[D" data)
      (coll? (first data))
-      (Matrix. ^"[[D" (into-array (map double-array data)))
+      (clx/matrix data)
      (number? (first data))
-      (Matrix. (double-array data))))
+      (clx/matrix (map vector data))))
   ([data ncol]
-    (cond
-      (instance? double_arr_type data)
-        (Matrix. ^"[D" data (int ncol))
-      (or (coll? data) (.isArray (class data)))
-        (Matrix. (double-array data) (int ncol))
-       (number? data)
-        (Matrix. (int data) (int ncol)))) ; data is the number of rows in this case
+   {:pre [(number? (first data))]}
+   (let [chunked  (partition ncol data)]
+     (make-matrix chunked)))
   ([init-val rows cols]
-    (Matrix. (int rows) (int cols) ^Number init-val)))
+    (clx/constant (int rows) (int cols) ^Number init-val)))
 
 
 (defmacro hint
@@ -59,71 +54,33 @@
   `~(with-meta body {:tag type}))
 
 
-(defmacro ^Matrix transform-with [A op fun]
-  (let [mA (with-meta (gensym "A") {:tag "Matrix"})
-        df (with-meta (gensym "fun") {:tag "DoubleFunction"})]
-   `(let [~df (. DoubleFunctions ~fun)]
-      (cond
-      (is-matrix ~A)
-        (let [~mA ~A]
-          (.assign (hint "Matrix" (.copy ~mA)) ~df))
-      (and (coll? ~A) (coll? (first ~A)))
-        (let [~mA (make-matrix ~A)]  
-          (.assign ~mA ~df))
-      (coll? ~A)
-        (map ~op ~A)
-      (number? ~A)
-        (~op ~A)))))
+(defmacro transform-with [A op fun]
+  `(cond
+     (is-matrix ~A) (~fun ~A)
+     (and (coll? ~A) (coll? (first ~A))) (let [mA# (make-matrix ~A)]  
+                                           (clx/matrix (clx/dotom ~fun mA#) nil))
+     (coll? ~A)   (map ~op ~A)
+     (number? ~A) (~op ~A)))
 
+(defn pass-to-matrix
+  "Make each element in coll a row-first matrix else pass it back as-is"
+  [coll]
+  (map (fn [x]
+         (if (and (not (is-matrix x)) (coll? x)) 
+           (make-matrix x) 
+           x))
+       coll))
 
 (defmacro combine-with [A B op fun]
-  (let [mA (with-meta (gensym "A") {:tag "Matrix"})
-        mB (with-meta (gensym "B") {:tag "Matrix"})
-        df (with-meta (gensym "fun") {:tag "DoubleDoubleFunction"})]
-   `(let [~df (. DoubleFunctions ~fun)]
-      (cond
-      (and (number? ~A) (number? ~B))
-         (~op ~A ~B)
-      (and (is-matrix ~A) (is-matrix ~B))
-        (let [~mA ~A
-              ~mB ~B] 
-          (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
-      (and (is-matrix ~A) (number? ~B))
-        (let [~mA ~A
-              ~mB (make-matrix ~B (.rows ~mA) (.columns ~mA))] 
-          (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
-      (and (number? ~A) (is-matrix ~B))
-        (let [~mB ~B
-              ~mA (make-matrix ~A (.rows ~mB) (.columns ~mB))]
-          (.assign ~mA ~mB ~df))
-      (and (coll? ~A) (is-matrix ~B))
-        (let [~mB ~B
-              ~mA (make-matrix ~A (.columns ~mB))]
-          (.assign ~mA ~mB ~df))
-      (and (is-matrix ~A) (coll? ~B))
-        (let [~mA ~A
-              ~mB (make-matrix ~B)]
-        (.assign (hint "Matrix" (.copy ~mA)) ~mB ~df))
-      (and (coll? ~A) (coll? ~B) (coll? (first ~A)))
-        (let [~mA (make-matrix ~A)
-              ~mB (make-matrix ~B)]
-          (.assign ~mA~mB ~df))
-      (and (coll? ~A) (number? ~B) (coll? (first ~A)))
-        (let [~mA (make-matrix ~A)
-              ~mB (make-matrix ~B (count ~A) (count (first ~A)))]
-          (.assign ~mA ~mB ~df))
-      (and (number? ~A) (coll? ~B) (coll? (first ~B)))
-        (let [~mA (make-matrix ~A (count ~B) (count (first ~B)))
-              ~mB (make-matrix ~B)]
-          (.assign ~mA ~mB ~df))
-      (and (coll? ~A) (coll? ~B))
-        (map ~op ~A ~B)
-      (and (number? ~A) (coll? ~B))
-        (map ~op (replicate (count ~B) ~A)  ~B)
-      (and (coll? ~A) (number? ~B))
-        (map ~op ~A (replicate (count ~A) ~B))
-  ))))
-
+  `(cond
+     (and (number? ~A) (number? ~B))  
+     (~op ~A ~B)
+     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
+     (map ~op ~A ~B)
+     (and (not (is-matrix ~A)) (not (is-matrix ~B)))
+     (let [a# (if (number? ~A) (replicate (count ~B) ~A) ~A)
+           b# (if (number? ~B) (replicate (count ~A) ~B) ~B)]
+       (map ~op a# b#))))
 
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, ^java.io.Writer w]
