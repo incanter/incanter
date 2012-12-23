@@ -80,9 +80,7 @@
      (and (not (is-matrix ~A)) (not (is-matrix ~B)))
      (let [a# (if (number? ~A) (replicate (count ~B) ~A) ~A)
            b# (if (number? ~B) (replicate (count ~A) ~B) ~B)]
-       (map ~op a# b#))
-     :else (with-meta (~fun ~A ~B) nil))) ;; TODO fix meta
-
+       (map ~op a# b#))))
 
 ;; PRINT METHOD FOR COLT MATRICES
 (defmethod print-method Matrix [o, ^java.io.Writer w]

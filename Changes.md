@@ -1,5 +1,12 @@
 # What's new in Incanter #
 
+## Changes since 1.4.0 ##
+
+Major changes are:
+ * The `incanter.sql` module was added to allow load datasets from databases using ClojureQL.
+ * Support for parametric plots in `incanter.chart` module
+ * Bugfixes
+
 ## Changes since 1.3.0 ##
 
 Major changes are:

@@ -1,12 +1,12 @@
-(defproject incanter/incanter-mongodb "1.4.2"
-  :description "Incanter-mongodb is the MongoDB module of the Incanter project."
+(defproject incanter/incanter-sql "1.4.2"
+  :description "Database interaction via ClojureQL"
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.4.2"]
-                 [congomongo "0.3.3"
-                  :exclusions [org.clojure/clojure
-                               org.clojure/clojure-contrib]]]
+                 [clojureql "1.0.4"]
+                 ]
+  :profiles {:dev {:dependencies [[org.apache.derby/derby "10.8.1.2"]]}}
   )
