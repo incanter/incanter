@@ -73,11 +73,15 @@
 
 (defmacro combine-with [A B op fun]
   `(cond
-    (and (number? ~A) (number? ~B))  
-    (~op ~A ~B)
-    (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
-    (map ~op ~A ~B)
-    :else (with-meta (~fun ~A ~B) nil))) ;; TODO fix meta
+     (and (number? ~A) (number? ~B))  
+     (~op ~A ~B)
+     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
+     (map ~op ~A ~B)
+     (and (not (is-matrix ~A)) (not (is-matrix ~B)))
+     (let [a# (if (number? ~A) (replicate (count ~B) ~A) ~A)
+           b# (if (number? ~B) (replicate (count ~A) ~B) ~B)]
+       (map ~op a# b#))
+     :else (with-meta (~fun ~A ~B) nil))) ;; TODO fix meta
 
 
 ;; PRINT METHOD FOR COLT MATRICES
