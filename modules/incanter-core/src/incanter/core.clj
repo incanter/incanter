@@ -643,7 +643,7 @@
 
   "
     ([& args]
-     (reduce (fn [A B] (clx/* A B)) args)))
+     (reduce (fn [A B] (clx/* A B)) (pass-to-matrix args))))
 
 
 (defn kronecker
