@@ -241,7 +241,7 @@
     (is (every? #(< (float (/ % 10000)) 0.05) diffs) "If this fails, check distribution manually")))
 
 (deftest basic-integer-distribution-tests
-  (is (thrown? AssertionError (integer-distribution 5 0))) ; wrong argment order
+  (is (thrown? AssertionError (integer-distribution 5 0))) ; wrong argument order
   (let [u (integer-distribution 1 5)]
     (is (= (pdf u 5) 1/4))
     (is (= (cdf u 2) 1/2))
@@ -258,9 +258,9 @@
 
 (deftest combination-distribution-tests
   (let [cd (combination-distribution 5 3)]
-    (is (thrown? AssertionError (combination-distribution 0 5))) ; wrong argment order
-    (is (thrown? AssertionError (combination-distribution 3 -1))) ; wrong argment sign
-    (is (thrown? AssertionError (combination-distribution -2 -5))) ; wrong argment sign
+    (is (thrown? AssertionError (combination-distribution 0 5))) ; wrong argument order
+    (is (thrown? AssertionError (combination-distribution 3 -1))) ; wrong argument sign
+    (is (thrown? AssertionError (combination-distribution -2 -5))) ; wrong argument sign
     
     (is (= 3 (count (draw cd))))
 		(is (= 3 (count (set (draw cd)))))))

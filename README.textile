@@ -1,6 +1,6 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/incanter-banner.png" alt="Incanter" /></a>
 
-<a border="0" href="https://secure.travis-ci.org/liebke/incanter" > <img src="https://secure.travis-ci.org/liebke/incanter.png" alt="Incanter" /></a>
+<a border="0" href="https://travis-ci.org/liebke/incanter" > <img src="https://secure.travis-ci.org/liebke/incanter.png" alt="Incanter" /></a>
 
 * <a href="#overview">Overview</a>
 * <a href="#clojure">Getting started with Clojure</a>
@@ -106,7 +106,7 @@ To build and test Incanter, you will need to have <a href="https://github.com/te
 
 Other tasks:
 * If you want to run the tests for each of Incanter's modules, use @script/test@ 
-* Each of Incanter's modules are independent Leiningen projects. Just cd into modules/incanter-* and use Leiningen to build each one as a standalone library.
+* Each of Incanter's modules are independent Leiningen projects. Just cd into modules/incanter-* and use Leiningen to build each one as a stand-alone library.
 * @script/install@ uses Leiningen to build all the modules and install them in your local ~/.m2 repository.
 
 

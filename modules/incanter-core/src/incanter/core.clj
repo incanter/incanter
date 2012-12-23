@@ -33,19 +33,9 @@
   (:use [incanter internal]
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)])
-  (:import (incanter Matrix)
-           (cern.colt.matrix.tdouble DoubleMatrix2D
-                                     DoubleFactory2D
-                                     DoubleFactory1D)
-           (cern.colt.matrix.tdouble.algo DenseDoubleAlgebra
-                                          DoubleFormatter)
-           (cern.colt.matrix.tdouble.algo.decomposition DenseDoubleCholeskyDecomposition
-                                                        DenseDoubleSingularValueDecomposition
-                                                        DenseDoubleEigenvalueDecomposition
-                                                        DenseDoubleLUDecomposition
-                                                        DenseDoubleQRDecomposition)
-           (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
-           (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)
+  (:require [clatrix.core :as clx])
+  (:import (clatrix.core Matrix)
+           (cern.jet.math.tdouble DoubleArithmetic)
            (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.stat.tdouble DoubleDescriptive Gamma)
            (javax.swing JTable JScrollPane JFrame)
@@ -59,6 +49,7 @@
 
 (defrecord Dataset [column-names rows])
 (derive incanter.core.Dataset ::dataset)
+(derive clatrix.core.Matrix ::matrix)
 
 (defn matrix
 "
@@ -103,7 +94,7 @@
 
 
 (defn matrix?
-  " Test if obj is 'derived' incanter.Matrix."
+  " Test if obj is 'derived' clatrix.core.Matrix"
   ([obj] (is-matrix obj)))
 
 
@@ -111,13 +102,12 @@
 " Determines if obj is of type incanter.core.Dataset."
   ([obj] (isa? (type obj) incanter.core.Dataset)))
 
-
 (defn nrow
   ^{:tag Integer
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
-    (matrix? mat) (.rows ^Matrix mat)
+    (matrix? mat) (first (clx/size ^clatrix.core.Matrix mat))
     (dataset? mat) (count (:rows mat))
     (coll? mat) (count mat))))
 
@@ -127,7 +117,7 @@
      :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
-    (matrix? mat) (.columns ^Matrix mat)
+    (matrix? mat) (last (clx/size ^clatrix.core.Matrix mat))
     (dataset? mat) (count (:column-names mat))
     (coll? mat) 1 )))
 
@@ -147,32 +137,25 @@
       (identity-matrix 4)
 
 "
-([^Integer n] (Matrix. (.identity DoubleFactory2D/dense n))))
+([^Integer n] (clx/id n)))
 
 
 (defn diag
-"   If given a matrix, diag returns a sequence of its diagonal elements.
-    If given a sequence, it returns a matrix with the sequence's elements
-    on its diagonal. Equivalent to R's diag function.
+  "
+  If given a matrix, diag returns a sequence of its diagonal elements.
+  If given a sequence, it returns a matrix with the sequence's elements
+  on its diagonal. Equivalent to R's diag function.
 
-    Examples:
-      (diag [1 2 3 4])
+  Examples:
+  (diag [1 2 3 4])
 
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (diag A)
-
-
-"
-   ([m]
-    (cond
-     (matrix? m)
-      (seq (.toArray (.diagonal DoubleFactory2D/dense m)))
-     (coll? m)
-      (Matrix. (.diagonal DoubleFactory2D/dense (.make DoubleFactory1D/dense (double-array m))))
-     (number? m)
-      m)))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (diag A)
+  "
+  [m]
+  (clx/diag m))
 
 
 (defn ^Matrix trans
@@ -187,11 +170,9 @@
 
 "
   ([mat]
-   (cond
-    (matrix? mat)
-      (.viewDice ^Matrix mat)
-    (coll? mat)
-      (.viewDice ^Matrix (matrix ^double-array mat)))))
+   (if (matrix? mat)
+     (clx/t mat)
+     (clx/t (matrix mat)))))
 
 
 
@@ -257,61 +238,60 @@
 
 
 "
-(fn [mat & options] [(type mat) (keyword? (first options))]))
+  (fn [mat & options] [(type mat) (keyword? (first options))]))
 
 
 ;; (defmethod sel [nil false] [])
 ;; (defmethod sel [nil true] [])
 
-(defmethod sel [incanter.Matrix false]
-  ([^Matrix mat rows columns]
+(defmethod sel [clatrix.core.Matrix false]
+  ([^clatrix.core.Matrix mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
          cols (if (number? columns) [columns] columns)
          all-rows? (or (true? rws) (= rws :all))
          all-cols? (or (true? cols) (= cols :all))]
     (cond
       (and (number? rows) (number? columns))
-        (.getQuick mat rows columns)
+        (clx/get mat rows columns)
       (and all-rows? (coll? cols))
-        (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
+        (clx/get mat (range (nrow mat)) cols)
       (and (coll? rws) all-cols?)
-        (.viewSelection mat (int-array rws) (int-array (range (.columns mat))))
+        (clx/get mat rws (range (ncol mat)))
       (and (coll? rws) (coll? cols))
-        (.viewSelection mat (int-array rws) (int-array cols))
+        (clx/get mat rws cols)
       (and all-rows? all-cols?)
         mat))))
 
-
-(defmethod sel [incanter.Matrix true]
-  ([^Matrix mat & {:keys [rows cols except-rows except-cols filter-fn]}]
+(defmethod sel [clatrix.core.Matrix true]
+  ([mat & {:keys [rows cols except-rows except-cols filter-fn]}]
    (let [rows (cond
                 rows rows
-                except-rows (except-for (.rows mat) except-rows)
+                except-rows (except-for (nrow mat) except-rows)
                 :else true)
          cols (cond
                 cols cols
-                except-cols (except-for (.columns mat) except-cols)
+                except-cols (except-for (ncol mat) except-cols)
                 :else true)
-         ^Matrix mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
+         mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
          all-rows? (or (true? rows) (= rows :all))
          all-cols? (or (true? cols) (= cols :all))]
      (cond
        (and (number? rows) (number? cols))
-         (.getQuick mat rows cols)
+         (clx/get mat rows cols)
        (and all-rows? (coll? cols))
-         (.viewSelection mat (int-array (range (.rows mat))) (int-array cols))
+         (clx/get mat (range (nrow mat)) cols)
        (and all-rows? (number? cols))
-         (.viewSelection mat (int-array (range (.rows mat))) (int-array [cols]))
+         (clx/get mat (range (nrow mat)) [cols])
        (and (coll? rows) (number? cols))
-         (.viewSelection mat (int-array rows) (int-array [cols]))
+         (clx/get mat rows [cols])
        (and (coll? rows) all-cols?)
-         (.viewSelection mat (int-array rows) (int-array (range (.columns mat))))
+         (clx/get mat rows (range (ncol mat)))
        (and (number? rows) all-cols?)
-         (.viewSelection mat (int-array [rows]) (int-array (range (.columns mat))))
+         (clx/get mat [rows] (range (ncol mat)))
        (and (number? rows) (coll? cols))
-         (.viewSelection mat (int-array [rows]) (int-array cols))
+         (clx/get mat [rows] cols)
        (and (coll? rows) (coll? cols))
-         (.viewSelection mat (int-array rows) (int-array cols))
+         (clx/get mat rows cols)
        (and all-rows? all-cols?)
          mat))))
 
@@ -340,14 +320,13 @@
           B
         (nil? (seq B))
           A
-        (and (matrix? A) (matrix? B))
-          (conj A B)
-        (and (matrix? A) (coll? B))
-          (conj A B)
-        (and (coll? A) (matrix? B))
-          (conj (matrix A (count A)) B)
-        (and (coll? A) (coll? B))
-          (conj (matrix A (count A)) (matrix B (count B)))
+        (or (coll? A) (coll? B))
+          (conj (if (matrix? A)
+                  A
+                  (matrix A (count A)))
+                (if (matrix? B)
+                  B
+                  (matrix B (count B))))
         :else
           (throw (Exception. "Incompatible types"))))
       args)))
@@ -355,26 +334,24 @@
 
 
 (defn bind-columns
-"   Returns the matrix resulting from concatenating the given matrices
-    and/or sequences by their columns. Equivalent to R's cbind.
+  "   Returns the matrix resulting from concatenating the given matrices
+  and/or sequences by their columns. Equivalent to R's cbind.
 
-    Examples:
-      (def A (matrix [[1 2 3]
-                     [4 5 6]
-                     [7 8 9]]))
+  Examples:
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
 
-      (def B (matrix [10 11 12]))
+  (def B (matrix [10 11 12]))
 
-      (bind-columns A B)
+  (bind-columns A B)
 
-      (bind-columns [1 2 3 4] [5 6 7 8])
+  (bind-columns [1 2 3 4] [5 6 7 8])
 
 
-"
-  ([& args]
-   (reduce
-    (fn [A B] (.viewDice ^Matrix (bind-rows (trans A) (trans B))))
-    args)))
+  "
+  [& args]
+  (reduce clx/hstack (pass-to-matrix args)))
 
 
 
@@ -390,72 +367,67 @@
 
 
 (defn plus
-"   Performs element-by-element addition on multiple matrices, sequences
-    and/or numbers. Equivalent to R's + operator.
+  "
+  Performs element-by-element addition on multiple matrices, sequences
+  and/or numbers. Equivalent to R's + operator.
 
-    Examples:
+  Examples:
 
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (plus A A A)
-      (plus A 2)
-      (plus 2 A)
-      (plus [1 2 3] [1 2 3])
-      (plus [1 2 3] 2)
-      (plus 2 [1 2 3])
-
-
-"
-   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/+ plus)) args)))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (plus A A A)
+  (plus A 2)
+  (plus 2 A)
+  (plus [1 2 3] [1 2 3])
+  (plus [1 2 3] 2)
+  (plus 2 [1 2 3])
+  "
+  [& args] (reduce clx/+ (pass-to-matrix args)))
 
 
 (defn minus
-"   Performs element-by-element subtraction on multiple matrices, sequences
-    and/or numbers. If only a single argument is provided, returns the
-    negative of the given matrix, sequence, or number. Equivalent to R's - operator.
+  "
+  Performs element-by-element subtraction on multiple matrices, sequences
+  and/or numbers. If only a single argument is provided, returns the
+  negative of the given matrix, sequence, or number. Equivalent to R's - operator.
 
+  Examples:
 
-    Examples:
-
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (minus A)
-      (minus A A A)
-      (minus A 2)
-      (minus 2 A)
-      (minus [1 2 3] [1 2 3])
-      (minus [1 2 3] 2)
-      (minus 2 [1 2 3])
-      (minus [1 2 3])
-
-"
-   ([& args] (if (= (count args) 1)
-               (combine-with (Integer. 0) (first args) clojure.core/- minus)
-               (reduce (fn [A B] (combine-with A B clojure.core/- minus)) args))))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (minus A)
+  (minus A A A)
+  (minus A 2)
+  (minus 2 A)
+  (minus [1 2 3] [1 2 3])
+  (minus [1 2 3] 2)
+  (minus 2 [1 2 3])
+  (minus [1 2 3])
+  "
+  [& args] (reduce clx/- (pass-to-matrix args)))
 
 
 
 (defn mult
-"   Performs element-by-element multiplication on multiple matrices, sequences
-    and/or numbers. Equivalent to R's * operator.
+  "
+  Performs element-by-element multiplication on multiple matrices, sequences
+  and/or numbers. Equivalent to R's * operator.
 
-    Examples:
+  Examples:
 
-      (def A (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]]))
-      (mult A A A)
-      (mult A 2)
-      (mult 2 A)
-      (mult [1 2 3] [1 2 3])
-      (mult [1 2 3] 2)
-      (mult 2 [1 2 3])
-
-
-"
-   ([& args] (reduce (fn [A B] (combine-with A B clojure.core/* mult)) args)))
+  (def A (matrix [[1 2 3]
+  [4 5 6]
+  [7 8 9]]))
+  (mult A A A)
+  (mult A 2)
+  (mult 2 A)
+  (mult [1 2 3] [1 2 3])
+  (mult [1 2 3] 2)
+  (mult 2 [1 2 3])
+  "
+  [& args] (reduce clx/mult (pass-to-matrix args))) ;; TODO: clean, special case for (reduce mult A)
 
 
 (defn div
@@ -478,27 +450,38 @@
 
 "
    ([& args] (if (= (count args) 1)
-               (combine-with (Integer. 1) (first args) clojure.core// div)
-               (reduce (fn [A B] (combine-with A B clojure.core// div)) args))))
+               (clx/div (double 1) (first args))
+               (reduce clx/div (pass-to-matrix args)))))
 
 
-(defn pow
+(defn pow  ;; TODO use jblas and fix meta
   " This is an element-by-element exponent function, raising the first argument
-    by the exponents in the remaining arguments. Equivalent to R's ^ operator."
-   ([& args] (reduce (fn [A B] (combine-with A B #(Math/pow %1 %2) pow)) args)))
+  by the exponents in the remaining arguments. Equivalent to R's ^ operator."
+  [& args]
+  (reduce (fn [A B]
+            (combine-with A B
+                          #(Math/pow %1 %2)
+                          (fn [a b] (map (map #(Math/pow %1 %2))
+                                         a b))))
+          args))
 
 
-(defn atan2
+(defn atan2 ;; TODO fix meta
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
-   Equivalent to R's atan2 function."
-   ([& args] (reduce (fn [A B] (combine-with A B #(Math/atan2 %1 %2)
-                                    cern.jet.math.tdouble.DoubleFunctions/atan2)) args)))
+  Equivalent to R's atan2 function."
+  [& args]
+  (reduce (fn [A B]
+            (combine-with A B
+                          #(Math/atan2 %1 %2) ;; TODO macro this
+                          (fn [a b] (map (map #(Math/atan2 %1 %2))
+                                         a b))))
+          args))
 
 
 (defn sqrt
   "Returns the square-root of the elements in the given matrix, sequence or number.
    Equivalent to R's sqrt function."
-   ([A] (pow A 1/2)))
+   [A] (transform-with A #(Math/sqrt %) clx/sqrt!))
 
 
 (defn sq
@@ -509,68 +492,69 @@
 
 (defn log
   "Returns the natural log of the elements in the given matrix, sequence or number.
-   Equvalent to R's log function."
-   ([A] (transform-with A #(Math/log %) log)))
+   Equivalent to R's log function."
+   ([A] (transform-with A #(Math/log %) clx/log!)))
 
 
 (defn log2
   "Returns the log base 2 of the elements in the given matrix, sequence or number.
    Equivalent to R's log2 function."
-   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) log2)))
+   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) #(div (clx/log! %)
+                                                               (matrix (Math/log 2) (nrow %) (ncol %))))))
 
 
 (defn log10
   "Returns the log base 10 of the elements in the given matrix, sequence or number.
    Equivalent to R's log10 function."
-   ([A] (transform-with A #(Math/log10 %) (lg 10.0))))
+   ([A] (transform-with A #(Math/log10 %) clx/log10!)))
 
 
 (defn exp
   "Returns the exponential of the elements in the given matrix, sequence or number.
    Equivalent to R's exp function."
-   ([A] (transform-with A #(Math/exp %) exp)))
+   ([A] (transform-with A #(Math/exp %) clx/exp!)))
 
 
 (defn abs
   "Returns the absolute value of the elements in the given matrix, sequence or number.
    Equivalent to R's abs function."
-   ([A] (transform-with A #(Math/abs (float %)) abs)))
+   ([A] (transform-with A #(Math/abs (double %)) clx/abs!)))
 
 
 (defn sin
   "Returns the sine of the elements in the given matrix, sequence or number.
    Equivalent to R's sin function."
-   ([A] (transform-with A #(Math/sin %) sin)))
+   ([A] (transform-with A #(Math/sin %) clx/sin!)))
 
 
 (defn asin
   "Returns the arc sine of the elements in the given matrix, sequence or number.
    Equivalent to R's asin function."
-   ([A] (transform-with A #(Math/asin %) asin)))
+   ([A] (transform-with A #(Math/asin %) clx/asin!)))
 
 
 (defn cos
   "Returns the cosine of the elements in the given matrix, sequence or number.
    Equivalent to R's cos function."
-   ([A] (transform-with A #(Math/cos %) cos)))
+   ([A] (transform-with A #(Math/cos %) clx/cos!)))
 
 
 (defn acos
   "Returns the arc cosine of the elements in the given matrix, sequence or number.
    Equivalent to R's acos function."
-   ([A] (transform-with A #(Math/acos %) acos)))
+   ([A] (transform-with A #(Math/acos %) clx/acos!)))
 
 
 (defn tan
   "Returns the tangent of the elements in the given matrix, sequence or number.
    Equivalent to R's tan function."
-   ([A] (transform-with A #(Math/tan %) tan)))
+   ([A] (transform-with A #(Math/tan %) clx/tan!)))
 
 
 (defn atan
   "Returns the arc tangent of the elements in the given matrix, sequence or number.
    Equivalent to R's atan function."
-   ([A] (transform-with A #(Math/atan %) atan)))
+   ([A] (transform-with A #(Math/atan %) clx/atan!)))
 
 
 (defn factorial
@@ -620,15 +604,9 @@
     and a flat list if the matrix is one-dimensional."
   type)
 
-(defmethod to-list Matrix
- ([^Matrix mat]
-  (cond
-    (= (.columns mat) 1)
-      (first (map #(seq %) (seq (.toArray (.viewDice mat)))))
-    (= (.rows mat) 1)
-      (first (map #(seq %) (seq (.toArray mat))))
-    :else
-      (map #(seq %) (seq (.toArray mat))))))
+(defmethod to-list ::matrix
+ ([^clatrix.core.Matrix mat]
+  (clx/as-vec mat)))
 
 
 (defmethod to-list ::dataset
@@ -644,7 +622,7 @@
 
 (defn ^Matrix copy
   "Returns a copy of the given matrix."
-  ([^Matrix mat] (.copy mat)))
+  ([^Matrix mat] (clx/matrix (clx/dotom .copy mat) nil)))
 
 
 (defn mmult
@@ -665,14 +643,7 @@
 
   "
     ([& args]
-     (reduce (fn [A B]
-              (let [a (if (matrix? A) A (matrix A))
-                    b (if (matrix? B) B (matrix B))
-                    result (Matrix. (.zMult ^Matrix a ^Matrix b nil))]
-                (if (and (= (.rows result) 1) (= (.columns result) 1))
-                  (.getQuick result 0 0)
-                  result)))
-            args)))
+     (reduce (fn [A B] (clx/* A B)) (pass-to-matrix args))))
 
 
 (defn kronecker
@@ -705,9 +676,6 @@
                                              (mult (sel a i j) b)))))))
             args)))
 
-
-
-
 (defn solve
 " Returns a matrix solution if A is square, least squares solution otherwise.
   Equivalent to R's solve function.
@@ -722,30 +690,28 @@
 "
   ([^Matrix A & B]
    (if B
-    (Matrix. (.solve (DenseDoubleAlgebra.) A ^Matrix (first B)))
-    (Matrix. (.inverse (DenseDoubleAlgebra.) A)))))
+    (clx/solve A B)
+    (clx/i A))))
 
+;(defn det ;; TODO
+;" Returns the determinant of the given matrix. Equivalent
+  ;to R's det function.
 
-
-(defn det
-" Returns the determinant of the given matrix. Equivalent
-  to R's det function.
-
-  References:
-    http://en.wikipedia.org/wiki/LU_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
-"
-  ([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
+  ;References:
+    ;http://en.wikipedia.org/wiki/LU_decomposition
+    ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
+;"
+  ;([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
 
 
 (defn trace
-" Returns the trace of the given matrix.
+  " Returns the trace of the given matrix.
 
   References:
-    http://en.wikipedia.org/wiki/Matrix_trace
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
-"
-  ([mat] (.trace DenseDoubleAlgebra/DEFAULT mat)))
+  http://en.wikipedia.org/wiki/Matrix_trace
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
+  "
+  [mat] (clx/trace mat))
 
 
 
@@ -847,46 +813,47 @@
   chol function.
 
   Returns:
-    a matrix of the triangular factor (note: the result from
-    cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
-    that it matches the result return from R's chol function.
+a matrix of the triangular factor (note: the result from
+cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
+that it matches the result return from R's chol function.
 
 
 
-  Examples:
+Examples:
 
-  (use '(incanter core stats charts datasets))
-  ;; load the iris dataset
-  (def iris (to-matrix (get-dataset :iris)))
-  ;; take the Cholesky decompostion of the correlation matrix of the iris data.
-  (decomp-cholesky (correlation iris))
+(use '(incanter core stats charts datasets))
+;; load the iris dataset
+(def iris (to-matrix (get-dataset :iris)))
+;; take the Cholesky decomposition of the correlation matrix of the iris data.
+(decomp-cholesky (correlation iris))
 
 
 
-  References:
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
-    http://en.wikipedia.org/wiki/Cholesky_decomposition
+References:
+http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
+http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
-  ([^Matrix mat]
-    (Matrix. (.viewDice (.getL (DenseDoubleCholeskyDecomposition. mat))))))
+  [^Matrix mat]
+  (clx/cholesky mat))
 
 
 
 (defn decomp-svd
-" Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
+  "
+  Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
   R's svd function.
 
   Optional parameters:
-    :type -- one of :full, :compact, or :values.  default is :full
-      if :full, returns the full SVD
-      if :compact, returns the compact SVD
-      if :values, only the singular values are calculated
+  :type -- one of :full, :compact, or :values.  default is :full
+  if :full, returns the full SVD
+  if :compact, returns the compact SVD
+  if :values, only the singular values are calculated
 
   Returns:
-    a map containing:
-      :S -- the diagonal matrix of singular values S (the diagonal in vector form)
-      :U -- the left singular vectors U
-      :V -- the right singular vectors V
+  a map containing:
+  :S -- the diagonal matrix of singular values S (the diagonal in vector form)
+  :U -- the left singular vectors U
+  :V -- the right singular vectors V
 
   Examples:
 
@@ -899,30 +866,28 @@
 
 
   References:
-    http://en.wikipedia.org/wiki/Singular_value_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
-"
-  ([mat & {:keys [type] :or {type :full}}]
-    (let [type (or type :full)
-          want-uv (not= type :values)
-          want-whole-uv (= type :full)
-          result (DenseDoubleSingularValueDecomposition. mat want-uv want-whole-uv)]
-      (if (= type :values)
-        {:S (diag (Matrix. (.getS result)))}
-        {:S (diag (Matrix. (.getS result)))
-         :U (Matrix. (.getU result))
-         :V (Matrix. (.getV result))}))))
-
-
+  http://en.wikipedia.org/wiki/Singular_value_decomposition
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
+  "
+  [mat & {:keys [type] :or {type :full}}]
+  (let [type (or type :full)
+        result (if (= type :full)
+                 (clx/svd mat :type :full)
+                 (clx/svd mat :type :sparse))]
+    (if (= type :values)
+      {:S (:values (clx/svd mat :type :values))}
+      {:S (:values result)
+       :U (if (= type :compact) mat (:left result)) 
+       :V (:right result)})))
 
 (defn decomp-eigenvalue
-" Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
+  "
+  Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
 
   Returns:
-    a map containing:
-      :values -- vector of eigenvalues
-      :vectors -- the matrix of eigenvectors
-
+  a map containing:
+  :values -- vector of eigenvalues
+  :vectors -- the matrix of eigenvectors
 
   Examples:
 
@@ -930,15 +895,14 @@
   (def foo (matrix (range 9) 3))
   (decomp-eigenvalue foo)
 
-
   References:
-    http://en.wikipedia.org/wiki/Eigenvalue_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
-"
-  ([mat]
-    (let [result (DenseDoubleEigenvalueDecomposition. mat)]
-      {:values (diag (Matrix. (.getD result)))
-       :vectors (Matrix. (.getV result))})))
+  http://en.wikipedia.org/wiki/Eigenvalue_decomposition
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
+  "
+  [mat]
+  (let [result (clx/eigen mat)]
+    {:values (or (:values result) (:ivalues result))
+     :vectors (or (:vectors result) (:ivectors result))}))
 
 
 (defn decomp-lu
@@ -962,45 +926,74 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
 "
   ([mat]
-    (let [result (DenseDoubleLUDecomposition. mat)]
-      {:L (Matrix. (.getL result))
-       :U (Matrix. (.getU result))})))
+    (let [result (clx/lu mat)]
+      {:L (:l result)
+       :U (:u result)})))
+
+(defn vector-length [u]
+  (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
+
+(defn inner-product [u v]
+  (apply + (mult u (trans v))))
+
+(defn proj [u v]
+  (mult (div (inner-product v u) (inner-product u u)) u))
 
 
-(defn decomp-qr
-" Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
+(defn orthonormal-base-stable [m]
+  (let [m (trans m)
+        vectors (reduce (fn [ac i]
+                          (let [vi (nth m i)]
+                            (conj ac (reduce (fn [aci j]
+                                               (minus aci (proj (nth ac j) vi)))
+                                             vi
+                                             (range 0 i)))))
+                        []
+                        (range 0 (nrow m)))]
+    (map (fn [v] (div v (vector-length v))) vectors)))
 
-  Optional parameters:
-    :type -- one of :full, :compact.  default is :full
-      if :full, returns the full QR decomposition
-      if :compact, returns the compact (economy) QR decomposition
+;(defn decomp-qr
+  ;" Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
-  Returns:
-    a map containing:
-      :Q -- orthogonal factors
-      :R -- the upper triangular factors
+  ;Optional parameters:
+  ;:type -- one of :full, :compact.  default is :full
+  ;if :full, returns the full QR decomposition
+  ;if :compact, returns the compact (economy) QR decomposition
 
-  Examples:
+  ;Returns:
+  ;a map containing:
+  ;:Q -- orthogonal factors
+  ;:R -- the upper triangular factors
 
-  (use 'incanter.core)
-  (def foo (matrix (range 9) 3))
-  (decomp-qr foo)
-  (decomp-qr foo :type :full)
-  (decomp-qr foo :type :compact)
+  ;Examples:
 
-  References:
-    http://en.wikipedia.org/wiki/QR_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
-"
-  ([mat & {:keys [type] :or {type :full}}]
-    (let [type (or type :full)
-          economy (case type
-                    :full false
-                    :compact true
-                    (throw (IllegalArgumentException. (str "Unknown type " type))))
-          result (DenseDoubleQRDecomposition. mat)]
-      {:Q (Matrix. (.getQ result economy))
-       :R (Matrix. (.getR result economy))})))
+  ;(use 'incanter.core)
+  ;(def foo (matrix (range 9) 3))
+  ;(decomp-qr foo)
+  ;(decomp-qr foo :type :full)
+  ;(decomp-qr foo :type :compact)
+
+  ;References:
+  ;http://en.wikipedia.org/wiki/QR_decomposition
+  ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
+  ;"
+  ;[m & {:keys [type] :or {type :full}}]  ;; TODO make work in matrix
+  ;(let [type (or type :full)
+        ;q (orthonormal-base-stable m)
+        ;m (trans m)]
+    ;{:Q (if (= type :full) q m) 
+     ;:R (if (= type :compact)
+          ;(matrix (reduce (fn [r j]
+                            ;(conj r
+                                  ;(reduce (fn [row i]
+                                            ;(if (< i j)
+                                              ;(conj row 0)
+                                              ;(conj row (inner-product (nth q j) (nth m i)))))
+                                          ;[]
+                                          ;(range 0 (count q)))))
+                          ;[]
+                          ;(range 0 (count q))))
+          ;m)}))
 
 (defn condition
 " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.
@@ -1018,12 +1011,13 @@
     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
-    (.cond (DenseDoubleSingularValueDecomposition. mat, true, true))))
+   (let [s (:S (decomp-svd mat))]
+     (/ (apply max s) (apply min s)))))
 
 
 (defn rank
-" Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
-
+  "
+  Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
 
   Examples:
 
@@ -1031,14 +1025,12 @@
   (def foo (matrix (range 9) 3))
   (rank foo)
 
-
-
   References:
-    http://en.wikipedia.org/wiki/Matrix_rank
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
-"
-  ([mat]
-    (.rank (DenseDoubleSingularValueDecomposition. mat, true, true))))
+  http://en.wikipedia.org/wiki/Matrix_rank
+  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
+  "
+  [mat]
+  (clx/rank mat))
 
 
 
@@ -1072,15 +1064,11 @@
       (number? coll)
         1
       (matrix? coll)
-        (* (.rows ^Matrix coll) (.columns ^Matrix coll))
+        (* (nrow coll) (ncol coll))
       (coll? coll)
         (count coll)
       :else
         1)))
-
-
-
-
 
 (defn group-on
 " Groups the given matrix by the values in the columns indicated by the
@@ -1654,7 +1642,7 @@ altering later ones."
 "Returns a dataset that uses the given summary function (or function identifier keyword)
  to rollup the given column based on a set of group-by columns. The summary function
  should accept a single sequence of values and return a single summary value. Alternatively,
- you can provide a keyword identifer of a set of built-in functions including:
+ you can provide a keyword identifier of a set of built-in functions including:
 
    :max -- the maximum value of the data in each group
    :min -- the minimum value of the data in each group
@@ -1694,7 +1682,7 @@ altering later ones."
     (with-data ($rollup :mean :Sepal.Length :Species iris)
       (view (bar-chart :Species :Sepal.Length)))
 
-     ;; the following exaples use the built-in data set called hair-eye-color.
+     ;; the following examples use the built-in data set called hair-eye-color.
 
      (with-data ($rollup :mean :count [:hair :eye] hair-eye-color)
        (view (bar-chart :hair :count :group-by :eye :legend true)))
@@ -2344,14 +2332,14 @@ altering later ones."
   ([data & {:keys [lower] :or {lower true}}]
    (let [n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
-         mat (incanter.Matrix. p p 0)
+         mat (matrix 0 p p)
          indices (if lower
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
      (doseq [idx (range n)]
       (let [[i j] (nth indices idx)]
-        (.set mat i j (nth data idx))
-        (.set mat j i (nth data idx))))
+        (clx/set mat i j (nth data idx))
+        (clx/set mat j i (nth data idx))))
      mat)))
 
 
@@ -2433,7 +2421,7 @@ altering later ones."
 
 
 
-(defmethod view incanter.Matrix
+(defmethod view incanter.Matrix ;; TODO convert to clatrix
   ([obj & {:keys [column-names]}]
      (let [col-names (or column-names (range (ncol obj)))
            m (ncol obj)
@@ -2750,31 +2738,32 @@ of each type"
       (.write w (str (apply vector (map #(get row %) (:column-names o)))))
       (.write w "\n"))))
 
+(comment ;; TODO
+  (defn- block-diag2 [block0 block1]
+    (.composeDiagonal DoubleFactory2D/dense block0 block1)) 
+  (defn block-diag
+    "Blocks should be a sequence of matrices."
+    [blocks]
+    (new Matrix (reduce block-diag2 blocks))) 
 
-(defn- block-diag2 [block0 block1]
-  (.composeDiagonal DoubleFactory2D/dense block0 block1))
-(defn block-diag
-  "Blocks should be a sequence of matrices."
-  [blocks]
-  (new Matrix (reduce block-diag2 blocks)))
+  (defn block-matrix
+    "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
+    [blocks]
+    (let [element-class (-> blocks first first class)
+          native-rows (for [row blocks] (into-array element-class row))
+          native-blocks (into-array (-> native-rows first class) native-rows)]
+      (new Matrix (.compose DoubleFactory2D/dense native-blocks)))) 
 
-(defn block-matrix
-  "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
-  [blocks]
-  (let [element-class (-> blocks first first class)
-        native-rows (for [row blocks] (into-array element-class row))
-        native-blocks (into-array (-> native-rows first class) native-rows)]
-    (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
+  (defn separate-blocks
+    "Partitions should be a sequence of [start,size] pairs."
+    [matrix partitions]
+    (for [p partitions]
+      (for [q partitions]
+        (.viewPart matrix (first p) (first q) (second p) (second q))))) 
 
-(defn separate-blocks
-  "Partitions should be a sequence of [start,size] pairs."
-  [matrix partitions]
-  (for [p partitions]
-    (for [q partitions]
-      (.viewPart matrix (first p) (first q) (second p) (second q)))))
-
-(defn diagonal-blocks
-  "Partitions should be a sequence of [start,size] pairs."
-  [matrix partitions]
-  (for [p partitions]
-    (.viewPart matrix (first p) (first p) (second p) (second p))))
+  (defn diagonal-blocks
+    "Partitions should be a sequence of [start,size] pairs."
+    [matrix partitions]
+    (for [p partitions]
+      (.viewPart matrix (first p) (first p) (second p) (second p))))
+  ) 

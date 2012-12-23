@@ -1,6 +1,19 @@
 # What's new in Incanter #
 
-## Changes since 1.3.0 ##
+## Changes for 1.5.x
+
+- Incanter-core matrix using native BLAS through jBLAS/Clatrix
+- Updated dependencies:
+    - [Clatrix](https://github.com/Quantisan/clatrix): 0.2.1
+
+## Changes for 1.4.x ##
+
+Major changes are:
+ * The `incanter.sql` module was added to allow load datasets from databases using ClojureQL.
+ * Support for parametric plots in `incanter.chart` module
+ * Bugfixes
+
+## Changes for 1.3.x ##
 
 Major changes are:
 
