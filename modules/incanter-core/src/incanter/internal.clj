@@ -81,17 +81,3 @@
      (let [a# (if (number? ~A) (replicate (count ~B) ~A) ~A)
            b# (if (number? ~B) (replicate (count ~A) ~B) ~B)]
        (map ~op a# b#))))
-
-;; PRINT METHOD FOR COLT MATRICES
-(defmethod print-method Matrix [o, ^java.io.Writer w]
-  (let [formatter (DoubleFormatter. "%1.4f")]
-    (do
-      (.setPrintShape formatter false)
-      (.write w "[")
-      (.write w (.toString formatter o))
-      (.write w "]\n"))))
-
-
-
-
-
