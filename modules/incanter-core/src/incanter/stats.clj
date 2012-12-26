@@ -2093,7 +2093,7 @@
           coef-var (mult mse xtxi)
           std-errors (sqrt (diag coef-var))
           t-tests (div coefs std-errors)
-          t-probs (mult 2 (cdf-t (scalar-abs t-tests) :df df2 :lower-tail false))
+          t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
                        [(plus coefs t-95)
