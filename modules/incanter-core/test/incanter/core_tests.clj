@@ -39,6 +39,9 @@
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
   (is (= (sel dataset1 :all 1) [2 5]))
+  (is (= (sel dataset1 :all :b) [2 5]))
+  (is (= (sel dataset1 :all [:a :c]) (dataset [:a :c] [[1 3] [4 6]])))
+  (is (= (sel dataset1 :all :all) dataset1))
   (is (= (sel dataset2 :cols :b) [2 5]))
   (is (= (sel dataset2 :cols "c") [3 6]))
   (is (= (sel dataset3 :cols :a) [1 4]))
@@ -198,6 +201,15 @@
   ;; use 'true' to select an entire row or column
   (is (= (sel A :cols 2) (matrix [3 6 9 12])))
   (is (= (sel A :rows 1) (matrix [[4 5 6]])))
+  (is (= (sel A :all [0 2]) (matrix [[1 3]
+                                     [4 6]
+                                     [7 9]
+                                     [10 12]])))
+  (is (= (sel A :all :all) A))
+  (is (= (sel A :all 2) (matrix [[3]
+                                 [6]
+                                 [9]
+                                 [12]])))
   (is (= (sel A true true) A))
   ;; pass a vector of indices to select a set of rows and/or columns
   (is (= (sel A :cols [0 2]) (matrix [[1 3]
