@@ -39,7 +39,9 @@
      (coll? (first data))
       (clx/matrix data)
      (number? (first data))
-      (clx/matrix (map vector data))))
+      (clx/matrix (map vector data))
+     :default
+      (clx/matrix (map seq data))))
   ([data ncol]
    {:pre [(number? (first data))]}
    (let [chunked  (partition ncol data)]

@@ -81,7 +81,10 @@
 ;; constructing matrices from arrays
 (deftest matrix-from-arrays
   (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
-  (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3])))))
+  (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3]))))
+  (is (= (matrix [[1 2] [3 4]]) 
+         (matrix (object-array [(double-array [1.0 2.0])
+                                (double-array [3.0 4.0])])))))
 
 
   ;; performing clojure sequence operations on matrices
