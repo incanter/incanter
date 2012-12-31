@@ -78,6 +78,12 @@
   (is (= (count (rest A)) 3))
   (is (= (count (rest (first A))) 2)))
 
+;; constructing matrices from arrays
+(deftest matrix-from-arrays
+  (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
+  (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3])))))
+
+
   ;; performing clojure sequence operations on matrices
 (deftest matrix-seq-tests
   (is (= (first A) (matrix [1 2 3] 3))) ; first of A is a 1D row matrix
