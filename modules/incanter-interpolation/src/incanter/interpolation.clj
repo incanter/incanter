@@ -43,7 +43,29 @@
                     (dec (count points)))]
     (b-spline points degree)))
 
+(defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
+  (if-not (or (nil? xs) (nil? ys))
+    [xs ys]
+    (let [n (count grid)
+          m (count (first grid))
+          x-range (or x-range [0 1])
+          y-range (or y-range [0 1])
+          uniform (fn [[a b] n]
+                    (map #(-> % (* (- b a)) (/ (dec n)) (+ a))
+                         (range n)))
+          options (assoc options
+                    :xs (uniform x-range n)
+                    :ys (uniform y-range m))]
+      (recur grid type options))))
 
+
+(defn interpolate-grid
+  " Interpolates 2-dimensional grid"
+  [grid type & options]
+  (let [opts (when options (apply assoc {} options))]
+    (interpolate-grid* grid type opts))
+)
+(interpolate-grid [[1 2 3] [3 4 5]] nil :x-range [0 10] :y-range [-5 5])
 
 #_(
 
