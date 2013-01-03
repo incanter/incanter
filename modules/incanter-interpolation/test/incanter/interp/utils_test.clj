@@ -1,6 +1,6 @@
-(ns incanter.b-spline-test
+(ns incanter.interp.utils-test
   (:use clojure.test
-        incanter.b-spline))
+        incanter.interp.utils))
 
 (deftest binary-search-test
   (are [value pos] (= (binary-search [0 2 4 8 16 32 64 128] value) pos)

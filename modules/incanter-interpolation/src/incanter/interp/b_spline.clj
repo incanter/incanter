@@ -1,19 +1,6 @@
-(ns incanter.b-spline
-  (:use [incanter.core :only (plus minus div mult)]))
-
-(defn log [v & args]
-  (apply println v args)
-  v)
-
-(defn binary-search [vec value]
-  (loop [left 0
-         right (dec (count vec))]
-    (if (= (- right left) 1)
-      (if (<= (nth vec right) value) right left)
-      (let [middle (quot (+ left right) 2)]
-        (if (<= (nth vec middle) value)
-          (recur middle right)
-          (recur left middle))))))
+(ns incanter.interp.b-spline
+  (:use [incanter.core :only (plus minus div mult)]
+        [incanter.interp.utils :only (binary-search)]))
 
 (defn calc-Ns [ts m t k]
   (letfn [(calc-V [i m]
