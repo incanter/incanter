@@ -263,7 +263,7 @@
         mat))))
 
 (defmethod sel [clatrix.core.Matrix true]
-  ([mat & {:keys [rows cols except-rows except-cols filter-fn]}]
+  ([mat & {:keys [rows cols except-rows except-cols filter-fn all]}]
    (let [rows (cond
                 rows rows
                 except-rows (except-for (nrow mat) except-rows)
@@ -271,10 +271,11 @@
          cols (cond
                 cols cols
                 except-cols (except-for (ncol mat) except-cols)
+                all all
                 :else true)
          mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
-         all-rows? (or (true? rows) (= rows :all))
-         all-cols? (or (true? cols) (= cols :all))]
+         all-rows? (or (true? rows) (= rows :all) all)
+         all-cols? (or (true? cols) (= cols :all) (= all :all))]
      (cond
        (and (number? rows) (number? cols))
          (clx/get mat rows cols)
@@ -1312,20 +1313,24 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
 
 (defmethod sel [::dataset true]
-  ([data & {:keys [rows cols except-rows except-cols filter]}]
+  ([data & {:keys [rows cols except-rows except-cols filter all]}]
     (let [rows (cond
                  rows rows
                  except-rows (except-for (nrow data) except-rows)
                 :else true)
           cols (cond
                  cols (cond
-                        (coll? cols) cols
+                        (coll? cols)  cols
                         (or (= :all cols) (true? cols)) (:column-names data)
                         :else [cols])
+                 all (cond
+                       (coll? all) all
+                       (= :all all) (:column-names data)
+                       :else [all])
                 except-cols (except-for-cols data except-cols)
                 :else (:column-names data))
           selected-rows (cond
-                          (or (= rows :all) (true? rows))
+                          (or (= rows :all) (true? rows) all)
                             (:rows data)
                           (number? rows)
                             (list (nth (:rows data) rows))
