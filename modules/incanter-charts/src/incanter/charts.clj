@@ -2273,9 +2273,12 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
-          __x (in-coll (if x-groups (first x-groups) _x))
+                     (->> (conj-cols _x _group-by)
+                          ($group-by :col-1)
+                          vals
+                          (map #($ :col-0 %))
+                          (map in-coll)))
+          __x (if x-groups (first x-groups) _x)
           title (or (:title opts) "")
           x-label (or (:x-label opts) "")
           y-label (or (:y-label opts) (str 'x))
