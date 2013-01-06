@@ -20,3 +20,28 @@
        0 2
        3 7
        6 12))
+
+(deftest find-segment-test
+  (let [xs [0 1 2 3 4 5]]
+    (are [x expected] (= (find-segment xs x) expected)
+         0   0
+         0.5 0
+         1   1
+         1.5 1
+         4   4
+         4.5 4
+         5   4
+         -1  0
+         6   4)))
+
+
+(deftest find-rect-test
+  (let [xs [0 1 2 3 4 5]
+        ys [0 2 4 6 8 10]]
+    (are [x y expected] (= (find-rect xs ys x y) expected)
+         0 0   [0 0]
+         1.5 3 [1 1]
+         2 7   [2 3]
+         0 10  [0 4]
+         5 10  [4 4]
+         5 0   [4 0])))

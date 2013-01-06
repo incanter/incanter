@@ -13,11 +13,21 @@
           (recur left middle))))))
 
 
-(defn out-of-range
-  "Throws out-of-range exception."
-  [x points]
-  (throw (IllegalArgumentException.
-          (format "x = %s is out of range [%s, %s]"
-                  x
-                  (apply min (map first points))
-                  (apply max (map first points))))))
+(defn find-segment
+  "Finds indices of segment that contains given point.
+   Params:
+     xs - sorted coordinates of segments
+     x - point"
+  [xs x]
+  (min (- (count xs) 2)
+       (binary-search xs x)))
+
+
+(defn find-rect
+  "Finds indices of region (rectangle) in grid that contains given point.
+   Params:
+     xs, ys - coordinates of grid
+     x, y - coordinates of point we to find region for"
+  [xs ys x y]
+  [(find-segment xs x)
+   (find-segment ys y)])

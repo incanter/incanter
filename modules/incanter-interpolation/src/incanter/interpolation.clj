@@ -1,10 +1,10 @@
 (ns incanter.interpolation
-  (:use [incanter.core :only (plus minus mult div)]
-        [incanter.interp
-         [cubic-spline :rename {interpolate interpolate-cubic}]
-         [b-spline :only (b-spline)]
-         [polynomial :only (interpolate-polynomial)]
-         [linear :only (interpolate-linear)]]))
+  (:use [incanter.core :only (plus minus mult div)])
+  (:require [incanter.interp
+             [cubic-spline :as cubic-spline]
+             [b-spline :as b-spline]
+             [polynomial :as polynomial]
+             [linear :as linear]]))
 
 (defn- validate-unique [xs]
   (when-not (apply distinct? xs)
@@ -20,9 +20,9 @@
 "
   [points type]
   (let [method (case type
-                 :linear interpolate-linear
-                 :polynomial interpolate-polynomial
-                 :cubic-spline interpolate-cubic)]
+                 :linear linear/interpolate
+                 :polynomial polynomial/interpolate
+                 :cubic-spline cubic-spline/interpolate)]
     (validate-unique (map first points))
     (method (sort-by first points))))
 
@@ -41,11 +41,17 @@
   (let [opts (when options (apply assoc {} options))
         degree (min (:degree opts 3)
                     (dec (count points)))]
-    (b-spline points degree)))
+    (b-spline/b-spline points degree)))
 
 (defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
   (if-not (or (nil? xs) (nil? ys))
-    [xs ys]
+    (let [method (case type
+                   :bilinear linear/interpolate-grid)
+          xs (sort xs)
+          ys (sort ys)]
+      (validate-unique xs)
+      (validate-unique ys)
+      (method grid xs ys options))
     (let [n (count grid)
           m (count (first grid))
           x-range (or x-range [0 1])
@@ -56,16 +62,18 @@
           options (assoc options
                     :xs (uniform x-range n)
                     :ys (uniform y-range m))]
-      (recur grid type options))))
+      (interpolate-grid* grid type options))))
 
 
 (defn interpolate-grid
-  " Interpolates 2-dimensional grid"
+  "Interpolates 2-dimensional grid"
   [grid type & options]
   (let [opts (when options (apply assoc {} options))]
-    (interpolate-grid* grid type opts))
-)
-(interpolate-grid [[1 2 3] [3 4 5]] nil :x-range [0 10] :y-range [-5 5])
+    (interpolate-grid* grid type opts)))
+
+
+#_((interpolate-grid [[1 2 3] [3 4 5]] :bilinear :x-range [0 10] :y-range [-5 5]) 5 -2.5)
+#_((interpolate-grid [[1 2 3] [3 4 5]] :bilinear) 0 1)
 
 #_(
 
@@ -83,7 +91,7 @@
            points (map vector xs ys)
            min-x (apply min xs)
            max-x (apply max xs)
-           f (interpolate points :cubic-spline)]
+           f (interpolate points :linear)]
        (doto (charts/function-plot f min-x max-x)
          (charts/add-points xs ys)
          (core/view))))

@@ -1,7 +1,7 @@
 (ns incanter.interp.polynomial
   (:use [incanter.core :only (plus minus mult div)]))
 
-(defn interpolate-polynomial [points]
+(defn interpolate [points]
   (let [xs (map first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]
