@@ -19,3 +19,16 @@
                       (map vector
                            (range 10)
                            (range 10 0 -1))))
+
+(deftest interpolate-grid-test
+  (doseq [method [:bilinear]]
+    (testing (str "Test " (name method) " grid interpolation")
+      (let [xs (range 6)
+            ys (range 6)
+            grid (vec (for [x xs] (vec (for [y ys] (+ x y)))))
+            interp-fn (interpolate-grid grid method :xs xs :ys ys)]
+        (doseq [x xs
+                y ys]
+          (is (= (interp-fn x y) (get-in grid [x y]))
+              (str "x = " x " , y = " y ". Expecting f(x, y) = " (get-in grid [x y]))))))))
+
