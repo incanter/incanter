@@ -112,6 +112,10 @@
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
 
+(deftest box-plot-groups-with-single-elements
+  "Asserting that no error is thrown, for a dataset that represents several groups with single element in each group."
+  (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3] [4 5 6] [7 8 9]]) :group-by :col-2)))))
+
 (deftest trace-plot-single-row
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (trace-plot :col-0 :data (to-dataset [[1 2 3]]))))))
