@@ -1,7 +1,10 @@
 (ns incanter.interp.polynomial
-  (:use [incanter.core :only (plus minus mult div)]))
+  (:use [incanter.core :only (plus minus mult div matrix trans mmult $)]))
 
-(defn interpolate [points]
+(defn interpolate
+  "Interpolates point by polynomial using Newton form.
+   http://en.wikipedia.org/wiki/Newton_polynomial"
+  [points]
   (let [xs (map first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]
@@ -20,3 +23,49 @@
       (->> (reductions #(* %1 (- x %2)) 1 xs)
            (map mult fs)
            (apply plus)))))
+
+(defn- update-P [P ys xs k]
+  (letfn [(update-upper-right [i j]
+            (/ (- (get-in P [i j]) (get-in P [i (dec j)]))
+               (- (xs j) (xs (- j k)))))
+          (update-bottom-left [i j]
+            (/ (- (get-in P [i j]) (get-in P [(dec i) j]))
+               (- (ys i) (ys (- i k)))))
+          (update-bottom-right [i j]
+            (/ (- (+ (get-in P [i j]) (get-in P [(dec i) (dec j)]))
+                  (+ (get-in P [i (dec j)]) (get-in P [(dec i) j])))
+               (* (- (ys i) (ys (- i k)))
+                  (- (xs j) (xs (- j k))))))
+          (update [P-new [i j]]
+            (assoc-in P-new [i j]
+                      ((cond (< i k) update-upper-right
+                             (< j k) update-bottom-left
+                             :default update-bottom-right)
+                       i j)))]
+    (let [n (count P)
+          m (count (first P))]
+      (reduce update P
+              (for [i (range n)
+                    j (range (if (< i k) k 0) m)]
+                [i j])))))
+
+(defn- calc-P [grid xs ys]
+  (let [k (max (count grid) (count (first grid)))]
+    (reduce #(update-P %1 xs ys %2) grid (range 1 k))))
+
+
+(defn interpolate-grid
+  "Interpolates grid of points using polynomial in Newton form.
+   Implemented algorithm is taken from here:
+   http://www.academia.edu/1387278/On_the_Newton_Multivariate_Polynomial_Interpolation_with_Applications
+   Part III"
+  [grid xs ys options]
+  (let [xs (vec xs)
+        ys (vec ys)
+        P (matrix (calc-P grid xs ys))
+        xs (butlast xs)
+        ys (butlast ys)]
+    (fn [x y]
+      (let [Y (reductions #(* %1 (- y %2)) 1 ys)
+            X (reductions #(* %1 (- x %2)) 1 xs)]
+        ($ 0 0 (mmult (trans X) P Y))))))

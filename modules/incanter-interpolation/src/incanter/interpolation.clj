@@ -46,7 +46,8 @@
 (defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
   (if-not (or (nil? xs) (nil? ys))
     (let [method (case type
-                   :bilinear linear/interpolate-grid)
+                   :bilinear linear/interpolate-grid
+                   :polynomial polynomial/interpolate-grid)
           xs (sort xs)
           ys (sort ys)]
       (validate-unique xs)
