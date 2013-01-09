@@ -1,5 +1,6 @@
 (ns incanter.interp.cubic-spline
-  (:use [incanter.core :only (plus minus div mult)]))
+  (:use [incanter.core :only (plus minus div mult)]
+        [incanter.interp.utils :only (find-segment)]))
 
 
 (defn- map-pairs [fn coll]
@@ -52,19 +53,23 @@
                    (map #(mult %1 (/ %2 6))
                         (map-pairs #(plus (mult 2 %2) %1) gammas)
                         hs))]
-    (map vector
-         (rest alphas)
-         betas
-         (map #(div % 2) (rest gammas))
-         (map #(div % 6) deltas))))
+    (mapv vector
+          (rest alphas)
+          betas
+          (map #(div % 2) (rest gammas))
+          (map #(div % 6) deltas))))
+
+(defn calc-polynom [coefs x]
+  (reduce #(plus (mult %1 x) %2) 0 (reverse coefs)))
 
 (defn interpolate [points]
-  (let [xs (map first points)
+  (let [xs (mapv first points)
         ys (map second points)
         hs (map-pairs #(- %2 %1) xs)
-        coefs (calc-coefs hs ys)
-        pairs (map vector (rest xs) coefs)]
+        all-coefs (calc-coefs hs ys)]
     (fn [x]
-      (let [[x-i coefs] (first (drop-while #(< (first %) x) pairs))]
-        (reduce #(plus (mult %1 (- x x-i)) %2) 0 (reverse coefs))))))
+      (let [ind (find-segment xs x)
+            x-i (inc (xs ind))
+            coefs (all-coefs ind)]
+        (calc-polynom coefs (- x x-i))))))
 
