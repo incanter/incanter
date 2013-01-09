@@ -1,5 +1,6 @@
 (ns incanter.interp.polynomial
-  (:use [incanter.core :only (plus minus mult div matrix trans mmult $)]))
+  (:use [incanter.core :only (plus minus mult div matrix trans mmult $ to-list)]))
+
 
 (defn interpolate
   "Interpolates point by polynomial using Newton form.
@@ -22,7 +23,8 @@
     (fn [x]
       (->> (reductions #(* %1 (- x %2)) 1 xs)
            (map mult fs)
-           (apply plus)))))
+           (apply plus)
+           to-list))))
 
 (defn- update-P [P ys xs k]
   (letfn [(update-upper-right [i j]
