@@ -41,9 +41,7 @@
 (defn interpolate-grid
   "Interpolates grid of values using bilinear interpolation."
   [grid xs ys options]
-  (let [grid (vec (map vec grid))
-        xs (vec xs)
-        ys (vec ys)]
+  (let [grid (vec (map vec grid))]
     (fn [x y]
       (let [[ind-x ind-y] (find-rect xs ys x y)
             subvec-2 (fn [vec start] (subvec vec start (+ start 2)))

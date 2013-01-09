@@ -60,9 +60,7 @@
    http://www.academia.edu/1387278/On_the_Newton_Multivariate_Polynomial_Interpolation_with_Applications
    Part III"
   [grid xs ys options]
-  (let [xs (vec xs)
-        ys (vec ys)
-        P (matrix (calc-P grid xs ys))
+  (let [P (matrix (calc-P grid xs ys))
         xs (butlast xs)
         ys (butlast ys)]
     (fn [x y]

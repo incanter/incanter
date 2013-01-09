@@ -48,8 +48,8 @@
     (let [method (case type
                    :bilinear linear/interpolate-grid
                    :polynomial polynomial/interpolate-grid)
-          xs (sort xs)
-          ys (sort ys)]
+          xs (vec (sort xs))
+          ys (vec (sort ys))]
       (validate-unique xs)
       (validate-unique ys)
       (method grid xs ys options))
