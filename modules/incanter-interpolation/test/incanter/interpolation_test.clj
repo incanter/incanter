@@ -29,7 +29,7 @@
                            (range 10 0 -1))))
 
 (deftest interpolate-grid-test
-  (doseq [method [:bilinear :polynomial]]
+  (doseq [method [:bilinear :polynomial :bicubic-spline]]
     (testing (str "Test " (name method) " grid interpolation")
       (let [xs (range 6)
             ys (range 6)

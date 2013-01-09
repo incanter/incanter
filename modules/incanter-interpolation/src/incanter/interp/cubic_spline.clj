@@ -59,17 +59,35 @@
           (map #(div % 2) (rest gammas))
           (map #(div % 6) deltas))))
 
-(defn calc-polynom [coefs x]
+(defn- calc-polynom [coefs x]
   (reduce #(plus (mult %1 x) %2) 0 (reverse coefs)))
 
-(defn interpolate [points]
+(defn interpolate
+  "Interpolates set of points using cubic splines.
+   http://en.wikipedia.org/wiki/Spline_interpolation"
+  [points]
   (let [xs (mapv first points)
         ys (map second points)
         hs (map-pairs #(- %2 %1) xs)
         all-coefs (calc-coefs hs ys)]
     (fn [x]
       (let [ind (find-segment xs x)
-            x-i (inc (xs ind))
+            x-i (xs (inc ind))
             coefs (all-coefs ind)]
         (calc-polynom coefs (- x x-i))))))
+
+(defn interpolate-grid
+  "Interpolates grid using bicubic splines."
+  [grid xs ys options]
+  (let [hs (map-pairs #(- %2 %1) ys)
+        coefs (map #(calc-coefs hs %) grid)
+        trans-coefs (apply map vector coefs)
+        strip-points (map #(map vector xs %) trans-coefs)
+        strip-interpolators (mapv interpolate strip-points)]
+    (fn [x y]
+      (let [ind-y (find-segment ys y)
+            y-i (ys (inc ind-y))
+            coefs ((strip-interpolators ind-y) x)]
+        (calc-polynom coefs (- y y-i))))))
+
 

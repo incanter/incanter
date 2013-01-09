@@ -47,7 +47,8 @@
   (if-not (or (nil? xs) (nil? ys))
     (let [method (case type
                    :bilinear linear/interpolate-grid
-                   :polynomial polynomial/interpolate-grid)
+                   :polynomial polynomial/interpolate-grid
+                   :bicubic-spline cubic-spline/interpolate-grid)
           xs (vec (sort xs))
           ys (vec (sort ys))]
       (validate-unique xs)
