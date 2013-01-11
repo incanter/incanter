@@ -3,8 +3,8 @@
              [cubic-spline :as cubic-spline]
              [b-spline :as b-spline]
              [polynomial :as polynomial]
-             [linear :as linear]
-             [incanter.core :refer (plus minus mult div)]]))
+             [linear :as linear]]
+            [incanter.core :refer (plus minus mult div)]))
 
 (defn- validate-unique [xs]
   (when-not (apply distinct? xs)
