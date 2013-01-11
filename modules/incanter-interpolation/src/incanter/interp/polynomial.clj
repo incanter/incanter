@@ -1,5 +1,5 @@
 (ns incanter.interp.polynomial
-  (:use [incanter.core :only (plus minus mult div matrix trans mmult $ to-list)]))
+  (:require [incanter.core :refer (plus minus mult div matrix trans mmult $ to-list)]))
 
 
 (defn interpolate

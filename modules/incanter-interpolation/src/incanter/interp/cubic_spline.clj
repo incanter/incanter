@@ -1,6 +1,6 @@
 (ns incanter.interp.cubic-spline
-  (:use [incanter.core :only (plus minus div mult)]
-        [incanter.interp.utils :only (find-segment)]))
+  (:require  [incanter.core :refer (plus minus div mult)]
+             [incanter.interp.utils :refer (find-segment)]))
 
 
 (defn- map-pairs [fn coll]

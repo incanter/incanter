@@ -1,6 +1,6 @@
 (ns incanter.interp.linear
-  (:use [incanter.interp.utils :only (find-segment find-rect)]
-        [incanter.core :only (plus minus mult div)]))
+  (:require [incanter.interp.utils :refer (find-segment find-rect)]
+            [incanter.core :refer (plus minus mult div)]))
 
 (defn- calc-line
   "Finds value in point x.

@@ -1,10 +1,10 @@
 (ns incanter.interpolation
-  (:use [incanter.core :only (plus minus mult div)])
   (:require [incanter.interp
              [cubic-spline :as cubic-spline]
              [b-spline :as b-spline]
              [polynomial :as polynomial]
-             [linear :as linear]]))
+             [linear :as linear]
+             [incanter.core :refer (plus minus mult div)]]))
 
 (defn- validate-unique [xs]
   (when-not (apply distinct? xs)

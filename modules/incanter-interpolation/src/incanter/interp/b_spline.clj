@@ -1,6 +1,6 @@
 (ns incanter.interp.b-spline
-  (:use [incanter.core :only (plus minus div mult)]
-        [incanter.interp.utils :only (binary-search)]))
+  (:require [incanter.core :refer (plus minus div mult)]
+            [incanter.interp.utils :refer (binary-search)]))
 
 (defn calc-Ns [ts m t k]
   (letfn [(calc-V [i m]
