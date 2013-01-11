@@ -1,4 +1,4 @@
-(defproject incanter/incanter-intepolation "1.5.0-SNAPSHOT"
+(defproject incanter/incanter-interpolation "1.5.0-SNAPSHOT"
   :description "Incanter-interpolation is module for functions interpolation. Interpolates functions of 1 and 2 arguments."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
