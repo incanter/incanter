@@ -68,4 +68,4 @@
     (fn [x y]
       (let [Y (reductions #(* %1 (- y %2)) 1 ys)
             X (reductions #(* %1 (- x %2)) 1 xs)]
-        ($ 0 0 (mmult (trans X) P Y))))))
+        (to-list ($ 0 0 (mmult (trans X) P Y)))))))

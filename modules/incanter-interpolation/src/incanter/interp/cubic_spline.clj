@@ -1,5 +1,5 @@
 (ns incanter.interp.cubic-spline
-  (:require  [incanter.core :refer (plus minus div mult)]
+  (:require  [incanter.core :refer (plus minus div mult to-list)]
              [incanter.interp.utils :refer (find-segment)]))
 
 
@@ -60,7 +60,7 @@
           (map #(div % 6) deltas))))
 
 (defn- calc-polynom [coefs x]
-  (reduce #(plus (mult %1 x) %2) 0 (reverse coefs)))
+  (to-list (reduce #(plus (mult %1 x) %2) 0 (reverse coefs))))
 
 (defn interpolate
   "Interpolates set of points using cubic splines.

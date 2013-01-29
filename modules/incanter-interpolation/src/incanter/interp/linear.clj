@@ -1,6 +1,6 @@
 (ns incanter.interp.linear
   (:require [incanter.interp.utils :refer (find-segment find-rect)]
-            [incanter.core :refer (plus minus mult div)]))
+            [incanter.core :refer (plus minus mult div to-list)]))
 
 (defn- calc-line
   "Finds value in point x.
@@ -21,7 +21,7 @@
     (fn [x]
       (let [ind-l (find-segment xs x)
             ind-r (inc ind-l)]
-        (calc-line (xs ind-l) (ys ind-l) (xs ind-r) (ys ind-r) x)))))
+        (to-list (calc-line (xs ind-l) (ys ind-l) (xs ind-r) (ys ind-r) x))))))
 
 (defn- calc-plane
   "Finds value in point (x, y).
@@ -48,4 +48,4 @@
             [xl xr] (subvec-2 xs ind-x)
             [yd yu] (subvec-2 ys ind-y)
             [zl zr] (map #(subvec-2 % ind-y) (subvec-2 grid ind-x))]
-        (calc-plane xl xr yd yu zl zr x y)))))
+        (to-list (calc-plane xl xr yd yu zl zr x y))))))
