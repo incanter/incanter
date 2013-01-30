@@ -170,11 +170,6 @@
                     (dec (count (first grid))))]
     (b-spline/b-surface grid degree)))
 
-(def grid [[0 1 2] [3 4 5]])
-
-(def approximator (approximate-grid grid :degree 1))
-
-
 #_((interpolate-grid [[1 2 3] [3 4 5]] :bilinear :x-range [0 10] :y-range [-5 5]) 5 -2.5)
 #_((interpolate-grid [[1 2 3] [3 4 5]] :bilinear) 0 1)
 
