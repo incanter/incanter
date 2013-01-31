@@ -32,7 +32,7 @@
      f(xr, yu) = zru
      xl <= x <= xr
      yd <= y <= yd"
-  [xl xr yd yu [zld zlu] [zrd zru] x y]
+  [xl xr yd yu [zld zrd] [zlu zru] x y]
   (let [zd (calc-line xl zld xr zrd x)
         zu (calc-line xl zlu xr zru x)
         res (calc-line yd zd yu zu y)]
@@ -47,5 +47,5 @@
             subvec-2 (fn [vec start] (subvec vec start (+ start 2)))
             [xl xr] (subvec-2 xs ind-x)
             [yd yu] (subvec-2 ys ind-y)
-            [zl zr] (map #(subvec-2 % ind-y) (subvec-2 grid ind-x))]
-        (to-list (calc-plane xl xr yd yu zl zr x y))))))
+            [zd zu] (map #(subvec-2 % ind-x) (subvec-2 grid ind-y))]
+        (to-list (calc-plane xl xr yd yu zd zu x y))))))

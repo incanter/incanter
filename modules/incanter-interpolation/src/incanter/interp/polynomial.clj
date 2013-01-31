@@ -26,7 +26,7 @@
            (apply plus)
            to-list))))
 
-(defn- update-P [P ys xs k]
+(defn- update-P [P xs ys k]
   (letfn [(update-upper-right [i j]
             (/ (- (get-in P [i j]) (get-in P [i (dec j)]))
                (- (xs j) (xs (- j k)))))
@@ -68,4 +68,4 @@
     (fn [x y]
       (let [Y (reductions #(* %1 (- y %2)) 1 ys)
             X (reductions #(* %1 (- x %2)) 1 xs)]
-        (to-list ($ 0 0 (mmult (trans X) P Y)))))))
+        (to-list ($ 0 0 (mmult (trans Y) P X)))))))

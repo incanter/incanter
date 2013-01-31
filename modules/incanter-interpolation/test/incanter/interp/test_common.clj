@@ -39,11 +39,11 @@
                            (rand-coll 10))))
 
 (defn test-interpolate-grid [method-fn]
-  (let [xs (vec (range 6))
-        ys (vec (range 6))
-        grid (vec (for [x xs] (vec (for [y ys] (+ x y)))))
+  (let [xs (vec (range 7))
+        ys (vec (range 5))
+        grid (vec (for [y ys] (vec (for [x xs] (+ (* 2 x) y)))))
         interp-fn (method-fn grid xs ys {})]
     (doseq [x xs
             y ys]
-      (is (points-eq? (interp-fn x y) (get-in grid [x y]))
-          (str "x = " x " , y = " y ". Expecting f(x, y) = " (get-in grid [x y]))))))
+      (is (points-eq? (interp-fn x y) (get-in grid [y x]))
+          (str "x = " x " , y = " y ". Expecting f(x, y) = " (get-in grid [y x]))))))

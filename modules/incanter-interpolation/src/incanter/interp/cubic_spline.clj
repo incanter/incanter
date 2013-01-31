@@ -79,15 +79,15 @@
 (defn interpolate-grid
   "Interpolates grid using bicubic splines."
   [grid xs ys options]
-  (let [hs (map-pairs #(- %2 %1) ys)
+  (let [hs (map-pairs #(- %2 %1) xs)
         coefs (map #(calc-coefs hs %) grid)
         trans-coefs (apply map vector coefs)
-        strip-points (map #(map vector xs %) trans-coefs)
+        strip-points (map #(map vector ys %) trans-coefs)
         strip-interpolators (mapv interpolate strip-points)]
     (fn [x y]
-      (let [ind-y (find-segment ys y)
-            y-i (ys (inc ind-y))
-            coefs ((strip-interpolators ind-y) x)]
-        (calc-polynom coefs (- y y-i))))))
+      (let [ind-x (find-segment xs x)
+            x-i (xs (inc ind-x))
+            coefs ((strip-interpolators ind-x) y)]
+        (calc-polynom coefs (- x x-i))))))
 
 

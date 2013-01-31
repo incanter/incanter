@@ -95,9 +95,10 @@
                     (map #(-> % (* (- b a)) (/ (dec n)) (+ a))
                          (range n)))
           options (assoc options
-                    :xs (uniform x-range n)
-                    :ys (uniform y-range m))]
+                    :xs (uniform x-range m)
+                    :ys (uniform y-range n))]
       (interpolate-grid* grid type options))))
+
 
 (defn interpolate-grid
   "Interpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y. By default function interpolates on [0,1]x[0,1].
