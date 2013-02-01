@@ -2580,6 +2580,8 @@ of each type"
         the dataset's column-names array.
     :append (default false) determines whether this given file should be
         appended to. If true, a header will not be written to the file again.
+    If the filename is exactly \"-\" then *out* the matrix/dataset will be
+        written to *out*
 
   Chart options:
     :width (default 500)
