@@ -96,7 +96,9 @@ incanter.io
 
 (defmethod save incanter.Matrix [mat filename & {:keys [delim header append]
                                                  :or {append false delim \,}}]
-  (let [file-writer (java.io.FileWriter. filename append)]
+  (let [file-writer (if (= "-" filename)
+                      *out*
+                      (java.io.FileWriter. filename append))]
     (do
       (when (and header (not append))
         (.write file-writer (str (first header)))
@@ -120,7 +122,9 @@ incanter.io
 (defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
                                                             :or {append false delim \,}}]
   (let [header (or header (map #(if (keyword? %) (name %) %) (:column-names dataset)))
-        file-writer (java.io.FileWriter. filename append)
+        file-writer (if (= "-" filename)
+                      *out*
+                      (java.io.FileWriter. filename append))
         rows (:rows dataset)
         columns (:column-names dataset)]
     (do
