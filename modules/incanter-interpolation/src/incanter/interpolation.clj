@@ -104,7 +104,7 @@
   "Interpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y. By default function interpolates on [0,1]x[0,1].
 
    Arguments:
-     grid -- collection of collection of points to be approximated. Each point either a number of collection of numbers.
+     grid -- collection of collection of numbers to be interpolated. If you need to interpolate vectors - interpolate each component by separate interpolator.
      type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline
 
    Options:
@@ -144,7 +144,7 @@
  "  Approximates 2-dimensional grid using B-splines and tensor product. Returns function f that takes 2 arguments: x and y. both x and y must be in range [0, 1].
 
     Arguments:
-      grid -- collection of collection of points to be approximated. Each point either a number of collection of numbers.
+      grid -- collection of collection of numbers to be approximated. If you need to approximate vectors - approximate each component by separate approximator.
 
     Options:
       :degree -- degree of a B-spline. Default 3.
