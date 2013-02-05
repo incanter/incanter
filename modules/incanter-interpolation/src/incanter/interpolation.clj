@@ -82,6 +82,7 @@
                    :bilinear linear/interpolate-grid
                    :polynomial polynomial/interpolate-grid
                    :bicubic-spline cubic-spline/interpolate-grid)
+          grid (mapv vec grid)
           xs (vec (sort xs))
           ys (vec (sort ys))]
       (validate-unique xs)
@@ -220,5 +221,148 @@
          (core/view))))
 
    ((approximate [[0 0] [0 0] [0 0] [1 1]]) 0.9)
-
    )
+
+#_(; Benchamarking
+   do
+
+    (do
+      (def logger-atom (agent {} :error-mode :continue)) 
+      
+      #_(def fields
+        { ;label (init-fn [time]) (update-fn [current-value add-value]) (print-fn [value])
+         :times-called {:init-fn (fn [_] 1)
+                        :update-fn (fn [c _] (inc c))
+                        :print-fn (fn [value] (println "Was called " value "times."))}
+         :total-time   {:init-fn (fn [T] T)
+                        :update-fn +
+                        :print-fn (fn [value] (println "Spent " value "ms."))}
+         :average      {:init-fn (fn [T] [1 T])
+                        :update-fn (fn [[n old-T] T] [(inc n) (+ T old-T)])
+                        :print-fn (fn [[n value]] (println "Average " (/ value n) "ms."))}
+         :min          {:init-fn (fn [T] T)
+                        :update-fn min
+                        :print-fn (fn [value] (println "Min time spent: " value "ms."))}
+         :max          {:init-fn (fn [T] T)
+                        :update-fn max
+                        :print-fn (fn [value] (println "Max time spent" value "ms."))}})
+
+      (def fields
+        { ;label (init-fn [time]) (update-fn [current-value add-value]) (print-fn [value])
+         :average      {:init-fn (fn [T] [1 T])
+                        :update-fn (fn [[n old-T] T] [(inc n) (+ T old-T)])
+                        :print-fn (fn [[n value]] (println "Average " (/ value n) "ms."))}})
+
+      (defn update-log [log handle T] 
+        (merge-with 
+         (fn [val-current {add-time :total-time}] 
+           (into {}
+                 (for [[label {:keys [update-fn]}] fields] 
+                   [label (update-fn (val-current label) add-time)]))) ; updates all values mentioned in 'fields
+         log 
+         {handle (into {} (for [[label {init :init-fn}] fields] 
+                            [label (init T)]))}))
+
+      (defmacro log-time [handle body]
+        `(let [start# (. System (nanoTime)) 
+               ret# ~body
+               T# (/ (double (- (. System (nanoTime)) start#)) 1000000.0)] 
+           (send logger-atom update-log ~handle T#)
+           ret#))
+
+      (defn reset-logger []
+        
+        (send logger-atom empty))
+      
+
+      (defn print-time-stats
+        ([]
+           (let [state @logger-atom] (doseq [l (keys state)] (print-time-stats l))) )
+        ([label]
+           (let [state (@logger-atom label)]
+             (println label "stats:")
+             (doseq [[param value] state]
+               ((get-in fields [param :print-fn]) value))))))
+
+    (def ^{:dynamic true} *n* 10)
+    (def ^{:dynamic true} *creation-times* 10)
+    (def ^{:dynamic true} *call-times* 100)
+    (def ^{:dynamic true} *name* "default")
+
+    (defmacro bench [& body]
+      `(do
+         (reset-logger)
+         ~@body
+         (print-time-stats)))
+
+    (defn bench-interpolator-creation
+      ([interp-fn-fn y-fn]
+         (let [xs (range *n*)
+               ys (map y-fn (range *n*))
+               points (map vector xs ys)]
+        (dotimes [i *creation-times*]
+          (log-time *name* (interp-fn-fn points))))))
+
+    (defn bench-interpolator-calls [interp-fn-fn y-fn]
+      (let [xs (range *n*)
+            ys (map y-fn (range *n*))
+            points (map vector xs ys)
+            interp-fn (interp-fn-fn points)
+            queries (->> (range *call-times*)
+                         (map #(/ % (dec *call-times*)))
+                         (map #(* % *n*)))]
+        (doseq [x queries]
+          (log-time *name* (interp-fn x)))))
+
+    (defn grid []
+      (for [i (range *n*)]
+        (for [j (range *n*)]
+          (+ (* 2 i) j))))
+
+    (defn bench-interpolator-grid-creation [interp-fn-fn]
+      (let [grid (grid)]
+        (dotimes [_ *creation-times*]
+          (log-time *name* (interp-fn-fn grid)))))
+
+    (defn bench-interpolator-grid-calls [interp-fn-fn]
+      (let [grid (grid)
+            interp-fn (interp-fn-fn grid)
+            xs (map #(/ % (dec *call-times*)) (range *call-times*))]
+        (doseq [x xs
+                y xs]
+          (log-time *name* (interp-fn x y)))))
+
+    (bench (bench-interpolator-calls #(interpolate % :polynomial) (fn [i] [2 2])))
+
+    (defn bench-interpolator [interp-fn interp-grid-fn name]
+      (binding [*name* (str name " 1d create single")]
+        (bench-interpolator-creation interp-fn (fn [i] (* 2 i))))
+      (binding [*name* (str name " 1d call single")]
+        (bench-interpolator-calls interp-fn (fn [i] (* 2 i))))
+      (binding [*name* (str name " 1d create vector")]
+        (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i)])))
+      (binding [*name* (str name " 1d calls vector")]
+        (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i)])))
+      (binding [*name* (str name " 2d create")]
+        (bench-interpolator-grid-creation interp-grid-fn))
+      (binding [*name* (str name " 2d calls")]
+        (bench-interpolator-grid-calls interp-grid-fn)))
+
+    (defn test-all []
+      (println \newline \newline "Linear")
+      (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
+
+      (println \newline \newline "Cubic")
+      (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bicubic-spline) ""))
+
+      (println \newline \newline "Polynomial")
+      (bench (bench-interpolator #(interpolate % :polynomial) #(interpolate-grid % :polynomial) ""))
+
+      (println \newline \newline "B-spline")
+      (bench (bench-interpolator #(approximate %) #(approximate-grid % :bilinear) "")))
+
+    (test-all)
+    
+    
+
+    )
