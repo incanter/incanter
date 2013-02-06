@@ -7,4 +7,5 @@
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [incanter/incanter-core "1.5.0-SNAPSHOT"]
-                 [incanter/incanter-charts "1.5.0-SNAPSHOT"]])
+                 [incanter/incanter-charts "1.5.0-SNAPSHOT"]]
+  :profiles {:dev {:dependencies [[criterium "0.3.1"]]}})

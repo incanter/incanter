@@ -227,6 +227,8 @@
    do
 
     (do
+
+      (require '[criterium.core :refer [warmup-for-jit]])
       (def logger-atom (agent {} :error-mode :continue)) 
       
       #_(def fields
@@ -271,7 +273,6 @@
            ret#))
 
       (defn reset-logger []
-        
         (send logger-atom empty))
       
 
@@ -282,87 +283,90 @@
            (let [state (@logger-atom label)]
              (println label "stats:")
              (doseq [[param value] state]
-               ((get-in fields [param :print-fn]) value))))))
+               ((get-in fields [param :print-fn]) value)))))
 
-    (def ^{:dynamic true} *n* 10)
-    (def ^{:dynamic true} *creation-times* 10)
-    (def ^{:dynamic true} *call-times* 100)
-    (def ^{:dynamic true} *name* "default")
+      (def ^{:dynamic true} *n* 20)
+      (def ^{:dynamic true} *creation-times* 50)
+      (def ^{:dynamic true} *call-times* 1000000)
+      (def ^{:dynamic true} *name* "default")
+      (def ^{:dynamic true} *warmup-period* (* 5 200000000))
 
-    (defmacro bench [& body]
-      `(do
-         (reset-logger)
-         ~@body
-         (print-time-stats)))
+      (defmacro bench [& body]
+        `(do
+           (reset-logger)
+           ~@body
+           (print-time-stats)))
 
-    (defn bench-interpolator-creation
-      ([interp-fn-fn y-fn]
-         (let [xs (range *n*)
-               ys (map y-fn (range *n*))
-               points (map vector xs ys)]
-        (dotimes [i *creation-times*]
-          (log-time *name* (interp-fn-fn points))))))
+      (defn bench-interpolator-creation
+        ([interp-fn-fn y-fn]
+           (let [xs (range *n*)
+                 ys (map y-fn (range *n*))
+                 points (map vector xs ys)]
+             (warmup-for-jit *warmup-period* #(interp-fn-fn points))
+             (dotimes [i *creation-times*]
+               (log-time *name* (interp-fn-fn points))))))
 
-    (defn bench-interpolator-calls [interp-fn-fn y-fn]
-      (let [xs (range *n*)
-            ys (map y-fn (range *n*))
-            points (map vector xs ys)
-            interp-fn (interp-fn-fn points)
-            queries (->> (range *call-times*)
-                         (map #(/ % (dec *call-times*)))
-                         (map #(* % *n*)))]
-        (doseq [x queries]
-          (log-time *name* (interp-fn x)))))
+      (defn bench-interpolator-calls [interp-fn-fn y-fn]
+        (let [xs (range *n*)
+              ys (map y-fn (range *n*))
+              points (map vector xs ys)
+              interp-fn (interp-fn-fn points)
+              queries (->> (range *call-times*)
+                           (map #(/ % (dec *call-times*)))
+                           (map #(* % *n*)))]
+          (warmup-for-jit *warmup-period* #(interp-fn 1))
+          (doseq [x queries]
+            (log-time *name* (interp-fn x)))))
 
-    (defn grid []
-      (for [i (range *n*)]
-        (for [j (range *n*)]
-          (+ (* 2 i) j))))
+      (defn grid []
+        (for [i (range *n*)]
+          (for [j (range *n*)]
+            (+ (* 2 i) j))))
 
-    (defn bench-interpolator-grid-creation [interp-fn-fn]
-      (let [grid (grid)]
-        (dotimes [_ *creation-times*]
-          (log-time *name* (interp-fn-fn grid)))))
+      (defn bench-interpolator-grid-creation [interp-fn-fn]
+        (let [grid (grid)]
+          (warmup-for-jit *warmup-period* #(interp-fn-fn grid))
+          (dotimes [_ *creation-times*]
+            (log-time *name* (interp-fn-fn grid)))))
 
-    (defn bench-interpolator-grid-calls [interp-fn-fn]
-      (let [grid (grid)
-            interp-fn (interp-fn-fn grid)
-            xs (map #(/ % (dec *call-times*)) (range *call-times*))]
-        (doseq [x xs
-                y xs]
-          (log-time *name* (interp-fn x y)))))
+      (defn bench-interpolator-grid-calls [interp-fn-fn]
+        (let [grid (grid)
+              interp-fn (interp-fn-fn grid)
+              call-times (Math/sqrt *call-times*)
+              xs (map #(/ % (dec call-times)) (range call-times))]
+          (warmup-for-jit *warmup-period* #(interp-fn 0 0))
+          (doseq [x xs
+                  y xs]
+            (log-time *name* (interp-fn x y)))))
 
-    (bench (bench-interpolator-calls #(interpolate % :polynomial) (fn [i] [2 2])))
+      (defn bench-interpolator [interp-fn interp-grid-fn name]
+        #_(binding [*name* (str name " 1d create single")]
+          (bench-interpolator-creation interp-fn (fn [i] (* 2 i))))
+        (binding [*name* (str name " 1d call single")]
+          (bench-interpolator-calls interp-fn (fn [i] (* 2 i))))
+        #_(binding [*name* (str name " 1d create vector")]
+          (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i)])))
+        (binding [*name* (str name " 1d calls vector")]
+          (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i)])))
+        #_(binding [*name* (str name " 2d create")]
+          (bench-interpolator-grid-creation interp-grid-fn))
+        #_(binding [*name* (str name " 2d calls")]
+          (bench-interpolator-grid-calls interp-grid-fn)))
 
-    (defn bench-interpolator [interp-fn interp-grid-fn name]
-      (binding [*name* (str name " 1d create single")]
-        (bench-interpolator-creation interp-fn (fn [i] (* 2 i))))
-      (binding [*name* (str name " 1d call single")]
-        (bench-interpolator-calls interp-fn (fn [i] (* 2 i))))
-      (binding [*name* (str name " 1d create vector")]
-        (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i)])))
-      (binding [*name* (str name " 1d calls vector")]
-        (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i)])))
-      (binding [*name* (str name " 2d create")]
-        (bench-interpolator-grid-creation interp-grid-fn))
-      (binding [*name* (str name " 2d calls")]
-        (bench-interpolator-grid-calls interp-grid-fn)))
+      (defn test-all []
+        (println \newline \newline "Linear")
+        (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
 
-    (defn test-all []
-      (println \newline \newline "Linear")
-      (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
+        (println \newline \newline "Cubic")
+        (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bicubic-spline) ""))
 
-      (println \newline \newline "Cubic")
-      (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bicubic-spline) ""))
+        (println \newline \newline "Polynomial")
+        (bench (bench-interpolator #(interpolate % :polynomial) #(interpolate-grid % :polynomial) ""))
 
-      (println \newline \newline "Polynomial")
-      (bench (bench-interpolator #(interpolate % :polynomial) #(interpolate-grid % :polynomial) ""))
+        (println \newline \newline "B-spline")
+        (bench (bench-interpolator #(approximate (map second %)) approximate-grid ""))))
 
-      (println \newline \newline "B-spline")
-      (bench (bench-interpolator #(approximate %) #(approximate-grid % :bilinear) "")))
+    (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
 
-    (test-all)
-    
-    
 
     )

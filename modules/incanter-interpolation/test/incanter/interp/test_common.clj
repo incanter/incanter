@@ -33,7 +33,7 @@
 (defn test-interpolate-parametric [method-fn]
   (test-interpolation method-fn
                       (rand-coll 10)
-                      (map vector
+                      (map list
                            (rand-coll 10)
                            (rand-coll 10)
                            (rand-coll 10))))

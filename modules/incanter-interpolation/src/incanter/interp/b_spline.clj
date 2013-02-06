@@ -44,6 +44,8 @@
              (reduce plus)
              to-list)))))
 
+
+
 (defn b-surface [grid degree]
   (let [grid (mapv vec grid)
         n (- (count grid) degree)
