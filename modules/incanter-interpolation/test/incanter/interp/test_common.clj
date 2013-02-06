@@ -25,18 +25,10 @@
        (take n)))
 
 
-(defn test-interpolate-normal [method-fn]
+(defn test-interpolate [method-fn]
   (test-interpolation method-fn
                       (rand-coll 10)
                       (rand-coll 10)))
-
-(defn test-interpolate-parametric [method-fn]
-  (test-interpolation method-fn
-                      (rand-coll 10)
-                      (map list
-                           (rand-coll 10)
-                           (rand-coll 10)
-                           (rand-coll 10))))
 
 (defn test-interpolate-grid [method-fn]
   (let [xs (vec (range 7))

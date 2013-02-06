@@ -3,11 +3,8 @@
         incanter.interp.cubic-spline
         incanter.interp.test-common))
 
-(deftest interpolate-normal
-  (test-interpolate-normal interpolate))
-
-(deftest interpolate-parametric
-  (test-interpolate-parametric interpolate))
+(deftest interpolate-test
+  (test-interpolate interpolate))
 
 (deftest interpolate-grid-test
   (test-interpolate-grid interpolate-grid))
