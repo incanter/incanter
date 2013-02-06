@@ -1,6 +1,5 @@
 (ns incanter.interp.b-spline
-  (:require [incanter.core :refer (plus minus div mult to-list)]
-            [incanter.interp.utils :refer (binary-search)]))
+  (:require [incanter.interp.utils :refer (binary-search)]))
 
 (defn- calc-Ns [ts m t k]
   (letfn [(calc-V [i m]
@@ -40,9 +39,8 @@
     (fn [t]
       (let [[Ns k] (ns-finder t)]
         (->> (subvec points (- k degree) (inc k))
-             (map mult Ns)
-             (reduce plus)
-             to-list)))))
+             (map * Ns)
+             (reduce +))))))
 
 
 
@@ -57,11 +55,10 @@
             [y-Ns y-k] (y-ns-finder y)
             calc-x (fn [points]
                      (->> (subvec points (- x-k degree) (inc x-k))
-                          (map mult x-Ns)
-                          (reduce plus)))]
+                          (map * x-Ns)
+                          (reduce +)))]
         (->> (subvec grid (- y-k degree) (inc y-k))
              (map calc-x)
-             (map mult y-Ns)
-             (reduce plus)
-             to-list)))))
+             (map * y-Ns)
+             (reduce +))))))
 

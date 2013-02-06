@@ -10,6 +10,15 @@
   (when-not (apply distinct? xs)
     (throw (IllegalArgumentException. "All x must be distinct."))))
 
+(defn- interpolate-parametric [method points]
+  (let [point-groups (->> points
+                          (map (fn [[t value]]
+                                 (map #(vector t %) value)))
+                          (apply map vector))
+        interpolators (map method point-groups)]
+    (fn [t]
+      (map #(% t) interpolators))))
+
 (defn interpolate
 "  Returns a function that interpolates given collection of points.
    http://en.wikipedia.org/wiki/Interpolation
@@ -41,16 +50,24 @@
   (let [method (case type
                  :linear linear/interpolate
                  :polynomial polynomial/interpolate
-                 :cubic-spline cubic-spline/interpolate)]
+                 :cubic-spline cubic-spline/interpolate)
+        points (sort-by first points)]
     (validate-unique (map first points))
-    (method (sort-by first points))))
+    (if (number? (second (first points)))
+      (method points)
+      (interpolate-parametric method points))))
 
+(defn- approximate-parametric [method points]
+  (let [point-groups (apply map vector points)
+        interpolators (map method point-groups)]
+    (fn [t]
+      (map #(% t) interpolators))))
 
 (defn approximate
  "  Approximates given collection of points using B-spline. Returns parametric function f that takes values from 0 to 1. f(0) will give you first point, f(1) - last point.
 
     Arguments:
-      points -- collection of points. Each point either a number of collection of numbers.
+      points -- collection of points. Each point either a number or collection of numbers.
 
     Options:
       :degree -- degree of a B-spline. Default 3.
@@ -73,8 +90,9 @@
   (let [opts (when options (apply assoc {} options))
         degree (min (:degree opts 3)
                     (dec (count points)))]
-    (b-spline/b-spline points degree)))
-
+    (if (number? (first points))
+      (b-spline/b-spline points degree)
+      (approximate-parametric #(b-spline/b-spline % degree) points))))
 
 (defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
   (if-not (or (nil? xs) (nil? ys))
@@ -230,7 +248,6 @@
 
       (require '[criterium.core :refer [warmup-for-jit]])
       (def logger-atom (agent {} :error-mode :continue)) 
-      
       #_(def fields
         { ;label (init-fn [time]) (update-fn [current-value add-value]) (print-fn [value])
          :times-called {:init-fn (fn [_] 1)
@@ -252,29 +269,29 @@
       (def fields
         { ;label (init-fn [time]) (update-fn [current-value add-value]) (print-fn [value])
          :average      {:init-fn (fn [T] [1 T])
-                        :update-fn (fn [[n old-T] T] [(inc n) (+ T old-T)])
+                        :update-fn (fn [[n old-T] [_ T]] [(inc n) (+ T old-T)])
                         :print-fn (fn [[n value]] (println "Average " (/ value n) "ms."))}})
 
-      (defn update-log [log handle T] 
-        (merge-with 
-         (fn [val-current {add-time :total-time}] 
+      (defn update-log [log handle T]
+        (merge-with
+         (fn [val-current val-new]
            (into {}
-                 (for [[label {:keys [update-fn]}] fields] 
-                   [label (update-fn (val-current label) add-time)]))) ; updates all values mentioned in 'fields
-         log 
-         {handle (into {} (for [[label {init :init-fn}] fields] 
+                 (for [[label {:keys [update-fn]}] fields]
+                   [label (update-fn (val-current label) (val-new label))]))) ; updates all values mentioned in 'fields
+         log
+         {handle (into {} (for [[label {init :init-fn}] fields]
                             [label (init T)]))}))
 
       (defmacro log-time [handle body]
-        `(let [start# (. System (nanoTime)) 
+        `(let [start# (. System (nanoTime))
                ret# ~body
-               T# (/ (double (- (. System (nanoTime)) start#)) 1000000.0)] 
+               T# (/ (double (- (. System (nanoTime)) start#)) 1000000.0)]
            (send logger-atom update-log ~handle T#)
            ret#))
 
       (defn reset-logger []
         (send logger-atom empty))
-      
+
 
       (defn print-time-stats
         ([]
@@ -287,7 +304,7 @@
 
       (def ^{:dynamic true} *n* 20)
       (def ^{:dynamic true} *creation-times* 50)
-      (def ^{:dynamic true} *call-times* 1000000)
+      (def ^{:dynamic true} *call-times* 1000)
       (def ^{:dynamic true} *name* "default")
       (def ^{:dynamic true} *warmup-period* (* 5 200000000))
 
@@ -302,11 +319,12 @@
            (let [xs (range *n*)
                  ys (map y-fn (range *n*))
                  points (map vector xs ys)]
-             (warmup-for-jit *warmup-period* #(interp-fn-fn points))
+             (dotimes [i *creation-times*]
+               (interp-fn-fn points))
              (dotimes [i *creation-times*]
                (log-time *name* (interp-fn-fn points))))))
 
-      (defn bench-interpolator-calls [interp-fn-fn y-fn]
+      (defn bench-interpolator-calls [interp-fn-fn y-fn dl]
         (let [xs (range *n*)
               ys (map y-fn (range *n*))
               points (map vector xs ys)
@@ -314,9 +332,10 @@
               queries (->> (range *call-times*)
                            (map #(/ % (dec *call-times*)))
                            (map #(* % *n*)))]
-          (warmup-for-jit *warmup-period* #(interp-fn 1))
+          (doseq [x (apply concat (repeat 3 queries))]
+            (interp-fn x))
           (doseq [x queries]
-            (log-time *name* (interp-fn x)))))
+            (log-time *name* (dl (interp-fn x))))))
 
       (defn grid []
         (for [i (range *n*)]
@@ -325,7 +344,8 @@
 
       (defn bench-interpolator-grid-creation [interp-fn-fn]
         (let [grid (grid)]
-          (warmup-for-jit *warmup-period* #(interp-fn-fn grid))
+          (dotimes [_ *creation-times*]
+            (interp-fn-fn grid))
           (dotimes [_ *creation-times*]
             (log-time *name* (interp-fn-fn grid)))))
 
@@ -334,7 +354,9 @@
               interp-fn (interp-fn-fn grid)
               call-times (Math/sqrt *call-times*)
               xs (map #(/ % (dec call-times)) (range call-times))]
-          (warmup-for-jit *warmup-period* #(interp-fn 0 0))
+          (doseq [x xs
+                  y xs]
+            (interp-fn x y)
           (doseq [x xs
                   y xs]
             (log-time *name* (interp-fn x y)))))
@@ -342,12 +364,12 @@
       (defn bench-interpolator [interp-fn interp-grid-fn name]
         #_(binding [*name* (str name " 1d create single")]
           (bench-interpolator-creation interp-fn (fn [i] (* 2 i))))
-        (binding [*name* (str name " 1d call single")]
-          (bench-interpolator-calls interp-fn (fn [i] (* 2 i))))
         #_(binding [*name* (str name " 1d create vector")]
-          (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i)])))
+          (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i) (- i)])))
         (binding [*name* (str name " 1d calls vector")]
-          (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i)])))
+          (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i) (- i)]) doall))
+        (binding [*name* (str name " 1d call single")]
+          (bench-interpolator-calls interp-fn (fn [i] (* 2 i)) identity))
         #_(binding [*name* (str name " 2d create")]
           (bench-interpolator-grid-creation interp-grid-fn))
         #_(binding [*name* (str name " 2d calls")]
@@ -366,7 +388,11 @@
         (println \newline \newline "B-spline")
         (bench (bench-interpolator #(approximate (map second %)) approximate-grid ""))))
 
-    (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
+      (test-all)
 
+    (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
+    (bench (bench-interpolator #(interpolate % :polynomial) #(interpolate-grid % :bilinear) ""))
+    (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bilinear) ""))
+    (bench (bench-interpolator #(approximate (map second %)) nil ""))
 
     )

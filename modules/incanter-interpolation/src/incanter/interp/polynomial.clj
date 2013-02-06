@@ -1,5 +1,5 @@
 (ns incanter.interp.polynomial
-  (:require [incanter.core :refer (plus minus mult div matrix trans mmult $ to-list)]))
+  (:require [incanter.core :refer (matrix trans mmult $ to-list)]))
 
 
 (defn interpolate
@@ -9,8 +9,8 @@
   (let [xs (map first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]
-                             {:f (div (minus (:f f2) (:f f1))
-                                      (minus (:x-r f2) (:x-l f1)))
+                             {:f (/ (- (:f f2) (:f f1))
+                                    (- (:x-r f2) (:x-l f1)))
                               :x-r (:x-r f2)
                               :x-l (:x-l f1)})
         next-level-differences (fn [fs]
@@ -22,9 +22,8 @@
                 (map :f))]
     (fn [x]
       (->> (reductions #(* %1 (- x %2)) 1 xs)
-           (map mult fs)
-           (apply plus)
-           to-list))))
+           (map * fs)
+           (apply +)))))
 
 (defn- update-P [P xs ys k]
   (letfn [(update-upper-right [i j]

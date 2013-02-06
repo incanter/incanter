@@ -1,6 +1,5 @@
 (ns incanter.interp.cubic-spline
-  (:require  [incanter.core :refer (plus minus div mult to-list)]
-             [incanter.interp.utils :refer (find-segment)]))
+  (:require [incanter.interp.utils :refer (find-segment)]))
 
 
 (defn- map-pairs [fn coll]
@@ -8,26 +7,26 @@
 
 (defn- calc-bs [hs ys]
   (letfn [(calc-b [[y_i-1 y_i y_i+1] [h_i h_i+1]]
-            (mult (/ 6 (+ h_i h_i+1))
-                  (minus (div (minus y_i+1 y_i) h_i+1)
-                         (div (minus y_i y_i-1) h_i))))]
+            (* (/ 6 (+ h_i h_i+1))
+               (- (/ (- y_i+1 y_i) h_i+1)
+                  (/ (- y_i y_i-1) h_i))))]
     (map calc-b
          (partition 3 1 ys)
          (partition 2 1 hs))))
 
 (defn- solve-tridiagonal [as cs ds]
-  ; bs equals to [2 2 2 2 2 2 ..] so we substitute in place
+                                        ; bs equals to [2 2 2 2 2 2 ..] so we substitute in place
   (let [next-cd (fn [[c-prev d-prev] [a c d]]
                   (let [coef (- 2 (* c-prev a))]
                     [(if (nil? c) nil (/ c coef))
-                     (div (minus d (mult d-prev a))
-                          coef)]))
+                     (/ (- d (* d-prev a))
+                        coef)]))
         [cs ds] (->> (map vector as (concat (rest cs) [nil]) (rest ds))
                      (reductions next-cd
                                  [(/ (first cs) 2)
-                                  (div (first ds) 2)])
+                                  (/ (first ds) 2)])
                      (apply map vector))
-        prev-x (fn [x [c d]] (minus d (mult c x)))
+        prev-x (fn [x [c d]] (- d (* c x)))
         xs (->> (map vector cs ds)
                 reverse
                 rest
@@ -40,27 +39,27 @@
         cs (map-pairs #(/ %1 (+ %1 %2)) hs)
         bs (calc-bs hs ys)
         gammas (if (= 1 (count es))
-                 [(div (first bs) 2)]
+                 [(/ (first bs) 2)]
                  (solve-tridiagonal (rest cs) (drop-last es) bs))]
     (concat [0] gammas [0])))
 
 (defn- calc-coefs [hs ys]
   (let [alphas ys
         gammas (calc-gammas hs ys)
-        deltas (map div (map-pairs #(minus %2 %1) gammas) hs)
-        betas (map plus
-                   (map div (map-pairs #(minus %2 %1) ys) hs)
-                   (map #(mult %1 (/ %2 6))
-                        (map-pairs #(plus (mult 2 %2) %1) gammas)
+        deltas (map / (map-pairs #(- %2 %1) gammas) hs)
+        betas (map +
+                   (map / (map-pairs #(- %2 %1) ys) hs)
+                   (map #(* %1 (/ %2 6))
+                        (map-pairs #(+ (* 2 %2) %1) gammas)
                         hs))]
     (mapv vector
           (rest alphas)
           betas
-          (map #(div % 2) (rest gammas))
-          (map #(div % 6) deltas))))
+          (map #(/ % 2) (rest gammas))
+          (map #(/ % 6) deltas))))
 
 (defn- calc-polynom [coefs x]
-  (to-list (reduce #(plus (mult %1 x) %2) 0 (reverse coefs))))
+  (reduce #(+ (* %1 x) %2) 0 (reverse coefs)))
 
 (defn interpolate
   "Interpolates set of points using cubic splines.
@@ -76,6 +75,15 @@
             coefs (all-coefs ind)]
         (calc-polynom coefs (- x x-i))))))
 
+(defn- interpolate-parametric [points]
+  (let [point-groups (->> points
+                          (map (fn [[t value]]
+                                 (map #(vector t %) value)))
+                          (apply map vector))
+        interpolators (map interpolate point-groups)]
+    (fn [t]
+      (map #(% t) interpolators))))
+
 (defn interpolate-grid
   "Interpolates grid using bicubic splines."
   [grid xs ys options]
@@ -83,11 +91,10 @@
         coefs (map #(calc-coefs hs %) grid)
         trans-coefs (apply map vector coefs)
         strip-points (map #(map vector ys %) trans-coefs)
-        strip-interpolators (mapv interpolate strip-points)]
+        strip-interpolators (mapv interpolate-parametric strip-points)]
     (fn [x y]
       (let [ind-x (find-segment xs x)
             x-i (xs (inc ind-x))
             coefs ((strip-interpolators ind-x) y)]
         (calc-polynom coefs (- x x-i))))))
-
 

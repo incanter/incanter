@@ -1,6 +1,5 @@
 (ns incanter.interp.linear
-  (:require [incanter.interp.utils :refer (find-segment find-rect)]
-            [incanter.core :refer (plus minus mult div to-list)]))
+  (:require [incanter.interp.utils :refer (find-segment find-rect)]))
 
 (defn- calc-line
   "Finds value in point x.
@@ -10,8 +9,8 @@
      xl <= x <= xr"
   [xl yl xr yr x]
   (let [coef (/ (- x xl) (- xr xl))]
-    (plus (mult (- 1 coef) yl)
-                (mult coef yr))))
+    (+ (* (- 1 coef) yl)
+       (* coef yr))))
 
 (defn interpolate
   "Interpolates set of points using linear interpolation."
@@ -21,7 +20,7 @@
     (fn [x]
       (let [ind-l (find-segment xs x)
             ind-r (inc ind-l)]
-        (to-list (calc-line (xs ind-l) (ys ind-l) (xs ind-r) (ys ind-r) x))))))
+        (calc-line (xs ind-l) (ys ind-l) (xs ind-r) (ys ind-r) x)))))
 
 (defn- calc-plane
   "Finds value in point (x, y).
@@ -48,4 +47,4 @@
             [xl xr] (subvec-2 xs ind-x)
             [yd yu] (subvec-2 ys ind-y)
             [zd zu] (map #(subvec-2 % ind-x) (subvec-2 grid ind-y))]
-        (to-list (calc-plane xl xr yd yu zd zu x y))))))
+        (calc-plane xl xr yd yu zd zu x y)))))
