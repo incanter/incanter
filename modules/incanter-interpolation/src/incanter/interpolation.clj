@@ -395,4 +395,4 @@
     (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bilinear) ""))
     (bench (bench-interpolator #(approximate (map second %)) nil ""))
 
-    )
+    ))
