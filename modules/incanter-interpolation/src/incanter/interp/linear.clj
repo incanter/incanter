@@ -8,8 +8,13 @@
      f(xr) = yr
      xl <= x <= xr"
   [xl yl xr yr x]
-  (let [coef (/ (- x xl) (- xr xl))]
-    (+ (* (- 1 coef) yl)
+  (let [xl (double xl)
+        yl (double yl)
+        xr (double xr)
+        yr (double yr)
+        x (double x)
+        coef (/ (- x xl) (- xr xl))]
+    (+ (* (- 1.0 coef) yl)
        (* coef yr))))
 
 (defn interpolate

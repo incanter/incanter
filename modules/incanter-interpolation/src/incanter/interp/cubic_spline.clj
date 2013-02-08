@@ -61,6 +61,17 @@
 (defn- calc-polynom [coefs x]
   (reduce #(+ (* %1 x) %2) 0 (reverse coefs)))
 
+(defn- polynom
+  "Takes coefficients of 3-order polynom and builds a function that calculates it in given point.
+   It's ~3 times faster than calc-polynom function. "
+  [coefs]
+  (let [d (double (nth coefs 0))
+        c (double (nth coefs 1))
+        b (double (nth coefs 2))
+        a (double (nth coefs 3))]
+    (fn [^double x]
+      (+ d (* x (+ c (* x (+ b (* a x)))))))))
+
 (defn interpolate
   "Interpolates set of points using cubic splines.
    http://en.wikipedia.org/wiki/Spline_interpolation"
@@ -68,12 +79,13 @@
   (let [xs (mapv first points)
         ys (map second points)
         hs (map-pairs #(- %2 %1) xs)
-        all-coefs (calc-coefs hs ys)]
+        all-coefs (calc-coefs hs ys)
+        polynoms (mapv polynom all-coefs)]
     (fn [x]
       (let [ind (find-segment xs x)
             x-i (xs (inc ind))
-            coefs (all-coefs ind)]
-        (calc-polynom coefs (- x x-i))))))
+            polynom (polynoms ind)]
+        (polynom (- x x-i))))))
 
 (defn- interpolate-parametric [points]
   (let [point-groups (->> points
