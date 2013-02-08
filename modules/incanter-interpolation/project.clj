@@ -8,4 +8,5 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [incanter/incanter-core "1.5.0-SNAPSHOT"]
                  [incanter/incanter-charts "1.5.0-SNAPSHOT"]]
+  :java-source-paths ["java"]
   :profiles {:dev {:dependencies [[criterium "0.3.1"]]}})

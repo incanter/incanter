@@ -310,13 +310,13 @@
             (log-time *name* (interp-fn x y))))))
 
       (defn bench-interpolator [interp-fn interp-grid-fn name]
-        #_(binding [*name* (str name " 1d create single")]
+        (binding [*name* (str name " 1d create single")]
           (bench-interpolator-creation interp-fn (fn [i] (* 2 i))))
         #_(binding [*name* (str name " 1d create vector")]
           (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i) (- i)])))
         #_(binding [*name* (str name " 1d calls vector")]
             (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i) (- i)]) doall))
-        (binding [*name* (str name " 1d call single")]
+        #_(binding [*name* (str name " 1d call single")]
           (bench-interpolator-calls interp-fn (fn [i] (* 2 i)) identity))
         #_(binding [*name* (str name " 2d create")]
           (bench-interpolator-grid-creation interp-grid-fn))

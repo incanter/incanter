@@ -6,7 +6,7 @@
   "Interpolates point by polynomial using Newton form.
    http://en.wikipedia.org/wiki/Newton_polynomial"
   [points]
-  (let [xs (map first points)
+  (let [xs (mapv first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]
                              {:f (/ (- (:f f2) (:f f1))
@@ -14,16 +14,23 @@
                               :x-r (:x-r f2)
                               :x-l (:x-l f1)})
         next-level-differences (fn [fs]
-                                 (map divided-difference (partition 2 1 fs)))
+                                 (doall (map divided-difference (partition 2 1 fs))))
         fs (->> (map (fn [x f] {:f f :x-l x :x-r x}) xs ys)
                 (iterate next-level-differences)
                 (take (count xs))
                 (map first)
-                (map :f))]
-    (fn [x]
-      (->> (reductions #(* %1 (- x %2)) 1 xs)
-           (map * fs)
-           (apply +)))))
+                (mapv :f))]
+    (fn [^double x]
+      ; Use ugly loop instead of functional reductions, map, reduce
+      ; Because it speeds up ~5 times.
+      (loop [sum (double 0)
+             pow (double 1)
+             ind 0]
+        (if (= (count fs) ind)
+          sum
+          (recur (+ (* (fs ind) pow) sum)
+                 (* pow (- x (xs ind)))
+                 (inc ind)))))))
 
 (defn- update-P [P xs ys k]
   (letfn [(update-upper-right [i j]
@@ -68,3 +75,4 @@
       (let [Y (reductions #(* %1 (- y %2)) 1 ys)
             X (reductions #(* %1 (- x %2)) 1 xs)]
         (to-list ($ 0 0 (mmult (trans Y) P X)))))))
+
