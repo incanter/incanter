@@ -959,7 +959,7 @@
     :rate (default 1)
 
   See also:
-      pdf-exp, and cdf-exp
+      pdf-exp and cdf-exp
 
   References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html
@@ -1162,7 +1162,7 @@
     :prob (default 1/2)
 
   See also:
-      cdf-binomial and sample-binomial
+      pdf-binomial and cdf-binomial
 
   References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html
@@ -1171,10 +1171,10 @@
   Example:
       (sample-binomial 1000 :prob 1/4 :size 20)
 "
-([^Integer size & {:keys [size prob] :or {size 1 prob 1/2}}]
-   (if (= size 1)
+([^Integer samplesize & {:keys [size prob] :or {size 1 prob 1/2}}]
+   (if (= samplesize 1)
       (Binomial/staticNextInt size prob)
-      (for [_ (range size)] (Binomial/staticNextInt size prob)))))
+      (repeatedly samplesize #(Binomial/staticNextInt size prob)))))
 
 
 
@@ -1267,7 +1267,7 @@
     :lower-tail (default true)
 
   See also:
-      cdf-poisson and sample-poisson
+      pdf-poisson and sample-poisson
 
   References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html
@@ -1353,7 +1353,7 @@
     :lower-tail? (default true)
 
   See also:
-      cdf-neg-binomial and sample-neg-binomial
+      pdf-neg-binomial and sample-neg-binomial
 
   References:
       http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html
@@ -1373,7 +1373,6 @@
 
 
 
-;; TODO: may be this is a bug, that we have 2 size? in param and in options
 (defn sample-neg-binomial
 " Returns a sample of the given size from a Negative Binomial distribution.
   Same as R's rnbinom
@@ -1392,10 +1391,10 @@
   Example:
       (sample-neg-binomial 1000 :prob 1/2 :size 20)
 "
-([^Integer nsize & {:keys [size prob] :or {size 10 prob 1/2}}]
-   (if (= size 1)
+([^Integer samplesize & {:keys [size prob] :or {size 10 prob 1/2}}]
+   (if (= samplesize 1)
       (NegativeBinomial/staticNextInt size prob)
-      (for [_ (range size)] (NegativeBinomial/staticNextInt size prob)))))
+      (repeatedly samplesize #(NegativeBinomial/staticNextInt size prob)))))
 
 
 
