@@ -370,16 +370,16 @@
 
 
 ;; make box-plots for each of the Binomial distributions
-(doto (box-plot (sample-binomial 1000 :prob 1/2 :size 20) 
+(doto (box-plot (sample-binomial 1000 20 1/2) 
                 :title "Binomial Boxplot"
                 :legend true)
-      (add-box-plot (sample-binomial 1000 :prob 0.7 :size 20))
-      (add-box-plot (sample-binomial 1000 :prob 1/2 :size 40))
+      (add-box-plot (sample-binomial 1000 20 0.7))
+      (add-box-plot (sample-binomial 1000 40 1/2))
       view)
 
 
 ;; make a histogram of a sample of 1000 Exponential deviates
-(view (histogram (sample-binomial 1000 :prob 1/2 :size 20)
+(view (histogram (sample-binomial 1000 20 1/2)
         :title "Binomial Histogram"
         :nbins 10))
 
