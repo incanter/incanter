@@ -63,10 +63,10 @@
   (let [xs (mapv double xs)
         hs (map-pairs #(- %2 %1) xs)
         grid (map #(mapv double %) grid)
-        coefs (map #(calc-coefs hs %) grid)
+        coefs (pmap #(calc-coefs hs %) grid)
         trans-coefs (apply map vector coefs)
         strip-points (map #(map vector ys %) trans-coefs)
-        strip-interpolators (mapv interpolate-parametric strip-points)]
+        strip-interpolators (vec (pmap interpolate-parametric strip-points))]
     (fn [x y]
       (let [ind-x (find-segment xs x)
             x-i (xs (inc ind-x))
