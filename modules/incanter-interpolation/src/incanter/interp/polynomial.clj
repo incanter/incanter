@@ -5,7 +5,7 @@
 (defn interpolate
   "Interpolates point by polynomial using Newton form.
    http://en.wikipedia.org/wiki/Newton_polynomial"
-  [points]
+  [points options]
   (let [xs (mapv first points)
         ys (map second points)
         divided-difference (fn [[f1 f2]]

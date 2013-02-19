@@ -27,6 +27,13 @@
      points -- collection of points. Each point is a vector where first element - x, second element f(x). Note that f(x) can be number or vector of numbers.
      type -- type of interpolation - :linear, :polynomial or :cubic-spline. For most cases you should use :cubic-spline - it usually gives best result. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
 
+   Options:
+     :boundaries - valid only for :cubic-spline interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
+                   Support that our spline is function S. leftmost point is a, rightmost - b.
+                   :natural - S''(a) = S''(b) = 0
+                   :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curve.
+                   Default value is :natural
+
    Examples:
 
    (def points [[0 0] [1 5] [2 0] [3 5]])
@@ -45,17 +52,21 @@
    (cubic 0) => [0.0 0.0]
    (cubic 1) => [1.0 1.0]
    (cubic 0.5) => [-0.12053571428571436 0.5669642857142858]
+
+   ; Specify boundary conditions
+   (interpolate points :cubic-spline :boundaries :closed)
 "
-  [points type]
+  [points type & options]
   (let [method (case type
                  :linear linear/interpolate
                  :polynomial polynomial/interpolate
                  :cubic-spline cubic-spline/interpolate)
-        points (sort-by first points)]
+        points (sort-by first points)
+        opts (when options (apply assoc {} options))]
     (validate-unique (map first points))
     (if (number? (second (first points)))
-      (method points)
-      (interpolate-parametric method points))))
+      (method points opts)
+      (interpolate-parametric #(method % opts) points))))
 
 (defn- approximate-parametric [method points]
   (let [point-groups (apply map vector points)
@@ -130,6 +141,10 @@
      :x-range, :y-range - range of possible x and y. By default :x-range = [0 1] and :y-range = [0 1]
      :xs, :ys - coordinates of grid points. Size of xs and ys must be consistent with grid size. If you have grid 4x3 then xs must have size 3 and ys - 4.
      Note that :x-range, :y-range and :xs, :ys both doing same job - they specify coordinates of points in grid. So you should use only 1 of them or none at all.
+
+   Options:
+     :boundaries - valid only for :cubic-spline interpolation. Defines boundary condition for bicubic spline. Possible values - :natural and :closed. Default - :natural. Check documentation of 'interpolate' method for more explanation.
+
 
    Examples:
 
@@ -209,7 +224,7 @@
            points (map vector xs ys)
            min-x (apply min xs)
            max-x (apply max xs)
-           f (interpolate points :linear)]
+           f (interpolate points :cubic-spline)]
        (doto (charts/function-plot f min-x max-x)
          (charts/add-points xs ys)
          (core/view))))
@@ -229,12 +244,13 @@
    (do
      (require '[incanter.core :as core])
      (require '[incanter.charts :as charts])
-     (let [n 3
+     (let [n 10
            xs (repeatedly n #(rand-int 20))
            ys (repeatedly n #(rand-int 20))
-           points (map vector xs ys)
-           plot (charts/parametric-plot (approximate points :degree 0) 0 1)]
-       (doto (reduce #(charts/add-parametric %1 (approximate points :degree %2) 0 1) plot [1 2 3])
+           ts (range n)
+           points (map (fn [t x y] [t [x y]]) ts xs ys )
+           plot (charts/parametric-plot (interpolate points :cubic-spline :boundaries :closed) 0 (dec n))]
+       (doto plot
          (charts/add-points xs ys)
          (core/view))))
 

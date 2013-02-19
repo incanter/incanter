@@ -4,9 +4,11 @@
 (defn- map-pairs [fn coll]
   (mapv #(apply fn %) (partition 2 1 coll)))
 
-(defn- calc-coefs [hs ys]
+(defn- calc-coefs [hs ys type]
   (let [alphas ys
-        gammas (incanter.interpolation.Utils/calcGammas ys hs)
+        gammas (cond (= type :natural) (incanter.interpolation.Utils/calcNaturalGammas ys hs)
+                     (= type :closed) (incanter.interpolation.Utils/calcClosedGammas ys hs)
+                     :default (throw (IllegalArgumentException. (str "Unknown type " type))))
         deltas (map / (map-pairs #(- %2 %1) gammas) hs)
         betas (map +
                    (map / (map-pairs #(- %2 %1) ys) hs)
@@ -36,11 +38,12 @@
 (defn interpolate
   "Interpolates set of points using cubic splines.
    http://en.wikipedia.org/wiki/Spline_interpolation"
-  [points]
+  [points options]
   (let [xs (mapv #(double (first %)) points)
         ys (mapv #(double (second %)) points)
         hs (map-pairs #(- %2 %1) xs)
-        all-coefs (calc-coefs hs ys)
+        type (:boundaries options :natural)
+        all-coefs (calc-coefs hs ys type)
         polynoms (mapv polynom all-coefs)]
     (fn [x]
       (let [ind (find-segment xs x)
@@ -48,25 +51,26 @@
             polynom (polynoms ind)]
         (polynom (- x x-i))))))
 
-(defn- interpolate-parametric [points]
+(defn- interpolate-parametric [points options]
   (let [point-groups (->> points
                           (map (fn [[t value]]
                                  (map #(vector t %) value)))
                           (apply map vector))
-        interpolators (map interpolate point-groups)]
+        interpolators (map #(interpolate % options) point-groups)]
     (fn [t]
       (map #(% t) interpolators))))
 
 (defn interpolate-grid
   "Interpolates grid using bicubic splines."
   [grid xs ys options]
-  (let [xs (mapv double xs)
+  (let [type (:boundaries options :natural)
+        xs (mapv double xs)
         hs (map-pairs #(- %2 %1) xs)
         grid (map #(mapv double %) grid)
-        coefs (pmap #(calc-coefs hs %) grid)
+        coefs (pmap #(calc-coefs hs % type) grid)
         trans-coefs (apply map vector coefs)
         strip-points (map #(map vector ys %) trans-coefs)
-        strip-interpolators (vec (pmap interpolate-parametric strip-points))]
+        strip-interpolators (vec (pmap #(interpolate-parametric % options) strip-points))]
     (fn [x y]
       (let [ind-x (find-segment xs x)
             x-i (xs (inc ind-x))

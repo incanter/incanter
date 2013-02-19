@@ -4,7 +4,7 @@
         incanter.interp.test-common))
 
 (deftest interpolate-test
-  (test-interpolate interpolate))
+  (test-interpolate interpolate {}))
 
 (deftest interpolate-grid-test
-  (test-interpolate-grid interpolate-grid))
+  (test-interpolate-grid interpolate-grid {}))

@@ -19,7 +19,7 @@
 
 (defn interpolate
   "Interpolates set of points using linear interpolation."
-  [points]
+  [points options]
   (let [xs (mapv first points)
         ys (mapv second points)]
     (fn [x]
