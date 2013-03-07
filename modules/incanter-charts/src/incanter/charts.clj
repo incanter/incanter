@@ -3117,6 +3117,15 @@
 (defn trace-plot
   " Returns a trace-plot object, use the 'view' function to display it.
 
+  Options:
+    :data (default nil) If the :data option is provided a dataset,
+                        a column name can be used instead of a sequence
+                        of data for argument x.
+    :title (default 'Trace Plot') main title
+    :x-label (default 'Iteration')
+    :y-label (default 'Value')
+    :series-label (default 'Value')
+
     Examples:
       (use '(incanter core datasets stats bayes charts))
       (def ols-data (to-matrix (get-dataset :survey)))
@@ -3159,6 +3168,11 @@
 "
   Returns a QQ-Plot object. Use the 'view' function to display it.
 
+  Options:
+    :data (default nil) If the :data option is provided a dataset,
+                        a column name can be used instead of a sequence
+                        of data for argument x.
+
   References:
     http://en.wikipedia.org/wiki/QQ_plot
 
@@ -3196,6 +3210,10 @@
 
 (defn bland-altman-plot
 "
+  Options:
+    :data (default nil) If the :data option is provided a dataset,
+                        column names can be used instead of sequences
+                        of data for arguments x1 and x2.
 
   Examples:
 
