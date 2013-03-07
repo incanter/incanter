@@ -3292,17 +3292,25 @@
      (set-data chart data 0))
   ([chart data series-idx]
      (let [series (get-series chart series-idx)]
-       (do
-         (.clear series)
-         (cond
-           (= 2 (count (first data)))
-             (doseq [row data]
-               (.addOrUpdate series (first row) (second row)))
-           (= 2 (count data))
-             (doseq [i (range (count (first data)))]
-               (.addOrUpdate series (nth (first data) i) (nth (second data) i)))
-           :else
-             (throw (Exception. "Data has wrong number of dimensions"))))
+       (.clear series)
+       (cond
+         (= 2 (count (first data)))
+           (doseq [row data]
+             (.addOrUpdate series (first row) (second row)))
+         (= 2 (count data))
+           (dorun (map #(.addOrUpdate series %1 %2) (first data) (second data)))
+         :else
+           (throw (Exception. "Data has wrong number of dimensions")))
+       chart))
+  ; by using (data-as-list) these two signatures do not only work for two
+  ; column names and a dataset, but also when x and y are collections, in
+  ; which case the dataset is ignored
+  ([chart x y dataset]
+    (set-data chart x y dataset 0))
+  ([chart x y dataset series-idx]
+     (let [series (get-series chart series-idx)]
+       (.clear series)
+       (dorun (map #(.addOrUpdate series %1 %2) (data-as-list x dataset) (data-as-list y dataset)))
        chart)))
 
 
