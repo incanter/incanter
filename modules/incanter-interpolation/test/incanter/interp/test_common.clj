@@ -12,24 +12,19 @@
     (every? true? (map points-eq? p1 p2))
     (< (abs (- p1 p2)) eps)))
 
-(defn test-interpolation [method-fn xs ys options]
-  (let [points (sort-by first (map vector xs ys))
-        interp-fn (method-fn points options)]
-    (doseq [[x y] (map vector xs ys)]
-      (is (points-eq? (interp-fn x) y) (str "x = " x " expecting f(x) = " y)))))
-
 (defn rand-coll [n]
   (->> #(rand-int 100)
        repeatedly
        distinct
        (take n)))
 
-
 (defn test-interpolate [method-fn options]
-  (test-interpolation method-fn
-                      (rand-coll 10)
-                      (rand-coll 10)
-                      options))
+  (let [xs (rand-coll 10)
+        ys (rand-coll 10)
+        points (sort-by first (map vector xs ys))
+        interp-fn (method-fn points options)]
+    (doseq [[x y] (map vector xs ys)]
+      (is (points-eq? (interp-fn x) y) (str "x = " x " expecting f(x) = " y)))))
 
 (defn test-interpolate-grid [method-fn options]
   (let [xs (vec (range 7))

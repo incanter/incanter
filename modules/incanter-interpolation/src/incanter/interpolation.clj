@@ -10,21 +10,20 @@
   (when-not (apply distinct? xs)
     (throw (IllegalArgumentException. "All x must be distinct."))))
 
-(defn- interpolate-parametric [method points]
-  (let [point-groups (->> points
-                          (map (fn [[t value]]
-                                 (map #(vector t %) value)))
-                          (apply map vector))
-        interpolators (map method point-groups)]
-    (fn [t]
-      (map #(% t) interpolators))))
+(defn- uniform
+" Splits segment [a b] to n points with equals distance between them."
+  [[a b] n]
+  (map #(-> (* (- b a) %)
+            (/ (dec n))
+            (+ a))
+       (range n)))
 
 (defn interpolate
-"  Returns a function that interpolates given collection of points.
+"   Builds a function that interpolates given collection of points.
    http://en.wikipedia.org/wiki/Interpolation
 
    Arguments:
-     points -- collection of points. Each point is a vector where first element - x, second element f(x). Note that f(x) can be number or vector of numbers.
+     points -- collection of points. Each point is a collection [x y].
      type -- type of interpolation - :linear, :polynomial or :cubic-spline. For most cases you should use :cubic-spline - it usually gives best result. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
 
    Options:
@@ -42,17 +41,6 @@
    (linear 1) => 5.0
    (linear 1.5) => 2.5
 
-   ; Example of parametric interpolation when y component has several components
-   (def points [[0 [0 0]]
-                [1 [0 1]]
-                [2 [1 1]]
-                [3 [1 0]]
-                [4 [0 0]]])
-   (def cubic (interpolate points :cubic-spline))
-   (cubic 0) => [0.0 0.0]
-   (cubic 1) => [1.0 1.0]
-   (cubic 0.5) => [-0.12053571428571436 0.5669642857142858]
-
    ; Specify boundary conditions
    (interpolate points :cubic-spline :boundaries :closed)
 "
@@ -64,9 +52,62 @@
         points (sort-by first points)
         opts (when options (apply assoc {} options))]
     (validate-unique (map first points))
-    (if (number? (second (first points)))
-      (method points opts)
-      (interpolate-parametric #(method % opts) points))))
+    (method points opts)))
+
+(defn interpolate-parametric
+"   Builds a parametric function that interpolates given collection of points.
+   Parametric function represents a curve that go through all points. By default domain is [0, 1].
+
+   Arguments:
+     points -- collection of points. Each point either a single value or collection of values.
+     type -- type of interpolation - :linear, :polynomial or :cubic-spline. For most cases you should use :cubic-spline - it usually gives best result. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
+
+   Options:
+     :range -- defines range for parameter t.
+               Default value is [0, 1]. f(0) = points[0], f(1) = points[n].
+
+     :boundaries -- valid only for :cubic-spline interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
+                    Support that our spline is function S. leftmost point is a, rightmost - b.
+                    :natural - S''(a) = S''(b) = 0
+                    :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curv
+
+                    Default value is :natural
+
+   Examples:
+
+   (def points [[0 0]
+                [0 1]
+                [1 1]
+                [3 5]
+                [2 9]])
+   (def cubic (interpolate-parametric points :cubic-spline))
+   (cubic 0) => [0.0 0.0]
+   (cubic 1) => [2.0 9.0]
+   (cubic 0.5) => [1.0 1.0]
+
+   ; Specify custom :range
+   (def cubic (interpolate-parametric points :cubic-spline :range [-10 10))
+   (cubic -10) => [0.0 0.0]
+   (cubic 0) => [1.0 1.0]
+"
+  [points type & options]
+  (let [method (case type
+                 :linear linear/interpolate
+                 :polynomial polynomial/interpolate
+                 :cubic-spline cubic-spline/interpolate)
+        opts (when options (apply assoc {} options))
+        rng (:range opts [0 1])
+        ts (uniform rng (count points))
+        point-groups (->> points
+                          (map #(if (coll? %) % (list %)))
+                          (map (fn [t value]
+                                 (map #(vector t %) value))
+                               ts)
+                          (apply map vector))
+        _ (println point-groups)
+        interpolators (map #(method % opts) point-groups)]
+    (fn [t]
+      (map #(% t) interpolators))))
 
 (defn- approximate-parametric [method points]
   (let [point-groups (apply map vector points)
@@ -121,9 +162,6 @@
           m (count (first grid))
           x-range (or x-range [0 1])
           y-range (or y-range [0 1])
-          uniform (fn [[a b] n]
-                    (map #(-> % (* (- b a)) (/ (dec n)) (+ a))
-                         (range n)))
           options (assoc options
                     :xs (uniform x-range m)
                     :ys (uniform y-range n))]
@@ -254,109 +292,20 @@
          (charts/add-points xs ys)
          (core/view))))
 
-   ((approximate [[0 0] [0 0] [0 0] [1 1]]) 0.9)
+   (do
+     (require '[incanter.core :as core])
+     (require '[incanter.charts :as charts])
+     (let [points [[0 0] [1 3] [2 0] [5 2] [6 1] [8 2] [11 1]]
+           [xs ys] (core/trans points)
+           cubic (interpolate points :cubic-spline :boundaries :closed)
+           b-spline (approximate points :degree 3)
+           plot (charts/parametric-plot b-spline 0 1)]
+       (doto plot
+         (charts/add-points xs ys)
+         (core/view)
+         (core/save "/home/nikelandjelo/plot.png"))))
+
+   (doc core/save)
+
+
    )
-
-#_(; Benchamarking
-   do
-
-    (do
-
-      (require '[criterium.core :refer [warmup-for-jit]])
-      (use 'incanter.logger)
-
-
-      (def ^{:dynamic true} *n* 20)
-      (def ^{:dynamic true} *creation-times* 50)
-      (def ^{:dynamic true} *call-times* 1000)
-      (def ^{:dynamic true} *name* "default")
-      (def ^{:dynamic true} *warmup-period* (* 5 200000000))
-
-      (defmacro bench [& body]
-        `(do
-           (reset-logger)
-           ~@body
-           (print-time-stats)))
-
-      (defn bench-interpolator-creation
-        ([interp-fn-fn y-fn]
-           (let [xs (range *n*)
-                 ys (map y-fn (range *n*))
-                 points (map vector xs ys)]
-             (dotimes [i *creation-times*]
-               (interp-fn-fn points))
-             (dotimes [i *creation-times*]
-               (log-time *name* (interp-fn-fn points))))))
-
-      (defn bench-interpolator-calls [interp-fn-fn y-fn dl]
-        (let [xs (range *n*)
-              ys (map y-fn (range *n*))
-              points (map vector xs ys)
-              interp-fn (interp-fn-fn points)
-              queries (->> (range *call-times*)
-                           (map #(/ % (dec *call-times*)))
-                           (map #(* % *n*)))]
-          (doseq [x (apply concat (repeat 3 queries))]
-            (interp-fn x))
-          (doseq [x queries]
-            (log-time *name* (dl (interp-fn x))))))
-
-      (defn grid []
-        (for [i (range *n*)]
-          (for [j (range *n*)]
-            (+ (* 2 i) j))))
-
-      (defn bench-interpolator-grid-creation [interp-fn-fn]
-        (let [grid (grid)]
-          (dotimes [_ *creation-times*]
-            (interp-fn-fn grid))
-          (dotimes [_ *creation-times*]
-            (log-time *name* (interp-fn-fn grid)))))
-
-      (defn bench-interpolator-grid-calls [interp-fn-fn]
-        (let [grid (grid)
-              interp-fn (interp-fn-fn grid)
-              call-times (Math/sqrt *call-times*)
-              xs (map #(/ % (dec call-times)) (range call-times))]
-          (doseq [x xs
-                  y xs]
-            (interp-fn x y)
-          (doseq [x xs
-                  y xs]
-            (log-time *name* (interp-fn x y))))))
-
-      (defn bench-interpolator [interp-fn interp-grid-fn name]
-        (binding [*name* (str name " 1d create single")]
-          (bench-interpolator-creation interp-fn (fn [i] (* 2 i))))
-        #_(binding [*name* (str name " 1d create vector")]
-          (bench-interpolator-creation interp-fn (fn [i] [i (* 2 i) (- i)])))
-        #_(binding [*name* (str name " 1d calls vector")]
-            (bench-interpolator-calls interp-fn (fn [i] [i (* 2 i) (- i)]) doall))
-        #_(binding [*name* (str name " 1d call single")]
-          (bench-interpolator-calls interp-fn (fn [i] (* 2 i)) identity))
-        #_(binding [*name* (str name " 2d create")]
-          (bench-interpolator-grid-creation interp-grid-fn))
-        #_(binding [*name* (str name " 2d calls")]
-          (bench-interpolator-grid-calls interp-grid-fn)))
-
-      (defn test-all []
-        (println \newline \newline "Linear")
-        (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
-
-        (println \newline \newline "Cubic")
-        (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bicubic-spline) ""))
-
-        (println \newline \newline "Polynomial")
-        (bench (bench-interpolator #(interpolate % :polynomial) #(interpolate-grid % :polynomial) ""))
-
-        (println \newline \newline "B-spline")
-        (bench (bench-interpolator #(approximate (map second %)) approximate-grid ""))))
-
-      (test-all)
-
-    (bench (bench-interpolator #(interpolate % :linear) #(interpolate-grid % :bilinear) ""))
-    (bench (bench-interpolator #(interpolate % :polynomial) #(interpolate-grid % :bilinear) ""))
-    (bench (bench-interpolator #(interpolate % :cubic-spline) #(interpolate-grid % :bilinear) ""))
-    (bench (bench-interpolator #(approximate (map second %)) nil ""))
-
-    )
