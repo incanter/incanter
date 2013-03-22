@@ -104,7 +104,6 @@
                                  (map #(vector t %) value))
                                ts)
                           (apply map vector))
-        _ (println point-groups)
         interpolators (map #(method % opts) point-groups)]
     (fn [t]
       (map #(% t) interpolators))))
