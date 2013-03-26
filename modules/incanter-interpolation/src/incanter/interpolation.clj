@@ -97,24 +97,21 @@
                  :cubic-spline cubic-spline/interpolate)
         opts (when options (apply assoc {} options))
         rng (:range opts [0 1])
-        ts (uniform rng (count points))
-        point-groups (->> points
-                          (map #(if (coll? %) % (list %)))
-                          (map (fn [t value]
-                                 (map #(vector t %) value))
-                               ts)
-                          (apply map vector))
-        interpolators (map #(method % opts) point-groups)]
-    (fn [t]
-      (map #(% t) interpolators))))
+        ts (uniform rng (count points))]
+    (if (number? (first points))
+      (let [t-points (map vector ts points)]
+        (method t-points opts))
+      (let [point-groups (->> points
+                              (map (fn [t value]
+                                     (map #(vector t %) value))
+                                   ts)
+                              (apply map vector))
+            interpolators (map #(method % opts) point-groups)]
+        (fn [t]
+         (map #(% t) interpolators))))))
 
-(defn- approximate-parametric [method points]
-  (let [point-groups (apply map vector points)
-        interpolators (map method point-groups)]
-    (fn [t]
-      (map #(% t) interpolators))))
 
-(defn approximate
+(defn approximate-parametric
  "  Approximates given collection of points using B-spline. Returns parametric function f that takes values from 0 to 1. f(0) will give you first point, f(1) - last point.
 
     Arguments:
@@ -129,13 +126,13 @@
     Examples:
 
     (def points [0 1 5 5 0])
-    (def approximator (approximate points))
+    (def approximator (approximate-parametric points))
     (approximator 0) => 0.0
     (approximator 1) => 0.0
     (approximator 0.5) => 0.5
 
     ; Set degree manually
-    (def approximator (approximate points :degree 2))
+    (def approximator (approximate-parametric points :degree 2))
 "
   [points & options]
   (let [opts (when options (apply assoc {} options))
@@ -143,7 +140,10 @@
                     (dec (count points)))]
     (if (number? (first points))
       (b-spline/b-spline points degree)
-      (approximate-parametric #(b-spline/b-spline % degree) points))))
+      (let [point-groups (apply map vector points)
+            interpolators (map #(b-spline/b-spline % degree) point-groups)]
+        (fn [t]
+          (map #(% t) interpolators))))))
 
 (defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
   (if-not (or (nil? xs) (nil? ys))
