@@ -77,3 +77,55 @@
             coefs ((strip-interpolators ind-x) y)]
         (calc-polynom coefs (- x x-i))))))
 
+(defn- difference [ys hs ind]
+  (let [n (dec (count ys))]
+   (cond (zero? ind) (/ (- (ys 1) (ys 0))
+                        (hs 0))
+         (= ind n) (/ (- (ys n) (ys (dec n)))
+                      (hs (dec n)))
+         :default (/ (+ (/ (- (ys (inc ind)) (ys ind))
+                           (hs ind))
+                        (/ (- (ys ind) (ys (dec ind)))
+                           (hs (dec ind))))
+                     2))))
+
+(defn- calc-coefs-hermite [hs ys]
+  (let [n (count ys)
+        yds (mapv #(difference ys hs %) (range n))
+        alphas ys
+        betas yds
+        calc-delta (fn [i]
+                     (let [h (- (hs (dec i)))]
+                       (+ (/ (* 6 (- (ys i) (ys (dec i))))
+                             h h h)
+                          (/ (* 3 (+ (yds i) (yds (dec i))))
+                             h h))))
+        deltas (mapv calc-delta (range 1 n))
+        calc-gamma (fn [i]
+                     (let [h (- (hs (dec i)))]
+                       (- (/ (- (yds (dec i)) (yds i))
+                             h)
+                          (* h (deltas (dec i))))))
+        gammas (mapv calc-gamma (range 1 n))]
+    (println hs ys yds deltas gammas)
+    (mapv vector
+          (rest alphas)
+          (rest betas)
+          (map #(/ % 2) gammas)
+          (map #(/ % 3) deltas))))
+
+(defn interpolate-hermite
+  "Interpolates set of points using cubic hermite splines.
+http://en.wikipedia.org/wiki/Cubic_Hermite_spline"
+  [points options]
+  (let [xs (mapv #(double (first %)) points)
+        ys (mapv #(double (second %)) points)
+        hs (map-pairs #(- %2 %1) xs)
+        all-coefs (calc-coefs-hermite hs ys)
+        polynoms (mapv polynom all-coefs)]
+    (println all-coefs)
+    (fn [x]
+      (let [ind (find-segment xs x)
+            x-i (xs (inc ind))
+            polynom (polynoms ind)]
+        (polynom (- x x-i))))))

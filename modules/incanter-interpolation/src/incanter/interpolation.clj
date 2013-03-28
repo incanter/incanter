@@ -48,7 +48,8 @@
   (let [method (case type
                  :linear linear/interpolate
                  :polynomial polynomial/interpolate
-                 :cubic-spline cubic-spline/interpolate)
+                 :cubic-spline cubic-spline/interpolate
+                 :cubic-hermite-spline cubic-spline/interpolate-hermite)
         points (sort-by first points)
         opts (when options (apply assoc {} options))]
     (validate-unique (map first points))
@@ -261,7 +262,7 @@
            points (map vector xs ys)
            min-x (apply min xs)
            max-x (apply max xs)
-           f (interpolate points :cubic-spline)]
+           f (interpolate points :cubic-hermite-spline)]
        (doto (charts/function-plot f min-x max-x)
          (charts/add-points xs ys)
          (core/view))))

@@ -1,7 +1,8 @@
 (ns incanter.interp.cubic-spline-test
-  (:use clojure.test
-        incanter.interp.cubic-spline
-        incanter.interp.test-common))
+  (:require [clojure.test :refer :all]
+            [incanter.interp
+             [cubic-spline :refer :all]
+             [test-common :refer :all]]))
 
 (deftest interpolate-test-natural
   (test-interpolate interpolate {:boundaries :natural}))
@@ -14,3 +15,6 @@
 
 (deftest interpolate-grid-test-closed
   (test-interpolate-grid interpolate-grid {:boundaries :closed}))
+
+(deftest interpolate-hermite-test
+  (test-interpolate interpolate-hermite nil))
