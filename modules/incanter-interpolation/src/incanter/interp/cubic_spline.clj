@@ -107,7 +107,6 @@
                              h)
                           (* h (deltas (dec i))))))
         gammas (mapv calc-gamma (range 1 n))]
-    (println hs ys yds deltas gammas)
     (mapv vector
           (rest alphas)
           (rest betas)
@@ -123,7 +122,6 @@ http://en.wikipedia.org/wiki/Cubic_Hermite_spline"
         hs (map-pairs #(- %2 %1) xs)
         all-coefs (calc-coefs-hermite hs ys)
         polynoms (mapv polynom all-coefs)]
-    (println all-coefs)
     (fn [x]
       (let [ind (find-segment xs x)
             x-i (xs (inc ind))
