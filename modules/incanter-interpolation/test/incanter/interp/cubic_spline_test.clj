@@ -18,3 +18,6 @@
 
 (deftest interpolate-hermite-test
   (test-interpolate interpolate-hermite nil))
+
+(deftest interpolate-grid-hermite-test
+  (test-interpolate-grid interpolate-grid-hermite nil))

@@ -95,7 +95,8 @@
   (let [method (case type
                  :linear linear/interpolate
                  :polynomial polynomial/interpolate
-                 :cubic-spline cubic-spline/interpolate)
+                 :cubic-spline cubic-spline/interpolate
+                 :cubic-hermite-spline cubic-spline/interpolate-hermite)
         opts (when options (apply assoc {} options))
         rng (:range opts [0 1])
         ts (uniform rng (count points))]
@@ -151,7 +152,8 @@
     (let [method (case type
                    :bilinear linear/interpolate-grid
                    :polynomial polynomial/interpolate-grid
-                   :bicubic-spline cubic-spline/interpolate-grid)
+                   :bicubic-spline cubic-spline/interpolate-grid
+                   :bicubic-hermite-spline cubic-spline/interpolate-grid-hermite)
           grid (mapv vec grid)
           xs (vec (sort xs))
           ys (vec (sort ys))]
@@ -173,7 +175,7 @@
 
    Arguments:
      grid -- collection of collection of numbers to be interpolated. If you need to interpolate vectors - interpolate each component by separate interpolator.
-     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline
+     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline, :bicubic-hermite-spline
 
    Options:
      :x-range, :y-range - range of possible x and y. By default :x-range = [0 1] and :y-range = [0 1]

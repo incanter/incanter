@@ -4,14 +4,20 @@
 (defn- map-pairs [fn coll]
   (mapv #(apply fn %) (partition 2 1 coll)))
 
+(defn- get-hs [xs]
+  (map-pairs #(- %2 %1) xs))
+
+(defn- transpose [grid]
+  (apply map vector grid))
+
 (defn- calc-coefs [hs ys type]
   (let [alphas ys
         gammas (cond (= type :natural) (incanter.interpolation.Utils/calcNaturalGammas ys hs)
                      (= type :closed) (incanter.interpolation.Utils/calcClosedGammas ys hs)
                      :default (throw (IllegalArgumentException. (str "Unknown type " type))))
-        deltas (map / (map-pairs #(- %2 %1) gammas) hs)
+        deltas (map / (get-hs gammas) hs)
         betas (map +
-                   (map / (map-pairs #(- %2 %1) ys) hs)
+                   (map / (get-hs ys) hs)
                    (map #(* %1 (/ %2 6))
                         (map-pairs #(+ (* 2 %2) %1) gammas)
                         hs))]
@@ -41,7 +47,7 @@
   [points options]
   (let [xs (mapv #(double (first %)) points)
         ys (mapv #(double (second %)) points)
-        hs (map-pairs #(- %2 %1) xs)
+        hs (get-hs xs)
         type (:boundaries options :natural)
         all-coefs (calc-coefs hs ys type)
         polynoms (mapv polynom all-coefs)]
@@ -55,7 +61,7 @@
   (let [point-groups (->> points
                           (map (fn [[t value]]
                                  (map #(vector t %) value)))
-                          (apply map vector))
+                          (transpose))
         interpolators (map #(interpolate % options) point-groups)]
     (fn [t]
       (map #(% t) interpolators))))
@@ -65,10 +71,10 @@
   [grid xs ys options]
   (let [type (:boundaries options :natural)
         xs (mapv double xs)
-        hs (map-pairs #(- %2 %1) xs)
+        hs (get-hs xs)
         grid (map #(mapv double %) grid)
         coefs (pmap #(calc-coefs hs % type) grid)
-        trans-coefs (apply map vector coefs)
+        trans-coefs (transpose coefs)
         strip-points (map #(map vector ys %) trans-coefs)
         strip-interpolators (vec (pmap #(interpolate-parametric % options) strip-points))]
     (fn [x y]
@@ -89,41 +95,93 @@
                            (hs (dec ind))))
                      2))))
 
-(defn- calc-coefs-hermite [hs ys]
-  (let [n (count ys)
-        yds (mapv #(difference ys hs %) (range n))
-        alphas ys
-        betas yds
-        calc-delta (fn [i]
-                     (let [h (- (hs (dec i)))]
-                       (+ (/ (* 6 (- (ys i) (ys (dec i))))
-                             h h h)
-                          (/ (* 3 (+ (yds i) (yds (dec i))))
-                             h h))))
-        deltas (mapv calc-delta (range 1 n))
-        calc-gamma (fn [i]
-                     (let [h (- (hs (dec i)))]
-                       (- (/ (- (yds (dec i)) (yds i))
-                             h)
-                          (* h (deltas (dec i))))))
-        gammas (mapv calc-gamma (range 1 n))]
-    (mapv vector
-          (rest alphas)
-          (rest betas)
-          (map #(/ % 2) gammas)
-          (map #(/ % 3) deltas))))
+(defn- differences [ys hs]
+  (map #(difference ys hs %) (range (count ys))))
+
+(defn- get-alphas
+  ([[y0 y1] [yd0 yd1] h]
+     (get-alphas [y0 yd0 y1 yd1] h))
+  ([[y0 yd0 y1 yd1] h]
+     [y0
+      yd0
+      (/ (- y1 y0 (* h yd0)) h h)
+      (/ (+ (* 2 (- y0 y1))
+            (* h (+ yd0 yd1)))
+         h h h)]))
+
+(defn- hermite-polynom [alphas [a b]]
+  (let [a0 (double (nth alphas 0))
+        a1 (double (nth alphas 1))
+        a2 (double (nth alphas 2))
+        a3 (double (nth alphas 3))
+        a (double a)
+        b (double b)]
+    (fn [^double x]
+      (+ a0 (* (- x a)
+               (+ a1 (* (- x a)
+                        (+ a2 (* (- x b) a3)))))))))
 
 (defn interpolate-hermite
   "Interpolates set of points using cubic hermite splines.
 http://en.wikipedia.org/wiki/Cubic_Hermite_spline"
   [points options]
-  (let [xs (mapv #(double (first %)) points)
-        ys (mapv #(double (second %)) points)
-        hs (map-pairs #(- %2 %1) xs)
-        all-coefs (calc-coefs-hermite hs ys)
-        polynoms (mapv polynom all-coefs)]
+  (let [xs (mapv #(first %) points)
+        ys (mapv #(second %) points)
+        hs (get-hs xs)
+        yds (differences ys hs)
+        all-alphas (map get-alphas
+                        (partition 2 1 ys)
+                        (partition 2 1 yds)
+                        hs)
+        polynoms (mapv hermite-polynom all-alphas (partition 2 1 xs))]
     (fn [x]
       (let [ind (find-segment xs x)
             x-i (xs (inc ind))
             polynom (polynoms ind)]
-        (polynom (- x x-i))))))
+        (polynom x)))))
+
+(defn- add-partial-derivatives [grid xs ys]
+  (let [hs-x (get-hs xs)
+        hs-y (get-hs ys)
+        grid-dx (map #(differences % hs-x) grid)
+        grid-dy (->> (transpose grid)
+                     (map #(differences % hs-y))
+                     transpose)
+        grid-dxdy (->> (transpose grid-dx)
+                       (map #(differences % hs-y))
+                       transpose)]
+    (interleave (map interleave grid grid-dx)
+                (map interleave grid-dy grid-dxdy))))
+
+(defn- get-alphas-grid [grid h-x h-y]
+  (->> grid
+       (map #(get-alphas % h-x))
+       transpose
+       (map #(get-alphas % h-y))
+       transpose))
+
+(defn- hermite-rect-interpolator [square [a b] [c d]]
+  (let [alphas (get-alphas-grid square (- b a) (- d c))
+        [a0 a1 a2 a3] (map #(hermite-polynom % [a b]) alphas)]
+    (fn [x y]
+      (+ (a0 x) (* (- y c)
+                   (+ (a1 x) (* (- y c)
+                                (+ (a2 x) (* (- y d) (a3 x))))))))))
+
+(defn interpolate-grid-hermite
+  "Interpolates grid using bicubic hermite splines."
+  [grid xs ys options]
+  (let [xs (mapv double xs)
+        ys (mapv double ys)
+        grid (map #(mapv double %) grid)
+        grid-ex (add-partial-derivatives grid xs ys)
+        interpolators (mapv (fn [strip ys]
+                              (mapv #(hermite-rect-interpolator %1 %2 ys)
+                                    (transpose (map #(partition 4 2 %) strip))
+                                    (partition 2 1 xs)))
+                           (partition 4 2 grid-ex)
+                           (partition 2 1 ys))]
+    (fn [x y]
+      (let [ind-x (find-segment xs x)
+            ind-y (find-segment ys y)]
+        ((get-in interpolators [ind-y ind-x]) x y)))))
