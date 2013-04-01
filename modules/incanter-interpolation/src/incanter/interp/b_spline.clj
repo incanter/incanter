@@ -32,8 +32,10 @@
             Ns (calc-Ns ts degree t k)]
         [Ns k]))))
 
-(defn b-spline [points degree]
-  (let [points (vec points)
+(defn b-spline [points opts]
+  (let [degree (min (:degree opts 3)
+                    (count points))
+        points (vec points)
         n (- (count points) degree)
         ns-finder (calc-Ns-and-k-fn n degree)]
     (fn [t]
@@ -46,8 +48,11 @@
             sum
             (recur (+ sum (* (sub-points ind) (Ns ind))) (inc ind))))))))
 
-(defn b-surface [grid degree]
-  (let [grid (mapv vec grid)
+(defn b-surface [grid _ _ opts]
+  (let [degree (min (:degree opts 3)
+                    (dec (count grid))
+                    (dec (count (first grid))))
+        grid (mapv vec grid)
         n (- (count grid) degree)
         m (- (count (first grid)) degree)
         x-ns-finder (calc-Ns-and-k-fn m degree)
