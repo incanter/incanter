@@ -878,7 +878,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     (if (= type :values)
       {:S (:values (clx/svd mat :type :values))}
       {:S (:values result)
-       :U (if (= type :compact) mat (:left result)) 
+       :U (if (= type :compact) mat (:left result))
        :V (:right result)})))
 
 (defn decomp-eigenvalue
@@ -982,7 +982,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   ;(let [type (or type :full)
         ;q (orthonormal-base-stable m)
         ;m (trans m)]
-    ;{:Q (if (= type :full) q m) 
+    ;{:Q (if (= type :full) q m)
      ;:R (if (= type :compact)
           ;(matrix (reduce (fn [r j]
                             ;(conj r
@@ -2745,11 +2745,11 @@ of each type"
 
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
-    (.composeDiagonal DoubleFactory2D/dense block0 block1)) 
+    (.composeDiagonal DoubleFactory2D/dense block0 block1))
   (defn block-diag
     "Blocks should be a sequence of matrices."
     [blocks]
-    (new Matrix (reduce block-diag2 blocks))) 
+    (new Matrix (reduce block-diag2 blocks)))
 
   (defn block-matrix
     "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
@@ -2757,18 +2757,33 @@ of each type"
     (let [element-class (-> blocks first first class)
           native-rows (for [row blocks] (into-array element-class row))
           native-blocks (into-array (-> native-rows first class) native-rows)]
-      (new Matrix (.compose DoubleFactory2D/dense native-blocks)))) 
+      (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
 
   (defn separate-blocks
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
       (for [q partitions]
-        (.viewPart matrix (first p) (first q) (second p) (second q))))) 
+        (.viewPart matrix (first p) (first q) (second p) (second q)))))
 
   (defn diagonal-blocks
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
       (.viewPart matrix (first p) (first p) (second p) (second p))))
-  ) 
+  )
+
+(defn reorder-columns
+  "Produce a new dataset with the columns in the specified order.
+Returns nil if no valid column names are given."
+  [dset cols]
+  (let [cols (filter (partial contains? (set (:column-names dset))) cols)]
+    (if (empty? cols)
+      nil
+      (dataset
+       cols
+       (map (fn [row]
+              (map (fn [col] (get row col 0)) cols)
+              )
+            (:rows dset)))))
+  )

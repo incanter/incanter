@@ -82,7 +82,7 @@
 (deftest matrix-from-arrays
   (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
   (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3]))))
-  (is (= (matrix [[1 2] [3 4]]) 
+  (is (= (matrix [[1 2] [3 4]])
          (matrix (object-array [(double-array [1.0 2.0])
                                 (double-array [3.0 4.0])])))))
 
@@ -530,3 +530,35 @@
   (is (factorial 5) 120.0)
   (is (factorial 0) 1.0)
   (is (thrown? AssertionError (factorial -1))))
+
+(deftest reorder-columns-test
+  (testing "Reordering column names of a dataset:"
+    (let [dset (dataset [:b :a]
+                        [[2 1]
+                         [4 3]
+                         [6 5]])
+          ]
+      (testing "Simple case"
+        (let [expected (dataset [:a :b]
+                                [[1 2]
+                                 [3 4]
+                                 [5 6]])
+              actual (reorder-columns dset [:a :b])]
+          (is (= expected actual)))
+        )
+      (testing "Nil case"
+        (let [expected nil
+              actual (reorder-columns dset [:c])]
+          (is (= expected actual))))
+
+      (testing "Duplication (does not make sense!)"
+        (let [expected (dataset [:a :b :a :b]
+                                [[1 2 1 2]
+                                 [3 4 3 4]
+                                 [5 6 5 6]])
+              actual (reorder-columns dset [:a :b :a :b])]
+          (is (= expected actual))
+          ))
+      )
+    )
+  )
