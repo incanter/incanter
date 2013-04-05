@@ -45,3 +45,15 @@
          0 10  [0 4]
          5 10  [4 4]
          5 0   [4 0])))
+
+(deftest translate-domain-test
+  (are [from to x expected] (== ((translate-domain inc from to) x)
+                                expected)
+       [0 1] [0 1] 0 1
+       [0 1] [0 1] 1 2
+       [0 1] [-1 1] 0   0
+       [0 1] [-1 1] 1/2 1
+       [0 1] [-1 1] 1   2
+       [-1 1] [3 103] -1 4
+       [-1 1] [3 103] 0 54
+       [-1 1] [3 103] 1 104))

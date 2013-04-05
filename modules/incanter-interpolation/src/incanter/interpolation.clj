@@ -3,7 +3,8 @@
              [cubic-spline :as cubic-spline]
              [b-spline :as b-spline]
              [polynomial :as polynomial]
-             [linear :as linear]]
+             [linear :as linear]
+             [utils :as utils]]
             [incanter.core :refer (plus minus mult div)]))
 
 
@@ -70,7 +71,6 @@
    Options:
      :range -- defines range for parameter t.
                Default value is [0, 1]. f(0) = points[0], f(1) = points[n].
-               :b-spline ignores this option and always uses [0, 1]
 
      :boundaries -- valid only for :cubic-spline interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
                     Support that our spline is function S. leftmost point is a, rightmost - b.
@@ -99,15 +99,17 @@
    (cubic 0) => [1.0 1.0]
 "
   [points type & options]
-  (let [opts (when options (apply assoc {} options))]
+  (let [opts (when options (apply assoc {} options))
+        rng (:range opts [0 1])]
     (case type
-     :polynomial (polynomial/barycentric-cheb points opts)
-     :b-spline (b-spline/b-spline points opts)
+     :polynomial (-> (polynomial/barycentric-cheb points opts)
+                     (utils/translate-domain rng [-1 1]))
+     :b-spline (-> (b-spline/b-spline points opts)
+                   (utils/translate-domain rng [0 1]))
      (let [method (case type
                     :linear linear/interpolate
                     :cubic-spline cubic-spline/interpolate
                     :cubic-hermite-spline cubic-spline/interpolate-hermite)
-           rng (:range opts [0 1])
            ts (uniform rng (count points))]
        (if (number? (first points))
          (let [t-points (map vector ts points)]
@@ -120,7 +122,6 @@
                interpolators (map #(method % opts) point-groups)]
            (fn [t]
              (map #(% t) interpolators))))))))
-
 
 (defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
   (if-not (or (nil? xs) (nil? ys))
@@ -195,15 +196,8 @@
     (interpolate-grid* grid type opts)))
 
 
-#_((interpolate-grid [[1 2 3] [3 4 5]] :bilinear :x-range [0 10] :y-range [-5 5]) 5 -2.5)
-#_((interpolate-grid [[1 2 3] [3 4 5]] :bilinear) 0 1)
 
 #_(
-
-   ((interpolate [0 2 1] [[0 1] [2 3] [4 5]] :linear) 1.5)
-
-   ((interpolate [1 2] [3 4] :lagrange) 1.5)
-
 
    (do
      (require '[incanter.core :as core])
@@ -252,8 +246,8 @@
            xs (repeatedly n #(rand-int 20))
            ys (repeatedly n #(rand-int 20))
            points (map vector xs ys)
-           interp (interpolate-parametric points :polynomial)
-           plot (charts/parametric-plot interp -1 1)]
+           interp (interpolate-parametric points :polynomial :range [0 5])
+           plot (charts/parametric-plot interp 0 5)]
        (doto plot
          (charts/add-points xs ys)
          (core/view))))
