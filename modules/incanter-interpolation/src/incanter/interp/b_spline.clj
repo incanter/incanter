@@ -34,19 +34,26 @@
 
 (defn b-spline [points opts]
   (let [degree (min (:degree opts 3)
-                    (count points))
-        points (vec points)
+                    (dec (count points)))
         n (- (count points) degree)
+        coll-vals? (coll? (first points))
+        points (if coll-vals?
+                 (apply map vector points)
+                 (vec points))
         ns-finder (calc-Ns-and-k-fn n degree)]
     (fn [t]
       (let [[Ns k] (ns-finder t)
             Ns (vec Ns)
-            sub-points (subvec points (- k degree) (inc k))]
-        (loop [sum (double 0)
-               ind 0]
-          (if (= (count Ns) ind)
-            sum
-            (recur (+ sum (* (sub-points ind) (Ns ind))) (inc ind))))))))
+            calc (fn [points]
+                   (let [sub-points (subvec points (- k degree) (inc k))]
+                     (loop [sum (double 0)
+                            ind 0]
+                       (if (= (count Ns) ind)
+                         sum
+                         (recur (+ sum (* (sub-points ind) (Ns ind))) (inc ind))))))]
+        (if coll-vals?
+          (map calc points)
+          (calc points))))))
 
 (defn b-surface [grid _ _ opts]
   (let [degree (min (:degree opts 3)

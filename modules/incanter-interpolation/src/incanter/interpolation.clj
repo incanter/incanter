@@ -102,25 +102,21 @@
   (let [opts (when options (apply assoc {} options))]
     (case type
      :polynomial (polynomial/barycentric-cheb points opts)
+     :b-spline (b-spline/b-spline points opts)
      (let [method (case type
                     :linear linear/interpolate
                     :cubic-spline cubic-spline/interpolate
-                    :cubic-hermite-spline cubic-spline/interpolate-hermite
-                    :b-spline b-spline/b-spline)
+                    :cubic-hermite-spline cubic-spline/interpolate-hermite)
            rng (:range opts [0 1])
            ts (uniform rng (count points))]
        (if (number? (first points))
-         (let [t-points (if (= type :b-spline)
-                          points
-                          (map vector ts points))]
+         (let [t-points (map vector ts points)]
            (method t-points opts))
-         (let [point-groups (if (= type :b-spline)
-                              (apply map vector points)
-                              (->> points
-                                   (map (fn [t value]
-                                          (map #(vector t %) value))
-                                        ts)
-                                   (apply map vector)))
+         (let [point-groups (->> points
+                                 (map (fn [t value]
+                                        (map #(vector t %) value))
+                                      ts)
+                                 (apply map vector))
                interpolators (map #(method % opts) point-groups)]
            (fn [t]
              (map #(% t) interpolators))))))))
