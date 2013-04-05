@@ -99,30 +99,31 @@
    (cubic 0) => [1.0 1.0]
 "
   [points type & options]
-  (let [method (case type
-                 :linear linear/interpolate
-                 :polynomial polynomial/interpolate
-                 :cubic-spline cubic-spline/interpolate
-                 :cubic-hermite-spline cubic-spline/interpolate-hermite
-                 :b-spline b-spline/b-spline)
-        opts (when options (apply assoc {} options))
-        rng (:range opts [0 1])
-        ts (uniform rng (count points))]
-    (if (number? (first points))
-      (let [t-points (if (= type :b-spline)
-                       points
-                       (map vector ts points))]
-        (method t-points opts))
-      (let [point-groups (if (= type :b-spline)
-                           (apply map vector points)
-                           (->> points
-                                (map (fn [t value]
-                                       (map #(vector t %) value))
-                                     ts)
-                                (apply map vector)))
-            interpolators (map #(method % opts) point-groups)]
-        (fn [t]
-         (map #(% t) interpolators))))))
+  (let [opts (when options (apply assoc {} options))]
+    (case type
+     :polynomial (polynomial/barycentric-cheb points opts)
+     (let [method (case type
+                    :linear linear/interpolate
+                    :cubic-spline cubic-spline/interpolate
+                    :cubic-hermite-spline cubic-spline/interpolate-hermite
+                    :b-spline b-spline/b-spline)
+           rng (:range opts [0 1])
+           ts (uniform rng (count points))]
+       (if (number? (first points))
+         (let [t-points (if (= type :b-spline)
+                          points
+                          (map vector ts points))]
+           (method t-points opts))
+         (let [point-groups (if (= type :b-spline)
+                              (apply map vector points)
+                              (->> points
+                                   (map (fn [t value]
+                                          (map #(vector t %) value))
+                                        ts)
+                                   (apply map vector)))
+               interpolators (map #(method % opts) point-groups)]
+           (fn [t]
+             (map #(% t) interpolators))))))))
 
 
 (defn- interpolate-grid* [grid type {:keys [x-range y-range xs ys] :as options}]
@@ -243,6 +244,20 @@
            ts (range n)
            points (map (fn [t x y] [t [x y]]) ts xs ys )
            plot (charts/parametric-plot (interpolate points :cubic-spline :boundaries :closed) 0 (dec n))]
+       (doto plot
+         (charts/add-points xs ys)
+         (core/view))))
+
+   (do
+     (require '[incanter.core :as core])
+     (require '[incanter.charts :as charts])
+     (require '[incanter.interp.polynomial :as polynomial])
+     (let [n 10
+           xs (repeatedly n #(rand-int 20))
+           ys (repeatedly n #(rand-int 20))
+           points (map vector xs ys)
+           interp (interpolate-parametric points :polynomial)
+           plot (charts/parametric-plot interp -1 1)]
        (doto plot
          (charts/add-points xs ys)
          (core/view))))

@@ -63,7 +63,7 @@
 
 
 (defn interpolate-grid
-  "Interpolates grid of points using polynomial in Newton form.
+"  Interpolates grid of points using polynomial in Newton form.
    Implemented algorithm is taken from here:
    http://www.academia.edu/1387278/On_the_Newton_Multivariate_Polynomial_Interpolation_with_Applications
    Part III"
@@ -75,4 +75,34 @@
       (let [Y (reductions #(* %1 (- y %2)) 1 ys)
             X (reductions #(* %1 (- x %2)) 1 xs)]
         (to-list ($ 0 0 (mmult (trans Y) P X)))))))
+
+(defn barycentric-cheb
+"  Interpolate given points using barycentric Lagrange interpolation
+   and Chebyshev nodes of second kind to minimize interpolation error."
+  [ys opts]
+  (let [n (dec (count ys))
+        coll-vals? (coll? (first ys))
+        ys (if coll-vals?
+             (apply map vector ys)
+             (vec ys))
+        xs (map #(Math/cos (/ (* % Math/PI) n))
+                (range (inc n)))
+        ws (->> (concat [0.5] (repeat (dec n) 1) [0.5])
+                (map-indexed (fn [i v] (* (if (odd? i) -1 1) v))))]
+    (fn [^double x]
+      (let [mults (map #(/ %1 (- x %2)) ws xs)
+            eq-pos (->> xs
+                        (map-indexed #(if (= %2 x) %1 nil))
+                        (remove nil?)
+                        first)
+            denom (reduce + mults)
+            calc (fn [vals]
+                   (if (nil? eq-pos)
+                     (/ (reduce + (map * vals mults))
+                        denom)
+                     (nth vals eq-pos))
+                   )]
+        (if coll-vals?
+          (map calc ys)
+          (calc ys))))))
 
