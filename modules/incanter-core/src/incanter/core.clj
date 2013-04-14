@@ -1392,7 +1392,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                  (map? obj)
                    ;; see if any of the values are collections
                    (if (reduce #(or %1 %2) (map coll? (vals obj)))
-                     (vals obj)
+                     (trans (vals obj))
                      [(vals obj)])
                    (coll? obj)
                      (cond

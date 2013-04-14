@@ -50,6 +50,11 @@
   (is (= (sel dataset5 :rows 1 :cols :a) nil))
   (is (= (sel dataset6 :cols :a) 1)))
 
+(def map1 {:col-0 [1.0 2.0 3.0] :col-1 [4.0 5.0 6.0]})
+
+(deftest dataset-construction
+  (is (= (to-dataset map1) (to-dataset [[1.0 4.0][2.0 5.0][3.0 6.0]]))))
+
 (deftest dataset-transforms
   (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
       "Single-row special case")
