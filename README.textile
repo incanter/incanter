@@ -19,7 +19,7 @@ The motivation for creating Incanter is to provide a JVM-based statistical compu
 
 Motivation for a Lisp-based R-like statistical environment can be found in the paper <i><a href="http://www.stat.auckland.ac.nz/~ihaka/downloads/Compstat-2008.pdf">Back to the Future: Lisp as a Base for a Statistical Computing System by Ihaka and Lang (2008)</a></i>. Incanter is also inspired by the now dormant Lisp-Stat (see the special volume in the Journal of Statistical Software on <a href="http://www.jstatsoft.org/v13">Lisp-Stat: Past, Present, and Future</a> from 2005).
 
-Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.org">Clojure website</a></u></i>, and screencasts of several excellent Clojure talks by the language’s creator, Rich Hickey, can be found at <i><a href="http://clojure.blip.tv/">clojure.blip.tv</a></i>.
+Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.org">Clojure website</a></u></i>, and screencasts of several excellent Clojure talks by the language’s creator, Rich Hickey, can be found at <i> <a href="http://www.youtube.com/user/ClojureTV">Clojure TV</a></i>.
 
 
 <a name="clojure"></a>
