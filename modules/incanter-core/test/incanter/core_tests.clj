@@ -486,6 +486,10 @@
     ;(check :full    expect-full)
     ;(check :compact expect-compact)))
 
+(deftest decomp-lu-test
+  (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
+        {:keys [L U P]} (decomp-lu m)]
+    (is (= m (mmult P L U)))))
 
 (deftest test-metadata
   (let [md {:name "metadata test"}

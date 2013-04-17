@@ -921,15 +921,17 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     a map containing:
       :L -- the lower triangular factor
       :U -- the upper triangular factor
+      :P -- the permutation matrix
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
+    http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
 "
   ([mat]
     (let [result (clx/lu mat)]
       {:L (:l result)
-       :U (:u result)})))
+       :U (:u result)
+       :P (:p result)})))
 
 (defn vector-length [u]
   (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
