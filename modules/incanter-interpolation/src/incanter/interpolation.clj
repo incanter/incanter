@@ -4,7 +4,8 @@
              [b-spline :as b-spline]
              [polynomial :as polynomial]
              [linear :as linear]
-             [utils :as utils]]
+             [utils :as utils]
+             [lls :as lls]]
             [incanter.core :refer (plus minus mult div)]))
 
 
@@ -13,22 +14,14 @@
     (throw (IllegalArgumentException. "All x must be distinct."))))
 
 
-(defn- uniform
-" Splits segment [a b] to n points with equals distance between them."
-  [[a b] n]
-  (map #(-> (* (- b a) %)
-            (/ (dec n))
-            (+ a))
-       (range n)))
-
-
 (defn interpolate
 "   Builds a function that interpolates given collection of points.
    http://en.wikipedia.org/wiki/Interpolation
+   http://en.wikipedia.org/wiki/Linear_least_squares_(mathematics)
 
    Arguments:
      points -- collection of points. Each point is a collection [x y].
-     type -- type of interpolation - :linear, :polynomial, :cubic-spline, :cubic-hermite-spline. For most cases you should use :cubic-spline or :cubic-hermite-spline - they usually give best results. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
+     type -- type of interpolation - :linear, :polynomial, :cubic-spline, :cubic-hermite-spline, :linear-least-squares. For most cases you should use :cubic-spline or :cubic-hermite-spline - they usually give best results. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
 
    Options:
      :boundaries - valid only for :cubic-spline interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
@@ -36,6 +29,18 @@
                    :natural - S''(a) = S''(b) = 0
                    :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curve.
                    Default value is :natural
+
+   Options for linear least squares:
+     :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:chebyshev and :b-spline).
+              You also can supply your own basis. It should be a function that takes x and returns collection [f1(x) f2(x) ... fn(x)].
+              Example of custom basis of 2 functions (1 and x*x): (interpolate :linear-least-squares :basis (fn [x] [1 (* x x)]))
+              Default value is :chebyshev
+
+     :n - number of functions in basis if you use built-in basis. Note that if n is greater that number of points then you might get singular matrix and exception.
+          Default value is 4.
+
+     :degree - degree of b-spline if you use :b-spline basis.
+               Default value is 3.
 
    Examples:
 
@@ -53,7 +58,8 @@
                  :linear linear/interpolate
                  :polynomial polynomial/interpolate
                  :cubic-spline cubic-spline/interpolate
-                 :cubic-hermite-spline cubic-spline/interpolate-hermite)
+                 :cubic-hermite-spline cubic-spline/interpolate-hermite
+                 :linear-least-squares lls/interpolate)
         points (sort-by first points)
         opts (when options (apply assoc {} options))]
     (validate-unique (map first points))
@@ -66,7 +72,7 @@
 
    Arguments:
      points -- collection of points. Each point either a single value or collection of values.
-     type -- type of interpolation - :linear, :polynomial, :cubic-spline, :cubic-hermite-spline, :b-spline.
+     type -- type of interpolation - :linear, :polynomial, :cubic-spline, :cubic-hermite-spline, :b-spline, :linear-least-squares.
 
    Options:
      :range -- defines range for parameter t.
@@ -80,6 +86,9 @@
                     Default value is :natural
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
+
+   Options for linear least squares:
+     See documentation for interpolate function.
 
    Examples:
 
@@ -106,11 +115,12 @@
                      (utils/translate-domain rng [-1 1]))
      :b-spline (-> (b-spline/b-spline points opts)
                    (utils/translate-domain rng [0 1]))
+     :linear-least-squares (lls/interpolate-parametric points opts)
      (let [method (case type
                     :linear linear/interpolate
                     :cubic-spline cubic-spline/interpolate
                     :cubic-hermite-spline cubic-spline/interpolate-hermite)
-           ts (uniform rng (count points))]
+           ts (utils/uniform rng (count points))]
        (if (number? (first points))
          (let [t-points (map vector ts points)]
            (method t-points opts))
@@ -142,8 +152,8 @@
           x-range (or x-range [0 1])
           y-range (or y-range [0 1])
           options (assoc options
-                    :xs (uniform x-range m)
-                    :ys (uniform y-range n))]
+                    :xs (utils/uniform x-range m)
+                    :ys (utils/uniform y-range n))]
       (interpolate-grid* grid type options))))
 
 
@@ -208,7 +218,7 @@
            points (map vector xs ys)
            min-x (apply min xs)
            max-x (apply max xs)
-           f (interpolate points :cubic-hermite-spline)]
+           f (interpolate points :linear-least-squares :n 2)]
        (doto (charts/function-plot f min-x max-x)
          (charts/add-points xs ys)
          (core/view))))
@@ -246,7 +256,7 @@
            xs (repeatedly n #(rand-int 20))
            ys (repeatedly n #(rand-int 20))
            points (map vector xs ys)
-           interp (interpolate-parametric points :polynomial :range [0 5])
+           interp (interpolate-parametric points :linear-least-squares :range [0 5] :basis :b-spline)
            plot (charts/parametric-plot interp 0 5)]
        (doto plot
          (charts/add-points xs ys)
@@ -257,15 +267,13 @@
      (require '[incanter.charts :as charts])
      (let [points [[0 0] [1 3] [2 0] [5 2] [6 1] [8 2] [11 1]]
            [xs ys] (core/trans points)
-           cubic (interpolate points :cubic-spline :boundaries :closed)
-           b-spline (interpolate-parametric  points :b-spline :degree 1)
-           plot (charts/parametric-plot b-spline 0 1)]
+           hermite (interpolate points :cubic-hermite-spline)
+           b-spline (interpolate-parametric  points :polynomial :degree 1)
+           plot (charts/function-plot hermite 0 11)]
        (doto plot
          (charts/add-points xs ys)
          (core/view)
-         (core/save "/home/nikelandjelo/plot.png"))))
+         (core/save "/home/nikelandjelo/hermite.png"))))
 
    (doc core/save)
-
-
    )

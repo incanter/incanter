@@ -16,8 +16,8 @@
               (mapv #(calc-N level % m) (range k (- k m 1) -1))))]
     (-> (iterate next-level [1]) (nth m) reverse)))
 
-(defn- calc-Ns-and-k-fn
-  "Returns function that calculates non zero Ns and returns index of last non zero N"
+(defn calc-Ns-and-k-fn
+  "Returns function that calculates non zero Ns and returns Ns and index of last non zero N in form [Ns k]"
   [n degree]
   (let [ts-inner (mapv #(/ % (double n)) (range 0 (inc n)))
         ; ts is a knot vector. Example: [0 0 0 1/5 2/5 3/5 4/5 1 1 1]

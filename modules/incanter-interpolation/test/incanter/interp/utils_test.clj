@@ -57,3 +57,11 @@
        [-1 1] [3 103] -1 4
        [-1 1] [3 103] 0 54
        [-1 1] [3 103] 1 104))
+
+(deftest uniform-test
+  (are [range n expected] (->> (uniform range n)
+                               (map == expected)
+                               (every? true?))
+       [0 1] 2 [0 1]
+       [0 2] 3 [0 1 2]
+       [-1 1] 5 [-1 -0.5 0 0.5 1]))

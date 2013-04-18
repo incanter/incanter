@@ -33,7 +33,7 @@
    (find-segment ys y)])
 
 (defn translate-domain
-  "  Translates domain [a b] of function f to [c d] and returns new function such that: f(a) = g(c), f(b) = g(d)"
+  "  Translates domain [c d] of function f to [a b] and returns new function g such that: f(c) = g(a), f(d) = g(b)"
   [f [a b] [c d]]
   (if (and (== a c)
            (== b d))
@@ -41,3 +41,11 @@
     (let [k (/ (- c d) (- a b))]
       (fn [^double x]
         (f (+ (* (- x a) k) c))))))
+
+(defn uniform
+" Splits segment [a b] to n points with equals distance between them."
+  [[a b] n]
+  (map #(-> (* (- b a) %)
+            (/ (dec n))
+            (+ a))
+       (range n)))
