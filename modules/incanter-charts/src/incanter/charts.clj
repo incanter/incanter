@@ -2771,6 +2771,7 @@
   ([function x-min x-max y-min y-max & options]
      (let [opts (when options (apply assoc {} options))
            color? (if (false? (:color? opts)) false true)
+           include-zero? (if (false? (:include-zero? opts)) false true)
            title (or (:title opts) "")
            x-label (or (:x-label opts) "")
            y-label (or (:y-label opts) "")
@@ -2786,13 +2787,15 @@
                     (.setLowerMargin 0.0)
                     (.setUpperMargin 0.0)
                     (.setAxisLinePaint java.awt.Color/white)
-                    (.setTickMarkPaint java.awt.Color/white))
+                    (.setTickMarkPaint java.awt.Color/white)
+                    (.setAutoRangeIncludesZero include-zero?))
            y-axis (doto (org.jfree.chart.axis.NumberAxis. y-label)
                     (.setStandardTickUnits (org.jfree.chart.axis.NumberAxis/createIntegerTickUnits))
                     (.setLowerMargin 0.0)
                     (.setUpperMargin 0.0)
                     (.setAxisLinePaint java.awt.Color/white)
-                    (.setTickMarkPaint java.awt.Color/white))
+                    (.setTickMarkPaint java.awt.Color/white)
+                    (.setAutoRangeIncludesZero include-zero?))
            colors (or (:colors opts)
                       [[0 0 127] [0 0 212] [0 42 255] [0 127 255] [0 127 255]
                        [0 226 255] [42 255 212] [56 255 198] [255 212 0] [255 198 0]
@@ -2844,6 +2847,7 @@
     (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
     (view (heat-map f -10 10 -15 15))
     (view (heat-map f -10 10 -10 10 :color? false))
+    (view (heat-map f 5 10 5 10 :include-zero? false))
 
     (defn f2 [x y] (plus (sq x) (sq y)))
     (view (heat-map f2 -10 10 -10 10))
