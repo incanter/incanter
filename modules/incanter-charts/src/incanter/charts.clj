@@ -2842,6 +2842,28 @@
 
 (defmacro heat-map
 "
+  Usage: (heat-map function x-min x-max y-min y-max & options)
+  
+  Returns a JFreeChart object representing a heat map of the function across
+  the given x and y ranges. Use the 'view' function to display the chart, or 
+  the 'save' function to write it to a file.
+  
+  Arguments:
+    function -- a function that takes two scalar arguments and returns a scalar
+    x-min    -- lower bound for the first value of the function
+    x-max    -- upper bound for the first value of the function
+    y-min    -- lower bound for the second value of the function
+    y-max    -- upper bound for the second value of the function
+  
+  Options:
+    :title 
+    :x-label (default 'x-min < x < x-max')
+    :y-label (default 'y-min < y < y-max')
+    :z-label -- defaults to function's name
+    :color? (default true) -- should the plot be in color or not?
+    :include-zero? (default true) -- should the plot include the origin if it
+                                     is not in the ranges specified?
+  
   Examples:
     (use '(incanter core charts))
     (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
