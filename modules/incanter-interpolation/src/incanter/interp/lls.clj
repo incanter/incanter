@@ -33,11 +33,11 @@
 
 (defn- get-basis [xs opts]
   (let [n (:n opts 4)
-        basis-type (:basis opts :chebyshev)]
+        basis-type (:basis opts :polynomial)]
     (if (fn? basis-type)
       basis-type
       (case basis-type
-        :chebyshev (cheb-basis xs n)
+        :polynomial (cheb-basis xs n)
         :b-spline (let [degree (min (:degree opts 3)
                                     (dec n))]
                     (b-spline-basis xs n degree))
@@ -81,8 +81,6 @@
         (if coll-vals?
           (map calc alphas)
           (calc alphas))))))
-
-((interpolate-parametric [[0 0] [1 1] [2 2] [3 3] [6.1 4]] {:n 2}) 1)
 
 #_(do
     (require '[incanter.core :as core])

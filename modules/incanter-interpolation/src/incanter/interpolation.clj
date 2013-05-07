@@ -31,7 +31,7 @@
                    Default value is :natural
 
    Options for linear least squares:
-     :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:chebyshev and :b-spline).
+     :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:polynomial and :b-spline).
               You also can supply your own basis. It should be a function that takes x and returns collection [f1(x) f2(x) ... fn(x)].
               Example of custom basis of 2 functions (1 and x*x): (interpolate :linear-least-squares :basis (fn [x] [1 (* x x)]))
               Default value is :chebyshev
@@ -162,7 +162,7 @@
 
    Arguments:
      grid -- collection of collection of numbers to be interpolated. If you need to interpolate vectors - interpolate each component by separate interpolator.
-     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline, :bicubic-hermite-spline
+     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline, :bicubic-hermite-spline, :b-surface
 
    Options:
      :x-range, :y-range - range of possible x and y.
@@ -265,15 +265,133 @@
    (do
      (require '[incanter.core :as core])
      (require '[incanter.charts :as charts])
+     (defn set-ranges [chart [x-min x-max x-tu] [y-min y-max y-tu]]
+       (let [plot (.getXYPlot chart)
+             tu #(org.jfree.chart.axis.NumberTickUnit. %)]
+         (doto (.getRangeAxis plot)
+           (.setRange y-min y-max)
+           (.setTickUnit (tu y-tu)))
+         (doto (.getDomainAxis plot)
+           (.setRange x-min x-max)
+           (.setTickUnit (tu x-tu)))
+         chart))
      (let [points [[0 0] [1 3] [2 0] [5 2] [6 1] [8 2] [11 1]]
            [xs ys] (core/trans points)
-           hermite (interpolate points :cubic-hermite-spline)
-           b-spline (interpolate-parametric  points :polynomial :degree 1)
-           plot (charts/function-plot hermite 0 11)]
-       (doto plot
-         (charts/add-points xs ys)
-         (core/view)
-         (core/save "/home/nikelandjelo/hermite.png"))))
+           get-chart #(charts/function-plot (interpolate points %) 0 11 :x-label "x" :y-label "y")
+           methods [{:name "linear_interpolation"
+                     :chart (get-chart :linear)}
+                    {:name "polynomial_interpolation"
+                     :chart (get-chart :polynomial)
+                     :y-range [-1 17.5 2]}
+                    {:name "cubic_interpolation"
+                     :chart (get-chart :cubic-spline)
+                     :y-range [-1 3.5 1]}
+                    {:name "cubic_hermite_interpolation"
+                     :chart (get-chart :cubic-hermite-spline)}
+                    {:name "polynomial_barycentric_interpolation"
+                     :chart (-> (interpolate-parametric points :polynomial)
+                                (charts/parametric-plot 0 1 :x-label "x" :y-label "y"))}
+                    {:name "lls_polynomial_3"
+                     :chart (-> (interpolate points :linear-least-squares
+                                             :basis :polynomial
+                                             :n 3)
+                                (charts/function-plot 0 11 :x-label "x" :y-label "y"))}
+                    {:name "lls_sin_cos"
+                     :chart (-> (interpolate points :linear-least-squares
+                                             :basis #(vector 1 % (* % %) (Math/sin %) (Math/cos %)))
+                                (charts/function-plot 0 11 :x-label "x" :y-label "y"))}
+                    {:name "b_spline_approximation"
+                     :chart (-> (interpolate-parametric  points :b-spline :degree 3)
+                                (charts/parametric-plot 0 1 :x-label "x" :y-label "y"))}]]
+       (doseq [{:keys [name chart x-range y-range]
+                :or {x-range [-0.5 11.5 2]
+                     y-range [-0.5 3.5 1]}} methods]
+         (doto chart
+           (set-ranges x-range y-range)
+           (charts/add-points xs ys)
+           #_(core/view)
+           (core/save (str "/home/nikelandjelo/interpolation-examples/diplom/img/" name "_1_var_small.png")
+                      :width 500
+                      :height 400)))))
+
+   (let [points [[0 0] [1 3] [2 0] [5 2] [6 1] [8 2] [11 1]]
+         [xs ys] (core/trans points)
+         chart (charts/scatter-plot xs ys
+                                    :x-label "x"
+                                    :y-label "y")]
+     (doto chart
+       (charts/add-points xs ys)
+       (set-ranges [-1 12 2] [-1 4 1])
+       (core/view)
+       (core/save "/home/nikelandjelo/interpolation-examples/diplom/img/points.png")))
+
+
+   (let [points [[0 0] [1 0] [1 3] [2 3] [2 0] [5 0] [5 2] [6 2] [6 1] [8 1] [8 2] [11 2] [11 1]]
+         [xs ys] (core/trans points)
+         chart (charts/xy-plot xs ys
+                               :x-label "x"
+                               :y-label "y")]
+     (doto chart
+       (charts/add-points xs ys)
+       (set-ranges [-1 12 2] [-1 4 1])
+       (core/view)
+       (core/save "/home/nikelandjelo/interpolation-examples/diplom/img/interrupted.png")))
+
+   (do
+     (require '[incanter.core :as core])
+     (require '[incanter.charts :as charts])
+     (let [points [[0 10] [2 13] [4 10] [2 5] [0 0] [-2 5] [-4 10] [-2 13] [0 10]]]
+       (-> (interpolate-parametric points :cubic-spline)
+           (charts/parametric-plot 0 1)
+           (charts/add-points (map first points) (map second points))
+           (core/view))))
+
+   (do
+     (require '[incanter.core :as core])
+     (require '[incanter.charts :as charts])
+     (defn set-ranges [chart [x-min x-max x-tu] [y-min y-max y-tu]]
+       (let [plot (.getXYPlot chart)
+             tu #(org.jfree.chart.axis.NumberTickUnit. %)]
+         (doto (.getRangeAxis plot)
+           (.setRange y-min y-max)
+           (.setTickUnit (tu y-tu)))
+         (doto (.getDomainAxis plot)
+           (.setRange x-min x-max)
+           (.setTickUnit (tu x-tu)))
+         chart))
+     (let [points [[0 10] [2 13] [4 10] [2 5] [0 0] [-2 5] [-4 10] [-2 13] [0 10]]
+           [xs ys] (core/trans points)
+           get-chart (fn [type & options]
+                       (-> (apply interpolate-parametric points type options)
+                           (charts/parametric-plot  0 1 :x-label "x" :y-label "y")))
+           methods [{:name "linear_parametric_interpolation"
+                     :chart (get-chart :linear)}
+                    {:name "polynomial_parametric_interpolation"
+                     :chart (get-chart :polynomial)}
+                    {:name "cubic_closed_parametric_interpolation"
+                     :chart (get-chart :cubic-spline :boundaries :closed)}
+                    {:name "cubic_hermite_parametric_interpolation"
+                     :chart (get-chart :cubic-hermite-spline)}
+                    {:name "lls_polynomial_parametric_4"
+                     :chart (get-chart :linear-least-squares)}
+                    {:name "b_spline_parametric"
+                     :chart (get-chart :b-spline)}]]
+       (doseq [{:keys [name chart x-range y-range]
+                :or {x-range [-5 5 2]
+                     y-range [-1 14 2]}} methods]
+         (doto chart
+           (set-ranges x-range y-range)
+           (charts/add-points xs ys)
+           (core/view)
+           (core/save (str "/home/nikelandjelo/interpolation-examples/diplom/img/" name "_small.png")
+                      :width 500
+                      :height 400)))))
+
+   (map (interpolate-parametric [[0 0] [1 1] [2 0] [3 1]] :b-spline :degree 0) [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1])
+
+   (.. chart getXYPlot getDomainAxis (setRange 0 5) )
+
+   (core/view chart)
 
    (doc core/save)
    )
