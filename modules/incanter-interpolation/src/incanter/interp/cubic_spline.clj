@@ -128,7 +128,7 @@ http://en.wikipedia.org/wiki/Cubic_Hermite_spline"
   (let [xs (mapv #(first %) points)
         ys (mapv #(second %) points)
         hs (get-hs xs)
-        yds (differences ys hs)
+        yds (:derivatives options (differences ys hs))
         all-alphas (map get-alphas
                         (partition 2 1 ys)
                         (partition 2 1 yds)

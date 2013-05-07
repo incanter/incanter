@@ -30,6 +30,8 @@
                    :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curve.
                    Default value is :natural
 
+     :derivatives - valid only for :cubic-hermite-spline. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
+
    Options for linear least squares:
      :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:polynomial and :b-spline).
               You also can supply your own basis. It should be a function that takes x and returns collection [f1(x) f2(x) ... fn(x)].
@@ -84,6 +86,8 @@
                     :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curv
 
                     Default value is :natural
+
+     :derivatives - valid only for :cubic-hermite-spline. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
 
@@ -277,7 +281,9 @@
          chart))
      (let [points [[0 0] [1 3] [2 0] [5 2] [6 1] [8 2] [11 1]]
            [xs ys] (core/trans points)
-           get-chart #(charts/function-plot (interpolate points %) 0 11 :x-label "x" :y-label "y")
+           get-chart (fn [type & options]
+                       (-> (apply interpolate points type options)
+                           (charts/function-plot  0 11 :x-label "x" :y-label "y")))
            methods [{:name "linear_interpolation"
                      :chart (get-chart :linear)}
                     {:name "polynomial_interpolation"
@@ -287,22 +293,17 @@
                      :chart (get-chart :cubic-spline)
                      :y-range [-1 3.5 1]}
                     {:name "cubic_hermite_interpolation"
-                     :chart (get-chart :cubic-hermite-spline)}
-                    {:name "polynomial_barycentric_interpolation"
-                     :chart (-> (interpolate-parametric points :polynomial)
-                                (charts/parametric-plot 0 1 :x-label "x" :y-label "y"))}
+                     :chart (get-chart :cubic-hermite-spline
+                                       :derivatives (repeat 1))}
                     {:name "lls_polynomial_3"
                      :chart (-> (interpolate points :linear-least-squares
                                              :basis :polynomial
                                              :n 3)
                                 (charts/function-plot 0 11 :x-label "x" :y-label "y"))}
-                    {:name "lls_sin_cos"
+                    {:name "lls_sin"
                      :chart (-> (interpolate points :linear-least-squares
-                                             :basis #(vector 1 % (* % %) (Math/sin %) (Math/cos %)))
-                                (charts/function-plot 0 11 :x-label "x" :y-label "y"))}
-                    {:name "b_spline_approximation"
-                     :chart (-> (interpolate-parametric  points :b-spline :degree 3)
-                                (charts/parametric-plot 0 1 :x-label "x" :y-label "y"))}]]
+                                             :basis #(vector 1 % (* % %) (Math/sin %)))
+                                (charts/function-plot 0 11 :x-label "x" :y-label "y"))}]]
        (doseq [{:keys [name chart x-range y-range]
                 :or {x-range [-0.5 11.5 2]
                      y-range [-0.5 3.5 1]}} methods]
