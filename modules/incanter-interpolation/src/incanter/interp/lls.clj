@@ -1,4 +1,4 @@
--(ns incanter.interp.lls
+(ns incanter.interp.lls
    (:require [incanter.core :refer (solve matrix mmult trans)]
              [incanter.interp
               [utils :refer (translate-domain uniform)]
@@ -30,6 +30,15 @@
                  (repeat (- n k 1) 0))))
      [mn mx]
      [0 1])))
+
+(defn polynomial-2d-basis [n]
+  (->> (for [degree (iterate inc 0)
+             x-deg (range (inc degree))
+             :let [y-deg (- degree x-deg)]]
+         #(* (Math/pow %1 x-deg)
+             (Math/pow %2 y-deg)))
+       (take n)
+       (partial (fn [fns x y] (map #(% x y) fns)))))
 
 (defn- get-basis [xs opts]
   (let [n (:n opts 4)
@@ -81,6 +90,28 @@
         (if coll-vals?
           (map calc alphas)
           (calc alphas))))))
+
+(defn- get-2d-basis [opts]
+  (let [n (:n opts 6)
+        basis-type (:basis opts :polynomial)]
+    (if (fn? basis-type)
+      basis-type
+      (case basis-type
+        :polynomial (polynomial-2d-basis n)
+        (throw (IllegalArgumentException. (str "Unsupported basis type " basis-type)))))))
+
+(defn interpolate-grid
+  [grid xs ys opts]
+  (let [xs (for [y ys x xs] [x y])
+        ys (flatten grid)
+        basis (get-2d-basis opts)
+        alphas (-> (partial apply basis)
+                   (alphas-fn xs)
+                   (#(% ys)))]
+    (fn [x y]
+      (->> (basis x y)
+           (map * alphas)
+           (reduce +)))))
 
 #_(do
     (require '[incanter.core :as core])

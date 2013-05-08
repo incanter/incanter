@@ -35,7 +35,7 @@
    Options for linear least squares:
      :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:polynomial and :b-spline).
               You also can supply your own basis. It should be a function that takes x and returns collection [f1(x) f2(x) ... fn(x)].
-              Example of custom basis of 2 functions (1 and x*x): (interpolate :linear-least-squares :basis (fn [x] [1 (* x x)]))
+              Example of custom basis of 2 functions (1 and  x*x): (interpolate :linear-least-squares :basis (fn [x] [1 (* x x)]))
               Default value is :chebyshev
 
      :n - number of functions in basis if you use built-in basis. Note that if n is greater that number of points then you might get singular matrix and exception.
@@ -144,7 +144,8 @@
                    :polynomial polynomial/interpolate-grid
                    :bicubic-spline cubic-spline/interpolate-grid
                    :bicubic-hermite-spline cubic-spline/interpolate-grid-hermite
-                   :b-surface b-spline/b-surface)
+                   :b-surface b-spline/b-surface
+                   :linear-least-squares lls/interpolate-grid)
           grid (mapv vec grid)
           xs (vec (sort xs))
           ys (vec (sort ys))]
@@ -166,20 +167,25 @@
 
    Arguments:
      grid -- collection of collection of numbers to be interpolated. If you need to interpolate vectors - interpolate each component by separate interpolator.
-     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline, :bicubic-hermite-spline, :b-surface
+     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline, :bicubic-hermite-spline, :b-surface, :linear-least-squares
 
-   Options:
+   Common options:
      :x-range, :y-range - range of possible x and y.
                           By default :x-range = [0 1] and :y-range = [0 1]
                           :b-surface ignores this option and always uses [0, 1] x [0, 1]
 
      :xs, :ys - coordinates of grid points. Size of xs and ys must be consistent with grid size. If you have grid 4x3 then xs must have size 3 and ys - 4.
-     Note that :x-range, :y-range and :xs, :ys both doing same job - they specify coordinates of points in grid. So you should use only 1 of them or none at all.
+     Note that (:x-range, :y-range) and (:xs, :ys) both do same job - they specify coordinates of points in grid. So you should use only one of them or none at all.
 
-   Options:
+   Type specific options:
      :boundaries - valid only for :cubic-spline interpolation. Defines boundary condition for bicubic spline. Possible values - :natural and :closed. Default - :natural. Check documentation of 'interpolate' method for more explanation.
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
+
+     :basis - defines basis for :linear-least-squares. It has 1 predefined basis :polynomial. :polynomial basis contains functions: (1, x, y, x^2, xy, y^2, x^3, ...) You can specify how many functions basis contains by using :n option.
+              You can also specify custom basis. Custom basis is a function that takes 2 arguments - x and y, and returns collection of values. Example: basis that contains only 2-degree polynomials: (fn [x y] [(* x x) (* x y) (* y y)])
+
+     :n - defines how many functions polynomial contains. Example: 1 - basis is (1), 3 - basis is (1, x, y), 5 - basis is (1, x, y, x^2, x*y)
 
    Examples:
 
@@ -208,8 +214,6 @@
   [grid type & options]
   (let [opts (when options (apply assoc {} options))]
     (interpolate-grid* grid type opts)))
-
-
 
 #_(
 
