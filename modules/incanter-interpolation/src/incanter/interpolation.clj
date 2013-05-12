@@ -21,16 +21,16 @@
 
    Arguments:
      points -- collection of points. Each point is a collection [x y].
-     type -- type of interpolation - :linear, :polynomial, :cubic-spline, :cubic-hermite-spline, :linear-least-squares. For most cases you should use :cubic-spline or :cubic-hermite-spline - they usually give best results. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
+     type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :linear-least-squares. For most cases you should use :cubic or :cubic-hermite - they usually give best results. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
 
    Options:
-     :boundaries - valid only for :cubic-spline interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
+     :boundaries - valid only for :cubic interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
                    Support that our spline is function S. leftmost point is a, rightmost - b.
                    :natural - S''(a) = S''(b) = 0
                    :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curve.
                    Default value is :natural
 
-     :derivatives - valid only for :cubic-hermite-spline. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
+     :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
 
    Options for linear least squares:
      :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:polynomial and :b-spline).
@@ -53,14 +53,14 @@
    (linear 1.5) => 2.5
 
    ; Specify boundary conditions
-   (interpolate points :cubic-spline :boundaries :closed)
+   (interpolate points :cubic :boundaries :closed)
 "
   [points type & options]
   (let [method (case type
                  :linear linear/interpolate
                  :polynomial polynomial/interpolate
-                 :cubic-spline cubic-spline/interpolate
-                 :cubic-hermite-spline cubic-spline/interpolate-hermite
+                 :cubic cubic-spline/interpolate
+                 :cubic-hermite cubic-spline/interpolate-hermite
                  :linear-least-squares lls/interpolate)
         points (sort-by first points)
         opts (when options (apply assoc {} options))]
@@ -74,20 +74,20 @@
 
    Arguments:
      points -- collection of points. Each point either a single value or collection of values.
-     type -- type of interpolation - :linear, :polynomial, :cubic-spline, :cubic-hermite-spline, :b-spline, :linear-least-squares.
+     type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :b-spline, :linear-least-squares.
 
    Options:
      :range -- defines range for parameter t.
                Default value is [0, 1]. f(0) = points[0], f(1) = points[n].
 
-     :boundaries -- valid only for :cubic-spline interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
+     :boundaries -- valid only for :cubic interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
                     Support that our spline is function S. leftmost point is a, rightmost - b.
                     :natural - S''(a) = S''(b) = 0
                     :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curv
 
                     Default value is :natural
 
-     :derivatives - valid only for :cubic-hermite-spline. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
+     :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
 
@@ -101,13 +101,13 @@
                 [1 1]
                 [3 5]
                 [2 9]])
-   (def cubic (interpolate-parametric points :cubic-spline))
+   (def cubic (interpolate-parametric points :cubic))
    (cubic 0) => [0.0 0.0]
    (cubic 1) => [2.0 9.0]
    (cubic 0.5) => [1.0 1.0]
 
    ; Specify custom :range
-   (def cubic (interpolate-parametric points :cubic-spline :range [-10 10))
+   (def cubic (interpolate-parametric points :cubic :range [-10 10))
    (cubic -10) => [0.0 0.0]
    (cubic 0) => [1.0 1.0]
 "
@@ -122,8 +122,8 @@
      :linear-least-squares (lls/interpolate-parametric points opts)
      (let [method (case type
                     :linear linear/interpolate
-                    :cubic-spline cubic-spline/interpolate
-                    :cubic-hermite-spline cubic-spline/interpolate-hermite)
+                    :cubic cubic-spline/interpolate
+                    :cubic-hermite cubic-spline/interpolate-hermite)
            ts (utils/uniform rng (count points))]
        (if (number? (first points))
          (let [t-points (map vector ts points)]
@@ -142,8 +142,8 @@
     (let [method (case type
                    :bilinear linear/interpolate-grid
                    :polynomial polynomial/interpolate-grid
-                   :bicubic-spline cubic-spline/interpolate-grid
-                   :bicubic-hermite-spline cubic-spline/interpolate-grid-hermite
+                   :bicubic cubic-spline/interpolate-grid
+                   :bicubic-hermite cubic-spline/interpolate-grid-hermite
                    :b-surface b-spline/b-surface
                    :linear-least-squares lls/interpolate-grid)
           grid (mapv vec grid)
@@ -167,7 +167,7 @@
 
    Arguments:
      grid -- collection of collection of numbers to be interpolated. If you need to interpolate vectors - interpolate each component by separate interpolator.
-     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic-spline, :bicubic-hermite-spline, :b-surface, :linear-least-squares
+     type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic, :bicubic-hermite, :b-surface, :linear-least-squares
 
    Common options:
      :x-range, :y-range - range of possible x and y.
@@ -178,7 +178,7 @@
      Note that (:x-range, :y-range) and (:xs, :ys) both do same job - they specify coordinates of points in grid. So you should use only one of them or none at all.
 
    Type specific options:
-     :boundaries - valid only for :cubic-spline interpolation. Defines boundary condition for bicubic spline. Possible values - :natural and :closed. Default - :natural. Check documentation of 'interpolate' method for more explanation.
+     :boundaries - valid only for :cubic interpolation. Defines boundary condition for bicubic spline. Possible values - :natural and :closed. Default - :natural. Check documentation of 'interpolate' method for more explanation.
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
 
@@ -251,7 +251,7 @@
            ys (repeatedly n #(rand-int 20))
            ts (range n)
            points (map (fn [t x y] [t [x y]]) ts xs ys )
-           plot (charts/parametric-plot (interpolate points :cubic-spline :boundaries :closed) 0 (dec n))]
+           plot (charts/parametric-plot (interpolate points :cubic :boundaries :closed) 0 (dec n))]
        (doto plot
          (charts/add-points xs ys)
          (core/view))))
@@ -294,10 +294,10 @@
                      :chart (get-chart :polynomial)
                      :y-range [-1 17.5 2]}
                     {:name "cubic_interpolation"
-                     :chart (get-chart :cubic-spline)
+                     :chart (get-chart :cubic)
                      :y-range [-1 3.5 1]}
                     {:name "cubic_hermite_interpolation"
-                     :chart (get-chart :cubic-hermite-spline
+                     :chart (get-chart :cubic-hermite
                                        :derivatives (repeat 1))}
                     {:name "lls_polynomial_3"
                      :chart (-> (interpolate points :linear-least-squares
@@ -346,7 +346,7 @@
      (require '[incanter.core :as core])
      (require '[incanter.charts :as charts])
      (let [points [[0 10] [2 13] [4 10] [2 5] [0 0] [-2 5] [-4 10] [-2 13] [0 10]]]
-       (-> (interpolate-parametric points :cubic-spline)
+       (-> (interpolate-parametric points :cubic)
            (charts/parametric-plot 0 1)
            (charts/add-points (map first points) (map second points))
            (core/view))))
@@ -374,9 +374,9 @@
                     {:name "polynomial_parametric_interpolation"
                      :chart (get-chart :polynomial)}
                     {:name "cubic_closed_parametric_interpolation"
-                     :chart (get-chart :cubic-spline :boundaries :closed)}
+                     :chart (get-chart :cubic :boundaries :closed)}
                     {:name "cubic_hermite_parametric_interpolation"
-                     :chart (get-chart :cubic-hermite-spline)}
+                     :chart (get-chart :cubic-hermite)}
                     {:name "lls_polynomial_parametric_4"
                      :chart (get-chart :linear-least-squares)}
                     {:name "b_spline_parametric"
@@ -397,6 +397,49 @@
    (.. chart getXYPlot getDomainAxis (setRange 0 5) )
 
    (core/view chart)
+
+   (require '[incanter [charts :as charts] [core :as core]])
+
+   (let [;points [[0 0] [1 3] [2 0] [5 2] [6 1] [8 2] [11 1]]
+         points [[0 10] [2 13] [4 10] [2 5] [0 0] [-2 5] [-4 10] [-2 13] [0 10]]
+         xs (map first points)
+         ys (map second points)
+         fn (interpolate-parametric points :b-spline :degree 3)]
+     (-> fn
+         (charts/parametric-plot 0 1)
+         (charts/add-points xs ys)
+;         (core/view)
+;         (core/save "img.png" :width 800 :height 600)
+         (core/save "img.png" :width 350 :height 262)
+         ))
+
+   (def ^:dynamic points [[0 10] [2 13] [4 10] [2 5] [0 0] [-2 5] [-4 10] [-2 13] [0 10]])
+
+   (defn plot [fn]
+  (-> (charts/function-plot fn 0 11)
+      (charts/add-points (map first points)
+                         (map second points))
+      (core/view)))
+
+   (defn plot [fn]
+  (-> (charts/parametric-plot fn 0 1)
+      (charts/add-points (map first points)
+                         (map second points))
+      (core/view)))
+
+
+   ((plot (interpolate-parametric points :linear)) 0.5)
+
+   (plot (interpolate-parametric points :cubic :boundaries :closed))
+   (plot (interpolate-parametric points :cubic-hermite))
+
+   (plot (interpolate-parametric points :linear-least-squares :basis :polynomial :n 3))
+
+   
+(plot (interpolate-parametric points :b-spline))
+
+(doseq [degree [1 2 3 (count points)]]
+  (plot (interpolate-parametric points :b-spline :degree degree)))
 
    (doc core/save)
    )
