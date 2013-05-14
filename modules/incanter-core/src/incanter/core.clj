@@ -1613,6 +1613,14 @@ altering later ones."
   ([mat]
      (head 10 mat)))
 
+(defn tail
+  "Returns the tailof the dataset. 10 or full dataset by default."
+  ([len mat]
+     (let [n (min len (nrow mat))]
+       ($ (range (- (nrow mat) n) (nrow mat)) :all mat)))
+  ([mat]
+     (tail 10 mat)))
+
 (defn $where
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
   it will use the $data binding for the first argument, which is set with
