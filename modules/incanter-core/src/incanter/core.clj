@@ -1609,9 +1609,24 @@ altering later ones."
 (defn head
   "Returns the head of the dataset. 10 or full dataset by default."
   ([len mat]
-     ($ (range (min len (nrow mat))) :all mat))
+     (cond
+      (= len 0) ($ :none :all mat)
+      (<= len (- (nrow mat))) (head 0 mat)
+      (< len 0) (head (+ (nrow mat) len) mat)
+      :else ($ (range (min len (nrow mat))) :all mat)))
   ([mat]
      (head 10 mat)))
+
+(defn tail
+  "Returns the tail of the dataset. 10 or full dataset by default."
+  ([len mat]
+     (cond
+      (= len 0) ($ :none :all mat)
+      (<= len (- (nrow mat))) (head 0 mat)
+      (< len 0) (head (+ (nrow mat) len) mat)
+      :else ($ (range (max 0 (- (nrow mat) len)) (nrow mat)) :all mat)))
+  ([mat]
+     (tail 10 mat)))
 
 (defn $where
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
