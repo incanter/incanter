@@ -224,8 +224,6 @@
 "
 (fn [chart & options] (type (-> chart .getPlot .getDataset))))
 
-
-
 (defn set-theme
 "  Changes the chart theme.
 
@@ -355,8 +353,6 @@
         (.fireChartChanged chart)
         chart))))
 
-
-
 (defmacro add-histogram
 "
   Adds a histogram to an existing histogram plot, returns the modified
@@ -393,10 +389,6 @@
                                                    [:series-label series-lab#]))))]
         (apply add-histogram* args#))))
 
-
-
-
-
 (defn add-box-plot*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
@@ -411,7 +403,6 @@
       (do
         (.add (.getDataset data-plot) _x series-label category-label)
         chart))))
-
 
 (defmacro add-box-plot
 "
@@ -449,10 +440,6 @@
                                                         [:series-label series-lab#]))))]
         (apply add-box-plot* args#))))
 
-
-
-
-
 (defn add-categories*
   ([chart categories values & options]
     (let [opts (when options (apply assoc {} options))
@@ -478,7 +465,6 @@
                                                          (str 'values))
                                                        (nth _categories i)))
           chart))))
-
 
 
 (defmacro add-categories
@@ -535,9 +521,7 @@
        (apply add-categories* args#))))
 
 
-
 (defmulti add-lines* (fn [chart x y & options] (type (-> chart .getPlot .getDataset))))
-
 
 (defmethod add-lines* org.jfree.data.xy.XYSeriesCollection
   ([chart x y & options]
@@ -567,7 +551,6 @@
         (.setRenderer n line-renderer))
       chart)))
 
-
 ;; doesn't work
 (defmethod add-lines* org.jfree.data.statistics.HistogramDataset
   ([chart x y & options]
@@ -595,8 +578,6 @@
          (.setDataset n data-set)
          (.setRenderer n line-renderer))
        chart)))
-
-
 
 (defmacro add-lines
 " Plots lines on the given scatter or line plot of the (x,y) points.
@@ -654,9 +635,6 @@
         (apply add-lines* args#))))
 
 
-
-
-
 (defn add-function*
   ([chart function min-range max-range & options]
     (let [opts (when options (apply assoc {} options))
@@ -666,7 +644,6 @@
            series-lab (or (:series-label opts)
                           (format "%s" 'function))]
        (add-lines chart x (map function x) :series-label series-lab))))
-
 
 
 (defmacro add-function
@@ -722,9 +699,6 @@
         (apply add-function* args#))))
 
 
-
-
-
 (defn add-parametric*
   ([chart function min-range max-range & options]
     (let [opts (when options (apply assoc {} options))
@@ -735,8 +709,6 @@
           series-lab (or (:series-label opts)
                          (format "%s" 'function))]
        (add-lines chart x y :series-label series-lab :auto-sort false))))
-
-
 
 
 (defmacro add-parametric
@@ -771,8 +743,6 @@
         (apply add-parametric* args#))))
 
 
-
-
 (defn add-points*
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
@@ -797,8 +767,6 @@
        (.setDataset data-plot n data-set)
        (.setRenderer data-plot n line-renderer)
        chart)))
-
-
 
 (defmacro add-points
 " Plots points on the given scatter-plot or xy-plot of the (x,y) points.
@@ -854,12 +822,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defn set-alpha
 " Sets the alpha level (transparency) of the plot's foreground
   returns the modified chart object.
@@ -872,7 +834,6 @@
   ([chart alpha]
     (.setForegroundAlpha (.getPlot chart) alpha)
     chart))
-
 
 (defn set-background-alpha
 " Sets the alpha level (transparency) of the plot's background
@@ -900,8 +861,6 @@
   ([chart]
     (.setBackgroundAlpha (.getPlot chart) 0.0)
     chart))
-
-
 
 (defn set-title
 " Sets the main title of the plot, returns the modified chart object.
@@ -942,7 +901,6 @@
     chart))
 
 
-
 (defn set-x-range
 " Sets the range of the x-axis on the given chart.
 
@@ -981,8 +939,6 @@
          .getRangeAxis
          (.setRange lower upper))
      chart))
-
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1284,7 +1240,6 @@
         (apply time-series-plot* args#))))
 
 
-
 (defn scatter-plot*
   ([x y & options]
     (let [opts (when options (apply assoc {} options))
@@ -1338,8 +1293,6 @@
       (.setSeriesShape (-> chart .getPlot .getRenderer) 1 (java.awt.geom.Rectangle2D$Double. -3 -3 6 6))
       (set-theme chart theme)
       chart)))
-
-
 
 
 (defmacro scatter-plot
@@ -1701,7 +1654,6 @@
           chart)))))
 
 
-
 (defmacro histogram
 " Returns a JFreeChart object representing the histogram of the given data.
   Use the 'view' function to display the chart, or the 'save' function
@@ -1763,8 +1715,6 @@
                                                          :x-label x-lab#
                                                          :series-label series-lab#]))))]
         (apply histogram* args#))))
-
-
 
 
 (defn line-chart*
@@ -1949,7 +1899,6 @@
           chart))))
 
 
-
 (defmacro bar-chart
 " Returns a JFreeChart object representing a bar-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
@@ -2044,8 +1993,6 @@
         (apply bar-chart* args#))))
 
 
-
-
 (defn area-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
@@ -2087,7 +2034,6 @@
                        (nth _categories i)))
           (set-theme chart theme)
           chart))))
-
 
 
 (defmacro area-chart
@@ -2227,7 +2173,6 @@
           chart))))
 
 
-
 (defmacro stacked-area-chart
 " Returns a JFreeChart object representing an stacked-area-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
@@ -2310,8 +2255,6 @@
                                                             :y-label y-lab#
                                                             :series-label series-lab#]))))]
         (apply stacked-area-chart* args#))))
-
-
 
 (defn stacked-bar-chart*
   ([categories values & options]
@@ -2450,7 +2393,6 @@
         (apply stacked-bar-chart* args#))))
 
 
-
 (defn pie-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
@@ -2472,7 +2414,6 @@
             (.setValue dataset (nth _categories i) (nth _values i)))
           (set-theme chart theme)
           chart))))
-
 
 
 (defmacro pie-chart
@@ -2525,7 +2466,6 @@
         (apply pie-chart* args#))))
 
 
-
 (defn box-plot*
   ([x & options]
     (let [opts (when options (apply assoc {} options))
@@ -2555,21 +2495,19 @@
                  y-label
                  dataset
                  legend?)]
-        (do
-          (-> chart .getCategoryPlot .getRenderer (.setMaximumBarWidth 0.25))
-          (.add dataset __x
-                (if _group-by
-                  (str series-label " (0)")
-                  series-label)
-                category-label)
-          (when-not (empty? (rest x-groups))
-            (doseq [i (range 1 (count x-groups))]
-              (.add dataset
-                    (nth x-groups i)
-                    (str series-label " (" i ")") i)))
-          (set-theme chart theme)
-          chart))))
-
+      (-> chart .getCategoryPlot .getRenderer (.setMaximumBarWidth 0.25))
+      (.add dataset __x
+            (if _group-by
+              (str series-label " (0)")
+              series-label)
+            category-label)
+      (when-not (empty? (rest x-groups))
+        (doseq [i (range 1 (count x-groups))]
+          (.add dataset
+                (nth x-groups i)
+                (str series-label " (" i ")") i)))
+      (set-theme chart theme)
+      chart)))
 
 
 (defmacro box-plot
@@ -2631,8 +2569,6 @@
         (apply box-plot* args#))))
 
 
-
-
 (defn function-plot*
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
@@ -2650,8 +2586,6 @@
                           :title title
                           :series-label series-lab
                           :legend legend?) theme))))
-
-
 
 
 (defmacro function-plot
@@ -2699,8 +2633,6 @@
        (apply function-plot* args#))))
 
 
-
-
 (defn parametric-plot*
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
@@ -2720,8 +2652,6 @@
                           :series-label series-lab
                           :legend legend?
                           :auto-sort false) theme))))
-
-
 
 
 (defmacro parametric-plot
@@ -2763,8 +2693,6 @@
                                                     :title title#
                                                     :series-label series-lab#]))))]
        (apply parametric-plot* args#))))
-
-
 
 
 (defn heat-map*
@@ -2996,11 +2924,8 @@
             (.setTextAnchor anno TextAnchor/CENTER_RIGHT)
           (= angle se)
             (.setTextAnchor anno TextAnchor/CENTER_LEFT))
-        (.addAnnotation (.getPlot chart) anno)))))
-
-
-
-
+        (.addAnnotation (.getPlot chart) anno))
+      chart)))
 
 
 (defn add-text
@@ -3044,8 +2969,8 @@
   ([chart x y text & options]
     (let [opts (when options (apply assoc {} options))
           anno (XYTextAnnotation. text x y)]
-      (.addAnnotation (.getPlot chart) anno))))
-
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 
 (defn add-polygon
@@ -3106,10 +3031,8 @@
     (let [opts (when options (apply assoc {} options))
           points (double-array (mapcat identity coords))
           anno (XYPolygonAnnotation. points)]
-      (.addAnnotation (.getPlot chart) anno))))
-
-
-
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 (defn add-image
 " Adds an image to the chart at the given coordinates.
@@ -3131,10 +3054,8 @@
   ([chart x y img & options]
     (let [opts (when options (apply assoc {} options))
           anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
-      (.addAnnotation (.getPlot chart) anno))))
-
-
-
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  OTHER CHARTS
@@ -3179,8 +3100,6 @@
         chart))))
 
 
-
-
 (defn qq-plot
 "
   Returns a QQ-Plot object. Use the 'view' function to display it.
@@ -3216,8 +3135,6 @@
                                   :y-label "Data quantiles"
                                   :series-label "Theoretical Normal")
                     theme))))
-
-
 
 
 (defn bland-altman-plot
@@ -3264,8 +3181,6 @@
           plot))))
 
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -3295,10 +3210,8 @@
 
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SLIDER CONTROLS AND PLOTS
-
 
 
 (defn get-series
@@ -3612,9 +3525,6 @@
      chart)))
 
 
-
-
-
 ;;;; DEFAULT THEME METHODS
 
 (defmethod set-theme-default org.jfree.data.category.DefaultCategoryDataset
@@ -3716,10 +3626,7 @@
          chart))))
 
 
-
-
 ;;;;; DEFAULT PLOT BACKGROUND SETTINGS
-
 
 (defmethod set-background-default org.jfree.chart.plot.XYPlot
   ([chart]
