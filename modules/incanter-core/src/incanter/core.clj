@@ -1614,7 +1614,7 @@ altering later ones."
      (head 10 mat)))
 
 (defn tail
-  "Returns the tailof the dataset. 10 or full dataset by default."
+  "Returns the tail of the dataset. 10 or full dataset by default."
   ([len mat]
      (let [n (min len (nrow mat))]
        ($ (range (- (nrow mat) n) (nrow mat)) :all mat)))
