@@ -878,7 +878,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     (if (= type :values)
       {:S (:values (clx/svd mat :type :values))}
       {:S (:values result)
-       :U (if (= type :compact) mat (:left result)) 
+       :U (if (= type :compact) mat (:left result))
        :V (:right result)})))
 
 (defn decomp-eigenvalue
@@ -921,15 +921,17 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     a map containing:
       :L -- the lower triangular factor
       :U -- the upper triangular factor
+      :P -- the permutation matrix
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
+    http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
 "
   ([mat]
     (let [result (clx/lu mat)]
       {:L (:l result)
-       :U (:u result)})))
+       :U (:u result)
+       :P (:p result)})))
 
 (defn vector-length [u]
   (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
@@ -982,7 +984,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   ;(let [type (or type :full)
         ;q (orthonormal-base-stable m)
         ;m (trans m)]
-    ;{:Q (if (= type :full) q m) 
+    ;{:Q (if (= type :full) q m)
      ;:R (if (= type :compact)
           ;(matrix (reduce (fn [r j]
                             ;(conj r
@@ -1392,7 +1394,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                  (map? obj)
                    ;; see if any of the values are collections
                    (if (reduce #(or %1 %2) (map coll? (vals obj)))
-                     (vals obj)
+                     (trans (vals obj))
                      [(vals obj)])
                    (coll? obj)
                      (cond
@@ -1607,9 +1609,24 @@ altering later ones."
 (defn head
   "Returns the head of the dataset. 10 or full dataset by default."
   ([len mat]
-     ($ (range (min len (nrow mat))) :all mat))
+     (cond
+      (= len 0) ($ :none :all mat)
+      (<= len (- (nrow mat))) (head 0 mat)
+      (< len 0) (head (+ (nrow mat) len) mat)
+      :else ($ (range (min len (nrow mat))) :all mat)))
   ([mat]
      (head 10 mat)))
+
+(defn tail
+  "Returns the tail of the dataset. 10 or full dataset by default."
+  ([len mat]
+     (cond
+      (= len 0) ($ :none :all mat)
+      (<= len (- (nrow mat))) (head 0 mat)
+      (< len 0) (head (+ (nrow mat) len) mat)
+      :else ($ (range (max 0 (- (nrow mat) len)) (nrow mat)) :all mat)))
+  ([mat]
+     (tail 10 mat)))
 
 (defn $where
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
@@ -2745,11 +2762,11 @@ of each type"
 
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
-    (.composeDiagonal DoubleFactory2D/dense block0 block1)) 
+    (.composeDiagonal DoubleFactory2D/dense block0 block1))
   (defn block-diag
     "Blocks should be a sequence of matrices."
     [blocks]
-    (new Matrix (reduce block-diag2 blocks))) 
+    (new Matrix (reduce block-diag2 blocks)))
 
   (defn block-matrix
     "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
@@ -2757,18 +2774,28 @@ of each type"
     (let [element-class (-> blocks first first class)
           native-rows (for [row blocks] (into-array element-class row))
           native-blocks (into-array (-> native-rows first class) native-rows)]
-      (new Matrix (.compose DoubleFactory2D/dense native-blocks)))) 
+      (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
 
   (defn separate-blocks
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
       (for [q partitions]
-        (.viewPart matrix (first p) (first q) (second p) (second q))))) 
+        (.viewPart matrix (first p) (first q) (second p) (second q)))))
 
   (defn diagonal-blocks
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
       (.viewPart matrix (first p) (first p) (second p) (second p))))
-  ) 
+  )
+
+(defn reorder-columns
+  "Produce a new dataset with the columns in the specified order.
+Returns nil if no valid column names are given."
+  [dset cols]
+  (let [cols (filter (partial contains? (set (:column-names dset))) cols)]
+    (cond
+     (empty? cols) nil
+     (= (count cols) 1) (dataset cols (sel dset :cols (first cols)))
+     :else (sel dset :cols cols))))

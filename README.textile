@@ -17,9 +17,9 @@ h2. Overview and motivation
 
 The motivation for creating Incanter is to provide a JVM-based statistical computing and graphics platform with R-like semantics and interactive-programming environment. Running on the JVM provides access to the large number of existing Java libraries for data access, data processing, and presentation.  Clojure’s seamless integration with Java makes leveraging these libraries much simpler than is possible in R, and Incanter’s R-like semantics makes statistical programming much simpler than is possible in pure Java.
 
-Motivation for a Lisp-based R-like statistical environment can be found in the paper <i><a href="http://books.google.com/books?id=8Cf16JkKz30C&pg=PA21">Back to the Future: Lisp as a Base for a Statistical Computing System by Ihaka and Lang (2008)</a></i>. Incanter is also inspired by the now dormant Lisp-Stat (see the special volume in the Journal of Statistical Software on <a href="http://www.jstatsoft.org/v13">Lisp-Stat: Past, Present, and Future</a> from 2005).
+Motivation for a Lisp-based R-like statistical environment can be found in the paper <i><a href="http://www.stat.auckland.ac.nz/~ihaka/downloads/Compstat-2008.pdf">Back to the Future: Lisp as a Base for a Statistical Computing System by Ihaka and Lang (2008)</a></i>. Incanter is also inspired by the now dormant Lisp-Stat (see the special volume in the Journal of Statistical Software on <a href="http://www.jstatsoft.org/v13">Lisp-Stat: Past, Present, and Future</a> from 2005).
 
-Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.org">Clojure website</a></u></i>, and screencasts of several excellent Clojure talks by the language’s creator, Rich Hickey, can be found at <i><a href="http://clojure.blip.tv/">clojure.blip.tv</a></i>.
+Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.org">Clojure website</a></u></i>, and screencasts of several excellent Clojure talks by the language’s creator, Rich Hickey, can be found at <i> <a href="http://www.youtube.com/user/ClojureTV">Clojure TV</a></i>.
 
 
 <a name="clojure"></a>

@@ -28,14 +28,16 @@
        :author "David Edgar Liebke"}
   incanter.charts
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                              bind-columns view save $group-by conj-cols
-                              grid-apply set-data col-names $data)]
-        [incanter.stats :only (quantile quantile-normal cumulative-mean sd)]
+                                bind-columns view save $group-by conj-cols
+                                grid-apply set-data col-names $data sel abs)]
+        [incanter.stats :only (quantile quantile-normal cumulative-mean
+                               sd correlation variance)]
         [clj-time.coerce :only (to-date)])
   (:import  (java.io File)
             (javax.imageio ImageIO)
             (javax.swing JSlider JFrame JLabel JPanel)
-            (java.awt BorderLayout)
+            (java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font)
+            (org.jfree.data DomainOrder)
             (org.jfree.data.statistics HistogramDataset
                                        HistogramType
                                        DefaultBoxAndWhiskerCategoryDataset)
@@ -43,17 +45,28 @@
                              ChartUtilities
                              ChartFrame
                              ChartTheme
-                             StandardChartTheme)
+                             StandardChartTheme
+                             JFreeChart
+                             LegendItem
+                             LegendItemCollection)
+            (org.jfree.chart.axis AxisSpace NumberAxis AxisLocation)
             (org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
-                                  SeriesRenderingOrder)
+                                  SeriesRenderingOrder
+                                  Plot
+                                  XYPlot)
             (org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
-                               XYSeriesCollection)
+                               XYSeriesCollection
+                               AbstractXYDataset)
             (org.jfree.data.category DefaultCategoryDataset)
             (org.jfree.data.general DefaultPieDataset)
-            (org.jfree.chart.renderer.xy XYLineAndShapeRenderer)
-            (org.jfree.ui TextAnchor)
+            (org.jfree.chart.renderer.xy XYLineAndShapeRenderer
+                                         XYBarRenderer
+                                         XYSplineRenderer
+                                         StandardXYBarPainter)
+            (org.jfree.ui TextAnchor RectangleInsets RectangleEdge)
+            (org.jfree.chart.title TextTitle)
             (org.jfree.chart.annotations XYPointerAnnotation
                                          XYTextAnnotation
                                          XYPolygonAnnotation)))
@@ -211,8 +224,6 @@
 "
 (fn [chart & options] (type (-> chart .getPlot .getDataset))))
 
-
-
 (defn set-theme
 "  Changes the chart theme.
 
@@ -342,8 +353,6 @@
         (.fireChartChanged chart)
         chart))))
 
-
-
 (defmacro add-histogram
 "
   Adds a histogram to an existing histogram plot, returns the modified
@@ -380,10 +389,6 @@
                                                    [:series-label series-lab#]))))]
         (apply add-histogram* args#))))
 
-
-
-
-
 (defn add-box-plot*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
@@ -398,7 +403,6 @@
       (do
         (.add (.getDataset data-plot) _x series-label category-label)
         chart))))
-
 
 (defmacro add-box-plot
 "
@@ -436,10 +440,6 @@
                                                         [:series-label series-lab#]))))]
         (apply add-box-plot* args#))))
 
-
-
-
-
 (defn add-categories*
   ([chart categories values & options]
     (let [opts (when options (apply assoc {} options))
@@ -447,7 +447,7 @@
           _values (data-as-list values data)
           _categories (data-as-list categories data)
           _group-by (when (:group-by opts)
-                      (data-as-list (:group-by opts) data))                      
+                      (data-as-list (:group-by opts) data))
            _chart chart
            series-label (:series-label opts)
            data-plot (.getCategoryPlot _chart)
@@ -465,7 +465,6 @@
                                                          (str 'values))
                                                        (nth _categories i)))
           chart))))
-
 
 
 (defmacro add-categories
@@ -522,9 +521,7 @@
        (apply add-categories* args#))))
 
 
-
 (defmulti add-lines* (fn [chart x y & options] (type (-> chart .getPlot .getDataset))))
-
 
 (defmethod add-lines* org.jfree.data.xy.XYSeriesCollection
   ([chart x y & options]
@@ -554,7 +551,6 @@
         (.setRenderer n line-renderer))
       chart)))
 
-
 ;; doesn't work
 (defmethod add-lines* org.jfree.data.statistics.HistogramDataset
   ([chart x y & options]
@@ -582,8 +578,6 @@
          (.setDataset n data-set)
          (.setRenderer n line-renderer))
        chart)))
-
-
 
 (defmacro add-lines
 " Plots lines on the given scatter or line plot of the (x,y) points.
@@ -641,9 +635,6 @@
         (apply add-lines* args#))))
 
 
-
-
-
 (defn add-function*
   ([chart function min-range max-range & options]
     (let [opts (when options (apply assoc {} options))
@@ -653,7 +644,6 @@
            series-lab (or (:series-label opts)
                           (format "%s" 'function))]
        (add-lines chart x (map function x) :series-label series-lab))))
-
 
 
 (defmacro add-function
@@ -709,9 +699,6 @@
         (apply add-function* args#))))
 
 
-
-
-
 (defn add-parametric*
   ([chart function min-range max-range & options]
     (let [opts (when options (apply assoc {} options))
@@ -722,8 +709,6 @@
           series-lab (or (:series-label opts)
                          (format "%s" 'function))]
        (add-lines chart x y :series-label series-lab :auto-sort false))))
-
-
 
 
 (defmacro add-parametric
@@ -758,8 +743,6 @@
         (apply add-parametric* args#))))
 
 
-
-
 (defn add-points*
   ([chart x y & options]
      (let [opts (when options (apply assoc {} options))
@@ -784,8 +767,6 @@
        (.setDataset data-plot n data-set)
        (.setRenderer data-plot n line-renderer)
        chart)))
-
-
 
 (defmacro add-points
 " Plots points on the given scatter-plot or xy-plot of the (x,y) points.
@@ -841,12 +822,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defn set-alpha
 " Sets the alpha level (transparency) of the plot's foreground
   returns the modified chart object.
@@ -859,7 +834,6 @@
   ([chart alpha]
     (.setForegroundAlpha (.getPlot chart) alpha)
     chart))
-
 
 (defn set-background-alpha
 " Sets the alpha level (transparency) of the plot's background
@@ -887,8 +861,6 @@
   ([chart]
     (.setBackgroundAlpha (.getPlot chart) 0.0)
     chart))
-
-
 
 (defn set-title
 " Sets the main title of the plot, returns the modified chart object.
@@ -929,7 +901,6 @@
     chart))
 
 
-
 (defn set-x-range
 " Sets the range of the x-axis on the given chart.
 
@@ -968,8 +939,6 @@
          .getRangeAxis
          (.setRange lower upper))
      chart))
-
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1271,15 +1240,14 @@
         (apply time-series-plot* args#))))
 
 
-
 (defn scatter-plot*
   ([x y & options]
     (let [opts (when options (apply assoc {} options))
           data (or (:data opts) $data)
           _x (data-as-list x data)
           _y (data-as-list y data)
-          _group-by (when (:group-by opts)                      
-                      (data-as-list (:group-by opts) data))                     
+          _group-by (when (:group-by opts)
+                      (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (map #($ :col-0 %)
                           (vals ($group-by :col-1 (conj-cols _x _group-by)))))
@@ -1313,7 +1281,7 @@
                    _dataset
                    org.jfree.chart.plot.PlotOrientation/VERTICAL
                    legend?
-                   true		; tooltips
+                   true            	; tooltips
                    false))
           _ (when x-groups
               (doseq [i (range 1 (count x-groups))]
@@ -1325,8 +1293,6 @@
       (.setSeriesShape (-> chart .getPlot .getRenderer) 1 (java.awt.geom.Rectangle2D$Double. -3 -3 6 6))
       (set-theme chart theme)
       chart)))
-
-
 
 
 (defmacro scatter-plot
@@ -1408,6 +1374,254 @@
         (apply scatter-plot* args#))))
 
 
+(defn scatter-plot-matrix*
+  [ &{:keys [data group-by title nbins only-first only-triangle]
+      :or {data $data
+           group-by nil
+           title "Scatter Plot Matrix"
+           nbins 10 ; number of bars in the histogram
+           only-first 6 ; nr of most correlating metrics shown
+           only-triangle false }}]
+  (let [margin 32
+        xmarg 8
+        ymarg 16
+        group-by-list (if (coll? group-by) group-by [group-by])
+        col-names (remove (set group-by-list) (:column-names data))
+        col-count (count col-names)
+        data-grouped (if (nil? group-by) {:x data} ($group-by group-by-list data))
+        rectangles (apply merge (for [xn col-names yn col-names]  {[xn yn] (Rectangle.)}  ))
+        xyplot (doto (XYPlot.)
+                 (.setRenderer (doto (XYLineAndShapeRenderer. false true)
+                                 (.setDrawOutlines true)
+                                 (.setBaseFillPaint (Color. 0 0 0 0))
+                                 (.setUseFillPaint true)
+                                 (.setSeriesPaint 0 (Color/BLUE))
+                                 (.setSeriesPaint 1 (Color/RED))
+                                 (.setSeriesPaint 2 (Color/GREEN))
+                                 (->>
+                                  (vector)
+                                  (apply (fn [x]
+                                           (dotimes [i col-count]
+                                             (let [c (.lookupSeriesPaint x i)
+                                                   c2 (Color. (.getRed c) (.getGreen c) (.getBlue c) 48 )]
+                                               (.setSeriesFillPaint x i c2))))))))
+                 (.setRangeGridlinesVisible false)
+                 (.setDomainGridlinesVisible false))
+        histoplot (doto (XYPlot.)
+                    (.setRenderer 1 (doto (XYBarRenderer.)
+                                      (.setShadowVisible false)
+                                      (.setSeriesPaint 0 (Color. 210 210 210))
+                                      (.setBarPainter (StandardXYBarPainter.))))
+                    (.setRenderer 0 (doto (XYSplineRenderer.)
+                                      (.setShapesVisible false)
+                                      (.setSeriesPaint 0 (Color. 170 170 170))
+                                      (.setSeriesStroke 0 (BasicStroke. 3))))
+                    (.setRangeGridlinesVisible false) ;; these lines do not fit to other range lines
+                    (.setDomainGridlinesVisible false)) ; plots for the diagonal
+        dataset-impl (fn [x-name y-name] (proxy [AbstractXYDataset] []
+                                          ( getDomainOrder [] (DomainOrder/ASCENDING))
+                                          ( getXValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols x-name))
+                                          ( getYValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols y-name))
+                                          ( getItemCount [series] (count (:rows (nth (vals data-grouped) series))))
+                                          ( getSeriesKey [series] (str (nth (keys data-grouped) series)))
+                                          ( getSeriesCount [] (count data-grouped))))
+        histogram-dataset-impl (fn [name]
+                                 (doto (HistogramDataset.)
+                                   (.addSeries (str name) (double-array ($ name data)) (int nbins))))
+        color-for (fn [k] (-> xyplot .getRenderer (.lookupSeriesPaint k)))
+        shape-for (fn [k] (-> xyplot .getRenderer (.lookupLegendShape k)))
+        font-normal (.getBaseItemLabelFont (.getRenderer xyplot))
+        font-bold (.deriveFont font-normal (Font/BOLD))
+        legend (let [coll (LegendItemCollection.)]
+                 (do
+                   (doseq [[k v] (map-indexed vector (keys data-grouped))]
+                     (.add coll (doto (LegendItem.
+                                       (cond
+                                        (map? v) (str (first (nfirst v)))
+                                        :else (str v))
+                                       "" "" ""
+                                       (shape-for k)
+                                       (color-for k))))))
+                 (identity coll))
+        draw-string-left (fn [g2 str x y]
+                           (do
+                             (let [metr (.getFontMetrics g2)
+                                   w    (.stringWidth metr str)
+                                   h    (.getHeight metr )]
+                               (doto g2
+                                 (.setPaint (Color. 255 255 255 128))
+                                 (.fillRect x (- y (* h 0.75)) w h)
+                                 (.setPaint (Color. 0 0 0))
+                                 (.drawString str x y)))))
+        draw-string-centered (fn [g2 str x y]
+                               (let [metr (.getFontMetrics g2)
+                                     w (.stringWidth metr str)
+                                     h (.getHeight metr)
+                                     xx (int (- x (/ w 2)))
+                                     yy (int (+ y (/ h 2)))]
+                                 (draw-string-left g2 str xx yy)))
+        correlations  (memoize (fn [xn yn] (get (apply merge (for [x col-names y col-names]
+                                                              { [x y] (correlation (sel data :cols x) (sel data :cols y)) }))
+                                               (sort [xn yn]))))
+        variances  (fn [xn] (get (apply merge (for [x col-names] {x (variance (sel data :cols x) ) })) xn ))
+        col-names-ordered (take only-first (sort-by (fn [x] (- 0 (reduce + (map (fn [y] (abs (correlations x y))) col-names))))
+                                                    col-names))
+        key-matrix-all (identity (for [ [yk yv] (map-indexed vector col-names-ordered)
+                                        [xk xv] (map-indexed vector col-names-ordered) ]
+                                   (vector xk xv yk yv) ))
+        key-matrix (if only-triangle (filter (fn [[a b c d]] (>= a c)) key-matrix-all) key-matrix-all)]
+    (doto
+        (JFreeChart.
+         (proxy [Plot] []
+           (getLegendItems [] (if (nil? group-by) nil legend))
+           (getPlotType [] "Scatter-Plot-Matrix")
+           (draw  [g2 area anchor parentState info]
+             (let [rect (.createInsetRectangle (.getInsets this) area)
+                   axis-space (AxisSpace.)
+                   w  (/ (- (.getWidth rect) (* 2 margin)) col-count)
+                   h  (/ (- (.getHeight rect) (* 2 margin)) col-count)]
+               (do
+                 (.drawBackground this g2 rect)
+                 (.drawOutline this g2 rect)
+                 (doto axis-space (.setLeft 0) (.setTop 0) (.setBottom 0) (.setRight 0))
+                 (doseq [x [xyplot histoplot]]
+                   (doto x
+                     (.setInsets    (RectangleInsets. 1 1 1 1))
+                     (.setDomainAxis (doto (NumberAxis. " ") (.setAutoRange true) (.setAutoRangeIncludesZero false)))
+                     (.setRangeAxis  (doto (NumberAxis. "  ") (.setAutoRange true) (.setAutoRangeIncludesZero false)))
+                     (.setFixedDomainAxisSpace axis-space)
+                     (.setFixedRangeAxisSpace  axis-space)))
+                 (dorun (map
+                         (fn [ [ x-ind x-name y-ind y-name]]
+                           (let [x (+ margin (* w x-ind) (.getX rect))
+                                 y (+ margin (* h y-ind) (.getY rect))
+                                 rect (doto (get rectangles [x-name y-name]) (.setBounds x y w h))
+                                 plot (cond
+                                       (== x-ind y-ind) (doto histoplot
+                                                          (.setDataset 1 (histogram-dataset-impl x-name))
+                                                          (.setDataset 0 (histogram-dataset-impl x-name)))
+                                       :else (doto xyplot
+                                               (.setDataset (dataset-impl x-name y-name))))]
+                             (do
+                               (cond
+                                (== y-ind 0) (do
+                                               (.setTickLabelsVisible (.getDomainAxis plot) (or (odd? x-ind) only-triangle))
+                                               (.setDomainAxisLocation plot (AxisLocation/TOP_OR_LEFT))
+                                               (.setTickMarksVisible (.getDomainAxis plot) true))
+                                (== y-ind (- col-count 1)) (do
+                                                             (.setTickLabelsVisible (.getDomainAxis plot) (even? x-ind))
+                                                             (.setDomainAxisLocation plot (AxisLocation/BOTTOM_OR_RIGHT))
+                                                             (.setTickMarksVisible (.getDomainAxis plot) true))
+                                :else (do
+                                        (.setTickLabelsVisible (.getDomainAxis plot) false)
+                                        (.setTickMarksVisible (.getDomainAxis plot) false)))
+                               (cond
+                                (== x-ind 0) (do
+                                               (.setTickLabelsVisible (.getRangeAxis plot) (odd? y-ind))
+                                               (.setRangeAxisLocation plot (AxisLocation/TOP_OR_LEFT))
+                                               (.setTickMarksVisible (.getRangeAxis plot) true))
+                                (== x-ind (- col-count 1)) (do
+                                                             (.setTickLabelsVisible (.getRangeAxis plot) (or (even? y-ind) only-triangle))
+                                                             (.setRangeAxisLocation plot (AxisLocation/BOTTOM_OR_RIGHT))
+                                                             (.setTickMarksVisible (.getRangeAxis plot) true))
+                                :else (do
+                                        (.setTickLabelsVisible (.getRangeAxis plot) false)
+                                        (.setTickMarksVisible (.getRangeAxis plot) false)))
+                                        ; we do have to handle the bottom right element - in case it has axes displayed.
+                               (if (and (== x-ind y-ind (- col-count 1)))
+                                 (do
+                                   (.setVisible (.getRangeAxis histoplot) false)
+                                   (.setDataset xyplot (dataset-impl x-name y-name))
+                                   (.setTickLabelsVisible (.getRangeAxis xyplot) (odd? col-count))
+                                   (.setRangeAxisLocation xyplot (AxisLocation/BOTTOM_OR_RIGHT))
+                                   (.setTickMarksVisible (.getRangeAxis xyplot) true)
+                                   (.setVisible (.getRangeAxis xyplot) true)
+                                   (.draw (.getRangeAxis xyplot) g2 (- (.getMaxX rect) 1) rect rect RectangleEdge/RIGHT info)))
+                               (identity (.draw plot g2 rect anchor parentState info))
+                               (if (== x-ind y-ind)
+                                 (let [str-name (str x-name)
+                                       str-var (format "var %.3f\n" (variances x-name ))]
+                                   (doto g2
+                                     (.setPaint (Color/BLACK))
+                                     (.setFont font-normal)
+                                     (draw-string-left str-var (int (+ x xmarg)) (int (+ y ymarg)))
+                                     (.setFont font-bold)
+                                     (draw-string-centered str-name (int (+ x (/ w 2))) (int (+ y (/ h 2))))))
+                                 (let [str-cor (format "corr %.3f" (correlations x-name y-name ))]
+                                   (doto g2
+                                     (.setPaint (Color/BLACK))
+                                     (.setFont font-normal)
+                                     (draw-string-left str-cor (int (+ x xmarg)) (int (+ y ymarg)))))
+                                 ))))
+                         key-matrix)))))))
+      (.setTitle title)
+      (.addSubtitle (doto
+                        (TextTitle. (str group-by))
+                      (.setPosition (RectangleEdge/BOTTOM)))))))
+
+(defn scatter-plot-matrix
+  "Returns a JFreeChart object displaying a scatter plot matrix for the given data.
+   Use the 'view' function to display the chart or 'save' to write it to a file.
+
+   Use:
+   (scatter-plot-matrix & options)
+   (scatter-plot-matrix data & options)
+
+   Options:
+   :data data (default $data) the data set for the plot.
+   :title s (default \"Scatter Plot Matrix\").
+   :nbins n (default 10) number of bins (ie. bars) in histogram.
+   :group-by grp (default nil) name of the column for grouping data.
+   :only-first n (default 6) show only the first n most correlating columns of the data set.
+   :only-triangle b (default false) shows only the upper triangle of the plot matrix.
+
+   Examples:
+   (use '(incanter core stats charts datasets pdf))
+   (view (scatter-plot-matrix (get-dataset :iris) :nbins 20 :group-by :Species ))
+   (with-data (get-dataset :iris) (view (scatter-plot-matrix :nbins 20 :group-by :Species )))
+   (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :nbins 20))
+
+   ;;;Input examples for Iris
+   ;; Input dataset examples: Incanter data repo, local file, remote file (url)
+   (def iris (get-dataset :iris))
+   (def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home
+   (def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))
+   ;; Filter dataset to specific columns only
+   (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
+   (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] ))
+
+   ;;; Scatter plot matrix examples
+   ;; Using default options
+   (def iris-spm (scatter-plot-matrix iris :group-by :Species))
+   ;; filter to metrics only, no categorical dimension for grouping
+   (def iris-spm (scatter-plot-matrix :data ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width] iris)))
+
+   ;; Using more options
+   (def iris-spm (scatter-plot-matrix iris
+                                      :title \"Iris Scatter Plot Matrix\"
+                                      :bins 20 ; number of histogram bars
+                                      :group-by :Species
+                                      :only-first 4 ; most correlating columns
+                                      :only-triangle false))
+
+   ;;;Output examples
+   ;; View on Display
+   (view iris-spm :width 1280 :height 800)
+   ;; Save as PDF
+   (save-pdf  iris-spm \"out/iris-spm.pdf\" :width 2560 :height 1600)
+   ;; Save as PNG
+   (save iris-spm \"out/iris-spm.png\" :width 2560 :height 1600)
+
+   ;; Airline dataset
+   (def airline ($ [:year :passengers :month] (read-dataset \"https://raw.github.com/liebke/incanter/master/data/airline_passengers.csv\" :header true)))
+   (def airline-spm (scatter-plot-matrix airline  :group-by :month :bins 20 :title \"Airline Scatter Plot Matrix\"))
+   (view airline-spm)
+   ;; Chick-weight dataset
+   (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :bins 20 :title \"Chick-weight Scatter Plot Matrix\" ))
+"
+  ([& opts] (cond
+             (even? (count opts)) (apply scatter-plot-matrix* opts)
+             :else (apply scatter-plot-matrix* (apply merge  [:data (first opts)]  (rest opts))))))
 
 (defn histogram*
   ([x & options]
@@ -1438,7 +1652,6 @@
                           false)
                         (set-theme theme))]
           chart)))))
-
 
 
 (defmacro histogram
@@ -1502,8 +1715,6 @@
                                                          :x-label x-lab#
                                                          :series-label series-lab#]))))]
         (apply histogram* args#))))
-
-
 
 
 (defn line-chart*
@@ -1654,7 +1865,7 @@
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
-                       (data-as-list (:group-by opts) data))                    
+                       (data-as-list (:group-by opts) data))
            x-label (or (:x-label opts) (str 'categories))
            y-label (or (:y-label opts) (str 'values))
            series-label (:series-label opts)
@@ -1686,7 +1897,6 @@
                        (nth _categories i)))
           (set-theme chart theme)
           chart))))
-
 
 
 (defmacro bar-chart
@@ -1783,8 +1993,6 @@
         (apply bar-chart* args#))))
 
 
-
-
 (defn area-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
@@ -1794,7 +2002,7 @@
            title (or (:title opts) "")
            theme (or (:theme opts) :default)
            _group-by (when (:group-by opts)
-                       (data-as-list (:group-by opts) data))                    
+                       (data-as-list (:group-by opts) data))
            x-label (or (:x-label opts) (str 'categories))
            y-label (or (:y-label opts) (str 'values))
            series-label (:series-label opts)
@@ -1826,7 +2034,6 @@
                        (nth _categories i)))
           (set-theme chart theme)
           chart))))
-
 
 
 (defmacro area-chart
@@ -1966,7 +2173,6 @@
           chart))))
 
 
-
 (defmacro stacked-area-chart
 " Returns a JFreeChart object representing an stacked-area-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
@@ -2049,8 +2255,6 @@
                                                             :y-label y-lab#
                                                             :series-label series-lab#]))))]
         (apply stacked-area-chart* args#))))
-
-
 
 (defn stacked-bar-chart*
   ([categories values & options]
@@ -2189,7 +2393,6 @@
         (apply stacked-bar-chart* args#))))
 
 
-
 (defn pie-chart*
   ([categories values & options]
      (let [opts (when options (apply assoc {} options))
@@ -2211,7 +2414,6 @@
             (.setValue dataset (nth _categories i) (nth _values i)))
           (set-theme chart theme)
           chart))))
-
 
 
 (defmacro pie-chart
@@ -2264,7 +2466,6 @@
         (apply pie-chart* args#))))
 
 
-
 (defn box-plot*
   ([x & options]
     (let [opts (when options (apply assoc {} options))
@@ -2294,21 +2495,19 @@
                  y-label
                  dataset
                  legend?)]
-        (do
-          (-> chart .getCategoryPlot .getRenderer (.setMaximumBarWidth 0.25))
-          (.add dataset __x
-                (if _group-by
-                  (str series-label " (0)")
-                  series-label)
-                category-label)
-          (when-not (empty? (rest x-groups))
-            (doseq [i (range 1 (count x-groups))]
-              (.add dataset
-                    (nth x-groups i)
-                    (str series-label " (" i ")") i)))
-          (set-theme chart theme)
-          chart))))
-
+      (-> chart .getCategoryPlot .getRenderer (.setMaximumBarWidth 0.25))
+      (.add dataset __x
+            (if _group-by
+              (str series-label " (0)")
+              series-label)
+            category-label)
+      (when-not (empty? (rest x-groups))
+        (doseq [i (range 1 (count x-groups))]
+          (.add dataset
+                (nth x-groups i)
+                (str series-label " (" i ")") i)))
+      (set-theme chart theme)
+      chart)))
 
 
 (defmacro box-plot
@@ -2370,8 +2569,6 @@
         (apply box-plot* args#))))
 
 
-
-
 (defn function-plot*
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
@@ -2389,8 +2586,6 @@
                           :title title
                           :series-label series-lab
                           :legend legend?) theme))))
-
-
 
 
 (defmacro function-plot
@@ -2438,8 +2633,6 @@
        (apply function-plot* args#))))
 
 
-
-
 (defn parametric-plot*
   ([function min-range max-range & options]
    (let [opts (when options (apply assoc {} options))
@@ -2459,8 +2652,6 @@
                           :series-label series-lab
                           :legend legend?
                           :auto-sort false) theme))))
-
-
 
 
 (defmacro parametric-plot
@@ -2504,12 +2695,11 @@
        (apply parametric-plot* args#))))
 
 
-
-
 (defn heat-map*
   ([function x-min x-max y-min y-max & options]
      (let [opts (when options (apply assoc {} options))
            color? (if (false? (:color? opts)) false true)
+           include-zero? (if (false? (:include-zero? opts)) false true)
            title (or (:title opts) "")
            x-label (or (:x-label opts) "")
            y-label (or (:y-label opts) "")
@@ -2525,13 +2715,15 @@
                     (.setLowerMargin 0.0)
                     (.setUpperMargin 0.0)
                     (.setAxisLinePaint java.awt.Color/white)
-                    (.setTickMarkPaint java.awt.Color/white))
+                    (.setTickMarkPaint java.awt.Color/white)
+                    (.setAutoRangeIncludesZero include-zero?))
            y-axis (doto (org.jfree.chart.axis.NumberAxis. y-label)
                     (.setStandardTickUnits (org.jfree.chart.axis.NumberAxis/createIntegerTickUnits))
                     (.setLowerMargin 0.0)
                     (.setUpperMargin 0.0)
                     (.setAxisLinePaint java.awt.Color/white)
-                    (.setTickMarkPaint java.awt.Color/white))
+                    (.setTickMarkPaint java.awt.Color/white)
+                    (.setAutoRangeIncludesZero include-zero?))
            colors (or (:colors opts)
                       [[0 0 127] [0 0 212] [0 42 255] [0 127 255] [0 127 255]
                        [0 226 255] [42 255 212] [56 255 198] [255 212 0] [255 198 0]
@@ -2578,11 +2770,34 @@
 
 (defmacro heat-map
 "
+  Usage: (heat-map function x-min x-max y-min y-max & options)
+  
+  Returns a JFreeChart object representing a heat map of the function across
+  the given x and y ranges. Use the 'view' function to display the chart, or 
+  the 'save' function to write it to a file.
+  
+  Arguments:
+    function -- a function that takes two scalar arguments and returns a scalar
+    x-min    -- lower bound for the first value of the function
+    x-max    -- upper bound for the first value of the function
+    y-min    -- lower bound for the second value of the function
+    y-max    -- upper bound for the second value of the function
+  
+  Options:
+    :title 
+    :x-label (default 'x-min < x < x-max')
+    :y-label (default 'y-min < y < y-max')
+    :z-label -- defaults to function's name
+    :color? (default true) -- should the plot be in color or not?
+    :include-zero? (default true) -- should the plot include the origin if it
+                                     is not in the ranges specified?
+  
   Examples:
     (use '(incanter core charts))
     (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
     (view (heat-map f -10 10 -15 15))
     (view (heat-map f -10 10 -10 10 :color? false))
+    (view (heat-map f 5 10 5 10 :include-zero? false))
 
     (defn f2 [x y] (plus (sq x) (sq y)))
     (view (heat-map f2 -10 10 -10 10))
@@ -2709,11 +2924,8 @@
             (.setTextAnchor anno TextAnchor/CENTER_RIGHT)
           (= angle se)
             (.setTextAnchor anno TextAnchor/CENTER_LEFT))
-        (.addAnnotation (.getPlot chart) anno)))))
-
-
-
-
+        (.addAnnotation (.getPlot chart) anno))
+      chart)))
 
 
 (defn add-text
@@ -2757,8 +2969,8 @@
   ([chart x y text & options]
     (let [opts (when options (apply assoc {} options))
           anno (XYTextAnnotation. text x y)]
-      (.addAnnotation (.getPlot chart) anno))))
-
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 
 (defn add-polygon
@@ -2819,10 +3031,8 @@
     (let [opts (when options (apply assoc {} options))
           points (double-array (mapcat identity coords))
           anno (XYPolygonAnnotation. points)]
-      (.addAnnotation (.getPlot chart) anno))))
-
-
-
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 (defn add-image
 " Adds an image to the chart at the given coordinates.
@@ -2844,10 +3054,8 @@
   ([chart x y img & options]
     (let [opts (when options (apply assoc {} options))
           anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
-      (.addAnnotation (.getPlot chart) anno))))
-
-
-
+      (.addAnnotation (.getPlot chart) anno)
+      chart)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  OTHER CHARTS
@@ -2892,8 +3100,6 @@
         chart))))
 
 
-
-
 (defn qq-plot
 "
   Returns a QQ-Plot object. Use the 'view' function to display it.
@@ -2929,8 +3135,6 @@
                                   :y-label "Data quantiles"
                                   :series-label "Theoretical Normal")
                     theme))))
-
-
 
 
 (defn bland-altman-plot
@@ -2977,8 +3181,6 @@
           plot))))
 
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -3008,10 +3210,8 @@
 
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SLIDER CONTROLS AND PLOTS
-
 
 
 (defn get-series
@@ -3325,9 +3525,6 @@
      chart)))
 
 
-
-
-
 ;;;; DEFAULT THEME METHODS
 
 (defmethod set-theme-default org.jfree.data.category.DefaultCategoryDataset
@@ -3429,10 +3626,7 @@
          chart))))
 
 
-
-
 ;;;;; DEFAULT PLOT BACKGROUND SETTINGS
-
 
 (defmethod set-background-default org.jfree.chart.plot.XYPlot
   ([chart]
@@ -3576,4 +3770,3 @@
   ([chart title]
      (.addSubtitle chart title)
      chart))
-

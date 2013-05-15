@@ -50,6 +50,11 @@
   (is (= (sel dataset5 :rows 1 :cols :a) nil))
   (is (= (sel dataset6 :cols :a) 1)))
 
+(def map1 {:col-0 [1.0 2.0 3.0] :col-1 [4.0 5.0 6.0]})
+
+(deftest dataset-construction
+  (is (= (to-dataset map1) (to-dataset [[1.0 4.0][2.0 5.0][3.0 6.0]]))))
+
 (deftest dataset-transforms
   (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
       "Single-row special case")
@@ -82,7 +87,7 @@
 (deftest matrix-from-arrays
   (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
   (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3]))))
-  (is (= (matrix [[1 2] [3 4]]) 
+  (is (= (matrix [[1 2] [3 4]])
          (matrix (object-array [(double-array [1.0 2.0])
                                 (double-array [3.0 4.0])])))))
 
@@ -486,6 +491,10 @@
     ;(check :full    expect-full)
     ;(check :compact expect-compact)))
 
+(deftest decomp-lu-test
+  (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
+        {:keys [L U P]} (decomp-lu m)]
+    (is (= m (mmult P L U)))))
 
 (deftest test-metadata
   (let [md {:name "metadata test"}
@@ -530,3 +539,4 @@
   (is (factorial 5) 120.0)
   (is (factorial 0) 1.0)
   (is (thrown? AssertionError (factorial -1))))
+
