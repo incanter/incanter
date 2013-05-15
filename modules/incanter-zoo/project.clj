@@ -6,7 +6,7 @@
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-io "1.5.0-SNAPSHOT"]
-                 [clj-time "0.4.4"
+                 [clj-time "0.5.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]]
   )
