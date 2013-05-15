@@ -2795,12 +2795,7 @@ of each type"
 Returns nil if no valid column names are given."
   [dset cols]
   (let [cols (filter (partial contains? (set (:column-names dset))) cols)]
-    (if (empty? cols)
-      nil
-      (dataset
-       cols
-       (map (fn [row]
-              (map (fn [col] (get row col 0)) cols)
-              )
-            (:rows dset)))))
-  )
+    (cond
+     (empty? cols) nil
+     (= (count cols) 1) (dataset cols (sel dset :cols (first cols)))
+     :else (sel dset :cols cols))))
