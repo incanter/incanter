@@ -860,10 +860,10 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-foo foo)
-  (decomp-foo foo :type :full)
-  (decomp-foo foo :type :compact)
-  (decomp-foo foo :type :values)
+  (decomp-svd foo)
+  (decomp-svd foo :type :full)
+  (decomp-svd foo :type :compact)
+  (decomp-svd foo :type :values)
 
 
   References:
@@ -871,8 +871,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat & {:keys [type] :or {type :full}}]
-  (let [type (or type :full)
-        result (if (= type :full)
+  (let [result (if (= type :full)
                  (clx/svd mat :type :full)
                  (clx/svd mat :type :sparse))]
     (if (= type :values)
