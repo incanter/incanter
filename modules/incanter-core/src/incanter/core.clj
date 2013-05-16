@@ -837,7 +837,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   [^Matrix mat]
   (clx/cholesky mat))
 
-
+(def ^:private ^:const allowed-types #{:full :compact :values})
 
 (defn decomp-svd
   "
@@ -871,7 +871,8 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat & {:keys [type] :or {type :full}}]
-  (let [result (if (= type :full)
+  (let [type (or (get allowed-types type) :full)
+        result (if (= type :full)
                  (clx/svd mat :type :full)
                  (clx/svd mat :type :sparse))]
     (if (= type :values)
