@@ -580,7 +580,7 @@
        chart)))
 
 (defmacro add-lines
-" Plots lines on the given scatter or line plot of the (x,y) points.
+" Plots lines on the given scatter or line plot (xy-plot) of the (x,y) points.
   Equivalent to R's lines function, returns the modified chart object.
 
   Options:
