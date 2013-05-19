@@ -1345,7 +1345,8 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
           (if (= (count result) 1)
             (ffirst result)
             (mapcat identity result))
-        (= (count result) 1)
+        (and (= (count result) 1)
+             (number? rows))
           (first result)
         :else
         (dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
