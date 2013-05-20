@@ -1321,16 +1321,16 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                  except-rows (except-for (nrow data) except-rows)
                 :else true)
           cols (cond
-                 cols (cond
-                        (coll? cols)  cols
-                        (or (= :all cols) (true? cols)) (:column-names data)
-                        :else [cols])
-                 all (cond
-                       (coll? all) all
-                       (= :all all) (:column-names data)
-                       :else [all])
+                cols cols
                 except-cols (except-for-cols data except-cols)
-                :else (:column-names data))
+                all all
+                :else true)
+          colnames (:column-names data)          
+          selected-cols (cond
+                         (or (= cols :all) (true? cols)) colnames
+                         (coll? cols) (map #(get-column-id data %) cols)
+                         :else [cols]
+                         )
           selected-rows (cond
                           (or (= rows :all) (true? rows) all)
                             (:rows data)
@@ -1338,18 +1338,17 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                             (list (nth (:rows data) rows))
                           (coll? rows)
                             (map #(nth (:rows data) %) rows))
-          _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
+          _data (map (fn [row] (map #(row (get-column-id data %)) selected-cols)) selected-rows)
           result (if (nil? filter) _data (clojure.core/filter filter _data))]
       (cond
-        (= (count cols) 1)
-          (if (= (count result) 1)
-            (ffirst result)
-            (mapcat identity result))
-        (and (= (count result) 1)
-             (number? rows))
-          (first result)
-        :else
-        (dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
+       (and (= (count selected-cols) 1) (not (coll? cols)))
+         (if (= (count result) 1)
+           (ffirst result)
+           (mapcat identity result))
+       (and (= (count result) 1) (not (coll? rows)))
+         (first result)
+       :else
+       (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
 
 
 (defn to-dataset
