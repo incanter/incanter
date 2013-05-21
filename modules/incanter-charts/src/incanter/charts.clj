@@ -3064,6 +3064,15 @@
 (defn trace-plot
   " Returns a trace-plot object, use the 'view' function to display it.
 
+  Options:
+    :data (default nil) If the :data option is provided a dataset,
+                        a column name can be used instead of a sequence
+                        of data for argument x.
+    :title (default 'Trace Plot') main title
+    :x-label (default 'Iteration')
+    :y-label (default 'Value')
+    :series-label (default 'Value')
+
     Examples:
       (use '(incanter core datasets stats bayes charts))
       (def ols-data (to-matrix (get-dataset :survey)))
@@ -3104,6 +3113,11 @@
 "
   Returns a QQ-Plot object. Use the 'view' function to display it.
 
+  Options:
+    :data (default nil) If the :data option is provided a dataset,
+                        a column name can be used instead of a sequence
+                        of data for argument x.
+
   References:
     http://en.wikipedia.org/wiki/QQ_plot
 
@@ -3139,6 +3153,10 @@
 
 (defn bland-altman-plot
 "
+  Options:
+    :data (default nil) If the :data option is provided a dataset,
+                        column names can be used instead of sequences
+                        of data for arguments x1 and x2.
 
   Examples:
 
@@ -3231,17 +3249,25 @@
      (set-data chart data 0))
   ([chart data series-idx]
      (let [series (get-series chart series-idx)]
-       (do
-         (.clear series)
-         (cond
-           (= 2 (count (first data)))
-             (doseq [row data]
-               (.addOrUpdate series (first row) (second row)))
-           (= 2 (count data))
-             (doseq [i (range (count (first data)))]
-               (.addOrUpdate series (nth (first data) i) (nth (second data) i)))
-           :else
-             (throw (Exception. "Data has wrong number of dimensions"))))
+       (.clear series)
+       (cond
+         (= 2 (count (first data)))
+           (doseq [row data]
+             (.addOrUpdate series (first row) (second row)))
+         (= 2 (count data))
+           (dorun (map #(.addOrUpdate series %1 %2) (first data) (second data)))
+         :else
+           (throw (Exception. "Data has wrong number of dimensions")))
+       chart))
+  ; by using (data-as-list) these two signatures do not only work for two
+  ; column names and a dataset, but also when x and y are collections, in
+  ; which case the dataset is ignored
+  ([chart x y dataset]
+    (set-data chart x y dataset 0))
+  ([chart x y dataset series-idx]
+     (let [series (get-series chart series-idx)]
+       (.clear series)
+       (dorun (map #(.addOrUpdate series %1 %2) (data-as-list x dataset) (data-as-list y dataset)))
        chart)))
 
 
