@@ -5,6 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
-  :dependencies [[incanter/incanter-core "1.5.0-SNAPSHOT"]
-                 [incanter/incanter-charts "1.5.0-SNAPSHOT"]]
+  :dependencies [[incanter/incanter-core "1.5.0-SNAPSHOT"]]
   :java-source-paths ["java"])
