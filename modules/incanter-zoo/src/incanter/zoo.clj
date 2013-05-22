@@ -170,13 +170,21 @@ That column must contain values that can be coerced into Jodas using the TimeCoe
                    (assoc :index (to-date-time i))))
              (:rows x)))))))
 
+(defn- zoo-simplify
+  "Returns a vector if 1 row, else identity" 
+  [z]
+  (let [n (nrow z)]
+    (cond
+     (= n 1) ($ 0 :all z)
+     :else z)))
+
 ;; I suspect this could be far better implemented using sel or such.
 (defn $$
   "This is the equivalent of :: in xts.  That is, it slices  out the timeseries between ind-1 and ind-2.  These are any values that can be coerced into clj-time values."
   ([ind ts]
-     ($ :all ($where {:index (to-date-time ind)} ts)))
+     (zoo-simplify ($ :all ($where {:index (to-date-time ind)} ts))))
   ([ind cols ts]
-     ($ cols ($where {:index (to-date-time ind)} ts)))
+     (zoo-simplify ($ cols ($where {:index (to-date-time ind)} ts))))
   ([ind-1 ind-2 cols ts]
      ($ cols
         ($where (fn [row]

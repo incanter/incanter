@@ -36,8 +36,8 @@
   (is (= ($ 1 :all cars) car1)))
 
 (deftest unselect-row-from-dataset
-  (is (= ($ [:not 0] :all cars) car1))
-  (is (= ($ [:not 1] :all cars) car0)))
+  (is (= ($ [:not 0] :all cars) (dataset [:speed :weight :colour] [car1])))
+  (is (= ($ [:not 1] :all cars) (dataset [:speed :weight :colour] [car0]))))
 
 (deftest select-all-returns-input
   (is (= ($ :all cars) cars)))

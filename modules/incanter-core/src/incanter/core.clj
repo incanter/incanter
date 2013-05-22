@@ -837,7 +837,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   [^Matrix mat]
   (clx/cholesky mat))
 
-
+(def ^:private ^:const allowed-types #{:full :compact :values})
 
 (defn decomp-svd
   "
@@ -860,10 +860,10 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-foo foo)
-  (decomp-foo foo :type :full)
-  (decomp-foo foo :type :compact)
-  (decomp-foo foo :type :values)
+  (decomp-svd foo)
+  (decomp-svd foo :type :full)
+  (decomp-svd foo :type :compact)
+  (decomp-svd foo :type :values)
 
 
   References:
@@ -871,7 +871,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat & {:keys [type] :or {type :full}}]
-  (let [type (or type :full)
+  (let [type (or (get allowed-types type) :full)
         result (if (= type :full)
                  (clx/svd mat :type :full)
                  (clx/svd mat :type :sparse))]
@@ -1321,16 +1321,16 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                  except-rows (except-for (nrow data) except-rows)
                 :else true)
           cols (cond
-                 cols (cond
-                        (coll? cols)  cols
-                        (or (= :all cols) (true? cols)) (:column-names data)
-                        :else [cols])
-                 all (cond
-                       (coll? all) all
-                       (= :all all) (:column-names data)
-                       :else [all])
+                cols cols
                 except-cols (except-for-cols data except-cols)
-                :else (:column-names data))
+                all all
+                :else true)
+          colnames (:column-names data)          
+          selected-cols (cond
+                         (or (= cols :all) (true? cols)) colnames
+                         (coll? cols) (map #(get-column-id data %) cols)
+                         :else [cols]
+                         )
           selected-rows (cond
                           (or (= rows :all) (true? rows) all)
                             (:rows data)
@@ -1338,17 +1338,17 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                             (list (nth (:rows data) rows))
                           (coll? rows)
                             (map #(nth (:rows data) %) rows))
-          _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
+          _data (map (fn [row] (map #(row (get-column-id data %)) selected-cols)) selected-rows)
           result (if (nil? filter) _data (clojure.core/filter filter _data))]
       (cond
-        (= (count cols) 1)
-          (if (= (count result) 1)
-            (ffirst result)
-            (mapcat identity result))
-        (= (count result) 1)
-          (first result)
-        :else
-        (dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
+       (and (= (count selected-cols) 1) (not (coll? cols)))
+         (if (= (count result) 1)
+           (ffirst result)
+           (mapcat identity result))
+       (and (= (count result) 1) (not (coll? rows)))
+         (first result)
+       :else
+       (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
 
 
 (defn to-dataset
@@ -2597,6 +2597,8 @@ of each type"
         the dataset's column-names array.
     :append (default false) determines whether this given file should be
         appended to. If true, a header will not be written to the file again.
+    If the filename is exactly \"-\" then *out* the matrix/dataset will be
+        written to *out*
 
   Chart options:
     :width (default 500)
