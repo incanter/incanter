@@ -74,6 +74,11 @@
                 [7 8 9]
                 [10 11 12]]))
 
+;; define a 2d list for testing
+(def l [[1 2 3]
+        [4 5 6]
+        [7 8 9]
+        [10 11 12]])
 
 (deftest matrix-dims
   ;; checking dimensions
@@ -236,6 +241,29 @@
                                      [4 5 6]])))
   (is (= (sel A [1 3] [0 2]) (matrix [[4 6]
                                       [10 12]]))))
+
+(deftest list-sel-tests
+  ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
+  (is (= (sel l 3 2) 12))
+  ;; use 'true' to select an entire row or column
+  (is (= (sel l :cols 2) [3 6 9 12]))
+  (is (= (sel l :rows 1) [4 5 6]))
+  (is (= (sel l :all [0 2]) [[1 3]
+                             [4 6]
+                             [7 9]
+                             [10 12]]))
+  (is (= (sel l :all :all) l))
+  (is (= (sel l :all 2) [3 6 9 12]))
+  (is (= (sel l true true) l))
+  ;; pass a vector of indices to select a set of rows and/or columns
+  (is (= (sel l :cols [0 2]) [[1 3]
+                              [4 6]
+                              [7 9]
+                              [10 12]]))
+  (is (= (sel l :rows [0 1]) [[1 2 3]
+                              [4 5 6]]))
+  (is (= (sel l [1 3] [0 2]) [[4 6]
+                              [10 12]])))
 
 (deftest matrix-filter-tests
   ;; filtering: return the rows that sum to more than 6
