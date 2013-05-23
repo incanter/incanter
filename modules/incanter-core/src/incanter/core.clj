@@ -193,10 +193,10 @@
 
 (defmulti sel
 "
-  Returns an element or subset of the given matrix, or dataset.
+  Returns an element or subset of the given matrix, dataset, or list.
 
   Argument:
-    a matrix object or dataset.
+    a matrix object, dataset, or list.
 
   Options:
     :rows (default true)
@@ -243,6 +243,46 @@
 
 ;; (defmethod sel [nil false] [])
 ;; (defmethod sel [nil true] [])
+
+(defmethod sel [java.util.List false]
+  ([^java.util.List lst rows cols]
+   (sel lst :rows rows :cols cols)))
+
+(defmethod sel [java.util.List true]
+  ([^java.util.List lst & {:keys [rows cols except-rows except-cols filter-fn all]}]
+     (let [rows (cond
+                 rows rows
+                 except-rows (except-for (nrow lst) except-rows)
+                 :else true)
+           cols (cond
+                 cols cols
+                 except-cols (except-for (nrow (first lst)) except-cols)
+                 all all
+                 :else true)
+           lst (if (nil? filter-fn) lst (filter filter-fn lst))
+           all-rows? (or (true? rows) (= rows :all) all)
+           all-cols? (or (true? cols) (= cols :all) (= all :all))]
+     (cond
+       (and (number? rows) (number? cols))
+         (nth (nth lst rows) cols)
+       (and all-rows? (coll? cols))
+         (map (fn [r] (map #(nth r %) cols)) lst)
+       (and all-rows? (number? cols))
+         (map #(nth % cols) lst)
+       (and (coll? rows) (number? cols))
+         (map #(nth % cols)
+              (map #(nth lst %) rows))
+       (and (coll? rows) all-cols?)
+         (map #(nth lst %) rows)
+       (and (number? rows) all-cols?)
+         (nth lst rows)
+       (and (number? rows) (coll? cols))
+         (map #(nth (nth lst rows) %) cols)
+       (and (coll? rows) (coll? cols))
+         (map (fn [r] (map #(nth r %) cols))
+              (map #(nth lst %) rows))
+       (and all-rows? all-cols?)
+         lst))))
 
 (defmethod sel [clatrix.core.Matrix false]
   ([^clatrix.core.Matrix mat rows columns]
