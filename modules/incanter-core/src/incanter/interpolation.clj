@@ -1,4 +1,9 @@
-(ns incanter.interpolation
+(ns ^{:doc "Interpolation and approximation of collection of points..
+            Supported types: linear, polynomial, cubic spline,
+            cubic hermite spline, B-spline, linear least squares.
+            Supports 1-dimensional and 2-dimensional interpolations."
+      :author "Nikita Beloglazov"}
+  incanter.interpolation
   (:require [incanter.interp
              [cubic-spline :as cubic-spline]
              [b-spline :as b-spline]
@@ -21,16 +26,21 @@
 
    Arguments:
      points -- collection of points. Each point is a collection [x y].
-     type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :linear-least-squares. For most cases you should use :cubic or :cubic-hermite - they usually give best results. Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
+     type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :linear-least-squares.
+             For most cases you should use :cubic or :cubic-hermite - they usually give best results.
+             Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.
 
    Options:
-     :boundaries - valid only for :cubic interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
-                   Support that our spline is function S. leftmost point is a, rightmost - b.
+     :boundaries - valid only for :cubic interpolation. Defines boundary condition for cubic spline.
+                   Possible values - :natural and :closed.
+                   Let's S - spline, a- leftmost point, b- rightmost point.
                    :natural - S''(a) = S''(b) = 0
-                   :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curve.
+                   :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be
+                   useful if you want to get periodic or closed curve.
                    Default value is :natural
 
-     :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
+     :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline.
+                    If not specified derivatives will be approximated from points.
 
    Options for linear least squares:
      :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:polynomial and :b-spline).
@@ -38,7 +48,8 @@
               Example of custom basis of 2 functions (1 and  x*x): (interpolate :linear-least-squares :basis (fn [x] [1 (* x x)]))
               Default value is :chebyshev
 
-     :n - number of functions in basis if you use built-in basis. Note that if n is greater that number of points then you might get singular matrix and exception.
+     :n - number of functions in basis if you use built-in basis.
+          Note that if n is greater that number of points then you might get singular matrix and exception.
           Default value is 4.
 
      :degree - degree of b-spline if you use :b-spline basis.
@@ -80,14 +91,17 @@
      :range -- defines range for parameter t.
                Default value is [0, 1]. f(0) = points[0], f(1) = points[n].
 
-     :boundaries -- valid only for :cubic interpolation. Defines boundary condition for cubic spline. Possible values - :natural and :closed.
-                    Support that our spline is function S. leftmost point is a, rightmost - b.
+     :boundaries -- valid only for :cubic interpolation.
+                    Defines boundary condition for cubic spline. Possible values - :natural and :closed.
+                    Let's S - spline, a- leftmost point, b- rightmost point.
                     :natural - S''(a) = S''(b) = 0
-                    :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful if you want to get periodic or closed curv
+                    :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful
+                    if you want to get periodic or closed curve
 
                     Default value is :natural
 
-     :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline. If not specified derivatives will be approximated from points.
+     :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline.
+                    If not specified derivatives will be approximated from points.
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
 
@@ -163,10 +177,12 @@
 
 
 (defn interpolate-grid
-  "Interpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y. By default function interpolates on [0,1]x[0,1].
+  "Interpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y.
+   By default function interpolates on [0,1]x[0,1].
 
    Arguments:
-     grid -- collection of collection of numbers to be interpolated. If you need to interpolate vectors - interpolate each component by separate interpolator.
+     grid -- collection of collection of numbers to be interpolated.
+             If you need to interpolate vectors - interpolate each component by separate interpolator.
      type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic, :bicubic-hermite, :b-surface, :linear-least-squares
 
    Common options:
@@ -174,16 +190,24 @@
                           By default :x-range = [0 1] and :y-range = [0 1]
                           :b-surface ignores this option and always uses [0, 1] x [0, 1]
 
-     :xs, :ys - coordinates of grid points. Size of xs and ys must be consistent with grid size. If you have grid 4x3 then xs must have size 3 and ys - 4.
-     Note that (:x-range, :y-range) and (:xs, :ys) both do same job - they specify coordinates of points in grid. So you should use only one of them or none at all.
+     :xs, :ys - coordinates of grid points. Size of xs and ys must be consistent with grid size.
+                If you have grid 4x3 then xs must have size 3 and ys - 4.
+
+     Note that (:x-range, :y-range) and (:xs, :ys) both do same job - they specify coordinates of points in grid.
+     So you should use only one of them or none at all.
 
    Type specific options:
-     :boundaries - valid only for :cubic interpolation. Defines boundary condition for bicubic spline. Possible values - :natural and :closed. Default - :natural. Check documentation of 'interpolate' method for more explanation.
+     :boundaries - valid only for :cubic interpolation. Defines boundary condition for bicubic spline.
+                   Possible values - :natural and :closed.
+                   Default - :natural. Check documentation of 'interpolate' method for more explanation.
 
      :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.
 
-     :basis - defines basis for :linear-least-squares. It has 1 predefined basis :polynomial. :polynomial basis contains functions: (1, x, y, x^2, xy, y^2, x^3, ...) You can specify how many functions basis contains by using :n option.
-              You can also specify custom basis. Custom basis is a function that takes 2 arguments - x and y, and returns collection of values. Example: basis that contains only 2-degree polynomials: (fn [x y] [(* x x) (* x y) (* y y)])
+     :basis - defines basis for :linear-least-squares. It has 1 predefined basis :polynomial. :polynomial basis
+              contains functions: (1, x, y, x^2, xy, y^2, x^3, ...)
+              You can specify how many functions basis contains by using :n option.
+              You can also specify custom basis. Custom basis is a function that takes 2 arguments - x and y, and returns collection of values.
+              Example: basis that contains only 2-degree polynomials: (fn [x y] [(* x x) (* x y) (* y y)])
 
      :n - defines how many functions polynomial contains. Example: 1 - basis is (1), 3 - basis is (1, x, y), 5 - basis is (1, x, y, x^2, x*y)
 

@@ -1,4 +1,5 @@
-(ns incanter.interp.utils)
+(ns ^{:skip-wiki true}
+  incanter.interp.utils)
 
 (defn binary-search
 "  Finds index of rightmost value in sorted vector that is less or equal to given value."

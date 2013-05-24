@@ -1,4 +1,5 @@
-(ns incanter.interp.linear
+(ns ^{:skip-wiki true}
+  incanter.interp.linear
   (:require [incanter.interp.utils :refer (find-segment find-rect)]))
 
 (defn- calc-line
