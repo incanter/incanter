@@ -1,8 +1,9 @@
-(ns incanter.interp.lls
-   (:require [incanter.core :refer (solve matrix mmult trans)]
-             [incanter.interp
-              [utils :refer (translate-domain uniform)]
-              [b-spline :as b-spline]]))
+(ns ^{:skip-wiki true}
+  incanter.interp.lls
+  (:require [incanter.core :refer (solve matrix mmult trans)]
+            [incanter.interp
+             [utils :refer (translate-domain uniform)]
+             [b-spline :as b-spline]]))
 
 (defn cheb-basis [xs n]
   (let [mn (apply min xs)
