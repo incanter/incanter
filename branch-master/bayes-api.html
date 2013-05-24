@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>bayes - Incanter 1.0 API documentation</title>
+    <title>bayes - Incanter 1.5 API documentation</title>
     <link href="../static/incanter.ico" rel="icon" />
     <link href="../static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
@@ -27,7 +27,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.0</span> API</span><br />
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.5</span> API</span><br />
     <ul>
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
@@ -35,13 +35,13 @@ namespace.
     <div class="NamespaceTOC">
       <span class="toc-header">Namespaces</span>
       <ul id="left-sidebar-list">
-        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="interp.b-spline-api.html" class="wiki_link">interp.b-spline</a></li><li><a href="interp.cubic-spline-api.html" class="wiki_link">interp.cubic-spline</a></li><li><a href="interp.linear-api.html" class="wiki_link">interp.linear</a></li><li><a href="interp.lls-api.html" class="wiki_link">interp.lls</a></li><li><a href="interp.polynomial-api.html" class="wiki_link">interp.polynomial</a></li><li><a href="interp.utils-api.html" class="wiki_link">interp.utils</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
       </ul>
     </div>
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
-        <li><a href="../index.html" class="wiki_link">next (in development)</a></li>
+        <li><a href="../index.html" class="wiki_link">1.4.1 (stable)</a></li>
       </ul>
     </div>
     <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
@@ -72,6 +72,9 @@ namespace.
       <a class="toc-entry-anchor" href="#incanter.bayes/sample-multinomial-params">sample-multinomial-params</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.bayes/sample-mvn-params">sample-mvn-params</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.bayes/sample-proportions">sample-proportions</a>
       
     </div>
@@ -79,7 +82,7 @@ namespace.
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="bayes">bayes</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.5</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
 <br />Full namespace name: <span id="long-name">incanter.bayes</span>
@@ -103,7 +106,7 @@ basic Bayesian modeling and inference.
     <hr />
     <h2 id="incanter.bayes/sample-model-params">sample-model-params</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (sample-model-params size linear-model)
+    <pre id="var-usage">Usage: (sample-model-params size {:keys [x y coefs residuals]})
 </pre>
     <pre id="var-docstr"> Returns a sample of the given size of the the parameters (coefficients and
 error variance) of the given linear-model. The sample is generated using
@@ -134,11 +137,11 @@ Examples:
   (map median (trans (:coefs param-samp)))
   (map sd (trans (:coefs param-samp)))
 
-  ;; show the 95% bayesian confidence interval for the firt coefficient
+  ;; show the 95% bayesian confidence interval for the first coefficient
   (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L36" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L35" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -175,7 +178,59 @@ Examples:
   (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L100" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L95" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.bayes/sample-mvn-params">sample-mvn-params</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (sample-mvn-params size y &amp; options)
+</pre>
+    <pre id="var-docstr">Returns samples of means (sampled from an mvn distribution) and vectorized covariance
+ matrices (sampled from an inverse-wishart distribution) for the given mvn data.
+
+ Arguments:
+   size -- the number of samples to return
+   y -- the data used to estimate the parameters
+
+
+ Returns map with following fields:
+   :means
+   :sigmas
+
+
+ Examples:
+
+   (use '(incanter core stats bayes charts))
+   (def y (sample-mvn 500 :mean [0 0] :sigma (identity-matrix 2)))
+   (def samp (sample-mvn-params 1000 y))
+
+   (map mean (trans (:means samp)))
+   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+
+   (view (histogram (sel (:means samp) :cols 0) :x-label "mean 1"))
+   (view (histogram (sel (:means samp) :cols 1) :x-label "mean 2"))
+   (view (histogram (sel (:sigmas samp) :cols 1) :x-label "covariance"))
+   (view (histogram (sel (:sigmas samp) :cols 0) :x-label "variance 1"))
+   (view (histogram (sel (:sigmas samp) :cols 2) :x-label "variance 2"))
+
+   (map #(quantile % :probs [0.025 0.0975]) (trans (:means samp)))
+   (map #(quantile % :probs [0.025 0.0975]) (trans (:sigmas samp)))
+
+
+
+
+   (use '(incanter core stats bayes charts))
+   (def y (sample-mvn 500 :sigma (symmetric-matrix [10 5 10]) :mean [5 2]))
+   (def samp (sample-mvn-params 1000 y))
+   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+   (map mean (trans (:means samp)))
+
+
+</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L133" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -186,7 +241,7 @@ Examples:
     <pre id="var-docstr"> sample-proportions has been renamed sample-multinomial-params</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/77fddb304e133b7feeb5f290a2d6afd061506a58/modules/incanter-core/src/main/clojure/incanter/bayes.clj#L93" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L88" id="var-source">Source</a>
   </div>
 </div>
 

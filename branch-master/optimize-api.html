@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>optimize - Incanter 1.0 API documentation</title>
+    <title>optimize - Incanter 1.5 API documentation</title>
     <link href="../static/incanter.ico" rel="icon" />
     <link href="../static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
@@ -27,7 +27,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.0</span> API</span><br />
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.5</span> API</span><br />
     <ul>
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
@@ -35,13 +35,13 @@ namespace.
     <div class="NamespaceTOC">
       <span class="toc-header">Namespaces</span>
       <ul id="left-sidebar-list">
-        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="chrono-api.html" class="wiki_link">chrono</a></li><li><a href="classification-api.html" class="wiki_link">classification</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="incremental-stats-api.html" class="wiki_link">incremental-stats</a></li><li><a href="information-theory-api.html" class="wiki_link">information-theory</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="probability-api.html" class="wiki_link">probability</a></li><li><a href="processing-api.html" class="wiki_link">processing</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="transformations-api.html" class="wiki_link">transformations</a></li>
+        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="interp.b-spline-api.html" class="wiki_link">interp.b-spline</a></li><li><a href="interp.cubic-spline-api.html" class="wiki_link">interp.cubic-spline</a></li><li><a href="interp.linear-api.html" class="wiki_link">interp.linear</a></li><li><a href="interp.lls-api.html" class="wiki_link">interp.lls</a></li><li><a href="interp.polynomial-api.html" class="wiki_link">interp.polynomial</a></li><li><a href="interp.utils-api.html" class="wiki_link">interp.utils</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
       </ul>
     </div>
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
-        <li><a href="../index.html" class="wiki_link">next (in development)</a></li>
+        <li><a href="../index.html" class="wiki_link">1.4.1 (stable)</a></li>
       </ul>
     </div>
     <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
@@ -85,7 +85,7 @@ namespace.
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="optimize">optimize</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.0</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.5</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 
 <br />Full namespace name: <span id="long-name">incanter.optimize</span>
@@ -107,7 +107,7 @@ namespace.
     <hr />
     <h2 id="incanter.optimize/derivative">derivative</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (derivative f &amp; options)
+    <pre id="var-usage">Usage: (derivative f &amp; {:keys [dx], :or {dx 1.0E-4}})
 </pre>
     <pre id="var-docstr">
 Returns a function that approximates the derivative of the given function.
@@ -144,13 +144,13 @@ Examples:
   (add-lines plot x (pdf-deriv2 x))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L68" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/69c2d83a6e6d0cf0cdd4eacb9fe73de6fd1d0a68/modules/incanter-core/src/incanter/optimize.clj#L68" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="incanter.optimize/gradient">gradient</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (gradient f start &amp; options)
+    <pre id="var-usage">Usage: (gradient f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
     <pre id="var-docstr">
 Returns a function that calculates a 5-point approximation to
@@ -179,13 +179,13 @@ Examples:
   (time (doall (grad start x)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L251" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/69c2d83a6e6d0cf0cdd4eacb9fe73de6fd1d0a68/modules/incanter-core/src/incanter/optimize.clj#L244" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="incanter.optimize/hessian">hessian</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (hessian f start &amp; options)
+    <pre id="var-usage">Usage: (hessian f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
     <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
 of the given function. The vector of start values are used to determine
@@ -214,7 +214,7 @@ Examples:
   (time (doall (hess start x)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L300" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/69c2d83a6e6d0cf0cdd4eacb9fe73de6fd1d0a68/modules/incanter-core/src/incanter/optimize.clj#L291" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -251,13 +251,13 @@ Reference:
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L26" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/69c2d83a6e6d0cf0cdd4eacb9fe73de6fd1d0a68/modules/incanter-core/src/incanter/optimize.clj#L26" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="incanter.optimize/non-linear-model">non-linear-model</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (non-linear-model f y x start &amp; options)
+    <pre id="var-usage">Usage: (non-linear-model f y x start &amp; {:keys [max-iter tol method], :or {max-iter 200, tol 1.0E-5, method :gauss-newton}})
 </pre>
     <pre id="var-docstr">
 Determine the nonlinear least-squares estimates of the
@@ -265,7 +265,7 @@ parameters of a nonlinear model.
 Based on R's nls (non-linear least squares) function.
 
 Arguments:
-  f -- model function, takes two argumetns the first a list of parameters
+  f -- model function, takes two arguments the first a list of parameters
        that are to be estimated, and an x value.
   y -- sequence of dependent data
   x -- sequence of independent data
@@ -328,7 +328,7 @@ Examples:
 
   ;; the newton-raphson algorithm fails to converge to the correct solution
   ;; using first set of start values from NIST, but the default gauss-newton
-  ;; algorith converges to the correct solution.
+  ;; algorithm converges to the correct solution.
 
   (def start1 [0.1 0.01 0.02])
   (add-lines plot x (f start1 x))
@@ -342,7 +342,7 @@ Examples:
   (add-lines plot x (:fitted nlm2))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/a05a08841214a2264b83b3b0f4ce9793c206f8a7/modules/incanter-core/src/main/clojure/incanter/optimize.clj#L588" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/69c2d83a6e6d0cf0cdd4eacb9fe73de6fd1d0a68/modules/incanter-core/src/incanter/optimize.clj#L578" id="var-source">Source</a>
   </div>
 </div>
 
