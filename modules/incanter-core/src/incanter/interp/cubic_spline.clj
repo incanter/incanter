@@ -1,4 +1,5 @@
-(ns incanter.interp.cubic-spline
+(ns ^{:skip-wiki true}
+  incanter.interp.cubic-spline
   (:require [incanter.interp.utils :refer (find-segment)]))
 
 (defn- map-pairs [fn coll]

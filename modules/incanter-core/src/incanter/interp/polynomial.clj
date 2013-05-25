@@ -1,4 +1,5 @@
-(ns incanter.interp.polynomial
+(ns ^{:skip-wiki true}
+  incanter.interp.polynomial
   (:require [incanter.core :refer (matrix trans mmult $ to-list)]))
 
 

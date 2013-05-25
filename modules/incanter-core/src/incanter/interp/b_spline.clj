@@ -1,4 +1,5 @@
-(ns incanter.interp.b-spline
+(ns ^{:skip-wiki true}
+    incanter.interp.b-spline
   (:require [incanter.interp.utils :refer (binary-search)]))
 
 (defn- calc-Ns [ts m t k]
