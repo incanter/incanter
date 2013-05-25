@@ -2404,6 +2404,16 @@ altering later ones."
         (clx/set mat j i (nth data idx))))
      mat)))
 
+(defn toeplitz
+"
+  Returns the Toeplitz matrix for the given vector, which form the first row of the matrix
+"
+  ([x]
+     (symmetric-matrix
+      (loop [v (rseq x)
+             d []]
+        (if (nil? v) d
+            (recur (next v) (concat v d)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VIEW METHODS
