@@ -200,7 +200,12 @@
   ;; create a 3x3 identity matrix
   (is (= (identity-matrix 3) (matrix [[1 0 0]
                                       [0 1 0]
-                                      [0 0 1]]))))
+                                      [0 0 1]])))
+
+  ;; create a 3x3 toeplitz matrix
+  (is (= (toeplitz [1 2 3]) (matrix [[1 2 3]
+                                     [2 1 2]
+                                     [3 2 1]]))))
 
 (deftest matrix-to-list-tests
   ;; convert a matrix to clojure vectors
