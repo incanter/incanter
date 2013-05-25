@@ -16,7 +16,8 @@
 
 
 
-(ns incanter.internal
+(ns ^{:skip-wiki true}
+    incanter.internal
   (:require [clatrix.core :as clx])
   (:import (clatrix.core Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
