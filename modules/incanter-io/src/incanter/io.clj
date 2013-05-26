@@ -19,11 +19,8 @@
 ;; DATA IO FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(ns 
-    ^{:doc 
-       "Library for reading and writing Incanter datasets and matrices."}
-
-incanter.io
+(ns ^{:doc "Library for reading and writing Incanter datasets and matrices."}
+  incanter.io
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
   (:use [incanter.core :only (dataset save)])

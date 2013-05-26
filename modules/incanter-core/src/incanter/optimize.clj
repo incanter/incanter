@@ -17,10 +17,10 @@
 
 
 
-(ns incanter.optimize
+(ns ^{:doc "Optimization-relates functions."}
+    incanter.optimize
   (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix ncol solve
                               abs sel trans bind-columns to-list identity-matrix $=)]))
-
 
 
 (defn integrate
@@ -814,6 +814,8 @@
     (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
 
 (defn maximize
+  "This function tries to maximize a scalar function of one or more variables.
+   See documentation of 'minimize' function for more information."
   [f start f-prime & {:keys [max-iter tol method]
                       :or {max-iter 200
                            tol 1E-5

@@ -16,7 +16,8 @@
 
 
 
-(ns incanter.datasets
+(ns ^{:doc "Provides access to different datasets that are bundled with Incanter."}
+    incanter.datasets
   (:use [incanter.io :only (read-dataset)]))
 
 

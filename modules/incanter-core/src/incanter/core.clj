@@ -21,7 +21,8 @@
             mathematical operations and the core data manipulation
             functions for Incanter.
 
-            This library is built on Parallel Colt
+            This library is built on Clatrix (https://github.com/tel/clatrix)
+            and Parallel Colt 
             (http://sites.google.com/site/piotrwendykier/software/parallelcolt)
             an extension of the Colt numerics library
             (http://acs.lbl.gov/~hoschek/colt/).

@@ -1,4 +1,5 @@
-(ns incanter.backstage.zoo-commons)
+(ns ^{:skip-wiki true}
+    incanter.backstage.zoo-commons)
 
 (defn partialsums [start coll]
   (lazy-seq
