@@ -43,6 +43,7 @@
            (javax.swing JTable JScrollPane JFrame)
            (java.util Vector)))
 
+(m/set-current-implementation :clatrix) 
 
 (def ^{:dynamic true
        :doc "This variable is bound to a dataset when the with-data macro is used.
@@ -63,7 +64,7 @@
   Examples:
     (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix
     (def A2 (matrix [1 2 3 4 5 6 7 8 9] 3)) ; produces the same 3x3 matrix
-    (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column vector
+    (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column matrix
 
     (first A) ; produces a row matrix [1 2 3]
     (rest A) ; produces a sub matrix [[4 5 6] [7 8 9]]
@@ -650,7 +651,7 @@
 
 (defmethod to-list ::matrix
  ([^clatrix.core.Matrix mat]
-  (clx/as-vec mat)))
+  (m/to-nested-vectors mat)))
 
 
 (defmethod to-list ::dataset
@@ -693,7 +694,7 @@
 
 
 (defn kronecker
-" Returns the Kronecker (outer) product of the given arguments.
+" Returns the Kronecker (outer) product of the given arguments, as a 2D matrix
 
   Examples:
 
@@ -706,7 +707,21 @@
 
 "
   ([& args]
-    (apply m/outer-product args)))
+    (reduce (fn [A B]
+              (let [a (cond
+                        (matrix? A) A
+                        (number? A) (matrix [A])
+                        :else (matrix A))
+                    b (cond
+                        (matrix? B) B
+                        (number? B) (matrix [B])
+                        :else (matrix B))
+                    rows (* (nrow a) (nrow b))
+                    cols (* (ncol a) (ncol b))]
+                (apply bind-rows (for [i (range (nrow a))]
+                             (apply bind-columns (for [j (range (ncol a))]
+                                             (mult (sel a i j) b)))))))
+            args)))
 
 (defn solve
 " Returns a matrix solution if A is square, least squares solution otherwise.
