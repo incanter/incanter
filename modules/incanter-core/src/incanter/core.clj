@@ -460,7 +460,7 @@
   (mult 2 [1 2 3])
   "
   [& args] 
-  (apply m/mul args) 
+  (apply m/mul args))
 
 
 (defn div
@@ -482,7 +482,7 @@
       (div [1 2 3]) ; returns [1 1/2 13]
 
 "
-   ([& args] (apply m/div args))))
+   ([& args] (apply m/div args)))
 
 
 (defn pow  ;; TODO use jblas and fix meta
@@ -767,7 +767,7 @@
       http://en.wikipedia.org/wiki/Vectorization_(mathematics)
   "
   ([mat]
-   (m/as-vector mat)))
+   (m/to-vector mat)))
 
 
 (defn half-vectorize
