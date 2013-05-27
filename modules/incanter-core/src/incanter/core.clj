@@ -84,14 +84,13 @@
 
 "
   ([data]
-   (m/matrix data))
+    (m/matrix data))
 
   ([data ^Integer ncol]
-   (m/matrix (partition ncol data)))
+    (m/matrix (partition ncol data)))
 
   ([init-val ^Integer rows ^Integer cols]
-    (let [a (m/new-matrix rows cols)]
-      (m/assign a init-val))))
+    (m/compute-matrix [rows cols] (constantly init-val))))
 
 
 (defn matrix?
@@ -107,10 +106,10 @@
   ^{:tag Integer
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
-   (cond
-     (m/matrix? mat) (m/row-count mat)
-     (dataset? mat) (count (:rows mat))
-     (coll? mat) (count mat))))
+	   (cond
+	     (m/matrix? mat) (m/row-count mat)
+	     (dataset? mat) (count (:rows mat))
+	     (coll? mat) (count mat))))
 
 
 (defn ncol
@@ -360,23 +359,7 @@
 
 "
   ([& args]
-   (reduce
-    (fn [A B]
-      (cond
-        (nil? (seq A))
-          B
-        (nil? (seq B))
-          A
-        (or (coll? A) (coll? B))
-          (conj (if (matrix? A)
-                  A
-                  (matrix A (count A)))
-                (if (matrix? B)
-                  B
-                  (matrix B (count B))))
-        :else
-          (throw (Exception. "Incompatible types"))))
-      args)))
+   (apply m/join args)))
 
 
 
@@ -398,12 +381,13 @@
 
   "
   [& args]
-  (reduce clx/hstack (pass-to-matrix args)))
+  (m/transpose (apply m/join (map m/transpose args))))
 
 
 
-;(defn inner-product [& args] (apply + (apply map * args)))
-;(inner-product [1 2 3] [4 5 6]) ; = 32
+(defn inner-product [& args]
+  (apply m/inner-product args))
+
 
 
 
@@ -430,7 +414,8 @@
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])
   "
-  [& args] (reduce clx/+ (pass-to-matrix args)))
+  [& args] 
+  (apply m/add args))
 
 
 (defn minus
@@ -453,7 +438,7 @@
   (minus 2 [1 2 3])
   (minus [1 2 3])
   "
-  [& args] (reduce clx/- (pass-to-matrix args)))
+  [& args] (apply m/sub args))
 
 
 
@@ -474,7 +459,8 @@
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
   "
-  [& args] (reduce clx/mult (pass-to-matrix args))) ;; TODO: clean, special case for (reduce mult A)
+  [& args] 
+  (apply m/mul args) 
 
 
 (defn div
@@ -496,21 +482,16 @@
       (div [1 2 3]) ; returns [1 1/2 13]
 
 "
-   ([& args] (if (= (count args) 1)
-               (clx/div (double 1) (first args))
-               (reduce clx/div (pass-to-matrix args)))))
+   ([& args] (apply m/div args))))
 
 
 (defn pow  ;; TODO use jblas and fix meta
   " This is an element-by-element exponent function, raising the first argument
   by the exponents in the remaining arguments. Equivalent to R's ^ operator."
   [& args]
-  (reduce (fn [A B]
-            (combine-with A B
-                          #(Math/pow %1 %2)
-                          (fn [a b] (map (map #(Math/pow %1 %2))
-                                         a b))))
-          args))
+  (if (== 1 (count args)) ;; TODO: not needed in core.matrix 0.8.0 or above
+    (first args)
+    (apply m/pow args)))
 
 
 (defn atan2 ;; TODO fix meta
@@ -647,7 +628,7 @@
 
 
 (defmulti to-list
-  " Returns a list-of-lists if the given matrix is two-dimensional
+  " Returns a list-of-vectors if the given matrix is two-dimensional
     and a flat list if the matrix is one-dimensional."
   type)
 
@@ -663,13 +644,19 @@
              (:rows data)))
 
 
-(defmethod to-list :default [s] s)
+(defmethod to-list :default [s] 
+  (cond
+    (m/vec? s)
+      (m/eseq s)
+    :else 
+      (m/slices s)))
 
 (defmethod to-list nil [s] nil)
 
-(defn ^Matrix copy
+(defn copy
   "Returns a copy of the given matrix."
-  ([^Matrix mat] (clx/matrix (clx/dotom .copy mat) nil)))
+  ([mat] 
+    (m/clone mat)))
 
 
 (defn mmult
@@ -690,7 +677,7 @@
 
   "
     ([& args]
-     (reduce (fn [A B] (clx/* A B)) (pass-to-matrix args))))
+     (apply m/mul args)))
 
 
 (defn kronecker
@@ -740,15 +727,15 @@
     (clx/solve A B)
     (clx/i A))))
 
-;(defn det ;; TODO
-;" Returns the determinant of the given matrix. Equivalent
-  ;to R's det function.
+(defn det ;; TODO
+ " Returns the determinant of the given matrix. Equivalent
+   to R's det function.
 
-  ;References:
-    ;http://en.wikipedia.org/wiki/LU_decomposition
-    ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
-;"
-  ;([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
+   References:
+     http://en.wikipedia.org/wiki/LU_decomposition
+     http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html"
+  ([mat] 
+    (m/det mat)))
 
 
 (defn trace
@@ -758,7 +745,8 @@
   http://en.wikipedia.org/wiki/Matrix_trace
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
   "
-  [mat] (clx/trace mat))
+  [mat] 
+  (m/trace mat))
 
 
 
@@ -779,7 +767,7 @@
       http://en.wikipedia.org/wiki/Vectorization_(mathematics)
   "
   ([mat]
-   (mapcat identity (trans mat))))
+   (m/as-vector mat)))
 
 
 (defn half-vectorize
@@ -1922,17 +1910,9 @@ altering later ones."
 
 "
  ([f m]
-    (if (sequential? m)
-      (if (sequential? (first m))
-        (map (fn [& a] (apply map f a)) m)
-        (map f m))
-      (f m)))
- ([f m & ms]
-    (if (sequential? m)
-      (if (sequential? (first m))
-        (apply map (fn [& a] (apply map f a)) m ms)
-        (apply map f m ms))
-      (apply f m ms))))
+    (m/emap f m))
+ ([f m & more]
+    (apply m/emap f m more)))
 
 
 (defn $map
@@ -2183,6 +2163,15 @@ altering later ones."
      (let [cols (to-list (trans mat))
             col-keys (range (ncol mat))]
        (zipmap col-keys cols))))
+
+;; default tests for a core.matrix matrix
+(defmethod to-map :default
+  ([mat]
+    (cond
+      (m/matrix? mat)
+        (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat))))
+      :else
+        (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat))))))) 
 
 
 
