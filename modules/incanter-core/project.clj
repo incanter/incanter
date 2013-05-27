@@ -9,7 +9,7 @@
                  [org.clojure/math.combinatorics "0.0.3"
                   :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.0"]
-                 [net.mikera/core.matrix "0.7.1"]
+                 [net.mikera/core.matrix "0.7.2-SNAPSHOT"]
                  [clatrix/clatrix "0.3.0-SNAPSHOT"
                   :exclusions [org.clojure/clojure]]]
   :java-source-paths ["java"])

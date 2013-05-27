@@ -380,8 +380,14 @@
 
 
   "
-  [& args]
-  (m/transpose (apply m/join (map m/transpose args))))
+  [m & args]
+  (let [dm (m/dimensionality m)
+        m (cond
+            (== dm 1) (m/row-matrix m)
+            (== dm 2) (m/transpose m)
+            :else (throw (RuntimeException. (str "Can't bind columns to array of dimensionality " dm))))
+        ]
+    (m/transpose (apply m/join m (map m/transpose args)))))
 
 
 
