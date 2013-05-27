@@ -15,8 +15,9 @@
 
 ;; CHANGE LOG
 
-(ns #^{:doc "Probability functions (pdf, cdf, draw, etc.) for common distributions, and for collections, sets, and maps." :author "Mark M. Fredrickson and William Leung"}
-	incanter.distributions
+(ns ^{:doc "Probability functions (pdf, cdf, draw, etc.) for common distributions, and for collections, sets, and maps."
+      :author "Mark M. Fredrickson and William Leung"}
+  incanter.distributions
   (:import java.util.Random
            (cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT)
            (cern.jet.stat.tdouble Probability)
@@ -440,14 +441,14 @@
 
 ; NOTE: the pdf and cdf functions require a reflection call. They could be made
 ; to note reflect by type hinting the d argument:
-; (fn [#^cern.jet.randome.tdouble.Normal d v] (.pdf d v))
+; (fn [^cern.jet.randome.tdouble.Normal d v] (.pdf d v))
 ; for now, I'm skipping this optimization so that more distributions can be boostrapped
 ; quickly using the extenders map. This can be easily pulled out for each distribution
 ; later, and appropriate type hints inserted.
 (def colt-extenders
   {:pdf (fn [d v] (.pdf d v))
    :cdf (fn [d v] (.cdf d v))
-   :draw (fn [#^cern.jet.random.tdouble.AbstractDoubleDistribution d] (.nextDouble d))
+   :draw (fn [^cern.jet.random.tdouble.AbstractDoubleDistribution d] (.nextDouble d))
    :support (fn [d] [inf-, inf+])
    :mean (fn [d] nil)
    :variance (fn [d] nil)})

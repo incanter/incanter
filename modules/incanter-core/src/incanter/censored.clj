@@ -1,4 +1,5 @@
-(ns incanter.censored
+(ns ^{:doc "Statistical functions for work with 'censored' (truncated) distributions."}
+    incanter.censored
   (:use [incanter.core :only (mult pow)]
         [incanter.stats :only (pdf-normal cdf-normal sd)]))
 

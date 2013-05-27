@@ -21,7 +21,8 @@
             mathematical operations and the core data manipulation
             functions for Incanter.
 
-            This library is built on Parallel Colt
+            This library is built on Clatrix (https://github.com/tel/clatrix)
+            and Parallel Colt 
             (http://sites.google.com/site/piotrwendykier/software/parallelcolt)
             an extension of the Colt numerics library
             (http://acs.lbl.gov/~hoschek/colt/).
@@ -193,10 +194,10 @@
 
 (defmulti sel
 "
-  Returns an element or subset of the given matrix, or dataset.
+  Returns an element or subset of the given matrix, dataset, or list.
 
   Argument:
-    a matrix object or dataset.
+    a matrix object, dataset, or list.
 
   Options:
     :rows (default true)
@@ -243,6 +244,46 @@
 
 ;; (defmethod sel [nil false] [])
 ;; (defmethod sel [nil true] [])
+
+(defmethod sel [java.util.List false]
+  ([^java.util.List lst rows cols]
+   (sel lst :rows rows :cols cols)))
+
+(defmethod sel [java.util.List true]
+  ([^java.util.List lst & {:keys [rows cols except-rows except-cols filter-fn all]}]
+     (let [rows (cond
+                 rows rows
+                 except-rows (except-for (nrow lst) except-rows)
+                 :else true)
+           cols (cond
+                 cols cols
+                 except-cols (except-for (nrow (first lst)) except-cols)
+                 all all
+                 :else true)
+           lst (if (nil? filter-fn) lst (filter filter-fn lst))
+           all-rows? (or (true? rows) (= rows :all) all)
+           all-cols? (or (true? cols) (= cols :all) (= all :all))]
+     (cond
+       (and (number? rows) (number? cols))
+         (nth (nth lst rows) cols)
+       (and all-rows? (coll? cols))
+         (map (fn [r] (map #(nth r %) cols)) lst)
+       (and all-rows? (number? cols))
+         (map #(nth % cols) lst)
+       (and (coll? rows) (number? cols))
+         (map #(nth % cols)
+              (map #(nth lst %) rows))
+       (and (coll? rows) all-cols?)
+         (map #(nth lst %) rows)
+       (and (number? rows) all-cols?)
+         (nth lst rows)
+       (and (number? rows) (coll? cols))
+         (map #(nth (nth lst rows) %) cols)
+       (and (coll? rows) (coll? cols))
+         (map (fn [r] (map #(nth r %) cols))
+              (map #(nth lst %) rows))
+       (and all-rows? all-cols?)
+         lst))))
 
 (defmethod sel [clatrix.core.Matrix false]
   ([^clatrix.core.Matrix mat rows columns]
@@ -837,7 +878,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   [^Matrix mat]
   (clx/cholesky mat))
 
-
+(def ^:private ^:const allowed-types #{:full :compact :values})
 
 (defn decomp-svd
   "
@@ -860,10 +901,10 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-foo foo)
-  (decomp-foo foo :type :full)
-  (decomp-foo foo :type :compact)
-  (decomp-foo foo :type :values)
+  (decomp-svd foo)
+  (decomp-svd foo :type :full)
+  (decomp-svd foo :type :compact)
+  (decomp-svd foo :type :values)
 
 
   References:
@@ -871,14 +912,14 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat & {:keys [type] :or {type :full}}]
-  (let [type (or type :full)
+  (let [type (or (get allowed-types type) :full)
         result (if (= type :full)
                  (clx/svd mat :type :full)
                  (clx/svd mat :type :sparse))]
     (if (= type :values)
       {:S (:values (clx/svd mat :type :values))}
       {:S (:values result)
-       :U (if (= type :compact) mat (:left result)) 
+       :U (if (= type :compact) mat (:left result))
        :V (:right result)})))
 
 (defn decomp-eigenvalue
@@ -921,15 +962,17 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     a map containing:
       :L -- the lower triangular factor
       :U -- the upper triangular factor
+      :P -- the permutation matrix
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
+    http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
 "
   ([mat]
     (let [result (clx/lu mat)]
       {:L (:l result)
-       :U (:u result)})))
+       :U (:u result)
+       :P (:p result)})))
 
 (defn vector-length [u]
   (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
@@ -982,7 +1025,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   ;(let [type (or type :full)
         ;q (orthonormal-base-stable m)
         ;m (trans m)]
-    ;{:Q (if (= type :full) q m) 
+    ;{:Q (if (= type :full) q m)
      ;:R (if (= type :compact)
           ;(matrix (reduce (fn [r j]
                             ;(conj r
@@ -1319,16 +1362,16 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                  except-rows (except-for (nrow data) except-rows)
                 :else true)
           cols (cond
-                 cols (cond
-                        (coll? cols)  cols
-                        (or (= :all cols) (true? cols)) (:column-names data)
-                        :else [cols])
-                 all (cond
-                       (coll? all) all
-                       (= :all all) (:column-names data)
-                       :else [all])
+                cols cols
                 except-cols (except-for-cols data except-cols)
-                :else (:column-names data))
+                all all
+                :else true)
+          colnames (:column-names data)          
+          selected-cols (cond
+                         (or (= cols :all) (true? cols)) colnames
+                         (coll? cols) (map #(get-column-id data %) cols)
+                         :else [cols]
+                         )
           selected-rows (cond
                           (or (= rows :all) (true? rows) all)
                             (:rows data)
@@ -1336,17 +1379,17 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                             (list (nth (:rows data) rows))
                           (coll? rows)
                             (map #(nth (:rows data) %) rows))
-          _data (map (fn [row] (map #(row (get-column-id data %)) cols)) selected-rows)
+          _data (map (fn [row] (map #(row (get-column-id data %)) selected-cols)) selected-rows)
           result (if (nil? filter) _data (clojure.core/filter filter _data))]
       (cond
-        (= (count cols) 1)
-          (if (= (count result) 1)
-            (ffirst result)
-            (mapcat identity result))
-        (= (count result) 1)
-          (first result)
-        :else
-        (dataset cols (map #(apply assoc {} (interleave cols %)) result))))))
+       (and (= (count selected-cols) 1) (not (coll? cols)))
+         (if (= (count result) 1)
+           (ffirst result)
+           (mapcat identity result))
+       (and (= (count result) 1) (not (coll? rows)))
+         (first result)
+       :else
+       (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
 
 
 (defn to-dataset
@@ -1392,7 +1435,7 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
                  (map? obj)
                    ;; see if any of the values are collections
                    (if (reduce #(or %1 %2) (map coll? (vals obj)))
-                     (vals obj)
+                     (trans (vals obj))
                      [(vals obj)])
                    (coll? obj)
                      (cond
@@ -1607,9 +1650,24 @@ altering later ones."
 (defn head
   "Returns the head of the dataset. 10 or full dataset by default."
   ([len mat]
-     ($ (range (min len (nrow mat))) :all mat))
+     (cond
+      (= len 0) ($ :none :all mat)
+      (<= len (- (nrow mat))) (head 0 mat)
+      (< len 0) (head (+ (nrow mat) len) mat)
+      :else ($ (range (min len (nrow mat))) :all mat)))
   ([mat]
      (head 10 mat)))
+
+(defn tail
+  "Returns the tail of the dataset. 10 or full dataset by default."
+  ([len mat]
+     (cond
+      (= len 0) ($ :none :all mat)
+      (<= len (- (nrow mat))) (head 0 mat)
+      (< len 0) (head (+ (nrow mat) len) mat)
+      :else ($ (range (max 0 (- (nrow mat) len)) (nrow mat)) :all mat)))
+  ([mat]
+     (tail 10 mat)))
 
 (defn $where
 "An alias to (query-dataset (second args) (first args)). If given only a single argument,
@@ -2347,6 +2405,16 @@ altering later ones."
         (clx/set mat j i (nth data idx))))
      mat)))
 
+(defn toeplitz
+"
+  Returns the Toeplitz matrix for the given vector, which form the first row of the matrix
+"
+  ([x]
+     (symmetric-matrix
+      (loop [v (rseq x)
+             d []]
+        (if (nil? v) d
+            (recur (next v) (concat v d)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VIEW METHODS
@@ -2580,6 +2648,8 @@ of each type"
         the dataset's column-names array.
     :append (default false) determines whether this given file should be
         appended to. If true, a header will not be written to the file again.
+    If the filename is exactly \"-\" then *out* the matrix/dataset will be
+        written to *out*
 
   Chart options:
     :width (default 500)
@@ -2745,11 +2815,11 @@ of each type"
 
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
-    (.composeDiagonal DoubleFactory2D/dense block0 block1)) 
+    (.composeDiagonal DoubleFactory2D/dense block0 block1))
   (defn block-diag
     "Blocks should be a sequence of matrices."
     [blocks]
-    (new Matrix (reduce block-diag2 blocks))) 
+    (new Matrix (reduce block-diag2 blocks)))
 
   (defn block-matrix
     "Blocks should be a nested sequence of matrices. Each element of the sequence should be a block row."
@@ -2757,18 +2827,28 @@ of each type"
     (let [element-class (-> blocks first first class)
           native-rows (for [row blocks] (into-array element-class row))
           native-blocks (into-array (-> native-rows first class) native-rows)]
-      (new Matrix (.compose DoubleFactory2D/dense native-blocks)))) 
+      (new Matrix (.compose DoubleFactory2D/dense native-blocks))))
 
   (defn separate-blocks
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
       (for [q partitions]
-        (.viewPart matrix (first p) (first q) (second p) (second q))))) 
+        (.viewPart matrix (first p) (first q) (second p) (second q)))))
 
   (defn diagonal-blocks
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
       (.viewPart matrix (first p) (first p) (second p) (second p))))
-  ) 
+  )
+
+(defn reorder-columns
+  "Produce a new dataset with the columns in the specified order.
+Returns nil if no valid column names are given."
+  [dset cols]
+  (let [cols (filter (partial contains? (set (:column-names dset))) cols)]
+    (cond
+     (empty? cols) nil
+     (= (count cols) 1) (dataset cols (sel dset :cols (first cols)))
+     :else (sel dset :cols cols))))

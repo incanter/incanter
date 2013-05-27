@@ -1,8 +1,6 @@
-(ns 
-  ^{
-    :doc "Excel module for reading and writing Incanter datasets.  Recognizes both old and new
+(ns ^{:doc "Excel module for reading and writing Incanter datasets.  Recognizes both old and new
 Excel file formats (.xls and .xlsx)."
-    :author "David James Humphreys"}
+      :author "David James Humphreys"}
   incanter.excel
   (:import
     [java.io FileOutputStream FileInputStream])

@@ -26,7 +26,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns ^{:doc "Library for converting infix mathematical formula to prefix expressions"
-       :author "J. Bester"}
+      :author "J. Bester"}
   incanter.infix)
 
 

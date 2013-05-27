@@ -41,14 +41,21 @@
   (is (= (sel dataset1 :all 1) [2 5]))
   (is (= (sel dataset1 :all :b) [2 5]))
   (is (= (sel dataset1 :all [:a :c]) (dataset [:a :c] [[1 3] [4 6]])))
+  (is (= (sel dataset1 :all [:a]) (dataset [:a] [[1] [4]])))
   (is (= (sel dataset1 :all :all) dataset1))
   (is (= (sel dataset2 :cols :b) [2 5]))
   (is (= (sel dataset2 :cols "c") [3 6]))
   (is (= (sel dataset3 :cols :a) [1 4]))
+  (is (= (sel dataset1 :cols [:a]) (dataset [:a] [[1] [4]])))
   (is (= (sel dataset4 :cols :b) [2 5]))
   (is (= (sel dataset4 :cols "c") [3 6]))
   (is (= (sel dataset5 :rows 1 :cols :a) nil))
   (is (= (sel dataset6 :cols :a) 1)))
+
+(def map1 {:col-0 [1.0 2.0 3.0] :col-1 [4.0 5.0 6.0]})
+
+(deftest dataset-construction
+  (is (= (to-dataset map1) (to-dataset [[1.0 4.0][2.0 5.0][3.0 6.0]]))))
 
 (deftest dataset-transforms
   (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
@@ -67,6 +74,11 @@
                 [7 8 9]
                 [10 11 12]]))
 
+;; define a 2d list for testing
+(def l [[1 2 3]
+        [4 5 6]
+        [7 8 9]
+        [10 11 12]])
 
 (deftest matrix-dims
   ;; checking dimensions
@@ -82,7 +94,7 @@
 (deftest matrix-from-arrays
   (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
   (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3]))))
-  (is (= (matrix [[1 2] [3 4]]) 
+  (is (= (matrix [[1 2] [3 4]])
          (matrix (object-array [(double-array [1.0 2.0])
                                 (double-array [3.0 4.0])])))))
 
@@ -188,7 +200,12 @@
   ;; create a 3x3 identity matrix
   (is (= (identity-matrix 3) (matrix [[1 0 0]
                                       [0 1 0]
-                                      [0 0 1]]))))
+                                      [0 0 1]])))
+
+  ;; create a 3x3 toeplitz matrix
+  (is (= (toeplitz [1 2 3]) (matrix [[1 2 3]
+                                     [2 1 2]
+                                     [3 2 1]]))))
 
 (deftest matrix-to-list-tests
   ;; convert a matrix to clojure vectors
@@ -229,6 +246,29 @@
                                      [4 5 6]])))
   (is (= (sel A [1 3] [0 2]) (matrix [[4 6]
                                       [10 12]]))))
+
+(deftest list-sel-tests
+  ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
+  (is (= (sel l 3 2) 12))
+  ;; use 'true' to select an entire row or column
+  (is (= (sel l :cols 2) [3 6 9 12]))
+  (is (= (sel l :rows 1) [4 5 6]))
+  (is (= (sel l :all [0 2]) [[1 3]
+                             [4 6]
+                             [7 9]
+                             [10 12]]))
+  (is (= (sel l :all :all) l))
+  (is (= (sel l :all 2) [3 6 9 12]))
+  (is (= (sel l true true) l))
+  ;; pass a vector of indices to select a set of rows and/or columns
+  (is (= (sel l :cols [0 2]) [[1 3]
+                              [4 6]
+                              [7 9]
+                              [10 12]]))
+  (is (= (sel l :rows [0 1]) [[1 2 3]
+                              [4 5 6]]))
+  (is (= (sel l [1 3] [0 2]) [[4 6]
+                              [10 12]])))
 
 (deftest matrix-filter-tests
   ;; filtering: return the rows that sum to more than 6
@@ -486,6 +526,10 @@
     ;(check :full    expect-full)
     ;(check :compact expect-compact)))
 
+(deftest decomp-lu-test
+  (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
+        {:keys [L U P]} (decomp-lu m)]
+    (is (= m (mmult P L U)))))
 
 (deftest test-metadata
   (let [md {:name "metadata test"}
@@ -530,3 +574,4 @@
   (is (factorial 5) 120.0)
   (is (factorial 0) 1.0)
   (is (thrown? AssertionError (factorial -1))))
+

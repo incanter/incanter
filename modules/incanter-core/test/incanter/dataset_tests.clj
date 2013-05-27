@@ -36,8 +36,8 @@
   (is (= ($ 1 :all cars) car1)))
 
 (deftest unselect-row-from-dataset
-  (is (= ($ [:not 0] :all cars) car1))
-  (is (= ($ [:not 1] :all cars) car0)))
+  (is (= ($ [:not 0] :all cars) (dataset [:speed :weight :colour] [car1])))
+  (is (= ($ [:not 1] :all cars) (dataset [:speed :weight :colour] [car0]))))
 
 (deftest select-all-returns-input
   (is (= ($ :all cars) cars)))
@@ -55,3 +55,33 @@
 ;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
 ;;     (is (= ($ :first
 ;;     )))))
+
+(deftest reorder-columns-test
+  (testing "Reordering column names of a dataset:"
+    (let [dset (dataset [:b :a]
+                        [[2 1]
+                         [4 3]
+                         [6 5]])
+          ]
+      (testing "Simple case"
+        (let [expected (dataset [:a :b]
+                                [[1 2]
+                                 [3 4]
+                                 [5 6]])
+              actual (reorder-columns dset [:a :b])]
+          (is (= expected actual)))
+        )
+      (testing "Nil case"
+        (let [expected nil
+              actual (reorder-columns dset [:c])]
+          (is (= expected actual))))
+
+      (testing "Duplication (does not make sense!)"
+        (let [expected (dataset [:a :b :a :b]
+                                [[1 2 1 2]
+                                 [3 4 3 4]
+                                 [5 6 5 6]])
+              actual (reorder-columns dset [:a :b :a :b])]
+          (is (= expected actual))
+          ))
+      )))

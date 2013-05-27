@@ -19,7 +19,7 @@
                                org.clojure/clojure-contrib]]
                  [jline "0.9.94"]]
   :main incanter.main
-  :plugins [[lein-ritz "0.5.0"]]
+  :plugins [[lein-ritz "0.7.0" :exclusions [org.clojure/clojure]]]
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
              }  

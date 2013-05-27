@@ -6,7 +6,8 @@
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.5.0-SNAPSHOT"]
-                 [clojureql "1.0.4"]
+                 [clojureql "1.0.4" :exclusions [org.clojure/clojure]]
                  ]
   :profiles {:dev {:dependencies [[org.apache.derby/derby "10.8.1.2"]]}}
   )
+

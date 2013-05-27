@@ -1,3 +1,4 @@
+
 ;;; optimize.clj -- Statistics library for Clojure built on the CERN Colt Library
 
 ;; by David Edgar Liebke http://incanter.org
@@ -16,10 +17,10 @@
 
 
 
-(ns incanter.optimize
+(ns ^{:doc "Optimization-relates functions."}
+    incanter.optimize
   (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix ncol solve
-                              abs sel trans bind-columns to-list identity-matrix)]))
-
+                              abs sel trans bind-columns to-list identity-matrix $=)]))
 
 
 (defn integrate
@@ -677,3 +678,146 @@
        :x x
        :y y})))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ROUTINES FOR UNCONSTRAINED MINIMIZATION
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn- dot
+  "
+   Scalar product of a pair of collections
+  "
+  [xs ys] (reduce + ($= xs * ys)))
+
+(defn- with-counting
+  "
+   Takes a function and returns a version of the function that tracks how many
+   times that function is called, together with a counter.
+  "
+  [f]
+  (let [num-calls (agent 0)]
+    [(fn [& args]
+      (send num-calls inc)
+      (apply f args)) num-calls]))
+
+(defn- line-search-BFGS
+  "
+   Minimize alpha in the function f(x-k + alpha*p-k) using the interpolation
+   algorithm detailed in 'Numerical Optimization' Nocedal and Wright, 1999.
+   Pg. 56-57
+  "
+  [f x-k p-k grad-f-k & {:keys [c-1 alpha-0] :or {c-1 1E-4 alpha-0 1}}]
+  (let [phi (memoize (fn [alpha] (f ($= x-k + (alpha * p-k)))))
+        phi-prime-0 (dot grad-f-k p-k)
+        decrease-condition (fn [alpha] (<= (phi alpha)
+                                          ($= (phi 0) + (c-1 * alpha * phi-prime-0))))]
+    (if (decrease-condition alpha-0) alpha-0
+        (let [phi-factor (memoize (fn [alpha] ($= (phi alpha) - (phi 0) - (phi-prime-0 * alpha))))
+              factor (memoize (fn [alpha-k alpha-k-1] ($= (alpha-k-1 ** 2) * (alpha-k ** 2) * (alpha-k - alpha-k-1))))
+              alpha-1 ($= -1 * (phi-prime-0 * alpha-0 ** 2) / (2 * (phi-factor alpha-0)))]
+          (if (decrease-condition alpha-1) alpha-1
+            (let [next-alpha (fn
+                               [alpha-k alpha-k-1]
+                               (let [a ($= ((alpha-k-1 ** 2) * (phi-factor alpha-k) - (alpha-k ** 2) * (phi-factor alpha-k-1)) / (factor alpha-k alpha-k-1))
+                                     b ($= (-1 * ((alpha-k-1 ** 3) * (phi-factor alpha-k)) + (alpha-k-1 ** 3) * (phi-factor alpha-k-1)) / (factor alpha-k alpha-k-1))]
+                                 (/ (- (Math/sqrt (Math/abs (- (Math/pow b 2) (* 3 a phi-prime-0)))) b)
+                                    (* 3 a))))]
+              (loop [alpha-i alpha-1
+                     alpha-i-1 alpha-0]
+                (let [alpha-i+1 (next-alpha alpha-i alpha-i-1)]
+                  (if (decrease-condition alpha-i+1) alpha-i+1
+                    (recur (if (or
+                                (> (- alpha-i alpha-i+1) (/ alpha-i 2))
+                                (< 0.96 (- 1 (/ alpha-i+1 alpha-i)))) (/ alpha-i 2) alpha-i+1) alpha-i))))))))))
+
+(defn- fmin-bfgs
+  "
+    Minimize a function of multiple variables using the BFGS algorthim, based
+    fmin_bfgs in scipy.optimize.
+
+    This function is called by minimize (and maximize) with 'method :bfgs' or
+    by default, and shouldn't be used directly.
+  "
+  [f x-0 f-prime tol max-iter]
+  (let [norm (fn [grad-vec] (apply max (map #(Math/abs %) grad-vec)))
+        I (identity-matrix (count x-0))]
+    (loop [inv-hessian-k I
+           gradient-k (f-prime x-0)
+           x-k x-0
+           iter max-iter]
+      (let [converged? (< (norm gradient-k) tol)
+            max-iterations (= 0 iter)]
+        (if (or converged? max-iterations)
+          {:value x-k :iterations (- max-iter iter)}
+          (let [p-k ($= -1 * (inv-hessian-k <*> gradient-k))
+                alpha-k (line-search-BFGS f x-k p-k gradient-k)
+                x-k+1 ($= x-k + (alpha-k * p-k))
+                gradient-k+1 (f-prime x-k+1)
+                y-k ($= gradient-k+1 - gradient-k)
+                s-k ($= x-k+1 - x-k)
+                rho-k  (/ 1 (dot y-k s-k))
+                A-1 ($= I - ((s-k <*> (trans y-k)) * rho-k))
+                A-2 ($= I - ((y-k <*> (trans s-k)) * rho-k))]
+            (recur ($= (A-1 <*> (inv-hessian-k <*> A-2))
+                       + (rho-k * (s-k <*> (trans s-k))))
+                   gradient-k+1 x-k+1 (dec iter))))))))
+
+(defn minimize
+  "
+   Minimize a scalar function of one or more variables. Based on the
+   Implementation from scipy.optimize. Currently only the BFGS algorithim is
+   implemented.
+
+   Arguments:
+     f -- Objective function. Takes a collection of values and returns a scalar
+          of the value of the function.
+     start -- Collection of initial guesses for the minimum
+     f-prime -- partial derivative of the objective function. Takes
+                a collection of values and returns a collection of partial
+                derivatives with respect to each variable. If this is not
+                provided it will be estimated using gradient-fn.
+
+   Options:
+     :method (default :bfgs) currently no other options
+     :tol (default 1E-5)
+     :max-iter (default 200)
+
+   Returns: a hash-map containing the following fields:
+     :method -- the method used
+     :value  -- the minimum of the objective function
+     :iterations -- the number of iterations performed
+     :fun-calls -- the number of calls to f
+     :grad-calls -- the number of calles to f-prime
+
+
+  Examples:
+
+    (use '(incanter core optimize))
+    ;; define the rosenbrock function and derivative
+    (defn rosenbrock
+      [[x y]]
+      ($= (1 - x) ** 2 + 100 * (y - x ** 2) ** 2))
+
+    (defn rosenbrock-der
+      [[x y]]
+      [($= 2 * (200 * x ** 3 - 200 * x * y + x - 1))
+       ($= 200 * (y - x ** 2))])
+    ;; run minimize function on rosenbrock to find root
+    (= (minimize rosenbrock [0 10] rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
+  "
+  [f start f-prime & {:keys [max-iter tol method]
+                      :or {max-iter 200
+                           tol 1E-5
+                           method :bfgs}}]
+  (let [min (cond :else fmin-bfgs)
+        [f f-calls] (with-counting f)
+        [f-prime f-prime-calls] (with-counting f-prime)]
+    (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
+
+(defn maximize
+  "This function tries to maximize a scalar function of one or more variables.
+   See documentation of 'minimize' function for more information."
+  [f start f-prime & {:keys [max-iter tol method]
+                      :or {max-iter 200
+                           tol 1E-5
+                           method :bfgs}}]
+  (minimize (comp - f) start (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))
