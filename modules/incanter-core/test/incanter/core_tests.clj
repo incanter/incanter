@@ -195,16 +195,16 @@
   ;; take the diagonal elements of matrix A
   (is (m/e== (diag A) [1.0 5.0 9.0]))
   ;; create a diagonal matrix with the given data on the diagonal
-  (is (= (diag [1/2 1/2 1/2]) (matrix [[1/2 0 0]
+  (is (m/e== (diag [1/2 1/2 1/2]) (matrix [[1/2 0 0]
                                        [0 1/2 0]
                                        [0 0 1/2]])))
   ;; create a 3x3 identity matrix
-  (is (= (identity-matrix 3) (matrix [[1 0 0]
+  (is (m/e== (identity-matrix 3) (matrix [[1 0 0]
                                       [0 1 0]
                                       [0 0 1]])))
 
   ;; create a 3x3 toeplitz matrix
-  (is (= (toeplitz [1 2 3]) (matrix [[1 2 3]
+  (is (m/e== (toeplitz [1 2 3]) (matrix [[1 2 3]
                                      [2 1 2]
                                      [3 2 1]]))))
 

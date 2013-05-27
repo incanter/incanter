@@ -155,7 +155,9 @@
   (diag A)
   "
   [m]
-  (m/diagonal-matrix m))
+  (if (== 2 (m/dimensionality m)) 
+    (m/main-diagonal m)
+    (m/diagonal-matrix m)))
 
 
 (defn ^Matrix trans
@@ -2393,6 +2395,7 @@ altering later ones."
    (let [n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
          mat (matrix 0 p p)
+         mat (m/coerce :clatrix mat) 
          indices (if lower
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
