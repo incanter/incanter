@@ -707,11 +707,11 @@
     (reduce (fn [A B]
               (let [a (cond
                         (matrix? A) A
-                        (number? A) (matrix [A])
+                        (number? A) (matrix [[A]])
                         :else (matrix A))
                     b (cond
                         (matrix? B) B
-                        (number? B) (matrix [B])
+                        (number? B) (matrix [[B]])
                         :else (matrix B))
                     rows (* (nrow a) (nrow b))
                     cols (* (ncol a) (ncol b))]

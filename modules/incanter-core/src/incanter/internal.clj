@@ -19,6 +19,7 @@
 (ns ^{:skip-wiki true}
     incanter.internal
   (:require [clatrix.core :as clx])
+  (:require [clojure.core.matrix :as m])
   (:import (clatrix.core Matrix)
            (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
@@ -59,13 +60,17 @@
   `~(with-meta body {:tag type}))
 
 
-(defmacro transform-with [A op fun]
-  `(cond
-     (clx/clatrix?) (~fun ~A)
-     (and (coll? ~A) (coll? (first ~A))) (let [mA# (make-matrix ~A)]  
-                                           (clx/matrix (clx/dotom ~fun mA#) nil))
-     (coll? ~A)   (map ~op ~A)
-     (number? ~A) (~op ~A)))
+(defmacro transform-with 
+  "Transforms a matrix with a Clatrix function"
+  ([A op fun]
+  `(let [A# ~A]
+     (cond
+       (clx/clatrix? A#) (~fun A#)
+       (m/array? A#) (~fun (m/coerce :clatrix A#))
+       (and (coll? A#) (coll? (first A#))) (let [mA# (make-matrix ~A)]  
+                                             (clx/matrix (clx/dotom ~fun mA#) nil))
+       (coll? A#)   (map ~op A#)
+       (number? A#) (~op A#)))))
 
 (defn pass-to-matrix
   "Make each element in coll a row-first matrix else pass it back as-is"
