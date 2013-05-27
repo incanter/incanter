@@ -21,6 +21,7 @@
 ;; (run-tests 'incanter.tests.core-test-cases)
 
 (ns incanter.core-tests
+  (:require [clojure.core.matrix :as m])
   (:use clojure.test
         (incanter core)))
 
@@ -153,22 +154,22 @@
 
 (deftest bind-cols-test
   ;; combining matrices/vectors by column
-  (is (= (bind-columns (trans (nth (trans A) 0))
+  (is (m/e== (bind-columns (trans (nth (trans A) 0))
                        (trans (nth (trans A) 2)))
          (matrix [[1 3]
                   [4 6]
                   [7 9]
                   [10 12]])))
-  (is (= (bind-columns [[1] [2] [3]] [[4] [5] [6]] [[7] [8] [9]])
+  (is (m/e== (bind-columns [[1] [2] [3]] [[4] [5] [6]] [[7] [8] [9]])
          (matrix [[1 4 7]
                   [2 5 8]
                   [3 6 9]])))
-  (is (= (bind-columns [13 14 15 16] A)
+  (is (m/e== (bind-columns [13 14 15 16] A)
          (matrix [[13 1 2 3]
                   [14 4 5 6]
                   [15 7 8 9]
                   [16 10 11 12]])))
-  (is (= (bind-columns A [13 14 15 16])
+  (is (m/e== (bind-columns A [13 14 15 16])
          (matrix [[1 2 3 13]
                   [4 5 6 14]
                   [7 8 9 15]
@@ -177,22 +178,22 @@
 (deftest matrix-creation-tests
   ;; creating matrices
   ;; create a 3x2 matrix with initial value 99
-  (is (= (matrix 99 3 2)
+  (is (m/e== (matrix 99 3 2)
          (matrix [[99 99]
                   [99 99]
                   [99 99]])))
   ;; create a 3x2 matrix with initial value 0
-  (is (= (matrix 0 3 2)
+  (is (m/e== (matrix 0 3 2)
          (matrix [[0 0]
                   [0 0]
                   [0 0]])))
   ;; create a matrix with the given data that has 3 columns
-  (is (= (matrix [1 2 3 4 5 6 7 8 9] 3)
+  (is (m/e== (matrix [1 2 3 4 5 6 7 8 9] 3)
          (matrix [[1 2 3]
                   [4 5 6]
                   [7 8 9]])))
   ;; take the diagonal elements of matrix A
-  (is (= (diag A) [1.0 5.0 9.0]))
+  (is (m/e== (diag A) [1.0 5.0 9.0]))
   ;; create a diagonal matrix with the given data on the diagonal
   (is (= (diag [1/2 1/2 1/2]) (matrix [[1/2 0 0]
                                        [0 1/2 0]
@@ -209,16 +210,16 @@
 
 (deftest matrix-to-list-tests
   ;; convert a matrix to clojure vectors
-  (is (= (to-list A) [[1.0 2.0 3.0]
+  (is (m/e== (to-list A) [[1.0 2.0 3.0]
                       [4.0 5.0 6.0]
                       [7.0 8.0 9.0]
                       [10.0 11.0 12.0]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
-  (is (= (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
-  (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
-  (is (= (to-list [1 2 3]) [1 2 3]))
-  (is (= (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
-  (is (= (to-list 3) 3))
+  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (m/e== (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (m/e== (to-list [1 2 3]) [1 2 3]))
+  (is (m/e== (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
+  (is (m/e== (to-list 3) 3))
   (is (nil? (to-list nil))))
 
 (deftest matrix-sel-tests
@@ -297,150 +298,150 @@
 (deftest matrix-plus-test
 
   ;; element by element addition on matrices
-  (is (= (plus A A A) (matrix [[3 6 9]
+  (is (m/e== (plus A A A) (matrix [[3 6 9]
                                [12 15 18]
                                [21 24 27]
                                [30 33 36]])))
-  (is (= (plus A 1) (matrix [[2 3 4]
+  (is (m/e== (plus A 1) (matrix [[2 3 4]
                              [5 6 7]
                              [8 9 10]
                              [11 12 13]])))
-  (is (= (plus 1 A) (matrix [[2 3 4]
+  (is (m/e== (plus 1 A) (matrix [[2 3 4]
                              [5 6 7]
                              [8 9 10]
                              [11 12 13]])))
-  (is (= (plus V V V) (matrix [[3 6 9]
+  (is (m/e== (plus V V V) (matrix [[3 6 9]
                                [12 15 18]
                                [21 24 27]
                                [30 33 36]])))
-  (is (= (plus V 1) (matrix [[2 3 4]
+  (is (m/e== (plus V 1) (matrix [[2 3 4]
                              [5 6 7]
                              [8 9 10]
                              [11 12 13]])))
-  (is (= (plus 1 V) (matrix [[2 3 4]
+  (is (m/e== (plus 1 V) (matrix [[2 3 4]
                              [5 6 7]
                              [8 9 10]
                              [11 12 13]])))
-  (is (= (plus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [2 4 6])))
-  (is (= (plus [1.0 2.0 3.0] 1) (matrix [2 3 4])))
-  (is (= (plus 1 [1.0 2.0 3.0]) (matrix [2 3 4])))
-  (is (= (plus [1.0 2.0 3.0] (matrix [1 2 3]) (matrix [2 4 6])))))
+  (is (m/e== (plus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [2 4 6])))
+  (is (m/e== (plus [1.0 2.0 3.0] 1) (matrix [2 3 4])))
+  (is (m/e== (plus 1 [1.0 2.0 3.0]) (matrix [2 3 4])))
+  (is (m/e== (plus [1.0 2.0 3.0] (matrix [1 2 3]) (matrix [2 4 6])))))
 
 (deftest matrix-minus-test
   ;; element by element subtraction on matrices
-  (is (= (minus A A A) (matrix [[-1 -2 -3]
+  (is (m/e== (minus A A A) (matrix [[-1 -2 -3]
                                 [-4 -5 -6]
                                 [-7 -8 -9]
                                 [-10 -11 -12]])))
-  (is (= (minus A 1) (matrix [[0 1 2]
+  (is (m/e== (minus A 1) (matrix [[0 1 2]
                               [3 4 5]
                               [6 7 8]
                               [9 10 11]])))
-  (is (= (minus 1 A) (matrix [[0 -1 -2]
+  (is (m/e== (minus 1 A) (matrix [[0 -1 -2]
                               [-3 -4 -5]
                               [-6 -7 -8]
                               [-9 -10 -11]])))
-  (is (= (minus V V V) (matrix [[-1 -2 -3]
+  (is (m/e== (minus V V V) (matrix [[-1 -2 -3]
                                 [-4 -5 -6]
                                 [-7 -8 -9]
                                 [-10 -11 -12]])))
-  (is (= (minus V 1) (matrix [[0 1 2]
+  (is (m/e== (minus V 1) (matrix [[0 1 2]
                               [3 4 5]
                               [6 7 8]
                               [9 10 11]])))
-  (is (= (minus 1 V) (matrix [[0 -1 -2]
+  (is (m/e== (minus 1 V) (matrix [[0 -1 -2]
                               [-3 -4 -5]
                               [-6 -7 -8]
                               [-9 -10 -11]])))
-  (is (= (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
-  (is (= (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
-  (is (= (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
-  (is (= (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0])))))
+  (is (m/e== (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
+  (is (m/e== (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
+  (is (m/e== (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
+  (is (m/e== (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0])))))
 
 (deftest matrix-mult-tests
   ;; element by element multiplication on matrices
-  (is (= (mult A A A) (matrix [[1 8 27]
+  (is (m/e== (mult A A A) (matrix [[1 8 27]
                                [64 125 216]
                                [343 512 729]
                                [1000 1331 1728]])))
-  (is (= (mult A 2) (matrix [[2 4 6]
+  (is (m/e== (mult A 2) (matrix [[2 4 6]
                              [8 10 12]
                              [14 16 18]
                              [20 22 24]])))
-  (is (= (mult 2 A) (matrix [[2 4 6]
+  (is (m/e== (mult 2 A) (matrix [[2 4 6]
                              [8 10 12]
                              [14 16 18]
                              [20 22 24]])))
-  (is (= (mult V V V) (matrix [[1 8 27]
+  (is (m/e== (mult V V V) (matrix [[1 8 27]
                                [64 125 216]
                                [343 512 729]
                                [1000 1331 1728]])))
-  (is (= (mult V 2) (matrix [[2 4 6]
+  (is (m/e== (mult V 2) (matrix [[2 4 6]
                              [8 10 12]
                              [14 16 18]
                              [20 22 24]])))
-  (is (= (mult 2 V) (matrix [[2 4 6]
+  (is (m/e== (mult 2 V) (matrix [[2 4 6]
                              [8 10 12]
                              [14 16 18]
                              [20 22 24]])))
-  (is (= (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 4 9])))
-  (is (= (mult [1 2 3] 2.0) (matrix [2 4 6])))
-  (is (= (mult 2.0 [1 2 3]) (matrix [2 4 6])))
-  (is (= (mult [1 2 3] (matrix [1 2 3])) (matrix [1 4 9]))))
+  (is (m/e== (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 4 9])))
+  (is (m/e== (mult [1 2 3] 2.0) (matrix [2 4 6])))
+  (is (m/e== (mult 2.0 [1 2 3]) (matrix [2 4 6])))
+  (is (m/e== (mult [1 2 3] (matrix [1 2 3])) (matrix [1 4 9]))))
 
 (deftest matrix-div-tests
   ;; element by element division on matrices
-  (is (= (div A A A) (matrix [[1 1/2 1/3]
+  (is (m/e== (div A A A) (matrix [[1 1/2 1/3]
                               [1/4 1/5 1/6]
                               [1/7 1/8 1/9]
                               [1/10 1/11 1/12]])))
-  (is (= (div A 2) (matrix [[1/2 1 3/2]
+  (is (m/e== (div A 2) (matrix [[1/2 1 3/2]
                             [4/2 5/2 6/2]
                             [7/2 8/2 9/2]
                             [10/2 11/2 12/2]])))
-  (is (= (div 2 A) (matrix [[2/1 1 2/3]
+  (is (m/e== (div 2 A) (matrix [[2/1 1 2/3]
                             [2/4 2/5 2/6]
                             [2/7 2/8 2/9]
                             [2/10 2/11 2/12]])))
-  (is (= (div V V V) (matrix [[1 1/2 1/3]
+  (is (m/e== (div V V V) (matrix [[1 1/2 1/3]
                               [1/4 1/5 1/6]
                               [1/7 1/8 1/9]
                               [1/10 1/11 1/12]])))
-  (is (= (div V 2) (matrix [[1/2 1 3/2]
+  (is (m/e== (div V 2) (matrix [[1/2 1 3/2]
                             [4/2 5/2 6/2]
                             [7/2 8/2 9/2]
                             [10/2 11/2 12/2]])))
-  (is (= (div 2 V) (matrix [[2/1 1 2/3]
+  (is (m/e== (div 2 V) (matrix [[2/1 1 2/3]
                             [2/4 2/5 2/6]
                             [2/7 2/8 2/9]
                             [2/10 2/11 2/12]])))
-  (is (= (div [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 1 1])))
-  (is (= (div [1 2 3] 2.0) (matrix [1/2 1 3/2])))
-  (is (= (div 2.0 [1 2 3]) (matrix [2 1 0.6666666666666666])))
-  (is (= (div [1 2 3] (matrix [1 2 3])) (matrix [1 1 1]))))
+  (is (m/e== (div [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 1 1])))
+  (is (m/e== (div [1 2 3] 2.0) (matrix [1/2 1 3/2])))
+  (is (m/e== (div 2.0 [1 2 3]) (matrix [2 1 0.6666666666666666])))
+  (is (m/e== (div [1 2 3] (matrix [1 2 3])) (matrix [1 1 1]))))
 
 (deftest matrix-mapreduce-tests
   ;; getting row sums
-  (is (= (reduce + (first A)) 6.0))
-  (is (= (map #(reduce + %) A) [6.0 15.0 24.0 33.0]))
-  (is (= (reduce plus (trans A)) (matrix [6 15 24  33] 4)))
+  (is (m/e== (reduce + (first A)) 6.0))
+  (is (m/e== (map #(reduce + %) A) [6.0 15.0 24.0 33.0]))
+  (is (m/e== (reduce plus (trans A)) (matrix [6 15 24  33] 4)))
 
   ;; getting column sums
-  (is (= (reduce plus A) (matrix [22 26 30] 3)))
-  (is (= (map #(reduce + %) (trans A)) [22.0 26.0 30.0]))
+  (is (m/e== (reduce plus A) (matrix [22 26 30] 3)))
+  (is (m/e== (map #(reduce + %) (trans A)) [22.0 26.0 30.0]))
 
   ;; getting column products
-  (is (= (reduce mult A) (matrix [280 880 1944] 3)))
-  (is (= (reduce mult (trans A)) (matrix [6 120 504 1320] 4))))
+  (is (m/e== (reduce mult A) (matrix [280 880 1944] 3)))
+  (is (m/e== (reduce mult (trans A)) (matrix [6 120 504 1320] 4))))
 
 (deftest matrix-mmult-tests
 ;; perform matrix multiplication
-(is (= (mmult A (trans A)) (matrix [[14  32  50  68]
+(is (m/e== (mmult A (trans A)) (matrix [[14  32  50  68]
                                     [32  77 122 167]
                                     [50 122 194 266]
                                     [68 167 266 365]])))
 ;; perform matrix multiplication on more than two matrices
-(is (= (mmult A (trans A) A) (matrix [[1172 1336 1500]
+(is (m/e== (mmult A (trans A) A) (matrix [[1172 1336 1500]
                                       [2864 3262 3660]
                                       [4556 5188 5820]
                                       [6248 7114 7980]]))))
@@ -477,19 +478,19 @@
 
 (deftest matrix-solve-test
 ;; calculate the inverse of a matrix
-(is (= (solve (matrix [[2 0 0] [0 2 0] [0 0 2]])) (diag [1/2 1/2 1/2]))))
+(is (m/e== (solve (matrix [[2 0 0] [0 2 0] [0 0 2]])) (diag [1/2 1/2 1/2]))))
 
 (deftest sum-test
 ;; calculate the sum of values in a vector or 1D matrix
-(is (= (sum x) 2700.0)))
+(is (== (sum x) 2700.0)))
 
 (deftest sum-of-squares-test
 ;; calculate the sum of squares of values in a vector or 1D matrix
-(is (= (sum-of-squares x) 315638.0)))
+(is (== (sum-of-squares x) 315638.0)))
 
 (deftest prod-test
 ;; calculate the product of values in a vector or 1D matrix
-(is (= (prod [1 2 3 4 5 6]) 720.0)))
+(is (== (prod [1 2 3 4 5 6]) 720.0)))
 
 (deftest decomp-svd-test
   (let [m (matrix [[1 0] [0 1] [0 0]])
@@ -558,7 +559,7 @@
 
 (deftest matrix-map-test
   (let [mat (matrix (range 9) 3)]
-    (are [x y] (= x y)
+    (are [x y] (m/e== x y)
          '((0.0 1.0 0.0) (1.0 0.0 1.0) (0.0 1.0 0.0)) (matrix-map #(mod % 2) mat)
          '(0.0 1.0 0.0) (matrix-map #(mod % 2) (first mat))
          1.0 (matrix-map #(mod % 2) ($ 1 0 mat))

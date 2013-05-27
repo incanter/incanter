@@ -645,11 +645,7 @@
 
 
 (defmethod to-list :default [s] 
-  (cond
-    (m/vec? s)
-      (m/eseq s)
-    :else 
-      (m/slices s)))
+  (m/to-nested-vectors s))
 
 (defmethod to-list nil [s] nil)
 
@@ -722,10 +718,11 @@
 
 
 "
-  ([^Matrix A & B]
-   (if B
-    (clx/solve A B)
-    (clx/i A))))
+  ([A & B]
+   (let [A (m/matrix :clatrix A)] ;; TODO: check if too expensive?
+     (if B
+       (clx/solve A B)
+       (clx/i A)))))
 
 (defn det ;; TODO
  " Returns the determinant of the given matrix. Equivalent
