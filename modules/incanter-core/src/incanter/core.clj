@@ -35,6 +35,7 @@
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)])
   (:require [clatrix.core :as clx])
+  (:require [clojure.core.matrix :as m])
   (:import (clatrix.core Matrix)
            (cern.jet.math.tdouble DoubleArithmetic)
            (cern.colt.list.tdouble DoubleArrayList)
@@ -54,12 +55,10 @@
 
 (defn matrix
 "
-  Returns an instance of an incanter.Matrix, which is an extension of
-  cern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure
-  interface clojure.lang.ISeq. Therefore Clojure sequence operations can
-  be applied to matrices. A matrix consists of a sequence of rows, where
-  each row is a one-dimensional row matrix. One-dimensional matrices are
-  in turn, sequences of numbers. Equivalent to R's matrix function.
+  Returns a matrix, in a valid core.matrix format. You can use the slices function to
+  access 
+
+  Equivalent to R's matrix function.
 
   Examples:
     (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix
@@ -85,18 +84,19 @@
 
 "
   ([data]
-   (make-matrix data))
+   (m/matrix data))
 
   ([data ^Integer ncol]
-   (make-matrix data ncol))
+   (m/matrix (partition ncol data)))
 
   ([init-val ^Integer rows ^Integer cols]
-   (make-matrix init-val rows cols)))
+    (let [a (m/new-matrix rows cols)]
+      (m/assign a init-val))))
 
 
 (defn matrix?
   " Test if obj is 'derived' clatrix.core.Matrix"
-  ([obj] (is-matrix obj)))
+  ([obj] (m/matrix? obj)))
 
 
 (defn dataset?
@@ -108,9 +108,9 @@
      :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
   ([mat]
    (cond
-    (matrix? mat) (first (clx/size ^clatrix.core.Matrix mat))
-    (dataset? mat) (count (:rows mat))
-    (coll? mat) (count mat))))
+     (m/matrix? mat) (m/row-count mat)
+     (dataset? mat) (count (:rows mat))
+     (coll? mat) (count mat))))
 
 
 (defn ncol
@@ -118,9 +118,9 @@
      :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
   ([mat]
    (cond
-    (matrix? mat) (last (clx/size ^clatrix.core.Matrix mat))
-    (dataset? mat) (count (:column-names mat))
-    (coll? mat) 1 )))
+     (m/matrix? mat) (m/column-count mat)
+     (dataset? mat) (count (:column-names mat))
+     (coll? mat) 1 )))
 
 
 
@@ -138,7 +138,7 @@
       (identity-matrix 4)
 
 "
-([^Integer n] (clx/id n)))
+([^Integer n] (m/identity-matrix n)))
 
 
 (defn diag
@@ -156,7 +156,7 @@
   (diag A)
   "
   [m]
-  (clx/diag m))
+  (m/diagonal-matrix m))
 
 
 (defn ^Matrix trans
@@ -171,9 +171,9 @@
 
 "
   ([mat]
-   (if (matrix? mat)
-     (clx/t mat)
-     (clx/t (matrix mat)))))
+   (if (m/matrix? mat)
+     (m/transpose mat)
+     (m/transpose (m/matrix mat)))))
 
 
 
@@ -336,6 +336,11 @@
          (clx/get mat rows cols)
        (and all-rows? all-cols?)
          mat))))
+
+(defmethod sel :default
+  ([mat & more]
+    (apply sel (m/matrix :clatrix mat) more)
+    ))
 
 (defn bind-rows
 "   Returns the matrix resulting from concatenating the given matrices
