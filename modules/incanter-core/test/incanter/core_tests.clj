@@ -93,37 +93,37 @@
 
 ;; constructing matrices from arrays
 (deftest matrix-from-arrays
-  (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
-  (is (= (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3]))))
-  (is (= (matrix [[1 2] [3 4]])
+  (is (m/e== (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
+  (is (m/e== (matrix [1.0 2.0 3.0]) (matrix (long-array [1 2 3]))))
+  (is (m/e== (matrix [[1 2] [3 4]])
          (matrix (object-array [(double-array [1.0 2.0])
                                 (double-array [3.0 4.0])])))))
 
 
   ;; performing clojure sequence operations on matrices
 (deftest matrix-seq-tests
-  (is (= (first A) (matrix [1 2 3] 3))) ; first of A is a 1D row matrix
-  (is (= (rest A) (matrix [[4 5 6]
+  (is (m/e== (first A) (matrix [1 2 3]))) ; first of A is a 1D row matrix
+  (is (m/e== (rest A) (matrix [[4 5 6]
                            [7 8 9]
                            [10 11 12]])))
-  (is (= (conj A [13 14 15]) (matrix [[1 2 3]
+  (is (m/e== (conj A [13 14 15]) (matrix [[1 2 3]
                                       [4 5 6]
                                       [7 8 9]
                                       [10 11 12]
                                       [13 14 15]])))
-  (is (= (conj A A) (matrix [[1 2 3]
-                             [4 5 6]
-                             [7 8 9]
-                             [10 11 12]
-                             [1 2 3]
-                             [4 5 6]
-                             [7 8 9]
-                             [10 11 12]])))
+  (is (m/e== (m/join A A) (matrix [[1 2 3]
+                                 [4 5 6]
+                                 [7 8 9]
+                                 [10 11 12]
+                                 [1 2 3]
+                                 [4 5 6]
+                                 [7 8 9]
+                                 [10 11 12]])))
   (is (= (seq A) A))
-  (is (= (first (first A)) 1.0))
-  (is (= (nth (nth A 1) 1.0)))
+  (is (== (first (first A)) 1.0))
+  (is (== (nth (nth A 1) 1.0)))
   ;; get column 1 (i.e. second column) of matrix A
-  (is (= (map #(nth % 1) A) [2.0 5.0 8.0 11.0])))
+  (is (m/e== (map #(nth % 1) A) [2.0 5.0 8.0 11.0])))
 
 
 
@@ -133,7 +133,7 @@
                             [2 5 8 11]
                             [3 6 9 12]])))
   (is (= (trans (trans A)) A))
-  (is (= (first (trans A)) (matrix [1 4 7 10] 4))))
+  (is (m/e== (first (trans A)) (matrix [1 4 7 10]))))
 
 (deftest bind-rows-test
   ;; combining matrices/vectors by row
@@ -224,19 +224,16 @@
 
 (deftest matrix-sel-tests
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
-  (is (= (sel A 3 2) 12.0))
+  (is (== (sel A 3 2) 12.0))
   ;; use 'true' to select an entire row or column
   (is (= (sel A :cols 2) (matrix [3 6 9 12])))
-  (is (= (sel A :rows 1) (matrix [[4 5 6]])))
+  (is (= (sel A :rows 1) (matrix [4 5 6])))
   (is (= (sel A :all [0 2]) (matrix [[1 3]
                                      [4 6]
                                      [7 9]
                                      [10 12]])))
   (is (= (sel A :all :all) A))
-  (is (= (sel A :all 2) (matrix [[3]
-                                 [6]
-                                 [9]
-                                 [12]])))
+  (is (m/e== (sel A :all 2) (matrix [3 6 9 12])))
   (is (= (sel A true true) A))
   ;; pass a vector of indices to select a set of rows and/or columns
   (is (= (sel A :cols [0 2]) (matrix [[1 3]
@@ -530,7 +527,7 @@
 (deftest decomp-lu-test
   (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
         {:keys [L U P]} (decomp-lu m)]
-    (is (= m (mmult P L U)))))
+    (is (m/e== m (mmult P L U)))))
 
 (deftest test-metadata
   (let [md {:name "metadata test"}

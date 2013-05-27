@@ -360,8 +360,14 @@
       (bind-rows [1 2 3 4] [5 6 7 8])
 
 "
-  ([& args]
-   (apply m/join args)))
+  ([m & args]
+   (let [dm (m/dimensionality m)
+        m (cond
+            (== dm 1) (m/row-matrix m)
+            (== dm 2) m
+            :else (throw (RuntimeException. (str "Can't bind rows to array of dimensionality " dm))))
+        ]
+    (apply m/join m args))))
 
 
 
@@ -874,7 +880,8 @@ http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decompos
 http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
   [^Matrix mat]
-  (clx/cholesky mat))
+  (let [mat (m/coerce :clatrix mat)]
+    (clx/cholesky mat)))
 
 (def ^:private ^:const allowed-types #{:full :compact :values})
 
@@ -910,7 +917,8 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat & {:keys [type] :or {type :full}}]
-  (let [type (or (get allowed-types type) :full)
+  (let [mat (m/coerce :clatrix mat) ;; TODO: generalise for all matrices
+        type (or (get allowed-types type) :full)
         result (if (= type :full)
                  (clx/svd mat :type :full)
                  (clx/svd mat :type :sparse))]
@@ -940,7 +948,8 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
   http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
   "
   [mat]
-  (let [result (clx/eigen mat)]
+  (let [mat (m/coerce :clatrix mat)
+        result (clx/eigen mat)]
     {:values (or (:values result) (:ivalues result))
      :vectors (or (:vectors result) (:ivectors result))}))
 
@@ -967,10 +976,12 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
     http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
 "
   ([mat]
-    (let [result (clx/lu mat)]
-      {:L (:l result)
-       :U (:u result)
-       :P (:p result)})))
+    (or (try (m/lu-decomposition mat) (catch Throwable t nil))
+      (let [mat (m/coerce :clatrix mat)
+            result (clx/lu mat)]
+        {:L (:l result)
+         :U (:u result)
+         :P (:p result)}))))
 
 (defn vector-length [u]
   (sqrt (reduce + (map (fn [c] (pow c 2)) u))))

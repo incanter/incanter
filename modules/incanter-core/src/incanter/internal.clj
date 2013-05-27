@@ -37,6 +37,8 @@
 (defn make-matrix
   ([data]
     (cond
+     (clojure.core.matrix/array? data)
+       (clojure.core.matrix/coerce :clatrix data)
      (coll? (first data))
       (clx/matrix data)
      (number? (first data))
@@ -59,7 +61,7 @@
 
 (defmacro transform-with [A op fun]
   `(cond
-     (is-matrix ~A) (~fun ~A)
+     (clx/clatrix?) (~fun ~A)
      (and (coll? ~A) (coll? (first ~A))) (let [mA# (make-matrix ~A)]  
                                            (clx/matrix (clx/dotom ~fun mA#) nil))
      (coll? ~A)   (map ~op ~A)
