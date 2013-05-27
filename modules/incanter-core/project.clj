@@ -10,6 +10,6 @@
                   :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.0"]
                  [net.mikera/core.matrix "0.7.1"]
-                 [com.quantisan/clatrix "0.2.2"
+                 [clatrix/clatrix "0.3.0-SNAPSHOT"
                   :exclusions [org.clojure/clojure]]]
   :java-source-paths ["java"])
