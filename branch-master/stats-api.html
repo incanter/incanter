@@ -35,7 +35,7 @@ namespace.
     <div class="NamespaceTOC">
       <span class="toc-header">Namespaces</span>
       <ul id="left-sidebar-list">
-        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
+        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
       </ul>
     </div>
     <div class="BranchTOC">
@@ -286,6 +286,9 @@ namespace.
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.stats/rank-index">rank-index</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.stats/sample">sample</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.stats/sample-beta">sample-beta</a>
@@ -2340,6 +2343,30 @@ given a seq, returns a map where the keys are the values of the seq and the valu
     
     
     <a href="https://github.com/liebke/incanter/blob/384908f1004c58e65630b3a63dfb775de86bcdbc/modules/incanter-core/src/incanter/stats.clj#L2890" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.stats/sample">sample</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr"> Returns a sample of the given size from the given collection. If replacement
+is set to false it returns a set, otherwise it returns a list.
+
+Arguments:
+  coll -- collection or dataset to be sampled from
+
+Options:
+  :size -- (default (count x) sample size
+  :replacement (default true) -- sample with replacement
+
+
+Examples:
+  (sample (range 10)) ; permutation of numbers zero through ten
+  (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.
+  (sample (seq "abcdefghijklmnopqrstuvwxyz")  :size 4 :replacement false) ; choose 4 random letters.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/384908f1004c58e65630b3a63dfb775de86bcdbc/modules/incanter-core/src/incanter/stats.clj#L1662" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />

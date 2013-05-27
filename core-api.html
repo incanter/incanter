@@ -294,7 +294,16 @@ namespace.
       <a class="toc-entry-anchor" href="#incanter.core/regularized-beta">regularized-beta</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.core/save">save</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.core/sel">sel</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.core/separate-blocks">separate-blocks</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.core/set-data">set-data</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.core/sin">sin</a>
@@ -333,6 +342,12 @@ namespace.
       <a class="toc-entry-anchor" href="#incanter.core/to-levels">to-levels</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.core/to-list">to-list</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.core/to-map">to-map</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.core/to-matrix">to-matrix</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -349,6 +364,9 @@ namespace.
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.core/vectorize">vectorize</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.core/view">view</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.core/with-data">with-data</a>
@@ -2121,6 +2139,120 @@ References:
   </div><div id="var-entry">
     <br />
     <hr />
+    <h2 id="incanter.core/save">save</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr"> Save is a multi-function that is used to write matrices, datasets and
+charts (in png format) to a file.
+
+Arguments:
+  obj -- is a matrix, dataset, or chart object
+  filename -- the filename to create.
+
+Matrix and dataset options:
+  :delim (default \,) column delimiter
+  :header (default nil) an sequence of strings to be used as header line
+      for matrices the default value is nil, for datasets, the default is
+      the dataset's column-names array.
+  :append (default false) determines whether this given file should be
+      appended to. If true, a header will not be written to the file again.
+
+Chart options:
+  :width (default 500)
+  :height (default 400)
+
+
+Matrix Examples:
+
+  (use '(incanter core io))
+  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix
+  (save A "A.dat") ; writes A to the file A.dat, with no header and comma delimited
+  (save A "A.dat" :delim \tab) ; writes A to the file A.dat, with no header and tab delimited
+
+  ;; writes A to the file A.dat, with a header and tab delimited
+  (save A "A.dat" :delim \, :header ["col1" "col2" "col3"])
+
+
+Dataset Example:
+
+  (use '(incanter core io datasets))
+  ;; read the iris sample dataset, and save it to a file.
+  (def iris (get-dataset :iris))
+  (save iris "iris.dat")
+
+
+Chart Example:
+
+  (use '(incanter core io stats charts))
+  (save (histogram (sample-normal 1000)) "hist.png")
+
+  ;; chart example using java.io.OutputStream instead of filename
+  (use '(incanter core stats charts))
+  (import 'java.io.FileOutputStream)
+  (def fos (FileOutputStream. "/tmp/hist.png"))
+  (def hist (histogram (sample-normal 1000)))
+  (save hist fos)
+  (.close fos)
+
+  (view "<a href="file:///tmp/hist.png">file:///tmp/hist.png</a>")</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2575" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.core/sel">sel</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">
+Returns an element or subset of the given matrix, or dataset.
+
+Argument:
+  a matrix object or dataset.
+
+Options:
+  :rows (default true)
+    returns all rows by default, can pass a row index or sequence of row indices
+  :cols (default true)
+    returns all columns by default, can pass a column index or sequence of column indices
+  :except-rows (default nil) can pass a row index or sequence of row indices to exclude
+  :except-cols (default nil) can pass a column index or sequence of column indices to exclude
+  :filter (default nil)
+    a function can be provided to filter the rows of the matrix
+
+Examples:
+  (use 'incanter.datasets)
+  (def iris (to-matrix (get-dataset :iris)))
+  (sel iris 0 0) ; first element
+  (sel iris :rows 0 :cols 0) ; also first element
+  (sel iris :cols 0) ; first column of all rows
+  (sel iris :cols [0 2]) ; first and third column of all rows
+  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows
+  (sel iris :rows (range 10)) ; all columns of the first 10 rows
+
+  ;; exclude rows or columns
+  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows
+  (sel iris :except-cols 1) ; all columns except the second
+
+  ;; return only the first 10 even rows
+  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))
+  ;; select rows where distance (third column) is greater than 50
+  (sel iris :filter #(&gt; (nth % 2) 4))
+
+  ;; examples with datasets
+  (use 'incanter.datasets)
+  (def us-arrests (get-dataset :us-arrests))
+  (sel us-arrests :cols "State")
+  (sel us-arrests :cols :State)
+
+  (sel us-arrests :cols ["State" "Murder"])
+  (sel us-arrests :cols [:State :Murder])</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L213" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
     <h2 id="incanter.core/separate-blocks">separate-blocks</h2>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (separate-blocks matrix partitions)
@@ -2129,6 +2261,37 @@ References:
     
     
     <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2769" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.core/set-data">set-data</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">
+
+Examples:
+
+  (use '(incanter core charts datasets))
+
+  (def data (get-dataset :iris))
+  (def table (data-table data))
+  (view table)
+  ;; now view only a subset of the data
+  (set-data table ($where {:Petal.Length {:gt 6}} data))
+
+
+  ;; use sliders to dynamically select the query values
+  (let [data (get-dataset :iris)
+        table (data-table data)]
+    (view table)
+    (sliders [species ["setosa" "virginica" "versicolor"]
+              min-petal-length (range 0 8 0.1)]
+      (set-data table ($where {:Species species
+                               :Petal.Length {:gt min-petal-length}}
+                              data))))</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2515" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2326,6 +2489,36 @@ Examples:
   </div><div id="var-entry">
     <br />
     <hr />
+    <h2 id="incanter.core/to-list">to-list</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr"> Returns a list-of-lists if the given matrix is two-dimensional
+and a flat list if the matrix is one-dimensional.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L618" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.core/to-map">to-map</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Takes a dataset or matrix and returns a hash-map where the keys are
+ keyword versions of the column names, for datasets, or numbers, for
+ matrices, and the values are sequence of the column values.
+
+Examples:
+  (use '(incanter core datasets))
+
+  (to-map (get-dataset :cars))
+
+  (to-map (matrix (range 9) 3))</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2104" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
     <h2 id="incanter.core/to-matrix">to-matrix</h2>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (to-matrix dataset &amp; {:keys [dummies], :or {dummies false}})
@@ -2423,6 +2616,61 @@ with the resulting new values.</pre>
     
     
     <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L752" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.core/view">view</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr"> This is a general 'view' function. When given an Incanter matrix/dataset
+or a Clojure numeric collection, it will display it in a Java Swing
+JTable. When given an Incanter chart object, it will display it in a new
+window. When given a URL string, it will open the location with the
+platform's default web browser.
+
+When viewing charts, a :width (default 500) and :height (default 400)
+option can be provided.
+
+When viewing an incanter.processing sketch, set the :exit-on-close option
+to true (default is false) to kill the animation processes when you
+close the window (this will also kill your REPL or Swank server),
+otherwise those processing will continue to run in the background.
+
+
+
+Examples:
+
+  (use '(incanter core stats datasets charts))
+
+  ;; view matrices
+  (def rand-mat (matrix (sample-normal 100) 4))
+  (view rand-mat)
+
+  ;; view numeric collections
+  (view [1 2 3 4 5])
+  (view (sample-normal 100))
+
+  ;; view Incanter datasets
+  (view (get-dataset :iris))
+
+  ;; convert dataset to matrix, changing Species names to numeric codes
+  (view (to-matrix (get-dataset :iris)))
+
+  ;; convert dataset to matrix, changing Species names to dummy variables
+  (view (to-matrix (get-dataset :iris) :dummies true))
+
+  ;; view a chart
+  (view (histogram (sample-normal 1000)) :width 700 :height 700)
+
+  ;; view a URL
+  (view "<a href="http://incanter.org">http://incanter.org</a>")
+
+  ;; view a PNG file
+  (save (histogram (sample-normal 1000)) "/tmp/norm_hist.png")
+  (view "<a href="file:///tmp/norm_hist.png">file:///tmp/norm_hist.png</a>")</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2362" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />

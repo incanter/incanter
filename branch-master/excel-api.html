@@ -35,7 +35,7 @@ namespace.
     <div class="NamespaceTOC">
       <span class="toc-header">Namespaces</span>
       <ul id="left-sidebar-list">
-        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
+        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
       </ul>
     </div>
     <div class="BranchTOC">
@@ -74,7 +74,13 @@ namespace.
     </div>
   </div><div style="margin-left: 1em;" class="toc-section">
     <a href="#excel.cells" style="margin-top: 3px;">excel.cells</a>
-    
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel.cells/get-cell-value">get-cell-value</a>
+      
+    </div>
   </div><div style="margin-left: 1em;" class="toc-section">
     <a href="#excel.workbook" style="margin-top: 3px;">excel.workbook</a>
     <div style="margin-left: 1em;" class="toc-entry">
@@ -107,8 +113,8 @@ Excel file formats (.xls and .xlsx).</pre>
     <br />
     <hr />
     <h2 id="incanter.excel/read-xls">read-xls</h2>
-    <span id="var-type">var</span><br />
-    <pre id="var-usage"></pre>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
     <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
 or :override-format option.
@@ -135,13 +141,13 @@ or :xlsx override the suffix check.
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L97" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-excel/src/incanter/excel.clj#L95" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="incanter.excel/save-xls">save-xls</h2>
-    <span id="var-type">var</span><br />
-    <pre id="var-usage"></pre>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
     <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
 Excel formats, uses the filename suffix or :override-format option.
 
@@ -160,7 +166,7 @@ Examples:
   (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L26" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-excel/src/incanter/excel.clj#L24" id="var-source">Source</a>
   </div>
 </div>
 <br />
@@ -171,7 +177,31 @@ Examples:
 <br />
 
 
-
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Get the value after the evaluating the formula.  See <a href="http://poi.apache.org/spreadsheet/eval.html#Evaluate">http://poi.apache.org/spreadsheet/eval.html#Evaluate</a></pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L14" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel.cells/get-cell-value">get-cell-value</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Get the cell value depending on the cell type.</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L20" id="var-source">Source</a>
+  </div>
+</div>
 <br />
 <h2 id="excel.workbook">excel.workbook</h2>
 <pre id="namespace-docstr"></pre>
@@ -187,8 +217,8 @@ Examples:
     <br />
     <hr />
     <h2 id="incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</h2>
-    <span id="var-type">var</span><br />
-    <pre id="var-usage"></pre>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
     <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
     
     
