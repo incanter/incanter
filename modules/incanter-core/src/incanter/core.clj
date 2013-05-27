@@ -460,7 +460,7 @@
   (mult 2 [1 2 3])
   "
   [& args] 
-  (apply m/mul args))
+  (apply m/emul args))
 
 
 (defn div
