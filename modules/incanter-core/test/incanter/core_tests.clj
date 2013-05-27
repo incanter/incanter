@@ -102,7 +102,7 @@
 
   ;; performing clojure sequence operations on matrices
 (deftest matrix-seq-tests
-  (is (m/e== (first A) (matrix [1 2 3]))) ; first of A is a 1D row matrix
+  (is (m/e== (first A) [1 2 3])) ; first of A is a 1D vector
   (is (m/e== (rest A) (matrix [[4 5 6]
                            [7 8 9]
                            [10 11 12]])))
@@ -132,8 +132,8 @@
   (is (= (trans A) (matrix [[1 4 7 10]
                             [2 5 8 11]
                             [3 6 9 12]])))
-  (is (= (trans (trans A)) A))
-  (is (m/e== (first (trans A)) (matrix [1 4 7 10]))))
+  (is (m/e== (trans (trans A)) A))
+  (is (m/e== (first (trans A)) [1 4 7 10])))
 
 (deftest bind-rows-test
   ;; combining matrices/vectors by row
@@ -215,7 +215,7 @@
                       [7.0 8.0 9.0]
                       [10.0 11.0 12.0]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
-  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) (matrix [1.0 2.0 3.0 4.0 5.0 6.0])))
   (is (m/e== (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/e== (to-list [1 2 3]) [1 2 3]))
   (is (m/e== (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
@@ -226,14 +226,14 @@
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
   (is (== (sel A 3 2) 12.0))
   ;; use 'true' to select an entire row or column
-  (is (= (sel A :cols 2) (matrix [3 6 9 12])))
-  (is (= (sel A :rows 1) (matrix [4 5 6])))
-  (is (= (sel A :all [0 2]) (matrix [[1 3]
+  (is (m/e== (sel A :cols 2) [3 6 9 12]))
+  (is (m/e== (sel A :rows 1) [4 5 6]))
+  (is (m/e== (sel A :all [0 2]) (matrix [[1 3]
                                      [4 6]
                                      [7 9]
                                      [10 12]])))
   (is (= (sel A :all :all) A))
-  (is (m/e== (sel A :all 2) (matrix [3 6 9 12])))
+  (is (m/e== (sel A :all 2) [3 6 9 12]))
   (is (= (sel A true true) A))
   ;; pass a vector of indices to select a set of rows and/or columns
   (is (= (sel A :cols [0 2]) (matrix [[1 3]
@@ -319,10 +319,10 @@
                              [5 6 7]
                              [8 9 10]
                              [11 12 13]])))
-  (is (m/e== (plus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [2 4 6])))
-  (is (m/e== (plus [1.0 2.0 3.0] 1) (matrix [2 3 4])))
-  (is (m/e== (plus 1 [1.0 2.0 3.0]) (matrix [2 3 4])))
-  (is (m/e== (plus [1.0 2.0 3.0] (matrix [1 2 3]) (matrix [2 4 6])))))
+  (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1.0 2.0 3.0])) (matrix [2 4 6])))
+  (is (m/e== (plus (matrix [1.0 2.0 3.0]) 1) (matrix [2 3 4])))
+  (is (m/e== (plus 1 (matrix [1.0 2.0 3.0])) (matrix [2 3 4])))
+  (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1 2 3]) (matrix [2 4 6])))))
 
 (deftest matrix-minus-test
   ;; element by element subtraction on matrices
@@ -350,10 +350,10 @@
                               [-3 -4 -5]
                               [-6 -7 -8]
                               [-9 -10 -11]])))
-  (is (m/e== (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
-  (is (m/e== (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
-  (is (m/e== (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
-  (is (m/e== (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0])))))
+  (is (m/e== (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) [0 0 0]))
+  (is (m/e== (minus [1.0 2.0 3.0] 1) [0 1 2]))
+  (is (m/e== (minus 1 [1.0 2.0 3.0]) [0 -1 -2]))
+  (is (m/e== (minus [1 2 3] (m/array [1 2 3]) [0 0 0]))))
 
 (deftest matrix-mult-tests
   ;; element by element multiplication on matrices
@@ -381,10 +381,10 @@
                              [8 10 12]
                              [14 16 18]
                              [20 22 24]])))
-  (is (m/e== (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 4 9])))
-  (is (m/e== (mult [1 2 3] 2.0) (matrix [2 4 6])))
-  (is (m/e== (mult 2.0 [1 2 3]) (matrix [2 4 6])))
-  (is (m/e== (mult [1 2 3] (matrix [1 2 3])) (matrix [1 4 9]))))
+  (is (m/e== (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) [1 4 9]))
+  (is (m/e== (mult [1 2 3] 2.0) [2 4 6]))
+  (is (m/e== (mult 2.0 [1 2 3]) [2 4 6]))
+  (is (m/e== (mult (matrix [1 2 3]) (matrix [1 2 3])) [[1] [4] [9]])))
 
 (deftest matrix-div-tests
   ;; element by element division on matrices
@@ -412,10 +412,10 @@
                             [2/4 2/5 2/6]
                             [2/7 2/8 2/9]
                             [2/10 2/11 2/12]])))
-  (is (m/e== (div [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 1 1])))
-  (is (m/e== (div [1 2 3] 2.0) (matrix [1/2 1 3/2])))
-  (is (m/e== (div 2.0 [1 2 3]) (matrix [2 1 0.6666666666666666])))
-  (is (m/e== (div [1 2 3] (matrix [1 2 3])) (matrix [1 1 1]))))
+  (is (m/e== (div (matrix [1.0 2.0 3.0]) (matrix [1.0 2.0 3.0])) (matrix [1 1 1])))
+  (is (m/e== (div (matrix [1 2 3]) 2.0) (matrix [1/2 1 3/2])))
+  (is (m/e== (div 2.0 (matrix [1 2 3])) (matrix [2 1 0.6666666666666666])))
+  (is (m/e== (div (matrix [1 2 3]) (matrix [1 2 3])) (matrix [1 1 1]))))
 
 (deftest matrix-mapreduce-tests
   ;; getting row sums

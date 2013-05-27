@@ -56,7 +56,7 @@
 (defn matrix
 "
   Returns a matrix, in a valid core.matrix format. You can use the slices function to
-  access 
+  access the rows.
 
   Equivalent to R's matrix function.
 
@@ -84,14 +84,16 @@
 
 "
   ([data]
-    (m/matrix data))
+    (let [data (m/matrix data)]
+      (if (== (m/dimensionality data) 1)
+        (m/column-matrix data)
+        data)))
 
   ([data ^Integer ncol]
     (m/matrix (partition ncol data)))
 
   ([init-val ^Integer rows ^Integer cols]
     (m/compute-matrix [rows cols] (constantly init-val))))
-
 
 (defn matrix?
   " Test if obj is 'derived' clatrix.core.Matrix"
@@ -691,7 +693,7 @@
 
 
 (defn kronecker
-" Returns the Kronecker product of the given arguments.
+" Returns the Kronecker (outer) product of the given arguments.
 
   Examples:
 
@@ -704,21 +706,7 @@
 
 "
   ([& args]
-    (reduce (fn [A B]
-              (let [a (cond
-                        (matrix? A) A
-                        (number? A) (matrix [[A]])
-                        :else (matrix A))
-                    b (cond
-                        (matrix? B) B
-                        (number? B) (matrix [[B]])
-                        :else (matrix B))
-                    rows (* (nrow a) (nrow b))
-                    cols (* (ncol a) (ncol b))]
-                (apply bind-rows (for [i (range (nrow a))]
-                             (apply bind-columns (for [j (range (ncol a))]
-                                             (mult (sel a i j) b)))))))
-            args)))
+    (apply m/outer-product args)))
 
 (defn solve
 " Returns a matrix solution if A is square, least squares solution otherwise.
