@@ -31,21 +31,20 @@
 
 
 ;; operator precedence for formula macro
-(def +precedence-table+ (ref {}))
+(def +precedence-table+ (atom {}))
 
-;; symbol translation for symbols in formula 
-;; (only supports binary operators)
-(def +translation-table+ (ref {}))
+;; symbol translation for symbols in formula (only supports binary operators)
+(def +translation-table+ (atom {}))
 
-(def +highest-precedence+ (ref 0))
+(def +highest-precedence+ (atom 0))
 
 (defn defop
   "Define operators for formula macro"
   ([op prec & [trans]]
-     (dosync (ref-set +precedence-table+ (assoc @+precedence-table+ op prec)))
+     (swap! +precedence-table+ assoc op prec)
      (when-not (nil? trans)
-       (dosync (ref-set +translation-table+ (assoc @+translation-table+ op trans))))
-     (dosync (ref-set +highest-precedence+ (apply max (map val @+precedence-table+))))))
+       (swap! +translation-table+ assoc op trans))
+     (reset! +highest-precedence+ (reduce max (map val @+precedence-table+)))))
 
 
 ;; == operators ==
@@ -58,8 +57,6 @@
 (defop '<= 40)
 (defop '>= 40)
 (defop 'mod 90 'rem)
-
-
 
 (defn- operator?
   "Check if is valid operator"
@@ -91,10 +88,8 @@
 (defn- translate-op
   "Translation of symbol => symbol for binary op allows for
 user defined operators"
-  ([op] 
-     (if (contains? @+translation-table+ op)
-       (get @+translation-table+ op)
-       op)))
+  ([op]
+     (get @+translation-table+ op op)))
 
 (defn infix-to-prefix
   "Convert from infix notation to prefix notation"
