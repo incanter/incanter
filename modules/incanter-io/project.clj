@@ -6,6 +6,7 @@
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.5.0-SNAPSHOT"]
+                 [org.clojure/clojure "1.5.1"]
                  ;; TODO: switch to data.csv?
                  [net.sf.opencsv/opencsv "2.3"]
                  ;; TODO: switch to data.json?
