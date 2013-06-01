@@ -1,10 +1,32 @@
 # What's new in Incanter #
 
-## Changes for 1.5.x
+## Changes for 1.5.0 ##
 
-- Incanter-core matrix using native BLAS through jBLAS/Clatrix
-- Updated dependencies:
-    - [Clatrix](https://github.com/Quantisan/clatrix): 0.2.1
+### Enhancements ###
+
+ - incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance.
+ - several interpolation functions were added to incanter-core module (as `incanter.interpolation` namespace).
+ - a new option is added to `heat-map` - `:include-zero?`.
+ - the `tail` function was added.
+ - new function `reorder-columns` for a dataset that changes the order of appearance of the datset columns. It does not alter the row order.
+ - `save` will print data to standard output if `"-"` is specified as file name.
+ - `sel` and other functions (`$`, `head`, `tail`, etc.) can be used with lists (`java.util.List`). 
+ - the `toeplitz` function was added to generate Toeplitz matrix for given vector.
+ - the `scatter-plot-matrix` function was added to `incanter.chart` module
+ - `incanter.optimize` was extended with `minimize` and `maximise` functions for performing unconstrained nonlinear optimization using the BFGS algorithm. 
+
+### Many bugfixes ###
+ - for function & parametric plots, line is finished in max-range point.
+ - permutation matrix is returned in LU decomposition.
+ - `sel` will return dataset when `:rows` or `:cols` are non-numbers - this changes
+   previous behaviour when list was returned if only one row or col was specified
+ - `linear-model` now correctly calculates t-probs
+
+### Updated dependencies ###
+
+ - [Clatrix](https://github.com/Quantisan/clatrix): 0.3.0
+ - Clojure: 1.5.1
+ - JLine: 2.11
 
 ## Changes for 1.4.x ##
 

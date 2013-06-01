@@ -18,7 +18,7 @@
                  [swingrepl "1.3.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]
-                 [jline "0.9.94"]]
+                 [jline/jline "2.11"]]
   :main incanter.main
   :plugins [[lein-ritz "0.7.0" :exclusions [org.clojure/clojure]]]
   :profiles {:dev {:resource-paths ["data"]}
