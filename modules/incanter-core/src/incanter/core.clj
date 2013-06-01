@@ -629,7 +629,7 @@
   Equivalent to R's choose function.
 
   Examples:
-    (choose 25 6) ; => 2,598,960
+    (choose 25 6) ; => 177,100
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html
@@ -743,7 +743,6 @@
 
 (defn det ;; TODO
  " Returns the determinant of the given matrix. Equivalent
-   to R's det function.
 
    References:
      http://en.wikipedia.org/wiki/LU_decomposition
