@@ -41,7 +41,7 @@
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows)]))
+                              cumulative-sum solve vectorize bind-rows safe-div)]))
 
 (defn scalar-abs
   "Fast absolute value function"
@@ -2078,14 +2078,14 @@
           sse (sum-of-squares resid)
           ssr (sum-of-squares (minus fitted (mean fitted)))
           sst (+ sse ssr)
-          r-square (/ ssr sst)
+          r-square (safe-div ssr sst)
           n (nrow y)
           p (ncol _x)
           p-1 (if intercept (dec p) p)
           adj-r-square (- 1 (* (- 1 r-square) (/ (dec 1) (- n p 1))))
-          mse (/ sse (- n p))
-          msr (/ ssr p-1)
-          f-stat (/ msr mse)
+          mse (safe-div sse (- n p))
+          msr (safe-div ssr p-1)
+          f-stat (safe-div msr mse)
           df1 p-1
           df2 (- n p)
           f-prob (cdf-f f-stat :df1 df1 :df2 df2 :lower-tail? false)

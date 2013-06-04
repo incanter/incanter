@@ -334,3 +334,9 @@
     (is
       (= (format "%.8f" 5.4456385557467595) 
          (format "%.8f" (:X-sq (benford-test coll)))))))
+
+(deftest linear-model-with-zero-ss
+  ;; pre 1.5.0 linear model would have a divide by zero exception with this data
+  (let [data [0.0 2.0 0.0 0.0 0.0 1.0 1.0 3.0 0.0 2.0 0.0 1.0 2.0 0.0 0.0 0.0 0.0 1.0 2.0 0.0 1.0 1.0]
+        lm (linear-model data data)]
+    (is 1.0 (:r-square lm))))
