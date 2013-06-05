@@ -2813,10 +2813,13 @@ the coefficients."
  ([model x]
    (let [predictor (if (coll? x)
                       (cons 1 x)
-                      [1 x])]
-   (mmult (trans (:coefs model))
-          predictor))))
-
+                      [1 x])
+         res (mmult (trans (:coefs model))
+                    predictor)]
+     (if (and (matrix? res)
+              (= 1 (nrow res)) (= 1 (ncol res)))
+       (sel res 0 0)
+       res))))
 
 
 (defn odds-ratio

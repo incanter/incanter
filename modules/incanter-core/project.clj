@@ -9,6 +9,6 @@
                  [org.clojure/math.combinatorics "0.0.3"
                   :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.0"]
-                 [com.quantisan/clatrix "0.2.2"
+                 [clatrix/clatrix "0.3.0"
                   :exclusions [org.clojure/clojure]]]
   :java-source-paths ["java"])

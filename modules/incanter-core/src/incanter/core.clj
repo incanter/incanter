@@ -55,7 +55,7 @@
 (defn matrix
 "
   Returns an instance of an incanter.Matrix, which is an extension of
-  cern.colt.matrix.tdouble.impl.DenseColDoubleMatrix2D that implements the Clojure
+  Clatrix matrix that implements the Clojure
   interface clojure.lang.ISeq. Therefore Clojure sequence operations can
   be applied to matrices. A matrix consists of a sequence of rows, where
   each row is a one-dimensional row matrix. One-dimensional matrices are
@@ -80,8 +80,6 @@
     ; you can filter the rows using Clojure's filter function
     (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
 
-  References:
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html
 
 "
   ([data]
@@ -138,7 +136,7 @@
       (identity-matrix 4)
 
 "
-([^Integer n] (clx/id n)))
+([^Integer n] (clx/eye n)))
 
 
 (defn diag
@@ -363,12 +361,12 @@
         (nil? (seq B))
           A
         (or (coll? A) (coll? B))
-          (conj (if (matrix? A)
-                  A
-                  (matrix A (count A)))
-                (if (matrix? B)
-                  B
-                  (matrix B (count B))))
+        (conj (if (or (matrix? A) (matrix? (first A)))
+                A
+                (matrix A (count A)))
+              (if (or (matrix? B) (matrix? (first B)))
+                B
+                (matrix B (count B))))
         :else
           (throw (Exception. "Incompatible types"))))
       args)))
@@ -405,8 +403,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MATH FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 
 (defn plus
   "
@@ -491,9 +487,10 @@
       (div [1 2 3]) ; returns [1 1/2 13]
 
 "
-   ([& args] (if (= (count args) 1)
-               (clx/div (double 1) (first args))
-               (reduce clx/div (pass-to-matrix args)))))
+([& args]
+   (if (= (count args) 1)
+     (clx/div (double 1) (first args))
+     (reduce clx/div (pass-to-matrix args)))))
 
 (defn safe-div  ;; TODO modify to work with matrices ?
   "DivideByZero safe alternative to clojures / function,
@@ -680,7 +677,6 @@
   "Returns a copy of the given matrix."
   ([^Matrix mat] (clx/matrix (clx/dotom .copy mat) nil)))
 
-
 (defn mmult
   " Returns the matrix resulting from the matrix multiplication of the
     the given arguments. Equivalent to R's %*% operator.
@@ -695,11 +691,10 @@
 
     References:
       http://en.wikipedia.org/wiki/Matrix_multiplication
-      http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/DoubleMatrix2D.html
 
   "
     ([& args]
-     (reduce (fn [A B] (clx/* A B)) (pass-to-matrix args))))
+       (reduce (fn [A B] (clx/* A B)) (pass-to-matrix args))))
 
 
 (defn kronecker
@@ -727,9 +722,11 @@
                         :else (matrix B))
                     rows (* (nrow a) (nrow b))
                     cols (* (ncol a) (ncol b))]
-                (apply bind-rows (for [i (range (nrow a))]
-                             (apply bind-columns (for [j (range (ncol a))]
-                                             (mult (sel a i j) b)))))))
+                (apply bind-rows
+                       (for [i (range (nrow a))]
+                         (apply bind-columns
+                                (for [j (range (ncol a))]
+                                  (mult (sel a i j) b)))))))
             args)))
 
 (defn solve
@@ -749,15 +746,14 @@
     (clx/solve A B)
     (clx/i A))))
 
-;(defn det ;; TODO: 
-;" Returns the determinant of the given matrix. Equivalent
-  ;to R's det function.
+(defn det
+" Returns the determinant of the given matrix. Equivalent
+  to R's det function.
 
-  ;References:
-    ;http://en.wikipedia.org/wiki/LU_decomposition
-    ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleLUDecomposition.html
-;"
-  ;([mat] (.det DenseDoubleAlgebra/DEFAULT mat)))
+  References:
+    http://en.wikipedia.org/wiki/LU_decomposition
+"
+  ([mat] (clx/det mat)))
 
 
 (defn trace
@@ -765,10 +761,8 @@
 
   References:
   http://en.wikipedia.org/wiki/Matrix_trace
-  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/DenseDoubleAlgebra.html
   "
   [mat] (clx/trace mat))
-
 
 
 (defn vectorize
@@ -886,7 +880,6 @@ Examples:
 
 
 References:
-http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleCholeskyDecomposition.html
 http://en.wikipedia.org/wiki/Cholesky_decomposition
 "
   [^Matrix mat]
@@ -923,7 +916,6 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   References:
   http://en.wikipedia.org/wiki/Singular_value_decomposition
-  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat & {:keys [type] :or {type :full}}]
   (let [type (or (get allowed-types type) :full)
@@ -953,7 +945,6 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   References:
   http://en.wikipedia.org/wiki/Eigenvalue_decomposition
-  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleEigenvalueDecomposition.html
   "
   [mat]
   (let [result (clx/eigen mat)]
@@ -997,61 +988,35 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 (defn proj [u v]
   (mult (div (inner-product v u) (inner-product u u)) u))
 
+(defn decomp-qr
+  " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
-(defn orthonormal-base-stable [m]
-  (let [m (trans m)
-        vectors (reduce (fn [ac i]
-                          (let [vi (nth m i)]
-                            (conj ac (reduce (fn [aci j]
-                                               (minus aci (proj (nth ac j) vi)))
-                                             vi
-                                             (range 0 i)))))
-                        []
-                        (range 0 (nrow m)))]
-    (map (fn [v] (div v (vector-length v))) vectors)))
+  Optional parameters:
+  :type -- possible values: :full.  default is :full
+  if :full, returns the full QR decomposition
 
-;(defn decomp-qr
-  ;" Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
+  Returns:
+  a map containing:
+  :Q -- orthogonal factors
+  :R -- the upper triangular factors
 
-  ;Optional parameters:
-  ;:type -- one of :full, :compact.  default is :full
-  ;if :full, returns the full QR decomposition
-  ;if :compact, returns the compact (economy) QR decomposition
+  Examples:
 
-  ;Returns:
-  ;a map containing:
-  ;:Q -- orthogonal factors
-  ;:R -- the upper triangular factors
+  (use 'incanter.core)
+  (def foo (matrix (range 9) 3))
+  (decomp-qr foo)
+  (decomp-qr foo :type :full)
 
-  ;Examples:
+  References:
+  http://en.wikipedia.org/wiki/QR_decomposition
 
-  ;(use 'incanter.core)
-  ;(def foo (matrix (range 9) 3))
-  ;(decomp-qr foo)
-  ;(decomp-qr foo :type :full)
-  ;(decomp-qr foo :type :compact)
-
-  ;References:
-  ;http://en.wikipedia.org/wiki/QR_decomposition
-  ;http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DenseDoubleQRDecomposition.html
-  ;"
-  ;[m & {:keys [type] :or {type :full}}]  ;; TODO make work in matrix
-  ;(let [type (or type :full)
-        ;q (orthonormal-base-stable m)
-        ;m (trans m)]
-    ;{:Q (if (= type :full) q m)
-     ;:R (if (= type :compact)
-          ;(matrix (reduce (fn [r j]
-                            ;(conj r
-                                  ;(reduce (fn [row i]
-                                            ;(if (< i j)
-                                              ;(conj row 0)
-                                              ;(conj row (inner-product (nth q j) (nth m i)))))
-                                          ;[]
-                                          ;(range 0 (count q)))))
-                          ;[]
-                          ;(range 0 (count q))))
-          ;m)}))
+  "
+  [m & {:keys [type]}]
+  (let [;type (or (#{:full :compact} type) :full)
+        qr (clx/qr m)]
+    {:Q (:q qr)
+     :R (:r qr)})
+  )
 
 (defn condition
 " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.
@@ -1066,7 +1031,6 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   References:
     http://en.wikipedia.org/wiki/Condition_number
-    http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
 "
   ([mat]
    (let [s (:S (decomp-svd mat))]
@@ -1085,7 +1049,6 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   References:
   http://en.wikipedia.org/wiki/Matrix_rank
-  http://incanter.org/docs/parallelcolt/api/cern/colt/matrix/tdouble/algo/decomposition/DoubleSingularValueDecompositionDC.html
   "
   [mat]
   (clx/rank mat))

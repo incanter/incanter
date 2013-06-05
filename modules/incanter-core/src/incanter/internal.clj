@@ -37,6 +37,7 @@
 (defn make-matrix
   ([data]
     (cond
+     (is-matrix data) data
      (coll? (first data))
       (clx/matrix data)
      (number? (first data))

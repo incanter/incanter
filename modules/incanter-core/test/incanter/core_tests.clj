@@ -105,7 +105,7 @@
   (is (= (rest A) (matrix [[4 5 6]
                            [7 8 9]
                            [10 11 12]])))
-  (is (= (conj A [13 14 15]) (matrix [[1 2 3]
+  (is (= (conj A [[13 14 15]]) (matrix [[1 2 3]
                                       [4 5 6]
                                       [7 8 9]
                                       [10 11 12]
@@ -511,25 +511,30 @@
     (check :compact expect-compact)
     (check :values  expect-values)))
 
-;(deftest decomp-qr-test
-  ;(let [m (matrix [[1 0] [0 1] [0 0]])
-        ;expect-full {:Q (diag [1 1 1])
-                     ;:R m}
-        ;expect-compact {:Q m
-                        ;:R (diag [1 1])}
-        ;check (fn [type mtest]
-                ;(let [mtrue (decomp-qr m :type type)]
-                  ;(testing (str "qr " type)
-                    ;(is (= (:Q mtrue) (:Q mtest)))
-                    ;(is (= (:R mtrue) (:R mtest))))))]
-    ;(check nil      expect-full)
-    ;(check :full    expect-full)
-    ;(check :compact expect-compact)))
+(deftest decomp-qr-test
+  (let [m (matrix [[1 0] [0 1] [0 0]])
+        expect-full {:Q (diag [1 1 1])
+                     :R m}
+        expect-compact {:Q m
+                        :R (diag [1 1])}
+        check (fn [type mtest]
+                (let [mtrue (decomp-qr m :type type)]
+                  (testing (str "qr " type)
+                    (is (= (:Q mtrue) (:Q mtest)))
+                    (is (= (:R mtrue) (:R mtest))))))]
+    (check nil      expect-full)
+    (check :full    expect-full)
+;    (check :compact expect-compact)
+    ))
 
 (deftest decomp-lu-test
   (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
         {:keys [L U P]} (decomp-lu m)]
     (is (= m (mmult P L U)))))
+
+(deftest det-test
+  (let [m (matrix [[-2 2 3] [-1 1 3] [2 0 -1]])]
+    (is (= 6.0 (det m)))))
 
 (deftest test-metadata
   (let [md {:name "metadata test"}
