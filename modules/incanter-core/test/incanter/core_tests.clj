@@ -575,3 +575,21 @@
   (is (factorial 0) 1.0)
   (is (thrown? AssertionError (factorial -1))))
 
+
+(deftest safe-div-test
+  (is 1/2 (safe-div 2))
+  (is 2 (safe-div 10 5))
+  (is 2 (safe-div 20 2 5))
+
+  (is -1/2 (safe-div -2))
+  (is -2 (safe-div -10 5))
+  (is -2 (safe-div -20 2 5))
+
+  (is Double/NaN (safe-div 0))
+  (is Double/NaN (safe-div 0 0))
+  (is Double/NaN (safe-div 0 0 5))
+  (is Double/POSITIVE_INFINITY (safe-div 10 0))
+  (is Double/POSITIVE_INFINITY (safe-div 20 2 2 0))
+  (is Double/POSITIVE_INFINITY (safe-div 20 0 2 2))
+  (is Double/NEGATIVE_INFINITY (safe-div -10 0))
+  (is Double/NEGATIVE_INFINITY (safe-div -10 5 0)))

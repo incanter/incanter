@@ -495,6 +495,20 @@
                (clx/div (double 1) (first args))
                (reduce clx/div (pass-to-matrix args)))))
 
+(defn safe-div  ;; TODO modify to work with matrices ?
+  "DivideByZero safe alternative to clojures / function,
+   detects divide by zero and returns Infinity, -Infinity or NaN as appropriate.
+   Note: Does not work on matrices, only primitive types"
+  ([x] (safe-div 1 x))
+  ([x y]
+     (try (/ x y)
+          (catch ArithmeticException _
+            (cond (> x 0)   Double/POSITIVE_INFINITY
+                  (zero? x) Double/NaN
+                  :else     Double/NEGATIVE_INFINITY))))
+  ([x y & more]
+     (reduce safe-div (safe-div x y) more)))
+
 
 (defn pow  ;; TODO use jblas and fix meta
   " This is an element-by-element exponent function, raising the first argument
