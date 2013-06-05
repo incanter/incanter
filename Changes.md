@@ -4,29 +4,46 @@
 
 ### Enhancements ###
 
- - incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance.
- - several interpolation functions were added to incanter-core module (as `incanter.interpolation` namespace).
- - a new option is added to `heat-map` - `:include-zero?`.
- - the `tail` function was added.
- - new function `reorder-columns` for a dataset that changes the order of appearance of the datset columns. It does not alter the row order.
- - `save` will print data to standard output if `"-"` is specified as file name.
- - `sel` and other functions (`$`, `head`, `tail`, etc.) can be used with lists (`java.util.List`). 
- - the `toeplitz` function was added to generate Toeplitz matrix for given vector.
- - the `scatter-plot-matrix` function was added to `incanter.chart` module
- - `incanter.optimize` was extended with `minimize` and `maximise` functions for performing unconstrained nonlinear optimization using the BFGS algorithm. 
+ * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance.
+ * several interpolation functions were added to incanter-core module (as `incanter.interpolation` namespace).
+ * a new option is added to `heat-map` - `:include-zero?`.
+ * the `tail` function was added.
+ * new function `reorder-columns` for a dataset that changes the order of appearance of the datset columns. It does not alter the row order.
+ * `save` will print data to standard output if `"-"` is specified as file name.
+ * `sel` and other functions (`$`, `head`, `tail`, etc.) can be used with lists (`java.util.List`). 
+ * the `toeplitz` function was added to generate Toeplitz matrix for given vector.
+ * the `scatter-plot-matrix` function was added to `incanter.chart` module.
+ * `incanter.optimize` was extended with `minimize` and `maximise` functions for performing unconstrained nonlinear optimization using the BFGS algorithm.
 
 ### Many bugfixes ###
- - for function & parametric plots, line is finished in max-range point.
- - permutation matrix is returned in LU decomposition.
- - `sel` will return dataset when `:rows` or `:cols` are non-numbers - this changes
-   previous behaviour when list was returned if only one row or col was specified
- - `linear-model` now correctly calculates t-probs
+
+ * for function & parametric plots, line is finished in max-range point.
+ * permutation matrix is returned in LU decomposition.
+ * `linear-model` now correctly calculates t-probs.
+ * fixed division by zero in `linear-model` for some data.
+
+### Modified behavior ###
+
+ * `sel` will return dataset when `:rows` or `:cols` are non-numbers - this changes
+   previous behaviour when list was returned if only one row or col was specified.
+ * `mult` & `mmult` always return matrices, even if it's 1x1 matrix.
+
+### Known issues ###
+
+ * `conj`'ing of matrix & vector doesn't work with new Clatrix - you can either use `bind-rows`, or wrap vector into another vector:
+    
+    (def M (matrix [[0 1] [2 3] [4 5]]))
+    (conj M [6 7])      ; => doesn't work
+    (bind-rows M [6 7]) ; => works
+    (conj M [[6 7]])    ; => works
+
+ * `decomp-qr` performs only full QR decomposition, and the `:type` parameter is ignored.
 
 ### Updated dependencies ###
 
- - [Clatrix](https://github.com/Quantisan/clatrix): 0.3.0
- - Clojure: 1.5.1
- - JLine: 2.11
+ * [Clatrix](https://github.com/Quantisan/clatrix): 0.3.0
+ * Clojure: 1.5.1
+ * JLine: 2.11
 
 ## Changes for 1.4.x ##
 
