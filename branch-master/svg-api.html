@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>sql - Incanter 1.5 API documentation</title>
+    <title>svg - Incanter 1.5 API documentation</title>
     <link href="../static/incanter.ico" rel="icon" />
     <link href="../static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
@@ -66,21 +66,22 @@ namespace.
   </div><div style="margin-left: 1em;" class="toc-section">
     <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#incanter.sql/read-dataset">read-dataset</a>
+      <a class="toc-entry-anchor" href="#incanter.svg/save-svg">save-svg</a>
       
     </div>
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="sql">sql</span>
+                <div id="content-tag"><h1 id="overview">API for <span id="svg">svg</span>
   - <span id="header-project">Incanter</span> <span id="header-version">1.5</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 
-<br />Full namespace name: <span id="long-name">incanter.sql</span>
+<br />Full namespace name: <span id="long-name">incanter.svg</span>
 <p></p>
 <h2>Overview</h2>
 
-<pre id="namespace-docstr">SQL module for interacting with databases.</pre>
+<pre id="namespace-docstr">This library currently has only a single function, save-svg, which saves
+charts as an SVG file.</pre>
 
 
 <br />
@@ -93,14 +94,27 @@ namespace.
   <div id="var-entry">
     <br />
     <hr />
-    <h2 id="incanter.sql/read-dataset">read-dataset</h2>
+    <h2 id="incanter.svg/save-svg">save-svg</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (read-dataset cql-statement)
+    <pre id="var-usage">Usage: (save-svg chart filename &amp; {:keys [width height], :or {width 500, height 400}})
 </pre>
-    <pre id="var-docstr">Lazily read a dataset for the given ClojureQL query.</pre>
+    <pre id="var-docstr"> Save a chart object as an SVG document.
+
+Arguments:
+  chart
+  filename
+
+Options:
+  :width (default 500)
+  :height (default 400)
+
+Examples:
+
+  (use '(incanter core charts svg))
+  (save-svg (function-plot sin -4 4) "./svg-chart.svg")</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/24ba79422aa4080310c702f383b23278479bc549/modules/incanter-sql/src/incanter/sql.clj#L33" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/007d1c6cb54a5a7f0ef6c30cba14edb5fca75814/modules/incanter-svg/src/incanter/svg.clj#L13" id="var-source">Source</a>
   </div>
 </div>
 
