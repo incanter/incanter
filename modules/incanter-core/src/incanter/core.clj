@@ -33,7 +33,8 @@
 
   (:use [incanter internal]
         [incanter.infix :only (infix-to-prefix defop)]
-        [clojure.set :only (difference)])
+        [clojure.set :only (difference)]
+        [clojure.pprint :only (print-table)])
   (:require [clatrix.core :as clx])
   (:import (clatrix.core Matrix)
            (cern.jet.math.tdouble DoubleArithmetic)
@@ -2805,13 +2806,9 @@ of each type"
 
 
 ;; PRINT METHOD FOR INCANTER DATASETS
-(defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
-  (do
-    (.write w (str (:column-names o)))
-    (.write w "\n")
-    (doseq [row (:rows o)]
-      (.write w (str (apply vector (map #(get row %) (:column-names o)))))
-      (.write w "\n"))))
+ (defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
+   (binding [*out* w]
+     (print-table (:column-names o) (:rows o))))
 
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
