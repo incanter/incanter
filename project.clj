@@ -10,6 +10,7 @@
                  [incanter/incanter-charts "1.5.0-SNAPSHOT"]
                  [incanter/incanter-mongodb "1.5.0-SNAPSHOT"]
                  [incanter/incanter-pdf "1.5.0-SNAPSHOT"]
+                 [incanter/incanter-svg "1.5.0-SNAPSHOT"]
                  [incanter/incanter-latex "1.5.0-SNAPSHOT"]
                  [incanter/incanter-excel "1.5.0-SNAPSHOT"]
                  [incanter/incanter-sql "1.5.0-SNAPSHOT"]

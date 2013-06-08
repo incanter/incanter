@@ -1,13 +1,6 @@
 (ns
 ^{:doc "This library currently has only a single function, save-svg, which saves
-  charts as an SVG file. To build this namespace make sure the you have the Batik
-  library (http://xmlgraphics.apache.org/batik) as a declared dependency in your pom.xml or
-  project.clj file:
-  [org.apache.xmlgraphics/batik-dom \"1.7\"]
-  [org.apache.xmlgraphics/batik-svggen \"1.7\"]
-  [org.apache.xmlgraphics/batik-awt-util \"1.7\"]
-  [org.apache.xmlgraphics/batik-util \"1.7\"]
-  [org.apache.xmlgraphics/batik-xml \"1.7\"]]"}
+  charts as an SVG file."}
 
   incanter.svg
   (:use (incanter charts))

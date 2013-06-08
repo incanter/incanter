@@ -14,6 +14,7 @@
  * the `toeplitz` function was added to generate Toeplitz matrix for given vector.
  * the `scatter-plot-matrix` function was added to `incanter.chart` module.
  * `incanter.optimize` was extended with `minimize` and `maximise` functions for performing unconstrained nonlinear optimization using the BFGS algorithm.
+ * the new `incanter.svg` module provides `save-svg` function to output charts to SVG files.  Include `incanter-svg` as dependency to use this functionality.
 
 ### Many bugfixes ###
 
