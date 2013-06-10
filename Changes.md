@@ -4,7 +4,7 @@
 
 ### Enhancements ###
 
- * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance.
+ * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance (but you might need to install `libgfortran3` library).
  * several interpolation functions were added to incanter-core module (as `incanter.interpolation` namespace).
  * a new option is added to `heat-map` - `:include-zero?`.
  * the `tail` function was added.
