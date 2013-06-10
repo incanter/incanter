@@ -4,7 +4,7 @@
 
 ### Enhancements ###
 
- * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance (but you might need to install `libgfortran3` library).
+ * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance (on 64-bit Linux see "Known issues" section).
  * several interpolation functions were added to incanter-core module (as `incanter.interpolation` namespace).
  * a new option is added to `heat-map` - `:include-zero?`.
  * the `tail` function was added.
@@ -39,6 +39,7 @@
     (conj M [[6 7]])    ; => works
 
  * `decomp-qr` performs only full QR decomposition, and the `:type` parameter is ignored.
+ * On 64-bit Linux you need to install libgfortran3 package. See [jblas wiki](https://github.com/mikiobraun/jblas/wiki/Missing-Libraries) for more details
 
 ### Updated dependencies ###
 
