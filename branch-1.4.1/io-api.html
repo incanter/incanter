@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>backstage.zoo-commons - Incanter 1.4.1 API documentation</title>
-    <link href="static/incanter.ico" rel="icon" />
-    <link href="static/incanter.ico" rel="shortcut icon" />
-    <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
-    <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
-    <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
+    <title>io - Incanter 1.4.1 API documentation</title>
+    <link href="../static/incanter.ico" rel="icon" />
+    <link href="../static/incanter.ico" rel="shortcut icon" />
+    <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/internal.css" rel="stylesheet" />
     <style>.menuWrapper{height: 36px;}</style>
     <!--[if lte IE 6]>
     <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
@@ -21,7 +21,7 @@ namespace.
   <body>
     <div id="AllContentContainer">
       <div id="Header">
-	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="../static/clojure-icon.gif" /></a>
 	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
       </div>
       <div id="leftcolumn"><div style="text-align: center;"></div>
@@ -41,7 +41,7 @@ namespace.
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
-        <li><a href="branch-master/index.html" class="wiki_link">1.5 (in development)</a></li>
+        <li><a href="../index.html" class="wiki_link">1.5.0 (stable)</a></li><li><a href="../branch-master/index.html" class="wiki_link">2.0 (in development)</a></li>
       </ul>
     </div>
     <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
@@ -64,27 +64,55 @@ namespace.
     <a href="#" style="margin-top: 3px;"></a>
     
   </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#" style="margin-top: 3px;"></a>
-    
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.io/read-dataset">read-dataset</a>
+      
+    </div>
   </div>
 </div>
 </div>
-                <div id="content-tag"><h1 id="overview">API for <span id="backstage.zoo-commons">backstage.zoo-commons</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.4.1</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
+                <div id="content-tag"><h1 id="overview">API for <span id="io">io</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.4.1</span><span id="header-status-block"> (<span id="header-status">legacy</span>)</span>
   </h1>
 
-<br />Full namespace name: <span id="long-name">incanter.backstage.zoo-commons</span>
+<br />Full namespace name: <span id="long-name">incanter.io</span>
 <p></p>
 <h2>Overview</h2>
 
-<pre id="namespace-docstr"></pre>
+<pre id="namespace-docstr">Library for reading and writing Incanter datasets and matrices.</pre>
 
 
 <br />
 
 
 
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.io/read-dataset">read-dataset</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (read-dataset filename &amp; {:keys [delim keyword-headers quote skip header compress-delim], :or {delim ,, quote ", skip 0, header false, keyword-headers true}})
+</pre>
+    <pre id="var-docstr">
+  Returns a dataset read from a file or a URL.
 
+  Options:
+    :delim (default \,), other options (\tab \space \|  etc)
+    :quote (default \") character used for quoting strings
+    :skip (default 0) the number of lines to skip at the top of the file.
+    :header (default false) indicates the file has a header line
+    :compress-delim (default true if delim = \space, false otherwise) means
+                    compress multiple adjacent delimiters into a single delimiter
+</pre>
+    
+    
+    <a href="https://github.com/liebke/incanter/blob/01e8a07796e449199730123155573a99d6ab945f/modules/incanter-io/src/incanter/io.clj#L40" id="var-source">Source</a>
+  </div>
+</div>
 
 
 </div>
