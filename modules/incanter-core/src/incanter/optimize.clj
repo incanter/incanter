@@ -213,7 +213,7 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -259,7 +259,7 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -306,7 +306,7 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -359,7 +359,7 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -392,7 +392,7 @@
                  (+ (nth theta 2) x))))
 
     (def theta-init [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -430,7 +430,7 @@
                  (+ (nth theta 2) x))))
 
     (def theta-init [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -476,7 +476,7 @@
 
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -533,7 +533,7 @@
 ;        (plus a (div (mult x (minus b a)) (plus c x)))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -616,7 +616,7 @@
         (plus a (div (mult x (minus b a)) (plus c x)))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -631,7 +631,7 @@
     (use '(incanter core optimize datasets charts))
     ;; Chwirut data set from NIST
     ;; http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat
-    (def data (to-matrix (get-dataset :chwirut)))
+    (def data (get-dataset :chwirut))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
 

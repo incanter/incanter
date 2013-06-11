@@ -2378,9 +2378,13 @@ altering later ones."
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
      (doseq [idx (range n)]
-      (let [[i j] (nth indices idx)]
-        (clx/set mat i j (nth data idx))
-        (clx/set mat j i (nth data idx))))
+      (let [[i j] (nth indices idx)
+            res (nth data idx)
+            d (if (and (matrix? res) (= 1 (nrow res)) (= 1 (ncol res)))
+              (sel res 0 0)
+              res)]
+        (clx/set mat i j d)
+        (clx/set mat j i d)))
      mat)))
 
 (defn toeplitz
