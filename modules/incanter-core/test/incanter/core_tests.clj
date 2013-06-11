@@ -90,6 +90,25 @@
   (is (= (count (rest A)) 3))
   (is (= (count (rest (first A))) 2)))
 
+(deftest non-mutable-ops
+  (let [MO (matrix [[-1 2 3]
+                    [4 -5 6]
+                    [7 8 -9]
+                    [10 11 -12]])
+        MC (matrix [[-1 2 3]
+                    [4 -5 6]
+                    [7 8 -9]
+                    [10 11 -12]])
+        MA (matrix [[1 2 3]
+                    [4 5 6]
+                    [7 8 9]
+                    [10 11 12]])
+        res (abs MO)]
+    (is (= res MA))
+    (is (= MC MO))
+    (is (not (= MO MA)))))
+
+
 ;; constructing matrices from arrays
 (deftest matrix-from-arrays
   (is (= (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))

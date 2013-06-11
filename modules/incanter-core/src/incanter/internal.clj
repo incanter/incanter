@@ -37,7 +37,7 @@
 (defn make-matrix
   ([data]
     (cond
-     (is-matrix data) data
+     (is-matrix data) (clx/matrix data)
      (coll? (first data))
       (clx/matrix data)
      (number? (first data))
@@ -60,7 +60,7 @@
 
 (defmacro transform-with [A op fun]
   `(cond
-     (is-matrix ~A) (~fun ~A)
+     (is-matrix ~A) (~fun (clx/matrix ~A))
      (and (coll? ~A) (coll? (first ~A))) (let [mA# (make-matrix ~A)]  
                                            (clx/matrix (clx/dotom ~fun mA#) nil))
      (coll? ~A)   (map ~op ~A)
