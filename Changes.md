@@ -1,6 +1,6 @@
 # What's new in Incanter #
 
-## Changes for 1.5.0 ##
+## Changes for 1.5.1 ##
 
 ### Bugfixes ###
 
