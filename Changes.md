@@ -2,6 +2,13 @@
 
 ## Changes for 1.5.0 ##
 
+### Bugfixes ###
+
+ * Issue 157: when `transform-with` was used with Matrix, then source data was modified instead of working on copy of data
+ * Issue 160: when 2-arguments version of `solve` was used, the exception was thrown
+
+## Changes for 1.5.0 ##
+
 ### Enhancements ###
 
  * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance (on 64-bit Linux see "Known issues" section).
