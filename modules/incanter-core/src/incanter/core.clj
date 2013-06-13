@@ -740,12 +740,11 @@
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
 
-
 "
-  ([^Matrix A & B]
-   (if B
-    (clx/solve A B)
-    (clx/i A))))
+([^Matrix A ^Matrix B]
+   (clx/solve A B))
+([^Matrix A]
+   (clx/i A)))
 
 (defn det
 " Returns the determinant of the given matrix. Equivalent
