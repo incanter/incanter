@@ -3291,7 +3291,7 @@
   ([updater-fn slider-values]
      (slider updater-fn slider-values nil))
   ([updater-fn slider-values slider-label]
-     (let [max-idx (count slider-values)
+     (let [max-idx (dec (count slider-values))
            label-txt (fn [v] (str (when slider-label (str slider-label " = ")) v))
            label (JLabel. (label-txt (first slider-values)) JLabel/CENTER)
            slider (doto (JSlider. JSlider/HORIZONTAL 0 max-idx 0)
