@@ -2473,9 +2473,7 @@ altering later ones."
           colnames (range (count (first rows)))]
       (view (dataset colnames rows)))))
 
-
-
-(defmethod view incanter.Matrix ;; TODO convert to clatrix
+(defmethod view :incanter.core/matrix
   ([obj & {:keys [column-names]}]
      (let [col-names (or column-names (range (ncol obj)))
            m (ncol obj)
