@@ -41,7 +41,7 @@ namespace.
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
-        <li><a href="../index.html" class="wiki_link">1.5.0 (stable)</a></li><li><a href="../branch-1.4.1/index.html" class="wiki_link">1.4.1 (legacy)</a></li>
+        <li><a href="../index.html" class="wiki_link">1.5.1 (stable)</a></li><li><a href="../branch-1.4.1/index.html" class="wiki_link">1.4.1 (legacy)</a></li>
       </ul>
     </div>
     <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
@@ -144,7 +144,7 @@ Examples:
   (add-lines plot x (pdf-deriv2 x))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/optimize.clj#L68" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L68" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -169,7 +169,7 @@ Examples:
                (+ (nth theta 2) x))))
 
   (def start [20 200 100])
-  (def data (to-matrix (get-dataset :thurstone)))
+  (def data (get-dataset :thurstone))
   (def x (sel data :cols 1))
   (def y (sel data :cols 0))
   ;; view the data
@@ -179,7 +179,7 @@ Examples:
   (time (doall (grad start x)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/optimize.clj#L244" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L244" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -204,7 +204,7 @@ Examples:
                (+ (nth theta 2) x))))
 
   (def start [20 200 100])
-  (def data (to-matrix (get-dataset :thurstone)))
+  (def data (get-dataset :thurstone))
   (def x (sel data :cols 1))
   (def y (sel data :cols 0))
   ;; view the data
@@ -214,7 +214,7 @@ Examples:
   (time (doall (hess start x)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/optimize.clj#L291" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L291" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -251,7 +251,7 @@ Reference:
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/optimize.clj#L26" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L26" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -299,7 +299,7 @@ Examples:
       (plus a (div (mult x (minus b a)) (plus c x)))))
 
   (def start [20 200 100])
-  (def data (to-matrix (get-dataset :thurstone)))
+  (def data (get-dataset :thurstone))
   (def x (sel data :cols 1))
   (def y (sel data :cols 0))
   ;; view the data
@@ -314,7 +314,7 @@ Examples:
   (use '(incanter core optimize datasets charts))
   ;; Chwirut data set from NIST
   ;; <a href="http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat">http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat</a>
-  (def data (to-matrix (get-dataset :chwirut)))
+  (def data (get-dataset :chwirut))
   (def x (sel data :cols 1))
   (def y (sel data :cols 0))
 
@@ -342,7 +342,7 @@ Examples:
   (add-lines plot x (:fitted nlm2))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/optimize.clj#L578" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L578" id="var-source">Source</a>
   </div>
 </div>
 

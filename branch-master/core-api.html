@@ -41,7 +41,7 @@ namespace.
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
-        <li><a href="../index.html" class="wiki_link">1.5.0 (stable)</a></li><li><a href="../branch-1.4.1/index.html" class="wiki_link">1.4.1 (legacy)</a></li>
+        <li><a href="../index.html" class="wiki_link">1.5.1 (stable)</a></li><li><a href="../branch-1.4.1/index.html" class="wiki_link">1.4.1 (legacy)</a></li>
       </ul>
     </div>
     <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
@@ -503,7 +503,7 @@ Examples:
      (view ($ [:not :gender])))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1523" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1522" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -582,7 +582,7 @@ Examples:
      view))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2707" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2708" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -593,7 +593,7 @@ Examples:
 functions like $ and $where can use $data as a default argument.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L47" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L47" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -647,7 +647,7 @@ Examples:
   (view ($where ($fn [Species] ($in Species #{"virginica" "setosa"})) (get-dataset :iris)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1800" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1799" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -669,7 +669,7 @@ Examples:
     ($group-by [:hair :eye]))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1852" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1851" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -725,7 +725,7 @@ Examples:
      (view (bar-chart :hair :count :group-by :gender :legend true)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1947" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1946" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -758,7 +758,7 @@ Examples:
     (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1911" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1910" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -785,7 +785,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1771" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1770" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -850,7 +850,7 @@ you can provide a keyword identifier of a set of built-in functions including:
       (view (bar-chart :hair :count :group-by :eye :legend true)))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1682" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1681" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -882,7 +882,7 @@ Examples:
                     (conj-rows ($where {:speed {:$lt 10}})))))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1650" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1649" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -893,7 +893,7 @@ Examples:
     <pre id="var-docstr">Positional factory function for class incanter.core.Dataset.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L52" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L52" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -905,7 +905,7 @@ Examples:
 Equivalent to R's abs function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L572" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L572" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -917,7 +917,7 @@ Equivalent to R's abs function.</pre>
 Equivalent to R's acos function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L596" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L596" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -929,7 +929,7 @@ Equivalent to R's acos function.</pre>
 Equivalent to R's asin function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L584" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L584" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -941,7 +941,7 @@ Equivalent to R's asin function.</pre>
 Equivalent to R's atan function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L608" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L608" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -953,7 +953,7 @@ Equivalent to R's atan function.</pre>
 Equivalent to R's atan2 function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L523" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L523" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -968,7 +968,7 @@ References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2280" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2279" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -994,7 +994,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L377" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L377" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1018,7 +1018,7 @@ Examples:
   (bind-rows [1 2 3 4] [5 6 7 8])</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L339" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L339" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1042,7 +1042,7 @@ Examples:
   (categorical-var :levels [1 2 3])</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2166" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2165" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1066,7 +1066,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Combination">http://en.wikipedia.org/wiki/Combination</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L631" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L631" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1090,7 +1090,7 @@ Examples:
  </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1449" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1448" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1112,7 +1112,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Condition_number">http://en.wikipedia.org/wiki/Condition_number</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1022" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1021" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1136,7 +1136,7 @@ There must be the same number of rows in each dataset and/or
    (view (conj-cols {:a 1 :b 2} {:c 1 :d 2}))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1469" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1468" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1158,7 +1158,7 @@ Examples:
   (conj-rows (range 5) (range 5 10))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1498" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1497" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1169,7 +1169,7 @@ Examples:
     <pre id="var-docstr">Returns a copy of the given matrix.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L677" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L677" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1181,7 +1181,7 @@ Examples:
 Equivalent to R's cos function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L590" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L590" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1200,7 +1200,7 @@ Equivalent to R's cos function.</pre>
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L834" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L833" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1211,7 +1211,7 @@ Equivalent to R's cos function.</pre>
     <pre id="var-docstr">Creates a javax.swing.JTable given an Incanter dataset.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2542" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2543" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1223,7 +1223,7 @@ Equivalent to R's cos function.</pre>
 data. The data is either a sequence of sequences or a sequence of hash-maps.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1160" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1159" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1234,7 +1234,7 @@ data. The data is either a sequence of sequences or a sequence of hash-maps.</pr
     <pre id="var-docstr"> Determines if obj is of type incanter.core.Dataset.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L101" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L101" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1266,7 +1266,7 @@ References:
 <a href="http://en.wikipedia.org/wiki/Cholesky_decomposition">http://en.wikipedia.org/wiki/Cholesky_decomposition</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L862" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L861" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1293,7 +1293,7 @@ References:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L932" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L931" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1322,7 +1322,7 @@ References:
   <a href="http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html">http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L956" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L955" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1354,7 +1354,7 @@ References:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L992" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L991" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1393,7 +1393,7 @@ References:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L891" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L890" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1433,7 +1433,7 @@ Examples:
     (view (deshape :merge [:age :weight :height] :remove-na false :data data))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2023" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2022" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1448,7 +1448,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/LU_decomposition">http://en.wikipedia.org/wiki/LU_decomposition</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L750" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L749" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1471,7 +1471,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L143" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L143" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1482,7 +1482,7 @@ Examples:
     <pre id="var-docstr"> Returns a vector with the number of rows and columns of the given matrix. </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L126" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L126" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1508,7 +1508,7 @@ Examples:
   (div [1 2 3]) ; returns [1 1/2 13]</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L472" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L472" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1520,7 +1520,7 @@ Examples:
 Equivalent to R's exp function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L566" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L566" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1540,7 +1540,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Factorial">http://en.wikipedia.org/wiki/Factorial</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L614" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L614" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1555,7 +1555,7 @@ References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2270" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2269" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1573,7 +1573,7 @@ Examples:
   (get-categories [:eye :hair] (get-dataset :hair-eye-color))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2090" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2089" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1587,7 +1587,7 @@ sequence of three sequences representing the cartesian product of x and y
 and z calculated by applying f to the combinations of x and y.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2681" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2682" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1628,7 +1628,7 @@ Examples:
           view))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1095" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1094" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1653,7 +1653,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L789" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L788" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1665,7 +1665,7 @@ Examples:
     <pre id="var-docstr">Returns the head of the dataset. 10 or full dataset by default.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1628" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1627" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1679,7 +1679,7 @@ Examples:
   (identity-matrix 4)</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L133" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L133" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1694,7 +1694,7 @@ References:
   <a href="http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html">http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2290" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2289" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1713,7 +1713,7 @@ Examples:
   (kronecker x y)</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L701" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L701" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1728,7 +1728,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1078" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1077" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1740,7 +1740,7 @@ Examples:
 Equivalent to R's log function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L547" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L547" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1752,7 +1752,7 @@ Equivalent to R's log function.</pre>
 Equivalent to R's log10 function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L560" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L560" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1764,7 +1764,7 @@ Equivalent to R's log10 function.</pre>
 Equivalent to R's log2 function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L553" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L553" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1777,7 +1777,7 @@ Equivalent to R's log2 function.</pre>
 altering later ones.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1430" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1429" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1788,7 +1788,7 @@ altering later ones.</pre>
     <pre id="var-docstr">Factory function for class incanter.core.Dataset, taking a map of keywords to field values.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L52" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L52" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1826,7 +1826,7 @@ Examples:
   (filter #(&gt; (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L56" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L56" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1848,7 +1848,7 @@ Examples:
    (matrix-map #(mod % 2) 9)</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1883" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1882" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1859,7 +1859,7 @@ Examples:
     <pre id="var-docstr"> Test if obj is 'derived' clatrix.core.Matrix</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L96" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L96" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1888,7 +1888,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L428" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L428" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1913,7 +1913,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L681" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L681" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1939,7 +1939,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L452" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L452" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1965,7 +1965,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L408" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L408" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1977,7 +1977,7 @@ Examples:
 by the exponents in the remaining arguments. Equivalent to R's ^ operator.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L511" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L511" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1988,7 +1988,7 @@ by the exponents in the remaining arguments. Equivalent to R's ^ operator.</pre>
     <pre id="var-docstr">Returns the product of the given sequence.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L824" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L823" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2030,7 +2030,7 @@ Examples:
    (view (query-dataset cars (fn [row] (&gt; (/ (row "speed") (row "dist")) 1/2))))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1269" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1268" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2054,7 +2054,7 @@ Examples:
   (pred {:x 5 :y 7 :z :d})</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1218" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1217" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2065,7 +2065,7 @@ Examples:
     <pre id="var-docstr"> Exits the Clojure shell.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2592" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2593" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2087,7 +2087,7 @@ References:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1041" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1040" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2104,7 +2104,7 @@ References:
   <a href="http://mathworld.wolfram.com/RegularizedBetaFunction.html">http://mathworld.wolfram.com/RegularizedBetaFunction.html</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2302" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2301" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2116,7 +2116,7 @@ References:
 Returns nil if no valid column names are given.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2820" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2821" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2131,7 +2131,7 @@ detects divide by zero and returns Infinity, -Infinity or NaN as appropriate.
 Note: Does not work on matrices, only primitive types</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L496" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L496" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2195,7 +2195,7 @@ Chart Example:
   (view "<a href="file:///tmp/hist.png">file:///tmp/hist.png</a>")</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2614" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2615" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2247,7 +2247,7 @@ Examples:
   (sel us-arrests :cols [:State :Murder])</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L194" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L194" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2278,7 +2278,7 @@ Examples:
                               data))))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2554" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2555" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2290,13 +2290,14 @@ Examples:
 Equivalent to R's sin function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L578" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L578" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="incanter.core/solve">solve</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (solve A &amp; B)
+    <pre id="var-usage">Usage: (solve A B)
+       (solve A)
 </pre>
     <pre id="var-docstr"> Returns a matrix solution if A is square, least squares solution otherwise.
 Equivalent to R's solve function.
@@ -2308,7 +2309,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Matrix_inverse">http://en.wikipedia.org/wiki/Matrix_inverse</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L733" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L733" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2333,7 +2334,7 @@ References:
   <a href="http://en.wikipedia.org/wiki/Quadratic_formula">http://en.wikipedia.org/wiki/Quadratic_formula</a></pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2320" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2319" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2345,7 +2346,7 @@ References:
 Equivalent to R's sq function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L541" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L541" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2357,7 +2358,7 @@ Equivalent to R's sq function.</pre>
 Equivalent to R's sqrt function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L535" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L535" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2368,7 +2369,7 @@ Equivalent to R's sqrt function.</pre>
     <pre id="var-docstr">Returns the sum of the given sequence.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L817" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L816" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2379,7 +2380,7 @@ Equivalent to R's sqrt function.</pre>
     <pre id="var-docstr">Returns the sum-of-squares of the given sequence.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L810" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L809" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2411,7 +2412,7 @@ Examples:
                        7 8 9 10] :lower false))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2347" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2346" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2423,7 +2424,7 @@ Examples:
     <pre id="var-docstr">Returns the tail of the dataset. 10 or full dataset by default.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1639" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1638" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2435,7 +2436,7 @@ Examples:
 Equivalent to R's tan function.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L602" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L602" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2460,7 +2461,7 @@ Examples:
   (to-dataset [{"a" 1 "b" 2 "c" 3} {"a" 1 "b" 2 "c" 3}])</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1373" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1372" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2472,7 +2473,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2206" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2205" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2484,7 +2485,7 @@ Examples:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2196" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2195" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2495,7 +2496,7 @@ Examples:
 and a flat list if the matrix is one-dimensional.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L656" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L656" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2514,7 +2515,7 @@ Examples:
   (to-map (matrix (range 9) 3))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2133" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2132" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2531,7 +2532,7 @@ Options:
                               them into numeric codes.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2245" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2244" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2544,7 +2545,7 @@ and a flat vector if the matrix is one-dimensional. This is a bit
 slower than the to-list function. </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L1064" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L1063" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2556,7 +2557,7 @@ slower than the to-list function. </pre>
 Returns the Toeplitz matrix for the given vector, which form the first row of the matrix</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2386" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2389" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2571,7 +2572,7 @@ References:
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L760" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L759" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2589,7 +2590,7 @@ Examples:
   (trans A)</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L161" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L161" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2601,7 +2602,7 @@ Examples:
 with the resulting new values.</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2014" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2013" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2626,7 +2627,7 @@ with the resulting new values.</pre>
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L769" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L768" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2681,7 +2682,7 @@ Examples:
   (view "<a href="file:///tmp/norm_hist.png">file:///tmp/norm_hist.png</a>")</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2401" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2404" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2707,7 +2708,7 @@ Examples:
                      (conj-rows ($where {:speed {:$lt 10}})))))</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/1fdc0914b9f39f623a2796a2a8ea0f580d1e701b/modules/incanter-core/src/incanter/core.clj#L2109" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/83f6e8aab49c9b2b9db2935fa7f502454a17d392/modules/incanter-core/src/incanter/core.clj#L2108" id="var-source">Source</a>
   </div>
 </div>
 
