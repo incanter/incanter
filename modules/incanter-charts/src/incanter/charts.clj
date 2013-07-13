@@ -49,7 +49,7 @@
                              JFreeChart
                              LegendItem
                              LegendItemCollection)
-            (org.jfree.chart.axis AxisSpace NumberAxis AxisLocation)
+            (org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis)
             (org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
@@ -817,6 +817,97 @@
                                                            [:series-label series-lab#]))))]
         (apply add-points* args#))))
 
+(defn log-axis
+" Create a logarithmic axis.
+
+  Beware: Log will behave strangely for data below 1 (especially 0), filter them out.
+
+  Options:
+    :base (default 10) base of the logarithm; typically 2 or 10
+    :label (default none) the label of the axis
+    :int-ticks? (default true) if true, use normal numbers instead of
+       <base>^<exponent>, i.e. 1 instead of f.ex. 10^0.0
+
+  See also:
+    set-axis
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/LogAxis.html
+
+"
+  [& options]
+  (let [opts (when options (apply assoc {} options))
+        base (or (:base opts) 10)
+        int-ticks? (get opts :int-ticks? true)
+        label (:label opts)
+        axis (if label
+               (LogAxis. label)
+               (LogAxis.))]
+    (doto axis (.setBase base))
+    (if int-ticks?
+      (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
+    axis))
+
+(defmulti set-axis
+" Set the selected axis of the chart, returning the chart.
+  (Beware: the axis' label will replace axis label set previously on the chart.)
+
+  Arguments:
+    chart - the JFreeChart object whose axis to change
+    dimension - depends on the plot type for plots with mutliple axes
+                 f.ex. :x or :y for an XYPlot (x is the domain axis, y the range one)
+    axis - the axis to set, an instance of ValueAxis
+
+  See also:
+    log-axis
+
+  Note:
+    Not applicable to DialPlot MeterPlot PiePlot MultiplePiePlot CompassPlot WaferMapPlot SpiderWebPlot
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/ValueAxis.html
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/plot/XYPlot.html
+
+  Examples:
+
+    (use '(incanter core charts))
+
+    (view
+      (doto (function-plot #(Math/pow 10 %) 0 5)
+            (set-axis :x (log-axis :base 10, :label \"log(x)\"))))
+"
+
+  (fn [chart & args] (type (.getPlot chart))))
+
+;;; Note: it would be nicer to use hierarchies to declare what plot types support
+;;; the x and y axes but it feels as an overkill now
+(defmethod set-axis :default
+  ([chart axis] (throw (IllegalArgumentException. "Dimension (:x or :y) is required for XY-like charts")))
+  ([chart dimension axis]
+     {:pre [(#{:x :y} dimension)]}
+
+     (let [plot (.getPlot chart)
+           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.ContourPlot org.jfree.chart.plot.FastScatterPlot}]
+       (assert (allowed-types (type plot))
+               (str "The default set-axis method only works for " allowed-types))
+       (if (= :x dimension)
+         (.setDomainAxis plot axis)
+         (.setRangeAxis plot axis)))
+     chart))
+
+(defmethod set-axis org.jfree.chart.plot.PolarPlot
+  ([chart axis]
+     (let [plot (.getPlot chart)]
+       (.setAxis plot axis))
+     chart))
+
+(defmethod set-axis org.jfree.chart.plot.ThermometerPlot
+  ([chart axis]
+     (let [plot (.getPlot chart)]
+       (.setRangeAxis plot axis))
+     chart))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2771,27 +2862,27 @@
 (defmacro heat-map
 "
   Usage: (heat-map function x-min x-max y-min y-max & options)
-  
+
   Returns a JFreeChart object representing a heat map of the function across
-  the given x and y ranges. Use the 'view' function to display the chart, or 
+  the given x and y ranges. Use the 'view' function to display the chart, or
   the 'save' function to write it to a file.
-  
+
   Arguments:
     function -- a function that takes two scalar arguments and returns a scalar
     x-min    -- lower bound for the first value of the function
     x-max    -- upper bound for the first value of the function
     y-min    -- lower bound for the second value of the function
     y-max    -- upper bound for the second value of the function
-  
+
   Options:
-    :title 
+    :title
     :x-label (default 'x-min < x < x-max')
     :y-label (default 'y-min < y < y-max')
     :z-label -- defaults to function's name
     :color? (default true) -- should the plot be in color or not?
     :include-zero? (default true) -- should the plot include the origin if it
                                      is not in the ranges specified?
-  
+
   Examples:
     (use '(incanter core charts))
     (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
