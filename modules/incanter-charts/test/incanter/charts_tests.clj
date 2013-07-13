@@ -1,4 +1,3 @@
-
 ;;; test-cases.clj -- Unit tests of Incanter functions
 
 ;; by David Edgar Liebke http://incanter.org
@@ -410,4 +409,37 @@
   (.dispose aw1)
   )
 
-;(run-tests)
+(deftest log-axis-tests
+  (let [a10 (log-axis)]
+    (is (isa? (type a10) org.jfree.chart.axis.ValueAxis))
+    (is (= "1" (.. a10 (getStandardTickUnits) (get 0) (valueToString 1.0)))))
+  (let [a2 (log-axis :base 2, :label "my precious", :int-ticks? false)]
+    (is (= 2.0 (.getBase a2)))
+    (is (= "my precious" (.getLabel a2)))
+    (is (= "10^0.0" (.. a2 (getStandardTickUnits) (get 0) (valueToString 1.0))))))
+
+(deftest set-axis-tests
+  (let [make-xy #(xy-plot (range 1) (range 1))
+        pie-chart (pie-chart ["a"] [10])
+        scatter-chart (scatter-plot [4] [2])
+        axis (log-axis)]
+    (testing "chart with X log axis"
+      (let [ch (set-axis (make-xy) :x axis)]
+        (is (= axis (.. ch (getPlot) (getDomainAxis))))
+        (is (not= axis (.. ch (getPlot) (getRangeAxis))))))
+    (testing "chart with Y log axis"
+      (let [ch (set-axis (make-xy) :y axis)]
+        (is (not= axis (.. ch (getPlot) (getDomainAxis))))
+        (is (= axis (.. ch (getPlot) (getRangeAxis))))))
+    (testing "Another XY-like chart"
+      (is (= axis (.. (set-axis scatter-chart :x axis)
+                      (getPlot)
+                      (getDomainAxis)))))
+    (testing "unsupported chart type"
+      (try
+        (set-axis pie-chart :x axis)
+        (assert false "Should have failed for set-axis doesn't support PieChart")
+        (catch AssertionError e)))))
+
+
+; (run-tests)
