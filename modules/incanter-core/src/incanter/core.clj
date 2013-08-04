@@ -190,6 +190,8 @@
 (defmulti sel
 "
   Returns an element or subset of the given matrix, dataset, or list.
+  If the column or row is specified as an atomic object (index or name), then
+  the result will be returned as a list (only values from selected column or row).
 
   Argument:
     a matrix object, dataset, or list.
@@ -1362,12 +1364,12 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
           _data (map (fn [row] (map #(row (get-column-id data %)) selected-cols)) selected-rows)
           result (if (nil? filter) _data (clojure.core/filter filter _data))]
       (cond
-       (and (= (count selected-cols) 1) (not (coll? cols)))
+       (and (= (count selected-cols) 1) (not (or (coll? cols) (true? cols))))
          (if (= (count result) 1)
            (ffirst result)
            (mapcat identity result))
-       (and (= (count result) 1) (not (coll? rows)))
-         (first result)
+         (and (= (count result) 1) (not (or (coll? rows) (true? rows))))
+           (first result)
        :else
        (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
 
