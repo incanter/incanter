@@ -89,14 +89,12 @@
                  parsed-data)))))))
 
 
-
-
 (defmethod save incanter.Matrix [mat filename & {:keys [delim header append]
                                                  :or {append false delim \,}}]
   (let [file-writer (if (= "-" filename)
                       *out*
                       (java.io.FileWriter. filename append))]
-    (do
+    (try
       (when (and header (not append))
         (.write file-writer (str (first header)))
         (doseq [column-name (rest header)]
@@ -110,11 +108,10 @@
             (doseq [column (rest row)]
               (.write file-writer (str delim column)))
             (.write file-writer (str \newline)))))
-      (.flush file-writer)
-      (.close file-writer))))
-
-
-
+      (finally
+        (.flush file-writer)
+        (when (= "-" filename)
+            (.close file-writer))))))
 
 (defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
                                                             :or {append false delim \,}}]
@@ -124,20 +121,22 @@
                       (java.io.FileWriter. filename append))
         rows (:rows dataset)
         columns (:column-names dataset)]
-    (do
+    (try
       (when (and header (not append))
         (.write file-writer (str (first header)))
         (doseq [column-name (rest header)]
           (.write file-writer (str delim column-name)))
         (.write file-writer (str \newline)))
       (doseq [row rows]
-          (do
-            (.write file-writer (str (row (first columns))))
-            (doseq [column-name (rest columns)]
-              (.write file-writer (str delim (row column-name))))
-            (.write file-writer (str \newline))))
-      (.flush file-writer)
-      (.close file-writer))))
+        (do
+          (.write file-writer (str (row (first columns))))
+          (doseq [column-name (rest columns)]
+            (.write file-writer (str delim (row column-name))))
+          (.write file-writer (str \newline))))
+      (finally
+        (.flush file-writer)
+        (when (= "-" filename)
+          (.close file-writer))))))
 
 
 (defmethod save java.awt.image.BufferedImage
