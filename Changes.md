@@ -1,5 +1,24 @@
 # What's new in Incanter #
 
+## Changes for 1.5.2 ##
+
+### Bugfixes ###
+
+ * Issue 168: the `view` function wasn't defined for `Matrix` class
+ * Issue 161: maximal idx for slider wasn't correctly calculated
+ * The `sel` function on `nil` was implemented, preventing from getting errors when there
+   was no data specified in the `$data` variable
+ * Issue 169: metadata wasn't added to `ncol` & `nrow` functions
+ * Issue 164: `to-vect` was implemented only for `Matrix` class, now it works with any
+   support data type
+ * Issue 165: `sel` returns a dataset even if result has one row, and we're selecting
+   columns.
+
+### Enhancements ###
+
+ * Issue 166: You can use logarithmic axes (with different bases) in Incanter charts.  See
+   issue for more details
+
 ## Changes for 1.5.1 ##
 
 ### Bugfixes ###
