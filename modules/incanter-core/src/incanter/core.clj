@@ -1056,19 +1056,26 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn to-vect
+(defmulti to-vect
   " Returns a vector-of-vectors if the given matrix is two-dimensional
     and a flat vector if the matrix is one-dimensional. This is a bit
-    slower than the to-list function. "
- ([^Matrix mat]
-  (into [] (cond
-             (= (.columns mat) 1)
-              (first (map #(into [] (seq %)) (seq (.toArray (.viewDice mat)))))
-             (= (.rows mat) 1)
-              (first (map #(into [] (seq %)) (seq (.toArray mat))))
-             :else
-              (map #(into [] (seq %)) (seq (.toArray mat)))))))
+    slower than the to-list function"
+  type)
 
+(defmethod to-vect ::matrix
+  ([^clatrix.core.Matrix mat]
+     (clx/as-vec mat)))
+
+(defmethod to-vect ::dataset
+  [data]
+  (into [] (map (fn [row]
+                  (into [] (map (fn [col] (row col))
+                                (:column-names data))))
+                (:rows data))))
+
+(defmethod to-vect nil [s] nil)
+
+(defmethod to-vect :default [s] s)
 
 (defn length
   " A version of count that works on collections, matrices, and numbers.

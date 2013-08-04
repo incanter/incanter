@@ -240,6 +240,20 @@
   (is (= (to-list 3) 3))
   (is (nil? (to-list nil))))
 
+(deftest matrix-to-vect-tests
+  ;; convert a matrix to clojure vectors
+  (is (= (to-vect A) [[1.0 2.0 3.0]
+                      [4.0 5.0 6.0]
+                      [7.0 8.0 9.0]
+                      [10.0 11.0 12.0]]))
+  ;; one-dimensional matrices are coverted to one-dimension vectors
+  (is (= (to-vect (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (= (to-vect (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (= (to-vect [1 2 3]) [1 2 3]))
+  (is (= (to-vect [[1 2] [3 4]]) [[1 2] [3 4]]))
+  (is (= (to-vect 3) 3))
+  (is (nil? (to-vect nil))))
+
 (deftest matrix-sel-tests
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
   (is (= (sel A 3 2) 12.0))
