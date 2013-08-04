@@ -102,9 +102,8 @@
 " Determines if obj is of type incanter.core.Dataset."
   ([obj] (isa? (type obj) incanter.core.Dataset)))
 
-(defn nrow
-  ^{:tag Integer
-     :doc " Returns the number of rows in the given matrix. Equivalent to R's nrow function."}
+(defn ^Integer nrow
+  "Returns the number of rows in the given matrix. Equivalent to R's nrow function."
   ([mat]
    (cond
     (matrix? mat) (first (clx/size ^clatrix.core.Matrix mat))
@@ -112,16 +111,13 @@
     (coll? mat) (count mat))))
 
 
-(defn ncol
-  ^{:tag Integer
-     :doc " Returns the number of columns in the given matrix. Equivalent to R's ncol function."}
+(defn ^Integer ncol
+  "Returns the number of columns in the given matrix. Equivalent to R's ncol function."
   ([mat]
    (cond
     (matrix? mat) (last (clx/size ^clatrix.core.Matrix mat))
     (dataset? mat) (count (:column-names mat))
     (coll? mat) 1 )))
-
-
 
 (defn dim
   " Returns a vector with the number of rows and columns of the given matrix. "
