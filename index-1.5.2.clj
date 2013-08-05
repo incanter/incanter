@@ -285,9 +285,9 @@
    :name "add-box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L407",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L407",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-box-plot",
    :doc
@@ -299,9 +299,9 @@
    :name "add-categories",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L470",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L470",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-categories",
    :doc
@@ -313,9 +313,9 @@
    :name "add-function",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L649",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L649",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-function",
    :doc
@@ -327,9 +327,9 @@
    :name "add-histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L356",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L356",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-histogram",
    :doc
@@ -341,23 +341,23 @@
    :name "add-image",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3037",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3128",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-image",
    :doc
    " Adds an image to the chart at the given coordinates.\n\nArguments:\n  chart -- the chart to add the polygon to.\n  x, y -- the coordinates to place the image\n  img -- a java.awt.Image object\n\n\nExamples:\n  (use '(incanter core charts latex))\n\n   (doto (function-plot sin -10 10)\n    (add-image 0 0 (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))\n    view)",
    :var-type "function",
-   :line 3037,
+   :line 3128,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart x y & options]),
    :name "add-lines",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L582",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L582",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-lines",
    :doc
@@ -369,9 +369,9 @@
    :name "add-parametric",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L714",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L714",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-parametric",
    :doc
@@ -383,23 +383,23 @@
    :name "add-pointer",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2845",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2936",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-pointer",
    :doc
    " Adds an arrow annotation to the given chart.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinate to add the annotation\n\n\nOptions:\n    :text -- (default \"\") text to include at the end of the arrow\n    :angle -- (default :nw) either a number indicating the angle of the arrow\n              or a keyword indicating a direction (:north :nw :west :sw :south\n              :se :east :ne)\n\n\nExamples:\n\n  (use '(incanter core charts))\n  (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))\n  (def plot (xy-plot x (sin x)))\n  (view plot)\n  ;; annotate the plot\n  (doto plot\n    (add-pointer (- Math/PI) (sin (- Math/PI)) :text \"(-pi, (sin -pi))\")\n    (add-pointer Math/PI (sin Math/PI) :text \"(pi, (sin pi))\" :angle :ne)\n    (add-pointer (* 1/2 Math/PI) (sin (* 1/2 Math/PI)) :text \"(pi/2, (sin pi/2))\" :angle :south))\n\n  ;; try the different angle options\n  (add-pointer plot 0 0 :text \"north\" :angle :north)\n  (add-pointer plot 0 0 :text \"nw\" :angle :nw)\n  (add-pointer plot 0 0 :text \"ne\" :angle :ne)\n  (add-pointer plot 0 0 :text \"west\" :angle :west)\n  (add-pointer plot 0 0 :text \"east\" :angle :east)\n  (add-pointer plot 0 0 :text \"south\" :angle :south)\n  (add-pointer plot 0 0 :text \"sw\" :angle :sw)\n  (add-pointer plot 0 0 :text \"se\" :angle :se)",
    :var-type "function",
-   :line 2845,
+   :line 2936,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart x y & options]),
    :name "add-points",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L771",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L771",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-points",
    :doc
@@ -411,25 +411,25 @@
    :name "add-polygon",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2976",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3067",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-polygon",
    :doc
    " Adds a polygon outline defined by a given coordinates. The last coordinate will\nclose with the first. If only two points are given, it will plot a line.\n\nArguments:\n  chart -- the chart to add the polygon to.\n  coords -- a list of coords (an n-by-2 matrix can also be used)\n\n\nExamples:\n  (use '(incanter core stats charts))\n  (def x (range -3 3 0.01))\n  (def plot (xy-plot x (pdf-normal x)))\n  (view plot)\n\n  ;; add polygon to the chart\n  (add-polygon plot [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]])\n  ;; the coordinates can also be passed in a matrix\n  ;; (def points (matrix [[-1.96 0] [1.96 0] [1.96 0.4] [-1.96 0.4]]))\n  ;; (add-polygon plot points)\n  ;; add a text annotation\n  (add-text plot -1.25 0.35 \"95% Conf Interval\")\n\n  ;; PCA chart example\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (def plot (scatter-plot x1 x2\n                          :group-by (sel iris :cols 4)\n                          :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n\n  (view plot)\n  ;; put box around the first group\n  (add-polygon plot [[-3.2 -6.3] [-2 -6.3] [-2 -3.78] [-3.2 -3.78]])\n  ;; add some text annotations\n  (add-text plot -2.5 -6.5 \"Setosa\")\n  (add-text plot -5 -5.5 \"Versicolor\")\n  (add-text plot -8 -5.5 \"Virginica\")",
    :var-type "function",
-   :line 2976,
+   :line 3067,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3771",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3862",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-subtitle",
    :namespace "incanter.charts",
-   :line 3771,
+   :line 3862,
    :var-type "multimethod",
    :doc
    "Adds a JFreeChart title object to a chart as a subtitle.\n\nExamples:\n  (use '(incanter core charts latex))\n\n  (doto (function-plot sin -10 10)\n    (add-subtitle \"subtitle\")\n    (add-subtitle (latex \" \\\\frac{(a+b)^2} {(a-b)^2}\"))\n    view)",
@@ -438,286 +438,313 @@
    :name "add-text",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2931",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3022",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/add-text",
    :doc
    " Adds a text annotation centered at the given coordinates.\n\nArguments:\n  chart -- the chart to annotate\n  x, y -- the coordinates to center the text\n  text -- the text to add\n\n\nExamples:\n\n  ;; PCA chart example\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (def plot (scatter-plot x1 x2\n                          :group-by (sel iris :cols 4)\n                          :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n  (view plot)\n  ;; add some text annotations\n  (add-text plot -2.5 -6.5 \"Setosa\")\n  (add-text plot -5 -5.5 \"Versicolor\")\n  (add-text plot -8 -5.5 \"Virginica\")",
    :var-type "function",
-   :line 2931,
+   :line 3022,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([categories values & options]),
    :name "area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2039",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2130",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/area-chart",
    :doc
    " Returns a JFreeChart object representing an area-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default '') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :series-label\n  :legend (default false) prints legend\n  :vertical (default true) the orientation of the plot\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (with-data (get-dataset :co2)\n    (view (area-chart :Type :uptake\n                     :title \"CO2 Uptake\"\n                     :group-by :Treatment\n                     :x-label \"Grass Types\" :y-label \"Uptake\"\n                    :legend true)))\n\n\n  (def data (get-dataset :airline-passengers))\n  (view (area-chart :year :passengers :group-by :month :legend true :data data))\n\n  (with-data  (get-dataset :airline-passengers)\n    (view (area-chart :month :passengers :group-by :year :legend true)))\n\n\n  (def data (get-dataset :austres))\n  (view data)\n  (def plot (area-chart :year :population :group-by :quarter :legend true :data data))\n  (view plot)\n  (save plot \"/tmp/austres_plot.png\" :width 1000)\n  (view \"file:///tmp/austres_plot.png\")\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def values (sample-uniform 12 :integers true :max 100))\n  (view (area-chart years values :group-by seasons :legend true))\n\n  (view (area-chart [\"a\" \"b\" \"c\"] [10 20 30]))\n  (view (area-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]\n                   :legend true\n                   :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))\n\n  ;; add a series label\n  (def plot (area-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))\n  (view plot)\n  (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")\n\n  (view (area-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                   (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 2039,
+   :line 2130,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([categories values & options]),
    :name "bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1902",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1993",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bar-chart",
    :doc
    " Returns a JFreeChart object representing a bar-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :series-label\n  :legend (default false) prints legend\n  :vertical (default true) the orientation of the plot\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (with-data (get-dataset :co2)\n    (view (bar-chart :Type :uptake\n                     :title \"CO2 Uptake\"\n                     :group-by :Treatment\n                     :x-label \"Grass Types\" :y-label \"Uptake\"\n                    :legend true)))\n\n\n  (def data (get-dataset :airline-passengers))\n  (view (bar-chart :year :passengers :group-by :month :legend true :data data))\n\n  (with-data  (get-dataset :airline-passengers)\n    (view (bar-chart :month :passengers :group-by :year :legend true)))\n\n\n  (def data (get-dataset :austres))\n  (view data)\n  (def plot (bar-chart :year :population :group-by :quarter :legend true :data data))\n  (view plot)\n  (save plot \"/tmp/austres_plot.png\" :width 1000)\n  (view \"file:///tmp/austres_plot.png\")\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def values (sample-uniform 12 :integers true :max 100))\n  (view (bar-chart years values :group-by seasons :legend true))\n\n  (view (bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))\n  (view (bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]\n                   :legend true\n                   :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))\n\n  ;; add a series label\n  (def plot (bar-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))\n  (view plot)\n  (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")\n\n  (view (bar-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                   (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 1902,
+   :line 1993,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([x1 x2 & options]),
    :name "bland-altman-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3154",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3245",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/bland-altman-plot",
    :doc
    "\nOptions:\n  :data (default nil) If the :data option is provided a dataset,\n                      column names can be used instead of sequences\n                      of data for arguments x1 and x2.\n\nExamples:\n\n  (use '(incanter core datasets charts))\n  (def flow-meter (to-matrix (get-dataset :flow-meter)))\n  (def x1 (sel flow-meter :cols 1))\n  (def x2 (sel flow-meter :cols 3))\n  (view (bland-altman-plot x1 x2))\n\n  (with-data (get-dataset :flow-meter)\n    (view (bland-altman-plot \"Wright 1st PEFR\" \"Mini Wright 1st PEFR\")))\n\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Bland-Altman_plot\n  http://www-users.york.ac.uk/~mb55/meas/ba.htm",
    :var-type "function",
-   :line 3154,
+   :line 3245,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([x & options]),
    :name "box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2513",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2604",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/box-plot",
    :doc
    " Returns a JFreeChart object representing a box-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x values into series.\n\nSee also:\n  view and save\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                        :title \"Gamma Boxplot\"\n                        :legend true))\n  (view gamma-box-plot)\n  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))\n\n  ;; use the group-by options\n  (use '(incanter core stats datasets charts))\n  (with-data (get-dataset :iris)\n    (view (box-plot :Petal.Length :group-by :Species :legend true))\n    (view (box-plot :Petal.Width :group-by :Species :legend true))\n    (view (box-plot :Sepal.Length :group-by :Species :legend true))\n    (view (box-plot :Sepal.Width :group-by :Species :legend true)))\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 2513,
+   :line 2604,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart]),
    :name "clear-background",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L852",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L943",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/clear-background",
    :doc
    " Sets the alpha level (transparency) of the plot's background to zero\nremoving the default grid, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "function",
-   :line 852,
+   :line 943,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([[& slider-bindings] expression & options]),
    :name "dynamic-scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3445",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3536",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-scatter-plot",
    :doc
    " Returns an scatter-plot bound to sliders (which tend to appear behind the chart).\nSee the sliders macro for more information.\n\n\nExamples:\n\n(use '(incanter core stats charts))\n\n(let [x (range -3 3 0.1)]\n  (view (dynamic-scatter-plot [mean (range -3 3 0.1)\n                               sd (range 0.1 10 0.1)]\n          [x (pdf-normal x :mean mean :sd sd)]\n          :title \"Normal PDF Plot\")))\n\n\n (let [x (range -3 3 0.1)]\n   (view (dynamic-scatter-plot [mean (range -3 3 0.1)\n                                sd (range 0.1 10 0.1)]\n          (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])\n          :title \"Normal PDF Plot\")))",
    :var-type "macro",
-   :line 3445,
+   :line 3536,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([[& slider-bindings] expression & options]),
    :name "dynamic-xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3414",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3505",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/dynamic-xy-plot",
    :doc
    " Returns an xy-plot bound to sliders (which tend to appear behind the chart).\nSee the sliders macro for more information.\n\n\nExamples:\n\n(use '(incanter core stats charts))\n\n(let [x (range -3 3 0.1)]\n  (view (dynamic-xy-plot [mean (range -3 3 0.1)\n                          sd (range 0.1 10 0.1)]\n          [x (pdf-normal x :mean mean :sd sd)]\n          :title \"Normal PDF Plot\")))\n\n (let [x (range -3 3 0.1)]\n   (view (dynamic-xy-plot [mean (range -3 3 0.1)\n                           sd (range 0.1 10 0.1)]\n          (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])\n          :title \"Normal PDF Plot\")))",
    :var-type "macro",
-   :line 3414,
+   :line 3505,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([function min-range max-range & options]),
    :name "function-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2591",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2682",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/function-plot",
    :doc
    " Returns a xy-plot object of the given function over the range indicated\nby the min-range and max-range arguments. Use the 'view' function to\ndisplay the chart, or the 'save' function to write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :step-size (default (/ (- max-range min-range) 500))\n\nSee also:\n  view, save, add-points, add-lines\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  (view (function-plot sin (- Math/PI) Math/PI))\n  (view (function-plot pdf-normal -3 3))\n\n  (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))\n  (view (function-plot cubic -10 10))",
    :var-type "macro",
-   :line 2591,
+   :line 2682,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart] [chart series-idx]),
    :name "get-series",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3235",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3326",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/get-series",
    :doc "get-series",
    :var-type "function",
-   :line 3235,
+   :line 3326,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([function x-min x-max y-min y-max & options]),
    :name "heat-map",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2771",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2862",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/heat-map",
    :doc
-   "\nUsage: (heat-map function x-min x-max y-min y-max & options)\n\nReturns a JFreeChart object representing a heat map of the function across\nthe given x and y ranges. Use the 'view' function to display the chart, or \nthe 'save' function to write it to a file.\n\nArguments:\n  function -- a function that takes two scalar arguments and returns a scalar\n  x-min    -- lower bound for the first value of the function\n  x-max    -- upper bound for the first value of the function\n  y-min    -- lower bound for the second value of the function\n  y-max    -- upper bound for the second value of the function\n\nOptions:\n  :title \n  :x-label (default 'x-min < x < x-max')\n  :y-label (default 'y-min < y < y-max')\n  :z-label -- defaults to function's name\n  :color? (default true) -- should the plot be in color or not?\n  :include-zero? (default true) -- should the plot include the origin if it\n                                   is not in the ranges specified?\n\nExamples:\n  (use '(incanter core charts))\n  (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))\n  (view (heat-map f -10 10 -15 15))\n  (view (heat-map f -10 10 -10 10 :color? false))\n  (view (heat-map f 5 10 5 10 :include-zero? false))\n\n  (defn f2 [x y] (plus (sq x) (sq y)))\n  (view (heat-map f2 -10 10 -10 10))\n  (view (heat-map f2 -10 10 -10 10 :color? false))\n\n  (use 'incanter.stats)\n  (defn f3 [x y] (pdf-normal (sqrt (plus (sq x) (sq y)))))\n  (view (heat-map f3 -3 3 -3 3 :x-label \"x1\" :y-label \"x2\" :z-label \"pdf\"))\n  (view (heat-map f3 -3 3 -3 3 :color? false))\n\n  (defn f4 [x y] (minus (sq x) (sq y)))\n  (view (heat-map f4 -10 10 -10 10))\n  (view (heat-map f4 -10 10 -10 10 :color? false))\n\n\n  (use '(incanter core stats charts))\n  (let [data [[0 5 1 2]\n                [0 10 1.9 1]\n                [15 0 0.5 1.5]\n                [18 10 4.5 2.1]]\n        diffusion (fn [x y]\n                    (sum (map #(pdf-normal (euclidean-distance [x y] (take 2 %))\n                                           :mean (nth % 2) :sd (last %))\n                              data)))]\n    (view (heat-map diffusion -5 20 -5 20)))",
+   "\nUsage: (heat-map function x-min x-max y-min y-max & options)\n\nReturns a JFreeChart object representing a heat map of the function across\nthe given x and y ranges. Use the 'view' function to display the chart, or\nthe 'save' function to write it to a file.\n\nArguments:\n  function -- a function that takes two scalar arguments and returns a scalar\n  x-min    -- lower bound for the first value of the function\n  x-max    -- upper bound for the first value of the function\n  y-min    -- lower bound for the second value of the function\n  y-max    -- upper bound for the second value of the function\n\nOptions:\n  :title\n  :x-label (default 'x-min < x < x-max')\n  :y-label (default 'y-min < y < y-max')\n  :z-label -- defaults to function's name\n  :color? (default true) -- should the plot be in color or not?\n  :include-zero? (default true) -- should the plot include the origin if it\n                                   is not in the ranges specified?\n\nExamples:\n  (use '(incanter core charts))\n  (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))\n  (view (heat-map f -10 10 -15 15))\n  (view (heat-map f -10 10 -10 10 :color? false))\n  (view (heat-map f 5 10 5 10 :include-zero? false))\n\n  (defn f2 [x y] (plus (sq x) (sq y)))\n  (view (heat-map f2 -10 10 -10 10))\n  (view (heat-map f2 -10 10 -10 10 :color? false))\n\n  (use 'incanter.stats)\n  (defn f3 [x y] (pdf-normal (sqrt (plus (sq x) (sq y)))))\n  (view (heat-map f3 -3 3 -3 3 :x-label \"x1\" :y-label \"x2\" :z-label \"pdf\"))\n  (view (heat-map f3 -3 3 -3 3 :color? false))\n\n  (defn f4 [x y] (minus (sq x) (sq y)))\n  (view (heat-map f4 -10 10 -10 10))\n  (view (heat-map f4 -10 10 -10 10 :color? false))\n\n\n  (use '(incanter core stats charts))\n  (let [data [[0 5 1 2]\n                [0 10 1.9 1]\n                [15 0 0.5 1.5]\n                [18 10 4.5 2.1]]\n        diffusion (fn [x y]\n                    (sum (map #(pdf-normal (euclidean-distance [x y] (take 2 %))\n                                           :mean (nth % 2) :sd (last %))\n                              data)))]\n    (view (heat-map diffusion -5 20 -5 20)))",
    :var-type "macro",
-   :line 2771,
+   :line 2862,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([x & options]),
    :name "histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1657",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1748",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/histogram",
    :doc
    " Returns a JFreeChart object representing the histogram of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :nbins (default 10) number of bins\n  :density (default false) if false, plots frequency, otherwise density\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n\n\nSee also:\n  view, save, add-histogram\n\nExamples:\n\n  (use '(incanter core charts stats))\n  (view (histogram (sample-normal 1000)))\n\n  # plot a density histogram\n  (def hist (histogram (sample-normal 1000) :density true))\n  (view hist)\n\n  # add a normal density line to the plot\n  (def x (range -4 4 0.01))\n  (add-lines hist x (pdf-normal x))\n\n  # plot some gamma data\n  (def gam-hist (histogram (sample-gamma 1000) :density true :nbins 30))\n  (view gam-hist)\n  (def x (range 0 8 0.01))\n  (add-lines gam-hist x (pdf-gamma x))\n\n  (use 'incanter.datasets)\n  (def iris (get-dataset :iris))\n  (view (histogram :Sepal.Width :data iris))\n\n  (with-data (get-dataset :iris)\n    (view (histogram :Petal.Length)))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 1657,
+   :line 1748,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([categories values & options]),
    :name "line-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1762",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1853",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/line-chart",
    :doc
    " Returns a JFreeChart object representing a line-chart of the given values and categories.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :legend (default false) prints legend\n  :series-label\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n  :gradient? (default false) -- use gradient on bars\n\n\nSee also:\n  view and save\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n\n  (def data (get-dataset :airline-passengers))\n  (def years (sel data :cols 0))\n  (def months (sel data :cols 2))\n  (def passengers (sel data :cols 1))\n  (view (line-chart years passengers :group-by months :legend true))\n  (view (line-chart months passengers :group-by years :legend true))\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def x (sample-uniform 12 :integers true :max 100))\n  (view (line-chart years x :group-by seasons :legend true))\n\n  (view (line-chart [\"a\" \"b\" \"c\" \"d\" \"e\" \"f\"] [10 20 30 10 40 20]))\n\n  (view (line-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                       (sample-uniform 10 :max 50) :legend true))\n\n  ;; add a series label\n  (def plot (line-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))\n  (view plot)\n  (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")\n\n\n  (view (line-chart :year :passengers :group-by :month :legend true :data data))\n\n  (view (line-chart :month :passengers :group-by :year :legend true :data data))\n\n  (with-data data\n    (view (line-chart :month :passengers :group-by :year :legend true)))\n\n  (with-data (->> ($rollup :sum :passengers :year (get-dataset :airline-passengers))\n                  ($order :year :asc))\n    (view (line-chart :year :passengers)))\n\n  (with-data (->> ($rollup :sum :passengers :month (get-dataset :airline-passengers))\n                  ($order :passengers :asc))\n    (view (line-chart :month :passengers)))\n\n\n  (with-data ($rollup :sum :passengers :month (get-dataset :airline-passengers))\n    (view (line-chart :month :passengers)))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 1762,
+   :line 1853,
+   :file "modules/incanter-charts/src/incanter/charts.clj"}
+  {:arglists ([& options]),
+   :name "log-axis",
+   :namespace "incanter.charts",
+   :source-url
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L820",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//charts-api.html#incanter.charts/log-axis",
+   :doc
+   " Create a logarithmic axis.\n\nBeware: Log will behave strangely for data below 1 (especially 0), filter them out.\n\nOptions:\n  :base (default 10) base of the logarithm; typically 2 or 10\n  :label (default none) the label of the axis\n  :int-ticks? (default true) if true, use normal numbers instead of\n     <base>^<exponent>, i.e. 1 instead of f.ex. 10^0.0\n\nSee also:\n  set-axis\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/LogAxis.html",
+   :var-type "function",
+   :line 820,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([function min-range max-range & options]),
    :name "parametric-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2657",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2748",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/parametric-plot",
    :doc
    " Returns a xy-plot object of the given parametric function over the range indicated\nby the min-range and max-range arguments. Use the 'view' function to\ndisplay the chart, or the 'save' function to write it to a file.\nFunction must take 1 argument - parameter t and return point [x y].\n\nOptions:\n  :title (default '') main title\n  :x-label (default 'min-x < x < max-x')\n  :y-label (default 'min-y < y < max-y')\n  :legend (default false) prints legend\n  :series-label (default function expression)\n  :step-size (default (/ (- max-range min-range) 500))\n\nSee also:\n  view, save, add-parametric, function-plot\n\n\nExamples:\n\n  (use '(incanter core charts))\n\n  (defn circle [t] [(cos t) (sin t)])\n  (view (parametric-plot circle (- Math/PI) Math/PI))\n\n  (defn spiral [t] [(* t (cos t)) (* t (sin t))])\n  (view (parametric-plot spiral 0 (* 6 Math/PI)))",
    :var-type "macro",
-   :line 2657,
+   :line 2748,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([categories values & options]),
    :name "pie-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2419",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2510",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/pie-chart",
    :doc
    " Returns a JFreeChart object representing a pie-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default 'Histogram') main title\n  :legend (default false) prints legend\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (view (pie-chart [\"a\" \"b\" \"c\"] [10 20 30]))\n\n   (view (pie-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                   (sample-uniform 10 :max 50) :legend true))\n\n\n   (with-data (->> (get-dataset :hair-eye-color)\n                   ($rollup :sum :count [:hair :eye]))\n     (view $data)\n     (view (pie-chart :hair :count :title \"Hair Color\"))\n     (view (pie-chart :eye :count :title \"Eye Color\")))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 2419,
+   :line 2510,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([x & options]),
    :name "qq-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3112",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3203",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/qq-plot",
    :doc
    "\nReturns a QQ-Plot object. Use the 'view' function to display it.\n\nOptions:\n  :data (default nil) If the :data option is provided a dataset,\n                      a column name can be used instead of a sequence\n                      of data for argument x.\n\nReferences:\n  http://en.wikipedia.org/wiki/QQ_plot\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n  (view (qq-plot (sample-normal 100)))\n  (view (qq-plot (sample-exp 100)))\n  (view (qq-plot (sample-gamma 100)))\n\n  (with-data (get-dataset :iris)\n    (view (qq-plot :Sepal.Length)))",
    :var-type "function",
-   :line 3112,
+   :line 3203,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([] [x y & options]),
    :name "scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1298",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1389",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/scatter-plot",
    :doc
    " Returns a JFreeChart object representing a scatter-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :title (default 'Histogram') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x and y values into series.\n  :density? (default false) -- chart will represent density instead of frequency.\n  :nbins (default 10) -- number of bins (i.e. bars)\n  :gradient? (default false) -- use gradient on bars\n\nSee also:\n  view, save, add-points, add-lines\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n  ;; create some data\n  (def mvn-samp (sample-mvn 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))\n\n  ;; create scatter-plot of points\n  (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))\n  (view mvn-plot)\n\n  ;; add regression line to scatter plot\n  (def x (sel mvn-samp :cols 0))\n  (def y (sel mvn-samp :cols 1))\n  (def lm (linear-model y x))\n  (add-lines mvn-plot x (:fitted lm))\n\n  ;; use :group-by option\n  (use '(incanter core stats datasets charts))\n  ;; load the :iris dataset\n  (def iris (get-dataset :iris))\n  ;; plot the first two columns grouped by the fifth column\n  (view (scatter-plot ($ :Sepal.Width iris) ($ :Sepal.Length iris) :group-by ($ :Species iris)))\n\n  (view (scatter-plot :Sepal.Length :Sepal.Width :data (get-dataset :iris)))\n\n  (view (scatter-plot :Sepal.Length :Sepal.Width :group-by :Species :data (get-dataset :iris)))\n\n  (with-data (get-dataset :iris)\n     (view (scatter-plot :Sepal.Length :Sepal.Width)))\n\n  (with-data (get-dataset :iris)\n     (view (scatter-plot :Sepal.Length :Sepal.Width :group-by :Species)))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 1298,
+   :line 1389,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([& opts]),
    :name "scatter-plot-matrix",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1562",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1653",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/scatter-plot-matrix",
    :doc
    "Returns a JFreeChart object displaying a scatter plot matrix for the given data.\nUse the 'view' function to display the chart or 'save' to write it to a file.\n\nUse:\n(scatter-plot-matrix & options)\n(scatter-plot-matrix data & options)\n\nOptions:\n:data data (default $data) the data set for the plot.\n:title s (default \"Scatter Plot Matrix\").\n:nbins n (default 10) number of bins (ie. bars) in histogram.\n:group-by grp (default nil) name of the column for grouping data.\n:only-first n (default 6) show only the first n most correlating columns of the data set.\n:only-triangle b (default false) shows only the upper triangle of the plot matrix.\n\nExamples:\n(use '(incanter core stats charts datasets pdf))\n(view (scatter-plot-matrix (get-dataset :iris) :nbins 20 :group-by :Species ))\n(with-data (get-dataset :iris) (view (scatter-plot-matrix :nbins 20 :group-by :Species )))\n(view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :nbins 20))\n\n;;;Input examples for Iris\n;; Input dataset examples: Incanter data repo, local file, remote file (url)\n(def iris (get-dataset :iris))\n(def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home\n(def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))\n;; Filter dataset to specific columns only\n(def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))\n(def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] ))\n\n;;; Scatter plot matrix examples\n;; Using default options\n(def iris-spm (scatter-plot-matrix iris :group-by :Species))\n;; filter to metrics only, no categorical dimension for grouping\n(def iris-spm (scatter-plot-matrix :data ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width] iris)))\n\n;; Using more options\n(def iris-spm (scatter-plot-matrix iris\n                                   :title \"Iris Scatter Plot Matrix\"\n                                   :bins 20 ; number of histogram bars\n                                   :group-by :Species\n                                   :only-first 4 ; most correlating columns\n                                   :only-triangle false))\n\n;;;Output examples\n;; View on Display\n(view iris-spm :width 1280 :height 800)\n;; Save as PDF\n(save-pdf  iris-spm \"out/iris-spm.pdf\" :width 2560 :height 1600)\n;; Save as PNG\n(save iris-spm \"out/iris-spm.png\" :width 2560 :height 1600)\n\n;; Airline dataset\n(def airline ($ [:year :passengers :month] (read-dataset \"https://raw.github.com/liebke/incanter/master/data/airline_passengers.csv\" :header true)))\n(def airline-spm (scatter-plot-matrix airline  :group-by :month :bins 20 :title \"Airline Scatter Plot Matrix\"))\n(view airline-spm)\n;; Chick-weight dataset\n(view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :bins 20 :title \"Chick-weight Scatter Plot Matrix\" ))",
    :var-type "function",
-   :line 1562,
+   :line 1653,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart alpha]),
    :name "set-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L825",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L916",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-alpha",
    :doc
    " Sets the alpha level (transparency) of the plot's foreground\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "function",
-   :line 825,
+   :line 916,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
+  {:file "modules/incanter-charts/src/incanter/charts.clj",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L852",
+   :wiki-url
+   "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-axis",
+   :namespace "incanter.charts",
+   :line 852,
+   :var-type "multimethod",
+   :doc
+   " Set the selected axis of the chart, returning the chart.\n(Beware: the axis' label will replace axis label set previously on the chart.)\n\nArguments:\n  chart - the JFreeChart object whose axis to change\n  dimension - depends on the plot type for plots with mutliple axes\n               f.ex. :x or :y for an XYPlot (x is the domain axis, y the range one)\n  axis - the axis to set, an instance of ValueAxis\n\nSee also:\n  log-axis\n\nNote:\n  Not applicable to DialPlot MeterPlot PiePlot MultiplePiePlot CompassPlot WaferMapPlot SpiderWebPlot\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/ValueAxis.html\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/plot/XYPlot.html\n\nExamples:\n\n  (use '(incanter core charts))\n\n  (view\n    (doto (function-plot #(Math/pow 10 %) 0 5)\n          (set-axis :x (log-axis :base 10, :label \"log(x)\"))))",
+   :name "set-axis"}
   {:arglists ([chart alpha]),
    :name "set-background-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L838",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L929",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha",
    :doc
    " Sets the alpha level (transparency) of the plot's background\nreturns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "function",
-   :line 838,
+   :line 929,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L76",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L76",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-background-default",
    :namespace "incanter.charts",
@@ -730,37 +757,37 @@
    :name "set-stroke",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3480",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3571",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke",
    :doc
    "\nExamples:\n  (use '(incanter core charts))\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (set-stroke :width 4 :dash 5)\n    view)\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (add-categories [:a :b :c :d] [20 5 30 15])\n    (set-stroke :width 4 :dash 5)\n    (set-stroke :series 1 :width 2 :dash 10)\n    view)\n\n\n  (doto (function-plot sin -10 10 :step-size 0.1)\n    (set-stroke :width 3 :dash 5)\n    view)\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (add-categories [:a :b :c :d] [20 5 30 15])\n    (set-stroke :series 0 :width 4 :dash 5)\n    (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))",
    :var-type "function",
-   :line 3480,
+   :line 3571,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart color & options]),
    :name "set-stroke-color",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3525",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3616",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-stroke-color",
    :doc
    "\nExamples:\n  (use '(incanter core charts))\n\n  (doto (line-chart [:a :b :c :d] [10 20 5 35])\n    (set-stroke :width 4 :dash 5)\n    (set-stroke-color java.awt.Color/blue)\n    view)\n\n  (doto (xy-plot [1 2 3] [4 5 6])\n    (add-points [1 2 3] [4.1 5.1 6.1])\n    (set-stroke-color java.awt.Color/black :series 0)\n    (set-stroke-color java.awt.Color/red :series 1))\n\n  (doto (function-plot sin -10 10 :step-size 0.1)\n    (set-stroke :width 3 :dash 5)\n    (set-stroke-color java.awt.Color/gray)\n    view)",
    :var-type "function",
-   :line 3525,
+   :line 3616,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart theme]),
    :name "set-theme",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L227",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L227",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme",
    :doc
@@ -770,9 +797,9 @@
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L159",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L159",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-theme-bw",
    :namespace "incanter.charts",
@@ -785,71 +812,71 @@
    :name "set-title",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L865",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L956",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-title",
    :doc
    " Sets the main title of the plot, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "function",
-   :line 865,
+   :line 956,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart label]),
    :name "set-x-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L878",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L969",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-label",
    :doc
    " Sets the label of the x-axis, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "function",
-   :line 878,
+   :line 969,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart lower upper]),
    :name "set-x-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L904",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L995",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-x-range",
    :doc
    " Sets the range of the x-axis on the given chart.\n\nExamples:\n\n  (use '(incanter core charts datasets))\n\n  (def chart (xy-plot :speed :dist :data (get-dataset :cars)))\n  (view chart)\n  (set-x-range chart 10 20)",
    :var-type "function",
-   :line 904,
+   :line 995,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart label]),
    :name "set-y-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L891",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L982",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-label",
    :doc
    " Sets the label of the y-axis, returns the modified chart object.\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "function",
-   :line 891,
+   :line 982,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([chart lower upper]),
    :name "set-y-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L924",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1015",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/set-y-range",
    :doc
    " Sets the range of the y-axis on the given chart.\n\nExamples:\n\n  (use '(incanter core charts datasets))\n\n  (def chart (xy-plot :speed :dist :data (get-dataset :cars)))\n  (view chart)\n  (set-y-range chart 10 60)",
    :var-type "function",
-   :line 924,
+   :line 1015,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists
    ([updater-fn slider-values]
@@ -857,150 +884,150 @@
    :name "slider",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3275",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3366",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/slider",
    :doc
    "\n\nExamples:\n  (use '(incanter core stats charts))\n\n  (def pdf-chart (function-plot pdf-normal -3 3))\n  (view pdf-chart)\n  (add-function pdf-chart pdf-normal -3 3)\n\n  (let [x (range -3 3 0.1)]\n    (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1)))\n\n  (let [x (range -3 3 0.1)]\n    (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1) \"sd\"))",
    :var-type "function",
-   :line 3275,
+   :line 3366,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([[& slider-bindings] body]),
    :name "sliders",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3352",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3443",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders",
    :doc
    " Creates one slider control for each of the given sequence bindings.\nEach slider calls the given expression when manipulated.\n\n\nExamples:\n(use '(incanter core stats charts))\n\n;; manipulate a normal pdf\n(let [x (range -3 3 0.1)]\n  (def pdf-chart (xy-plot))\n  (view pdf-chart)\n  (sliders [mean (range -3 3 0.1)\n            stdev (range 0.1 10 0.1)]\n    (set-data pdf-chart [x (pdf-normal x :mean mean :sd stdev)])))\n\n\n\n;; manipulate a gamma pdf\n(let [x (range 0 20 0.1)]\n  (def pdf-chart (xy-plot))\n  (view pdf-chart)\n  (sliders [rate (range 0.1 10 0.1)\n            shape (range 0.1 10 0.1)]\n    (set-data pdf-chart [x (pdf-gamma x :rate rate :shape shape)])))\n\n\n\n;; find the start values of a non-linear model function\n(use '(incanter core charts datasets))\n;; create model function used in the following data-sorcery post:\n;; http://data-sorcery.org/2009/06/06/fitting-non-linear-models/\n\n(defn f [theta x]\n  (let [[b1 b2 b3] theta]\n    (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))\n\n\n(with-data (get-dataset :chwirut)\n  (view $data)\n  (def chart (scatter-plot ($ :x) ($ :y)))\n  (view chart)\n  (add-lines chart ($ :x) (f [0 0.01 0] ($ :x)))\n\n  ;; manipulate the model line to find some good start values.\n  ;; give the index of the line data (i.e. 1) to set-data.\n  (let [x ($ :x)]\n    (sliders [b1 (range 0 2 0.01)\n              b2 (range 0.01 2 0.01)\n              b3 (range 0 2 0.01)]\n      (set-data chart [x (f [b1 b2 b3] x)] 1))))",
    :var-type "macro",
-   :line 3352,
+   :line 3443,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists
    ([f [& slider-values]] [f [& slider-values] [& slider-labels]]),
    :name "sliders*",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3321",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3412",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/sliders*",
    :doc
    "sliders*\n\nExamples:\n(use '(incanter core stats charts))\n\n(let [x (range -3 3 0.1)]\n  (do\n    (def pdf-chart (xy-plot x (pdf-normal x :mean -3 :sd 0.1)))\n    (view pdf-chart)\n    (sliders* #(set-data pdf-chart [x (pdf-normal x :mean %1 :sd %2)])\n             [(range -3 3 0.1) (range 0.1 10 0.1)]\n             [\"mean\" \"sd\"])))",
    :var-type "function",
-   :line 3321,
+   :line 3412,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([categories values & options]),
    :name "stacked-area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2176",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2267",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-area-chart",
    :doc
    " Returns a JFreeChart object representing an stacked-area-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default '') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :series-label\n  :legend (default false) prints legend\n  :vertical (default true) the orientation of the plot\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (with-data (get-dataset :co2)\n    (view (stacked-area-chart :Type :uptake\n                     :title \"CO2 Uptake\"\n                     :group-by :Treatment\n                     :x-label \"Grass Types\" :y-label \"Uptake\"\n                    :legend true)))\n\n\n  (def data (get-dataset :airline-passengers))\n  (view (stacked-area-chart :year :passengers :group-by :month :legend true :data data))\n\n  (with-data  (get-dataset :airline-passengers)\n    (view (stacked-area-chart :month :passengers :group-by :year :legend true)))\n\n\n  (def data (get-dataset :austres))\n  (view data)\n  (def plot (stacked-area-chart :year :population :group-by :quarter :legend true :data data))\n  (view plot)\n  (save plot \"/tmp/austres_plot.png\" :width 1000)\n  (view \"file:///tmp/austres_plot.png\")\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def values (sample-uniform 12 :integers true :max 100))\n  (view (stacked-area-chart years values :group-by seasons :legend true))\n\n  (view (stacked-area-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]\n                   :legend true\n                   :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 2176,
+   :line 2267,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([categories values & options]),
    :name "stacked-bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L2302",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L2393",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/stacked-bar-chart",
    :doc
    " Returns a JFreeChart object representing an stacked-bar-chart of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nArguments:\n  categories -- a sequence of categories\n  values -- a sequence of numeric values\n\nOptions:\n  :title (default '') main title\n  :x-label (default 'Categories')\n  :y-label (default 'Value')\n  :series-label\n  :legend (default false) prints legend\n  :vertical (default true) the orientation of the plot\n  :group-by (default nil) -- a vector of values used to group the values into\n                             series within each category.\n\n\nSee also:\n  view and save\n\nExamples:\n\n\n  (use '(incanter core stats charts datasets))\n\n  (with-data (get-dataset :co2)\n    (view (stacked-bar-chart :Type :uptake\n                     :title \"CO2 Uptake\"\n                     :group-by :Treatment\n                     :x-label \"Grass Types\" :y-label \"Uptake\"\n                    :legend true)))\n\n\n  (def data (get-dataset :airline-passengers))\n  (view (stacked-bar-chart :year :passengers :group-by :month :legend true :data data))\n\n  (with-data  (get-dataset :airline-passengers)\n    (view (stacked-bar-chart :month :passengers :group-by :year :legend true)))\n\n\n  (def data (get-dataset :austres))\n  (view data)\n  (def plot (stacked-bar-chart :year :population :group-by :quarter :legend true :data data))\n  (view plot)\n  (save plot \"/tmp/austres_plot.png\" :width 1000)\n  (view \"file:///tmp/austres_plot.png\")\n\n\n  (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))\n  (def years (mapcat identity (repeat 4 [2007 2008 2009])))\n  (def values (sample-uniform 12 :integers true :max 100))\n  (view (stacked-bar-chart years values :group-by seasons :legend true))\n\n  (view (stacked-bar-chart [\"a\" \"b\" \"c\"] [10 20 30]))\n  (view (stacked-bar-chart [\"a\" \"a\" \"b\" \"b\" \"c\" \"c\" ] [10 20 30 10 40 20]\n                   :legend true\n                   :group-by [\"I\" \"II\" \"I\" \"II\" \"I\" \"II\"]))\n\n  ;; add a series label\n  (def plot (stacked-bar-chart [\"a\" \"b\" \"c\"] [10 20 30] :legend true :series-label \"s1\"))\n  (view plot)\n  (add-categories plot [\"a\" \"b\" \"c\"] [5 25 40] :series-label \"s2\")\n\n  (view (stacked-bar-chart (sample \"abcdefghij\" :size 10 :replacement true)\n                   (sample-uniform 10 :max 50) :legend true))\n\n\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 2302,
+   :line 2393,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([x y & options]),
    :name "time-series-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1188",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1279",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/time-series-plot",
    :doc
    " Returns a JFreeChart object representing a time series plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file. Sequence passed in for the x axis should be\nnumber of milliseconds from the epoch (1 January 1970).\n\nOptions:\n  :data (default nil) If the :data option is provided a dataset,\n                      column names can be used instead of sequences\n                      of data as arguments to xy-plot.\n  :title (default 'Time Series Plot') main title\n  :x-label (default x expression)\n  :y-label (default y expression)\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x and y values into series.\n\nSee also:\n  view, save, add-points, add-lines\n\nExamples:\n\n  (use '(incanter core stats charts chrono))\n\n  ;; plot numbers against years starting with 1900\n  (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0))\n                       .getMillis)\n                  (range 100)))\n  (def y (range 100))\n  (view (time-series-plot dates y\n                          :x-label \"Year\"))\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 1188,
+   :line 1279,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([x & options]),
    :name "trace-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L3064",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L3155",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/trace-plot",
    :doc
    " Returns a trace-plot object, use the 'view' function to display it.\n\nOptions:\n  :data (default nil) If the :data option is provided a dataset,\n                      a column name can be used instead of a sequence\n                      of data for argument x.\n  :title (default 'Trace Plot') main title\n  :x-label (default 'Iteration')\n  :y-label (default 'Value')\n  :series-label (default 'Value')\n\n  Examples:\n    (use '(incanter core datasets stats bayes charts))\n    (def ols-data (to-matrix (get-dataset :survey)))\n    (def x (sel ols-data (range 0 2313) (range 1 10)))\n    (def y (sel ols-data (range 0 2313) 10))\n    (def sample-params (sample-model-params 5000 (linear-model y x :intercept false)))\n    (view (trace-plot (:var sample-params)))\n\n    (view (trace-plot (sel (:coefs sample-params) :cols 0)))",
    :var-type "function",
-   :line 3064,
+   :line 3155,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([] [x y & options]),
    :name "xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/liebke/incanter/blob/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj#L1029",
+   "https://github.com/liebke/incanter/blob/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj#L1120",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/8c85d2c13f617f1ed0bacf957ce41572215023f3/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/liebke/incanter/raw/4ff8dceb4dc65e0790b9160445580227a2655359/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://liebke.github.com/incanter//charts-api.html#incanter.charts/xy-plot",
    :doc
    " Returns a JFreeChart object representing a xy-plot of the given data.\nUse the 'view' function to display the chart, or the 'save' function\nto write it to a file.\n\nOptions:\n  :data (default nil) If the :data option is provided a dataset,\n                      column names can be used instead of sequences\n                      of data as arguments to xy-plot.\n  :title (default 'XY Plot') main title\n  :x-label (default x expression)\n  :y-label (default 'Frequency')\n  :legend (default false) prints legend\n  :series-label (default x expression)\n  :group-by (default nil) -- a vector of values used to group the x and y values into series.\n  :points (default false) includes point-markers\n  :auto-sort (default true) sort data by x\n\nSee also:\n  view, save, add-points, add-lines\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  ;; plot the cosine function\n  (def x (range -1 5 0.01))\n  (def y (cos (mult 2 Math/PI x)))\n  (view (xy-plot x y))\n\n  ;; plot gamma pdf with different parameters\n  (def x2 (range 0 20 0.1))\n  (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :rate 2)\n                             :legend true\n                             :title \"Gamma PDF\"\n                             :y-label \"Density\"))\n  (view gamma-plot)\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))\n  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))\n\n  ;; use :group-by option\n  (use '(incanter core charts datasets))\n\n  (with-data (get-dataset :chick-weight)\n    (view (xy-plot :Time :weight :group-by :Chick)))\n\n\n  ;; see INCANTER_HOME/examples/probability_plots.clj for more examples of plots\n\nReferences:\n  http://www.jfree.org/jfreechart/api/javadoc/\n  http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html",
    :var-type "macro",
-   :line 1029,
+   :line 1120,
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:arglists ([cols] [arg1 arg2] [rows cols data]),
    :name "$",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1522",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1527",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$",
    :doc
    "An alias to (sel (second args) :cols (first args)). If given only a single argument,\nit will use the $data binding for the first argument, which is set with\nthe with-data macro.\n\nExamples:\n  (use '(incanter core stats charts datasets))\n\n  (def cars (get-dataset :cars))\n  ($ :speed cars)\n\n\n  (with-data cars\n    (def lm (linear-model ($ :dist) ($ :speed)))\n    (doto (scatter-plot ($ :speed) ($ :dist))\n      view\n      (add-lines ($ :speed) (:fitted lm))))\n\n  ;; standardize speed and dist and append the standardized variables to the original dataset\n  (with-data (get-dataset :cars)\n    (view (conj-cols $data\n                     (sweep (sweep ($ :speed)) :stat sd :fun div)\n                     (sweep (sweep ($ :dist)) :stat sd :fun div))))\n\n  (with-data (get-dataset :iris)\n    (view $data)\n    (view ($ [:Sepal.Length :Sepal.Width :Species]))\n    (view ($ [:not :Petal.Width :Petal.Length]))\n    (view ($ 0 [:not :Petal.Width :Petal.Length])))\n\n\n   (use 'incanter.core)\n   (def mat (matrix (range 9) 3))\n   (view mat)\n   ($ 2 2 mat)\n   ($ [0 2] 2 mat)\n   ($ :all 1 mat)\n   ($ 1 mat)\n   ($ [:not 1] mat)\n   ($ 0 :all mat)\n   ($ [0 2] [0 2] mat)\n   ($ [:not 1] [:not 1] mat)\n   ($ [:not 1] :all mat)\n   ($ [0 2] [:not 1] mat)\n   ($ [0 2] [:not 1 2] mat)\n   ($ [0 2] [:not (range 2)] mat)\n   ($ [:not (range 2)] [0 2] mat)\n\n   (with-data mat\n     ($ 0 0))\n   (with-data mat\n     ($ [0 2] 2 mat))\n   (with-data mat\n     ($ :all 1))\n   (with-data mat\n     ($ [0 2] [0 2]))\n   (with-data mat\n     ($ [:not 1] :all))\n   (with-data mat\n     ($ [0 2] [:not 1]))\n\n\n   (use 'incanter.datasets)\n   (view (get-dataset :cars))\n   ($ (range 5) 0 (get-dataset :cars))\n   ($ (range 5) :all (get-dataset :cars))\n   ($ :all (range 2) (get-dataset :cars))\n\n   ($ (range 5) :dist (get-dataset :cars))\n   ($ [:not (range 5)] 0 (get-dataset :cars))\n   ($ [:not 0 1 2 3 4] 0 (get-dataset :cars))\n   (with-data (get-dataset :cars)\n     ($ 0 :dist))\n\n   (with-data (get-dataset :hair-eye-color)\n     (view $data)\n     (view ($ [:not :gender])))",
    :var-type "function",
-   :line 1522,
+   :line 1527,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& equation]),
    :name "$=",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2710",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2713",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$=",
    :doc
    "Formula macro translates from infix to prefix\n\n\nExamples:\n\n (use 'incanter.core)\n ($= 7 + 8)\n ($= [1 2 3] + [4 5 6])\n ($= [1 2 3] + (sin [4 5 6]))\n ($= [1 2 3] <*> (trans [1 2 3]))\n ($= [1 2 3] * [1 2 3])\n ($= [1 2 3] <x> [1 2 3])\n ($= 9 * 8 ** 3)\n ($= (sin Math/PI) * 10)\n\n ($= 10 + 20 * (4 - 5) / 6)\n\n ($= 20 * (4 - 5) / 6)\n\n (let [x 10\n       y -5]\n   ($= x + y / -10))\n\n ($= 3 ** 3)\n\n ($= [1 2 3] * [1 2 3])\n ($= [1 2 3] / (sq [1 2 3]) + [5 6 7])\n\n ($= (sqrt 5 * 5 + 3 * 3))\n ($= (sq [1 2 3] + [1 2 3]))\n ($= ((5 + 4) * 5))\n ($= ((5 + 4 * (3 - 4)) / (5 + 8) * 6))\n ($= [1 2 3] + 5)\n ($= (matrix [[1 2] [4 5]]) + 6)\n ($= (trans [[1 2] [4 5]]) + 6)\n\n ($= (trans [[1 2] [4 5]]) <*> (matrix [[1 2] [4 5]]))\n\n\n (use '(incanter core charts))\n (defn f [x] ($= x ** 2 + 3 * x + 5))\n (f 5)\n (view (function-plot f -10 10))\n (view (function-plot #($= % ** 2 + 3 * % + 5) -10 10))\n (view (function-plot (fn [x] ($= x ** 2 + 3 * x + 5)) -10 10))\n (let [x (range -10 10 0.1)]\n   (view (xy-plot x ($= x ** 3 - 5 * x ** 2 + 3 * x + 5))))\n\n ($= (5 + 7))\n ($= (trans [1 2 3 4]) <*> [1 2 3 4])\n ($= [1 2 3 4] <*> (trans [1 2 3 4]))\n\n ($= [1 2 3 4] <*> (trans [1 2 3 4]))\n ($= [1 2 3 4] <x> (trans [1 2 3 4]))\n\n\n ;; kronecker product example\n ($= (matrix [[1 2] [3 4] [5 6]]) <x> 4)\n ($= (matrix [[1 2] [3 4] [5 6]]) <x> (matrix [[1 2] [3 4]]))\n ($= [1 2 3 4] <x> 4)\n\n ($= 3 > (5 * 2/7))\n\n (use '(incanter core datasets charts))\n (with-data (get-dataset :cars)\n   (doto (scatter-plot :speed :dist :data ($where ($fn [speed dist] ($= dist / speed < 2))))\n     (add-points :speed :dist :data ($where ($fn [speed dist] ($= dist / speed >= 2))))\n     (add-lines ($ :speed) ($= 2 * ($ :speed)))\n     view))",
    :var-type "macro",
-   :line 2710,
+   :line 2713,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:name "$data",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L47",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L47",
    :dynamic true,
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$data",
    :doc
@@ -1012,29 +1039,29 @@
    :name "$fn",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1799",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1804",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$fn",
    :doc
    " A simple macro used as syntactic sugar for defining predicate functions to be used\nin the $where function. The supplied arguments should be column names of a dataset.\nThis macro performs map destructuring on the arguments.\n\nFor instance,\n($fn [speed] (< speed 10)) => (fn [{:keys [speed]}] (< speed 10))\n\nExamples:\n  (use '(incanter core datasets))\n  (view ($where ($fn [speed dist] (or (> speed 20) (< dist 10))) (get-dataset :cars)))\n\n  (view ($where ($fn [speed dist] (< (/ dist speed) 2)) (get-dataset :cars)))\n\n  (use '(incanter core datasets charts))\n  (with-data (get-dataset :cars)\n    (doto (scatter-plot :speed :dist :data ($where ($fn [speed dist] (< (/ dist speed) 2))))\n      (add-points :speed :dist :data ($where ($fn [speed dist] (>= (/ dist speed) 2))))\n      (add-lines ($ :speed) (mult 2 ($ :speed)))\n      view))\n\n\n  (let [passed? ($fn [speed dist] (< (/ dist speed) 2))\n        failed? (complement passed?)]\n    (with-data (get-dataset :cars)\n      (doto (scatter-plot :speed :dist :data ($where passed?))\n        (add-points :speed :dist :data ($where failed?))\n        (add-lines ($ :speed) (mult 2 ($ :speed)))\n        view)))\n\n\n  (use '(incanter core stats charts))\n  (let [above-sine? ($fn [col-0 col-1] (> col-1 (sin col-0)))\n        below-sine? (complement above-sine?)]\n    (with-data (conj-cols (sample-uniform 1000 :min -5 :max 5)\n                          (sample-uniform 1000 :min -1 :max 1))\n      (doto (function-plot sin -5 5)\n        (add-points :col-0 :col-1 :data ($where above-sine?))\n        (add-points :col-0 :col-1 :data ($where below-sine?))\n        view)))\n\n\n  (view ($where ($fn [] (> (rand) 0.9)) (get-dataset :cars)))\n\n  (view ($where ($fn [Species] ($in Species #{\"virginica\" \"setosa\"})) (get-dataset :iris)))",
    :var-type "macro",
-   :line 1799,
+   :line 1804,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([cols] [cols data]),
    :name "$group-by",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1851",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1856",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$group-by",
    :doc
    "Returns a map of datasets keyed by a query-map corresponding the group.\n\nExamples:\n\n  (use '(incanter core datasets))\n  ($group-by :Species (get-dataset :iris))\n\n  ($group-by [:hair :eye] (get-dataset :hair-eye-color))\n\n  (with-data (get-dataset :hair-eye-color)\n    ($group-by [:hair :eye]))",
    :var-type "function",
-   :line 1851,
+   :line 1856,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists
    ([[left-keys right-keys] left-data]
@@ -1042,43 +1069,43 @@
    :name "$join",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1946",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1951",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$join",
    :doc
    "\nReturns a dataset created by right-joining two datasets.\nThe join is based on one or more columns in the datasets.\nIf used within the body of the with-data macro, the second\ndataset is optional, defaulting the the dataset bound to $data.\n\n\nExamples:\n  (use '(incanter core stats datasets charts))\n  (def iris (get-dataset :iris))\n\n\n\n  (def lookup (dataset [:species :species-key] [[\"setosa\" :setosa]\n                                                [\"versicolor\" :versicolor]\n                                                [\"virginica\" :virginica]]))\n  (view ($join [:species :Species] lookup iris))\n\n (def hair-eye-color (get-dataset :hair-eye-color))\n (def lookup2 (conj-cols ($ [:hair :eye :gender] hair-eye-color) (range (nrow hair-eye-color))))\n (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2 hair-eye-color))\n\n (with-data hair-eye-color\n   (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2)))\n\n\n (def lookup3 (dataset [:gender :hair :hair-gender] [[\"male\" \"black\" :male-black]\n                                                     [\"male\" \"brown\" :male-brown]\n                                                     [\"male\" \"red\" :male-red]\n                                                     [\"male\" \"blond\" :male-blond]\n                                                     [\"female\" \"black\" :female-black]\n                                                     [\"female\" \"brown\" :female-brown]\n                                                     [\"female\" \"red\" :female-red]\n                                                     [\"female\" \"blond\" :female-blond]]))\n\n (view ($join [[:gender :hair] [:gender :hair]] lookup3 hair-eye-color))\n\n (use 'incanter.charts)\n (with-data (->>  (get-dataset :hair-eye-color)\n                  ($where {:hair {:in #{\"brown\" \"blond\"}}})\n                  ($rollup :sum :count [:hair :gender])\n                  ($join [[:gender :hair] [:gender :hair]] lookup3)\n                  ($order :count :desc))\n     (view $data)\n     (view (bar-chart :hair :count :group-by :gender :legend true)))",
    :var-type "function",
-   :line 1946,
+   :line 1951,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([fun col-keys data] [fun col-keys]),
    :name "$map",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1910",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1915",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$map",
    :doc
    "This function returns a sequence resulting from mapping the given function over\n  the value(s) for the given column key(s) of the given dataset.\n  Like other '$*' functions, it will use $data as the default dataset\n  if none is provided, where $data is set using the with-data macro.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (def cars (get-dataset :cars))\n\n  ($map (fn [s] (/ s)) :speed cars)\n  ($map (fn [s d] (/ s d)) [:speed :dist] cars)\n\n  (map (fn [s d] (/ s d)) ($ :speed cars) ($ :speed cars))\n\n  (with-data (get-dataset :cars)\n    (view ($map (fn [s] (/ s)) :speed))\n    (view ($map (fn [s d] (/ s d)) [:speed :dist])))\n\n  ;; calculate the speed to dist ratio and append as new column to dataset\n  (with-data (get-dataset :cars)\n    (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))",
    :var-type "function",
-   :line 1910,
+   :line 1915,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([cols order] [cols order data]),
    :name "$order",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1770",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1775",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$order",
    :doc
    " Sorts a dataset by the given columns in either ascending (:asc)\n  or descending (:desc) order. If used within a the body of\n  the with-data macro, the data argument is optional, defaulting\n  to the dataset bound to the variable $data.\n\n  Examples:\n\n  (use '(incanter core charts datasets))\n  (def iris (get-datset :iris))\n  (view ($order :Sepal.Length :asc iris))\n  (view ($order [:Sepal.Width :Sepal.Length] :desc iris))\n\n  (with-data (get-dataset :iris)\n    (view ($order [:Petal.Length :Sepal.Length] :desc)))\n\n",
    :var-type "function",
-   :line 1770,
+   :line 1775,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists
    ([summary-fun col-name group-by]
@@ -1086,37 +1113,37 @@
    :name "$rollup",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1681",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1686",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$rollup",
    :doc
    "Returns a dataset that uses the given summary function (or function identifier keyword)\nto rollup the given column based on a set of group-by columns. The summary function\nshould accept a single sequence of values and return a single summary value. Alternatively,\nyou can provide a keyword identifier of a set of built-in functions including:\n\n  :max -- the maximum value of the data in each group\n  :min -- the minimum value of the data in each group\n  :sum -- the sum of the data in each group\n  :count -- the number of elements in each group\n  :mean -- the mean of the data in each group\n\n\n Like the other '$' dataset functions, $rollup will use the dataset bound to $data\n (see the with-data macro) if a dataset is not provided as an argument.\n\n Examples:\n\n   (use '(incanter core datasets))\n\n   (def iris (get-dataset :iris))\n   ($rollup :mean :Sepal.Length :Species iris)\n   ($rollup :count :Sepal.Length :Species iris)\n   ($rollup :max :Sepal.Length :Species iris)\n   ($rollup :min :Sepal.Length :Species iris)\n\n   ;; The following is an example using a custom function, but since all the\n   ;; iris measurements are positive, the built-in mean function could have\n   ;; been used instead.\n\n   (use 'incanter.stats)\n   ($rollup #(mean (abs %)) :Sepal.Width :Species iris)\n\n   ($rollup sd :Sepal.Length :Species iris)\n   ($rollup variance :Sepal.Length :Species iris)\n   ($rollup median :Sepal.Length :Species iris)\n\n   (def hair-eye-color (get-dataset :hair-eye-color))\n   ($rollup :mean :count [:hair :eye] hair-eye-color)\n\n   (use 'incanter.charts)\n   (with-data ($rollup :mean :Sepal.Length :Species iris)\n     (view (bar-chart :Species :Sepal.Length)))\n\n    ;; the following examples use the built-in data set called hair-eye-color.\n\n    (with-data ($rollup :mean :count [:hair :eye] hair-eye-color)\n      (view (bar-chart :hair :count :group-by :eye :legend true)))\n\n    (with-data (->>  (get-dataset :hair-eye-color)\n                     ($where {:hair {:in #{\"brown\" \"blond\"}}})\n                     ($rollup :sum :count [:hair :eye])\n                     ($order :count :desc))\n      (view $data)\n      (view (bar-chart :hair :count :group-by :eye :legend true)))",
    :var-type "function",
-   :line 1681,
+   :line 1686,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([query-map] [query-map data]),
    :name "$where",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1649",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1654",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/$where",
    :doc
    "An alias to (query-dataset (second args) (first args)). If given only a single argument,\nit will use the $data binding for the first argument, which is set with\nthe with-data macro.\n\nExamples:\n\n  (use '(incanter core datasets))\n\n  (def cars (get-dataset :cars))\n  ($where {:speed 10} cars)\n\n  ;; use the with-data macro and the one arg version of $where\n  (with-data cars\n    (view ($where {:speed {:$gt -10 :$lt 10}}))\n    (view ($where {:dist {:$in #{10 12 16}}}))\n    (view ($where {:dist {:$nin #{10 12 16}}})))\n\n  ;; create a dataset where :speed greater than 10 or less than -10\n  (with-data (get-dataset :cars)\n    (view (-> ($where {:speed {:$gt 20}})\n                    (conj-rows ($where {:speed {:$lt 10}})))))",
    :var-type "function",
-   :line 1649,
+   :line 1654,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([column-names rows]),
    :name "->Dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L52",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L52",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/->Dataset",
    :doc "Positional factory function for class incanter.core.Dataset.",
@@ -1127,274 +1154,274 @@
    :name "abs",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L572",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L570",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/abs",
    :doc
    "Returns the absolute value of the elements in the given matrix, sequence or number.\nEquivalent to R's abs function.",
    :var-type "function",
-   :line 572,
+   :line 570,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "acos",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L596",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L594",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/acos",
    :doc
    "Returns the arc cosine of the elements in the given matrix, sequence or number.\nEquivalent to R's acos function.",
    :var-type "function",
-   :line 596,
+   :line 594,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "asin",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L584",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L582",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/asin",
    :doc
    "Returns the arc sine of the elements in the given matrix, sequence or number.\nEquivalent to R's asin function.",
    :var-type "function",
-   :line 584,
+   :line 582,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "atan",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L608",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L606",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/atan",
    :doc
    "Returns the arc tangent of the elements in the given matrix, sequence or number.\nEquivalent to R's atan function.",
    :var-type "function",
-   :line 608,
+   :line 606,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "atan2",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L523",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L521",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/atan2",
    :doc
    "Returns the atan2 of the elements in the given matrices, sequences or numbers.\nEquivalent to R's atan2 function.",
    :var-type "function",
-   :line 523,
+   :line 521,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([a b]),
    :name "beta",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2279",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2284",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/beta",
    :doc
    "\nEquivalent to R's beta function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    :var-type "function",
-   :line 2279,
+   :line 2284,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "bind-columns",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L377",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L375",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/bind-columns",
    :doc
    " Returns the matrix resulting from concatenating the given matrices\nand/or sequences by their columns. Equivalent to R's cbind.\n\nExamples:\n(def A (matrix [[1 2 3]\n[4 5 6]\n[7 8 9]]))\n\n(def B (matrix [10 11 12]))\n\n(bind-columns A B)\n\n(bind-columns [1 2 3 4] [5 6 7 8])\n\n\n",
    :var-type "function",
-   :line 377,
+   :line 375,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "bind-rows",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L339",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L337",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/bind-rows",
    :doc
    "   Returns the matrix resulting from concatenating the given matrices\nand/or sequences by their rows. Equivalent to R's rbind.\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (def B (matrix [[10 11 12]\n                  [13 14 15]]))\n\n  (bind-rows A B)\n\n  (bind-rows [1 2 3 4] [5 6 7 8])",
    :var-type "function",
-   :line 339,
+   :line 337,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists
    ([& {:keys [data ordered? labels levels], :or {ordered? false}}]),
    :name "categorical-var",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2165",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2170",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/categorical-var",
    :doc
    " Returns a categorical variable based on the values in the given collection.\nEquivalent to R's factor function.\n\nOptions:\n  :data (default nil) factors will be extracted from the given data.\n  :ordered? (default false) indicates that the variable is ordinal.\n  :labels (default (sort (into #{} data)))\n  :levels (range (count labels))\n\nExamples:\n  (categorical-var :data [:a :a :c :b :a :c :c])\n  (categorical-var :labels [:a :b :c])\n  (categorical-var :labels [:a :b :c] :levels [10 20 30])\n  (categorical-var :levels [1 2 3])",
    :var-type "function",
-   :line 2165,
+   :line 2170,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([n k]),
    :name "choose",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L631",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L629",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/choose",
    :doc
    "\nReturns number of k-combinations (each of size k) from a set S with\nn elements (size n), which is the binomial coefficient (also known\nas the 'choose function') [wikipedia]\n      choose = n!/(k!(n - k)!)\n\nEquivalent to R's choose function.\n\nExamples:\n  (choose 25 6) ; => 177,100\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html\n  http://en.wikipedia.org/wiki/Combination",
    :var-type "function",
-   :line 631,
+   :line 629,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([data] [data colnames]),
    :name "col-names",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1448",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1453",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/col-names",
    :doc
    "If given a dataset, it returns its column names. If given a dataset and a sequence\nof column names, it returns a dataset with the given column names.\n\nExamples:\n  (use '(incanter core datasets))\n  (def data (get-dataset :cars))\n  (col-names data)\n\n  (def renamed-data (col-names data [:x1 :x2]))\n  (col-names renamed-data)\n\n\n ",
    :var-type "function",
-   :line 1448,
+   :line 1453,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "condition",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1021",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1019",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/condition",
    :doc
    " Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(condition foo)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Condition_number",
    :var-type "function",
-   :line 1021,
+   :line 1019,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "conj-cols",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1468",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1473",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/conj-cols",
    :doc
    "Returns a dataset created by merging the given datasets and/or collections.\nThere must be the same number of rows in each dataset and/or\n collections.  Column names may be changed in order to prevent\n naming conflicts in the conjed dataset.\n\n Examples:\n   (use '(incanter core datasets))\n   (def cars (get-dataset :cars))\n   (def x (sel cars :cols 0))\n   (view (conj-cols cars cars))\n   (view (conj-cols cars x))\n   (view (conj-cols (range (nrow cars)) cars))\n   (view (conj-cols (range 10) (range 10)))\n   (view (conj-cols {:a 1 :b 2} {:c 1 :d 2}))",
    :var-type "function",
-   :line 1468,
+   :line 1473,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "conj-rows",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1497",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1502",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/conj-rows",
    :doc
    "Returns a dataset created by combining the rows of the given datasets and/or collections.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (def cars (get-dataset :cars))\n  (view (conj-rows (to-dataset (range 5)) (to-dataset (range 5 10))))\n  (view (conj-rows cars cars))\n  (view (conj-rows [[1 2] [3 4]] [[5 6] [7 8]]))\n  (view (conj-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]]))\n  (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))\n  (conj-rows (range 5) (range 5 10))",
    :var-type "function",
-   :line 1497,
+   :line 1502,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "copy",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L677",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L675",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/copy",
    :doc "Returns a copy of the given matrix.",
    :var-type "function",
-   :line 677,
+   :line 675,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "cos",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L590",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L588",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/cos",
    :doc
    "Returns the cosine of the elements in the given matrix, sequence or number.\nEquivalent to R's cos function.",
    :var-type "function",
-   :line 590,
+   :line 588,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([coll]),
    :name "cumulative-sum",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L833",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L831",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/cumulative-sum",
    :doc
    " Returns a sequence of cumulative sum for the given collection. For instance\n  The first value equals the first value of the argument, the second value is\n  the sum of the first two arguments, the third is the sum of the first three\n  arguments, etc.\n\n  Examples:\n    (use 'incanter.core)\n    (cumulative-sum (range 100))\n",
    :var-type "function",
-   :line 833,
+   :line 831,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([data]),
    :name "data-table",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2545",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2548",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/data-table",
    :doc "Creates a javax.swing.JTable given an Incanter dataset.",
    :var-type "function",
-   :line 2545,
+   :line 2548,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([column-names & data]),
    :name "dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1159",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1164",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/dataset",
    :doc
    " Returns a map of type incanter.core.dataset constructed from the given column-names and\ndata. The data is either a sequence of sequences or a sequence of hash-maps.",
    :var-type "function",
-   :line 1159,
+   :line 1164,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([obj]),
    :name "dataset?",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L101",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L101",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/dataset?",
    :doc " Determines if obj is of type incanter.core.Dataset.",
@@ -1405,374 +1432,374 @@
    :name "decomp-cholesky",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L861",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L859",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-cholesky",
    :doc
    " Returns the Cholesky decomposition of the given matrix. Equivalent to R's\n  chol function.\n\n  Returns:\na matrix of the triangular factor (note: the result from\ncern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so\nthat it matches the result return from R's chol function.\n\n\n\nExamples:\n\n(use '(incanter core stats charts datasets))\n;; load the iris dataset\n(def iris (to-matrix (get-dataset :iris)))\n;; take the Cholesky decomposition of the correlation matrix of the iris data.\n(decomp-cholesky (correlation iris))\n\n\n\nReferences:\nhttp://en.wikipedia.org/wiki/Cholesky_decomposition",
    :var-type "function",
-   :line 861,
+   :line 859,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-eigenvalue",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L931",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L929",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-eigenvalue",
    :doc
    "\nReturns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.\n\nReturns:\na map containing:\n:values -- vector of eigenvalues\n:vectors -- the matrix of eigenvectors\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-eigenvalue foo)\n\nReferences:\nhttp://en.wikipedia.org/wiki/Eigenvalue_decomposition\n",
    :var-type "function",
-   :line 931,
+   :line 929,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "decomp-lu",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L955",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L953",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-lu",
    :doc
    " Returns the LU decomposition of the given matrix.\n\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-lu foo)\n\n\nReturns:\n  a map containing:\n    :L -- the lower triangular factor\n    :U -- the upper triangular factor\n    :P -- the permutation matrix\n\nReferences:\n  http://en.wikipedia.org/wiki/LU_decomposition\n  http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html",
    :var-type "function",
-   :line 955,
+   :line 953,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([m & {:keys [type]}]),
    :name "decomp-qr",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L991",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L989",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-qr",
    :doc
    " Returns the QR decomposition of the given matrix. Equivalent to R's qr function.\n\nOptional parameters:\n:type -- possible values: :full.  default is :full\nif :full, returns the full QR decomposition\n\nReturns:\na map containing:\n:Q -- orthogonal factors\n:R -- the upper triangular factors\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-qr foo)\n(decomp-qr foo :type :full)\n\nReferences:\nhttp://en.wikipedia.org/wiki/QR_decomposition\n\n",
    :var-type "function",
-   :line 991,
+   :line 989,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat & {:keys [type], :or {type :full}}]),
    :name "decomp-svd",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L890",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L888",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/decomp-svd",
    :doc
    "\nReturns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to\nR's svd function.\n\nOptional parameters:\n:type -- one of :full, :compact, or :values.  default is :full\nif :full, returns the full SVD\nif :compact, returns the compact SVD\nif :values, only the singular values are calculated\n\nReturns:\na map containing:\n:S -- the diagonal matrix of singular values S (the diagonal in vector form)\n:U -- the left singular vectors U\n:V -- the right singular vectors V\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(decomp-svd foo)\n(decomp-svd foo :type :full)\n(decomp-svd foo :type :compact)\n(decomp-svd foo :type :values)\n\n\nReferences:\nhttp://en.wikipedia.org/wiki/Singular_value_decomposition\n",
    :var-type "function",
-   :line 890,
+   :line 888,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists
    ([& {:keys [data remove-na group-by merge], :or {remove-na true}}]),
    :name "deshape",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2022",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2027",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/deshape",
    :doc
    " Returns a dataset where the columns identified by :merge are collapsed into\ntwo columns called :variable and :value. The values in these columns are grouped\nby the columns identified by :group-by.\n\nExamples:\n\n  (use '(incanter core charts datasets))\n  (with-data (->> (deshape :merge [:Ahmadinejad :Rezai :Karrubi :Mousavi]\n                            :group-by :Region\n                            :data (get-dataset :iran-election))\n                  ($order :value :desc))\n    (view $data)\n    (view (bar-chart :variable :value :group-by :Region :legend true))\n\n    (view (bar-chart :Region :value :group-by :variable\n                     :legend true :vertical false))\n\n    (view (bar-chart :Region :value :legend true :vertical false\n                     :data ($order :value :desc ($rollup :sum :value :Region)))))\n\n\n\n    (def data (to-dataset [{:subject \"John Smith\" :time 1 :age 33 :weight 90 :height 1.87}\n                           {:subject \"Mary Smith\" :time 1 :height 1.54}]))\n    (view data)\n    (view (deshape :group-by [:subject :time] :merge [:age :weight :height] :data data))\n    (view (deshape :merge [:age :weight :height] :data data))\n    (view (deshape :group-by [:subject :time] :data data))\n\n    (view (deshape :merge [:age :weight :height] :remove-na false :data data))",
    :var-type "function",
-   :line 2022,
+   :line 2027,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "det",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L749",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L747",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/det",
    :doc
    " Returns the determinant of the given matrix. Equivalent\nto R's det function.\n\nReferences:\n  http://en.wikipedia.org/wiki/LU_decomposition",
    :var-type "function",
-   :line 749,
+   :line 747,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([m]),
    :name "diag",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L143",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L139",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/diag",
    :doc
    "\nIf given a matrix, diag returns a sequence of its diagonal elements.\nIf given a sequence, it returns a matrix with the sequence's elements\non its diagonal. Equivalent to R's diag function.\n\nExamples:\n(diag [1 2 3 4])\n\n(def A (matrix [[1 2 3]\n[4 5 6]\n[7 8 9]]))\n(diag A)\n",
    :var-type "function",
-   :line 143,
+   :line 139,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "dim",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L126",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L122",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/dim",
    :doc
    " Returns a vector with the number of rows and columns of the given matrix. ",
    :var-type "function",
-   :line 126,
+   :line 122,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "div",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L472",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L470",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/div",
    :doc
    "   Performs element-by-element division on multiple matrices, sequences\nand/or numbers. Equivalent to R's / operator.\n\nExamples:\n\n  (def A (matrix [[1 2 3]\n                  [4 5 6]\n                  [7 8 9]]))\n  (div A A A)\n  (div A 2)\n  (div 2 A)\n  (div [1 2 3] [1 2 3])\n  (div [1 2 3] 2)\n  (div 2 [1 2 3])\n\n  (div [1 2 3]) ; returns [1 1/2 13]",
    :var-type "function",
-   :line 472,
+   :line 470,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "exp",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L566",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L564",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/exp",
    :doc
    "Returns the exponential of the elements in the given matrix, sequence or number.\nEquivalent to R's exp function.",
    :var-type "function",
-   :line 566,
+   :line 564,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([k]),
    :name "factorial",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L614",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L612",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/factorial",
    :doc
    "\nReturns the factorial of k (k must be a positive integer). Equivalent to R's\nfactorial function.\n\nExamples:\n  (factorial 6)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/math/tdouble/DoubleArithmetic.html\n  http://en.wikipedia.org/wiki/Factorial",
    :var-type "function",
-   :line 614,
+   :line 612,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x]),
    :name "gamma",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2269",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2274",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/gamma",
    :doc
    "\nEquivalent to R's gamma function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    :var-type "function",
-   :line 2269,
+   :line 2274,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([cols data]),
    :name "get-categories",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2089",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2094",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/get-categories",
    :doc
    "\nGiven a dataset and one or more column keys, returns the set of categories for them.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (get-categories :eye (get-dataset :hair-eye-color))\n  (get-categories [:eye :hair] (get-dataset :hair-eye-color))",
    :var-type "function",
-   :line 2089,
+   :line 2094,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([f x-min x-max y-min y-max]),
    :name "grid-apply",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2684",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2687",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/grid-apply",
    :doc
    " Applies the given function f, that accepts two arguments, to a grid\ndefined by rectangle bounded x-min, y-min, x-max, y-max and returns a\nsequence of three sequences representing the cartesian product of x and y\nand z calculated by applying f to the combinations of x and y.",
    :var-type "function",
-   :line 2684,
+   :line 2687,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat on-cols & {:keys [cols except-cols]}]),
    :name "group-on",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1094",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1099",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/group-on",
    :doc
    " Groups the given matrix by the values in the columns indicated by the\n'on-cols' argument, returning a sequence of matrices. The returned\nmatrices are sorted by the value of the group column ONLY when there\nis only a single (non-vector) on-col argument.\n\nExamples:\n\n  (use '(incanter core datasets))\n  (def plant-growth (to-matrix (get-dataset :plant-growth)))\n  (group-on plant-growth 1)\n  ;; only return the first column\n  (group-on plant-growth 1 :cols 0)\n  ;; don't return the second column\n  (group-on plant-growth 1 :except-cols 1)\n\n  (def plant-growth-dummies (to-matrix (get-dataset :plant-growth) :dummies true))\n  (group-on plant-growth-dummies [1 2])\n  ;; return only the first column\n  (group-on plant-growth-dummies [1 2] :cols 0)\n  ;; don't return the last two columns\n  (group-on plant-growth-dummies [1 2] :except-cols [1 2])\n\n  ;; plot the plant groups\n  (use 'incanter.charts)\n  ;; can use destructuring if you know the number of groups\n  ;; groups are sorted only if the group is based on a single column value\n  (let [[ctrl trt1 trt2] (group-on plant-growth 1 :cols 0)]\n    (doto (box-plot ctrl)\n          (add-box-plot trt1)\n          (add-box-plot trt2)\n          view))",
    :var-type "function",
-   :line 1094,
+   :line 1099,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "half-vectorize",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L788",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L786",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/half-vectorize",
    :doc
    " Returns the half-vectorization (i.e. vech) of the given matrix.\n  The half-vectorization, vech(A), of a symmetric nxn matrix A\n  is the n(n+1)/2 x 1 column vector obtained by vectorizing only\n  the upper triangular part of A.\n\n  For instance:\n    (= (half-vectorize (matrix [[a b] [b d]])) (matrix [a b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [2 4]]))\n    (half-vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
    :var-type "function",
-   :line 788,
+   :line 786,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([len mat] [mat]),
    :name "head",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1627",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1632",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/head",
    :doc
    "Returns the head of the dataset. 10 or full dataset by default.",
    :var-type "function",
-   :line 1627,
+   :line 1632,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([n]),
    :name "identity-matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L133",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L129",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/identity-matrix",
    :doc
    "   Returns an n-by-n identity matrix.\n\nExamples:\n  (identity-matrix 4)",
    :var-type "function",
-   :line 133,
+   :line 129,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x a b]),
    :name "incomplete-beta",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2289",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2294",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/incomplete-beta",
    :doc
    "\nReturns the non-regularized incomplete beta value.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html",
    :var-type "function",
-   :line 2289,
+   :line 2294,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "kronecker",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L701",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L699",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/kronecker",
    :doc
    " Returns the Kronecker product of the given arguments.\n\nExamples:\n\n  (def x (matrix (range 6) 2))\n  (def y (matrix (range 4) 2))\n  (kronecker 4 x)\n  (kronecker x 4)\n  (kronecker x y)",
    :var-type "function",
-   :line 701,
+   :line 699,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([coll]),
    :name "length",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1077",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1082",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/length",
    :doc
    " A version of count that works on collections, matrices, and numbers.\n  The length of a number is one, the length of a collection is its count\n  and the length of a matrix is the number of elements it contains (nrow*ncol).\n  Equivalent to R's length function.\n",
    :var-type "function",
-   :line 1077,
+   :line 1082,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "log",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L547",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L545",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/log",
    :doc
    "Returns the natural log of the elements in the given matrix, sequence or number.\nEquivalent to R's log function.",
    :var-type "function",
-   :line 547,
+   :line 545,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "log10",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L560",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L558",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/log10",
    :doc
    "Returns the log base 10 of the elements in the given matrix, sequence or number.\nEquivalent to R's log10 function.",
    :var-type "function",
-   :line 560,
+   :line 558,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "log2",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L553",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L551",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/log2",
    :doc
    "Returns the log base 2 of the elements in the given matrix, sequence or number.\nEquivalent to R's log2 function.",
    :var-type "function",
-   :line 553,
+   :line 551,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([coll] [coll seen]),
    :name "make-unique",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1429",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1434",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/make-unique",
    :doc
    "Take a sequence of keywords and make them unique by possibly\naltering later ones.",
    :var-type "function",
-   :line 1429,
+   :line 1434,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([m__5818__auto__]),
    :name "map->Dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L52",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L52",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/map->Dataset",
    :doc
@@ -1784,9 +1811,9 @@
    :name "matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L56",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L56",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/matrix",
    :doc
@@ -1798,23 +1825,23 @@
    :name "matrix-map",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1882",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1887",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/matrix-map",
    :doc
    "Like clojure.core/map, but will work on matrices of any dimension:\n1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m\n\n Examples:\n   (use '(incanter core))\n   (def mat (matrix (range 9) 3))\n   (matrix-map #(mod % 2) mat)\n   (matrix-map #(mod % 2) (first mat))\n   (matrix-map #(mod % 2) ($ 1 0 mat))\n   (matrix-map #(mod % 2) [1 2 3 4])\n   (matrix-map #(mod % 2) 9)",
    :var-type "function",
-   :line 1882,
+   :line 1887,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([obj]),
    :name "matrix?",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L96",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L96",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/matrix?",
    :doc " Test if obj is 'derived' clatrix.core.Matrix",
@@ -1825,217 +1852,245 @@
    :name "minus",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L428",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L426",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/minus",
    :doc
    "\nPerforms element-by-element subtraction on multiple matrices, sequences\nand/or numbers. If only a single argument is provided, returns the\nnegative of the given matrix, sequence, or number. Equivalent to R's - operator.\n\nExamples:\n\n(def A (matrix [[1 2 3]\n[4 5 6]\n[7 8 9]]))\n(minus A)\n(minus A A A)\n(minus A 2)\n(minus 2 A)\n(minus [1 2 3] [1 2 3])\n(minus [1 2 3] 2)\n(minus 2 [1 2 3])\n(minus [1 2 3])\n",
    :var-type "function",
-   :line 428,
+   :line 426,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "mmult",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L681",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L679",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/mmult",
    :doc
    " Returns the matrix resulting from the matrix multiplication of the\n  the given arguments. Equivalent to R's %*% operator.\n\n  Examples:\n\n    (def A (matrix [[1 2 3]\n                    [4 5 6]\n                    [7 8 9]]))\n    (mmult A (trans A))\n    (mmult A (trans A) A)\n\n  References:\n    http://en.wikipedia.org/wiki/Matrix_multiplication\n\n",
    :var-type "function",
-   :line 681,
+   :line 679,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "mult",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L452",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L450",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/mult",
    :doc
    "\nPerforms element-by-element multiplication on multiple matrices, sequences\nand/or numbers. Equivalent to R's * operator.\n\nExamples:\n\n(def A (matrix [[1 2 3]\n[4 5 6]\n[7 8 9]]))\n(mult A A A)\n(mult A 2)\n(mult 2 A)\n(mult [1 2 3] [1 2 3])\n(mult [1 2 3] 2)\n(mult 2 [1 2 3])\n",
    :var-type "function",
-   :line 452,
+   :line 450,
+   :file "modules/incanter-core/src/incanter/core.clj"}
+  {:arglists ([mat]),
+   :name "ncol",
+   :namespace "incanter.core",
+   :source-url
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L114",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//core-api.html#incanter.core/ncol",
+   :doc
+   "Returns the number of columns in the given matrix. Equivalent to R's ncol function.",
+   :var-type "function",
+   :line 114,
+   :file "modules/incanter-core/src/incanter/core.clj"}
+  {:arglists ([mat]),
+   :name "nrow",
+   :namespace "incanter.core",
+   :source-url
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L105",
+   :raw-source-url
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
+   :wiki-url
+   "http://liebke.github.com/incanter//core-api.html#incanter.core/nrow",
+   :doc
+   "Returns the number of rows in the given matrix. Equivalent to R's nrow function.",
+   :var-type "function",
+   :line 105,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "plus",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L408",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L406",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/plus",
    :doc
    "\nPerforms element-by-element addition on multiple matrices, sequences\nand/or numbers. Equivalent to R's + operator.\n\nExamples:\n\n(def A (matrix [[1 2 3]\n[4 5 6]\n[7 8 9]]))\n(plus A A A)\n(plus A 2)\n(plus 2 A)\n(plus [1 2 3] [1 2 3])\n(plus [1 2 3] 2)\n(plus 2 [1 2 3])\n",
    :var-type "function",
-   :line 408,
+   :line 406,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([& args]),
    :name "pow",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L511",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L509",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/pow",
    :doc
    " This is an element-by-element exponent function, raising the first argument\nby the exponents in the remaining arguments. Equivalent to R's ^ operator.",
    :var-type "function",
-   :line 511,
+   :line 509,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x]),
    :name "prod",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L823",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L821",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/prod",
    :doc "Returns the product of the given sequence.",
    :var-type "function",
-   :line 823,
+   :line 821,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([data query-map]),
    :name "query-dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1268",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1273",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/query-dataset",
    :doc
    "Queries the given dataset using the query-map, returning a new dataset.\n The query-map uses the the dataset's column-names as keys and a\n simple variant of the MongoDB query language.\n\n For instance, given a dataset with two columns, :x and :category,  to query\n for rows where :x equals 10, use the following query-map: {:x 10}.\n\n To indicate that :x should be between 10 and 20, use {:x {:$gt 10 :$lt 20}}.\n\n To indicate that :category should also be either :red, :green, or :blue, use :$in\n {:x {:$gt 10 :$lt 20} :y {:$in #{:green :blue :red}}}\n\n And to indicate that :category should not include :red, :green, or :blue, use :$nin\n {:x {:$gt 10 :$lt 20} :y {:$nin #{:green :blue :red}}}\n\n The available query terms include :$gt, :$lt, :$gte, :$lte, :$eq, :$ne, :$in, :$nin, $fn.\n\n A row predicate function can be used instead of a query-map. The function must accept\n a map, representing a row of the dataset, and return a boolean value indicating whether\n the row should be included in the new dataset.\n\nExamples:\n   (use '(incanter core datasets))\n   (def cars (get-dataset :cars))\n\n   (view (query-dataset cars {:speed 10}))\n   (view (query-dataset cars {:speed {:$in #{17 14 19}}}))\n   (view (query-dataset cars {:speed {:$lt 20 :$gt 10}}))\n   (view (query-dataset cars {:speed {:$fn #(> (log %) 3)}}))\n\n   ;; use a row predicate function instead of a query map.\n   (view (query-dataset cars (fn [row] (> (/ (row \"speed\") (row \"dist\")) 1/2))))",
    :var-type "function",
-   :line 1268,
+   :line 1273,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([query-map]),
    :name "query-to-pred",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1217",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1222",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/query-to-pred",
    :doc
    "Given a query-map, it returns a function that accepts a hash-map and returns true if it\nsatisfies the conditions specified in the provided query-map.\n\nExamples:\n\n  (use 'incanter.core)\n  (def pred (query-to-pred {:x 5 :y 7}))\n  (pred {:x 5 :y 7 :z :d})\n\n  (def pred (query-to-pred {:x 5 :y {:$gt 5 :$lt 10}}))\n  (pred {:x 5 :y 7 :z :d})\n\n  (def pred (query-to-pred {:z {:$in #{:a :b}}}))\n  (pred {:x 5 :y 7 :z :d})",
    :var-type "function",
-   :line 1217,
+   :line 1222,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([]),
    :name "quit",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2595",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2598",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/quit",
    :doc " Exits the Clojure shell.",
    :var-type "function",
-   :line 2595,
+   :line 2598,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "rank",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1040",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1038",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/rank",
    :doc
    "\nReturns the effective numerical matrix rank, which is the number of nonnegligible singular values.\n\nExamples:\n\n(use 'incanter.core)\n(def foo (matrix (range 9) 3))\n(rank foo)\n\nReferences:\nhttp://en.wikipedia.org/wiki/Matrix_rank\n",
    :var-type "function",
-   :line 1040,
+   :line 1038,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x a b]),
    :name "regularized-beta",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2301",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2306",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/regularized-beta",
    :doc
    "\nReturns the regularized incomplete beta value. Equivalent to R's pbeta function.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Gamma.html\n  http://en.wikipedia.org/wiki/Regularized_incomplete_beta_function\n  http://mathworld.wolfram.com/RegularizedBetaFunction.html",
    :var-type "function",
-   :line 2301,
+   :line 2306,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([dset cols]),
    :name "reorder-columns",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2823",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2826",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/reorder-columns",
    :doc
    "Produce a new dataset with the columns in the specified order.\nReturns nil if no valid column names are given.",
    :var-type "function",
-   :line 2823,
+   :line 2826,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x] [x y] [x y & more]),
    :name "safe-div",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L496",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L494",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/safe-div",
    :doc
    "DivideByZero safe alternative to clojures / function,\ndetects divide by zero and returns Infinity, -Infinity or NaN as appropriate.\nNote: Does not work on matrices, only primitive types",
    :var-type "function",
-   :line 496,
+   :line 494,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2617",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2620",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/save",
    :namespace "incanter.core",
-   :line 2617,
+   :line 2620,
    :var-type "multimethod",
    :doc
    " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n  If the filename is exactly \"-\" then *out* the matrix/dataset will be\n      written to *out*\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
    :name "save"}
   {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L194",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L190",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sel",
    :namespace "incanter.core",
-   :line 194,
+   :line 190,
    :var-type "multimethod",
    :doc
-   "\nReturns an element or subset of the given matrix, dataset, or list.\n\nArgument:\n  a matrix object, dataset, or list.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
+   "\nReturns an element or subset of the given matrix, dataset, or list.\nIf the column or row is specified as an atomic object (index or name), then\nthe result will be returned as a list (only values from selected column or row).\n\nArgument:\n  a matrix object, dataset, or list.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
    :name "sel"}
   {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2557",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2560",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/set-data",
    :namespace "incanter.core",
-   :line 2557,
+   :line 2560,
    :var-type "multimethod",
    :doc
    "\n\nExamples:\n\n  (use '(incanter core charts datasets))\n\n  (def data (get-dataset :iris))\n  (def table (data-table data))\n  (view table)\n  ;; now view only a subset of the data\n  (set-data table ($where {:Petal.Length {:gt 6}} data))\n\n\n  ;; use sliders to dynamically select the query values\n  (let [data (get-dataset :iris)\n        table (data-table data)]\n    (view table)\n    (sliders [species [\"setosa\" \"virginica\" \"versicolor\"]\n              min-petal-length (range 0 8 0.1)]\n      (set-data table ($where {:Species species\n                               :Petal.Length {:gt min-petal-length}}\n                              data))))",
@@ -2044,202 +2099,202 @@
    :name "sin",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L578",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L576",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sin",
    :doc
    "Returns the sine of the elements in the given matrix, sequence or number.\nEquivalent to R's sin function.",
    :var-type "function",
-   :line 578,
+   :line 576,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A B] [A]),
    :name "solve",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L733",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L731",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/solve",
    :doc
    " Returns a matrix solution if A is square, least squares solution otherwise.\nEquivalent to R's solve function.\n\nExamples:\n  (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))\n\nReferences:\n  http://en.wikipedia.org/wiki/Matrix_inverse",
    :var-type "function",
-   :line 733,
+   :line 731,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([a b c]),
    :name "solve-quadratic",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2319",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2324",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/solve-quadratic",
    :doc
    "\nReturns a vector with the solution to x from the quadratic\nequation, a*x^2 + b*x + c.\n\nArguments:\n  a, b, c: coefficients of a qaudratic equation.\n\nExamples:\n  ;; -2*x^2 + 7*x + 15\n  (quadratic-formula -2 7 15)\n  ;; x^2 + -2*x + 1\n  (quadratic-formula 1 -2 1)\n\nReferences:\n  http://en.wikipedia.org/wiki/Quadratic_formula",
    :var-type "function",
-   :line 2319,
+   :line 2324,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "sq",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L541",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L539",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sq",
    :doc
    "Returns the square of the elements in the given matrix, sequence or number.\nEquivalent to R's sq function.",
    :var-type "function",
-   :line 541,
+   :line 539,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "sqrt",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L535",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L533",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sqrt",
    :doc
    "Returns the square-root of the elements in the given matrix, sequence or number.\nEquivalent to R's sqrt function.",
    :var-type "function",
-   :line 535,
+   :line 533,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x]),
    :name "sum",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L816",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L814",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sum",
    :doc "Returns the sum of the given sequence.",
    :var-type "function",
-   :line 816,
+   :line 814,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([x]),
    :name "sum-of-squares",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L809",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L807",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/sum-of-squares",
    :doc "Returns the sum-of-squares of the given sequence.",
    :var-type "function",
-   :line 809,
+   :line 807,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([data & {:keys [lower], :or {lower true}}]),
    :name "symmetric-matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2346",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2351",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/symmetric-matrix",
    :doc
    "\nReturns a symmetric matrix from the given data, which represents the lower triangular elements\nordered by row. This is not the inverse of half-vectorize which returns a vector of the upper-triangular\nvalues, unless the :lower option is set to false.\n\nOptions:\n  :lower (default true) -- lower-triangular. Set :lower to false to reverse the half-vectorize function.\n\nExamples:\n\n  (use 'incanter.core)\n  (symmetric-matrix [1\n                     2 3\n                     4 5 6\n                     7 8 9 10])\n\n\n  (half-vectorize\n    (symmetric-matrix [1\n                       2 3\n                       4 5 6\n                       7 8 9 10] :lower false))",
    :var-type "function",
-   :line 2346,
+   :line 2351,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([len mat] [mat]),
    :name "tail",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1638",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1643",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/tail",
    :doc
    "Returns the tail of the dataset. 10 or full dataset by default.",
    :var-type "function",
-   :line 1638,
+   :line 1643,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([A]),
    :name "tan",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L602",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L600",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/tan",
    :doc
    "Returns the tangent of the elements in the given matrix, sequence or number.\nEquivalent to R's tan function.",
    :var-type "function",
-   :line 602,
+   :line 600,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([obj & {:keys [transpose]}]),
    :name "to-dataset",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1372",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1377",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-dataset",
    :doc
    "Returns a dataset containing the given values.\n\nExamples:\n\n  (use 'incanter.core)\n  (to-dataset 1)\n  (to-dataset :a)\n  (to-dataset [:a])\n  (to-dataset (range 10))\n  (to-dataset (range 10) :transpose true)\n  (to-dataset [[1 2] [3 4] [5 6]])\n  (to-dataset {:a 1 :b 2 :c 3})\n  (to-dataset {\"a\" 1 \"b\" 2 \"c\" 3})\n  (to-dataset [{:a 1 :b 2} {:a 1 :b 2}])\n  (to-dataset [{\"a\" 1 \"b\" 2 \"c\" 3} {\"a\" 1 \"b\" 2 \"c\" 3}])",
    :var-type "function",
-   :line 1372,
+   :line 1377,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([coll cat-var]),
    :name "to-labels",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2205",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2210",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-labels",
    :doc "\n",
    :var-type "function",
-   :line 2205,
+   :line 2210,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([coll & options]),
    :name "to-levels",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2195",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2200",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-levels",
    :doc "\n",
    :var-type "function",
-   :line 2195,
+   :line 2200,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L656",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L654",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-list",
    :namespace "incanter.core",
-   :line 656,
+   :line 654,
    :var-type "multimethod",
    :doc
    " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
    :name "to-list"}
   {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2132",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2137",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-map",
    :namespace "incanter.core",
-   :line 2132,
+   :line 2137,
    :var-type "multimethod",
    :doc
    "Takes a dataset or matrix and returns a hash-map where the keys are\n keyword versions of the column names, for datasets, or numbers, for\n matrices, and the values are sequence of the column values.\n\nExamples:\n  (use '(incanter core datasets))\n\n  (to-map (get-dataset :cars))\n\n  (to-map (matrix (range 9) 3))",
@@ -2248,109 +2303,108 @@
    :name "to-matrix",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2244",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2249",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-matrix",
    :doc
    "Converts a dataset into a matrix. Equivalent to R's as.matrix function\n for datasets.\n\nOptions:\n  :dummies (default false) -- if true converts non-numeric variables into sets\n                              of binary dummy variables, otherwise converts\n                              them into numeric codes.",
    :var-type "function",
-   :line 2244,
+   :line 2249,
    :file "modules/incanter-core/src/incanter/core.clj"}
-  {:arglists ([mat]),
-   :name "to-vect",
-   :namespace "incanter.core",
-   :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L1063",
+  {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
+   :source-url
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L1061",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/to-vect",
+   :namespace "incanter.core",
+   :line 1061,
+   :var-type "multimethod",
    :doc
-   " Returns a vector-of-vectors if the given matrix is two-dimensional\nand a flat vector if the matrix is one-dimensional. This is a bit\nslower than the to-list function. ",
-   :var-type "function",
-   :line 1063,
-   :file "modules/incanter-core/src/incanter/core.clj"}
+   " Returns a vector-of-vectors if the given matrix is two-dimensional\nand a flat vector if the matrix is one-dimensional. This is a bit\nslower than the to-list function",
+   :name "to-vect"}
   {:arglists ([x]),
    :name "toeplitz",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2389",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2394",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/toeplitz",
    :doc
    "\nReturns the Toeplitz matrix for the given vector, which form the first row of the matrix",
    :var-type "function",
-   :line 2389,
+   :line 2394,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "trace",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L759",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L757",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/trace",
    :doc
    " Returns the trace of the given matrix.\n\nReferences:\nhttp://en.wikipedia.org/wiki/Matrix_trace\n",
    :var-type "function",
-   :line 759,
+   :line 757,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "trans",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L161",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L157",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/trans",
    :doc
    "   Returns the transpose of the given matrix. Equivalent to R's t function\n\nExamples:\n  (def A (matrix [[1 2 3]\n                 [4 5 6]\n                 [7 8 9]]))\n\n  (trans A)",
    :var-type "function",
-   :line 161,
+   :line 157,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([dataset column f & args]),
    :name "transform-col",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2013",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2018",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/transform-col",
    :doc
    " Apply function f & args to the specified column of dataset and replace the column\nwith the resulting new values.",
    :var-type "function",
-   :line 2013,
+   :line 2018,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:arglists ([mat]),
    :name "vectorize",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L768",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L766",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/vectorize",
    :doc
    " Returns the vectorization (i.e. vec) of the given matrix.\n  The vectorization of an m-by-n matrix A, denoted by vec(A)\n  is the m*n-by-1 column vector obtain by stacking the columns\n  of the matrix A on top of one another.\n\n  For instance:\n    (= (vectorize (matrix [[a b] [c d]])) (matrix [a c b d]))\n\n  Examples:\n    (def A (matrix [[1 2] [3 4]]))\n    (vectorize A)\n\n  References:\n    http://en.wikipedia.org/wiki/Vectorization_(mathematics)\n",
    :var-type "function",
-   :line 768,
+   :line 766,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:file "modules/incanter-core/src/incanter/core.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2404",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2409",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/view",
    :namespace "incanter.core",
-   :line 2404,
+   :line 2409,
    :var-type "multimethod",
    :doc
    " This is a general 'view' function. When given an Incanter matrix/dataset\nor a Clojure numeric collection, it will display it in a Java Swing\nJTable. When given an Incanter chart object, it will display it in a new\nwindow. When given a URL string, it will open the location with the\nplatform's default web browser.\n\nWhen viewing charts, a :width (default 500) and :height (default 400)\noption can be provided.\n\nWhen viewing an incanter.processing sketch, set the :exit-on-close option\nto true (default is false) to kill the animation processes when you\nclose the window (this will also kill your REPL or Swank server),\notherwise those processing will continue to run in the background.\n\n\n\nExamples:\n\n  (use '(incanter core stats datasets charts))\n\n  ;; view matrices\n  (def rand-mat (matrix (sample-normal 100) 4))\n  (view rand-mat)\n\n  ;; view numeric collections\n  (view [1 2 3 4 5])\n  (view (sample-normal 100))\n\n  ;; view Incanter datasets\n  (view (get-dataset :iris))\n\n  ;; convert dataset to matrix, changing Species names to numeric codes\n  (view (to-matrix (get-dataset :iris)))\n\n  ;; convert dataset to matrix, changing Species names to dummy variables\n  (view (to-matrix (get-dataset :iris) :dummies true))\n\n  ;; view a chart\n  (view (histogram (sample-normal 1000)) :width 700 :height 700)\n\n  ;; view a URL\n  (view \"http://incanter.org\")\n\n  ;; view a PNG file\n  (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")\n  (view \"file:///tmp/norm_hist.png\")",
@@ -2359,15 +2413,15 @@
    :name "with-data",
    :namespace "incanter.core",
    :source-url
-   "https://github.com/liebke/incanter/blob/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj#L2108",
+   "https://github.com/liebke/incanter/blob/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj#L2113",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/3950c8f0749c50ec5f5dd3c3f92bc9f94c29228e/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/liebke/incanter/raw/dcfb17f5d2a882ec095edd2d54d49f38f1890bbe/modules/incanter-core/src/incanter/core.clj",
    :wiki-url
    "http://liebke.github.com/incanter//core-api.html#incanter.core/with-data",
    :doc
    "Binds the given data to $data and executes the body.\n Typically used with the $ and $where functions.\n\nExamples:\n  (use '(incanter core stats charts datasets))\n\n  (with-data  (get-dataset :cars)\n    (def lm (linear-model ($ :dist) ($ :speed)))\n    (doto (scatter-plot ($ :speed) ($ :dist))\n              (add-lines ($ :speed) (:fitted lm))\n               view))\n\n   ;; create a dataset where :speed greater than 10 or less than -10\n   (with-data (get-dataset :cars)\n     (view (-> ($where {:speed {:$gt 20}})\n                     (conj-rows ($where {:speed {:$lt 10}})))))",
    :var-type "macro",
-   :line 2108,
+   :line 2113,
    :file "modules/incanter-core/src/incanter/core.clj"}
   {:file nil,
    :raw-source-url nil,
@@ -3275,9 +3329,9 @@
    :name "read-dataset",
    :namespace "incanter.io",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-io/src/incanter/io.clj#L37",
+   "https://github.com/liebke/incanter/blob/5e8d5b889f00bb8e73b140bc4f2751a378d4c8d2/modules/incanter-io/src/incanter/io.clj#L37",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-io/src/incanter/io.clj",
+   "https://github.com/liebke/incanter/raw/5e8d5b889f00bb8e73b140bc4f2751a378d4c8d2/modules/incanter-io/src/incanter/io.clj",
    :wiki-url
    "http://liebke.github.com/incanter//io-api.html#incanter.io/read-dataset",
    :doc
