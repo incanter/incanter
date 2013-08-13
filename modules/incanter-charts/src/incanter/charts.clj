@@ -3641,6 +3641,22 @@
      (.setSeriesPaint renderer series color)
      chart)))
 
+(defn set-point-size
+  "Set the point size of a scatter plot. Use series option to apply
+  point-size to only one series." 
+  [chart point-size & {:keys [series dataset] :or {series :all dataset 0}}]
+(let [xy (- (/ point-size 2))
+      new-point (java.awt.geom.Ellipse2D$Double. xy xy point-size point-size)
+      plot (.getPlot chart)
+      series-count (.getSeriesCount plot)
+      series-list (if (= :all series) 
+                    (range 0 series-count) 
+                    (list series))
+      renderer (.getRenderer plot)]
+  (doseq [a-series series-list]
+    (doto renderer (.setSeriesShape a-series new-point)))
+  chart))
+
 
 ;;;; DEFAULT THEME METHODS
 
