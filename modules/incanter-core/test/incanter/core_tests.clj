@@ -64,6 +64,44 @@
   (is (= (transform-col dataset1 :b (partial + 10))) (dataset [:a :b :c] [[1 12 3] [4 15 6]]))
   (is (= (transform-col dataset1 :b * 2) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
 
+(deftest $group-by-tests
+  (let [cs [:c1 :c2 :c3]
+        a-dataset (dataset cs
+                           [[1 3 3]
+                            [1 2 4]
+                            [1 2 7]
+                            [6 6 8]
+                            [6 5 10]
+                            [11 12 13]])]
+    
+    (are [group-cols n-groups]
+      (= n-groups (count ($group-by group-cols a-dataset)))
+      :c1 3
+      [:c1 :c2] 5) ; 2 arity version
+    
+    (are [group-cols n-groups]
+      (= n-groups (count 
+                   (with-data a-dataset 
+                     ($group-by group-cols))))
+      :c1 3
+      [:c1 :c2] 5) ; 3 arity version
+    
+    (is (= ($group-by :c1 a-dataset)
+           {{:c1 1} (dataset cs [[1 3 3]
+                                 [1 2 4]
+                                 [1 2 7]])
+            {:c1 6} (dataset cs [[6 6 8] 
+                                 [6 5 10]])
+            {:c1 11} (dataset cs [[11 12 13]])}))
+    
+    (is (= ($group-by [:c1 :c2] a-dataset)
+           {{:c1 1 :c2 3} (dataset cs [[1 3 3]])
+            {:c1 1 :c2 2} (dataset cs [[1 2 4]
+                                       [1 2 7]])
+            {:c1 6 :c2 6} (dataset cs [[6 6 8]])
+            {:c1 6 :c2 5} (dataset cs [[6 5 10]])
+            {:c1 11 :c2 12} (dataset cs [[11 12 13]])}))))
+
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3]
                 [4 5 6]

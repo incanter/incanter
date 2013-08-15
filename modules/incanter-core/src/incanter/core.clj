@@ -1863,18 +1863,11 @@ altering later ones."
   ([cols]
      ($group-by cols $data))
   ([cols data]
-     (let [n (nrow data)
-           rows (:rows data)]
-       (loop [r 0 grouped-rows {}]
-         (if (= r n)
-           (let [group-cols (keys grouped-rows)
-                 res (apply assoc {} (interleave group-cols (map to-dataset (vals grouped-rows))))]
-             res)
-           (recur (inc r)
-                  (let [row (nth rows r)
-                        k (submap row cols)
-                        k-rows (grouped-rows k)]
-                    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
+     (let [orig-col-names (:column-names data);save to preserve order below
+           groups (group-by #(submap % cols) (:rows data))]
+       (into {}
+             (for [[group-value group-rows] groups]
+               {group-value (dataset orig-col-names group-rows)})))))
 
 
 (defn matrix-map
