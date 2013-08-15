@@ -2000,6 +2000,28 @@ altering later ones."
            rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
+(defn- replace-by-number-or-value [col-vec [old-col new-col-name]]
+  (if (number? old-col)
+    (assoc col-vec old-col new-col-name)
+    (replace {old-col new-col-name} col-vec)))
+
+(defn rename-cols
+  "Rename columns based on col-map of old-col new-col-name pairs.  If
+  old-col is a number it is taken as a 0 based index for the column to
+  replace
+
+  Example:
+   (use '(incanter core datasets))
+   (rename-cols {:Sepal.Length :s.length 3 :p.width} (get-dataset :iris))
+  "
+  ([col-map]
+     (rename-cols col-map $data))
+  ([col-map data]
+     (let [old-col-names (col-names data)
+           new-col-names (reduce 
+                          replace-by-number-or-value old-col-names col-map)]
+       (col-names data new-col-names))))
+
 ;; credit to M.Brandmeyer
 (defn transform-col
 " Apply function f & args to the specified column of dataset and replace the column
