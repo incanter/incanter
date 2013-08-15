@@ -30,4 +30,5 @@
                          (use 'clojure.repl))
                  }
   :jvm-opts ["-Xmx1g"]
+
   )
