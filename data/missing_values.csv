@@ -1,0 +1,8 @@
+Monster,HP,Attack,Speed,Special,Gold,EXP
+Goblin,6,1,3,,2,4
+Werewolf,24,5,2,Venom,8,16
+Oublia,40,,2,Memory,18
+Statue,45,8,,Gaze,0,40
+,,
+Dragon,85,10,20,Fire;Flying,120,35
+Undefeatable,,50,20,Death,,
