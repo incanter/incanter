@@ -1286,7 +1286,7 @@
     :data (default nil) If the :data option is provided a dataset,
                         column names can be used instead of sequences
                         of data as arguments to xy-plot.
-    :title (default 'Time Series Plot') main title
+    :title (default '') main title
     :x-label (default x expression)
     :y-label (default y expression)
     :legend (default false) prints legend
@@ -1392,7 +1392,7 @@
   to write it to a file.
 
   Options:
-    :title (default 'Histogram') main title
+    :title (default '') main title
     :x-label (default x expression)
     :y-label (default 'Frequency')
     :legend (default false) prints legend
@@ -1860,7 +1860,7 @@
     values -- a sequence of numeric values
 
   Options:
-    :title (default 'Histogram') main title
+    :title (default '') main title
     :x-label (default 'Categories')
     :y-label (default 'Value')
     :legend (default false) prints legend
@@ -2000,7 +2000,7 @@
     values -- a sequence of numeric values
 
   Options:
-    :title (default 'Histogram') main title
+    :title (default '') main title
     :x-label (default 'Categories')
     :y-label (default 'Value')
     :series-label
@@ -2517,7 +2517,7 @@
     values -- a sequence of numeric values
 
   Options:
-    :title (default 'Histogram') main title
+    :title (default '') main title
     :legend (default false) prints legend
 
 
@@ -2607,7 +2607,7 @@
   to write it to a file.
 
   Options:
-    :title (default 'Histogram') main title
+    :title (default '') main title
     :x-label (default x expression)
     :y-label (default 'Frequency')
     :legend (default false) prints legend
@@ -2685,7 +2685,7 @@
   display the chart, or the 'save' function to write it to a file.
 
   Options:
-    :title (default 'Histogram') main title
+    :title (default '') main title
     :x-label (default x expression)
     :y-label (default 'Frequency')
     :legend (default false) prints legend
