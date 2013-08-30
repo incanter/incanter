@@ -1223,7 +1223,6 @@
     chart))
 
 (defmacro candle-stick-plot
-  [& options]
   "Produces a candle stick chart
 
    Options:
@@ -1236,17 +1235,17 @@
     :open Key for accessing open value data (defaults to :open)
     :close Key for accessing close value data (defaults to :close)
     :volume Key for accessing volume data (defaults to :volume). Volume data is optional
-    :title (default 'Candle Chart Plot') main title
+    :title (default 'Candle Stick Plot') main title
     :time-label (default empty)
     :value-label (default empty)
     :legend (default false) prints legend
     :series-label (default empty)
 
    Example:
-   (candle-plot :data <dataset>) ;; uses default mappings so the dataset must have :date, :high, :low, :open, :close and :volume keys
+   (candle-stick-plot :data <dataset>) ;; uses default mappings so the dataset must have :date, :high, :low, :open, :close and :volume keys
 
    ;; more customization
-   (candle-plot
+   (candle-stick-plot
       :data dataset
       :high :HighPrice
       :low :LowPrice
@@ -1257,10 +1256,12 @@
       :time-label \"CoB date\"
       :value-label \"Price\"
       :series-label \"Price time series\"
-      :title \"Price information\")"
+      :title \"Price information\")
 
+"
+  [& options]
   `(let [opts# ~(when options (apply assoc {} options))
-         main-title# (or (:title opts#) "Candle Chart Plot")
+         main-title# (or (:title opts#) "Candle Stick Plot")
          args#
          (concat
           (mapcat #(vector % (or (opts# %) %)) [:volume :high :low :open :close :date])
@@ -1271,7 +1272,6 @@
                               :value-label (or (opts# :value-label) "")
                               :series-label (or (opts# :series-label))]))))]
      (apply candle-stick-plot* args#)))
-
 
 (defn time-series-plot* [x y & options]
   (apply create-xy-series-plot x y create-time-series-plot options))
