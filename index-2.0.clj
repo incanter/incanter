@@ -3365,7 +3365,14 @@
   {:arglists
    ([filename
      &
-     {:keys [delim keyword-headers quote skip header compress-delim],
+     {:keys
+      [delim
+       keyword-headers
+       quote
+       skip
+       header
+       compress-delim
+       empty-field-value],
       :or
       {delim \,,
        quote \",
@@ -3375,15 +3382,15 @@
    :name "read-dataset",
    :namespace "incanter.io",
    :source-url
-   "https://github.com/liebke/incanter/blob/5e8d5b889f00bb8e73b140bc4f2751a378d4c8d2/modules/incanter-io/src/incanter/io.clj#L37",
+   "https://github.com/liebke/incanter/blob/f36c45db4725a021d60f9ecc2c5a1c3f8a96d7ec/modules/incanter-io/src/incanter/io.clj#L41",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/5e8d5b889f00bb8e73b140bc4f2751a378d4c8d2/modules/incanter-io/src/incanter/io.clj",
+   "https://github.com/liebke/incanter/raw/f36c45db4725a021d60f9ecc2c5a1c3f8a96d7ec/modules/incanter-io/src/incanter/io.clj",
    :wiki-url
    "http://liebke.github.com/incanter//io-api.html#incanter.io/read-dataset",
    :doc
-   "\n  Returns a dataset read from a file or a URL.\n\n  Options:\n    :delim (default \\,), other options (\\tab \\space \\|  etc)\n    :quote (default \\\") character used for quoting strings\n    :skip (default 0) the number of lines to skip at the top of the file.\n    :header (default false) indicates the file has a header line\n    :compress-delim (default true if delim = \\space, false otherwise) means\n                    compress multiple adjacent delimiters into a single delimiter\n",
+   "\n  Returns a dataset read from a file or a URL.\n\n  Options:\n    :delim (default \\,), other options (\\tab \\space \\|  etc)\n    :quote (default \\\") character used for quoting strings\n    :skip (default 0) the number of lines to skip at the top of the file.\n    :header (default false) indicates the file has a header line\n    :compress-delim (default true if delim = \\space, false otherwise) means\n                    compress multiple adjacent delimiters into a single delimiter.\n    :empty-field-value (default nil) indicates the interpretation of an empty field.\n",
    :var-type "function",
-   :line 37,
+   :line 41,
    :file "modules/incanter-io/src/incanter/io.clj"}
   {:arglists
    ([chart
