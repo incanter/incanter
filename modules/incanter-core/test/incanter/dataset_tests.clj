@@ -85,3 +85,17 @@
           (is (= expected actual))
           ))
       )))
+
+(deftest melt-test
+  (testing "Melting the data")
+  (let [dset (dataset  [:id :time :x1 :x2 ]
+                       [[1 1 5 6]
+                        [2 2 7 8]])
+        expected (dataset [:value :variable :id]
+                          [[6 :x2 1]
+                           [8 :x2 2]
+                           [5 :x1 1]
+                           [7 :x1 2]
+                           [1 :time 1]
+                           [2 :time 2]])]
+    (is (= (melt dset :id) expected))))
