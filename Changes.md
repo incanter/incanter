@@ -1,5 +1,10 @@
 # What's new in Incanter #
 
+## Changes for 1.5.4 ##
+
+Made an error during deployment of 1.5.3, so 1.5.4 was released to fix this problem.
+Don't use 1.5.3!
+
 ## Changes for 1.5.3 ##
 
 ### Bugfixes ###
