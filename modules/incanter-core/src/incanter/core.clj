@@ -2027,6 +2027,58 @@ altering later ones."
                           replace-by-number-or-value old-col-names col-map)]
        (col-names data new-col-names))))
 
+(defn- update
+  ([m key f] (update-in m [key] f))
+  ([m key f & kfs] (apply update (update-in m [key] f) kfs)))
+
+(defn replace-column
+  "Replaces a column in a dataset with new values."
+  ([column-name values]
+     (replace-column column-name values $data))
+  ([column-name values data]
+     (update data :rows
+             (fn [rows]
+               (map #(assoc %1 column-name %2)
+                    rows values)))))
+
+(defn add-column
+  "Adds a column, with given values, to a dataset."
+  ([column-name values]
+     (add-column column-name values $data))
+  ([column-name values data]
+     (if (some #{column-name} (:column-names data))
+       (replace-column column-name values data)
+       (update data :column-names #(conj % column-name)
+               :rows #(mapv (fn [r v]
+                              (assoc r column-name v))
+                            % (concat values (repeat nil)))))))
+
+(defn add-derived-column
+  "This function adds a column to a dataset that is a function of
+  existing columns. If no dataset is provided, $data (bound by the
+  with-data macro) will be used. f should be a function of the
+  from-columns, with arguments in that order.
+
+  Examples:
+    (use '(incanter core datasets))
+    (def cars (get-dataset :cars))
+
+    (add-derived-column :dist-over-speed [:dist :speed] (fn [d s] (/ d s)) cars)
+
+    (with-data (get-dataset :cars)
+      (view (add-derived-column :speed**-1 [:speed] #(/ 1.0 %))))"
+
+  ([column-name from-columns f]
+     (add-derived-column column-name from-columns f $data))
+  ([column-name from-columns f data]
+     (update data :column-names #(conj % column-name)
+             :rows (fn [rows]
+                     (mapv (fn [row]
+                             (assoc row column-name
+                                    (apply f (map #(map-get row %)
+                                                  from-columns))))
+                           rows)))))
+
 ;; credit to M.Brandmeyer
 (defn transform-col
 " Apply function f & args to the specified column of dataset and replace the column

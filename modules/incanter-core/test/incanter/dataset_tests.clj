@@ -51,6 +51,16 @@
   (is (= (head 2 dataset1) ($ (range 2) :all dataset1)))
   (is (= (head dataset1) ($ (range 2) :all dataset1))))
 
+(deftest test-add-column
+  (is (= (add-column :price [17599 22099] cars)
+         (dataset [:speed :weight :colour :price] [(conj car0 17599) (conj car1 22099)])))
+  (is (= (add-column :weight [2500 3500] cars)
+         (dataset [:speed :weight :colour] [(assoc car0 1 2500) (assoc car1 1 3500)]))))
+
+(deftest test-add-derived-column
+  (is (= ($ :weight-minus-speed (add-derived-column :weight-minus-speed [:weight :speed] #(- %1 %2) cars))
+         [5940 6930])))
+
 ;; (deftest selects-on-badly-named-atoms
 ;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
 ;;     (is (= ($ :first
