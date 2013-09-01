@@ -3461,12 +3461,12 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
         view))
 
     ;; calculate the distances of each point from the centroid.
-    (def dists (mahalanobis-distance data))
+    (def dists (map first (mahalanobis-distance data)))
     ;; view a bar-chart of the distances
     (view (bar-chart (range 102) dists))
 
     ;; Now contrast with the Euclidean distance.
-    (def dists (mahalanobis-distance data :W (matrix [[1 0] [0 1]])))
+    (def dists (map first (mahalanobis-distance data :W (matrix [[1 0] [0 1]]))))
     ;; view a bar-chart of the distances
     (view (bar-chart (range 102) dists))
 
