@@ -97,10 +97,9 @@
   " Test if obj is 'derived' clatrix.core.Matrix"
   ([obj] (is-matrix obj)))
 
-
 (defn dataset?
 " Determines if obj is of type incanter.core.Dataset."
-  ([obj] (isa? (type obj) incanter.core.Dataset)))
+  ([obj] (instance? Dataset obj)))
 
 (defn ^Integer nrow
   "Returns the number of rows in the given matrix. Equivalent to R's nrow function."
@@ -498,30 +497,34 @@
   ([x y & more]
      (reduce safe-div (safe-div x y) more)))
 
+(declare to-list dataset col-names)
+
+(defn- mapping-helper [func args]
+  (reduce (fn [A B]
+            (cond
+             (number? A) (func A B)
+             (matrix? A) (let [m (matrix (mapping-helper func (list (to-list A) B)))]
+                           (if (clx/row? A)
+                             (trans m)
+                             m))
+             (dataset? A) (dataset (col-names A)
+                                   (mapping-helper func (list (to-list A) B)))
+             (and (coll? A) (coll? (first A)))
+             (map (fn [a] (map #(func %1 B) a)) A)
+             (coll? A) (map #(func %1 B) A)))
+          args))
 
 (defn pow  ;; TODO use jblas and fix meta
   " This is an element-by-element exponent function, raising the first argument
   by the exponents in the remaining arguments. Equivalent to R's ^ operator."
   [& args]
-  (reduce (fn [A B]
-            (combine-with A B
-                          #(Math/pow %1 %2)
-                          (fn [a b] (map (map #(Math/pow %1 %2))
-                                         a b))))
-          args))
-
+  (mapping-helper #(Math/pow %1 %2) args))
 
 (defn atan2 ;; TODO fix meta
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
   Equivalent to R's atan2 function."
   [& args]
-  (reduce (fn [A B]
-            (combine-with A B
-                          #(Math/atan2 %1 %2) ;; TODO macro this
-                          (fn [a b] (map (map #(Math/atan2 %1 %2))
-                                         a b))))
-          args))
-
+  (mapping-helper #(Math/atan2 %1 %2) args))
 
 (defn sqrt
   "Returns the square-root of the elements in the given matrix, sequence or number.
@@ -544,8 +547,9 @@
 (defn log2
   "Returns the log base 2 of the elements in the given matrix, sequence or number.
    Equivalent to R's log2 function."
-   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) #(div (clx/log! %)
-                                                               (matrix (Math/log 2) (nrow %) (ncol %))))))
+   ([A] (transform-with A #(/ (Math/log %) (Math/log 2))
+                        #(div (clx/log! %)
+                              (matrix (Math/log 2) (nrow %) (ncol %))))))
 
 
 (defn log10
@@ -664,6 +668,27 @@
 (defmethod to-list :default [s] s)
 
 (defmethod to-list nil [s] nil)
+
+(defmulti to-vect
+  " Returns a vector-of-vectors if the given matrix is two-dimensional
+    and a flat vector if the matrix is one-dimensional. This is a bit
+    slower than the to-list function"
+  type)
+
+(defmethod to-vect ::matrix
+  ([^clatrix.core.Matrix mat]
+     (clx/as-vec mat)))
+
+(defmethod to-vect ::dataset
+  [data]
+  (into [] (map (fn [row]
+                  (into [] (map (fn [col] (row col))
+                                (:column-names data))))
+                (:rows data))))
+
+(defmethod to-vect nil [s] nil)
+
+(defmethod to-vect :default [s] s)
 
 (defn ^Matrix copy
   "Returns a copy of the given matrix."
@@ -800,14 +825,14 @@
 (defn sum-of-squares
   "Returns the sum-of-squares of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
       (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
 
 
 (defn sum
   "Returns the sum of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
       (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
 
 
@@ -1050,27 +1075,6 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 ;; MISC FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-(defmulti to-vect
-  " Returns a vector-of-vectors if the given matrix is two-dimensional
-    and a flat vector if the matrix is one-dimensional. This is a bit
-    slower than the to-list function"
-  type)
-
-(defmethod to-vect ::matrix
-  ([^clatrix.core.Matrix mat]
-     (clx/as-vec mat)))
-
-(defmethod to-vect ::dataset
-  [data]
-  (into [] (map (fn [row]
-                  (into [] (map (fn [col] (row col))
-                                (:column-names data))))
-                (:rows data))))
-
-(defmethod to-vect nil [s] nil)
-
-(defmethod to-vect :default [s] s)
 
 (defn length
   " A version of count that works on collections, matrices, and numbers.
@@ -1885,18 +1889,19 @@ altering later ones."
 
 "
  ([f m]
-    (if (sequential? m)
-      (if (sequential? (first m))
-        (map (fn [& a] (apply map f a)) m)
-        (map f m))
-      (f m)))
+    (let [m (if (and (matrix? m) (clx/row? m)) (to-list m) m)]
+      (if (sequential? m)
+        (if (sequential? (first m))
+          (map (fn [& a] (apply map f a)) m)
+          (map f m))
+        (f m))))
  ([f m & ms]
-    (if (sequential? m)
-      (if (sequential? (first m))
-        (apply map (fn [& a] (apply map f a)) m ms)
-        (apply map f m ms))
-      (apply f m ms))))
-
+    (let [m (if (and (matrix? m) (clx/row? m)) (to-list m) m)]
+      (if (sequential? m)
+        (if (sequential? (first m))
+          (apply map (fn [& a] (apply map f a)) m ms)
+          (apply map f m ms))
+        (apply f m ms)))))
 
 (defn $map
   "This function returns a sequence resulting from mapping the given function over
