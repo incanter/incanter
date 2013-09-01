@@ -94,3 +94,10 @@
     (is (instance? java.lang.Long (parse-string "5678")))
     (is (instance? java.lang.Long (parse-string "1330418008377")))
     ))
+
+(deftest missing-fields-validation 
+  (testing "Proper handling of missing fields."
+    (let [ds (read-dataset (str incanter-home "data/missing_values.csv")
+                           :header true
+                           :empty-field-value :NA)]
+      (is (= ($ 6 ds) [4 16 :NA 40 35 :NA])))))
