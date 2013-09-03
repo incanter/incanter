@@ -2225,7 +2225,7 @@ altering later ones."
        (zipmap col-keys cols))))
 
 
-(defn melt [dataset pivot-key]
+(defn melt
   "Melt an object into a form suitable for easy casting, like a melt function in R.
 Only accepts one pivot key for now. e.g.
 
@@ -2234,6 +2234,7 @@ Only accepts one pivot key for now. e.g.
               (line-chart :Subject :value :group-by :variable :legend true)))
 
   See http://www.statmethods.net/management/reshape.html for more examples."
+  [dataset pivot-key]
   (let [in-m (to-map dataset)
         nrows (nrow dataset)
         ks (keys in-m)]
