@@ -3572,9 +3572,9 @@
    :name "derivative",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L68",
+   "https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L68",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/derivative",
    :doc
@@ -3586,9 +3586,9 @@
    :name "gradient",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L244",
+   "https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L244",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/gradient",
    :doc
@@ -3600,9 +3600,9 @@
    :name "hessian",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L291",
+   "https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L291",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/hessian",
    :doc
@@ -3614,9 +3614,9 @@
    :name "integrate",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L26",
+   "https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L26",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/integrate",
    :doc
@@ -3635,9 +3635,9 @@
    :name "non-linear-model",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj#L578",
+   "https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L578",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/996ab26038410c511379cd011a6a82d84d9870fd/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/non-linear-model",
    :doc
