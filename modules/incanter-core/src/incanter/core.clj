@@ -2537,6 +2537,9 @@ Only accepts one pivot key for now. e.g.
 
 "
   (fn [obj & options] (cond
+                        (and (map? obj)
+                             (:charts obj))
+                          :multi-chart
                         (and (not (matrix? obj))
                              (not (dataset? obj))
                              (not (map? obj))
