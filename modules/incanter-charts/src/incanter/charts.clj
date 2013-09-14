@@ -1334,6 +1334,7 @@
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
            title# (or (:title opts#) "")
+           legend# (or (:legend opts#) false)
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
            series-lab# (or (:series-label opts#) (if group-by#
@@ -1342,6 +1343,7 @@
            args# (concat [~x ~y] (apply concat (seq (apply assoc opts#
                                                            [:group-by group-by#
                                                             :title title#
+                                                            :legend legend#
                                                             :x-label x-lab#
                                                             :y-label y-lab#
                                                             :series-label series-lab#]))))]
