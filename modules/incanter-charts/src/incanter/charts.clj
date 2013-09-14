@@ -36,7 +36,7 @@
   (:import  (java.io File)
             (javax.imageio ImageIO)
             (javax.swing JSlider JFrame JLabel JPanel)
-            (java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font)
+            (java.awt BorderLayout GridLayout Color Shape Rectangle Graphics2D BasicStroke Font)
             (org.jfree.data DomainOrder)
             (org.jfree.data.statistics HistogramDataset
                                        HistogramType
@@ -44,6 +44,7 @@
             (org.jfree.chart ChartFactory
                              ChartUtilities
                              ChartFrame
+                             ChartPanel
                              ChartTheme
                              StandardChartTheme
                              JFreeChart
@@ -848,6 +849,22 @@
     (if int-ticks?
       (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
     axis))
+
+(defn multi-chart
+" Creates a multi-chart object, which is a container that allows multiple charts to be displayed
+  in the same frame.
+
+  This multi-chart is actually a JPanel with GridLayout that contains multiple charts.
+"
+  []
+  (let [panel (JPanel.)]
+    (.setLayout panel (GridLayout. 1 0))
+    panel)
+
+(defn multi-chart-add
+  [multi-chart chart]
+  (.add multi-chart (ChartPanel. chart))
+  multi-chart)
 
 (defmulti set-axis
 " Set the selected axis of the chart, returning the chart.
