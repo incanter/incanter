@@ -854,17 +854,15 @@
 " Creates a multi-chart object, which is a container that allows multiple charts to be displayed
   in the same frame.
 
-  This multi-chart is actually a JPanel with GridLayout that contains multiple charts.
+  This multi-chart is actually a map that contains a vector that contains multiple charts.
 "
   []
-  (let [panel (JPanel.)]
-    (.setLayout panel (GridLayout. 1 0))
-    panel)
+  {:charts []})
 
 (defn multi-chart-add
-  [multi-chart chart]
-  (.add multi-chart (ChartPanel. chart))
-  multi-chart)
+  [mchart ^JFreeChart chart]
+  (assoc mchart
+         :charts (conj (:charts mchart) chart)))
 
 (defmulti set-axis
 " Set the selected axis of the chart, returning the chart.
@@ -3321,9 +3319,33 @@
           frame (ChartFrame. window-title chart)]
       (doto frame
         (.setSize width height)
-        (.setVisible true))
-      frame)))
+        (.setVisible true)))))
 
+(defmethod view :multi-chart
+  ;; By default, we'll render a list of charts in a grid layout. Each component chart will be
+  ;; 125px by 100px by default. The charts will be ordered in a square format by default.
+  ([chart & options]
+    (let [opts (when options (apply assoc {} options))
+          window-title (or (:window-title opts) "Incanter Plot")
+          width (or (:width opts) 500)
+          height (or (:height opts) 400)
+          charts (:charts chart)
+          ncharts (count charts)
+          nrows (->> ncharts Math/sqrt int)
+          ncols (->> nrows (/ ncharts) Math/ceil int)
+          frame (JFrame. window-title)]
+      (.setLayout frame (GridLayout. nrows ncols))
+      (doseq [one-chart charts]
+        (let [chart-panel (ChartPanel.
+                            one-chart
+                            125 100
+                            50 40
+                            200 160
+                            false false false false false false)]
+          (.add frame chart-panel)))
+      (doto frame
+        (.setSize width height)
+        (.setVisible true)))))
 
 (defmethod save org.jfree.chart.JFreeChart
   ([chart filename & options]
