@@ -435,8 +435,7 @@
   (minus 2 [1 2 3])
   (minus [1 2 3])
   "
-  [& args] (reduce clx/- (pass-to-matrix args)))
-
+  [& args] (apply clx/- (pass-to-matrix args)))
 
 
 (defn mult
