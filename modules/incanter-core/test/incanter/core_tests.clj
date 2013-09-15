@@ -439,7 +439,13 @@
   (is (= (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
   (is (= (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
   (is (= (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
-  (is (= (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0])))))
+  (is (= (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0]))))
+  (is (= (minus 1) -1))
+  (is (= (minus [1.0 2.0 3.0]) (matrix [-1.0 -2.0 -3.0])))
+  (is (= (minus A) (matrix [[-1 -2 -3]
+                            [-4 -5 -6]
+                            [-7 -8 -9]
+                            [-10 -11 -12]]))))
 
 (deftest matrix-mult-tests
   ;; element by element multiplication on matrices
