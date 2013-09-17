@@ -2082,7 +2082,7 @@
           n (nrow y)
           p (ncol _x)
           p-1 (if intercept (dec p) p)
-          adj-r-square (- 1 (* (- 1 r-square) (/ (dec 1) (- n p 1))))
+          adj-r-square (- 1 (* (- 1 r-square) (safe-div (dec n) (- n p 1))))
           mse (safe-div sse (- n p))
           msr (safe-div ssr p-1)
           f-stat (safe-div msr mse)
