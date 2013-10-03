@@ -1543,10 +1543,14 @@
     (let [
           xx (to-list x)
           yy (to-list y)
+          sd-x (sd x)
+          sd-y (sd y)
         ]
-      (DoubleDescriptive/correlation
-        (DoubleArrayList. (double-array xx)) (sd x)
-        (DoubleArrayList. (double-array yy)) (sd y))))
+      (if (not= (* sd-x sd-y) 0)
+        (DoubleDescriptive/correlation
+         (DoubleArrayList. (double-array xx)) (sd x)
+         (DoubleArrayList. (double-array yy)) (sd y))
+        0.0)))
   ([mat]
    (div (covariance mat)
         (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
