@@ -3697,9 +3697,9 @@
    :name "auto-correlation",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1559",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1559",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/auto-correlation",
    :doc
@@ -3711,9 +3711,9 @@
    :name "benford-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2544",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2544",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/benford-test",
    :doc
@@ -3733,9 +3733,9 @@
    :name "bootstrap",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1717",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1717",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/bootstrap",
    :doc
@@ -3747,9 +3747,9 @@
    :name "category-col-summarizer",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2592",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2592",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/category-col-summarizer",
    :doc
@@ -3765,9 +3765,9 @@
    :name "cdf-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L465",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L465",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-beta",
    :doc
@@ -3783,9 +3783,9 @@
    :name "cdf-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1126",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1126",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-binomial",
    :doc
@@ -3798,9 +3798,9 @@
    :name "cdf-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L726",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L726",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-chisq",
    :doc
@@ -3812,9 +3812,9 @@
    :name "cdf-empirical",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1405",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1405",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-empirical",
    :doc
@@ -3826,9 +3826,9 @@
    :name "cdf-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L929",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L929",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-exp",
    :doc
@@ -3844,9 +3844,9 @@
    :name "cdf-f",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L138",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L138",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-f",
    :doc
@@ -3862,9 +3862,9 @@
    :name "cdf-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L639",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L639",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-gamma",
    :doc
@@ -3880,9 +3880,9 @@
    :name "cdf-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1346",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1346",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-neg-binomial",
    :doc
@@ -3894,9 +3894,9 @@
    :name "cdf-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L209",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L209",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-normal",
    :doc
@@ -3911,9 +3911,9 @@
    :name "cdf-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1261",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1261",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-poisson",
    :doc
@@ -3926,9 +3926,9 @@
    :name "cdf-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L809",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L809",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-t",
    :doc
@@ -3940,9 +3940,9 @@
    :name "cdf-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L378",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L378",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-uniform",
    :doc
@@ -3954,9 +3954,9 @@
    :name "cdf-weibull",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L554",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L554",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cdf-weibull",
    :doc
@@ -3968,9 +3968,9 @@
    :name "chebyshev-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3116",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3116",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/chebyshev-distance",
    :doc
@@ -3983,9 +3983,9 @@
    :name "chisq-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2381",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2381",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/chisq-test",
    :doc
@@ -3997,9 +3997,9 @@
    :name "choose-singletype-col-summarizer",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2600",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2600",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/choose-singletype-col-summarizer",
    :doc "Takes in a type, and returns a suitable column summarizer",
@@ -4010,9 +4010,9 @@
    :name "correlation",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1531",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1531",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/correlation",
    :doc
@@ -4024,9 +4024,9 @@
    :name "correlation-linearity-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2887",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2887",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/correlation-linearity-test",
    :doc
@@ -4038,9 +4038,9 @@
    :name "correlation-ratio",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2849",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2849",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/correlation-ratio",
    :doc
@@ -4052,9 +4052,9 @@
    :name "cosine-similarity",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3136",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3136",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cosine-similarity",
    :doc
@@ -4066,9 +4066,9 @@
    :name "covariance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1480",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1480",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/covariance",
    :doc
@@ -4080,9 +4080,9 @@
    :name "cumulative-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1842",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1842",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/cumulative-mean",
    :doc
@@ -4094,9 +4094,9 @@
    :name "detabulate",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2705",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2705",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/detabulate",
    :doc
@@ -4108,9 +4108,9 @@
    :name "dice-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3214",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3214",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/dice-coefficient",
    :doc
@@ -4122,9 +4122,9 @@
    :name "dice-coefficient-str",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3240",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3240",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/dice-coefficient-str",
    :doc
@@ -4136,9 +4136,9 @@
    :name "discordant-pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2996",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2996",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/discordant-pairs",
    :doc "http://en.wikipedia.org/wiki/Discordant_pairs",
@@ -4149,9 +4149,9 @@
    :name "euclidean-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3109",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3109",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/euclidean-distance",
    :doc
@@ -4163,9 +4163,9 @@
    :name "f-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2256",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2256",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/f-test",
    :doc
@@ -4177,9 +4177,9 @@
    :name "gamma-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3019",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3019",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/gamma-coefficient",
    :doc
@@ -4191,9 +4191,9 @@
    :name "hamming-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3265",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3265",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/hamming-distance",
    :doc
@@ -4205,9 +4205,9 @@
    :name "indicator",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L71",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L71",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/indicator",
    :doc
@@ -4219,9 +4219,9 @@
    :name "jaccard-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3203",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3203",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/jaccard-distance",
    :doc
@@ -4233,9 +4233,9 @@
    :name "jaccard-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3192",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3192",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/jaccard-index",
    :doc
@@ -4247,9 +4247,9 @@
    :name "kendalls-tau",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2947",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2947",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/kendalls-tau",
    :doc
@@ -4261,9 +4261,9 @@
    :name "kendalls-w",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3028",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3028",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/kendalls-w",
    :doc
@@ -4275,9 +4275,9 @@
    :name "kurtosis",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1596",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1596",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/kurtosis",
    :doc
@@ -4289,9 +4289,9 @@
    :name "lee-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3280",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3280",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/lee-distance",
    :doc
@@ -4303,9 +4303,9 @@
    :name "levenshtein-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3327",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3327",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/levenshtein-distance",
    :doc
@@ -4317,9 +4317,9 @@
    :name "linear-model",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2016",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2016",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/linear-model",
    :doc
@@ -4331,9 +4331,9 @@
    :name "mahalanobis-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3428",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3428",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/mahalanobis-distance",
    :doc
@@ -4345,9 +4345,9 @@
    :name "manhattan-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3125",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3125",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/manhattan-distance",
    :doc
@@ -4359,9 +4359,9 @@
    :name "mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1445",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1445",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/mean",
    :doc
@@ -4373,9 +4373,9 @@
    :name "median",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1578",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1578",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/median",
    :doc
@@ -4387,9 +4387,9 @@
    :name "minkowski-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3089",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3089",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/minkowski-distance",
    :doc
@@ -4401,9 +4401,9 @@
    :name "n-grams",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3226",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3226",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/n-grams",
    :doc
@@ -4415,9 +4415,9 @@
    :name "normalized-kendall-tau-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3006",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3006",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/normalized-kendall-tau-distance",
    :doc
@@ -4429,9 +4429,9 @@
    :name "numeric-col-summarizer",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2585",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2585",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/numeric-col-summarizer",
    :doc
@@ -4443,9 +4443,9 @@
    :name "odds-ratio",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2829",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2829",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/odds-ratio",
    :doc
@@ -4457,9 +4457,9 @@
    :name "pairings",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2983",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2983",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pairings",
    :doc "confusing ass name.",
@@ -4470,9 +4470,9 @@
    :name "pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2971",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2971",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pairs",
    :doc
@@ -4484,9 +4484,9 @@
    :name "pdf-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L439",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L439",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-beta",
    :doc
@@ -4498,9 +4498,9 @@
    :name "pdf-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1099",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1099",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-binomial",
    :doc
@@ -4512,9 +4512,9 @@
    :name "pdf-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L700",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L700",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-chisq",
    :doc
@@ -4526,9 +4526,9 @@
    :name "pdf-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L904",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L904",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-exp",
    :doc
@@ -4540,9 +4540,9 @@
    :name "pdf-f",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L104",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L104",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-f",
    :doc
@@ -4554,9 +4554,9 @@
    :name "pdf-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L612",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L612",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-gamma",
    :doc
@@ -4568,9 +4568,9 @@
    :name "pdf-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1318",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1318",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-neg-binomial",
    :doc
@@ -4582,9 +4582,9 @@
    :name "pdf-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L182",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L182",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-normal",
    :doc
@@ -4596,9 +4596,9 @@
    :name "pdf-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1235",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1235",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-poisson",
    :doc
@@ -4610,9 +4610,9 @@
    :name "pdf-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L784",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L784",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-t",
    :doc
@@ -4624,9 +4624,9 @@
    :name "pdf-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L351",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L351",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-uniform",
    :doc
@@ -4638,9 +4638,9 @@
    :name "pdf-weibull",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L526",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L526",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/pdf-weibull",
    :doc
@@ -4652,9 +4652,9 @@
    :name "permute",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1882",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1882",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/permute",
    :doc
@@ -4666,9 +4666,9 @@
    :name "predict",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2814",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2814",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/predict",
    :doc
@@ -4680,9 +4680,9 @@
    :name "principal-components",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2647",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2647",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/principal-components",
    :doc
@@ -4694,9 +4694,9 @@
    :name "product-marginal-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3070",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3070",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/product-marginal-test",
    :doc
@@ -4714,9 +4714,9 @@
    :name "quantile",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1636",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1636",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/quantile",
    :doc
@@ -4728,9 +4728,9 @@
    :name "quantile-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L235",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L235",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/quantile-normal",
    :doc
@@ -4742,9 +4742,9 @@
    :name "quantile-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L836",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L836",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/quantile-t",
    :doc
@@ -4756,9 +4756,9 @@
    :name "rank-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2897",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2897",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/rank-index",
    :doc
@@ -4768,9 +4768,9 @@
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:file "modules/incanter-core/src/incanter/stats.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1666",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1666",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample",
    :namespace "incanter.stats",
@@ -4783,9 +4783,9 @@
    :name "sample-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L498",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L498",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-beta",
    :doc
@@ -4798,9 +4798,9 @@
    :name "sample-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1156",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1156",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-binomial",
    :doc
@@ -4812,9 +4812,9 @@
    :name "sample-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L756",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L756",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-chisq",
    :doc
@@ -4826,9 +4826,9 @@
    :name "sample-dirichlet",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1048",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1048",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-dirichlet",
    :doc
@@ -4840,9 +4840,9 @@
    :name "sample-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L954",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L954",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-exp",
    :doc
@@ -4854,9 +4854,9 @@
    :name "sample-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L670",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L670",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-gamma",
    :doc
@@ -4868,9 +4868,9 @@
    :name "sample-inv-wishart",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1020",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1020",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-inv-wishart",
    :doc
@@ -4883,9 +4883,9 @@
    :name "sample-multinomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1186",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1186",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-multinomial",
    :doc
@@ -4897,9 +4897,9 @@
    :name "sample-mvn",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L296",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L296",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-mvn",
    :doc
@@ -4912,9 +4912,9 @@
    :name "sample-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1376",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1376",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-neg-binomial",
    :doc
@@ -4926,9 +4926,9 @@
    :name "sample-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L267",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L267",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-normal",
    :doc
@@ -4940,9 +4940,9 @@
    :name "sample-permutations",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1910",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1910",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-permutations",
    :doc
@@ -4954,9 +4954,9 @@
    :name "sample-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1290",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1290",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-poisson",
    :doc
@@ -4968,9 +4968,9 @@
    :name "sample-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L874",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L874",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-t",
    :doc
@@ -4986,9 +4986,9 @@
    :name "sample-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L405",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L405",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-uniform",
    :doc
@@ -5000,9 +5000,9 @@
    :name "sample-weibull",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L582",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L582",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-weibull",
    :doc
@@ -5014,9 +5014,9 @@
    :name "sample-wishart",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L984",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L984",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sample-wishart",
    :doc
@@ -5028,9 +5028,9 @@
    :name "scalar-abs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L46",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L46",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/scalar-abs",
    :doc "Fast absolute value function",
@@ -5041,9 +5041,9 @@
    :name "sd",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1512",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1512",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sd",
    :doc
@@ -5055,9 +5055,9 @@
    :name "simple-ci",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2245",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2245",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/simple-ci",
    :doc "Get the confidence interval for the data.",
@@ -5068,9 +5068,9 @@
    :name "simple-p-value",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2237",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2237",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/simple-p-value",
    :doc "Returns the p-value for the data contained in coll.",
@@ -5081,9 +5081,9 @@
    :name "simple-regression",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2798",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2798",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/simple-regression",
    :doc
@@ -5095,9 +5095,9 @@
    :name "simple-t-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2228",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2228",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/simple-t-test",
    :doc "Perform a simple t-test on the data contained in coll.",
@@ -5108,9 +5108,9 @@
    :name "skewness",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1617",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1617",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/skewness",
    :doc
@@ -5122,9 +5122,9 @@
    :name "sorensen-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3301",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3301",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sorensen-index",
    :doc
@@ -5136,9 +5136,9 @@
    :name "spearmans-rho",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2904",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2904",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/spearmans-rho",
    :doc
@@ -5150,9 +5150,9 @@
    :name "square-devs-from-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2775",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2775",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/square-devs-from-mean",
    :doc
@@ -5164,9 +5164,9 @@
    :name "sum-of-square-devs-from-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2788",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2788",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sum-of-square-devs-from-mean",
    :doc
@@ -5178,9 +5178,9 @@
    :name "sum-variance-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3060",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3060",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sum-variance-test",
    :doc
@@ -5192,9 +5192,9 @@
    :name "summarizable?",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2625",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2625",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/summarizable?",
    :doc
@@ -5206,9 +5206,9 @@
    :name "summarizer-fn",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2612",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2612",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/summarizer-fn",
    :doc
@@ -5220,9 +5220,9 @@
    :name "summary",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2631",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2631",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/summary",
    :doc
@@ -5234,9 +5234,9 @@
    :name "sweep",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1855",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1855",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/sweep",
    :doc
@@ -5256,9 +5256,9 @@
    :name "t-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2136",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2136",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/t-test",
    :doc
@@ -5270,9 +5270,9 @@
    :name "tabulate",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2281",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2281",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/tabulate",
    :doc
@@ -5284,9 +5284,9 @@
    :name "tanimoto-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L3171",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L3171",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/tanimoto-coefficient",
    :doc
@@ -5298,9 +5298,9 @@
    :name "variance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L1463",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L1463",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/variance",
    :doc
@@ -5312,9 +5312,9 @@
    :name "within",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/liebke/incanter/blob/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj#L2768",
+   "https://github.com/liebke/incanter/blob/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj#L2768",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/58249c16869b1c2de197cb42b36a0310241ae3c1/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/liebke/incanter/raw/9c3ccdd7f2a9b3643ac97b4f4b9fca3a63a27af8/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://liebke.github.com/incanter//stats-api.html#incanter.stats/within",
    :doc "\ny is within z of x in metric space.  ",
