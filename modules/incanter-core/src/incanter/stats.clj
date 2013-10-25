@@ -2470,7 +2470,8 @@ Test for different variances between 2 samples
                    (tabulate x)))
           table (cond
                   table? table
-                  (and x y) (:table xtab))
+                  (and x y) (:table xtab)
+                  :else (map #(get-in xtab [:counts %] 0) (first (:levels xtab))))
           two-samp? (if (or (and x y)
                             (and table?
                                  (and (> (nrow table) 1) (> (ncol table) 1))))
