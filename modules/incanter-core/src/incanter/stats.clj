@@ -2468,32 +2468,31 @@ Test for different variances between 2 samples
                  (if y
                    (tabulate (bind-columns x y))
                    (tabulate x)))
+          levels (if table?
+                   (map range ((juxt nrow ncol) table))
+                   (:levels xtab))
+          r-levels (first levels)
+          c-levels (second levels)
           table (cond
                   table? table
                   (and x y) (:table xtab)
-                  :else (map #(get-in xtab [:counts %] 0) (first (:levels xtab))))
+                  :else (matrix (map #(get-in xtab [:counts %] 0) r-levels)))
           two-samp? (if (or (and x y)
                             (and table?
                                  (and (> (nrow table) 1) (> (ncol table) 1))))
                       true false)
-          r-levels (if table?
-                     (range (nrow table))
-                     (first (:levels xtab)))
-          c-levels (if table?
-                     (range (ncol table))
-                     (second (:levels xtab)))
           r-margins (if table?
                       (if two-samp?
                         (apply hash-map (interleave r-levels (map sum table)))
                         (if (> (nrow table) 1)
                           (to-list table)
                           (throw (Exception. "One dimensional tables must have only a single column"))))
-                      (second (:margins xtab)))
+                      (first (:margins xtab)))
           c-margins (if table?
                       (if two-samp?
                         (apply hash-map (interleave c-levels (map sum (trans table))))
                         0)
-                      (first (:margins xtab)))
+                      (second (:margins xtab)))
 
           counts (if two-samp? (vectorize table) table)
           N (if table?
