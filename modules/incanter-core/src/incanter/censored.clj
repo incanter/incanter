@@ -20,97 +20,91 @@
 
 
 (defn censored-mean-two-sided
-" Returns the mean of a normal distribution (with mean mu and standard
+  "Returns the mean of a normal distribution (with mean mu and standard
   deviation sigma) with the lower tail censored at 'a' and the upper
-  tail censored at 'b'
-"
+  tail censored at 'b'"
   ([a b mu sigma]
-   (let [a-std (psi a mu sigma)
-         b-std (psi b mu sigma)
-         cdf-a (cdf-normal a-std)
-         cdf-b (cdf-normal b-std)]
+    (let [a-std (psi a mu sigma)
+          b-std (psi b mu sigma)
+          cdf-a (cdf-normal a-std)
+          cdf-b (cdf-normal b-std)]
       (+ (* cdf-a a)
          (* (- cdf-b cdf-a) (+ mu (* sigma (lambda-two-sided a-std b-std))))
          (* (- 1 cdf-b) b)))))
 
 
 (defn censored-variance-two-sided
-" Returns the variance of a normal distribution (with mean mu and standard
+  "Returns the variance of a normal distribution (with mean mu and standard
   deviation sigma) with the lower tail censored at 'a' and the upper
-  tail censored at 'b'
-"
+  tail censored at 'b'"
   ([a b mu sigma]
-   (let [a-std (psi a mu sigma)
-         b-std (psi b mu sigma)
-         sigma-sq (* sigma sigma)
-         Ey (censored-mean-two-sided a b mu sigma)
-         cdf-a (cdf-normal a-std)
-         cdf-b (cdf-normal b-std)]
-     (+ (* cdf-a (* a a))
-        (* (- cdf-b cdf-a)
-           (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-two-sided a-std b-std))))
-        (* sigma-sq (- (* a-std (pdf-normal a-std)) (* b-std (pdf-normal b-std))))
-        (- (* (- 1 cdf-b) (* b b)) (* Ey Ey))))))
+    (let [a-std (psi a mu sigma)
+          b-std (psi b mu sigma)
+          sigma-sq (* sigma sigma)
+          Ey (censored-mean-two-sided a b mu sigma)
+          cdf-a (cdf-normal a-std)
+          cdf-b (cdf-normal b-std)]
+      (+ (* cdf-a (* a a))
+         (* (- cdf-b cdf-a)
+            (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-two-sided a-std b-std))))
+         (* sigma-sq (- (* a-std (pdf-normal a-std)) (* b-std (pdf-normal b-std))))
+         (- (* (- 1 cdf-b) (* b b)) (* Ey Ey))))))
 
 
 
 (defn censored-mean-lower
-" Returns the mean of a normal distribution (with mean mu and standard
-  deviation sigma) with the lower tail censored at 'a'
-"
+  "Returns the mean of a normal distribution (with mean mu and standard
+  deviation sigma) with the lower tail censored at 'a'"
   ([a mu sigma]
-   (let [a-std (psi a mu sigma)]
-    (+ (* (cdf-normal a-std) a)
-       (* (- 1 (cdf-normal a-std))
-          (+ mu (* sigma (lambda-lower a-std))))))))
+    (let [a-std (psi a mu sigma)]
+      (+ (* (cdf-normal a-std) a)
+         (* (- 1 (cdf-normal a-std))
+            (+ mu (* sigma (lambda-lower a-std))))))))
 
 
 (defn censored-variance-lower
-" Returns the variance of a normal distribution (with mean mu and standard
-  deviation sigma) with the lower tail censored at 'a'
-"
+  "Returns the variance of a normal distribution (with mean mu and standard
+  deviation sigma) with the lower tail censored at 'a'"
   ([a mu sigma]
-   (let [a-std (psi a mu sigma)
-         cdf-a (cdf-normal a-std)
-         sigma-sq (* sigma sigma)
-         Ey (censored-mean-lower a mu sigma)]
-     (+ (* cdf-a (* a a))
-        (* (- 1 cdf-a)
-           (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-lower a-std))))
-        (* sigma-sq a-std (pdf-normal a-std))
-        (- (* Ey Ey))))))
-
-
-
-(defn censored-mean-upper
-" Returns the mean of a normal distribution (with mean mu and standard
-  deviation sigma) with the upper tail censored at 'b'
-"
-  ([b mu sigma]
-   (let [b-std (psi b mu sigma)]
-    (+ (* (cdf-normal b-std) (+ mu (* sigma (lambda-upper b-std))))
-       (* (- 1 (cdf-normal b-std)) b)))))
-
-
-(defn censored-variance-upper
-" Returns the variance of a normal distribution (with mean mu and standard
-  deviation sigma) with the upper tail censored at 'b'
-"
-  ([b mu sigma]
-   (let [sigma-sq (* sigma sigma)
-         b-std (psi b mu sigma)
-         cdf-b (cdf-normal b-std)
-         Ey (censored-mean-upper b mu sigma)]
-      (+ (* cdf-b
-            (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-upper b-std))))
-         (- (* sigma-sq b-std (pdf-normal b-std)))
-         (* (- 1 cdf-b) (* b b))
+    (let [a-std (psi a mu sigma)
+          cdf-a (cdf-normal a-std)
+          sigma-sq (* sigma sigma)
+          Ey (censored-mean-lower a mu sigma)]
+      (+ (* cdf-a (* a a))
+         (* (- 1 cdf-a)
+            (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-lower a-std))))
+         (* sigma-sq a-std (pdf-normal a-std))
          (- (* Ey Ey))))))
 
 
 
+(defn censored-mean-upper
+  "Returns the mean of a normal distribution (with mean mu and standard
+  deviation sigma) with the upper tail censored at 'b'"
+  ([b mu sigma]
+    (let [b-std (psi b mu sigma)]
+      (+ (* (cdf-normal b-std) (+ mu (* sigma (lambda-upper b-std))))
+         (* (- 1 (cdf-normal b-std)) b)))))
+
+
+(defn censored-variance-upper
+  "Returns the variance of a normal distribution (with mean mu and standard
+  deviation sigma) with the upper tail censored at 'b'"
+  ([b mu sigma]
+    (let [sigma-sq (* sigma sigma)
+          b-std (psi b mu sigma)
+          cdf-b (cdf-normal b-std)
+          Ey (censored-mean-upper b mu sigma)]
+       (+ (* cdf-b
+             (+ sigma-sq (* mu mu) (* 2 mu sigma (lambda-upper b-std))))
+          (- (* sigma-sq b-std (pdf-normal b-std)))
+          (* (- 1 cdf-b) (* b b))
+          (- (* Ey Ey))))))
+
+
+
 (defn truncated-variance
-" Returns the variance of a normal distribution truncated at a and b.
+  "Returns the variance of a normal distribution truncated at a and b.
 
   Options:
     :mean (default 0) mean of untruncated normal distribution
@@ -140,8 +134,7 @@
     DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables.
       Wiley-IEEE.
 
-    http://en.wikipedia.org/wiki/Truncated_normal_distribution
-"
+    http://en.wikipedia.org/wiki/Truncated_normal_distribution"
   ([& {:keys [mean sd a b]
        :or {mean 0
             sd 1
