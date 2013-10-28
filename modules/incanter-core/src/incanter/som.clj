@@ -29,25 +29,25 @@
 
 (defn- som-initialize-linear
   ([data]
-   (let [pc (principal-components (covariance data))
-         pc1-sd (nth (:std-dev pc) 0)
-         pc2-sd (nth (:std-dev pc) 1)
-         pc1 (sel (:rotation pc) :cols 0)
-         pc2 (sel (:rotation pc) :cols 1)
-         [dim-1 dim-2] (map #(Math/ceil %) (som-dimensions pc1-sd pc2-sd))
-         data-mean (map mean (trans data))
-         weight-fn (fn [i j data-mean pc1-sd dim-1 dim-2 pc1 pc2]
-                     (to-vect
-                       (plus data-mean
-                        (mult (mult 5 pc1-sd)
-                              (plus (mult pc1 (minus i (div dim-1 2)))
-                                    (mult pc2 (minus j (div dim-2 2))))))))
-         weights (reduce conj {}
-                         (for [i (range dim-1) j (range dim-2)]
-                           {[i j] (weight-fn i j data-mean pc1-sd dim-1 dim-2 pc1 pc2)} ))
-         sets (reduce conj {}
-                      (for [i (range dim-1) j (range dim-2)]
-                        {[i j] #{}} ))]
+    (let [pc (principal-components (covariance data))
+          pc1-sd (nth (:std-dev pc) 0)
+          pc2-sd (nth (:std-dev pc) 1)
+          pc1 (sel (:rotation pc) :cols 0)
+          pc2 (sel (:rotation pc) :cols 1)
+          [dim-1 dim-2] (map #(Math/ceil %) (som-dimensions pc1-sd pc2-sd))
+          data-mean (map mean (trans data))
+          weight-fn (fn [i j data-mean pc1-sd dim-1 dim-2 pc1 pc2]
+                      (to-vect
+                        (plus data-mean
+                          (mult (mult 5 pc1-sd)
+                                (plus (mult pc1 (minus i (div dim-1 2)))
+                                      (mult pc2 (minus j (div dim-2 2))))))))
+          weights (reduce conj {}
+                          (for [i (range dim-1) j (range dim-2)]
+                            {[i j] (weight-fn i j data-mean pc1-sd dim-1 dim-2 pc1 pc2)} ))
+          sets (reduce conj {}
+                       (for [i (range dim-1) j (range dim-2)]
+                         {[i j] #{}} ))]
       {:dims [dim-1 dim-2]
        :weights weights
        :sets sets
@@ -59,27 +59,27 @@
 
 (defn- get-distances
   ([x som]
-   (reduce conj {}
-           (pmap #(hash-map % (dist-euclidean x ((:weights som) %)))
-             (keys (:weights som))))))
+    (reduce conj {}
+            (pmap #(hash-map % (dist-euclidean x ((:weights som) %)))
+                  (keys (:weights som))))))
 
 
 (defn- get-min-dist
   ([x som]
-   (let [distances (get-distances x som)
-         min-dist-key (reduce #(if (<= (distances %1) (distances %2)) %1  %2)
-                              (keys distances))]
-     {:index min-dist-key :dist (distances min-dist-key)} )))
+    (let [distances (get-distances x som)
+          min-dist-key (reduce #(if (<= (distances %1) (distances %2)) %1  %2)
+                               (keys distances))]
+      {:index min-dist-key :dist (distances min-dist-key)} )))
 
 
 (defn- som-update-cells
   ([data som]
-   (let [sets (loop [i 0 sets {}]
-                (if (= i (nrow data))
-                  sets
-                  (let [{idx :index min-dist :dist} (get-min-dist (trans (nth data i)) som)]
-                    (recur (inc i) (assoc sets idx (conj (sets idx) i))))))]
-     (assoc som :sets sets))))
+    (let [sets (loop [i 0 sets {}]
+                 (if (= i (nrow data))
+                   sets
+                   (let [{idx :index min-dist :dist} (get-min-dist (trans (nth data i)) som)]
+                     (recur (inc i) (assoc sets idx (conj (sets idx) i))))))]
+      (assoc som :sets sets))))
 
 
 (defn- alpha-fn
@@ -106,24 +106,22 @@
 
 
 (defn- som-update-weights [r total-cycles som alpha-init beta-init]
-    (let [
-          sets (:sets som)
-          weights (:weights som)
-          indices (keys weights)
-          dims (:dims som)
-          neighborhoods (som-neighborhoods r (first dims) (second dims) total-cycles beta-init)
-         ]
-      (assoc som :weights
-             (reduce conj {}
-              (pmap (fn [indx]
-                      {indx
-                        (plus (weights indx)
-                              (mult (alpha-fn r total-cycles alpha-init)
-                                    (minus (if (pos? (count (sets indx)))
-                                            (div (sum (sets indx))
-                                                  (count (sets indx)))
-                                            0)
-                                          (weights indx))))} ) indices)))))
+  (let [sets (:sets som)
+        weights (:weights som)
+        indices (keys weights)
+        dims (:dims som)
+        neighborhoods (som-neighborhoods r (first dims) (second dims) total-cycles beta-init)]
+    (assoc som :weights
+           (reduce conj {}
+             (pmap (fn [indx]
+                       {indx
+                         (plus (weights indx)
+                               (mult (alpha-fn r total-cycles alpha-init)
+                                     (minus (if (pos? (count (sets indx)))
+                                              (div (sum (sets indx))
+                                                   (count (sets indx)))
+                                              0)
+                                            (weights indx))))} ) indices)))))
 
 
 (defn- som-fitness
@@ -135,7 +133,7 @@
 
 
 (defn som-batch-train
-" Performs BL-SOM (batch-learning self organizing map) learning on
+  "Performs BL-SOM (batch-learning self organizing map) learning on
   the given data, returning a hashmap containing resulting BL-SOM
   values.
 
@@ -186,9 +184,7 @@
 
   References:
 
-    http://en.wikipedia.org/wiki/Self-organizing_map
-
-"
+    http://en.wikipedia.org/wiki/Self-organizing_map"
 ([data & {:keys [alpha beta cycles]
           :or {alpha 0.5
                beta 3
