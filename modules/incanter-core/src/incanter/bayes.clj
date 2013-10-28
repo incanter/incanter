@@ -33,7 +33,7 @@
 
 
 (defn sample-model-params
-" Returns a sample of the given size of the the parameters (coefficients and
+  "Returns a sample of the given size of the the parameters (coefficients and
   error variance) of the given linear-model. The sample is generated using
   Gibbs sampling.
 
@@ -63,9 +63,7 @@
     (map sd (trans (:coefs param-samp)))
 
     ;; show the 95% bayesian confidence interval for the first coefficient
-    (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
-
-"
+    (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])"
   ([^Integer size {:keys [x y coefs residuals]}]
     (let [xtxi (solve (mmult (trans x) x))
           shape (/ (- (nrow x) (ncol x)) 2)
@@ -86,14 +84,14 @@
 
 
 (defn sample-proportions
-" sample-proportions has been renamed sample-multinomial-params"
+  "sample-proportions has been renamed sample-multinomial-params"
   ([size counts]
    (throw (Exception. "sample-proportions has been renamed sample-multinomial-params"))))
 
 
 
 (defn sample-multinomial-params
-" Returns a sample of multinomial proportion parameters.
+  "Returns a sample of multinomial proportion parameters.
   The counts are assumed to have a multinomial distribution.
   A uniform prior distribution is assigned to the multinomial vector
   theta, then the posterior distribution of theta is
@@ -119,19 +117,15 @@
 
     ;; view  a histogram of the difference in proportions between the first
     ;; two candidates
-    (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))
-
-
-
-"
-([^Integer size counts]
+    (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))"
+  ([^Integer size counts]
     (sample-dirichlet size (plus counts 1))))
 
 
 
 
 (defn sample-mvn-params
-" Returns samples of means (sampled from an mvn distribution) and vectorized covariance
+  "Returns samples of means (sampled from an mvn distribution) and vectorized covariance
   matrices (sampled from an inverse-wishart distribution) for the given mvn data.
 
   Arguments:
@@ -169,13 +163,8 @@
     (def y (sample-mvn 500 :sigma (symmetric-matrix [10 5 10]) :mean [5 2]))
     (def samp (sample-mvn-params 1000 y))
     (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
-    (map mean (trans (:means samp)))
-
-
- 
-
-"
-([^Integer size y & options]
+    (map mean (trans (:means samp)))"
+  ([^Integer size y & options]
     (let [opts (when options (apply assoc {} options))
           means (map mean (trans y))
           n (count y)
@@ -196,9 +185,7 @@
 
 
 (defn- sample-mv-model-params
-"
-
-  Examples:
+  "Examples:
 
     (use '(incanter core stats bayes datasets))
     (def survey (to-matrix (get-dataset :survey)))
@@ -207,11 +194,8 @@
 
     (time (def params (sample-mv-model-params 100 y x)))
     (trans (matrix (map mean (trans (:coefs params))) (inc (ncol x))))
-    (matrix (map mean (trans (:sigmas params))) (ncol y))
-
-
-"
-([^Integer size y x & options]
+    (matrix (map mean (trans (:sigmas params))) (ncol y))"
+  ([^Integer size y x & options]
     (let [opts (when options (apply assoc {} options))
           _x (bind-columns (repeat (nrow x) 1) x)
           ;_x x

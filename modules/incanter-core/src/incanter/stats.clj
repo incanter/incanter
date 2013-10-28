@@ -21,9 +21,9 @@
             modeling functions, similarity/association measures,
             and more.
 
-            This library is built on Parallel Colt 
+            This library is built on Parallel Colt
             (http://sites.google.com/site/piotrwendykier/software/parallelcolt),
-            an extension of the Colt numerics library 
+            an extension of the Colt numerics library
             (http://acs.lbl.gov/~hoschek/colt/).
             "
        :author "David Edgar Liebke and Bradford Cross"}
@@ -69,8 +69,7 @@
     maps))
 
 (defn indicator
-"
-  Returns a sequence of ones and zeros, where ones
+  "Returns a sequence of ones and zeros, where ones
   are returned when the given predicate is true for
   corresponding element in the given collection, and
   zero otherwise.
@@ -82,9 +81,8 @@
 
     ;; return the sum of the positive values in a normal sample
     (def x (sample-normal 100))
-    (sum (mult x (indicator #(pos? %) x)))
+    (sum (mult x (indicator #(pos? %) x)))"
 
-"
   [pred coll]
   (let [pred-int (fn [pred el]
                    (if (pred el) 1 0))]
@@ -102,7 +100,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-f
-" Returns the F pdf of the given value, x. It will return a sequence
+  "Returns the F pdf of the given value, x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's df function.
 
   Options:
@@ -118,8 +116,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-f 1.0 :df1 5 :df2 2)
-"
+      (pdf-f 1.0 :df1 5 :df2 2)"
   ([x & {:keys [df1 df2] :or {df1 1 df2 1}}]
     (let [pdf-fx (fn [x]
                    (* (/ (gamma (/ (+ df1 df2) 2))
@@ -136,7 +133,7 @@
 
 
 (defn cdf-f
-" Returns the F-distribution cdf of the given value, x. It will return a sequence
+  "Returns the F-distribution cdf of the given value, x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's pf function.
 
   Options:
@@ -153,8 +150,7 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-f 1.0 :df1 5 :df2 2)
-"
+      (cdf-f 1.0 :df1 5 :df2 2)"
   ([x & {:keys [df1 df2 lower-tail?]
          :or {df1 1
               df2 1
@@ -180,7 +176,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-normal
-" Returns the Normal pdf of the given value, x. It will return a sequence
+  "Returns the Normal pdf of the given value, x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's dnorm function.
 
   Options:
@@ -196,8 +192,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
-"
+      (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))"
   ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
     (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -207,7 +202,7 @@
 
 
 (defn cdf-normal
-" Returns the Normal cdf of the given value, x. It will return a sequence
+  "Returns the Normal cdf of the given value, x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's pnorm function.
 
   Options:
@@ -223,8 +218,7 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
-"
+      (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))"
   ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
     (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -233,7 +227,7 @@
 
 
 (defn quantile-normal
-" Returns the inverse of the Normal CDF for the given probability.
+  "Returns the inverse of the Normal CDF for the given probability.
   It will return a sequence of values, if given a sequence of
   probabilities. This is equivalent to R's qnorm function.
 
@@ -254,8 +248,7 @@
 
   Example:
       (quantile-normal 0.975)
-      (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))
-"
+      (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))"
   ([probability & {:keys [mean sd] :or {mean 0 sd 1}}]
     (let [x (if (coll? probability)
               (map #(Probability/normalInverse %) probability)
@@ -265,7 +258,7 @@
 
 
 (defn sample-normal
-" Returns a sample of the given size from a Normal distribution
+  "Returns a sample of the given size from a Normal distribution
   This is equivalent to R's rnorm function.
 
   Options:
@@ -280,10 +273,9 @@
       http://en.wikipedia.org/wiki/Normal_distribution
 
   Example:
-      (sample-normal 1000 :mean -2 :sd (sqrt 0.5))
-"
+      (sample-normal 1000 :mean -2 :sd (sqrt 0.5))"
   ([^Integer size & {:keys [mean sd] :or {mean 0 sd 1}}]
-     (if (= size 1)
+    (if (= size 1)
       (Normal/staticNextDouble mean sd)
       (for [_ (range size)] (Normal/staticNextDouble mean sd)))))
 
@@ -294,7 +286,7 @@
 
 
 (defn sample-mvn
-" Returns a sample of the given size from a Multivariate Normal
+  "Returns a sample of the given size from a Multivariate Normal
   distribution. This is equivalent to R's mvtnorm::rmvnorm function.
 
   Arguments:
@@ -326,19 +318,16 @@
 
 
   References:
-    http://en.wikipedia.org/wiki/Multivariate_normal
-
-"
-([^Integer size & {:keys [mean sigma]}]
-   (let [mean (or mean (if sigma (repeat (ncol sigma) 0) [0]))
-         sigma (or sigma (identity-matrix (count mean)))
-         p (count mean)
-         chol (decomp-cholesky sigma)
-         norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)
-        ]
-     (if (> (nrow norm-samp) 1)
-       (matrix (map #(plus % (trans mean)) norm-samp))
-       (matrix (plus norm-samp (trans mean)))))))
+    http://en.wikipedia.org/wiki/Multivariate_normal"
+  ([^Integer size & {:keys [mean sigma]}]
+    (let [mean (or mean (if sigma (repeat (ncol sigma) 0) [0]))
+          sigma (or sigma (identity-matrix (count mean)))
+          p (count mean)
+          chol (decomp-cholesky sigma)
+          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)]
+      (if (> (nrow norm-samp) 1)
+        (matrix (map #(plus % (trans mean)) norm-samp))
+        (matrix (plus norm-samp (trans mean)))))))
 
 
 
@@ -349,7 +338,7 @@
 
 
 (defn pdf-uniform
-" Returns the Uniform pdf of the given value of x. It will return a sequence
+  "Returns the Uniform pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's dunif function.
 
   Options:
@@ -366,17 +355,16 @@
 
   Example:
       (pdf-uniform 5)
-      (pdf-uniform 5 :min 1 :max 10)
-"
-([x & {:keys [min max] :or {min 0.0 max 1.0}}]
-   (let [dist (DoubleUniform. min max (DoubleMersenneTwister.))]
-     (if (coll? x)
-       (map #(.pdf dist %) x)
-       (.pdf dist x)))))
+      (pdf-uniform 5 :min 1 :max 10)"
+  ([x & {:keys [min max] :or {min 0.0 max 1.0}}]
+    (let [dist (DoubleUniform. min max (DoubleMersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
 
 
 (defn cdf-uniform
-" Returns the Uniform cdf of the given value of x. It will return a sequence
+  "Returns the Uniform cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's punif function.
 
   Options:
@@ -393,17 +381,16 @@
 
   Example:
       (cdf-uniform 5)
-      (cdf-uniform 5 :min 1 :max 10)
-"
-([x & {:keys [min max] :or {min 0.0 max 1.0}}]
-   (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister.))]
-     (if (coll? x)
-       (map #(.cdf dist %) x)
-       (.cdf dist x)))))
+      (cdf-uniform 5 :min 1 :max 10)"
+  ([x & {:keys [min max] :or {min 0.0 max 1.0}}]
+    (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister.))]
+      (if (coll? x)
+        (map #(.cdf dist %) x)
+        (.cdf dist x)))))
 
 
 (defn sample-uniform
-" Returns a sample of the given size from a Uniform distribution.
+  "Returns a sample of the given size from a Uniform distribution.
   This is equivalent to R's runif function.
 
   Options:
@@ -420,10 +407,9 @@
 
   Example:
       (sample-uniform 1000)
-      (sample-uniform 1000 :min 1 :max 10)
-"
-([^Integer size & {:keys [min max integers]
-                   :or {min 0.0 max 1.0 integers false}}]
+      (sample-uniform 1000 :min 1 :max 10)"
+  ([^Integer size & {:keys [min max integers]
+                     :or {min 0.0 max 1.0 integers false}}]
     (let [min-val (double min)
           max-val (double max)
           dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
@@ -437,7 +423,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-beta
-" Returns the Beta pdf of the given value of x. It will return a sequence
+  "Returns the Beta pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's dbeta function.
 
   Options:
@@ -453,8 +439,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-beta 0.5 :alpha 1 :beta 2)
-"
+      (pdf-beta 0.5 :alpha 1 :beta 2)"
   ([x & {:keys [alpha beta] :or {alpha 1 beta 1}}]
     (let [dist (Beta. alpha beta (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -463,7 +448,7 @@
 
 
 (defn cdf-beta
-" Returns the Beta cdf of the given value of x. It will return a sequence
+  "Returns the Beta cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's pbeta function.
 
   Options:
@@ -481,22 +466,21 @@
 
   Example:
       (cdf-beta 0.5 :alpha 1 :beta 2)
-      (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)
-"
+      (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)"
 ([x & {:keys [alpha beta lower-tail?] :or {alpha 1 beta 1 lower-tail? false}}]
-    (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/beta alpha beta x1))
-                  (fn [x1] (- 1 (Probability/betaComplemented alpha beta x1))))]
-      (if (coll? x)
-        (map cdf-fx x)
-        (cdf-fx x)))))
+  (let [cdf-fx (if lower-tail?
+                 (fn [x1] (Probability/beta alpha beta x1))
+                 (fn [x1] (- 1 (Probability/betaComplemented alpha beta x1))))]
+    (if (coll? x)
+      (map cdf-fx x)
+      (cdf-fx x)))))
 
 
 
 
 
 (defn sample-beta
-" Returns a sample of the given size from a Beta distribution.
+  "Returns a sample of the given size from a Beta distribution.
   This is equivalent to R's rbeta function.
 
   Options:
@@ -512,10 +496,9 @@
       http://en.wikipedia.org/wiki/Beta_distribution
 
   Example:
-      (sample-beta 1000 :alpha 1 :beta 2)
-"
-([^Integer size & {:keys [alpha beta] :or {alpha 1 beta 1}}]
-   (if (= size 1)
+      (sample-beta 1000 :alpha 1 :beta 2)"
+  ([^Integer size & {:keys [alpha beta] :or {alpha 1 beta 1}}]
+    (if (= size 1)
       (Beta/staticNextDouble alpha beta)
       (for [_ (range size)] (Beta/staticNextDouble alpha beta)))))
 
@@ -524,7 +507,7 @@
 ;; WEIBULL DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn pdf-weibull
-" Returns the Weibull pdf for the given value of x. It will return a sequence
+  "Returns the Weibull pdf for the given value of x. It will return a sequence
   of values, if x is a sequence.
 
   Options:
@@ -540,19 +523,18 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-weibull 2 :alpha 1 :beta 0.5)
-"
-([x & options]
-   (let [opts (when options (apply assoc {} options))
-         scale (or (:scale opts) 1)
-         shape (or (:shape opts) 1)
-         dist (Weibull. scale shape (DoubleMersenneTwister.))]
-     (if (coll? x)
-       (map #(.pdf dist %) x)
-       (.pdf dist x)))))
+      (pdf-weibull 2 :alpha 1 :beta 0.5)"
+  ([x & options]
+    (let [opts (when options (apply assoc {} options))
+          scale (or (:scale opts) 1)
+          shape (or (:shape opts) 1)
+          dist (Weibull. scale shape (DoubleMersenneTwister.))]
+      (if (coll? x)
+        (map #(.pdf dist %) x)
+        (.pdf dist x)))))
 
 (defn cdf-weibull
-" Returns the Weibull cdf for the given value of x. It will return a sequence
+  "Returns the Weibull cdf for the given value of x. It will return a sequence
   of values, if x is a sequence.
 
   Options:
@@ -568,8 +550,7 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-weibull 10 :shape 1 :scale 0.2)
-"
+      (cdf-weibull 10 :shape 1 :scale 0.2)"
   ([x & options]
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
@@ -580,7 +561,7 @@
         (.cdf dist x)))))
 
 (defn sample-weibull
-" Returns a sample of the given size from a Weibull distribution
+  "Returns a sample of the given size from a Weibull distribution
 
   Options:
     :shape (default 1)
@@ -594,8 +575,7 @@
       http://en.wikipedia.org/wiki/Weibull_distribution
 
   Example:
-      (sample-weibull 1000 :shape 1 :scale 0.2)
-"
+      (sample-weibull 1000 :shape 1 :scale 0.2)"
   ([size & options]
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
@@ -610,7 +590,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-gamma
-" Returns the Gamma pdf for the given value of x. It will return a sequence
+  "Returns the Gamma pdf for the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's dgamma function.
 
   Options:
@@ -626,8 +606,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-gamma 10 :shape 1 :rate 2)
-"
+      (pdf-gamma 10 :shape 1 :rate 2)"
   ([x & {:keys [shape rate] :or {shape 1 rate 1}}]
     (let [dist (Gamma. shape rate (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -637,7 +616,7 @@
 
 
 (defn cdf-gamma
-" Returns the Gamma cdf for the given value of x. It will return a sequence
+  "Returns the Gamma cdf for the given value of x. It will return a sequence
   of values, if x is a sequence. This is equivalent to R's pgamma function.
 
   Options:
@@ -655,12 +634,11 @@
 
   Example:
       (cdf-gamma 10 :shape 1 :rate 2)
-      (cdf-gamma 3 :shape 1 :lower-tail false)
-"
-([x & {:keys [shape rate lower-tail?] :or {shape 1 rate 1 lower-tail? true}}]
+      (cdf-gamma 3 :shape 1 :lower-tail false)"
+  ([x & {:keys [shape rate lower-tail?] :or {shape 1 rate 1 lower-tail? true}}]
     (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/gamma rate shape x1))
-                  (fn [x1] (Probability/gammaComplemented rate shape x1)))]
+                   (fn [x1] (Probability/gamma rate shape x1))
+                   (fn [x1] (Probability/gammaComplemented rate shape x1)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -668,7 +646,7 @@
 
 
 (defn sample-gamma
-" Returns a sample of the given size from a Gamma distribution.
+  "Returns a sample of the given size from a Gamma distribution.
   This is equivalent to R's rgamma function.
 
   Options:
@@ -683,10 +661,9 @@
       http://en.wikipedia.org/wiki/Gamma_distribution
 
   Example:
-      (sample-gamma 1000 :shape 1 :rate 2)
-"
-([^Integer size & {:keys [shape rate] :or {shape 1 rate 1}}]
-   (if (= size 1)
+      (sample-gamma 1000 :shape 1 :rate 2)"
+  ([^Integer size & {:keys [shape rate] :or {shape 1 rate 1}}]
+    (if (= size 1)
       (Gamma/staticNextDouble shape rate)
       (for [_ (range size)] (Gamma/staticNextDouble shape rate)))))
 
@@ -698,7 +675,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-chisq
-" Returns the Chi Square pdf of the given value of x.  It will return a sequence
+  "Returns the Chi Square pdf of the given value of x.  It will return a sequence
   of values, if x is a sequence. Same as R's dchisq function.
 
   Options:
@@ -713,8 +690,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-chisq 5.0 :df 2)
-"
+      (pdf-chisq 5.0 :df 2)"
   ([x & {:keys [df] :or {df 1}}]
     (let [dist (ChiSquare. df (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -724,7 +700,7 @@
 
 
 (defn cdf-chisq
-" Returns the Chi Square cdf of the given value of x. It will return a sequence
+  "Returns the Chi Square cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pchisq function.
 
   Options:
@@ -741,12 +717,11 @@
 
   Example:
       (cdf-chisq 5.0 :df 2)
-      (cdf-chisq 5.0 :df 2 :lower-tail false)
-"
-([x & {:keys [df lower-tail?] :or {df 1 lower-tail? true}}]
+      (cdf-chisq 5.0 :df 2 :lower-tail false)"
+  ([x & {:keys [df lower-tail?] :or {df 1 lower-tail? true}}]
     (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/chiSquare df x1))
-                  (fn [x1] (Probability/chiSquareComplemented df x1)))]
+                   (fn [x1] (Probability/chiSquare df x1))
+                   (fn [x1] (Probability/chiSquareComplemented df x1)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -754,7 +729,7 @@
 
 
 (defn sample-chisq
-" Returns a sample of the given size from a Chi Square distribution
+  "Returns a sample of the given size from a Chi Square distribution
   Same as R's rchisq function.
 
   Options:
@@ -768,10 +743,9 @@
       http://en.wikipedia.org/wiki/Chi_square_distribution
 
   Example:
-      (sample-chisq 1000 :df 2)
-"
-([^Integer size & {:keys [df] :or {df 1}}]
-   (if (= size 1)
+      (sample-chisq 1000 :df 2)"
+  ([^Integer size & {:keys [df] :or {df 1}}]
+    (if (= size 1)
       (ChiSquare/staticNextDouble df)
       (for [_ (range size)] (ChiSquare/staticNextDouble df)))))
 
@@ -782,7 +756,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-t
-" Returns the Student's t pdf for the given value of x. It will return a sequence
+  "Returns the Student's t pdf for the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dt function.
 
   Options:
@@ -797,8 +771,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-t 1.2 :df 10)
-"
+      (pdf-t 1.2 :df 10)"
   ([x & {:keys [df] :or {df 1}}]
     (let [dist (StudentT. df (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -807,7 +780,7 @@
 
 
 (defn cdf-t
-" Returns the Student's t cdf for the given value of x. It will return a sequence
+  "Returns the Student's t cdf for the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pt function.
 
   Options:
@@ -822,19 +795,18 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-t 1.2 :df 10)
-"
+      (cdf-t 1.2 :df 10)"
   ([x & {:keys [df lower-tail?] :or {df 1 lower-tail? true}}]
     (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/studentT df x1))
-                  (fn [x1] (- 1 (Probability/studentT df x1))))]
+                   (fn [x1] (Probability/studentT df x1))
+                   (fn [x1] (- 1 (Probability/studentT df x1))))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
 
 
 (defn quantile-t
-" Returns the inverse of the Student's t CDF for the given probability
+  "Returns the inverse of the Student's t CDF for the given probability
   (i.e. the quantile).  It will return a sequence of values, if x is
   a sequence of probabilities. This is equivalent to R's qt function.
 
@@ -856,23 +828,22 @@
       (quantile-t 0.975)
       (quantile-t [0.025 0.975] :df 25)
       (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])
-      (map #(quantile-t 0.025 :df %) df)
-"
+      (map #(quantile-t 0.025 :df %) df)"
   ([probability & {:keys [df] :or {df 1}}]
     (let [to-alpha (fn [prob] ;; need to convert the probability to an alpha value
                      (if (< prob 1/2)
-                      (* 2 prob)
-                      (* 2 (- 1 prob))))
+                       (* 2 prob)
+                       (* 2 (- 1 prob))))
           sign-fx (fn [x1 prob] (if (< prob 1/2) (* -1 x1) x1))
           x (if (coll? probability)
               (map #(sign-fx (Probability/studentTInverse (to-alpha %) df) %) probability)
               (sign-fx (Probability/studentTInverse (to-alpha probability) df) probability))]
-        x)))
+      x)))
 
 
 
 (defn sample-t
-" Returns a sample of the given size from a Student's t distribution.
+  "Returns a sample of the given size from a Student's t distribution.
   Same as R's rt function.
 
   Options:
@@ -886,10 +857,9 @@
       http://en.wikipedia.org/wiki/Student-t_distribution
 
   Example:
-      (cdf-t 1000 :df 10)
-"
+      (cdf-t 1000 :df 10)"
   ([size & {:keys [df] :or {df 1}}]
-     (if (= size 1)
+    (if (= size 1)
       (StudentT/staticNextDouble df)
       (for [_ (range size)] (StudentT/staticNextDouble df)))))
 
@@ -902,7 +872,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-exp
-" Returns the Exponential pdf of the given value of x. It will return a sequence
+  "Returns the Exponential pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dexp
 
   Options:
@@ -917,8 +887,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-exp 2.0 :rate 1/2)
-"
+      (pdf-exp 2.0 :rate 1/2)"
   ([x & {:keys [rate] :or {rate 1}}]
     (let [dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -927,7 +896,7 @@
 
 
 (defn cdf-exp
-" Returns the Exponential cdf of the given value of x. It will return a sequence
+  "Returns the Exponential cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pexp
 
   Options:
@@ -942,8 +911,7 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-exp 2.0 :rate 1/2)
-"
+      (cdf-exp 2.0 :rate 1/2)"
   ([x & {:keys [rate] :or {rate 1}}]
     (let [dist (Exponential. rate (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -952,7 +920,7 @@
 
 
 (defn sample-exp
-" Returns a sample of the given size from a Exponential distribution.
+  "Returns a sample of the given size from a Exponential distribution.
   Same as R's rexp
 
   Options:
@@ -966,12 +934,11 @@
       http://en.wikipedia.org/wiki/Exponential_distribution
 
   Example:
-      (sample-exp 1000 :rate 1/2)
-"
-([size & {:keys [rate] :or {rate 1}}]
-   (if (= size 1)
-     (Exponential/staticNextDouble rate)
-     (for [_ (range size)] (Exponential/staticNextDouble rate)))))
+      (sample-exp 1000 :rate 1/2)"
+  ([size & {:keys [rate] :or {rate 1}}]
+    (if (= size 1)
+      (Exponential/staticNextDouble rate)
+      (for [_ (range size)] (Exponential/staticNextDouble rate)))))
 
 
 
@@ -982,8 +949,7 @@
 
 
 (defn sample-wishart
-"
-  Returns a p-by-p symmetric distribution drawn from a Wishart distribution
+  "Returns a p-by-p symmetric distribution drawn from a Wishart distribution
 
   Options:
     :p (default 2) -- number of dimensions of resulting matrix
@@ -999,27 +965,24 @@
 
 
   References:
-    http://en.wikipedia.org/wiki/Wishart_distribution#
-
-"
-([& {:keys [scale p df] :or {p 2}}]
-   (let [scale (or scale (when p (identity-matrix p)))
-         p (count scale)
-         df (or df p)
-         diagonal (for [i (range 1 (inc p))]
-                    (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
-         mat (diag diagonal)
-         indices (for [i (range p) j (range p) :when (< j i)] [i j])
-         _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
-         chol (decomp-cholesky scale)
-         x (mmult chol mat (trans mat) (trans chol))]
-     x)))
+    http://en.wikipedia.org/wiki/Wishart_distribution#"
+  ([& {:keys [scale p df] :or {p 2}}]
+    (let [scale (or scale (when p (identity-matrix p)))
+          p (count scale)
+          df (or df p)
+          diagonal (for [i (range 1 (inc p))]
+                     (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
+          mat (diag diagonal)
+          indices (for [i (range p) j (range p) :when (< j i)] [i j])
+          _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
+          chol (decomp-cholesky scale)
+          x (mmult chol mat (trans mat) (trans chol))]
+      x)))
 
 
 
 (defn sample-inv-wishart
-"
-  Returns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution
+  "Returns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution
 
   Options:
     :p (default 2) -- number of dimensions of resulting matrix
@@ -1035,19 +998,16 @@
 
 
   References:
-    http://en.wikipedia.org/wiki/Inverse-Wishart_distribution
-
-"
-([& {:keys [scale p df] :or {p 2}}]
-   (let [scale (or scale (when p (identity-matrix p)))
-         p (count scale)
-         df (or df p)]
-     (solve (sample-wishart :p p :df df :scale scale)))))
+    http://en.wikipedia.org/wiki/Inverse-Wishart_distribution"
+  ([& {:keys [scale p df] :or {p 2}}]
+    (let [scale (or scale (when p (identity-matrix p)))
+          p (count scale)
+          df (or df p)]
+      (solve (sample-wishart :p p :df df :scale scale)))))
 
 
 (defn sample-dirichlet
-"
-  Examples:
+  "Examples:
     (use '(incanter core stats charts))
 
     ;; a total of 1447 adults were polled to indicate their preferences for
@@ -1073,11 +1033,9 @@
 
     ;; view  a histogram of the difference in proportions between the first
     ;; two candidates
-    (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))
+    (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))"
 
-
-"
-([^Integer size alpha]
+  ([^Integer size alpha]
     (let [W (trans (for [a alpha] (sample-gamma size :shape a :rate 1)))
           T (map sum W)]
       (matrix (map #(div %1 %2) W T)))))
@@ -1097,7 +1055,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-binomial
-" Returns the Binomial pdf of the given value of x. It will return a sequence
+  "Returns the Binomial pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dbinom
 
   Options:
@@ -1113,8 +1071,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-binomial 10 :prob 1/4 :size 20)
-"
+      (pdf-binomial 10 :prob 1/4 :size 20)"
   ([x & {:keys [size prob] :or {size 1 prob 1/2}}]
     (let [dist (Binomial. size prob (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -1124,7 +1081,7 @@
 
 
 (defn cdf-binomial
-" Returns the Binomial cdf of the given value of x. It will return a sequence
+  "Returns the Binomial cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's pbinom
 
   Options:
@@ -1141,12 +1098,11 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-binomial 10 :prob 1/4 :size 20)
-"
-([x & {:keys [size prob lower-tail?] :or {size 1 prob 1/2 lower-tail? true}}]
+      (cdf-binomial 10 :prob 1/4 :size 20)"
+  ([x & {:keys [size prob lower-tail?] :or {size 1 prob 1/2 lower-tail? true}}]
     (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/binomial x1 size prob))
-                  (fn [x1] (Probability/binomialComplemented x1 size prob)))]
+                   (fn [x1] (Probability/binomial x1 size prob))
+                   (fn [x1] (Probability/binomialComplemented x1 size prob)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1154,7 +1110,7 @@
 
 
 (defn sample-binomial
-" Returns a sample of the given size from a Binomial distribution.
+  "Returns a sample of the given size from a Binomial distribution.
   Same as R's rbinom
 
   Options:
@@ -1169,10 +1125,9 @@
       http://en.wikipedia.org/wiki/Binomial_distribution
 
   Example:
-      (sample-binomial 1000 :prob 1/4 :size 20)
-"
-([^Integer samplesize & {:keys [size prob] :or {size 1 prob 1/2}}]
-   (if (= samplesize 1)
+      (sample-binomial 1000 :prob 1/4 :size 20)"
+  ([^Integer samplesize & {:keys [size prob] :or {size 1 prob 1/2}}]
+    (if (= samplesize 1)
       (Binomial/staticNextInt size prob)
       (repeatedly samplesize #(Binomial/staticNextInt size prob)))))
 
@@ -1184,7 +1139,7 @@
 
 
 (defn sample-multinomial
-" Returns a sequence representing a sample from a multinomial distribution.
+  "Returns a sequence representing a sample from a multinomial distribution.
 
   Arguments: size -- number of values to return
 
@@ -1206,26 +1161,23 @@
     ;; estimate sample proportions
     (def sample-size 1000.0)
     (def categories [:red :yellow :blue :green])
-    (def data (to-dataset (sample-multinomial sample-size 
+    (def data (to-dataset (sample-multinomial sample-size
                                               :categories categories
                                               :probs [0.5 0.25 0.2 0.05])))
 
     ;; check the sample proportions
     (view (pie-chart categories
-                     (map #(div (count ($ :col-0 ($where {:col-0 %} data))) 
+                     (map #(div (count ($ :col-0 ($where {:col-0 %} data)))
                                 sample-size)
-                          categories)))
-                      
-
-"
-([size & {:keys [probs categories] :or {probs [0.5 0.5]}}]
-     (let [categories (or categories (range (count probs)))
-           cumulative-probs (cumulative-sum probs)]
-       (for [x (sample-uniform size)] 
-         (loop [i 0]
-           (if (>= (nth cumulative-probs i) x)
-             (nth categories i)
-             (recur (inc i))))))))
+                          categories)))"
+  ([size & {:keys [probs categories] :or {probs [0.5 0.5]}}]
+    (let [categories (or categories (range (count probs)))
+          cumulative-probs (cumulative-sum probs)]
+      (for [x (sample-uniform size)]
+        (loop [i 0]
+          (if (>= (nth cumulative-probs i) x)
+            (nth categories i)
+            (recur (inc i))))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1233,7 +1185,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-poisson
-" Returns the Poisson pdf of the given value of x. It will return a sequence
+  "Returns the Poisson pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dpois
 
   Options:
@@ -1248,8 +1200,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-poisson 5 :lambda 10)
-"
+      (pdf-poisson 5 :lambda 10)"
   ([x & {:keys [lambda] :or {lambda 1}}]
     (let [dist (Poisson. lambda (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -1259,7 +1210,7 @@
 
 
 (defn cdf-poisson
-" Returns the Poisson cdf of the given value of x. It will return a sequence
+  "Returns the Poisson cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's ppois
 
   Options:
@@ -1275,12 +1226,11 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-poisson 5 :lambda 10)
-"
+      (cdf-poisson 5 :lambda 10)"
   ([x & {:keys [lambda lower-tail?] :or {lambda 1 lower-tail? true}}]
     (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/poisson x1 lambda))
-                  (fn [x1] (Probability/poissonComplemented x1 lambda)))]
+                   (fn [x1] (Probability/poisson x1 lambda))
+                   (fn [x1] (Probability/poissonComplemented x1 lambda)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1288,7 +1238,7 @@
 
 
 (defn sample-poisson
-" Returns a sample of the given size from a Poisson distribution.
+  "Returns a sample of the given size from a Poisson distribution.
   Same as R's rpois
 
   Options:
@@ -1302,10 +1252,9 @@
       http://en.wikipedia.org/wiki/Poisson_distribution
 
   Example:
-      (sample-poisson 1000 :lambda 10)
-"
-([^Integer size & {:keys [lambda] :or {lambda 1}}]
-   (if (= size 1)
+      (sample-poisson 1000 :lambda 10)"
+  ([^Integer size & {:keys [lambda] :or {lambda 1}}]
+    (if (= size 1)
       (Poisson/staticNextInt lambda)
       (for [_ (range size)] (Poisson/staticNextInt lambda)))))
 
@@ -1316,7 +1265,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pdf-neg-binomial
-" Returns the Negative Binomial pdf of the given value of x. It will return a sequence
+  "Returns the Negative Binomial pdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dnbinom
 
   Options:
@@ -1332,8 +1281,7 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-neg-binomial 10 :prob 1/2 :size 20)
-"
+      (pdf-neg-binomial 10 :prob 1/2 :size 20)"
   ([x & {:keys [size prob] :or {size 10 prob 1/2}}]
     (let [dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
       (if (coll? x)
@@ -1344,7 +1292,7 @@
 
 
 (defn cdf-neg-binomial
-" Returns the Negative Binomial cdf of the given value of x. It will return a sequence
+  "Returns the Negative Binomial cdf of the given value of x. It will return a sequence
   of values, if x is a sequence. Same as R's dnbinom
 
   Options:
@@ -1361,12 +1309,11 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-neg-binomial 10 :prob 1/2 :size 20)
-"
-([x & {:keys [size prob lower-tail?] :or {size 10 prob 1/2 lower-tail? true}}]
+      (cdf-neg-binomial 10 :prob 1/2 :size 20)"
+  ([x & {:keys [size prob lower-tail?] :or {size 10 prob 1/2 lower-tail? true}}]
     (let [cdf-fx (if lower-tail?
-                  (fn [x1] (Probability/negativeBinomial x1 size prob))
-                  (fn [x1] (Probability/negativeBinomialComplemented x1 size prob)))]
+                   (fn [x1] (Probability/negativeBinomial x1 size prob))
+                   (fn [x1] (Probability/negativeBinomialComplemented x1 size prob)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -1374,7 +1321,7 @@
 
 
 (defn sample-neg-binomial
-" Returns a sample of the given size from a Negative Binomial distribution.
+  "Returns a sample of the given size from a Negative Binomial distribution.
   Same as R's rnbinom
 
   Options:
@@ -1389,10 +1336,9 @@
       http://en.wikipedia.org/wiki/Negative_binomial_distribution
 
   Example:
-      (sample-neg-binomial 1000 :prob 1/2 :size 20)
-"
-([^Integer samplesize & {:keys [size prob] :or {size 10 prob 1/2}}]
-   (if (= samplesize 1)
+      (sample-neg-binomial 1000 :prob 1/2 :size 20)"
+  ([^Integer samplesize & {:keys [size prob] :or {size 10 prob 1/2}}]
+    (if (= samplesize 1)
       (NegativeBinomial/staticNextInt size prob)
       (repeatedly samplesize #(NegativeBinomial/staticNextInt size prob)))))
 
@@ -1403,7 +1349,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn cdf-empirical
-" Returns a step-function representing the empirical cdf of the given data.
+  "Returns a step-function representing the empirical cdf of the given data.
   Equivalent to R's ecdf function.
 
   The following description is from the ecdf help in R: The e.c.d.f.
@@ -1428,11 +1374,9 @@
     (def ecdf (cdf-empirical exam1))
 
     ;; plot the data's empirical cdf
-    (view (scatter-plot exam1 (map ecdf exam1)))
+    (view (scatter-plot exam1 (map ecdf exam1)))"
 
 
-
-"
   ([x] (fn [t] (div (sum (indicator #(<= % t) x)) (count x)))))
 
 
@@ -1443,43 +1387,37 @@
 
 
 (defn mean
-"
-  Returns the mean of the data, x.
+  "Returns the mean of the data, x.
 
   Examples:
     (mean (sample-normal 100))
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Mean
-
-"
-([x]
-  (let [xx (to-list x)]
-    (DoubleDescriptive/mean (DoubleArrayList. (double-array xx))))))
+    http://en.wikipedia.org/wiki/Mean"
+  ([x]
+    (let [xx (to-list x)]
+      (DoubleDescriptive/mean (DoubleArrayList. (double-array xx))))))
 
 
 
 (defn variance
-"
-  Returns the sample variance of the data, x. Equivalent to R's var function.
+  "Returns the sample variance of the data, x. Equivalent to R's var function.
 
   Examples:
     (variance (sample-normal 100))
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance
-
-"
-([x] (let [xx (to-list x)]
-       (DoubleDescriptive/sampleVariance (DoubleArrayList. (double-array xx)) (mean x)))))
+    http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance"
+  ([x]
+    (let [xx (to-list x)]
+      (DoubleDescriptive/sampleVariance (DoubleArrayList. (double-array xx)) (mean x)))))
 
 
 
 (defn covariance
-"
-  Returns the sample covariance of x and y.
+  "Returns the sample covariance of x and y.
 
   Examples:
     ;; create some data that covaries
@@ -1491,27 +1429,23 @@
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Covariance
-"
+    http://en.wikipedia.org/wiki/Covariance"
   ([x y]
-    (let [
-          xx (to-list x)
-          yy (to-list y)
-        ]
+    (let [xx (to-list x)
+          yy (to-list y)]
       (DoubleDescriptive/covariance
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
-        (let [n (ncol mat)]
-          (matrix
-            (for [i (range n) j (range n)]
-              (covariance (sel mat true i) (sel mat true j))) n))))
+    (let [n (ncol mat)]
+      (matrix
+        (for [i (range n) j (range n)]
+          (covariance (sel mat true i) (sel mat true j))) n))))
 
 
 
 (defn sd
-"
-  Returns the sample standard deviation of the data, x. Equivalent to
+  "Returns the sample standard deviation of the data, x. Equivalent to
   R's sd function.
 
   Examples:
@@ -1519,8 +1453,7 @@
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Standard_deviation
-"
+    http://en.wikipedia.org/wiki/Standard_deviation"
   ([x]
     ;; population sd, not the sample sd
     ;; return the sample standard deviation
@@ -1529,27 +1462,23 @@
 
 
 (defn correlation
-"
-  Returns the sample correlation of x and y, or the correlation
+  "Returns the sample correlation of x and y, or the correlation
   matrix of the given matrix.
 
   Examples:
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Correlation
-"
+    http://en.wikipedia.org/wiki/Correlation"
   ([x y]
-    (let [
-          xx (to-list x)
+    (let [xx (to-list x)
           yy (to-list y)
           sd-x (sd x)
-          sd-y (sd y)
-        ]
+          sd-y (sd y)]
       (if (not= (* sd-x sd-y) 0)
         (DoubleDescriptive/correlation
-         (DoubleArrayList. (double-array xx)) (sd x)
-         (DoubleArrayList. (double-array yy)) (sd y))
+          (DoubleArrayList. (double-array xx)) (sd x)
+          (DoubleArrayList. (double-array yy)) (sd y))
         0.0)))
   ([mat]
    (div (covariance mat)
@@ -1557,18 +1486,15 @@
 
 
 (defn auto-correlation
-"
-  Returns the auto-correlation of x with given lag, mean, and variance.
+  "Returns the auto-correlation of x with given lag, mean, and variance.
   If no mean or variance is provided, the they are calculated from x.
 
   References:
-    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-
-"
+    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html"
   ([x lag]
     auto-correlation x lag (mean x) (variance x))
   ([x lag mean variance]
-     (DoubleDescriptive/autoCorrelation
+    (DoubleDescriptive/autoCorrelation
       (DoubleArrayList. (double-array (to-list x)))
       lag
       mean
@@ -1576,17 +1502,14 @@
 
 
 (defn median
-"
-  Returns the median of the data, x.
+  "Returns the median of the data, x.
 
   Examples:
     (median (sample-normal 100))
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Median
-
-"
+    http://en.wikipedia.org/wiki/Median"
   ([x]
     (let [xx (sort (to-list x))]
       (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
@@ -1594,8 +1517,7 @@
 
 
 (defn kurtosis
-"
-  Returns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\"
+  "Returns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\"
   of the probability distribution of a real-valued random variable. Higher kurtosis
   means more of the variance is due to infrequent extreme deviations, as opposed to
   frequent modestly-sized deviations.\" (Wikipedia)
@@ -1607,16 +1529,13 @@
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Kurtosis
-
-"
+    http://en.wikipedia.org/wiki/Kurtosis"
   ([x] (DoubleDescriptive/kurtosis (DoubleArrayList. (double-array x)) (mean x) (variance x))))
 
 
 
 (defn skewness
-"
-  Returns the skewness of the data, x. \"Skewness is a measure of the asymmetry
+  "Returns the skewness of the data, x. \"Skewness is a measure of the asymmetry
   of the probability distribution of a real-valued random variable.\" (Wikipedia)
 
   Examples:
@@ -1626,16 +1545,13 @@
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Skewness
-
-"
+    http://en.wikipedia.org/wiki/Skewness"
   ([x] (DoubleDescriptive/skew (DoubleArrayList. (double-array x)) (mean x) (sd x))))
 
 
 
 (defn quantile
-"
-  Returns the quantiles of the data, x. By default it returns the min,
+  "Returns the quantiles of the data, x. By default it returns the min,
   25th-percentile, 50th-percentile, 75th-percentile, and max value.
 
   Options:
@@ -1648,23 +1564,21 @@
 
   References:
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
-    http://en.wikipedia.org/wiki/Quantile
-
-"
-([x & {:keys [probs] :or {probs (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0]))}}]
-   (let [_x (to-list x)
-         data (DoubleArrayList. (double-array (sort _x)))
-         probs (if (coll? probs)
-                 (DoubleArrayList. (double-array probs))
-                 probs)]
-        (if (number? probs)
-          (DoubleDescriptive/quantile data probs)
-          (seq (.elements (DoubleDescriptive/quantiles data probs)))))))
+    http://en.wikipedia.org/wiki/Quantile"
+  ([x & {:keys [probs] :or {probs (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0]))}}]
+    (let [_x (to-list x)
+          data (DoubleArrayList. (double-array (sort _x)))
+          probs (if (coll? probs)
+                  (DoubleArrayList. (double-array probs))
+                  probs)]
+      (if (number? probs)
+        (DoubleDescriptive/quantile data probs)
+        (seq (.elements (DoubleDescriptive/quantiles data probs)))))))
 
 
 
 (defmulti sample
-" Returns a sample of the given size from the given collection. If replacement
+  "Returns a sample of the given size from the given collection. If replacement
   is set to false it returns a set, otherwise it returns a list.
 
   Arguments:
@@ -1678,9 +1592,7 @@
   Examples:
     (sample (range 10)) ; permutation of numbers zero through ten
     (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.
-    (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.
-
-"
+    (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters."
   (fn [coll & _]
     (cond
       (instance? incanter.core.Dataset coll) ::dataset
@@ -1705,7 +1617,7 @@
                        (recur (conj samp-indices i) (conj indices-set i))))))))))))
 
 (defmethod sample ::dataset
-  [ds & options]  
+  [ds & options]
   (let [r  (range (nrow ds))
         r  (apply sample r options)
         r  (if (seq? r)
@@ -1715,7 +1627,7 @@
 
 
 (defn bootstrap
-" Returns a bootstrap sample of the given statistic on the given data.
+  "Returns a bootstrap sample of the given statistic on the given data.
 
   Arguments:
     data -- vector of data to resample from
@@ -1807,10 +1719,7 @@
     (def smooth-samp (bootstrap speed-of-light median :size 10000 :smooth true))
     (view (histogram smooth-samp :density true :nbins 30))
     (mean smooth-samp)
-    (quantile smooth-samp :probs [0.025 0.975])
-
-
-"
+    (quantile smooth-samp :probs [0.025 0.975])"
   ([data statistic & {:keys [size replacement smooth? smooth-sd]
                       :or {replacement true
                            smooth? false
@@ -1840,47 +1749,44 @@
 
 
 (defn cumulative-mean
-  " Returns a sequence of cumulative means for the given collection. For instance
+  "Returns a sequence of cumulative means for the given collection. For instance
     The first value equals the first value of the argument, the second value is
     the mean of the first two arguments, the third is the mean of the first three
     arguments, etc.
 
     Examples:
-      (cumulative-mean (sample-normal 100))
-  "
+      (cumulative-mean (sample-normal 100))"
   ([coll] (map / (cumulative-sum coll) (range 1 (inc (count coll))))))
 
 
 
 (defn sweep
-" Return an array obtained from an input array by sweeping out a
+  "Return an array obtained from an input array by sweeping out a
   summary statistic. Based to R's sweep function.
 
-    Arguments:
-      x is an sequence
+  Arguments:
+    x is an sequence
 
 
-    Options:
-          :stat (default mean) the statistic to sweep out
-          :fun (defaul minus) the function used to sweep the stat out
+  Options:
+        :stat (default mean) the statistic to sweep out
+        :fun (defaul minus) the function used to sweep the stat out
 
-    Example:
+  Example:
 
-      (use '(incanter core stats))
+    (use '(incanter core stats))
 
-      (def x (sample-normal 30 :mean 10 :sd 5))
-      (sweep x) ;; center the data around mean
-      (sweep x :stat sd :fun div) ;; divide data by its sd
-
-"
+    (def x (sample-normal 30 :mean 10 :sd 5))
+    (sweep x) ;; center the data around mean
+    (sweep x :stat sd :fun div) ;; divide data by its sd"
   ([x & {:keys [stat fun] :or {stat mean fun minus}}]
-     (fun x (stat x))))
+    (fun x (stat x))))
 
 
 
 
 (defn permute
-" If provided a single argument, returns a permuted version of the
+  "If provided a single argument, returns a permuted version of the
   given collection. (permute x) is the same as (sample x).
 
   If provided two arguments, returns two lists that are permutations
@@ -1891,24 +1797,21 @@
   Examples:
 
     (permute (range 10))
-    (permute (range 10) (range 10 20))
-
-
-"
+    (permute (range 10) (range 10 20))"
   ([x]
     (sample x))
 
   ([x y]
-   (let [n1 (count x)
-         samp (sample (concat x y) :replacement false)
-         new-x (take n1 samp)
-         new-y (drop n1 samp)]
-     (list new-x new-y))))
+    (let [n1 (count x)
+          samp (sample (concat x y) :replacement false)
+          new-x (take n1 samp)
+          new-y (drop n1 samp)]
+      (list new-x new-y))))
 
 
 
 (defn sample-permutations
-" If provided a two arguments (n x), it returns a list of n permutations
+  "If provided a two arguments (n x), it returns a list of n permutations
   of x. If provided three (n x y) arguments, returns a list with two with n permutations of
   each arguments, where each permutation is drawn from the pooled arguments.
 
@@ -1986,26 +1889,24 @@
 
 
     Further Reading:
-      http://en.wikipedia.org/wiki/Resampling_(statistics)
-
-"
-([^Integer n x]
+      http://en.wikipedia.org/wiki/Resampling_(statistics)"
+  ([^Integer n x]
     (loop [samp '() i 0]
       (if (= i n)
-          samp
+        samp
           (recur
             (conj samp (sample x)) (inc i)))))
 
-([^Integer n x y]
-   (let [pool (concat x y)
-         m1 (count x)]
-     (loop [samp-x '() samp-y '() i 0]
-       (if (= i n)
-         (list samp-x samp-y)
-         (let [perm-samp (sample pool)
-               new-x (take m1 perm-samp)
-               new-y (drop m1 perm-samp)]
-           (recur (conj samp-x new-x) (conj samp-y new-y) (inc i))))))))
+  ([^Integer n x y]
+    (let [pool (concat x y)
+          m1 (count x)]
+      (loop [samp-x '() samp-y '() i 0]
+        (if (= i n)
+          (list samp-x samp-y)
+          (let [perm-samp (sample pool)
+                new-x (take m1 perm-samp)
+                new-y (drop m1 perm-samp)]
+            (recur (conj samp-x new-x) (conj samp-y new-y) (inc i))))))))
 
 
 
@@ -2014,8 +1915,7 @@
 
 
 (defn linear-model
-"
-  Returns the results of performing a OLS linear regression of y on x.
+  "Returns the results of performing a OLS linear regression of y on x.
 
   Arguments:
     y is a vector (or sequence) of values for the dependent variable
@@ -2062,9 +1962,7 @@
 
   References:
     http://en.wikipedia.org/wiki/OLS_Regression
-    http://en.wikipedia.org/wiki/Coefficient_of_determination
-
-"
+    http://en.wikipedia.org/wiki/Coefficient_of_determination"
   ([y x & {:keys [intercept] :or {intercept true}}]
     (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
           xtx (mmult (trans _x) _x)
@@ -2076,8 +1974,8 @@
                     (mult xtxi xty)
                     (mmult xtxi xty))))
           fitted (to-list (if (number? coefs)
-                  (mult _x coefs)
-                  (mmult _x coefs)))
+                   (mult _x coefs)
+                   (mmult _x coefs)))
           resid (to-list (minus y fitted))
           sse (sum-of-squares resid)
           ssr (sum-of-squares (minus fitted (mean fitted)))
@@ -2099,13 +1997,12 @@
           t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail? false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
-                       [(plus coefs t-95)
-                        (minus coefs t-95)]
-                       (partition 2
-                         (interleave
-                           (minus coefs t-95)
-                           (plus coefs t-95))))
-         ]
+                     [(plus coefs t-95)
+                      (minus coefs t-95)]
+                     (partition 2
+                       (interleave
+                         (minus coefs t-95)
+                         (plus coefs t-95))))]
       (with-meta
         {:x _x
          :y y
@@ -2134,8 +2031,7 @@
 
 
 (defn t-test
-"
-  Argument:
+  "Argument:
     x : sample to test
 
   Options:
@@ -2159,14 +2055,13 @@
 
   References:
     http://en.wikipedia.org/wiki/T_test
-    http://www.socialresearchmethods.net/kb/stat_t.php
+    http://www.socialresearchmethods.net/kb/stat_t.php"
 
-"
-([x & {:keys [y mu paired conf-level alternative var-equal]
-       :or {paired false
-            alternative :two-sided
-            conf-level 0.95
-            var-equal false}}]
+  ([x & {:keys [y mu paired conf-level alternative var-equal]
+         :or {paired false
+              alternative :two-sided
+              conf-level 0.95
+              var-equal false}}]
     (let [one-sample? (nil? y)
           mu (or mu (if y (mean y) 0))
           x-mean (mean x)
@@ -2254,8 +2149,7 @@
     {:lower (- m e) :upper (+ m e)}))
 
 (defn f-test
-  "
-Test for different variances between 2 samples
+  "Test for different variances between 2 samples
 
   Argument:
     x : 1st sample to test
@@ -2265,21 +2159,19 @@ Test for different variances between 2 samples
 
   References:
     http://en.wikipedia.org/wiki/F-test
-    http://people.richland.edu/james/lecture/m170/ch13-f.html
-
-"
+    http://people.richland.edu/james/lecture/m170/ch13-f.html"
   ([x y]
-     (let [x-var (variance x)
-           y-var (variance y)
-           pval (* 2 (- 1.0
-                        (if (> x-var y-var)
-                          (cdf-f (/ x-var y-var) :df1 (dec (count x)) :df2 (dec (count y)))
-                          (cdf-f (/ y-var x-var) :df1 (dec (count y)) :df2 (dec (count x))))))]
-       pval)))
+    (let [x-var (variance x)
+          y-var (variance y)
+          pval (* 2 (- 1.0
+                       (if (> x-var y-var)
+                         (cdf-f (/ x-var y-var) :df1 (dec (count x)) :df2 (dec (count y)))
+                         (cdf-f (/ y-var x-var) :df1 (dec (count y)) :df2 (dec (count x))))))]
+      pval)))
 
 
 (defn tabulate
-" Cross-tabulates the values of the given numeric matrix.
+  "Cross-tabulates the values of the given numeric matrix.
 
   Returns a hash-map with the following fields:
     :table -- the table of counts for each combination of values,
@@ -2328,9 +2220,7 @@ Test for different variances between 2 samples
                        [1 1]
                        [1 0]
                        [1 1]]))
-    (tabulate data)
-
-"
+    (tabulate data)"
   ([x & options]
     (let [_x (if (matrix? x) x (matrix x))
           p (ncol _x)
@@ -2342,9 +2232,9 @@ Test for different variances between 2 samples
                       marg
                       (let [lvl (sel _x :rows i :cols j)]
                         (recur (let [cnt (get marg lvl)]
-                                (if cnt
-                                  (assoc marg lvl (inc cnt))
-                                  (assoc marg lvl 1)))
+                                 (if cnt
+                                   (assoc marg lvl (inc cnt))
+                                   (assoc marg lvl 1)))
                               (inc i))))))
           counts (loop [tab {} i (int 0)]
                     (if (= i n)
@@ -2379,8 +2269,7 @@ Test for different variances between 2 samples
 
 
 (defn chisq-test
-"
-  Performs chi-squared contingency table tests and goodness-of-fit tests.
+  "Performs chi-squared contingency table tests and goodness-of-fit tests.
 
   If the optional argument :y is not provided then a goodness-of-fit test
   is performed. In this case, the hypothesis tested is whether the
@@ -2459,10 +2348,9 @@ Test for different variances between 2 samples
   References:
     http://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm
     http://en.wikipedia.org/wiki/Pearson's_chi-square_test
-    http://en.wikipedia.org/wiki/Yates'_chi-square_test
+    http://en.wikipedia.org/wiki/Yates'_chi-square_test"
 
-"
-([& {:keys [x y correct table probs freq] :or {correct true }}]
+  ([& {:keys [x y correct table probs freq] :or {correct true }}]
     (let [table? (if table true false)
           xtab (when (or x y)
                  (if y
@@ -2538,12 +2426,11 @@ Test for different variances between 2 samples
       benford-probs (map benford-law (range 1 11)))
 
 (defn get-counts [digits]
-  (map #(get (:counts (tabulate digits)) % 0) 
+  (map #(get (:counts (tabulate digits)) % 0)
        (range 1.0 10.0 1.0)))
 
 (defn benford-test
-"
-  Performs Benford's Law test using chisq-test.
+  "Performs Benford's Law test using chisq-test.
 
   Argument:
   coll: -- a sequence of numbers
@@ -2555,11 +2442,10 @@ Test for different variances between 2 samples
 
   Reference:
   http://data-sorcery.org/2009/06/21/chi-square-goodness-of-fit/
-  http://en.wikipedia.org/wiki/Benford%27s_Law
-"
+  http://en.wikipedia.org/wiki/Benford%27s_Law"
   [coll]
   (let [digits (map first-digit coll)]
-    (chisq-test :table (get-counts digits) 
+    (chisq-test :table (get-counts digits)
                 :probs benford-probs)))
 
 ;;;; END Benford's Law ;;;;
@@ -2577,7 +2463,7 @@ Test for different variances between 2 samples
 
 (defn- stat-summarizable
   "Placeholder stub function, for more advanced cases where we want to automatically ignore occasional bad values in a column."
-  ([types] 
+  ([types]
     ; FIXME Add the column name
     "Statistical summarizablity is currently stubbed out. Please contact the dev team if you're seeing this message."))
 
@@ -2585,14 +2471,14 @@ Test for different variances between 2 samples
 (defn numeric-col-summarizer
   "Returns a summarizer function which takes a purely numeric column with no non-numeric values"
   ([col ds]
-              {:col col :min (reduce min (remove nil? ($ col ds))) :max (reduce max (remove nil? ($ col ds))) 
-               :mean (mean (remove nil? ($ col ds))) :median (median (remove nil? ($ col ds))) :is-numeric true}))
+    {:col col :min (reduce min (remove nil? ($ col ds))) :max (reduce max (remove nil? ($ col ds)))
+     :mean (mean (remove nil? ($ col ds))) :median (median (remove nil? ($ col ds))) :is-numeric true}))
 
 
 (defn category-col-summarizer
-  "Returns a summarizer function which takes a category column and returns a list of the top 5 columns by volume, and a 
+  "Returns a summarizer function which takes a category column and returns a list of the top 5 columns by volume, and a
    count of remaining rows"
-  ([col ds] 
+  ([col ds]
     (let [freqs (frequencies ($ col ds)) top-5 (take 5 (reverse (sort-by val freqs)))]
       (into {:col col :count (- (reduce + (map val freqs)) (reduce + (map val (into {} top-5)))) :is-numeric false} top-5))))
 
@@ -2609,8 +2495,8 @@ Test for different variances between 2 samples
           ))))
 
 
-(defn summarizer-fn 
-  "Takes in a column (number or name) and a dataset. Returns a function to summarize the column if summarizable, and a 
+(defn summarizer-fn
+  "Takes in a column (number or name) and a dataset. Returns a function to summarize the column if summarizable, and a
    string describing why the column can't be summarized in the event that it can't"
   ([col ds]
    (let [type-counts (dissoc (count-col-types col ds) nil)]
@@ -2629,9 +2515,9 @@ Test for different variances between 2 samples
 
 
 (defn summary
-  "Takes in a dataset. Returns a summary of that dataset (as a map of maps), having automatically figured out the relevant 
+  "Takes in a dataset. Returns a summary of that dataset (as a map of maps), having automatically figured out the relevant
    datatypes of columns. Will be slightly forgiving of mangled data in columns."
-  ([ds] 
+  ([ds]
     (let [cols (:column-names ds)]
       (map #(let [r (summarizer-fn %1 ds)]
               (if (fn? r)
@@ -2645,8 +2531,7 @@ Test for different variances between 2 samples
 
 
 (defn principal-components
-"
-  Performs a principal components analysis on the given data matrix.
+  "Performs a principal components analysis on the given data matrix.
   Equivalent to R's prcomp function.
 
   Returns:
@@ -2690,20 +2575,18 @@ Test for different variances between 2 samples
 
 
   References:
-    http://en.wikipedia.org/wiki/Principal_component_analysis
-
-"
+    http://en.wikipedia.org/wiki/Principal_component_analysis"
   ([x & options]
-   (let [svd (decomp-svd (correlation x))
-         rotation (:V svd)
-         std-dev (sqrt (:S svd))]
-     {:std-dev std-dev
-      :rotation rotation})))
+    (let [svd (decomp-svd (correlation x))
+          rotation (:V svd)
+          std-dev (sqrt (:S svd))]
+      {:std-dev std-dev
+       :rotation rotation})))
 
 
 
 (defn detabulate
-" Take a contingency table of counts and returns a matrix of observations.
+  "Take a contingency table of counts and returns a matrix of observations.
 
   Examples:
 
@@ -2727,9 +2610,7 @@ Test for different variances between 2 samples
                        [1 1]]))
     (tabulate data)
 
-    (tabulate (detabulate :table (:table (tabulate data))))
-
-"
+    (tabulate (detabulate :table (:table (tabulate data))))"
   ([& {:keys [table row-labels col-labels]}]
      (let [row-labels (when table (or row-labels (range (nrow table))))
            col-labels (when table (or col-labels (range (ncol table))))
@@ -2739,7 +2620,7 @@ Test for different variances between 2 samples
                                 (repeat (sel table :rows r :cols c) [r c]))))]
        data)))
 
-;;TODO: finish gamma, kendall's-w and 
+;;TODO: finish gamma, kendall's-w and
 
 ;;TODO mote this to a new task in tracker: nonparametric stuff such as: http://en.wikipedia.org/wiki/Median_absolute_deviation
 
@@ -2765,59 +2646,56 @@ Test for different variances between 2 samples
 ;;http://en.wikipedia.org/wiki/Approximate_string_matching
 ;;http://en.wikipedia.org/wiki/Longest_common_subsequence_problem
 
-(defn within 
-"
-y is within z of x in metric space.  
-"
-[z x y]
- (< (scalar-abs (- x y)) z))
+(defn within
+  "y is within z of x in metric space."
+  [z x y]
+    (< (scalar-abs (- x y)) z))
 
 (defn square-devs-from-mean
-"takes either a sample or a sample and a precalculated mean.
-
-returns the squares of the difference between each observation and the sample mean."
+  "takes either a sample or a sample and a precalculated mean.
+  returns the squares of the difference between each observation and the sample mean."
   ([x]
-     (square-devs-from-mean x (mean x)))
+    (square-devs-from-mean x (mean x)))
 
   ([x m]
-     (map 
-      #(pow 
+    (map
+      #(pow
         (- % m) 2)
       x)))
 
-(defn sum-of-square-devs-from-mean 
-"takes either a sample or a sample and a precalculated mean.
+(defn sum-of-square-devs-from-mean
+  "takes either a sample or a sample and a precalculated mean.
 
-returns the sum of the squares of the difference between each observation and the sample mean."
-([x]
-(sum-of-square-devs-from-mean x (mean x)))
+  returns the sum of the squares of the difference between each observation and the sample mean."
+  ([x]
+    (sum-of-square-devs-from-mean x (mean x)))
 
-([x m]
-   (apply + (square-devs-from-mean x m))))
+  ([x m]
+    (apply + (square-devs-from-mean x m))))
 
 (defn simple-regression
-"A stripped version of linear-model that returns a map containing only
-the coefficients."
- ([y x & {:keys [intercept] :or {intercept true}}]
-   (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
-         xtx (mmult (trans _x) _x)
-         xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
-         xty (mmult (trans _x) y)
-         coefs (if (and (number? xtxi) (number? xty))
-                 (* xtxi xty)
-                 (to-list (if (or (number? xtxi) (number? xty))
-                   (mult xtxi xty)
-                   (mmult xtxi xty))))]
-     {:coefs coefs})))
+  "A stripped version of linear-model that returns a map containing only
+  the coefficients."
+  ([y x & {:keys [intercept] :or {intercept true}}]
+    (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
+          xtx (mmult (trans _x) _x)
+          xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
+          xty (mmult (trans _x) y)
+          coefs (if (and (number? xtxi) (number? xty))
+                  (* xtxi xty)
+                  (to-list (if (or (number? xtxi) (number? xty))
+                    (mult xtxi xty)
+                    (mmult xtxi xty))))]
+      {:coefs coefs})))
 
 
 (defn predict
-"Takes a linear-model and an x value (either a scalar or vector)
+  "Takes a linear-model and an x value (either a scalar or vector)
  and returns the predicted value based on the linear-model."
  ([model x]
    (let [predictor (if (coll? x)
-                      (cons 1 x)
-                      [1 x])
+                     (cons 1 x)
+                     [1 x])
          res (mmult (trans (:coefs model))
                     predictor)]
      (if (and (matrix? res)
@@ -2827,160 +2705,180 @@ the coefficients."
 
 
 (defn odds-ratio
-"
-http://en.wikipedia.org/wiki/Odds_ratio
+  "http://en.wikipedia.org/wiki/Odds_ratio
 
-Definition in terms of group-wise odds
+  Definition in terms of group-wise odds
 
-The odds ratio is the ratio of the odds of an event occurring in one group to the odds of it occurring in another group, or to a sample-based estimate of that ratio.
+  The odds ratio is the ratio of the odds of an event occurring in one group
+  to the odds of it occurring in another group, or to a sample-based estimate of that ratio.
 
 
-Suppose that in a sample of 100 men, 90 have drunk wine in the previous week, while in a sample of 100 women only 20 have drunk wine in the same period. The odds of a man drinking wine are 90 to 10, or 9:1, while the odds of a woman drinking wine are only 20 to 80, or 1:4 = 0.25:1. The odds ratio is thus 9/0.25, or 36, showing that men are much more likely to drink wine than women. 
+  Suppose that in a sample of 100 men, 90 have drunk wine in the previous week,
+  while in a sample of 100 women only 20 have drunk wine in the same period.
+  The odds of a man drinking wine are 90 to 10, or 9:1,
+  while the odds of a woman drinking wine are only 20 to 80, or 1:4 = 0.25:1.
+  The odds ratio is thus 9/0.25, or 36, showing that men are much more likely
+  to drink wine than women.
 
-Relation to statistical independence
+  Relation to statistical independence
 
-If X and Y are independent, their joint probabilities can be expressed in terms of their marginal probabilities.  In this case, the odds ratio equals one, and conversely the odds ratio can only equal one if the joint probabilities can be factored in this way. Thus the odds ratio equals one if and only if X and Y are independent.
+  If X and Y are independent, their joint probabilities can be expressed in
+  terms of their marginal probabilities. In this case, the odds ratio equals one,
+  and conversely the odds ratio can only equal one if the joint probabilities
+  can be factored in this way. Thus the odds ratio equals one if and only if
+  X and Y are independent."
 
-"
-[p1 p2]
-(/ (* p1 (- 1 p2))
-   (* p2 (- 1 p1))))
+  [p1 p2]
+    (/ (* p1 (- 1 p2))
+       (* p2 (- 1 p1))))
 
-(defn correlation-ratio 
-"
-http://en.wikipedia.org/wiki/Correlation_ratio
+(defn correlation-ratio
+  "http://en.wikipedia.org/wiki/Correlation_ratio
 
-In statistics, the correlation ratio is a measure of the relationship between the statistical dispersion within individual categories and the dispersion across the whole population or sample. i.e. the weighted variance of the category means divided by the variance of all samples.
+  In statistics, the correlation ratio is a measure of the relationship between
+  the statistical dispersion within individual categories and the
+  dispersion across the whole population or sample. i.e. the weighted variance
+  of the category means divided by the variance of all samples.
 
-Example
+  Example
 
-Suppose there is a distribution of test scores in three topics (categories):
+  Suppose there is a distribution of test scores in three topics (categories):
 
     * Algebra: 45, 70, 29, 15 and 21 (5 scores)
     * Geometry: 40, 20, 30 and 42 (4 scores)
     * Statistics: 65, 95, 80, 70, 85 and 73 (6 scores).
 
-Then the subject averages are 36, 33 and 78, with an overall average of 52.
+  Then the subject averages are 36, 33 and 78, with an overall average of 52.
 
-The sums of squares of the differences from the subject averages are 1952 for Algebra, 308 for Geometry and 600 for Statistics, adding to 2860, while the overall sum of squares of the differences from the overall average is 9640. The difference between these of 6780 is also the weighted sum of the square of the differences between the subject averages and the overall average:
+  The sums of squares of the differences from the subject averages are 1952
+  for Algebra, 308 for Geometry and 600 for Statistics, adding to 2860,
+  while the overall sum of squares of the differences from the overall average
+  is 9640. The difference between these of 6780 is also the weighted sum of the
+  square of the differences between the subject averages and the overall average:
 
     5(36 − 52)2 + 4(33 − 52)2 + 6(78 − 52)2 = 6780
 
-This gives
+  This gives
 
     eta^2 =6780/9640=0.7033
 
-suggesting that most of the overall dispersion is a result of differences between topics, rather than within topics. Taking the square root
+  suggesting that most of the overall dispersion is a result of differences
+  between topics, rather than within topics. Taking the square root
 
     eta = sqrt 6780/9640=0.8386
 
-Observe that for η = 1 the overall sample dispersion is purely due to dispersion among the categories and not at all due to dispersion within the individual categories. For a quick comprehension simply imagine all Algebra, Geometry, and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.
-"
-[& xs]
- (let [sos (map sum-of-square-devs-from-mean xs)
-       all (apply concat xs)
-       overall-sos (sum-of-square-devs-from-mean all)]
-(sqrt 
- (/ (- overall-sos (apply + sos))
-   overall-sos))))
+  Observe that for η = 1 the overall sample dispersion is purely due to dispersion
+  among the categories and not at all due to dispersion within the individual
+  categories. For a quick comprehension simply imagine all Algebra, Geometry,
+  and Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78."
+
+  [& xs]
+    (let [sos (map sum-of-square-devs-from-mean xs)
+          all (apply concat xs)
+          overall-sos (sum-of-square-devs-from-mean all)]
+      (sqrt
+        (/ (- overall-sos (apply + sos))
+        overall-sos))))
 
 (defn correlation-linearity-test
-"
-http://en.wikipedia.org/wiki/Correlation_ratio
-
-It is worth noting that if the relationship between values of  and values of overline y_x is linear (which is certainly true when there are only two possibilities for x) this will give the same result as the square of the correlation coefficient, otherwise the correlation ratio will be larger in magnitude. It can therefore be used for judging non-linear relationships.
-"
-[a b]
-(- (correlation-ratio a b)
-   (correlation a b)))
+  "http://en.wikipedia.org/wiki/Correlation_ratio
+  It is worth noting that if the relationship between values of  and values of
+  overline y_x is linear (which is certainly true when there are only two
+  possibilities for x) this will give the same result as the square of the
+  correlation coefficient, otherwise the correlation ratio will be larger in magnitude.
+  It can therefore be used for judging non-linear relationships."
+  [a b]
+    (- (correlation-ratio a b)
+       (correlation a b)))
 
 (defn rank-index
-"
-given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.
-"
-[x]
-(zipmap (sort x) (range 1 (inc (count x)))))
+  "given a seq, returns a map where the keys are the values of the seq
+  and the values are the positional rank of each member o the seq."
+  [x]
+    (zipmap (sort x) (range 1 (inc (count x)))))
 
 (defn spearmans-rho
-"
-http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
+  "http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient
 
-In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a non-parametric measure of correlation – that is, it assesses how well an arbitrary monotonic function could describe the relationship between two variables, without making any other assumptions about the particular nature of the relationship between the variables. Certain other measures of correlation are parametric in the sense of being based on possible relationships of a parameterised form, such as a linear relationship.
-"
-[a b]
-{:pre [(= (count a) (count b))]}
-(let [n (count a)
-      arank (rank-index a)
-      brank (rank-index b)
-      dsos (apply 
-            + (map (fn [x y] (pow
-                      (- (arank x) (brank y)) 
-                          2))
+  In statistics, Spearman's rank correlation coefficient or Spearman's rho,
+  is a non-parametric measure of correlation – that is, it assesses how well
+  an arbitrary monotonic function could describe the relationship between two
+  variables, without making any other assumptions about the particular nature
+  of the relationship between the variables. Certain other measures of correlation
+  are parametric in the sense of being based on possible relationships of a
+  parameterised form, such as a linear relationship."
+  [a b]
+    {:pre [(= (count a) (count b))]}
+    (let [n (count a)
+          arank (rank-index a)
+          brank (rank-index b)
+          dsos (apply
+                 + (map (fn [x y] (pow
+                     (- (arank x) (brank y))
+                         2))
            a b))]
-  (- 1 (/ (* 6 dsos) 
-          (* n (dec (pow n 2)))))))
+    (- 1 (/ (* 6 dsos)
+            (* n (dec (pow n 2)))))))
 
 
 
 
 
 (defn- key-compare
- [x y]
-  (cond 
-    (and 
-       (keyword? x)
-       (not (keyword? y))) 1
-    (and 
-       (keyword? y)
-       (not (keyword? x))) -1
-    :otherwise (compare x y)))
+  [x y]
+    (cond
+      (and
+        (keyword? x)
+        (not (keyword? y))) 1
+      (and
+        (keyword? y)
+        (not (keyword? x))) -1
+      :otherwise (compare x y)))
 
-;;weird inversion makes us revers k1 and k2 
+;;weird inversion makes us revers k1 and k2
 (defn- kv-compare [[k1 v1] [k2 v2]] (key-compare k2 k1))
 
 ;;TDOO: doesn't seem to work? test and beat on it.
-;;use clojure sorting: sort-by, sorted-map-by, etc. 
+;;use clojure sorting: sort-by, sorted-map-by, etc.
 (defn- sort-map [m] (into {} (sort kv-compare m)))
 
 
 
 (defn kendalls-tau
-"
-http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient
-http://www.statsdirect.com/help/nonparametric_methods/kend.htm
-http://mail.scipy.org/pipermail/scipy-dev/2009-March/011589.html
-best explanation and example is in \"cluster analysis for researchers\" page 165.
-http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175
-"
-[a b]
-{:pre [(= (count a) (count b))]}
-(let [n (count a)
-      ranked (reverse (sort-map (zipmap a b)))
-      ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
-      dcd (second
-            (reduce
-             (fn [[vals total] [k v]]
-               (let [diff (- (count (filter #(> % v) vals))
-                             (count (filter #(< % v) vals)))]
-                 [(conj vals v) (+ total diff)]))
-             [[] 0]
-             ranked))]
-  (/ (* 2 dcd)
-     (* n (dec n)))))
+  "http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient
+  http://www.statsdirect.com/help/nonparametric_methods/kend.htm
+  http://mail.scipy.org/pipermail/scipy-dev/2009-March/011589.html
+  best explanation and example is in \"cluster analysis for researchers\" page 165.
+  http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175"
+  [a b]
+  {:pre [(= (count a) (count b))]}
+    (let [n (count a)
+          ranked (reverse (sort-map (zipmap a b)))
+          ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
+          dcd (second
+                (reduce
+                  (fn [[vals total] [k v]]
+                    (let [diff (- (count (filter #(> % v) vals))
+                                  (count (filter #(< % v) vals)))]
+                      [(conj vals v) (+ total diff)]))
+                  [[] 0]
+                  ranked))]
+    (/ (* 2 dcd)
+       (* n (dec n)))))
 
-(defn pairs 
-"returns unique pairs of a and b where members of a and b can not be paired with the corresponding slot in the other list."
-[a b]
-((fn combine [combos ra rb]
-    (let [heada (first ra)
-          level-combos (for [bx (rest rb)]
-                         [heada bx])
-          all-combos (concat combos level-combos)]
-      (if (zero? (count (rest ra)))
-        all-combos
-        (combine all-combos (rest ra) (rest rb))))) [] a b))
+(defn pairs
+  "returns unique pairs of a and b where members of a and b can not be paired with the corresponding slot in the other list."
+  [a b]
+    ((fn combine [combos ra rb]
+      (let [heada (first ra)
+            level-combos (for [bx (rest rb)]
+                           [heada bx])
+            all-combos (concat combos level-combos)]
+        (if (zero? (count (rest ra)))
+          all-combos
+          (combine all-combos (rest ra) (rest rb))))) [] a b))
 
-(defn pairings 
+(defn pairings
   "confusing ass name."
   [a b]
   (let [tuples (zipmap a b)]
@@ -2994,90 +2892,78 @@ http://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/14116061
 (def discordant? (comp not concordant?))
 
 (defn discordant-pairs
-"http://en.wikipedia.org/wiki/Discordant_pairs"
-[a b]
- (let [tuples (zipmap a b)
-       ps (pairs tuples tuples)]
-   (count (filter discordant? ps))))
+  "http://en.wikipedia.org/wiki/Discordant_pairs"
+  [a b]
+    (let [tuples (zipmap a b)
+          ps (pairs tuples tuples)]
+      (count (filter discordant? ps))))
 
 (def kendalls-tau-distance discordant-pairs)
 
 ;;TODO: factor out duplication between the distance metric and regular kendall's tau
 (defn normalized-kendall-tau-distance
-"
-http://en.wikipedia.org/wiki/Kendall_tau_distance
-
-Kendall tau distance is the total number of discordant pairs.
-"
-[a b]
-(let [n (count a)
-      discords (discordant-pairs a b)]
-(/ (* 2 discords)
-   (* n (dec n)))))
+  "http://en.wikipedia.org/wiki/Kendall_tau_distance
+  Kendall tau distance is the total number of discordant pairs."
+  [a b]
+    (let [n (count a)
+          discords (discordant-pairs a b)]
+      (/ (* 2 discords)
+         (* n (dec n)))))
 
 
 (defn gamma-coefficient
-"
-http://www.statsdirect.com/help/nonparametric_methods/kend.htm
-
-The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):
-"
-[]
-)
+  "http://www.statsdirect.com/help/nonparametric_methods/kend.htm
+  The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):"
+  []) ;TODO: implement
 
 (defn kendalls-w
-"
-http://en.wikipedia.org/wiki/Kendall%27s_W
-http://faculty.chass.ncsu.edu/garson/PA765/friedman.htm
+  "http://en.wikipedia.org/wiki/Kendall%27s_W
+  http://faculty.chass.ncsu.edu/garson/PA765/friedman.htm
 
-Suppose that object i is given the rank ri,j by judge number j, where there are in total n objects and m judges. Then the total rank given to object i is
+  Suppose that object i is given the rank ri,j by judge number j, where there are in total n objects and m judges. Then the total rank given to object i is
 
     Ri = sum Rij
 
-and the mean value of these total ranks is
+  and the mean value of these total ranks is
 
     Rbar = 1/2 m (n + 1)
 
-The sum of squared deviations, S, is defined as
+  The sum of squared deviations, S, is defined as
 
     S=sum1-n (Ri - Rbar)
 
-and then Kendall's W is defined as[1]
+  and then Kendall's W is defined as[1]
 
     W= 12S / m^2(n^3-n)
 
-If the test statistic W is 1, then all the survey respondents have been unanimous, and each respondent has assigned the same order to the list of concerns. If W is 0, then there is no overall trend of agreement among the respondents, and their responses may be regarded as essentially random. Intermediate values of W indicate a greater or lesser degree of unanimity among the various responses.
+  If the test statistic W is 1, then all the survey respondents have been unanimous, and each respondent has assigned the same order to the list of concerns. If W is 0, then there is no overall trend of agreement among the respondents, and their responses may be regarded as essentially random. Intermediate values of W indicate a greater or lesser degree of unanimity among the various responses.
 
-Legendre[2] discusses a variant of the W statistic which accommodates ties in the rankings and also describes methods of making significance tests based on W.
+  Legendre[2] discusses a variant of the W statistic which accommodates ties in the rankings and also describes methods of making significance tests based on W.
 
- [{:observation [1 2 3]} {} ... {}] -> W
-"
-[])
-
+  [{:observation [1 2 3]} {} ... {}] -> W"
+[]) ;TODO: implement
 
 
 
-(defn sum-variance-test 
-"the variance of the sum of n independent variables is equal to the sum of their variances.
 
- (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -> 5/2
-"
-[vs]
- (- (variance (apply map + vs))
-    (apply + (map variance vs))))
+(defn sum-variance-test
+  "the variance of the sum of n independent variables is equal to the sum of their variances.
+
+   (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -> 5/2"
+  [vs]
+    (- (variance (apply map + vs))
+       (apply + (map variance vs))))
 
 ;;TODO: don't implement until fully understanding whether these are just f-divergences.
-(defn product-marginal-test 
-"the joint PMF of independent variables is equal to the product of their marginal PMFs."
-[j]
-)
+(defn product-marginal-test
+  "the joint PMF of independent variables is equal to the product of their marginal PMFs."
+  [j])
 
 
 
 ;;TODO: combine into one tree comp that can figure out if it should call one branch function on each leave, or each branch function on all leaves.
 (defn- tree-comp-each [root branch & leaves]
- (apply 
-  root (map branch leaves)))
+  (apply root (map branch leaves)))
 
 
 
@@ -3087,232 +2973,255 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
 ;;TODO: string similarity measures: http://en.wikipedia.org/wiki/String_metric
 
 (defn minkowski-distance
-"http://en.wikipedia.org/wiki/Minkowski_distance
-http://en.wikipedia.org/wiki/Lp_space
+  "http://en.wikipedia.org/wiki/Minkowski_distance
+  http://en.wikipedia.org/wiki/Lp_space
 
-The Minkowski distance is a metric on Euclidean space which can be considered as a generalization of both the Euclidean distance and the Manhattan distance.
+  The Minkowski distance is a metric on Euclidean space which can be considered as a generalization of both the Euclidean distance and the Manhattan distance.
 
-Minkowski distance is typically used with p being 1 or 2. The latter is the Euclidean distance, while the former is sometimes known as the Manhattan distance.
+  Minkowski distance is typically used with p being 1 or 2. The latter is the Euclidean distance, while the former is sometimes known as the Manhattan distance.
 
-In the limiting case of p reaching infinity we obtain the Chebyshev distance."
- [a b p]
- {:pre [(= (count a) (count b))]}
- (pow 
-   (reduce + 
-           (map 
-             #(pow 
-                (scalar-abs 
-                  (pow (- %1 %2) p)))
-           a b))
- (/ 1 p)))
+  In the limiting case of p reaching infinity we obtain the Chebyshev distance."
+  [a b p]
+  {:pre [(= (count a) (count b))]}
+    (pow
+      (reduce +
+              (map
+                #(pow
+                   (scalar-abs
+                     (pow (- %1 %2) p)))
+                a b))
+      (/ 1 p)))
 
 (defn euclidean-distance
-"http://en.wikipedia.org/wiki/Euclidean_distance
+  "http://en.wikipedia.org/wiki/Euclidean_distance
 
-the Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric."
- [a b]
-(minkowski-distance a b 2))
+  the Euclidean distance or Euclidean metric is the ordinary distance
+  between two points that one would measure with a ruler, and is
+  given by the Pythagorean formula. By using this formula as distance,
+  Euclidean space (or even any inner product space) becomes a metric space.
+  The associated norm is called the Euclidean norm.
+  Older literature refers to the metric as Pythagorean metric."
+  [a b]
+    (minkowski-distance a b 2))
 
 (defn chebyshev-distance
-"In the limiting case of Lp reaching infinity we obtain the Chebyshev distance."
-[a b]
-{:pre [(= (count a) (count b))]}
-(reduce max 
-        (map 
-          #(scalar-abs (- %1 %2)) 
-          a b)))
+  "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance."
+  [a b]
+  {:pre [(= (count a) (count b))]}
+    (reduce max
+            (map
+              #(scalar-abs (- %1 %2))
+              a b)))
 
 (defn manhattan-distance
-"http://en.wikipedia.org/wiki/Manhattan_distance
+  "http://en.wikipedia.org/wiki/Manhattan_distance
 
-usual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length"
- [a b]
-(minkowski-distance a b 1))
+  usual metric of Euclidean geometry is replaced by a new metric in which
+  the distance between two points is the sum of the (absolute) differences
+  of their coordinates. The taxicab metric is also known as rectilinear distance,
+  L1 distance or l1 norm (see Lp space), city block distance,
+  Manhattan distance, or Manhattan length"
+  [a b]
+    (minkowski-distance a b 1))
 
 
 ;;TODO: factor out duplication between cosine similarity and tanimoto.
 ;;perhaps switch to matrix representation?
 
 (defn cosine-similarity
-"
-http://en.wikipedia.org/wiki/Cosine_similarity
-http://www.appliedsoftwaredesign.com/cosineSimilarityCalculator.php
+  "http://en.wikipedia.org/wiki/Cosine_similarity
+  http://www.appliedsoftwaredesign.com/cosineSimilarityCalculator.php
 
-The Cosine Similarity of two vectors a and b is the ratio: a dot b / ||a|| ||b||
+  The Cosine Similarity of two vectors a and b is the ratio: a dot b / ||a|| ||b||
 
-Let d1 = {2 4 3 1 6}
-Let d2 = {3 5 1 2 5}
+  Let d1 = {2 4 3 1 6}
+  Let d2 = {3 5 1 2 5}
 
-Cosine Similarity (d1, d2) =  dot(d1, d2) / ||d1|| ||d2||
+  Cosine Similarity (d1, d2) =  dot(d1, d2) / ||d1|| ||d2||
 
-dot(d1, d2) = (2)*(3) + (4)*(5) + (3)*(1) + (1)*(2) + (6)*(5) = 61
+  dot(d1, d2) = (2)*(3) + (4)*(5) + (3)*(1) + (1)*(2) + (6)*(5) = 61
 
-||d1|| = sqrt((2)^2 + (4)^2 + (3)^2 + (1)^2 + (6)^2) = 8.12403840464
+  ||d1|| = sqrt((2)^2 + (4)^2 + (3)^2 + (1)^2 + (6)^2) = 8.12403840464
 
-||d2|| = sqrt((3)^2 + (5)^2 + (1)^2 + (2)^2 + (5)^2) = 8
+  ||d2|| = sqrt((3)^2 + (5)^2 + (1)^2 + (2)^2 + (5)^2) = 8
 
-Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
-                           = 61 / 64.9923072371
-                           = 0.938572618717
-"
+  Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
+                             = 61 / 64.9923072371
+                             = 0.938572618717"
 [a b]
-(let [counts
-(apply merge-with +
-(map 
- (fn [[x y]]
-   {:dot (* x y)
-    :a (pow x 2)
-    :b (pow y 2)})
- (map vector a b)))]
-(/ (:dot counts)
-   (* (sqrt (:a counts))
-      (sqrt (:b counts))))))
+  (let [counts (apply merge-with +
+                      (map
+                        (fn [[x y]]
+                          {:dot (* x y)
+                           :a (pow x 2)
+                           :b (pow y 2)})
+                        (map vector a b)))]
+      (/ (:dot counts)
+         (* (sqrt (:a counts))
+            (sqrt (:b counts))))))
 
 (defn tanimoto-coefficient
-"
+  "http://en.wikipedia.org/wiki/Jaccard_index
 
-http://en.wikipedia.org/wiki/Jaccard_index
+  The cosine similarity metric may be extended such that it yields the
+  Jaccard coefficient in the case of binary attributes.
+  This is the Tanimoto coefficient. "
+  [a b]
+    (let [counts (apply merge-with +
+                        (map
+                          (fn [[x y]]
+                            {:dot (* x y)
+                             :a (pow x 2)
+                             :b (pow y 2)})
+                          (map vector a b)))]
+      (/ (:dot counts)
+         (-
+           (+ (:a counts)
+           (:b counts))
+           (:dot counts)))))
 
-The cosine similarity metric may be extended such that it yields the Jaccard coefficient in the case of binary attributes. This is the Tanimoto coefficient. "
-[a b]
-(let [counts
-(apply merge-with +
-(map 
- (fn [[x y]]
-   {:dot (* x y)
-    :a (pow x 2)
-    :b (pow y 2)})
- (map vector a b)))]
-(/ (:dot counts)
-   (- 
-    (+ (:a counts)
-       (:b counts))
-    (:dot counts)))))
+(defn jaccard-index
+  "http://en.wikipedia.org/wiki/Jaccard_index
 
-(defn jaccard-index 
-"
-http://en.wikipedia.org/wiki/Jaccard_index
+  The Jaccard index, also known as the Jaccard similarity coefficient
+  (originally coined coefficient de communauté by Paul Jaccard), is a
+  statistic used for comparing the similarity and diversity of sample sets.
 
-The Jaccard index, also known as the Jaccard similarity coefficient (originally coined coefficient de communauté by Paul Jaccard), is a statistic used for comparing the similarity and diversity of sample sets.
-
-The Jaccard coefficient measures similarity between sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets."
-[a b]
- (/ (count (intersection a b))
-    (count (union a b))))
+  The Jaccard coefficient measures similarity between sample sets,
+  and is defined as the size of the intersection divided by the
+  size of the union of the sample sets."
+  [a b]
+    (/ (count (intersection a b))
+       (count (union a b))))
 
 (defn jaccard-distance
-"
-http://en.wikipedia.org/wiki/Jaccard_index
-
-The Jaccard distance, which measures dissimilarity between sample sets, is complementary to the Jaccard coefficient and is obtained by subtracting the Jaccard coefficient from 1, or, equivalently, by dividing the difference of the sizes of the union and the intersection of two sets by the size of the union."
-[a b]
-(- 1 (jaccard-index a b)))
+  "http://en.wikipedia.org/wiki/Jaccard_index
+  The Jaccard distance, which measures dissimilarity between sample sets,
+  is complementary to the Jaccard coefficient and is obtained by subtracting
+  the Jaccard coefficient from 1, or, equivalently, by dividing the difference
+  of the sizes of the union and the intersection of two sets by the size of the union."
+  [a b]
+    (- 1 (jaccard-index a b)))
 
 ;;TODO: mutlimethod for dice coefficient.
 ;;(defmulti dice-coefficient (fn [a b] (into [] (map class [a b]))))
 
 (defn dice-coefficient
-"
-http://en.wikipedia.org/wiki/Dice%27s_coefficient
-Dice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.
-"
-[a b]
-(let [an (count a)
-      bn (count b)
-      cn (count (intersection a b))]
-(/ (* 2 cn)
-   (+ an bn))))
+  "http://en.wikipedia.org/wiki/Dice%27s_coefficient
+  Dice's coefficient (also known as the Dice coefficient)
+  is a similarity measure related to the Jaccard index."
+  [a b]
+  (let [an (count a)
+        bn (count b)
+        cn (count (intersection a b))]
+    (/ (* 2 cn)
+       (+ an bn))))
 
 (defn n-grams
-"returns a set of the unique n-grams in a string.
-
-this is using actual sets here, discards duplicate n-grams?
-"
- [n s] 
-(into 
- #{}
- (map 
-  #(apply str %) 
-  (partition n 1 s))))
+  "returns a set of the unique n-grams in a string.
+  this is using actual sets here, discards duplicate n-grams?"
+  [n s]
+  (into #{}
+    (map
+      #(apply str %)
+      (partition n 1 s))))
 
 (defn bigrams [s] (n-grams 2 s))
 
 (defn dice-coefficient-str
-"
-http://en.wikipedia.org/wiki/Dice%27s_coefficient
+  "http://en.wikipedia.org/wiki/Dice%27s_coefficient
 
-When taken as a string similarity measure, the coefficient may be calculated for two strings, x and y using bigrams.  here nt is the number of character bigrams found in both strings, nx is the number of bigrams in string x and ny is the number of bigrams in string y. For example, to calculate the similarity between:
+  When taken as a string similarity measure, the coefficient
+  may be calculated for two strings, x and y using bigrams.
+  Here nt is the number of character bigrams found in both strings,
+  nx is the number of bigrams in string x and
+  ny is the number of bigrams in string y.
+  For example, to calculate the similarity between:
 
     night
     nacht
 
-We would find the set of bigrams in each word:
+  We would find the set of bigrams in each word:
 
     {ni,ig,gh,ht}
     {na,ac,ch,ht}
 
-Each set has four elements, and the intersection of these two sets has only one element: ht.
+  Each set has four elements, and the intersection of these two sets has only one element: ht.
 
-Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.
-"
-[a b]
-(dice-coefficient 
- (bigrams a)
- (bigrams b)))
+  Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25."
+  [a b]
+  (dice-coefficient
+    (bigrams a)
+    (bigrams b)))
 
 (defn- bool-to-binary [pred] (if pred 1 0))
 
 (defn hamming-distance
-"http://en.wikipedia.org/wiki/Hamming_distance
+  "http://en.wikipedia.org/wiki/Hamming_distance
 
-In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other."
-[a b]
-(if (and (integer? a) (integer? b))
-  (hamming-distance (str a) (str b))
-  (let [_ (assert (= (count a) (count b)))]
-    (apply
-      tree-comp-each 
-      + 
-      #(bool-to-binary (not (apply = %)))
-      (map vector a b)))))
+  In information theory, the Hamming distance between two strings of equal
+  length is the number of positions at which the corresponding symbols are different.
+  Put another way, it measures the minimum number of
+  substitutions required to change one string into the other,
+  or the number of errors that transformed one string into the other."
+  [a b]
+  (if (and (integer? a) (integer? b))
+    (hamming-distance (str a) (str b))
+    (let [_ (assert (= (count a) (count b)))]
+      (apply
+        tree-comp-each
+        +
+        #(bool-to-binary (not (apply = %)))
+        (map vector a b)))))
 
 ;;TODO: not exactly sure if this is right.
 (defn lee-distance
-"http://en.wikipedia.org/wiki/Lee_distance
+  "http://en.wikipedia.org/wiki/Lee_distance
 
-In coding theory, the Lee distance is a distance between two strings x1x2...xn and y1y2...yn of equal length n over the q-ary alphabet {0,1,…,q-1} of size q >= 2. It is metric.
+  In coding theory, the Lee distance is a distance between
+  two strings x1x2...xn and y1y2...yn of equal length n
+  over the q-ary alphabet {0,1,…,q-1} of size q >= 2. It is metric.
 
-If q = 2 or q = 3 the Lee distance coincides with the Hamming distance.
+  If q = 2 or q = 3 the Lee distance coincides with the Hamming distance.
 
-The metric space induced by the Lee distance is a discrete analog of the elliptic space.
-"
-[a b q]
-(if (and (integer? a) (integer? b))
-  (lee-distance (str a) (str b) q)
-  (let [_ (assert (= (count a) (count b)))]
-    (apply
-      tree-comp-each 
-      + 
-      (fn [x]
-        (let [diff (scalar-abs (apply - (map int x)))]
-          (min diff (- q diff))))
-      (map vector a b)))))
+  The metric space induced by the Lee distance is a discrete analog of the elliptic space."
+
+  [a b q]
+  (if (and (integer? a) (integer? b))
+    (lee-distance (str a) (str b) q)
+    (let [_ (assert (= (count a) (count b)))]
+      (apply
+        tree-comp-each
+        +
+        (fn [x]
+          (let [diff (scalar-abs (apply - (map int x)))]
+            (min diff (- q diff))))
+        (map vector a b)))))
 
 (defn sorensen-index
-"
-http://en.wikipedia.org/wiki/S%C3%B8rensen_similarity_index#cite_note-4
+  "http://en.wikipedia.org/wiki/S%C3%B8rensen_similarity_index#cite_note-4
 
-The Sørensen index, also known as Sørensen’s similarity coefficient, is a statistic used for comparing the similarity of two samples. where A and B are the species numbers in samples A and B, respectively, and C is the number of species shared by the two samples. 
+  The Sørensen index, also known as Sørensen’s similarity coefficient,
+  is a statistic used for comparing the similarity of two samples.
+  where A and B are the species numbers in samples A and B, respectively,
+  and C is the number of species shared by the two samples.
 
- The Sørensen index is identical to Dice's coefficient which is always in [0, 1] range. Sørensen index used as a distance measure, 1 − QS, is identical to Hellinger distance and Bray–Curtis dissimilarity.
+  The Sørensen index is identical to Dice's coefficient which is always in [0, 1] range.
+  Sørensen index used as a distance measure, 1 − QS, is identical
+  to Hellinger distance and Bray–Curtis dissimilarity.
 
-The Sørensen coefficient is mainly useful for ecological community data (e.g. Looman & Campbell, 1960[3]). Justification for its use is primarily empirical rather than theoretical (although it can be justified theoretically as the intersection of two fuzzy sets[4]). As compared to Euclidean distance, Sørensen distance retains sensitivity in more heterogeneous data sets and gives less weight to outliers
+  The Sørensen coefficient is mainly useful for ecological community data
+  (e.g. Looman & Campbell, 1960[3]). Justification for its use is primarily
+  empirical rather than theoretical
+  (although it can be justified theoretically as the intersection of two fuzzy sets[4]).
+  As compared to Euclidean distance, Sørensen distance retains sensitivity
+  in more heterogeneous data sets and gives less weight to outliers
 
-This function assumes you pass in a and b as sets.
+  This function assumes you pass in a and b as sets.
 
-The sorensen index extended to abundance instead of incidence of species is called the Czekanowski index."
-[a b]
-(dice-coefficient a b))
+  The sorensen index extended to abundance instead of incidence of species is called the Czekanowski index."
+  [a b]
+    (dice-coefficient a b))
 
 ;; Possible improvements to this algorithm include:
 
@@ -3325,61 +3234,66 @@ The sorensen index extended to abundance instead of incidence of species is call
 ;;     * This algorithm parallelizes poorly, due to a large number of data dependencies. However, all the cost values can be computed in parallel, and the algorithm can be adapted to perform the minimum function in phases to eliminate dependencies.
 ;;     * By examining diagonals instead of rows, and by using lazy evaluation, we can find the Levenshtein distance in O(m (1 + d)) time (where d is the Levenshtein distance), which is much faster than the regular dynamic programming algorithm if the distance is small.[5]
 (defn levenshtein-distance
-"
-http://en.wikipedia.org/wiki/Levenshtein_distance
+  "http://en.wikipedia.org/wiki/Levenshtein_distance
 
-internal representation is a table d with m+1 rows and n+1 columns
+  internal representation is a table d with m+1 rows and n+1 columns
 
-where m is the length of a and m is the length of b.
+  where m is the length of a and m is the length of b.
 
-In information theory and computer science, the Levenshtein distance is a metric for measuring the amount of difference between two sequences (i.e., the so called edit distance). The Levenshtein distance between two strings is given by the minimum number of operations needed to transform one string into the other, where an operation is an insertion, deletion, or substitution of a single character.
+  In information theory and computer science, the Levenshtein distance
+  is a metric for measuring the amount of difference between two sequences
+  (i.e., the so called edit distance).
+  The Levenshtein distance between two strings is given by the minimum number
+  of operations needed to transform one string into the other,
+  where an operation is an insertion, deletion, or substitution of a single character.
 
-For example, the Levenshtein distance between \"kitten\" and \"sitting\" is 3, since the following three edits change one into the other, and there is no way to do it with fewer than three edits:
+  For example, the Levenshtein distance between \"kitten\" and \"sitting\" is 3,
+  since the following three edits change one into the other,
+  and there is no way to do it with fewer than three edits:
 
    1. kitten → sitten (substitution of 's' for 'k')
    2. sitten → sittin (substitution of 'i' for 'e')
    3. sittin → sitting (insert 'g' at the end).
 
-The Levenshtein distance has several simple upper and lower bounds that are useful in applications which compute many of them and compare them. These include:
+  The Levenshtein distance has several simple upper and lower bounds that are useful
+  in applications which compute many of them and compare them. These include:
 
     * It is always at least the difference of the sizes of the two strings.
     * It is at most the length of the longer string.
     * It is zero if and only if the strings are identical.
-    * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.
-
-"
+    * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance."
   [a b]
-  (let [m (count a)
-        n (count b)
-        init (apply deep-merge-with (fn [a b] b)
-                    (concat 
-                     ;;deletion
-                     (for [i (range 0 (inc m))]
-                       {i {0 i}})
-                     ;;insertion
-                     (for [j (range 0 (inc n))]
-                       {0 {j j}})))
-        table (reduce
-               (fn [d [i j]]
-                 (deep-merge-with 
-                  (fn [a b] b) 
-                  d 
-                  {i {j (if (= (nth a (dec i))
-                               (nth b (dec j)))
-                          ((d (dec i)) (dec j))
-                          (min 
-                           (+ ((d (dec i))
-                               j) 1) ;;deletion
-                           (+ ((d i) 
-                               (dec j)) 1) ;;insertion
-                           (+ ((d (dec i))
-                               (dec j)) 1))) ;;substitution
-                      }}))
-               init
-               (for [j (range 1 (inc n))
-                     i (range 1 (inc m))] [i j]))]
+    (let [m (count a)
+          n (count b)
+          init (apply deep-merge-with (fn [a b] b)
+                      (concat
+                       ;;deletion
+                       (for [i (range 0 (inc m))]
+                         {i {0 i}})
+                       ;;insertion
+                       (for [j (range 0 (inc n))]
+                         {0 {j j}})))
+          table (reduce
+                 (fn [d [i j]]
+                   (deep-merge-with
+                    (fn [a b] b)
+                    d
+                    {i {j (if (= (nth a (dec i))
+                                 (nth b (dec j)))
+                            ((d (dec i)) (dec j))
+                            (min
+                             (+ ((d (dec i))
+                                 j) 1) ;;deletion
+                             (+ ((d i)
+                                 (dec j)) 1) ;;insertion
+                             (+ ((d (dec i))
+                                 (dec j)) 1))) ;;substitution
+                        }}))
+                 init
+                 (for [j (range 1 (inc n))
+                       i (range 1 (inc m))] [i j]))]
 
-    ((table m) n)))
+      ((table m) n)))
 
 
 (defn damerau-levenshtein-distance
@@ -3387,7 +3301,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
   (let [m (count a)
         n (count b)
         init (apply deep-merge-with (fn [a b] b)
-                    (concat 
+                    (concat
                      ;;deletion
                      (for [i (range 0 (inc m))]
                        {i {0 i}})
@@ -3396,25 +3310,25 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
                        {0 {j j}})))
         table (reduce
                (fn [d [i j]]
-                 (deep-merge-with 
-                  (fn [a b] b) 
-                  d 
+                 (deep-merge-with
+                  (fn [a b] b)
+                  d
                   (let [cost (bool-to-binary (not (= (nth a (dec i))
                                           (nth b (dec j)))))
                         x
-                          (min 
+                          (min
                            (inc ((d (dec i)) j)) ;;deletion
                            (inc ((d i) (dec j))) ;;insertion
                            (+ ((d (dec i))
                                (dec j)) cost)) ;;substitution
-                      
+
                         val (if (and (> i 1)
                                (> j 1)
                                (= (nth a (dec i))
                                   (nth b (- j 2)))
                                (= (nth a (- i 2))
                                   (nth b (dec j))))
-                        (min x (+ ((d (- i 2)) 
+                        (min x (+ ((d (- i 2))
                                    (- j 2)) ;;transposition
                                   cost))
                         x)]
@@ -3426,13 +3340,13 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
     ((table m) n)))
 
 (defn mahalanobis-distance
-  "Returns the Mahalanobis distance between x, which is 
-   either a vector or matrix of row vectors, and the 
+  "Returns the Mahalanobis distance between x, which is
+   either a vector or matrix of row vectors, and the
    centroid of the observations in the matrix :y.
-  
+
   Arguments:
     x -- either a vector or a matrix of row vectors
-  
+
   Options:
     :y -- Defaults to x, must be a matrix of row vectors which will be used to calculate a centroid
     :W -- Defaults to (solve (covariance y)), if an identity matrix is provided, the mahalanobis-distance
@@ -3450,9 +3364,9 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
 
     ;; generate some multivariate normal data with a single outlier.
     (def data (bind-rows
-                (bind-columns 
-                  (sample-mvn 100 
-                              :sigma (matrix [[1 0.9] 
+                (bind-columns
+                  (sample-mvn 100
+                              :sigma (matrix [[1 0.9]
                                               [0.9 1]])))
                 [-1.75 1.75]))
 
@@ -3477,12 +3391,10 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
 
     ;; another example
     (mahalanobis-distance [-1.75 1.75] :y data)
-    (mahalanobis-distance [-1.75 1.75] 
-                      :y data 
-                      :W (matrix [[1 0] 
-                                  [0 1]]))
- 
-"
+    (mahalanobis-distance [-1.75 1.75]
+                      :y data
+                      :W (matrix [[1 0]
+                                  [0 1]]))"
   ([x & {:keys [y W centroid]}]
     (let [y (or y x)
           W (or W (solve (covariance y)))
