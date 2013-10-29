@@ -754,7 +754,10 @@
                 gradient-k+1 (f-prime x-k+1)
                 y-k ($= gradient-k+1 - gradient-k)
                 s-k ($= x-k+1 - x-k)
-                rho-k  (/ 1 (dot y-k s-k))
+                rho-k (try
+                        (/ 1 (dot y-k s-k))
+                        (catch java.lang.ArithmeticException ae
+                          1000)) ;; Divide-by-zero encountered: rho-k assumed large
                 A-1 ($= I - ((s-k <*> (trans y-k)) * rho-k))
                 A-2 ($= I - ((y-k <*> (trans s-k)) * rho-k))]
             (recur ($= (A-1 <*> (inv-hessian-k <*> A-2))

@@ -1,5 +1,31 @@
 # What's new in Incanter #
 
+## Changes for 1.5.4 ##
+
+Made an error during deployment of 1.5.3, so 1.5.4 was released to fix this problem.
+Don't use 1.5.3!
+
+## Changes for 1.5.3 ##
+
+### Bugfixes ###
+
+ * Issue 183: the `pow` & `atan2` functions weren't implemented for matrices & datasets.
+ * `read-dataset` now converts empty fields to `nil`, or user-supplied value (see Issue 182).
+ * Documentation improvements.
+
+### Enhancements ###
+
+ * New functions in `incanter.charts`:
+   * `set-point-size` to control size of points on scatter plots.
+ * New functions in `incanter.core`:
+   * `rename-cols` allows to rename columns of dataset
+   * `replace-column` replaces data in column of dataset with new values
+   * `add-column` allows easier to add new column to dataset
+   * `add-derived-column` adds a column to a dataset that is a function of existing
+     columns
+   * `melt` implements part of functionality of R's `melt` function from `reshape`
+     package.
+
 ## Changes for 1.5.2 ##
 
 ### Bugfixes ###

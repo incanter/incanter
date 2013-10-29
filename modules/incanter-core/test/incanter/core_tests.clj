@@ -64,6 +64,54 @@
   (is (= (transform-col dataset1 :b (partial + 10))) (dataset [:a :b :c] [[1 12 3] [4 15 6]]))
   (is (= (transform-col dataset1 :b * 2) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
 
+(deftest $group-by-tests
+  (let [cs [:c1 :c2 :c3]
+        a-dataset (dataset cs
+                           [[1 3 3]
+                            [1 2 4]
+                            [1 2 7]
+                            [6 6 8]
+                            [6 5 10]
+                            [11 12 13]])]
+    
+    (are [group-cols n-groups]
+      (= n-groups (count ($group-by group-cols a-dataset)))
+      :c1 3
+      [:c1 :c2] 5) ; 2 arity version
+    
+    (are [group-cols n-groups]
+      (= n-groups (count 
+                   (with-data a-dataset 
+                     ($group-by group-cols))))
+      :c1 3
+      [:c1 :c2] 5) ; 3 arity version
+    
+    (is (= ($group-by :c1 a-dataset)
+           {{:c1 1} (dataset cs [[1 3 3]
+                                 [1 2 4]
+                                 [1 2 7]])
+            {:c1 6} (dataset cs [[6 6 8] 
+                                 [6 5 10]])
+            {:c1 11} (dataset cs [[11 12 13]])}))
+    
+    (is (= ($group-by [:c1 :c2] a-dataset)
+           {{:c1 1 :c2 3} (dataset cs [[1 3 3]])
+            {:c1 1 :c2 2} (dataset cs [[1 2 4]
+                                       [1 2 7]])
+            {:c1 6 :c2 6} (dataset cs [[6 6 8]])
+            {:c1 6 :c2 5} (dataset cs [[6 5 10]])
+            {:c1 11 :c2 12} (dataset cs [[11 12 13]])}))))
+
+(deftest rename-cols-tests
+  (let [data (dataset [:c1 :c2 :c3] [[1 2 3]])
+        col-map {:c1 :new-c1 2 :new-c3}
+        expected [:new-c1 :c2 :new-c3]]
+    (is (= (:column-names (rename-cols col-map data))
+           expected))
+    (is (= (:column-names (with-data data
+                            (rename-cols col-map)))
+           expected))))
+
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3]
                 [4 5 6]
@@ -236,6 +284,7 @@
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (= (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (= (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (= (to-list (matrix [1])) [1.0]))
   (is (= (to-list [1 2 3]) [1 2 3]))
   (is (= (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
   (is (= (to-list 3) 3))
@@ -250,6 +299,7 @@
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (= (to-vect (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (= (to-vect (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (= (to-vect (matrix [1])) [1.0]))
   (is (= (to-vect [1 2 3]) [1 2 3]))
   (is (= (to-vect [[1 2] [3 4]]) [[1 2] [3 4]]))
   (is (= (to-vect 3) 3))
@@ -389,7 +439,13 @@
   (is (= (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
   (is (= (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
   (is (= (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
-  (is (= (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0])))))
+  (is (= (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0]))))
+  (is (= (minus 1) -1))
+  (is (= (minus [1.0 2.0 3.0]) (matrix [-1.0 -2.0 -3.0])))
+  (is (= (minus A) (matrix [[-1 -2 -3]
+                            [-4 -5 -6]
+                            [-7 -8 -9]
+                            [-10 -11 -12]]))))
 
 (deftest matrix-mult-tests
   ;; element by element multiplication on matrices
@@ -632,3 +688,13 @@
   (is Double/POSITIVE_INFINITY (safe-div 20 0 2 2))
   (is Double/NEGATIVE_INFINITY (safe-div -10 0))
   (is Double/NEGATIVE_INFINITY (safe-div -10 5 0)))
+
+(deftest pow-test
+  (is (= (pow 2 2) 4.0))
+  (is (= (pow [1 2 3] 2) [1.0 4.0 9.0]))
+  (is (= (pow [[1 2 3]] 2) [[1.0 4.0 9.0]]))
+  (is (= (pow (matrix [[1 2 3] [4 5 6]]) 2) (matrix [[1.0 4.0 9.0] [16.0 25.0 36.0]])))
+  (is (= (pow (matrix [[1 2 3]]) 2) (matrix [[1.0 4.0 9.0]])))
+  (is (= (pow (matrix [1 2 3]) 2) (matrix [1.0 4.0 9.0])))
+  (is (= (pow (dataset [:a :b :c] [[1 2 3]]) 2) (dataset [:a :b :c] [[1.0 4.0 9.0]])))
+  )

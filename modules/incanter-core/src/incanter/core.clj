@@ -97,10 +97,9 @@
   " Test if obj is 'derived' clatrix.core.Matrix"
   ([obj] (is-matrix obj)))
 
-
 (defn dataset?
 " Determines if obj is of type incanter.core.Dataset."
-  ([obj] (isa? (type obj) incanter.core.Dataset)))
+  ([obj] (instance? Dataset obj)))
 
 (defn ^Integer nrow
   "Returns the number of rows in the given matrix. Equivalent to R's nrow function."
@@ -392,13 +391,6 @@
   [& args]
   (reduce clx/hstack (pass-to-matrix args)))
 
-
-
-;(defn inner-product [& args] (apply + (apply map * args)))
-;(inner-product [1 2 3] [4 5 6]) ; = 32
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MATH FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -443,8 +435,7 @@
   (minus 2 [1 2 3])
   (minus [1 2 3])
   "
-  [& args] (reduce clx/- (pass-to-matrix args)))
-
+  [& args] (apply clx/- (pass-to-matrix args)))
 
 
 (defn mult
@@ -505,30 +496,34 @@
   ([x y & more]
      (reduce safe-div (safe-div x y) more)))
 
+(declare to-list dataset col-names)
+
+(defn- mapping-helper [func args]
+  (reduce (fn [A B]
+            (cond
+             (number? A) (func A B)
+             (matrix? A) (let [m (matrix (mapping-helper func (list (to-list A) B)))]
+                           (if (clx/row? A)
+                             (trans m)
+                             m))
+             (dataset? A) (dataset (col-names A)
+                                   (mapping-helper func (list (to-list A) B)))
+             (and (coll? A) (coll? (first A)))
+             (map (fn [a] (map #(func %1 B) a)) A)
+             (coll? A) (map #(func %1 B) A)))
+          args))
 
 (defn pow  ;; TODO use jblas and fix meta
   " This is an element-by-element exponent function, raising the first argument
   by the exponents in the remaining arguments. Equivalent to R's ^ operator."
   [& args]
-  (reduce (fn [A B]
-            (combine-with A B
-                          #(Math/pow %1 %2)
-                          (fn [a b] (map (map #(Math/pow %1 %2))
-                                         a b))))
-          args))
-
+  (mapping-helper #(Math/pow %1 %2) args))
 
 (defn atan2 ;; TODO fix meta
   "Returns the atan2 of the elements in the given matrices, sequences or numbers.
   Equivalent to R's atan2 function."
   [& args]
-  (reduce (fn [A B]
-            (combine-with A B
-                          #(Math/atan2 %1 %2) ;; TODO macro this
-                          (fn [a b] (map (map #(Math/atan2 %1 %2))
-                                         a b))))
-          args))
-
+  (mapping-helper #(Math/atan2 %1 %2) args))
 
 (defn sqrt
   "Returns the square-root of the elements in the given matrix, sequence or number.
@@ -551,8 +546,9 @@
 (defn log2
   "Returns the log base 2 of the elements in the given matrix, sequence or number.
    Equivalent to R's log2 function."
-   ([A] (transform-with A #(/ (Math/log %) (Math/log 2)) #(div (clx/log! %)
-                                                               (matrix (Math/log 2) (nrow %) (ncol %))))))
+   ([A] (transform-with A #(/ (Math/log %) (Math/log 2))
+                        #(div (clx/log! %)
+                              (matrix (Math/log 2) (nrow %) (ncol %))))))
 
 
 (defn log10
@@ -671,6 +667,27 @@
 (defmethod to-list :default [s] s)
 
 (defmethod to-list nil [s] nil)
+
+(defmulti to-vect
+  " Returns a vector-of-vectors if the given matrix is two-dimensional
+    and a flat vector if the matrix is one-dimensional. This is a bit
+    slower than the to-list function"
+  type)
+
+(defmethod to-vect ::matrix
+  ([^clatrix.core.Matrix mat]
+     (clx/as-vec mat)))
+
+(defmethod to-vect ::dataset
+  [data]
+  (into [] (map (fn [row]
+                  (into [] (map (fn [col] (row col))
+                                (:column-names data))))
+                (:rows data))))
+
+(defmethod to-vect nil [s] nil)
+
+(defmethod to-vect :default [s] s)
 
 (defn ^Matrix copy
   "Returns a copy of the given matrix."
@@ -807,14 +824,14 @@
 (defn sum-of-squares
   "Returns the sum-of-squares of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
       (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
 
 
 (defn sum
   "Returns the sum of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-list x))]
+    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
       (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
 
 
@@ -1057,27 +1074,6 @@ http://en.wikipedia.org/wiki/Cholesky_decomposition
 ;; MISC FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-(defmulti to-vect
-  " Returns a vector-of-vectors if the given matrix is two-dimensional
-    and a flat vector if the matrix is one-dimensional. This is a bit
-    slower than the to-list function"
-  type)
-
-(defmethod to-vect ::matrix
-  ([^clatrix.core.Matrix mat]
-     (clx/as-vec mat)))
-
-(defmethod to-vect ::dataset
-  [data]
-  (into [] (map (fn [row]
-                  (into [] (map (fn [col] (row col))
-                                (:column-names data))))
-                (:rows data))))
-
-(defmethod to-vect nil [s] nil)
-
-(defmethod to-vect :default [s] s)
 
 (defn length
   " A version of count that works on collections, matrices, and numbers.
@@ -1870,18 +1866,11 @@ altering later ones."
   ([cols]
      ($group-by cols $data))
   ([cols data]
-     (let [n (nrow data)
-           rows (:rows data)]
-       (loop [r 0 grouped-rows {}]
-         (if (= r n)
-           (let [group-cols (keys grouped-rows)
-                 res (apply assoc {} (interleave group-cols (map to-dataset (vals grouped-rows))))]
-             res)
-           (recur (inc r)
-                  (let [row (nth rows r)
-                        k (submap row cols)
-                        k-rows (grouped-rows k)]
-                    (assoc grouped-rows k (if k-rows (conj k-rows row) [row])))))))))
+     (let [orig-col-names (:column-names data);save to preserve order below
+           groups (group-by #(submap % cols) (:rows data))]
+       (into {}
+             (for [[group-value group-rows] groups]
+               {group-value (dataset orig-col-names group-rows)})))))
 
 
 (defn matrix-map
@@ -1899,18 +1888,19 @@ altering later ones."
 
 "
  ([f m]
-    (if (sequential? m)
-      (if (sequential? (first m))
-        (map (fn [& a] (apply map f a)) m)
-        (map f m))
-      (f m)))
+    (let [m (if (and (matrix? m) (clx/row? m)) (to-list m) m)]
+      (if (sequential? m)
+        (if (sequential? (first m))
+          (map (fn [& a] (apply map f a)) m)
+          (map f m))
+        (f m))))
  ([f m & ms]
-    (if (sequential? m)
-      (if (sequential? (first m))
-        (apply map (fn [& a] (apply map f a)) m ms)
-        (apply map f m ms))
-      (apply f m ms))))
-
+    (let [m (if (and (matrix? m) (clx/row? m)) (to-list m) m)]
+      (if (sequential? m)
+        (if (sequential? (first m))
+          (apply map (fn [& a] (apply map f a)) m ms)
+          (apply map f m ms))
+        (apply f m ms)))))
 
 (defn $map
   "This function returns a sequence resulting from mapping the given function over
@@ -2014,6 +2004,80 @@ altering later ones."
            rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
        (to-dataset rows))))
 
+(defn- replace-by-number-or-value [col-vec [old-col new-col-name]]
+  (if (number? old-col)
+    (assoc col-vec old-col new-col-name)
+    (replace {old-col new-col-name} col-vec)))
+
+(defn rename-cols
+  "Rename columns based on col-map of old-col new-col-name pairs.  If
+  old-col is a number it is taken as a 0 based index for the column to
+  replace
+
+  Example:
+   (use '(incanter core datasets))
+   (rename-cols {:Sepal.Length :s.length 3 :p.width} (get-dataset :iris))
+  "
+  ([col-map]
+     (rename-cols col-map $data))
+  ([col-map data]
+     (let [old-col-names (col-names data)
+           new-col-names (reduce 
+                          replace-by-number-or-value old-col-names col-map)]
+       (col-names data new-col-names))))
+
+(defn- update
+  ([m key f] (update-in m [key] f))
+  ([m key f & kfs] (apply update (update-in m [key] f) kfs)))
+
+(defn replace-column
+  "Replaces a column in a dataset with new values."
+  ([column-name values]
+     (replace-column column-name values $data))
+  ([column-name values data]
+     (update data :rows
+             (fn [rows]
+               (map #(assoc %1 column-name %2)
+                    rows values)))))
+
+(defn add-column
+  "Adds a column, with given values, to a dataset."
+  ([column-name values]
+     (add-column column-name values $data))
+  ([column-name values data]
+     (if (some #{column-name} (:column-names data))
+       (replace-column column-name values data)
+       (update data :column-names #(conj % column-name)
+               :rows #(mapv (fn [r v]
+                              (assoc r column-name v))
+                            % (concat values (repeat nil)))))))
+
+(defn add-derived-column
+  "This function adds a column to a dataset that is a function of
+  existing columns. If no dataset is provided, $data (bound by the
+  with-data macro) will be used. f should be a function of the
+  from-columns, with arguments in that order.
+
+  Examples:
+    (use '(incanter core datasets))
+    (def cars (get-dataset :cars))
+
+    (add-derived-column :dist-over-speed [:dist :speed] (fn [d s] (/ d s)) cars)
+
+    (with-data (get-dataset :cars)
+      (view (add-derived-column :speed**-1 [:speed] #(/ 1.0 %))))"
+
+  ([column-name from-columns f]
+     (add-derived-column column-name from-columns f $data))
+  ([column-name from-columns f data]
+     (update data :column-names #(conj % column-name)
+             :rows (fn [rows]
+                     (mapv (fn [row]
+                             (assoc row column-name
+                                    (apply f (map #(map-get row %)
+                                                  from-columns))))
+                           rows)))))
+
 ;; credit to M.Brandmeyer
 (defn transform-col
 " Apply function f & args to the specified column of dataset and replace the column
@@ -2089,8 +2153,6 @@ altering later ones."
        (to-dataset deshaped-data))))
 
 
-
-
 (defn get-categories
 "
   Given a dataset and one or more column keys, returns the set of categories for them.
@@ -2162,6 +2224,23 @@ altering later ones."
        (zipmap col-keys cols))))
 
 
+(defn melt
+  "Melt an object into a form suitable for easy casting, like a melt function in R.
+Only accepts one pivot key for now. e.g.
+
+    (use '(incanter core charts datasets))
+    (view (with-data (melt (get-dataset :flow-meter) :Subject)
+              (line-chart :Subject :value :group-by :variable :legend true)))
+
+  See http://www.statmethods.net/management/reshape.html for more examples."
+  [dataset pivot-key]
+  (let [in-m (to-map dataset)
+        nrows (nrow dataset)
+        ks (keys in-m)]
+    (to-dataset
+     (for [k ks i (range nrows) :when (not (= pivot-key k))]     
+       (zipmap [pivot-key :variable :value]
+               [(nth (pivot-key in-m) i) k (nth (k in-m) i)])))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES

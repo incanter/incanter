@@ -12,20 +12,9 @@ cd "$TOP_DIR"
 
 script/clean
 
-cd modules
-for i in core io charts mongodb pdf svg latex excel zoo sql; do
-    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
-        OLDWD=`pwd`
-        cd "incanter-$i"
-        $LEIN install
-        RES=$?
-        if [ $RES -ne 0 ] ; then
-            cd "$TWD"
-            exit $RES
-        fi
-        cd "$OLDWD"
-    fi
-done
+$TOP_DIR/script/run-cmd $LEIN install
+RES=$?
 
 cd "$TWD"
 
+exit $RES

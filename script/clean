@@ -10,14 +10,7 @@ fi
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
 
-for i in modules/* ; do
-    if [ -d "$i" -a -f "$i/project.clj" ] ; then
-        OLDWD=`pwd`
-        cd "$i"
-        $LEIN clean
-        cd "$OLDWD"
-    fi
-done
+$TOP_DIR/script/run-cmd $LEIN clean
 
 $LEIN clean
 

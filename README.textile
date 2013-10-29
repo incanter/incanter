@@ -61,7 +61,7 @@ The online documentation for most Incanter functions contain usage examples. The
 
 The <a href="http://www.amazon.com/gp/product/178216264X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=178216264X&linkCode=as2&tag=statisprograw-20">Clojure Data Analysis Cookbook</a> (published by Packt Publishing) contains several chapters dedicated to Incanter, including work with datasets, charting, etc.  You can read the <a href="https://github.com/liebke/incanter/blob/master/docs/9781782162643_Chapter%206.pdf?raw=true">sample chapter</a> that describes Incanter's datasets.
 
-There is dedicated mailing list for discussions about Incater. It's hosted on <a href="http://groups.google.com/group/clojure">Google Groups</a>.
+There is dedicated mailing list for discussions about Incater. It's hosted on <a href="http://groups.google.com/group/incanter">Google Groups</a>.
 
 *More Incanter examples*
 

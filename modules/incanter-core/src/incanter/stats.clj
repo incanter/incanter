@@ -1543,10 +1543,14 @@
     (let [
           xx (to-list x)
           yy (to-list y)
+          sd-x (sd x)
+          sd-y (sd y)
         ]
-      (DoubleDescriptive/correlation
-        (DoubleArrayList. (double-array xx)) (sd x)
-        (DoubleArrayList. (double-array yy)) (sd y))))
+      (if (not= (* sd-x sd-y) 0)
+        (DoubleDescriptive/correlation
+         (DoubleArrayList. (double-array xx)) (sd x)
+         (DoubleArrayList. (double-array yy)) (sd y))
+        0.0)))
   ([mat]
    (div (covariance mat)
         (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
@@ -2082,7 +2086,7 @@
           n (nrow y)
           p (ncol _x)
           p-1 (if intercept (dec p) p)
-          adj-r-square (- 1 (* (- 1 r-square) (/ (dec 1) (- n p 1))))
+          adj-r-square (- 1 (* (- 1 r-square) (safe-div (dec n) (- n p 1))))
           mse (safe-div sse (- n p))
           msr (safe-div ssr p-1)
           f-stat (safe-div msr mse)
@@ -2464,31 +2468,31 @@ Test for different variances between 2 samples
                  (if y
                    (tabulate (bind-columns x y))
                    (tabulate x)))
+          levels (if table?
+                   (map range ((juxt nrow ncol) table))
+                   (:levels xtab))
+          r-levels (first levels)
+          c-levels (second levels)
           table (cond
                   table? table
-                  (and x y) (:table xtab))
+                  (and x y) (:table xtab)
+                  :else (matrix (map #(get-in xtab [:counts %] 0) r-levels)))
           two-samp? (if (or (and x y)
                             (and table?
                                  (and (> (nrow table) 1) (> (ncol table) 1))))
                       true false)
-          r-levels (if table?
-                     (range (nrow table))
-                     (first (:levels xtab)))
-          c-levels (if table?
-                     (range (ncol table))
-                     (second (:levels xtab)))
           r-margins (if table?
                       (if two-samp?
                         (apply hash-map (interleave r-levels (map sum table)))
                         (if (> (nrow table) 1)
                           (to-list table)
                           (throw (Exception. "One dimensional tables must have only a single column"))))
-                      (second (:margins xtab)))
+                      (first (:margins xtab)))
           c-margins (if table?
                       (if two-samp?
                         (apply hash-map (interleave c-levels (map sum (trans table))))
                         0)
-                      (first (:margins xtab)))
+                      (second (:margins xtab)))
 
           counts (if two-samp? (vectorize table) table)
           N (if table?
@@ -3461,12 +3465,12 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
         view))
 
     ;; calculate the distances of each point from the centroid.
-    (def dists (mahalanobis-distance data))
+    (def dists (map first (mahalanobis-distance data)))
     ;; view a bar-chart of the distances
     (view (bar-chart (range 102) dists))
 
     ;; Now contrast with the Euclidean distance.
-    (def dists (mahalanobis-distance data :W (matrix [[1 0] [0 1]])))
+    (def dists (map first (mahalanobis-distance data :W (matrix [[1 0] [0 1]]))))
     ;; view a bar-chart of the distances
     (view (bar-chart (range 102) dists))
 
