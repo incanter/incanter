@@ -100,7 +100,7 @@ To build and test Incanter, you will need to have <a href="https://github.com/te
   b. Place it on your path and chmod it to be executable: @chmod +x lein@
   c. Run: @lein self-install@
 
-3. From the incanter directory, download the necessary dependencies: @lein deps@ 
+3. Execute @script/install@ staying in the incanter directory - this will download all necessary dependencies, compile & install all Incanter's modules into local Maven repository.  The use of separate script is required because Incanter consists of several modules, and development versions are usually not available in official repositories.
 
 4. Start a REPL: @lein repl@ (it also starts nRepl server), or start a Swank server: @lein ritz 4005@
 
