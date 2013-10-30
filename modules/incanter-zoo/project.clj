@@ -7,7 +7,7 @@
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-io "1.5.5-SNAPSHOT"]
                  [org.clojure/clojure "1.5.1"]
-                 [clj-time "0.5.0"
+                 [clj-time "0.6.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]]
   )

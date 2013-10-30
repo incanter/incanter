@@ -9,6 +9,6 @@
                  [org.clojure/clojure "1.5.1"]
                  [clojureql "1.0.4" :exclusions [org.clojure/clojure]]
                  ]
-  :profiles {:dev {:dependencies [[org.apache.derby/derby "10.8.1.2"]]}}
+  :profiles {:dev {:dependencies [[org.apache.derby/derby "10.10.1.1"]]}}
   )
 
