@@ -88,8 +88,8 @@
             dataset-body)]
     (dataset column-names padded-body)))
 
-(defmethod save incanter.Matrix [mat filename & {:keys [delim header append]
-                                                 :or {append false delim \,}}]
+(defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
+                                                       :or {append false delim \,}}]
   (let [file-writer (if (= "-" filename)
                       *out*
                       (java.io.FileWriter. filename append))]
