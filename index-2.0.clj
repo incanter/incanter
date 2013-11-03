@@ -3437,9 +3437,9 @@
    :name "read-dataset",
    :namespace "incanter.io",
    :source-url
-   "https://github.com/liebke/incanter/blob/f36c45db4725a021d60f9ecc2c5a1c3f8a96d7ec/modules/incanter-io/src/incanter/io.clj#L41",
+   "https://github.com/liebke/incanter/blob/0e17345542f795260651989b83694079cd9d2b28/modules/incanter-io/src/incanter/io.clj#L41",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/f36c45db4725a021d60f9ecc2c5a1c3f8a96d7ec/modules/incanter-io/src/incanter/io.clj",
+   "https://github.com/liebke/incanter/raw/0e17345542f795260651989b83694079cd9d2b28/modules/incanter-io/src/incanter/io.clj",
    :wiki-url
    "http://liebke.github.com/incanter//io-api.html#incanter.io/read-dataset",
    :doc
