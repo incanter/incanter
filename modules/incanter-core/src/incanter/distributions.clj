@@ -769,7 +769,7 @@
   Distribution
   (pdf [d v] (.pdf (DoubleUniform. min max (DoubleMersenneTwister.)) v))
   (cdf [d v] (.cdf (DoubleUniform. min max (DoubleMersenneTwister.)) v))
-  (draw [d] (cern.jet.random.tdouble.DoubleUniform/staticNextDouble))
+  (draw [d] (cern.jet.random.tdouble.DoubleUniform/staticNextDoubleFromTo min max))
   (support [d] [min,max])
   (mean [d] (/ (+ min max)
                2))
