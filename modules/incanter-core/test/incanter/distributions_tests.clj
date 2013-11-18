@@ -435,4 +435,7 @@
     (is (= 5.5 (mean dist)))
 
     (is (= (/ (* (- ub lb) (- ub lb))
-              12) (variance dist)))))
+              12) (variance dist)))
+    ;; up to 0e17345542f795260651989b83694079cd9d2b28 used (0,1) for
+    ;; draw, ignoring lb and ub
+    (is (<= lb (draw dist) ub))))
