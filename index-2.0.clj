@@ -2559,9 +2559,9 @@
    :name "->Beta-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L498",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L498",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Beta-rec",
    :doc
@@ -2573,9 +2573,9 @@
    :name "->Binomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L529",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L529",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Binomial-rec",
    :doc
@@ -2587,9 +2587,9 @@
    :name "->ChiSquare-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L557",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L557",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->ChiSquare-rec",
    :doc
@@ -2601,9 +2601,9 @@
    :name "->Combination",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L337",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L337",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Combination",
    :doc
@@ -2615,9 +2615,9 @@
    :name "->DoubleUniform-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L768",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L768",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->DoubleUniform-rec",
    :doc
@@ -2629,9 +2629,9 @@
    :name "->Exponential-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L584",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L584",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Exponential-rec",
    :doc
@@ -2643,9 +2643,9 @@
    :name "->F",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L610",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L610",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->F",
    :doc
@@ -2657,9 +2657,9 @@
    :name "->Gamma-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L651",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L651",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Gamma-rec",
    :doc
@@ -2671,9 +2671,9 @@
    :name "->NegativeBinomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L682",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L682",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->NegativeBinomial-rec",
    :doc
@@ -2685,9 +2685,9 @@
    :name "->Normal-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L456",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L456",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Normal-rec",
    :doc
@@ -2699,9 +2699,9 @@
    :name "->Poisson-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L712",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L712",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->Poisson-rec",
    :doc
@@ -2713,9 +2713,9 @@
    :name "->StudentT-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L739",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L739",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->StudentT-rec",
    :doc
@@ -2727,9 +2727,9 @@
    :name "->UniformInt",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L250",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L250",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/->UniformInt",
    :doc
@@ -2741,9 +2741,9 @@
    :name "beta-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L509",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L509",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/beta-distribution",
    :doc
@@ -2755,9 +2755,9 @@
    :name "binomial-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L537",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L537",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/binomial-distribution",
    :doc
@@ -2769,9 +2769,9 @@
    :name "chisq-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L565",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L565",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/chisq-distribution",
    :doc
@@ -2783,9 +2783,9 @@
    :name "combination-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L347",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L347",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/combination-distribution",
    :doc
@@ -2797,9 +2797,9 @@
    :name "exponential-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L592",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L592",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/exponential-distribution",
    :doc
@@ -2811,9 +2811,9 @@
    :name "f-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L632",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L632",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/f-distribution",
    :doc
@@ -2825,9 +2825,9 @@
    :name "gamma-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L662",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L662",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/gamma-distribution",
    :doc
@@ -2839,9 +2839,9 @@
    :name "integer-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L268",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L268",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/integer-distribution",
    :doc
@@ -2853,9 +2853,9 @@
    :name "map->Beta-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L498",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L498",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Beta-rec",
    :doc
@@ -2867,9 +2867,9 @@
    :name "map->Binomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L529",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L529",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Binomial-rec",
    :doc
@@ -2881,9 +2881,9 @@
    :name "map->ChiSquare-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L557",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L557",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->ChiSquare-rec",
    :doc
@@ -2895,9 +2895,9 @@
    :name "map->Combination",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L337",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L337",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Combination",
    :doc
@@ -2909,9 +2909,9 @@
    :name "map->DoubleUniform-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L768",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L768",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->DoubleUniform-rec",
    :doc
@@ -2923,9 +2923,9 @@
    :name "map->Exponential-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L584",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L584",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Exponential-rec",
    :doc
@@ -2937,9 +2937,9 @@
    :name "map->F",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L610",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L610",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->F",
    :doc
@@ -2951,9 +2951,9 @@
    :name "map->Gamma-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L651",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L651",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Gamma-rec",
    :doc
@@ -2965,9 +2965,9 @@
    :name "map->NegativeBinomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L682",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L682",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->NegativeBinomial-rec",
    :doc
@@ -2979,9 +2979,9 @@
    :name "map->Normal-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L456",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L456",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Normal-rec",
    :doc
@@ -2993,9 +2993,9 @@
    :name "map->Poisson-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L712",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L712",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->Poisson-rec",
    :doc
@@ -3007,9 +3007,9 @@
    :name "map->StudentT-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L739",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L739",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->StudentT-rec",
    :doc
@@ -3021,9 +3021,9 @@
    :name "map->UniformInt",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L250",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L250",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/map->UniformInt",
    :doc
@@ -3035,9 +3035,9 @@
    :name "neg-binomial-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L692",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L692",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/neg-binomial-distribution",
    :doc
@@ -3049,9 +3049,9 @@
    :name "normal-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L471",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L471",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/normal-distribution",
    :doc
@@ -3063,9 +3063,9 @@
    :name "poisson-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L720",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L720",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/poisson-distribution",
    :doc
@@ -3077,9 +3077,9 @@
    :name "roulette-wheel",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L195",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L195",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/roulette-wheel",
    :doc
@@ -3091,9 +3091,9 @@
    :name "t-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L749",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L749",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/t-distribution",
    :doc
@@ -3105,9 +3105,9 @@
    :name "test-statistic-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L378",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L378",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/test-statistic-distribution",
    :doc
@@ -3119,9 +3119,9 @@
    :name "uniform-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L778",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L778",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/uniform-distribution",
    :doc
@@ -3235,9 +3235,9 @@
    :name "UniformInt"}
   {:file "modules/incanter-core/src/incanter/distributions.clj",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/liebke/incanter/raw/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj",
    :source-url
-   "https://github.com/liebke/incanter/blob/886e8f3afa579f699aa329f963b615c99478de91/modules/incanter-core/src/incanter/distributions.clj#L31",
+   "https://github.com/liebke/incanter/blob/bfb75b37cc8e150a8a663d24b68a452041071275/modules/incanter-core/src/incanter/distributions.clj#L31",
    :wiki-url
    "http://liebke.github.com/incanter//distributions-api.html#incanter.distributions/Distribution",
    :namespace "incanter.distributions",
