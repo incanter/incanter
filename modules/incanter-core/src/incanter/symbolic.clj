@@ -14,8 +14,8 @@
 (def all-fn-list (into fn-list chain-list ))
 
 (defn- same-var?
-  "on one arg, checks if variable, ie a symbol not in our list, on two,
-  checks vars and equality"
+  "on one arg, checks if variable, ie a symbol not in our list,
+  on two, checks vars and equality"
   ([v1] (and (not (contains? all-fn-list v1)) (symbol? v1)))
   ([v1 v2] (and (= v1 v2) (same-var? v1))))
 
@@ -73,7 +73,8 @@
     true (list 'pow b e)))
 
 (defn deriv*
-  "main sub-function for differentiation. with 2 args, takes 1st degree deriv.
+  "
+  Main sub-function for differentiation. with 2 args, takes 1st degree deriv.
   with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
 
 
@@ -91,9 +92,7 @@
 
     (deriv* '(* x y (+ x 3)) 'x 2)
     (deriv* '(* x y (+ x 3)) 'x 3)
-
-
-"
+  "
   ([exp v]
     (cond
       (number? exp) 0
@@ -139,7 +138,8 @@
 
 
 (defmacro deriv
-  "Macro for symbolic differentiation. with 2 args, takes 1st degree deriv.
+  "
+  Macro for symbolic differentiation. with 2 args, takes 1st degree deriv.
   with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
 
 
@@ -175,8 +175,7 @@
     ;; NOT WORKING YET
 
     (deriv (/ 1 x) x) ; => (* (deriv* (* (x)) x) (* -1 (pow (* (x)) -2)))
-                                          ^-- need to fix
-"
+                                          ^-- need to fix"
   ([exp v]
      `(deriv* '~exp '~v))
   ([exp v degree]
@@ -185,21 +184,20 @@
 
 
 (defn- tree-subst
-"
-
+  "
   Examples:
     (use '(incanter core symbolic))
 
     (def ops {'+ clojure.core/+
-		'- clojure.core/-
-		'* clojure.core/*
-		'/ clojure.core//
-		'sin incanter.core/sin
-		'cos incanter.core/cos
-		'tan incanter.core/tan
-		'pow incanter.core/pow
-		'** incanter.core/pow
-		'exp incanter.core/exp
+    '- clojure.core/-
+    '* clojure.core/*
+    '/ clojure.core//
+    'sin incanter.core/sin
+    'cos incanter.core/cos
+    'tan incanter.core/tan
+    'pow incanter.core/pow
+    '** incanter.core/pow
+    'exp incanter.core/exp
                 'fn clojure.core/fn})
 
     (tree-subst '(+ (* x y) x) {'x 3, 'y 9, '* 'clojure.core/*, '+ 'clojure.core/+})
@@ -209,61 +207,56 @@
     (eval (tree-subst (deriv (+ (* x y) x) x) (apply assoc ops ['x 3 'y 9])))
 
     (fn [x y] (tree-subst (deriv (+ (* x y) x) x)  (apply assoc ops ['x 3 'y 9])))
-    
+
     ((fn [x y] (eval (tree-subst (deriv (+ (* x y) x) x) (apply assoc ops ['x 3 'y 9])))) 5 9)
 
     ((eval (tree-subst (list 'fn '[x y] (deriv (+ (* x y) x) x))
-                       (apply assoc ops ['x (gensym 'x) 'y (gensym 'y)]))) 
+                       (apply assoc ops ['x (gensym 'x) 'y (gensym 'y)])))
       5 9)
 
      ((eval (tree-subst (list 'fn '[x y] (deriv* '(+ (* x y) x) 'x))
-                       (apply assoc ops ['x (gensym 'x) 'y (gensym 'y)]))) 
-      5 9)
-
-
-"
+                       (apply assoc ops ['x (gensym 'x) 'y (gensym 'y)])))
+      5 9)"
   ([tree subst-map]
-     (let [subst-fn (fn [el] 
-		      (cond
-		       (vector? el)
-		         (apply vector (tree-subst el subst-map))
-		       (coll? el) 
-		         (tree-subst el subst-map) 
-		       :else
-		         (or (subst-map el) el)))]
-       (map subst-fn tree))))
+    (let [subst-fn (fn [el]
+         (cond
+           (vector? el)
+             (apply vector (tree-subst el subst-map))
+           (coll? el)
+             (tree-subst el subst-map)
+           :else
+             (or (subst-map el) el)))]
+      (map subst-fn tree))))
 
 
 (defn deriv-fn*
-"
-
+  "
   Examples:
     (use '(incanter core symbolic))
 
     (deriv-fn* '[x y] '(+ (* x y) x) 'x)
 
     ((deriv-fn* '[x y] '(+ (* x y) x) 'x) 5 9)
-"
+  "
   ([[& args] expr v]
      (deriv-fn* args expr v 1))
   ([[& args] expr v degree]
      (let [ops {'+ clojure.core/+
-		'- clojure.core/-
-		'* clojure.core/*
-		'/ clojure.core//
-		'sin incanter.core/sin
-		'cos incanter.core/cos
-		'tan incanter.core/tan
-		'pow incanter.core/pow
-		'** incanter.core/pow
-		'exp incanter.core/exp}] 
+    '- clojure.core/-
+    '* clojure.core/*
+    '/ clojure.core//
+    'sin incanter.core/sin
+    'cos incanter.core/cos
+    'tan incanter.core/tan
+    'pow incanter.core/pow
+    '** incanter.core/pow
+    'exp incanter.core/exp}]
        (eval (tree-subst (list 'fn (apply vector args) (deriv* expr v degree))
-			 (apply assoc ops (interleave args (map gensym args))))))))
+       (apply assoc ops (interleave args (map gensym args))))))))
 
 
 (defmacro deriv-fn
-"
-
+  "
   Examples:
     (use '(incanter core symbolic))
 
@@ -298,9 +291,7 @@
       (doto (function-plot f 0.5 5)
         (add-function df 0.5 5)
         view))
-
-
-"
+  "
 ([[& args] expr v]
    `(deriv-fn* '[~@args] '~expr '~v 1))
 ([[& args] expr v degree]
