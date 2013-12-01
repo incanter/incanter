@@ -106,7 +106,8 @@ Supports 1-dimensional and 2-dimensional interpolations.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (interpolate points type &amp; options)
 </pre>
-    <pre id="var-docstr">Builds a function that interpolates given collection of points.
+    <pre id="var-docstr">
+Builds a function that interpolates given collection of points.
 <a href="http://en.wikipedia.org/wiki/Interpolation">http://en.wikipedia.org/wiki/Interpolation</a>
 <a href="http://en.wikipedia.org/wiki/Linear_least_squares_">http://en.wikipedia.org/wiki/Linear_least_squares_</a>(mathematics)
 
@@ -143,17 +144,18 @@ Options for linear least squares:
 
 Examples:
 
-(def points [[0 0] [1 5] [2 0] [3 5]])
-(def linear (interpolate points :linear))
-(linear 0) =&gt; 0.0
-(linear 1) =&gt; 5.0
-(linear 1.5) =&gt; 2.5
+  (def points [[0 0] [1 5] [2 0] [3 5]])
+  (def linear (interpolate points :linear))
+  (linear 0) =&gt; 0.0
+  (linear 1) =&gt; 5.0
+  (linear 1.5) =&gt; 2.5
 
-; Specify boundary conditions
-(interpolate points :cubic :boundaries :closed)</pre>
+  ; Specify boundary conditions
+  (interpolate points :cubic :boundaries :closed)
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/3e069b5307f72f5e9835b8446833be9d2ade2cf6/modules/incanter-core/src/incanter/interpolation.clj#L22" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj#L22" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -161,7 +163,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (interpolate-grid grid type &amp; options)
 </pre>
-    <pre id="var-docstr">Interpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y.
+    <pre id="var-docstr">
+Interpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y.
 By default function interpolates on [0,1]x[0,1].
 
 Arguments:
@@ -220,7 +223,7 @@ Examples:
 (interpolator  2 100) =&gt; 0</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/3e069b5307f72f5e9835b8446833be9d2ade2cf6/modules/incanter-core/src/incanter/interpolation.clj#L179" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj#L181" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -228,7 +231,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (interpolate-parametric points type &amp; options)
 </pre>
-    <pre id="var-docstr">Builds a parametric function that interpolates given collection of points.
+    <pre id="var-docstr">
+Builds a parametric function that interpolates given collection of points.
 Parametric function represents a curve that go through all points. By default domain is [0, 1].
 
 Arguments:
@@ -271,10 +275,11 @@ Examples:
 ; Specify custom :range
 (def cubic (interpolate-parametric points :cubic :range [-10 10))
 (cubic -10) =&gt; [0.0 0.0]
-(cubic 0) =&gt; [1.0 1.0]</pre>
+(cubic 0) =&gt; [1.0 1.0]
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/3e069b5307f72f5e9835b8446833be9d2ade2cf6/modules/incanter-core/src/incanter/interpolation.clj#L82" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj#L83" id="var-source">Source</a>
   </div>
 </div>
 

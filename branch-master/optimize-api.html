@@ -141,10 +141,11 @@ Examples:
 
   ;; plot the second derivative function
   (def pdf-deriv2 (derivative pdf-deriv))
-  (add-lines plot x (pdf-deriv2 x))</pre>
+  (add-lines plot x (pdf-deriv2 x))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L68" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L66" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -176,10 +177,11 @@ Examples:
   (view (scatter-plot x y))
 
   (def grad (gradient f start))
-  (time (doall (grad start x)))</pre>
+  (time (doall (grad start x)))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L244" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L233" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -187,7 +189,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (hessian f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
-    <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
+    <pre id="var-docstr">
+Returns a function that calculates an approximation to the Hessian matrix
 of the given function. The vector of start values are used to determine
 the number of parameters required by the function, and to scale the
 step-size. The generated function accepts a vector of
@@ -211,10 +214,11 @@ Examples:
   (view (scatter-plot x y))
 
   (time (def hess (hessian f start)))
-  (time (doall (hess start x)))</pre>
+  (time (doall (hess start x)))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L291" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L279" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -222,8 +226,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (integrate f a b)
 </pre>
-    <pre id="var-docstr"> Integrate a function f from a to b
-
+    <pre id="var-docstr">
+Integrate a function f from a to b
 
 Examples:
   (defn f1 [x] 1)
@@ -248,10 +252,11 @@ Examples:
 
 Reference:
   <a href="http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html">http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html</a>
-  <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
+  <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a>
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L26" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L26" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -339,10 +344,11 @@ Examples:
   (def start2 [0.15 0.008 0.010])
   (add-lines plot x (f start2 x))
   (def nlm2 (non-linear-model f y x start2))
-  (add-lines plot x (:fitted nlm2))</pre>
+  (add-lines plot x (:fitted nlm2))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/7fc6c40be7e6aaa8a2eb057a5e04e87342beb89e/modules/incanter-core/src/incanter/optimize.clj#L578" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L551" id="var-source">Source</a>
   </div>
 </div>
 

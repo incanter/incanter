@@ -108,7 +108,8 @@ basic Bayesian modeling and inference.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-model-params size {:keys [x y coefs residuals]})
 </pre>
-    <pre id="var-docstr"> Returns a sample of the given size of the the parameters (coefficients and
+    <pre id="var-docstr">
+Returns a sample of the given size of the the parameters (coefficients and
 error variance) of the given linear-model. The sample is generated using
 Gibbs sampling.
 
@@ -138,10 +139,11 @@ Examples:
   (map sd (trans (:coefs param-samp)))
 
   ;; show the 95% bayesian confidence interval for the first coefficient
-  (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])</pre>
+  (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L35" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L35" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -149,7 +151,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-multinomial-params size counts)
 </pre>
-    <pre id="var-docstr"> Returns a sample of multinomial proportion parameters.
+    <pre id="var-docstr">
+Returns a sample of multinomial proportion parameters.
 The counts are assumed to have a multinomial distribution.
 A uniform prior distribution is assigned to the multinomial vector
 theta, then the posterior distribution of theta is
@@ -175,10 +178,11 @@ Examples:
 
   ;; view  a histogram of the difference in proportions between the first
   ;; two candidates
-  (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))</pre>
+  (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L95" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L95" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -186,51 +190,50 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-mvn-params size y &amp; options)
 </pre>
-    <pre id="var-docstr">Returns samples of means (sampled from an mvn distribution) and vectorized covariance
- matrices (sampled from an inverse-wishart distribution) for the given mvn data.
+    <pre id="var-docstr">
+Returns samples of means (sampled from an mvn distribution) and vectorized covariance
+matrices (sampled from an inverse-wishart distribution) for the given mvn data.
 
- Arguments:
-   size -- the number of samples to return
-   y -- the data used to estimate the parameters
-
-
- Returns map with following fields:
-   :means
-   :sigmas
+Arguments:
+  size -- the number of samples to return
+  y -- the data used to estimate the parameters
 
 
- Examples:
-
-   (use '(incanter core stats bayes charts))
-   (def y (sample-mvn 500 :mean [0 0] :sigma (identity-matrix 2)))
-   (def samp (sample-mvn-params 1000 y))
-
-   (map mean (trans (:means samp)))
-   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
-
-   (view (histogram (sel (:means samp) :cols 0) :x-label "mean 1"))
-   (view (histogram (sel (:means samp) :cols 1) :x-label "mean 2"))
-   (view (histogram (sel (:sigmas samp) :cols 1) :x-label "covariance"))
-   (view (histogram (sel (:sigmas samp) :cols 0) :x-label "variance 1"))
-   (view (histogram (sel (:sigmas samp) :cols 2) :x-label "variance 2"))
-
-   (map #(quantile % :probs [0.025 0.0975]) (trans (:means samp)))
-   (map #(quantile % :probs [0.025 0.0975]) (trans (:sigmas samp)))
+Returns map with following fields:
+  :means
+  :sigmas
 
 
+Examples:
+
+  (use '(incanter core stats bayes charts))
+  (def y (sample-mvn 500 :mean [0 0] :sigma (identity-matrix 2)))
+  (def samp (sample-mvn-params 1000 y))
+
+  (map mean (trans (:means samp)))
+  (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+
+  (view (histogram (sel (:means samp) :cols 0) :x-label "mean 1"))
+  (view (histogram (sel (:means samp) :cols 1) :x-label "mean 2"))
+  (view (histogram (sel (:sigmas samp) :cols 1) :x-label "covariance"))
+  (view (histogram (sel (:sigmas samp) :cols 0) :x-label "variance 1"))
+  (view (histogram (sel (:sigmas samp) :cols 2) :x-label "variance 2"))
+
+  (map #(quantile % :probs [0.025 0.0975]) (trans (:means samp)))
+  (map #(quantile % :probs [0.025 0.0975]) (trans (:sigmas samp)))
 
 
-   (use '(incanter core stats bayes charts))
-   (def y (sample-mvn 500 :sigma (symmetric-matrix [10 5 10]) :mean [5 2]))
-   (def samp (sample-mvn-params 1000 y))
-   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
-   (map mean (trans (:means samp)))
 
 
+  (use '(incanter core stats bayes charts))
+  (def y (sample-mvn 500 :sigma (symmetric-matrix [10 5 10]) :mean [5 2]))
+  (def samp (sample-mvn-params 1000 y))
+  (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
+  (map mean (trans (:means samp)))
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L133" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L131" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -238,10 +241,10 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-proportions size counts)
 </pre>
-    <pre id="var-docstr"> sample-proportions has been renamed sample-multinomial-params</pre>
+    <pre id="var-docstr">sample-proportions has been renamed sample-multinomial-params</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/bayes.clj#L88" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L88" id="var-source">Source</a>
   </div>
 </div>
 
