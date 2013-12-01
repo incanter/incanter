@@ -1086,7 +1086,12 @@
           theme (or (:theme opts) :default)
           legend? (true? (:legend opts))
           points? (true? (:points opts))
-          data-series (XYSeries. series-lab (:auto-sort opts true))
+          data-series (XYSeries. (cond
+                                   _group-by
+                                     (first _group-by)
+                                   :else
+                                     series-lab)
+                                 (:auto-sort opts true))
           dataset (XYSeriesCollection.)
           chart (do
                   (dorun
@@ -1108,7 +1113,13 @@
                 (doseq [i (range 1 (count x-groups))]
                   (add-lines chart (nth x-groups i)
                              (nth y-groups i)
-                             :series-label (format "%s, %s (%s)" 'x 'y i)
+                             :series-label (cond
+                                             _group-by
+                                               (nth _group-by i)
+                                             series-lab
+                                               series-lab
+                                             :else
+                                               (format "%s, %s (%s)" 'x 'y i))
                              :points points?)))]
       (.setRenderer (.getPlot chart) 0 (XYLineAndShapeRenderer. true points?))
       (set-theme chart theme)
@@ -1181,6 +1192,7 @@
            title# (or (:title opts#) "")
            x-lab# (or (:x-label opts#) (str '~x))
            y-lab# (or (:y-label opts#) (str '~y))
+           legend# (or  (:legend opts#) false)
            series-lab# (or (:series-label opts#)
                            (if group-by#
                              (format "%s, %s (0)" '~x '~y)
@@ -1188,6 +1200,7 @@
            args# (concat [~x ~y] (apply concat (seq (apply assoc opts#
                                                            [:group-by group-by#
                                                             :title title#
+                                                            :legend legend#
                                                             :x-label x-lab#
                                                             :y-label y-lab#
                                                             :series-label series-lab#]))))]
