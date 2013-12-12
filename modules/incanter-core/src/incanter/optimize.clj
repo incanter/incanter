@@ -142,10 +142,9 @@
     (def quad-grad (gradient-fn quad-fx 2))
     (quad-grad [1 1])
   "
-  ([fx n & options]
-    (let [funs (for [i (range n)] (partial-derivative fx i))]
-      (fn [theta] (map #(% theta) funs)))))
-
+  ([fx n & {:keys [dx] :or {dx 0.0001}}]
+    (let [funs (for [i (range n)] (partial-derivative fx i :dx dx))]
+      (fn [theta] (map #(% (apply vector theta)) funs)))))
 
 
 (defn- second-partial-derivative
@@ -778,14 +777,19 @@
     ;; run minimize function on rosenbrock to find root
     (= (minimize rosenbrock [0 10] rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
   "
-  [f start f-prime & {:keys [max-iter tol method]
-                      :or {max-iter 200
-                           tol 1E-5
-                           method :bfgs}}]
-    (let [min (cond :else fmin-bfgs)
-          [f f-calls] (with-counting f)
-          [f-prime f-prime-calls] (with-counting f-prime)]
-      (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
+  ([f start {:keys [max-iter tol method]
+             :or {f-prime (gradient-fn f (count start) :dx 0.00001)
+                  max-iter 200
+                  tol 1E-5
+                  method :bfgs}}] (minimize f start (gradient-fn f (count start) :dx 0.00001)))
+  ([f start f-prime {:keys [max-iter tol method]
+                     :or {max-iter 200
+                          tol 1E-5
+                          method :bfgs}}]
+   (let [min (cond :else fmin-bfgs)
+         [f f-calls] (with-counting f)
+         [f-prime f-prime-calls] (with-counting f-prime)]
+     (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls))))
 
 (defn maximize
   "
