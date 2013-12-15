@@ -744,12 +744,12 @@
     f -- Objective function. Takes a collection of values and returns a scalar
          of the value of the function.
     start -- Collection of initial guesses for the minimum
-    f-prime -- partial derivative of the objective function. Takes
-               a collection of values and returns a collection of partial
-               derivatives with respect to each variable. If this is not
-               provided it will be estimated using gradient-fn.
 
   Options:
+    :f-prime -- partial derivative of the objective function. Takes
+                a collection of values and returns a collection of partial
+                derivatives with respect to each variable. If this is not
+                provided it will be estimated using gradient-fn.
     :method (default :bfgs) currently no other options
     :tol (default 1E-5)
     :max-iter (default 200)
@@ -775,7 +775,7 @@
       [($= 2 * (200 * x ** 3 - 200 * x * y + x - 1))
        ($= 200 * (y - x ** 2))])
     ;; run minimize function on rosenbrock to find root
-    (= (minimize rosenbrock [0 10] rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
+    (= (minimize rosenbrock [0 10] :f-prime rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
   "
   [f start & {:keys [f-prime max-iter tol method]
                       :or {f-prime (gradient-fn f (count start) :dx 1E-5)
