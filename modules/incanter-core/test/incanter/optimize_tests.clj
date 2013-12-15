@@ -35,7 +35,7 @@
 
 
 (deftest minimize-test
-  (is (= (:value (minimize rosenbrock [0 0] rosenbrock-der {:max-iter 500})) (matrix [1 1]))))
+  (is (= (:value (minimize rosenbrock [0 0] :f-prime rosenbrock-der :max-iter 500)) (matrix [1 1]))))
 
 (deftest maximize-test
-  (is (= (:value (maximize neg-rosenbrock [0 0] neg-rosenbrock-der {:max-iter 500})) (matrix [1 1]))))
+  (is (= (:value (maximize neg-rosenbrock [0 0] :f-prime neg-rosenbrock-der :max-iter 500)) (matrix [1 1]))))

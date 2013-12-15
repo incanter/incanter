@@ -777,27 +777,24 @@
     ;; run minimize function on rosenbrock to find root
     (= (minimize rosenbrock [0 10] rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
   "
-  ([f start {:keys [max-iter tol method]
-             :or {f-prime (gradient-fn f (count start) :dx 0.00001)
-                  max-iter 200
-                  tol 1E-5
-                  method :bfgs}}] (minimize f start (gradient-fn f (count start) :dx 0.00001)))
-  ([f start f-prime {:keys [max-iter tol method]
-                     :or {max-iter 200
-                          tol 1E-5
-                          method :bfgs}}]
-   (let [min (cond :else fmin-bfgs)
-         [f f-calls] (with-counting f)
-         [f-prime f-prime-calls] (with-counting f-prime)]
-     (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls))))
+  [f start & {:keys [f-prime max-iter tol method]
+                      :or {f-prime (gradient-fn f (count start) :dx 1E-5)
+                           max-iter 200
+                           tol 1E-5
+                           method :bfgs}}]
+  (let [min (cond :else fmin-bfgs)
+        [f f-calls] (with-counting f)
+        [f-prime f-prime-calls] (with-counting f-prime)]
+    (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
 
 (defn maximize
   "
   This function tries to maximize a scalar function of one or more variables.
   See documentation of 'minimize' function for more information.
   "
-  [f start f-prime & {:keys [max-iter tol method]
-                      :or {max-iter 200
+  [f start & {:keys [f-prime max-iter tol method]
+                      :or {f-prime (gradient-fn f (count start) :dx 1E-5)
+                           max-iter 200
                            tol 1E-5
                            method :bfgs}}]
-    (minimize (comp - f) start (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))
+  (minimize (comp - f) start :f-prime (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))
