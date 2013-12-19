@@ -50,9 +50,10 @@
       :compress-delim (default true if delim = \\space, false otherwise) means
                       compress multiple adjacent delimiters into a single delimiter.
       :empty-field-value (default nil) indicates the interpretation of an empty field.
+      :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value]
+  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char]
                :or {delim \, quote \" skip 0 header false keyword-headers true}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
@@ -60,8 +61,8 @@
                             (fn [line] (filter #(not= % "") line))
                             identity)
         comment-char-fn (fn [line]
-                          (if (boolean (seq line))
-                            (if (.startsWith (first line) "%")
+                          (if (and (boolean (seq line)) comment-char)
+                            (if (.startsWith (first line) comment-char)
                               '()
                               line)
                             line))
