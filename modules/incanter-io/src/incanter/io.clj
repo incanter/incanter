@@ -59,6 +59,12 @@
         compress-delim-fn (if compress-delim?
                             (fn [line] (filter #(not= % "") line))
                             identity)
+        comment-char-fn (fn [line]
+                          (if (boolean (seq line))
+                            (if (.startsWith (first line) "%")
+                              '()
+                              line)
+                            line))
         remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
         parse-data-fn (fn [line]
                         (vec (map #(parse-string % empty-field-value) line)))
@@ -68,6 +74,7 @@
               (if-let [line (.readNext reader)]
                 (let [new-line (-> line
                                    compress-delim-fn
+                                   comment-char-fn
                                    remove-empty-fn
                                    parse-data-fn)]
                   (recur (if-not (empty? new-line) (conj lines new-line) lines)
