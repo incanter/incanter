@@ -142,10 +142,9 @@
     (def quad-grad (gradient-fn quad-fx 2))
     (quad-grad [1 1])
   "
-  ([fx n & options]
-    (let [funs (for [i (range n)] (partial-derivative fx i))]
-      (fn [theta] (map #(% theta) funs)))))
-
+  ([fx n & {:keys [dx] :or {dx 0.0001}}]
+    (let [funs (for [i (range n)] (partial-derivative fx i :dx dx))]
+      (fn [theta] (map #(% (apply vector theta)) funs)))))
 
 
 (defn- second-partial-derivative
@@ -745,12 +744,12 @@
     f -- Objective function. Takes a collection of values and returns a scalar
          of the value of the function.
     start -- Collection of initial guesses for the minimum
-    f-prime -- partial derivative of the objective function. Takes
-               a collection of values and returns a collection of partial
-               derivatives with respect to each variable. If this is not
-               provided it will be estimated using gradient-fn.
 
   Options:
+    :f-prime -- partial derivative of the objective function. Takes
+                a collection of values and returns a collection of partial
+                derivatives with respect to each variable. If this is not
+                provided it will be estimated using gradient-fn.
     :method (default :bfgs) currently no other options
     :tol (default 1E-5)
     :max-iter (default 200)
@@ -776,24 +775,26 @@
       [($= 2 * (200 * x ** 3 - 200 * x * y + x - 1))
        ($= 200 * (y - x ** 2))])
     ;; run minimize function on rosenbrock to find root
-    (= (minimize rosenbrock [0 10] rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
+    (= (minimize rosenbrock [0 10] :f-prime rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
   "
-  [f start f-prime & {:keys [max-iter tol method]
-                      :or {max-iter 200
+  [f start & {:keys [f-prime max-iter tol method]
+                      :or {f-prime (gradient-fn f (count start) :dx 1E-5)
+                           max-iter 200
                            tol 1E-5
                            method :bfgs}}]
-    (let [min (cond :else fmin-bfgs)
-          [f f-calls] (with-counting f)
-          [f-prime f-prime-calls] (with-counting f-prime)]
-      (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
+  (let [min (cond :else fmin-bfgs)
+        [f f-calls] (with-counting f)
+        [f-prime f-prime-calls] (with-counting f-prime)]
+    (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
 
 (defn maximize
   "
   This function tries to maximize a scalar function of one or more variables.
   See documentation of 'minimize' function for more information.
   "
-  [f start f-prime & {:keys [max-iter tol method]
-                      :or {max-iter 200
+  [f start & {:keys [f-prime max-iter tol method]
+                      :or {f-prime (gradient-fn f (count start) :dx 1E-5)
+                           max-iter 200
                            tol 1E-5
                            method :bfgs}}]
-    (minimize (comp - f) start (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))
+  (minimize (comp - f) start :f-prime (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))
