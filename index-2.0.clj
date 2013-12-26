@@ -3546,9 +3546,9 @@
    :name "derivative",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L66",
+   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L66",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/derivative",
    :doc
@@ -3560,37 +3560,37 @@
    :name "gradient",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L233",
+   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L232",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/gradient",
    :doc
    "\nReturns a function that calculates a 5-point approximation to\nthe gradient of the given function. The vector of start values are\nused to determine the number of parameters required by the function, and\nto scale the step-size. The generated function accepts a vector of\nparameter values and a vector of x data points and returns a matrix,\nwhere each row is the gradient evaluated at the corresponding x value.\n\nExamples:\n\n  (use '(incanter core optimize datasets charts))\n  (defn f [theta x]\n    (+ (nth theta 0)\n          (div (* x (- (nth theta 1) (nth theta 0)))\n               (+ (nth theta 2) x))))\n\n  (def start [20 200 100])\n  (def data (get-dataset :thurstone))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (view (scatter-plot x y))\n\n  (def grad (gradient f start))\n  (time (doall (grad start x)))\n",
    :var-type "function",
-   :line 233,
+   :line 232,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists ([f start & {:keys [tol dx], :or {tol 1.0E-4}}]),
    :name "hessian",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L279",
+   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L278",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/hessian",
    :doc
    "\nReturns a function that calculates an approximation to the Hessian matrix\nof the given function. The vector of start values are used to determine\nthe number of parameters required by the function, and to scale the\nstep-size. The generated function accepts a vector of\nparameter values and a vector of x data points and returns a matrix,\nwhere each row with p*(p+1)/2 columns, one for each unique entry in\nthe Hessian evaluated at the corresponding x value.\n\nExamples:\n\n  (use '(incanter core optimize datasets charts))\n  (defn f [theta x]\n    (+ (nth theta 0)\n          (div (* x (- (nth theta 1) (nth theta 0)))\n               (+ (nth theta 2) x))))\n\n  (def start [20 200 100])\n  (def data (get-dataset :thurstone))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (view (scatter-plot x y))\n\n  (time (def hess (hessian f start)))\n  (time (doall (hess start x)))\n",
    :var-type "function",
-   :line 279,
+   :line 278,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists ([f a b]),
    :name "integrate",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L26",
+   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L26",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/integrate",
    :doc
@@ -3609,15 +3609,15 @@
    :name "non-linear-model",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj#L551",
+   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L550",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/d2986033ce7ab60724d3504ef4419d8e2231ef67/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/non-linear-model",
    :doc
    "\nDetermine the nonlinear least-squares estimates of the\nparameters of a nonlinear model.\nBased on R's nls (non-linear least squares) function.\n\nArguments:\n  f -- model function, takes two arguments the first a list of parameters\n       that are to be estimated, and an x value.\n  y -- sequence of dependent data\n  x -- sequence of independent data\n  start -- start values for the parameters to be estimated\n\nOptions:\n  :method (default :gauss-newton) other option :newton-raphson\n  :tol (default 1E-5)\n  :max-iter (default 200)\n\nReturns: a hash-map containing the following fields:\n  :method -- the method used\n  :coefs  -- the parameter estimates\n  :gradient  -- the estimated gradient\n  :hessian -- the estimated hessian, if available\n  :iterations -- the number of iterations performed\n  :fitted -- the fitted values of y (i.e. y-hat)\n  :rss -- the residual sum-of-squares\n  :x -- the independent data values\n  :y -- the dependent data values\n\n\nExamples:\n\n  ;; example 1\n  (use '(incanter core optimize datasets charts))\n  ;; define the Michaelis-Menton model function\n  ;; y = a + (b - a)*x/(c + x)\n  (defn f [theta x]\n    (let [[a b c] theta]\n      (plus a (div (mult x (minus b a)) (plus c x)))))\n\n  (def start [20 200 100])\n  (def data (get-dataset :thurstone))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (def plot (scatter-plot x y))\n  (view plot)\n\n  (def nlm (non-linear-model f y x start))\n  (add-lines plot x (:fitted nlm))\n\n\n  ;; example 2\n  (use '(incanter core optimize datasets charts))\n  ;; Chwirut data set from NIST\n  ;; http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat\n  (def data (get-dataset :chwirut))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n\n  ;; define model function: y = exp(-b1*x)/(b2+b3*x) + e\n  (defn f [theta x]\n    (let [[b1 b2 b3] theta]\n      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))\n\n  (def plot (scatter-plot x y :legend true))\n  (view plot)\n\n  ;; the newton-raphson algorithm fails to converge to the correct solution\n  ;; using first set of start values from NIST, but the default gauss-newton\n  ;; algorithm converges to the correct solution.\n\n  (def start1 [0.1 0.01 0.02])\n  (add-lines plot x (f start1 x))\n  (def nlm1 (non-linear-model f y x start1))\n  (add-lines plot x (:fitted nlm1))\n\n  ;; both algorithms converges with second set of start values from NIST\n  (def start2 [0.15 0.008 0.010])\n  (add-lines plot x (f start2 x))\n  (def nlm2 (non-linear-model f y x start2))\n  (add-lines plot x (:fitted nlm2))\n",
    :var-type "function",
-   :line 551,
+   :line 550,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists
    ([chart
