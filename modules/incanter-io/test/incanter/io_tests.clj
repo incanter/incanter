@@ -24,7 +24,8 @@
 
 (ns incanter.io-tests
   (:use clojure.test 
-        (incanter core io)))
+        (incanter core io))
+  (:require [incanter.dataset :as ds]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.io.clj
@@ -83,8 +84,8 @@
 	  [["dat" test-data]
 	   ["csv" test-csv-data]
 	   ["tdd" test-tdd-data]]]
-    (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
-    (is (= 50 (count (:rows cars-dataset)))) (str "Reading rows for " name " failed"))) ;; end of read-dataset-validation tests
+    (is (= [:speed :dist] (col-names cars-dataset)) (str "Reading column names for " name " failed"))
+    (is (= 50 (count (ds/rows cars-dataset)))) (str "Reading rows for " name " failed"))) ;; end of read-dataset-validation tests
 
 (def parse-string (ns-resolve 'incanter.io 'parse-string))
 (deftest parse-string-validation
