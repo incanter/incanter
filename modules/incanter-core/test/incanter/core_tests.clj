@@ -106,10 +106,10 @@
   (let [data (dataset [:c1 :c2 :c3] [[1 2 3]])
         col-map {:c1 :new-c1 2 :new-c3}
         expected [:new-c1 :c2 :new-c3]]
-    (is (= (:column-names (rename-cols col-map data))
+    (is (= (col-names (rename-cols col-map data))
            expected))
-    (is (= (:column-names (with-data data
-                            (rename-cols col-map)))
+    (is (= (col-names (with-data data
+                        (rename-cols col-map)))
            expected))))
 
 ;; define a simple matrix for testing
