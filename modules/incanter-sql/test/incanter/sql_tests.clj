@@ -6,6 +6,7 @@
        [clojure.java.jdbc :exclude [resultset-seq]]
        [clojureql.core :as q :exclude [conj! disj! take drop distinct case compile sort]]
        )
+ (:require [incanter.dataset :as ds])
  )
 
 ;;HACK: Jack into the clojureql namespace to override the syntax of
@@ -192,8 +193,8 @@ verify the lazy fetching."
      )
    (let [dset (read-dataset (q/table :TAB1))]
      (is (dataset? dset))
-     (is (= [:my_id] (:column-names dset)))
-     (is (= 3M (:my_id (first (:rows dset))))))))
+     (is (= [:my_id] (col-names dset)))
+     (is (= 3M (:my_id (first (ds/rows dset))))))))
 
 (deftest test-db-data-types
   (wrap-db-test
@@ -202,8 +203,8 @@ verify the lazy fetching."
      (with-connection conn (do-commands "create table COMPLEX1 (a_number numeric, a_blob BLOB)"))
      (insert-dataset dataset-1 (q/table :COMPLEX1))
      (let [dset (read-dataset (q/table :COMPLEX1))]
-       (is (= [:a_number :a_blob] (:column-names dset)))
-       (is (= 2 (count (:rows dset))))))))
+       (is (= [:a_number :a_blob] (col-names dset)))
+       (is (= 2 (count (ds/rows dset))))))))
 
 (deftest test-roundtrip-1
   (wrap-db-test
@@ -216,7 +217,7 @@ verify the lazy fetching."
      (insert-dataset dataset-2 (q/table :ROUNDTRIP))
      (let [ret-val (read-dataset (q/table :ROUNDTRIP))]
        (is (dataset? ret-val))
-       (is (= [:xnum :xstr :xdte] (:column-names dataset-2)))
+       (is (= [:xnum :xstr :xdte] (col-names dataset-2)))
        ))))
 
 (deftest test-incanter-join
@@ -268,7 +269,7 @@ verify the lazy fetching."
        (let [query1 (-> (q/table :LARGE_SET))]
          (let [ret (read-dataset query1)]
            (is (dataset? ret))
-           (let [retrows (:rows ret)]
+           (let [retrows (ds/rows ret)]
              ;; Check the first row looks OK...
              (is (== 1                (:a (first retrows))))
              (is (= {:a 20M :b "X120"} (nth retrows 19)))
@@ -297,6 +298,6 @@ verify the lazy fetching."
        (insert-dataset large-set (q/table :LARGE))
        (let [ret (read-dataset (q/table :LARGE))]
          (is (dataset? ret))
-         (is (= 999 (count (:rows ret))))
+         (is (= 999 (count (ds/rows ret))))
          )))))
 
