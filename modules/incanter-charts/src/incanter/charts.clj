@@ -820,13 +820,15 @@
 (defn log-axis
 " Create a logarithmic axis.
 
-  Beware: Log will behave strangely for data below 1 (especially 0), filter them out.
+  Note: By default, values smaller than 0.5 are rounded to 0.5 to prevent strange behavior that
+  happens for values close to 0.
 
   Options:
     :base (default 10) base of the logarithm; typically 2 or 10
     :label (default none) the label of the axis
     :int-ticks? (default true) if true, use normal numbers instead of
        <base>^<exponent>, i.e. 1 instead of f.ex. 10^0.0
+    :smallest-value (default: 0.5) Set the smallest value represented by the axis, set to 0.0 to 'reset'
 
   See also:
     set-axis
@@ -839,6 +841,7 @@
   [& options]
   (let [opts (when options (apply assoc {} options))
         base (or (:base opts) 10)
+        smallest-value (or (:smallest-value opts) 0.5)
         int-ticks? (get opts :int-ticks? true)
         label (:label opts)
         axis (if label
@@ -847,6 +850,8 @@
     (doto axis (.setBase base))
     (if int-ticks?
       (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
+    (if smallest-value
+      (.setSmallestValue axis smallest-value)) ; TODO TEST THIS!
     axis))
 
 (defmulti set-axis
