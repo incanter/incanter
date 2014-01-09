@@ -11,7 +11,8 @@
 
 ;; Adapted from Java code at: http://dolf.trieschnigg.nl/jfreechart
 (defn save-svg
-" Save a chart object as an SVG document.
+  "
+  Save a chart object as an SVG document.
 
   Arguments:
     chart
@@ -26,8 +27,7 @@
     (use '(incanter core charts svg))
     (save-svg (function-plot sin -4 4) \"./svg-chart.svg\")
 
-
-"
+  "
   ([chart filename & {:keys [width height ] :or {width 500 height 400}}]
      (let [domImpl (GenericDOMImplementation/getDOMImplementation)
            document (.createDocument domImpl nil "svg" nil)
@@ -41,5 +41,4 @@
          (.stream svgGenerator out true)
          (.flush outputStream)
          (.close outputStream)))))
-
 
