@@ -31,10 +31,11 @@
                                  nrow identity-matrix decomp-cholesky decomp-svd
                                  matrix length log10 sum sum-of-squares sel matrix?
                                  cumulative-sum solve vectorize bind-rows to-dataset
-                                 conj-cols $where transform-col col-names)]
+                                 conj-cols $where transform-col col-names dataset)]
          [incanter.stats :only (mean median)])
    (:require [clj-time.core :as t]
-             [clj-time.coerce :as c]))
+             [clj-time.coerce :as c]
+             [incanter.dataset :as ds]))
 
  ;;;;; Start of ROLL functions ;;;;;
 
@@ -96,10 +97,10 @@
 ;; a dataset to the zoo function which will return the zoo value.
 
 (defn coredata
-  "Return the :rows of a dataset, with :index dissoc'd.
+  "Return the rows of a dataset, with :index dissoc'd.
  Intended to be used internally time series function to get at data."
   [x]
-  (->> x ($ [:not :index]) :rows))
+  (->> x ($ [:not :index]) (ds/rows)))
 
 ;; Credit: http://stackoverflow.com/questions/3249334/test-whether-a-list-contains-a-specific-value-in-clojure
 (defn- in? 
@@ -145,7 +146,8 @@
 (defn- order
   "Order a zoo so that the :index is increasing in time."
   [z]
-  (update-in z [:rows] row-order))
+  (dataset (col-names z)
+           (row-order (ds/rows z))))
 
 (defn within-zoo?
   "Is t between the first and last indices."
@@ -160,7 +162,7 @@ that contains an column of clj-time values specified by index-col, default :inde
 That column must contain values that can be coerced into Jodas using the TimeCoercible Protocol."
   ([x] (zoo x :index))
   ([x index-col]
-     {:pre [(-> x :column-names (in? index-col))]}
+     {:pre [(-> x (col-names) (in? index-col))]}
      (order
       (to-dataset
        (conj-cols
@@ -168,7 +170,7 @@ That column must contain values that can be coerced into Jodas using the TimeCoe
                (-> v
                    (dissoc index-col)
                    (assoc :index (to-date-time i))))
-             (:rows x)))))))
+             (ds/rows x)))))))
 
 (defn- zoo-simplify
   "Returns a vector if 1 row, else identity" 
@@ -210,7 +212,7 @@ each value.  Used for padding zoo in functions that shorten it."
   ([z n]
      {:post [(= (nrow z) (nrow %))]}
      (conj-cols
-      (map #(select-keys % [:index]) (:rows z))
+      (map #(select-keys % [:index]) (ds/rows z))
       (to-dataset
        (concat
         (take n (repeat (nil-row (-> z coredata first))))
@@ -265,9 +267,9 @@ each value.  Used for padding zoo in functions that shorten it."
   (to-dataset
    (map merge 
         (-> d
-            :column-names
+            (col-names)
             (zipmap (repeat v))
             repeat)
-        (:rows d)))))
+        (ds/rows d)))))
 
 

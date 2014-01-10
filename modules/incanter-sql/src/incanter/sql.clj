@@ -2,6 +2,7 @@
   "SQL module for interacting with databases."
   (:use [incanter.core :only [dataset]]
         [clojureql.core :as ql :exclude [conj! disj! take drop distinct case compile sort]])
+  (:require [incanter.dataset :as ds])
   )
 
 (defn- window [psize wsize]
@@ -48,4 +49,4 @@
     ))
 
 (defn insert-dataset [dset table]
-  (ql/conj! table (map #(zipmap (keys %) (vals %)) (:rows dset))))
+  (ql/conj! table (map #(zipmap (keys %) (vals %)) (ds/rows dset))))

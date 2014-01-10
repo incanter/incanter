@@ -41,7 +41,8 @@
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows safe-div)]))
+                              cumulative-sum solve vectorize bind-rows safe-div
+                              dataset?)]))
 
 (defn scalar-abs
   "Fast absolute value function"
@@ -1705,7 +1706,7 @@
   "
   (fn [coll & _]
     (cond
-      (instance? incanter.core.Dataset coll) ::dataset
+      (dataset? coll) ::dataset
       :else ::coll)))
 
 (defmethod sample ::coll

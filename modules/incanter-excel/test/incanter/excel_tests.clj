@@ -1,6 +1,6 @@
 (ns incanter.excel-tests
   (:use [clojure.test :only[deftest is]]
-        [incanter.core :only [dataset dataset? $]]
+        [incanter.core :only [dataset dataset? $ col-names]]
         [incanter.excel :only [save-xls read-xls]])
   (:import java.lang.Math
            java.util.Date
@@ -24,7 +24,7 @@
            result (do (save-xls dset fname) (read-xls fname))]
         (do
           (is (dataset? result))
-          (is (= cols (:column-names result)))))
+          (is (= cols (col-names result)))))
      (finally (. ffile delete)))))
 
 (deftest headers
@@ -35,7 +35,7 @@
                           [[1 2 3]])
             result (do (save-xls dset fname) (read-xls fname :header-keywords true))]
         (is (dataset? result))
-        (is (= (:column-names dset) (:column-names result))))
+        (is (= (col-names dset) (col-names result))))
       (finally (. ffile delete)))))
 
 (deftest xlsx
@@ -52,7 +52,7 @@
            result (do (save-xls dset fname) (read-xls fname))]
         (do
           (is (dataset? result))
-          (is (= cols (:column-names result)))))
+          (is (= cols (col-names result)))))
      (finally (. ffile delete)))))
 
 (deftest multi-sheets
@@ -70,6 +70,6 @@
             (is (= [1 2 3] (map int ($ :Ints one))))
             (is (dataset? two))
             (is (= [1 5 9] (map int ($ :a two))))
-            (is (= [:a :b :c :d] (:column-names two)))
+            (is (= [:a :b :c :d] (col-names two)))
             )))
       (finally (. ffile delete)))))
