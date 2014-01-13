@@ -71,6 +71,7 @@
                                          XYTextAnnotation
                                          XYPolygonAnnotation)))
 
+(declare set-axes)
 
 
 (defmulti set-background-default
@@ -1403,6 +1404,7 @@
       (.setSeriesShape (-> chart .getPlot .getRenderer) 0 (java.awt.geom.Ellipse2D$Double. -3 -3 6 6))
       (.setSeriesShape (-> chart .getPlot .getRenderer) 1 (java.awt.geom.Rectangle2D$Double. -3 -3 6 6))
       (set-theme chart theme)
+      (set-axes chart opts)
       chart)))
 
 
@@ -1761,8 +1763,27 @@
                           legend?		; no legend
                           true			; tooltips
                           false)
-                        (set-theme theme))]
+                        (set-theme theme)
+                        (set-axes opts))]
           chart)))))
+
+(defn- set-axes
+" If the options map contains :x-axis and/or :y-axis,
+  set them on the chart.
+
+  Options:
+    :x-axis (optional) The ValueAxis to use; see set-axis
+    :y-axis (optional) The ValueAxis to use; see set-axis
+
+
+  Returns: The chart
+
+  See also set-axis and f.ex. histogram
+"
+  [chart {:keys [x-axis y-axis]}]
+  (if x-axis (set-axis chart :x x-axis))
+  (if y-axis (set-axis chart :y y-axis))
+  chart)
 
 
 (defmacro histogram
@@ -1776,6 +1797,8 @@
     :title (default 'Histogram') main title
     :x-label (default x expression)
     :y-label (default 'Frequency')
+    :x-axis (optional) The ValueAxis to use; see set-axis
+    :y-axis (optional) The ValueAxis to use; see set-axis
     :legend (default false) prints legend
     :series-label (default x expression)
 
@@ -1867,6 +1890,7 @@
                                                           (str 'values))
                                                        (nth _categories i)))
         (set-theme chart theme)
+        (set-axes chart opts)
         chart))))
 
 
@@ -2007,6 +2031,7 @@
                           (str 'values))
                        (nth _categories i)))
           (set-theme chart theme)
+          (set-axes chart opts)
           chart))))
 
 
@@ -2144,6 +2169,7 @@
                           (str 'values))
                        (nth _categories i)))
           (set-theme chart theme)
+          (set-axes chart opts)
           chart))))
 
 
@@ -2281,6 +2307,7 @@
                           (str 'values))
                        (nth _categories i)))
           (set-theme chart theme)
+          (set-axes chart opts)
           chart))))
 
 
@@ -2407,6 +2434,7 @@
                           (str 'values))
                        (nth _categories i)))
           (set-theme chart theme)
+          (set-axes chart opts)
           chart))))
 
 
@@ -2524,6 +2552,7 @@
           (doseq [i (range 0 (count _values))]
             (.setValue dataset (nth _categories i) (nth _values i)))
           (set-theme chart theme)
+          (set-axes chart opts)
           chart))))
 
 
@@ -2618,6 +2647,7 @@
                 (nth x-groups i)
                 (str series-label " (" i ")") i)))
       (set-theme chart theme)
+      (set-axes chart opts)
       chart)))
 
 
@@ -2691,12 +2721,14 @@
          series-lab (or (:series-label opts) (format "%s" 'function))
          theme (or (:theme opts) :default)
          legend? (true? (:legend opts))]
-      (set-theme (xy-plot _x (map function _x)
+      (-> (xy-plot _x (map function _x)
                           :x-label x-lab
                           :y-label y-lab
                           :title title
                           :series-label series-lab
-                          :legend legend?) theme))))
+                          :legend legend?)
+          (set-theme theme)
+          (set-axes opts)))))
 
 
 (defmacro function-plot
@@ -2756,13 +2788,15 @@
          series-lab (or (:series-label opts) (format "%s" 'function))
          theme (or (:theme opts) :default)
          legend? (true? (:legend opts))]
-      (set-theme (xy-plot _x _y
+     (-> (xy-plot _x _y
                           :x-label x-lab
                           :y-label y-lab
                           :title title
                           :series-label series-lab
                           :legend legend?
-                          :auto-sort false) theme))))
+                          :auto-sort false)
+         (set-theme theme)
+         (set-axes opts)))))
 
 
 (defmacro parametric-plot
@@ -2875,7 +2909,8 @@
         (.setTitle chart title)
         (.addSubtitle chart legend)
         (org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
-        (set-theme chart theme))
+        (set-theme chart theme)
+        (set-axes chart opts))
        chart)))
 
 
@@ -3217,6 +3252,7 @@
         (.setSeriesRenderingOrder (.getPlot chart) SeriesRenderingOrder/FORWARD)
         (.setDatasetRenderingOrder (.getPlot chart) DatasetRenderingOrder/FORWARD)
         (set-theme chart theme)
+        (set-axes chart opts)
         chart))))
 
 
@@ -3254,12 +3290,14 @@
          norm-quants (quantile-normal quants)
          theme (or (:theme opts) :default)
          y (quantile _x :probs quants)]
-         (set-theme (scatter-plot norm-quants y
-                                  :title "QQ-Plot"
-                                  :x-label "Normal theoretical quantiles"
-                                  :y-label "Data quantiles"
-                                  :series-label "Theoretical Normal")
-                    theme))))
+     (->
+      (scatter-plot norm-quants y
+                    :title "QQ-Plot"
+                    :x-label "Normal theoretical quantiles"
+                    :y-label "Data quantiles"
+                    :series-label "Theoretical Normal")
+      (set-theme theme)
+      (set-axes opts)))))
 
 
 (defn bland-altman-plot
@@ -3307,6 +3345,7 @@
           (add-lines plot _x (repeat (count _x) y-sd) :series-label "mean + sd")
           (add-lines plot _x (repeat (count _x) (- 0 y-sd)) :series-label "mean - sd")
           (set-theme plot theme)
+          (set-axes plot opts)
           plot))))
 
 
