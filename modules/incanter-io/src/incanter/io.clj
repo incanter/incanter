@@ -1,4 +1,4 @@
-;;; io.clj -- Data I/O library for Clojure built on CSVReader
+;;; io.clj -- Data I/O library for Clojure built on data.csv
 
 ;; by David Edgar Liebke http://incanter.org
 ;; March 11, 2009
@@ -21,10 +21,10 @@
 
 (ns ^{:doc "Library for reading and writing Incanter datasets and matrices."}
   incanter.io
-  (:import (java.io FileReader FileWriter File)
-           (au.com.bytecode.opencsv CSVReader))
+  (:import (java.io FileWriter File))
   (:use [incanter.core :only (dataset save)])
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]
+            [clojure.data.csv :as csv]))
 
 (defn- parse-string [value & [empty-value]]
   (if (= value "")
@@ -63,16 +63,14 @@
         parse-data-fn (fn [line]
                         (vec (map #(parse-string % empty-field-value) line)))
         [parsed-data column-count]
-          (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
-            (loop [lines [] max-column 0]
-              (if-let [line (.readNext reader)]
-                (let [new-line (-> line
-                                   compress-delim-fn
-                                   remove-empty-fn
-                                   parse-data-fn)]
-                  (recur (if-not (empty? new-line) (conj lines new-line) lines)
-                         (max max-column (count new-line))))
-                [lines max-column])))
+          (with-open [reader (io/reader filename)]
+              (let [lines (map #(-> %
+                                    compress-delim-fn
+                                    remove-empty-fn
+                                    parse-data-fn
+                                    ((fn [s] [s (count s)])))
+                               (csv/read-csv reader :separator delim :quote quote))]
+                [(filter seq (map first lines)) (apply max (map second lines))]))
         header-row (when header (first parsed-data))
         dataset-body (if header (rest parsed-data) parsed-data)
         column-names-strs

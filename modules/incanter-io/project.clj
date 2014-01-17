@@ -7,8 +7,7 @@
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.5.5-SNAPSHOT"]
                  [org.clojure/clojure "1.5.1"]
-                 ;; TODO: switch to data.csv?
-                 [net.sf.opencsv/opencsv "2.3"]
+                 [org.clojure/data.csv "0.1.2"]
                  ;; TODO: switch to data.json?
                  [org.danlarkin/clojure-json "1.1"
                   :exclusions [org.clojure/clojure
