@@ -52,8 +52,8 @@
       :header-fn applied to each header value in the dataset, defaults to keyword. Only applied if :header is true.
   "
 
-  [filename & {:keys [delim keyword-headers quote header compress-delim empty-field-value header-fn]
-               :or {delim \, quote \" header false keyword-headers true header-fn keyword}}]
+  [filename & {:keys [delim  quote header compress-delim empty-field-value header-fn]
+               :or {delim \, quote \" header false header-fn keyword}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
