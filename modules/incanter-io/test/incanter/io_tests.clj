@@ -136,6 +136,9 @@
       (is (= (read-dataset (data "11,,13\n21,22,23"))
              (to-dataset [[11 nil 13][21 22 23]]))
           "Empty values converted to nil by default")
+      (is (= (read-dataset (data "11, ,13\n21,22,23"))
+             (to-dataset [[11 " " 13][21 22 23]]))
+          "Blank strings not converted to nil by default")
 
       (testing "should :empty-field-value option always pad rows? "
         (is (= (read-dataset (data "11,,13\n21,22,,24") :empty-field-value :NA)
