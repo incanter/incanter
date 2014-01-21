@@ -97,11 +97,16 @@
     (is (= (col-names (read-dataset (java.io.StringReader. "11,12,13\n21,22,23")))
            (default-col-names 3)))))
 
+(defn data
+  "Returns string s as a StringReader which can be read by read-dataset"
+  [s]
+  (java.io.StringReader. s))
+
 (with-test
   (defn cars-ds
     [& options]
     (apply read-dataset (str incanter-home "data/cars.csv") options))
-  (testing "read-dataset header options"
+  (testing "header options"
     (is (= (col-names (cars-ds :header true)) [:speed :dist])
         "Default header function should be keyword.")
     (is (= (col-names (cars-ds)) (default-col-names 2))
@@ -111,7 +116,44 @@
            [:SPEED :DIST])
         "Header function should be used.")
     (is (= (col-names (cars-ds :header-fn identity)) (default-col-names 2))
-        "Header function should not be used.")))
+        "Header function should not be used."))
+
+  (testing "options"
+    (testing "compress delimeters"
+      (let [ds (fn [& options]
+                 (apply read-dataset (data "a b c\nd e  f\n") options))]
+        (is (= (ds :delim \space)
+               (to-dataset [["a" "b" "c"] ["d" "e" "f"]]))
+            "compress delimeters")
+        (is (= (ds :delim \space :compress-delim false)
+               (to-dataset [["a" "b" "c"] ["d" "e" "" "f"]]))
+            "Should not compress delimiters")))
+
+    (testing "empty field values"
+      (is (= (read-dataset (data "11,,13\n21,22,23") :empty-field-value :NA)
+             (to-dataset [[11 :NA 13][21 22 23]]))
+          "Empty values should be :NA")
+      (is (= (read-dataset (data "11,,13\n21,22,23"))
+             (to-dataset [[11 nil 13][21 22 23]]))
+          "Empty values converted to nil by default")
+
+      (testing "should :empty-field-value option always pad rows? "
+        (is (= (read-dataset (data "11,,13\n21,22,,24") :empty-field-value :NA)
+               (to-dataset [[11 :NA 13][21 22 :NA 24]]))
+            "Should behave same as to-dataset when different row lengths. Empty values :NA")
+        (is (= (read-dataset (data "11,,13\n21,22,,24"))
+               (to-dataset [[11 nil 13][21 22 nil 24]]))
+            "Should behave same as to-dataset when different row lengths. Empty values nil")))
+
+    (testing "skip option"
+      (is (= (read-dataset (data "11,12,13\n21,22,23") :skip 1)
+             (to-dataset [21 22 23] :transpose true))
+          "Should skip first line."))
+
+    (testing "parsing numbers"
+      (is (= (read-dataset (data "001,010,011,100,0100"))
+             (to-dataset ["001" "010" "011" "100" "0100"] :transpose true))
+          "Categorical data should not be converted to number."))))
 
 (def parse-string (ns-resolve 'incanter.io 'parse-string))
 (deftest parse-string-validation
