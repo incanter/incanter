@@ -72,16 +72,16 @@
                                     ((fn [s] [s (count s)])))
                                (csv/read-csv reader :separator delim :quote quote))]
                 [(filter seq (map first lines)) (apply max (map second lines))]))
-        header-row (if header
-                     (map header-fn (first parsed-data))
-                     (map (comp keyword (partial str "col")) (range (count (first parsed-data)))))
+        header-row (when header (map header-fn (first parsed-data)))
         dataset-body (if header (rest parsed-data) parsed-data)
         padded-body
           (if (not (nil? empty-field-value))
             (map #(pad-vector % column-count empty-field-value)
                  dataset-body)
             dataset-body)]
-    (dataset header-row padded-body)))
+    (if header
+      (dataset header-row padded-body)
+      (incanter.core/to-dataset padded-body))))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
