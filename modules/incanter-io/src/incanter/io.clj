@@ -45,7 +45,6 @@
     Options:
       :delim (default \\,), other options (\\tab \\space \\|  etc)
       :quote (default \\\") character used for quoting strings
-      :skip (default 0) the number of lines to skip at the top of the file.
       :header (default false) indicates the file has a header line
       :compress-delim (default true if delim = \\space, false otherwise) means
                       compress multiple adjacent delimiters into a single delimiter.
@@ -53,8 +52,8 @@
       :header-fn applied to each header value in the dataset, defaults to keyword. Only applied if :header is true.
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value header-fn]
-               :or {delim \, quote \" skip 0 header false keyword-headers true header-fn keyword}}]
+  [filename & {:keys [delim keyword-headers quote header compress-delim empty-field-value header-fn]
+               :or {delim \, quote \" header false keyword-headers true header-fn keyword}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
