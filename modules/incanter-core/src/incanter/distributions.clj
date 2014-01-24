@@ -331,7 +331,7 @@
   "
   [n k]
   (let [res (transient (into [] (range 0 k)))]
-    (doall (map
+    (dorun (map
      (fn [i] (if (< (/ k i) (rand)) (assoc! res (rand-int k) i)))
      (range k n)))
     (persistent! res)))

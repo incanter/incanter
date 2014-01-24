@@ -61,7 +61,7 @@
 (deftest dataset-transforms
   (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
       "Single-row special case")
-  (is (= (transform-col dataset1 :b (partial + 10))) (dataset [:a :b :c] [[1 12 3] [4 15 6]]))
+  (is (= (transform-col dataset1 :b (partial + 10)) (dataset [:a :b :c] [[1 12 3] [4 15 6]])))
   (is (= (transform-col dataset1 :b * 2) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
 
 (deftest $group-by-tests
@@ -188,7 +188,7 @@
                              [10 11 12]])))
   (is (= (seq A) A))
   (is (= (first (first A)) 1.0))
-  (is (= (nth (nth A 1) 1.0)))
+  (is (= (nth (nth A 0) 0) 1.0))
   ;; get column 1 (i.e. second column) of matrix A
   (is (= (map #(nth % 1) A) [2.0 5.0 8.0 11.0])))
 
@@ -408,7 +408,7 @@
   (is (= (plus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [2 4 6])))
   (is (= (plus [1.0 2.0 3.0] 1) (matrix [2 3 4])))
   (is (= (plus 1 [1.0 2.0 3.0]) (matrix [2 3 4])))
-  (is (= (plus [1.0 2.0 3.0] (matrix [1 2 3]) (matrix [2 4 6])))))
+  (is (= (plus [1.0 2.0 3.0] (matrix [1 2 3])) (matrix [2 4 6]))))
 
 (deftest matrix-minus-test
   ;; element by element subtraction on matrices
@@ -439,7 +439,7 @@
   (is (= (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
   (is (= (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
   (is (= (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
-  (is (= (minus [1 2 3] (matrix [1 2 3]) (matrix [0 0 0]))))
+  (is (= (minus [1 2 3] (matrix [1 2 3])) (matrix [0 0 0])))
   (is (= (minus 1) -1))
   (is (= (minus [1.0 2.0 3.0]) (matrix [-1.0 -2.0 -3.0])))
   (is (= (minus A) (matrix [[-1 -2 -3]
@@ -666,28 +666,30 @@
 
 
 (deftest factorial-test
-  (is (factorial 5) 120.0)
-  (is (factorial 0) 1.0)
+  (is (= (factorial 5) 120.0))
+  (is (= (factorial 0) 1.0))
   (is (thrown? AssertionError (factorial -1))))
 
+(defn nan? [x]
+  (.isNaN x))
 
 (deftest safe-div-test
-  (is 1/2 (safe-div 2))
-  (is 2 (safe-div 10 5))
-  (is 2 (safe-div 20 2 5))
+  (is (= 1/2 (safe-div 2)))
+  (is (= 2 (safe-div 10 5)))
+  (is (= 2 (safe-div 20 2 5)))
 
-  (is -1/2 (safe-div -2))
-  (is -2 (safe-div -10 5))
-  (is -2 (safe-div -20 2 5))
+  (is (= -1/2 (safe-div -2)))
+  (is (= -2 (safe-div -10 5)))
+  (is (= -2 (safe-div -20 2 5)))
 
-  (is Double/NaN (safe-div 0))
-  (is Double/NaN (safe-div 0 0))
-  (is Double/NaN (safe-div 0 0 5))
-  (is Double/POSITIVE_INFINITY (safe-div 10 0))
-  (is Double/POSITIVE_INFINITY (safe-div 20 2 2 0))
-  (is Double/POSITIVE_INFINITY (safe-div 20 0 2 2))
-  (is Double/NEGATIVE_INFINITY (safe-div -10 0))
-  (is Double/NEGATIVE_INFINITY (safe-div -10 5 0)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 0)))
+  (is (nan? (safe-div 0 0)))
+  (is (nan? (safe-div 0 0 5)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 10 0)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 20 2 2 0)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 20 0 2 2)))
+  (is (= Double/NEGATIVE_INFINITY (safe-div -10 0)))
+  (is (= Double/NEGATIVE_INFINITY (safe-div -10 5 0))))
 
 (deftest pow-test
   (is (= (pow 2 2) 4.0))

@@ -19,8 +19,9 @@
   ([v1] (and (not (contains? all-fn-list v1)) (symbol? v1)))
   ([v1 v2] (and (= v1 v2) (same-var? v1))))
 
-(defn- reduce-expr [e op]
+(defn- reduce-expr
   "return the last (third) item of a list, or a symbol and then everything after that"
+  [e op]
   (if (= (count e) 3)
       (nth e 2)
       (conj (nthnext e 2) op)))
@@ -31,7 +32,8 @@
 (defn- difference? [x] (and (>= (count x) 3) (= (first x) '-)))
 (defn- quotient? [x] (and (>= (count x) 3) (= (first x) '/)))
 
-(defn- conv-qtnt [x] "Convert a quotient to a product of a base with an inverse"
+(defn- conv-qtnt "Convert a quotient to a product of a base with an inverse"
+  [x]
   (list '* (second x) (list 'pow (list* '*  1 (nthnext x 1))) -1))
 
 ;exp can also kind of be chainrulized below, it makes sense not to though since
@@ -51,8 +53,9 @@
     (number? a1) (list '+ a1 a2)
     true (list '+ a2 a1)))
 
-(defn- make-prod [a1 a2]
+(defn- make-prod
   "assemble a product expression properly"
+  [a1 a2]
   (cond
     (= a1 0) 0
     (= a2 0) 0
@@ -62,8 +65,9 @@
     (number? a1) (list '* a1 a2)
     true (list '* a2 a1)))
 
-(defn- make-expnt [b e]
+(defn- make-expnt
   "assemble an exponent expression properly."
+  [b e]
   (cond
     (= b 0) 0
     (= b 1) 1
