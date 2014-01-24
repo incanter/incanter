@@ -37,20 +37,24 @@
 (def test-data (read-dataset 
                  (str incanter-home "data/cars.dat") 
                  :delim \space
+                 :row-fn #(map parse-string (filter seq  %))
                  :header true)) ; default delimiter: \,
 ;; read in a dataset from a comma delimited file 
 (def test-csv-data (read-dataset 
                      (str incanter-home "data/cars.csv") 
+                     :row-fn #(map parse-string %)
                      :header true))
 ;; read in a dataset from a tab delimited file 
 (def test-tdd-data (read-dataset 
                      (str incanter-home "data/cars.tdd") 
                      :header true 
+                     :row-fn #(map parse-string %)
                      :delim \tab)) 
 ;; read in the iris dataset from a space delimited file 
 (def iris-data (read-dataset 
                  (str incanter-home "data/iris.dat") 
                  :delim \space
+                 :row-fn #(map parse-string %)
                  :header true))
 ;; read in the social science survey dataset from a space delimited file 
 (def ols-data (to-matrix (read-dataset 
@@ -122,7 +126,7 @@
     (testing "compress delimeters"
       (let [ds (fn [& options]
                  (apply read-dataset (data "a b c\nd e  f\n") options))]
-        (is (= (ds :delim \space)
+        (is (= (ds :delim \space :row-fn #(filter seq %))
                (to-dataset [["a" "b" "c"] ["d" "e" "f"]]))
             "compress delimeters")
         (is (= (ds :delim \space :compress-delim false)
@@ -130,46 +134,130 @@
             "Should not compress delimiters")))
 
     (testing "empty field values"
-      (is (= (read-dataset (data "11,,13\n21,22,23") :empty-field-value :NA)
+      (is (= (read-dataset (data "11,,13\n21,22,23")
+                           :row-fn (fn [row] (map #(parse-string % :NA) row)))
              (to-dataset [[11 :NA 13][21 22 23]]))
           "Empty values should be :NA")
-      (is (= (read-dataset (data "11,,13\n21,22,23"))
-             (to-dataset [[11 nil 13][21 22 23]]))
-          "Empty values converted to nil by default")
+      (is (= (read-dataset (data "11,,13\n21,22,23")
+                           :row-fn (fn [row] (map #(if (seq %) %) row)))
+             (to-dataset [["11" nil "13"]["21" "22" "23"]]))
+          "Empty values converted to nil")
       (is (= (read-dataset (data "11, ,13\n21,22,23"))
-             (to-dataset [[11 " " 13][21 22 23]]))
-          "Blank strings not converted to nil by default")
+             (to-dataset [["11" " " "13"]["21" "22" "23"]]))
+          "Blank strings (\" \") not converted to nil")
+      (is (= (read-dataset (data "11, ,13\n21,22,23")
+                           :row-fn (fn [row] (map #(when-let [s (seq %)] %) row)))
+             (to-dataset [["11" " " "13"]["21" "22" "23"]]))
+          "Blank strings (\" \") converted to nil"))
 
       (testing "should :empty-field-value option always pad rows? "
-        (is (= (read-dataset (data "11,,13\n21,22,,24") :empty-field-value :NA)
+        (is (= (read-dataset (data "11,,13\n21,22,,24")
+                             :row-fn (fn [row] (map #(parse-string % :NA) row)))
                (to-dataset [[11 :NA 13][21 22 :NA 24]]))
             "Should behave same as to-dataset when different row lengths. Empty values :NA")
-        (is (= (read-dataset (data "11,,13\n21,22,,24"))
+        (is (= (read-dataset (data "11,,13\n21,22,,24")
+                             :row-fn #(map parse-string %))
                (to-dataset [[11 nil 13][21 22 nil 24]]))
-            "Should behave same as to-dataset when different row lengths. Empty values nil")))
+            "Should behave same as to-dataset when different row lengths. Empty values nil")
+        (is (= (read-dataset (data "11,,13\n21,22,,24"))
+               (to-dataset [["11" "" "13"]["21" "22" "" "24"]]))
+            "Should behave same as to-dataset when different row lengths. Empty values not converted"))
+
+    (testing "skip empty lines"
+      (is (= (read-dataset (data "1,2,3\n\n7,8,9"))
+             (to-dataset [["1" "2" "3"] ["7" "8" "9"]]))
+          "Should skip blank lines.")
+      (is (= (read-dataset (data "1,2,3\n,,\n7,8,9"))
+             (to-dataset [["1" "2" "3"] ["7" "8" "9"]]))
+          "Should skip lines with only empty values.")
+      (is (= (read-dataset (data "1,2,3\n, ,\n7,8,9"))
+             (to-dataset [["1" "2" "3"] ["7" "8" "9"]]))
+          "Should skip lines with only empty values. blank (\" \") values considered empty.")
+      (is (= (read-dataset (data "1,2,3\n,,,\n7,8,9"))
+             (to-dataset [["1" "2" "3"] ["7" "8" "9"]]))
+          "Should skip lines with only empty values even if it contains extra fields.")
+      (is (= (read-dataset (data "1,2,3\n,\n7,8,9"))
+             (to-dataset [["1" "2" "3"] ["7" "8" "9"]]))
+          "Should skip lines with only empty values even if it contains less fields.")
+      (is (= (read-dataset (data "1,2,3\n\n7,8,9")
+                           :skip-blank-lines false)
+             (to-dataset [["1" "2" "3"] [""] ["7" "8" "9"]]))
+          "Should not skip blank lines.")
+      (is (= (read-dataset (data "1,2,3\n, ,\n7,8,9")
+                           :skip-blank-lines false)
+             (to-dataset [["1" "2" "3"] ["" " " ""] ["7" "8" "9"]]))
+          "Should not skip blank lines with only empty values."))
 
     (testing "skip option"
-      (is (= (read-dataset (data "11,12,13\n21,22,23") :skip 1)
-             (to-dataset [21 22 23] :transpose true))
-          "Should skip first line."))
+      (is (= (read-dataset (data "11,12,13\n21,22,23\n31,32,33")
+                           :dataset-fn (partial drop 1))
+             (to-dataset [["21" "22" "23"] ["31" "32" "33"]]))
+          "Should skip first line.")
+      (is (= (read-dataset (data "11,12,13\n21,22,23\n31,32,33")
+                           :header true
+                           :dataset-fn (partial drop 1))
+             (dataset [:11 :12 :13] [["31" "32" "33"]]))
+          "Should skip first line after header."))
 
     (testing "parsing numbers"
       (is (= (read-dataset (data "001,010,011,100,0100"))
              (to-dataset ["001" "010" "011" "100" "0100"] :transpose true))
-          "Categorical data should not be converted to number."))))
+          "Categorical data should not be converted to number.")
+      (is (= (read-dataset (data "1,2,3\n4,5,6")
+                           :row-fn #(update-in % [2] read-string))
+             (to-dataset [["1" "2" 3] ["4" "5" 6]]))
+          "Third column should be converted to number.")
+      (is (thrown-with-msg? RuntimeException #"EOF while reading"
+                            (read-dataset (data "1,2,3\n4,5,")
+                                          :row-fn #(update-in % [2] read-string)))
+          "Should throw exception. read-string can't read empty string."))))
 
-(def parse-string (ns-resolve 'incanter.io 'parse-string))
+(deftest missing-values-handling
+  (testing "Non string"
+    (are [x] (= nil (missing-value? x))
+         :NA
+         :1
+         'symbol
+         '(1 2)
+         []
+         pos?))
+  (testing "nil"
+    (is (= true (missing-value? nil))))
+  (testing "Strings"
+    (are [x] (= true (missing-value? x))
+         ""
+         "   "
+         "\n")))
+
 (deftest parse-string-validation
-  
+
   (testing "Parsing string values into numbers"
     (is (= 1234 (parse-string "1234")))
     (is (instance? java.lang.Long (parse-string "5678")))
     (is (instance? java.lang.Long (parse-string "1330418008377")))
     ))
 
-(deftest missing-fields-validation 
-  (testing "Proper handling of missing fields."
-    (let [ds (read-dataset (str incanter-home "data/missing_values.csv")
+(deftest missing-fields-validation
+  (testing "Proper handling of missing fields. Pad vectors and convert empty fields to :NA"
+    ;; This test shows how to handle complicated scenarios.
+    ;; The row function converts the sixth field into a number if possible,
+    ;; if field is empty it gets converted to nil. Then all nil values are converted to :NA.
+    ;; The dataset function gets the maximum number of fields for all rows in the data,
+    ;; and adds :NA to fill out rows with less fields.
+    (let [numeric-field (fn [v index] (if-let [val (get v index)]
+                                        (assoc v index (when (seq val)
+                                                         (read-string val)))
+                                        v))
+          nil->na (fn [row] (map #(if (nil? %) :NA %) row))
+          pad-rows (fn [ds] (let [cols (apply max (map count ds))
+                                  pad #(concat % (repeat (- cols (count %))
+                                                         :NA))]
+                              (map pad ds)))
+          row-fn (fn [row] (-> row
+                               (numeric-field 6)
+                               nil->na))
+          ds (read-dataset (str incanter-home "data/missing_values.csv")
                            :header true
-                           :empty-field-value :NA)]
+                           :row-fn row-fn
+                           :dataset-fn pad-rows)]
       (is (= ($ 6 ds) [4 16 :NA 40 35 :NA])))))
