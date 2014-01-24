@@ -288,8 +288,8 @@
   ; which I arbitrarily decide are cups 0 -3
   (let [lady-fn (fn [x] (count (intersection (set x) #{0 1 2 3})))
         lady-tasting-tea (test-statistic-distribution lady-fn 8 4)]
-    (= (support lady-tasting-tea) #{0 1 2 3}) ; possible cups correctly classified
-    (= (map #(pdf lady-tasting-tea %) [0 1 2 3 4]) [1/70 16/70 36/70 16/70 1/70])))
+    (is (= (support lady-tasting-tea) #{0 1 2 3})) ; possible cups correctly classified
+    (is (= (map #(pdf lady-tasting-tea %) [0 1 2 3 4]) [1/70 16/70 36/70 16/70 1/70]))))
 
     
 ;; tests against incanter.stats, checking for similar behaviour
