@@ -306,7 +306,7 @@
              (_theme chart)))
          chart))))
 
-(defn- data-as-list [x data]
+(defn- data-as-list
   "
   data-as-list [x data]
 
@@ -314,6 +314,7 @@
   If x is a single value, and data is undefined, return x in vector
   If x is a single value, and data is defined, return ($ x data)
   "
+  [x data]
   (if (coll? x)
     (to-list x)
     (if data
@@ -323,18 +324,20 @@
           [selected]))
       [x])))
 
-(defn- in-coll [x]
+(defn- in-coll
   "
   in-coll [x]
 
   If x is a collection, return it
   Otherwise return x in a vector"
+  [x]
   (if (coll? x)
     x
     [x]))
 
-(defn- range-inclusive [start end step]
+(defn- range-inclusive
   "Similar to range but adds end to result."
+  [start end step]
   (concat (range start end step) [end]))
 
 (defn add-histogram*
