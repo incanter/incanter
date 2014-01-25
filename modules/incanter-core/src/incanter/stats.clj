@@ -1592,7 +1592,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
   "
   ([x lag]
-    auto-correlation x lag (mean x) (variance x))
+    (auto-correlation x lag (mean x) (variance x)))
   ([x lag mean variance]
     (DoubleDescriptive/autoCorrelation
       (DoubleArrayList. (double-array (to-list x)))
@@ -2086,7 +2086,7 @@
     http://en.wikipedia.org/wiki/Coefficient_of_determination
   "
   ([y x & {:keys [intercept] :or {intercept true}}]
-    (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
+    (let [_x (if intercept (bind-columns (repeat (nrow x) 1) x) x)
           xtx (mmult (trans _x) _x)
           xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
           xty (mmult (trans _x) y)
@@ -2818,7 +2818,7 @@
   "A stripped version of linear-model that returns a map containing only
   the coefficients."
   ([y x & {:keys [intercept] :or {intercept true}}]
-    (let [_x (if intercept (bind-columns (replicate (nrow x) 1) x) x)
+    (let [_x (if intercept (bind-columns (repeat (nrow x) 1) x) x)
           xtx (mmult (trans _x) _x)
           xtxi (if (number? xtx) (/ 1 xtx) (solve xtx))
           xty (mmult (trans _x) y)
