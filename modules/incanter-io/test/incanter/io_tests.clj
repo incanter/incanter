@@ -229,6 +229,14 @@
          "   "
          "\n")))
 
+(deftest example-skipping-commented-lines
+  (testing "skip commented lines"
+    (let [comment? (fn [s v] (.startsWith (first v) s))]
+      (is (= (read-dataset (data "#a comment\n1,2,3\n#another comment\n4,5,6")
+                           :dataset-fn #(remove (partial comment? "#") %))
+                           (to-dataset [["1" "2" "3"] ["4" "5" "6"]]))
+             "Lines beginning with '#' should be skipped"))))
+
 (deftest parse-string-validation
 
   (testing "Parsing string values into numbers"
