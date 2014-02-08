@@ -83,12 +83,12 @@ namespace.
 <p></p>
 <h2>Overview</h2>
 
-<pre id="namespace-docstr">A simple library that provides functions for persisting 
+<pre id="namespace-docstr">A simple library that provides functions for persisting
 Incanter data structures using MongoDB.
 
-Use incanter.mongodb in combination with the somnium.congomongo library. 
-For usage examples, see the Congomongo README at <a href="http://github.com/somnium/congomongo">http://github.com/somnium/congomongo</a>, 
-and the examples/blog/mongodb_datasets.clj file in the Incanter distribution. 
+Use incanter.mongodb in combination with the somnium.congomongo library.
+For usage examples, see the Congomongo README at <a href="http://github.com/somnium/congomongo">http://github.com/somnium/congomongo</a>,
+and the examples/blog/mongodb_datasets.clj file in the Incanter distribution.
 
 Here are Somnium's descriptions of Congomongo's functions:
 
@@ -161,31 +161,34 @@ Here are Somnium's descriptions of Congomongo's functions:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (fetch-dataset &amp; args)
 </pre>
-    <pre id="var-docstr">Queries a MongoDB database, accepting the same arguments as 
-somnium.congomongo/fetch, but returning an Incanter dataset instead 
+    <pre id="var-docstr">
+Queries a MongoDB database, accepting the same arguments as
+somnium.congomongo/fetch, but returning an Incanter dataset instead
 of a sequence of maps.
 
 Examples:
 
-   (use '(incanter core datasets mongodb))
-   (use 'somnium.congomongo)
+ (use '(incanter core datasets mongodb))
+ (use 'somnium.congomongo)
 
-   ;; first load some sample data
-   (def data (get-dataset :airline-passengers))
-   (view data)
+ ;; first load some sample data
+ (def data (get-dataset :airline-passengers))
+ (view data)
 
-   ;; a MongoDB server must be running on the localhost on the default port
-   ;; for the following steps.
+ ;; a MongoDB server must be running on the localhost on the default port
+ ;; for the following steps.
 
-   (mongo! :db "mydb")
-   (mass-insert! :airline-data (:rows data))
+ (mongo! :db "mydb")
+ (mass-insert! :airline-data (:rows data))
 
-   ;; and then retrieve it
-   ;; notice that the retrieved data set has two additional columns,  :_id :_ns
-   (view (fetch-dataset :airline-data))</pre>
+ ;; and then retrieve it
+ ;; notice that the retrieved data set has two additional columns,  :_id :_ns
+ (view (fetch-dataset :airline-data))
+
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-mongodb/src/incanter/mongodb.clj#L72" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/129dadf7b50f51175cb820c5f3b927e8b8095d91/modules/incanter-mongodb/src/incanter/mongodb.clj#L72" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -193,27 +196,29 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (insert-dataset mongodb-coll dataset)
 </pre>
-    <pre id="var-docstr">Inserts the rows of the Incanter dataset into the given MongoDB collection.
+    <pre id="var-docstr">
+Inserts the rows of the Incanter dataset into the given MongoDB collection.
 
 Examples:
 
-(use '(incanter core datasets mongodb))
-(use 'somnium.congomongo)
+  (use '(incanter core datasets mongodb))
+  (use 'somnium.congomongo)
 
-(def data (get-dataset :airline-passengers))
-(view data)
+  (def data (get-dataset :airline-passengers))
+  (view data)
 
-;; a MongoDB server must be running on the localhost on the default port
-;; for the following steps.
+  ;; a MongoDB server must be running on the localhost on the default port
+  ;; for the following steps.
 
-(mongo! :db "mydb")
-(mass-insert! :airline-data (:rows data))
+  (mongo! :db "mydb")
+  (mass-insert! :airline-data (:rows data))
 
-;; notice that the retrieved data set has two additional columns,  :_id :_ns
-(view (fetch-dataset :airline-data))</pre>
+  ;; notice that the retrieved data set has two additional columns,  :_id :_ns
+  (view (fetch-dataset :airline-data))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-mongodb/src/incanter/mongodb.clj#L104" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/129dadf7b50f51175cb820c5f3b927e8b8095d91/modules/incanter-mongodb/src/incanter/mongodb.clj#L105" id="var-source">Source</a>
   </div>
 </div>
 

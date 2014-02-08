@@ -98,20 +98,20 @@ namespace.
     <pre id="var-usage">Usage: (read-dataset filename &amp; {:keys [delim keyword-headers quote skip header compress-delim empty-field-value], :or {delim ,, quote ", skip 0, header false, keyword-headers true}})
 </pre>
     <pre id="var-docstr">
-  Returns a dataset read from a file or a URL.
+Returns a dataset read from a file or a URL.
 
-  Options:
-    :delim (default \,), other options (\tab \space \|  etc)
-    :quote (default \") character used for quoting strings
-    :skip (default 0) the number of lines to skip at the top of the file.
-    :header (default false) indicates the file has a header line
-    :compress-delim (default true if delim = \space, false otherwise) means
-                    compress multiple adjacent delimiters into a single delimiter.
-    :empty-field-value (default nil) indicates the interpretation of an empty field.
+Options:
+  :delim (default \,), other options (\tab \space \|  etc)
+  :quote (default \") character used for quoting strings
+  :skip (default 0) the number of lines to skip at the top of the file.
+  :header (default false) indicates the file has a header line
+  :compress-delim (default true if delim = \space, false otherwise) means
+                  compress multiple adjacent delimiters into a single delimiter.
+  :empty-field-value (default nil) indicates the interpretation of an empty field.
 </pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/0e17345542f795260651989b83694079cd9d2b28/modules/incanter-io/src/incanter/io.clj#L41" id="var-source">Source</a>
+    <a href="https://github.com/liebke/incanter/blob/6fb74e2859352f80be0262ba0e480b98d09a9948/modules/incanter-io/src/incanter/io.clj#L41" id="var-source">Source</a>
   </div>
 </div>
 
