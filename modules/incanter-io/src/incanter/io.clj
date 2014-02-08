@@ -40,16 +40,16 @@
 
 (defn read-dataset
   "
-    Returns a dataset read from a file or a URL.
+  Returns a dataset read from a file or a URL.
 
-    Options:
-      :delim (default \\,), other options (\\tab \\space \\|  etc)
-      :quote (default \\\") character used for quoting strings
-      :skip (default 0) the number of lines to skip at the top of the file.
-      :header (default false) indicates the file has a header line
-      :compress-delim (default true if delim = \\space, false otherwise) means
-                      compress multiple adjacent delimiters into a single delimiter.
-      :empty-field-value (default nil) indicates the interpretation of an empty field.
+  Options:
+    :delim (default \\,), other options (\\tab \\space \\|  etc)
+    :quote (default \\\") character used for quoting strings
+    :skip (default 0) the number of lines to skip at the top of the file.
+    :header (default false) indicates the file has a header line
+    :compress-delim (default true if delim = \\space, false otherwise) means
+                    compress multiple adjacent delimiters into a single delimiter.
+    :empty-field-value (default nil) indicates the interpretation of an empty field.
   "
 
   [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value]
@@ -140,11 +140,6 @@
 
 (defmethod save java.awt.image.BufferedImage
   ([img filename & {:keys [format] :or {format "png"}}]
-     (javax.imageio.ImageIO/write img 
-                                  format 
+     (javax.imageio.ImageIO/write img
+                                  format
                                   (.getAbsoluteFile (java.io.File. filename)))))
-
-
-
-
-
