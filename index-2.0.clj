@@ -3401,7 +3401,8 @@
        skip
        header
        compress-delim
-       empty-field-value],
+       empty-field-value
+       comment-char],
       :or
       {delim \,,
        quote \",
@@ -3411,13 +3412,13 @@
    :name "read-dataset",
    :namespace "incanter.io",
    :source-url
-   "https://github.com/liebke/incanter/blob/6fb74e2859352f80be0262ba0e480b98d09a9948/modules/incanter-io/src/incanter/io.clj#L41",
+   "https://github.com/liebke/incanter/blob/41f5b9d4a2b10ba140338129eb0daeb54d601524/modules/incanter-io/src/incanter/io.clj#L41",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/6fb74e2859352f80be0262ba0e480b98d09a9948/modules/incanter-io/src/incanter/io.clj",
+   "https://github.com/liebke/incanter/raw/41f5b9d4a2b10ba140338129eb0daeb54d601524/modules/incanter-io/src/incanter/io.clj",
    :wiki-url
    "http://liebke.github.com/incanter//io-api.html#incanter.io/read-dataset",
    :doc
-   "\nReturns a dataset read from a file or a URL.\n\nOptions:\n  :delim (default \\,), other options (\\tab \\space \\|  etc)\n  :quote (default \\\") character used for quoting strings\n  :skip (default 0) the number of lines to skip at the top of the file.\n  :header (default false) indicates the file has a header line\n  :compress-delim (default true if delim = \\space, false otherwise) means\n                  compress multiple adjacent delimiters into a single delimiter.\n  :empty-field-value (default nil) indicates the interpretation of an empty field.\n",
+   "\nReturns a dataset read from a file or a URL.\n\nOptions:\n  :delim (default \\,), other options (\\tab \\space \\|  etc)\n  :quote (default \\\") character used for quoting strings\n  :skip (default 0) the number of lines to skip at the top of the file.\n  :header (default false) indicates the file has a header line\n  :compress-delim (default true if delim = \\space, false otherwise) means\n                  compress multiple adjacent delimiters into a single delimiter.\n  :empty-field-value (default nil) indicates the interpretation of an empty field.\n  :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)\n",
    :var-type "function",
    :line 41,
    :file "modules/incanter-io/src/incanter/io.clj"}
