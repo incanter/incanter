@@ -48,7 +48,6 @@
 
 (defn read-dataset
   "
-<<<<<<< HEAD
     Returns a dataset read from a file or a URL.
 
     Options:
