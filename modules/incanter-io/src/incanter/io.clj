@@ -48,6 +48,7 @@
 
 (defn read-dataset
   "
+<<<<<<< HEAD
     Returns a dataset read from a file or a URL.
 
     Options:
@@ -129,6 +130,6 @@
 
 (defmethod save java.awt.image.BufferedImage
   ([img filename & {:keys [format] :or {format "png"}}]
-     (javax.imageio.ImageIO/write img 
-                                  format 
+     (javax.imageio.ImageIO/write img
+                                  format
                                   (.getAbsoluteFile (java.io.File. filename)))))

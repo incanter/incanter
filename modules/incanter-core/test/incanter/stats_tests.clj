@@ -150,7 +150,7 @@
     (is (= 36
 	   (odds-ratio p1 p2)))))
 
-(deftest covariance-test
+(deftest covariance-test-2
   (is (= 5.333333333333333
 	 (covariance
 	  [3 1 3 9]
@@ -243,8 +243,8 @@
         (hamming-distance "toned" "roses"))))
 
 (deftest lee-distance-withq
- (= (+ 1 2 0 3)
-    (lee-distance 3340 2543 6)))
+ (is (= (+ 1 2 0 3)
+        (lee-distance 3340 2543 6))))
 
 ;;since the following three edits change one into the other, and there is no way to do it with fewer than three edits:
    ;; 1. kitten → sitten (substitution of 's' for 'k')
@@ -339,7 +339,7 @@
   ;; pre 1.5.0 linear model would have a divide by zero exception with this data
   (let [data [0.0 2.0 0.0 0.0 0.0 1.0 1.0 3.0 0.0 2.0 0.0 1.0 2.0 0.0 0.0 0.0 0.0 1.0 2.0 0.0 1.0 1.0]
         lm (linear-model data data)]
-    (is 1.0 (:r-square lm))))
+    (is (= 1.0 (:r-square lm)))))
 
 (deftest linear-model-r2-test
   (let [x [10 12 10 15 14 12 13 15 16 14 13 12 11 10 13 13 14 18 17 14]

@@ -14,7 +14,8 @@
 
 
 (defn save-pdf
-" Save a chart object as a pdf document.
+  "
+  Save a chart object as a pdf document.
 
   Arguments:
     chart
@@ -28,9 +29,7 @@
 
     (use '(incanter core charts pdf))
     (save-pdf (function-plot sin -4 4) \"./pdf-chart.pdf\")
-
-
-"
+  "
   ([chart filename & {:keys [width height ] :or {width 500 height 400}}]
      (let [pagesize (Rectangle. width height)
            document (Document. pagesize 50 50 50 50)
@@ -48,5 +47,3 @@
          (.addTemplate cb tp 0 0)
          (.close document)
          (.close out)))))
-
-

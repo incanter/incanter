@@ -90,17 +90,18 @@
 
 
 (defn get-dataset
-" Returns the sample dataset associated with the given key. Most datasets
+  "
+  Returns the sample dataset associated with the given key. Most datasets
   are from R's sample data sets, as are the descriptions below.
 
   Options:
 
     :incanter-home -- if the incanter.home property is not set when the JVM is
                       started (using -Dincanter.home) or there is no INCANTER_HOME
-                      environment variable set, use the :incanter-home options to 
+                      environment variable set, use the :incanter-home options to
                       provide the parent directory of the sample data directory.
 
-    :from-repo (default false) -- If true, retrieves the dataset from the online repository 
+    :from-repo (default false) -- If true, retrieves the dataset from the online repository
                        instead of locally, it will do this by default if incanter-home is not set.
 
 
@@ -173,15 +174,14 @@
      (def data (get-dataset :cars))
      (def data2 (get-dataset :cars :incanter.home \"/usr/local/packages/incanter\"))
 
-
-"
+  "
   ([dataset-key & {:keys [incanter-home from-repo]
                    :or {incanter-home (or (System/getProperty "incanter.home")
                                           (System/getenv "INCANTER_HOME"))
                         from-repo true}}]
      (when-let [ds (**datasets** dataset-key)]
-       (let [filename (if (or (nil? incanter-home) from-repo) 
-                        (str **datasets-base-url** (ds :filename)) 
+       (let [filename (if (or (nil? incanter-home) from-repo)
+                        (str **datasets-base-url** (ds :filename))
                         (str incanter-home "/" (ds :filename)))
              delim (ds :delim)
              header (ds :header)]
