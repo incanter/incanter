@@ -1335,10 +1335,11 @@
 
   Examples:
 
-    (use '(incanter core stats charts chrono))
+    (use '(incanter core stats charts))
+    (require '[clj-time.core :refer [date-time]])
 
     ;; plot numbers against years starting with 1900
-    (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0))
+    (def dates (map #(-> (date-time (+ 1900 %))
                          .getMillis)
                     (range 100)))
     (def y (range 100))
