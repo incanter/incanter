@@ -416,7 +416,7 @@
 
   Examples:
 
-    (use '(incanter core charts stats))
+    (use '(incanter core charts stats datasets))
     (doto (box-plot (sample-normal 1000) :legend true)
           view
           (add-box-plot (sample-normal 1000 :sd 2))
