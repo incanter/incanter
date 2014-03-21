@@ -185,5 +185,4 @@
                         (str **datasets-base-url** (ds :filename)))
              delim (ds :delim)
              header (ds :header)]
-         (println "from repo" from-repo "incanter home" incanter-home "filename" filename)
          (read-dataset filename :delim delim :header header)))))
