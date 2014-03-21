@@ -3312,7 +3312,8 @@
     (view (bland-altman-plot x1 x2))
 
     (with-data (get-dataset :flow-meter)
-      (view (bland-altman-plot \"Wright 1st PEFR\" \"Mini Wright 1st PEFR\")))
+      (view (bland-altman-plot (keyword \"Wright 1st PEFR\")
+                               (keyword \"Mini Wright 1st PEFR\"))))
 
 
 
