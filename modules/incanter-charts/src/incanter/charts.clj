@@ -416,7 +416,7 @@
 
   Examples:
 
-    (use '(incanter core charts stats))
+    (use '(incanter core charts stats datasets))
     (doto (box-plot (sample-normal 1000) :legend true)
           view
           (add-box-plot (sample-normal 1000 :sd 2))
@@ -1335,10 +1335,11 @@
 
   Examples:
 
-    (use '(incanter core stats charts chrono))
+    (use '(incanter core stats charts))
+    (require '[clj-time.core :refer [date-time]])
 
     ;; plot numbers against years starting with 1900
-    (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0))
+    (def dates (map #(-> (date-time (+ 1900 %))
                          .getMillis)
                     (range 100)))
     (def y (range 100))
@@ -3311,7 +3312,8 @@
     (view (bland-altman-plot x1 x2))
 
     (with-data (get-dataset :flow-meter)
-      (view (bland-altman-plot \"Wright 1st PEFR\" \"Mini Wright 1st PEFR\")))
+      (view (bland-altman-plot (keyword \"Wright 1st PEFR\")
+                               (keyword \"Mini Wright 1st PEFR\"))))
 
 
 
