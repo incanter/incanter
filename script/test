@@ -9,6 +9,8 @@ fi
 
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
+INCANTER_HOME=`pwd`
+export INCANTER_HOME
 
 RESULTS=0
 
