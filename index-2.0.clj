@@ -2515,13 +2515,13 @@
        (or
         (System/getProperty "incanter.home")
         (System/getenv "INCANTER_HOME")),
-       from-repo true}}]),
+       from-repo false}}]),
    :name "get-dataset",
    :namespace "incanter.datasets",
    :source-url
-   "https://github.com/liebke/incanter/blob/6fb74e2859352f80be0262ba0e480b98d09a9948/modules/incanter-io/src/incanter/datasets.clj#L92",
+   "https://github.com/liebke/incanter/blob/4e73be3e9b03036a3a46c0127252eb3cd5076d1d/modules/incanter-io/src/incanter/datasets.clj#L92",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/6fb74e2859352f80be0262ba0e480b98d09a9948/modules/incanter-io/src/incanter/datasets.clj",
+   "https://github.com/liebke/incanter/raw/4e73be3e9b03036a3a46c0127252eb3cd5076d1d/modules/incanter-io/src/incanter/datasets.clj",
    :wiki-url
    "http://liebke.github.com/incanter//datasets-api.html#incanter.datasets/get-dataset",
    :doc
