@@ -2519,9 +2519,9 @@
    :name "get-dataset",
    :namespace "incanter.datasets",
    :source-url
-   "https://github.com/liebke/incanter/blob/4e73be3e9b03036a3a46c0127252eb3cd5076d1d/modules/incanter-io/src/incanter/datasets.clj#L92",
+   "https://github.com/liebke/incanter/blob/b2536728626dbf109884bd3fb9c98d4cbc04a362/modules/incanter-io/src/incanter/datasets.clj#L92",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/4e73be3e9b03036a3a46c0127252eb3cd5076d1d/modules/incanter-io/src/incanter/datasets.clj",
+   "https://github.com/liebke/incanter/raw/b2536728626dbf109884bd3fb9c98d4cbc04a362/modules/incanter-io/src/incanter/datasets.clj",
    :wiki-url
    "http://liebke.github.com/incanter//datasets-api.html#incanter.datasets/get-dataset",
    :doc
