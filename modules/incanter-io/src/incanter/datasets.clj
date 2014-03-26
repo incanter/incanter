@@ -178,11 +178,11 @@
   ([dataset-key & {:keys [incanter-home from-repo]
                    :or {incanter-home (or (System/getProperty "incanter.home")
                                           (System/getenv "INCANTER_HOME"))
-                        from-repo true}}]
+                        from-repo false}}]
      (when-let [ds (**datasets** dataset-key)]
-       (let [filename (if (or (nil? incanter-home) from-repo)
-                        (str **datasets-base-url** (ds :filename))
-                        (str incanter-home "/" (ds :filename)))
+       (let [filename (if (and (not from-repo) (not (nil? incanter-home)))
+                        (str incanter-home "/" (ds :filename))
+                        (str **datasets-base-url** (ds :filename)))
              delim (ds :delim)
              header (ds :header)]
          (read-dataset filename :delim delim :header header)))))
