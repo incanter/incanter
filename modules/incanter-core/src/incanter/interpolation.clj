@@ -123,7 +123,7 @@
   (cubic 0.5) => [1.0 1.0]
 
   ; Specify custom :range
-  (def cubic (interpolate-parametric points :cubic :range [-10 10))
+  (def cubic (interpolate-parametric points :cubic :range [-10 10]))
   (cubic -10) => [0.0 0.0]
   (cubic 0) => [1.0 1.0]
   "

@@ -28,6 +28,8 @@
   Integrate a function f from a to b
 
   Examples:
+    (use '(incanter optimize))
+
     (defn f1 [x] 1)
     (defn f2 [x] (Math/pow x 2))
     (defn f3 [x] (* x (Math/exp (Math/pow x 2))))
