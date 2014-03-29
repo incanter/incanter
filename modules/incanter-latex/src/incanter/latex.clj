@@ -19,7 +19,7 @@
     :border (default [5 5 5 5]) -- image border
 
   Examples:
-    (use '(incanter core charts stats latex))
+    (use '(incanter io core charts stats latex))
 
     (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))
     (save latex-img \"/tmp/latex-example1.png\")
