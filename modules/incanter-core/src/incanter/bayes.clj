@@ -34,7 +34,7 @@
 
 (defn sample-model-params
   "
-  Returns a sample of the given size of the the parameters (coefficients and
+  Returns a sample of the given size of the parameters (coefficients and
   error variance) of the given linear-model. The sample is generated using
   Gibbs sampling.
 
@@ -69,7 +69,7 @@
   ([^Integer size {:keys [x y coefs residuals]}]
     (let [xtxi (solve (mmult (trans x) x))
           shape (/ (- (nrow x) (ncol x)) 2)
-          rate (mult 1/2 (mmult (trans residuals) residuals))
+          rate (first (mult 1/2 (mmult (trans residuals) residuals)))
           s-sq (div 1 (sample-gamma size :shape shape :rate rate))]
       {:coefs
         (matrix
