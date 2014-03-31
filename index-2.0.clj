@@ -124,13 +124,13 @@
    :name "sample-model-params",
    :namespace "incanter.bayes",
    :source-url
-   "https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L35",
+   "https://github.com/liebke/incanter/blob/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj#L35",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj",
+   "https://github.com/liebke/incanter/raw/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj",
    :wiki-url
    "http://liebke.github.com/incanter//bayes-api.html#incanter.bayes/sample-model-params",
    :doc
-   "\nReturns a sample of the given size of the the parameters (coefficients and\nerror variance) of the given linear-model. The sample is generated using\nGibbs sampling.\n\nSee also:\n  incanter.stats/linear-model\n\nExamples:\n  (use '(incanter core datasets stats charts bayes))\n\n  (def ols-data (to-matrix (get-dataset :survey)))\n  (def x (sel ols-data (range 0 2313) (range 1 10)))\n  (def y (sel ols-data (range 0 2313) 10))\n  (def lm (linear-model y x :intercept false))\n  (def param-samp (sample-model-params 5000 lm))\n\n  ;; view trace plots\n  (view (trace-plot (:var param-samp )))\n  (view (trace-plot (sel (:coefs param-samp) :cols 0)))\n\n  ;; view histograms\n  (view (histogram (:var param-samp)))\n  (view (histogram (sel (:coefs param-samp) :cols 0)))\n\n  ;; calculate statistics\n  (map mean (trans (:coefs param-samp)))\n  (map median (trans (:coefs param-samp)))\n  (map sd (trans (:coefs param-samp)))\n\n  ;; show the 95% bayesian confidence interval for the first coefficient\n  (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])\n",
+   "\nReturns a sample of the given size of the parameters (coefficients and\nerror variance) of the given linear-model. The sample is generated using\nGibbs sampling.\n\nSee also:\n  incanter.stats/linear-model\n\nExamples:\n  (use '(incanter core datasets stats charts bayes))\n\n  (def ols-data (to-matrix (get-dataset :survey)))\n  (def x (sel ols-data (range 0 2313) (range 1 10)))\n  (def y (sel ols-data (range 0 2313) 10))\n  (def lm (linear-model y x :intercept false))\n  (def param-samp (sample-model-params 5000 lm))\n\n  ;; view trace plots\n  (view (trace-plot (:var param-samp )))\n  (view (trace-plot (sel (:coefs param-samp) :cols 0)))\n\n  ;; view histograms\n  (view (histogram (:var param-samp)))\n  (view (histogram (sel (:coefs param-samp) :cols 0)))\n\n  ;; calculate statistics\n  (map mean (trans (:coefs param-samp)))\n  (map median (trans (:coefs param-samp)))\n  (map sd (trans (:coefs param-samp)))\n\n  ;; show the 95% bayesian confidence interval for the first coefficient\n  (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])\n",
    :var-type "function",
    :line 35,
    :file "modules/incanter-core/src/incanter/bayes.clj"}
@@ -138,9 +138,9 @@
    :name "sample-multinomial-params",
    :namespace "incanter.bayes",
    :source-url
-   "https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L95",
+   "https://github.com/liebke/incanter/blob/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj#L95",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj",
+   "https://github.com/liebke/incanter/raw/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj",
    :wiki-url
    "http://liebke.github.com/incanter//bayes-api.html#incanter.bayes/sample-multinomial-params",
    :doc
@@ -152,9 +152,9 @@
    :name "sample-mvn-params",
    :namespace "incanter.bayes",
    :source-url
-   "https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L131",
+   "https://github.com/liebke/incanter/blob/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj#L131",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj",
+   "https://github.com/liebke/incanter/raw/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj",
    :wiki-url
    "http://liebke.github.com/incanter//bayes-api.html#incanter.bayes/sample-mvn-params",
    :doc
@@ -166,9 +166,9 @@
    :name "sample-proportions",
    :namespace "incanter.bayes",
    :source-url
-   "https://github.com/liebke/incanter/blob/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj#L88",
+   "https://github.com/liebke/incanter/blob/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj#L88",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/496cb8a2fd28e8eaec83dc70aca0453fe4fe5b6a/modules/incanter-core/src/incanter/bayes.clj",
+   "https://github.com/liebke/incanter/raw/f925587e0ff99682f595e33606b19b6b1b599df9/modules/incanter-core/src/incanter/bayes.clj",
    :wiki-url
    "http://liebke.github.com/incanter//bayes-api.html#incanter.bayes/sample-proportions",
    :doc
@@ -3353,9 +3353,9 @@
    :name "interpolate",
    :namespace "incanter.interpolation",
    :source-url
-   "https://github.com/liebke/incanter/blob/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj#L22",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj#L22",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj",
    :wiki-url
    "http://liebke.github.com/incanter//interpolation-api.html#incanter.interpolation/interpolate",
    :doc
@@ -3367,9 +3367,9 @@
    :name "interpolate-grid",
    :namespace "incanter.interpolation",
    :source-url
-   "https://github.com/liebke/incanter/blob/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj#L181",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj#L181",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj",
    :wiki-url
    "http://liebke.github.com/incanter//interpolation-api.html#incanter.interpolation/interpolate-grid",
    :doc
@@ -3381,13 +3381,13 @@
    :name "interpolate-parametric",
    :namespace "incanter.interpolation",
    :source-url
-   "https://github.com/liebke/incanter/blob/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj#L83",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj#L83",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/cfa59efaf6df081e2bab2a2b0eb6abdf9863f455/modules/incanter-core/src/incanter/interpolation.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj",
    :wiki-url
    "http://liebke.github.com/incanter//interpolation-api.html#incanter.interpolation/interpolate-parametric",
    :doc
-   "\nBuilds a parametric function that interpolates given collection of points.\nParametric function represents a curve that go through all points. By default domain is [0, 1].\n\nArguments:\n  points -- collection of points. Each point either a single value or collection of values.\n  type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :b-spline, :linear-least-squares.\n\nOptions:\n  :range -- defines range for parameter t.\n            Default value is [0, 1]. f(0) = points[0], f(1) = points[n].\n\n  :boundaries -- valid only for :cubic interpolation.\n                 Defines boundary condition for cubic spline. Possible values - :natural and :closed.\n                 Let's S - spline, a- leftmost point, b- rightmost point.\n                 :natural - S''(a) = S''(b) = 0\n                 :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful\n                 if you want to get periodic or closed curve\n\n                 Default value is :natural\n\n  :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline.\n                 If not specified derivatives will be approximated from points.\n\n  :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.\n\nOptions for linear least squares:\n  See documentation for interpolate function.\n\nExamples:\n\n(def points [[0 0]\n             [0 1]\n             [1 1]\n             [3 5]\n             [2 9]])\n(def cubic (interpolate-parametric points :cubic))\n(cubic 0) => [0.0 0.0]\n(cubic 1) => [2.0 9.0]\n(cubic 0.5) => [1.0 1.0]\n\n; Specify custom :range\n(def cubic (interpolate-parametric points :cubic :range [-10 10))\n(cubic -10) => [0.0 0.0]\n(cubic 0) => [1.0 1.0]\n",
+   "\nBuilds a parametric function that interpolates given collection of points.\nParametric function represents a curve that go through all points. By default domain is [0, 1].\n\nArguments:\n  points -- collection of points. Each point either a single value or collection of values.\n  type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :b-spline, :linear-least-squares.\n\nOptions:\n  :range -- defines range for parameter t.\n            Default value is [0, 1]. f(0) = points[0], f(1) = points[n].\n\n  :boundaries -- valid only for :cubic interpolation.\n                 Defines boundary condition for cubic spline. Possible values - :natural and :closed.\n                 Let's S - spline, a- leftmost point, b- rightmost point.\n                 :natural - S''(a) = S''(b) = 0\n                 :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful\n                 if you want to get periodic or closed curve\n\n                 Default value is :natural\n\n  :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline.\n                 If not specified derivatives will be approximated from points.\n\n  :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.\n\nOptions for linear least squares:\n  See documentation for interpolate function.\n\nExamples:\n\n(def points [[0 0]\n             [0 1]\n             [1 1]\n             [3 5]\n             [2 9]])\n(def cubic (interpolate-parametric points :cubic))\n(cubic 0) => [0.0 0.0]\n(cubic 1) => [2.0 9.0]\n(cubic 0.5) => [1.0 1.0]\n\n; Specify custom :range\n(def cubic (interpolate-parametric points :cubic :range [-10 10]))\n(cubic -10) => [0.0 0.0]\n(cubic 0) => [1.0 1.0]\n",
    :var-type "function",
    :line 83,
    :file "modules/incanter-core/src/incanter/interpolation.clj"}
@@ -3432,9 +3432,9 @@
    :name "add-latex",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj#L79",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L79",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/add-latex",
    :doc
@@ -3450,9 +3450,9 @@
    :name "add-latex-subtitle",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj#L59",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L59",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/add-latex-subtitle",
    :doc
@@ -3471,13 +3471,13 @@
    :name "latex",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj#L12",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L12",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/latex",
    :doc
-   "\nReturns the given LaTeX equation rendered as an java.awt.Image.\n\nOptions:\n  :color (default java.awt.Color/black) -- the text color\n  :background (default java.awt.Clolor/white) -- the background color\n  :border (default [5 5 5 5]) -- image border\n\nExamples:\n  (use '(incanter core charts stats latex))\n\n  (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))\n  (save latex-img \"/tmp/latex-example1.png\")\n  (view \"file:///tmp/latex-example1.png\")\n\n  (view (latex \"f(x)=\\\\frac {1} {\\\\sqrt {2\\\\pi \\\\sigma ^2}} e^{\\\\frac {-(x - \\\\mu)^2}{2 \\\\sigma ^2}}\"))\n\n  (view (latex \"\\\\begin{pmatrix}\n                 a & b & c \\\\\\\\\n                 d & e & f \\\\\\\\\n                 g & h & i\n                 \\\\end{pmatrix}\"))\n",
+   "\nReturns the given LaTeX equation rendered as an java.awt.Image.\n\nOptions:\n  :color (default java.awt.Color/black) -- the text color\n  :background (default java.awt.Clolor/white) -- the background color\n  :border (default [5 5 5 5]) -- image border\n\nExamples:\n  (use '(incanter io core charts stats latex))\n\n  (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))\n  (save latex-img \"/tmp/latex-example1.png\")\n  (view \"file:///tmp/latex-example1.png\")\n\n  (view (latex \"f(x)=\\\\frac {1} {\\\\sqrt {2\\\\pi \\\\sigma ^2}} e^{\\\\frac {-(x - \\\\mu)^2}{2 \\\\sigma ^2}}\"))\n\n  (view (latex \"\\\\begin{pmatrix}\n                 a & b & c \\\\\\\\\n                 d & e & f \\\\\\\\\n                 g & h & i\n                 \\\\end{pmatrix}\"))\n",
    :var-type "function",
    :line 12,
    :file "modules/incanter-latex/src/incanter/latex.clj"}
@@ -3505,9 +3505,9 @@
    :name "to-latex",
    :namespace "incanter.latex",
    :source-url
-   "https://github.com/liebke/incanter/blob/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj#L106",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L106",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/dc52656f6091a4f68f2e53caf80261c102a516e3/modules/incanter-latex/src/incanter/latex.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj",
    :wiki-url
    "http://liebke.github.com/incanter//latex-api.html#incanter.latex/to-latex",
    :doc
@@ -3547,55 +3547,55 @@
    :name "derivative",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L66",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj#L68",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/derivative",
    :doc
    "\nReturns a function that approximates the derivative of the given function.\n\nOptions:\n  :dx (default 0.0001)\n\nExamples:\n\n  (use '(incanter core optimize charts stats))\n  (defn cube [x] (* x x x))\n  (def cube-deriv (derivative cube))\n  (cube-deriv 2) ; value: 12.000600010022566\n  (cube-deriv 3) ; value: 27.00090001006572\n  (cube-deriv 4) ; value: 48.00120000993502\n\n  (def x (range -3 3 0.1))\n  (def plot (xy-plot x (map cube x)))\n  (view plot)\n  (add-lines plot x (map cube-deriv x))\n\n  ;; get the second derivative function\n  (def cube-deriv2 (derivative cube-deriv))\n  (add-lines plot x (map cube-deriv2 x))\n\n  ;; plot the normal pdf and its derivatives\n  (def plot (xy-plot x (pdf-normal x)))\n  (view plot)\n  (def pdf-deriv (derivative pdf-normal))\n  (add-lines plot x (pdf-deriv x))\n\n  ;; plot the second derivative function\n  (def pdf-deriv2 (derivative pdf-deriv))\n  (add-lines plot x (pdf-deriv2 x))\n",
    :var-type "function",
-   :line 66,
+   :line 68,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists ([f start & {:keys [tol dx], :or {tol 1.0E-4}}]),
    :name "gradient",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L232",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj#L234",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/gradient",
    :doc
    "\nReturns a function that calculates a 5-point approximation to\nthe gradient of the given function. The vector of start values are\nused to determine the number of parameters required by the function, and\nto scale the step-size. The generated function accepts a vector of\nparameter values and a vector of x data points and returns a matrix,\nwhere each row is the gradient evaluated at the corresponding x value.\n\nExamples:\n\n  (use '(incanter core optimize datasets charts))\n  (defn f [theta x]\n    (+ (nth theta 0)\n          (div (* x (- (nth theta 1) (nth theta 0)))\n               (+ (nth theta 2) x))))\n\n  (def start [20 200 100])\n  (def data (get-dataset :thurstone))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (view (scatter-plot x y))\n\n  (def grad (gradient f start))\n  (time (doall (grad start x)))\n",
    :var-type "function",
-   :line 232,
+   :line 234,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists ([f start & {:keys [tol dx], :or {tol 1.0E-4}}]),
    :name "hessian",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L278",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj#L280",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/hessian",
    :doc
    "\nReturns a function that calculates an approximation to the Hessian matrix\nof the given function. The vector of start values are used to determine\nthe number of parameters required by the function, and to scale the\nstep-size. The generated function accepts a vector of\nparameter values and a vector of x data points and returns a matrix,\nwhere each row with p*(p+1)/2 columns, one for each unique entry in\nthe Hessian evaluated at the corresponding x value.\n\nExamples:\n\n  (use '(incanter core optimize datasets charts))\n  (defn f [theta x]\n    (+ (nth theta 0)\n          (div (* x (- (nth theta 1) (nth theta 0)))\n               (+ (nth theta 2) x))))\n\n  (def start [20 200 100])\n  (def data (get-dataset :thurstone))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (view (scatter-plot x y))\n\n  (time (def hess (hessian f start)))\n  (time (doall (hess start x)))\n",
    :var-type "function",
-   :line 278,
+   :line 280,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists ([f a b]),
    :name "integrate",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L26",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj#L26",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/integrate",
    :doc
-   "\nIntegrate a function f from a to b\n\nExamples:\n  (defn f1 [x] 1)\n  (defn f2 [x] (Math/pow x 2))\n  (defn f3 [x] (* x (Math/exp (Math/pow x 2))))\n\n  (integrate f1 0 5)\n  (integrate f2 0 1)\n  (integrate f3 0 1)\n\n  ;; normal distribution\n  (def std 1)\n  (def mu 0)\n  (defn normal [x]\n    (/ 1\n      (* (* std (Math/sqrt (* 2 Math/PI)))\n        (Math/exp (/ (Math/pow (- (- x mu)) 2)\n        (* 2 (Math/pow std 2)))))))\n\n  (integrate normal 1.96 10)\n\n\nReference:\n  http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html\n  http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/\n",
+   "\nIntegrate a function f from a to b\n\nExamples:\n  (use '(incanter optimize))\n\n  (defn f1 [x] 1)\n  (defn f2 [x] (Math/pow x 2))\n  (defn f3 [x] (* x (Math/exp (Math/pow x 2))))\n\n  (integrate f1 0 5)\n  (integrate f2 0 1)\n  (integrate f3 0 1)\n\n  ;; normal distribution\n  (def std 1)\n  (def mu 0)\n  (defn normal [x]\n    (/ 1\n      (* (* std (Math/sqrt (* 2 Math/PI)))\n        (Math/exp (/ (Math/pow (- (- x mu)) 2)\n        (* 2 (Math/pow std 2)))))))\n\n  (integrate normal 1.96 10)\n\n\nReference:\n  http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html\n  http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/\n",
    :var-type "function",
    :line 26,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
@@ -3610,15 +3610,15 @@
    :name "non-linear-model",
    :namespace "incanter.optimize",
    :source-url
-   "https://github.com/liebke/incanter/blob/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj#L550",
+   "https://github.com/liebke/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj#L552",
    :raw-source-url
-   "https://github.com/liebke/incanter/raw/77f7d3f4de2400d2d5fa0b7a285d046dbce450ca/modules/incanter-core/src/incanter/optimize.clj",
+   "https://github.com/liebke/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/optimize.clj",
    :wiki-url
    "http://liebke.github.com/incanter//optimize-api.html#incanter.optimize/non-linear-model",
    :doc
    "\nDetermine the nonlinear least-squares estimates of the\nparameters of a nonlinear model.\nBased on R's nls (non-linear least squares) function.\n\nArguments:\n  f -- model function, takes two arguments the first a list of parameters\n       that are to be estimated, and an x value.\n  y -- sequence of dependent data\n  x -- sequence of independent data\n  start -- start values for the parameters to be estimated\n\nOptions:\n  :method (default :gauss-newton) other option :newton-raphson\n  :tol (default 1E-5)\n  :max-iter (default 200)\n\nReturns: a hash-map containing the following fields:\n  :method -- the method used\n  :coefs  -- the parameter estimates\n  :gradient  -- the estimated gradient\n  :hessian -- the estimated hessian, if available\n  :iterations -- the number of iterations performed\n  :fitted -- the fitted values of y (i.e. y-hat)\n  :rss -- the residual sum-of-squares\n  :x -- the independent data values\n  :y -- the dependent data values\n\n\nExamples:\n\n  ;; example 1\n  (use '(incanter core optimize datasets charts))\n  ;; define the Michaelis-Menton model function\n  ;; y = a + (b - a)*x/(c + x)\n  (defn f [theta x]\n    (let [[a b c] theta]\n      (plus a (div (mult x (minus b a)) (plus c x)))))\n\n  (def start [20 200 100])\n  (def data (get-dataset :thurstone))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n  ;; view the data\n  (def plot (scatter-plot x y))\n  (view plot)\n\n  (def nlm (non-linear-model f y x start))\n  (add-lines plot x (:fitted nlm))\n\n\n  ;; example 2\n  (use '(incanter core optimize datasets charts))\n  ;; Chwirut data set from NIST\n  ;; http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat\n  (def data (get-dataset :chwirut))\n  (def x (sel data :cols 1))\n  (def y (sel data :cols 0))\n\n  ;; define model function: y = exp(-b1*x)/(b2+b3*x) + e\n  (defn f [theta x]\n    (let [[b1 b2 b3] theta]\n      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))\n\n  (def plot (scatter-plot x y :legend true))\n  (view plot)\n\n  ;; the newton-raphson algorithm fails to converge to the correct solution\n  ;; using first set of start values from NIST, but the default gauss-newton\n  ;; algorithm converges to the correct solution.\n\n  (def start1 [0.1 0.01 0.02])\n  (add-lines plot x (f start1 x))\n  (def nlm1 (non-linear-model f y x start1))\n  (add-lines plot x (:fitted nlm1))\n\n  ;; both algorithms converges with second set of start values from NIST\n  (def start2 [0.15 0.008 0.010])\n  (add-lines plot x (f start2 x))\n  (def nlm2 (non-linear-model f y x start2))\n  (add-lines plot x (:fitted nlm2))\n",
    :var-type "function",
-   :line 550,
+   :line 552,
    :file "modules/incanter-core/src/incanter/optimize.clj"}
   {:arglists
    ([chart
