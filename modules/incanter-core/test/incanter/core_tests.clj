@@ -38,10 +38,13 @@
 
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
+  (is (= (sel dataset1 :cols "a") [1 4]))
   (is (= (sel dataset1 :all 1) [2 5]))
   (is (= (sel dataset1 :all :b) [2 5]))
   (is (= (sel dataset1 :all [:a :c]) (dataset [:a :c] [[1 3] [4 6]])))
+  (is (= (sel dataset1 :all ["a" "c"]) (dataset [:a :c] [[1 3] [4 6]])))
   (is (= (sel dataset1 :all [:a]) (dataset [:a] [[1] [4]])))
+  (is (= (sel dataset1 :all ["a"]) (dataset [:a] [[1] [4]])))
   (is (= (sel dataset1 :all :all) dataset1))
   (is (= (sel dataset2 :cols :b) [2 5]))
   (is (= (sel dataset2 :cols "c") [3 6]))

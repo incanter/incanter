@@ -1211,19 +1211,27 @@
 
 
 (defn- get-column-id [dataset column-key]
-  (let [headers (:column-names dataset)
-        col-key (if (and
-                     (keyword? column-key) ;; if the given column name is a keyword, and
-                     (not (some #{column-key} headers))) ; a keyword column name wasn't used in the dataset
-                  (name column-key) ;; convert the keyword to a string
-                  column-key) ;; otherwise use the given column key
-        id (if (number? col-key)
-             (if (some #(= col-key %) headers)
-               col-key
-               (nth headers col-key))
-             col-key)]
-    id))
+  (let [headers (:column-names dataset)]
+    (cond
+     (and (keyword? column-key) ;; if the given column name is a keyword, and
+          ;; a keyword column name wasn't used in the dataset
+          (not (some #{column-key} headers)))
+     (name column-key) ;; convert the keyword to a string
 
+     (and (string? column-key) ;; if the given column is a string, and
+          ;; this column was't used in the dataset, and
+          (not (some #{column-key} headers))
+          ;; a keyword column name was used in the dataset
+          (some #{(keyword column-key)} headers))
+     ;; convert string to keyword
+     (keyword column-key)
+
+     (and (number? column-key) ;; if the given column name is a number
+          ;; and this number is not in headers
+          (not (some #(= column-key %) headers)))
+     (nth headers column-key) ;; get nth column from headers
+
+     :else column-key)))
 
 (defn- map-get
   ([m k]
