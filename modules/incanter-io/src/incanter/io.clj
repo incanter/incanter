@@ -85,7 +85,9 @@
         dataset-body (if header (rest parsed-data) parsed-data)
         column-names-strs
           (map (fn [hr-entry idx]
-                 (or hr-entry (str "col" idx)))
+                 (if hr-entry
+                   (str hr-entry)
+                   (str "col" idx)))
                (concat header-row (repeat nil))
                (range column-count))
         column-names (map (if keyword-headers keyword identity) column-names-strs)
