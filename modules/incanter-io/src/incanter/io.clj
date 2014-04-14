@@ -23,8 +23,9 @@
   incanter.io
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
-  (:use [incanter.core :only (dataset save)])
-  (:require [clojure.java.io :as io]))
+  (:use [incanter.core :only (col-names dataset save)])
+  (:require [clojure.java.io :as io]
+            [incanter.dataset :refer [rows]]))
 
 (defn- parse-string [value & [empty-value]]
   (if (= value "")
@@ -114,12 +115,12 @@
 
 (defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
                                                             :or {append false delim \,}}]
-  (let [header (or header (map #(if (keyword? %) (name %) %) (:column-names dataset)))
+  (let [header (or header (map #(if (keyword? %) (name %) %) (col-names dataset)))
         file-writer (if (= "-" filename)
                       *out*
                       (java.io.FileWriter. filename append))
-        rows (:rows dataset)
-        columns (:column-names dataset)]
+        rows (rows dataset)
+        columns (col-names dataset)]
     (try
       (when (and header (not append))
         (.write file-writer (str (first header)))
@@ -140,11 +141,6 @@
 
 (defmethod save java.awt.image.BufferedImage
   ([img filename & {:keys [format] :or {format "png"}}]
-     (javax.imageio.ImageIO/write img 
-                                  format 
+     (javax.imageio.ImageIO/write img
+                                  format
                                   (.getAbsoluteFile (java.io.File. filename)))))
-
-
-
-
-
