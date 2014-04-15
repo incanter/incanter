@@ -1,6 +1,6 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/incanter-banner.png" alt="Incanter" /></a>
 
-<a border="0" href="https://travis-ci.org/liebke/incanter" > <img src="https://secure.travis-ci.org/liebke/incanter.png" alt="Incanter" /></a>
+<a border="0" href="https://travis-ci.org/incanter/incanter" > <img src="https://secure.travis-ci.org/incanter/incanter.png" alt="Incanter" /></a>
 
 * <a href="#overview">Overview</a>
 * <a href="#clojure">Getting started with Clojure</a>
