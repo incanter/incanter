@@ -40,25 +40,32 @@
 
 (defn read-dataset
   "
-    Returns a dataset read from a file or a URL.
+  Returns a dataset read from a file or a URL.
 
-    Options:
-      :delim (default \\,), other options (\\tab \\space \\|  etc)
-      :quote (default \\\") character used for quoting strings
-      :skip (default 0) the number of lines to skip at the top of the file.
-      :header (default false) indicates the file has a header line
-      :compress-delim (default true if delim = \\space, false otherwise) means
-                      compress multiple adjacent delimiters into a single delimiter.
-      :empty-field-value (default nil) indicates the interpretation of an empty field.
+  Options:
+    :delim (default \\,), other options (\\tab \\space \\|  etc)
+    :quote (default \\\") character used for quoting strings
+    :skip (default 0) the number of lines to skip at the top of the file.
+    :header (default false) indicates the file has a header line
+    :compress-delim (default true if delim = \\space, false otherwise) means
+                    compress multiple adjacent delimiters into a single delimiter.
+    :empty-field-value (default nil) indicates the interpretation of an empty field.
+    :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value]
+  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char]
                :or {delim \, quote \" skip 0 header false keyword-headers true}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
                             (fn [line] (filter #(not= % "") line))
                             identity)
+        comment-char-fn (fn [line]
+                          (if (and (boolean (seq line)) comment-char)
+                            (if (.startsWith (first line) comment-char)
+                              '()
+                              line)
+                            line))
         remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
         parse-data-fn (fn [line]
                         (vec (map #(parse-string % empty-field-value) line)))
@@ -68,6 +75,7 @@
               (if-let [line (.readNext reader)]
                 (let [new-line (-> line
                                    compress-delim-fn
+                                   comment-char-fn
                                    remove-empty-fn
                                    parse-data-fn)]
                   (recur (if-not (empty? new-line) (conj lines new-line) lines)
@@ -77,7 +85,9 @@
         dataset-body (if header (rest parsed-data) parsed-data)
         column-names-strs
           (map (fn [hr-entry idx]
-                 (or hr-entry (str "col" idx)))
+                 (if hr-entry
+                   (str hr-entry)
+                   (str "col" idx)))
                (concat header-row (repeat nil))
                (range column-count))
         column-names (map (if keyword-headers keyword identity) column-names-strs)
@@ -88,8 +98,8 @@
             dataset-body)]
     (dataset column-names padded-body)))
 
-(defmethod save incanter.Matrix [mat filename & {:keys [delim header append]
-                                                 :or {append false delim \,}}]
+(defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
+                                                       :or {append false delim \,}}]
   (let [file-writer (if (= "-" filename)
                       *out*
                       (java.io.FileWriter. filename append))]
@@ -140,11 +150,6 @@
 
 (defmethod save java.awt.image.BufferedImage
   ([img filename & {:keys [format] :or {format "png"}}]
-     (javax.imageio.ImageIO/write img 
-                                  format 
+     (javax.imageio.ImageIO/write img
+                                  format
                                   (.getAbsoluteFile (java.io.File. filename)))))
-
-
-
-
-

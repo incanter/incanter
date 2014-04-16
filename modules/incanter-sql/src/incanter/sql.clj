@@ -1,8 +1,7 @@
 (ns incanter.sql
   "SQL module for interacting with databases."
   (:use [incanter.core :only [dataset]]
-        [clojureql.core :as ql :exclude [conj! disj! take drop distinct case compile sort]])
-  )
+        [clojureql.core :as ql :exclude [conj! disj! take drop distinct case compile sort]]))
 
 (defn- window [psize wsize]
   (let [full-chunks (quot psize wsize)
@@ -44,8 +43,7 @@
               ch-rest
               (concat data (lazy-seq (read-dataframe cql-statement (:window ch) (:offset ch))))
               ))))]
-    (dataset (keys (first lazy-data)) lazy-data)
-    ))
+    (dataset (keys (first lazy-data)) lazy-data)))
 
 (defn insert-dataset [dset table]
   (ql/conj! table (map #(zipmap (keys %) (vals %)) (:rows dset))))

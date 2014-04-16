@@ -74,8 +74,7 @@
 
 
 (defmulti set-background-default
-"
-
+  "
   Examples:
     (use '(incanter core stats charts datasets))
 
@@ -146,10 +145,8 @@
 
     (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))
     (def cw2 (view chart2))
-
-
-"
-(fn [chart] (type (.getPlot chart))))
+  "
+  (fn [chart] (type (.getPlot chart))))
 
 
 (defmulti set-theme-default
@@ -157,7 +154,7 @@
 
 
 (defmulti set-theme-bw
-"
+  "
 
   Examples:
     (use '(incanter core stats charts datasets))
@@ -221,60 +218,60 @@
       (add-categories [:a :b :c] [5 25 40]))
 
 
-"
-(fn [chart & options] (type (-> chart .getPlot .getDataset))))
+  "
+  (fn [chart & options] (type (-> chart .getPlot .getDataset))))
 
 (defn set-theme
-"  Changes the chart theme.
+  "
+  Changes the chart theme.
 
-   Arguments:
-     chart -- an Incanter/JFreeChart object
-     theme -- either a keyword indicating one of the built-in themes, or a JFreeChart ChartTheme object.
+  Arguments:
+    chart -- an Incanter/JFreeChart object
+    theme -- either a keyword indicating one of the built-in themes, or a JFreeChart ChartTheme object.
 
-   Built-in Themes:
-     :default
-     :dark
+  Built-in Themes:
+    :default
+    :dark
 
-   Examples:
+  Examples:
 
-     (use '(incanter core charts))
-     (def chart (function-plot sin -4 4))
-     (view chart)
-     ;; change the theme of chart to :dark
-     (set-theme chart :dark)
-     ;; change it back to the default
-     (set-theme chart :default)
+    (use '(incanter core charts))
+    (def chart (function-plot sin -4 4))
+    (view chart)
+    ;; change the theme of chart to :dark
+    (set-theme chart :dark)
+    ;; change it back to the default
+    (set-theme chart :default)
+
+    ;; Example using JFreeTheme
+    (use '(incanter core stats charts datasets))
+
+    (import '(org.jfree.chart StandardChartTheme)
+            '(org.jfree.chart.plot DefaultDrawingSupplier)
+            '(java.awt Color))
+
+    (def all-red-theme
+      (doto
+        (StandardChartTheme/createJFreeTheme)
+        (.setDrawingSupplier
+        (proxy [DefaultDrawingSupplier] []
+          (getNextPaint [] Color/red)))))
+
+    (def data (get-dataset :airline-passengers))
+
+    (def chart (bar-chart :month :passengers :group-by :year :legend true :data data))
+
+    (doto chart
+      ;; has no effect
+      (set-theme all-red-theme)
+      view)
 
 
-     ;; Example using JFreeTheme
-     (use '(incanter core stats charts datasets))
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html
 
-     (import '(org.jfree.chart StandardChartTheme)
-             '(org.jfree.chart.plot DefaultDrawingSupplier)
-             '(java.awt Color))
-
-     (def all-red-theme
-       (doto
-         (StandardChartTheme/createJFreeTheme)
-         (.setDrawingSupplier
-         (proxy [DefaultDrawingSupplier] []
-           (getNextPaint [] Color/red)))))
-
-     (def data (get-dataset :airline-passengers))
-
-     (def chart (bar-chart :month :passengers :group-by :year :legend true :data data))
-
-     (doto chart
-       ;; has no effect
-       (set-theme all-red-theme)
-       view)
-
-
-    References:
-       http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html
-       http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html
-
-"
+  "
   ([chart theme]
      (let [built-in-theme? (some #{theme} #{:dark :legacy :gradient})
            _theme (if built-in-theme?
@@ -309,12 +306,15 @@
              (_theme chart)))
          chart))))
 
-(defn- data-as-list [x data]
-  "data-as-list [x data]
+(defn- data-as-list
+  "
+  data-as-list [x data]
 
-    If x is a collection, return it
-    If x is a single value, and data is undefined, return x in vector
-    If x is a single value, and data is defined, return ($ x data)"
+  If x is a collection, return it
+  If x is a single value, and data is undefined, return x in vector
+  If x is a single value, and data is defined, return ($ x data)
+  "
+  [x data]
   (if (coll? x)
     (to-list x)
     (if data
@@ -324,17 +324,20 @@
           [selected]))
       [x])))
 
-(defn- in-coll [x]
-  "in-coll [x]
+(defn- in-coll
+  "
+  in-coll [x]
 
-    If x is a collection, return it
-    Otherwise return x in a vector"
+  If x is a collection, return it
+  Otherwise return x in a vector"
+  [x]
   (if (coll? x)
     x
     [x]))
 
-(defn- range-inclusive [start end step]
+(defn- range-inclusive
   "Similar to range but adds end to result."
+  [start end step]
   (concat (range start end step) [end]))
 
 (defn add-histogram*
@@ -354,7 +357,7 @@
         chart))))
 
 (defmacro add-histogram
-"
+  "
   Adds a histogram to an existing histogram plot, returns the modified
   chart object.
 
@@ -380,7 +383,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart x & options]
     `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~x))
@@ -405,7 +408,7 @@
         chart))))
 
 (defmacro add-box-plot
-"
+  "
   Adds an additional box to an existing box-plot, returns the modified chart object.
 
   Options:
@@ -413,26 +416,26 @@
 
   Examples:
 
-      (use '(incanter core charts stats))
-      (doto (box-plot (sample-normal 1000) :legend true)
-            view
-            (add-box-plot (sample-normal 1000 :sd 2))
-            (add-box-plot (sample-gamma 1000)))
+    (use '(incanter core charts stats datasets))
+    (doto (box-plot (sample-normal 1000) :legend true)
+          view
+          (add-box-plot (sample-normal 1000 :sd 2))
+          (add-box-plot (sample-gamma 1000)))
 
 
-     (with-data (get-dataset :iris)
-       (doto (box-plot :Sepal.Length :legend true)
-         (add-box-plot :Petal.Length)
-         (add-box-plot :Sepal.Width)
-         (add-box-plot :Petal.Width)
-         view))
+    (with-data (get-dataset :iris)
+      (doto (box-plot :Sepal.Length :legend true)
+        (add-box-plot :Petal.Length)
+        (add-box-plot :Sepal.Width)
+        (add-box-plot :Petal.Width)
+        view))
 
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart x & options]
     `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~x))
@@ -468,7 +471,7 @@
 
 
 (defmacro add-categories
-"
+  "
   Adds an additional categories to an existing bar-chart or line-chart, returns the modified chart object.
 
   Options:
@@ -477,20 +480,20 @@
 
   Examples:
 
-      (use '(incanter core charts stats datasets))
-      (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
-      (def years (mapcat identity (repeat 4 [2007 2008 2009])))
-      (def x (sample-uniform 12 :integers true :max 100))
-      (def plot (bar-chart years x :group-by seasons :legend true))
-      (view plot)
-      (add-categories plot years [10 20 40] :series-label \"winter-break\")
+    (use '(incanter core charts stats datasets))
+    (def seasons (mapcat identity (repeat 3 [\"winter\" \"spring\" \"summer\" \"fall\"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def x (sample-uniform 12 :integers true :max 100))
+    (def plot (bar-chart years x :group-by seasons :legend true))
+    (view plot)
+    (add-categories plot years [10 20 40] :series-label \"winter-break\")
 
-      (add-categories plot
-                         (plus 3 years)
-                         (sample-uniform 12 :integers true :max 100)
-                         :group-by seasons)
+    (add-categories plot
+                    (plus 3 years)
+                    (sample-uniform 12 :integers true :max 100)
+                    :group-by seasons)
 
-      (def plot2 (line-chart years x :group-by seasons :legend true))
+    (def plot2 (line-chart years x :group-by seasons :legend true))
       (view plot2)
       (add-categories plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
 
@@ -508,7 +511,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart categories values & options]
     `(let [opts# ~(if options (apply assoc {} options) {})
            group-by# (:group-by opts#)
@@ -580,7 +583,8 @@
        chart)))
 
 (defmacro add-lines
-" Plots lines on the given scatter or line plot (xy-plot) of the (x,y) points.
+  "
+  Plots lines on the given scatter or line plot (xy-plot) of the (x,y) points.
   Equivalent to R's lines function, returns the modified chart object.
 
   Options:
@@ -625,7 +629,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
 
-"
+  "
   ([chart x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#)
@@ -647,7 +651,8 @@
 
 
 (defmacro add-function
-" Adds a xy-plot of the given function to the given chart, returning
+  "
+  Adds a xy-plot of the given function to the given chart, returning
   a modified version of the chart.
 
   Options:
@@ -689,7 +694,7 @@
           (add-function deriv-cubic -10 10)
           view)
 
-"
+  "
   ([chart function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~function))
@@ -712,7 +717,8 @@
 
 
 (defmacro add-parametric
-" Adds a xy-plot of the given parametric function to the given chart, returning
+  "
+  Adds a xy-plot of the given parametric function to the given chart, returning
   a modified version of the chart.
   Function takes 1 argument t and returns point [x y].
 
@@ -733,7 +739,7 @@
     (doto (xy-plot [1 -1 -1 1 1] [1 1 -1 -1 1] :auto-sort false)
           (add-parametric circle 0 (* 2 Math/PI))
           (view))
-"
+  "
   ([chart function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (str '~function))
@@ -769,7 +775,8 @@
        chart)))
 
 (defmacro add-points
-" Plots points on the given scatter-plot or xy-plot of the (x,y) points.
+  "
+  Plots points on the given scatter-plot or xy-plot of the (x,y) points.
   Equivalent to R's lines function, returns the modified chart object.
 
   Options:
@@ -809,7 +816,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
 
-"
+  "
   ([chart x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            series-lab# (or (:series-label opts#) (format "%s, %s" '~x '~y))
@@ -818,15 +825,18 @@
         (apply add-points* args#))))
 
 (defn log-axis
-" Create a logarithmic axis.
+  "
+  Create a logarithmic axis.
 
-  Beware: Log will behave strangely for data below 1 (especially 0), filter them out.
+  Note: By default, values smaller than 0.5 are rounded to 0.5 to prevent strange behavior that
+  happens for values close to 0.
 
   Options:
     :base (default 10) base of the logarithm; typically 2 or 10
     :label (default none) the label of the axis
     :int-ticks? (default true) if true, use normal numbers instead of
        <base>^<exponent>, i.e. 1 instead of f.ex. 10^0.0
+    :smallest-value (default: 0.5) Set the smallest value represented by the axis, set to 0.0 to 'reset'
 
   See also:
     set-axis
@@ -835,10 +845,11 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/LogAxis.html
 
-"
+  "
   [& options]
   (let [opts (when options (apply assoc {} options))
         base (or (:base opts) 10)
+        smallest-value (or (:smallest-value opts) 0.5)
         int-ticks? (get opts :int-ticks? true)
         label (:label opts)
         axis (if label
@@ -847,10 +858,13 @@
     (doto axis (.setBase base))
     (if int-ticks?
       (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
+    (if smallest-value
+      (.setSmallestValue axis smallest-value)) ; TODO TEST THIS!
     axis))
 
 (defmulti set-axis
-" Set the selected axis of the chart, returning the chart.
+  "
+  Set the selected axis of the chart, returning the chart.
   (Beware: the axis' label will replace axis label set previously on the chart.)
 
   Arguments:
@@ -877,7 +891,7 @@
     (view
       (doto (function-plot #(Math/pow 10 %) 0 5)
             (set-axis :x (log-axis :base 10, :label \"log(x)\"))))
-"
+  "
 
   (fn [chart & args] (type (.getPlot chart))))
 
@@ -914,86 +928,93 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn set-alpha
-" Sets the alpha level (transparency) of the plot's foreground
+  "
+  Sets the alpha level (transparency) of the plot's foreground
   returns the modified chart object.
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart alpha]
     (.setForegroundAlpha (.getPlot chart) alpha)
     chart))
 
 (defn set-background-alpha
-" Sets the alpha level (transparency) of the plot's background
+  "
+  Sets the alpha level (transparency) of the plot's background
   returns the modified chart object.
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart alpha]
     (.setBackgroundAlpha (.getPlot chart) alpha)
     chart))
 
 
 (defn clear-background
-" Sets the alpha level (transparency) of the plot's background to zero
+  "
+  Sets the alpha level (transparency) of the plot's background to zero
   removing the default grid, returns the modified chart object.
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart]
     (.setBackgroundAlpha (.getPlot chart) 0.0)
     chart))
 
 (defn set-title
-" Sets the main title of the plot, returns the modified chart object.
+  "
+  Sets the main title of the plot, returns the modified chart object.
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart title]
     (.setTitle chart title)
     chart))
 
 
 (defn set-x-label
-" Sets the label of the x-axis, returns the modified chart object.
+  "
+  Sets the label of the x-axis, returns the modified chart object.
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart label]
     (.setLabel (.getDomainAxis (.getPlot chart)) label)
     chart))
 
 
 (defn set-y-label
-" Sets the label of the y-axis, returns the modified chart object.
+  "
+  Sets the label of the y-axis, returns the modified chart object.
 
   References:
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([chart label]
     (.setLabel (.getRangeAxis (.getPlot chart)) label)
     chart))
 
 
 (defn set-x-range
-" Sets the range of the x-axis on the given chart.
+  "
+  Sets the range of the x-axis on the given chart.
 
   Examples:
 
@@ -1003,7 +1024,7 @@
     (view chart)
     (set-x-range chart 10 20)
 
-"
+  "
   ([chart lower upper]
      (-> chart
          .getPlot
@@ -1013,7 +1034,8 @@
 
 
 (defn set-y-range
-" Sets the range of the y-axis on the given chart.
+  "
+  Sets the range of the y-axis on the given chart.
 
   Examples:
 
@@ -1023,7 +1045,7 @@
     (view chart)
     (set-y-range chart 10 60)
 
-"
+  "
   ([chart lower upper]
      (-> chart
          .getPlot
@@ -1086,7 +1108,12 @@
           theme (or (:theme opts) :default)
           legend? (true? (:legend opts))
           points? (true? (:points opts))
-          data-series (XYSeries. series-lab (:auto-sort opts true))
+          data-series (XYSeries. (cond
+                                   _group-by
+                                     (first _group-by)
+                                   :else
+                                     series-lab)
+                                 (:auto-sort opts true))
           dataset (XYSeriesCollection.)
           chart (do
                   (dorun
@@ -1108,17 +1135,25 @@
                 (doseq [i (range 1 (count x-groups))]
                   (add-lines chart (nth x-groups i)
                              (nth y-groups i)
-                             :series-label (format "%s, %s (%s)" 'x 'y i)
+                             :series-label (cond
+                                             _group-by
+                                               (nth _group-by i)
+                                             series-lab
+                                               series-lab
+                                             :else
+                                               (format "%s, %s (%s)" 'x 'y i))
                              :points points?)))]
       (.setRenderer (.getPlot chart) 0 (XYLineAndShapeRenderer. true points?))
       (set-theme chart theme)
       chart)))
 
+
 (defn xy-plot* [x y & options]
   (apply create-xy-series-plot x y create-xy-plot options))
 
 (defmacro xy-plot
-" Returns a JFreeChart object representing a xy-plot of the given data.
+  "
+  Returns a JFreeChart object representing a xy-plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -1172,7 +1207,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([]
      `(xy-plot [] [] :x-label "x" :y-label "y"))
   ([x y & options]
@@ -1223,9 +1258,10 @@
     chart))
 
 (defmacro candle-stick-plot
-  "Produces a candle stick chart
+  "
+  Produces a candle stick chart
 
-   Options:
+  Options:
     :data (default nil) If the :data option is provided a dataset,
                         column names can be used instead of sequences
                         of data as arguments to xy-plot.
@@ -1242,23 +1278,23 @@
     :series-label (default empty)
 
    Example:
-   (candle-stick-plot :data <dataset>) ;; uses default mappings so the dataset must have :date, :high, :low, :open, :close and :volume keys
-
-   ;; more customization
-   (candle-stick-plot
-      :data dataset
-      :high :HighPrice
-      :low :LowPrice
-      :open :StartOfDay
-      :close :CoB
-      :volume :TransactionVolume
-      :legend true
-      :time-label \"CoB date\"
-      :value-label \"Price\"
-      :series-label \"Price time series\"
-      :title \"Price information\")
-
-"
+     ;; use default mappings so the dataset must have
+     ;; :date, :high, :low, :open, :close and :volume keys
+     (candle-stick-plot :data <dataset>)
+     ;; more customization
+     (candle-stick-plot
+       :data dataset
+       :high :HighPrice
+       :low :LowPrice
+       :open :StartOfDay
+       :close :CoB
+       :volume :TransactionVolume
+       :legend true
+       :time-label \"CoB date\"
+       :value-label \"Price\"
+       :series-label \"Price time series\"
+       :title \"Price information\")
+  "
   [& options]
   `(let [opts# ~(when options (apply assoc {} options))
          main-title# (or (:title opts#) "Candle Stick Plot")
@@ -1277,7 +1313,8 @@
   (apply create-xy-series-plot x y create-time-series-plot options))
 
 (defmacro time-series-plot
-" Returns a JFreeChart object representing a time series plot of the given data.
+  "
+  Returns a JFreeChart object representing a time series plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file. Sequence passed in for the x axis should be
   number of milliseconds from the epoch (1 January 1970).
@@ -1298,10 +1335,11 @@
 
   Examples:
 
-    (use '(incanter core stats charts chrono))
+    (use '(incanter core stats charts))
+    (require '[clj-time.core :refer [date-time]])
 
     ;; plot numbers against years starting with 1900
-    (def dates (map #(-> (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0))
+    (def dates (map #(-> (date-time (+ 1900 %))
                          .getMillis)
                     (range 100)))
     (def y (range 100))
@@ -1312,7 +1350,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([x y & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -1389,7 +1427,8 @@
 
 
 (defmacro scatter-plot
-" Returns a JFreeChart object representing a scatter-plot of the given data.
+  "
+  Returns a JFreeChart object representing a scatter-plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -1446,7 +1485,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([]
      `(scatter-plot [] [] :x-label "x" :y-label "y"))
   ([x y & options]
@@ -1564,27 +1603,27 @@
                                    (vector xk xv yk yv) ))
         key-matrix (if only-triangle (filter (fn [[a b c d]] (>= a c)) key-matrix-all) key-matrix-all)]
     (doto
-        (JFreeChart.
-         (proxy [Plot] []
-           (getLegendItems [] (if (nil? group-by) nil legend))
-           (getPlotType [] "Scatter-Plot-Matrix")
-           (draw  [g2 area anchor parentState info]
-             (let [rect (.createInsetRectangle (.getInsets this) area)
-                   axis-space (AxisSpace.)
-                   w  (/ (- (.getWidth rect) (* 2 margin)) col-count)
-                   h  (/ (- (.getHeight rect) (* 2 margin)) col-count)]
-               (do
-                 (.drawBackground this g2 rect)
-                 (.drawOutline this g2 rect)
-                 (doto axis-space (.setLeft 0) (.setTop 0) (.setBottom 0) (.setRight 0))
-                 (doseq [x [xyplot histoplot]]
-                   (doto x
-                     (.setInsets    (RectangleInsets. 1 1 1 1))
-                     (.setDomainAxis (doto (NumberAxis. " ") (.setAutoRange true) (.setAutoRangeIncludesZero false)))
-                     (.setRangeAxis  (doto (NumberAxis. "  ") (.setAutoRange true) (.setAutoRangeIncludesZero false)))
-                     (.setFixedDomainAxisSpace axis-space)
-                     (.setFixedRangeAxisSpace  axis-space)))
-                 (dorun (map
+      (JFreeChart.
+        (proxy [Plot] []
+          (getLegendItems [] (if (nil? group-by) nil legend))
+          (getPlotType [] "Scatter-Plot-Matrix")
+          (draw  [g2 area anchor parentState info]
+            (let [rect (.createInsetRectangle (.getInsets this) area)
+                  axis-space (AxisSpace.)
+                  w  (/ (- (.getWidth rect) (* 2 margin)) col-count)
+                  h  (/ (- (.getHeight rect) (* 2 margin)) col-count)]
+              (do
+                (.drawBackground this g2 rect)
+                (.drawOutline this g2 rect)
+                (doto axis-space (.setLeft 0) (.setTop 0) (.setBottom 0) (.setRight 0))
+                (doseq [x [xyplot histoplot]]
+                  (doto x
+                    (.setInsets    (RectangleInsets. 1 1 1 1))
+                    (.setDomainAxis (doto (NumberAxis. " ") (.setAutoRange true) (.setAutoRangeIncludesZero false)))
+                    (.setRangeAxis  (doto (NumberAxis. "  ") (.setAutoRange true) (.setAutoRangeIncludesZero false)))
+                    (.setFixedDomainAxisSpace axis-space)
+                    (.setFixedRangeAxisSpace  axis-space)))
+                (dorun (map
                          (fn [ [ x-ind x-name y-ind y-name]]
                            (let [x (+ margin (* w x-ind) (.getX rect))
                                  y (+ margin (* h y-ind) (.getY rect))
@@ -1649,69 +1688,70 @@
                          key-matrix)))))))
       (.setTitle title)
       (.addSubtitle (doto
-                        (TextTitle. (str group-by))
+                      (TextTitle. (str group-by))
                       (.setPosition (RectangleEdge/BOTTOM)))))))
 
 (defn scatter-plot-matrix
-  "Returns a JFreeChart object displaying a scatter plot matrix for the given data.
-   Use the 'view' function to display the chart or 'save' to write it to a file.
+  "
+  Returns a JFreeChart object displaying a scatter plot matrix for the given data.
+  Use the 'view' function to display the chart or 'save' to write it to a file.
 
-   Use:
-   (scatter-plot-matrix & options)
-   (scatter-plot-matrix data & options)
+  Use:
+    (scatter-plot-matrix & options)
+    (scatter-plot-matrix data & options)
 
-   Options:
-   :data data (default $data) the data set for the plot.
-   :title s (default \"Scatter Plot Matrix\").
-   :nbins n (default 10) number of bins (ie. bars) in histogram.
-   :group-by grp (default nil) name of the column for grouping data.
-   :only-first n (default 6) show only the first n most correlating columns of the data set.
-   :only-triangle b (default false) shows only the upper triangle of the plot matrix.
+  Options:
+    :data data (default $data) the data set for the plot.
+    :title s (default \"Scatter Plot Matrix\").
+    :nbins n (default 10) number of bins (ie. bars) in histogram.
+    :group-by grp (default nil) name of the column for grouping data.
+    :only-first n (default 6) show only the first n most correlating columns of the data set.
+    :only-triangle b (default false) shows only the upper triangle of the plot matrix.
 
-   Examples:
-   (use '(incanter core stats charts datasets pdf))
-   (view (scatter-plot-matrix (get-dataset :iris) :nbins 20 :group-by :Species ))
-   (with-data (get-dataset :iris) (view (scatter-plot-matrix :nbins 20 :group-by :Species )))
-   (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :nbins 20))
+  Examples:
+    (use '(incanter core stats charts datasets pdf))
+    (view (scatter-plot-matrix (get-dataset :iris) :nbins 20 :group-by :Species ))
+    (with-data (get-dataset :iris) (view (scatter-plot-matrix :nbins 20 :group-by :Species )))
+    (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :nbins 20))
 
-   ;;;Input examples for Iris
-   ;; Input dataset examples: Incanter data repo, local file, remote file (url)
-   (def iris (get-dataset :iris))
-   (def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home
-   (def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))
-   ;; Filter dataset to specific columns only
-   (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
-   (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] ))
+    ;;;Input examples for Iris
+    ;; Input dataset examples: Incanter data repo, local file, remote file (url)
+    (def iris (get-dataset :iris))
+    (def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home
+    (def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))
+    ;; Filter dataset to specific columns only
+    (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
+    (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species]))
 
-   ;;; Scatter plot matrix examples
-   ;; Using default options
-   (def iris-spm (scatter-plot-matrix iris :group-by :Species))
-   ;; filter to metrics only, no categorical dimension for grouping
-   (def iris-spm (scatter-plot-matrix :data ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width] iris)))
+    ;;; Scatter plot matrix examples
+    ;; Using default options
+    (def iris-spm (scatter-plot-matrix iris :group-by :Species))
+    ;; filter to metrics only, no categorical dimension for grouping
+    (def iris-spm (scatter-plot-matrix :data ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width] iris)))
 
-   ;; Using more options
-   (def iris-spm (scatter-plot-matrix iris
-                                      :title \"Iris Scatter Plot Matrix\"
-                                      :bins 20 ; number of histogram bars
-                                      :group-by :Species
-                                      :only-first 4 ; most correlating columns
-                                      :only-triangle false))
+    ;; Using more options
+    (def iris-spm (scatter-plot-matrix iris
+                                       :title \"Iris Scatter Plot Matrix\"
+                                       :bins 20 ; number of histogram bars
+                                       :group-by :Species
+                                       :only-first 4 ; most correlating columns
+                                       :only-triangle false))
 
-   ;;;Output examples
-   ;; View on Display
-   (view iris-spm :width 1280 :height 800)
-   ;; Save as PDF
-   (save-pdf  iris-spm \"out/iris-spm.pdf\" :width 2560 :height 1600)
-   ;; Save as PNG
-   (save iris-spm \"out/iris-spm.png\" :width 2560 :height 1600)
+    ;;;Output examples
+    ;; View on Display
+    (view iris-spm :width 1280 :height 800)
+    ;; Save as PDF
+    (save-pdf  iris-spm \"out/iris-spm.pdf\" :width 2560 :height 1600)
+    ;; Save as PNG
+    (save iris-spm \"out/iris-spm.png\" :width 2560 :height 1600)
 
-   ;; Airline dataset
-   (def airline ($ [:year :passengers :month] (read-dataset \"https://raw.github.com/liebke/incanter/master/data/airline_passengers.csv\" :header true)))
-   (def airline-spm (scatter-plot-matrix airline  :group-by :month :bins 20 :title \"Airline Scatter Plot Matrix\"))
-   (view airline-spm)
-   ;; Chick-weight dataset
-   (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :bins 20 :title \"Chick-weight Scatter Plot Matrix\" ))
-"
+    ;; Airline dataset
+    (def airline ($ [:year :passengers :month] (read-dataset \"https://raw.github.com/liebke/incanter/master/data/airline_passengers.csv\" :header true)))
+    (def airline-spm (scatter-plot-matrix airline  :group-by :month :bins 20 :title \"Airline Scatter Plot Matrix\"))
+    (view airline-spm)
+    ;; Chick-weight dataset
+    (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :bins 20 :title \"Chick-weight Scatter Plot Matrix\" ))
+  "
   ([& opts] (cond
              (even? (count opts)) (apply scatter-plot-matrix* opts)
              :else (apply scatter-plot-matrix* (apply merge  [:data (first opts)]  (rest opts))))))
@@ -1748,7 +1788,8 @@
 
 
 (defmacro histogram
-" Returns a JFreeChart object representing the histogram of the given data.
+  "
+  Returns a JFreeChart object representing the histogram of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -1797,7 +1838,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([x & options]
     `(let [opts# ~(if options (apply assoc {} options) {})
            title# (or (:title opts#) "")
@@ -1853,7 +1894,8 @@
 
 
 (defmacro line-chart
-" Returns a JFreeChart object representing a line-chart of the given values and categories.
+  "
+  Returns a JFreeChart object representing a line-chart of the given values and categories.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -1928,7 +1970,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -1951,49 +1993,50 @@
 
 (defn bar-chart*
   ([categories values & options]
-     (let [opts (when options (apply assoc {} options))
-           data (or (:data opts) $data)
+    (let [opts (when options (apply assoc {} options))
+          data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
-           title (or (:title opts) "")
-           theme (or (:theme opts) :default)
-           _group-by (when (:group-by opts)
-                       (data-as-list (:group-by opts) data))
-           x-label (or (:x-label opts) (str 'categories))
-           y-label (or (:y-label opts) (str 'values))
-           series-label (:series-label opts)
-           vertical? (if (false? (:vertical opts)) false true)
-           legend? (true? (:legend opts))
-           dataset (DefaultCategoryDataset.)
-           chart (org.jfree.chart.ChartFactory/createBarChart
-                     title
-                     x-label
-                     y-label
-                     dataset
-                     (if vertical?
-                       org.jfree.chart.plot.PlotOrientation/VERTICAL
-                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
-                     legend?
-                     true
-                     false)]
-        (do
-          (doseq [i (range 0 (count _values))]
-            (.addValue dataset
-                       (nth _values i)
-                       (cond
-                        _group-by
-                          (nth _group-by i)
-                        series-label
-                          series-label
-                        :else
-                          (str 'values))
-                       (nth _categories i)))
-          (set-theme chart theme)
-          chart))))
+          title (or (:title opts) "")
+          theme (or (:theme opts) :default)
+          _group-by (when (:group-by opts)
+                      (data-as-list (:group-by opts) data))
+          x-label (or (:x-label opts) (str 'categories))
+          y-label (or (:y-label opts) (str 'values))
+          series-label (:series-label opts)
+          vertical? (if (false? (:vertical opts)) false true)
+          legend? (true? (:legend opts))
+          dataset (DefaultCategoryDataset.)
+          chart (org.jfree.chart.ChartFactory/createBarChart
+                  title
+                  x-label
+                  y-label
+                  dataset
+                  (if vertical?
+                    org.jfree.chart.plot.PlotOrientation/VERTICAL
+                    org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                   legend?
+                   true
+                   false)]
+      (do
+        (doseq [i (range 0 (count _values))]
+          (.addValue dataset
+                     (nth _values i)
+                     (cond
+                       _group-by
+                         (nth _group-by i)
+                       series-label
+                         series-label
+                       :else
+                         (str 'values))
+                     (nth _categories i)))
+        (set-theme chart theme)
+        chart))))
 
 
 (defmacro bar-chart
-" Returns a JFreeChart object representing a bar-chart of the given data.
+  "
+  Returns a JFreeChart object representing a bar-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -2006,7 +2049,8 @@
     :x-label (default 'Categories')
     :y-label (default 'Value')
     :series-label
-    :legend (default false) prints legend
+
+  :legend (default false) prints legend
     :vertical (default true) the orientation of the plot
     :group-by (default nil) -- a vector of values used to group the values into
                                series within each category.
@@ -2067,7 +2111,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2130,7 +2174,7 @@
 
 
 (defmacro area-chart
-" Returns a JFreeChart object representing an area-chart of the given data.
+  "Returns a JFreeChart object representing an area-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -2204,7 +2248,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2225,49 +2269,50 @@
 
 (defn stacked-area-chart*
   ([categories values & options]
-     (let [opts (when options (apply assoc {} options))
-           data (or (:data opts) $data)
+    (let [opts (when options (apply assoc {} options))
+          data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
-           title (or (:title opts) "")
-           theme (or (:theme opts) :default)
-           _group-by (when (:group-by opts)
-                       (data-as-list (:group-by opts) data))
-           x-label (or (:x-label opts) (str 'categories))
-           y-label (or (:y-label opts) (str 'values))
-           series-label (:series-label opts)
-           vertical? (if (false? (:vertical opts)) false true)
-           legend? (true? (:legend opts))
-           dataset (DefaultCategoryDataset.)
-           chart (org.jfree.chart.ChartFactory/createStackedAreaChart
-                     title
-                     x-label
-                     y-label
-                     dataset
-                     (if vertical?
-                       org.jfree.chart.plot.PlotOrientation/VERTICAL
-                       org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
-                     legend?
-                     true
-                     false)]
-        (do
-          (doseq [i (range 0 (count _values))]
-            (.addValue dataset
-                       (nth _values i)
-                       (cond
-                        _group-by
-                          (nth _group-by i)
+          title (or (:title opts) "")
+          theme (or (:theme opts) :default)
+          _group-by (when (:group-by opts)
+                      (data-as-list (:group-by opts) data))
+          x-label (or (:x-label opts) (str 'categories))
+          y-label (or (:y-label opts) (str 'values))
+          series-label (:series-label opts)
+          vertical? (if (false? (:vertical opts)) false true)
+          legend? (true? (:legend opts))
+          dataset (DefaultCategoryDataset.)
+          chart (org.jfree.chart.ChartFactory/createStackedAreaChart
+                  title
+                  x-label
+                  y-label
+                  dataset
+                  (if vertical?
+                    org.jfree.chart.plot.PlotOrientation/VERTICAL
+                    org.jfree.chart.plot.PlotOrientation/HORIZONTAL)
+                    legend?
+                    true
+                    false)]
+      (do
+        (doseq [i (range 0 (count _values))]
+          (.addValue dataset
+                     (nth _values i)
+                     (cond
+                      _group-by
+                        (nth _group-by i)
+                      series-label
                         series-label
-                          series-label
-                        :else
-                          (str 'values))
-                       (nth _categories i)))
+                      :else
+                        (str 'values))
+                     (nth _categories i)))
           (set-theme chart theme)
           chart))))
 
 
 (defmacro stacked-area-chart
-" Returns a JFreeChart object representing an stacked-area-chart of the given data.
+  "
+  Returns a JFreeChart object representing an stacked-area-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -2331,7 +2376,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2393,7 +2438,8 @@
 
 
 (defmacro stacked-bar-chart
-" Returns a JFreeChart object representing an stacked-bar-chart of the given data.
+  "
+  Returns a JFreeChart object representing an stacked-bar-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -2467,7 +2513,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2488,29 +2534,30 @@
 
 (defn pie-chart*
   ([categories values & options]
-     (let [opts (when options (apply assoc {} options))
-           data (or (:data opts) $data)
+    (let [opts (when options (apply assoc {} options))
+          data (or (:data opts) $data)
           _values (data-as-list values data)
           _categories (data-as-list categories data)
-           title (or (:title opts) "")
-           theme (or (:theme opts) :default)
-           legend? (true? (:legend opts))
-           dataset (DefaultPieDataset.)
-           chart (org.jfree.chart.ChartFactory/createPieChart
+          title (or (:title opts) "")
+          theme (or (:theme opts) :default)
+          legend? (true? (:legend opts))
+          dataset (DefaultPieDataset.)
+          chart (org.jfree.chart.ChartFactory/createPieChart
                   title
                   dataset
                   legend?
                   true
                   false)]
-        (do
-          (doseq [i (range 0 (count _values))]
-            (.setValue dataset (nth _categories i) (nth _values i)))
-          (set-theme chart theme)
-          chart))))
+      (do
+        (doseq [i (range 0 (count _values))]
+          (.setValue dataset (nth _categories i) (nth _values i)))
+        (set-theme chart theme)
+        chart))))
 
 
 (defmacro pie-chart
-" Returns a JFreeChart object representing a pie-chart of the given data.
+  "
+  Returns a JFreeChart object representing a pie-chart of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -2549,7 +2596,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([categories values & options]
     `(let [opts# ~(when options (apply assoc {} options))
            title# (or (:title opts#) "")
@@ -2604,7 +2651,8 @@
 
 
 (defmacro box-plot
-" Returns a JFreeChart object representing a box-plot of the given data.
+  "
+  Returns a JFreeChart object representing a box-plot of the given data.
   Use the 'view' function to display the chart, or the 'save' function
   to write it to a file.
 
@@ -2643,7 +2691,7 @@
     http://www.jfree.org/jfreechart/api/javadoc/
     http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
 
-"
+  "
   ([x & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2664,15 +2712,15 @@
 
 (defn function-plot*
   ([function min-range max-range & options]
-   (let [opts (when options (apply assoc {} options))
-         step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
-         _x (range-inclusive min-range max-range step-size)
-         title (or (:title opts) "")
-         x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
-         y-lab (or (:y-label opts) (str 'function))
-         series-lab (or (:series-label opts) (format "%s" 'function))
-         theme (or (:theme opts) :default)
-         legend? (true? (:legend opts))]
+    (let [opts (when options (apply assoc {} options))
+          step-size (or (:step-size opts) (float (/ (- max-range min-range) 500)))
+          _x (range-inclusive min-range max-range step-size)
+          title (or (:title opts) "")
+          x-lab (or (:x-label opts) (format "%s < x < %s" min-range max-range))
+          y-lab (or (:y-label opts) (str 'function))
+          series-lab (or (:series-label opts) (format "%s" 'function))
+          theme (or (:theme opts) :default)
+          legend? (true? (:legend opts))]
       (set-theme (xy-plot _x (map function _x)
                           :x-label x-lab
                           :y-label y-lab
@@ -2682,7 +2730,8 @@
 
 
 (defmacro function-plot
-" Returns a xy-plot object of the given function over the range indicated
+  "
+  Returns a xy-plot object of the given function over the range indicated
   by the min-range and max-range arguments. Use the 'view' function to
   display the chart, or the 'save' function to write it to a file.
 
@@ -2708,7 +2757,7 @@
     (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
     (view (function-plot cubic -10 10))
 
-"
+  "
   ([function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2748,7 +2797,8 @@
 
 
 (defmacro parametric-plot
-" Returns a xy-plot object of the given parametric function over the range indicated
+  "
+  Returns a xy-plot object of the given parametric function over the range indicated
   by the min-range and max-range arguments. Use the 'view' function to
   display the chart, or the 'save' function to write it to a file.
   Function must take 1 argument - parameter t and return point [x y].
@@ -2774,7 +2824,7 @@
 
     (defn spiral [t] [(* t (cos t)) (* t (sin t))])
     (view (parametric-plot spiral 0 (* 6 Math/PI)))
-"
+  "
   ([function min-range max-range & options]
     `(let [opts# ~(when options (apply assoc {} options))
            group-by# (:group-by opts#)
@@ -2836,33 +2886,33 @@
            plot (org.jfree.chart.plot.XYPlot. xyz-dataset x-axis y-axis renderer)
            chart (org.jfree.chart.JFreeChart. plot)]
        (do
-        (.setPaintScale renderer scale)
-        (when color? (doseq [i (range (count colors))]
-                       (add-color i (nth colors i))))
-        (.addSeries xyz-dataset "Series 1" data)
-        (.setBackgroundPaint plot java.awt.Color/lightGray)
-        (.setDomainGridlinesVisible plot false)
-        (.setRangeGridlinePaint plot java.awt.Color/white)
-        (.setAxisOffset plot (org.jfree.ui.RectangleInsets. 5 5 5 5))
-        (.setOutlinePaint plot java.awt.Color/blue)
-        (.removeLegend chart)
-        (.setSubdivisionCount legend 20)
-        (.setAxisLocation legend org.jfree.chart.axis.AxisLocation/BOTTOM_OR_LEFT)
-        (.setAxisOffset legend 5.0)
-        (.setMargin legend (org.jfree.ui.RectangleInsets. 5 5 5 5))
-        (.setFrame legend (org.jfree.chart.block.BlockBorder. java.awt.Color/red))
-        (.setPadding legend (org.jfree.ui.RectangleInsets. 10 10 10 10))
-        (.setStripWidth legend 10)
-        (.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
-        (.setTitle chart title)
-        (.addSubtitle chart legend)
-        (org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
-        (set-theme chart theme))
+         (.setPaintScale renderer scale)
+         (when color? (doseq [i (range (count colors))]
+                        (add-color i (nth colors i))))
+         (.addSeries xyz-dataset "Series 1" data)
+         (.setBackgroundPaint plot java.awt.Color/lightGray)
+         (.setDomainGridlinesVisible plot false)
+         (.setRangeGridlinePaint plot java.awt.Color/white)
+         (.setAxisOffset plot (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setOutlinePaint plot java.awt.Color/blue)
+         (.removeLegend chart)
+         (.setSubdivisionCount legend 20)
+         (.setAxisLocation legend org.jfree.chart.axis.AxisLocation/BOTTOM_OR_LEFT)
+         (.setAxisOffset legend 5.0)
+         (.setMargin legend (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setFrame legend (org.jfree.chart.block.BlockBorder. java.awt.Color/red))
+         (.setPadding legend (org.jfree.ui.RectangleInsets. 10 10 10 10))
+         (.setStripWidth legend 10)
+         (.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
+         (.setTitle chart title)
+         (.addSubtitle chart legend)
+         (org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
+         (set-theme chart theme))
        chart)))
 
 
 (defmacro heat-map
-"
+  "
   Usage: (heat-map function x-min x-max y-min y-max & options)
 
   Returns a JFreeChart object representing a heat map of the function across
@@ -2917,7 +2967,7 @@
                                 data)))]
       (view (heat-map diffusion -5 20 -5 20)))
 
-"
+  "
   ([function x-min x-max y-min y-max & options]
     `(let [opts# ~(when options (apply assoc {} options))
            x-lab# (or (:x-label opts#) (format "%s < x < %s" '~x-min '~x-max))
@@ -2936,7 +2986,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn add-pointer
-" Adds an arrow annotation to the given chart.
+  "
+  Adds an arrow annotation to the given chart.
 
   Arguments:
     chart -- the chart to annotate
@@ -2973,7 +3024,7 @@
     (add-pointer plot 0 0 :text \"se\" :angle :se)
 
 
-"
+  "
   ([chart x y & options]
     (let [opts (when options (apply assoc {} options))
           text (or (:text opts) "")
@@ -3022,7 +3073,8 @@
 
 
 (defn add-text
-" Adds a text annotation centered at the given coordinates.
+  "
+  Adds a text annotation centered at the given coordinates.
 
   Arguments:
     chart -- the chart to annotate
@@ -3057,8 +3109,7 @@
     (add-text plot -5 -5.5 \"Versicolor\")
     (add-text plot -8 -5.5 \"Virginica\")
 
-
-"
+  "
   ([chart x y text & options]
     (let [opts (when options (apply assoc {} options))
           anno (XYTextAnnotation. text x y)]
@@ -3067,7 +3118,8 @@
 
 
 (defn add-polygon
-" Adds a polygon outline defined by a given coordinates. The last coordinate will
+  "
+  Adds a polygon outline defined by a given coordinates. The last coordinate will
   close with the first. If only two points are given, it will plot a line.
 
   Arguments:
@@ -3119,7 +3171,7 @@
 
 
 
-"
+  "
   ([chart coords & options]
     (let [opts (when options (apply assoc {} options))
           points (double-array (mapcat identity coords))
@@ -3128,7 +3180,8 @@
       chart)))
 
 (defn add-image
-" Adds an image to the chart at the given coordinates.
+  "
+  Adds an image to the chart at the given coordinates.
 
   Arguments:
     chart -- the chart to add the polygon to.
@@ -3143,7 +3196,7 @@
       (add-image 0 0 (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))
       view)
 
-"
+  "
   ([chart x y img & options]
     (let [opts (when options (apply assoc {} options))
           anno (org.jfree.chart.annotations.XYImageAnnotation. x y img)]
@@ -3155,7 +3208,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn trace-plot
-  " Returns a trace-plot object, use the 'view' function to display it.
+  "
+  Returns a trace-plot object, use the 'view' function to display it.
 
   Options:
     :data (default nil) If the :data option is provided a dataset,
@@ -3176,7 +3230,7 @@
 
       (view (trace-plot (sel (:coefs sample-params) :cols 0)))
 
-"
+  "
   ([x & options]
     (let [opts (when options (apply assoc {} options))
           data (or (:data opts) $data)
@@ -3203,7 +3257,7 @@
 
 
 (defn qq-plot
-"
+  "
   Returns a QQ-Plot object. Use the 'view' function to display it.
 
   Options:
@@ -3224,9 +3278,7 @@
     (with-data (get-dataset :iris)
       (view (qq-plot :Sepal.Length)))
 
-
-
-"
+  "
   ([x & options]
    (let [opts (when options (apply assoc {} options))
          data (or (:data opts) $data)
@@ -3245,7 +3297,7 @@
 
 
 (defn bland-altman-plot
-"
+  "
   Options:
     :data (default nil) If the :data option is provided a dataset,
                         column names can be used instead of sequences
@@ -3260,7 +3312,8 @@
     (view (bland-altman-plot x1 x2))
 
     (with-data (get-dataset :flow-meter)
-      (view (bland-altman-plot \"Wright 1st PEFR\" \"Mini Wright 1st PEFR\")))
+      (view (bland-altman-plot (keyword \"Wright 1st PEFR\")
+                               (keyword \"Mini Wright 1st PEFR\"))))
 
 
 
@@ -3268,28 +3321,28 @@
     http://en.wikipedia.org/wiki/Bland-Altman_plot
     http://www-users.york.ac.uk/~mb55/meas/ba.htm
 
-"
+  "
   ([x1 x2 & options]
-      (let [opts (when options (apply assoc {} options))
-            data (or (:data opts) $data)
-            _x1 (data-as-list x1 data)
-            _x2 (data-as-list x2 data)
-            plot (scatter-plot (div (plus _x1 _x2) 2) (minus _x1 _x2)
-                               :title "Bland Altman Plot"
-                               :legend false)
-            x-axis (div (plus _x1 _x2) 2)
-            y-axis (minus _x1 _x2)
-            min-x (reduce min x-axis)
-            max-x (reduce max x-axis)
-            _x (range min-x max-x (/ (- max-x min-x) 100))
-            y-sd (* (sd y-axis) 2)
-            theme (or (:theme opts) :default)]
-        (do
-          (add-lines plot _x (repeat (count _x) 0) :series-label "mean")
-          (add-lines plot _x (repeat (count _x) y-sd) :series-label "mean + sd")
-          (add-lines plot _x (repeat (count _x) (- 0 y-sd)) :series-label "mean - sd")
-          (set-theme plot theme)
-          plot))))
+    (let [opts (when options (apply assoc {} options))
+          data (or (:data opts) $data)
+          _x1 (data-as-list x1 data)
+          _x2 (data-as-list x2 data)
+          plot (scatter-plot (div (plus _x1 _x2) 2) (minus _x1 _x2)
+                             :title "Bland Altman Plot"
+                             :legend false)
+          x-axis (div (plus _x1 _x2) 2)
+          y-axis (minus _x1 _x2)
+          min-x (reduce min x-axis)
+          max-x (reduce max x-axis)
+          _x (range min-x max-x (/ (- max-x min-x) 100))
+          y-sd (* (sd y-axis) 2)
+          theme (or (:theme opts) :default)]
+      (do
+        (add-lines plot _x (repeat (count _x) 0) :series-label "mean")
+        (add-lines plot _x (repeat (count _x) y-sd) :series-label "mean + sd")
+        (add-lines plot _x (repeat (count _x) (- 0 y-sd)) :series-label "mean - sd")
+        (set-theme plot theme)
+        plot))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3326,7 +3379,7 @@
 
 
 (defn get-series
-"get-series"
+  "get-series"
   ([chart]
      (-> chart .getPlot .getDataset .getSeries))
   ([chart series-idx]
@@ -3366,8 +3419,7 @@
 
 
 (defn slider
-"
-
+  "
   Examples:
     (use '(incanter core stats charts))
 
@@ -3380,7 +3432,7 @@
 
     (let [x (range -3 3 0.1)]
       (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1) \"sd\"))
-"
+  "
   ([updater-fn slider-values]
      (slider updater-fn slider-values nil))
   ([updater-fn slider-values slider-label]
@@ -3412,20 +3464,19 @@
 
 
 (defn sliders*
-"sliders*
+  "sliders*
 
   Examples:
-  (use '(incanter core stats charts))
+    (use '(incanter core stats charts))
 
-  (let [x (range -3 3 0.1)]
-    (do
-      (def pdf-chart (xy-plot x (pdf-normal x :mean -3 :sd 0.1)))
-      (view pdf-chart)
-      (sliders* #(set-data pdf-chart [x (pdf-normal x :mean %1 :sd %2)])
-               [(range -3 3 0.1) (range 0.1 10 0.1)]
-               [\"mean\" \"sd\"])))
-
-"
+    (let [x (range -3 3 0.1)]
+      (do
+        (def pdf-chart (xy-plot x (pdf-normal x :mean -3 :sd 0.1)))
+        (view pdf-chart)
+        (sliders* #(set-data pdf-chart [x (pdf-normal x :mean %1 :sd %2)])
+                 [(range -3 3 0.1) (range 0.1 10 0.1)]
+                 [\"mean\" \"sd\"])))
+  "
   ([f [& slider-values]]
      (sliders* f (apply vector slider-values) [nil]))
   ([f [& slider-values] [& slider-labels]]
@@ -3443,58 +3494,57 @@
 
 
 (defmacro sliders
-" Creates one slider control for each of the given sequence bindings.
+  "
+  Creates one slider control for each of the given sequence bindings.
   Each slider calls the given expression when manipulated.
 
 
   Examples:
-  (use '(incanter core stats charts))
+    (use '(incanter core stats charts))
 
-  ;; manipulate a normal pdf
-  (let [x (range -3 3 0.1)]
-    (def pdf-chart (xy-plot))
-    (view pdf-chart)
-    (sliders [mean (range -3 3 0.1)
-              stdev (range 0.1 10 0.1)]
-      (set-data pdf-chart [x (pdf-normal x :mean mean :sd stdev)])))
-
-
-
-  ;; manipulate a gamma pdf
-  (let [x (range 0 20 0.1)]
-    (def pdf-chart (xy-plot))
-    (view pdf-chart)
-    (sliders [rate (range 0.1 10 0.1)
-              shape (range 0.1 10 0.1)]
-      (set-data pdf-chart [x (pdf-gamma x :rate rate :shape shape)])))
+    ;; manipulate a normal pdf
+    (let [x (range -3 3 0.1)]
+      (def pdf-chart (xy-plot))
+      (view pdf-chart)
+      (sliders [mean (range -3 3 0.1)
+                stdev (range 0.1 10 0.1)]
+        (set-data pdf-chart [x (pdf-normal x :mean mean :sd stdev)])))
 
 
-
-  ;; find the start values of a non-linear model function
-  (use '(incanter core charts datasets))
-  ;; create model function used in the following data-sorcery post:
-  ;; http://data-sorcery.org/2009/06/06/fitting-non-linear-models/
-
-  (defn f [theta x]
-    (let [[b1 b2 b3] theta]
-      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))
+    ;; manipulate a gamma pdf
+    (let [x (range 0 20 0.1)]
+      (def pdf-chart (xy-plot))
+      (view pdf-chart)
+      (sliders [rate (range 0.1 10 0.1)
+                shape (range 0.1 10 0.1)]
+               (set-data pdf-chart [x (pdf-gamma x :rate rate :shape shape)])))
 
 
-  (with-data (get-dataset :chwirut)
-    (view $data)
-    (def chart (scatter-plot ($ :x) ($ :y)))
-    (view chart)
-    (add-lines chart ($ :x) (f [0 0.01 0] ($ :x)))
 
-    ;; manipulate the model line to find some good start values.
-    ;; give the index of the line data (i.e. 1) to set-data.
-    (let [x ($ :x)]
-      (sliders [b1 (range 0 2 0.01)
-                b2 (range 0.01 2 0.01)
-                b3 (range 0 2 0.01)]
-        (set-data chart [x (f [b1 b2 b3] x)] 1))))
+    ;; find the start values of a non-linear model function
+    (use '(incanter core charts datasets))
+    ;; create model function used in the following data-sorcery post:
+    ;; http://data-sorcery.org/2009/06/06/fitting-non-linear-models/
 
-"
+    (defn f [theta x]
+      (let [[b1 b2 b3] theta]
+        (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))
+
+    (with-data (get-dataset :chwirut)
+      (view $data)
+      (def chart (scatter-plot ($ :x) ($ :y)))
+      (view chart)
+      (add-lines chart ($ :x) (f [0 0.01 0] ($ :x)))
+
+      ;; manipulate the model line to find some good start values.
+      ;; give the index of the line data (i.e. 1) to set-data.
+      (let [x ($ :x)]
+        (sliders [b1 (range 0 2 0.01)
+                  b2 (range 0.01 2 0.01)
+                  b3 (range 0 2 0.01)]
+          (set-data chart [x (f [b1 b2 b3] x)] 1))))
+
+  "
   ([[& slider-bindings] body]
      `(let [slider-fn# (fn ~(apply vector (map symbol (take-nth 2 slider-bindings)))
                          (do ~body))
@@ -3505,19 +3555,20 @@
 
 
 (defmacro dynamic-xy-plot
-" Returns an xy-plot bound to sliders (which tend to appear behind the chart).
+  "
+  Returns an xy-plot bound to sliders (which tend to appear behind the chart).
   See the sliders macro for more information.
 
 
   Examples:
 
-  (use '(incanter core stats charts))
+    (use '(incanter core stats charts))
 
-  (let [x (range -3 3 0.1)]
+    (let [x (range -3 3 0.1)]
     (view (dynamic-xy-plot [mean (range -3 3 0.1)
                             sd (range 0.1 10 0.1)]
-            [x (pdf-normal x :mean mean :sd sd)]
-            :title \"Normal PDF Plot\")))
+                           [x (pdf-normal x :mean mean :sd sd)]
+                           :title \"Normal PDF Plot\")))
 
    (let [x (range -3 3 0.1)]
      (view (dynamic-xy-plot [mean (range -3 3 0.1)
@@ -3525,7 +3576,8 @@
             (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
             :title \"Normal PDF Plot\")))
 
-"
+
+  "
   ([[& slider-bindings] expression & options]
      `(let [chart# (xy-plot [] [] ~@options)
             sliders# (sliders ~(vec slider-bindings)
@@ -3536,7 +3588,8 @@
 
 
 (defmacro dynamic-scatter-plot
-" Returns an scatter-plot bound to sliders (which tend to appear behind the chart).
+  "
+  Returns an scatter-plot bound to sliders (which tend to appear behind the chart).
   See the sliders macro for more information.
 
 
@@ -3557,7 +3610,7 @@
             (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
             :title \"Normal PDF Plot\")))
 
-"
+  "
   ([[& slider-bindings] expression & options]
      `(let [chart# (scatter-plot [] [] ~@options)
             sliders# (sliders ~(vec slider-bindings)
@@ -3571,7 +3624,7 @@
 ;;; CHART CUSTOMIZATION
 
 (defn set-stroke
-"
+  "
   Examples:
     (use '(incanter core charts))
 
@@ -3594,29 +3647,29 @@
       (add-categories [:a :b :c :d] [20 5 30 15])
       (set-stroke :series 0 :width 4 :dash 5)
       (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))
-"
- ([chart & options]
-   (let [{:keys [width dash series dataset cap join]
-          :or {width 1.0 dash 1.0 series :all dataset 0
-               cap java.awt.BasicStroke/CAP_ROUND
-               join java.awt.BasicStroke/JOIN_ROUND}} (apply hash-map options)
-         renderer (-> chart .getPlot (.getRenderer dataset))
-         stroke (java.awt.BasicStroke. width
-                                       cap
-                                       join
-                                       1.0
-                                       (float-array 1.0 dash)
-                                       0.0)]
-     (if (= :all series)
-       (doto renderer
-         (.setAutoPopulateSeriesStroke false)
-         (.setBaseStroke stroke))
-       (.setSeriesStroke renderer series stroke))
-     chart)))
+  "
+  ([chart & options]
+    (let [{:keys [width dash series dataset cap join]
+           :or {width 1.0 dash 1.0 series :all dataset 0
+                cap java.awt.BasicStroke/CAP_ROUND
+                join java.awt.BasicStroke/JOIN_ROUND}} (apply hash-map options)
+          renderer (-> chart .getPlot (.getRenderer dataset))
+          stroke (java.awt.BasicStroke. width
+                                        cap
+                                        join
+                                        1.0
+                                        (float-array 1.0 dash)
+                                        0.0)]
+      (if (= :all series)
+        (doto renderer
+          (.setAutoPopulateSeriesStroke false)
+          (.setBaseStroke stroke))
+        (.setSeriesStroke renderer series stroke))
+      chart)))
 
 
 (defn set-stroke-color
-"
+  "
   Examples:
     (use '(incanter core charts))
 
@@ -3635,7 +3688,7 @@
       (set-stroke-color java.awt.Color/gray)
       view)
 
-"
+  "
 ([chart color & options]
    (let [{:keys [series dataset]
           :or {series 0 dataset 0}} (apply hash-map options)
@@ -3877,7 +3930,8 @@
 
 
 (defmulti add-subtitle
-"Adds a JFreeChart title object to a chart as a subtitle.
+  "
+  Adds a JFreeChart title object to a chart as a subtitle.
 
   Examples:
     (use '(incanter core charts latex))
@@ -3887,7 +3941,7 @@
       (add-subtitle (latex \" \\\\frac{(a+b)^2} {(a-b)^2}\"))
       view)
 
-"
+  "
   (fn [chart title] (type title)))
 
 (defmethod add-subtitle java.awt.image.BufferedImage

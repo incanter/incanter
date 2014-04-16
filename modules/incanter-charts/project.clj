@@ -7,5 +7,5 @@
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-io "1.5.5-SNAPSHOT"]
                  [incanter/jfreechart "1.0.13-no-gnujaxp"]
-                 [clj-time "0.5.0" :exclusions [org.clojure/clojure]]]
+                 [clj-time "0.6.0" :exclusions [org.clojure/clojure]]]
   )

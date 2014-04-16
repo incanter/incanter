@@ -6,9 +6,9 @@
   :scm {:name "git" :url "https://github.com/liebke/incanter"}
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/math.combinatorics "0.0.3"
+                 [org.clojure/math.combinatorics "0.0.4"
                   :exclusions [org.clojure/clojure]]
-                 [net.sourceforge.parallelcolt/parallelcolt "0.10.0"]
+                 [net.sourceforge.parallelcolt/parallelcolt "0.10.1"]
                  [clatrix/clatrix "0.3.0"
                   :exclusions [org.clojure/clojure]]]
   :java-source-paths ["java"])

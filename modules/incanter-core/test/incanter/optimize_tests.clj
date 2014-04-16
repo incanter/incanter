@@ -1,7 +1,7 @@
 
 ;;; optimize-test-cases.clj -- Unit tests of Incanter functions
 
-;; by John Sullivan 
+;; by John Sullivan
 ;; March 19, 2013
 
 ;; Copyright (c) John Sullivan, 2013. All rights reserved.  The use
@@ -16,10 +16,10 @@
 (ns incanter.optimize-tests
   (:use clojure.test
     (incanter core optimize)))
-  
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.optimize.clj
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn rosenbrock
   [[x y]]
@@ -33,8 +33,9 @@
 (def neg-rosenbrock (comp - rosenbrock))
 (def neg-rosenbrock-der (comp (partial map -) rosenbrock-der))
 
+
 (deftest minimize-test
-  (is (= (:value (minimize rosenbrock [0 0] rosenbrock-der :max-iter 500)) (matrix [1 1]))))
+  (is (= (:value (minimize rosenbrock [0 0] :f-prime rosenbrock-der :max-iter 500)) (matrix [1 1]))))
 
 (deftest maximize-test
-  (is (= (:value (maximize neg-rosenbrock [0 0] neg-rosenbrock-der :max-iter 500)) (matrix [1 1]))))
+  (is (= (:value (maximize neg-rosenbrock [0 0] :f-prime neg-rosenbrock-der :max-iter 500)) (matrix [1 1]))))

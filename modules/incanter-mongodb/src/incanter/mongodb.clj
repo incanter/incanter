@@ -1,9 +1,9 @@
-(ns ^{:doc "A simple library that provides functions for persisting 
+(ns ^{:doc "A simple library that provides functions for persisting
 Incanter data structures using MongoDB.
 
-Use incanter.mongodb in combination with the somnium.congomongo library. 
-For usage examples, see the Congomongo README at http://github.com/somnium/congomongo, 
-and the examples/blog/mongodb_datasets.clj file in the Incanter distribution. 
+Use incanter.mongodb in combination with the somnium.congomongo library.
+For usage examples, see the Congomongo README at http://github.com/somnium/congomongo,
+and the examples/blog/mongodb_datasets.clj file in the Incanter distribution.
 
 Here are Somnium's descriptions of Congomongo's functions:
 
@@ -66,15 +66,16 @@ Here are Somnium's descriptions of Congomongo's functions:
 
  incanter.mongodb
     (:use [incanter.core :only (dataset)]
-             [somnium.congomongo :only (fetch mass-insert!)]))
+          [somnium.congomongo :only (fetch mass-insert!)]))
 
 
 (defn fetch-dataset
-  "Queries a MongoDB database, accepting the same arguments as 
-somnium.congomongo/fetch, but returning an Incanter dataset instead 
-of a sequence of maps.
+  "
+  Queries a MongoDB database, accepting the same arguments as
+  somnium.congomongo/fetch, but returning an Incanter dataset instead
+  of a sequence of maps.
 
-Examples:
+  Examples:
 
    (use '(incanter core datasets mongodb))
    (use 'somnium.congomongo)
@@ -93,35 +94,34 @@ Examples:
    ;; notice that the retrieved data set has two additional columns,  :_id :_ns
    (view (fetch-dataset :airline-data))
 
-"
+  "
   [& args]
     (let [results (apply fetch args)
-	   colnames  (keys (first results))]
+	        colnames  (keys (first results))]
       (dataset colnames results)))
 
 
 
 (defn insert-dataset
-  "Inserts the rows of the Incanter dataset into the given MongoDB collection.
+  "
+  Inserts the rows of the Incanter dataset into the given MongoDB collection.
 
-   Examples:
+  Examples:
 
-   (use '(incanter core datasets mongodb))
-   (use 'somnium.congomongo)
+    (use '(incanter core datasets mongodb))
+    (use 'somnium.congomongo)
 
-   (def data (get-dataset :airline-passengers))
-   (view data)
+    (def data (get-dataset :airline-passengers))
+    (view data)
 
-   ;; a MongoDB server must be running on the localhost on the default port
-   ;; for the following steps.
+    ;; a MongoDB server must be running on the localhost on the default port
+    ;; for the following steps.
 
-   (mongo! :db \"mydb\")
-   (mass-insert! :airline-data (:rows data))
+    (mongo! :db \"mydb\")
+    (mass-insert! :airline-data (:rows data))
 
-   ;; notice that the retrieved data set has two additional columns,  :_id :_ns
-   (view (fetch-dataset :airline-data))
-
-
-"
+    ;; notice that the retrieved data set has two additional columns,  :_id :_ns
+    (view (fetch-dataset :airline-data))
+  "
   [mongodb-coll dataset]
     (mass-insert! mongodb-coll (:rows dataset)))
