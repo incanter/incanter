@@ -59,7 +59,7 @@ Try another simple example, a plot of the sine function over the range -4 to 4:
 
 The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
 
-The <a href="http://www.amazon.com/gp/product/178216264X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=178216264X&linkCode=as2&tag=statisprograw-20">Clojure Data Analysis Cookbook</a> (published by Packt Publishing) contains several chapters dedicated to Incanter, including work with datasets, charting, etc.  You can read the <a href="https://github.com/liebke/incanter/blob/master/docs/9781782162643_Chapter%206.pdf?raw=true">sample chapter</a> that describes Incanter's datasets.
+The <a href="http://www.amazon.com/gp/product/178216264X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=178216264X&linkCode=as2&tag=statisprograw-20">Clojure Data Analysis Cookbook</a> (published by Packt Publishing) contains several chapters dedicated to Incanter, including work with datasets, charting, etc.  You can read the <a href="https://github.com/incanter/incanter/blob/master/docs/9781782162643_Chapter%206.pdf?raw=true">sample chapter</a> that describes Incanter's datasets.
 
 There is dedicated mailing list for discussions about Incater. It's hosted on <a href="http://groups.google.com/group/incanter">Google Groups</a>.
 
@@ -92,7 +92,7 @@ h2. Building Incanter
 
 To build and test Incanter, you will need to have <a href="https://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
 
-1. Clone the repository with git: @git clone git://github.com/liebke/incanter.git@
+1. Clone the repository with git: @git clone git://github.com/incanter/incanter.git@
 
 2. Install Leiningen (version 2.x)
   a. Download the lein script: @wget https://github.com/technomancy/leiningen/raw/preview/bin/lein@
