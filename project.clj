@@ -23,12 +23,13 @@
   :main incanter.main
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
+             :uberjar {:aot :all}
              }  
   :repl-options {:init-ns incanter.main
                  :init (do
                          (set! *print-length* 500)
                          (use 'clojure.repl))
                  }
-  :jvm-opts ["-Xmx1g"]
-
+  :jvm-opts ["-Xmx1g" "-Djsse.enableSNIExtension=false"
+             ~(str "-Dincanter.home=" (System/getProperty "user.dir"))]
   )
