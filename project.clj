@@ -16,16 +16,19 @@
                  [incanter/incanter-sql "1.5.5-SNAPSHOT"]
                  [incanter/incanter-zoo "1.5.5-SNAPSHOT"]
                  [org.clojure/clojure "1.5.1"]
-                 [swingrepl "1.3.0"
-                  :exclusions [org.clojure/clojure
-                               org.clojure/clojure-contrib]]
-                 [jline/jline "2.11"]]
-  :main incanter.main
+                 ]
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
-             :uberjar {:aot :all}
+             :uberjar {:aot :all
+                       :main incanter.main
+                       :dependencies [[reply "0.3.0" :exclusions [org.clojure/clojure]]
+                                      [swingrepl "1.3.0"
+                                       :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]
+                                      ]
+                       }
              }  
-  :repl-options {:init-ns incanter.main
+  :repl-options {:init-ns incanter.irepl
+                 :resource-paths ["data"]
                  :init (do
                          (set! *print-length* 500)
                          (use 'clojure.repl))

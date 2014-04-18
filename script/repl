@@ -15,4 +15,8 @@ if [ $JAR_FOUND -eq 0 ] ; then
     exit 1
 fi
 
-java -Xmx1G -cp "$CP" jline.ConsoleRunner clojure.main -i "$TOP_DIR/script/run.clj" -r
+INCANTER_HOME=$TOP_DIR
+export INCANTER_HOME
+
+java -Xmx1G -cp "$CP" incanter.repl -i "$TOP_DIR/script/run.clj" "$@"
+
