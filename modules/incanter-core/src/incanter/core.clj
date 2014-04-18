@@ -2040,6 +2040,26 @@
           rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
       (to-dataset rows))))
 
+(defn aggregate
+  "
+  Performs the aggregation of the data in given dataset using the specified rollup function.
+  The fields parameter defines column(s) on which the rollup will happen, and group-by
+  specifies the column(s) for joining the results.  The fields & group-by parameters could be
+  single values or collections.  The dataset is provided by the :dataset parameter, if it's not
+  provided, then the $data is used.  The rollup function is provided by :rollup-fun parameter,
+  if it's not provided, then the :sum is used.
+
+    (aggregate [:uptake :conc] :Type :dataset (get-dataset :co2))
+    (aggregate [:uptake :conc] [:Type] :dataset (get-dataset :co2) :rollup-fun :min)
+"
+  [fields group-by & {:keys [dataset rollup-fun] :or {rollup-fun :sum}}]
+  (let [dset (or dataset $data)
+        fields (if (coll? fields) fields [fields])
+        group-by (if (coll? group-by) group-by [group-by])]
+    (reduce #($join [group-by group-by] %1 %2)
+            (map #($rollup rollup-fun % group-by dset)
+                 fields))))
+
 (defn- replace-by-number-or-value [col-vec [old-col new-col-name]]
   (if (number? old-col)
     (assoc col-vec old-col new-col-name)
