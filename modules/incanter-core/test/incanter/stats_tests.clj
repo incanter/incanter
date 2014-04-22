@@ -213,7 +213,7 @@
 	 (normalized-kendall-tau-distance [1 2 3 4 5] 
 					  [3 4 1 2 5])))) 
 
-(deftest gamma-coefficient
+(deftest test-gamma-coefficient
   (is (= 1
        (gamma-coefficient [1 2 3]
                           [4 5 6])))
