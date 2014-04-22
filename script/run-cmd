@@ -27,3 +27,6 @@ for i in core io charts mongodb pdf svg latex excel zoo sql; do
 done
 
 cd $TWD
+
+# execute the command in the top-level directory as well
+$@

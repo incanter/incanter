@@ -3035,15 +3035,31 @@
           (combine all-combos (rest ra) (rest rb))))) [] a b))
 
 (defn pairings
-  "confusing ass name."
+  "
+  Creates pairs by matching a1 with b1, a2 with b2, etc. and returns
+  all pairs of those pairs without matching a pair with itself.
+  "
   [a b]
   (let [tuples (zipmap a b)]
     (pairs tuples tuples)))
 
 (defn concordant?
-  [[[a1 b1][a2 b2]]]
-  (= (compare a1 a2)
-     (compare b1 b2)))
+  "
+  Given two pairs of numbers, checks if they are concordant.
+  "
+  [[[a1 b1][a2 b2] & more]]
+  (if (nil? more)
+    (= (compare a1 a2)
+       (compare b1 b2))
+    (throw (Exception. "Too many arguments!"))))
+
+(defn concordant-pairs
+  "http://en.wikipedia.org/wiki/Concordant_pairs"
+  [a b]
+    (let [tuples (zipmap a b)
+          ps (pairs tuples tuples)]
+      (count (filter concordant? ps))))
+
 
 (def discordant? (comp not concordant?))
 
@@ -3075,7 +3091,10 @@
   The gamma coefficient is given as a measure of association that
   is highly resistant to tied data (Goodman and Kruskal, 1963)
   "
-  []) ;TODO: implement
+  [a b]
+  (let [nc (concordant-pairs a b)
+        nd (discordant-pairs a b)]
+    (/ (- nc nd) (+ nc nd))))
 
 (defn kendalls-w
   "

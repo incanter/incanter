@@ -213,6 +213,16 @@
 	 (normalized-kendall-tau-distance [1 2 3 4 5] 
 					  [3 4 1 2 5])))) 
 
+(deftest gamma-coefficient
+  (is (= 1
+       (gamma-coefficient [1 2 3]
+                          [4 5 6])))
+  (is (= -1
+       (gamma-coefficient [1 2 3]
+                          [0 -1 -2])))
+  (is (= 1/3
+       (gamma-coefficient [1 2 3]
+                          [0 -1 1]))))
 
 (deftest jaccard-examples
  (is (= 2/6
