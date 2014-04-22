@@ -130,7 +130,7 @@
   (is (= (nrow (sample test-mat :size 3)) 3))
   (is (= (nrow (sample dataset1 :size 3)) 3)))
 
-(deftest sample-mean
+(deftest sample-mean-test
  (is (= 3.0 
       (mean [2 3 4]))))
 
@@ -213,7 +213,7 @@
 	 (normalized-kendall-tau-distance [1 2 3 4 5] 
 					  [3 4 1 2 5])))) 
 
-(deftest gamma-coefficient
+(deftest test-gamma-coefficient
   (is (= 1
        (gamma-coefficient [1 2 3]
                           [4 5 6])))
