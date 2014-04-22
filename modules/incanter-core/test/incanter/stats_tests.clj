@@ -130,7 +130,7 @@
   (is (= (nrow (sample test-mat :size 3)) 3))
   (is (= (nrow (sample dataset1 :size 3)) 3)))
 
-(deftest sample-mean
+(deftest sample-mean-test
  (is (= 3.0 
       (mean [2 3 4]))))
 
