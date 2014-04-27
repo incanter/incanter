@@ -14,14 +14,7 @@ script/clean
 
 $TOP_DIR/script/run-cmd $LEIN deploy clojars
 RES=$?
-if [ $RES -ne 0 ] ; then
-    exit $RES
-fi
 
-cd "$TOP_DIR"
-$LEIN deploy clojars
-RES=$?
 cd "$TWD"
-
 exit $RES
 
