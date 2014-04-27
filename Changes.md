@@ -1,5 +1,47 @@
 # What's new in Incanter #
 
+## Changes for 1.5.5 ##
+
+### Bugfixes ###
+
+ * Fix the repl scripts (issue #215)
+ * Correctly handle `from-repo` parameter of `get-dataset` function
+ * Correctly scale parameter in `sample-model-params`
+ * Columns are explicitely casted to str in `read-dataset`
+ * Correct different problems found by Eastwood lint tool
+ * Correctly handle missing values when using `log-axis` (issue #210)
+ * BFGS minimization routine uses `gradient-fn` to estimate `f-prime` when it is not
+   provided.  This also entailed changing gradient-fn to accept matrices as well as
+   vectors.
+ * `xy-plot` and `time-series-plot` modified to take into account `group-by` names
+   correctly for legend labels (issue #216)
+ * `draw` for `uniform-distribution` uses specified min & max parameters
+ * Correlation coefficient now 0.0 (not NaN) with constant vector
+ * Fix for linear model adjusted R-squared (issue #194)
+ * Catch divide by zero exceptions when calculating `rho-k` in `fmin-bfgs`
+ * Correctly handle `:legend` for `time-series-plot`
+ * Fix for `minus` for a single argument (issue #195)
+ * `chisq-test` works correctly when `:x` is one sample collection
+
+### Enhancements ###
+
+ * New functions in `incanter.core`:
+   * `aggregate` performs the aggregation of data on given fields (issue #223)
+   * `get-column-id` returns keyword version of column-key if convenient 
+ * New functions in `incanter.stats`:
+   * implementation of `gamma-coefficient` function
+   * `concordant-pairs` function
+ * `read-dataset` now accepts the `:comment-char` parameter that specifies the commentary
+   character
+
+### Breaking changes
+
+ * (issue #245) Incanter used the 'rate' as parameter name, although in reality this was a
+   'scale' parameter (https://en.wikipedia.org/wiki/Gamma_distribution).  For `pdf-gamma`,
+   `cdf-gamma` & `sample-gamma` functions the new parameter `:scale` was introduced
+   (equivalent to the old `:rate` parameter), and `:rate` parameter is now the
+   `1/:scale`...
+
 ## Changes for 1.5.4 ##
 
 Made an error during deployment of 1.5.3, so 1.5.4 was released to fix this problem.

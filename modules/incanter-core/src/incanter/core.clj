@@ -1995,33 +1995,33 @@
                                                   [\"virginica\" :virginica]]))
     (view ($join [:species :Species] lookup iris))
 
-   (def hair-eye-color (get-dataset :hair-eye-color))
-   (def lookup2 (conj-cols ($ [:hair :eye :gender] hair-eye-color) (range (nrow hair-eye-color))))
-   (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2 hair-eye-color))
+    (def hair-eye-color (get-dataset :hair-eye-color))
+    (def lookup2 (conj-cols ($ [:hair :eye :gender] hair-eye-color) (range (nrow hair-eye-color))))
+    (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2 hair-eye-color))
 
-   (with-data hair-eye-color
-     (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2)))
+    (with-data hair-eye-color
+      (view ($join [[:col-0 :col-1 :col-2] [:hair :eye :gender]] lookup2)))
 
 
-   (def lookup3 (dataset [:gender :hair :hair-gender] [[\"male\" \"black\" :male-black]
-                                                       [\"male\" \"brown\" :male-brown]
-                                                       [\"male\" \"red\" :male-red]
-                                                       [\"male\" \"blond\" :male-blond]
-                                                       [\"female\" \"black\" :female-black]
-                                                       [\"female\" \"brown\" :female-brown]
-                                                       [\"female\" \"red\" :female-red]
-                                                       [\"female\" \"blond\" :female-blond]]))
+    (def lookup3 (dataset [:gender :hair :hair-gender] [[\"male\" \"black\" :male-black]
+                                                        [\"male\" \"brown\" :male-brown]
+                                                        [\"male\" \"red\" :male-red]
+                                                        [\"male\" \"blond\" :male-blond]
+                                                        [\"female\" \"black\" :female-black]
+                                                        [\"female\" \"brown\" :female-brown]
+                                                        [\"female\" \"red\" :female-red]
+                                                        [\"female\" \"blond\" :female-blond]]))
 
-   (view ($join [[:gender :hair] [:gender :hair]] lookup3 hair-eye-color))
+    (view ($join [[:gender :hair] [:gender :hair]] lookup3 hair-eye-color))
 
-   (use 'incanter.charts)
-   (with-data (->>  (get-dataset :hair-eye-color)
-                    ($where {:hair {:in #{\"brown\" \"blond\"}}})
-                    ($rollup :sum :count [:hair :gender])
-                    ($join [[:gender :hair] [:gender :hair]] lookup3)
-                    ($order :count :desc))
-       (view $data)
-       (view (bar-chart :hair :count :group-by :gender :legend true)))
+    (use 'incanter.charts)
+    (with-data (->>  (get-dataset :hair-eye-color)
+                     ($where {:hair {:in #{\"brown\" \"blond\"}}})
+                     ($rollup :sum :count [:hair :gender])
+                     ($join [[:gender :hair] [:gender :hair]] lookup3)
+                     ($order :count :desc))
+        (view $data)
+        (view (bar-chart :hair :count :group-by :gender :legend true)))
   "
   ([[left-keys right-keys] left-data]
     ($join [left-keys right-keys] left-data $data))
