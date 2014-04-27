@@ -69,8 +69,8 @@
   ([^Integer size {:keys [x y coefs residuals]}]
     (let [xtxi (solve (mmult (trans x) x))
           shape (/ (- (nrow x) (ncol x)) 2)
-          rate (first (mult 1/2 (mmult (trans residuals) residuals)))
-          s-sq (div 1 (sample-gamma size :shape shape :rate rate))]
+          scale (first (mult 1/2 (mmult (trans residuals) residuals)))
+          s-sq (div 1 (sample-gamma size :shape shape :scale scale))]
       {:coefs
         (matrix
           ;(pmap ;; run a parallel map over the values of s-sq

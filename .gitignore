@@ -14,3 +14,4 @@ pom.xml.asc
 /.classpath
 /.project
 /.settings
+/modules/incanter-core/.nrepl-port

@@ -370,8 +370,8 @@
   (let [k 1
         theta 2
         dist (gamma-distribution k theta)]
-    (is (= (pdf dist 10) (pdf-gamma 10 :shape k :rate theta)))
-    (is (= (cdf dist 10) (cdf-gamma 10 :shape k :rate theta)))
+    (is (= (pdf dist 10) (pdf-gamma 10 :shape k :scale theta)))
+    (is (= (cdf dist 10) (cdf-gamma 10 :shape k :scale theta)))
 
     (is (= (* k theta) (mean dist)))
 

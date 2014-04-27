@@ -116,11 +116,11 @@
       view)
 
 
-    (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+    (doto (box-plot (sample-gamma 1000 :shape 1 :scale 2)
                     :legend true)
       view set-background-default
-      (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
-      (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))
+      (add-box-plot (sample-gamma 1000 :shape 2 :scale 2))
+      (add-box-plot (sample-gamma 1000 :shape 3 :scale 2)))
 
 
     (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
@@ -198,11 +198,11 @@
       view)
 
 
-    (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+    (doto (box-plot (sample-gamma 1000 :shape 1 :scale 2)
                     :legend true)
       view
-      (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
-      (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+      (add-box-plot (sample-gamma 1000 :shape 2 :scale 2))
+      (add-box-plot (sample-gamma 1000 :shape 3 :scale 2))
       set-theme-bw)
 
 
@@ -1184,15 +1184,15 @@
 
     ;; plot gamma pdf with different parameters
     (def x2 (range 0 20 0.1))
-    (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :rate 2)
+    (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :scale 2)
                                :legend true
                                :title \"Gamma PDF\"
                                :y-label \"Density\"))
     (view gamma-plot)
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))
-    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :scale 2))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :scale 2))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :scale 1))
+    (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :scale 0.5))
 
     ;; use :group-by option
     (use '(incanter core charts datasets))
@@ -2670,12 +2670,12 @@
   Examples:
 
     (use '(incanter core stats charts))
-    (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)
+    (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :scale 2)
                           :title \"Gamma Boxplot\"
                           :legend true))
     (view gamma-box-plot)
-    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))
-    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
+    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :scale 2))
+    (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :scale 2))
 
     ;; use the group-by options
     (use '(incanter core stats datasets charts))
@@ -3515,9 +3515,9 @@
     (let [x (range 0 20 0.1)]
       (def pdf-chart (xy-plot))
       (view pdf-chart)
-      (sliders [rate (range 0.1 10 0.1)
+      (sliders [scale (range 0.1 10 0.1)
                 shape (range 0.1 10 0.1)]
-               (set-data pdf-chart [x (pdf-gamma x :rate rate :shape shape)])))
+               (set-data pdf-chart [x (pdf-gamma x :scale scale :shape shape)])))
 
 
 

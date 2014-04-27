@@ -659,14 +659,14 @@
   ([] (f-distribution 1 1))
   ([df1 df2] (F. df1 df2)))
 
-(defrecord Gamma-rec [shape rate] ; using defrecord since cdf was not matching up in unittest without switching ":lower-tail"
+(defrecord Gamma-rec [shape scale] ; using defrecord since cdf was not matching up in unittest without switching ":lower-tail"
   Distribution
-  (pdf [d v] (.pdf (Gamma. shape rate (DoubleMersenneTwister.)) v))
-  (cdf [d v] (Probability/gamma rate shape v)) ; TODO decide on :lower-tail
-  (draw [d] (cern.jet.random.tdouble.Gamma/staticNextDouble shape rate))
+  (pdf [d v] (.pdf (Gamma. shape scale (DoubleMersenneTwister.)) v))
+  (cdf [d v] (Probability/gamma shape scale v)) ; TODO decide on :lower-tail
+  (draw [d] (Gamma/staticNextDouble shape scale))
   (support [d] [0,inf+])
-  (mean [d] (* shape rate))
-  (variance [d] (* shape rate rate)))
+  (mean [d] (* shape scale))
+  (variance [d] (* shape scale scale)))
 
 ;(extend cern.jet.random.tdouble.Gamma Distribution colt-extenders)
 (defn gamma-distribution
@@ -674,8 +674,8 @@
   Returns a Gamma distribution that implements the incanter.distributions.Distribution protocol.
 
   Arguments:
-    shape      (default 1)
-    rate       (default 1)
+    shape (k)  (default 1)
+    scale (θ)  (default 1)
 
   See also:
     Distribution, pdf, cdf, draw, support
@@ -688,7 +688,7 @@
     (pdf (gamma-distribution 1 2) 10)
   "
   ([] (gamma-distribution 1 1))
-  ([shape rate] (Gamma-rec. shape rate)))
+  ([shape scale] (Gamma-rec. shape scale)))
 
 ;(extend cern.jet.random.tdouble.NegativeBinomial Distribution colt-extenders)
 (defrecord NegativeBinomial-rec [size prob]

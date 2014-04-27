@@ -629,8 +629,9 @@
   of values, if x is a sequence. This is equivalent to R's dgamma function.
 
   Options:
-    :shape (default 1)
-    :rate (default 1)
+    :shape (k) (default 1)
+    :scale (θ) (default 1 or 1/rate, if :rate is specified)
+    :rate  (β) (default 1/scale, if :scale is specified)
 
   See also:
       cdf-gamma and sample-gamma
@@ -641,15 +642,14 @@
       http://en.wikipedia.org/wiki/Probability_density_function
 
   Example:
-      (pdf-gamma 10 :shape 1 :rate 2)
+      (pdf-gamma 10 :shape 1 :scale 2)
   "
-  ([x & {:keys [shape rate] :or {shape 1 rate 1}}]
-    (let [dist (Gamma. shape rate (DoubleMersenneTwister.))]
+  ([x & {:keys [shape scale rate] :or {shape 1}}]
+     (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))
+           dist (Gamma. shape tscale (DoubleMersenneTwister.))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
-
-
 
 (defn cdf-gamma
   "
@@ -657,8 +657,9 @@
   of values, if x is a sequence. This is equivalent to R's pgamma function.
 
   Options:
-    :shape (default 1)
-    :rate (default 1)
+    :shape (k) (default 1)
+    :scale (θ) (default 1 or 1/rate, if :rate is specified)
+    :rate  (β) (default 1/scale, if :scale is specified)
     :lower-tail (default true)
 
   See also:
@@ -670,18 +671,17 @@
       http://en.wikipedia.org/wiki/Cumulative_distribution_function
 
   Example:
-      (cdf-gamma 10 :shape 1 :rate 2)
+      (cdf-gamma 10 :shape 1 :scale 2)
       (cdf-gamma 3 :shape 1 :lower-tail false)
   "
-  ([x & {:keys [shape rate lower-tail?] :or {shape 1 rate 1 lower-tail? true}}]
-    (let [cdf-fx (if lower-tail?
-                   (fn [x1] (Probability/gamma rate shape x1))
-                   (fn [x1] (Probability/gammaComplemented rate shape x1)))]
+  ([x & {:keys [shape scale rate lower-tail?] :or {shape 1 lower-tail? true}}]
+     (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))
+           cdf-fx (if lower-tail?
+                   (fn [x1] (Probability/gamma shape tscale x1))
+                   (fn [x1] (Probability/gammaComplemented shape tscale x1)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
-
-
 
 (defn sample-gamma
   "
@@ -689,8 +689,9 @@
   This is equivalent to R's rgamma function.
 
   Options:
-    :shape (default 1)
-    :rate (default 1)
+    :shape (k) (default 1)
+    :scale (θ) (default 1 or 1/rate, if :rate is specified)
+    :rate  (β) (default 1/scale, if :scale is specified)
 
   See also:
       pdf-gamma, cdf-gamma, and quantile-gamma
@@ -700,15 +701,13 @@
       http://en.wikipedia.org/wiki/Gamma_distribution
 
   Example:
-      (sample-gamma 1000 :shape 1 :rate 2)
+      (sample-gamma 1000 :shape 1 :scale 2)
   "
-  ([^Integer size & {:keys [shape rate] :or {shape 1 rate 1}}]
-    (if (= size 1)
-      (Gamma/staticNextDouble shape rate)
-      (for [_ (range size)] (Gamma/staticNextDouble shape rate)))))
-
-
-
+  ([^Integer size & {:keys [shape scale rate] :or {shape 1}}]
+     (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))]
+       (if (= size 1)
+         (Gamma/staticNextDouble shape tscale)
+         (for [_ (range size)] (Gamma/staticNextDouble shape tscale))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CHI SQUARE DISTRIBUTION FUNCTIONS
@@ -1102,7 +1101,7 @@
   "
 
   ([^Integer size alpha]
-    (let [W (trans (for [a alpha] (sample-gamma size :shape a :rate 1)))
+    (let [W (trans (for [a alpha] (sample-gamma size :shape a :scale 1)))
           T (map sum W)]
       (matrix (map #(div %1 %2) W T)))))
 
