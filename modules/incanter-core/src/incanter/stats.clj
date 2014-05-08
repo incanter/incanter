@@ -675,10 +675,10 @@
       (cdf-gamma 3 :shape 1 :lower-tail false)
   "
   ([x & {:keys [shape scale rate lower-tail?] :or {shape 1 lower-tail? true}}]
-     (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))
+     (let [trate (or rate (if (nil? scale) 1 (/ 1.0 scale)))
            cdf-fx (if lower-tail?
-                   (fn [x1] (Probability/gamma shape tscale x1))
-                   (fn [x1] (Probability/gammaComplemented shape tscale x1)))]
+                   (fn [x1] (Probability/gamma trate shape x1))
+                   (fn [x1] (Probability/gammaComplemented trate shape x1)))]
       (if (coll? x)
         (map cdf-fx x)
         (cdf-fx x)))))
@@ -704,10 +704,10 @@
       (sample-gamma 1000 :shape 1 :scale 2)
   "
   ([^Integer size & {:keys [shape scale rate] :or {shape 1}}]
-     (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))]
+     (let [trate (or rate (if (nil? scale) 1 (/ 1.0 scale)))]
        (if (= size 1)
-         (Gamma/staticNextDouble shape tscale)
-         (for [_ (range size)] (Gamma/staticNextDouble shape tscale))))))
+         (Gamma/staticNextDouble shape trate)
+         (for [_ (range size)] (Gamma/staticNextDouble shape trate))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CHI SQUARE DISTRIBUTION FUNCTIONS
