@@ -662,8 +662,8 @@
 (defrecord Gamma-rec [shape scale] ; using defrecord since cdf was not matching up in unittest without switching ":lower-tail"
   Distribution
   (pdf [d v] (.pdf (Gamma. shape scale (DoubleMersenneTwister.)) v))
-  (cdf [d v] (Probability/gamma shape scale v)) ; TODO decide on :lower-tail
-  (draw [d] (Gamma/staticNextDouble shape scale))
+  (cdf [d v] (.cdf (Gamma. (/ 1.0 scale) shape (DoubleMersenneTwister.)) v)) ; TODO decide on :lower-tail
+  (draw [d] (Gamma/staticNextDouble shape (/ 1.0 scale)))
   (support [d] [0,inf+])
   (mean [d] (* shape scale))
   (variance [d] (* shape scale scale)))
