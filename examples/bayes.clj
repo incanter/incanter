@@ -26,7 +26,7 @@
 "
   This function implements the Gibbs sampling example using full conditional in OLS
   from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the Social
-  Sciences (page 171). This version is purely functional with no immutability.
+  Sciences (page 171). This version is purely functional with no mutability.
 "
   (let [lm (linear-model y x :intercept false)
         pars (trans (:coefs lm))
@@ -51,7 +51,7 @@
 "
   This function implements the Gibbs sampling example using full conditional in OLS
   from Scott Lynch book 'Introduction to Applied Bayesian Statistics in the Social
-  Sciences (page 171). This version uses immutability (i.e. references)
+  Sciences (page 171). This version uses mutability (i.e. references)
 "
   (let [lm (linear-model y x :intercept false)
         pars (trans (:coefs lm))        
