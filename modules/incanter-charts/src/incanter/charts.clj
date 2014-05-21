@@ -1137,7 +1137,7 @@
                              (nth y-groups i)
                              :series-label (cond
                                              _group-by
-                                               (nth _group-by i)
+                                               (nth (reduce #(if (< (.indexOf %1 %2) 0) (conj %1 %2) %1) [] _group-by) i)
                                              series-lab
                                                series-lab
                                              :else
