@@ -7,7 +7,9 @@
         :url "https://github.com/incanter/incanter"
         :dir "modules/incanter-charts"}
   :min-lein-version "2.0.0"
-  :dependencies [[incanter/incanter-io "1.5.6-SNAPSHOT"]
+  :dependencies [[incanter/incanter-core "1.5.6-SNAPSHOT"]
+                 [incanter/incanter-io "1.5.6-SNAPSHOT"]
+                 [incanter/jgui "1.5.6-SNAPSHOT"]
                  [incanter/jfreechart "1.0.13-no-gnujaxp"]
                  [clj-time "0.6.0" :exclusions [org.clojure/clojure]]]
   )

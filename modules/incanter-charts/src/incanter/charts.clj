@@ -28,8 +28,9 @@
        :author "David Edgar Liebke"}
   incanter.charts
   (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                                bind-columns view save $group-by conj-cols
-                                grid-apply set-data col-names $data sel abs)]
+                                bind-columns save $group-by conj-cols
+                                grid-apply col-names $data sel abs)]
+        [incanter.jgui :only (view set-data)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean
                                sd correlation variance)]
         [clj-time.coerce :only (to-date)])
