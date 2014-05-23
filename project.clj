@@ -46,6 +46,7 @@
         "modules/incanter-sql"
         "modules/incanter-svg"
         "modules/incanter-zoo"
+        "modules/jgui"
         ]
   :plugins [[lein-sub "0.3.0"]]
   )
