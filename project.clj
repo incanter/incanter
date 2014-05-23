@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git" :url "https://github.com/incanter/incanter"}
   :min-lein-version "2.0.0"
+  ;; :uberjar-name "incanter.jar"
   :dependencies [[incanter/incanter-core "1.5.6-SNAPSHOT"]
                  [incanter/incanter-io "1.5.6-SNAPSHOT"]
                  [incanter/incanter-charts "1.5.6-SNAPSHOT"]
@@ -26,7 +27,7 @@
                                        :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]
                                       ]
                        }
-             }  
+             }
   :repl-options {:init-ns incanter.irepl
                  :resource-paths ["data"]
                  :init (do
@@ -35,4 +36,16 @@
                  }
   :jvm-opts ["-Xmx1g" "-Djsse.enableSNIExtension=false"
              ~(str "-Dincanter.home=" (System/getProperty "user.dir"))]
+  :sub ["modules/incanter-charts"
+        "modules/incanter-core"
+        "modules/incanter-excel"
+        "modules/incanter-io"
+        "modules/incanter-latex"
+        "modules/incanter-mongodb"
+        "modules/incanter-pdf"
+        "modules/incanter-sql"
+        "modules/incanter-svg"
+        "modules/incanter-zoo"
+        ]
+  :plugins [[lein-sub "0.3.0"]]
   )
