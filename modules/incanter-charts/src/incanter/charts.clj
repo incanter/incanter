@@ -340,6 +340,26 @@
   [start end step]
   (concat (range start end step) [end]))
 
+(defn remove-series
+  "Remove an existing series speicified by series-lab.
+   If the series does not exist it return nil"
+  [chart series-label]
+  (let [data-set (-> chart .getPlot .getDataset)
+        series   (try (.getSeries data-set series-label)
+                      (catch UnknownKeyException e nil))]
+    (when series
+      (.removeSeries data-set series)
+      chart)))
+
+(defn has-series?
+  "Test to see if a chart has a series name series-lab"
+  [chart label-series]
+  (try
+    (-> chart .getPlot .getDataset (.getSeries series-label))
+    true
+    (catch UnknownKeyException e
+      false)))
+
 (defn add-histogram*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
@@ -553,6 +573,31 @@
         (.setDataset n data-set)
         (.setRenderer n line-renderer))
       chart)))
+
+(defn extend-line
+  " Add new data set to an exiting series if it already exists,
+    otherwise, data set will be added to a newly created series. "
+  [chart x y & options]
+  (let [opts       (when options (apply assoc {} options))
+        data       (or (:data opts) $data)
+        _x         (data-as-list x data)
+        _y         (data-as-list y data)
+        series-lab (or (:series-label opts) (format "%s, %s" 'x 'y))
+        data-set   (-> chart .getPlot .getDataset)
+        series     (try (.getSeries data-set series-lab)
+                        (catch UnknownKeyException e
+                          (let [new-series    (XYSeries. series-lab (:auto-sort opts true))
+                                ;; line-renderer (XYLineAndShapeRenderer. true (true? (:points opts)))
+                                ]
+                            (.addSeries data-set new-series)
+                            new-series)))]
+    (dorun
+     (map (fn [x y]
+            (if (and (not (nil? x))
+                     (not (nil? y)))
+              (.add series (double x) (double y))))
+          _x _y))
+    chart))
 
 ;; doesn't work
 (defmethod add-lines* org.jfree.data.statistics.HistogramDataset
