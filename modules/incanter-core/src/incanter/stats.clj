@@ -36,6 +36,7 @@
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability)
            (incanter Weibull))
+  (:require [clatrix.core :as clx])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
@@ -1035,7 +1036,7 @@
                      (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
           mat (diag diagonal)
           indices (for [i (range p) j (range p) :when (< j i)] [i j])
-          _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
+          _ (doseq [indx indices] (clx/set mat (first indx) (second indx) (sample-normal 1)))
           chol (decomp-cholesky scale)
           x (mmult chol mat (trans mat) (trans chol))]
       x)))
