@@ -1,0 +1,32 @@
+#!/bin/sh
+
+TWD=`pwd`
+
+if [ -z "$1" ]; then
+    echo "Executes given command in every modules directory"
+    echo "Usage: run-cmd command-to-execute"
+    exit 1
+fi
+
+TOP_DIR=`dirname $0`/..
+cd "$TOP_DIR"
+
+cd modules
+for i in core io charts mongodb pdf svg latex excel zoo sql; do
+    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
+        OLDWD=`pwd`
+        cd "incanter-$i"
+        $@
+        RES=$?
+        if [ $RES -ne 0 ] ; then
+            cd "$TWD"
+            exit $RES
+        fi
+        cd "$OLDWD"
+    fi
+done
+
+cd $TWD
+
+# execute the command in the top-level directory as well
+$@

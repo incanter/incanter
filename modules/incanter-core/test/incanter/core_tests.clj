@@ -1,4 +1,3 @@
-
 ;;; core-test-cases.clj -- Unit tests of Incanter functions
 
 ;; by David Edgar Liebke http://incanter.org
@@ -22,8 +21,8 @@
 
 (ns incanter.core-tests
   (:require [clojure.core.matrix :as m])
-  (:use clojure.test
-        (incanter core)))
+  (:use  clojure.test
+         (incanter core)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39,10 +38,13 @@
 
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
+  (is (= (sel dataset1 :cols "a") [1 4]))
   (is (= (sel dataset1 :all 1) [2 5]))
   (is (= (sel dataset1 :all :b) [2 5]))
   (is (= (sel dataset1 :all [:a :c]) (dataset [:a :c] [[1 3] [4 6]])))
+  (is (= (sel dataset1 :all ["a" "c"]) (dataset [:a :c] [[1 3] [4 6]])))
   (is (= (sel dataset1 :all [:a]) (dataset [:a] [[1] [4]])))
+  (is (= (sel dataset1 :all ["a"]) (dataset [:a] [[1] [4]])))
   (is (= (sel dataset1 :all :all) dataset1))
   (is (= (sel dataset2 :cols :b) [2 5]))
   (is (= (sel dataset2 :cols "c") [3 6]))
@@ -51,7 +53,8 @@
   (is (= (sel dataset4 :cols :b) [2 5]))
   (is (= (sel dataset4 :cols "c") [3 6]))
   (is (= (sel dataset5 :rows 1 :cols :a) nil))
-  (is (= (sel dataset6 :cols :a) 1)))
+  (is (= (sel dataset6 :cols :a) 1))
+  (is (= (sel (dataset [:a :b] [[11 12]]) :except-cols :b) (dataset [:a] [[11]]))))
 
 (def map1 {:col-0 [1.0 2.0 3.0] :col-1 [4.0 5.0 6.0]})
 
@@ -61,8 +64,56 @@
 (deftest dataset-transforms
   (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
       "Single-row special case")
-  (is (= (transform-col dataset1 :b (partial + 10))) (dataset [:a :b :c] [[1 12 3] [4 15 6]]))
+  (is (= (transform-col dataset1 :b (partial + 10)) (dataset [:a :b :c] [[1 12 3] [4 15 6]])))
   (is (= (transform-col dataset1 :b * 2) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
+
+(deftest $group-by-tests
+  (let [cs [:c1 :c2 :c3]
+        a-dataset (dataset cs
+                           [[1 3 3]
+                            [1 2 4]
+                            [1 2 7]
+                            [6 6 8]
+                            [6 5 10]
+                            [11 12 13]])]
+
+    (are [group-cols n-groups]
+      (= n-groups (count ($group-by group-cols a-dataset)))
+      :c1 3
+      [:c1 :c2] 5) ; 2 arity version
+
+    (are [group-cols n-groups]
+      (= n-groups (count
+                   (with-data a-dataset
+                     ($group-by group-cols))))
+      :c1 3
+      [:c1 :c2] 5) ; 3 arity version
+
+    (is (= ($group-by :c1 a-dataset)
+           {{:c1 1} (dataset cs [[1 3 3]
+                                 [1 2 4]
+                                 [1 2 7]])
+            {:c1 6} (dataset cs [[6 6 8]
+                                 [6 5 10]])
+            {:c1 11} (dataset cs [[11 12 13]])}))
+
+    (is (= ($group-by [:c1 :c2] a-dataset)
+           {{:c1 1 :c2 3} (dataset cs [[1 3 3]])
+            {:c1 1 :c2 2} (dataset cs [[1 2 4]
+                                       [1 2 7]])
+            {:c1 6 :c2 6} (dataset cs [[6 6 8]])
+            {:c1 6 :c2 5} (dataset cs [[6 5 10]])
+            {:c1 11 :c2 12} (dataset cs [[11 12 13]])}))))
+
+(deftest rename-cols-tests
+  (let [data (dataset [:c1 :c2 :c3] [[1 2 3]])
+        col-map {:c1 :new-c1 2 :new-c3}
+        expected [:new-c1 :c2 :new-c3]]
+    (is (= (:column-names (rename-cols col-map data))
+           expected))
+    (is (= (:column-names (with-data data
+                            (rename-cols col-map)))
+           expected))))
 
 ;; define a simple matrix for testing
 (def A (matrix [[1 2 3]
@@ -91,6 +142,25 @@
   (is (= (count (rest A)) 3))
   (is (= (count (rest (first A))) 2)))
 
+(deftest non-mutable-ops
+  (let [MO (matrix [[-1 2 3]
+                    [4 -5 6]
+                    [7 8 -9]
+                    [10 11 -12]])
+        MC (matrix [[-1 2 3]
+                    [4 -5 6]
+                    [7 8 -9]
+                    [10 11 -12]])
+        MA (matrix [[1 2 3]
+                    [4 5 6]
+                    [7 8 9]
+                    [10 11 12]])
+        res (abs MO)]
+    (is (= res MA))
+    (is (= MC MO))
+    (is (not (= MO MA)))))
+
+
 ;; constructing matrices from arrays
 (deftest matrix-from-arrays
   (is (m/e== (matrix [1.0 2.0 3.0]) (matrix (double-array [1.0 2.0 3.0]))))
@@ -107,21 +177,21 @@
                            [7 8 9]
                            [10 11 12]])))
   (is (m/e== (conj A [13 14 15]) (matrix [[1 2 3]
-                                      [4 5 6]
-                                      [7 8 9]
-                                      [10 11 12]
-                                      [13 14 15]])))
+                                          [4 5 6]
+                                          [7 8 9]
+                                          [10 11 12]
+                                          [13 14 15]])))
   (is (m/e== (m/join A A) (matrix [[1 2 3]
-                                 [4 5 6]
-                                 [7 8 9]
-                                 [10 11 12]
-                                 [1 2 3]
-                                 [4 5 6]
-                                 [7 8 9]
-                                 [10 11 12]])))
+                                   [4 5 6]
+                                   [7 8 9]
+                                   [10 11 12]
+                                   [1 2 3]
+                                   [4 5 6]
+                                   [7 8 9]
+                                   [10 11 12]])))
   (is (= (seq A) A))
   (is (== (first (first A)) 1.0))
-  (is (== (nth (nth A 1) 1.0)))
+  (is (= (nth (nth A 0) 0) 1.0))
   ;; get column 1 (i.e. second column) of matrix A
   (is (m/e== (map #(nth % 1) A) [2.0 5.0 8.0 11.0])))
 
@@ -215,12 +285,29 @@
                       [7.0 8.0 9.0]
                       [10.0 11.0 12.0]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
-  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) (matrix [1.0 2.0 3.0 4.0 5.0 6.0])))
+  ;;  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) (matrix [1.0 2.0 3.0 4.0 5.0 6.0])))
+  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/e== (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/e== (to-list [1 2 3]) [1 2 3]))
   (is (m/e== (to-list [[1 2] [3 4]]) [[1 2] [3 4]]))
   (is (m/e== (to-list 3) 3))
+  (is (m/e== (to-list (matrix [1])) [1.0]))
   (is (nil? (to-list nil))))
+
+(deftest matrix-to-vect-tests
+  ;; convert a matrix to clojure vectors
+  (is (= (to-vect A) [[1.0 2.0 3.0]
+                      [4.0 5.0 6.0]
+                      [7.0 8.0 9.0]
+                      [10.0 11.0 12.0]]))
+  ;; one-dimensional matrices are coverted to one-dimension vectors
+  (is (= (to-vect (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (= (to-vect (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
+  (is (= (to-vect (matrix [1])) [1.0]))
+  (is (= (to-vect [1 2 3]) [1 2 3]))
+  (is (= (to-vect [[1 2] [3 4]]) [[1 2] [3 4]]))
+  (is (= (to-vect 3) 3))
+  (is (nil? (to-vect nil))))
 
 (deftest matrix-sel-tests
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
@@ -322,7 +409,9 @@
   (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1.0 2.0 3.0])) (matrix [2 4 6])))
   (is (m/e== (plus (matrix [1.0 2.0 3.0]) 1) (matrix [2 3 4])))
   (is (m/e== (plus 1 (matrix [1.0 2.0 3.0])) (matrix [2 3 4])))
-  (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1 2 3]) (matrix [2 4 6])))))
+  ;;TODO: check that (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1 2 3]) (matrix [2 4 6])))))
+  (is (= (plus [1.0 2.0 3.0] (matrix [1 2 3])) (matrix [2 4 6]))))
+
 
 (deftest matrix-minus-test
   ;; element by element subtraction on matrices
@@ -353,7 +442,15 @@
   (is (m/e== (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) [0 0 0]))
   (is (m/e== (minus [1.0 2.0 3.0] 1) [0 1 2]))
   (is (m/e== (minus 1 [1.0 2.0 3.0]) [0 -1 -2]))
-  (is (m/e== (minus [1 2 3] (m/array [1 2 3]) [0 0 0]))))
+  ;;(is (m/e== (minus [1 2 3] (m/array [1 2 3]) [0 0 0])))) check that
+  (is (= (minus [1 2 3] (matrix [1 2 3])) (matrix [0 0 0])))
+  (is (= (minus 1) -1))
+  (is (= (minus [1.0 2.0 3.0]) (matrix [-1.0 -2.0 -3.0])))
+  (is (= (minus A) (matrix [[-1 -2 -3]
+                            [-4 -5 -6]
+                            [-7 -8 -9]
+                            [-10 -11 -12]]))))
+
 
 (deftest matrix-mult-tests
   ;; element by element multiplication on matrices
@@ -509,25 +606,30 @@
     (check :compact expect-compact)
     (check :values  expect-values)))
 
-;(deftest decomp-qr-test
-  ;(let [m (matrix [[1 0] [0 1] [0 0]])
-        ;expect-full {:Q (diag [1 1 1])
-                     ;:R m}
-        ;expect-compact {:Q m
-                        ;:R (diag [1 1])}
-        ;check (fn [type mtest]
-                ;(let [mtrue (decomp-qr m :type type)]
-                  ;(testing (str "qr " type)
-                    ;(is (= (:Q mtrue) (:Q mtest)))
-                    ;(is (= (:R mtrue) (:R mtest))))))]
-    ;(check nil      expect-full)
-    ;(check :full    expect-full)
-    ;(check :compact expect-compact)))
+(deftest decomp-qr-test
+  (let [m (matrix [[1 0] [0 1] [0 0]])
+        expect-full {:Q (diag [1 1 1])
+                     :R m}
+        expect-compact {:Q m
+                        :R (diag [1 1])}
+        check (fn [type mtest]
+                (let [mtrue (decomp-qr m :type type)]
+                  (testing (str "qr " type)
+                    (is (= (:Q mtrue) (:Q mtest)))
+                    (is (= (:R mtrue) (:R mtest))))))]
+    (check nil      expect-full)
+    (check :full    expect-full)
+;    (check :compact expect-compact)
+    ))
 
 (deftest decomp-lu-test
   (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
         {:keys [L U P]} (decomp-lu m)]
     (is (m/e== m (mmult P L U)))))
+
+(deftest det-test
+  (let [m (matrix [[-2 2 3] [-1 1 3] [2 0 -1]])]
+    (is (= 6.0 (det m)))))
 
 (deftest test-metadata
   (let [md {:name "metadata test"}
@@ -569,7 +671,37 @@
 
 
 (deftest factorial-test
-  (is (factorial 5) 120.0)
-  (is (factorial 0) 1.0)
+  (is (= (factorial 5) 120.0))
+  (is (= (factorial 0) 1.0))
   (is (thrown? AssertionError (factorial -1))))
 
+(defn nan? [x]
+  (.isNaN x))
+
+(deftest safe-div-test
+  (is (= 1/2 (safe-div 2)))
+  (is (= 2 (safe-div 10 5)))
+  (is (= 2 (safe-div 20 2 5)))
+
+  (is (= -1/2 (safe-div -2)))
+  (is (= -2 (safe-div -10 5)))
+  (is (= -2 (safe-div -20 2 5)))
+
+  (is (= Double/POSITIVE_INFINITY (safe-div 0)))
+  (is (nan? (safe-div 0 0)))
+  (is (nan? (safe-div 0 0 5)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 10 0)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 20 2 2 0)))
+  (is (= Double/POSITIVE_INFINITY (safe-div 20 0 2 2)))
+  (is (= Double/NEGATIVE_INFINITY (safe-div -10 0)))
+  (is (= Double/NEGATIVE_INFINITY (safe-div -10 5 0))))
+
+(deftest pow-test
+  (is (= (pow 2 2) 4.0))
+  (is (= (pow [1 2 3] 2) [1.0 4.0 9.0]))
+  (is (= (pow [[1 2 3]] 2) [[1.0 4.0 9.0]]))
+  (is (= (pow (matrix [[1 2 3] [4 5 6]]) 2) (matrix [[1.0 4.0 9.0] [16.0 25.0 36.0]])))
+  (is (= (pow (matrix [[1 2 3]]) 2) (matrix [[1.0 4.0 9.0]])))
+  (is (= (pow (matrix [1 2 3]) 2) (matrix [1.0 4.0 9.0])))
+  (is (= (pow (dataset [:a :b :c] [[1 2 3]]) 2) (dataset [:a :b :c] [[1.0 4.0 9.0]])))
+  )

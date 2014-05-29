@@ -30,7 +30,7 @@
 (derive clatrix.core.Matrix ::matrix)
 
 (defn is-matrix
-  " Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
+  "Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
   ([obj] (clx/matrix? obj)))
 
 (def double_arr_type (Class/forName "[D"))
@@ -47,9 +47,9 @@
      :default
       (clx/matrix (map seq data))))
   ([data ncol]
-   {:pre [(number? (first data))]}
-   (let [chunked  (partition ncol data)]
-     (make-matrix chunked)))
+    {:pre [(number? (first data))]}
+    (let [chunked  (partition ncol data)]
+      (make-matrix chunked)))
   ([init-val rows cols]
     (clx/constant (int rows) (int cols) ^Number init-val)))
 
@@ -57,33 +57,34 @@
 (defmacro hint
   "Applies a type hint to a body"
   [type body]
-  `~(with-meta body {:tag type}))
+    `~(with-meta body {:tag type}))
 
 
-(defmacro transform-with 
+(defmacro transform-with
   "Transforms a matrix with a Clatrix function"
   ([A op fun]
   `(let [A# ~A]
      (cond
        (clx/clatrix? A#) (~fun A#)
        (m/array? A#) (~fun (m/coerce :clatrix A#))
-       (and (coll? A#) (coll? (first A#))) (let [mA# (make-matrix ~A)]  
+       (and (coll? A#) (coll? (first A#))) (let [mA# (make-matrix ~A)]
                                              (clx/matrix (clx/dotom ~fun mA#) nil))
        (coll? A#)   (map ~op A#)
        (number? A#) (~op A#)))))
 
+
 (defn pass-to-matrix
   "Make each element in coll a row-first matrix else pass it back as-is"
   [coll]
-  (map (fn [x]
-         (if (and (not (is-matrix x)) (coll? x)) 
-           (make-matrix x) 
-           x))
-       coll))
+    (map (fn [x]
+           (if (and (not (is-matrix x)) (coll? x))
+             (make-matrix x)
+             x))
+         coll))
 
 (defmacro combine-with [A B op fun]
   `(cond
-     (and (number? ~A) (number? ~B))  
+     (and (number? ~A) (number? ~B))
      (~op ~A ~B)
      (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
      (map ~op ~A ~B)

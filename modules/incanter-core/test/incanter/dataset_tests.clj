@@ -51,6 +51,16 @@
   (is (= (head 2 dataset1) ($ (range 2) :all dataset1)))
   (is (= (head dataset1) ($ (range 2) :all dataset1))))
 
+(deftest test-add-column
+  (is (= (add-column :price [17599 22099] cars)
+         (dataset [:speed :weight :colour :price] [(conj car0 17599) (conj car1 22099)])))
+  (is (= (add-column :weight [2500 3500] cars)
+         (dataset [:speed :weight :colour] [(assoc car0 1 2500) (assoc car1 1 3500)]))))
+
+(deftest test-add-derived-column
+  (is (= ($ :weight-minus-speed (add-derived-column :weight-minus-speed [:weight :speed] #(- %1 %2) cars))
+         [5940 6930])))
+
 ;; (deftest selects-on-badly-named-atoms
 ;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
 ;;     (is (= ($ :first
@@ -85,3 +95,17 @@
           (is (= expected actual))
           ))
       )))
+
+(deftest melt-test
+  (testing "Melting the data")
+  (let [dset (dataset  [:id :time :x1 :x2 ]
+                       [[1 1 5 6]
+                        [2 2 7 8]])
+        expected (dataset [:value :variable :id]
+                          [[6 :x2 1]
+                           [8 :x2 2]
+                           [5 :x1 1]
+                           [7 :x1 2]
+                           [1 :time 1]
+                           [2 :time 2]])]
+    (is (= (melt dset :id) expected))))

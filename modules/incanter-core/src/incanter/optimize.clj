@@ -24,10 +24,12 @@
 
 
 (defn integrate
-" Integrate a function f from a to b
-
+  "
+  Integrate a function f from a to b
 
   Examples:
+    (use '(incanter optimize))
+
     (defn f1 [x] 1)
     (defn f2 [x] (Math/pow x 2))
     (defn f3 [x] (* x (Math/exp (Math/pow x 2))))
@@ -51,9 +53,7 @@
   Reference:
     http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html
     http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/
-
-
-"
+  "
   ([f a b]
     (let [small-dx 0.0001
           integrate-gen (fn [f x b dx sum]
@@ -66,7 +66,7 @@
 
 
 (defn derivative
-"
+  "
   Returns a function that approximates the derivative of the given function.
 
   Options:
@@ -99,8 +99,7 @@
     ;; plot the second derivative function
     (def pdf-deriv2 (derivative pdf-deriv))
     (add-lines plot x (pdf-deriv2 x))
-
-"
+  "
   ([f & {:keys [dx] :or {dx 0.0001}}]
      (fn [x] (div (minus (f (plus x dx)) (f x)) dx))))
 
@@ -109,7 +108,7 @@
 
 
 (defn- partial-derivative
-"
+  "
   Examples:
 
     (defn quad-fx [[x y]] (+ (* x x) (* x y) (* y y)))
@@ -125,18 +124,16 @@
 
   References:
     http://en.wikipedia.org/wiki/Partial_derivative
-
-"
-([fx i & {:keys [dx] :or {dx 0.0001}}]
-   (fn [theta]
+  "
+  ([fx i & {:keys [dx] :or {dx 0.0001}}]
+    (fn [theta]
       (let [theta-next (assoc theta i (+ (theta i) dx))]
         (/ (- (fx theta-next) (fx theta)) dx)))))
 
 
 
 (defn- gradient-fn
-"
-  Returns a function that approximates the gradient of the given function,
+  "Returns a function that approximates the gradient of the given function,
   which takes a single vector argument.
 
 
@@ -146,16 +143,14 @@
     (defn quad-fx [[x y]] (+ (* x x) (* x y) (* y y)))
     (def quad-grad (gradient-fn quad-fx 2))
     (quad-grad [1 1])
-
-"
-  ([fx n & options]
-    (let [funs (for [i (range n)] (partial-derivative fx i))]
-      (fn [theta] (map #(% theta) funs)))))
-
+  "
+  ([fx n & {:keys [dx] :or {dx 0.0001}}]
+    (let [funs (for [i (range n)] (partial-derivative fx i :dx dx))]
+      (fn [theta] (map #(% (apply vector theta)) funs)))))
 
 
 (defn- second-partial-derivative
-"
+  "
   Examples:
 
     (use '(incanter core optimize charts))
@@ -168,15 +163,14 @@
     (quad-dfx10 [1 1])
     (quad-dfx01 [1 1])
     (quad-dfx11 [1 1])
-
-"
+  "
   ([fx i j]
    (partial-derivative (partial-derivative fx i) j)))
 
 
 
 (defn- hessian-fn
-"
+  "
   Examples:
 
     (use '(incanter core optimize charts))
@@ -187,8 +181,7 @@
 
   References:
     http://en.wikipedia.org/wiki/Hessian_matrix
-
-"
+  "
   ([fx n & options]
     (let [funs (for [i (range n) j (range n) :when (<= j i)]
                  (second-partial-derivative fx i j))]
@@ -202,29 +195,26 @@
 
 
 (defn- gradient-forward-diff
-"
-
+  "
   Examples:
 
-    (use '(incanter core optimize datasets charts))
-    (defn f [theta x]
-      (+ (nth theta 0)
-            (div (* x (- (nth theta 1) (nth theta 0)))
-                 (+ (nth theta 2) x))))
+  (use '(incanter core optimize datasets charts))
+  (defn f [theta x]
+    (+ (nth theta 0)
+          (div (* x (- (nth theta 1) (nth theta 0)))
+               (+ (nth theta 2) x))))
 
-    (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
-    (def x (sel data :cols 1))
-    (def y (sel data :cols 0))
-    ;; view the data
-    (view (scatter-plot x y))
+  (def start [20 200 100])
+  (def data (get-dataset :thurstone))
+  (def x (sel data :cols 1))
+  (def y (sel data :cols 0))
+  ;; view the data
+  (view (scatter-plot x y))
 
-    (def grad (gradient-forward-diff f start))
-    (grad start x)
+  (def grad (gradient-forward-diff f start))
+  (grad start x)
+  "
 
-
-
-"
   ([f start & {:keys [tol dx] :or {tol 1E-4}}]
     (let [tdx (or dx (mult start tol))
           p (count start)
@@ -242,7 +232,7 @@
 
 
 (defn gradient
-"
+  "
   Returns a function that calculates a 5-point approximation to
   the gradient of the given function. The vector of start values are
   used to determine the number of parameters required by the function, and
@@ -259,7 +249,7 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -267,10 +257,9 @@
 
     (def grad (gradient f start))
     (time (doall (grad start x)))
+  "
 
-
-"
-([f start & {:keys [tol dx] :or {tol 1E-4}}]
+  ([f start & {:keys [tol dx] :or {tol 1E-4}}]
     (let [tdx (or dx (mult start tol))
           p (count start)
           e (to-list (identity-matrix p))]
@@ -289,7 +278,8 @@
 
 
 (defn hessian
-" Returns a function that calculates an approximation to the Hessian matrix
+  "
+  Returns a function that calculates an approximation to the Hessian matrix
   of the given function. The vector of start values are used to determine
   the number of parameters required by the function, and to scale the
   step-size. The generated function accepts a vector of
@@ -306,7 +296,7 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -314,9 +304,8 @@
 
     (time (def hess (hessian f start)))
     (time (doall (hess start x)))
+  "
 
-
-"
   ([f start & {:keys [tol dx] :or {tol 1E-4}}]
     (let [tdx (or dx (mult start tol))
           p (count start)
@@ -346,7 +335,8 @@
 
 
 (defn- nls-rss
-" Returns the residual sum-of-squares for the given function evaluated at x with
+  "
+  Returns the residual sum-of-squares for the given function evaluated at x with
   the given parameters theta. The function must take the form of (f theta x).
 
 
@@ -359,17 +349,14 @@
                  (+ (nth theta 2) x))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
     (view (scatter-plot x y))
 
     (nls-rss f start x y)
-
-
-
-"
+  "
   ([f theta x y]
     (let [y-hat (map (partial f theta) x)
           resid (map - y y-hat)]
@@ -378,7 +365,8 @@
 
 
 (defn- nls-gradient
-" Returns the gradient of the least squares function applied to the given function evaluated
+  "
+  Returns the gradient of the least squares function applied to the given function evaluated
   at x with the parameters theta. The function, f, must be of the form (f theta x),
   df must be of the form (df theta x) and return a vector representing the gradient of f.
 
@@ -392,7 +380,7 @@
                  (+ (nth theta 2) x))))
 
     (def theta-init [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -401,9 +389,8 @@
     (nls-gradient f
                   (gradient f theta-init)
                   theta-init x y)
+  "
 
-
-"
   ([f df theta x y]
     (let [_df (df theta x)
           y-hat (map (partial f theta) x)
@@ -415,7 +402,8 @@
 
 
 (defn- nls-hessian
-" Returns the Hessian matrix of the least squares function applied to f evaluated
+  "
+  Returns the Hessian matrix of the least squares function applied to f evaluated
   at x with the parameters theta. The function, f, must be of the form (f theta x),
   df must be of the form (df theta x) and return a vector representing the gradient of f,
   d2f must be of the form (d2f theta x) and return a matrix representing the hessian of f.
@@ -430,7 +418,7 @@
                  (+ (nth theta 2) x))))
 
     (def theta-init [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -440,10 +428,9 @@
                  (gradient f theta-init)
                  (hessian f theta-init)
                  theta-init x y)))
+  "
 
 
-
-"
   ([f df d2f theta x y]
     (let [p (count theta)
           _df (df theta x)
@@ -461,9 +448,7 @@
 
 
 (defn- nls-newton-raphson
-"
-
-
+  "
   Examples:
 
     (use '(incanter core optimize datasets charts))
@@ -476,7 +461,7 @@
 
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -489,10 +474,7 @@
 
     ;(add-lines plot x (f (:theta result) x))
     (add-lines plot x (map (partial f (:theta result)) x))
-
-
-
-"
+  "
   ([f df d2f start x y & {:keys [max-iter tol]
                           :or {max-iter 200
                                tol 1E-5}}]
@@ -515,9 +497,7 @@
 
 
 (defn- nls-gauss-newton
-"
-
-
+  "
   Examples:
 
     (use '(incanter core optimize datasets charts))
@@ -528,12 +508,12 @@
             (div (* x (- (nth theta 1) (nth theta 0)))
                  (+ (nth theta 2) x))))
 
-;    (defn f [theta x]
-;      (let [[a b c] theta]
-;        (plus a (div (mult x (minus b a)) (plus c x)))))
+  ;    (defn f [theta x]
+  ;      (let [[a b c] theta]
+  ;        (plus a (div (mult x (minus b a)) (plus c x)))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -545,13 +525,10 @@
 
     ;(add-lines plot x (f (:theta result) x))
     (add-lines plot x (map (partial f (:theta result)) x))
-
-
-
-"
-([f start x y & {:keys [max-iter tol]
-                 :or {max-iter 200
-                      tol 1E-5}}]
+  "
+  ([f start x y & {:keys [max-iter tol]
+                   :or {max-iter 200
+                        tol 1E-5}}]
     (let [grad (gradient f start)
           ;; g
           ;; (grad start x)
@@ -572,11 +549,8 @@
 
 
 
-
-
-
 (defn non-linear-model
-"
+  "
   Determine the nonlinear least-squares estimates of the
   parameters of a nonlinear model.
   Based on R's nls (non-linear least squares) function.
@@ -616,7 +590,7 @@
         (plus a (div (mult x (minus b a)) (plus c x)))))
 
     (def start [20 200 100])
-    (def data (to-matrix (get-dataset :thurstone)))
+    (def data (get-dataset :thurstone))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
     ;; view the data
@@ -631,7 +605,7 @@
     (use '(incanter core optimize datasets charts))
     ;; Chwirut data set from NIST
     ;; http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat
-    (def data (to-matrix (get-dataset :chwirut)))
+    (def data (get-dataset :chwirut))
     (def x (sel data :cols 1))
     (def y (sel data :cols 0))
 
@@ -657,16 +631,16 @@
     (add-lines plot x (f start2 x))
     (def nlm2 (non-linear-model f y x start2))
     (add-lines plot x (:fitted nlm2))
+  "
 
 
-"
-([f y x start & {:keys [max-iter tol method]
-                 :or {max-iter 200
-                      tol 1E-5
-                      method :gauss-newton}}] ;; other option is :newton-raphson
+  ([f y x start & {:keys [max-iter tol method]
+                   :or {max-iter 200
+                        tol 1E-5
+                        method :gauss-newton}}] ;; other option is :newton-raphson
     (let [nls (if (= method :newton-raphson)
-                (nls-newton-raphson f (gradient f start) (hessian f start) start x y :tol tol :max-iter max-iter)
-                (nls-gauss-newton f start x y :tol tol :max-iter max-iter))
+                  (nls-newton-raphson f (gradient f start) (hessian f start) start x y :tol tol :max-iter max-iter)
+                  (nls-gauss-newton f start x y :tol tol :max-iter max-iter))
           fitted (map #(f (:theta nls) %) x)]
       {:method method
        :coefs (:theta nls)
@@ -683,34 +657,32 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn- dot
-  "
-   Scalar product of a pair of collections
-  "
+  "Scalar product of a pair of collections"
   [xs ys] (reduce + ($= xs * ys)))
 
 (defn- with-counting
   "
-   Takes a function and returns a version of the function that tracks how many
-   times that function is called, together with a counter.
+  Takes a function and returns a version of the function that tracks how many
+  times that function is called, together with a counter.
   "
   [f]
-  (let [num-calls (agent 0)]
-    [(fn [& args]
-      (send num-calls inc)
-      (apply f args)) num-calls]))
+    (let [num-calls (agent 0)]
+      [(fn [& args]
+        (send num-calls inc)
+        (apply f args)) num-calls]))
 
 (defn- line-search-BFGS
   "
-   Minimize alpha in the function f(x-k + alpha*p-k) using the interpolation
-   algorithm detailed in 'Numerical Optimization' Nocedal and Wright, 1999.
-   Pg. 56-57
+  Minimize alpha in the function f(x-k + alpha*p-k) using the interpolation
+  algorithm detailed in 'Numerical Optimization' Nocedal and Wright, 1999.
+  Pg. 56-57
   "
   [f x-k p-k grad-f-k & {:keys [c-1 alpha-0] :or {c-1 1E-4 alpha-0 1}}]
-  (let [phi (memoize (fn [alpha] (f ($= x-k + (alpha * p-k)))))
-        phi-prime-0 (dot grad-f-k p-k)
-        decrease-condition (fn [alpha] (<= (phi alpha)
+    (let [phi (memoize (fn [alpha] (f ($= x-k + (alpha * p-k)))))
+          phi-prime-0 (dot grad-f-k p-k)
+          decrease-condition (fn [alpha] (<= (phi alpha)
                                           ($= (phi 0) + (c-1 * alpha * phi-prime-0))))]
-    (if (decrease-condition alpha-0) alpha-0
+      (if (decrease-condition alpha-0) alpha-0
         (let [phi-factor (memoize (fn [alpha] ($= (phi alpha) - (phi 0) - (phi-prime-0 * alpha))))
               factor (memoize (fn [alpha-k alpha-k-1] ($= (alpha-k-1 ** 2) * (alpha-k ** 2) * (alpha-k - alpha-k-1))))
               alpha-1 ($= -1 * (phi-prime-0 * alpha-0 ** 2) / (2 * (phi-factor alpha-0)))]
@@ -731,62 +703,65 @@
 
 (defn- fmin-bfgs
   "
-    Minimize a function of multiple variables using the BFGS algorthim, based
-    fmin_bfgs in scipy.optimize.
+  Minimize a function of multiple variables using the BFGS algorthim, based
+  fmin_bfgs in scipy.optimize.
 
-    This function is called by minimize (and maximize) with 'method :bfgs' or
-    by default, and shouldn't be used directly.
+  This function is called by minimize (and maximize) with 'method :bfgs' or
+  by default, and shouldn't be used directly.
   "
   [f x-0 f-prime tol max-iter]
-  (let [norm (fn [grad-vec] (apply max (map #(Math/abs %) grad-vec)))
-        I (identity-matrix (count x-0))]
-    (loop [inv-hessian-k I
-           gradient-k (f-prime x-0)
-           x-k x-0
-           iter max-iter]
-      (let [converged? (< (norm gradient-k) tol)
-            max-iterations (= 0 iter)]
-        (if (or converged? max-iterations)
-          {:value x-k :iterations (- max-iter iter)}
-          (let [p-k ($= -1 * (inv-hessian-k <*> gradient-k))
-                alpha-k (line-search-BFGS f x-k p-k gradient-k)
-                x-k+1 ($= x-k + (alpha-k * p-k))
-                gradient-k+1 (f-prime x-k+1)
-                y-k ($= gradient-k+1 - gradient-k)
-                s-k ($= x-k+1 - x-k)
-                rho-k  (/ 1 (dot y-k s-k))
-                A-1 ($= I - ((s-k <*> (trans y-k)) * rho-k))
-                A-2 ($= I - ((y-k <*> (trans s-k)) * rho-k))]
-            (recur ($= (A-1 <*> (inv-hessian-k <*> A-2))
-                       + (rho-k * (s-k <*> (trans s-k))))
-                   gradient-k+1 x-k+1 (dec iter))))))))
+    (let [norm (fn [grad-vec] (apply max (map #(Math/abs %) grad-vec)))
+       I  (identity-matrix (count x-0))]
+      (loop [inv-hessian-k I
+             gradient-k (f-prime x-0)
+             x-k x-0
+             iter max-iter]
+        (let [converged? (< (norm gradient-k) tol)
+              max-iterations (= 0 iter)]
+          (if (or converged? max-iterations)
+            {:value x-k :iterations (- max-iter iter)}
+            (let [p-k ($= -1 * (inv-hessian-k <*> gradient-k))
+                  alpha-k (line-search-BFGS f x-k p-k gradient-k)
+                  x-k+1 ($= x-k + (alpha-k * p-k))
+                  gradient-k+1 (f-prime x-k+1)
+                  y-k ($= gradient-k+1 - gradient-k)
+                  s-k ($= x-k+1 - x-k)
+                  rho-k (try
+                          (/ 1 (dot y-k s-k))
+                          (catch java.lang.ArithmeticException ae
+                            1000)) ;; Divide-by-zero encountered: rho-k assumed large
+                  A-1 ($= I - ((s-k <*> (trans y-k)) * rho-k))
+                  A-2 ($= I - ((y-k <*> (trans s-k)) * rho-k))]
+              (recur ($= (A-1 <*> (inv-hessian-k <*> A-2))
+                         + (rho-k * (s-k <*> (trans s-k))))
+                     gradient-k+1 x-k+1 (dec iter))))))))
 
 (defn minimize
   "
-   Minimize a scalar function of one or more variables. Based on the
-   Implementation from scipy.optimize. Currently only the BFGS algorithim is
-   implemented.
+  Minimize a scalar function of one or more variables. Based on the
+  Implementation from scipy.optimize. Currently only the BFGS algorithim is
+  implemented.
 
-   Arguments:
-     f -- Objective function. Takes a collection of values and returns a scalar
-          of the value of the function.
-     start -- Collection of initial guesses for the minimum
-     f-prime -- partial derivative of the objective function. Takes
+  Arguments:
+    f -- Objective function. Takes a collection of values and returns a scalar
+         of the value of the function.
+    start -- Collection of initial guesses for the minimum
+
+  Options:
+    :f-prime -- partial derivative of the objective function. Takes
                 a collection of values and returns a collection of partial
                 derivatives with respect to each variable. If this is not
                 provided it will be estimated using gradient-fn.
+    :method (default :bfgs) currently no other options
+    :tol (default 1E-5)
+    :max-iter (default 200)
 
-   Options:
-     :method (default :bfgs) currently no other options
-     :tol (default 1E-5)
-     :max-iter (default 200)
-
-   Returns: a hash-map containing the following fields:
-     :method -- the method used
-     :value  -- the minimum of the objective function
-     :iterations -- the number of iterations performed
-     :fun-calls -- the number of calls to f
-     :grad-calls -- the number of calles to f-prime
+  Returns: a hash-map containing the following fields:
+    :method -- the method used
+    :value  -- the minimum of the objective function
+    :iterations -- the number of iterations performed
+    :fun-calls -- the number of calls to f
+    :grad-calls -- the number of calles to f-prime
 
 
   Examples:
@@ -802,10 +777,11 @@
       [($= 2 * (200 * x ** 3 - 200 * x * y + x - 1))
        ($= 200 * (y - x ** 2))])
     ;; run minimize function on rosenbrock to find root
-    (= (minimize rosenbrock [0 10] rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
+    (= (minimize rosenbrock [0 10] :f-prime rosenbrock-der :max-iter 500) (matrix [1 1])) ;; True
   "
-  [f start f-prime & {:keys [max-iter tol method]
-                      :or {max-iter 200
+  [f start & {:keys [f-prime max-iter tol method]
+                      :or {f-prime (gradient-fn f (count start) :dx 1E-5)
+                           max-iter 200
                            tol 1E-5
                            method :bfgs}}]
   (let [min (cond :else fmin-bfgs)
@@ -814,10 +790,13 @@
     (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
 
 (defn maximize
-  "This function tries to maximize a scalar function of one or more variables.
-   See documentation of 'minimize' function for more information."
-  [f start f-prime & {:keys [max-iter tol method]
-                      :or {max-iter 200
+  "
+  This function tries to maximize a scalar function of one or more variables.
+  See documentation of 'minimize' function for more information.
+  "
+  [f start & {:keys [f-prime max-iter tol method]
+                      :or {f-prime (gradient-fn f (count start) :dx 1E-5)
+                           max-iter 200
                            tol 1E-5
                            method :bfgs}}]
-  (minimize (comp - f) start (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))
+  (minimize (comp - f) start :f-prime (comp (partial map -) f-prime) :max-iter max-iter :tol tol :method method))

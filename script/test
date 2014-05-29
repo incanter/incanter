@@ -9,24 +9,14 @@ fi
 
 TOP_DIR=`dirname $0`/..
 cd "$TOP_DIR"
+INCANTER_HOME=`pwd`
+export INCANTER_HOME
 
 RESULTS=0
 
-cd modules
-for i in core io charts mongodb pdf latex excel zoo sql; do
-    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
-        echo "testing in incanter-$i"
-        OLDWD=`pwd`
-        cd "incanter-$i"
-        $LEIN test
-        RES=$?
-        if [ $RES -ne 0 ] ; then
-            RESULTS=$RES
-        fi
-        cd "$OLDWD"
-    fi
-done
+$TOP_DIR/script/run-cmd $LEIN test
+RES=$?
 
 cd "$TWD"
 
-exit $RESULTS
+exit $RES

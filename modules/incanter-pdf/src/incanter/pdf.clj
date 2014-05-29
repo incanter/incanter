@@ -1,9 +1,6 @@
 (ns
 ^{:doc "This library currently has only a single function, save-pdf, which saves
-  charts as a PDF file. To build this namespace make sure the you have the iText
-  library (http://itextpdf.com/) as a declared dependency in your pom.xml or
-  project.clj file:
-  [com.lowagie/itext \"1.4\"] "}
+  charts as a PDF file."}
 
   incanter.pdf
   (:use (incanter charts))
@@ -17,7 +14,8 @@
 
 
 (defn save-pdf
-" Save a chart object as a pdf document.
+  "
+  Save a chart object as a pdf document.
 
   Arguments:
     chart
@@ -31,9 +29,7 @@
 
     (use '(incanter core charts pdf))
     (save-pdf (function-plot sin -4 4) \"./pdf-chart.pdf\")
-
-
-"
+  "
   ([chart filename & {:keys [width height ] :or {width 500 height 400}}]
      (let [pagesize (Rectangle. width height)
            document (Document. pagesize 50 50 50 50)
@@ -51,5 +47,3 @@
          (.addTemplate cb tp 0 0)
          (.close document)
          (.close out)))))
-
-

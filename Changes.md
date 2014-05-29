@@ -1,10 +1,103 @@
 # What's new in Incanter #
 
-## Changes for 1.5.x
+## Changes for 1.5.4 ##
 
-- Incanter-core matrix using native BLAS through jBLAS/Clatrix
-- Updated dependencies:
-    - [Clatrix](https://github.com/Quantisan/clatrix): 0.2.1
+Made an error during deployment of 1.5.3, so 1.5.4 was released to fix this problem.
+Don't use 1.5.3!
+
+## Changes for 1.5.3 ##
+
+### Bugfixes ###
+
+ * Issue 183: the `pow` & `atan2` functions weren't implemented for matrices & datasets.
+ * `read-dataset` now converts empty fields to `nil`, or user-supplied value (see Issue 182).
+ * Documentation improvements.
+
+### Enhancements ###
+
+ * New functions in `incanter.charts`:
+   * `set-point-size` to control size of points on scatter plots.
+ * New functions in `incanter.core`:
+   * `rename-cols` allows to rename columns of dataset
+   * `replace-column` replaces data in column of dataset with new values
+   * `add-column` allows easier to add new column to dataset
+   * `add-derived-column` adds a column to a dataset that is a function of existing
+     columns
+   * `melt` implements part of functionality of R's `melt` function from `reshape`
+     package.
+
+## Changes for 1.5.2 ##
+
+### Bugfixes ###
+
+ * Issue 168: the `view` function wasn't defined for `Matrix` class
+ * Issue 161: maximal idx for slider wasn't correctly calculated
+ * The `sel` function on `nil` was implemented, preventing from getting errors when there
+   was no data specified in the `$data` variable
+ * Issue 169: metadata wasn't added to `ncol` & `nrow` functions
+ * Issue 164: `to-vect` was implemented only for `Matrix` class, now it works with any
+   support data type
+ * Issue 165: `sel` returns a dataset even if result has one row, and we're selecting
+   columns.
+
+### Enhancements ###
+
+ * Issue 166: You can use logarithmic axes (with different bases) in Incanter charts.  See
+   issue for more details
+
+## Changes for 1.5.1 ##
+
+### Bugfixes ###
+
+ * Issue 157: when `transform-with` was used with Matrix, then source data was modified instead of working on copy of data
+ * Issue 160: when 2-arguments version of `solve` was used, the exception was thrown
+
+## Changes for 1.5.0 ##
+
+### Enhancements ###
+
+ * incanter-core's matrix uses native BLAS through jBLAS/Clatrix - this greatly improves performance (on 64-bit Linux see "Known issues" section).
+ * several interpolation functions were added to incanter-core module (as `incanter.interpolation` namespace).
+ * a new option is added to `heat-map` - `:include-zero?`.
+ * the `tail` function was added.
+ * new function `reorder-columns` for a dataset that changes the order of appearance of the datset columns. It does not alter the row order.
+ * `save` will print data to standard output if `"-"` is specified as file name.
+ * `sel` and other functions (`$`, `head`, `tail`, etc.) can be used with lists (`java.util.List`). 
+ * the `toeplitz` function was added to generate Toeplitz matrix for given vector.
+ * the `scatter-plot-matrix` function was added to `incanter.chart` module.
+ * `incanter.optimize` was extended with `minimize` and `maximise` functions for performing unconstrained nonlinear optimization using the BFGS algorithm.
+ * the new `incanter.svg` module provides `save-svg` function to output charts to SVG files.  Include `incanter-svg` as dependency to use this functionality.
+
+### Many bugfixes ###
+
+ * for function & parametric plots, line is finished in max-range point.
+ * permutation matrix is returned in LU decomposition.
+ * `linear-model` now correctly calculates t-probs.
+ * fixed division by zero in `linear-model` for some data.
+
+### Modified behavior ###
+
+ * `sel` will return dataset when `:rows` or `:cols` are non-numbers - this changes
+   previous behaviour when list was returned if only one row or col was specified.
+ * `mult` & `mmult` always return matrices, even if it's 1x1 matrix.
+
+### Known issues ###
+
+ * `conj`'ing of matrix & vector doesn't work with new Clatrix - you can either use `bind-rows`, or wrap vector into another vector:
+    
+    (def M (matrix [[0 1] [2 3] [4 5]]))
+    (conj M [6 7])      ; => doesn't work
+    (bind-rows M [6 7]) ; => works
+    (conj M [[6 7]])    ; => works
+
+ * `decomp-qr` performs only full QR decomposition, and the `:type` parameter is ignored.
+ * On 64-bit Linux you need to install libgfortran3 package. See [jblas wiki](https://github.com/mikiobraun/jblas/wiki/Missing-Libraries) for more details
+
+### Updated dependencies ###
+
+ * [Clatrix](https://github.com/Quantisan/clatrix): 0.3.0
+ * Clojure: 1.5.1
+ * JLine: 2.11
 
 ## Changes for 1.4.x ##
 

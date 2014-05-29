@@ -1,4 +1,4 @@
-;;; infix-tests.clj -- Unit tests of Incanter infix expression functions 
+;;; infix-tests.clj -- Unit tests of Incanter infix expression functions
 
 ;; by Michael Nygard http://incanter.org
 ;; Sept 16 2011
@@ -14,7 +14,7 @@
 
 
 (ns incanter.infix-tests
-  (:use clojure.test 
+  (:use clojure.test
         (incanter core infix)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -60,7 +60,9 @@
   (is (= ($= (matrix [1 2 3]) <*> (trans (matrix [1 2 3]))) (matrix [[1 2 3] [2 4 6] [3 6 9]])))
   (is (= ($= (trans [[1 2] [4 5]]) <*> (matrix [[1 2] [4 5]])) (matrix [[17 22] [22 29]])))
   (is (= ($= (trans (matrix [1 2 3 4])) <*> (matrix [1 2 3 4])) 30.0))
+;;  (is (= ($= (trans [1 2 3 4]) <*> [1 2 3 4]) (matrix [30.0])))
   (is (= ($= (matrix [1 2 3 4]) <*> (trans (matrix [1 2 3 4]))) (matrix [[1 2 3 4] [2 4 6 8] [3 6 9 12] [4 8 12 16]]))))
+  ;;(is (= ($= [1 2 3 4] <*> (trans [1 2 3 4])) (matrix [[1 2 3 4] [2 4 6 8] [3 6 9 12] [4 8 12 16]]))))
 
 (deftest kronecker-product-in-infix
   (is (= ($= (matrix [1 2 3]) <x> (matrix [1 2 3])) (matrix [1 2 3 2 4 6 3 6 9])))
@@ -68,4 +70,3 @@
   (is (= ($= (matrix [[1 2] [3 4] [5 6]]) <x> (matrix [[1 2] [3 4]])) (matrix [[1 2 2 4] [3 4 6 8] [3 6 4 8] [9 12 12 16] [5 10 6 12] [15 20 18 24]])))
   (is (= ($= (matrix [1 2 3 4]) <x> 4) (matrix [4 8 12 16])))
   (is (= ($= (matrix [1 2 3 4]) <x> (trans (matrix [1 2 3 4]))) (matrix [[1 2 3 4] [2 4 6 8] [3 6 9 12] [4 8 12 16]]))))
-

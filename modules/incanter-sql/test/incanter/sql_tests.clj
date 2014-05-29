@@ -1,10 +1,8 @@
 (ns incanter.sql-tests
- (:use clojure.test 
-       incanter.sql
-       incanter.core
-       clojure.core
-       [clojure.java.jdbc :exclude [resultset-seq]]
-       [clojureql.core :as q :exclude [conj! disj! take drop distinct case compile sort]]
+  (:use clojure.test 
+        [incanter sql core]
+        [clojure.java.jdbc :exclude [resultset-seq]]
+        [clojureql.core :as q :exclude [conj! disj! take drop distinct case compile sort aggregate]]
        )
  )
 

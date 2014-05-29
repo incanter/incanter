@@ -84,7 +84,7 @@
 	   ["csv" test-csv-data]
 	   ["tdd" test-tdd-data]]]
     (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
-    (is (= 50 (count (:rows cars-dataset)))) (str "Reading rows for " name " failed"))) ;; end of read-dataset-validation tests
+    (is (= 50 (count (:rows cars-dataset))) (str "Reading rows for " name " failed")))) ;; end of read-dataset-validation tests
 
 (def parse-string (ns-resolve 'incanter.io 'parse-string))
 (deftest parse-string-validation
@@ -94,3 +94,10 @@
     (is (instance? java.lang.Long (parse-string "5678")))
     (is (instance? java.lang.Long (parse-string "1330418008377")))
     ))
+
+(deftest missing-fields-validation 
+  (testing "Proper handling of missing fields."
+    (let [ds (read-dataset (str incanter-home "data/missing_values.csv")
+                           :header true
+                           :empty-field-value :NA)]
+      (is (= ($ 6 ds) [4 16 :NA 40 35 :NA])))))

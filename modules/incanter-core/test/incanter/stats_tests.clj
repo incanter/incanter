@@ -130,7 +130,7 @@
   (is (= (nrow (sample test-mat :size 3)) 3))
   (is (= (nrow (sample dataset1 :size 3)) 3)))
 
-(deftest sample-mean
+(deftest sample-mean-test
  (is (= 3.0 
       (mean [2 3 4]))))
 
@@ -150,7 +150,7 @@
     (is (= 36
 	   (odds-ratio p1 p2)))))
 
-(deftest covariance-test
+(deftest covariance-test-2
   (is (= 5.333333333333333
 	 (covariance
 	  [3 1 3 9]
@@ -213,6 +213,16 @@
 	 (normalized-kendall-tau-distance [1 2 3 4 5] 
 					  [3 4 1 2 5])))) 
 
+(deftest test-gamma-coefficient
+  (is (= 1
+       (gamma-coefficient [1 2 3]
+                          [4 5 6])))
+  (is (= -1
+       (gamma-coefficient [1 2 3]
+                          [0 -1 -2])))
+  (is (= 1/3
+       (gamma-coefficient [1 2 3]
+                          [0 -1 1]))))
 
 (deftest jaccard-examples
  (is (= 2/6
@@ -243,8 +253,8 @@
         (hamming-distance "toned" "roses"))))
 
 (deftest lee-distance-withq
- (= (+ 1 2 0 3)
-    (lee-distance 3340 2543 6)))
+ (is (= (+ 1 2 0 3)
+        (lee-distance 3340 2543 6))))
 
 ;;since the following three edits change one into the other, and there is no way to do it with fewer than three edits:
    ;; 1. kitten → sitten (substitution of 's' for 'k')
@@ -334,3 +344,18 @@
     (is
       (= (format "%.8f" 5.4456385557467595) 
          (format "%.8f" (:X-sq (benford-test coll)))))))
+
+(deftest linear-model-with-zero-ss
+  ;; pre 1.5.0 linear model would have a divide by zero exception with this data
+  (let [data [0.0 2.0 0.0 0.0 0.0 1.0 1.0 3.0 0.0 2.0 0.0 1.0 2.0 0.0 0.0 0.0 0.0 1.0 2.0 0.0 1.0 1.0]
+        lm (linear-model data data)]
+    (is (= 1.0 (:r-square lm)))))
+
+(deftest linear-model-r2-test
+  (let [x [10 12 10 15 14 12 13 15 16 14 13 12 11 10 13 13 14 18 17 14]
+        y [3.33 2.92 2.56 3.08 3.57 3.31 3.45 3.93 3.82 3.70
+           3.26 3.00 2.74 2.85 3.33 3.29 3.58 3.85 4.00 3.50]
+        lm (linear-model y x)]
+    (testing "Linear Model R^2 tests"
+      (is (= 0.6682675077269637 (:r-square lm)))
+      (is (= 0.6292401556948419 (:adj-r-square lm))))))

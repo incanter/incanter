@@ -1,6 +1,6 @@
 <a border="0" href="http://incanter.org" ><img src="http://incanter.org/incanter-banner.png" alt="Incanter" /></a>
 
-<a border="0" href="https://travis-ci.org/liebke/incanter" > <img src="https://secure.travis-ci.org/liebke/incanter.png" alt="Incanter" /></a>
+<a border="0" href="https://travis-ci.org/incanter/incanter" > <img src="https://secure.travis-ci.org/incanter/incanter.png" alt="Incanter" /></a>
 
 * <a href="#overview">Overview</a>
 * <a href="#clojure">Getting started with Clojure</a>
@@ -26,14 +26,14 @@ Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.o
 
 h2. Getting started with Clojure
 
-For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure":http://www.pragprog.com/titles/shcloj/programming-clojure by Stuart Halloway, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="http://apress.com/book/view/1430272317">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
+For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure, 2ed":http://pragprog.com/book/shcloj2/programming-clojure by Stuart Halloway and Aaron Bedra, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="http://apress.com/book/view/1430272317">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
 
 *Other Clojure resources*
 
 * "Clojure website":http://clojure.org
-* "Getting Started with Clojure":http://www.assembla.com/wiki/show/clojure/Getting_Started
-* "Clojure Google group":http://groups.google.com/group/clojure
-* "clojure.blip.tv":http://clojure.blip.tv
+* "Getting Started with Clojure":http://dev.clojure.org/display/doc/Getting+Started
+* "Clojure Google group":http://groups.google.com/group/ClojureTV
+* "clojure":https://www.youtube.com/user/ClojureTV
 * "Disclojure blog":http://disclojure.org/
 * "Full Disclojure screencasts":http://vimeo.com/channels/fulldisclojure
 
@@ -42,10 +42,9 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
-Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://data-sorcery.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download either an <a href="http://incanter.org/downloads/">Incanter executable</a> or a pre-built version of <a href="http://incanter.org/downloads/">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).
+Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://data-sorcery.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download either an <a href="http://incanter.org/downloads/">Incanter executable</a> or a pre-built version of <a href="http://incanter.org/downloads/">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).  You also might need to install libgfortran3 library that is required for <a href="http://mikiobraun.github.io/jblas/">jblas</a> that is powering matrix operations (see <a href="https://github.com/mikiobraun/jblas/wiki/Missing-Libraries">jblas wiki</a> for more details).
 
 Start the Clojure REPL (aka the shell) by double-clicking on the downloaded executable or, if you downloaded the pre-built distribution, running one of the scripts in the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows.
-
 
 From the Clojure REPL, load the Incanter libraries: 
 <pre><code>user=> (use '(incanter core stats charts))</code></pre>
@@ -58,15 +57,16 @@ Try another simple example, a plot of the sine function over the range -4 to 4:
 <pre><code>user=> (view (function-plot sin -10 10))</code></pre>
 <img src="http://incanter.org/images/examples/newtheme/xy-sin.png" />
 
-
 The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
+
+The <a href="http://www.amazon.com/gp/product/178216264X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=178216264X&linkCode=as2&tag=statisprograw-20">Clojure Data Analysis Cookbook</a> (published by Packt Publishing) contains several chapters dedicated to Incanter, including work with datasets, charting, etc.  You can read the <a href="https://github.com/incanter/incanter/blob/master/docs/9781782162643_Chapter%206.pdf?raw=true">sample chapter</a> that describes Incanter's datasets.
+
+There is dedicated mailing list for discussions about Incater. It's hosted on <a href="http://groups.google.com/group/incanter">Google Groups</a>.
 
 *More Incanter examples*
 
 * See the <a href="http://data-sorcery.org">Data-Sorcery blog</a>
 * See the <a href="http://data-sorcery.org/contents">Documentation table of contents</a>
-
-
 
 <a name="docs"></a>
 
@@ -92,7 +92,7 @@ h2. Building Incanter
 
 To build and test Incanter, you will need to have <a href="https://github.com/technomancy/leiningen/">Leiningen</a> and <a href="http://git-scm.com/">git</a> installed:
 
-1. Clone the repository with git: @git clone git://github.com/liebke/incanter.git@
+1. Clone the repository with git: @git clone git://github.com/incanter/incanter.git@
 
 2. Install Leiningen (version 2.x)
   a. Download the lein script: @wget https://github.com/technomancy/leiningen/raw/preview/bin/lein@
@@ -100,7 +100,7 @@ To build and test Incanter, you will need to have <a href="https://github.com/te
   b. Place it on your path and chmod it to be executable: @chmod +x lein@
   c. Run: @lein self-install@
 
-3. From the incanter directory, download the necessary dependencies: @lein deps@ 
+3. Execute @script/install@ staying in the incanter directory - this will download all necessary dependencies, compile & install all Incanter's modules into local Maven repository.  The use of separate script is required because Incanter consists of several modules, and development versions are usually not available in official repositories.
 
 4. Start a REPL: @lein repl@ (it also starts nRepl server), or start a Swank server: @lein ritz 4005@
 
@@ -115,10 +115,11 @@ Other tasks:
 
 h2. Incanter dependencies
 
-* "Clojure":http://code.google.com/p/clojure/
-* "Clojure-Contrib":http://code.google.com/p/clojure-contrib/ 
+* "Clojure":https://github.com/clojure/clojure
 * "Parallel Colt":http://sites.google.com/site/piotrwendykier/software/parallelcolt
 ** "Netlib-Java":http://code.google.com/p/netlib-java/ (included with Parallel Colt)
+* "Clatrix":https://github.com/tel/clatrix
+** "jblas":https://github.com/mikiobraun/jblas
 * "JFreeChart":http://www.jfree.org/jfreechart/
 ** "JCommon":http://www.jfree.org/jcommon/ (included with JFreeChart)
 ** "GnuJaxp":http://www.gnu.org/software/classpathx/jaxp/jaxp.html (included with JFreeChart)
@@ -128,91 +129,6 @@ h2. Incanter dependencies
 * "JLaTeXMath":http://forge.scilab.org/index.php/p/jlatexmath/
 * "Apache POI":http://poi.apache.org/
 * "JLine":http://jline.sourceforge.net/
+* "ClojureQL":http://clojureql.org/
+* "Batik SVG Toolkit":https://xmlgraphics.apache.org/batik/
 
-h2. Problems Moving to Clojure 1.3
-
-h3. Numerics
-
-* Integer overflow in distributions_tests.clj, function
-  (large-integer-tests). The test uses @(reduce
-  * (repeat 100 2))@ and @(reduce * (repeat 100 3))@. Workaround:
-  change * to *' in the test. Open question: propagating number
-  promotion looks to be a big pain. Should we add ticks to all the
-  arithmetic operators, or should be force them to bigint by adding an
-  "N" to the original literals?
-
-* Promotion problems: 
-** Test failure in (dice-string) (stats_tests.clj:184), comparing a double (0.25) to a Ratio (1/4).
-** Test failure in (chebyshev) (stats_tests.clj:236), comparing an integer to a double.
-** Workaround: Change from equality operator (=) to equivalence operator (==). This should probably be done comprehensively.
-
-* Bit ops no longer support doubles. Appears to only affect
-  incanter.core/get-dummies, which was passing a double but didn't
-  need to. Have made that explicitly an integer.
-
-* @(matrix)@ promotes to double. 
-
-* Equality tests are now problematic. Either use = and double or
-  bigint literals, or use == and don't force precision on literals.
-* However, matrix-to-list or lazy-seq-to-list compares don't work with
-  ==. Symmetry is broken and and clojure lists don't look like numeric
-  lists, and clojure vectors don't look like algebraic vectors.
-
-
-h3. Sequences
-
-* Matrix.java no longer accepted as seq. Previously, implementing ISeq
-  was sufficient, now it appears the marker interface
-  clojure.lang.Sequential is also needed. Workaround: added Sequential
-  to Matrix's implements clause. Open question: Should this be
-  Sequential vs. Seqable?
-
-h3. Dynamic vars
-
-* Compiler complains about @*test-statistic-iterations*@ and
-  @*test-statistic-map*@ looking like dynamic vars, but not being
-  declared as such. They aren't rebound in incanter-core, but the
-  docstring for test-statistic-distribution implies than an
-  application can rebind them, so I'm adding @^:dynamic@ to the decls.
-* $data was not declared as dynamic, could not be rebound. Workaround:
-  added ^{:dynamic true} to metadata. Open question: does rebinding
-  this fit in the 1.3 model for vars? Check with Stu about threading.
-
-h3. Leiningen
-
-* Complains that class clojure.set not found (called from
-  incanter.core as clojure.set/difference). This didn't happen when
-  building under cake, for some reason. Workaround: change call from
-  clojure.set/difference to just difference, add :use in ns decl.
-
-h3. Contrib migration
-
-* From clojure.contrib.core, defvar and defvar- didn't make it into
-  core.incubator. Scope: only used by distributions.clj. Workaround:
-  changed defvar- calls to just def.
-
-* clojure.contrib.combinatorics: moved to math.combinatorics, but no
-  release made yet. Workaround: added pom.xml to local clone of
-  https://github.com/clojure/math.combinatorics.git. Built using "mvn
-  install" to put jar in local repository.
-
-h3. Missing tests
-
-These are things I caught by running examples by hand, but were not
-picked up by any test cases.
-
-* $data not used in -core
-
-* Running the first "with-data" function on
-  http://data-sorcery.org/2010/01/03/datasets_mongodb/ revealed that
-  "sel" was not being exercised in -core.
-
-h3. Possible behavior changes
-
-* @read-dataset@ with a URL that redirects gives a dataset with the
-  redirect response as the rows, rather than following the
-  redirect. Is this how it was under clojure 1.2?
-
-* @$where@ has some examples on the web that use strings as the column
-  keys. I couldn't get that to work, had to use keywords
-  instead. Intended change or accidental?

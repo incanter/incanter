@@ -12,22 +12,13 @@ cd "$TOP_DIR"
 
 script/clean
 
-cd modules
-for i in core io charts mongodb pdf latex excel zoo sql; do
-    if [ -d "incanter-$i" -a -f "incanter-$i/project.clj" ] ; then
-        OLDWD=`pwd`
-        cd "incanter-$i"
-        $LEIN deploy clojars
-        RES=$?
-        if [ $RES -ne 0 ] ; then
-            cd "$TWD"
-            exit $RES
-        fi
-        cd "$OLDWD"
-    fi
-done
-cd ..
+$TOP_DIR/script/run-cmd $LEIN deploy clojars
+RES=$?
+if [ $RES -ne 0 ] ; then
+    exit $RES
+fi
 
+cd "$TOP_DIR"
 $LEIN deploy clojars
 RES=$?
 cd "$TWD"
