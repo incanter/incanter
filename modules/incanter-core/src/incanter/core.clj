@@ -357,8 +357,12 @@
             (== dm 1) (m/row-matrix m)
             (== dm 2) m
             :else (throw (RuntimeException. (str "Can't bind rows to array of dimensionality " dm))))
-        ]
-    (apply m/join m args))))
+         args (map
+               #(if (= (m/dimensionality %) 3)
+                  (reduce m/join %)
+                  %)
+               args)]
+     (apply m/join m args))))
 
 (defn bind-columns
   "
