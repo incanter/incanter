@@ -518,7 +518,7 @@
   ;; getting row sums
   (is (m/e== (reduce + (first A)) 6.0))
   (is (m/e== (map #(reduce + %) A) [6.0 15.0 24.0 33.0]))
-  (is (m/e== (reduce plus (trans A)) (matrix [6 15 24  33] 4)))
+  (is (m/e== (matrix [6 15 24 33] 4) (reduce plus (trans A))))
 
   ;; getting column sums
   (is (m/e== (reduce plus A) (matrix [22 26 30] 3)))
@@ -526,7 +526,7 @@
 
   ;; getting column products
   (is (m/e== (reduce mult A) (matrix [280 880 1944] 3)))
-  (is (m/e== (reduce mult (trans A)) (matrix [6 120 504 1320] 4))))
+  (is (m/e== (matrix [6 120 504 1320] 4) (reduce mult (trans A)))))
 
 (deftest matrix-mmult-tests
 ;; perform matrix multiplication
