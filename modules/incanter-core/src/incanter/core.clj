@@ -165,7 +165,7 @@
   ([mat]
    (if (m/matrix? mat)
      (m/transpose mat)
-     (m/transpose (m/matrix mat)))))
+     (m/transpose (matrix mat)))))
 
 
 
