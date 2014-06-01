@@ -59,7 +59,7 @@
 (deftest matrix-products-in-infix
   (is (= ($= (matrix [1 2 3]) <*> (trans (matrix [1 2 3]))) (matrix [[1 2 3] [2 4 6] [3 6 9]])))
   (is (= ($= (trans [[1 2] [4 5]]) <*> (matrix [[1 2] [4 5]])) (matrix [[17 22] [22 29]])))
-  (is (= ($= (trans (matrix [1 2 3 4])) <*> (matrix [1 2 3 4])) 30.0))
+  (is (= ($= (trans (matrix [1 2 3 4])) <*> (matrix [1 2 3 4])) (matrix [30.0])))
 ;;  (is (= ($= (trans [1 2 3 4]) <*> [1 2 3 4]) (matrix [30.0])))
   (is (= ($= (matrix [1 2 3 4]) <*> (trans (matrix [1 2 3 4]))) (matrix [[1 2 3 4] [2 4 6 8] [3 6 9 12] [4 8 12 16]]))))
   ;;(is (= ($= [1 2 3 4] <*> (trans [1 2 3 4])) (matrix [[1 2 3 4] [2 4 6 8] [3 6 9 12] [4 8 12 16]]))))
