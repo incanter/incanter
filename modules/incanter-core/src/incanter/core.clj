@@ -709,8 +709,11 @@
   type)
 
 (defmethod to-vect ::matrix
-  ([^clatrix.core.Matrix mat]
-   (clx/as-vec mat)))
+  ([mat]
+     (if (or (m/row-matrix? mat)
+             (m/column-matrix? mat))
+       (m/to-vector mat)
+       (m/to-nested-vectors mat))))
 
 (defmethod to-vect ::dataset
   [data]
