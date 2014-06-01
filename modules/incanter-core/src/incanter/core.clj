@@ -744,7 +744,7 @@
     http://en.wikipedia.org/wiki/Matrix_multiplication
   "
   ([& args]
-     (apply m/mmul args)))
+     (apply m/mmul (map matrix args))))
 
 
 (defn kronecker
