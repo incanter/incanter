@@ -1940,10 +1940,20 @@
     (matrix-map #(mod % 2) [1 2 3 4])
     (matrix-map #(mod % 2) 9)
   "
- ([f m]
-    (m/emap f m))
- ([f m & more]
-    (apply m/emap f m more)))
+  ([f m]
+    (let [m (if (and (matrix? m) (m/row-matrix? m)) (to-list m) m)]
+      (if (sequential? m)
+        (if (sequential? (first m))
+          (map (fn [& a] (apply map f a)) m)
+          (map f m))
+        (f m))))
+  ([f m & ms]
+    (let [m (if (and (matrix? m) (m/row-matrix? m)) (to-list m) m)]
+      (if (sequential? m)
+        (if (sequential? (first m))
+          (apply map (fn [& a] (apply map f a)) m ms)
+          (apply map f m ms))
+        (apply f m ms)))))
 
 
 (defn $map
