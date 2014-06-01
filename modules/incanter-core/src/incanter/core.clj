@@ -503,10 +503,7 @@
   (reduce (fn [A B]
             (cond
               (number? A) (func A B)
-              (matrix? A) (let [m (matrix (mapping-helper func (list (to-list A) B)))]
-                            (if (clx/row? A)
-                              (trans m)
-                              m))
+              (matrix? A) (m/emap #(func %1 B) A)
               (dataset? A) (dataset (col-names A)
                                     (mapping-helper func (list (to-list A) B)))
               (and (coll? A) (coll? (first A)))
@@ -535,7 +532,7 @@
   Returns the square-root of the elements in the given matrix, sequence or number.
   Equivalent to R's sqrt function.
   "
-  [A] (transform-with A #(Math/sqrt %) clx/sqrt!))
+  [A] (transform-with A #(Math/sqrt %)))
 
 
 (defn sq
@@ -551,7 +548,7 @@
   Returns the natural log of the elements in the given matrix, sequence or number.
   Equivalent to R's log function.
   "
-  ([A] (transform-with A #(Math/log %) clx/log!)))
+  ([A] (transform-with A #(Math/log %))))
 
 
 (defn log2
@@ -559,9 +556,7 @@
   Returns the log base 2 of the elements in the given matrix, sequence or number.
   Equivalent to R's log2 function.
   "
-  ([A] (transform-with A #(/ (Math/log %) (Math/log 2))
-                       #(div (clx/log! %)
-                             (matrix (Math/log 2) (nrow %) (ncol %))))))
+  ([A] (transform-with A #(/ (Math/log %) (Math/log 2)))))
 
 
 (defn log10
@@ -569,14 +564,14 @@
   Returns the log base 10 of the elements in the given matrix, sequence or number.
   Equivalent to R's log10 function.
   "
-  ([A] (transform-with A #(Math/log10 %) clx/log10!)))
+  ([A] (transform-with A #(Math/log10 %))))
 
 
 (defn exp
   "
   Returns the exponential of the elements in the given matrix, sequence or number.
   Equivalent to R's exp function."
-  ([A] (transform-with A #(Math/exp %) clx/exp!)))
+  ([A] (transform-with A #(Math/exp %))))
 
 
 (defn abs
@@ -584,7 +579,7 @@
   Returns the absolute value of the elements in the given matrix, sequence or number.
   Equivalent to R's abs function.
   "
-  ([A] (transform-with A #(Math/abs (double %)) clx/abs!)))
+  ([A] (transform-with A #(Math/abs (double %)))))
 
 
 (defn sin
@@ -592,7 +587,7 @@
   Returns the sine of the elements in the given matrix, sequence or number.
   Equivalent to R's sin function.
   "
-  ([A] (transform-with A #(Math/sin %) clx/sin!)))
+  ([A] (transform-with A #(Math/sin %))))
 
 
 (defn asin
@@ -600,7 +595,7 @@
   Returns the arc sine of the elements in the given matrix, sequence or number.
   Equivalent to R's asin function.
   "
-  ([A] (transform-with A #(Math/asin %) clx/asin!)))
+  ([A] (transform-with A #(Math/asin %))))
 
 
 (defn cos
@@ -608,14 +603,14 @@
   Returns the cosine of the elements in the given matrix, sequence or number.
   Equivalent to R's cos function.
   "
-  ([A] (transform-with A #(Math/cos %) clx/cos!)))
+  ([A] (transform-with A #(Math/cos %))))
 
 
 (defn acos
   "
   Returns the arc cosine of the elements in the given matrix, sequence or number.
   Equivalent to R's acos function."
-  ([A] (transform-with A #(Math/acos %) clx/acos!)))
+  ([A] (transform-with A #(Math/acos %))))
 
 
 (defn tan
@@ -623,7 +618,7 @@
   Returns the tangent of the elements in the given matrix, sequence or number.
   Equivalent to R's tan function.
   "
-  ([A] (transform-with A #(Math/tan %) clx/tan!)))
+  ([A] (transform-with A #(Math/tan %))))
 
 
 (defn atan
@@ -631,7 +626,7 @@
   Returns the arc tangent of the elements in the given matrix, sequence or number.
   Equivalent to R's atan function.
   "
-  ([A] (transform-with A #(Math/atan %) clx/atan!)))
+  ([A] (transform-with A #(Math/atan %))))
 
 
 (defn factorial
