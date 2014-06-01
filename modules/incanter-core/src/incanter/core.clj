@@ -277,33 +277,33 @@
         (and all-rows? all-cols?)
           lst))))
 
-(defmethod sel [clatrix.core.Matrix false]
-  ([^clatrix.core.Matrix mat rows columns]
+(defmethod sel [::matrix false]
+  ([mat rows columns]
    (let [rws (if (number? rows) [rows] rows)
          cols (if (number? columns) [columns] columns)
          all-rows? (or (true? rws) (= rws :all))
          all-cols? (or (true? cols) (= cols :all))]
     (cond
-      (and (number? rows) (number? columns))
-        (clx/get mat rows columns)
-      (and all-rows? (coll? cols))
-        (clx/get mat (range (nrow mat)) cols)
-      (and (coll? rws) all-cols?)
-        (clx/get mat rws (range (ncol mat)))
-      (and (coll? rws) (coll? cols))
-        (clx/get mat rws cols)
-      (and all-rows? all-cols?)
-        mat))))
+     (and (number? rows) (number? columns))
+      (m/mget mat rows columns)
+     (and all-rows? (coll? cols))
+      (matrix (m/select mat :all cols))
+     (and (coll? rws) all-cols?)
+      (matrix (m/select mat rws :all))
+     (and (coll? rws) (coll? cols))
+      (matrix (m/select mat rws cols))
+    (and all-rows? all-cols?)
+      mat))))
 
-(defmethod sel [clatrix.core.Matrix true]
+(defmethod sel [::matrix true]
   ([mat & {:keys [rows cols except-rows except-cols filter-fn all]}]
    (let [rows (cond
                 rows rows
-                except-rows (except-for (nrow mat) except-rows)
+                except-rows (except-for (m/row-count mat) except-rows)
                 :else true)
          cols (cond
                 cols cols
-                except-cols (except-for (ncol mat) except-cols)
+                except-cols (except-for (m/column-count mat) except-cols)
                 all all
                 :else true)
          mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
@@ -311,28 +311,28 @@
          all-cols? (or (true? cols) (= cols :all) (= all :all))]
      (cond
        (and (number? rows) (number? cols))
-         (clx/get mat rows cols)
+         (m/mget mat rows cols)
        (and all-rows? (coll? cols))
-         (clx/get mat (range (nrow mat)) cols)
+         (matrix (m/select mat :all cols))
        (and all-rows? (number? cols))
-         (clx/get mat (range (nrow mat)) [cols])
+         (matrix (m/select mat :all [cols]))
        (and (coll? rows) (number? cols))
-         (clx/get mat rows [cols])
+         (matrix (m/select rows [cols]))
        (and (coll? rows) all-cols?)
-         (clx/get mat rows (range (ncol mat)))
+         (matrix (m/select mat rows :all))
        (and (number? rows) all-cols?)
-         (clx/get mat [rows] (range (ncol mat)))
+         (let [res (m/select mat rows :all)]
+           (matrix res (m/row-count res)))
        (and (number? rows) (coll? cols))
-         (clx/get mat [rows] cols)
+         (matrix (m/select mat rows cols) (count cols))
        (and (coll? rows) (coll? cols))
-         (clx/get mat rows cols)
+         (matrix (m/select mat rows cols))
        (and all-rows? all-cols?)
          mat))))
 
 (defmethod sel :default
   ([mat & more]
-    (apply sel (m/matrix :clatrix mat) more)
-    ))
+    (apply sel (matrix mat) more)))
 
 (defn bind-rows
   "
