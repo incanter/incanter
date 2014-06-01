@@ -38,20 +38,15 @@
 (defn make-matrix
   ([data]
     (cond
-     (clojure.core.matrix/array? data)
-       (clojure.core.matrix/coerce :clatrix data)
-     (coll? (first data))
-      (clx/matrix data)
-     (number? (first data))
-      (clx/matrix (map vector data))
-     :default
-      (clx/matrix (map seq data))))
+     (number? (first data)) (m/matrix (map vector data))
+     :default (m/matrix (map seq data))))
   ([data ncol]
     {:pre [(number? (first data))]}
     (let [chunked  (partition ncol data)]
       (make-matrix chunked)))
   ([init-val rows cols]
-    (clx/constant (int rows) (int cols) ^Number init-val)))
+     (m/compute-matrix [(int rows) (int cols)]
+                       (constantly ^Number init-val))))
 
 
 (defmacro hint
@@ -62,15 +57,12 @@
 
 (defmacro transform-with
   "Transforms a matrix with a Clatrix function"
-  ([A op fun]
+  ([A fun]
   `(let [A# ~A]
      (cond
-       (clx/clatrix? A#) (~fun A#)
-       (m/array? A#) (~fun (m/coerce :clatrix A#))
-       (and (coll? A#) (coll? (first A#))) (let [mA# (make-matrix ~A)]
-                                             (clx/matrix (clx/dotom ~fun mA#) nil))
-       (coll? A#)   (map ~op A#)
-       (number? A#) (~op A#)))))
+      (m/array? A#) (m/emap ~fun A#)
+      (coll? A#)   (map ~fun A#)
+      (number? A#) (~fun A#)))))
 
 
 (defn pass-to-matrix
