@@ -197,13 +197,13 @@
 
 
 
-  ;; transposing matrices
+;; transposing matrices
 (deftest matrix-trans-test
-  (is (= (trans A) (matrix [[1 4 7 10]
-                            [2 5 8 11]
-                            [3 6 9 12]])))
+  (is (m/e== (trans A) (matrix [[1 4 7 10]
+                                [2 5 8 11]
+                                [3 6 9 12]])))
   (is (m/e== (trans (trans A)) A))
-  (is (m/e== (first (trans A)) [1 4 7 10])))
+  (is (m/e== (first (trans A)) (matrix [[1 4 7 10]]))))
 
 (deftest bind-rows-test
   ;; combining matrices/vectors by row
