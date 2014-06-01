@@ -312,14 +312,14 @@
   ;; select the element at row 3 (i.e. fourth row) and column 2 (i.e. third column)
   (is (== (sel A 3 2) 12.0))
   ;; use 'true' to select an entire row or column
-  (is (m/e== (sel A :cols 2) [3 6 9 12]))
-  (is (m/e== (sel A :rows 1) [4 5 6]))
+  (is (m/e== (sel A :cols 2) (matrix [3 6 9 12])))
+  (is (m/e== (sel A :rows 1) (matrix [4 5 6] 3)))
   (is (m/e== (sel A :all [0 2]) (matrix [[1 3]
-                                     [4 6]
-                                     [7 9]
-                                     [10 12]])))
+                                         [4 6]
+                                         [7 9]
+                                         [10 12]])))
   (is (= (sel A :all :all) A))
-  (is (m/e== (sel A :all 2) [3 6 9 12]))
+  (is (m/e== (sel A :all 2) (matrix [3 6 9 12])))
   (is (= (sel A true true) A))
   ;; pass a vector of indices to select a set of rows and/or columns
   (is (= (sel A :cols [0 2]) (matrix [[1 3]
