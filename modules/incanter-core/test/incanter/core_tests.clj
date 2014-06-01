@@ -212,78 +212,78 @@
   (is (= (bind-rows [1 2 3] [4 5 6]) (matrix [[1 2 3]
                                               [4 5 6]])))
   (is (= (bind-rows A [13 14 15]) (matrix [[1 2 3]
-                                       [4 5 6]
-                                       [7 8 9]
-                                       [10 11 12]
-                                       [13 14 15]])))
+                                           [4 5 6]
+                                           [7 8 9]
+                                           [10 11 12]
+                                           [13 14 15]])))
   (is (= (bind-rows [13 14 15] A) (matrix [[13 14 15]
-                                       [1 2 3]
-                                       [4 5 6]
-                                       [7 8 9]
-                                       [10 11 12]]))))
+                                           [1 2 3]
+                                           [4 5 6]
+                                           [7 8 9]
+                                           [10 11 12]]))))
 
 (deftest bind-cols-test
   ;; combining matrices/vectors by column
   (is (m/e== (bind-columns (trans (nth (trans A) 0))
-                       (trans (nth (trans A) 2)))
-         (matrix [[1 3]
-                  [4 6]
-                  [7 9]
-                  [10 12]])))
+                           (trans (nth (trans A) 2)))
+             (matrix [[1 3]
+                      [4 6]
+                      [7 9]
+                      [10 12]])))
   (is (m/e== (bind-columns [[1] [2] [3]] [[4] [5] [6]] [[7] [8] [9]])
-         (matrix [[1 4 7]
-                  [2 5 8]
-                  [3 6 9]])))
+             (matrix [[1 4 7]
+                      [2 5 8]
+                      [3 6 9]])))
   (is (m/e== (bind-columns [13 14 15 16] A)
-         (matrix [[13 1 2 3]
-                  [14 4 5 6]
-                  [15 7 8 9]
-                  [16 10 11 12]])))
+             (matrix [[13 1 2 3]
+                      [14 4 5 6]
+                      [15 7 8 9]
+                      [16 10 11 12]])))
   (is (m/e== (bind-columns A [13 14 15 16])
-         (matrix [[1 2 3 13]
-                  [4 5 6 14]
-                  [7 8 9 15]
-                  [10 11 12 16]]))))
+             (matrix [[1 2 3 13]
+                      [4 5 6 14]
+                      [7 8 9 15]
+                      [10 11 12 16]]))))
 
 (deftest matrix-creation-tests
   ;; creating matrices
   ;; create a 3x2 matrix with initial value 99
   (is (m/e== (matrix 99 3 2)
-         (matrix [[99 99]
-                  [99 99]
-                  [99 99]])))
+             (matrix [[99 99]
+                      [99 99]
+                      [99 99]])))
   ;; create a 3x2 matrix with initial value 0
   (is (m/e== (matrix 0 3 2)
-         (matrix [[0 0]
-                  [0 0]
-                  [0 0]])))
+             (matrix [[0 0]
+                      [0 0]
+                      [0 0]])))
   ;; create a matrix with the given data that has 3 columns
   (is (m/e== (matrix [1 2 3 4 5 6 7 8 9] 3)
-         (matrix [[1 2 3]
-                  [4 5 6]
-                  [7 8 9]])))
+             (matrix [[1 2 3]
+                      [4 5 6]
+                      [7 8 9]])))
   ;; take the diagonal elements of matrix A
   (is (m/e== (diag A) [1.0 5.0 9.0]))
   ;; create a diagonal matrix with the given data on the diagonal
   (is (m/e== (diag [1/2 1/2 1/2]) (matrix [[1/2 0 0]
-                                       [0 1/2 0]
-                                       [0 0 1/2]])))
+                                           [0 1/2 0]
+                                           [0 0 1/2]])))
   ;; create a 3x3 identity matrix
   (is (m/e== (identity-matrix 3) (matrix [[1 0 0]
-                                      [0 1 0]
-                                      [0 0 1]])))
+                                          [0 1 0]
+                                          [0 0 1]])))
 
   ;; create a 3x3 toeplitz matrix
   (is (m/e== (toeplitz [1 2 3]) (matrix [[1 2 3]
-                                     [2 1 2]
-                                     [3 2 1]]))))
+                                         [2 1 2]
+                                         [3 2 1]]))))
 
 (deftest matrix-to-list-tests
   ;; convert a matrix to clojure vectors
   (is (m/e== (to-list A) [[1.0 2.0 3.0]
-                      [4.0 5.0 6.0]
-                      [7.0 8.0 9.0]
-                      [10.0 11.0 12.0]]))
+                          [4.0 5.0 6.0]
+                          [7.0 8.0 9.0]
+                          [10.0 11.0 12.0]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (m/e== (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/e== (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
@@ -476,37 +476,37 @@
                              [8 10 12]
                              [14 16 18]
                              [20 22 24]])))
-  (is (m/e== (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) [1 4 9]))
-  (is (m/e== (mult [1 2 3] 2.0) [2 4 6]))
-  (is (m/e== (mult 2.0 [1 2 3]) [2 4 6]))
-  (is (m/e== (mult (matrix [1 2 3]) (matrix [1 2 3])) [[1] [4] [9]])))
+  (is (m/e== (mult [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [1 4 9])))
+  (is (m/e== (mult [1 2 3] 2.0) (matrix [2 4 6])))
+  (is (m/e== (mult 2.0 [1 2 3]) (matrix [2 4 6])))
+  (is (m/e== (mult (matrix [1 2 3]) (matrix [1 2 3])) (matrix [1 4 9]))))
 
 (deftest matrix-div-tests
   ;; element by element division on matrices
   (is (m/e== (div A A A) (matrix [[1 1/2 1/3]
-                              [1/4 1/5 1/6]
-                              [1/7 1/8 1/9]
-                              [1/10 1/11 1/12]])))
+                                  [1/4 1/5 1/6]
+                                  [1/7 1/8 1/9]
+                                  [1/10 1/11 1/12]])))
   (is (m/e== (div A 2) (matrix [[1/2 1 3/2]
-                            [4/2 5/2 6/2]
-                            [7/2 8/2 9/2]
-                            [10/2 11/2 12/2]])))
+                                [4/2 5/2 6/2]
+                                [7/2 8/2 9/2]
+                                [10/2 11/2 12/2]])))
   (is (m/e== (div 2 A) (matrix [[2/1 1 2/3]
-                            [2/4 2/5 2/6]
-                            [2/7 2/8 2/9]
-                            [2/10 2/11 2/12]])))
+                                [2/4 2/5 2/6]
+                                [2/7 2/8 2/9]
+                                [2/10 2/11 2/12]])))
   (is (m/e== (div V V V) (matrix [[1 1/2 1/3]
-                              [1/4 1/5 1/6]
-                              [1/7 1/8 1/9]
-                              [1/10 1/11 1/12]])))
+                                  [1/4 1/5 1/6]
+                                  [1/7 1/8 1/9]
+                                  [1/10 1/11 1/12]])))
   (is (m/e== (div V 2) (matrix [[1/2 1 3/2]
-                            [4/2 5/2 6/2]
-                            [7/2 8/2 9/2]
-                            [10/2 11/2 12/2]])))
+                                [4/2 5/2 6/2]
+                                [7/2 8/2 9/2]
+                                [10/2 11/2 12/2]])))
   (is (m/e== (div 2 V) (matrix [[2/1 1 2/3]
-                            [2/4 2/5 2/6]
-                            [2/7 2/8 2/9]
-                            [2/10 2/11 2/12]])))
+                                [2/4 2/5 2/6]
+                                [2/7 2/8 2/9]
+                                [2/10 2/11 2/12]])))
   (is (m/e== (div (matrix [1.0 2.0 3.0]) (matrix [1.0 2.0 3.0])) (matrix [1 1 1])))
   (is (m/e== (div (matrix [1 2 3]) 2.0) (matrix [1/2 1 3/2])))
   (is (m/e== (div 2.0 (matrix [1 2 3])) (matrix [2 1 0.6666666666666666])))
@@ -701,5 +701,4 @@
   (is (= (pow (matrix [[1 2 3] [4 5 6]]) 2) (matrix [[1.0 4.0 9.0] [16.0 25.0 36.0]])))
   (is (= (pow (matrix [[1 2 3]]) 2) (matrix [[1.0 4.0 9.0]])))
   (is (= (pow (matrix [1 2 3]) 2) (matrix [1.0 4.0 9.0])))
-  (is (= (pow (dataset [:a :b :c] [[1 2 3]]) 2) (dataset [:a :b :c] [[1.0 4.0 9.0]])))
-  )
+  (is (= (pow (dataset [:a :b :c] [[1 2 3]]) 2) (dataset [:a :b :c] [[1.0 4.0 9.0]]))))
