@@ -285,7 +285,6 @@
                       [7.0 8.0 9.0]
                       [10.0 11.0 12.0]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
-  ;;  (is (m/e== (to-list (matrix [1 2 3 4 5 6])) (matrix [1.0 2.0 3.0 4.0 5.0 6.0])))
   (is (m/e== (to-list (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/e== (to-list (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/e== (to-list [1 2 3]) [1 2 3]))
