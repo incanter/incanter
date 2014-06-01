@@ -408,8 +408,7 @@
   (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1.0 2.0 3.0])) (matrix [2 4 6])))
   (is (m/e== (plus (matrix [1.0 2.0 3.0]) 1) (matrix [2 3 4])))
   (is (m/e== (plus 1 (matrix [1.0 2.0 3.0])) (matrix [2 3 4])))
-  ;;TODO: check that (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1 2 3]) (matrix [2 4 6])))))
-  (is (= (plus [1.0 2.0 3.0] (matrix [1 2 3])) (matrix [2 4 6]))))
+  (is (m/e== (plus (matrix [1.0 2.0 3.0]) (matrix [1 2 3]) (matrix [2 4 6])))))
 
 
 (deftest matrix-minus-test
@@ -419,36 +418,36 @@
                                 [-7 -8 -9]
                                 [-10 -11 -12]])))
   (is (m/e== (minus A 1) (matrix [[0 1 2]
-                              [3 4 5]
-                              [6 7 8]
-                              [9 10 11]])))
+                                  [3 4 5]
+                                  [6 7 8]
+                                  [9 10 11]])))
   (is (m/e== (minus 1 A) (matrix [[0 -1 -2]
-                              [-3 -4 -5]
-                              [-6 -7 -8]
-                              [-9 -10 -11]])))
+                                  [-3 -4 -5]
+                                  [-6 -7 -8]
+                                  [-9 -10 -11]])))
   (is (m/e== (minus V V V) (matrix [[-1 -2 -3]
+                                    [-4 -5 -6]
+                                    [-7 -8 -9]
+                                    [-10 -11 -12]])))
+  (is (m/e== (minus V 1) (matrix [[0 1 2]
+                                  [3 4 5]
+                                  [6 7 8]
+                                  [9 10 11]])))
+  (is (m/e== (minus 1 V) (matrix [[0 -1 -2]
+                                  [-3 -4 -5]
+                                  [-6 -7 -8]
+                                  [-9 -10 -11]])))
+  (is (m/e== (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) (matrix [0 0 0])))
+  (is (m/e== (minus [1.0 2.0 3.0] 1) (matrix [0 1 2])))
+  (is (m/e== (minus 1 [1.0 2.0 3.0]) (matrix [0 -1 -2])))
+  (is (m/e== (minus [1 2 3] (m/array [1 2 3]) [0 0 0])))
+  (is (= (minus [1 2 3] (matrix [1 2 3])) (matrix [0 0 0])))
+  (is (== (minus 1) -1))
+  (is (m/e== (minus [1.0 2.0 3.0]) (matrix [-1.0 -2.0 -3.0])))
+  (is (m/e== (minus A) (matrix [[-1 -2 -3]
                                 [-4 -5 -6]
                                 [-7 -8 -9]
-                                [-10 -11 -12]])))
-  (is (m/e== (minus V 1) (matrix [[0 1 2]
-                              [3 4 5]
-                              [6 7 8]
-                              [9 10 11]])))
-  (is (m/e== (minus 1 V) (matrix [[0 -1 -2]
-                              [-3 -4 -5]
-                              [-6 -7 -8]
-                              [-9 -10 -11]])))
-  (is (m/e== (minus [1.0 2.0 3.0] [1.0 2.0 3.0]) [0 0 0]))
-  (is (m/e== (minus [1.0 2.0 3.0] 1) [0 1 2]))
-  (is (m/e== (minus 1 [1.0 2.0 3.0]) [0 -1 -2]))
-  ;;(is (m/e== (minus [1 2 3] (m/array [1 2 3]) [0 0 0])))) check that
-  (is (= (minus [1 2 3] (matrix [1 2 3])) (matrix [0 0 0])))
-  (is (= (minus 1) -1))
-  (is (= (minus [1.0 2.0 3.0]) (matrix [-1.0 -2.0 -3.0])))
-  (is (= (minus A) (matrix [[-1 -2 -3]
-                            [-4 -5 -6]
-                            [-7 -8 -9]
-                            [-10 -11 -12]]))))
+                                [-10 -11 -12]]))))
 
 
 (deftest matrix-mult-tests
