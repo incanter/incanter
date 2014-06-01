@@ -81,11 +81,11 @@
     ; you can filter the rows using Clojure's filter function
     (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
   "
-  ([data]
-     (let [data (m/matrix data)]
-       (if (== (m/dimensionality data) 1)
-         (m/column-matrix data)
-         data)))
+([data]
+   (case (m/dimensionality data)
+     0 data
+     1 (m/column-matrix data)
+     (m/matrix data)))
 
   ([data ^Integer ncol]
     (m/matrix (partition ncol data)))
