@@ -676,8 +676,11 @@
   type)
 
 (defmethod to-list ::matrix
- ([^clatrix.core.Matrix mat]
-  (m/to-nested-vectors mat)))
+  ([mat]
+     (if (or (m/row-matrix? mat)
+             (m/column-matrix? mat))
+       (m/to-vector mat)
+       (m/to-nested-vectors mat))))
 
 (defmethod to-list ::dataset
   [data]
