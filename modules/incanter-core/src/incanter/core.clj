@@ -415,7 +415,7 @@
   (plus 2 [1 2 3])
   "
   [& args]
-  (apply m/add args))
+  (apply m/add (map matrix args)))
 
 
 (defn minus
@@ -437,7 +437,7 @@
     (minus 2 [1 2 3])
     (minus [1 2 3])
   "
-  [& args] (apply m/sub args))
+  [& args] (apply m/sub (map matrix args)))
 
 (defn mult
   "
@@ -457,7 +457,7 @@
   (mult 2 [1 2 3])
   "
   [& args]
-  (apply m/emul args))
+  (apply m/emul (map matrix args)))
 
 
 (defn div
@@ -478,16 +478,7 @@
 
   (div [1 2 3]) ; returns [1 1/2 13]
   "
-   ([& args] (apply m/div args)))
-
-
-(defn pow  ;; TODO use jblas and fix meta
-  " This is an element-by-element exponent function, raising the first argument
-  by the exponents in the remaining arguments. Equivalent to R's ^ operator."
-  [& args]
-  (if (== 1 (count args)) ;; TODO: not needed in core.matrix 0.8.0 or above
-    (first args)
-    (apply m/pow args)))
+  ([& args] (apply m/div (map matrix args))))
 
 
 (defn safe-div  ;; TODO modify to work with matrices ?
