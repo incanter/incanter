@@ -2535,15 +2535,14 @@
    (let [n (count data)
          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
          mat (matrix 0 p p)
-         mat (m/coerce :clatrix mat)
          indices (if lower
                    (for [i (range p) j (range p) :when (<= j i)] [i j])
                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
-     (doseq [idx (range n)]
-      (let [[i j] (nth indices idx)]
-        (clx/set mat i j (nth data idx))
-        (clx/set mat j i (nth data idx))))
-     mat)))
+     (reduce (fn [acc idx]
+               (let [[i j] (nth indices idx)]
+                 (-> (m/mset acc i j (nth data idx))
+                     (m/mset j i (nth data idx)))))
+             (matrix 0 p p) (range n)))))
 
 (defn toeplitz
   "
