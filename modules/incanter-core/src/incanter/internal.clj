@@ -31,7 +31,7 @@
 
 (defn is-matrix
   "Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
-  ([obj] (clx/matrix? obj)))
+  ([obj] (m/matrix? obj)))
 
 (def double_arr_type (Class/forName "[D"))
 
@@ -78,7 +78,7 @@
   `(cond
      (and (number? ~A) (number? ~B))
      (~op ~A ~B)
-     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
+     (and (is-matrix ~A) (is-matrix ~B) (= (first (m/shape ~A)) 1) (= (m/shape ~A) (m/shape ~B)))
      (map ~op ~A ~B)
      (and (not (is-matrix ~A)) (not (is-matrix ~B)))
      (let [a# (if (number? ~A) (replicate (count ~B) ~A) ~A)
