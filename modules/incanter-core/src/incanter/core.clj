@@ -678,7 +678,8 @@
      (if (or (m/row-matrix? mat)
              (m/column-matrix? mat))
        (apply list (m/to-vector mat))
-       (apply list (m/rows mat)))))
+       (apply list (map #(apply list %)
+                        (m/to-nested-vectors mat))))))
 
 (defmethod to-list ::dataset
   [data]
