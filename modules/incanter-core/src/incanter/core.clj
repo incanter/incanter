@@ -37,10 +37,8 @@
         [clojure.pprint :only (print-table)])
   (:require [clatrix.core :as clx])
   (:require [clojure.core.matrix :as m])
-  (:import (clatrix.core Matrix)
-           (cern.jet.math.tdouble DoubleArithmetic)
-           (cern.colt.list.tdouble DoubleArrayList)
-           (cern.jet.stat.tdouble DoubleDescriptive Gamma)
+  (:import (cern.jet.math.tdouble DoubleArithmetic)
+           (cern.jet.stat.tdouble Gamma)
            (javax.swing JTable JScrollPane JFrame)
            (java.util Vector)))
 
@@ -152,7 +150,7 @@
     (m/diagonal-matrix m)))
 
 
-(defn ^Matrix trans
+(defn trans
   "
   Returns the transpose of the given matrix. Equivalent to R's t function
 
@@ -789,9 +787,9 @@
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
   "
-([^Matrix A ^Matrix B]
+([A B]
   (clx/solve A B))
-([^Matrix A]
+([A]
   (clx/i A)))
 
 (defn det
@@ -862,24 +860,19 @@
 (defn sum-of-squares
   "Returns the sum-of-squares of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
-      (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
+     (m/length-squared x)))
 
 
 (defn sum
   "Returns the sum of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
-      (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
+     (m/esum x)))
 
 
 (defn prod
   "Returns the product of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x))
-               [1]
-               (to-list x))]
-      (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
+     (m/ereduce * x)))
 
 
 
@@ -912,7 +905,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn ^Matrix decomp-cholesky
+(defn decomp-cholesky
   "
   Returns the Cholesky decomposition of the given matrix. Equivalent to R's
   chol function.
@@ -935,7 +928,7 @@
   References:
     http://en.wikipedia.org/wiki/Cholesky_decomposition
   "
-  [^Matrix mat]
+  [mat]
   (let [mat (m/coerce :clatrix mat)]
     (clx/cholesky mat)))
 
