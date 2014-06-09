@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>latex - Incanter 1.5.4 API documentation</title>
+    <title>latex - Incanter 1.5.5 API documentation</title>
     <link href="static/incanter.ico" rel="icon" />
     <link href="static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
@@ -27,7 +27,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.5.4</span> API</span><br />
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.5.5</span> API</span><br />
     <ul>
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
@@ -82,7 +82,7 @@ namespace.
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="latex">latex</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">1.5.4</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.5.5</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
 <br />Full namespace name: <span id="long-name">incanter.latex</span>
@@ -91,8 +91,7 @@ namespace.
 
 <pre id="namespace-docstr">This library is used to render LaTex Math equations, based
 on the jLateXMath library, and applying them incanter.charts as annotations
-and subtitles.
-         </pre>
+and subtitles.</pre>
 
 
 <br />
@@ -109,7 +108,8 @@ and subtitles.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; {:keys [color], :or {color darkGray}})
 </pre>
-    <pre id="var-docstr"> Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
+    <pre id="var-docstr">
+Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
 
 Arguments:
   chart -- the chart to add the polygon to.
@@ -122,14 +122,15 @@ Options:
 
 
 Examples:
-  (use '(incanter core charts stats latex))   
+  (use '(incanter core charts stats latex))
 
     (doto (function-plot pdf-normal -3 3)
       (add-latex 0 0.1 "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
-      view)</pre>
+      view)
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L84" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L79" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -137,8 +138,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; {:keys [color], :or {color darkGray}})
 </pre>
-    <pre id="var-docstr"> Adds the given LaTeX equation as a subtitle to the chart.
-
+    <pre id="var-docstr">
+Adds the given LaTeX equation as a subtitle to the chart.
 
 Options:
   :color (default java.awt.Color/darkGray) -- the text color
@@ -149,10 +150,11 @@ Examples:
 
   (doto (function-plot pdf-normal -3 3)
     (add-latex-subtitle "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
-    view)</pre>
+    view)
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L61" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L59" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -160,7 +162,8 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color background border], :or {color black, background white, border [5 5 5 5]}})
 </pre>
-    <pre id="var-docstr"> Returns the given LaTeX equation rendered as an java.awt.Image.
+    <pre id="var-docstr">
+Returns the given LaTeX equation rendered as an java.awt.Image.
 
 Options:
   :color (default java.awt.Color/black) -- the text color
@@ -168,7 +171,7 @@ Options:
   :border (default [5 5 5 5]) -- image border
 
 Examples:
-  (use '(incanter core charts stats latex))
+  (use '(incanter io core charts stats latex))
 
   (def latex-img (latex "\\frac{(a+b)^2} {(a-b)^2}"))
   (save latex-img "/tmp/latex-example1.png")
@@ -180,10 +183,11 @@ Examples:
                  a &amp; b &amp; c \\\\
                  d &amp; e &amp; f \\\\
                  g &amp; h &amp; i
-                 \\end{pmatrix}"))</pre>
+                 \\end{pmatrix}"))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L13" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L12" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -191,16 +195,18 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (to-latex mx &amp; {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline table-newline-suppress-last newline], :or {mxtype pmatrix, preamble , col-just [], row-names-tex-cmd [], hline false, table-newline \\, table-newline-suppress-last false, newline }})
 </pre>
-    <pre id="var-docstr">Convert an Incanter Matrix into a string of LaTeX commands to render it.
+    <pre id="var-docstr">
+Convert an Incanter Matrix into a string of LaTeX commands to render it.
 
 Options:
   :mxtype (default pmatrix) -- the type of matrix to output, see LaTeX documentation for other options.
 Example:
-    (use '(incanter core latex))
-    (view (latex (to-latex (matrix [[1 0][0 1]]))))</pre>
+  (use '(incanter core latex))
+  (view (latex (to-latex (matrix [[1 0][0 1]]))))
+</pre>
     
     
-    <a href="https://github.com/liebke/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L111" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L106" id="var-source">Source</a>
   </div>
 </div>
 

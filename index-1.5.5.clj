@@ -286,9 +286,9 @@
    :name "add-box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L410",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L410",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-box-plot",
    :doc
@@ -300,9 +300,9 @@
    :name "add-categories",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L473",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L473",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-categories",
    :doc
@@ -314,9 +314,9 @@
    :name "add-function",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L653",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L653",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-function",
    :doc
@@ -328,9 +328,9 @@
    :name "add-histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L359",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L359",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-histogram",
    :doc
@@ -342,9 +342,9 @@
    :name "add-image",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3182",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3182",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-image",
    :doc
@@ -356,9 +356,9 @@
    :name "add-lines",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L585",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L585",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-lines",
    :doc
@@ -370,9 +370,9 @@
    :name "add-parametric",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L719",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L719",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-parametric",
    :doc
@@ -384,9 +384,9 @@
    :name "add-pointer",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2988",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2988",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-pointer",
    :doc
@@ -398,9 +398,9 @@
    :name "add-points",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L777",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L777",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-points",
    :doc
@@ -412,9 +412,9 @@
    :name "add-polygon",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3120",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3120",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-polygon",
    :doc
@@ -424,9 +424,9 @@
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3932",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3932",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-subtitle",
    :namespace "incanter.charts",
@@ -439,9 +439,9 @@
    :name "add-text",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3075",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3075",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-text",
    :doc
@@ -453,9 +453,9 @@
    :name "area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2176",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2176",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/area-chart",
    :doc
@@ -467,9 +467,9 @@
    :name "bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2037",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2037",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/bar-chart",
    :doc
@@ -481,9 +481,9 @@
    :name "bland-altman-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3299",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3299",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/bland-altman-plot",
    :doc
@@ -495,9 +495,9 @@
    :name "box-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2653",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2653",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/box-plot",
    :doc
@@ -509,9 +509,9 @@
    :name "candle-stick-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1260",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1260",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/candle-stick-plot",
    :doc
@@ -523,9 +523,9 @@
    :name "clear-background",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L959",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L959",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/clear-background",
    :doc
@@ -537,9 +537,9 @@
    :name "dynamic-scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3590",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3590",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/dynamic-scatter-plot",
    :doc
@@ -551,9 +551,9 @@
    :name "dynamic-xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3557",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3557",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/dynamic-xy-plot",
    :doc
@@ -565,9 +565,9 @@
    :name "function-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2732",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2732",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/function-plot",
    :doc
@@ -579,9 +579,9 @@
    :name "get-series",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3381",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3381",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/get-series",
    :doc "get-series",
@@ -592,9 +592,9 @@
    :name "heat-map",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2914",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2914",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/heat-map",
    :doc
@@ -606,9 +606,9 @@
    :name "histogram",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1790",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1790",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/histogram",
    :doc
@@ -620,9 +620,9 @@
    :name "line-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1896",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1896",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/line-chart",
    :doc
@@ -634,9 +634,9 @@
    :name "log-axis",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L827",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L827",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/log-axis",
    :doc
@@ -648,9 +648,9 @@
    :name "parametric-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2799",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2799",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/parametric-plot",
    :doc
@@ -662,9 +662,9 @@
    :name "pie-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2558",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2558",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/pie-chart",
    :doc
@@ -676,9 +676,9 @@
    :name "qq-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3259",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3259",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/qq-plot",
    :doc
@@ -690,9 +690,9 @@
    :name "scatter-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1429",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1429",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/scatter-plot",
    :doc
@@ -704,9 +704,9 @@
    :name "scatter-plot-matrix",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1694",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1694",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/scatter-plot-matrix",
    :doc
@@ -718,9 +718,9 @@
    :name "set-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L930",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L930",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-alpha",
    :doc
@@ -730,9 +730,9 @@
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L865",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L865",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-axis",
    :namespace "incanter.charts",
@@ -745,9 +745,9 @@
    :name "set-background-alpha",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L944",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L944",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha",
    :doc
@@ -757,9 +757,9 @@
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L76",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L76",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-background-default",
    :namespace "incanter.charts",
@@ -776,9 +776,9 @@
    :name "set-point-size",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3699",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3699",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-point-size",
    :doc
@@ -790,9 +790,9 @@
    :name "set-stroke",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3626",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3626",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-stroke",
    :doc
@@ -804,9 +804,9 @@
    :name "set-stroke-color",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3671",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3671",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-stroke-color",
    :doc
@@ -818,9 +818,9 @@
    :name "set-theme",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L224",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L224",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-theme",
    :doc
@@ -830,9 +830,9 @@
    :file "modules/incanter-charts/src/incanter/charts.clj"}
   {:file "modules/incanter-charts/src/incanter/charts.clj",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L156",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L156",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-theme-bw",
    :namespace "incanter.charts",
@@ -845,9 +845,9 @@
    :name "set-title",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L973",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L973",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-title",
    :doc
@@ -859,9 +859,9 @@
    :name "set-x-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L987",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L987",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-x-label",
    :doc
@@ -873,9 +873,9 @@
    :name "set-x-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1015",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1015",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-x-range",
    :doc
@@ -887,9 +887,9 @@
    :name "set-y-label",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1001",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1001",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-y-label",
    :doc
@@ -901,9 +901,9 @@
    :name "set-y-range",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1036",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1036",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-y-range",
    :doc
@@ -917,9 +917,9 @@
    :name "slider",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3421",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3421",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/slider",
    :doc
@@ -931,9 +931,9 @@
    :name "sliders",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3496",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3496",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/sliders",
    :doc
@@ -946,9 +946,9 @@
    :name "sliders*",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3466",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3466",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/sliders*",
    :doc
@@ -960,9 +960,9 @@
    :name "stacked-area-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2313",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2313",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/stacked-area-chart",
    :doc
@@ -974,9 +974,9 @@
    :name "stacked-bar-chart",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2440",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L2440",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/stacked-bar-chart",
    :doc
@@ -988,9 +988,9 @@
    :name "time-series-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1315",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1315",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/time-series-plot",
    :doc
@@ -1002,9 +1002,9 @@
    :name "trace-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3210",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L3210",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/trace-plot",
    :doc
@@ -1016,9 +1016,9 @@
    :name "xy-plot",
    :namespace "incanter.charts",
    :source-url
-   "https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1154",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1154",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/xy-plot",
    :doc
@@ -2552,9 +2552,9 @@
    :name "->Beta-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L497",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L497",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Beta-rec",
    :doc
@@ -2566,9 +2566,9 @@
    :name "->Binomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L530",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L530",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Binomial-rec",
    :doc
@@ -2580,9 +2580,9 @@
    :name "->ChiSquare-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L561",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L561",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->ChiSquare-rec",
    :doc
@@ -2594,9 +2594,9 @@
    :name "->Combination",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L342",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L342",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Combination",
    :doc
@@ -2608,9 +2608,9 @@
    :name "->DoubleUniform-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L788",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L788",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->DoubleUniform-rec",
    :doc
@@ -2622,9 +2622,9 @@
    :name "->Exponential-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L591",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L591",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Exponential-rec",
    :doc
@@ -2636,9 +2636,9 @@
    :name "->F",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L620",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L620",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->F",
    :doc
@@ -2650,9 +2650,9 @@
    :name "->Gamma-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L662",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L662",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Gamma-rec",
    :doc
@@ -2664,9 +2664,9 @@
    :name "->NegativeBinomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L694",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L694",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->NegativeBinomial-rec",
    :doc
@@ -2678,9 +2678,9 @@
    :name "->Normal-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L456",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L456",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Normal-rec",
    :doc
@@ -2692,9 +2692,9 @@
    :name "->Poisson-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L727",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L727",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->Poisson-rec",
    :doc
@@ -2706,9 +2706,9 @@
    :name "->StudentT-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L757",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L757",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->StudentT-rec",
    :doc
@@ -2720,9 +2720,9 @@
    :name "->UniformInt",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L252",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L252",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/->UniformInt",
    :doc
@@ -2734,9 +2734,9 @@
    :name "beta-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L508",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L508",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/beta-distribution",
    :doc
@@ -2748,9 +2748,9 @@
    :name "binomial-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L539",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L539",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/binomial-distribution",
    :doc
@@ -2762,9 +2762,9 @@
    :name "chisq-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L570",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L570",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/chisq-distribution",
    :doc
@@ -2776,9 +2776,9 @@
    :name "combination-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L351",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L351",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/combination-distribution",
    :doc
@@ -2790,9 +2790,9 @@
    :name "exponential-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L600",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L600",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/exponential-distribution",
    :doc
@@ -2804,9 +2804,9 @@
    :name "f-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L641",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L641",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/f-distribution",
    :doc
@@ -2818,9 +2818,9 @@
    :name "gamma-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L672",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L672",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/gamma-distribution",
    :doc
@@ -2832,9 +2832,9 @@
    :name "integer-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L269",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L269",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/integer-distribution",
    :doc
@@ -2846,9 +2846,9 @@
    :name "map->Beta-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L497",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L497",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Beta-rec",
    :doc
@@ -2860,9 +2860,9 @@
    :name "map->Binomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L530",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L530",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Binomial-rec",
    :doc
@@ -2874,9 +2874,9 @@
    :name "map->ChiSquare-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L561",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L561",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->ChiSquare-rec",
    :doc
@@ -2888,9 +2888,9 @@
    :name "map->Combination",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L342",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L342",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Combination",
    :doc
@@ -2902,9 +2902,9 @@
    :name "map->DoubleUniform-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L788",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L788",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->DoubleUniform-rec",
    :doc
@@ -2916,9 +2916,9 @@
    :name "map->Exponential-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L591",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L591",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Exponential-rec",
    :doc
@@ -2930,9 +2930,9 @@
    :name "map->F",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L620",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L620",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->F",
    :doc
@@ -2944,9 +2944,9 @@
    :name "map->Gamma-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L662",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L662",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Gamma-rec",
    :doc
@@ -2958,9 +2958,9 @@
    :name "map->NegativeBinomial-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L694",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L694",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->NegativeBinomial-rec",
    :doc
@@ -2972,9 +2972,9 @@
    :name "map->Normal-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L456",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L456",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Normal-rec",
    :doc
@@ -2986,9 +2986,9 @@
    :name "map->Poisson-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L727",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L727",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->Poisson-rec",
    :doc
@@ -3000,9 +3000,9 @@
    :name "map->StudentT-rec",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L757",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L757",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->StudentT-rec",
    :doc
@@ -3014,9 +3014,9 @@
    :name "map->UniformInt",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L252",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L252",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/map->UniformInt",
    :doc
@@ -3028,9 +3028,9 @@
    :name "neg-binomial-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L705",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L705",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/neg-binomial-distribution",
    :doc
@@ -3042,9 +3042,9 @@
    :name "normal-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L470",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L470",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/normal-distribution",
    :doc
@@ -3056,9 +3056,9 @@
    :name "poisson-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L736",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L736",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/poisson-distribution",
    :doc
@@ -3070,9 +3070,9 @@
    :name "roulette-wheel",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L198",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L198",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/roulette-wheel",
    :doc
@@ -3084,9 +3084,9 @@
    :name "t-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L767",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L767",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/t-distribution",
    :doc
@@ -3098,9 +3098,9 @@
    :name "test-statistic-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L380",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L380",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/test-statistic-distribution",
    :doc
@@ -3112,9 +3112,9 @@
    :name "uniform-distribution",
    :namespace "incanter.distributions",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L799",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L799",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/uniform-distribution",
    :doc
@@ -3228,9 +3228,9 @@
    :name "UniformInt"}
   {:file "modules/incanter-core/src/incanter/distributions.clj",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/8b31ba6e6ccbfaadc7f375a9851fbdceb6fc99e9/modules/incanter-core/src/incanter/distributions.clj#L31",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/distributions.clj#L31",
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Distribution",
    :namespace "incanter.distributions",
@@ -3691,29 +3691,29 @@
    :name "auto-correlation",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1586",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1585",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/auto-correlation",
    :doc
    "\nReturns the auto-correlation of x with given lag, mean, and variance.\nIf no mean or variance is provided, the they are calculated from x.\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n",
    :var-type "function",
-   :line 1586,
+   :line 1585,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([coll]),
    :name "benford-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2562",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2561",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/benford-test",
    :doc
    "\nPerforms Benford's Law test using chisq-test.\n\nArgument:\ncoll: -- a sequence of numbers\n\nReturns:\n  :X-sq -- the Pearson X-squared test statistics\n  :p-value -- the p-value for the test statistic\n  :df -- the degress of freedom\n\nReference:\nhttp://data-sorcery.org/2009/06/21/chi-square-goodness-of-fit/\nhttp://en.wikipedia.org/wiki/Benford%27s_Law\n",
    :var-type "function",
-   :line 2562,
+   :line 2561,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([data
@@ -3727,29 +3727,29 @@
    :name "bootstrap",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1739",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1738",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/bootstrap",
    :doc
    "\nReturns a bootstrap sample of the given statistic on the given data.\n\nArguments:\n  data -- vector of data to resample from\n  statistic -- a function that returns a value given a vector of data\n\nOptions:\n  :size -- the number of bootstrap samples to return\n  :smooth -- (default false) smoothing option\n  :smooth-sd -- (default (/ (sqrt (count data)))) determines the standard\n                deviation of the noise to use for smoothing\n  :replacement -- (default true) determines if sampling of the data\n                  should be done with replacement\n\n\nReferences:\n  1. Clifford E. Lunneborg, Data Analysis by Resampling Concepts and Applications, 2000, pages 105-117\n  2. http://en.wikipedia.org/wiki/Bootstrapping_(statistics)\n\n\nExamples:\n\n  ;; example from Data Analysis by Resampling Concepts and Applications\n  ;; Clifford E. Lunneborg (pages 119-122)\n\n  (use '(incanter core stats charts))\n\n  ;; weights (in grams) of 50 randoincanter. sampled bags of preztels\n  (def weights [464 447 446 454 450 457 450 442\n                433 452 449 454 450 438 448 449\n                457 451 456 452 450 463 464 453\n                452 447 439 449 468 443 433 460\n                452 447 447 446 450 459 466 433\n                445 453 454 446 464 450 456 456\n                447 469])\n\n  ;; calculate the sample median, 450\n  (median weights)\n\n  ;; generate bootstrap sample\n  (def t* (bootstrap weights median :size 2000))\n\n  ;; view histogram of bootstrap histogram\n  (view (histogram t*))\n\n  ;; calculate the mean of the bootstrap median ~ 450.644\n  (mean t*)\n\n  ;; calculate the standard error ~ 1.083\n  (def se (sd t*))\n\n  ;; 90% standard normal CI ~ (448.219 451.781)\n  (plus (median weights) (mult (quantile-normal [0.05 0.95]) se))\n\n  ;; 90% symmetric percentile CI ~ (449.0 452.5)\n  (quantile t* :probs [0.05 0.95])\n\n\n  ;; 90% non-symmetric percentile CI ~ (447.5 451.0)\n  (minus (* 2 (median weights)) (quantile t* :probs [0.95 0.05]))\n\n  ;; calculate bias\n  (- (mean t*) (median weights)) ;; ~ 0.644\n\n  ;; example with smoothing\n  ;; Newcomb's speed of light data\n\n  (use '(incanter core stats charts))\n\n  ;; A numeric vector giving the Third Series of measurements of the\n  ;; passage time of light recorded by Newcomb in 1882. The given\n  ;; values divided by 1000 plus 24 give the time in millionths of a\n  ;; second for light to traverse a known distance. The 'true' value is\n  ;; now considered to be 33.02.\n\n  (def speed-of-light [28 -44  29  30  24  28  37  32  36  27  26  28  29\n                       26  27  22  23  20  25 25  36  23  31  32  24  27\n                       33  16  24  29  36  21  28  26  27  27  32  25 28\n                       24  40  21  31  32  28  26  30  27  26  24  32  29\n                       34  -2  25  19  36 29  30  22  28  33  39  25  16  23])\n\n  ;; view histogram of data to see outlier observations\n  (view (histogram speed-of-light :nbins 30))\n\n  (def samp (bootstrap speed-of-light median :size 10000))\n  (view (histogram samp :density true :nbins 30))\n  (mean samp)\n  (quantile samp :probs [0.025 0.975])\n\n  (def smooth-samp (bootstrap speed-of-light median :size 10000 :smooth true))\n  (view (histogram smooth-samp :density true :nbins 30))\n  (mean smooth-samp)\n  (quantile smooth-samp :probs [0.025 0.975])\n",
    :var-type "function",
-   :line 1739,
+   :line 1738,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([col ds]),
    :name "category-col-summarizer",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2610",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2609",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/category-col-summarizer",
    :doc
    "Returns a summarizer function which takes a category column and returns a list of the top 5 columns by volume, and a\ncount of remaining rows",
    :var-type "function",
-   :line 2610,
+   :line 2609,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -3759,15 +3759,15 @@
    :name "cdf-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L477",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L476",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-beta",
    :doc
    "\nReturns the Beta cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pbeta function.\n\nOptions:\n  :alpha (default 1)\n  :beta (default 1)\n  :lower-tail (default true)\n\nSee also:\n    pdf-beta and sample-beta\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html\n    http://en.wikipedia.org/wiki/Beta_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-beta 0.5 :alpha 1 :beta 2)\n    (cdf-beta 0.5 :alpha 1 :beta 2 :lower-tail false)\n",
    :var-type "function",
-   :line 477,
+   :line 476,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -3777,58 +3777,58 @@
    :name "cdf-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1151",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1150",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-binomial",
    :doc
    "\nReturns the Binomial cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pbinom\n\nOptions:\n  :size (default 1)\n  :prob (default 1/2)\n  :lower-tail (default true)\n\nSee also:\n    pdf-binomial and sample-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html\n    http://en.wikipedia.org/wiki/Binomial_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-binomial 10 :prob 1/4 :size 20)\n",
    :var-type "function",
-   :line 1151,
+   :line 1150,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x & {:keys [df lower-tail?], :or {df 1, lower-tail? true}}]),
    :name "cdf-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L744",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L743",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-chisq",
    :doc
    "\nReturns the Chi Square cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pchisq function.\n\nOptions:\n  :df (default 1)\n  :lower-tail (default true)\n\nSee also:\n    pdf-chisq and sample-chisq\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html\n    http://en.wikipedia.org/wiki/Chi_square_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-chisq 5.0 :df 2)\n    (cdf-chisq 5.0 :df 2 :lower-tail false)\n",
    :var-type "function",
-   :line 744,
+   :line 743,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "cdf-empirical",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1437",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1436",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-empirical",
    :doc
    "\nReturns a step-function representing the empirical cdf of the given data.\nEquivalent to R's ecdf function.\n\nThe following description is from the ecdf help in R: The e.c.d.f.\n(empirical cumulative distribution function) Fn is a step function\nwith jumps i/n at observation values, where i is the number of tied\nobservations at that value.  Missing values are ignored.\n\nFor observations 'x'= (x1,x2, ... xn), Fn is the fraction of\nobservations less or equal to t, i.e.,\n\nFn(t) = #{x_i <= t} / n  =  1/n sum(i=1,n) Indicator(xi <= t).\n\n\nExamples:\n  (use '(incanter core stats charts))\n\n  (def exam1 [192 160 183 136 162 165 181 188 150 163 192 164 184\n              189 183 181 188 191 190 184 171 177 125 192 149 188\n              154 151 159 141 171 153 169 168 168 157 160 190 166 150])\n\n  ;; the ecdf function returns an empirical cdf function for the given data\n  (def ecdf (cdf-empirical exam1))\n\n  ;; plot the data's empirical cdf\n  (view (scatter-plot exam1 (map ecdf exam1)))\n",
    :var-type "function",
-   :line 1437,
+   :line 1436,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [rate], :or {rate 1}}]),
    :name "cdf-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L954",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L953",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-exp",
    :doc
    "\nReturns the Exponential cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pexp\n\nOptions:\n  :rate (default 1)\n\nSee also:\n    pdf-exp and sample-exp\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html\n    http://en.wikipedia.org/wiki/Exponential_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-exp 2.0 :rate 1/2)\n",
    :var-type "function",
-   :line 954,
+   :line 953,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -3838,15 +3838,15 @@
    :name "cdf-f",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L142",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L141",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-f",
    :doc
    "\nReturns the F-distribution cdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pf function.\n\nOptions:\n  :df1 (default 1)\n  :df2 (default 1)\n  :lower-tail? (default true)\n\nSee also:\n    pdf-f and quantile-f\n\nReferences:\n    http://en.wikipedia.org/wiki/F_distribution\n    http://mathworld.wolfram.com/F-Distribution.html\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-f 1.0 :df1 5 :df2 2)\n",
    :var-type "function",
-   :line 142,
+   :line 141,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -3856,15 +3856,15 @@
    :name "cdf-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L655",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L654",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-gamma",
    :doc
    "\nReturns the Gamma cdf for the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pgamma function.\n\nOptions:\n  :shape (k) (default 1)\n  :scale (θ) (default 1 or 1/rate, if :rate is specified)\n  :rate  (β) (default 1/scale, if :scale is specified)\n  :lower-tail (default true)\n\nSee also:\n    pdf-gamma and sample-gamma\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html\n    http://en.wikipedia.org/wiki/Gamma_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-gamma 10 :shape 1 :scale 2)\n    (cdf-gamma 3 :shape 1 :lower-tail false)\n",
    :var-type "function",
-   :line 655,
+   :line 654,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -3874,29 +3874,29 @@
    :name "cdf-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1376",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1375",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-neg-binomial",
    :doc
    "\nReturns the Negative Binomial cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dnbinom\n\nOptions:\n  :size (default 10)\n  :prob (default 1/2)\n  :lower-tail? (default true)\n\nSee also:\n    pdf-neg-binomial and sample-neg-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html\n    http://en.wikipedia.org/wiki/Negative_binomial_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-neg-binomial 10 :prob 1/2 :size 20)\n",
    :var-type "function",
-   :line 1376,
+   :line 1375,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "cdf-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L215",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L214",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-normal",
    :doc
    "\nReturns the Normal cdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's pnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nSee also:\n    pdf-normal, quantile-normal, sample-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))\n",
    :var-type "function",
-   :line 215,
+   :line 214,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -3905,826 +3905,826 @@
    :name "cdf-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1288",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1287",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-poisson",
    :doc
    "\nReturns the Poisson cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's ppois\n\nOptions:\n  :lambda (default 1)\n  :lower-tail (default true)\n\nSee also:\n    pdf-poisson and sample-poisson\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html\n    http://en.wikipedia.org/wiki/Poisson_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-poisson 5 :lambda 10)\n",
    :var-type "function",
-   :line 1288,
+   :line 1287,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x & {:keys [df lower-tail?], :or {df 1, lower-tail? true}}]),
    :name "cdf-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L830",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L829",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-t",
    :doc
    "\nReturns the Student's t cdf for the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's pt function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    pdf-t, quantile-t, and sample-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-t 1.2 :df 10)\n",
    :var-type "function",
-   :line 830,
+   :line 829,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [min max], :or {min 0.0, max 1.0}}]),
    :name "cdf-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L387",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L386",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-uniform",
    :doc
    "\nReturns the Uniform cdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's punif function.\n\nOptions:\n  :min (default 0)\n  :max (default 1)\n\nSee also:\n    pdf-uniform and sample-uniform\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html\n    http://en.wikipedia.org/wiki/Uniform_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-uniform 5)\n    (cdf-uniform 5 :min 1 :max 10)\n",
    :var-type "function",
-   :line 387,
+   :line 386,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "cdf-weibull",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L567",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L566",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cdf-weibull",
    :doc
    "\nReturns the Weibull cdf for the given value of x. It will return a sequence\nof values, if x is a sequence.\n\nOptions:\n  :shape (default 1)\n  :scale (default 1)\n\nSee also:\n    pdf-weibull and sample-weibull\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html\n    http://en.wikipedia.org/wiki/Weibull_distribution\n    http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\nExample:\n    (cdf-weibull 10 :shape 1 :scale 0.2)\n",
    :var-type "function",
-   :line 567,
+   :line 566,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "chebyshev-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3205",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3204",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/chebyshev-distance",
    :doc
    "In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.",
    :var-type "function",
-   :line 3205,
+   :line 3204,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([& {:keys [x y correct table probs freq], :or {correct true}}]),
    :name "chisq-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2399",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2398",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/chisq-test",
    :doc
    "\nPerforms chi-squared contingency table tests and goodness-of-fit tests.\n\nIf the optional argument :y is not provided then a goodness-of-fit test\nis performed. In this case, the hypothesis tested is whether the\npopulation probabilities equal those in :probs, or are all equal if\n:probs is not given.\n\nIf :y is provided, it must be a sequence of integers that is the\nsame length as x. A contingency table is computed from x and :y.\nThen, Pearson's chi-squared test of the null hypothesis that the joint\ndistribution of the cell counts in a 2-dimensional contingency\ntable is the product of the row and column marginals is performed.\nBy default the Yates' continuity correction for 2x2 contingency\ntables is performed, this can be disabled by setting the :correct\noption to false.\n\n\nOptions:\n  :x -- a sequence of numbers.\n  :y -- a sequence of numbers\n  :table -- a contingency table. If one dimensional, the test is a goodness-of-fit\n  :probs (when (nil? y) -- (repeat n-levels (/ n-levels)))\n  :freq (default nil) -- if given, these are rescaled to probabilities\n  :correct (default true) -- use Yates' correction for continuity for 2x2 contingency tables\n\n\nReturns:\n  :X-sq -- the Pearson X-squared test statistics\n  :p-value -- the p-value for the test statistic\n  :df -- the degress of freedom\n\n\nExamples:\n  (use '(incanter core stats))\n  (chisq-test :x [1 2 3 2 3 2 4 3 5]) ;; X-sq 2.6667\n  ;; create a one-dimensional table of this data\n  (def table (matrix [1 3 3 1 1]))\n  (chisq-test :table table) ;; X-sq 2.6667\n  (chisq-test :table (trans table)) ;; throws exception\n\n  (chisq-test :x [1 0 0 0  1 1 1 0 0 1 0 0 1 1 1 1]) ;; 0.25\n\n  (use '(incanter core stats datasets))\n  (def math-prog (to-matrix (get-dataset :math-prog)))\n  (def x (sel math-prog :cols 1))\n  (def y (sel math-prog :cols 2))\n  (chisq-test :x x :y y) ;; X-sq = 1.24145, df=1, p-value = 0.26519\n  (chisq-test :x x :y y :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617\n\n  (def table (matrix [[31 12] [9 8]]))\n  (chisq-test :table table) ;; X-sq = 1.24145, df=1, p-value = 0.26519\n  (chisq-test :table table :correct false) ;; X-sq = 2.01094, df=1, p-value = 0.15617\n  ;; use the detabulate function to create data rows corresponding to the table\n  (def detab (detabulate :table table))\n  (chisq-test :x (sel detab :cols 0) :y (sel detab :cols 1))\n\n  ;; look at the hair-eye-color data\n  ;; turn the count data for males into a contingency table\n  (def male (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16)) 4))\n  (chisq-test :table male) ;; X-sq = 41.280, df = 9, p-value = 4.44E-6\n  ;; turn the count data for females into a contingency table\n  (def female (matrix (sel (get-dataset :hair-eye-color) :cols 3 :rows (range 16 32)) 4))\n  (chisq-test :table female) ;; X-sq = 106.664, df = 9, p-value = 7.014E-19,\n\n\n  ;; supply probabilities to goodness-of-fit test\n  (def table [89 37 30 28 2])\n  (def probs [0.40 0.20 0.20 0.19 0.01])\n  (chisq-test :table table :probs probs) ;; X-sq = 5.7947, df = 4, p-value = 0.215\n\n  ;; use frequencies instead of probabilities\n  (def freq [40 20 20 15 5])\n  (chisq-test :table table :freq freq) ;; X-sq = 9.9901, df = 4, p-value = 0.04059\n\n\n\nReferences:\n  http://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm\n  http://en.wikipedia.org/wiki/Pearson's_chi-square_test\n  http://en.wikipedia.org/wiki/Yates'_chi-square_test\n",
    :var-type "function",
-   :line 2399,
+   :line 2398,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([col-type]),
    :name "choose-singletype-col-summarizer",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2618",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2617",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/choose-singletype-col-summarizer",
    :doc "Takes in a type, and returns a suitable column summarizer",
    :var-type "function",
-   :line 2618,
+   :line 2617,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "concordant-pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3056",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3055",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/concordant-pairs",
    :doc "http://en.wikipedia.org/wiki/Concordant_pairs",
    :var-type "function",
-   :line 3056,
+   :line 3055,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([[[a1 b1] [a2 b2] & more]]),
    :name "concordant?",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3046",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3045",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/concordant?",
    :doc
    "\nGiven two pairs of numbers, checks if they are concordant.\n",
    :var-type "function",
-   :line 3046,
+   :line 3045,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x y] [mat]),
    :name "correlation",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1560",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1559",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/correlation",
    :doc
    "\nReturns the sample correlation of x and y, or the correlation\nmatrix of the given matrix.\n\nExamples:\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Correlation\n",
    :var-type "function",
-   :line 1560,
+   :line 1559,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "correlation-linearity-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2928",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2927",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/correlation-linearity-test",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Correlation_ratio\nIt is worth noting that if the relationship between values of  and values of\noverline y_x is linear (which is certainly true when there are only two\npossibilities for x) this will give the same result as the square of the\ncorrelation coefficient, otherwise the correlation ratio will be larger in magnitude.\nIt can therefore be used for judging non-linear relationships.\n",
    :var-type "function",
-   :line 2928,
+   :line 2927,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& xs]),
    :name "correlation-ratio",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2878",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2877",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/correlation-ratio",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Correlation_ratio\n\nIn statistics, the correlation ratio is a measure of the relationship between\nthe statistical dispersion within individual categories and the\ndispersion across the whole population or sample. i.e. the weighted variance\nof the category means divided by the variance of all samples.\n\nExample\n\nSuppose there is a distribution of test scores in three topics (categories):\n\n  * Algebra: 45, 70, 29, 15 and 21 (5 scores)\n  * Geometry: 40, 20, 30 and 42 (4 scores)\n  * Statistics: 65, 95, 80, 70, 85 and 73 (6 scores).\n\nThen the subject averages are 36, 33 and 78, with an overall average of 52.\n\nThe sums of squares of the differences from the subject averages are 1952\nfor Algebra, 308 for Geometry and 600 for Statistics, adding to 2860,\nwhile the overall sum of squares of the differences from the overall average\nis 9640. The difference between these of 6780 is also the weighted sum of the\nsquare of the differences between the subject averages and the overall average:\n\n  5(36 − 52)2 + 4(33 − 52)2 + 6(78 − 52)2 = 6780\n\nThis gives\n\n  eta^2 =6780/9640=0.7033\n\nsuggesting that most of the overall dispersion is a result of differences\nbetween topics, rather than within topics. Taking the square root\n\n  eta = sqrt 6780/9640=0.8386\n\nObserve that for η = 1 the overall sample dispersion is purely due to dispersion\namong the categories and not at all due to dispersion within the individual\ncategories. For a quick comprehension simply imagine all Algebra, Geometry,\nand Statistics scores being the same respectively, e.g. 5 times 36, 4 times 33, 6 times 78.\n",
    :var-type "function",
-   :line 2878,
+   :line 2877,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "cosine-similarity",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3231",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3230",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cosine-similarity",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Cosine_similarity\nhttp://www.appliedsoftwaredesign.com/cosineSimilarityCalculator.php\n\nThe Cosine Similarity of two vectors a and b is the ratio: a dot b / ||a|| ||b||\n\nLet d1 = {2 4 3 1 6}\nLet d2 = {3 5 1 2 5}\n\nCosine Similarity (d1, d2) =  dot(d1, d2) / ||d1|| ||d2||\n\ndot(d1, d2) = (2)*(3) + (4)*(5) + (3)*(1) + (1)*(2) + (6)*(5) = 61\n\n||d1|| = sqrt((2)^2 + (4)^2 + (3)^2 + (1)^2 + (6)^2) = 8.12403840464\n\n||d2|| = sqrt((3)^2 + (5)^2 + (1)^2 + (2)^2 + (5)^2) = 8\n\nCosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)\n                           = 61 / 64.9923072371\n                           = 0.938572618717\n",
    :var-type "function",
-   :line 3231,
+   :line 3230,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x y] [mat]),
    :name "covariance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1511",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1510",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/covariance",
    :doc
    "\nReturns the sample covariance of x and y.\n\nExamples:\n  ;; create some data that covaries\n  (def x (sample-normal 100))\n  (def err (sample-normal 100))\n  (def y (plus (mult 5 x) err))\n  ;; estimate the covariance of x and y\n  (covariance x y)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Covariance\n",
    :var-type "function",
-   :line 1511,
+   :line 1510,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([coll]),
    :name "cumulative-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1863",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1862",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/cumulative-mean",
    :doc
    "\nReturns a sequence of cumulative means for the given collection. For instance\nThe first value equals the first value of the argument, the second value is\nthe mean of the first two arguments, the third is the mean of the first three\narguments, etc.\n\nExamples:\n  (cumulative-mean (sample-normal 100))\n",
    :var-type "function",
-   :line 1863,
+   :line 1862,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& {:keys [table row-labels col-labels]}]),
    :name "detabulate",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2727",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2726",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/detabulate",
    :doc
    "\nTake a contingency table of counts and returns a matrix of observations.\n\nExamples:\n\n  (use '(incanter core stats datasets))\n\n  (def by-gender (group-on (get-dataset :hair-eye-color) 2))\n  (def table (matrix (sel (first by-gender) :cols 3) 4))\n\n  (detabulate :table table)\n  (tabulate (detabulate :table table))\n\n  ;; example 2\n  (def data (matrix [[1 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [0 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [1 1]]))\n  (tabulate data)\n\n  (tabulate (detabulate :table (:table (tabulate data))))\n",
    :var-type "function",
-   :line 2727,
+   :line 2726,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "dice-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3316",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3315",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/dice-coefficient",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Dice%27s_coefficient\nDice's coefficient (also known as the Dice coefficient)\nis a similarity measure related to the Jaccard index.\n",
    :var-type "function",
-   :line 3316,
+   :line 3315,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "dice-coefficient-str",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3342",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3341",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/dice-coefficient-str",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Dice%27s_coefficient\n\nWhen taken as a string similarity measure, the coefficient\nmay be calculated for two strings, x and y using bigrams.\nHere nt is the number of character bigrams found in both strings,\nnx is the number of bigrams in string x and\nny is the number of bigrams in string y.\nFor example, to calculate the similarity between:\n\n  night\n  nacht\n\nWe would find the set of bigrams in each word:\n\n  {ni,ig,gh,ht}\n  {na,ac,ch,ht}\n\nEach set has four elements, and the intersection of these two sets has only one element: ht.\n\nPlugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.\n",
    :var-type "function",
-   :line 3342,
+   :line 3341,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "discordant-pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3066",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3065",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/discordant-pairs",
    :doc "http://en.wikipedia.org/wiki/Discordant_pairs",
    :var-type "function",
-   :line 3066,
+   :line 3065,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "euclidean-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3191",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3190",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/euclidean-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Euclidean_distance\n\nthe Euclidean distance or Euclidean metric is the ordinary distance\nbetween two points that one would measure with a ruler, and is\ngiven by the Pythagorean formula. By using this formula as distance,\nEuclidean space (or even any inner product space) becomes a metric space.\nThe associated norm is called the Euclidean norm.\nOlder literature refers to the metric as Pythagorean metric.\n",
    :var-type "function",
-   :line 3191,
+   :line 3190,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x y]),
    :name "f-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2275",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2274",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/f-test",
    :doc
    "\nTest for different variances between 2 samples\n\nArgument:\n  x : 1st sample to test\n  y : 2nd sample to test\n\nOptions:\n\nReferences:\n  http://en.wikipedia.org/wiki/F-test\n  http://people.richland.edu/james/lecture/m170/ch13-f.html\n",
    :var-type "function",
-   :line 2275,
+   :line 2274,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "gamma-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3088",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3087",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/gamma-coefficient",
    :doc
    "\nhttp://www.statsdirect.com/help/nonparametric_methods/kend.htm\nThe gamma coefficient is given as a measure of association that\nis highly resistant to tied data (Goodman and Kruskal, 1963)\n",
    :var-type "function",
-   :line 3088,
+   :line 3087,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "hamming-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3372",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3371",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/hamming-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Hamming_distance\n\nIn information theory, the Hamming distance between two strings of equal\nlength is the number of positions at which the corresponding symbols are different.\nPut another way, it measures the minimum number of\nsubstitutions required to change one string into the other,\nor the number of errors that transformed one string into the other.\n",
    :var-type "function",
-   :line 3372,
+   :line 3371,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([pred coll]),
    :name "indicator",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L74",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L73",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/indicator",
    :doc
    "\nReturns a sequence of ones and zeros, where ones\nare returned when the given predicate is true for\ncorresponding element in the given collection, and\nzero otherwise.\n\nExamples:\n  (use 'incanter.stats)\n\n  (indicator #(neg? %) (sample-normal 10))\n\n  ;; return the sum of the positive values in a normal sample\n  (def x (sample-normal 100))\n  (sum (mult x (indicator #(pos? %) x)))\n",
    :var-type "function",
-   :line 74,
+   :line 73,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "jaccard-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3302",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3301",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/jaccard-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Jaccard_index\nThe Jaccard distance, which measures dissimilarity between sample sets,\nis complementary to the Jaccard coefficient and is obtained by subtracting\nthe Jaccard coefficient from 1, or, equivalently, by dividing the difference\nof the sizes of the union and the intersection of two sets by the size of the union.\n",
    :var-type "function",
-   :line 3302,
+   :line 3301,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "jaccard-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3286",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3285",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/jaccard-index",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Jaccard_index\n\nThe Jaccard index, also known as the Jaccard similarity coefficient\n(originally coined coefficient de communauté by Paul Jaccard), is a\nstatistic used for comparing the similarity and diversity of sample sets.\n\nThe Jaccard coefficient measures similarity between sample sets,\nand is defined as the size of the intersection divided by the\nsize of the union of the sample sets.\n",
    :var-type "function",
-   :line 3286,
+   :line 3285,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "kendalls-tau",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2998",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2997",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/kendalls-tau",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient\nhttp://www.statsdirect.com/help/nonparametric_methods/kend.htm\nhttp://mail.scipy.org/pipermail/scipy-dev/2009-March/011589.html\nbest explanation and example is in \"cluster analysis for researchers\" page 165.\nhttp://www.amazon.com/Cluster-Analysis-Researchers-Charles-Romesburg/dp/1411606175\n",
    :var-type "function",
-   :line 2998,
+   :line 2997,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([]),
    :name "kendalls-w",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3099",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3098",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/kendalls-w",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Kendall%27s_W\nhttp://faculty.chass.ncsu.edu/garson/PA765/friedman.htm\n\nSuppose that object i is given the rank ri,j by judge number j, where there\nare in total n objects and m judges. Then the total rank given to object i is\n\n  Ri = sum Rij\n\nand the mean value of these total ranks is\n\n  Rbar = 1/2 m (n + 1)\n\nThe sum of squared deviations, S, is defined as\n\n  S=sum1-n (Ri - Rbar)\n\nand then Kendall's W is defined as[1]\n\n  W= 12S / m^2(n^3-n)\n\nIf the test statistic W is 1, then all the survey respondents have been\nunanimous, and each respondent has assigned the same order to the list\nof concerns. If W is 0, then there is no overall trend of agreement among\nthe respondents, and their responses may be regarded as essentially random.\nIntermediate values of W indicate a greater or lesser degree of unanimity\namong the various responses.\n\nLegendre[2] discusses a variant of the W statistic which accommodates ties\nin the rankings and also describes methods of making significance tests based on W.\n\n[{:observation [1 2 3]} {} ... {}] -> W\n",
    :var-type "function",
-   :line 3099,
+   :line 3098,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "kurtosis",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1621",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1620",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/kurtosis",
    :doc
    "\nReturns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\"\nof the probability distribution of a real-valued random variable. Higher kurtosis\nmeans more of the variance is due to infrequent extreme deviations, as opposed to\nfrequent modestly-sized deviations.\" (Wikipedia)\n\nExamples:\n\n  (kurtosis (sample-normal 100000)) ;; approximately 0\n  (kurtosis (sample-gamma 100000)) ;; approximately 6\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Kurtosis\n",
    :var-type "function",
-   :line 1621,
+   :line 1620,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b q]),
    :name "lee-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3393",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3392",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/lee-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Lee_distance\n\nIn coding theory, the Lee distance is a distance between\ntwo strings x1x2...xn and y1y2...yn of equal length n\nover the q-ary alphabet {0,1,…,q-1} of size q >= 2. It is metric.\n\nIf q = 2 or q = 3 the Lee distance coincides with the Hamming distance.\n\nThe metric space induced by the Lee distance is a discrete analog of the elliptic space.\n",
    :var-type "function",
-   :line 3393,
+   :line 3392,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "levenshtein-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3455",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3454",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/levenshtein-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Levenshtein_distance\n\ninternal representation is a table d with m+1 rows and n+1 columns\n\nwhere m is the length of a and m is the length of b.\n\nIn information theory and computer science, the Levenshtein distance\nis a metric for measuring the amount of difference between two sequences\n(i.e., the so called edit distance).\nThe Levenshtein distance between two strings is given by the minimum number\nof operations needed to transform one string into the other,\nwhere an operation is an insertion, deletion, or substitution of a single character.\n\nFor example, the Levenshtein distance between \"kitten\" and \"sitting\" is 3,\nsince the following three edits change one into the other,\nand there is no way to do it with fewer than three edits:\n\n 1. kitten → sitten (substitution of 's' for 'k')\n 2. sitten → sittin (substitution of 'i' for 'e')\n 3. sittin → sitting (insert 'g' at the end).\n\nThe Levenshtein distance has several simple upper and lower bounds that are useful\nin applications which compute many of them and compare them. These include:\n\n  * It is always at least the difference of the sizes of the two strings.\n  * It is at most the length of the longer string.\n  * It is zero if and only if the strings are identical.\n  * If the strings are the same size, the Hamming distance is an upper bound on the Levenshtein distance.\n",
    :var-type "function",
-   :line 3455,
+   :line 3454,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([y x & {:keys [intercept], :or {intercept true}}]),
    :name "linear-model",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2037",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2036",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/linear-model",
    :doc
    "\nReturns the results of performing a OLS linear regression of y on x.\n\nArguments:\n  y is a vector (or sequence) of values for the dependent variable\n  x is a vector or matrix of values for the independent variables\n\nOptions:\n  :intercept (default true) indicates weather an intercept term should be included\n\nReturns:\n  a map, of type ::linear-model, containing:\n    :design-matrix -- a matrix containing the independent variables, and an intercept columns\n    :coefs -- the regression coefficients\n    :t-tests -- t-test values of coefficients\n    :t-probs -- p-values for t-test values of coefficients\n    :coefs-ci -- 95% percentile confidence interval\n    :fitted -- the predicted values of y\n    :residuals -- the residuals of each observation\n    :std-errors -- the standard errors of the coeffients\n    :sse -- the sum of squared errors, also called the residual sum of squares\n    :ssr -- the regression sum of squares, also called the explained sum of squares\n    :sst -- the total sum of squares (proportional to the sample variance)\n    :r-square -- coefficient of determination\n\nExamples:\n  (use '(incanter core stats datasets charts))\n  (def iris (to-matrix (get-dataset :iris) :dummies true))\n  (def y (sel iris :cols 0))\n  (def x (sel iris :cols (range 1 6)))\n  (def iris-lm (linear-model y x)) ; with intercept term\n\n  (keys iris-lm) ; see what fields are included\n  (:coefs iris-lm)\n  (:sse iris-lm)\n  (quantile (:residuals iris-lm))\n  (:r-square iris-lm)\n  (:adj-r-square iris-lm)\n  (:f-stat iris-lm)\n  (:f-prob iris-lm)\n  (:df iris-lm)\n\n  (def x1 (range 0.0 3 0.1))\n  (view (xy-plot x1 (cdf-f x1 :df1 4 :df2 144)))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/OLS_Regression\n  http://en.wikipedia.org/wiki/Coefficient_of_determination\n",
    :var-type "function",
-   :line 2037,
+   :line 2036,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [y W centroid]}]),
    :name "mahalanobis-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3563",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3562",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/mahalanobis-distance",
    :doc
    "\nReturns the Mahalanobis distance between x, which is\n either a vector or matrix of row vectors, and the\n centroid of the observations in the matrix :y.\n\nArguments:\n  x -- either a vector or a matrix of row vectors\n\nOptions:\n  :y -- Defaults to x, must be a matrix of row vectors which will be used to calculate a centroid\n  :W -- Defaults to (solve (covariance y)), if an identity matrix is provided, the mahalanobis-distance\n        function will be equal to the Euclidean distance.\n  :centroid -- Defaults to (map mean (trans y))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Mahalanobis_distance\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n\n  ;; generate some multivariate normal data with a single outlier.\n  (def data (bind-rows\n              (bind-columns\n                (sample-mvn 100\n                            :sigma (matrix [[1 0.9]\n                                            [0.9 1]])))\n              [-1.75 1.75]))\n\n  ;; view a scatter plot of the data\n  (let [[x y] (trans data)]\n    (doto (scatter-plot x y)\n      (add-points [(mean x)] [(mean y)])\n      (add-pointer -1.75 1.75 :text \"Outlier\")\n      (add-pointer (mean x) (mean y) :text \"Centroid\")\n      view))\n\n  ;; calculate the distances of each point from the centroid.\n  (def dists (map first (mahalanobis-distance data)))\n  ;; view a bar-chart of the distances\n  (view (bar-chart (range 102) dists))\n\n  ;; Now contrast with the Euclidean distance.\n  (def dists (map first (mahalanobis-distance data :W (matrix [[1 0] [0 1]]))))\n  ;; view a bar-chart of the distances\n  (view (bar-chart (range 102) dists))\n\n\n  ;; another example\n  (mahalanobis-distance [-1.75 1.75] :y data)\n  (mahalanobis-distance [-1.75 1.75]\n                    :y data\n                    :W (matrix [[1 0]\n                                [0 1]]))\n",
    :var-type "function",
-   :line 3563,
+   :line 3562,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "manhattan-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3214",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3213",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/manhattan-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Manhattan_distance\n\nusual metric of Euclidean geometry is replaced by a new metric in which\nthe distance between two points is the sum of the (absolute) differences\nof their coordinates. The taxicab metric is also known as rectilinear distance,\nL1 distance or l1 norm (see Lp space), city block distance,\nManhattan distance, or Manhattan length\n",
    :var-type "function",
-   :line 3214,
+   :line 3213,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1477",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1476",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/mean",
    :doc
    "\nReturns the mean of the data, x.\n\nExamples:\n  (mean (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Mean\n",
    :var-type "function",
-   :line 1477,
+   :line 1476,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "median",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1604",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1603",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/median",
    :doc
    "\nReturns the median of the data, x.\n\nExamples:\n  (median (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Median\n",
    :var-type "function",
-   :line 1604,
+   :line 1603,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b p]),
    :name "minkowski-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3167",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3166",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/minkowski-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Minkowski_distance\nhttp://en.wikipedia.org/wiki/Lp_space\n\nThe Minkowski distance is a metric on Euclidean space which can be considered\nas a generalization of both the Euclidean distance and the Manhattan distance.\n\nMinkowski distance is typically used with p being 1 or 2. The latter is the\nEuclidean distance, while the former is sometimes known as the Manhattan distance.\n\nIn the limiting case of p reaching infinity we obtain the Chebyshev distance.\n",
    :var-type "function",
-   :line 3167,
+   :line 3166,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([n s]),
    :name "n-grams",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3329",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3328",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/n-grams",
    :doc
    "\nReturns a set of the unique n-grams in a string.\nthis is using actual sets here, discards duplicate n-grams?\n",
    :var-type "function",
-   :line 3329,
+   :line 3328,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "normalized-kendall-tau-distance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3076",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3075",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/normalized-kendall-tau-distance",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Kendall_tau_distance\nKendall tau distance is the total number of discordant pairs.\n",
    :var-type "function",
-   :line 3076,
+   :line 3075,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([col ds]),
    :name "numeric-col-summarizer",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2603",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2602",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/numeric-col-summarizer",
    :doc
    "Returns a summarizer function which takes a purely numeric column with no non-numeric values",
    :var-type "function",
-   :line 2603,
+   :line 2602,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([p1 p2]),
    :name "odds-ratio",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2848",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2847",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/odds-ratio",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Odds_ratio\n\nDefinition in terms of group-wise odds\n\nThe odds ratio is the ratio of the odds of an event occurring in one group\nto the odds of it occurring in another group, or to a sample-based estimate of that ratio.\n\n\nSuppose that in a sample of 100 men, 90 have drunk wine in the previous week,\nwhile in a sample of 100 women only 20 have drunk wine in the same period.\nThe odds of a man drinking wine are 90 to 10, or 9:1,\nwhile the odds of a woman drinking wine are only 20 to 80, or 1:4 = 0.25:1.\nThe odds ratio is thus 9/0.25, or 36, showing that men are much more likely\nto drink wine than women.\n\nRelation to statistical independence\n\nIf X and Y are independent, their joint probabilities can be expressed in\nterms of their marginal probabilities. In this case, the odds ratio equals one,\nand conversely the odds ratio can only equal one if the joint probabilities\ncan be factored in this way. Thus the odds ratio equals one if and only if\nX and Y are independent.\n",
    :var-type "function",
-   :line 2848,
+   :line 2847,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "pairings",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3037",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3036",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pairings",
    :doc
    "\nCreates pairs by matching a1 with b1, a2 with b2, etc. and returns\nall pairs of those pairs without matching a pair with itself.\n",
    :var-type "function",
-   :line 3037,
+   :line 3036,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "pairs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3022",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3021",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pairs",
    :doc
    "\nReturns unique pairs of a and b where members of a and b can not\nbe paired with the corresponding slot in the other list.\n",
    :var-type "function",
-   :line 3022,
+   :line 3021,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [alpha beta], :or {alpha 1, beta 1}}]),
    :name "pdf-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L450",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L449",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-beta",
    :doc
    "\nReturns the Beta pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dbeta function.\n\nOptions:\n  :alpha (default 1)\n  :beta (default 1)\n\nSee also:\n    cdf-beta and sample-beta\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html\n    http://en.wikipedia.org/wiki/Beta_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-beta 0.5 :alpha 1 :beta 2)\n",
    :var-type "function",
-   :line 450,
+   :line 449,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [size prob], :or {size 1, prob 1/2}}]),
    :name "pdf-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1123",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1122",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-binomial",
    :doc
    "\nReturns the Binomial pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dbinom\n\nOptions:\n  :size (default 1)\n  :prob (default 1/2)\n\nSee also:\n    cdf-binomial and sample-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html\n    http://en.wikipedia.org/wiki/Binomial_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-binomial 10 :prob 1/4 :size 20)\n",
    :var-type "function",
-   :line 1123,
+   :line 1122,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [df], :or {df 1}}]),
    :name "pdf-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L717",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L716",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-chisq",
    :doc
    "\nReturns the Chi Square pdf of the given value of x.  It will return a sequence\nof values, if x is a sequence. Same as R's dchisq function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    cdf-chisq and sample-chisq\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html\n    http://en.wikipedia.org/wiki/Chi_square_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-chisq 5.0 :df 2)\n",
    :var-type "function",
-   :line 717,
+   :line 716,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [rate], :or {rate 1}}]),
    :name "pdf-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L928",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L927",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-exp",
    :doc
    "\nReturns the Exponential pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dexp\n\nOptions:\n  :rate (default 1)\n\nSee also:\n    cdf-exp and sample-exp\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html\n    http://en.wikipedia.org/wiki/Exponential_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-exp 2.0 :rate 1/2)\n",
    :var-type "function",
-   :line 928,
+   :line 927,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [df1 df2], :or {df1 1, df2 1}}]),
    :name "pdf-f",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L107",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L106",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-f",
    :doc
    "\nReturns the F pdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's df function.\n\nOptions:\n  :df1 (default 1)\n  :df2 (default 1)\n\nSee also:\n    cdf-f and quantile-f\n\nReferences:\n    http://en.wikipedia.org/wiki/F_distribution\n    http://mathworld.wolfram.com/F-Distribution.html\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-f 1.0 :df1 5 :df2 2)\n",
    :var-type "function",
-   :line 107,
+   :line 106,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [shape scale rate], :or {shape 1}}]),
    :name "pdf-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L627",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L626",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-gamma",
    :doc
    "\nReturns the Gamma pdf for the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dgamma function.\n\nOptions:\n  :shape (k) (default 1)\n  :scale (θ) (default 1 or 1/rate, if :rate is specified)\n  :rate  (β) (default 1/scale, if :scale is specified)\n\nSee also:\n    cdf-gamma and sample-gamma\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html\n    http://en.wikipedia.org/wiki/Gamma_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-gamma 10 :shape 1 :scale 2)\n",
    :var-type "function",
-   :line 627,
+   :line 626,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [size prob], :or {size 10, prob 1/2}}]),
    :name "pdf-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1347",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1346",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-neg-binomial",
    :doc
    "\nReturns the Negative Binomial pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dnbinom\n\nOptions:\n  :size (default 10)\n  :prob (default 1/2)\n\nSee also:\n    cdf-neg-binomial and sample-neg-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html\n    http://en.wikipedia.org/wiki/Negative_binomial_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-neg-binomial 10 :prob 1/2 :size 20)\n",
    :var-type "function",
-   :line 1347,
+   :line 1346,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "pdf-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L187",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L186",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-normal",
    :doc
    "\nReturns the Normal pdf of the given value, x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nSee also:\n    cdf-normal, quantile-normal, sample-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))\n",
    :var-type "function",
-   :line 187,
+   :line 186,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [lambda], :or {lambda 1}}]),
    :name "pdf-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1261",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1260",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-poisson",
    :doc
    "\nReturns the Poisson pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dpois\n\nOptions:\n  :lambda (default 1)\n\nSee also:\n    cdf-poisson and sample-poisson\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html\n    http://en.wikipedia.org/wiki/Poisson_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-poisson 5 :lambda 10)\n",
    :var-type "function",
-   :line 1261,
+   :line 1260,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [df], :or {df 1}}]),
    :name "pdf-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L804",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L803",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-t",
    :doc
    "\nReturns the Student's t pdf for the given value of x. It will return a sequence\nof values, if x is a sequence. Same as R's dt function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    cdf-t, quantile-t, and sample-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-t 1.2 :df 10)\n",
    :var-type "function",
-   :line 804,
+   :line 803,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [min max], :or {min 0.0, max 1.0}}]),
    :name "pdf-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L359",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L358",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-uniform",
    :doc
    "\nReturns the Uniform pdf of the given value of x. It will return a sequence\nof values, if x is a sequence. This is equivalent to R's dunif function.\n\nOptions:\n  :min (default 0)\n  :max (default 1)\n\nSee also:\n    cdf-uniform and sample-uniform\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html\n    http://en.wikipedia.org/wiki/Uniform_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-uniform 5)\n    (pdf-uniform 5 :min 1 :max 10)\n",
    :var-type "function",
-   :line 359,
+   :line 358,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "pdf-weibull",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L538",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L537",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/pdf-weibull",
    :doc
    "\nReturns the Weibull pdf for the given value of x. It will return a sequence\nof values, if x is a sequence.\n\nOptions:\n    :scale (default 1)\n    :shape (default 1)\n\nSee also:\n    cdf-weibull and sample-weibull\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html\n    http://en.wikipedia.org/wiki/Weibull_distribution\n    http://en.wikipedia.org/wiki/Probability_density_function\n\nExample:\n    (pdf-weibull 2 :alpha 1 :beta 0.5)\n",
    :var-type "function",
-   :line 538,
+   :line 537,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x] [x y]),
    :name "permute",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1904",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1903",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/permute",
    :doc
    "\nIf provided a single argument, returns a permuted version of the\ngiven collection. (permute x) is the same as (sample x).\n\nIf provided two arguments, returns two lists that are permutations\nacross the given collections. In other words, each of the new collections\nwill contain elements from both of the given collections. Useful for\npermutation tests or randomization tests.\n\nExamples:\n\n  (permute (range 10))\n  (permute (range 10) (range 10 20))\n",
    :var-type "function",
-   :line 1904,
+   :line 1903,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([model x]),
    :name "predict",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2833",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2832",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/predict",
    :doc
    "Takes a linear-model and an x value (either a scalar or vector)\nand returns the predicted value based on the linear-model.",
    :var-type "function",
-   :line 2833,
+   :line 2832,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "principal-components",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2670",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2669",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/principal-components",
    :doc
    "\nPerforms a principal components analysis on the given data matrix.\nEquivalent to R's prcomp function.\n\nReturns:\n  A map with the following fields:\n  :std-dev -- the standard deviations of the principal components\n      (i.e. the square roots of the eigenvalues of the correlation\n      matrix, though the calculation is actually done with the\n      singular values of the data matrix.\n  :rotation -- the matrix of variable loadings (i.e. a matrix\n      whose columns contain the eigenvectors).\n\n\nExamples:\n\n  (use '(incanter core stats charts datasets))\n  ;; load the iris dataset\n  (def iris (to-matrix (get-dataset :iris)))\n  ;; run the pca\n  (def pca (principal-components (sel iris :cols (range 4))))\n  ;; extract the first two principal components\n  (def pc1 (sel (:rotation pca) :cols 0))\n  (def pc2 (sel (:rotation pca) :cols 1))\n\n  ;; project the first four dimension of the iris data onto the first\n  ;; two principal components\n  (def x1 (mmult (sel iris :cols (range 4)) pc1))\n  (def x2 (mmult (sel iris :cols (range 4)) pc2))\n\n  ;; now plot the transformed data, coloring each species a different color\n  (doto (scatter-plot (sel x1 :rows (range 50)) (sel x2 :rows (range 50))\n                      :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\")\n        (add-points (sel x1 :rows (range 50 100)) (sel x2 :rows (range 50 100)))\n        (add-points (sel x1 :rows (range 100 150)) (sel x2 :rows (range 100 150)))\n        view)\n\n\n  ;; alternatively, the :group-by option can be used in scatter-plot\n  (view (scatter-plot x1 x2\n                      :group-by (sel iris :cols 4)\n                      :x-label \"PC1\" :y-label \"PC2\" :title \"Iris PCA\"))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Principal_component_analysis\n",
    :var-type "function",
-   :line 2670,
+   :line 2669,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([j]),
    :name "product-marginal-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3150",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3149",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/product-marginal-test",
    :doc
    "the joint PMF of independent variables is equal to the product of their marginal PMFs.",
    :var-type "function",
-   :line 3150,
+   :line 3149,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -4736,67 +4736,67 @@
    :name "quantile",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1659",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1658",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/quantile",
    :doc
    "\nReturns the quantiles of the data, x. By default it returns the min,\n25th-percentile, 50th-percentile, 75th-percentile, and max value.\n\nOptions:\n  :probs (default [0.0 0.25 0.5 0.75 1.0])\n\nExamples:\n  (quantile (sample-normal 100))\n  (quantile (sample-normal 100) :probs [0.025 0.975])\n  (quantile (sample-normal 100) :probs 0.975)\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Quantile\n",
    :var-type "function",
-   :line 1659,
+   :line 1658,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([probability & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "quantile-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L242",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L241",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/quantile-normal",
    :doc
    "\nReturns the inverse of the Normal CDF for the given probability.\nIt will return a sequence of values, if given a sequence of\nprobabilities. This is equivalent to R's qnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nReturns:\n  a value x, where (cdf-normal x) = probability\n\nSee also:\n    pdf-normal, cdf-normal, and sample-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n    http://en.wikipedia.org/wiki/Quantile\n\nExample:\n    (quantile-normal 0.975)\n    (quantile-normal [0.025 0.975] :mean -2 :sd (sqrt 0.5))\n",
    :var-type "function",
-   :line 242,
+   :line 241,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([probability & {:keys [df], :or {df 1}}]),
    :name "quantile-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L858",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L857",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/quantile-t",
    :doc
    "\nReturns the inverse of the Student's t CDF for the given probability\n(i.e. the quantile).  It will return a sequence of values, if x is\na sequence of probabilities. This is equivalent to R's qt function.\n\nOptions:\n  :df (default 1)\n\nReturns:\n  a value x, where (cdf-t x) = probability\n\nSee also:\n   pdf-t, cdf-t, and sample-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/Probability.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n    http://en.wikipedia.org/wiki/Quantile\n\nExample:\n    (quantile-t 0.975)\n    (quantile-t [0.025 0.975] :df 25)\n    (def df [1 2 3 4 5 6 7 8 9 10 20 50 100 1000])\n    (map #(quantile-t 0.025 :df %) df)\n",
    :var-type "function",
-   :line 858,
+   :line 857,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "rank-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2941",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2940",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/rank-index",
    :doc
    "\nGiven a seq, returns a map where the keys are the values of the seq\nand the values are the positional rank of each member o the seq.\n",
    :var-type "function",
-   :line 2941,
+   :line 2940,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:file "modules/incanter-core/src/incanter/stats.clj",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1688",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1687",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample",
    :namespace "incanter.stats",
-   :line 1688,
+   :line 1687,
    :var-type "multimethod",
    :doc
    "\nReturns a sample of the given size from the given collection. If replacement\nis set to false it returns a set, otherwise it returns a list.\n\nArguments:\n  coll -- collection or dataset to be sampled from\n\nOptions:\n  :size -- (default (count x) sample size\n  :replacement (default true) -- sample with replacement\n\n\nExamples:\n  (sample (range 10)) ; permutation of numbers zero through ten\n  (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.\n  (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.\n",
@@ -4805,200 +4805,200 @@
    :name "sample-beta",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L509",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L508",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-beta",
    :doc
    "\nReturns a sample of the given size from a Beta distribution.\nThis is equivalent to R's rbeta function.\n\nOptions:\n  :alpha (default 1)\n  :beta (default 1)\n  These default values produce a Uniform distribution.\n\nSee also:\n    pdf-beta and cdf-beta\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Beta.html\n    http://en.wikipedia.org/wiki/Beta_distribution\n\nExample:\n    (sample-beta 1000 :alpha 1 :beta 2)\n",
    :var-type "function",
-   :line 509,
+   :line 508,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([samplesize & {:keys [size prob], :or {size 1, prob 1/2}}]),
    :name "sample-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1182",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1181",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-binomial",
    :doc
    "\nReturns a sample of the given size from a Binomial distribution.\nSame as R's rbinom\n\nOptions:\n  :size (default 1)\n  :prob (default 1/2)\n\nSee also:\n    pdf-binomial and cdf-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Binomial.html\n    http://en.wikipedia.org/wiki/Binomial_distribution\n\nExample:\n    (sample-binomial 1000 :prob 1/4 :size 20)\n",
    :var-type "function",
-   :line 1182,
+   :line 1181,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [df], :or {df 1}}]),
    :name "sample-chisq",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L775",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L774",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-chisq",
    :doc
    "\nReturns a sample of the given size from a Chi Square distribution\nSame as R's rchisq function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    pdf-chisq and cdf-chisq\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/ChiSquare.html\n    http://en.wikipedia.org/wiki/Chi_square_distribution\n\nExample:\n    (sample-chisq 1000 :df 2)\n",
    :var-type "function",
-   :line 775,
+   :line 774,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size alpha]),
    :name "sample-dirichlet",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1073",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1072",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-dirichlet",
    :doc
    "\nExamples:\n  (use '(incanter core stats charts))\n\n  ;; a total of 1447 adults were polled to indicate their preferences for\n  ;; candidate 1 (y1=727), candidate 2 (y2=583), or some other candidate or no\n  ;; preference (y3=137).\n\n  ;; the counts y1, y2, and y3 are assumed to have a multinomial distribution\n  ;; If a uniform prior distribution is assigned to the multinomial vector\n  ;; theta = (th1, th2, th3), then the posterior distribution of theta is\n  ;; proportional to g(theta) = th1^y1 * th2^y2 * th3^y3, which is a\n  ;; dirichlet distribution with parameters (y1+1, y2+1, y3+1)\n  (def  theta (sample-dirichlet 1000 [(inc 727) (inc 583) (inc 137)]))\n  ;; view means, 95% CI, and histograms of the proportion parameters\n  (mean (sel theta :cols 0))\n  (quantile (sel theta :cols 0) :probs [0.0275 0.975])\n  (view (histogram (sel theta :cols 0)))\n  (mean (sel theta :cols 1))\n  (quantile (sel theta :cols 1) :probs [0.0275 0.975])\n  (view (histogram (sel theta :cols 1)))\n  (mean (sel theta :cols 2))\n  (quantile (sel theta :cols 2) :probs [0.0275 0.975])\n  (view (histogram (sel theta :cols 2)))\n\n  ;; view  a histogram of the difference in proportions between the first\n  ;; two candidates\n  (view (histogram (minus (sel theta :cols 0) (sel theta :cols 1))))\n",
    :var-type "function",
-   :line 1073,
+   :line 1072,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [rate], :or {rate 1}}]),
    :name "sample-exp",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L980",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L979",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-exp",
    :doc
    "\nReturns a sample of the given size from a Exponential distribution.\nSame as R's rexp\n\nOptions:\n  :rate (default 1)\n\nSee also:\n    pdf-exp and cdf-exp\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Exponential.html\n    http://en.wikipedia.org/wiki/Exponential_distribution\n\nExample:\n    (sample-exp 1000 :rate 1/2)\n",
    :var-type "function",
-   :line 980,
+   :line 979,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [shape scale rate], :or {shape 1}}]),
    :name "sample-gamma",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L687",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L686",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-gamma",
    :doc
    "\nReturns a sample of the given size from a Gamma distribution.\nThis is equivalent to R's rgamma function.\n\nOptions:\n  :shape (k) (default 1)\n  :scale (θ) (default 1 or 1/rate, if :rate is specified)\n  :rate  (β) (default 1/scale, if :scale is specified)\n\nSee also:\n    pdf-gamma, cdf-gamma, and quantile-gamma\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Gamma.html\n    http://en.wikipedia.org/wiki/Gamma_distribution\n\nExample:\n    (sample-gamma 1000 :shape 1 :scale 2)\n",
    :var-type "function",
-   :line 687,
+   :line 686,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& {:keys [scale p df], :or {p 2}}]),
    :name "sample-inv-wishart",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1046",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1045",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-inv-wishart",
    :doc
    "\nReturns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution\n\nOptions:\n  :p (default 2) -- number of dimensions of resulting matrix\n  :df (default p) -- degree of freedoms (aka n), df <= p\n  :scale (default (identity-matrix p)) -- positive definite matrix (aka V)\n\nExamples:\n  (use 'incanter.stats)\n  (sample-inv-wishart :df 10  :p 4)\n\n  ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)\n  (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Inverse-Wishart_distribution\n",
    :var-type "function",
-   :line 1046,
+   :line 1045,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([size & {:keys [probs categories], :or {probs [0.5 0.5]}}]),
    :name "sample-multinomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1213",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1212",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-multinomial",
    :doc
    "\nReturns a sequence representing a sample from a multinomial distribution.\n\nArguments: size -- number of values to return\n\nOptions:\n  :categories (default [0 1]) -- the values returned\n  :probs (default [0.5 0.5]) -- the probabilities associated with each category\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Multinomial_distribution#Sampling_from_a_multinomial_distribution\n\n\nExamples:\n  (use '(incanter core stats charts))\n\n  (sample-multinomial 10)\n  (sample-multinomial 10 :probs [0.25 0.5 0.25])\n\n  ;; estimate sample proportions\n  (def sample-size 1000.0)\n  (def categories [:red :yellow :blue :green])\n  (def data (to-dataset (sample-multinomial sample-size\n                                            :categories categories\n                                            :probs [0.5 0.25 0.2 0.05])))\n\n  ;; check the sample proportions\n  (view (pie-chart categories\n                   (map #(div (count ($ :col-0 ($where {:col-0 %} data)))\n                              sample-size)\n                        categories)))\n",
    :var-type "function",
-   :line 1213,
+   :line 1212,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [mean sigma]}]),
    :name "sample-mvn",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L305",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L304",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-mvn",
    :doc
    "\nReturns a sample of the given size from a Multivariate Normal\ndistribution. This is equivalent to R's mvtnorm::rmvnorm function.\n\nArguments:\n  size -- the size of the sample to return\n\nOptions:\n  :mean (default (repeat (ncol sigma) 0))\n  :sigma (default (identity-matrix (count mean)))\n\n\nExamples:\n\n  (use '(incanter core stats charts))\n  (def mvn-samp (sample-mvn 1000 :mean [7 5] :sigma (matrix [[2 1.5] [1.5 3]])))\n  (covariance mvn-samp)\n  (def means (map mean (trans mvn-samp)))\n\n  ;; plot scatter-plot of points\n  (def mvn-plot (scatter-plot (sel mvn-samp :cols 0) (sel mvn-samp :cols 1)))\n  (view mvn-plot)\n  ;; add centroid to plot\n  (add-points mvn-plot [(first means)] [(second means)])\n\n  ;; add regression line to scatter plot\n  (def x (sel mvn-samp :cols 0))\n  (def y (sel mvn-samp :cols 1))\n  (def lm (linear-model y x))\n  (add-lines mvn-plot x (:fitted lm))\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Multivariate_normal\n",
    :var-type "function",
-   :line 305,
+   :line 304,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([samplesize & {:keys [size prob], :or {size 10, prob 1/2}}]),
    :name "sample-neg-binomial",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1407",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1406",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-neg-binomial",
    :doc
    "\nReturns a sample of the given size from a Negative Binomial distribution.\nSame as R's rnbinom\n\nOptions:\n  :size (default 10)\n  :prob (default 1/2)\n\nSee also:\n    pdf-neg-binomial and cdf-neg-binomial\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/NegativeBinomial.html\n    http://en.wikipedia.org/wiki/Negative_binomial_distribution\n\nExample:\n    (sample-neg-binomial 1000 :prob 1/2 :size 20)\n",
    :var-type "function",
-   :line 1407,
+   :line 1406,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [mean sd], :or {mean 0, sd 1}}]),
    :name "sample-normal",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L275",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L274",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-normal",
    :doc
    "\nReturns a sample of the given size from a Normal distribution\nThis is equivalent to R's rnorm function.\n\nOptions:\n  :mean (default 0)\n  :sd (default 1)\n\nSee also:\n    pdf-normal, cdf-normal, quantile-normal\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Normal.html\n    http://en.wikipedia.org/wiki/Normal_distribution\n\nExample:\n    (sample-normal 1000 :mean -2 :sd (sqrt 0.5))\n",
    :var-type "function",
-   :line 275,
+   :line 274,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([n x] [n x y]),
    :name "sample-permutations",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1931",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1930",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-permutations",
    :doc
    "\nIf provided a two arguments (n x), it returns a list of n permutations\nof x. If provided three (n x y) arguments, returns a list with two with n permutations of\neach arguments, where each permutation is drawn from the pooled arguments.\n\nArguments:\n  n -- number of randomized versions of the original two groups to return\n  x -- group 1\n  y -- (default nil) group 2\n\n\nExamples:\n\n  (use '(incanter core stats))\n  (sample-permutations 10 (range 10))\n  (sample-permutations 10 (range 10) (range 10 20))\n\n  ;; extended example with plant-growth data\n  (use '(incanter core stats datasets charts))\n\n  ;; load the plant-growth dataset\n  (def data (to-matrix (get-dataset :plant-growth)))\n\n  ;; break the first column of the data into groups based on treatment (second column).\n  (def groups (group-on data 1 :cols 0))\n\n  ;; define a function for the statistic of interest\n  (defn means-diff [x y] (minus (mean x) (mean y)))\n\n  ;; calculate the difference in sample means between the two groups\n  (def samp-mean-diff (means-diff (first groups) (second groups))) ;; 0.371\n\n  ;; create 500 permuted versions of the original two groups\n  (def permuted-groups (sample-permutations 1000 (first groups) (second groups)))\n\n  ;; calculate the difference of means of the 500 samples\n  (def permuted-means-diffs1 (map means-diff (first permuted-groups) (second permuted-groups)))\n\n  ;; use an indicator function that returns 1 when the randomized means diff is greater\n  ;; than the original sample mean, and zero otherwise. Then take the mean of this sequence\n  ;; of ones and zeros. That is the proportion of times you would see a value more extreme\n  ;; than the sample mean (i.e. the p-value).\n  (mean (indicator #(> % samp-mean-diff) permuted-means-diffs1)) ;; 0.088\n\n  ;; calculate the 95% confidence interval of the null hypothesis. If the\n  ;; sample difference in means is outside of this range, that is evidence\n  ;; that the two means are statistically significantly different.\n  (quantile permuted-means-diffs1 :probs [0.025 0.975]) ;; (-0.606 0.595)\n\n  ;; Plot a histogram of the permuted-means-diffs using the density option,\n  ;; instead of the default frequency, and then add a normal pdf curve with\n  ;; the mean and sd of permuted-means-diffs data for a visual comparison.\n  (doto (histogram permuted-means-diffs1 :density true)\n        (add-lines (range -1 1 0.01) (pdf-normal (range -1 1 0.01)\n                                                 :mean (mean permuted-means-diffs1)\n                                                 :sd (sd permuted-means-diffs1)))\n        view)\n\n  ;; compare the means of treatment 2 and control\n  (def permuted-groups (sample-permutations 1000 (first groups) (last groups)))\n  (def permuted-means-diffs2 (map means-diff (first permuted-groups) (second permuted-groups)))\n  (def samp-mean-diff (means-diff (first groups) (last groups))) ;; -0.4939\n  (mean (indicator #(< % samp-mean-diff) permuted-means-diffs2)) ;; 0.022\n  (quantile permuted-means-diffs2 :probs [0.025 0.975]) ;; (-0.478 0.466)\n\n  ;; compare the means of treatment 1 and treatment 2\n  (def permuted-groups (sample-permutations 1000 (second groups) (last groups)))\n  (def permuted-means-diffs3 (map means-diff (first permuted-groups) (second permuted-groups)))\n  (def samp-mean-diff (means-diff (second groups) (last groups))) ;; -0.865\n  (mean (indicator #(< % samp-mean-diff) permuted-means-diffs3)) ;;  0.002\n  (quantile permuted-means-diffs3 :probs [0.025 0.975]) ;; (-0.676 0.646)\n\n  (doto (box-plot permuted-means-diffs1)\n        (add-box-plot permuted-means-diffs2)\n        (add-box-plot permuted-means-diffs3)\n        view)\n\n\n  Further Reading:\n    http://en.wikipedia.org/wiki/Resampling_(statistics)\n",
    :var-type "function",
-   :line 1931,
+   :line 1930,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [lambda], :or {lambda 1}}]),
    :name "sample-poisson",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1318",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1317",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-poisson",
    :doc
    "\nReturns a sample of the given size from a Poisson distribution.\nSame as R's rpois\n\nOptions:\n  :lambda (default 1)\n\nSee also:\n    pdf-poisson and cdf-poisson\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Poisson.html\n    http://en.wikipedia.org/wiki/Poisson_distribution\n\nExample:\n    (sample-poisson 1000 :lambda 10)\n",
    :var-type "function",
-   :line 1318,
+   :line 1317,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & {:keys [df], :or {df 1}}]),
    :name "sample-t",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L897",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L896",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-t",
    :doc
    "\nReturns a sample of the given size from a Student's t distribution.\nSame as R's rt function.\n\nOptions:\n  :df (default 1)\n\nSee also:\n    pdf-t, cdf-t, and quantile-t\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/StudentT.html\n    http://en.wikipedia.org/wiki/Student-t_distribution\n\nExample:\n    (cdf-t 1000 :df 10)\n",
    :var-type "function",
-   :line 897,
+   :line 896,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([size
@@ -5008,263 +5008,263 @@
    :name "sample-uniform",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L415",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L414",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-uniform",
    :doc
    "\nReturns a sample of the given size from a Uniform distribution.\nThis is equivalent to R's runif function.\n\nOptions:\n  :min (default 0)\n  :max (default 1)\n  :integers (default false)\n\nSee also:\n    pdf-uniform and cdf-uniform\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/DoubleUniform.html\n    http://en.wikipedia.org/wiki/Uniform_distribution\n\nExample:\n    (sample-uniform 1000)\n    (sample-uniform 1000 :min 1 :max 10)\n",
    :var-type "function",
-   :line 415,
+   :line 414,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([size & options]),
    :name "sample-weibull",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L596",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L595",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-weibull",
    :doc
    "\nReturns a sample of the given size from a Weibull distribution\n\nOptions:\n  :shape (default 1)\n  :scale (default 1)\n\nSee also:\n    pdf-weibull, cdf-weibull\n\nReferences:\n    http://incanter.org/docs/parallelcolt/api/cern/jet/random/tdouble/Distributions.html\n    http://en.wikipedia.org/wiki/Weibull_distribution\n\nExample:\n    (sample-weibull 1000 :shape 1 :scale 0.2)\n",
    :var-type "function",
-   :line 596,
+   :line 595,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([& {:keys [scale p df], :or {p 2}}]),
    :name "sample-wishart",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1011",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1010",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample-wishart",
    :doc
    "\nReturns a p-by-p symmetric distribution drawn from a Wishart distribution\n\nOptions:\n  :p (default 2) -- number of dimensions of resulting matrix\n  :df (default p) -- degree of freedoms (aka n), df <= p\n  :scale (default (identity-matrix p)) -- positive definite matrix (aka V)\n\nExamples:\n  (use 'incanter.stats)\n  (sample-wishart :df 10  :p 4)\n\n  ;; calculate the mean of 1000 wishart matrices, should equal (mult df scale)\n  (div (reduce plus (for [_ (range 1000)] (sample-wishart :p 4))) 1000)\n\n\nReferences:\n  http://en.wikipedia.org/wiki/Wishart_distribution\n",
    :var-type "function",
-   :line 1011,
+   :line 1010,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "scalar-abs",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L47",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L46",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/scalar-abs",
    :doc "Fast absolute value function",
    :var-type "function",
-   :line 47,
+   :line 46,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "sd",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1541",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1540",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sd",
    :doc
    "\nReturns the sample standard deviation of the data, x. Equivalent to\nR's sd function.\n\nExamples:\n  (sd (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Standard_deviation\n",
    :var-type "function",
-   :line 1541,
+   :line 1540,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([coll]),
    :name "simple-ci",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2264",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2263",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/simple-ci",
    :doc "Get the confidence interval for the data.",
    :var-type "function",
-   :line 2264,
+   :line 2263,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([coll mu]),
    :name "simple-p-value",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2256",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2255",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/simple-p-value",
    :doc "Returns the p-value for the data contained in coll.",
    :var-type "function",
-   :line 2256,
+   :line 2255,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([y x & {:keys [intercept], :or {intercept true}}]),
    :name "simple-regression",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2817",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2816",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/simple-regression",
    :doc
    "A stripped version of linear-model that returns a map containing only\nthe coefficients.",
    :var-type "function",
-   :line 2817,
+   :line 2816,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([coll mu]),
    :name "simple-t-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2247",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2246",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/simple-t-test",
    :doc "Perform a simple t-test on the data contained in coll.",
    :var-type "function",
-   :line 2247,
+   :line 2246,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "skewness",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1641",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1640",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/skewness",
    :doc
    "\nReturns the skewness of the data, x. \"Skewness is a measure of the asymmetry\nof the probability distribution of a real-valued random variable.\" (Wikipedia)\n\nExamples:\n\n  (skewness (sample-normal 100000)) ;; approximately 0\n  (skewness (sample-gamma 100000)) ;; approximately 2\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Skewness\n",
    :var-type "function",
-   :line 1641,
+   :line 1640,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "sorensen-index",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3418",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3417",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sorensen-index",
    :doc
    "\nhttp://en.wikipedia.org/wiki/S%C3%B8rensen_similarity_index#cite_note-4\n\nThe Sørensen index, also known as Sørensen’s similarity coefficient,\nis a statistic used for comparing the similarity of two samples.\nwhere A and B are the species numbers in samples A and B, respectively,\nand C is the number of species shared by the two samples.\n\nThe Sørensen index is identical to Dice's coefficient which is always in [0, 1] range.\nSørensen index used as a distance measure, 1 − QS, is identical\nto Hellinger distance and Bray–Curtis dissimilarity.\n\nThe Sørensen coefficient is mainly useful for ecological community data\n(e.g. Looman & Campbell, 1960[3]). Justification for its use is primarily\nempirical rather than theoretical\n(although it can be justified theoretically as the intersection of two fuzzy sets[4]).\nAs compared to Euclidean distance, Sørensen distance retains sensitivity\nin more heterogeneous data sets and gives less weight to outliers\n\nThis function assumes you pass in a and b as sets.\n\nThe sorensen index extended to abundance instead of incidence of species is called the Czekanowski index.\n",
    :var-type "function",
-   :line 3418,
+   :line 3417,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "spearmans-rho",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2949",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2948",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/spearmans-rho",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient\n\nIn statistics, Spearman's rank correlation coefficient or Spearman's rho,\nis a non-parametric measure of correlation – that is, it assesses how well\nan arbitrary monotonic function could describe the relationship between two\nvariables, without making any other assumptions about the particular nature\nof the relationship between the variables. Certain other measures of correlation\nare parametric in the sense of being based on possible relationships of a\nparameterised form, such as a linear relationship.\n",
    :var-type "function",
-   :line 2949,
+   :line 2948,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x] [x m]),
    :name "square-devs-from-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2795",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2794",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/square-devs-from-mean",
    :doc
    "takes either a sample or a sample and a precalculated mean.\nreturns the squares of the difference between each observation and the sample mean.",
    :var-type "function",
-   :line 2795,
+   :line 2794,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x] [x m]),
    :name "sum-of-square-devs-from-mean",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2807",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2806",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sum-of-square-devs-from-mean",
    :doc
    "takes either a sample or a sample and a precalculated mean.\n\nreturns the sum of the squares of the difference between each observation and the sample mean.",
    :var-type "function",
-   :line 2807,
+   :line 2806,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([vs]),
    :name "sum-variance-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3138",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3137",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sum-variance-test",
    :doc
    "\nThe variance of the sum of n independent variables is equal\nto the sum of their variances.\n\n (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -> 5/2\n",
    :var-type "function",
-   :line 3138,
+   :line 3137,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([col ds]),
    :name "summarizable?",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2646",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2645",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/summarizable?",
    :doc
    "Takes in a column name (or number) and a dataset. Returns true if the column can be summarized, and false otherwise",
    :var-type "function",
-   :line 2646,
+   :line 2645,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([col ds]),
    :name "summarizer-fn",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2630",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2629",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/summarizer-fn",
    :doc
    "\nTakes in a column (number or name) and a dataset. Returns a function\nto summarize the column if summarizable, and a string describing why\nthe column can't be summarized in the event that it can't\n",
    :var-type "function",
-   :line 2630,
+   :line 2629,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([ds]),
    :name "summary",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2652",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2651",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/summary",
    :doc
    "\nTakes in a dataset. Returns a summary of that dataset (as a map of maps),\nhaving automatically figured out the relevant datatypes of columns.\nWill be slightly forgiving of mangled data in columns.",
    :var-type "function",
-   :line 2652,
+   :line 2651,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & {:keys [stat fun], :or {stat mean, fun minus}}]),
    :name "sweep",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1877",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1876",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sweep",
    :doc
    "\nReturn an array obtained from an input array by sweeping out a\nsummary statistic. Based to R's sweep function.\n\nArguments:\n  x is an sequence\n\n\nOptions:\n      :stat (default mean) the statistic to sweep out\n      :fun (defaul minus) the function used to sweep the stat out\n\nExample:\n\n  (use '(incanter core stats))\n\n  (def x (sample-normal 30 :mean 10 :sd 5))\n  (sweep x) ;; center the data around mean\n  (sweep x :stat sd :fun div) ;; divide data by its sd\n",
    :var-type "function",
-   :line 1877,
+   :line 1876,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([x
@@ -5278,70 +5278,70 @@
    :name "t-test",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2155",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2154",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/t-test",
    :doc
    "\nArgument:\n  x : sample to test\n\nOptions:\n  :y (default nil)\n  :mu (default (mean y) or 0) population mean\n  :alternative (default :two-sided) other choices :less :greater\n  :var-equal TODO (default false) variance equal\n  :paired TODO (default false) paired test\n  :conf-level (default 0.95) for returned confidence interval\n\nExamples:\n\n  (t-test (range 1 11) :mu 0)\n  (t-test (range 1 11) :mu 0 :alternative :less)\n  (t-test (range 1 11) :mu 0 :alternative :greater)\n\n  (t-test (range 1 11) :y (range 7 21))\n  (t-test (range 1 11) :y (range 7 21) :alternative :less)\n  (t-test (range 1 11) :y (range 7 21) :alternative :greater)\n  (t-test (range 1 11) :y (conj (range 7 21) 200))\n\nReferences:\n  http://en.wikipedia.org/wiki/T_test\n  http://www.socialresearchmethods.net/kb/stat_t.php\n",
    :var-type "function",
-   :line 2155,
+   :line 2154,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x & options]),
    :name "tabulate",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2299",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2298",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/tabulate",
    :doc
    "\nCross-tabulates the values of the given numeric matrix.\n\nReturns a hash-map with the following fields:\n  :table -- the table of counts for each combination of values,\n            this table is only returned if x has two-columns\n  :levels -- a sequence of sequences, where each sequence list\n             the levels (possible values) of the corresponding\n             column of x.\n  :margins -- a sequence of sequences, where each sequence\n              represents the marginal total for each level\n              of the corresponding column of x.\n  :counts -- a hash-map, where vectors of unique combinations\n             of the cross-tabulated levels are the keys and the\n             values are the total count of each combination.\n  :N  -- the grand-total for the contingency table\n\n\nExamples:\n\n  (use '(incanter core stats))\n  (tabulate [1 2 3 2 3 2 4 3 5])\n  (tabulate (sample-poisson 100 :lambda 5))\n\n  (use '(incanter core stats datasets))\n  (def math-prog (to-matrix (get-dataset :math-prog)))\n  (tabulate (sel math-prog :cols [1 2]))\n\n\n  (def data (matrix [[1 0 1]\n                     [1 1 1]\n                     [1 1 1]\n                     [1 0 1]\n                     [0 0 0]\n                     [1 1 1]\n                     [1 1 1]\n                     [1 0 1]\n                     [1 1 0]]))\n  (tabulate data)\n\n\n  (def data (matrix [[1 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [0 0]\n                     [1 1]\n                     [1 1]\n                     [1 0]\n                     [1 1]]))\n  (tabulate data)\n",
    :var-type "function",
-   :line 2299,
+   :line 2298,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([a b]),
    :name "tanimoto-coefficient",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L3265",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L3264",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/tanimoto-coefficient",
    :doc
    "\nhttp://en.wikipedia.org/wiki/Jaccard_index\n\nThe cosine similarity metric may be extended such that it yields the\nJaccard coefficient in the case of binary attributes.\nThis is the Tanimoto coefficient. ",
    :var-type "function",
-   :line 3265,
+   :line 3264,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([x]),
    :name "variance",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L1494",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L1493",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/variance",
    :doc
    "\nReturns the sample variance of the data, x. Equivalent to R's var function.\n\nExamples:\n  (variance (sample-normal 100))\n\nReferences:\n  http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html\n  http://en.wikipedia.org/wiki/Sample_variance#Population_variance_and_sample_variance\n",
    :var-type "function",
-   :line 1494,
+   :line 1493,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists ([z x y]),
    :name "within",
    :namespace "incanter.stats",
    :source-url
-   "https://github.com/incanter/incanter/blob/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj#L2790",
+   "https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj#L2789",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/fda4f722e78605945b0b6315d8d4f99f9758a14c/modules/incanter-core/src/incanter/stats.clj",
+   "https://github.com/incanter/incanter/raw/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/stats.clj",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/within",
    :doc "y is within z of x in metric space.",
    :var-type "function",
-   :line 2790,
+   :line 2789,
    :file "modules/incanter-core/src/incanter/stats.clj"}
   {:arglists
    ([chart
