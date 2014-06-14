@@ -54,6 +54,7 @@
   (is (= (sel dataset4 :cols "c") [3 6]))
   (is (= (sel dataset5 :rows 1 :cols :a) nil))
   (is (= (sel dataset6 :cols :a) 1))
+  (is (= (sel dataset6 :cols [:a] :rows :all) (dataset [:a] [[1 2 3]])))
   (is (= (sel (dataset [:a :b] [[11 12]]) :except-cols :b) (dataset [:a] [[11]]))))
 
 (def map1 {:col-0 [1.0 2.0 3.0] :col-1 [4.0 5.0 6.0]})
