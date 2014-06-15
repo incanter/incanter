@@ -1616,8 +1616,6 @@
     (let [xx (sort (to-list x))]
       (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
 
-
-
 (defn kurtosis
   "
   Returns the kurtosis of the data, x. \"Kurtosis is a measure of the \"peakedness\"
@@ -1634,7 +1632,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Kurtosis
   "
-  ([x] (DoubleDescriptive/kurtosis (DoubleArrayList. (double-array x)) (mean x) (variance x))))
+  ([x] (DoubleDescriptive/kurtosis (DoubleArrayList. (double-array x)) (mean x) (sd x))))
 
 
 

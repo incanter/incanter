@@ -119,6 +119,35 @@
   ;; calculate the median of a variable
   (is (= (median x) 113.0)))
 
+(deftest kurtosis-test
+  (let [test-sample [2.00 2.00 2.00 2.00 2.00
+                     2.00 2.00 2.00 2.00 2.00
+                     2.00 2.00 2.00 2.00 2.00
+                     2.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 2.00]]
+    (testing "correctness of result"
+      (is (= -0.11735294117647133 (kurtosis test-sample))))
+    (testing "invariance of calculation"
+      (let [kurtosis-diff (- (kurtosis (map (partial * 10) test-sample))
+                            (kurtosis test-sample))]
+        (is (< kurtosis-diff 1e-15))))
+    ))
+
 (deftest sample-tests
   ;; test sample function
   (is (not= (sample (range 10) :replacement false) (range 10)))
