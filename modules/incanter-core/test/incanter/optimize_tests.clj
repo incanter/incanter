@@ -15,7 +15,8 @@
 
 (ns incanter.optimize-tests
   (:use clojure.test
-    (incanter core optimize)))
+        (incanter core optimize))
+  (:require [clojure.core.matrix :as m]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.optimize.clj
@@ -34,8 +35,19 @@
 (def neg-rosenbrock-der (comp (partial map -) rosenbrock-der))
 
 
-(deftest minimize-test
-  (is (= (:value (minimize rosenbrock [0 0] :f-prime rosenbrock-der :max-iter 500)) (matrix [1 1]))))
+(defn minimize-test []
+  (is (m/equals (:value (minimize rosenbrock [0 0] :f-prime rosenbrock-der :max-iter 500))
+                [1 1]
+                1E-6)))
 
-(deftest maximize-test
-  (is (= (:value (maximize neg-rosenbrock [0 0] :f-prime neg-rosenbrock-der :max-iter 500)) (matrix [1 1]))))
+(defn maximize-test []
+  (is (m/equals (:value (maximize neg-rosenbrock [0 0] :f-prime neg-rosenbrock-der :max-iter 500))
+                [1 1]
+                1E-6)))
+
+(deftest compliance-test
+  (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
+    (m/set-current-implementation impl)
+    (println (str "compliance test " impl))
+    (minimize-test)
+    (maximize-test)))

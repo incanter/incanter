@@ -20,7 +20,8 @@
 (ns ^{:doc "Optimization-relates functions."}
     incanter.optimize
   (:use [incanter.core :only (plus minus div mult mmult symmetric-matrix ncol solve
-                              abs sel trans bind-columns to-list identity-matrix $=)]))
+                              matrix abs sel trans bind-columns to-list identity-matrix $=)])
+  (:require [clojure.core.matrix :as m]))
 
 
 (defn integrate
@@ -691,7 +692,7 @@
                                [alpha-k alpha-k-1]
                                (let [a ($= ((alpha-k-1 ** 2) * (phi-factor alpha-k) - (alpha-k ** 2) * (phi-factor alpha-k-1)) / (factor alpha-k alpha-k-1))
                                      b ($= (-1 * ((alpha-k-1 ** 3) * (phi-factor alpha-k)) + (alpha-k-1 ** 3) * (phi-factor alpha-k-1)) / (factor alpha-k alpha-k-1))]
-                                 (/ (- (Math/sqrt (Math/abs (- (Math/pow b 2) (* 3 a phi-prime-0)))) b)
+                                 (/ (-' (Math/sqrt (Math/abs (-' (Math/pow b 2) (* 3 a phi-prime-0)))) b)
                                     (* 3 a))))]
               (loop [alpha-i alpha-1
                      alpha-i-1 alpha-0]
@@ -711,7 +712,7 @@
   "
   [f x-0 f-prime tol max-iter]
     (let [norm (fn [grad-vec] (apply max (map #(Math/abs %) grad-vec)))
-       I  (identity-matrix (count x-0))]
+          I  (identity-matrix (count x-0))]
       (loop [inv-hessian-k I
              gradient-k (f-prime x-0)
              x-k x-0
@@ -730,6 +731,8 @@
                           (/ 1 (dot y-k s-k))
                           (catch java.lang.ArithmeticException ae
                             1000)) ;; Divide-by-zero encountered: rho-k assumed large
+                  s-k (matrix s-k 1)
+                  y-k (matrix y-k 1)
                   A-1 ($= I - ((s-k <*> (trans y-k)) * rho-k))
                   A-2 ($= I - ((y-k <*> (trans s-k)) * rho-k))]
               (recur ($= (A-1 <*> (inv-hessian-k <*> A-2))
@@ -784,10 +787,9 @@
                            max-iter 200
                            tol 1E-5
                            method :bfgs}}]
-  (let [min (cond :else fmin-bfgs)
-        [f f-calls] (with-counting f)
+  (let [[f f-calls] (with-counting f)
         [f-prime f-prime-calls] (with-counting f-prime)]
-    (assoc (min f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
+    (assoc (fmin-bfgs f start f-prime tol max-iter) :method method :fun-calls @f-calls :grad-calls @f-prime-calls)))
 
 (defn maximize
   "
