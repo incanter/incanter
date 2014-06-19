@@ -48,10 +48,9 @@
        :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."}
      $data nil)
+(declare to-list to-vector vectorize dataset col-names)
 
 (defrecord Dataset [column-names rows])
-(derive incanter.core.Dataset ::dataset)
-(derive clatrix.core.Matrix ::matrix)
 
 (defn matrix
 "
@@ -79,31 +78,41 @@
     ; you can filter the rows using Clojure's filter function
     (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
   "
-([data]
-   (case (m/dimensionality data)
-     0 data
-     1 (m/column-matrix data)
-     (m/matrix data)))
+  ([data]
+     (m/matrix data))
 
-  ([data ^Integer ncol]
-    (m/matrix (partition ncol data)))
+  ([data ^Integer ncol &]
+     (m/matrix (partition ncol (vectorize data))))
 
   ([init-val ^Integer rows ^Integer cols]
-    (m/compute-matrix [rows cols] (constantly init-val))))
+     (m/compute-matrix [rows cols] (constantly init-val))))
 
 (defn matrix?
-  " Test if obj is 'derived' clatrix.core.Matrix"
+  "Tests if obj is core.matrix matrix"
   ([obj] (m/matrix? obj)))
+
+(defn vec?
+  "Tests if obj is core.matrix vector"
+  ([obj] (m/vec? obj)))
 
 (defn dataset?
   "Determines if obj is of type incanter.core.Dataset."
   ([obj] (instance? Dataset obj)))
 
+(defn dispatch
+  "Dispatch function for multimethods"
+  ([obj]
+     (cond
+      (matrix? obj) ::matrix
+      (vec? obj) ::vector
+      (dataset? obj) ::dataset
+      :else (type obj))))
+
 (defn ^Integer nrow
   "Returns the number of rows in the given matrix. Equivalent to R's nrow function."
   ([mat]
      (cond
-      (m/matrix? mat) (m/row-count mat)
+      (matrix? mat) (m/row-count mat)
       (dataset? mat) (count (:rows mat))
       (coll? mat) (count mat))))
 
@@ -111,14 +120,14 @@
   "Returns the number of columns in the given matrix. Equivalent to R's ncol function."
   ([mat]
    (cond
-     (m/matrix? mat) (m/column-count mat)
+     (matrix? mat) (m/column-count mat)
      (dataset? mat) (count (:column-names mat))
      (coll? mat) 1 )))
 
 (defn dim
   "Returns a vector with the number of rows and columns of the given matrix."
   ([mat]
-   [(nrow mat) (ncol mat)]))
+     (m/dimensionality mat)))
 
 
 
@@ -146,7 +155,7 @@
   (diag A)"
   [m]
   (if (== 2 (m/dimensionality m))
-    (m/main-diagonal m)
+    (matrix (m/main-diagonal m))
     (m/diagonal-matrix m)))
 
 
@@ -161,7 +170,7 @@
     (trans A)
   "
   ([mat]
-   (if (m/matrix? mat)
+   (if (matrix? mat)
      (m/transpose mat)
      (m/transpose (matrix mat)))))
 
@@ -229,7 +238,7 @@
     (sel us-arrests :cols [:State :Murder])
   "
 
-  (fn [mat & options] [(type mat) (keyword? (first options))]))
+  (fn [mat & options] [(dispatch mat) (keyword? (first options))]))
 
 
 (defmethod sel [nil false] [])
@@ -326,7 +335,10 @@
        (and (coll? rows) (coll? cols))
          (matrix (m/select mat rows cols))
        (and all-rows? all-cols?)
-         mat))))
+       mat))))
+
+(prefer-method sel [::matrix true] [java.util.List true])
+(prefer-method sel [::matrix false] [java.util.List false])
 
 (defmethod sel :default
   ([mat & more]
@@ -349,18 +361,17 @@
 
   (bind-rows [1 2 3 4] [5 6 7 8])
   "
-  ([m & args]
-   (let [dm (m/dimensionality m)
-         m (cond
-            (== dm 1) (m/row-matrix m)
-            (== dm 2) m
-            :else (throw (RuntimeException. (str "Can't bind rows to array of dimensionality " dm))))
-         args (map
-               #(if (= (m/dimensionality %) 3)
-                  (reduce m/join %)
-                  %)
-               args)]
-     (apply m/join m args))))
+  ([& args]
+     (->>
+      args
+      (map
+       #(let [dm (m/dimensionality %)]
+          (case dm
+            1 (m/row-matrix %)
+            2 %
+            (throw (RuntimeException.
+                    (str "Can't bind rows to array of dimensionality " dm))))))
+      (apply m/join))))
 
 (defn bind-columns
   "
@@ -378,14 +389,16 @@
 
   (bind-columns [1 2 3 4] [5 6 7 8])
   "
-  [m & args]
-  (let [dm (m/dimensionality m)
-        m (cond
-            (== dm 1) (m/row-matrix m)
-            (== dm 2) (m/transpose m)
-            :else (throw (RuntimeException. (str "Can't bind columns to array of dimensionality " dm))))
-        ]
-    (m/transpose (apply m/join m (map m/transpose args)))))
+  [& args]
+  (->>
+   args
+   (map #(let [dm (m/dimensionality %)]
+           (case dm
+             1 (m/row-matrix %)
+             2 (m/transpose %)
+             (throw (RuntimeException.
+                     (str "Can't bind columns to array of dimensionality " dm))))))
+   (#(m/transpose (apply m/join %)))))
 
 (defn inner-product [& args]
   (apply m/inner-product args))
@@ -412,8 +425,7 @@
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])
   "
-  [& args]
-  (apply m/add (map matrix args)))
+  [& args] (apply m/add args))
 
 
 (defn minus
@@ -435,7 +447,7 @@
     (minus 2 [1 2 3])
     (minus [1 2 3])
   "
-  [& args] (apply m/sub (map matrix args)))
+  [& args] (apply m/sub args))
 
 (defn mult
   "
@@ -455,7 +467,7 @@
   (mult 2 [1 2 3])
   "
   [& args]
-  (apply m/emul (map matrix args)))
+  (apply m/emul args))
 
 
 (defn div
@@ -476,7 +488,7 @@
 
   (div [1 2 3]) ; returns [1 1/2 13]
   "
-  ([& args] (apply m/div (map matrix args))))
+  ([& args] (apply m/div args)))
 
 
 (defn safe-div  ;; TODO modify to work with matrices ?
@@ -487,7 +499,7 @@
   "
   ([x] (safe-div 1 x))
   ([x y]
-    (try (/ x y)
+    (try (m/div x y)
          (catch ArithmeticException _
          (cond (> x 0)   Double/POSITIVE_INFINITY
                (zero? x) Double/NaN
@@ -495,13 +507,13 @@
   ([x y & more]
      (reduce safe-div (safe-div x y) more)))
 
-(declare to-list dataset col-names)
 
 (defn- mapping-helper [func args]
   (reduce (fn [A B]
             (cond
               (number? A) (func A B)
-              (matrix? A) (m/emap #(func %1 B) A)
+              (or (matrix? A)
+                  (m/vec? A)) (m/emap #(func %1 B) A)
               (dataset? A) (dataset (col-names A)
                                     (mapping-helper func (list (to-list A) B)))
               (and (coll? A) (coll? (first A)))
@@ -671,15 +683,17 @@
 (defmulti to-list
   " Returns a list-of-vectors if the given matrix is two-dimensional
     and a flat list if the matrix is one-dimensional."
-  type)
+  dispatch)
 
 (defmethod to-list ::matrix
   ([mat]
-     (if (or (m/row-matrix? mat)
-             (m/column-matrix? mat))
-       (apply list (m/to-vector mat))
-       (apply list (map #(apply list %)
-                        (m/to-nested-vectors mat))))))
+     (cond
+      (or (m/row-matrix? mat)
+          (m/column-matrix? mat)
+          (= (m/dimensionality mat) 1)) (apply list (m/to-vector mat))
+      (m/scalar? mat) mat
+      :default (apply list (map #(apply list %)
+                                (m/to-nested-vectors mat))))))
 
 (defmethod to-list ::dataset
   [data]
@@ -687,12 +701,9 @@
                       (:column-names data)))
        (:rows data)))
 
-
-(defmethod to-list :default [s]
-  (m/to-nested-vectors s))
-
 (defmethod to-list nil [s] nil)
 
+(defmethod to-list :default [s] s)
 
 (defn copy
   ([mat]
@@ -705,7 +716,7 @@
   and a flat vector if the matrix is one-dimensional. This is a bit
   slower than the to-list function
   "
-  type)
+  dispatch)
 
 (defmethod to-vect ::matrix
   ([mat]
@@ -743,7 +754,7 @@
     http://en.wikipedia.org/wiki/Matrix_multiplication
   "
   ([& args]
-     (apply m/mmul (map matrix args))))
+     (apply m/mmul args)))
 
 
 (defn kronecker
@@ -759,22 +770,23 @@
     (kronecker x y)
   "
   ([& args]
-    (reduce (fn [A B]
-              (let [a (cond
-                        (matrix? A) A
-                        (number? A) (matrix [A])
-                        :else (matrix A))
-                    b (cond
-                        (matrix? B) B
-                        (number? B) (matrix [B])
-                        :else (matrix B))
-                    rows (* (nrow a) (nrow b))
-                    cols (* (ncol a) (ncol b))]
-                (apply bind-rows
-                       (for [i (range (nrow a))]
-                         (apply bind-columns
-                                (for [j (range (ncol a))]
-                                  (mult (sel a i j) b)))))))
+     (reduce (fn [A B]
+               (let [adims (long (dim A))
+                     bdims (long (dim B))]
+                 (cond
+                  (and (== adims 0) (== bdims 0)) (* A B)
+                  (and (== adims 1) (== bdims 1))
+                  (-> (for [a B b B] (* a b))
+                      (matrix))
+                  (and (== adims 1) (== bdims 0)) (mult A B)
+                  (and (== adims 2) (== bdims 2))
+                  (apply bind-rows
+                         (for [i (range (nrow A))]
+                           (apply bind-columns
+                                  (for [j (range (ncol A))]
+                                    (mult (sel A i j) B)))))
+                  (and (== adims 2) (== bdims 0)) (recur A (matrix [[B]]))
+                  (and (== adims 2) (== bdims 1)) (recur A (matrix [B])))))
             args)))
 
 (defn solve
@@ -861,7 +873,10 @@
 (defn sum-of-squares
   "Returns the sum-of-squares of the given sequence."
   ([x]
-     (m/length-squared x)))
+     (if (or (m/row-matrix? x)
+             (m/column-matrix? x))
+       (m/length-squared (m/to-vector x))
+       (m/length-squared x))))
 
 
 (defn sum
@@ -873,7 +888,7 @@
 (defn prod
   "Returns the product of the given sequence."
   ([x]
-     (m/ereduce * x)))
+     (m/ereduce *' x)))
 
 
 
@@ -1024,15 +1039,14 @@
     http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
   "
   ([mat]
-    (or (try (m/lu-decomposition mat) (catch Throwable t nil))
-      (let [mat (m/coerce :clatrix mat)
-            result (clx/lu mat)]
-        {:L (:l result)
-         :U (:u result)
-         :P (:p result)}))))
+     (let [mat (m/coerce :clatrix mat)
+           result (clx/lu mat)]
+       {:L (:l result)
+        :U (:u result)
+        :P (:p result)})))
 
 (defn vector-length [u]
-  (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
+  (m/length u))
 
 (defn inner-product [u v]
   (apply + (mult u (trans v))))
@@ -1935,19 +1949,9 @@
     (matrix-map #(mod % 2) 9)
   "
   ([f m]
-    (let [m (if (and (matrix? m) (m/row-matrix? m)) (to-list m) m)]
-      (if (sequential? m)
-        (if (sequential? (first m))
-          (map (fn [& a] (apply map f a)) m)
-          (map f m))
-        (f m))))
+     (to-list (m/emap f m)))
   ([f m & ms]
-    (let [m (if (and (matrix? m) (m/row-matrix? m)) (to-list m) m)]
-      (if (sequential? m)
-        (if (sequential? (first m))
-          (apply map (fn [& a] (apply map f a)) m ms)
-          (apply map f m ms))
-        (apply f m ms)))))
+     (to-list (m/emap f m ms))))
 
 
 (defn $map
@@ -2275,15 +2279,15 @@
     (to-map (matrix (range 9) 3))
 
   "
-  type)
+  dispatch)
 
-(defmethod to-map :incanter.core/dataset
+(defmethod to-map ::dataset
   ([data]
     (let [cols (map (partial sel data :cols) (col-names data))
           col-keys (map keyword (col-names data))]
       (zipmap col-keys cols))))
 
-(defmethod to-map incanter.Matrix
+(defmethod to-map ::matrix
   ([mat]
     (let [cols (to-list (trans mat))
           col-keys (range (ncol mat))]
@@ -2297,7 +2301,7 @@
       (m/matrix? mat)
         (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat))))
       :else
-        (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat)))))))
+      (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat)))))))
 
 (defn melt
   "
@@ -2543,11 +2547,10 @@
   Returns the Toeplitz matrix for the given vector, which form the first row of the matrix
   "
   ([x]
-    (symmetric-matrix
-      (loop [v (rseq x)
-             d []]
-        (if (nil? v) d
-            (recur (next v) (concat v d)))))))
+     (let [c (m/row-count x)]
+       (m/compute-matrix
+        [c c]
+        (fn [i j] (m/mget x (abs (- i j))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VIEW METHODS
@@ -2727,7 +2730,7 @@
                                 data))))
 
   "
-  (fn [obj & more] (type obj)))
+  (fn [obj & more] dispatch))
 
 
 (defmethod set-data javax.swing.JTable
@@ -2829,7 +2832,7 @@
   (fn [obj filename & options]
     (if (.contains (str (type obj)) "processing.core.PApplet")
       :sketch
-      (type obj))))
+      (dispatch obj))))
 
 
 
