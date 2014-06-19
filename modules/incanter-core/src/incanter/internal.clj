@@ -18,16 +18,11 @@
 
 (ns ^{:skip-wiki true}
     incanter.internal
-  (:require [clatrix.core :as clx])
   (:require [clojure.core.matrix :as m])
-  (:import (clatrix.core Matrix)
-           (cern.colt.matrix.tdouble.algo DoubleFormatter)
+  (:import (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)))
 
-
-
-(derive clatrix.core.Matrix ::matrix)
 
 (defn is-matrix
   "Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
