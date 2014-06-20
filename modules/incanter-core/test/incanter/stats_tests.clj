@@ -15,54 +15,18 @@
 ;; to run these tests:
 ;; (use 'tests core-test-cases)
 ;;  need to load this file to define data variables
-;; (use 'clojure.test) 
+;; (use 'clojure.test)
 ;; then run tests
 ;; (run-tests 'incanter.tests.core-test-cases)
 
 (ns incanter.stats-tests
-  (:use clojure.test 
-        (incanter core stats)))
+  (:use clojure.test
+        (incanter core stats))
+  (:require [clojure.core.matrix :as m]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.stats.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; define a simple matrix for testing
-(def A (matrix [[1 2 3] 
-                [4 5 6] 
-                [7 8 9] 
-                [10 11 12]]))
-
-(def test-mat (matrix
-  [[39      10 ]
-   [51      20 ]
-   [60      30 ]
-   [64      40 ]
-   [73      50 ]
-   [83      60 ]
-   [90      70 ]
-   [93      80 ]
-   [99      90 ]
-   [105     100]
-   [110     110]
-   [111     120]
-   [113     130]
-   [117     140]
-   [120     150]
-   [125     160]
-   [130     170]
-   [133     180]
-   [133     190]
-   [134     200]
-   [138     210]
-   [140     220]
-   [145     230]
-   [146     240]
-   [148     250]]))
-
-(def x (sel test-mat :cols 0))
-(def y (sel test-mat :cols 1))
 
 (def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6] [7 8 9] [10 11 12]]))
 
@@ -94,83 +58,17 @@
                      [1000000114   1000.000117  1.00000011   1000000.000108]  [1000000098  1000.000099  1.000000101  1000000.000096]  [1000000046  1000.000039  1.000000045  1000000.000039]
                      [1000000051   1000.000046  1.000000042  1000000.000042]  [1000000110  1000.000105  1.000000108  1000000.000101]  [1000000056  1000.000057  1.000000056  1000000.00005]]))
 
-(deftest mean-test
-  (is (= (map mean (trans test-mat)) [108.0 130.0])))
-
-(deftest variance-test
-  (is (= (map variance (trans test-mat)) [1001.5833333333334 5416.666666666667])))
-
 (deftest variance-precision-test
   (is (within 1E-13 7.354943E-10 (variance ($ :sensitive precision-ds0))))
   (is (within 1E-19 7.315992E-16 (variance ($ :small precision-ds0))))
   (is (within 1E-13 9.697281E-9 (variance ($ :medium precision-ds0))))
   (is (within 0.001 736.7868 (variance ($ :large precision-ds0)))))
 
-(deftest sd-test
-  ;; calculate the standard deviation of a variable
-  (is (= (sd x) 31.6478013980961))
-  (is (= (map sd A) [1.0 1.0 1.0 1.0])))
-
-(deftest covariance-test
-  ;; get the covariance between two variables
-  (is (= (Math/round (covariance x y)) 2263)))
-
-(deftest median-test
-  ;; calculate the median of a variable
-  (is (= (median x) 113.0)))
-
-(deftest sample-tests
-  ;; test sample function
-  (is (not= (sample (range 10) :replacement false) (range 10)))
-  (is (= (count (sample (range 10))) 10))
-  (is (= (count (sample (range 10) :size 5)) 5))
-  (is (= (count (sample (range 10) :size 5 :replacement false)) 5))
-  (is (= (count (sample (range 10) :replacement false)) (count (range 10))))
-  (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))
-  (is (= (nrow (sample test-mat :size 3)) 3))
-  (is (= (nrow (sample dataset1 :size 3)) 3)))
-
-(deftest sample-mean-test
- (is (= 3.0 
-      (mean [2 3 4]))))
-
-(deftest stdev-test
- (is (= 2.138089935299395 
-      (sd [2 4 4 4 5 5 7 9]))))
-
-(deftest simple-regresssion-tests
- (let [r (simple-regression [2 4] [1 3])]
-  (is (= 3.0
-	 (predict r 2)))))	 
-
-
 (deftest odds-ratio-test
   (let [p1 9/10
 	p2 2/10]
     (is (= 36
 	   (odds-ratio p1 p2)))))
-
-(deftest covariance-test-2
-  (is (= 5.333333333333333
-	 (covariance
-	  [3 1 3 9]
-	  [4 4 8 8]))))
-
-(deftest pearson-test
-  (is (within 0.0001 1
-	      (correlation [5 6 7 8] [8 9 10 11]))))
-
-(deftest correlation-ratio-example
-  (let [algebra [45, 70, 29, 15, 21]
-	geometry [40, 20, 30 42]
-	statistics [65, 95, 80, 70, 85, 73]]
-
-    (is (within 0.0001
-		0.8386
-		(correlation-ratio
-		 algebra
-		 geometry
-		 statistics)))))
 
 (deftest correlation-precision-test
   (is (within 1E-6 -0.05412184 (correlation ($ :large precision-ds0)  ($ :medium precision-ds0))))
@@ -179,50 +77,6 @@
   (is (within 1E-5 0.9941202   (correlation ($ :large precision-ds0)  ($ :sensitive precision-ds0))))
   (is (within 1E-5 -0.02104787 (correlation ($ :medium precision-ds0) ($ :sensitive precision-ds0))))
   (is (within 1E-5 0.9942994   (correlation ($ :small precision-ds0)  ($ :sensitive precision-ds0)))))
-
-(deftest ranking-test
-(is (=
-     {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
-     (rank-index [106 86 100 101 99 103 97 113 112 110]))))
-
-(deftest spearmans-rho-test
-  (is (within 0.000001 (float -29/165)
-	 (spearmans-rho [106 86 100 101 99 103 97 113 112 110] 
-			[7 0 27 50 28 29 20 12 6 17]))))
-
-(deftest kendalls-tau-test
-  (is (= 23/45
-	 (kendalls-tau [4 10 3 1 9 2 6 7 8 5] 
-		       [5 8 6 2 10 3 9 4 7 1])))
-  (is (= 9/13
-	 (kendalls-tau
-	  [1 3 2 4 5 8 6 7 13 10 12 11 9]
-	  [1 4 3 2 7 5 6 8 9 10 12 13 11]))))
-
-(deftest concordancy-test
-  (is (discordant? [[4 2] [2 4]]))
-  (is (= 4
-	 (discordant-pairs [1 2 3 4 5] 
-			   [3 4 1 2 5]))))
-
-(deftest kendalls-tau-distance-test
-  (is (= 4
-	 (kendalls-tau-distance [1 2 3 4 5] 
-				[3 4 1 2 5])))
-  (is (= 2/5
-	 (normalized-kendall-tau-distance [1 2 3 4 5] 
-					  [3 4 1 2 5])))) 
-
-(deftest test-gamma-coefficient
-  (is (= 1
-       (gamma-coefficient [1 2 3]
-                          [4 5 6])))
-  (is (= -1
-       (gamma-coefficient [1 2 3]
-                          [0 -1 -2])))
-  (is (= 1/3
-       (gamma-coefficient [1 2 3]
-                          [0 -1 1]))))
 
 (deftest jaccard-examples
  (is (= 2/6
@@ -279,43 +133,7 @@
     (= 9223372036854775808
        (scalar-abs -9223372036854775808))))
 
-(deftest euclid
-  (is 
-   (= 2.8284271247461903 
-      (euclidean-distance [2 4 3 1 6]
-			  [3 5 1 2 5]))))
-
-(deftest manhattan
-  (is 
-   (= (+ 1.0 1 2 1 1) 
-      (manhattan-distance [2 4 3 1 6]
-			  [3 5 1 2 5]))))
-
-(deftest minkowski-3
-  (is 
-   (= 2.2894284851066637
-      (minkowski-distance 
-        [2 4 3 1 6] [3 5 1 2 5] 3))))
-
-(deftest chebyshev
-  (is 
-   (== 2 
-      (chebyshev-distance [2 4 3 1 6]
-			  [3 5 1 2 5]))))
-
-(deftest cosine-sim
-  (is 
-   (=  0.938572618717412
-       (cosine-similarity  [2 4 3 1 6]
-			   [3 5 1 2 5]))))
-
-(deftest tanimoto-sim
-  (is 
-   (=  0.8840579710144928
-       (tanimoto-coefficient  [2 4 3 1 6]
-			      [3 5 1 2 5]))))
-
-(deftest summary-datasets 
+(deftest summary-datasets
   (is (summarizable? 0 summary-ds0))
   (is (summarizable? 0 summary-ds1))
   (is (summarizable? 0 summary-ds2))
@@ -323,15 +141,150 @@
   (is (summarizable? 0 summary-ds4))
   (is (not (summarizable? 0 summary-ds5)))
   (is (not (summarizable? 0 summary-ds6)))
-  (is (summarizable? 0 summary-ds7))
-  )
+  (is (summarizable? 0 summary-ds7)))
 
-(deftest simple-p-value-test
+(defn mean-test [m]
+  (is (= (map mean (trans m)) [108.0 130.0])))
+
+(defn sample-mean-test []
+ (is (= 3.0
+        (mean [2 3 4]))))
+
+(defn variance-test [m]
+  (is (= (map variance (trans m)) [1001.5833333333334 5416.666666666667])))
+
+(defn sd-test [m x]
+  ;; calculate the standard deviation of a variable
+  (is (= (sd x) 31.6478013980961))
+  (is (= (map sd m) [1.0 1.0 1.0 1.0])))
+
+(defn median-test [x]
+  ;; calculate the median of a variable
+  (is (= (median x) 113.0)))
+
+(defn covariance-test [x y]
+  ;; get the covariance between two variables
+  (is (= (Math/round (covariance x y)) 2263)))
+
+(defn covariance-test-2 []
+  (is (= 5.333333333333333
+	 (covariance
+	  [3 1 3 9]
+	  [4 4 8 8]))))
+
+(defn pearson-test []
+  (is (within 0.0001 1
+	      (correlation [5 6 7 8] [8 9 10 11]))))
+
+(defn correlation-ratio-example []
+  (let [algebra [45, 70, 29, 15, 21]
+	geometry [40, 20, 30 42]
+	statistics [65, 95, 80, 70, 85, 73]]
+
+    (is (within 0.0001
+		0.8386
+		(correlation-ratio
+		 algebra
+		 geometry
+		 statistics)))))
+
+(defn sample-test [m]
+  ;; test sample function
+  (is (not= (sample (range 10) :replacement false) (range 10)))
+  (is (= (count (sample (range 10))) 10))
+  (is (= (count (sample (range 10) :size 5)) 5))
+  (is (= (count (sample (range 10) :size 5 :replacement false)) 5))
+  (is (= (count (sample (range 10) :replacement false)) (count (range 10))))
+  (is (= (into #{} (sample (range 10) :replacement false)) (into #{} (range 10))))
+  (is (= (nrow (sample m :size 3)) 3))
+  (is (= (nrow (sample dataset1 :size 3)) 3)))
+
+(defn ranking-test []
+(is (=
+     {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
+     (rank-index [106 86 100 101 99 103 97 113 112 110]))))
+
+(defn spearmans-rho-test []
+  (is (within 0.000001 (float -29/165)
+	 (spearmans-rho [106 86 100 101 99 103 97 113 112 110]
+			[7 0 27 50 28 29 20 12 6 17]))))
+
+(defn kendalls-tau-test []
+  (is (= 23/45
+	 (kendalls-tau [4 10 3 1 9 2 6 7 8 5]
+		       [5 8 6 2 10 3 9 4 7 1])))
+  (is (= 9/13
+	 (kendalls-tau
+	  [1 3 2 4 5 8 6 7 13 10 12 11 9]
+	  [1 4 3 2 7 5 6 8 9 10 12 13 11]))))
+
+(defn concordancy-test []
+  (is (discordant? [[4 2] [2 4]]))
+  (is (= 4
+	 (discordant-pairs [1 2 3 4 5]
+			   [3 4 1 2 5]))))
+
+(defn kendalls-tau-distance-test []
+  (is (= 4
+	 (kendalls-tau-distance [1 2 3 4 5]
+				[3 4 1 2 5])))
+  (is (= 2/5
+	 (normalized-kendall-tau-distance [1 2 3 4 5]
+					  [3 4 1 2 5]))))
+
+(defn gamma-coefficient-test []
+  (is (= 1
+       (gamma-coefficient [1 2 3]
+                          [4 5 6])))
+  (is (= -1
+       (gamma-coefficient [1 2 3]
+                          [0 -1 -2])))
+  (is (= 1/3
+       (gamma-coefficient [1 2 3]
+                          [0 -1 1]))))
+
+(deftest euclid-test
+  (is
+   (= 2.8284271247461903
+      (euclidean-distance [2 4 3 1 6]
+			  [3 5 1 2 5]))))
+
+(deftest manhattan-test
+  (is
+   (= (+ 1.0 1 2 1 1)
+      (manhattan-distance [2 4 3 1 6]
+			  [3 5 1 2 5]))))
+
+(deftest minkowski-test
+  (is
+   (= 2.2894284851066637
+      (minkowski-distance
+        [2 4 3 1 6] [3 5 1 2 5] 3))))
+
+(deftest chebyshev-test
+  (is
+   (== 2
+      (chebyshev-distance [2 4 3 1 6]
+			  [3 5 1 2 5]))))
+
+(deftest cosine-sim-test
+  (is
+   (=  0.938572618717412
+       (cosine-similarity  [2 4 3 1 6]
+			   [3 5 1 2 5]))))
+
+(deftest tanimoto-sim-test
+  (is
+   (=  0.8840579710144928
+       (tanimoto-coefficient  [2 4 3 1 6]
+			      [3 5 1 2 5]))))
+
+(defn simple-p-value-test []
   (testing "Basic p-value testing"
     (is (= 1.0 (simple-p-value (range 1 11) 5.5)))
     (is (< 0.999 (simple-p-value (range 1 11) 5.499)))))
 
-(deftest t-test-test
+(defn t-test-test []
   (testing "Return values for a t-test"
     (let [t-test-result
           (t-test
@@ -339,19 +292,19 @@
            :y [1,1,2,2,2,4,4])]
       (is (> 1 (:p-value t-test-result))))))
 
-(deftest benford-law-test
-  (let [coll [1131111 623946 325911 1799255 199654 299357 3819495 359578 285984 2214801 341104 1303129 444480 295177 450269 1758026 498061 422457 315689 1160446 573568 253962 515211 998573 677829 1289257 572988 482990 765723 337178]]
+(defn benford-law-test []
+  (let [coll (matrix [1131111 623946 325911 1799255 199654 299357 3819495 359578 285984 2214801 341104 1303129 444480 295177 450269 1758026 498061 422457 315689 1160446 573568 253962 515211 998573 677829 1289257 572988 482990 765723 337178])]
     (is
-      (= (format "%.8f" 5.4456385557467595) 
+      (= (format "%.8f" 5.4456385557467595)
          (format "%.8f" (:X-sq (benford-test coll)))))))
 
-(deftest linear-model-with-zero-ss
+(defn linear-model-with-zero-ss []
   ;; pre 1.5.0 linear model would have a divide by zero exception with this data
   (let [data [0.0 2.0 0.0 0.0 0.0 1.0 1.0 3.0 0.0 2.0 0.0 1.0 2.0 0.0 0.0 0.0 0.0 1.0 2.0 0.0 1.0 1.0]
         lm (linear-model data data)]
     (is (= 1.0 (:r-square lm)))))
 
-(deftest linear-model-r2-test
+(defn linear-model-r2-test []
   (let [x [10 12 10 15 14 12 13 15 16 14 13 12 11 10 13 13 14 18 17 14]
         y [3.33 2.92 2.56 3.08 3.57 3.31 3.45 3.93 3.82 3.70
            3.26 3.00 2.74 2.85 3.33 3.29 3.58 3.85 4.00 3.50]
@@ -359,3 +312,70 @@
     (testing "Linear Model R^2 tests"
       (is (= 0.6682675077269637 (:r-square lm)))
       (is (= 0.6292401556948419 (:adj-r-square lm))))))
+
+(defn simple-regresssion-test []
+ (let [r (simple-regression [2 4] [1 3])]
+  (is (m/equals 3.0 (predict r 2)))))
+
+(deftest compliance-test
+  (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
+    (m/set-current-implementation impl)
+    (let [m1 (matrix [[1 2 3]
+                      [4 5 6]
+                      [7 8 9]
+                      [10 11 12]])
+          m2 (matrix [[39      10 ]
+                      [51      20 ]
+                      [60      30 ]
+                      [64      40 ]
+                      [73      50 ]
+                      [83      60 ]
+                      [90      70 ]
+                      [93      80 ]
+                      [99      90 ]
+                      [105     100]
+                      [110     110]
+                      [111     120]
+                      [113     130]
+                      [117     140]
+                      [120     150]
+                      [125     160]
+                      [130     170]
+                      [133     180]
+                      [133     190]
+                      [134     200]
+                      [138     210]
+                      [140     220]
+                      [145     230]
+                      [146     240]
+                      [148     250]])
+          x (sel m2 :cols 0)
+          y (sel m2 :cols 1)]
+      (println (str "compliance test " impl))
+      (mean-test m2)
+      (sample-mean-test)
+      (variance-test m2)
+      (sd-test m1 x)
+      (median-test x)
+      (covariance-test x y)
+      (pearson-test)
+      (correlation-ratio-example)
+      (sample-test m2)
+      (ranking-test)
+      (spearmans-rho-test)
+      (kendalls-tau-test)
+      (concordancy-test)
+      (kendalls-tau-distance-test)
+      (gamma-coefficient-test)
+      (euclid-test)
+      (manhattan-test)
+      (minkowski-test)
+      (chebyshev-test)
+      (cosine-sim-test)
+      (tanimoto-sim-test)
+      (simple-p-value-test)
+      (t-test-test)
+      (benford-law-test)
+      (linear-model-with-zero-ss)
+      (linear-model-r2-test)
+      (simple-regresssion-test))))
