@@ -491,19 +491,19 @@
   ([& args] (apply m/div args)))
 
 
-(defn safe-div  ;; TODO modify to work with matrices ?
-  "
-  DivideByZero safe alternative to clojures / function,
+(defn safe-div
+  "DivideByZero safe alternative to clojures / function,
   detects divide by zero and returns Infinity, -Infinity or NaN as appropriate.
-  Note: Does not work on matrices, only primitive types
   "
   ([x] (safe-div 1 x))
   ([x y]
-    (try (m/div x y)
-         (catch ArithmeticException _
-         (cond (> x 0)   Double/POSITIVE_INFINITY
-               (zero? x) Double/NaN
-                  :else     Double/NEGATIVE_INFINITY))))
+     (m/emap
+      #(try (m/div %1 %2)
+            (catch ArithmeticException _
+              (cond (> %1 0) Double/POSITIVE_INFINITY
+                  (zero? %1) Double/NaN
+                  :else Double/NEGATIVE_INFINITY)))
+      x y))
   ([x y & more]
      (reduce safe-div (safe-div x y) more)))
 
