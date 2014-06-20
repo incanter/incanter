@@ -799,11 +799,12 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
+  TODO: remove coerce to clatrix as soon as linear algebra is ready
   "
 ([A B]
-  (clx/solve A B))
+  (clx/solve (m/coerce :clatrix A) (m/coerce :clatrix B)))
 ([A]
-  (clx/i A)))
+  (clx/i (m/coerce :clatrix A))))
 
 (defn det
   "
