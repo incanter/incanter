@@ -670,6 +670,10 @@
                       (:column-names data)))
        (:rows data)))
 
+(defmethod to-list ::vector
+  [data]
+  (apply list data))
+
 (defmethod to-list nil [s] nil)
 
 (defmethod to-list :default [s] s)
@@ -693,6 +697,10 @@
              (m/column-matrix? mat))
        (m/to-vector mat)
        (m/to-nested-vectors mat))))
+
+(defmethod to-vect ::vector
+  [v]
+  (apply vector v ))
 
 (defmethod to-vect ::dataset
   [data]
