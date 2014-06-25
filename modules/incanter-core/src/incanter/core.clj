@@ -289,56 +289,22 @@
 
 (defmethod sel [::matrix false]
   ([mat rows columns]
-   (let [rws (if (number? rows) [rows] rows)
-         cols (if (number? columns) [columns] columns)
-         all-rows? (or (true? rws) (= rws :all))
-         all-cols? (or (true? cols) (= cols :all))]
-    (cond
-     (and (number? rows) (number? columns))
-      (m/mget mat rows columns)
-     (and all-rows? (coll? cols))
-      (matrix (m/select mat :all cols))
-     (and (coll? rws) all-cols?)
-      (matrix (m/select mat rws :all))
-     (and (coll? rws) (coll? cols))
-      (matrix (m/select mat rws cols))
-    (and all-rows? all-cols?)
-      mat))))
+     (matrix (m/select mat rows columns))))
 
 (defmethod sel [::matrix true]
   ([mat & {:keys [rows cols except-rows except-cols filter-fn all]}]
    (let [rows (cond
                 rows rows
                 except-rows (except-for (m/row-count mat) except-rows)
-                :else true)
+                all all
+                :else :all)
          cols (cond
                 cols cols
                 except-cols (except-for (m/column-count mat) except-cols)
                 all all
-                :else true)
-         mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
-         all-rows? (or (true? rows) (= rows :all) all)
-         all-cols? (or (true? cols) (= cols :all) (= all :all))]
-     (cond
-       (and (number? rows) (number? cols))
-         (m/mget mat rows cols)
-       (and all-rows? (coll? cols))
-         (matrix (m/select mat :all cols))
-       (and all-rows? (number? cols))
-         (matrix (m/select mat :all [cols]))
-       (and (coll? rows) (number? cols))
-         (matrix (m/select rows [cols]))
-       (and (coll? rows) all-cols?)
-         (matrix (m/select mat rows :all))
-       (and (number? rows) all-cols?)
-         (let [res (m/select mat rows :all)]
-           (matrix res (m/row-count res)))
-       (and (number? rows) (coll? cols))
-         (matrix (m/select mat rows cols) (count cols))
-       (and (coll? rows) (coll? cols))
-         (matrix (m/select mat rows cols))
-       (and all-rows? all-cols?)
-       mat))))
+                :else :all)
+         mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))]
+     (matrix (m/select mat rows cols)))))
 
 (prefer-method sel [::matrix true] [java.util.List true])
 (prefer-method sel [::matrix false] [java.util.List false])
