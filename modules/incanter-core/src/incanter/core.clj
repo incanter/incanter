@@ -52,6 +52,9 @@
 
 (defrecord Dataset [column-names rows])
 
+(defn set-current-implementation [imp]
+  (m/set-current-implementation imp))
+
 (defn matrix
 "
   Returns a matrix, in a valid core.matrix format. You can use the slices function to
