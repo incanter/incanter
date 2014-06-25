@@ -601,7 +601,7 @@
 
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
-    (m/set-current-implementation impl)
+    (set-current-implementation impl)
     (println (str "compliance test " impl))
     (let [m (matrix [[1 2 3]
                      [4 5 6]
