@@ -27,8 +27,8 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                                bind-columns view save $group-by conj-cols
+  (:use [incanter.core :only ($ matrix? dataset? vec? to-list plus minus div
+                                group-on bind-columns view save $group-by conj-cols
                                 grid-apply set-data col-names $data sel abs)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean
                                sd correlation variance)]
@@ -315,7 +315,10 @@
   If x is a single value, and data is defined, return ($ x data)
   "
   [x data]
-  (if (coll? x)
+  (if (or (coll? x)
+          (dataset? x)
+          (matrix? x)
+          (vec? x))
     (to-list x)
     (if data
       (let [selected ($ x data)]

@@ -31,33 +31,6 @@
 
 (def wait-timeout 3000)
 
-(def test-mat (matrix
-  [[39      10 ]
-   [51      20 ]
-   [60      30 ]
-   [64      40 ]
-   [73      50 ]
-   [83      60 ]
-   [90      70 ]
-   [93      80 ]
-   [99      90 ]
-   [105     100]
-   [110     110]
-   [111     120]
-   [113     130]
-   [117     140]
-   [120     150]
-   [125     160]
-   [130     170]
-   [133     180]
-   [133     190]
-   [134     200]
-   [138     210]
-   [140     220]
-   [145     230]
-   [146     240]
-   [148     250]]))
-
 
 (deftest bar-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
@@ -201,10 +174,10 @@
   )
 
 
-(deftest scatter-tests
+(defn scatter-tests [m]
   (def sw1 (view (scatter-plot
-                  (sel test-mat :cols 0)
-                  (sel test-mat :cols 0)
+                  (sel m :cols 0)
+                  (sel m :cols 0)
                   :series-lab "Test data col 1 versus col 2")))
 
 
@@ -278,7 +251,7 @@
   (.dispose cw2))
 
 
-(deftest bar-chart-tests
+(defn bar-chart-tests []
   (def data (get-dataset :co2))
   (def grass-type (sel data :cols 1))
   (def treatment-type (sel data :cols 2))
@@ -306,7 +279,7 @@
   (Thread/sleep wait-timeout)
   (.dispose pw1))
 
-(deftest line-chart-tests
+(defn line-chart-tests []
   (def data (get-dataset :airline-passengers))
   (def years (sel data :cols 0))
   (def months (sel data :cols 2))
@@ -444,5 +417,35 @@
         (assert false "Should have failed for set-axis doesn't support PieChart")
         (catch AssertionError e)))))
 
-
-; (run-tests)
+(deftest comliance-test
+  (doseq [impl [:vectorz :ndarray :persistent-vector]]
+    (set-current-implementation impl)
+    (println (str "compliance test " impl))
+    (let [m (matrix [[39      10 ]
+                     [51      20 ]
+                     [60      30 ]
+                     [64      40 ]
+                     [73      50 ]
+                     [83      60 ]
+                     [90      70 ]
+                     [93      80 ]
+                     [99      90 ]
+                     [105     100]
+                     [110     110]
+                     [111     120]
+                     [113     130]
+                     [117     140]
+                     [120     150]
+                     [125     160]
+                     [130     170]
+                     [133     180]
+                     [133     190]
+                     [134     200]
+                     [138     210]
+                     [140     220]
+                     [145     230]
+                     [146     240]
+                     [148     250]])]
+      (scatter-tests m)
+      (bar-chart-tests)
+      (line-chart-tests))))
