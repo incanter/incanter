@@ -1495,14 +1495,8 @@
     (use '(incanter core datasets))
     (def data (get-dataset :cars))
     (col-names data)
-
-    (def renamed-data (col-names data [:x1 :x2]))
-    (col-names renamed-data)
-
   "
-  ([data] (:column-names data))
-  ([data colnames]
-    (dataset colnames (to-list data))))
+  ([data] (:column-names data)))
 
 
 
@@ -2072,7 +2066,7 @@
     (let [old-col-names (col-names data)
           new-col-names (reduce
                          replace-by-number-or-value old-col-names col-map)]
-      (col-names data new-col-names))))
+      (dataset new-col-names (to-list data)))))
 
 (defn- update
   ([m key f] (update-in m [key] f))
