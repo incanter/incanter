@@ -1187,36 +1187,19 @@
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn dataset
-  "
-  Returns a map of type incanter.core.dataset constructed from the given column-names and
-  data. The data is either a sequence of sequences or a sequence of hash-maps.
-  "
-  ([column-names & data]
-    (let [dat (cond
-                (or (map? (ffirst data)) (coll? (ffirst data)))
-                  (first data)
-                (map? (first data))
-                  data
-                :else
-                  (map vector (first data)))
-          rows (cond
-                 (map? dat)
-                   [dat]
-                 (map? (first dat))
-                   dat
-                 :else
-                   (map #(apply assoc {} (interleave column-names %)) dat))]
-      (Dataset. (into [] column-names) rows))))
-
 
 (defn- get-column-id [dataset column-key]
   (let [headers (:column-names dataset)]
     (cond
+     (some #{column-key} headers)
+     column-key
+
      (and (keyword? column-key) ;; if the given column name is a keyword, and
-          ;; a keyword column name wasn't used in the dataset
-          (not (some #{column-key} headers)))
-     (name column-key) ;; convert the keyword to a string
+          ;; a keyword column name wasn't used in the dataset, and
+          (not (some #{column-key} headers))
+          ;; a string version was used in the dataset
+          (some #{(name column-key)} headers))
+     (get-column-id dataset(name column-key)) ;; convert the keyword to a string
 
      (and (string? column-key) ;; if the given column is a string, and
           ;; this column was't used in the dataset, and
@@ -1231,7 +1214,7 @@
           (not (some #(= column-key %) headers)))
      (nth headers column-key) ;; get nth column from headers
 
-     :else column-key)))
+     :else nil)))
 
 (defn- map-get
   ([m k]
