@@ -134,7 +134,7 @@
 
 
 
-(defn identity-matrix
+(defn ^:deprecated identity-matrix
   "
   Returns an n-by-n identity matrix.
 
@@ -144,7 +144,7 @@
   ([^Integer n] (m/identity-matrix n)))
 
 
-(defn diag
+(defn ^:deprecated diag
   "If given a matrix, diag returns a sequence of its diagonal elements.
   If given a sequence, it returns a matrix with the sequence's elements
   on its diagonal. Equivalent to R's diag function.
@@ -162,7 +162,7 @@
     (m/diagonal-matrix m)))
 
 
-(defn trans
+(defn ^:deprecated trans
   "
   Returns the transpose of the given matrix. Equivalent to R's t function
 
@@ -397,7 +397,7 @@
   [& args] (apply m/add args))
 
 
-(defn minus
+(defn ^:deprecated minus
   "
   Performs element-by-element subtraction on multiple matrices, sequences
   and/or numbers. If only a single argument is provided, returns the negative
@@ -418,7 +418,7 @@
   "
   [& args] (apply m/sub args))
 
-(defn mult
+(defn ^:deprecated mult
   "
   Performs element-by-element multiplication on multiple matrices, sequences
   and/or numbers. Equivalent to R's * operator.
@@ -439,7 +439,7 @@
   (apply m/emul args))
 
 
-(defn div
+(defn ^:deprecated div
   "
   Performs element-by-element division on multiple matrices, sequences
   and/or numbers. Equivalent to R's / operator.
@@ -678,7 +678,7 @@
 
 (defmethod to-list :default [s] s)
 
-(defn copy
+(defn ^:deprecated copy
   ([mat]
      (m/clone mat)))
 
@@ -706,15 +706,15 @@
   [data]
   (into [] (map (fn [row]
                   (into [] (map (fn [col] (row col))
-                                (:column-names data))))
-                (:rows data))))
+                                (.column-names data))))
+                (.rows data))))
 
 (defmethod to-vect nil [s] nil)
 
 (defmethod to-vect :default [s] s)
 
 
-(defn mmult
+(defn ^:deprecated mmult
   "
   Returns the matrix resulting from the matrix multiplication of the
   the given arguments. Equivalent to R's %*% operator.
@@ -766,7 +766,7 @@
                   (and (== adims 2) (== bdims 1)) (recur A (matrix [B])))))
             args)))
 
-(defn solve
+(defn ^:deprecated solve
   "
   Returns a matrix solution if A is square, least squares solution otherwise.
   Equivalent to R's solve function.
@@ -783,7 +783,7 @@
 ([A]
   (clx/i (m/coerce :clatrix A))))
 
-(defn det
+(defn ^:deprecated det
   "
   Returns the determinant of the given matrix. Equivalent
   to R's det function.
@@ -795,7 +795,7 @@
      (m/det mat)))
 
 
-(defn trace
+(defn ^:deprecated trace
   "
   Returns the trace of the given matrix.
 
@@ -848,7 +848,7 @@
 
 
 
-(defn sum-of-squares
+(defn ^:deprecated sum-of-squares
   "Returns the sum-of-squares of the given sequence."
   ([x]
      (if (or (m/row-matrix? x)
@@ -857,7 +857,7 @@
        (m/length-squared x))))
 
 
-(defn sum
+(defn ^:deprecated sum
   "Returns the sum of the given sequence."
   ([x]
      (m/esum x)))
@@ -899,7 +899,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn decomp-cholesky
+(defn ^:deprecated decomp-cholesky
   "
   Returns the Cholesky decomposition of the given matrix. Equivalent to R's
   chol function.
@@ -928,7 +928,7 @@
 
 (def ^:private ^:const allowed-types #{:full :compact :values})
 
-(defn decomp-svd
+(defn ^:deprecated decomp-svd
   "
   Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
   R's svd function.
@@ -970,7 +970,7 @@
        :U (if (= type :compact) mat (:left result))
        :V (:right result)})))
 
-(defn decomp-eigenvalue
+(defn ^:deprecated decomp-eigenvalue
   "
   Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
 
@@ -995,7 +995,7 @@
      :vectors (or (:vectors result) (:ivectors result))}))
 
 
-(defn decomp-lu
+(defn ^:deprecated decomp-lu
   "
   Returns the LU decomposition of the given matrix.
 
@@ -1023,16 +1023,16 @@
         :U (:u result)
         :P (:p result)})))
 
-(defn vector-length [u]
+(defn ^:deprecated vector-length [u]
   (m/length u))
 
-(defn inner-product [u v]
-  (apply + (mult u (trans v))))
+(defn ^:deprecated inner-product [u v]
+  (m/inner-product u v))
 
 (defn proj [u v]
   (mult (div (inner-product v u) (inner-product u u)) u))
 
-(defn decomp-qr
+(defn ^:deprecated decomp-qr
   "
   Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
@@ -1078,10 +1078,10 @@
   "
   ([mat]
     (let [s (:S (decomp-svd mat))]
-      (/ (apply max s) (apply min s)))))
+      (/ (m/emax s) (m/emin s)))))
 
 
-(defn rank
+(defn ^:deprecated rank
   "
   Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
 
@@ -1104,7 +1104,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn length
+(defn ^:deprecated length
   "
   A version of count that works on collections, matrices, and numbers.
   The length of a number is one, the length of a collection is its count
@@ -1912,7 +1912,7 @@
               {group-value (dataset orig-col-names group-rows)})))))
 
 
-(defn matrix-map
+(defn ^:deprecated matrix-map
   "
   Like clojure.core/map, but will work on matrices of any dimension:
   1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m
@@ -1927,9 +1927,9 @@
     (matrix-map #(mod % 2) 9)
   "
   ([f m]
-     (to-list (m/emap f m)))
+     (m/emap f m))
   ([f m & ms]
-     (to-list (m/emap f m ms))))
+     (apply m/emap f m ms)))
 
 
 (defn $map
