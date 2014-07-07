@@ -263,7 +263,8 @@
   "combining matrices/vectors by row"
   [m]
   (is (m/equals (bind-rows m m m) (bind-rows m (bind-rows m m))))
-  (is (m/equals (bind-rows [1 2 3] [4 5 6])
+  (is (m/equals (bind-rows (matrix [1 2 3])
+                           (matrix [4 5 6]))
              (matrix [[1 2 3]
                       [4 5 6]])))
   (is (m/equals (bind-rows m [13 14 15])
@@ -272,7 +273,7 @@
                   [7 8 9]
                   [10 11 12]
                   [13 14 15]])))
-  (is (m/equals (bind-rows [13 14 15] m)
+  (is (m/equals (bind-rows (matrix [13 14 15]) m)
              [[13 14 15]
               [1 2 3]
               [4 5 6]
