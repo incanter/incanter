@@ -21,7 +21,7 @@
             mathematical operations and the core data manipulation
             functions for Incanter.
 
-            This library is built on Clatrix (https://github.com/tel/clatrix)
+            This library is built on core.matrix (https://github.com/mikera/core.matrix)
             and Parallel Colt
             (http://sites.google.com/site/piotrwendykier/software/parallelcolt)
             an extension of the Colt numerics library
@@ -57,7 +57,7 @@
 
 (defn matrix
 "
-  Returns a matrix, in a valid core.matrix format. You can use the slices function to
+  Returns a matrix or vector, in a valid core.matrix format. You can use the slices function to
   access the rows.
 
   Equivalent to R's matrix function.
@@ -65,12 +65,7 @@
   Examples:
     (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix
     (def A2 (matrix [1 2 3 4 5 6 7 8 9] 3)) ; produces the same 3x3 matrix
-    (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column matrix
-
-    (first A) ; produces a row matrix [1 2 3]
-    (rest A) ; produces a sub matrix [[4 5 6] [7 8 9]]
-    (first (first A)) ; produces 1.0
-    (rest (first A)) ; produces a row matrix [2 3]
+    (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a vector with 9 elements
 
     ; since (plus row1 row2) adds the two rows element-by-element
     (reduce plus A) ; produces the sums of the columns
@@ -78,8 +73,6 @@
     ; and since (sum row1) sums the elements of the row
     (map sum A) ; produces the sums of the rows
 
-    ; you can filter the rows using Clojure's filter function
-    (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
   "
   ([data]
      (m/matrix data))
@@ -127,8 +120,11 @@
      (dataset? mat) (count (:column-names mat))
      (coll? mat) 1 )))
 
-(defn dim
-  "Returns a vector with the number of rows and columns of the given matrix."
+(defn ^:deprecated dim
+  "Returns a vector with the number of rows and columns of the given matrix.
+
+   Deprecated. Please use clojure.core.matrix/dimensionality instead.
+  "
   ([mat]
      (m/dimensionality mat)))
 
@@ -140,6 +136,8 @@
 
   Examples:
   (identity-matrix 4)
+
+  Deprecated. Please use clojure.core.matrix/identity-matrix instead.
   "
   ([^Integer n] (m/identity-matrix n)))
 
@@ -150,12 +148,16 @@
   on its diagonal. Equivalent to R's diag function.
 
   Examples:
-  (diag [1 2 3 4])
+  (diag [1 2 3 4]) ; produces diagonal matrix
 
   (def A (matrix [[1 2 3]
   [4 5 6]
   [7 8 9]]))
-  (diag A)"
+  (diag A) ;; returns elements on main diagonal
+
+  Deprecated. Please use clojure.core.matrix/main-diagonal for getting elements on main diagonal
+  and clojure.core.matrix/diagonal-matrix for creating diagonal matrix instead.
+  "
   [m]
   (if (== 2 (m/dimensionality m))
     (matrix (m/main-diagonal m))
@@ -171,12 +173,11 @@
                     [4 5 6]
                     [7 8 9]]))
     (trans A)
+
+  Deprecated. Please use clojure.core.matrix/transpose instead.
   "
   ([mat]
-   (if (matrix? mat)
-     (m/transpose mat)
-     (m/transpose (matrix mat)))))
-
+   (m/transpose mat)))
 
 
 (defn- except-for
@@ -377,7 +378,7 @@
 ;; MATH FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn plus
+(defn ^:deprecated plus
   "
   Performs element-by-element addition on multiple matrices, sequences
   and/or numbers. Equivalent to R's + operator.
@@ -393,6 +394,9 @@
   (plus [1 2 3] [1 2 3])
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])
+
+  Deprecated. Please use clojure.core.matrix/add or
+  clojure.core.matrix.operators/+ instead.
   "
   [& args] (apply m/add args))
 
@@ -415,6 +419,9 @@
     (minus [1 2 3] 2)
     (minus 2 [1 2 3])
     (minus [1 2 3])
+
+  Deprecated. Please use clojure.core.matrix/sub or
+  clojure.core.matrix.operators/- instead.
   "
   [& args] (apply m/sub args))
 
@@ -434,6 +441,9 @@
   (mult [1 2 3] [1 2 3])
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
+
+  Deprecated. Please use clojure.core.matrix/emul or
+  clojure.core.matrix.operators/* instead.
   "
   [& args]
   (apply m/emul args))
@@ -456,6 +466,9 @@
   (div 2 [1 2 3])
 
   (div [1 2 3]) ; returns [1 1/2 13]
+
+  Deprecated. Please use clojure.core.matrix/emul or
+  clojure.core.matrix.operators/div instead.
   "
   ([& args] (apply m/div args)))
 
@@ -679,6 +692,9 @@
 (defmethod to-list :default [s] s)
 
 (defn ^:deprecated copy
+  "
+  Deprecated. Please use clojure.core.matrix/clone instead.
+  "
   ([mat]
      (m/clone mat)))
 
@@ -729,6 +745,8 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_multiplication
+
+  Deprecated. Please use clojure.core.matrix/mmul instead.
   "
   ([& args]
      (apply m/mmul args)))
@@ -777,6 +795,11 @@
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
   TODO: remove coerce to clatrix as soon as linear algebra is ready
+
+  Deprecated. Please use clojure.core.matrix/inverse for matrix inverse,
+  clojure.core.matrix.linear/solve for solving system of linear equations and
+  clojure.core.matrix.linear/least-squares for least-squares solution.
+
   "
 ([A B]
   (clx/solve (m/coerce :clatrix A) (m/coerce :clatrix B)))
@@ -790,6 +813,8 @@
 
    References:
     http://en.wikipedia.org/wiki/LU_decomposition
+
+  Deprecated. Please use clojure.core.matrix/det instead.
   "
   ([mat]
      (m/det mat)))
@@ -801,6 +826,8 @@
 
   References:
   http://en.wikipedia.org/wiki/Matrix_trace
+
+  Deprecated. Please use clojure.core.matrix/trace instead.
   "
   [mat]
   (m/trace mat))
@@ -849,7 +876,11 @@
 
 
 (defn ^:deprecated sum-of-squares
-  "Returns the sum-of-squares of the given sequence."
+  "
+  Returns the sum-of-squares of the given sequence.
+
+  Deprecated. Please use clojure.core.matrix/length-squared instead.
+  "
   ([x]
      (if (or (m/row-matrix? x)
              (m/column-matrix? x))
@@ -858,7 +889,11 @@
 
 
 (defn ^:deprecated sum
-  "Returns the sum of the given sequence."
+  "
+  Returns the sum of the given sequence.
+
+  Deprecated. Please use clojure.core.matrix/esum instead.
+  "
   ([x]
      (m/esum x)))
 
@@ -921,6 +956,8 @@
 
   References:
     http://en.wikipedia.org/wiki/Cholesky_decomposition
+
+  Deprecated. Please use clojure.core.matrix.linear/cholesky instead.
   "
   [mat]
   (let [mat (m/coerce :clatrix mat)]
@@ -957,6 +994,8 @@
 
   References:
   http://en.wikipedia.org/wiki/Singular_value_decomposition
+
+  Deprecated. Please use clojure.core.matrix.linear/svd instead.
   "
   [mat & {:keys [type] :or {type :full}}]
   (let [mat (m/coerce :clatrix mat) ;; TODO: generalise for all matrices
@@ -987,6 +1026,8 @@
 
   References:
   http://en.wikipedia.org/wiki/Eigenvalue_decomposition
+
+  Deprecated. Please use clojure.core.matrix.linear/eigen instead.
   "
   [mat]
   (let [mat (m/coerce :clatrix mat)
@@ -1015,6 +1056,8 @@
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
     http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
+
+  Deprecated. Please use clojure.core.matrix.linear/lu instead.
   "
   ([mat]
      (let [mat (m/coerce :clatrix mat)
@@ -1024,6 +1067,7 @@
         :P (:p result)})))
 
 (defn ^:deprecated vector-length [u]
+  "Deprecated. Please use clojure.core.matrix/length instead."
   (m/length u))
 
 (defn ^:deprecated inner-product [u v]
@@ -1055,6 +1099,7 @@
   References:
   http://en.wikipedia.org/wiki/QR_decomposition
 
+  Deprecated. Please use clojure.core.matrix.linear/qr instead.
   "
   [m & {:keys [type]}]
   (let [;type (or (#{:full :compact} type) :full)
@@ -1093,6 +1138,8 @@
 
   References:
   http://en.wikipedia.org/wiki/Matrix_rank
+
+  Deprecated. Please use clojure.core.matrix.linear/rank instead.
   "
   [mat]
   (clx/rank mat))
@@ -1110,17 +1157,11 @@
   The length of a number is one, the length of a collection is its count
   and the length of a matrix is the number of elements it contains (nrow*ncol).
   Equivalent to R's length function.
+
+  Deprecated. Please use clojure.core.matrix/ecount instead.
   "
   ([coll]
-    (cond
-      (number? coll)
-        1
-      (matrix? coll)
-        (* (nrow coll) (ncol coll))
-      (coll? coll)
-        (count coll)
-      :else
-        1)))
+   (m/ecount coll)))
 
 (defn group-on
   "
@@ -1902,6 +1943,8 @@
     (matrix-map #(mod % 2) ($ 1 0 mat))
     (matrix-map #(mod % 2) [1 2 3 4])
     (matrix-map #(mod % 2) 9)
+
+  Deprecated. Please use clojure.core.matrix/emap instead.
   "
   ([f m]
      (m/emap f m))
