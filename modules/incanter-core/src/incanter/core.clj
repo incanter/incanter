@@ -1230,32 +1230,32 @@
 
 
 (defn- get-column-id [dataset column-key]
-  (let [headers (:column-names dataset)]
+  (let [headers (:column-names dataset)
+        error "Column not found."]
     (cond
      (some #{column-key} headers)
      column-key
-
-     (and (keyword? column-key) ;; if the given column name is a keyword, and
-          ;; a keyword column name wasn't used in the dataset, and
-          (not (some #{column-key} headers))
-          ;; a string version was used in the dataset
-          (some #{(name column-key)} headers))
-     (get-column-id dataset(name column-key)) ;; convert the keyword to a string
-
-     (and (string? column-key) ;; if the given column is a string, and
-          ;; this column was't used in the dataset, and
-          (not (some #{column-key} headers))
-          ;; a keyword column name was used in the dataset
-          (some #{(keyword column-key)} headers))
-     ;; convert string to keyword
-     (keyword column-key)
 
      (and (number? column-key) ;; if the given column name is a number
           ;; and this number is not in headers
           (not (some #(= column-key %) headers)))
      (nth headers column-key) ;; get nth column from headers
 
-     :else nil)))
+     (and (keyword? column-key) ;; if the given column name is a keyword, and
+          ;; a keyword column name wasn't used in the dataset, and
+          (not (some #{column-key} headers))
+          ;; a string version was used in the dataset
+          (some #{(name column-key)} headers))
+     (throw (RuntimeException. (str error " Typo? There is a column with the same name of string type.")))
+
+     (and (string? column-key) ;; if the given column is a string, and
+          ;; this column was't used in the dataset, and
+          (not (some #{column-key} headers))
+          ;; a keyword column name was used in the dataset
+          (some #{(keyword column-key)} headers))
+     (throw (RuntimeException. (str error " Typo? There is a column with the same name of keyword type.")))
+
+     :else (throw (RuntimeException. error)))))
 
 (defn- map-get
   ([m k]

@@ -10,12 +10,10 @@
 
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
-  (is (= (sel dataset2 :cols :b) [2 5]))
   (is (= (sel dataset2 :cols "c") [3 6]))
   (is (= (sel dataset3 :cols :a) [1 4]))
-  (is (= (sel dataset4 :cols :b) [2 5]))
   (is (= (sel dataset4 :cols "c") [3 6]))
-  (is (= (sel dataset5 :rows 1 :cols :a) nil)))
+  (is (= (sel dataset5 :rows 1 :cols "a") nil)))
 
 (def car0 [60, 6000, :green])
 (def car1 [70, 7000, :silver])
