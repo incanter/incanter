@@ -1377,18 +1377,18 @@
                  except-rows (except-for (nrow data) except-rows)
                  :else true)
           cols (cond
-
                  cols cols
                  except-cols (except-for-cols data except-cols)
                  all all
                  :else true)
+          all-rows? (or (true? rows) (= rows :all) all)
           colnames (:column-names data)
           selected-cols (cond
                           (or (= cols :all) (true? cols)) colnames
                           (coll? cols) (map #(get-column-id data %) cols)
                           :else [cols])
           selected-rows (cond
-                          (or (= rows :all) (true? rows) all)
+                          all-rows?
                             (:rows data)
                           (number? rows)
                             (list (nth (:rows data) rows))
@@ -1401,11 +1401,10 @@
           (if (= (count result) 1)
             (ffirst result)
             (mapcat identity result))
-        (and (= (count result) 1) (not (or (coll? rows) (true? rows))))
+        (and (= (count result) 1) (not (or (coll? rows) all-rows?)))
           (first result)
         :else
           (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
-
 
 (defn to-dataset
   "
