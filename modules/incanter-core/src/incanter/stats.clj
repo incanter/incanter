@@ -2942,7 +2942,8 @@
   and the values are the positional rank of each member o the seq.
   "
   [x]
-    (zipmap (sort x) (range 1 (inc (count x)))))
+  (apply merge-with concat (map hash-map (sort x) (map list (range 1 (inc (count x)))))))
+
 
 (defn spearmans-rho
   "
@@ -2961,10 +2962,10 @@
     (let [n (count a)
           arank (rank-index a)
           brank (rank-index b)
-          dsos (apply
+	  dsos (apply 
                  + (map (fn [x y] (pow
-                     (- (arank x) (brank y))
-                         2))
+                  (- (incanter.stats/mean (arank x)) (incanter.stats/mean (brank y)))
+                    2))
            a b))]
     (- 1 (/ (* 6 dsos)
             (* n (dec (pow n 2)))))))

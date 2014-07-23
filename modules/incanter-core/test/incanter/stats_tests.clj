@@ -210,10 +210,12 @@
   (is (within 1E-5 0.9942994   (correlation ($ :small precision-ds0)  ($ :sensitive precision-ds0)))))
 
 (deftest ranking-test
-(is (=
-     {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
-     (rank-index [106 86 100 101 99 103 97 113 112 110]))))
-
+  (is (=
+      {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
+      (into {}
+          (map (fn [[x [y & more]]] [x y])
+              (seq (rank-index [106 86 100 101 99 103 97 113 112 110])))))))
+ 
 (deftest spearmans-rho-test
   (is (within 0.000001 (float -29/165)
 	 (spearmans-rho [106 86 100 101 99 103 97 113 112 110] 
