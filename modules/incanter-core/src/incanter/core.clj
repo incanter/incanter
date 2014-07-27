@@ -35,8 +35,8 @@
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)]
         [clojure.pprint :only (print-table)])
-  (:require [clatrix.core :as clx])
   (:require [clojure.core.matrix :as m])
+  (:require [clojure.core.matrix.linear :as l])
   (:import (cern.jet.math.tdouble DoubleArithmetic)
            (cern.jet.stat.tdouble Gamma)
            (javax.swing JTable JScrollPane JFrame)
@@ -802,9 +802,9 @@
 
   "
 ([A B]
-  (clx/solve (m/coerce :clatrix A) (m/coerce :clatrix B)))
+  (l/solve (m/coerce :clatrix A) (m/coerce :clatrix B)))
 ([A]
-  (clx/i (m/coerce :clatrix A))))
+  (l/solve (m/coerce :clatrix A))))
 
 (defn ^:deprecated det
   "
@@ -940,118 +940,112 @@
   chol function.
 
   Returns:
-  a matrix of the triangular factor (note: the result from
-  cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
-  that it matches the result return from R's chol function.
+  a map containing two matrices with the keys [:L :L*] such that
 
+  Such that:
+      M = L.L*
 
+  Where
+     - M must be a hermitian, positive definite matrix
+     - L is a lower triangular matrix
+     - L* is the conjugate transpose of L
+
+  If :return parameter is specified in options map, it returns only specified keys.
 
   Examples:
-
   (use '(incanter core stats charts datasets))
   ;; load the iris dataset
   (def iris (to-matrix (get-dataset :iris)))
   ;; take the Cholesky decomposition of the correlation matrix of the iris data.
-  (decomp-cholesky (correlation iris))
+  (let [{:keys [L L*]} (decomp-cholesky (correlation iris))])
+  (let [{:keys [L*]} (decomp-cholesky (correlation iris {:return [:L*]}))])
 
   References:
     http://en.wikipedia.org/wiki/Cholesky_decomposition
 
   Deprecated. Please use clojure.core.matrix.linear/cholesky instead.
   "
-  [mat]
-  (let [mat (m/coerce :clatrix mat)]
-    (clx/cholesky mat)))
+  ([mat] (l/cholesky (m/coerce :clatrix mat)))
+  ([mat options] (l/cholesky (m/coerce :clatrix mat) options)))
 
-(def ^:private ^:const allowed-types #{:full :compact :values})
 
 (defn ^:deprecated decomp-svd
   "
   Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
   R's svd function.
 
-  Optional parameters:
-  :type -- one of :full, :compact, or :values.  default is :full
-  if :full, returns the full SVD
-  if :compact, returns the compact SVD
-  if :values, only the singular values are calculated
-
-  Returns:
-  a map containing:
+  If :return parameter is specified in options map, it returns only specified keys.
+  By default returns a map containing:
   :S -- the diagonal matrix of singular values S (the diagonal in vector form)
   :U -- the left singular vectors U
-  :V -- the right singular vectors V
+  :V* -- the right singular vectors V
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-svd foo)
-  (decomp-svd foo :type :full)
-  (decomp-svd foo :type :compact)
-  (decomp-svd foo :type :values)
-
+  (let [{:keys [U S V*]} (decomp-svd foo)] ....)
+  (let [{:keys [S]} (decomp-svd foo {:return [:S]})] ....)
 
   References:
   http://en.wikipedia.org/wiki/Singular_value_decomposition
 
   Deprecated. Please use clojure.core.matrix.linear/svd instead.
   "
-  [mat & {:keys [type] :or {type :full}}]
-  (let [mat (m/coerce :clatrix mat) ;; TODO: generalise for all matrices
-        type (or (get allowed-types type) :full)
-        result (if (= type :full)
-                 (clx/svd mat :type :full)
-                 (clx/svd mat :type :sparse))]
-    (if (= type :values)
-      {:S (:values (clx/svd mat :type :values))}
-      {:S (:values result)
-       :U (if (= type :compact) mat (:left result))
-       :V (:right result)})))
+  ([mat]
+     (l/svd (m/coerce :clatrix mat)))
+  ([mat options]
+     (l/svd (m/coerce :clatrix mat) options)))
 
 (defn ^:deprecated decomp-eigenvalue
   "
-  Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
+  Returns a map containing matrices for each of the the keys [:Q :rA :iA] such that:
 
-  Returns:
-  a map containing:
-  :values -- vector of eigenvalues
-  :vectors -- the matrix of eigenvectors
+      M = Q.A.Q-1
+
+   Where:
+     - Q is a matrix where each column is the ith normalised eigenvector of M
+     - rA is a vector whose elements are the real numbers of eigenvalues.
+     - iA is a vector whose elements are the imaginary units of eigenvalues.
+     - Q⁻-1 is the inverse of Q
+
+   If :return parameter is specified in options map, it returns only specified keys.
+   if :symmetric parameter is true in options map, symmetric eigenvalue decomposition will be performed.
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-eigenvalue foo)
+  (let [{:keys [Q rA iA]} (decomp-eigenvalue M)])
+  (let [{:keys [Q rA iA]} (decomp-eigenvalue M {:symmetric true})])
+  (let [{:keys [Q rA]} (decomp-eigenvalue M {:return [:Q :rA]})])
 
   References:
   http://en.wikipedia.org/wiki/Eigenvalue_decomposition
 
   Deprecated. Please use clojure.core.matrix.linear/eigen instead.
   "
-  [mat]
-  (let [mat (m/coerce :clatrix mat)
-        result (clx/eigen mat)]
-    {:values (or (:values result) (:ivalues result))
-     :vectors (or (:vectors result) (:ivectors result))}))
+  ([mat] (l/eigen (m/coerce :clatrix mat)))
+  ([mat options] (l/eigen (m/coerce :clatrix mat) options)))
 
 
 (defn ^:deprecated decomp-lu
   "
-  Returns the LU decomposition of the given matrix.
+  Computes the LU(P) decomposition of a matrix with partial row pivoting.
+  Returns a map containing the keys [:L :U :P], such that:
+
+       P.A = L.U
+
+   Where
+     - L is a lower triangular matrix
+     - U is an upper triangular matrix
+     - P is a permutation matrix
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-lu foo)
-
-
-  Returns:
-    a map containing:
-      :L -- the lower triangular factor
-      :U -- the upper triangular factor
-      :P -- the permutation matrix
+  (let [{:keys [L U P]} (decomp-lu A)])
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
@@ -1059,12 +1053,8 @@
 
   Deprecated. Please use clojure.core.matrix.linear/lu instead.
   "
-  ([mat]
-     (let [mat (m/coerce :clatrix mat)
-           result (clx/lu mat)]
-       {:L (:l result)
-        :U (:u result)
-        :P (:p result)})))
+  ([mat] (l/lu (m/coerce :clatrix mat)))
+  ([mat options] (l/lu (m/coerce :clatrix mat) options)))
 
 (defn ^:deprecated vector-length [u]
   "Deprecated. Please use clojure.core.matrix/length instead."
@@ -1079,34 +1069,31 @@
 (defn ^:deprecated decomp-qr
   "
   Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
+  Returns a map containing matrices with the keys [:Q :R] such that:
 
-  Optional parameters:
-  :type -- possible values: :full.  default is :full
-  if :full, returns the full QR decomposition
+        M = Q.R
 
-  Returns:
-  a map containing:
-  :Q -- orthogonal factors
-  :R -- the upper triangular factors
+  Where:
+        - Q is an orthogonal matrix
+        - R is an upper triangular matrix (= right triangular matrix)
+
+  If :return parameter is specified in options map, it returns only specified keys.
+  If :compact parameter is specified in options map, compact versions of matrices are returned.
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-qr foo)
-  (decomp-qr foo :type :full)
+  (let [{:keys [Q R]} (qr M)])
+  (let [{:keys [R]} (qr M {:return [:R]})])
 
   References:
   http://en.wikipedia.org/wiki/QR_decomposition
 
   Deprecated. Please use clojure.core.matrix.linear/qr instead.
   "
-  [m & {:keys [type]}]
-  (let [;type (or (#{:full :compact} type) :full)
-        qr (clx/qr m)]
-    {:Q (:q qr)
-     :R (:r qr)})
-  )
+  ([mat] (l/qr (m/coerce :clatrix mat)))
+  ([mat options] (l/qr (m/coerce :clatrix mat) options)))
 
 (defn condition
   "
@@ -1142,7 +1129,7 @@
   Deprecated. Please use clojure.core.matrix.linear/rank instead.
   "
   [mat]
-  (clx/rank mat))
+  (l/rank (m/coerce :clatrix mat)))
 
 
 
