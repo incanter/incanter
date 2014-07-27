@@ -113,45 +113,7 @@
   ;; calculate the inverse of a matrix
   ;; TODO: add to compliance tests as soon as other implementations are ready
   (is (= (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))
-             (diag [1/2 1/2 1/2]))))
-
-(deftest decomp-svd-test
-  ;; TODO: add to compliance tests as soon as other implementations are ready
-  (let [m (matrix [[1 0] [0 1] [0 0]])
-        expect-full {:U (diag [1 1 1])
-                     :S '(1.0 1.0)
-                     :V (diag [1 1])}
-        expect-compact {:U m
-                        :S '(1.0 1.0)
-                        :V (diag [1 1])}
-        expect-values {:S '(1.0 1.0)}
-        check (fn [type mtest]
-                (let [mtrue (decomp-svd m :type type)]
-                  (testing (str "svd " type)
-                  (is (= (:U mtrue) (:U mtest)))
-                  (is (= (:S mtrue) (:S mtest)))
-                  (is (= (:V mtrue) (:V mtest))))))]
-    (check nil      expect-full)
-    (check :full    expect-full)
-    (check :compact expect-compact)
-    (check :values  expect-values)))
-
-(deftest decomp-qr-test
-  ;; TODO: add to compliance tests as soon as other implementations are ready
-  (let [m (matrix [[1 0] [0 1] [0 0]])
-        expect-full {:Q (diag [1 1 1])
-                     :R m}
-        expect-compact {:Q m
-                        :R (diag [1 1])}
-        check (fn [type mtest]
-                (let [mtrue (decomp-qr m :type type)]
-                  (testing (str "qr " type)
-                    (is (= (:Q mtrue) (:Q mtest)))
-                    (is (= (:R mtrue) (:R mtest))))))]
-    (check nil      expect-full)
-    (check :full    expect-full)
-;    (check :compact expect-compact)
-    ))
+         (diag [1/2 1/2 1/2]))))
 
 (deftest decomp-lu-test
   ;; TODO: add to compliance tests as soon as other implementations are ready
