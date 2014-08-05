@@ -36,6 +36,7 @@
         [clojure.set :only (difference)]
         [clojure.pprint :only (print-table)])
   (:require [clojure.core.matrix :as m])
+  (:require [clojure.core.matrix.dataset :as ds])
   (:require [clojure.core.matrix.linear :as l])
   (:import (cern.jet.math.tdouble DoubleArithmetic)
            (cern.jet.stat.tdouble Gamma)
@@ -49,8 +50,6 @@
               functions like $ and $where can use $data as a default argument."}
      $data nil)
 (declare to-list to-vector vectorize dataset col-names)
-
-(defrecord Dataset [column-names rows])
 
 (defn set-current-implementation [imp]
   (m/set-current-implementation imp))
@@ -91,17 +90,21 @@
   "Tests if obj is core.matrix vector"
   ([obj] (m/vec? obj)))
 
-(defn dataset?
-  "Determines if obj is of type incanter.core.Dataset."
-  ([obj] (instance? Dataset obj)))
+(defn ^:deprecated dataset?
+  "Determines if obj is of type clojure.core.matrix.impl.dataset.Dataset.
+
+  Deprecated. Please use clojure.core.matrix.dataset/dataset? instead."
+  ([obj] (ds/dataset? obj)))
 
 (defn dispatch
   "Dispatch function for multimethods"
   ([obj]
      (cond
+      (dataset? obj) ::dataset
       (matrix? obj) ::matrix
       (vec? obj) ::vector
-      (dataset? obj) ::dataset
+      (coll? obj) ::coll
+      (.contains (str (type obj)) "processing.core.PApplet") :sketch
       :else (type obj))))
 
 (defn ^Integer nrow
@@ -109,7 +112,7 @@
   ([mat]
      (cond
       (matrix? mat) (m/row-count mat)
-      (dataset? mat) (count (:rows mat))
+      (dataset? mat) (m/row-count mat)
       (coll? mat) (count mat))))
 
 (defn ^Integer ncol
@@ -117,7 +120,7 @@
   ([mat]
    (cond
      (matrix? mat) (m/column-count mat)
-     (dataset? mat) (count (:column-names mat))
+     (dataset? mat) (m/column-count mat)
      (coll? mat) 1 )))
 
 (defn ^:deprecated dim
@@ -493,11 +496,11 @@
 (defn- mapping-helper [func args]
   (reduce (fn [A B]
             (cond
-              (number? A) (func A B)
+             (number? A) (func A B)
+             (dataset? A) (dataset (col-names A)
+                                   (mapping-helper func (list (m/columns A) B)))
               (or (matrix? A)
                   (m/vec? A)) (m/emap #(func %1 B) A)
-              (dataset? A) (dataset (col-names A)
-                                    (mapping-helper func (list (to-list A) B)))
               (and (coll? A) (coll? (first A)))
               (map (fn [a] (map #(func %1 B) a)) A)
               (coll? A) (map #(func %1 B) A)))
@@ -663,8 +666,8 @@
 
 
 (defmulti to-list
-  " Returns a list-of-vectors if the given matrix is two-dimensional
-    and a flat list if the matrix is one-dimensional."
+  "Returns a list-of-vectors if the given matrix is two-dimensional
+   and a flat list if the matrix is one-dimensional."
   dispatch)
 
 (defmethod to-list ::matrix
@@ -679,9 +682,7 @@
 
 (defmethod to-list ::dataset
   [data]
-  (map (fn [row] (map (fn [col] (row col))
-                      (:column-names data)))
-       (:rows data)))
+  (->> (m/rows data) (map #(apply list %)) (apply list)))
 
 (defmethod to-list ::vector
   [data]
@@ -720,10 +721,7 @@
 
 (defmethod to-vect ::dataset
   [data]
-  (into [] (map (fn [row]
-                  (into [] (map (fn [col] (row col))
-                                (.column-names data))))
-                (.rows data))))
+  (m/rows data))
 
 (defmethod to-vect nil [s] nil)
 
@@ -1214,10 +1212,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn dataset
+  "Returns a record of type clojure.core.matrix.impl.dataset.DataSet constructed from the given column-names and data.
+  The data is either a sequence of columns or a matrix, or a sequence of hash-maps.
 
+  Deprecated. Please use clojure.core.matrix.dataset/dataset instead.
+  "
+  ([m]
+     (ds/dataset m))
+  ([column-names columns]
+     (ds/dataset column-names columns)))
 
 (defn- get-column-id [dataset column-key]
-  (let [headers (:column-names dataset)
+  (let [headers (ds/column-names dataset)
         error "Column not found."]
     (cond
      (some #{column-key} headers)
@@ -1350,27 +1357,21 @@
 
     ;; use a row predicate function instead of a query map.
     (view (query-dataset cars (fn [row] (> (/ (row \"speed\") (row \"dist\")) 1/2))))
+     (assoc data :rows
+             (for [row (:rows data) :when (query-map row)] row))
   "
   ([data query-map]
-    (if (fn? query-map)
-      (assoc data :rows
-             (for [row (:rows data) :when (query-map row)] row))
-      (let [qmap (into {}
-                       (for [k (keys query-map)]
-                         (if (keyword? k)
-                           (if (some #{k} (:column-names data))
-                             [k (query-map k)]
-                             [(name k) (query-map k)])
-                           [k (query-map k)])))
-            pred (query-to-pred qmap)
-            rows (:rows data)]
-        (assoc data :rows
-               (for [row rows :when (pred row)] row))))))
+     (if (fn? query-map)
+       (->> (ds/row-maps data)
+            (filter query-map)
+            (dataset))
+       (query-dataset data (query-to-pred query-map)))))
+
 
 
 (defn- except-for-cols
   ([data except-cols]
-     (let [colnames (:column-names data)
+     (let [colnames (ds/column-names data)
            _except-cols (if (coll? except-cols)
                           (map #(get-column-id data %) except-cols)
                           [(get-column-id data except-cols)])
@@ -1383,39 +1384,58 @@
 
 (defmethod sel [::dataset true]
   ([data & {:keys [rows cols except-rows except-cols filter all]}]
-    (let [rows (cond
+     (let [except-cols (cond
+                        (nil? except-cols) except-cols
+                        (coll? except-cols) except-cols
+                        :else [except-cols])
+           rows (cond
                  rows rows
                  except-rows (except-for (nrow data) except-rows)
-                 :else true)
-          cols (cond
-
+                 :else :all)
+           cols (cond
                  cols cols
-                 except-cols (except-for-cols data except-cols)
+                 except-cols (ds/column-names (ds/except-columns data except-cols))
                  all all
-                 :else true)
-          colnames (:column-names data)
-          selected-cols (cond
-                          (or (= cols :all) (true? cols)) colnames
-                          (coll? cols) (map #(get-column-id data %) cols)
-                          :else [cols])
-          selected-rows (cond
-                          (or (= rows :all) (true? rows) all)
-                            (:rows data)
-                          (number? rows)
-                            (list (nth (:rows data) rows))
-                          (coll? rows)
-                            (map #(nth (:rows data) %) rows))
-          _data (map (fn [row] (map #(row (get-column-id data %)) selected-cols)) selected-rows)
-          result (if (nil? filter) _data (clojure.core/filter filter _data))]
-      (cond
-        (and (= (count selected-cols) 1) (not (or (coll? cols) (true? cols))))
-          (if (= (count result) 1)
-            (ffirst result)
-            (mapcat identity result))
-        (and (= (count result) 1) (not (or (coll? rows) (true? rows))))
-          (first result)
-        :else
-          (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
+                 :else :all)
+           col-names (ds/column-names data)
+           col-set (into #{} col-names)
+           r (cond
+              (= rows :all) (range (m/row-count data))
+              (number? rows) [rows]
+              :else rows)
+           c (cond
+              (= cols :all) (ds/column-names data)
+
+              (and (number? cols)
+                   (not (contains? col-set cols)))
+              [(nth col-names cols)]
+
+              (and (coll? cols)
+                   (every? number? cols)
+                   (not (every? #(contains? col-set %) cols)))
+              (map #(nth col-names %) cols)
+
+              (not (coll? cols)) [cols]
+
+              :else cols)
+           res (-> (ds/select-rows data r)
+                   (ds/select-columns c))
+           res (if-not (nil? filter)
+                 (->> (ds/row-maps res)
+                      (clojure.core/filter filter)
+                      (dataset))
+                 res)]
+
+       (cond
+        (and (= (count c) 1) (not (or (coll? cols) (= cols :all))))
+        (if (= (m/row-count res) 1)
+          (m/mget res 0 0)
+          (mapcat identity (m/rows res)))
+
+        (and (= (m/row-count res) 1)
+             (not (or (coll? rows) (= rows :all))))
+        (into [] (m/get-row res 0))
+        :else res))))
 
 
 (defn to-dataset
@@ -1435,45 +1455,17 @@
     (to-dataset {\"a\" 1 \"b\" 2 \"c\" 3})
     (to-dataset [{:a 1 :b 2} {:a 1 :b 2}])
     (to-dataset [{\"a\" 1 \"b\" 2 \"c\" 3} {\"a\" 1 \"b\" 2 \"c\" 3}])
-  "
+    "
   ([obj & {:keys [transpose]}]
-    (let [transpose? (true? transpose)
-          colnames (cond
-                     (dataset? obj)
-                       (:column-names obj)
-                     (map? obj)
-                       (keys obj)
-                     (coll? obj)
-                       (cond
-                         (map? (first obj))
-                           (keys (first obj))
-                         (coll? (first obj))
-                           (map #(keyword (str "col-" %)) (range (length (first obj))))
-                         transpose?
-                           (map #(keyword (str "col-" %)) (range (length obj)))
-                         :else
-                           [:col-0])
-                      :else
-                        [:col-0])
-          rows (cond
-                 (dataset? obj)
-                   (:rows obj)
-                 (map? obj)
-                   ;; see if any of the values are collections
-                   (if (reduce #(or %1 %2) (map coll? (vals obj)))
-                     (trans (vals obj))
-                     [(vals obj)])
-                   (coll? obj)
-                     (cond
-                       (coll? (first obj))
-                         obj
-                       transpose?
-                         [obj]
-                       :else
-                         obj)
-                   :else
-                     [obj])]
-         (dataset colnames rows))))
+     (let [obj (cond
+                (map? obj) obj
+                (= (m/dimensionality obj) 0) [[obj]]
+                (and (= (m/dimensionality obj) 1) (map? (first obj))) obj
+                (= (m/dimensionality obj) 1) (mapv (fn [k] [k]) obj)
+                :else obj)]
+       (if transpose
+         (dataset (m/transpose obj))
+         (dataset obj)))))
 
 (defn make-unique
   "
@@ -1482,22 +1474,25 @@
   "
   ([coll] (make-unique coll #{}))
   ([coll seen]
-    (let [new-name (fn new-name [x]
-                     (if (not (contains? seen x))
-                         x
-                         (let [match (re-matches #"(.*\-)([0-9]+)" (.getName x))]
-                           (if match
-                             (new-name (keyword (str (second match) (inc (Integer/parseInt (nth match 2))))))
-                             (new-name (keyword (str (.getName x) "-1")))))))]
+     (println coll)
+     (let [new-name
+           (fn new-name [x]
+             (if (not (contains? seen x))
+               x
+               (let [match (re-matches #"(.*\-)([0-9]+)" (name x))]
+                 (if match
+                   (new-name (keyword (str (second match)
+                                           (inc (Integer/parseInt (nth match 2))))))
+                   (new-name (keyword (str (name x) "-1")))))))]
 
       (if (empty? coll)
           ()
-          (let [name (new-name (first coll))]
+          (let [name (new-name (str (first coll)))]
             (cons name
                   (make-unique (rest coll) (conj seen name))))))))
 
 
-(defn col-names
+(defn ^:deprecated col-names
   "
   If given a dataset, it returns its column names. If given a dataset and a sequence
   of column names, it returns a dataset with the given column names.
@@ -1506,8 +1501,10 @@
     (use '(incanter core datasets))
     (def data (get-dataset :cars))
     (col-names data)
+
+  Deprecated. Please use clojure.core.matrix.dataset/dataset instead.
   "
-  ([data] (:column-names data)))
+  ([data] (ds/column-names data)))
 
 
 
@@ -1555,13 +1552,8 @@
     (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
     (conj-rows (range 5) (range 5 10))
   "
-  ([& args]
-    (reduce (fn [A B]
-              (let [a (to-dataset A :transpose true)
-                    b (to-dataset B :transpose true)]
-                (dataset (:column-names a)
-                         (concat (to-list a) (to-list b)))))
-            args)))
+  ([data & args]
+     (reduce ds/conj-rows data args)))
 
 
 
@@ -1910,11 +1902,16 @@
   ([cols]
     ($group-by cols $data))
   ([cols data]
-    (let [orig-col-names (:column-names data);save to preserve order below
-          groups (group-by #(submap % cols) (:rows data))]
+     (let [cols (if (coll? cols)
+                  cols
+                  [cols])
+           orig-col-names (ds/column-names data);save to preserve order below
+           groups (group-by #(select-keys % cols) (ds/row-maps data))]
       (into {}
             (for [[group-value group-rows] groups]
-              {group-value (dataset orig-col-names group-rows)})))))
+              {group-value (ds/select-columns
+                            (dataset group-rows)
+                            orig-col-names)})))))
 
 
 (defn ^:deprecated matrix-map
@@ -1965,10 +1962,10 @@
       (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))
   "
   ([fun col-keys data]
-    (let [rows (:rows data)]
+    (let [rows (m/rows data)]
       (if (coll? col-keys)
-        (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
-        (map (fn [row] (fun (map-get row col-keys))) (:rows data)))))
+        (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (m/rows data))
+        (map (fn [row] (fun (map-get row col-keys))) (m/rows data)))))
   ([fun col-keys]
     ($map fun col-keys $data)))
 
@@ -2033,9 +2030,9 @@
                                       (interleave right-keys
                                                   (map #(map-get (submap row left-keys) %)
                                                        left-keys))))
-                             (:rows left-data))
-                        (map #(reduce dissoc % left-keys) (:rows left-data))))
-          rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
+                             (m/rows left-data))
+                        (map #(reduce dissoc % left-keys) (m/rows left-data))))
+          rows (map #(merge (index (submap % right-keys)) %) (m/rows right-data))]
       (to-dataset rows))))
 
 (defn aggregate
@@ -2076,36 +2073,32 @@
   ([col-map]
     (rename-cols col-map $data))
   ([col-map data]
-    (let [old-col-names (col-names data)
-          new-col-names (reduce
-                         replace-by-number-or-value old-col-names col-map)]
-      (dataset new-col-names (to-list data)))))
-
-(defn- update
-  ([m key f] (update-in m [key] f))
-  ([m key f & kfs] (apply update (update-in m [key] f) kfs)))
+     (let [col-names (ds/column-names data)
+           col-set (into #{} col-names)
+           col-map (reduce
+                    (fn [acc [k v]]
+                      (if (and (not (contains? col-set k))
+                               (number? k))
+                        (assoc acc (nth col-names k) v)
+                        (assoc acc k v)))
+                    {} col-map)]
+       (ds/rename-columns data col-map))))
 
 (defn replace-column
   "Replaces a column in a dataset with new values."
   ([column-name values]
     (replace-column column-name values $data))
   ([column-name values data]
-    (update data :rows
-            (fn [rows]
-              (map #(assoc %1 column-name %2)
-                   rows values)))))
+     (ds/replace-column data column-name values)))
 
 (defn add-column
   "Adds a column, with given values, to a dataset."
   ([column-name values]
     (add-column column-name values $data))
   ([column-name values data]
-    (if (some #{column-name} (:column-names data))
-      (replace-column column-name values data)
-      (update data :column-names #(conj % column-name)
-              :rows #(mapv (fn [r v]
-                             (assoc r column-name v))
-                           % (concat values (repeat nil)))))))
+     (if (contains? (into #{} (ds/column-names data)) column-name)
+       (ds/replace-column data column-name values)
+       (ds/add-column data column-name values))))
 
 (defn add-derived-column
   "
@@ -2126,13 +2119,10 @@
   ([column-name from-columns f]
     (add-derived-column column-name from-columns f $data))
   ([column-name from-columns f data]
-    (update data :column-names #(conj % column-name)
-            :rows (fn [rows]
-                    (mapv (fn [row]
-                            (assoc row column-name
-                                   (apply f (map #(map-get row %)
-                                                 from-columns))))
-                          rows)))))
+     (let [d (ds/select-columns data from-columns)
+           cols (m/columns d)
+           derived-col (apply map f cols)]
+       (ds/add-column data column-name derived-col))))
 
 ;; credit to M.Brandmeyer
 (defn transform-col
@@ -2141,9 +2131,7 @@
   with the resulting new values.
   "
   [dataset column f & args]
-  (->> (map #(apply update-in % [column] f args) (:rows dataset))
-    vec
-    (assoc dataset :rows)))
+  (apply ds/update-column dataset column f args))
 
 
 (defn deshape
@@ -2205,7 +2193,7 @@
                                                      nil
                                                      (assoc base-map :variable k :value (map-get row k colnames))))
                                                  __merge))))
-                                (:rows data))]
+                                (m/rows data))]
       (to-dataset deshaped-data))))
 
 
@@ -2268,9 +2256,7 @@
 
 (defmethod to-map ::dataset
   ([data]
-    (let [cols (map (partial sel data :cols) (col-names data))
-          col-keys (map keyword (col-names data))]
-      (zipmap col-keys cols))))
+     (ds/to-map data)))
 
 (defmethod to-map ::matrix
   ([mat]
@@ -2590,29 +2576,15 @@
     (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")
     (view \"file:///tmp/norm_hist.png\")
   "
-  (fn [obj & options] (cond
-                        (and (not (matrix? obj))
-                             (not (dataset? obj))
-                             (not (map? obj))
-                             (coll? obj))
-                        ::coll
-                        (.contains (str (type obj)) "processing.core.PApplet")
-                          :sketch
-                        :else
-                          (type obj))))
+  (fn [obj & opts]
+    (dispatch obj)))
 
-
-;;(defmethod view ::coll ([obj & options] (view (matrix obj))))
 
 (defmethod view ::coll
   ([obj & options]
-    (let [rows (if (coll? (first obj))
-                 obj
-                 (map vector obj))
-          colnames (range (count (first rows)))]
-      (view (dataset colnames rows)))))
+     (view (m/transpose (matrix [obj])))))
 
-(defmethod view :incanter.core/matrix
+(defmethod view ::matrix
   ([obj & {:keys [column-names]}]
     (let [col-names (or column-names (range (ncol obj)))
           m (ncol obj)
@@ -2632,17 +2604,16 @@
        (.setVisible true)))))
 
 
-(defmethod view :incanter.core/dataset
+(defmethod view ::dataset
   ([obj & options]
-    (let [col-names (:column-names obj)
-          column-vals (map (fn [row] (map #(row %) col-names)) (:rows obj))]
-      (doto (JFrame. "Incanter Dataset")
-        (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals))
-                                     (Vector. col-names))))
-        (.setSize 400 600)
-        (.setVisible true)))))
-
-
+     (let [col-names  (ds/column-names obj)
+           rows (m/rows obj)]
+       (doto (JFrame. "Incanter Dataset")
+         (.add (JScrollPane. (JTable.
+                              (Vector. (map #(Vector. %) rows))
+                              (Vector. col-names))))
+         (.setSize 400 600)
+         (.setVisible true)))))
 
 (defmethod view javax.swing.JTable
   ([obj & options]
@@ -2665,7 +2636,6 @@
         (.setVisible true)))))
 
 
-
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
 (defmethod view String
   ([url]
@@ -2675,8 +2645,6 @@
             (.browse (java.net.URI. url)))
         url)
       (catch ClassNotFoundException e nil))))
-
-
 
 
 (defn data-table
@@ -2927,9 +2895,10 @@
 
 
 ;; PRINT METHOD FOR INCANTER DATASETS
-(defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
+(defmethod print-method clojure.core.matrix.impl.dataset.DataSet
+  [o, ^java.io.Writer w]
   (binding [*out* w]
-    (print-table (:column-names o) (:rows o))))
+    (print-table (ds/column-names o) (ds/row-maps o))))
 
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
@@ -2960,13 +2929,14 @@
     (for [p partitions]
       (.viewPart matrix (first p) (first p) (second p) (second p)))))
 
-(defn reorder-columns
+(defn ^:deprecated reorder-columns
   "
   Produce a new dataset with the columns in the specified order.
-  Returns nil if no valid column names are given."
-  [dset cols]
-  (let [cols (filter (partial contains? (set (:column-names dset))) cols)]
-    (cond
-     (empty? cols) nil
-     (= (count cols) 1) (dataset cols (sel dset :cols (first cols)))
-     :else (sel dset :cols cols))))
+  Returns nil if no valid column names are given.
+
+  Deprecated. Please use clojure.core.matrix.dataset/select-columns instead"
+  [ds cols]
+  (let [col-set (into #{} (ds/column-names ds))]
+    (if (clojure.set/subset? col-set (into #{} cols))
+      (ds/select-columns ds cols)
+      nil)))

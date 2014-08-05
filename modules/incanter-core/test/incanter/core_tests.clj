@@ -29,47 +29,50 @@
 ;; UNIT TESTS FOR incanter.core.clj
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6]]))
-(def dataset2 (dataset [" a" "b" "c"] [[1 2 3] [4 5 6]]))
-(def dataset3 (dataset [:a :b :c] [{:a 1 :b 2 :c 3} {:a 4 :b 5 :c 6}]))
-(def dataset4 (dataset ["a" "b" "c"] [{"a" 1 "b" 2 "c" 3} {"a" 4 "b" 5 "c" 6}]))
-(def dataset5 (dataset ["a" "b" "c"] [{"a" 1 "b" 2 "c" 3} {"b" 5 "c" 6}]))
-(def dataset6 (dataset [:a :b :c] [[1 2 3]]))
+(def dataset1 (dataset [:a :b :c] [[1 4] [2 5] [3 6]]))
+(def dataset2 (dataset [" a" "b"] [[1 2 3] [4 5 6]]))
+(def dataset3 (dataset [{:a 1 :b 2 :c 3} {:a 4 :b 5 :c 6}]))
+(def dataset4 (dataset [{"a" 1 "b" 2 "c" 3} {"a" 4 "b" 5 "c" 6}]))
+(def dataset6 (dataset [:a :b :c] [[1] [2] [3]]))
 
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
   (is (= (sel dataset1 :all 1) [2 5]))
   (is (= (sel dataset1 :all :b) [2 5]))
-  (is (= (sel dataset1 :all [:a :c]) (dataset [:a :c] [[1 3] [4 6]])))
-  (is (= (sel dataset1 :all [:a]) (dataset [:a] [[1] [4]])))
+  (is (= (sel dataset1 :all [:a :c]) (dataset [:a :c] [[1 4] [3 6]])))
+  (is (= (sel dataset1 :all [:a]) (dataset [:a] [[1 4]])))
   (is (= (sel dataset1 :all :all) dataset1))
   (is (= (sel dataset3 :cols :a) [1 4]))
-  (is (= (sel dataset1 :cols [:a]) (dataset [:a] [[1] [4]])))
+  (is (= (sel dataset1 :cols [:a]) (dataset [:a] [[1 4]])))
   (is (= (sel dataset4 :cols "b") [2 5]))
-  (is (= (sel dataset5 :rows 1 :cols "a") nil))
   (is (= (sel dataset6 :cols :a) 1))
-  (is (= (sel (dataset [:a :b] [[11 12]]) :except-cols :b) (dataset [:a] [[11]]))))
+  (is (= (sel (dataset [:a :b] [[11] [12]]) :except-cols :b)
+         (dataset [:a] [[11]]))))
 
 (def map1 {:col-0 [1.0 2.0 3.0] :col-1 [4.0 5.0 6.0]})
+(def map2 {0 [1.0 2.0 3.0] 1 [4.0 5.0 6.0]})
 
 (deftest dataset-construction
-  (is (= (to-dataset map1) (to-dataset [[1.0 4.0][2.0 5.0][3.0 6.0]]))))
+  (is (= (to-dataset map1) (dataset [:col-0 :col-1]
+                                       [[1.0 2.0 3.0]
+                                        [4.0 5.0 6.0]])))
+  (is (= (to-dataset map2) (to-dataset [[1.0 4.0] [2.0 5.0] [3.0 6.0]]))))
 
 (deftest dataset-transforms
-  (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
+  (is (= (transform-col dataset6 :b + 10)
+         (dataset [:a :b :c] [[1] [12] [3]]))
       "Single-row special case")
-  (is (= (transform-col dataset1 :b (partial + 10)) (dataset [:a :b :c] [[1 12 3] [4 15 6]])))
-  (is (= (transform-col dataset1 :b * 2) (dataset [:a :b :c] [[1 4 3] [4 10 6]]))))
+  (is (= (transform-col dataset1 :b (partial + 10))
+         (dataset [:a :b :c] [[1 4] [12 15] [3 6]])))
+  (is (= (transform-col dataset1 :b * 2)
+         (dataset [:a :b :c] [[1 4] [4 10] [3 6]]))))
 
 (deftest $group-by-tests
   (let [cs [:c1 :c2 :c3]
         a-dataset (dataset cs
-                           [[1 3 3]
-                            [1 2 4]
-                            [1 2 7]
-                            [6 6 8]
-                            [6 5 10]
-                            [11 12 13]])]
+                           [[1 1 1 6 6 11]
+                            [3 2 2 6 5 12]
+                            [3 4 7 8 10 13]])]
 
     (are [group-cols n-groups]
       (= n-groups (count ($group-by group-cols a-dataset)))
@@ -84,23 +87,21 @@
       [:c1 :c2] 5) ; 3 arity version
 
     (is (= ($group-by :c1 a-dataset)
-           {{:c1 1} (dataset cs [[1 3 3]
-                                 [1 2 4]
-                                 [1 2 7]])
-            {:c1 6} (dataset cs [[6 6 8]
-                                 [6 5 10]])
-            {:c1 11} (dataset cs [[11 12 13]])}))
+           {{:c1 1} (dataset cs [[1 1 1]
+                                 [3 2 2]
+                                 [3 4 7]])
+            {:c1 6} (dataset cs [[6 6] [6 5] [8 10]])
+            {:c1 11} (dataset cs [[11] [12] [13]])}))
 
     (is (= ($group-by [:c1 :c2] a-dataset)
-           {{:c1 1 :c2 3} (dataset cs [[1 3 3]])
-            {:c1 1 :c2 2} (dataset cs [[1 2 4]
-                                       [1 2 7]])
-            {:c1 6 :c2 6} (dataset cs [[6 6 8]])
-            {:c1 6 :c2 5} (dataset cs [[6 5 10]])
-            {:c1 11 :c2 12} (dataset cs [[11 12 13]])}))))
+           {{:c1 1 :c2 3} (dataset cs [[1] [3] [3]])
+            {:c1 1 :c2 2} (dataset cs [[1 1] [2 2] [4 7]])
+            {:c1 6 :c2 6} (dataset cs [[6] [6] [8]])
+            {:c1 6 :c2 5} (dataset cs [[6] [5] [10]])
+            {:c1 11 :c2 12} (dataset cs [[11] [12] [13]])}))))
 
 (deftest rename-cols-tests
-  (let [data (dataset [:c1 :c2 :c3] [[1 2 3]])
+  (let [data (dataset [:c1 :c2 :c3] [[1] [2] [3]])
         col-map {:c1 :new-c1 2 :new-c3}
         expected [:new-c1 :c2 :new-c3]]
     (is (= (:column-names (rename-cols col-map data))
@@ -552,8 +553,8 @@
                 (matrix [[1.0 4.0 9.0]])))
   (is (m/equals (pow (matrix [1 2 3]) 2)
                 (matrix [1.0 4.0 9.0])))
-  (is (= (pow (dataset [:a :b :c] [[1 2 3]]) 2)
-         (dataset [:a :b :c] [[1.0 4.0 9.0]]))))
+  (is (= (pow (dataset [:a :b :c] [[1] [2] [3]]) 2)
+         (dataset [:a :b :c] [[1.0] [4.0] [9.0]]))))
 
 
 (deftest compliance-test
