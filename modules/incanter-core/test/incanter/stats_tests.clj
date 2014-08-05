@@ -117,7 +117,8 @@
 
 (deftest median-test
   ;; calculate the median of a variable
-  (is (= (median x) 113.0)))
+  (is (= (median x) 113.0))
+  (is (Double/isNaN (median []))))
 
 (deftest kurtosis-test
   (let [test-sample [2.00 2.00 2.00 2.00 2.00
