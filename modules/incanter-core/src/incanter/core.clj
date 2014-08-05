@@ -1536,7 +1536,11 @@
                     ncol-b (ncol b)
                     colnames (make-unique (concat (col-names a) (col-names b)))]
                 (dataset colnames
-                         (map concat (to-list a) (to-list b)))))
+                         (reduce
+                          (fn [acc els]
+                            (map conj acc els))
+                          (vec (repeat (count colnames) []))
+                          (map concat (to-list a) (to-list b))))))
             args)))
 
 
