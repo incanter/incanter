@@ -52,6 +52,7 @@
 (declare to-list to-vector vectorize dataset col-names)
 
 (defn set-current-implementation [imp]
+  "Sets current matrix implementation"
   (m/set-current-implementation imp))
 
 (defn matrix
@@ -130,8 +131,6 @@
   "
   ([mat]
      (m/dimensionality mat)))
-
-
 
 (defn ^:deprecated identity-matrix
   "
@@ -2370,14 +2369,16 @@
 
 
 (defn- get-columns [dataset column-keys]
-  (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
+  (map (fn [col-key]
+         (map #(% (get-column-id dataset col-key))
+              (m/rows dataset)))
+       column-keys))
 
 
 
-(defn- string-to-categorical [dataset column-key dummies?]
-  (let [col (first (get-columns dataset [column-key]))]
-
-    (if (some string? col)
+(defn string-to-categorical [dataset column-idx dummies?]
+  (let [col (m/get-column dataset column-idx)]
+    (if (some #(or (string? %) (keyword? %)) col)
       (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
 
@@ -2395,10 +2396,9 @@
                                 them into numeric codes.
   "
   ([dataset & {:keys [dummies] :or {dummies false}}]
-    (reduce bind-columns
-            (map #(string-to-categorical dataset % dummies)
-                 (range (count (keys (:column-names dataset))))))))
-
+     (reduce bind-columns
+             (map #(string-to-categorical dataset % dummies)
+                  (range (count (ds/column-names dataset)))))))
 
 ;(defn- transpose-seq [coll]
 ;  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
