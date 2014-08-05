@@ -2699,8 +2699,8 @@
 
 (defmethod set-data javax.swing.JTable
   ([table data]
-     (let [col-names (:column-names data)
-           column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
+     (let [col-names (ds/column-names data)
+           column-vals (map (fn [row] (map #(row %) col-names)) (m/rows data))
            table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
                                                              (java.util.Vector. col-names))]
        (.setModel table table-model))))
