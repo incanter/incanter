@@ -1555,10 +1555,15 @@
     (view (conj-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]]))
     (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
     (conj-rows (range 5) (range 5 10))
-  "
-  ([data & args]
-     (reduce ds/conj-rows data args)))
 
+  Deprecated. Please use clojure.core.matrix/conj-rows instead.
+  "
+  ([& args]
+     (let [args (map
+                 (fn [x]
+                   (if (dataset? x) x
+                       (dataset x))) args)]
+       (reduce ds/conj-rows (first args) (rest args)))))
 
 
 (defn $
