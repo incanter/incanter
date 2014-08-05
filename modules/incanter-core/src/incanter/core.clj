@@ -374,6 +374,7 @@
    (#(m/transpose (apply m/join %)))))
 
 (defn inner-product [& args]
+  "Deprecated. Please use clojure.core.matrix/inner-product instead."
   (apply m/inner-product args))
 
 
@@ -470,8 +471,8 @@
 
   (div [1 2 3]) ; returns [1 1/2 13]
 
-  Deprecated. Please use clojure.core.matrix/emul or
-  clojure.core.matrix.operators/div instead.
+  Deprecated. Please use clojure.core.matrix/div or
+  clojure.core.matrix.operators// instead.
   "
   ([& args] (apply m/div args)))
 
@@ -1213,8 +1214,12 @@
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn dataset
-  "Returns a record of type clojure.core.matrix.impl.dataset.DataSet constructed from the given column-names and data.
-  The data is either a sequence of columns or a matrix, or a sequence of hash-maps.
+  "Returns a record of type clojure.core.matrix.impl.dataset.DataSet.
+   Creates dataset from:
+    column-names and seq of columns
+    map of columns with associated list of values.
+    matrix - its columns will be used as dataset columns and incrementing Long values starting from 0, i.e. 0, 1, 2, etc will be used as column names.
+    seq of maps
 
   Deprecated. Please use clojure.core.matrix.dataset/dataset instead.
   "
@@ -1474,7 +1479,6 @@
   "
   ([coll] (make-unique coll #{}))
   ([coll seen]
-     (println coll)
      (let [new-name
            (fn new-name [x]
              (if (not (contains? seen x))
@@ -1502,7 +1506,7 @@
     (def data (get-dataset :cars))
     (col-names data)
 
-  Deprecated. Please use clojure.core.matrix.dataset/dataset instead.
+  Deprecated. Please use clojure.core.matrix.dataset/column-names instead.
   "
   ([data] (ds/column-names data)))
 
@@ -1537,7 +1541,7 @@
             args)))
 
 
-(defn conj-rows
+(defn ^:deprecated conj-rows
   "
   Returns a dataset created by combining the rows of the given datasets and/or collections.
 
@@ -2125,10 +2129,12 @@
        (ds/add-column data column-name derived-col))))
 
 ;; credit to M.Brandmeyer
-(defn transform-col
+(defn ^:deprecated transform-col
   "
   Apply function f & args to the specified column of dataset and replace the column
   with the resulting new values.
+
+  Deprecated. Please use `clojure.core.matrix.dataset/update-column` instead.
   "
   [dataset column f & args]
   (apply ds/update-column dataset column f args))
