@@ -24,7 +24,9 @@
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
   (:use [incanter.core :only (dataset save)])
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]
+            [clojure.core.matrix :as m]
+            [clojure.core.matrix.dataset :as ds]))
 
 (defn- parse-string [value & [empty-value]]
   (if (= value "")
@@ -95,8 +97,17 @@
           (if (not (nil? empty-field-value))
             (map #(pad-vector % column-count empty-field-value)
                  dataset-body)
-            dataset-body)]
-    (dataset column-names padded-body)))
+            dataset-body)
+        cols (reduce
+              (fn [acc els]
+                (map conj acc els))
+              (->
+               (first padded-body)
+               (count)
+               (repeat [])
+               (vec))
+              padded-body)]
+    (dataset column-names cols)))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
@@ -124,12 +135,12 @@
 
 (defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
                                                             :or {append false delim \,}}]
-  (let [header (or header (map #(if (keyword? %) (name %) %) (:column-names dataset)))
+  (let [header (or header (map #(if (keyword? %) (name %) %) (ds/column-names dataset)))
         file-writer (if (= "-" filename)
                       *out*
                       (java.io.FileWriter. filename append))
-        rows (:rows dataset)
-        columns (:column-names dataset)]
+        rows (m/rows dataset)
+        columns (ds/column-names dataset)]
     (try
       (when (and header (not append))
         (.write file-writer (str (first header)))
