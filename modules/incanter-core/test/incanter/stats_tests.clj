@@ -302,8 +302,8 @@
            3.26 3.00 2.74 2.85 3.33 3.29 3.58 3.85 4.00 3.50]
         lm (linear-model y x)]
     (testing "Linear Model R^2 tests"
-      (is (= 0.6682675077269637 (:r-square lm)))
-      (is (= 0.6292401556948419 (:adj-r-square lm))))))
+      (is (m/equals 0.6682675 (:r-square lm)  1E-7))
+      (is (m/equals 0.6292401 (:adj-r-square lm) 1E-7)))))
 
 (defn simple-regresssion-test []
  (let [r (simple-regression [2 4] [1 3])]

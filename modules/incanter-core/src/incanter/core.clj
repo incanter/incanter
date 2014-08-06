@@ -792,7 +792,6 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
-  TODO: remove coerce to clatrix as soon as linear algebra is ready
 
   Deprecated. Please use clojure.core.matrix/inverse for matrix inverse,
   clojure.core.matrix.linear/solve for solving system of linear equations and
@@ -800,9 +799,9 @@
 
   "
 ([A B]
-  (l/solve (m/coerce :clatrix A) (m/coerce :clatrix B)))
+   (l/solve A B))
 ([A]
-  (l/solve (m/coerce :clatrix A))))
+   (l/solve A)))
 
 (defn ^:deprecated det
   "
@@ -963,8 +962,8 @@
 
   Deprecated. Please use clojure.core.matrix.linear/cholesky instead.
   "
-  ([mat] (l/cholesky (m/coerce :clatrix mat)))
-  ([mat options] (l/cholesky (m/coerce :clatrix mat) options)))
+  ([mat] (l/cholesky mat))
+  ([mat options] (l/cholesky mat options)))
 
 
 (defn ^:deprecated decomp-svd
@@ -991,9 +990,9 @@
   Deprecated. Please use clojure.core.matrix.linear/svd instead.
   "
   ([mat]
-     (l/svd (m/coerce :clatrix mat)))
+     (l/svd  mat))
   ([mat options]
-     (l/svd (m/coerce :clatrix mat) options)))
+     (l/svd mat options)))
 
 (defn ^:deprecated decomp-eigenvalue
   "
@@ -1023,8 +1022,8 @@
 
   Deprecated. Please use clojure.core.matrix.linear/eigen instead.
   "
-  ([mat] (l/eigen (m/coerce :clatrix mat)))
-  ([mat options] (l/eigen (m/coerce :clatrix mat) options)))
+  ([mat] (l/eigen mat))
+  ([mat options] (l/eigen mat options)))
 
 
 (defn ^:deprecated decomp-lu
@@ -1051,8 +1050,8 @@
 
   Deprecated. Please use clojure.core.matrix.linear/lu instead.
   "
-  ([mat] (l/lu (m/coerce :clatrix mat)))
-  ([mat options] (l/lu (m/coerce :clatrix mat) options)))
+  ([mat] (l/lu mat))
+  ([mat options] (l/lu mat options)))
 
 (defn ^:deprecated vector-length [u]
   "Deprecated. Please use clojure.core.matrix/length instead."
@@ -1090,8 +1089,8 @@
 
   Deprecated. Please use clojure.core.matrix.linear/qr instead.
   "
-  ([mat] (l/qr (m/coerce :clatrix mat)))
-  ([mat options] (l/qr (m/coerce :clatrix mat) options)))
+  ([mat] (l/qr mat))
+  ([mat options] (l/qr mat options)))
 
 (defn condition
   "
@@ -1127,7 +1126,7 @@
   Deprecated. Please use clojure.core.matrix.linear/rank instead.
   "
   [mat]
-  (l/rank (m/coerce :clatrix mat)))
+  (l/rank mat))
 
 
 
