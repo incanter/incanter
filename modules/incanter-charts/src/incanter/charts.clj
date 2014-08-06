@@ -1094,11 +1094,11 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _y _group-by)))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
@@ -1383,11 +1383,11 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _y _group-by)))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
@@ -2618,9 +2618,9 @@
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (->> (conj-cols _x _group-by)
-                          ($group-by :col-1)
+                          ($group-by 1)
                           vals
-                          (map #($ :col-0 %))
+                          (map #($ 0 %))
                           (map in-coll)))
           __x (if x-groups (first x-groups) _x)
           title (or (:title opts) "")
