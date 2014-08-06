@@ -130,7 +130,7 @@
    Deprecated. Please use clojure.core.matrix/dimensionality instead.
   "
   ([mat]
-     (m/dimensionality mat)))
+     (m/shape mat)))
 
 (defn ^:deprecated identity-matrix
   "
