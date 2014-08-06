@@ -93,11 +93,8 @@
                (concat header-row (repeat nil))
                (range column-count))
         column-names (map (if keyword-headers keyword identity) column-names-strs)
-        padded-body
-          (if (not (nil? empty-field-value))
-            (map #(pad-vector % column-count empty-field-value)
-                 dataset-body)
-            dataset-body)
+        padded-body (map #(pad-vector % column-count empty-field-value)
+                         dataset-body)
         cols (reduce
               (fn [acc els]
                 (map conj acc els))
