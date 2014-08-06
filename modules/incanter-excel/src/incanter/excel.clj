@@ -4,9 +4,12 @@ Excel file formats (.xls and .xlsx)."
   incanter.excel
   (:import
     [java.io FileOutputStream FileInputStream])
-  (:require [clojure.java.io :as io])
+  (:require
+   [clojure.java.io :as io]
+   [clojure.core.matrix :as m]
+   [clojure.core.matrix.dataset :as ds])
   (:use
-   [incanter.core :only [dataset dataset?]]
+   [incanter.core :only [dataset dataset? col-names]]
    [incanter.excel.cells :only [read-line-values write-line-values]]
    [incanter.excel.workbook :only [get-workbook-sheet make-workbook-map write-workbook create-workbook-object create-sheet get-all-sheets]]))
 
@@ -14,12 +17,12 @@ Excel file formats (.xls and .xlsx)."
   "Internally save the dataset into the :sheet object."
   [workbook-blob dataset use-bold]
   (let [align-row (fn [row cols] (map #(get row %1) cols))]
-    (write-line-values workbook-blob use-bold 0 (:column-names dataset))
+    (write-line-values workbook-blob use-bold 0 (col-names dataset))
     (dorun
      (map
       (partial write-line-values workbook-blob false)
       (iterate inc 1)
-      (seq (map #(align-row % (:column-names dataset)) (:rows dataset)))))))
+      (seq (map #(align-row % (col-names dataset)) (ds/row-maps dataset)))))))
 
 (defmulti
   ^{:doc "Save a dataset to an Excel file.  Can save in both older and newer
@@ -83,14 +86,21 @@ Examples:
      filename)))
 
 (defn- read-sheet [rows-it header-keywords]
-  (let [colnames  (read-line-values (first rows-it))]
+  (let [colnames  (read-line-values (first rows-it))
+        cols (reduce
+              (fn [acc els]
+                (map conj acc els))
+              (-> (count colnames)
+                  (repeat [])
+                  (vec))
+              (->> (rest rows-it)
+                   (map read-line-values)
+                   (filter (complement empty?))))]
     (dataset
        (if header-keywords
          (map keyword colnames)
          colnames)
-       (map
-        read-line-values
-        (rest rows-it)))))
+       cols)))
 
 (defmulti
   ^{:doc "Read an Excel file into a dataset. Note: cells containing formulas will be
