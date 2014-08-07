@@ -366,11 +366,11 @@
    args
    (map #(let [dm (m/dimensionality %)]
            (case dm
-             1 (m/row-matrix %)
-             2 (m/transpose %)
+             1 (m/column-matrix %)
+             2 %
              (throw (RuntimeException.
                      (str "Can't bind columns to array of dimensionality " dm))))))
-   (#(m/transpose (apply m/join %)))))
+   (apply m/join-along 1)))
 
 (defn inner-product [& args]
   "Deprecated. Please use clojure.core.matrix/inner-product instead."
@@ -764,8 +764,8 @@
   "
   ([& args]
      (reduce (fn [A B]
-               (let [adims (long (dim A))
-                     bdims (long (dim B))]
+               (let [adims (long (m/dimensionality A))
+                     bdims (long (m/dimensionality B))]
                  (cond
                   (and (== adims 0) (== bdims 0)) (* A B)
                   (and (== adims 1) (== bdims 1))
@@ -779,7 +779,7 @@
                                   (for [j (range (ncol A))]
                                     (mult (sel A i j) B)))))
                   (and (== adims 2) (== bdims 0)) (recur A (matrix [[B]]))
-                  (and (== adims 2) (== bdims 1)) (recur A (matrix [B])))))
+                  (and (== adims 2) (== bdims 1)) (recur A (m/column-matrix B)))))
             args)))
 
 (defn ^:deprecated solve

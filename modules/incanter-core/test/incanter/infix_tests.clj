@@ -75,7 +75,7 @@
   (is (m/equals ($= (matrix [1 2 3]) <x> (matrix [1 2 3]))
                 (matrix [1 2 3 2 4 6 3 6 9])))
   (is (m/equals ($= (matrix [[1 2 3]]) <x> (matrix [1 2 3]))
-                (matrix [[1 2 3 2 4 6 3 6 9]])))
+                (matrix [[1 2 3] [2 4 6] [3 6 9]])))
   (is (m/equals ($= (matrix [[1 2] [3 4] [5 6]]) <x> 4)
                 (matrix [[4 8] [12 16] [20 24]])))
   (is (m/equals ($= (matrix [[1 2] [3 4] [5 6]]) <x> (matrix [[1 2] [3 4]]))
