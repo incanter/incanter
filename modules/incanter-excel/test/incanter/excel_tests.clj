@@ -11,10 +11,9 @@
 (def sample-dataset
   (dataset
    sample-cols
-   [[1 2 3]
-    [(Math/sqrt 2) Math/E Math/PI]
-    ["One" "Two" "Three"]
-    [(Date.) (Date.) (Date.)]]))
+   [[1 (Math/sqrt 2) "One"   (Date.)]
+    [2 Math/E        "Two"   (Date.)]
+    [3 Math/PI       "Three" (Date.)]]))
 
 (deftest xls-roundtrip
  (let [ffile (File/createTempFile "excel-test" ".xls")
@@ -32,8 +31,7 @@
   (let [ffile (File/createTempFile "excel-test" ".xls")
         fname (. ffile getAbsolutePath)]
     (try
-      (let [dset (dataset [:a :b :c]
-                          [[1] [2] [3]])
+      (let [dset (dataset [:a :b :c] [[1 2 3]])
             result (do (save-xls dset fname) (read-xls fname :header-keywords true))]
         (is (dataset? result))
         (is (= (col-names dset) (col-names result))))
@@ -55,11 +53,7 @@
         fname (. ffile getAbsolutePath)]
     (try
       (let [data sample-dataset
-            data2 (dataset [:a :b :c :d]
-                           [[1 5 9]
-                            [2 6 10]
-                            [3 7 11]
-                            [4 8 12]])]
+            data2  (dataset [:a :b :c :d] [[1 2 3 4] [5 6 7 8] [9 10 11 12]])]
         (do
           (save-xls ["first" data "second" data2] fname)
           (let [res (read-xls fname :all-sheets? true :header-keywords true)

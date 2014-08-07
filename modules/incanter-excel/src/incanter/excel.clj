@@ -87,20 +87,14 @@ Examples:
 
 (defn- read-sheet [rows-it header-keywords]
   (let [colnames  (read-line-values (first rows-it))
-        cols (reduce
-              (fn [acc els]
-                (map conj acc els))
-              (-> (count colnames)
-                  (repeat [])
-                  (vec))
-              (->> (rest rows-it)
-                   (map read-line-values)
-                   (filter (complement empty?))))]
+        rows (->> (rest rows-it)
+                  (map read-line-values)
+                  (filter (complement empty?)))]
     (dataset
        (if header-keywords
          (map keyword colnames)
          colnames)
-       cols)))
+       rows)))
 
 (defmulti
   ^{:doc "Read an Excel file into a dataset. Note: cells containing formulas will be
@@ -125,7 +119,7 @@ or :xlsx override the suffix check.
    ;; time-series-plot needs time in millisecs
    ;; create a function, to-millis, to convert a sequence of Date objects
    ;; to a sequence of milliseconds
-   (let [to-millis (fn [dates] (map #(.getTime %) dates))] 
+   (let [to-millis (fn [dates] (map #(.getTime %) dates))]
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))
 
 "}
