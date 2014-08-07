@@ -49,7 +49,7 @@
        :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."}
      $data nil)
-(declare to-list to-vector vectorize dataset col-names)
+(declare to-list to-vector vectorize dataset col-names to-matrix)
 
 (defn set-current-implementation [imp]
   "Sets current matrix implementation"
@@ -498,7 +498,7 @@
             (cond
              (number? A) (func A B)
              (dataset? A) (dataset (col-names A)
-                                   (mapping-helper func (list (m/columns A) B)))
+                                   (mapping-helper func (list (m/rows A) B)))
               (or (matrix? A)
                   (m/vec? A)) (m/emap #(func %1 B) A)
               (and (coll? A) (coll? (first A)))
@@ -1214,7 +1214,8 @@
 (defn dataset
   "Returns a record of type clojure.core.matrix.impl.dataset.DataSet.
    Creates dataset from:
-    column-names and seq of columns
+    column names and seq of rows
+    column names and seq of row maps
     map of columns with associated list of values.
     matrix - its columns will be used as dataset columns and incrementing Long values starting from 0, i.e. 0, 1, 2, etc will be used as column names.
     seq of maps
@@ -1223,8 +1224,8 @@
   "
   ([m]
      (ds/dataset m))
-  ([column-names columns]
-     (ds/dataset column-names columns)))
+  ([column-names m]
+     (ds/dataset column-names m)))
 
 (defn- get-column-id [dataset column-key]
   (let [headers (ds/column-names dataset)
@@ -1367,7 +1368,7 @@
      (if (fn? query-map)
        (->> (ds/row-maps data)
             (filter query-map)
-            (dataset))
+            (dataset (ds/column-names data)))
        (query-dataset data (query-to-pred query-map)))))
 
 
@@ -1426,7 +1427,7 @@
            res (if-not (nil? filter)
                  (->> (ds/row-maps res)
                       (clojure.core/filter filter)
-                      (dataset))
+                      (dataset (ds/column-names res)))
                  res)]
 
        (cond
@@ -1534,12 +1535,7 @@
                     ncol-a (ncol a)
                     ncol-b (ncol b)
                     colnames (make-unique (concat (col-names a) (col-names b)))]
-                (dataset colnames
-                         (reduce
-                          (fn [acc els]
-                            (map conj acc els))
-                          (vec (repeat (count colnames) []))
-                          (map concat (to-list a) (to-list b))))))
+                (dataset colnames (bind-columns (to-matrix a) (to-matrix b)))))
             args)))
 
 
@@ -1840,7 +1836,7 @@
           comp-fn (if (= order :desc)
                     (comparator (fn [a b] (pos? (compare a b))))
                     compare)]
-      (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
+      (dataset (col-names data) (sort-by key-fn comp-fn (m/rows data))))))
 
 
 
