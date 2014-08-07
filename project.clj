@@ -17,6 +17,20 @@
                  [incanter/incanter-zoo "1.5.6-SNAPSHOT"]
                  [org.clojure/clojure "1.5.1"]
                  ]
+  
+  :plugins [[lein-sub "0.3.0"]]
+  
+  :sub ["modules/incanter-core"
+        "modules/incanter-io"
+        "modules/incanter-charts"
+        "modules/incanter-mongodb"
+        "modules/incanter-pdf"
+        "modules/incanter-svg"
+        "modules/incanter-latex"
+        "modules/incanter-excel"
+        "modules/incanter-sql"
+        "modules/incanter-zoo"]
+  
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
              :uberjar {:aot :all
