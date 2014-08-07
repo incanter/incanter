@@ -94,17 +94,8 @@
                (range column-count))
         column-names (map (if keyword-headers keyword identity) column-names-strs)
         padded-body (map #(pad-vector % column-count empty-field-value)
-                         dataset-body)
-        cols (reduce
-              (fn [acc els]
-                (map conj acc els))
-              (->
-               (first padded-body)
-               (count)
-               (repeat [])
-               (vec))
-              padded-body)]
-    (dataset column-names cols)))
+                         dataset-body)]
+    (dataset column-names padded-body)))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
