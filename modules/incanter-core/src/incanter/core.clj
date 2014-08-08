@@ -1441,6 +1441,13 @@
         (into [] (m/get-row res 0))
         :else res))))
 
+(defn fill-missing [maps]
+  (let [ks (into #{} (mapcat keys maps))
+        diff-m (zipmap ks (repeat nil))]
+    (reduce
+     (fn [acc m]
+       (conj acc (merge diff-m m)))
+     [] maps)))
 
 (defn to-dataset
   "
@@ -1464,7 +1471,7 @@
      (let [obj (cond
                 (map? obj) obj
                 (= (m/dimensionality obj) 0) [[obj]]
-                (and (= (m/dimensionality obj) 1) (map? (first obj))) obj
+                (and (= (m/dimensionality obj) 1) (map? (first obj))) (fill-missing obj)
                 (= (m/dimensionality obj) 1) (mapv (fn [k] [k]) obj)
                 :else obj)]
        (if transpose
@@ -2037,9 +2044,9 @@
                                       (interleave right-keys
                                                   (map #(map-get (submap row left-keys) %)
                                                        left-keys))))
-                             (m/rows left-data))
-                        (map #(reduce dissoc % left-keys) (m/rows left-data))))
-          rows (map #(merge (index (submap % right-keys)) %) (m/rows right-data))]
+                             (ds/row-maps left-data))
+                        (map #(reduce dissoc % left-keys) (ds/row-maps left-data))))
+          rows (map #(merge (index (submap % right-keys)) %) (ds/row-maps right-data))]
       (to-dataset rows))))
 
 (defn aggregate
