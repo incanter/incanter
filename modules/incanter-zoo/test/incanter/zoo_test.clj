@@ -1,7 +1,8 @@
 (ns incanter.zoo-test
-  (:use clojure.test 
+  (:use clojure.test
         (incanter zoo core stats))
-  (:require [clj-time.coerce :as c]))
+  (:require [clj-time.coerce :as c]
+            [clojure.core.matrix.dataset :as ds]))
 
 
 ;; --= Tests
@@ -71,8 +72,11 @@
   (let [ts1 (zoo ds1)]
     (testing "Single date slice"
       (is (= ($$ "2012-01-01" :temp ts1) 32) "Single col")
-      (is (= ($$ "2012-01-01" :all ts1)
-             [100 32 (to-date-time "2012-01-01")]) "Whole row")
+      (is (= (dataset (ds/column-names ts1) [($$ "2012-01-01" :all ts1)])
+             (dataset (ds/column-names ts1)
+                      [{:index (to-date-time "2012-01-01")
+                        :press 100
+                        :temp 32}])) "Whole row")
       (is (= ($$ "2012-01-01" :all ts1)
              ($$ "2012-01-01" ts1)) "Single arity check")
       (is (= (nrow ($$ "2012-01-10" :all ts1)) 0) "Date out of range"))
@@ -119,7 +123,7 @@
     (is (aligned? ts1 ls1) "Indices equal")
     (is (aligned? ts1 (lag ls1)) "Indices equal")
     (is (aligned? ts1 (lag ts1 3)) "Indices equal")
-    
+
     (is (= ($ 0 [:press :temp] ls1)
            [nil nil]) "Nil pad the front values")
     (is (= ($ 0 [:press :temp] ts1)

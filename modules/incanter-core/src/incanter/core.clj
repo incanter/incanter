@@ -38,12 +38,11 @@
   (:require [clojure.core.matrix :as m])
   (:require [clojure.core.matrix.dataset :as ds])
   (:require [clojure.core.matrix.linear :as l])
-  (:import (cern.jet.math.tdouble DoubleArithmetic)
+  (:import (clojure.core.matrix.impl.dataset DataSet)
+           (cern.jet.math.tdouble DoubleArithmetic)
            (cern.jet.stat.tdouble Gamma)
            (javax.swing JTable JScrollPane JFrame)
            (java.util Vector)))
-
-(m/set-current-implementation :clatrix)
 
 (def ^{:dynamic true
        :doc "This variable is bound to a dataset when the with-data macro is used.
@@ -1470,6 +1469,7 @@
   ([obj & {:keys [transpose]}]
      (let [obj (cond
                 (map? obj) obj
+                (dataset? obj) obj
                 (= (m/dimensionality obj) 0) [[obj]]
                 (and (= (m/dimensionality obj) 1) (map? (first obj))) (fill-missing obj)
                 (= (m/dimensionality obj) 1) (mapv (fn [k] [k]) obj)
@@ -1497,7 +1497,7 @@
 
       (if (empty? coll)
           ()
-          (let [name (new-name (str (first coll)))]
+          (let [name (new-name (first coll))]
             (cons name
                   (make-unique (rest coll) (conj seen name))))))))
 
@@ -1539,10 +1539,9 @@
     (reduce (fn [A B]
               (let [a (to-dataset A)
                     b (to-dataset B)
-                    ncol-a (ncol a)
-                    ncol-b (ncol b)
-                    colnames (make-unique (concat (col-names a) (col-names b)))]
-                (dataset colnames (bind-columns (to-matrix a) (to-matrix b)))))
+                    colnames (make-unique (concat (col-names a) (col-names b)))
+                    cols (concat (m/columns a) (m/columns b))]
+                (dataset colnames (m/transpose cols))))
             args)))
 
 
@@ -1568,7 +1567,7 @@
                  (fn [x]
                    (if (dataset? x) x
                        (dataset x))) args)]
-       (reduce ds/conj-rows (first args) (rest args)))))
+       (apply ds/join-rows args))))
 
 
 (defn $
@@ -2404,7 +2403,7 @@
   ([dataset & {:keys [dummies] :or {dummies false}}]
      (reduce bind-columns
              (map #(string-to-categorical dataset % dummies)
-                  (range (count (ds/column-names dataset)))))))
+                (range (count (ds/column-names dataset)))))))
 
 ;(defn- transpose-seq [coll]
 ;  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
@@ -2667,11 +2666,11 @@
 (defn data-table
 "Creates a javax.swing.JTable given an Incanter dataset."
   ([data]
-   (let [col-names (:column-names data)
-         column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
-                                                           (java.util.Vector. col-names))]
-
+   (let [col-names (ds/column-names data)
+         column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps data))
+         table-model (javax.swing.table.DefaultTableModel.
+                      (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+                      (java.util.Vector. col-names))]
      (javax.swing.JTable. table-model))))
 
 
