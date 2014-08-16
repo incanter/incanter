@@ -110,19 +110,6 @@
                             (rename-cols col-map)))
            expected))))
 
-(deftest matrix-solve-test
-  ;; calculate the inverse of a matrix
-  ;; TODO: add to compliance tests as soon as other implementations are ready
-  (is (= (solve (matrix [[2 0 0] [0 2 0] [0 0 2]]))
-         (diag [1/2 1/2 1/2]))))
-
-(deftest decomp-lu-test
-  ;; TODO: add to compliance tests as soon as other implementations are ready
-  (let [m (matrix [[0 1 2] [3 3 2] [4 0 1]])
-        {:keys [L U P]} (decomp-lu m)]
-    (is (= m (mmult P L U)))))
-
-
 (deftest infix-test
  (is (= ($= 10 - 1 + 10) 19))
  (is (= ($= 1 / 2 * 3) 3/2)))
@@ -162,10 +149,7 @@
       (is (nil? (meta (rest m)))))
     (testing "Matrix decomposition/mult functions"
       (is (nil? (meta (kronecker 4 m))))
-      (is (nil? (meta (mmult m (trans m)))))
-      (is (nil? (some map?
-                      (for [op [solve decomp-cholesky decomp-svd decomp-eigenvalue decomp-lu]]  ;; decomp-qr
-                        (meta (-> m op)))))))
+      (is (nil? (meta (mmult m (trans m))))))
     (testing "Matrix math ops"
       (is (nil? (some map?
                       (for [op [plus minus mult div pow atan2]]
