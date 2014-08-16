@@ -141,23 +141,6 @@
   (is (= Double/NEGATIVE_INFINITY (safe-div -10 0)))
   (is (= Double/NEGATIVE_INFINITY (safe-div -10 5 0))))
 
-(deftest test-metadata
-  (let [md {:name "metadata test"}
-        m  (with-meta (identity-matrix 3) md)]
-    (testing "Basic Matrix metadata conformance"
-      (is (= (meta m) md))
-      (is (nil? (meta (rest m)))))
-    (testing "Matrix decomposition/mult functions"
-      (is (nil? (meta (kronecker 4 m))))
-      (is (nil? (meta (mmult m (trans m))))))
-    (testing "Matrix math ops"
-      (is (nil? (some map?
-                      (for [op [plus minus mult div pow atan2]]
-                        (meta (-> m #(op % %)))))))
-      (is (nil? (some map?
-                      (for [op [sqrt sq log log2 log10 exp abs sin asin cos acos tan atan]]
-                        (meta (-> m op)))))))))
-
 
 (defn non-mutable-ops []
   (testing "non-mutable-ops"
