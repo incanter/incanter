@@ -54,6 +54,8 @@
   "Sets current matrix implementation"
   (m/set-current-implementation imp))
 
+(set-current-implementation :vectorz)
+
 (defn matrix
 "
   Returns a matrix or vector, in a valid core.matrix format. You can use the slices function to
