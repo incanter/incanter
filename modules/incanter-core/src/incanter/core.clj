@@ -1483,7 +1483,10 @@
   Take a sequence of keywords and make them unique by possibly
   altering later ones.
   "
-  ([coll] (make-unique coll #{}))
+  ([coll]
+     (if (= (count (into #{} coll)) (count coll))
+       coll
+       (make-unique coll #{})))
   ([coll seen]
      (let [new-name
            (fn new-name [x]
@@ -1497,7 +1500,8 @@
 
       (if (empty? coll)
           ()
-          (let [name (new-name (first coll))]
+          (let [name (new-name (first coll))
+                name (if (number? name) (str name) name)]
             (cons name
                   (make-unique (rest coll) (conj seen name))))))))
 
