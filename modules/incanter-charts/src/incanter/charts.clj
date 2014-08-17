@@ -27,8 +27,8 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                                bind-columns view save $group-by conj-cols
+  (:use [incanter.core :only ($ matrix? dataset? vec? to-list plus minus div
+                                group-on bind-columns view save $group-by conj-cols
                                 grid-apply set-data col-names $data sel abs)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean
                                sd correlation variance)]
@@ -315,7 +315,10 @@
   If x is a single value, and data is defined, return ($ x data)
   "
   [x data]
-  (if (coll? x)
+  (if (or (coll? x)
+          (dataset? x)
+          (matrix? x)
+          (vec? x))
     (to-list x)
     (if data
       (let [selected ($ x data)]
@@ -1091,11 +1094,11 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _y _group-by)))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
@@ -1380,11 +1383,11 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _y _group-by)))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
@@ -2615,9 +2618,9 @@
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (->> (conj-cols _x _group-by)
-                          ($group-by :col-1)
+                          ($group-by 1)
                           vals
-                          (map #($ :col-0 %))
+                          (map #($ 0 %))
                           (map in-coll)))
           __x (if x-groups (first x-groups) _x)
           title (or (:title opts) "")

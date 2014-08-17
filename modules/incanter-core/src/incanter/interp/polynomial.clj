@@ -73,9 +73,9 @@
         xs (butlast xs)
         ys (butlast ys)]
     (fn [x y]
-      (let [Y (reductions #(* %1 (- y %2)) 1 ys)
-            X (reductions #(* %1 (- x %2)) 1 xs)]
-        (to-list ($ 0 0 (mmult (trans Y) P X)))))))
+      (let [Y (matrix (reductions #(* %1 (- y %2)) 1 ys))
+            X (matrix (reductions #(* %1 (- x %2)) 1 xs))]
+        (mmult Y P X)))))
 
 (defn barycentric-cheb
 "  Interpolate given points using barycentric Lagrange interpolation

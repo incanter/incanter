@@ -40,8 +40,9 @@
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
-                              matrix length log10 sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows safe-div)]))
+                              matrix length log10 sum sum-of-squares sel matrix? vec?
+                              dataset? cumulative-sum solve vectorize bind-rows safe-div)])
+  (:require [clojure.core.matrix :as m]))
 
 (defn scalar-abs
   "Fast absolute value function"
@@ -1704,7 +1705,7 @@
   "
   (fn [coll & _]
     (cond
-      (instance? incanter.core.Dataset coll) ::dataset
+     (or (dataset? coll) (matrix? coll)) ::dataset
       :else ::coll)))
 
 (defmethod sample ::coll
@@ -2114,7 +2115,7 @@
           f-prob (cdf-f f-stat :df1 df1 :df2 df2 :lower-tail? false)
           coef-var (mult mse xtxi)
           std-errors (sqrt (diag coef-var))
-          t-tests (div coefs std-errors)
+          t-tests (safe-div coefs std-errors)
           t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail? false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
@@ -2349,10 +2350,14 @@
     (tabulate data)
   "
   ([x & options]
-    (let [_x (if (matrix? x) x (matrix x))
+    (let [_x (cond
+              (matrix? x) x
+              (vec? x) (matrix x 1)
+              (number? x) (matrix [[x]]))
           p (ncol _x)
           n (nrow _x)
-          levels (for [i (range p)] (sort (seq (into #{} (sel _x :cols i)))))
+          levels (for [i (range p)]
+                   (sort (seq (into #{} (vectorize (sel _x :cols i))))))
           margins (for [j (range p)]
                   (loop [marg {} i (int 0)]
                     (if (= i n)
@@ -2367,8 +2372,8 @@
                     (if (= i n)
                       tab
                       (recur (let [row (if (> p 1)
-                                         (to-list (nth _x i))
-                                         (nth _x i))
+                                         (to-list (m/get-row _x i))
+                                         (float (m/mget _x i 0)))
                                    cnt (get tab row)]
                               (if (nil? cnt)
                                 (assoc tab row 1)
@@ -2841,7 +2846,7 @@
      (if (and (matrix? res)
               (= 1 (nrow res)) (= 1 (ncol res)))
        (sel res 0 0)
-       res))))
+       (m/mget res)))))
 
 
 (defn odds-ratio

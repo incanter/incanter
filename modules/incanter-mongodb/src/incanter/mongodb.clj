@@ -64,9 +64,10 @@ Here are Somnium's descriptions of Congomongo's functions:
 "
        :author "David Edgar Liebke"}
 
- incanter.mongodb
-    (:use [incanter.core :only (dataset)]
-          [somnium.congomongo :only (fetch mass-insert!)]))
+  incanter.mongodb
+  (:require [clojure.core.matrix.dataset :as ds])
+  (:use [incanter.core :only (dataset)]
+        [somnium.congomongo :only (fetch mass-insert!)]))
 
 
 (defn fetch-dataset
@@ -78,6 +79,7 @@ Here are Somnium's descriptions of Congomongo's functions:
   Examples:
 
    (use '(incanter core datasets mongodb))
+   (require '[clojure.core.matrix.dataset :as ds])
    (use 'somnium.congomongo)
 
    ;; first load some sample data
@@ -88,7 +90,7 @@ Here are Somnium's descriptions of Congomongo's functions:
    ;; for the following steps.
 
    (mongo! :db \"mydb\")
-   (mass-insert! :airline-data (:rows data))
+   (mass-insert! :airline-data (ds/row-maps data))
 
    ;; and then retrieve it
    ;; notice that the retrieved data set has two additional columns,  :_id :_ns
@@ -97,7 +99,7 @@ Here are Somnium's descriptions of Congomongo's functions:
   "
   [& args]
     (let [results (apply fetch args)
-	        colnames  (keys (first results))]
+          colnames (keys (first results))]
       (dataset colnames results)))
 
 
@@ -109,7 +111,7 @@ Here are Somnium's descriptions of Congomongo's functions:
   Examples:
 
     (use '(incanter core datasets mongodb))
-    (use 'somnium.congomongo)
+    (require '[somnium.congomongo :refer [mongo! mass-insert!]])
 
     (def data (get-dataset :airline-passengers))
     (view data)
@@ -118,10 +120,10 @@ Here are Somnium's descriptions of Congomongo's functions:
     ;; for the following steps.
 
     (mongo! :db \"mydb\")
-    (mass-insert! :airline-data (:rows data))
+    (insert-dataset :airline-data data)
 
     ;; notice that the retrieved data set has two additional columns,  :_id :_ns
     (view (fetch-dataset :airline-data))
   "
   [mongodb-coll dataset]
-    (mass-insert! mongodb-coll (:rows dataset)))
+  (mass-insert! mongodb-coll (into [] (ds/row-maps dataset))))

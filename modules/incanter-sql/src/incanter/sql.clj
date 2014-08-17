@@ -1,5 +1,6 @@
 (ns incanter.sql
   "SQL module for interacting with databases."
+  (:require [clojure.core.matrix.dataset :as ds])
   (:use [incanter.core :only [dataset]]
         [clojureql.core :as ql :exclude [conj! disj! take drop distinct case compile sort]]))
 
@@ -36,14 +37,15 @@
         (lazy-seq
          (loop
              [[ch & ch-rest] (window (deref (generate-population-query cql-statement)) 16)
-              data           (vec '())]
+              data []]
            (if (not ch)
              data
              (recur
               ch-rest
-              (concat data (lazy-seq (read-dataframe cql-statement (:window ch) (:offset ch))))
-              ))))]
+              (concat data (lazy-seq
+                            (read-dataframe cql-statement
+                                            (:window ch) (:offset ch))))))))]
     (dataset (keys (first lazy-data)) lazy-data)))
 
 (defn insert-dataset [dset table]
-  (ql/conj! table (map #(zipmap (keys %) (vals %)) (:rows dset))))
+  (ql/conj! table (ds/row-maps dset)))
