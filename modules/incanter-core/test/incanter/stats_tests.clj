@@ -201,9 +201,12 @@
   (is (= (nrow (sample dataset1 :size 3)) 3)))
 
 (defn ranking-test []
-(is (=
-     {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
-     (rank-index [106 86 100 101 99 103 97 113 112 110]))))
+  (is (=
+       {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
+       (into {}
+             (map (fn [[x [y & more]]] [x y])
+                  (seq (rank-index [106 86 100 101 99 103 97 113 112 110]))))
+       )))
 
 (defn spearmans-rho-test []
   (is (within 0.000001 (float -29/165)
