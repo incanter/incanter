@@ -31,149 +31,122 @@
 
 (def wait-timeout 3000)
 
-(def test-mat (matrix
-  [[39      10 ]
-   [51      20 ]
-   [60      30 ]
-   [64      40 ]
-   [73      50 ]
-   [83      60 ]
-   [90      70 ]
-   [93      80 ]
-   [99      90 ]
-   [105     100]
-   [110     110]
-   [111     120]
-   [113     130]
-   [117     140]
-   [120     150]
-   [125     160]
-   [130     170]
-   [133     180]
-   [133     190]
-   [134     200]
-   [138     210]
-   [140     220]
-   [145     230]
-   [146     240]
-   [148     250]]))
-
 
 (deftest bar-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (bar-chart 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest bar-chart-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (bar-chart 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest pie-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (pie-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (pie-chart 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest scatter-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (scatter-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (scatter-plot 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest scatter-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (scatter-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (scatter-plot 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest area-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (area-chart 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest area-chart-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (area-chart 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest stacked-area-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (stacked-area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (stacked-area-chart 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest stacked-area-chart-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (stacked-area-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (stacked-area-chart 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest stacked-bar-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (stacked-bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (stacked-bar-chart 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest stacked-bar-chart-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (stacked-bar-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (stacked-bar-chart 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest box-plot-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (box-plot 0 :data (to-dataset [[1 2 3]]))))))
 
 (deftest box-plot-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (box-plot 0 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest box-plot-groups-with-single-elements
   "Asserting that no error is thrown, for a dataset that represents several groups with single element in each group."
-  (is (not (nil? (box-plot :col-0 :data (to-dataset [[1 2 3] [4 5 6] [7 8 9]]) :group-by :col-2)))))
+  (is (not (nil? (box-plot 0 :data (to-dataset [[1 2 3] [4 5 6] [7 8 9]]) :group-by 2)))))
 
 (deftest trace-plot-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (trace-plot :col-0 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (trace-plot 0 :data (to-dataset [[1 2 3]]))))))
 
 (deftest bland-altman-plot-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (bland-altman-plot :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (bland-altman-plot 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest line-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (line-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (line-chart 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest line-chart-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (line-chart :col-0 :col-1 :data (to-dataset [[1 2 3]]) :group-by :col-2)))))
+  (is (not (nil? (line-chart 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
 (deftest histogram-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (histogram :col-0 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (histogram 0 :data (to-dataset [[1 2 3]]))))))
 
 (deftest xy-plot-single-row
   "Asserting that no error is thrown, for a single item dataset"
-  (is (not (nil? (xy-plot :col-0 :col1 :data (to-dataset [[1 2 3]]))))))
+  (is (not (nil? (xy-plot 0 1 :data (to-dataset [[1 2 3]]))))))
 
 (deftest add-histogram-single-row
   "Asserting that no error is thrown, for a single item dataset"
   (let [data (to-dataset [[1 2 3]])
-        hist (histogram :col-0 :data data)]
-  (is (not (nil? (add-histogram hist :col-1 :data data))))))
+        hist (histogram 0 :data data)]
+  (is (not (nil? (add-histogram hist 1 :data data))))))
 
 (deftest add-box-plot-single-row
   "Asserting that no error is thrown, for a single item dataset"
   (let [data (to-dataset [[1 2 3]])
-        box (box-plot :col-0 :data data)]
-  (is (not (nil? (add-box-plot box :col-1 :data data))))))
+        box (box-plot 0 :data data)]
+  (is (not (nil? (add-box-plot box 1 :data data))))))
 
 (deftest add-categories-single-row
   "Asserting that no error is thrown, for a single item dataset"
    (let [data (to-dataset [[1 2 3]])
-         chart (line-chart :col-0 :col-1 :data data)]
-  (is (not (nil? (add-categories chart :col-2 :col-1 :data data))))))
+         chart (line-chart 0 1 :data data)]
+  (is (not (nil? (add-categories chart 2 1 :data data))))))
 
 (deftest add-categories-single-row-with-group
   "Asserting that no error is thrown, for a single item dataset"
    (let [data (to-dataset [[1 2 3]])
-         chart (line-chart :col-0 :col-1 :data data)]
-  (is (not (nil? (add-categories chart :col-2 :col-1 :data data :group-by :col-0))))))
+         chart (line-chart 0 1 :data data)]
+  (is (not (nil? (add-categories chart 2 1 :data data :group-by 0))))))
 
 (deftest add-lines-single-row
   "Asserting that no error is thrown, for a single item dataset"
    (let [data (to-dataset [[1 2 3]])
-         plot (scatter-plot :col-0 :col-1 :data data)]
-  (is (not (nil? (add-lines plot :col-2 :col-1 :data data))))))
+         plot (scatter-plot 0 1 :data data)]
+  (is (not (nil? (add-lines plot 2 1 :data data))))))
 
 (deftest add-points-single-row
   "Asserting that no error is thrown, for a single item dataset"
    (let [data (to-dataset [[1 2 3]])
-         plot (scatter-plot :col-0 :col-1 :data data)]
-  (is (not (nil? (add-points plot :col-2 :col-1 :data data))))))
+         plot (scatter-plot 0 1 :data data)]
+  (is (not (nil? (add-points plot 2 1 :data data))))))
 
 (deftest histogram-tests
   (def hw1 (view (histogram (sample-normal 1000))))
@@ -201,10 +174,10 @@
   )
 
 
-(deftest scatter-tests
+(defn scatter-tests [m]
   (def sw1 (view (scatter-plot
-                  (sel test-mat :cols 0)
-                  (sel test-mat :cols 0)
+                  (sel m :cols 0)
+                  (sel m :cols 0)
                   :series-lab "Test data col 1 versus col 2")))
 
 
@@ -223,8 +196,7 @@
   (set-point-size plot1 5)
   (Thread/sleep wait-timeout)
   (.dispose sw1)
-  (.dispose sw2)
-  )
+  (.dispose sw2))
 
 (deftest boxplot-tests
   (def boxplt (box-plot (sample-gamma 1000)))
@@ -234,8 +206,7 @@
   (add-box-plot boxplt (sample-gamma 1000))
   (add-box-plot boxplt (sample-gamma 1000))
   (Thread/sleep wait-timeout)
-  (.dispose bw1)
-  )
+  (.dispose bw1))
 
 
 (deftest xy-plot-tests
@@ -256,8 +227,7 @@
   (Thread/sleep wait-timeout)
   (.dispose cw1)
   (.dispose cw2)
-  (.dispose cw3)
-  )
+  (.dispose cw3))
 
 (deftest time-series-plot-tests
   (def epoch 0)
@@ -278,7 +248,7 @@
   (.dispose cw2))
 
 
-(deftest bar-chart-tests
+(defn bar-chart-tests []
   (def data (get-dataset :co2))
   (def grass-type (sel data :cols 1))
   (def treatment-type (sel data :cols 2))
@@ -306,7 +276,7 @@
   (Thread/sleep wait-timeout)
   (.dispose pw1))
 
-(deftest line-chart-tests
+(defn line-chart-tests []
   (def data (get-dataset :airline-passengers))
   (def years (sel data :cols 0))
   (def months (sel data :cols 2))
@@ -322,8 +292,7 @@
   (Thread/sleep wait-timeout)
   (.dispose lw1)
   (.dispose lw2)
-  (.dispose lw3)
-  )
+  (.dispose lw3))
 
 
 (deftest function-plot-tests
@@ -347,7 +316,7 @@
   (.dispose hw2))
 
 (deftest candle-stick-tests
-  (let [test-data1 (incanter.core/dataset [:date :high :low :open :volume :close]
+  (let [test-data1 (incanter.core/dataset
                                          (map
                                           (fn [day]
                                             (let [open (+ day (rand-int 10))
@@ -362,7 +331,7 @@
                                                :close close
                                                :volume volume}))
                                           (range 1 31)))
-        test-data2 (incanter.core/dataset [:date :high :low :open :volume :close]
+        test-data2 (incanter.core/dataset
                                           (map
                                            (fn [day]
                                              (let [open (+ day (rand-int 10))
@@ -444,5 +413,35 @@
         (assert false "Should have failed for set-axis doesn't support PieChart")
         (catch AssertionError e)))))
 
-
-; (run-tests)
+(deftest comliance-test
+  (doseq [impl [:vectorz :ndarray :persistent-vector]]
+    (set-current-implementation impl)
+    (println (str "compliance test " impl))
+    (let [m (matrix [[39      10 ]
+                     [51      20 ]
+                     [60      30 ]
+                     [64      40 ]
+                     [73      50 ]
+                     [83      60 ]
+                     [90      70 ]
+                     [93      80 ]
+                     [99      90 ]
+                     [105     100]
+                     [110     110]
+                     [111     120]
+                     [113     130]
+                     [117     140]
+                     [120     150]
+                     [125     160]
+                     [130     170]
+                     [133     180]
+                     [133     190]
+                     [134     200]
+                     [138     210]
+                     [140     220]
+                     [145     230]
+                     [146     240]
+                     [148     250]])]
+      (scatter-tests m)
+      (bar-chart-tests)
+      (line-chart-tests))))

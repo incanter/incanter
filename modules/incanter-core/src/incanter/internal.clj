@@ -18,38 +18,30 @@
 
 (ns ^{:skip-wiki true}
     incanter.internal
-  (:require [clatrix.core :as clx])
-  (:import (clatrix.core Matrix)
-           (cern.colt.matrix.tdouble.algo DoubleFormatter)
+  (:require [clojure.core.matrix :as m])
+  (:import (cern.colt.matrix.tdouble.algo DoubleFormatter)
            (cern.jet.math.tdouble DoubleFunctions DoubleArithmetic)
            (cern.colt.function.tdouble DoubleDoubleFunction DoubleFunction)))
 
 
-
-(derive clatrix.core.Matrix ::matrix)
-
 (defn is-matrix
   "Test if obj is 'derived' from ::matrix (e.g. class incanter.Matrix)."
-  ([obj] (clx/matrix? obj)))
+  ([obj] (m/matrix? obj)))
 
 (def double_arr_type (Class/forName "[D"))
 
 (defn make-matrix
   ([data]
     (cond
-      (is-matrix data) (clx/matrix data)
-      (coll? (first data))
-        (clx/matrix data)
-      (number? (first data))
-        (clx/matrix (map vector data))
-      :default
-        (clx/matrix (map seq data))))
+     (number? (first data)) (m/matrix (map vector data))
+     :default (m/matrix (map seq data))))
   ([data ncol]
     {:pre [(number? (first data))]}
     (let [chunked  (partition ncol data)]
       (make-matrix chunked)))
   ([init-val rows cols]
-    (clx/constant (int rows) (int cols) ^Number init-val)))
+     (m/compute-matrix [(int rows) (int cols)]
+                       (constantly ^Number init-val))))
 
 
 (defmacro hint
@@ -58,13 +50,15 @@
     `~(with-meta body {:tag type}))
 
 
-(defmacro transform-with [A op fun]
-  `(cond
-     (is-matrix ~A) (~fun (clx/matrix ~A))
-     (and (coll? ~A) (coll? (first ~A))) (let [mA# (make-matrix ~A)]
-                                           (clx/matrix (clx/dotom ~fun mA#) nil))
-     (coll? ~A)   (map ~op ~A)
-     (number? ~A) (~op ~A)))
+(defmacro transform-with
+  "Transforms a matrix with a Clatrix function"
+  ([A fun]
+  `(let [A# ~A]
+     (cond
+      (m/array? A#) (m/emap ~fun A#)
+      (coll? A#)   (map ~fun A#)
+      (number? A#) (~fun A#)))))
+
 
 (defn pass-to-matrix
   "Make each element in coll a row-first matrix else pass it back as-is"
@@ -79,7 +73,7 @@
   `(cond
      (and (number? ~A) (number? ~B))
      (~op ~A ~B)
-     (and (is-matrix ~A) (is-matrix ~B) (= (first (clx/size ~A)) 1) (= (clx/size ~A) (clx/size ~B)))
+     (and (is-matrix ~A) (is-matrix ~B) (= (first (m/shape ~A)) 1) (= (m/shape ~A) (m/shape ~B)))
      (map ~op ~A ~B)
      (and (not (is-matrix ~A)) (not (is-matrix ~B)))
      (let [a# (if (number? ~A) (replicate (count ~B) ~A) ~A)

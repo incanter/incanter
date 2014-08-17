@@ -25,7 +25,7 @@
    incanter.zoo
    (:import (cern.colt.list.tdouble DoubleArrayList))
    (:use incanter.backstage.zoo-commons
-         [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
+         [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns dataset
                                  gamma pow sqrt diag trans regularized-beta ncol
                                  nrow identity-matrix decomp-cholesky decomp-svd
                                  matrix length log10 sum sum-of-squares sel matrix?
@@ -33,7 +33,9 @@
                                  conj-cols $where transform-col col-names)]
          [incanter.stats :only (mean median)])
    (:require [clj-time.core :as t]
-             [clj-time.coerce :as c]))
+             [clj-time.coerce :as c]
+             [clojure.core.matrix :as m]
+             [clojure.core.matrix.dataset :as ds]))
 
  ;;;;; Start of ROLL functions ;;;;;
 
@@ -100,7 +102,7 @@
   Intended to be used internally time series function to get at data.
   "
   [x]
-  (->> x ($ [:not :index]) :rows))
+  (->> x ($ [:not :index]) (ds/row-maps)))
 
 ;; Credit: http://stackoverflow.com/questions/3249334/test-whether-a-list-contains-a-specific-value-in-clojure
 (defn- in?
@@ -164,23 +166,22 @@
   "
   ([x] (zoo x :index))
   ([x index-col]
-     {:pre [(-> x :column-names (in? index-col))]}
-     (order
-      (to-dataset
-       (conj-cols
-        (map (fn [{i index-col :as v}]
-               (-> v
-                   (dissoc index-col)
-                   (assoc :index (to-date-time i))))
-             (:rows x)))))))
+     {:pre [(-> x (ds/column-names) (in? index-col))]}
+     (let [rows (ds/row-maps x)]
+       (->> (row-order rows)
+            (map (fn [{i index-col :as v}]
+                   (-> v
+                       (dissoc index-col)
+                       (assoc :index (to-date-time i)))))
+            (conj-cols)
+            (to-dataset)))))
 
 (defn- zoo-simplify
   "Returns a vector if 1 row, else identity"
   [z]
-  (let [n (nrow z)]
-    (cond
-     (= n 1) ($ 0 :all z)
-     :else z)))
+  (if (= (nrow z) 1)
+    ($ 0 :all z)
+    z))
 
 ;; I suspect this could be far better implemented using sel or such.
 (defn $$
@@ -223,7 +224,7 @@
   ([z n]
      {:post [(= (nrow z) (nrow %))]}
      (conj-cols
-      (map #(select-keys % [:index]) (:rows z))
+      (map #(select-keys % [:index]) (ds/row-maps z))
       (to-dataset
        (concat
         (take n (repeat (nil-row (-> z coredata first))))
@@ -239,12 +240,13 @@
   "
   [f n zoo column & args]
   {:post [(= (nrow zoo) (nrow %))]}
-  (col-names
-   (conj-cols
-    ($ [:index] zoo)
-    (concat (take (dec n) (repeat nil))
-            (roll-apply f n ($ column zoo))))
-   [:index column]))
+  (conj-cols
+   ($ [:index] zoo)
+   (->> ($ column zoo)
+        (roll-apply f n)
+        (concat (take (dec n) (repeat nil)))
+        (hash-map column)
+        (dataset))))
 
 (defn zoo-row-map-
   "
@@ -291,9 +293,7 @@
   (to-dataset
    (map merge
         (-> d
-            :column-names
+            (ds/column-names)
             (zipmap (repeat v))
             repeat)
-        (:rows d)))))
-
-
+        (ds/row-maps d)))))

@@ -1,5 +1,5 @@
 (ns incanter.dataset-tests
-  (:use clojure.test 
+  (:use clojure.test
         (incanter core)))
 
 (def dataset1 (dataset [:a :b :c] [[1 2 3] [4 5 6]]))
@@ -10,12 +10,9 @@
 
 (deftest dataset-tests
   (is (= (sel dataset1 :cols :a) [1 4]))
-  (is (= (sel dataset2 :cols :b) [2 5]))
   (is (= (sel dataset2 :cols "c") [3 6]))
   (is (= (sel dataset3 :cols :a) [1 4]))
-  (is (= (sel dataset4 :cols :b) [2 5]))
-  (is (= (sel dataset4 :cols "c") [3 6]))
-  (is (= (sel dataset5 :rows 1 :cols :a) nil)))
+  (is (= (sel dataset4 :cols "c") [3 6])))
 
 (def car0 [60, 6000, :green])
 (def car1 [70, 7000, :silver])
@@ -58,29 +55,24 @@
          (dataset [:speed :weight :colour] [(assoc car0 1 2500) (assoc car1 1 3500)]))))
 
 (deftest test-add-derived-column
-  (is (= ($ :weight-minus-speed (add-derived-column :weight-minus-speed [:weight :speed] #(- %1 %2) cars))
+  (is (= ($ :weight-minus-speed
+            (add-derived-column :weight-minus-speed
+                                [:weight :speed] #(- %1 %2) cars))
          [5940 6930])))
-
-;; (deftest selects-on-badly-named-atoms
-;;   (let [with-nots (dataset [:first :second] [[:not :all] [:all :not]])]
-;;     (is (= ($ :first
-;;     )))))
 
 (deftest reorder-columns-test
   (testing "Reordering column names of a dataset:"
     (let [dset (dataset [:b :a]
                         [[2 1]
                          [4 3]
-                         [6 5]])
-          ]
+                         [6 5]])]
       (testing "Simple case"
         (let [expected (dataset [:a :b]
                                 [[1 2]
                                  [3 4]
                                  [5 6]])
               actual (reorder-columns dset [:a :b])]
-          (is (= expected actual)))
-        )
+          (is (= expected actual))))
       (testing "Nil case"
         (let [expected nil
               actual (reorder-columns dset [:c])]
@@ -92,9 +84,7 @@
                                  [3 4 3 4]
                                  [5 6 5 6]])
               actual (reorder-columns dset [:a :b :a :b])]
-          (is (= expected actual))
-          ))
-      )))
+          (is (= expected actual)))))))
 
 (deftest melt-test
   (testing "Melting the data")
@@ -102,10 +92,10 @@
                        [[1 1 5 6]
                         [2 2 7 8]])
         expected (dataset [:value :variable :id]
-                          [[6 :x2 1]
-                           [8 :x2 2]
+                          [[1 :time 1]
+                           [2 :time 2]
                            [5 :x1 1]
                            [7 :x1 2]
-                           [1 :time 1]
-                           [2 :time 2]])]
+                           [6 :x2 1]
+                           [8 :x2 2]])]
     (is (= (melt dset :id) expected))))
