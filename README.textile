@@ -110,7 +110,6 @@ Other tasks:
 * @script/install@ uses Leiningen to build all the modules and install them in your local ~/.m2 repository.
 
 
-
 <a name="depends"></a>
 
 h2. Incanter dependencies
