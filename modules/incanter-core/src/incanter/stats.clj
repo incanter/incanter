@@ -1614,7 +1614,10 @@
   "
   ([x]
     (let [xx (sort (to-list x))]
-      (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
+      (if (empty? xx)
+        Double/NaN
+        (DoubleDescriptive/median (DoubleArrayList. (double-array xx)))))))
+
 
 (defn kurtosis
   "
