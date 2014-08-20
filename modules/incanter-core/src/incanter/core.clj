@@ -197,7 +197,7 @@
       returns all columns by default, can pass a column index or sequence of column indices
     :except-rows (default nil) can pass a row index or sequence of row indices to exclude
     :except-cols (default nil) can pass a column index or sequence of column indices to exclude
-    :filter (default nil)
+    :filter-fn (default nil)
       a function can be provided to filter the rows of the matrix
 
   Examples:
@@ -215,7 +215,7 @@
     (sel iris :except-cols 1) ; all columns except the second
 
     ;; return only the first 10 even rows
-    (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))
+    (sel iris :rows (range 10) :filter-fn #(even? (int (nth % 0))))
     ;; select rows where distance (third column) is greater than 50
     (sel iris :filter #(> (nth % 2) 4))
 
@@ -1175,11 +1175,11 @@
          ]
       (cond
         cols
-          (map #(sel mat :cols cols :filter (filter-fn %)) groups)
+          (map #(sel mat :cols cols :filter-fn (filter-fn %)) groups)
         except-cols
-          (map #(sel mat :except-cols except-cols :filter (filter-fn %)) groups)
+          (map #(sel mat :except-cols except-cols :filter-fn (filter-fn %)) groups)
         :else
-          (map #(sel mat :filter (filter-fn %)) groups)))))
+          (map #(sel mat :filter-fn (filter-fn %)) groups)))))
 
 
 
