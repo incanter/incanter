@@ -708,3 +708,7 @@
 (deftest sel-filter-test
   (let [m (matrix [[110 110]])]
     (is (= m (sel test-mat :filter-fn (fn [[c1 c2]] (= c1 c2)))))))
+
+(deftest group-on-test
+  (let [m (matrix [[1 0] [2 1]])]
+    (is (= [(matrix [[1 0]]) (matrix [[2 1]])] (group-on m 1)))))
