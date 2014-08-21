@@ -53,10 +53,11 @@
                     compress multiple adjacent delimiters into a single delimiter.
     :empty-field-value (default nil) indicates the interpretation of an empty field.
     :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
+    :header-fn applied to each header value in the dataset, defaults to keyword. Only applied if :header is true.
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char]
-               :or {delim \, quote \" skip 0 header false keyword-headers true}}]
+  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char header-fn]
+               :or {delim \, quote \" skip 0 header false keyword-headers true header-fn keyword}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
@@ -80,19 +81,13 @@
                                 ((fn [s] [s (count s)])))
                            (csv/read-csv reader :separator delim :quote quote))]
             [(filter seq (map first lines)) (apply max (map second lines))]))
-        header-row (when header (first parsed-data))
+        header-row (if header
+                     (map header-fn (first parsed-data))
+                     (map (comp keyword (partial str "col")) (range (count (first parsed-data)))))
         dataset-body (if header (rest parsed-data) parsed-data)
-        column-names-strs
-          (map (fn [hr-entry idx]
-                 (if hr-entry
-                   (str hr-entry)
-                   (str "col" idx)))
-               (concat header-row (repeat nil))
-               (range column-count))
-        column-names (map (if keyword-headers keyword identity) column-names-strs)
         padded-body (map #(pad-vector % column-count empty-field-value)
                          dataset-body)]
-    (dataset column-names padded-body)))
+    (dataset header-row padded-body)))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
