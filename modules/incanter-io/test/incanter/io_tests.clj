@@ -109,3 +109,19 @@
           iris-mat-dummies (to-matrix iris-data :dummies true)]
       (io-validation test-mat test-csv-mat test-tdd-mat
                      iris-mat iris-mat-dummies))))
+
+(with-test
+  (defn cars-ds
+    [& options]
+    (apply read-dataset (str incanter-home "data/cars.csv") options))
+  (testing "read-dataset header options"
+    (is (= (col-names (cars-ds :header true)) [:speed :dist])
+        "Default header function should be keyword.")
+    (is (= (col-names (cars-ds)) [:col0 :col1])
+        "No header given, column names should be :col0 :col1 ....")
+    (is (= (col-names (cars-ds :header true
+                               :header-fn (comp keyword clojure.string/upper-case)))
+           [:SPEED :DIST])
+        "Header function should be used.")
+    (is (= (col-names (cars-ds :header-fn identity)) [:col0 :col1])
+        "Header function should not be used.")))
