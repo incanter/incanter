@@ -110,6 +110,11 @@
       (io-validation test-mat test-csv-mat test-tdd-mat
                      iris-mat iris-mat-dummies))))
 
+(defn default-col-names
+  "Returns the default column names for a dataset with n columns."
+  [n]
+  (col-names (to-dataset (range n) :transpose true)))
+
 (with-test
   (defn cars-ds
     [& options]
@@ -117,11 +122,16 @@
   (testing "read-dataset header options"
     (is (= (col-names (cars-ds :header true)) [:speed :dist])
         "Default header function should be keyword.")
-    (is (= (col-names (cars-ds)) [:col0 :col1])
-        "No header given, column names should be :col0 :col1 ....")
+    (is (= (col-names (cars-ds)) (default-col-names 2))
+        "No header given, column names should be 0 1 ....")
     (is (= (col-names (cars-ds :header true
                                :header-fn (comp keyword clojure.string/upper-case)))
            [:SPEED :DIST])
         "Header function should be used.")
-    (is (= (col-names (cars-ds :header-fn identity)) [:col0 :col1])
+    (is (= (col-names (cars-ds :header-fn identity)) (default-col-names 2))
         "Header function should not be used.")))
+
+(deftest default-column-names
+  (testing "Default column names should match core/to-dataset"
+    (is (= (col-names (read-dataset (java.io.StringReader. "11,12,13\n21,22,23")))
+           (default-col-names 3)))))
