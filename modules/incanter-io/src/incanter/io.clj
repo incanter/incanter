@@ -28,17 +28,16 @@
             [clojure.core.matrix :as m]
             [clojure.core.matrix.dataset :as ds]))
 
-(defn- parse-string [value & [empty-value]]
-  (if (= value "")
-    empty-value
-    (if (re-matches #"\d+" value)
-      (try (Long/parseLong value)
-           (catch NumberFormatException _ value))
-      (try (Double/parseDouble value)
-           (catch NumberFormatException _ value)))))
+(defn missing-value?
+  "Returns true if s is nil or a string that contains only whitespace."
+  [s]
+  (if (or (string? s) (nil? s))
+    (clojure.string/blank? s)))
 
-(defn- pad-vector [v new-len value]
-  (into v (repeat (- new-len (count v)) value)))
+(defn remove-blank-lines
+  "Removes empty lines from coll."
+  [coll]
+  (remove (partial every? missing-value?) coll))
 
 (defn read-dataset
   "
@@ -48,45 +47,29 @@
     :delim (default \\,), other options (\\tab \\space \\|  etc)
     :quote (default \\\") character used for quoting strings
     :header (default false) indicates the file has a header line
-    :compress-delim (default true if delim = \\space, false otherwise) means
-                    compress multiple adjacent delimiters into a single delimiter.
-    :empty-field-value (default nil) indicates the interpretation of an empty field.
-    :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
-    :header-fn applied to each header value in the dataset, defaults to keyword. Only applied if :header is true.
+    :skip-blank-lines (default true) if true, blank lines are ignored
+    :header-fn applied to each header value in the dataset, defaults to keyword. Only applied if :header is true
+    :row-fn (default identity) applied to each row before constructing dataset.
+    :dataset-fn (default doall) applied to entire sequence of rows before constructing dataset.
   "
 
-  [filename & {:keys [delim quote header compress-delim empty-field-value comment-char header-fn]
-               :or {delim \, quote \" header false header-fn keyword}}]
+  [filename & {:keys [delim quote header skip-blank-lines compress-delim empty-field-value header-fn row-fn dataset-fn]
+               :or {delim \, quote \" header false skip-blank-lines true header-fn keyword}}]
+  (with-open [reader (io/reader filename)]
+    (let [lines (csv/read-csv reader
+                              :separator delim
+                              :quote quote)
+          skip-blank-lines (when skip-blank-lines remove-blank-lines)
+          dataset-fns (conj [dataset-fn] skip-blank-lines)
+          fns (fn [r] ((apply comp (remove nil? dataset-fns)) r))
+          do-fns (fn [rows] (doall (fns
+                                    (if row-fn
+                                      (map row-fn rows)
+                                      rows))))]
+      (if header
+        (dataset (map header-fn (first lines)) (do-fns (rest lines)))
+        (incanter.core/to-dataset (do-fns lines))))))
 
-  (let [compress-delim? (or compress-delim (= delim \space))
-        compress-delim-fn (if compress-delim?
-                            (fn [line] (filter #(not= % "") line))
-                            identity)
-        comment-char-fn (fn [line]
-                          (if (and (boolean (seq line)) comment-char)
-                            (if (.startsWith (first line) comment-char)
-                              '()
-                              line)
-                            line))
-        remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
-        parse-data-fn (fn [line]
-                        (vec (map #(parse-string % empty-field-value) line)))
-        [parsed-data column-count]
-        (with-open [reader (io/reader filename)]
-          (let [lines (map #(-> %
-                                compress-delim-fn
-                                remove-empty-fn
-                                parse-data-fn
-                                ((fn [s] [s (count s)])))
-                           (csv/read-csv reader :separator delim :quote quote))]
-            [(filter seq (map first lines)) (apply max (map second lines))]))
-        header-row (when header (map header-fn (first parsed-data)))
-        dataset-body (if header (rest parsed-data) parsed-data)
-        padded-body (map #(pad-vector % column-count empty-field-value)
-                         dataset-body)]
-    (if header
-      (dataset header-row padded-body)
-      (incanter.core/to-dataset padded-body))))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
