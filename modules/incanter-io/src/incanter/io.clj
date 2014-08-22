@@ -22,8 +22,8 @@
 (ns ^{:doc "Library for reading and writing Incanter datasets and matrices."}
   incanter.io
   (:import (java.io FileWriter File))
-  (:use [incanter.core :only (dataset save)])
-  (:require [clojure.java.io :as io]
+  (:require [incanter.core :as i]
+            [clojure.java.io :as io]
             [clojure.data.csv :as csv]
             [clojure.core.matrix :as m]
             [clojure.core.matrix.dataset :as ds]))
@@ -67,11 +67,11 @@
                                       (map row-fn rows)
                                       rows))))]
       (if header
-        (dataset (map header-fn (first lines)) (do-fns (rest lines)))
-        (incanter.core/to-dataset (do-fns lines))))))
+        (i/dataset (map header-fn (first lines)) (do-fns (rest lines)))
+        (i/to-dataset (do-fns lines))))))
 
 
-(defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
+(defmethod i/save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
   (let [file-writer (if (= "-" filename)
                       *out*
@@ -95,7 +95,7 @@
         (when (= "-" filename)
             (.close file-writer))))))
 
-(defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
+(defmethod i/save :incanter.core/dataset [dataset filename & {:keys [delim header append]
                                                             :or {append false delim \,}}]
   (let [header (or header (map #(if (keyword? %) (name %) %) (ds/column-names dataset)))
         file-writer (if (= "-" filename)
@@ -121,7 +121,7 @@
           (.close file-writer))))))
 
 
-(defmethod save java.awt.image.BufferedImage
+(defmethod i/save java.awt.image.BufferedImage
   ([img filename & {:keys [format] :or {format "png"}}]
      (javax.imageio.ImageIO/write img
                                   format

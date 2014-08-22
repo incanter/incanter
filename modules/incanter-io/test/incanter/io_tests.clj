@@ -23,9 +23,10 @@
 ;; (run-tests 'incanter.tests.test-cases)
 
 (ns incanter.io-tests
-  (:use clojure.test
-        (incanter core io))
-  (:require [clojure.core.matrix :as m]))
+  (:use clojure.test)
+  (:require [incanter.core :as i :refer [to-dataset]]
+            [incanter.io :as io :refer [read-dataset]]
+            [clojure.core.matrix :as m]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.io.clj
@@ -67,7 +68,7 @@
                  :row-fn #(map parse-string %)
                  :header true))
 ;; read in the social science survey dataset from a space delimited file
-(def ols-data (to-matrix (read-dataset
+(def ols-data (i/to-matrix (read-dataset
                            (str incanter-home "data/olsexamp.dat")
                            :delim \space
                            :header true)))
@@ -75,15 +76,15 @@
 
 (defn io-validation [m1 m2 m3 m4 m5]
   ;; validate matrices read from files
-  (is (m/equals (m/esum (sel m1 :cols 0)) 770))
-  (is (m/equals (m/esum (sel m1 :cols 1)) 2149))
-  (is (m/equals (m/esum (sel m2 :cols 0)) 770))
-  (is (m/equals (m/esum (sel m2 :cols 1)) 2149))
-  (is (m/equals (m/esum (sel m3 :cols 0)) 770))
-  (is (m/equals (m/esum (sel m3 :cols 1)) 2149))
+  (is (m/equals (m/esum (i/sel m1 :cols 0)) 770))
+  (is (m/equals (m/esum (i/sel m1 :cols 1)) 2149))
+  (is (m/equals (m/esum (i/sel m2 :cols 0)) 770))
+  (is (m/equals (m/esum (i/sel m2 :cols 1)) 2149))
+  (is (m/equals (m/esum (i/sel m3 :cols 0)) 770))
+  (is (m/equals (m/esum (i/sel m3 :cols 1)) 2149))
   ;; confirm that iris species factor was converted to two dummy variables
-  (is (m/equals (sel m4 :rows 0) (matrix [5.10 3.50 1.40 0.20 0])))
-  (is (m/equals (m/get-row m5 0) (matrix [5.10 3.50 1.40 0.20 0 0]))))
+  (is (m/equals (i/sel m4 :rows 0) (i/matrix [5.10 3.50 1.40 0.20 0])))
+  (is (m/equals (m/get-row m5 0) (i/matrix [5.10 3.50 1.40 0.20 0 0]))))
 ;; end of io-validation tests
 
 (deftest read-dataset-validation
@@ -96,13 +97,13 @@
 
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
-    (set-current-implementation impl)
+    (i/set-current-implementation impl)
     (println (str "compliance test " impl))
-    (let [test-mat (to-matrix test-data)
-          test-csv-mat (to-matrix test-csv-data)
-          test-tdd-mat (to-matrix test-tdd-data)
-          iris-mat (to-matrix iris-data)
-          iris-mat-dummies (to-matrix iris-data :dummies true)]
+    (let [test-mat (i/to-matrix test-data)
+          test-csv-mat (i/to-matrix test-csv-data)
+          test-tdd-mat (i/to-matrix test-tdd-data)
+          iris-mat (i/to-matrix iris-data)
+          iris-mat-dummies (i/to-matrix iris-data :dummies true)]
       (io-validation test-mat test-csv-mat test-tdd-mat
                      iris-mat iris-mat-dummies))))
 
@@ -114,11 +115,11 @@
 (defn default-col-names
   "Returns the default column names for a dataset with n columns."
   [n]
-  (col-names (to-dataset (range n) :transpose true)))
+  (i/col-names (to-dataset (range n) :transpose true)))
 
 (deftest default-column-names
   (testing "Default column names should match core/to-dataset"
-    (is (= (col-names (read-dataset (java.io.StringReader. "11,12,13\n21,22,23")))
+    (is (= (i/col-names (read-dataset (java.io.StringReader. "11,12,13\n21,22,23")))
            (default-col-names 3)))))
 
 (with-test
@@ -126,15 +127,15 @@
     [& options]
     (apply read-dataset (str incanter-home "data/cars.csv") options))
   (testing "header options"
-    (is (= (col-names (cars-ds :header true)) [:speed :dist])
+    (is (= (i/col-names (cars-ds :header true)) [:speed :dist])
         "Default header function should be keyword.")
-    (is (= (col-names (cars-ds)) (default-col-names 2))
+    (is (= (i/col-names (cars-ds)) (default-col-names 2))
         "No header given, column names should be 0 1 ....")
-    (is (= (col-names (cars-ds :header true
+    (is (= (i/col-names (cars-ds :header true
                                :header-fn (comp keyword clojure.string/upper-case)))
            [:SPEED :DIST])
         "Header function should be used.")
-    (is (= (col-names (cars-ds :header-fn identity)) (default-col-names 2))
+    (is (= (i/col-names (cars-ds :header-fn identity)) (default-col-names 2))
         "Header function should not be used.")))
 
 (deftest test-options
@@ -211,7 +212,7 @@
     (is (= (read-dataset (data "11,12,13\n21,22,23\n31,32,33")
                          :header true
                          :dataset-fn (partial drop 1))
-           (dataset [:11 :12 :13] [["31" "32" "33"]]))
+           (i/dataset [:11 :12 :13] [["31" "32" "33"]]))
         "Should skip first line after header."))
 
   (testing "skip commented lines"
@@ -236,7 +237,7 @@
 
 (deftest missing-values-handling
   (testing "Non string"
-    (are [x] (= nil (missing-value? x))
+    (are [x] (= nil (io/missing-value? x))
          :NA
          :1
          'symbol
@@ -244,9 +245,9 @@
          []
          pos?))
   (testing "nil"
-    (is (= true (missing-value? nil))))
+    (is (= true (io/missing-value? nil))))
   (testing "Strings"
-    (are [x] (= true (missing-value? x))
+    (are [x] (= true (io/missing-value? x))
          ""
          "   "
          "\n")))
@@ -281,4 +282,4 @@
                            :header true
                            :row-fn row-fn
                            :dataset-fn pad-rows)]
-      (is (= ($ 6 ds) [4 16 :NA 40 35 :NA])))))
+      (is (= (i/$ 6 ds) [4 16 :NA 40 35 :NA])))))
