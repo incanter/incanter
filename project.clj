@@ -15,13 +15,40 @@
                  [incanter/incanter-excel "1.9.0-SNAPSHOT"]
                  [incanter/incanter-sql "1.9.0-SNAPSHOT"]
                  [incanter/incanter-zoo "1.9.0-SNAPSHOT"]
-                 [org.clojure/clojure "1.5.1"]
+                 [org.clojure/clojure "1.6.0"]
                  ]
+  
+  :plugins [[lein-sub "0.3.0"]
+            [lein-modules "0.3.8"]]
+  
+  :sub ["modules/incanter-core"
+        "modules/incanter-io"
+        "modules/incanter-charts"
+        "modules/incanter-mongodb"
+        "modules/incanter-pdf"
+        "modules/incanter-svg"
+        "modules/incanter-latex"
+        "modules/incanter-excel"
+        "modules/incanter-sql"
+        "modules/incanter-zoo"]
+  
+  :modules {:dirs ["modules/incanter-core"
+                   "modules/incanter-io"
+                   "modules/incanter-charts"
+                   "modules/incanter-mongodb"
+                   "modules/incanter-pdf"
+                   "modules/incanter-svg"
+                   "modules/incanter-latex"
+                   "modules/incanter-excel"
+                   "modules/incanter-sql"
+                   "modules/incanter-zoo"]
+            :subprocess false}
+	  
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
              :uberjar {:aot :all
                        :main incanter.main
-                       :dependencies [[reply "0.3.0" :exclusions [org.clojure/clojure]]
+                       :dependencies [[reply "0.3.4" :exclusions [org.clojure/clojure]]
                                       [swingrepl "1.3.0"
                                        :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]
                                       ]
