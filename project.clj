@@ -43,6 +43,8 @@
                    "modules/incanter-sql"
                    "modules/incanter-zoo"]
             :subprocess false}
+  
+  :main incanter.main
 	  
   :profiles {:dev {:resource-paths ["data"]}
              :debug {:debug true}
