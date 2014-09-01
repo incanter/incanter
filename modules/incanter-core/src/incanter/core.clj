@@ -2606,6 +2606,10 @@
   ([obj & options]
      (view (m/transpose (matrix [obj])))))
 
+(defmethod view ::vector
+  ([obj & options]
+     (view (m/transpose (matrix [obj])))))
+
 (defmethod view ::matrix
   ([obj & {:keys [column-names]}]
     (let [col-names (or column-names (range (ncol obj)))
