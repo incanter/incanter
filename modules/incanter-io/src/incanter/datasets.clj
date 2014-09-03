@@ -18,7 +18,7 @@
 
 (ns ^{:doc "Provides access to different datasets that are bundled with Incanter."}
     incanter.datasets
-  (:use [incanter.io :only (read-dataset)]))
+  (:require [incanter.io :as io]))
 
 
 (def ^:dynamic **datasets-base-url** "https://github.com/liebke/incanter/raw/master/")
@@ -185,4 +185,4 @@
                         (str **datasets-base-url** (ds :filename)))
              delim (ds :delim)
              header (ds :header)]
-         (read-dataset filename :delim delim :header header)))))
+         (io/read-dataset filename :delim delim :header header)))))
