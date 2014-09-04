@@ -23,7 +23,8 @@
 
 (ns incanter.charts-tests
   (:use clojure.test
-        (incanter core stats charts datasets)))
+        (incanter core stats charts))
+  (:require [incanter.datasets :as ds]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTS FOR incanter.charts.clj
@@ -247,12 +248,21 @@
   (.dispose cw1)
   (.dispose cw2))
 
+(def incanter-home "../..")
+
+(defn- get-dataset
+  [s]
+  (ds/get-dataset s :incanter-home incanter-home))
+
+(defn ->double
+  [s]
+  (Double/valueOf s))
 
 (defn bar-chart-tests []
   (def data (get-dataset :co2))
   (def grass-type (sel data :cols 1))
   (def treatment-type (sel data :cols 2))
-  (def uptake (sel data :cols 4))
+  (def uptake (map ->double (sel data :cols 4)))
   (def bw1 (view (bar-chart grass-type uptake
                             :title "CO2 Uptake"
                             :group-by treatment-type
@@ -263,7 +273,7 @@
   (def data (get-dataset :airline-passengers))
   (def years (sel data :cols 0))
   (def months (sel data :cols 2))
-  (def passengers (sel data :cols 1))
+  (def passengers (map ->double (sel data :cols 1)))
   (def bw2 (view (bar-chart years passengers :group-by months :legend true)))
   (def bw3 (view (bar-chart months passengers :group-by years :legend true)))
   (Thread/sleep wait-timeout)
@@ -280,7 +290,7 @@
   (def data (get-dataset :airline-passengers))
   (def years (sel data :cols 0))
   (def months (sel data :cols 2))
-  (def passengers (sel data :cols 1))
+  (def passengers (map ->double (sel data :cols 1)))
   (def lw1 (view (line-chart years passengers :group-by months :legend true)))
   (def lw2 (view (line-chart months passengers :group-by years :legend true)))
 

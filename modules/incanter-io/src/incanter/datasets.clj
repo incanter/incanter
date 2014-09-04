@@ -18,7 +18,8 @@
 
 (ns ^{:doc "Provides access to different datasets that are bundled with Incanter."}
     incanter.datasets
-  (:use [incanter.io :only (read-dataset)]))
+    (:require [incanter.io :as io]
+              [clojure.string :as s]))
 
 
 (def ^:dynamic **datasets-base-url** "https://github.com/liebke/incanter/raw/master/")
@@ -27,17 +28,20 @@
 (def ^:dynamic **datasets**
   {
    :iris {:filename "data/iris.dat"
-          :delim \space
-          :header true}
+            :delim \space
+            :header true}
    :cars {:filename "data/cars.dat"
-           :delim \space
-           :header true}
-   :cars-csv {:filename "data/cars.dat"
-               :delim \,
-               :header true}
-   :cars-tdd {:filename "data/cars.dat"
-               :delim \tab
-               :header true}
+            :delim \space
+            :header true
+            :row-fn #(filter seq %)}
+   :cars-csv {:filename "data/cars.csv"
+            :delim \,
+            :header true
+            :row-fn #(map s/trim %)}
+   :cars-tdd {:filename "data/cars.tdd"
+            :delim \tab
+            :header true
+            :row-fn #(map s/trim %)}
    :survey {:filename "data/olsexamp.dat"
             :delim \space
             :header true}
@@ -45,32 +49,40 @@
             :delim \,
             :header true}
    :flow-meter {:filename "data/flow_meter.dat"
-            :delim \space
-            :header true}
+            :delim \tab
+            :header true
+            :row-fn #(map s/trim %)}
    :co2 {:filename "data/co2.csv"
             :delim \,
-            :header true}
+            :header true
+            :row-fn #(map s/trim %)}
    :chick-weight {:filename "data/chick_weight.csv"
             :delim \,
-            :header true}
+            :header true
+            :row-fn #(map s/trim %)}
    :math-prog {:filename "data/math_prog.csv"
             :delim \,
             :header true}
    :plant-growth {:filename "data/plant_growth.csv"
             :delim \,
-            :header true}
+            :header true
+            :row-fn #(map s/trim %)}
    :filip {:filename "data/filip.dat"
             :delim \space
-            :header true}
+            :header true
+            :row-fn #(filter seq %)}
    :pontius {:filename "data/pontius.dat"
             :delim \space
-            :header true}
+            :header true
+            :row-fn #(filter seq %)}
    :longley {:filename "data/longley.dat"
             :delim \space
-            :header true}
+            :header true
+            :row-fn #(filter seq %)}
    :chwirut {:filename "data/Chwirut1.dat"
             :delim \space
-            :header true}
+            :header true
+            :row-fn #(filter seq %)}
    :hair-eye-color {:filename "data/hair_eye_color.csv"
             :delim \,
             :header true}
@@ -183,6 +195,6 @@
        (let [filename (if (and (not from-repo) (not (nil? incanter-home)))
                         (str incanter-home "/" (ds :filename))
                         (str **datasets-base-url** (ds :filename)))
-             delim (ds :delim)
-             header (ds :header)]
-         (read-dataset filename :delim delim :header header)))))
+             opts (flatten (keep #(when-let [v (ds %)] [% v])
+                                 [:header-fn :row-fn :dataset-fn :delim :header]))]
+         (apply io/read-dataset filename opts)))))

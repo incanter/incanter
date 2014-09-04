@@ -1,4 +1,4 @@
-;;; io.clj -- Data I/O library for Clojure built on CSVReader
+;;; io.clj -- Data I/O library for Clojure built on data.csv
 
 ;; by David Edgar Liebke http://incanter.org
 ;; March 11, 2009
@@ -21,24 +21,23 @@
 
 (ns ^{:doc "Library for reading and writing Incanter datasets and matrices."}
   incanter.io
-  (:import (java.io FileReader FileWriter File)
-           (au.com.bytecode.opencsv CSVReader))
-  (:use [incanter.core :only (dataset save)])
-  (:require [clojure.java.io :as io]
+  (:import (java.io FileWriter File))
+  (:require [incanter.core :as i]
+            [clojure.java.io :as io]
+            [clojure.data.csv :as csv]
             [clojure.core.matrix :as m]
             [clojure.core.matrix.dataset :as ds]))
 
-(defn- parse-string [value & [empty-value]]
-  (if (= value "")
-    empty-value
-    (if (re-matches #"\d+" value)
-      (try (Long/parseLong value)
-           (catch NumberFormatException _ value))
-      (try (Double/parseDouble value)
-           (catch NumberFormatException _ value)))))
+(defn missing-value?
+  "Returns true if s is nil or a string that contains only whitespace."
+  [s]
+  (if (or (string? s) (nil? s))
+    (clojure.string/blank? s)))
 
-(defn- pad-vector [v new-len value]
-  (into v (repeat (- new-len (count v)) value)))
+(defn remove-blank-lines
+  "Removes empty lines from coll."
+  [coll]
+  (remove (partial every? missing-value?) coll))
 
 (defn read-dataset
   "
@@ -47,57 +46,32 @@
   Options:
     :delim (default \\,), other options (\\tab \\space \\|  etc)
     :quote (default \\\") character used for quoting strings
-    :skip (default 0) the number of lines to skip at the top of the file.
     :header (default false) indicates the file has a header line
-    :compress-delim (default true if delim = \\space, false otherwise) means
-                    compress multiple adjacent delimiters into a single delimiter.
-    :empty-field-value (default nil) indicates the interpretation of an empty field.
-    :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
+    :skip-blank-lines (default true) if true, blank lines are ignored
+    :header-fn applied to each header value in the dataset, defaults to identity. Only applied if :header is true
+    :row-fn (default identity) applied to each row before constructing dataset.
+    :dataset-fn (default doall) applied to entire sequence of rows before constructing dataset.
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char]
-               :or {delim \, quote \" skip 0 header false keyword-headers true}}]
+  [filename & {:keys [delim quote header skip-blank-lines compress-delim empty-field-value header-fn row-fn dataset-fn]
+               :or {delim \, quote \" header false skip-blank-lines true header-fn identity}}]
+  (with-open [reader (io/reader filename)]
+    (let [lines (csv/read-csv reader
+                              :separator delim
+                              :quote quote)
+          skip-blank-lines (when skip-blank-lines remove-blank-lines)
+          dataset-fns (conj [dataset-fn] skip-blank-lines)
+          fns (fn [r] ((apply comp (remove nil? dataset-fns)) r))
+          do-fns (fn [rows] (doall (fns
+                                    (if row-fn
+                                      (map row-fn rows)
+                                      rows))))]
+      (if header
+        (i/dataset (map header-fn (first lines)) (do-fns (rest lines)))
+        (i/to-dataset (do-fns lines))))))
 
-  (let [compress-delim? (or compress-delim (= delim \space))
-        compress-delim-fn (if compress-delim?
-                            (fn [line] (filter #(not= % "") line))
-                            identity)
-        comment-char-fn (fn [line]
-                          (if (and (boolean (seq line)) comment-char)
-                            (if (.startsWith (first line) comment-char)
-                              '()
-                              line)
-                            line))
-        remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
-        parse-data-fn (fn [line]
-                        (vec (map #(parse-string % empty-field-value) line)))
-        [parsed-data column-count]
-          (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
-            (loop [lines [] max-column 0]
-              (if-let [line (.readNext reader)]
-                (let [new-line (-> line
-                                   compress-delim-fn
-                                   comment-char-fn
-                                   remove-empty-fn
-                                   parse-data-fn)]
-                  (recur (if-not (empty? new-line) (conj lines new-line) lines)
-                         (max max-column (count new-line))))
-                [lines max-column])))
-        header-row (when header (first parsed-data))
-        dataset-body (if header (rest parsed-data) parsed-data)
-        column-names-strs
-          (map (fn [hr-entry idx]
-                 (if hr-entry
-                   (str hr-entry)
-                   (str "col" idx)))
-               (concat header-row (repeat nil))
-               (range column-count))
-        column-names (map (if keyword-headers keyword identity) column-names-strs)
-        padded-body (map #(pad-vector % column-count empty-field-value)
-                         dataset-body)]
-    (dataset column-names padded-body)))
 
-(defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
+(defmethod i/save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
   (let [file-writer (if (= "-" filename)
                       *out*
@@ -121,7 +95,7 @@
         (when (= "-" filename)
             (.close file-writer))))))
 
-(defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
+(defmethod i/save :incanter.core/dataset [dataset filename & {:keys [delim header append]
                                                             :or {append false delim \,}}]
   (let [header (or header (map #(if (keyword? %) (name %) %) (ds/column-names dataset)))
         file-writer (if (= "-" filename)
@@ -147,7 +121,7 @@
           (.close file-writer))))))
 
 
-(defmethod save java.awt.image.BufferedImage
+(defmethod i/save java.awt.image.BufferedImage
   ([img filename & {:keys [format] :or {format "png"}}]
      (javax.imageio.ImageIO/write img
                                   format
