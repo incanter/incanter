@@ -48,13 +48,13 @@
     :quote (default \\\") character used for quoting strings
     :header (default false) indicates the file has a header line
     :skip-blank-lines (default true) if true, blank lines are ignored
-    :header-fn applied to each header value in the dataset, defaults to keyword. Only applied if :header is true
+    :header-fn applied to each header value in the dataset, defaults to identity. Only applied if :header is true
     :row-fn (default identity) applied to each row before constructing dataset.
     :dataset-fn (default doall) applied to entire sequence of rows before constructing dataset.
   "
 
   [filename & {:keys [delim quote header skip-blank-lines compress-delim empty-field-value header-fn row-fn dataset-fn]
-               :or {delim \, quote \" header false skip-blank-lines true header-fn keyword}}]
+               :or {delim \, quote \" header false skip-blank-lines true header-fn identity}}]
   (with-open [reader (io/reader filename)]
     (let [lines (csv/read-csv reader
                               :separator delim

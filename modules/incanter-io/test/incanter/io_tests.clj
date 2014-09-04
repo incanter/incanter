@@ -92,8 +92,10 @@
 	  [["dat" test-data]
 	   ["csv" test-csv-data]
 	   ["tdd" test-tdd-data]]]
-    (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
-    (is (= 50 (count (m/rows cars-dataset))) (str "Reading rows for " name " failed")))) ;; end of read-dataset-validation tests
+    (is (= ["speed" "dist"] (i/col-names cars-dataset))
+        (str "Reading column names for " name " failed"))
+    (is (= 50 (count (m/rows cars-dataset)))
+        (str "Reading rows for " name " failed"))))
 
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
@@ -127,7 +129,7 @@
     [& options]
     (apply read-dataset (str incanter-home "data/cars.csv") options))
   (testing "header options"
-    (is (= (i/col-names (cars-ds :header true)) [:speed :dist])
+    (is (= (i/col-names (cars-ds :header true)) ["speed" "dist"])
         "Default header function should be keyword.")
     (is (= (i/col-names (cars-ds)) (default-col-names 2))
         "No header given, column names should be 0 1 ....")
@@ -212,7 +214,7 @@
     (is (= (read-dataset (data "11,12,13\n21,22,23\n31,32,33")
                          :header true
                          :dataset-fn (partial drop 1))
-           (i/dataset [:11 :12 :13] [["31" "32" "33"]]))
+           (i/dataset ["11" "12" "13"] [["31" "32" "33"]]))
         "Should skip first line after header."))
 
   (testing "skip commented lines"
