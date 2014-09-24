@@ -2298,21 +2298,24 @@
 (defn melt
   "
   Melt an object into a form suitable for easy casting, like a melt function in R.
-  Only accepts one pivot key for now. e.g.
+  It accepts multiple pivot keys (identifier variables that are reproduced for each
+  row in the output).
 
     (use '(incanter core charts datasets))
     (view (with-data (melt (get-dataset :flow-meter) :Subject)
               (line-chart :Subject :value :group-by :variable :legend true)))
 
   See http://www.statmethods.net/management/reshape.html for more examples."
-  [dataset pivot-key]
+  [dataset & pivot-keys]
   (let [in-m (to-map dataset)
         nrows (nrow dataset)
         ks (keys in-m)]
     (to-dataset
-     (for [k ks i (range nrows) :when (not (= pivot-key k))]
-       (zipmap [pivot-key :variable :value]
-               [(nth (pivot-key in-m) i) k (nth (k in-m) i)])))))
+     (for [k ks i (range nrows) :when (not-any? #(= k %) pivot-keys)]
+       (zipmap (conj pivot-keys :variable :value)
+               (conj (map #(nth (% in-m) i) pivot-keys)
+                     k
+                     (nth (k in-m) i)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES

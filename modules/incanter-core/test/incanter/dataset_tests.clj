@@ -88,14 +88,14 @@
 
 (deftest melt-test
   (testing "Melting the data")
-  (let [dset (dataset  [:id :time :x1 :x2 ]
-                       [[1 1 5 6]
-                        [2 2 7 8]])
-        expected (dataset [:value :variable :id]
-                          [[1 :time 1]
-                           [2 :time 2]
-                           [5 :x1 1]
-                           [7 :x1 2]
-                           [6 :x2 1]
-                           [8 :x2 2]])]
-    (is (= (melt dset :id) expected))))
+  (let [dset (dataset  [:id :another-id :time :x1 :x2 ]
+                       [[1 3 1 5 6]
+                        [2 4 2 7 8]])
+        expected (dataset [:value :variable :id :another-id]
+                          [[1 :time 1 3]
+                           [2 :time 2 4]
+                           [5 :x1 1 3]
+                           [7 :x1 2 4]
+                           [6 :x2 1 3]
+                           [8 :x2 2 4]])]
+    (is (= (melt dset :id :another-id) expected))))
