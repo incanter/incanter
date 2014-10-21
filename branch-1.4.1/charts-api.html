@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>charts - Incanter 2.0 API documentation</title>
+    <title>charts - Incanter 1.4.1 API documentation</title>
     <link href="../static/incanter.ico" rel="icon" />
     <link href="../static/incanter.ico" rel="shortcut icon" />
     <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
@@ -27,7 +27,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">2.0</span> API</span><br />
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.4.1</span> API</span><br />
     <ul>
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
@@ -35,13 +35,13 @@ namespace.
     <div class="NamespaceTOC">
       <span class="toc-header">Namespaces</span>
       <ul id="left-sidebar-list">
-        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="svg-api.html" class="wiki_link">svg</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
+        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
       </ul>
     </div>
     <div class="BranchTOC">
       <span class="toc-header">Other Versions</span>
       <ul id="left-sidebar-branch-list">
-        <li><a href="../index.html" class="wiki_link">1.5.5 (stable)</a></li><li><a href="../branch-1.4.1/index.html" class="wiki_link">1.4.1 (legacy)</a></li>
+        <li><a href="../index.html" class="wiki_link">1.5.5 (stable)</a></li><li><a href="../branch-master/index.html" class="wiki_link">2.0 (in development)</a></li>
       </ul>
     </div>
     <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
@@ -114,9 +114,6 @@ namespace.
       <a class="toc-entry-anchor" href="#incanter.charts/box-plot">box-plot</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#incanter.charts/candle-stick-plot">candle-stick-plot</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.charts/clear-background">clear-background</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -141,9 +138,6 @@ namespace.
       <a class="toc-entry-anchor" href="#incanter.charts/line-chart">line-chart</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#incanter.charts/log-axis">log-axis</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.charts/parametric-plot">parametric-plot</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -156,22 +150,13 @@ namespace.
       <a class="toc-entry-anchor" href="#incanter.charts/scatter-plot">scatter-plot</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#incanter.charts/scatter-plot-matrix">scatter-plot-matrix</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.charts/set-alpha">set-alpha</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#incanter.charts/set-axis">set-axis</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.charts/set-background-alpha">set-background-alpha</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.charts/set-background-default">set-background-default</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#incanter.charts/set-point-size">set-point-size</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#incanter.charts/set-stroke">set-stroke</a>
@@ -229,7 +214,7 @@ namespace.
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="charts">charts</span>
-  - <span id="header-project">Incanter</span> <span id="header-version">2.0</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.4.1</span><span id="header-status-block"> (<span id="header-status">legacy</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
 <br />Full namespace name: <span id="long-name">incanter.charts</span>
@@ -269,29 +254,27 @@ Options:
 
 Examples:
 
-  (use '(incanter core charts stats datasets))
-  (doto (box-plot (sample-normal 1000) :legend true)
-        view
-        (add-box-plot (sample-normal 1000 :sd 2))
-        (add-box-plot (sample-gamma 1000)))
+    (use '(incanter core charts stats))
+    (doto (box-plot (sample-normal 1000) :legend true)
+          view
+          (add-box-plot (sample-normal 1000 :sd 2))
+          (add-box-plot (sample-gamma 1000)))
 
 
-  (with-data (get-dataset :iris)
-    (doto (box-plot :Sepal.Length :legend true)
-      (add-box-plot :Petal.Length)
-      (add-box-plot :Sepal.Width)
-      (add-box-plot :Petal.Width)
-      view))
+   (with-data (get-dataset :iris)
+     (doto (box-plot :Sepal.Length :legend true)
+       (add-box-plot :Petal.Length)
+       (add-box-plot :Sepal.Width)
+       (add-box-plot :Petal.Width)
+       view))
 
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L410" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L399" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -308,20 +291,20 @@ Options:
 
 Examples:
 
-  (use '(incanter core charts stats datasets))
-  (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
-  (def years (mapcat identity (repeat 4 [2007 2008 2009])))
-  (def x (sample-uniform 12 :integers true :max 100))
-  (def plot (bar-chart years x :group-by seasons :legend true))
-  (view plot)
-  (add-categories plot years [10 20 40] :series-label "winter-break")
+    (use '(incanter core charts stats datasets))
+    (def seasons (mapcat identity (repeat 3 ["winter" "spring" "summer" "fall"])))
+    (def years (mapcat identity (repeat 4 [2007 2008 2009])))
+    (def x (sample-uniform 12 :integers true :max 100))
+    (def plot (bar-chart years x :group-by seasons :legend true))
+    (view plot)
+    (add-categories plot years [10 20 40] :series-label "winter-break")
 
-  (add-categories plot
-                  (plus 3 years)
-                  (sample-uniform 12 :integers true :max 100)
-                  :group-by seasons)
+    (add-categories plot
+                       (plus 3 years)
+                       (sample-uniform 12 :integers true :max 100)
+                       :group-by seasons)
 
-  (def plot2 (line-chart years x :group-by seasons :legend true))
+    (def plot2 (line-chart years x :group-by seasons :legend true))
     (view plot2)
     (add-categories plot2 (plus 3 years) (sample-uniform 12 :integers true :max 100) :group-by seasons)
 
@@ -337,12 +320,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L473" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L467" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -350,8 +331,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-function chart function min-range max-range &amp; options)
 </pre>
-    <pre id="var-docstr">
-Adds a xy-plot of the given function to the given chart, returning
+    <pre id="var-docstr"> Adds a xy-plot of the given function to the given chart, returning
 a modified version of the chart.
 
 Options:
@@ -391,12 +371,10 @@ Examples:
   ;; plot the cubic function and its derivative
   (doto (function-plot cubic -10 10)
         (add-function deriv-cubic -10 10)
-        view)
-
-</pre>
+        view)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L653" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L655" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -428,12 +406,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L359" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L343" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -441,8 +417,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-image chart x y img &amp; options)
 </pre>
-    <pre id="var-docstr">
-Adds an image to the chart at the given coordinates.
+    <pre id="var-docstr"> Adds an image to the chart at the given coordinates.
 
 Arguments:
   chart -- the chart to add the polygon to.
@@ -455,12 +430,10 @@ Examples:
 
    (doto (function-plot sin -10 10)
     (add-image 0 0 (latex "\\frac{(a+b)^2} {(a-b)^2}"))
-    view)
-
-</pre>
+    view)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3182" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2820" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -468,8 +441,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-lines chart x y &amp; options)
 </pre>
-    <pre id="var-docstr">
-Plots lines on the given scatter or line plot (xy-plot) of the (x,y) points.
+    <pre id="var-docstr"> Plots lines on the given scatter or line plot of the (x,y) points.
 Equivalent to R's lines function, returns the modified chart object.
 
 Options:
@@ -511,13 +483,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L585" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L584" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -525,8 +494,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-parametric chart function min-range max-range &amp; options)
 </pre>
-    <pre id="var-docstr">
-Adds a xy-plot of the given parametric function to the given chart, returning
+    <pre id="var-docstr"> Adds a xy-plot of the given parametric function to the given chart, returning
 a modified version of the chart.
 Function takes 1 argument t and returns point [x y].
 
@@ -546,11 +514,10 @@ Examples:
   (defn circle [t] [(cos t) (sin t)])
   (doto (xy-plot [1 -1 -1 1 1] [1 1 -1 -1 1] :auto-sort false)
         (add-parametric circle 0 (* 2 Math/PI))
-        (view))
-</pre>
+        (view))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L719" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L725" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -558,8 +525,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-pointer chart x y &amp; options)
 </pre>
-    <pre id="var-docstr">
-Adds an arrow annotation to the given chart.
+    <pre id="var-docstr"> Adds an arrow annotation to the given chart.
 
 Arguments:
   chart -- the chart to annotate
@@ -593,13 +559,10 @@ Examples:
   (add-pointer plot 0 0 :text "east" :angle :east)
   (add-pointer plot 0 0 :text "south" :angle :south)
   (add-pointer plot 0 0 :text "sw" :angle :sw)
-  (add-pointer plot 0 0 :text "se" :angle :se)
-
-
-</pre>
+  (add-pointer plot 0 0 :text "se" :angle :se)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2988" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2623" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -607,8 +570,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-points chart x y &amp; options)
 </pre>
-    <pre id="var-docstr">
-Plots points on the given scatter-plot or xy-plot of the (x,y) points.
+    <pre id="var-docstr"> Plots points on the given scatter-plot or xy-plot of the (x,y) points.
 Equivalent to R's lines function, returns the modified chart object.
 
 Options:
@@ -645,13 +607,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L777" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L786" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -659,8 +618,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-polygon chart coords &amp; options)
 </pre>
-    <pre id="var-docstr">
-Adds a polygon outline defined by a given coordinates. The last coordinate will
+    <pre id="var-docstr"> Adds a polygon outline defined by a given coordinates. The last coordinate will
 close with the first. If only two points are given, it will plot a line.
 
 Arguments:
@@ -708,22 +666,17 @@ Examples:
   ;; add some text annotations
   (add-text plot -2.5 -6.5 "Setosa")
   (add-text plot -5 -5.5 "Versicolor")
-  (add-text plot -8 -5.5 "Virginica")
-
-
-
-</pre>
+  (add-text plot -8 -5.5 "Virginica")</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3120" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2757" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="incanter.charts/add-subtitle">add-subtitle</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-docstr">
-Adds a JFreeChart title object to a chart as a subtitle.
+    <pre id="var-docstr">Adds a JFreeChart title object to a chart as a subtitle.
 
 Examples:
   (use '(incanter core charts latex))
@@ -731,12 +684,10 @@ Examples:
   (doto (function-plot sin -10 10)
     (add-subtitle "subtitle")
     (add-subtitle (latex " \\frac{(a+b)^2} {(a-b)^2}"))
-    view)
-
-</pre>
+    view)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3932" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3544" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -744,8 +695,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-text chart x y text &amp; options)
 </pre>
-    <pre id="var-docstr">
-Adds a text annotation centered at the given coordinates.
+    <pre id="var-docstr"> Adds a text annotation centered at the given coordinates.
 
 Arguments:
   chart -- the chart to annotate
@@ -778,12 +728,10 @@ Examples:
   ;; add some text annotations
   (add-text plot -2.5 -6.5 "Setosa")
   (add-text plot -5 -5.5 "Versicolor")
-  (add-text plot -8 -5.5 "Virginica")
-
-</pre>
+  (add-text plot -8 -5.5 "Virginica")</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3075" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2712" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -791,7 +739,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (area-chart categories values &amp; options)
 </pre>
-    <pre id="var-docstr">Returns a JFreeChart object representing an area-chart of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing an area-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -863,12 +811,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2176" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1828" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -876,8 +822,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (bar-chart categories values &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a bar-chart of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a bar-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -886,12 +831,11 @@ Arguments:
   values -- a sequence of numeric values
 
 Options:
-  :title (default '') main title
+  :title (default 'Histogram') main title
   :x-label (default 'Categories')
   :y-label (default 'Value')
   :series-label
-
-:legend (default false) prints legend
+  :legend (default false) prints legend
   :vertical (default true) the orientation of the plot
   :group-by (default nil) -- a vector of values used to group the values into
                              series within each category.
@@ -950,12 +894,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2037" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1688" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -964,10 +906,6 @@ References:
     <pre id="var-usage">Usage: (bland-altman-plot x1 x2 &amp; options)
 </pre>
     <pre id="var-docstr">
-Options:
-  :data (default nil) If the :data option is provided a dataset,
-                      column names can be used instead of sequences
-                      of data for arguments x1 and x2.
 
 Examples:
 
@@ -978,19 +916,16 @@ Examples:
   (view (bland-altman-plot x1 x2))
 
   (with-data (get-dataset :flow-meter)
-    (view (bland-altman-plot (keyword "Wright 1st PEFR")
-                             (keyword "Mini Wright 1st PEFR"))))
+    (view (bland-altman-plot "Wright 1st PEFR" "Mini Wright 1st PEFR")))
 
 
 
 References:
   <a href="http://en.wikipedia.org/wiki/Bland-Altman_plot">http://en.wikipedia.org/wiki/Bland-Altman_plot</a>
-  <a href="http://www-users.york.ac.uk/~mb55/meas/ba.htm">http://www-users.york.ac.uk/~mb55/meas/ba.htm</a>
-
-</pre>
+  <a href="http://www-users.york.ac.uk/~mb55/meas/ba.htm">http://www-users.york.ac.uk/~mb55/meas/ba.htm</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3299" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2929" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -998,13 +933,12 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (box-plot x &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a box-plot of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a box-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
 Options:
-  :title (default '') main title
+  :title (default 'Histogram') main title
   :x-label (default x expression)
   :y-label (default 'Frequency')
   :legend (default false) prints legend
@@ -1017,12 +951,12 @@ See also:
 Examples:
 
   (use '(incanter core stats charts))
-  (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :scale 2)
+  (def gamma-box-plot (box-plot (sample-gamma 1000 :shape 1 :rate 2)
                         :title "Gamma Boxplot"
                         :legend true))
   (view gamma-box-plot)
-  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :scale 2))
-  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :scale 2))
+  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+  (add-box-plot gamma-box-plot (sample-gamma 1000 :shape 3 :rate 2))
 
   ;; use the group-by options
   (use '(incanter core stats datasets charts))
@@ -1036,59 +970,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2653" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="incanter.charts/candle-stick-plot">candle-stick-plot</h2>
-    <span id="var-type">macro</span><br />
-    <pre id="var-usage">Usage: (candle-stick-plot &amp; options)
-</pre>
-    <pre id="var-docstr">
-Produces a candle stick chart
-
-Options:
-  :data (default nil) If the :data option is provided a dataset,
-                      column names can be used instead of sequences
-                      of data as arguments to xy-plot.
-  :date Key for accessing the underlying date series (defaults to :date)
-  :high Key for accessing high value data (defaults to :high)
-  :low Key for accessing low value data (defaults to :low)
-  :open Key for accessing open value data (defaults to :open)
-  :close Key for accessing close value data (defaults to :close)
-  :volume Key for accessing volume data (defaults to :volume). Volume data is optional
-  :title (default 'Candle Stick Plot') main title
-  :time-label (default empty)
-  :value-label (default empty)
-  :legend (default false) prints legend
-  :series-label (default empty)
-
- Example:
-   ;; use default mappings so the dataset must have
-   ;; :date, :high, :low, :open, :close and :volume keys
-   (candle-stick-plot :data &lt;dataset&gt;)
-   ;; more customization
-   (candle-stick-plot
-     :data dataset
-     :high :HighPrice
-     :low :LowPrice
-     :open :StartOfDay
-     :close :CoB
-     :volume :TransactionVolume
-     :legend true
-     :time-label "CoB date"
-     :value-label "Price"
-     :series-label "Price time series"
-     :title "Price information")
-</pre>
-    
-    
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1260" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2307" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1096,18 +981,15 @@ Options:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (clear-background chart)
 </pre>
-    <pre id="var-docstr">
-Sets the alpha level (transparency) of the plot's background to zero
+    <pre id="var-docstr"> Sets the alpha level (transparency) of the plot's background to zero
 removing the default grid, returns the modified chart object.
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L959" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L874" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1115,8 +997,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (dynamic-scatter-plot [&amp; slider-bindings] expression &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns an scatter-plot bound to sliders (which tend to appear behind the chart).
+    <pre id="var-docstr"> Returns an scatter-plot bound to sliders (which tend to appear behind the chart).
 See the sliders macro for more information.
 
 
@@ -1135,12 +1016,10 @@ Examples:
    (view (dynamic-scatter-plot [mean (range -3 3 0.1)
                                 sd (range 0.1 10 0.1)]
           (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
-          :title "Normal PDF Plot")))
-
-</pre>
+          :title "Normal PDF Plot")))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3590" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3212" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1148,32 +1027,28 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (dynamic-xy-plot [&amp; slider-bindings] expression &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns an xy-plot bound to sliders (which tend to appear behind the chart).
+    <pre id="var-docstr"> Returns an xy-plot bound to sliders (which tend to appear behind the chart).
 See the sliders macro for more information.
 
 
 Examples:
 
-  (use '(incanter core stats charts))
+(use '(incanter core stats charts))
 
-  (let [x (range -3 3 0.1)]
+(let [x (range -3 3 0.1)]
   (view (dynamic-xy-plot [mean (range -3 3 0.1)
                           sd (range 0.1 10 0.1)]
-                         [x (pdf-normal x :mean mean :sd sd)]
-                         :title "Normal PDF Plot")))
+          [x (pdf-normal x :mean mean :sd sd)]
+          :title "Normal PDF Plot")))
 
  (let [x (range -3 3 0.1)]
    (view (dynamic-xy-plot [mean (range -3 3 0.1)
                            sd (range 0.1 10 0.1)]
           (for [xi x] [xi (pdf-normal xi :mean mean :sd sd)])
-          :title "Normal PDF Plot")))
-
-
-</pre>
+          :title "Normal PDF Plot")))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3557" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3181" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1181,13 +1056,12 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (function-plot function min-range max-range &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a xy-plot object of the given function over the range indicated
+    <pre id="var-docstr"> Returns a xy-plot object of the given function over the range indicated
 by the min-range and max-range arguments. Use the 'view' function to
 display the chart, or the 'save' function to write it to a file.
 
 Options:
-  :title (default '') main title
+  :title (default 'Histogram') main title
   :x-label (default x expression)
   :y-label (default 'Frequency')
   :legend (default false) prints legend
@@ -1206,12 +1080,10 @@ Examples:
   (view (function-plot pdf-normal -3 3))
 
   (defn cubic [x] (+ (* x x x) (* 2 x x) (* 2 x) 3))
-  (view (function-plot cubic -10 10))
-
-</pre>
+  (view (function-plot cubic -10 10))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2732" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2389" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1223,7 +1095,7 @@ Examples:
     <pre id="var-docstr">get-series</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3381" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3010" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1232,34 +1104,11 @@ Examples:
     <pre id="var-usage">Usage: (heat-map function x-min x-max y-min y-max &amp; options)
 </pre>
     <pre id="var-docstr">
-Usage: (heat-map function x-min x-max y-min y-max &amp; options)
-
-Returns a JFreeChart object representing a heat map of the function across
-the given x and y ranges. Use the 'view' function to display the chart, or
-the 'save' function to write it to a file.
-
-Arguments:
-  function -- a function that takes two scalar arguments and returns a scalar
-  x-min    -- lower bound for the first value of the function
-  x-max    -- upper bound for the first value of the function
-  y-min    -- lower bound for the second value of the function
-  y-max    -- upper bound for the second value of the function
-
-Options:
-  :title
-  :x-label (default 'x-min &lt; x &lt; x-max')
-  :y-label (default 'y-min &lt; y &lt; y-max')
-  :z-label -- defaults to function's name
-  :color? (default true) -- should the plot be in color or not?
-  :include-zero? (default true) -- should the plot include the origin if it
-                                   is not in the ranges specified?
-
 Examples:
   (use '(incanter core charts))
   (defn f [x y] (sin (sqrt (plus (sq x) (sq y)))))
   (view (heat-map f -10 10 -15 15))
   (view (heat-map f -10 10 -10 10 :color? false))
-  (view (heat-map f 5 10 5 10 :include-zero? false))
 
   (defn f2 [x y] (plus (sq x) (sq y)))
   (view (heat-map f2 -10 10 -10 10))
@@ -1284,12 +1133,10 @@ Examples:
                     (sum (map #(pdf-normal (euclidean-distance [x y] (take 2 %))
                                            :mean (nth % 2) :sd (last %))
                               data)))]
-    (view (heat-map diffusion -5 20 -5 20)))
-
-</pre>
+    (view (heat-map diffusion -5 20 -5 20)))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2914" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2572" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1297,8 +1144,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (histogram x &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing the histogram of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing the histogram of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -1345,12 +1191,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1790" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1440" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1358,8 +1202,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (line-chart categories values &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a line-chart of the given values and categories.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a line-chart of the given values and categories.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -1368,7 +1211,7 @@ Arguments:
   values -- a sequence of numeric values
 
 Options:
-  :title (default '') main title
+  :title (default 'Histogram') main title
   :x-label (default 'Categories')
   :y-label (default 'Value')
   :legend (default false) prints legend
@@ -1432,43 +1275,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1896" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="incanter.charts/log-axis">log-axis</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (log-axis &amp; options)
-</pre>
-    <pre id="var-docstr">
-Create a logarithmic axis.
-
-Note: By default, values smaller than 0.5 are rounded to 0.5 to prevent strange behavior that
-happens for values close to 0.
-
-Options:
-  :base (default 10) base of the logarithm; typically 2 or 10
-  :label (default none) the label of the axis
-  :int-ticks? (default true) if true, use normal numbers instead of
-     &lt;base&gt;^&lt;exponent&gt;, i.e. 1 instead of f.ex. 10^0.0
-  :smallest-value (default: 0.5) Set the smallest value represented by the axis, set to 0.0 to 'reset'
-
-See also:
-  set-axis
-
-References:
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/LogAxis.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/LogAxis.html</a>
-
-</pre>
-    
-    
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L827" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1547" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1476,8 +1286,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (parametric-plot function min-range max-range &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a xy-plot object of the given parametric function over the range indicated
+    <pre id="var-docstr"> Returns a xy-plot object of the given parametric function over the range indicated
 by the min-range and max-range arguments. Use the 'view' function to
 display the chart, or the 'save' function to write it to a file.
 Function must take 1 argument - parameter t and return point [x y].
@@ -1502,11 +1311,10 @@ Examples:
   (view (parametric-plot circle (- Math/PI) Math/PI))
 
   (defn spiral [t] [(* t (cos t)) (* t (sin t))])
-  (view (parametric-plot spiral 0 (* 6 Math/PI)))
-</pre>
+  (view (parametric-plot spiral 0 (* 6 Math/PI)))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2799" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2459" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1514,8 +1322,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (pie-chart categories values &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a pie-chart of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a pie-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -1524,7 +1331,7 @@ Arguments:
   values -- a sequence of numeric values
 
 Options:
-  :title (default '') main title
+  :title (default 'Histogram') main title
   :legend (default false) prints legend
 
 
@@ -1552,12 +1359,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2558" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2213" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1567,11 +1372,6 @@ References:
 </pre>
     <pre id="var-docstr">
 Returns a QQ-Plot object. Use the 'view' function to display it.
-
-Options:
-  :data (default nil) If the :data option is provided a dataset,
-                      a column name can be used instead of a sequence
-                      of data for argument x.
 
 References:
   <a href="http://en.wikipedia.org/wiki/QQ_plot">http://en.wikipedia.org/wiki/QQ_plot</a>
@@ -1584,12 +1384,10 @@ Examples:
   (view (qq-plot (sample-gamma 100)))
 
   (with-data (get-dataset :iris)
-    (view (qq-plot :Sepal.Length)))
-
-</pre>
+    (view (qq-plot :Sepal.Length)))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3259" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2890" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1598,13 +1396,12 @@ Examples:
     <pre id="var-usage">Usage: (scatter-plot)
        (scatter-plot x y &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a scatter-plot of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a scatter-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
 Options:
-  :title (default '') main title
+  :title (default 'Histogram') main title
   :x-label (default x expression)
   :y-label (default 'Frequency')
   :legend (default false) prints legend
@@ -1654,82 +1451,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1429" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="incanter.charts/scatter-plot-matrix">scatter-plot-matrix</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (scatter-plot-matrix &amp; opts)
-</pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object displaying a scatter plot matrix for the given data.
-Use the 'view' function to display the chart or 'save' to write it to a file.
-
-Use:
-  (scatter-plot-matrix &amp; options)
-  (scatter-plot-matrix data &amp; options)
-
-Options:
-  :data data (default $data) the data set for the plot.
-  :title s (default "Scatter Plot Matrix").
-  :nbins n (default 10) number of bins (ie. bars) in histogram.
-  :group-by grp (default nil) name of the column for grouping data.
-  :only-first n (default 6) show only the first n most correlating columns of the data set.
-  :only-triangle b (default false) shows only the upper triangle of the plot matrix.
-
-Examples:
-  (use '(incanter core stats charts datasets pdf))
-  (view (scatter-plot-matrix (get-dataset :iris) :nbins 20 :group-by :Species ))
-  (with-data (get-dataset :iris) (view (scatter-plot-matrix :nbins 20 :group-by :Species )))
-  (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :nbins 20))
-
-  ;;;Input examples for Iris
-  ;; Input dataset examples: Incanter data repo, local file, remote file (url)
-  (def iris (get-dataset :iris))
-  (def iris (read-dataset "data/iris.dat" :delim \space :header true)) ; relative to project home
-  (def iris (read-dataset "<a href="https://raw.github.com/liebke/incanter/master/data/iris.dat">https://raw.github.com/liebke/incanter/master/data/iris.dat</a>" :delim \space :header true))
-  ;; Filter dataset to specific columns only
-  (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
-  (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species]))
-
-  ;;; Scatter plot matrix examples
-  ;; Using default options
-  (def iris-spm (scatter-plot-matrix iris :group-by :Species))
-  ;; filter to metrics only, no categorical dimension for grouping
-  (def iris-spm (scatter-plot-matrix :data ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width] iris)))
-
-  ;; Using more options
-  (def iris-spm (scatter-plot-matrix iris
-                                     :title "Iris Scatter Plot Matrix"
-                                     :bins 20 ; number of histogram bars
-                                     :group-by :Species
-                                     :only-first 4 ; most correlating columns
-                                     :only-triangle false))
-
-  ;;;Output examples
-  ;; View on Display
-  (view iris-spm :width 1280 :height 800)
-  ;; Save as PDF
-  (save-pdf  iris-spm "out/iris-spm.pdf" :width 2560 :height 1600)
-  ;; Save as PNG
-  (save iris-spm "out/iris-spm.png" :width 2560 :height 1600)
-
-  ;; Airline dataset
-  (def airline ($ [:year :passengers :month] (read-dataset "<a href="https://raw.github.com/liebke/incanter/master/data/airline_passengers.csv">https://raw.github.com/liebke/incanter/master/data/airline_passengers.csv</a>" :header true)))
-  (def airline-spm (scatter-plot-matrix airline  :group-by :month :bins 20 :title "Airline Scatter Plot Matrix"))
-  (view airline-spm)
-  ;; Chick-weight dataset
-  (view (scatter-plot-matrix (get-dataset :chick-weight) :group-by :Diet :bins 20 :title "Chick-weight Scatter Plot Matrix" ))
-</pre>
-    
-    
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1694" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1328" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1737,56 +1462,15 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-alpha chart alpha)
 </pre>
-    <pre id="var-docstr">
-Sets the alpha level (transparency) of the plot's foreground
+    <pre id="var-docstr"> Sets the alpha level (transparency) of the plot's foreground
 returns the modified chart object.
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L930" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="incanter.charts/set-axis">set-axis</h2>
-    <span id="var-type">multimethod</span><br />
-    <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-docstr">
-Set the selected axis of the chart, returning the chart.
-(Beware: the axis' label will replace axis label set previously on the chart.)
-
-Arguments:
-  chart - the JFreeChart object whose axis to change
-  dimension - depends on the plot type for plots with mutliple axes
-               f.ex. :x or :y for an XYPlot (x is the domain axis, y the range one)
-  axis - the axis to set, an instance of ValueAxis
-
-See also:
-  log-axis
-
-Note:
-  Not applicable to DialPlot MeterPlot PiePlot MultiplePiePlot CompassPlot WaferMapPlot SpiderWebPlot
-
-References:
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/ValueAxis.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/axis/ValueAxis.html</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/plot/XYPlot.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/plot/XYPlot.html</a>
-
-Examples:
-
-  (use '(incanter core charts))
-
-  (view
-    (doto (function-plot #(Math/pow 10 %) 0 5)
-          (set-axis :x (log-axis :base 10, :label "log(x)"))))
-</pre>
-    
-    
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L865" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L846" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1794,18 +1478,15 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-background-alpha chart alpha)
 </pre>
-    <pre id="var-docstr">
-Sets the alpha level (transparency) of the plot's background
+    <pre id="var-docstr"> Sets the alpha level (transparency) of the plot's background
 returns the modified chart object.
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L944" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L860" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1813,6 +1494,7 @@ References:
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
     <pre id="var-docstr">
+
 Examples:
   (use '(incanter core stats charts datasets))
 
@@ -1854,11 +1536,11 @@ Examples:
     view)
 
 
-  (doto (box-plot (sample-gamma 1000 :shape 1 :scale 2)
+  (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
                   :legend true)
     view set-background-default
-    (add-box-plot (sample-gamma 1000 :shape 2 :scale 2))
-    (add-box-plot (sample-gamma 1000 :shape 3 :scale 2)))
+    (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+    (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))
 
 
   (doto (bar-chart [:a :b :c] [10 20 30] :legend true)
@@ -1882,23 +1564,10 @@ Examples:
   (add-lines chart1 dates (mult 1/2 (range 100)))
 
   (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))
-  (def cw2 (view chart2))
-</pre>
+  (def cw2 (view chart2))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L76" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="incanter.charts/set-point-size">set-point-size</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (set-point-size chart point-size &amp; {:keys [series dataset], :or {series :all, dataset 0}})
-</pre>
-    <pre id="var-docstr">Set the point size of a scatter plot. Use series option to apply
-point-size to only one series.</pre>
-    
-    
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3699" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L63" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1928,11 +1597,10 @@ Examples:
   (doto (line-chart [:a :b :c :d] [10 20 5 35])
     (add-categories [:a :b :c :d] [20 5 30 15])
     (set-stroke :series 0 :width 4 :dash 5)
-    (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))
-</pre>
+    (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3626" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3247" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1957,12 +1625,10 @@ Examples:
   (doto (function-plot sin -10 10 :step-size 0.1)
     (set-stroke :width 3 :dash 5)
     (set-stroke-color java.awt.Color/gray)
-    view)
-
-</pre>
+    view)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3671" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3292" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -1970,8 +1636,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-theme chart theme)
 </pre>
-    <pre id="var-docstr">
-Changes the chart theme.
+    <pre id="var-docstr">  Changes the chart theme.
 
 Arguments:
   chart -- an Incanter/JFreeChart object
@@ -1990,6 +1655,7 @@ Examples:
   (set-theme chart :dark)
   ;; change it back to the default
   (set-theme chart :default)
+
 
   ;; Example using JFreeTheme
   (use '(incanter core stats charts datasets))
@@ -2015,14 +1681,12 @@ Examples:
     view)
 
 
-References:
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html</a>
-
-</pre>
+ References:
+    <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/StandardChartTheme.html</a>
+    <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/ChartTheme.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L224" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L216" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2073,11 +1737,11 @@ Examples:
     view)
 
 
-  (doto (box-plot (sample-gamma 1000 :shape 1 :scale 2)
+  (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)
                   :legend true)
     view
-    (add-box-plot (sample-gamma 1000 :shape 2 :scale 2))
-    (add-box-plot (sample-gamma 1000 :shape 3 :scale 2))
+    (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))
+    (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))
     set-theme-bw)
 
 
@@ -2090,13 +1754,10 @@ Examples:
   (doto (line-chart [:a :b :c] [10 20 30] :legend true)
     view
     set-theme-bw
-    (add-categories [:a :b :c] [5 25 40]))
-
-
-</pre>
+    (add-categories [:a :b :c] [5 25 40]))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L156" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L146" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2104,17 +1765,14 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-title chart title)
 </pre>
-    <pre id="var-docstr">
-Sets the main title of the plot, returns the modified chart object.
+    <pre id="var-docstr"> Sets the main title of the plot, returns the modified chart object.
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L973" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L889" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2122,17 +1780,14 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-x-label chart label)
 </pre>
-    <pre id="var-docstr">
-Sets the label of the x-axis, returns the modified chart object.
+    <pre id="var-docstr"> Sets the label of the x-axis, returns the modified chart object.
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L987" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L902" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2140,8 +1795,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-x-range chart lower upper)
 </pre>
-    <pre id="var-docstr">
-Sets the range of the x-axis on the given chart.
+    <pre id="var-docstr"> Sets the range of the x-axis on the given chart.
 
 Examples:
 
@@ -2149,12 +1803,10 @@ Examples:
 
   (def chart (xy-plot :speed :dist :data (get-dataset :cars)))
   (view chart)
-  (set-x-range chart 10 20)
-
-</pre>
+  (set-x-range chart 10 20)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1015" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L929" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2162,17 +1814,14 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-y-label chart label)
 </pre>
-    <pre id="var-docstr">
-Sets the label of the y-axis, returns the modified chart object.
+    <pre id="var-docstr"> Sets the label of the y-axis, returns the modified chart object.
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1001" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L915" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2180,8 +1829,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-y-range chart lower upper)
 </pre>
-    <pre id="var-docstr">
-Sets the range of the y-axis on the given chart.
+    <pre id="var-docstr"> Sets the range of the y-axis on the given chart.
 
 Examples:
 
@@ -2189,12 +1837,10 @@ Examples:
 
   (def chart (xy-plot :speed :dist :data (get-dataset :cars)))
   (view chart)
-  (set-y-range chart 10 60)
-
-</pre>
+  (set-y-range chart 10 60)</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1036" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L949" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2204,6 +1850,7 @@ Examples:
        (slider updater-fn slider-values slider-label)
 </pre>
     <pre id="var-docstr">
+
 Examples:
   (use '(incanter core stats charts))
 
@@ -2215,11 +1862,10 @@ Examples:
     (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1)))
 
   (let [x (range -3 3 0.1)]
-    (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1) "sd"))
-</pre>
+    (slider #(set-data pdf-chart [x (pdf-normal x :sd %)]) (range 0.1 10 0.1) "sd"))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3421" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3042" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2227,60 +1873,59 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (sliders [&amp; slider-bindings] body)
 </pre>
-    <pre id="var-docstr">
-Creates one slider control for each of the given sequence bindings.
+    <pre id="var-docstr"> Creates one slider control for each of the given sequence bindings.
 Each slider calls the given expression when manipulated.
 
 
 Examples:
-  (use '(incanter core stats charts))
+(use '(incanter core stats charts))
 
-  ;; manipulate a normal pdf
-  (let [x (range -3 3 0.1)]
-    (def pdf-chart (xy-plot))
-    (view pdf-chart)
-    (sliders [mean (range -3 3 0.1)
-              stdev (range 0.1 10 0.1)]
-      (set-data pdf-chart [x (pdf-normal x :mean mean :sd stdev)])))
-
-
-  ;; manipulate a gamma pdf
-  (let [x (range 0 20 0.1)]
-    (def pdf-chart (xy-plot))
-    (view pdf-chart)
-    (sliders [scale (range 0.1 10 0.1)
-              shape (range 0.1 10 0.1)]
-             (set-data pdf-chart [x (pdf-gamma x :scale scale :shape shape)])))
+;; manipulate a normal pdf
+(let [x (range -3 3 0.1)]
+  (def pdf-chart (xy-plot))
+  (view pdf-chart)
+  (sliders [mean (range -3 3 0.1)
+            stdev (range 0.1 10 0.1)]
+    (set-data pdf-chart [x (pdf-normal x :mean mean :sd stdev)])))
 
 
 
-  ;; find the start values of a non-linear model function
-  (use '(incanter core charts datasets))
-  ;; create model function used in the following data-sorcery post:
-  ;; <a href="http://data-sorcery.org/2009/06/06/fitting-non-linear-models/">http://data-sorcery.org/2009/06/06/fitting-non-linear-models/</a>
+;; manipulate a gamma pdf
+(let [x (range 0 20 0.1)]
+  (def pdf-chart (xy-plot))
+  (view pdf-chart)
+  (sliders [rate (range 0.1 10 0.1)
+            shape (range 0.1 10 0.1)]
+    (set-data pdf-chart [x (pdf-gamma x :rate rate :shape shape)])))
 
-  (defn f [theta x]
-    (let [[b1 b2 b3] theta]
-      (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))
 
-  (with-data (get-dataset :chwirut)
-    (view $data)
-    (def chart (scatter-plot ($ :x) ($ :y)))
-    (view chart)
-    (add-lines chart ($ :x) (f [0 0.01 0] ($ :x)))
 
-    ;; manipulate the model line to find some good start values.
-    ;; give the index of the line data (i.e. 1) to set-data.
-    (let [x ($ :x)]
-      (sliders [b1 (range 0 2 0.01)
-                b2 (range 0.01 2 0.01)
-                b3 (range 0 2 0.01)]
-        (set-data chart [x (f [b1 b2 b3] x)] 1))))
+;; find the start values of a non-linear model function
+(use '(incanter core charts datasets))
+;; create model function used in the following data-sorcery post:
+;; <a href="http://data-sorcery.org/2009/06/06/fitting-non-linear-models/">http://data-sorcery.org/2009/06/06/fitting-non-linear-models/</a>
 
-</pre>
+(defn f [theta x]
+  (let [[b1 b2 b3] theta]
+    (div (exp (mult (minus b1) x)) (plus b2 (mult b3 x)))))
+
+
+(with-data (get-dataset :chwirut)
+  (view $data)
+  (def chart (scatter-plot ($ :x) ($ :y)))
+  (view chart)
+  (add-lines chart ($ :x) (f [0 0.01 0] ($ :x)))
+
+  ;; manipulate the model line to find some good start values.
+  ;; give the index of the line data (i.e. 1) to set-data.
+  (let [x ($ :x)]
+    (sliders [b1 (range 0 2 0.01)
+              b2 (range 0.01 2 0.01)
+              b3 (range 0 2 0.01)]
+      (set-data chart [x (f [b1 b2 b3] x)] 1))))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3496" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3119" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2292,19 +1937,18 @@ Examples:
     <pre id="var-docstr">sliders*
 
 Examples:
-  (use '(incanter core stats charts))
+(use '(incanter core stats charts))
 
-  (let [x (range -3 3 0.1)]
-    (do
-      (def pdf-chart (xy-plot x (pdf-normal x :mean -3 :sd 0.1)))
-      (view pdf-chart)
-      (sliders* #(set-data pdf-chart [x (pdf-normal x :mean %1 :sd %2)])
-               [(range -3 3 0.1) (range 0.1 10 0.1)]
-               ["mean" "sd"])))
-</pre>
+(let [x (range -3 3 0.1)]
+  (do
+    (def pdf-chart (xy-plot x (pdf-normal x :mean -3 :sd 0.1)))
+    (view pdf-chart)
+    (sliders* #(set-data pdf-chart [x (pdf-normal x :mean %1 :sd %2)])
+             [(range -3 3 0.1) (range 0.1 10 0.1)]
+             ["mean" "sd"])))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3466" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3088" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2312,8 +1956,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (stacked-area-chart categories values &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing an stacked-area-chart of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing an stacked-area-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -2375,12 +2018,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2313" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1966" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2388,8 +2029,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (stacked-bar-chart categories values &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing an stacked-bar-chart of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing an stacked-bar-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -2461,12 +2101,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L2440" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2094" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2474,8 +2112,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (time-series-plot x y &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a time series plot of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a time series plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file. Sequence passed in for the x axis should be
 number of milliseconds from the epoch (1 January 1970).
@@ -2484,7 +2121,7 @@ Options:
   :data (default nil) If the :data option is provided a dataset,
                       column names can be used instead of sequences
                       of data as arguments to xy-plot.
-  :title (default '') main title
+  :title (default 'Time Series Plot') main title
   :x-label (default x expression)
   :y-label (default y expression)
   :legend (default false) prints legend
@@ -2496,11 +2133,10 @@ See also:
 
 Examples:
 
-  (use '(incanter core stats charts))
-  (require '[clj-time.core :refer [date-time]])
+  (use '(incanter core stats charts chrono))
 
   ;; plot numbers against years starting with 1900
-  (def dates (map #(-&gt; (date-time (+ 1900 %))
+  (def dates (map #(-&gt; (joda-date (+ 1900 %) 1 1 12 0 0 0 (time-zone 0))
                        .getMillis)
                   (range 100)))
   (def y (range 100))
@@ -2509,12 +2145,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1315" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1215" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2522,32 +2156,20 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (trace-plot x &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a trace-plot object, use the 'view' function to display it.
+    <pre id="var-docstr"> Returns a trace-plot object, use the 'view' function to display it.
 
-Options:
-  :data (default nil) If the :data option is provided a dataset,
-                      a column name can be used instead of a sequence
-                      of data for argument x.
-  :title (default 'Trace Plot') main title
-  :x-label (default 'Iteration')
-  :y-label (default 'Value')
-  :series-label (default 'Value')
+Examples:
+  (use '(incanter core datasets stats bayes charts))
+  (def ols-data (to-matrix (get-dataset :survey)))
+  (def x (sel ols-data (range 0 2313) (range 1 10)))
+  (def y (sel ols-data (range 0 2313) 10))
+  (def sample-params (sample-model-params 5000 (linear-model y x :intercept false)))
+  (view (trace-plot (:var sample-params)))
 
-  Examples:
-    (use '(incanter core datasets stats bayes charts))
-    (def ols-data (to-matrix (get-dataset :survey)))
-    (def x (sel ols-data (range 0 2313) (range 1 10)))
-    (def y (sel ols-data (range 0 2313) 10))
-    (def sample-params (sample-model-params 5000 (linear-model y x :intercept false)))
-    (view (trace-plot (:var sample-params)))
-
-    (view (trace-plot (sel (:coefs sample-params) :cols 0)))
-
-</pre>
+  (view (trace-plot (sel (:coefs sample-params) :cols 0)))</pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L3210" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L2849" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -2556,8 +2178,7 @@ Options:
     <pre id="var-usage">Usage: (xy-plot)
        (xy-plot x y &amp; options)
 </pre>
-    <pre id="var-docstr">
-Returns a JFreeChart object representing a xy-plot of the given data.
+    <pre id="var-docstr"> Returns a JFreeChart object representing a xy-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
 
@@ -2588,15 +2209,15 @@ Examples:
 
   ;; plot gamma pdf with different parameters
   (def x2 (range 0 20 0.1))
-  (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :scale 2)
+  (def gamma-plot (xy-plot x2 (pdf-gamma x2 :shape 1 :rate 2)
                              :legend true
                              :title "Gamma PDF"
                              :y-label "Density"))
   (view gamma-plot)
-  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :scale 2))
-  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :scale 2))
-  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :scale 1))
-  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :scale 0.5))
+  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 2 :rate 2))
+  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 3 :rate 2))
+  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 5 :rate 1))
+  (add-lines gamma-plot x2 (pdf-gamma x2 :shape 9 :rate 0.5))
 
   ;; use :group-by option
   (use '(incanter core charts datasets))
@@ -2609,12 +2230,10 @@ Examples:
 
 References:
   <a href="http://www.jfree.org/jfreechart/api/javadoc/">http://www.jfree.org/jfreechart/api/javadoc/</a>
-  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a>
-
-</pre>
+  <a href="http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html">http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html</a></pre>
     
     
-    <a href="https://github.com/incanter/incanter/blob/1fead67889958cbecfdf66fb12a161de588a98c9/modules/incanter-charts/src/incanter/charts.clj#L1154" id="var-source">Source</a>
+    <a href="https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L1056" id="var-source">Source</a>
   </div>
 </div>
 

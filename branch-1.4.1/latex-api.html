@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <title>latex - Incanter 1.4.1 API documentation</title>
+    <link href="../static/incanter.ico" rel="icon" />
+    <link href="../static/incanter.ico" rel="shortcut icon" />
+    <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/internal.css" rel="stylesheet" />
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="../static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
+      </div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.4.1</span> API</span><br />
+    <ul>
+      <li><a class="wiki_link" href="index.html">Overview</a></li>
+      <li><a class="wiki_link" href="api-index.html">API Index</a></li>
+    </ul>
+    <div class="NamespaceTOC">
+      <span class="toc-header">Namespaces</span>
+      <ul id="left-sidebar-list">
+        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
+      </ul>
+    </div>
+    <div class="BranchTOC">
+      <span class="toc-header">Other Versions</span>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="../index.html" class="wiki_link">1.5.5 (stable)</a></li><li><a href="../branch-master/index.html" class="wiki_link">2.0 (in development)</a></li>
+      </ul>
+    </div>
+    <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
+  </div>
+</div>
+</div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.latex/add-latex">add-latex</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.latex/add-latex-subtitle">add-latex-subtitle</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.latex/latex">latex</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.latex/to-latex">to-latex</a>
+      
+    </div>
+  </div>
+</div>
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="latex">latex</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.4.1</span><span id="header-status-block"> (<span id="header-status">legacy</span>)</span>
+  </h1>
+<span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
+<br />Full namespace name: <span id="long-name">incanter.latex</span>
+<p></p>
+<h2>Overview</h2>
+
+<pre id="namespace-docstr">This library is used to render LaTex Math equations, based
+on the jLateXMath library, and applying them incanter.charts as annotations
+and subtitles.
+         </pre>
+
+
+<br />
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.latex/add-latex">add-latex</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; {:keys [color], :or {color darkGray}})
+</pre>
+    <pre id="var-docstr"> Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
+
+Arguments:
+  chart -- the chart to add the polygon to.
+  x, y -- the coordinates to place the image
+  latex-str -- a string of latex code
+
+
+Options:
+  :color (default java.awt.Color/darkGray) -- the text color
+
+
+Examples:
+  (use '(incanter core charts stats latex))   
+
+    (doto (function-plot pdf-normal -3 3)
+      (add-latex 0 0.1 "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
+      view)</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L84" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.latex/add-latex-subtitle">add-latex-subtitle</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; {:keys [color], :or {color darkGray}})
+</pre>
+    <pre id="var-docstr"> Adds the given LaTeX equation as a subtitle to the chart.
+
+
+Options:
+  :color (default java.awt.Color/darkGray) -- the text color
+
+
+Examples:
+  (use '(incanter core charts stats latex))
+
+  (doto (function-plot pdf-normal -3 3)
+    (add-latex-subtitle "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
+    view)</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L61" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.latex/latex">latex</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color background border], :or {color black, background white, border [5 5 5 5]}})
+</pre>
+    <pre id="var-docstr"> Returns the given LaTeX equation rendered as an java.awt.Image.
+
+Options:
+  :color (default java.awt.Color/black) -- the text color
+  :background (default java.awt.Clolor/white) -- the background color
+  :border (default [5 5 5 5]) -- image border
+
+Examples:
+  (use '(incanter core charts stats latex))
+
+  (def latex-img (latex "\\frac{(a+b)^2} {(a-b)^2}"))
+  (save latex-img "/tmp/latex-example1.png")
+  (view "<a href="file:///tmp/latex-example1.png">file:///tmp/latex-example1.png</a>")
+
+  (view (latex "f(x)=\\frac {1} {\\sqrt {2\\pi \\sigma ^2}} e^{\\frac {-(x - \\mu)^2}{2 \\sigma ^2}}"))
+
+  (view (latex "\\begin{pmatrix}
+                 a &amp; b &amp; c \\\\
+                 d &amp; e &amp; f \\\\
+                 g &amp; h &amp; i
+                 \\end{pmatrix}"))</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L13" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.latex/to-latex">to-latex</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (to-latex mx &amp; {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline table-newline-suppress-last newline], :or {mxtype pmatrix, preamble , col-just [], row-names-tex-cmd [], hline false, table-newline \\, table-newline-suppress-last false, newline }})
+</pre>
+    <pre id="var-docstr">Convert an Incanter Matrix into a string of LaTeX commands to render it.
+
+Options:
+  :mxtype (default pmatrix) -- the type of matrix to output, see LaTeX documentation for other options.
+Example:
+    (use '(incanter core latex))
+    (view (latex (to-latex (matrix [[1 0][0 1]]))))</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L111" id="var-source">Source</a>
+  </div>
+</div>
+
+
+</div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info </div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>

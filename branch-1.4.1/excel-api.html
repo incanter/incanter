@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <title>excel - Incanter 1.4.1 API documentation</title>
+    <link href="../static/incanter.ico" rel="icon" />
+    <link href="../static/incanter.ico" rel="shortcut icon" />
+    <link media="all" type="text/css" href="../static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="../static/internal.css" rel="stylesheet" />
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="../static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
+      </div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.4.1</span> API</span><br />
+    <ul>
+      <li><a class="wiki_link" href="index.html">Overview</a></li>
+      <li><a class="wiki_link" href="api-index.html">API Index</a></li>
+    </ul>
+    <div class="NamespaceTOC">
+      <span class="toc-header">Namespaces</span>
+      <ul id="left-sidebar-list">
+        <li><a href="backstage.zoo-commons-api.html" class="wiki_link">backstage.zoo-commons</a></li><li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="internal-api.html" class="wiki_link">internal</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
+      </ul>
+    </div>
+    <div class="BranchTOC">
+      <span class="toc-header">Other Versions</span>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="../index.html" class="wiki_link">1.5.5 (stable)</a></li><li><a href="../branch-master/index.html" class="wiki_link">2.0 (in development)</a></li>
+      </ul>
+    </div>
+    <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
+  </div>
+</div>
+</div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel/read-xls">read-xls</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel/save-xls">save-xls</a>
+      
+    </div>
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#excel.cells" style="margin-top: 3px;">excel.cells</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel.cells/get-cell-value">get-cell-value</a>
+      
+    </div>
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#excel.workbook" style="margin-top: 3px;">excel.workbook</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</a>
+      
+    </div>
+  </div>
+</div>
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="excel">excel</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.4.1</span><span id="header-status-block"> (<span id="header-status">legacy</span>)</span>
+  </h1>
+<span id="author-line">by <span id="author-name">David James Humphreys</span><br /></span>
+<br />Full namespace name: <span id="long-name">incanter.excel</span>
+<p></p>
+<h2>Overview</h2>
+
+<pre id="namespace-docstr">Excel module for reading and writing Incanter datasets.  Recognizes both old and new
+Excel file formats (.xls and .xlsx).</pre>
+
+
+<br />
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel/read-xls">read-xls</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
+empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
+or :override-format option.
+
+Options are:
+:sheet either a String for the tab name or an int for the sheet index -- defaults to 0
+:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)
+:override-format If nil use the filename suffix to guess the Excel file format.  If :xls
+or :xlsx override the suffix check.
+:all-sheets? true to try to read in all sheets of data (false by default).
+
+ Examples:
+   (use '(incanter core io excel))
+   (view (read-xls "<a href="http://incanter.org/data/aus-airline-passengers.xls">http://incanter.org/data/aus-airline-passengers.xls</a>"))
+
+   (use '(incanter core charts excel))
+   ;; read .xls file of Australian airline passenger data from the 1950s.
+   (with-data (read-xls "<a href="http://incanter.org/data/aus-airline-passengers.xls">http://incanter.org/data/aus-airline-passengers.xls</a>")
+   (view $data)
+   ;; time-series-plot needs time in millisecs
+   ;; create a function, to-millis, to convert a sequence of Date objects
+   ;; to a sequence of milliseconds
+   (let [to-millis (fn [dates] (map #(.getTime %) dates))] 
+     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L97" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel/save-xls">save-xls</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
+Excel formats, uses the filename suffix or :override-format option.
+
+By passing in a collection of datasets and names it is possible to write more than
+one sheet at a time: e.g.
+  (save-xls ["first sheet" dataset1 "second" dataset2] my-file)
+
+Options are:
+:sheet defaults to "dataset" if not provided.
+:use-bold defaults to true.  Set the header line in bold.
+:override-format If nil use the filename suffix to guess the Excel file format.
+If :xls or :xlsx override the suffix check.
+
+Examples:
+  (use '(incanter core datasets excel))
+  (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L26" id="var-source">Source</a>
+  </div>
+</div>
+<br />
+<h2 id="excel.cells">excel.cells</h2>
+<pre id="namespace-docstr">Functions for reading and writing to cells.</pre>
+
+
+<br />
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Get the value after the evaluating the formula.  See <a href="http://poi.apache.org/spreadsheet/eval.html#Evaluate">http://poi.apache.org/spreadsheet/eval.html#Evaluate</a></pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L14" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel.cells/get-cell-value">get-cell-value</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Get the cell value depending on the cell type.</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L20" id="var-source">Source</a>
+  </div>
+</div>
+<br />
+<h2 id="excel.workbook">excel.workbook</h2>
+<pre id="namespace-docstr"></pre>
+
+
+<br />
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</h2>
+    <span id="var-type">multimethod</span><br />
+    <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8" id="var-source">Source</a>
+  </div>
+</div>
+
+
+</div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info </div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>

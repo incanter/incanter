@@ -1,0 +1,378 @@
+<html>
+  <head>
+    <title>zoo - Incanter 1.5.5 API documentation</title>
+    <link href="static/incanter.ico" rel="icon" />
+    <link href="static/incanter.ico" rel="shortcut icon" />
+    <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">Incanter</a></h1>
+      </div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <span class="toc-header"><span id="project-name">Incanter</span> <span id="version">1.5.5</span> API</span><br />
+    <ul>
+      <li><a class="wiki_link" href="index.html">Overview</a></li>
+      <li><a class="wiki_link" href="api-index.html">API Index</a></li>
+    </ul>
+    <div class="NamespaceTOC">
+      <span class="toc-header">Namespaces</span>
+      <ul id="left-sidebar-list">
+        <li><a href="bayes-api.html" class="wiki_link">bayes</a></li><li><a href="censored-api.html" class="wiki_link">censored</a></li><li><a href="charts-api.html" class="wiki_link">charts</a></li><li><a href="core-api.html" class="wiki_link">core</a></li><li><a href="datasets-api.html" class="wiki_link">datasets</a></li><li><a href="distributions-api.html" class="wiki_link">distributions</a></li><li><a href="excel-api.html" class="wiki_link">excel</a></li><li><a href="infix-api.html" class="wiki_link">infix</a></li><li><a href="interpolation-api.html" class="wiki_link">interpolation</a></li><li><a href="io-api.html" class="wiki_link">io</a></li><li><a href="latex-api.html" class="wiki_link">latex</a></li><li><a href="mongodb-api.html" class="wiki_link">mongodb</a></li><li><a href="optimize-api.html" class="wiki_link">optimize</a></li><li><a href="pdf-api.html" class="wiki_link">pdf</a></li><li><a href="som-api.html" class="wiki_link">som</a></li><li><a href="sql-api.html" class="wiki_link">sql</a></li><li><a href="stats-api.html" class="wiki_link">stats</a></li><li><a href="svg-api.html" class="wiki_link">svg</a></li><li><a href="symbolic-api.html" class="wiki_link">symbolic</a></li><li><a href="zoo-api.html" class="wiki_link">zoo</a></li>
+      </ul>
+    </div>
+    <div class="BranchTOC">
+      <span class="toc-header">Other Versions</span>
+      <ul id="left-sidebar-branch-list">
+        <li><a href="branch-1.4.1/index.html" class="wiki_link">1.4.1 (legacy)</a></li><li><a href="branch-master/index.html" class="wiki_link">2.0 (in development)</a></li>
+      </ul>
+    </div>
+    <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
+  </div>
+</div>
+</div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0" style="margin-top: 3px;">Overview</a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#" style="margin-top: 3px;"></a>
+    
+  </div><div style="margin-left: 1em;" class="toc-section">
+    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/$$">$$</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/aligned?">aligned?</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/coredata">coredata</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/lag">lag</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/roll-apply">roll-apply</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/roll-max">roll-max</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/roll-mean">roll-mean</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/roll-median">roll-median</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/roll-min">roll-min</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/within-zoo?">within-zoo?</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/zoo">zoo</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/zoo-apply">zoo-apply</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/zoo-row-map">zoo-row-map</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/zoo-row-map-">zoo-row-map-</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#incanter.zoo/zoo-row-map-occupied">zoo-row-map-occupied</a>
+      
+    </div>
+  </div>
+</div>
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="zoo">zoo</span>
+  - <span id="header-project">Incanter</span> <span id="header-version">1.5.5</span><span id="header-status-block"> (<span id="header-status">stable</span>)</span>
+  </h1>
+<span id="author-line">by <span id="author-name">David Edgar Liebke</span><br /></span>
+<br />Full namespace name: <span id="long-name">incanter.zoo</span>
+<p></p>
+<h2>Overview</h2>
+
+<pre id="namespace-docstr">This is a port of Zoo from R in order to create the basis
+of a library for time series data.
+
+This library is built on Parallel Colt
+(<a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">http://sites.google.com/site/piotrwendykier/software/parallelcolt</a>),
+an extension of the Colt numerics library
+(<a href="http://acs.lbl.gov/~hoschek/colt/">http://acs.lbl.gov/~hoschek/colt/</a>).</pre>
+
+
+<br />
+
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/$$">$$</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: ($$ ind ts)
+       ($$ ind cols ts)
+       ($$ ind-1 ind-2 cols ts)
+</pre>
+    <pre id="var-docstr">
+This is the equivalent of :: in xts. That is, it slices out
+the timeseries between ind-1 and ind-2. These are any values
+that can be coerced into clj-time values.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L186" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/aligned?">aligned?</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (aligned? &amp; zs)
+</pre>
+    <pre id="var-docstr">Is the :index column identical for all zs.</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L125" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/coredata">coredata</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (coredata x)
+</pre>
+    <pre id="var-docstr">
+Return the :rows of a dataset, with :index dissoc'd.
+Intended to be used internally time series function to get at data.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L97" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/lag">lag</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lag z)
+       (lag z n)
+</pre>
+    <pre id="var-docstr">
+Return the timeseries lagged by n units or 1 if not specified.
+No time calculations are made in the index column. The output
+timeseries is of the same length as the input.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L216" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/roll-apply">roll-apply</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (roll-apply f n coll)
+</pre>
+    <pre id="var-docstr">
+A generic function for applying a function to rolling window of a collection.
+
+Arguments:
+f -- function to be applied
+n -- size of rolling window
+coll -- collection of data
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L54" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/roll-max">roll-max</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (roll-max n coll)
+</pre>
+    <pre id="var-docstr">
+Returns the rolling max of the previous n elements.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L75" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/roll-mean">roll-mean</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (roll-mean n coll)
+</pre>
+    <pre id="var-docstr">
+Returns the unweighted mean of the previous n data points.
+
+References:
+<a href="http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average">http://en.wikipedia.org/wiki/Moving_average#Simple_moving_average</a>
+<a href="http://www.learningclojure.com/2010/03/moving-average-of-list.html">http://www.learningclojure.com/2010/03/moving-average-of-list.html</a>
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L40" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/roll-median">roll-median</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (roll-median n coll)
+</pre>
+    <pre id="var-docstr">
+Returns the rolling median of the previous n elements.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L68" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/roll-min">roll-min</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (roll-min n coll)
+</pre>
+    <pre id="var-docstr">
+Returns the rolling min of the previous n elements.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L82" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/within-zoo?">within-zoo?</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (within-zoo? t z)
+</pre>
+    <pre id="var-docstr">Is t between the first and last indices.</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L151" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/zoo">zoo</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (zoo x)
+       (zoo x index-col)
+</pre>
+    <pre id="var-docstr">
+Return the given dataset as a zoo value which is simply a dataset
+that contains an column of clj-time values specified by index-col,
+default :index. That column must contain values that can be coerced
+into Jodas using the TimeCoercible Protocol.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L158" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/zoo-apply">zoo-apply</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (zoo-apply f n zoo column &amp; args)
+</pre>
+    <pre id="var-docstr">
+Behave as for roll-apply but accept a zoo and a single column
+upon which to roll-apply f. Returns a zoo of the same length
+as input zoo with pre-pended nils
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L234" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/zoo-row-map">zoo-row-map</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (zoo-row-map f &amp; zs)
+</pre>
+    <pre id="var-docstr">
+Accept a number of aligned zoo object and pass them row-wise
+into f, return a zoo. f must accept and return maps. The :index
+column is stripped out before f is applied, and then replaced
+afterwards with the :index of the first.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L263" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/zoo-row-map-">zoo-row-map-</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (zoo-row-map- f &amp; zs)
+</pre>
+    <pre id="var-docstr">
+Accept a number of aligned zoo object and pass them row-wise into f,
+return a seq of maps of the output of the output.
+f must accept and return maps. The :index column is stripped out before
+f is applied, and then replaced afterwards.
+</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L249" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="incanter.zoo/zoo-row-map-occupied">zoo-row-map-occupied</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (zoo-row-map-occupied f &amp; s)
+</pre>
+    <pre id="var-docstr">zoo-row-map- and remove the empties. This returns a seq of maps</pre>
+    
+    
+    <a href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L278" id="var-source">Source</a>
+  </div>
+</div>
+
+
+</div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info </div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>
