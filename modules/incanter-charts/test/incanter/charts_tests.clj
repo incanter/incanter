@@ -444,5 +444,12 @@
         (assert false "Should have failed for set-axis doesn't support PieChart")
         (catch AssertionError e)))))
 
+(deftest extend-line-tests
+  (let [chart (xy-plot [1 2 3 4] [1 2 3 4] :series-label :series1)]
+    (extend-line chart [5 6 7] [10 11 12] :series-label :series1)
+    (extend-line chart [1 2 3 4 5] [5 6 7 8 9] :series-label :series2)
+    (is (= (has-series? chart :series2) true))
+    (remove-series chart :series2)
+    (is (= (has-series? chart :series2) false))))
 
 ; (run-tests)
