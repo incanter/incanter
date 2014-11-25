@@ -117,7 +117,37 @@
 
 (deftest median-test
   ;; calculate the median of a variable
-  (is (= (median x) 113.0)))
+  (is (= (median x) 113.0))
+  (is (Double/isNaN (median []))))
+
+(deftest kurtosis-test
+  (let [test-sample [2.00 2.00 2.00 2.00 2.00
+                     2.00 2.00 2.00 2.00 2.00
+                     2.00 2.00 2.00 2.00 2.00
+                     2.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 2.00]]
+    (testing "correctness of result"
+      (is (= -0.11735294117647133 (kurtosis test-sample))))
+    (testing "invariance of calculation"
+      (let [kurtosis-diff (- (kurtosis (map (partial * 10) test-sample))
+                            (kurtosis test-sample))]
+        (is (< kurtosis-diff 1e-15))))
+    ))
 
 (deftest sample-tests
   ;; test sample function
@@ -181,10 +211,12 @@
   (is (within 1E-5 0.9942994   (correlation ($ :small precision-ds0)  ($ :sensitive precision-ds0)))))
 
 (deftest ranking-test
-(is (=
-     {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
-     (rank-index [106 86 100 101 99 103 97 113 112 110]))))
-
+  (is (=
+      {97 2, 99 3, 100 4, 101 5, 103 6, 106 7, 110 8, 112 9, 113 10, 86 1}
+      (into {}
+          (map (fn [[x [y & more]]] [x y])
+              (seq (rank-index [106 86 100 101 99 103 97 113 112 110])))))))
+ 
 (deftest spearmans-rho-test
   (is (within 0.000001 (float -29/165)
 	 (spearmans-rho [106 86 100 101 99 103 97 113 112 110] 

@@ -36,6 +36,7 @@
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability)
            (incanter Weibull))
+  (:require [clatrix.core :as clx])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
@@ -1035,7 +1036,7 @@
                      (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
           mat (diag diagonal)
           indices (for [i (range p) j (range p) :when (< j i)] [i j])
-          _ (doseq [indx indices] (.set mat (first indx) (second indx) (sample-normal 1)))
+          _ (doseq [indx indices] (clx/set mat (first indx) (second indx) (sample-normal 1)))
           chol (decomp-cholesky scale)
           x (mmult chol mat (trans mat) (trans chol))]
       x)))
@@ -1613,8 +1614,9 @@
   "
   ([x]
     (let [xx (sort (to-list x))]
-      (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
-
+      (if (empty? xx)
+        Double/NaN
+        (DoubleDescriptive/median (DoubleArrayList. (double-array xx)))))))
 
 
 (defn kurtosis
@@ -1633,7 +1635,7 @@
     http://incanter.org/docs/parallelcolt/api/cern/jet/stat/tdouble/DoubleDescriptive.html
     http://en.wikipedia.org/wiki/Kurtosis
   "
-  ([x] (DoubleDescriptive/kurtosis (DoubleArrayList. (double-array x)) (mean x) (variance x))))
+  ([x] (DoubleDescriptive/kurtosis (DoubleArrayList. (double-array x)) (mean x) (sd x))))
 
 
 
@@ -2943,7 +2945,8 @@
   and the values are the positional rank of each member o the seq.
   "
   [x]
-    (zipmap (sort x) (range 1 (inc (count x)))))
+  (apply merge-with concat (map hash-map (sort x) (map list (range 1 (inc (count x)))))))
+
 
 (defn spearmans-rho
   "
@@ -2962,10 +2965,10 @@
     (let [n (count a)
           arank (rank-index a)
           brank (rank-index b)
-          dsos (apply
+	  dsos (apply 
                  + (map (fn [x y] (pow
-                     (- (arank x) (brank y))
-                         2))
+                  (- (incanter.stats/mean (arank x)) (incanter.stats/mean (brank y)))
+                    2))
            a b))]
     (- 1 (/ (* 6 dsos)
             (* n (dec (pow n 2)))))))
