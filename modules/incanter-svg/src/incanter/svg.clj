@@ -14,6 +14,9 @@
   "
   Save a chart object as an SVG document.
 
+  As with incanter.core/save, a java.io.OutputStream can be used in place of a
+  filename.
+
   Arguments:
     chart
     filename
@@ -33,8 +36,10 @@
            document (.createDocument domImpl nil "svg" nil)
            svgGenerator (SVGGraphics2D. document)
            bounds (Rectangle. width height)
-           svgFile (File. filename)
-           outputStream (FileOutputStream. svgFile)
+           ;; if filename is not a string, assume it's already a stream
+           outputStream (if (string? filename)
+                          (FileOutputStream. (File. filename))
+                          filename)
            out (OutputStreamWriter. outputStream "UTF-8")]
        (do
          (.draw chart svgGenerator bounds)
