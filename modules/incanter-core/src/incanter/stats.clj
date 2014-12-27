@@ -718,7 +718,7 @@
 (defn pdf-chisq
   "
   Returns the Chi Square pdf of the given value of x.  It will return a sequence
-  of values, if x is a sequence. Same as R's dchisq function.
+  of values, if x is a sequence. Equivalent to R's dchisq function.
 
   Options:
     :df (default 1)
@@ -745,7 +745,7 @@
 (defn cdf-chisq
   "
   Returns the Chi Square cdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's pchisq function.
+  of values, if x is a sequence. Equivalent to R's pchisq function.
 
   Options:
     :df (default 1)
@@ -776,7 +776,7 @@
 (defn sample-chisq
   "
   Returns a sample of the given size from a Chi Square distribution
-  Same as R's rchisq function.
+  Equivalent to R's rchisq function.
 
   Options:
     :df (default 1)
@@ -805,7 +805,7 @@
 (defn pdf-t
   "
   Returns the Student's t pdf for the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's dt function.
+  of values, if x is a sequence. Equivalent to R's dt function.
 
   Options:
     :df (default 1)
@@ -831,7 +831,7 @@
 (defn cdf-t
   "
   Returns the Student's t cdf for the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's pt function.
+  of values, if x is a sequence. Equivalent to R's pt function.
 
   Options:
     :df (default 1)
@@ -898,7 +898,7 @@
 (defn sample-t
   "
   Returns a sample of the given size from a Student's t distribution.
-  Same as R's rt function.
+  Equivalent to R's rt function.
 
   Options:
     :df (default 1)
@@ -929,7 +929,7 @@
 (defn pdf-exp
   "
   Returns the Exponential pdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's dexp
+  of values, if x is a sequence. Equivalent to R's dexp.
 
   Options:
     :rate (default 1)
@@ -955,7 +955,7 @@
 (defn cdf-exp
   "
   Returns the Exponential cdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's pexp
+  of values, if x is a sequence. Equivalent to R's pexp.
 
   Options:
     :rate (default 1)
@@ -981,7 +981,7 @@
 (defn sample-exp
   "
   Returns a sample of the given size from a Exponential distribution.
-  Same as R's rexp
+  Equivalent to R's rexp.
 
   Options:
     :rate (default 1)
@@ -1124,7 +1124,7 @@
 (defn pdf-binomial
   "
   Returns the Binomial pdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's dbinom
+  of values, if x is a sequence. Equivalent to R's dbinom.
 
   Options:
     :size (default 1)
@@ -1152,7 +1152,7 @@
 (defn cdf-binomial
   "
   Returns the Binomial cdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's pbinom
+  of values, if x is a sequence. Equivalent to R's pbinom.
 
   Options:
     :size (default 1)
@@ -1183,7 +1183,7 @@
 (defn sample-binomial
   "
   Returns a sample of the given size from a Binomial distribution.
-  Same as R's rbinom
+  Equivalent to R's rbinom.
 
   Options:
     :size (default 1)
@@ -1262,7 +1262,7 @@
 (defn pdf-poisson
   "
   Returns the Poisson pdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's dpois
+  of values, if x is a sequence. Equivalent to R's dpois.
 
   Options:
     :lambda (default 1)
@@ -1289,7 +1289,7 @@
 (defn cdf-poisson
   "
   Returns the Poisson cdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's ppois
+  of values, if x is a sequence. Equivalent R's ppois.
 
   Options:
     :lambda (default 1)
@@ -1319,7 +1319,7 @@
 (defn sample-poisson
   "
   Returns a sample of the given size from a Poisson distribution.
-  Same as R's rpois
+  Equivalent to R's rpois.
 
   Options:
     :lambda (default 1)
@@ -1348,7 +1348,7 @@
 (defn pdf-neg-binomial
   "
   Returns the Negative Binomial pdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's dnbinom
+  of values, if x is a sequence. Equivalent to R's dnbinom.
 
   Options:
     :size (default 10)
@@ -1377,7 +1377,7 @@
 (defn cdf-neg-binomial
   "
   Returns the Negative Binomial cdf of the given value of x. It will return a sequence
-  of values, if x is a sequence. Same as R's dnbinom
+  of values, if x is a sequence. Equivalent to R's dnbinom.
 
   Options:
     :size (default 10)
@@ -1408,7 +1408,7 @@
 (defn sample-neg-binomial
   "
   Returns a sample of the given size from a Negative Binomial distribution.
-  Same as R's rnbinom
+  Equivalent to R's rnbinom.
 
   Options:
     :size (default 10)
@@ -1615,7 +1615,10 @@
   "
   ([x]
     (let [xx (sort (to-list x))]
-      (DoubleDescriptive/median (DoubleArrayList. (double-array xx))))))
+      (if (empty? xx)
+        Double/NaN
+        (DoubleDescriptive/median (DoubleArrayList. (double-array xx)))))))
+
 
 (defn kurtosis
   "

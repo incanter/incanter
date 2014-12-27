@@ -1,5 +1,26 @@
 # What's new in Incanter #
 
+## Changes for 1.5.6 ##
+
+### Bugfixes ###
+
+ * `median` returns `Double/NaN` when it receives empty list (PR #263);
+ * `sel` returns dataset when `:rows :all` specified, independent on size/structure of the
+   dataset (PR #259);
+ * Fixed calculation of `kurtosis` (PR #260);
+ * Fixed plots legend on `group-by` when repeated rows for the legend column are present
+   (PR #253);
+ * Fix for problems with gamma distribution (Issue #245);
+ * Fix for `rank-index` function (PR #261, #262).
+ 
+### Enhancements ###
+
+ * New functions in `incanter.charts` to work with series (PR #278):
+   * `has-series?` - checks, does the chart have the series with given name;
+   * `remove-series` - removes given series from chart;
+   * `extend-line` - adds new data to existing series, or creates new series if it doesn't exist.
+ * `save-svg` can also accept the `OutputStream`, not only the file name (PR #279).
+
 ## Changes for 1.5.5 ##
 
 ### Bugfixes ###

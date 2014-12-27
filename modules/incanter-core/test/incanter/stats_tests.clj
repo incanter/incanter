@@ -157,11 +157,13 @@
 (defn sd-test [m x]
   ;; calculate the standard deviation of a variable
   (is (= (sd x) 31.6478013980961))
-  (is (= (map sd m) [1.0 1.0 1.0 1.0])))
+  (is (= (map sd m) [1.0 1.0 1.0 1.0]))
+  (is (= 2.138089935299395 (sd [2 4 4 4 5 5 7 9]))))
 
 (defn median-test [x]
   ;; calculate the median of a variable
-  (is (= (median x) 113.0)))
+  (is (= (median x) 113.0))
+  (is (Double/isNaN (median []))))
 
 (defn covariance-test [x y]
   ;; get the covariance between two variables
@@ -235,6 +237,35 @@
   (is (= 2/5
 	 (normalized-kendall-tau-distance [1 2 3 4 5]
 					  [3 4 1 2 5]))))
+
+(defn kurtosis-test []
+  (let [test-sample [2.00 2.00 2.00 2.00 2.00
+                     2.00 2.00 2.00 2.00 2.00
+                     2.00 2.00 2.00 2.00 2.00
+                     2.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 3.00 3.00 3.00
+                     3.00 3.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 4.00
+                     4.00 4.00 4.00 4.00 2.00]]
+    (testing "correctness of result"
+      (is (= -0.11735294117647133 (kurtosis test-sample))))
+    (testing "invariance of calculation"
+      (let [kurtosis-diff (- (kurtosis (map (partial * 10) test-sample))
+                             (kurtosis test-sample))]
+        (is (< kurtosis-diff 1e-15))))
+    ))
 
 (defn gamma-coefficient-test []
   (is (= 1
@@ -370,6 +401,7 @@
       (kendalls-tau-test)
       (concordancy-test)
       (kendalls-tau-distance-test)
+      (kurtosis-test)
       (gamma-coefficient-test)
       (euclid-test)
       (manhattan-test)

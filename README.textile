@@ -5,6 +5,9 @@
 * <a href="#overview">Overview</a>
 * <a href="#clojure">Getting started with Clojure</a>
 * <a href="#getstarted">Getting started with Incanter</a>
+** <a href="#include-in-clojure-project">Include in Clojure project</a>
+** <a href="#use-standalone-app">Use standalone app</a>
+** <a href="#usage">Usage</a>
 * <a href="#docs">Documentation and examples</a>
 * <a href="#build">Building Incanter</a>
 * <a href="#depends">Dependencies</a>
@@ -42,22 +45,81 @@ For a great introduction to programming in Clojure, read "Clojure - Functional P
 
 h2. Getting started with Incanter
 
+h4. Include in Clojure project
+
+Include all incanter modules at once in your <code>project.clj</code>:
+
+bc[clojure]. :dependencies [[org.clojure/clojure "1.6.0"]
+               [incanter "1.5.5"]]
+
+
+Or only the modules you need:
+
+bc. :dependencies [[org.clojure/clojure "1.6.0"]
+               [incanter/incanter-core "1.5.5"]
+               [incanter/incanter-charts "1.5.5"]]
+
+Start repl:
+
+bc. lein repl
+
+
+h4. Use standalone app
+
 Start by visiting the <a href="http://incanter.org">Incanter website</a> for an overview, checkout the <a href="http://data-sorcery.org/contents/">documentation page</a> for a listing of HOW-TOs and examples, and then download either an <a href="http://incanter.org/downloads/">Incanter executable</a> or a pre-built version of <a href="http://incanter.org/downloads/">the latest build of Incanter</a>, which includes all the necessary dependencies, and unpack the file (if you would like to build it from source, read <a href="#build">Building Incanter</a>).  You also might need to install libgfortran3 library that is required for <a href="http://mikiobraun.github.io/jblas/">jblas</a> that is powering matrix operations (see <a href="https://github.com/mikiobraun/jblas/wiki/Missing-Libraries">jblas wiki</a> for more details).
 
 Start the Clojure REPL (aka the shell) by double-clicking on the downloaded executable or, if you downloaded the pre-built distribution, running one of the scripts in the Incanter directory: @script/repl@ or @script\repl.bat@ on Windows.
 
+h4. Usage
+
 From the Clojure REPL, load the Incanter libraries: 
-<pre><code>user=> (use '(incanter core stats charts))</code></pre>
+<pre><code>user=> (use '(incanter core stats charts io))</code></pre>
 
 Try an example: sample 1,000 values from a standard-normal distribution and view a histogram: 
 <pre><code>user=> (view (histogram (sample-normal 1000)))</code></pre>
 <img src="http://incanter.org/images/examples/newtheme/hist-norm.png" />
 
 Try another simple example, a plot of the sine function over the range -4 to 4:
-<pre><code>user=> (view (function-plot sin -10 10))</code></pre>
+
+bc. user=> (def my-plot (function-plot sin -10 10))
+user=> (view my-plot)
+
 <img src="http://incanter.org/images/examples/newtheme/xy-sin.png" />
 
-The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
+You can save plots into a png file:
+<pre><code>user=> (save my-plot "plot.png")</code></pre>
+
+Incanter can save charts into pdf or svg files. Check <code>incanter.pdf/save-pdf</code> and <code>incanter.svg/save-svg</code> functions.
+
+Let's play with some data know. We'll look at London weather for 2012:
+
+bc.. ; function that returns dataset containing weather in London for given month in 2012
+(defn weather-for-month [month]
+  (-> (format "http://www.wunderground.com/history/airport/EGLL/2012/%d/10/MonthlyHistory.html?format=1" month)
+      (read-dataset :header true)))
+
+; get weather data for each month in 2012 and build single dataset
+(def data (->> (range 1 13) (map weather-for-month) (apply conj-rows)))
+
+; view dataset in a table and view histogram of mean temperature
+(view data)
+(view (histogram "Mean TemperatureC" :nbins 100 :data data))
+
+; function that given month "2012-9-20" extracts month and returns 9
+(defn month [date] (Integer/parseInt (second (.split date "-"))))
+
+; dataset that contains 2 columns: month and mean temperature for that month
+(def grouped-by-month
+  (->> (map (fn [date temp] {:month (month date) :temp temp})
+            ($ "GMT" data) ($ "Mean TemperatureC" data))
+       to-dataset
+       ($rollup :mean :temp :month)
+       ($order :month :asc)))
+
+; view line chart that shows that August was the warmest month
+(view (line-chart :month :temp :data grouped-by-month))
+
+p. The online documentation for most Incanter functions contain usage examples. The documentation can be viewed using Clojure's @doc@ function. For example, to view the documentation and usage examples for the @linear-model@ function, call @(doc linear-model)@ from the Clojure shell. Use @(find-doc "search term")@ to search the online documentation from the Clojure shell. The API documentation can also be found at <a href="http://liebke.github.com/incanter">http://liebke.github.com/incanter</a>.
 
 The <a href="http://www.amazon.com/gp/product/178216264X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=178216264X&linkCode=as2&tag=statisprograw-20">Clojure Data Analysis Cookbook</a> (published by Packt Publishing) contains several chapters dedicated to Incanter, including work with datasets, charting, etc.  You can read the <a href="https://github.com/incanter/incanter/blob/master/docs/9781782162643_Chapter%206.pdf?raw=true">sample chapter</a> that describes Incanter's datasets.
 

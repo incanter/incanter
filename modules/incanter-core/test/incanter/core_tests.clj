@@ -523,6 +523,14 @@
          (dataset [:a :b :c] [[1.0 4.0 9.0]]))))
 
 
+(defn sel-filter-test []
+  (let [m (matrix [[110 110]])]
+    (is (= m (sel test-mat :filter-fn (fn [[c1 c2]] (= c1 c2)))))))
+
+(defn group-on-test []
+  (let [m (matrix [[1 0] [2 1]])]
+    (is (= [(matrix [[1 0]]) (matrix [[2 1]])] (group-on m 1)))))
+
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
     (set-current-implementation impl)
@@ -546,4 +554,7 @@
       (arithmetic-test)
       (det-test)
       (matrix-map-test)
-      (pow-test))))
+      (pow-test)
+      (sel-filter-test)
+      (group-on-test))))
+
