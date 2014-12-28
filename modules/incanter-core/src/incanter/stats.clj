@@ -36,7 +36,6 @@
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability)
            (incanter Weibull))
-  (:require [clatrix.core :as clx])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
@@ -1008,7 +1007,7 @@
 ;; WISHART DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+;; TODO: fix it completely...
 (defn sample-wishart
   "
   Returns a p-by-p symmetric distribution drawn from a Wishart distribution
@@ -1030,17 +1029,19 @@
     http://en.wikipedia.org/wiki/Wishart_distribution
   "
   ([& {:keys [scale p df] :or {p 2}}]
-    (let [scale (or scale (when p (identity-matrix p)))
-          p (count scale)
-          df (or df p)
-          diagonal (for [i (range 1 (inc p))]
-                     (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
-          mat (diag diagonal)
-          indices (for [i (range p) j (range p) :when (< j i)] [i j])
-          _ (doseq [indx indices] (clx/set mat (first indx) (second indx) (sample-normal 1)))
-          chol (decomp-cholesky scale)
-          x (mmult chol mat (trans mat) (trans chol))]
-      x)))
+   (let [scale (or scale (when p (identity-matrix p)))
+         p (m/row-count scale)
+         df (or df p)
+         mat (m/mutable (m/new-matrix p p))
+         _ (doseq [i (range 1 (inc p))]
+             (let [v (pow (sample-chisq 1 :df (inc (- df i))) 1/2)
+                   idx (dec i)]
+               (m/mset! mat idx idx v)))
+         indices (for [i (range p) j (range p) :when (< j i)] [i j])
+         _ (doseq [indx indices] (m/mset! mat (first indx) (second indx) (sample-normal 1)))
+         chol (decomp-cholesky scale)
+         x (m/mmul chol mat (trans mat) (trans chol))]
+     x)))
 
 
 
@@ -1065,8 +1066,8 @@
     http://en.wikipedia.org/wiki/Inverse-Wishart_distribution
   "
   ([& {:keys [scale p df] :or {p 2}}]
-    (let [scale (or scale (when p (identity-matrix p)))
-          p (count scale)
+    (let [scale (m/mutable (or scale (when p (identity-matrix p))))
+          p (m/row-count scale)
           df (or df p)]
       (solve (sample-wishart :p p :df df :scale scale)))))
 
