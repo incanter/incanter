@@ -2979,29 +2979,6 @@
             (* n (dec (pow n 2)))))))
 
 
-
-
-
-(defn- key-compare
-  [x y]
-    (cond
-      (and
-        (keyword? x)
-        (not (keyword? y))) 1
-      (and
-        (keyword? y)
-        (not (keyword? x))) -1
-      :otherwise (compare x y)))
-
-;;weird inversion makes us revers k1 and k2
-(defn- kv-compare [[k1 v1] [k2 v2]] (key-compare k2 k1))
-
-;;TDOO: doesn't seem to work? test and beat on it.
-;;use clojure sorting: sort-by, sorted-map-by, etc.
-(defn- sort-map [m] (into {} (sort kv-compare m)))
-
-
-
 (defn kendalls-tau
   "
   http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient
@@ -3013,7 +2990,7 @@
   [a b]
   {:pre [(= (count a) (count b))]}
     (let [n (count a)
-          ranked (reverse (sort-map (zipmap a b)))
+          ranked (reverse (apply sorted-map-by compare (interleave a b)))
           ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
           dcd (second
                 (reduce
