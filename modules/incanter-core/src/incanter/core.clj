@@ -48,7 +48,7 @@
        :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."}
      $data nil)
-(declare to-list to-vector vectorize dataset col-names to-matrix)
+(declare to-list to-vector vectorize dataset col-names to-matrix bind-rows)
 
 (defn set-current-implementation [imp]
   "Sets current matrix implementation"
@@ -307,7 +307,7 @@
                 except-cols (except-for (m/column-count mat) except-cols)
                 all all
                 :else :all)
-         mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))]
+         mat (if (nil? filter-fn) mat (apply bind-rows (filter filter-fn mat)))]
      (matrix (m/select mat rows cols)))))
 
 (prefer-method sel [::matrix true] [java.util.List true])
@@ -1191,13 +1191,13 @@
                         (and (coll? on-cols) (> (count on-cols) 1))
                           (fn [row]
                             (reduce #(and %1 %2)
-                                    (map (fn [i g] (= (nth row i) g)) on-cols group)))
+                                    (map (fn [i g] (= (m/mget row i) g)) on-cols group)))
                         (and (coll? on-cols) (= (count on-cols) 1))
                           (fn [row]
-                            (= (nth row (first on-cols)) group))
+                            (= (m/mget row (first on-cols)) group))
                         :else
                           (fn [row]
-                            (= (nth row on-cols) group))))
+                            (= (m/mget row on-cols) group))))
          ]
       (cond
         cols
@@ -1388,7 +1388,7 @@
 
 
 (defmethod sel [::dataset true]
-  ([data & {:keys [rows cols except-rows except-cols filter all]}]
+  ([data & {:keys [rows cols except-rows except-cols filter-fn all]}]
      (let [except-cols (cond
                         (nil? except-cols) except-cols
                         (coll? except-cols) except-cols
@@ -1425,9 +1425,9 @@
               :else cols)
            res (-> (ds/select-rows data r)
                    (ds/select-columns c))
-           res (if-not (nil? filter)
+           res (if-not (nil? filter-fn)
                  (->> (ds/row-maps res)
-                      (clojure.core/filter filter)
+                      (clojure.core/filter filter-fn)
                       (dataset (ds/column-names res)))
                  res)]
 
