@@ -50,14 +50,14 @@ h4. Include in Clojure project
 Include all incanter modules at once in your <code>project.clj</code>:
 
 bc[clojure]. :dependencies [[org.clojure/clojure "1.6.0"]
-               [incanter "1.5.5"]]
+               [incanter "1.5.6"]]
 
 
 Or only the modules you need:
 
 bc. :dependencies [[org.clojure/clojure "1.6.0"]
-               [incanter/incanter-core "1.5.5"]
-               [incanter/incanter-charts "1.5.5"]]
+               [incanter/incanter-core "1.5.6"]
+               [incanter/incanter-charts "1.5.6"]]
 
 Start repl:
 
@@ -103,12 +103,15 @@ bc.. ; function that returns dataset containing weather in London for given mont
 
 ; view dataset in a table and view histogram of mean temperature
 (view data)
+; wunderground.com formats temperature depending on locale/location/whatever 
+; so you might need to use "Mean TemperatureF" otherwise you'll get NullPointerException.
 (view (histogram "Mean TemperatureC" :nbins 100 :data data))
 
 ; function that given month "2012-9-20" extracts month and returns 9
 (defn month [date] (Integer/parseInt (second (.split date "-"))))
 
 ; dataset that contains 2 columns: month and mean temperature for that month
+; don't forget to change to "Mean TemperatureF" if you did so few steps back.
 (def grouped-by-month
   (->> (map (fn [date temp] {:month (month date) :temp temp})
             ($ "GMT" data) ($ "Mean TemperatureC" data))
