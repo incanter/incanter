@@ -3521,7 +3521,7 @@
    ))
 
 (defn clear-chart
-  ""
+  "Remove all series from all dataset."
   [chart]
   (let [plot       (-> chart .getPlot)
         count      (.getDatasetCount plot)]
@@ -3532,11 +3532,6 @@
         (doseq [i (range series-count)]
           (.removeSeries dataset i))))
     chart))
-
-(defn get-dataset
-  ""
-  [chart index]
-  (-> chart .getPlot (.getDataset index)))
 
 (defmethod set-data org.jfree.chart.JFreeChart
   ([chart data]
