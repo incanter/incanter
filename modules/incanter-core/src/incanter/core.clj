@@ -2636,7 +2636,7 @@
            rows (m/rows obj)]
        (doto (JFrame. "Incanter Dataset")
          (.add (JScrollPane. (JTable.
-                              (Vector. (map #(Vector. %) rows))
+                              (Vector. (map #(Vector. %) (to-list rows)))
                               (Vector. col-names))))
          (.setSize 400 600)
          (.setVisible true)))))
