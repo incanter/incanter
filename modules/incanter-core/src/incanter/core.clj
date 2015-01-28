@@ -109,21 +109,37 @@
       (.contains (str (type obj)) "processing.core.PApplet") :sketch
       :else (type obj))))
 
-(defn ^Integer nrow
+(defmulti nrow
   "Returns the number of rows in the given matrix. Equivalent to R's nrow function."
-  ([mat]
-     (cond
-      (matrix? mat) (m/row-count mat)
-      (dataset? mat) (m/row-count mat)
-      (coll? mat) (count mat))))
+  dispatch)
 
-(defn ^Integer ncol
+(defmethod nrow ::dataset
+  [ds] (m/row-count ds))
+
+(defmethod nrow ::matrix
+  [m] (m/row-count m))
+
+(defmethod nrow ::vector
+  [v] (m/row-count v))
+
+(defmethod nrow ::coll
+  [c] (count c))
+
+(defmulti ncol
   "Returns the number of columns in the given matrix. Equivalent to R's ncol function."
-  ([mat]
-   (cond
-     (matrix? mat) (m/column-count mat)
-     (dataset? mat) (m/column-count mat)
-     (coll? mat) 1 )))
+  dispatch)
+
+(defmethod ncol ::dataset
+  [ds] (m/column-count ds))
+
+(defmethod ncol ::matrix
+  [m] (m/column-count m))
+
+(defmethod ncol ::coll
+  [c] 1)
+
+(defmethod ncol ::vector
+  [v] 1)
 
 (defn ^:deprecated dim
   "Returns a vector with the number of rows and columns of the given matrix.
