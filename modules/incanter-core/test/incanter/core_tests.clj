@@ -561,3 +561,12 @@
       (sel-filter-test)
       (group-on-test))))
 
+(deftest view-test
+  (testing "Table views"
+    (testing "for datasets"
+      (is (view dataset1)))))
+
+(deftest data-table-test
+  (testing "Create JTable from dataset"
+    (let [table (data-table dataset1)]
+      (is (= (type table) javax.swing.JTable)))))

@@ -2549,6 +2549,16 @@
 ;; VIEW METHODS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defn data-table
+"Creates a javax.swing.JTable given an Incanter dataset."
+  ([data]
+   (let [col-names (ds/column-names data)
+         column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps data))
+         table-model (javax.swing.table.DefaultTableModel.
+                      (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+                      (java.util.Vector. col-names))]
+     (javax.swing.JTable. table-model))))
+
 (defmulti view
   "
   This is a general 'view' function. When given an Incanter matrix/dataset
@@ -2632,14 +2642,7 @@
 
 (defmethod view ::dataset
   ([obj & options]
-     (let [col-names  (ds/column-names obj)
-           rows (m/rows obj)]
-       (doto (JFrame. "Incanter Dataset")
-         (.add (JScrollPane. (JTable.
-                              (Vector. (map #(Vector. %) (to-list rows)))
-                              (Vector. col-names))))
-         (.setSize 400 600)
-         (.setVisible true)))))
+   (view (data-table obj))))
 
 (defmethod view javax.swing.JTable
   ([obj & options]
@@ -2671,19 +2674,6 @@
             (.browse (java.net.URI. url)))
         url)
       (catch ClassNotFoundException e nil))))
-
-
-(defn data-table
-"Creates a javax.swing.JTable given an Incanter dataset."
-  ([data]
-   (let [col-names (ds/column-names data)
-         column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps data))
-         table-model (javax.swing.table.DefaultTableModel.
-                      (java.util.Vector. (map #(java.util.Vector. %) column-vals))
-                      (java.util.Vector. col-names))]
-     (javax.swing.JTable. table-model))))
-
-
 
 (defmulti set-data
   "
