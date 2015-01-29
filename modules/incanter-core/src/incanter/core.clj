@@ -2550,13 +2550,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn data-table
-"Creates a javax.swing.JTable given an Incanter dataset."
+  "Creates a javax.swing.JTable given an Incanter dataset."
   ([data]
    (let [col-names (ds/column-names data)
          column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps data))
          table-model (javax.swing.table.DefaultTableModel.
-                      (java.util.Vector. (map #(java.util.Vector. %) column-vals))
-                      (java.util.Vector. col-names))]
+                       (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+                       (java.util.Vector. col-names))]
      (javax.swing.JTable. table-model))))
 
 (defmulti view
