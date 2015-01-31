@@ -561,3 +561,12 @@
       (sel-filter-test)
       (group-on-test))))
 
+(deftest data-table-test
+  (let [table (data-table dataset1)]
+    (testing "creates JTable from dataset"
+      (is (= (type table) javax.swing.JTable)))
+    (testing "JTable has correct value at specified cell"
+      (let [row 1 col 2
+            cell-value (-> table (.getModel) (.getValueAt row col))
+            dataset-value ($ row col dataset1)]
+        (is (= cell-value dataset-value))))))
