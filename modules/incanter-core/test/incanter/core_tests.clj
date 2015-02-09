@@ -562,11 +562,25 @@
       (group-on-test))))
 
 (deftest data-table-test
-  (let [table (data-table dataset1)]
-    (testing "creates JTable from dataset"
-      (is (= (type table) javax.swing.JTable)))
-    (testing "JTable has correct value at specified cell"
-      (let [row 1 col 2
-            cell-value (-> table (.getModel) (.getValueAt row col))
-            dataset-value ($ row col dataset1)]
-        (is (= cell-value dataset-value))))))
+  (let [row 1 col 2
+        ds dataset1
+        data-value ($ row col ds)]
+    (testing "create table from dataset"
+      (let [table (data-table ds)
+            table-cell-value (-> table (.getModel) (.getValueAt row col))]
+        (is (= (type table) javax.swing.JTable))
+        (is (= table-cell-value data-value)))
+    (testing "create table from core.matrix"
+      (let [table (data-table (m/matrix ds))
+            table-cell-value (-> table (.getModel) (.getValueAt row col))
+            table-column-names (map #(.getColumnName (.getModel table) %)
+                                 (range (length (:column-names ds))))]
+        (is (= (type table) javax.swing.JTable))
+        (is (= table-cell-value (double data-value)))
+        (is (= ["0" "1" "2"] table-column-names))
+        (testing "custom column names"
+          (let [column-names ["columnA" "columnB" "columnC"]
+                table (data-table (m/matrix ds) :column-names column-names)
+                table-column-names (map #(.getColumnName (.getModel table) %)
+                                     (range (length column-names)))]
+            (is (= column-names table-column-names)))))))))

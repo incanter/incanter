@@ -2562,18 +2562,52 @@
         (fn [i j] (m/mget x (abs (- i j))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; VIEW METHODS
+;; DATA TABLE CONVERSION METHODS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn data-table
-  "Creates a javax.swing.JTable given an Incanter dataset."
-  ([data]
-   (let [col-names (ds/column-names data)
-         column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps data))
+(defmulti data-table
+  "
+  Creates javax.swing.JTable from dataset or matrix.
+
+  JTable column names for datasets will be the datset's column names. For
+  matrices, an optional argument :column-names can be used to set the resulting
+  column names. Otherweise incrementing indices are used (0,1,2,..).
+
+  Example:
+
+  (data-table (clojure.core.matrix/matrix [[1 2 3][4 5 6]])
+    :column-names [\"first col\" \"second col\" \"third col\"])
+  "
+  (fn [obj & options]
+    (dispatch obj)))
+
+(defmethod data-table ::matrix
+  [obj & {:keys [column-names]}]
+    (let [col-names (or column-names (range (ncol obj)))
+          m (ncol obj)
+          n (nrow obj)]
+      (JTable.
+        (cond
+          (and (> m 1) (> n 1))
+          (Vector. (map #(Vector. %) (to-list obj)))
+          (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
+          (Vector. (map #(Vector. %) [(to-list obj) []]))
+          (and (= m 1) (> n 1))
+          (Vector. (map #(Vector. [%]) (to-list obj))))
+        (Vector. col-names))))
+
+(defmethod data-table ::dataset
+  [obj & options]
+   (let [col-names (ds/column-names obj)
+         column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps obj))
          table-model (javax.swing.table.DefaultTableModel.
                        (java.util.Vector. (map #(java.util.Vector. %) column-vals))
                        (java.util.Vector. col-names))]
-     (javax.swing.JTable. table-model))))
+    (JTable. table-model)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VIEW METHODS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmulti view
   "
@@ -2624,52 +2658,34 @@
     (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")
     (view \"file:///tmp/norm_hist.png\")
   "
-  (fn [obj & opts]
+  (fn [obj & options]
     (dispatch obj)))
 
-
 (defmethod view ::coll
-  ([obj & options]
-     (view (m/transpose (matrix [obj])))))
+  [obj & options]
+  (apply view (m/transpose (matrix [obj])) options))
 
 (defmethod view ::vector
-  ([obj & options]
-     (view (m/transpose (matrix [obj])))))
+  [obj & options]
+  (apply view (m/transpose (matrix [obj])) options))
 
 (defmethod view ::matrix
-  ([obj & {:keys [column-names]}]
-    (let [col-names (or column-names (range (ncol obj)))
-          m (ncol obj)
-          n (nrow obj)]
-     (doto (JFrame. "Incanter Matrix")
-       (.add (JScrollPane.
-               (JTable.
-                 (cond
-                   (and (> m 1) (> n 1))
-                     (Vector. (map #(Vector. %) (to-list obj)))
-                   (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
-                     (Vector. (map #(Vector. %) [(to-list obj) []]))
-                   (and (= m 1) (> n 1))
-                     (Vector. (map #(Vector. [%]) (to-list obj))))
-                                    (Vector. col-names))))
-       (.setSize 400 600)
-       (.setVisible true)))))
-
+  [obj & options]
+  (apply view (apply data-table obj options) options))
 
 (defmethod view ::dataset
-  ([obj & options]
-   (view (data-table obj))))
+  [obj & options]
+  (apply view (apply data-table obj options) options))
 
 (defmethod view javax.swing.JTable
-  ([obj & options]
-    (doto (javax.swing.JFrame. "Incanter Dataset")
-      (.add (javax.swing.JScrollPane. obj))
-      (.setSize 500 600)
-      (.setVisible true))))
-
+  [obj & {:keys [title] :or {title "Incanter Table"}}]
+  (doto (javax.swing.JFrame. title)
+    (.add (javax.swing.JScrollPane. obj))
+    (.setSize 500 600)
+    (.setVisible true)))
 
 (defmethod view java.awt.Image
-  ([obj & options]
+  [obj & options]
     (let [icon (javax.swing.ImageIcon. obj)
           label (javax.swing.JLabel. icon)
           height (+ 15 (.getIconHeight icon))
@@ -2678,7 +2694,7 @@
         (.add (javax.swing.JScrollPane. label))
         (.setSize height width)
         .pack
-        (.setVisible true)))))
+        (.setVisible true))))
 
 
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
