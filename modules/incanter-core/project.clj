@@ -10,8 +10,8 @@
   :java-source-paths ["java"]
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/math.combinatorics "0.0.8" :exclusions [org.clojure/clojure]]
-                 [net.mikera/vectorz-clj "0.28.0" :exclusions [org.clojure/clojure]]
-                 [net.mikera/core.matrix "0.32.1" :exclusions [org.clojure/clojure]]
+                 [net.mikera/vectorz-clj "0.29.0" :exclusions [org.clojure/clojure]]
+                 [net.mikera/core.matrix "0.33.2" :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.1"]]
   :profiles {:dev {:dependencies [[clatrix "0.4.0" :exclusions [org.clojure/clojure]]
                                   [org.jblas/jblas "1.2.3"]]}}
