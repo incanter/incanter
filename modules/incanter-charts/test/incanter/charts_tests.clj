@@ -52,6 +52,13 @@
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (scatter-plot 0 1 :data (to-dataset [[1 2 3]]) :group-by 2)))))
 
+(deftest scatter-group-by
+  (let [iris (get-dataset :iris)]
+    (is (not (nil? (scatter-plot ($ :Sepal.Width iris) ($ :Sepal.Length iris)
+                                 :group-by ($ :Species iris)))))
+    (is (not (nil? (scatter-plot :Sepal.Length :Sepal.Width
+                                 :group-by :Species :data iris))))))
+
 (deftest area-chart-single-row
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (area-chart 0 1 :data (to-dataset [[1 2 3]]))))))

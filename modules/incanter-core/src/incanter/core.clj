@@ -1496,32 +1496,7 @@
          (dataset (m/transpose obj))
          (dataset obj)))))
 
-(defn make-unique
-  "
-  Take a sequence of keywords and make them unique by possibly
-  altering later ones.
-  "
-  ([coll]
-     (if (= (count (into #{} coll)) (count coll))
-       coll
-       (make-unique coll #{})))
-  ([coll seen]
-     (let [new-name
-           (fn new-name [x]
-             (if (not (contains? seen x))
-               x
-               (let [match (re-matches #"(.*\-)([0-9]+)" (name x))]
-                 (if match
-                   (new-name (keyword (str (second match)
-                                           (inc (Integer/parseInt (nth match 2))))))
-                   (new-name (keyword (str (name x) "-1")))))))]
 
-      (if (empty? coll)
-          ()
-          (let [name (new-name (first coll))
-                name (if (number? name) (str name) name)]
-            (cons name
-                  (make-unique (rest coll) (conj seen name))))))))
 
 
 (defn ^:deprecated col-names
@@ -1558,13 +1533,32 @@
     (view (conj-cols {:a 1 :b 2} {:c 1 :d 2}))
   "
   ([& args]
-    (reduce (fn [A B]
-              (let [a (to-dataset A)
-                    b (to-dataset B)
-                    colnames (make-unique (concat (col-names a) (col-names b)))
-                    cols (concat (m/columns a) (m/columns b))]
-                (dataset colnames (m/transpose cols))))
-            args)))
+     (if (= (count args) 1)
+       (first args)
+       (let [all-colnames (->> (filter #(ds/dataset? %) args)
+                               (mapcat #(m/columns %))
+                               (into #{}))
+             name-f (filter #(not (contains? all-colnames %)) (range))
+             args (loop [x (first args)
+                         xs (next args)
+                         i 0
+                         acc []]
+                    (if (nil? x)
+                      acc
+                      (recur
+                       (first xs)
+                       (next xs)
+                       (+ i (ncol x))
+                       (conj acc
+                             (case (dispatch x)
+                               ::dataset x
+                               ::matrix (-> (take (ncol x) (drop i name-f))
+                                            (dataset x))
+                               (dataset (-> (take 1 (drop i name-f))
+                                            (first)
+                                            (hash-map x))))))))]
+
+         (apply ds/merge-datasets args)))))
 
 
 (defn ^:deprecated conj-rows
