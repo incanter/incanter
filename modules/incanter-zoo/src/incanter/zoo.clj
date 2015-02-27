@@ -224,14 +224,16 @@
   ([z] (lag z 1))
   ([z n]
      {:post [(= (nrow z) (nrow %))]}
-     (conj-cols
-      (map #(select-keys % [:index]) (ds/row-maps z))
-      (to-dataset
-       (concat
-        (take n (repeat (nil-row (-> z coredata first))))
-        (->> z
-             coredata
-             (drop-last n)))))))
+     (let [colnames (ds/column-names z)
+           row-maps (ds/row-maps z)
+           indices (map #(select-keys % [:index]) (ds/row-maps z))
+           row-maps (concat
+                     (take n (repeat (nil-row (-> z coredata first))))
+                     (->> z
+                          coredata
+                          (drop-last n)))
+           row-maps (map merge row-maps indices)]
+       (dataset colnames row-maps))))
 
 (defn zoo-apply
   "

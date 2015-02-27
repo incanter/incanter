@@ -131,7 +131,10 @@
     (is (= ($ 0 [:press :temp] ts1)
            ($ 2 [:press :temp] (lag ts1 2))) "Multiperiod lag")
     (is (= ($ 2 [:press :temp] (-> ts1 lag lag))
-           ($ 2 [:press :temp] (lag ts1 2))) "Multiperiod lag")))
+           ($ 2 [:press :temp] (lag ts1 2))) "Multiperiod lag")
+    (is (= (ds/column-names ts1)
+           (ds/column-names ls1))
+        "Preserve order of columns")))
 
 (defn zoo-apply-test []
   (let [ts (zoo ds1)
