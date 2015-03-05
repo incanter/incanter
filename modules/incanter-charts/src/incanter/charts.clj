@@ -1133,38 +1133,46 @@
 
 (defn- create-xy-series-plot
   ([x y create-plot & options]
-    (let [opts (when options (apply assoc {} options))
+     (let [opts (when options (apply assoc {} options))
           data (or (:data opts) $data)
           _x (data-as-list x data)
           _y (data-as-list y data)
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ 0 %)
-                          (vals ($group-by 1 (conj-cols _x _group-by)))))
-          y-groups (when _group-by
-                     (map #($ 0 %)
-                          (vals ($group-by 1 (conj-cols _y _group-by)))))
-          __x (in-coll (if x-groups (first x-groups) _x))
-          __y (in-coll (if y-groups (first y-groups) _y))
-          title (or (:title opts) "")
-          x-lab (or (:x-label opts) (str 'x))
-          y-lab (or (:y-label opts) (str 'y))
-          series-lab (or (:series-label opts)
+                     (let [x-groupped (->> (conj-cols _x _group-by)
+                                           ($group-by 1))]
+                       (->> (distinct _group-by)
+                            (map #(->>
+                                   (get x-groupped {1 %})
+                                   ($ 0))))))
+           y-groups (when _group-by
+                     (let [y-groupped (->> (conj-cols _y _group-by)
+                                           ($group-by 1))]
+                       (->> (distinct _group-by)
+                            (map #(->>
+                                   (get y-groupped {1 %})
+                                   ($ 0))))))
+           __x (in-coll (if x-groups (first x-groups) _x))
+           __y (in-coll (if y-groups (first y-groups) _y))
+           title (or (:title opts) "")
+           x-lab (or (:x-label opts) (str 'x))
+           y-lab (or (:y-label opts) (str 'y))
+           series-lab (or (:series-label opts)
                           (if x-groups
                             (format "%s, %s (0)" 'x 'y)
                             (format "%s, %s" 'x 'y)))
-          theme (or (:theme opts) :default)
-          legend? (true? (:legend opts))
-          points? (true? (:points opts))
-          data-series (XYSeries. (cond
+           theme (or (:theme opts) :default)
+           legend? (true? (:legend opts))
+           points? (true? (:points opts))
+           data-series (XYSeries. (cond
                                    _group-by
                                      (first _group-by)
                                    :else
                                      series-lab)
                                  (:auto-sort opts true))
-          dataset (XYSeriesCollection.)
-          chart (do
+           dataset (XYSeriesCollection.)
+           chart (do
                   (dorun
                    (map (fn [x y]
                         (if (and (not (nil? x))
