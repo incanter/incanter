@@ -1137,11 +1137,19 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (let [x-groupped (->> (conj-cols _x _group-by)
+                                           ($group-by :col-1))]
+                       (->> (distinct _group-by)
+                            (map #(->>
+                                   (get x-groupped {:col-1 %})
+                                   ($ :col-0))))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (let [y-groupped (->> (conj-cols _y _group-by)
+                                           ($group-by :col-1))]
+                       (->> (distinct _group-by)
+                            (map #(->>
+                                   (get y-groupped {:col-1 %})
+                                   ($ :col-0))))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
