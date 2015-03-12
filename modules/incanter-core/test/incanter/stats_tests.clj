@@ -169,6 +169,16 @@
   ;; get the covariance between two variables
   (is (= (Math/round (covariance x y)) 2263)))
 
+(defn covariance-matrix-test []
+  ;; get the covariance from a matrix
+  (let [in [[9   8  7]
+            [90 80 70]
+            [10  5  0]]
+        result [[ 1.  10.  5.]
+                [10. 100. 50.]
+                [ 5.  50. 25.]]]
+    (is (= (to-vect (covariance in)) (to-vect result)))))
+
 (defn covariance-test-2 []
   (is (= 5.333333333333333
 	 (covariance
@@ -393,6 +403,7 @@
       (sd-test m1 x)
       (median-test x)
       (covariance-test x y)
+      (covariance-matrix-test)
       (covariance-test-2)
       (pearson-test)
       (correlation-ratio-example)

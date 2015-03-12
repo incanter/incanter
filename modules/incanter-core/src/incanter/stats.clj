@@ -1533,10 +1533,11 @@
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
-    (let [n (ncol mat)]
+   (let [n (ncol mat)
+         m (nrow mat)]
       (matrix
-        (for [i (range n) j (range n)]
-          (covariance (sel mat true i) (sel mat true j))) n))))
+        (for [i (range m) j (range m)]
+          (covariance (sel mat :rows i) (sel mat :rows j))) n))))
 
 
 
