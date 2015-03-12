@@ -393,6 +393,7 @@
       (sd-test m1 x)
       (median-test x)
       (covariance-test x y)
+      (covariance-test-2)
       (pearson-test)
       (correlation-ratio-example)
       (sample-test m2)
