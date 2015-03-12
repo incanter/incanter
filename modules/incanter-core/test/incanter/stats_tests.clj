@@ -1,4 +1,4 @@
-;;; core-test-cases.clj -- Unit tests of Incanter functions 
+;;; core-test-cases.clj -- Unit tests of Incanter functions
 
 ;; by David Edgar Liebke http://incanter.org
 ;; October 31, 2009
@@ -362,6 +362,14 @@
  (let [r (simple-regression [2 4] [1 3])]
   (is (m/equals 3.0 (predict r 2)))))
 
+(defn principal-components-test [m]
+  ;; simple test to check if rotation and std-dev data gets set
+  (let [pca      (principal-components m)
+        rotation (:rotation pca)
+        std-dev   (:std-dev  pca)]
+    (is (not= rotation nil))
+    (is (not= std-dev nil))))
+
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
     (set-current-implementation impl)
@@ -405,6 +413,10 @@
       (covariance-test x y)
       (covariance-matrix-test)
       (covariance-test-2)
+      ;; single value decomposition (SVD) not yet implemented for some
+      ;; types in core.matrix, thus skipping the test then
+      (when-not (some #{impl} '(:ndarray :persistent-vector))
+        (principal-components-test m1))
       (pearson-test)
       (correlation-ratio-example)
       (sample-test m2)

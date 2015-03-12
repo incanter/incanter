@@ -2725,7 +2725,7 @@
   "
   ([x & options]
     (let [svd (decomp-svd (correlation x))
-          rotation (:V svd)
+          rotation (:V* svd)
           std-dev (sqrt (:S svd))]
       {:std-dev std-dev
        :rotation rotation})))
