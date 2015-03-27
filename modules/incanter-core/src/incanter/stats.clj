@@ -1582,9 +1582,10 @@
           (DoubleArrayList. (double-array yy)) (sd y))
         0.0)))
   ([mat]
-   (div (covariance mat)
-        (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
-
+   (let [trans-mat (trans mat)
+         cov-mat (covariance trans-mat)]
+     (div cov-mat
+       (sqrt (mult (diag cov-mat) (trans (diag cov-mat))))))))
 
 (defn auto-correlation
   "

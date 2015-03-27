@@ -201,6 +201,11 @@
 		 geometry
 		 statistics)))))
 
+(defn correlation-matrix []
+  (let [mat [[1 2 3] [1 1 3] [2 1 4]]]
+    (is (= [[1 -0.5 1] [-0.5 1 -0.5] [1 -0.5 1]]
+          (correlation mat)))))
+
 (defn sample-test [m]
   ;; test sample function
   (is (not= (sample (range 10) :replacement false) (range 10)))
@@ -419,6 +424,7 @@
         (principal-components-test m1))
       (pearson-test)
       (correlation-ratio-example)
+      (correlation-matrix)
       (sample-test m2)
       (ranking-test)
       (spearmans-rho-test)
