@@ -104,3 +104,9 @@
                            [1 6 :x2]
                            [2 8 :x2]])]
     (is (= (melt dset :id) expected))))
+
+(deftest $map-test
+  (is (= ($map (fn [s] (/ s)) :a dataset1)
+         [1 1/4]))
+  (is (= ($map (fn [s d] (/ s d)) [:a :b] dataset1)
+         [1/2 4/5])))

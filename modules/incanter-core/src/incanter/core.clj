@@ -1980,8 +1980,6 @@
     ($map (fn [s] (/ s)) :speed cars)
     ($map (fn [s d] (/ s d)) [:speed :dist] cars)
 
-    (map (fn [s d] (/ s d)) ($ :speed cars) ($ :speed cars))
-
     (with-data (get-dataset :cars)
       (view ($map (fn [s] (/ s)) :speed))
       (view ($map (fn [s d] (/ s d)) [:speed :dist])))
@@ -1991,10 +1989,10 @@
       (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))
   "
   ([fun col-keys data]
-    (let [rows (m/rows data)]
+     (let [rms (ds/row-maps data)]
       (if (coll? col-keys)
-        (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (m/rows data))
-        (map (fn [row] (fun (map-get row col-keys))) (m/rows data)))))
+        (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) rms)
+        (map (fn [row] (fun (map-get row col-keys))) rms))))
   ([fun col-keys]
     ($map fun col-keys $data)))
 
