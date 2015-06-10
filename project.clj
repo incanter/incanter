@@ -32,7 +32,7 @@
         "modules/incanter-sql"
         "modules/incanter-zoo"
         "."]
-  
+
   :modules {:dirs ["modules/incanter-core"
                    "modules/incanter-io"
                    "modules/incanter-charts"
