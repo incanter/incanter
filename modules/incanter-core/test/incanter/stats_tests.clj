@@ -374,12 +374,12 @@
   (testing "principal components results"
     (let [pca      (principal-components m)
           rotation (:rotation pca)
-          std-dev   (:std-dev  pca)]
+          std-dev  (:std-dev  pca)]
       (is (not= rotation nil))
       (is (not= std-dev nil))
-      (is (m/equals [[0.5773503 0.8164966  0]
-                     [0.5773503 0.4082483  0.7071068]
-                     [0.5773503 0.4082483  0.7071068]]
+      (is (m/equals [[0.5773503 0.5773503 0.5773503]
+                     [0.8164966 0.4082483 0.4082483]
+                     [0.        0.7071068 0.7071068]]
             (abs rotation)
             1E-6)))))
 
