@@ -3,15 +3,18 @@
 
 (defn binary-search
 "  Finds index of rightmost value in sorted vector that is less or equal to given value."
-  [vec value]
+[vec value]
+(if (= (count vec) 1)
+  0
   (loop [left 0
          right (dec (count vec))]
+
     (if (= (- right left) 1)
       (if (<= (nth vec right) value) right left)
       (let [middle (quot (+ left right) 2)]
         (if (<= (nth vec middle) value)
           (recur middle right)
-          (recur left middle))))))
+          (recur left middle)))))))
 
 
 (defn find-segment
