@@ -14,7 +14,6 @@
        (= (- right left) 1)
        (if (<= (nth vec right) value) right left)
 
-
        (<= (nth vec middle) value)
        (recur middle right)
 
