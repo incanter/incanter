@@ -2,19 +2,24 @@
   incanter.interp.utils)
 
 (defn binary-search
-"  Finds index of rightmost value in sorted vector that is less or equal to given value."
-[vec value]
-(if (= (count vec) 1)
-  0
+  "  Finds index of rightmost value in sorted vector that is less or equal to given value."
+  [vec value]
   (loop [left 0
          right (dec (count vec))]
+    (let [middle (quot (+ left right) 2)]
+      (cond
+       (= right left)
+       0
 
-    (if (= (- right left) 1)
-      (if (<= (nth vec right) value) right left)
-      (let [middle (quot (+ left right) 2)]
-        (if (<= (nth vec middle) value)
-          (recur middle right)
-          (recur left middle)))))))
+       (= (- right left) 1)
+       (if (<= (nth vec right) value) right left)
+
+
+       (<= (nth vec middle) value)
+       (recur middle right)
+
+       :else
+       (recur left middle)))))
 
 
 (defn find-segment
