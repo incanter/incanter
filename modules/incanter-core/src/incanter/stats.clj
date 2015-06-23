@@ -1533,11 +1533,10 @@
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
-   (let [n (ncol mat)
-         m (nrow mat)]
+   (let [n (ncol mat)]
       (matrix
-        (for [i (range m) j (range m)]
-          (covariance (sel mat :rows i) (sel mat :rows j))) n))))
+        (for [i (range n) j (range n)]
+          (covariance (sel mat :cols i) (sel mat :cols j))) n))))
 
 
 
@@ -1582,9 +1581,10 @@
           (DoubleArrayList. (double-array yy)) (sd y))
         0.0)))
   ([mat]
-   (div (covariance mat)
-        (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
-
+   (let [n (ncol mat)]
+      (matrix
+        (for [i (range n) j (range n)]
+          (correlation (sel mat :cols i) (sel mat :cols j))) n))))
 
 (defn auto-correlation
   "
@@ -2724,12 +2724,11 @@
     http://en.wikipedia.org/wiki/Principal_component_analysis
   "
   ([x & options]
-    (let [svd (decomp-svd (correlation x))
-          rotation (:V* svd)
-          std-dev (sqrt (:S svd))]
-      {:std-dev std-dev
-       :rotation rotation})))
-
+   (let [svd (decomp-svd (covariance x))
+         rotation        (:V* svd)
+         std-dev         (sqrt (:S svd))]
+     {:std-dev std-dev
+      :rotation rotation})))
 
 
 (defn detabulate

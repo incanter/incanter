@@ -174,10 +174,12 @@
   (let [in [[9   8  7]
             [90 80 70]
             [10  5  0]]
-        result [[ 1.  10.  5.]
-                [10. 100. 50.]
-                [ 5.  50. 25.]]]
-    (is (= (to-vect (covariance in)) (to-vect result)))))
+        result [[2160.333 1971.5 1782.667]
+                [1971.500 1803.0 1634.500]
+                [1782.667 1634.5 1486.333]]]
+    (is (m/equals (to-vect result)
+          (to-vect (covariance in))
+          1E-3))))
 
 (defn covariance-test-2 []
   (is (= 5.333333333333333
@@ -200,6 +202,16 @@
 		 algebra
 		 geometry
 		 statistics)))))
+
+(defn correlation-matrix []
+  (let [mat [[1 2 3]
+             [1 1 3]
+             [2 1 4]]]
+    (is (m/equals [[1 -0.5 1]
+                   [-0.5 1 -0.5]
+                   [1 -0.5 1]]
+          (correlation mat)
+          1E-7))))
 
 (defn sample-test [m]
   ;; test sample function
@@ -363,12 +375,17 @@
   (is (m/equals 3.0 (predict r 2)))))
 
 (defn principal-components-test [m]
-  ;; simple test to check if rotation and std-dev data gets set
-  (let [pca      (principal-components m)
-        rotation (:rotation pca)
-        std-dev   (:std-dev  pca)]
-    (is (not= rotation nil))
-    (is (not= std-dev nil))))
+  (testing "principal components results"
+    (let [pca      (principal-components m)
+          rotation (:rotation pca)
+          std-dev  (:std-dev  pca)]
+      (is (not= rotation nil))
+      (is (not= std-dev nil))
+      (is (m/equals [[0.5773503 0.5773503 0.5773503]
+                     [0.8164966 0.4082483 0.4082483]
+                     [0.        0.7071068 0.7071068]]
+            (abs rotation)
+            1E-6)))))
 
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
@@ -419,6 +436,7 @@
         (principal-components-test m1))
       (pearson-test)
       (correlation-ratio-example)
+      (correlation-matrix)
       (sample-test m2)
       (ranking-test)
       (spearmans-rho-test)
