@@ -3413,43 +3413,43 @@
    :name "interpolate",
    :namespace "incanter.interpolation",
    :source-url
-   "https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj#L22",
+   "https://github.com/incanter/incanter/blob/e5545c0d55757c7302712adc031ec8c5023bc1e9/modules/incanter-core/src/incanter/interpolation.clj#L25",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj",
+   "https://github.com/incanter/incanter/raw/e5545c0d55757c7302712adc031ec8c5023bc1e9/modules/incanter-core/src/incanter/interpolation.clj",
    :wiki-url
    "http://incanter.github.com/incanter//interpolation-api.html#incanter.interpolation/interpolate",
    :doc
    "\nBuilds a function that interpolates given collection of points.\nhttp://en.wikipedia.org/wiki/Interpolation\nhttp://en.wikipedia.org/wiki/Linear_least_squares_(mathematics)\n\nArguments:\n  points -- collection of points. Each point is a collection [x y].\n  type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :linear-least-squares.\n          For most cases you should use :cubic or :cubic-hermite - they usually give best results.\n          Check http://en.wikipedia.org/wiki/Interpolation for brief explanation of each kind.\n\nOptions:\n  :boundaries - valid only for :cubic interpolation. Defines boundary condition for cubic spline.\n                Possible values - :natural and :closed.\n                Let's S - spline, a- leftmost point, b- rightmost point.\n                :natural - S''(a) = S''(b) = 0\n                :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be\n                useful if you want to get periodic or closed curve.\n                Default value is :natural\n\n  :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline.\n                 If not specified derivatives will be approximated from points.\n\nOptions for linear least squares:\n  :basis - type of basis functions. There are 2 built-in bases: chebushev polynomials and b-splines (:polynomial and :b-spline).\n           You also can supply your own basis. It should be a function that takes x and returns collection [f1(x) f2(x) ... fn(x)].\n           Example of custom basis of 2 functions (1 and  x*x): (interpolate :linear-least-squares :basis (fn [x] [1 (* x x)]))\n           Default value is :chebyshev\n\n  :n - number of functions in basis if you use built-in basis.\n       Note that if n is greater that number of points then you might get singular matrix and exception.\n       Default value is 4.\n\n  :degree - degree of b-spline if you use :b-spline basis.\n            Default value is 3.\n\nExamples:\n\n  (def points [[0 0] [1 5] [2 0] [3 5]])\n  (def linear (interpolate points :linear))\n  (linear 0) => 0.0\n  (linear 1) => 5.0\n  (linear 1.5) => 2.5\n\n  ; Specify boundary conditions\n  (interpolate points :cubic :boundaries :closed)\n",
    :var-type "function",
-   :line 22,
+   :line 25,
    :file "modules/incanter-core/src/incanter/interpolation.clj"}
   {:arglists ([grid type & options]),
    :name "interpolate-grid",
    :namespace "incanter.interpolation",
    :source-url
-   "https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj#L181",
+   "https://github.com/incanter/incanter/blob/e5545c0d55757c7302712adc031ec8c5023bc1e9/modules/incanter-core/src/incanter/interpolation.clj#L185",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj",
+   "https://github.com/incanter/incanter/raw/e5545c0d55757c7302712adc031ec8c5023bc1e9/modules/incanter-core/src/incanter/interpolation.clj",
    :wiki-url
    "http://incanter.github.com/incanter//interpolation-api.html#incanter.interpolation/interpolate-grid",
    :doc
    "\nInterpolates 2-dimensional grid. Returns function f that takes 2 arguments: x and y.\nBy default function interpolates on [0,1]x[0,1].\n\nArguments:\n  grid -- collection of collection of numbers to be interpolated.\n          If you need to interpolate vectors - interpolate each component by separate interpolator.\n  type -- type of interpolation. Available: :bilinear, :polynomial, :bicubic, :bicubic-hermite, :b-surface, :linear-least-squares\n\nCommon options:\n  :x-range, :y-range - range of possible x and y.\n                       By default :x-range = [0 1] and :y-range = [0 1]\n                       :b-surface ignores this option and always uses [0, 1] x [0, 1]\n\n  :xs, :ys - coordinates of grid points. Size of xs and ys must be consistent with grid size.\n             If you have grid 4x3 then xs must have size 3 and ys - 4.\n\n  Note that (:x-range, :y-range) and (:xs, :ys) both do same job - they specify coordinates of points in grid.\n  So you should use only one of them or none at all.\n\nType specific options:\n  :boundaries - valid only for :cubic interpolation. Defines boundary condition for bicubic spline.\n                Possible values - :natural and :closed.\n                Default - :natural. Check documentation of 'interpolate' method for more explanation.\n\n  :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.\n\n  :basis - defines basis for :linear-least-squares. It has 1 predefined basis :polynomial. :polynomial basis\n           contains functions: (1, x, y, x^2, xy, y^2, x^3, ...)\n           You can specify how many functions basis contains by using :n option.\n           You can also specify custom basis. Custom basis is a function that takes 2 arguments - x and y, and returns collection of values.\n           Example: basis that contains only 2-degree polynomials: (fn [x y] [(* x x) (* x y) (* y y)])\n\n  :n - defines how many functions polynomial contains. Example: 1 - basis is (1), 3 - basis is (1, x, y), 5 - basis is (1, x, y, x^2, x*y)\n\nExamples:\n\n(def grid [[0 1 0]\n           [1 2 1]\n           [0 1 0]])\n(def interpolator (interpolate-grid grid :bilinear))\n(interpolator   0   0) => 0\n(interpolator 1/2 1/2) => 2\n(interpolator 1/2   1) => 1\n(interpolator 1/4   0) => 1/2\n\n\n; Specify x-range and y-range\n(def interpolator (interpolate-grid grid :bilinear :x-range [0 10] :y-range [-5 5]))\n(interpolator  0  -5) => 0\n(interpolator  5   0) => 2\n(interpolator 10   5) => 0\n\n; Specify xs and ys\n(def interpolator (interpolate-grid grid :bilinear :xs [0 1 2] :ys [0 10 100]))\n(interpolator  0   0) => 0\n(interpolator  1  10) => 2\n(interpolator  2 100) => 0",
    :var-type "function",
-   :line 181,
+   :line 185,
    :file "modules/incanter-core/src/incanter/interpolation.clj"}
   {:arglists ([points type & options]),
    :name "interpolate-parametric",
    :namespace "incanter.interpolation",
    :source-url
-   "https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj#L83",
+   "https://github.com/incanter/incanter/blob/e5545c0d55757c7302712adc031ec8c5023bc1e9/modules/incanter-core/src/incanter/interpolation.clj#L87",
    :raw-source-url
-   "https://github.com/incanter/incanter/raw/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-core/src/incanter/interpolation.clj",
+   "https://github.com/incanter/incanter/raw/e5545c0d55757c7302712adc031ec8c5023bc1e9/modules/incanter-core/src/incanter/interpolation.clj",
    :wiki-url
    "http://incanter.github.com/incanter//interpolation-api.html#incanter.interpolation/interpolate-parametric",
    :doc
    "\nBuilds a parametric function that interpolates given collection of points.\nParametric function represents a curve that go through all points. By default domain is [0, 1].\n\nArguments:\n  points -- collection of points. Each point either a single value or collection of values.\n  type -- type of interpolation - :linear, :polynomial, :cubic, :cubic-hermite, :b-spline, :linear-least-squares.\n\nOptions:\n  :range -- defines range for parameter t.\n            Default value is [0, 1]. f(0) = points[0], f(1) = points[n].\n\n  :boundaries -- valid only for :cubic interpolation.\n                 Defines boundary condition for cubic spline. Possible values - :natural and :closed.\n                 Let's S - spline, a- leftmost point, b- rightmost point.\n                 :natural - S''(a) = S''(b) = 0\n                 :closed - S'(a) = S'(b), S''(a) = S''(b) . This type of boundary conditions may be useful\n                 if you want to get periodic or closed curve\n\n                 Default value is :natural\n\n  :derivatives - valid only for :cubic-hermite. Defines first derivatives for spline.\n                 If not specified derivatives will be approximated from points.\n\n  :degree - valid only for :b-spline. Degree of a B-spline. Default 3. Degree will be reduced if there are too few points.\n\nOptions for linear least squares:\n  See documentation for interpolate function.\n\nExamples:\n\n(def points [[0 0]\n             [0 1]\n             [1 1]\n             [3 5]\n             [2 9]])\n(def cubic (interpolate-parametric points :cubic))\n(cubic 0) => [0.0 0.0]\n(cubic 1) => [2.0 9.0]\n(cubic 0.5) => [1.0 1.0]\n\n; Specify custom :range\n(def cubic (interpolate-parametric points :cubic :range [-10 10]))\n(cubic -10) => [0.0 0.0]\n(cubic 0) => [1.0 1.0]\n",
    :var-type "function",
-   :line 83,
+   :line 87,
    :file "modules/incanter-core/src/incanter/interpolation.clj"}
   {:arglists
    ([filename
