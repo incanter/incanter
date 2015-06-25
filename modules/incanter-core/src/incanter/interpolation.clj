@@ -18,6 +18,9 @@
   (when-not (apply distinct? xs)
     (throw (IllegalArgumentException. "All x must be distinct."))))
 
+(defn- validate-more-than-one-point-given [xs]
+  (when-not (< 1 (count xs))
+    (throw (IllegalArgumentException. "Must give more than 1 point to interpolate over"))))
 
 (defn interpolate
   "
@@ -76,6 +79,7 @@
                    :linear-least-squares lls/interpolate)
           points (sort-by first points)
           opts (when options (apply assoc {} options))]
+      (validate-more-than-one-point-given points)
       (validate-unique (map first points))
       (method points opts)))
 
