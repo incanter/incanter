@@ -51,7 +51,7 @@
              :debug {:debug true}
              :uberjar {:aot :all
                        :main incanter.main
-                       :dependencies [[reply "0.3.4" :exclusions [org.clojure/clojure]]
+                       :dependencies [[reply "0.3.7" :exclusions [org.clojure/clojure]]
                                       [swingrepl "1.3.0"
                                        :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]
                                       ]
