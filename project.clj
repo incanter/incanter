@@ -15,7 +15,8 @@
                  [incanter/incanter-excel "1.9.1-SNAPSHOT"]
                  [incanter/incanter-sql "1.9.1-SNAPSHOT"]
                  [incanter/incanter-zoo "1.9.1-SNAPSHOT"]
-                 [org.clojure/clojure "1.6.0"]
+                 [swingrepl "1.3.0"]
+                 [org.clojure/clojure "1.8.0-alpha2"]
                  ]
   
   :plugins [[lein-sub "0.3.0"]
