@@ -57,6 +57,9 @@
                                       ]
                        }
              }  
+  
+  :main incanter.main
+  
   :repl-options {:init-ns incanter.irepl
                  :resource-paths ["data"]
                  :init (do
