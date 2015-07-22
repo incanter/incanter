@@ -91,7 +91,7 @@ You can save plots into a png file:
 
 Incanter can save charts into pdf or svg files. Check <code>incanter.pdf/save-pdf</code> and <code>incanter.svg/save-svg</code> functions.
 
-Let's play with some data know. We'll look at London weather for 2012:
+Let's play with some data now. We'll look at London weather for 2012:
 
 bc.. ; function that returns dataset containing weather in London for given month in 2012
 (defn weather-for-month [month]
