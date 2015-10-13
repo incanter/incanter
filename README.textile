@@ -157,7 +157,7 @@ To build and test Incanter, you will need to have <a href="https://github.com/te
 1. Clone the repository with git: @git clone git://github.com/incanter/incanter.git@
 
 2. Install Leiningen (version 2.x)
-  a. Download the lein script: @wget https://github.com/technomancy/leiningen/raw/preview/bin/lein@
+  a. Download the lein script: @wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein@
      (use <a href="https://github.com/technomancy/leiningen/raw/preview/bin/lein.bat">lein.bat</a> on Windows)
   b. Place it on your path and chmod it to be executable: @chmod +x lein@
   c. Run: @lein self-install@
