@@ -14,8 +14,6 @@
 ;; CHANGE LOG
 ;; March 11, 2009: First version
 
-
-
 (ns ^{:doc "This is the core numerics library for Incanter.
             It provides functions for vector- and matrix-based
             mathematical operations and the core data manipulation
@@ -2317,10 +2315,12 @@
   (let [in-m (to-map dataset)
         nrows (nrow dataset)
         ks (keys in-m)]
-    (to-dataset
-     (for [k ks i (range nrows) :when (not (= pivot-key k))]
-       (zipmap [pivot-key :variable :value]
-               [(nth (pivot-key in-m) i) k (nth (k in-m) i)])))))
+    (ds/dataset
+      ;; column names
+      [pivot-key :variable :value]
+      ;; seq of rows
+      (for [k ks i (range nrows) :when (not (= pivot-key k))]
+        [(nth (pivot-key in-m) i) k (nth (k in-m) i)]))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES
