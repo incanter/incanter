@@ -15,7 +15,8 @@
                  [incanter/incanter-excel "1.9.1-SNAPSHOT"]
                  [incanter/incanter-sql "1.9.1-SNAPSHOT"]
                  [incanter/incanter-zoo "1.9.1-SNAPSHOT"]
-                 [org.clojure/clojure "1.6.0"]
+                 [swingrepl "1.3.0"]
+                 [org.clojure/clojure "1.7.0"]
                  ]
   
   :plugins [[lein-sub "0.3.0"]
@@ -50,12 +51,15 @@
              :debug {:debug true}
              :uberjar {:aot :all
                        :main incanter.main
-                       :dependencies [[reply "0.3.4" :exclusions [org.clojure/clojure]]
+                       :dependencies [[reply "0.3.7" :exclusions [org.clojure/clojure]]
                                       [swingrepl "1.3.0"
                                        :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]
                                       ]
                        }
              }  
+  
+  :main incanter.main
+  
   :repl-options {:init-ns incanter.irepl
                  :resource-paths ["data"]
                  :init (do

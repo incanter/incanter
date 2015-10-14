@@ -14,6 +14,6 @@
                  ;; TODO: switch to data.json?
                  [org.danlarkin/clojure-json "1.1"
                   :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]]
-  :profiles {:dev {:dependencies [[clatrix "0.4.0" :exclusions [org.clojure/clojure]]
+  :profiles {:dev {:dependencies [[clatrix "0.5.0" :exclusions [org.clojure/clojure]]
                                   [org.jblas/jblas "1.2.3"]]}}
   )
