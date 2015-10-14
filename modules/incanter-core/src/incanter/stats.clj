@@ -294,7 +294,7 @@
   ([^Integer size & {:keys [mean sd] :or {mean 0 sd 1}}]
     (if (= size 1)
       (Normal/staticNextDouble mean sd)
-      (for [_ (range size)] (Normal/staticNextDouble mean sd)))))
+      (matrix (for [_ (range size)] (Normal/staticNextDouble mean sd))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -342,13 +342,10 @@
     (let [mean (or mean (if sigma (repeat (ncol sigma) 0) [0]))
           sigma (or sigma (identity-matrix (count mean)))
           p (count mean)
-          chol (decomp-cholesky sigma)
-          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)]
-      (if (> (nrow norm-samp) 1)
-        (matrix (map #(plus % (trans mean)) norm-samp))
-        (matrix (plus norm-samp (trans mean)))))))
-
-
+          chol (or (decomp-cholesky sigma) (throw (Error. "sigma matrix cannot be decomposed - not positive definite")))
+          L* (:L* chol)
+          norm-samp (m/reshape (sample-normal (* size p)) [size p])]
+      (m/add (mmult norm-samp L*) mean))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
