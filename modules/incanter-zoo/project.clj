@@ -8,7 +8,7 @@
         :dir "modules/incanter-zoo"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-io "1.9.1-SNAPSHOT"]
-                 [org.clojure/clojure "1.8.0-alpha5"]
+                 [org.clojure/clojure "1.7.0"]
                  [clj-time "0.6.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]]
