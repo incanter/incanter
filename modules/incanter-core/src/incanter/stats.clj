@@ -2517,7 +2517,9 @@
                         0)
                       (second (:margins xtab)))
 
-          counts (if two-samp? (vectorize table) table)
+          counts (if two-samp?
+                   (apply m/join (m/slices table 1))
+                   table)
           N (if table?
               (sum counts)
               (:N xtab))

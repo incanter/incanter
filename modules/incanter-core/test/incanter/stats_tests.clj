@@ -372,7 +372,27 @@
 
 (defn simple-regresssion-test []
  (let [r (simple-regression [2 4] [1 3])]
-  (is (m/equals 3.0 (predict r 2)))))
+   (is (m/equals 3.0 (predict r 2)))))
+
+(defn chisq-test-test []
+  (let [mat (matrix [[31 12] [9 8]])
+        {:keys [X-sq col-levels row-margins table
+                p-value df probs col-margins E
+                row-levels two-samp? N]} (chisq-test :table mat :correct false)]
+
+    (is (m/equals X-sq 2.0109439124487 1E-7))
+    (is (= col-levels (list 0 1)))
+    (is (and
+         (m/equals (get row-margins 0) 43)
+         (m/equals (get row-margins 1) 17)))
+    (is (= table mat))
+    (is (m/equals p-value 0.15616812746636347 1E-7))
+    (is (and
+         (m/equals (get col-margins 0) 40)
+         (m/equals (get col-margins 1) 20)))
+    (is (= row-levels (list 0 1)))
+    (is (true? two-samp?))
+    (is (m/equals N 60))))
 
 (defn principal-components-test [m]
   (testing "principal components results"
@@ -456,4 +476,5 @@
       (benford-law-test)
       (linear-model-with-zero-ss)
       (linear-model-r2-test)
-      (simple-regresssion-test))))
+      (simple-regresssion-test)
+      (chisq-test-test))))
