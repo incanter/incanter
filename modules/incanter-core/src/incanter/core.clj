@@ -714,34 +714,15 @@
   ([mat]
      (m/clone mat)))
 
+(defn to-vect
+  "Converts an array into nested Clojure vectors. 
 
-(defmulti to-vect
-  "
   Returns a vector-of-vectors if the given matrix is two-dimensional
   and a flat vector if the matrix is one-dimensional. This is a bit
   slower than the to-list function
   "
-  dispatch)
-
-(defmethod to-vect ::matrix
-  ([mat]
-     (if (or (m/row-matrix? mat)
-             (m/column-matrix? mat))
-       (m/to-vector mat)
-       (m/to-nested-vectors mat))))
-
-(defmethod to-vect ::vector
-  [v]
-  (apply vector v ))
-
-(defmethod to-vect ::dataset
-  [data]
-  (m/rows data))
-
-(defmethod to-vect nil [s] nil)
-
-(defmethod to-vect :default [s] s)
-
+  [a]
+  (m/to-nested-vectors a))
 
 (defn ^:deprecated mmult
   "
