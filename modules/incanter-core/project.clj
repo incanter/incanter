@@ -8,10 +8,10 @@
         :dir "modules/incanter-core"}
   :min-lein-version "2.0.0"
   :java-source-paths ["java"]
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0-beta2"]
                  [org.clojure/math.combinatorics "0.1.1" :exclusions [org.clojure/clojure]]
-                 [net.mikera/vectorz-clj "0.36.0" :exclusions [org.clojure/clojure]]
-                 [net.mikera/core.matrix "0.42.1" :exclusions [org.clojure/clojure]]
+                 [net.mikera/vectorz-clj "0.37.0" :exclusions [org.clojure/clojure]]
+                 [net.mikera/core.matrix "0.43.0" :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.1"]]
   :profiles {:dev {:dependencies [[clatrix "0.5.0" :exclusions [org.clojure/clojure]]
                                   [org.jblas/jblas "1.2.3"]]}}

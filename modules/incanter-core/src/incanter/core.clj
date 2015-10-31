@@ -76,10 +76,10 @@
   ([data]
      (m/matrix data))
 
-  ([data ^Integer ncol &]
+  ([data ncol &]
      (m/matrix (partition ncol (vectorize data))))
 
-  ([init-val ^Integer rows ^Integer cols]
+  ([init-val rows cols]
      (m/compute-matrix [rows cols] (constantly init-val))))
 
 (defn matrix?
@@ -542,7 +542,7 @@
   Returns the square-root of the elements in the given matrix, sequence or number.
   Equivalent to R's sqrt function.
   "
-  [A] (transform-with A #(Math/sqrt %)))
+  [A] (m/sqrt A))
 
 
 (defn sq
@@ -558,7 +558,7 @@
   Returns the natural log of the elements in the given matrix, sequence or number.
   Equivalent to R's log function.
   "
-  ([A] (transform-with A #(Math/log %))))
+  ([A] (m/log A)))
 
 
 (defn log2
@@ -574,14 +574,14 @@
   Returns the log base 10 of the elements in the given matrix, sequence or number.
   Equivalent to R's log10 function.
   "
-  ([A] (transform-with A #(Math/log10 %))))
+  ([A] (m/log10 A)))
 
 
 (defn exp
   "
   Returns the exponential of the elements in the given matrix, sequence or number.
   Equivalent to R's exp function."
-  ([A] (transform-with A #(Math/exp %))))
+  ([A] (m/exp A)))
 
 
 (defn abs
@@ -589,7 +589,7 @@
   Returns the absolute value of the elements in the given matrix, sequence or number.
   Equivalent to R's abs function.
   "
-  ([A] (transform-with A #(Math/abs (double %)))))
+  ([A] (m/abs A)))
 
 
 (defn sin
@@ -597,7 +597,7 @@
   Returns the sine of the elements in the given matrix, sequence or number.
   Equivalent to R's sin function.
   "
-  ([A] (transform-with A #(Math/sin %))))
+  ([A] (m/sin A)))
 
 
 (defn asin
@@ -605,7 +605,7 @@
   Returns the arc sine of the elements in the given matrix, sequence or number.
   Equivalent to R's asin function.
   "
-  ([A] (transform-with A #(Math/asin %))))
+  ([A] (m/asin A)))
 
 
 (defn cos
@@ -613,14 +613,14 @@
   Returns the cosine of the elements in the given matrix, sequence or number.
   Equivalent to R's cos function.
   "
-  ([A] (transform-with A #(Math/cos %))))
+  ([A] (m/cos A)))
 
 
 (defn acos
   "
   Returns the arc cosine of the elements in the given matrix, sequence or number.
   Equivalent to R's acos function."
-  ([A] (transform-with A #(Math/acos %))))
+  ([A] (m/acos A)))
 
 
 (defn tan
@@ -628,7 +628,7 @@
   Returns the tangent of the elements in the given matrix, sequence or number.
   Equivalent to R's tan function.
   "
-  ([A] (transform-with A #(Math/tan %))))
+  ([A] (m/tan A)))
 
 
 (defn atan
@@ -636,7 +636,7 @@
   Returns the arc tangent of the elements in the given matrix, sequence or number.
   Equivalent to R's atan function.
   "
-  ([A] (transform-with A #(Math/atan %))))
+  ([A] (m/atan A)))
 
 
 (defn factorial
@@ -714,34 +714,15 @@
   ([mat]
      (m/clone mat)))
 
+(defn to-vect
+  "Converts an array into nested Clojure vectors. 
 
-(defmulti to-vect
-  "
   Returns a vector-of-vectors if the given matrix is two-dimensional
   and a flat vector if the matrix is one-dimensional. This is a bit
   slower than the to-list function
   "
-  dispatch)
-
-(defmethod to-vect ::matrix
-  ([mat]
-     (if (or (m/row-matrix? mat)
-             (m/column-matrix? mat))
-       (m/to-vector mat)
-       (m/to-nested-vectors mat))))
-
-(defmethod to-vect ::vector
-  [v]
-  (apply vector v ))
-
-(defmethod to-vect ::dataset
-  [data]
-  (m/rows data))
-
-(defmethod to-vect nil [s] nil)
-
-(defmethod to-vect :default [s] s)
-
+  [a]
+  (m/to-nested-vectors a))
 
 (defn ^:deprecated mmult
   "
