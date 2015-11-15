@@ -41,7 +41,8 @@
            (cern.colt.list.tdouble DoubleArrayList)
            (cern.jet.stat.tdouble DoubleDescriptive Gamma)
            (javax.swing JTable JScrollPane JFrame)
-           (java.util Vector)))
+           (java.util Vector))
+  (:refer-clojure :exclude [update]))
 
 
 (def ^{:dynamic true
