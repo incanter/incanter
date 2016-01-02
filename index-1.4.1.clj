@@ -267,11 +267,7 @@
    :arglists
    ([&
      {:keys [mean sd a b],
-      :or
-      {mean 0,
-       sd 1,
-       a Double/NEGATIVE_INFINITY,
-       b Double/POSITIVE_INFINITY}}]),
+      :or {mean 0, sd 1, a NEGATIVE_INFINITY, b POSITIVE_INFINITY}}]),
    :doc
    " Returns the variance of a normal distribution truncated at a and b.\n\nOptions:\n  :mean (default 0) mean of untruncated normal distribution\n  :sd (default 1) standard deviation of untruncated normal distribution\n  :a (default -infinity) lower truncation point\n  :b (default +infinity) upper truncation point\n\nExamples:\n\n  (use '(incanter core stats))\n  (truncated-variance :a -1.96 :b 1.96)\n  (truncated-variance :a 0)\n  (truncated-variance :b 0)\n\n  (use 'incanter.charts)\n  (def x (range -3 3 0.1))\n  (def plot (xy-plot x (map #(truncated-variance :a %) x)))\n  (view plot)\n  (add-lines plot x (map #(truncated-variance :b %) x))\n\n  (def samp (sample-normal 10000))\n  (add-lines plot x (map #(variance (filter (fn [s] (> s %)) samp)) x))\n  (add-lines plot x (map #(variance (mult samp (indicator (fn [s] (> s %)) samp))) x))\n\n\nReferences:\n  DeMaris, A. (2004) Regression with social data: modeling continuous and limited response variables.\n    Wiley-IEEE.\n\n  http://en.wikipedia.org/wiki/Truncated_normal_distribution",
    :namespace "incanter.censored",
@@ -417,19 +413,20 @@
    :namespace "incanter.charts",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-polygon"}
-  {:name "add-subtitle",
-   :doc
-   "Adds a JFreeChart title object to a chart as a subtitle.\n\nExamples:\n  (use '(incanter core charts latex))\n\n  (doto (function-plot sin -10 10)\n    (add-subtitle \"subtitle\")\n    (add-subtitle (latex \" \\\\frac{(a+b)^2} {(a-b)^2}\"))\n    view)",
-   :var-type "multimethod",
-   :line 3544,
-   :namespace "incanter.charts",
-   :wiki-url
-   "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-subtitle",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
+   :name "add-subtitle",
+   :file "modules/incanter-charts/src/incanter/charts.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L3544",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
-   :file "modules/incanter-charts/src/incanter/charts.clj"}
+   :line 3544,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "Adds a JFreeChart title object to a chart as a subtitle.\n\nExamples:\n  (use '(incanter core charts latex))\n\n  (doto (function-plot sin -10 10)\n    (add-subtitle \"subtitle\")\n    (add-subtitle (latex \" \\\\frac{(a+b)^2} {(a-b)^2}\"))\n    view)",
+   :namespace "incanter.charts",
+   :wiki-url
+   "http://incanter.github.com/incanter//charts-api.html#incanter.charts/add-subtitle"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
    :name "add-text",
@@ -695,19 +692,20 @@
    :namespace "incanter.charts",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-background-alpha"}
-  {:name "set-background-default",
-   :doc
-   "\n\nExamples:\n  (use '(incanter core stats charts datasets))\n\n  (doto (histogram (sample-normal 1000) :title (str :Test-Tittle))\n    set-theme-bw\n    view)\n\n\n  (doto (histogram (sample-normal 1000))\n    set-background-default\n    (add-histogram (sample-normal 1000 :mean 1))\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (set-stroke :dash 5)\n    (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-background-default\n    (set-stroke :dash 5)\n    (add-function sin 0 25)\n    view)\n\n\n  (doto (xy-plot :speed :dist :data (get-dataset :cars) :legend true)\n    set-background-default\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-background-default\n    view)\n\n\n  (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                  :legend true)\n    view set-background-default\n    (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n    (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))\n\n\n  (doto (bar-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-background-default\n    (add-categories [:a :b :c] [5 25 40]))\n\n\n  (doto (line-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-background-default\n    (add-categories [:a :b :c] [5 25 40]))\n\n  ;; time-series-plot\n  (def epoch 0)\n  (defn num-years-to-milliseconds [x]\n    (* 365 24 60 60 1000 x))\n  (def dates (map num-years-to-milliseconds (range 100)))\n  (def chart1 (time-series-plot dates (range 100)))\n  (def cw1 (view chart1))\n  (add-lines chart1 dates (mult 1/2 (range 100)))\n\n  (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))\n  (def cw2 (view chart2))",
-   :var-type "multimethod",
-   :line 63,
-   :namespace "incanter.charts",
-   :wiki-url
-   "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-background-default",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
+   :name "set-background-default",
+   :file "modules/incanter-charts/src/incanter/charts.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L63",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
-   :file "modules/incanter-charts/src/incanter/charts.clj"}
+   :line 63,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "\n\nExamples:\n  (use '(incanter core stats charts datasets))\n\n  (doto (histogram (sample-normal 1000) :title (str :Test-Tittle))\n    set-theme-bw\n    view)\n\n\n  (doto (histogram (sample-normal 1000))\n    set-background-default\n    (add-histogram (sample-normal 1000 :mean 1))\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (set-stroke :dash 5)\n    (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-background-default\n    (set-stroke :dash 5)\n    (add-function sin 0 25)\n    view)\n\n\n  (doto (xy-plot :speed :dist :data (get-dataset :cars) :legend true)\n    set-background-default\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-background-default\n    view)\n\n\n  (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                  :legend true)\n    view set-background-default\n    (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n    (add-box-plot (sample-gamma 1000 :shape 3 :rate 2)))\n\n\n  (doto (bar-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-background-default\n    (add-categories [:a :b :c] [5 25 40]))\n\n\n  (doto (line-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-background-default\n    (add-categories [:a :b :c] [5 25 40]))\n\n  ;; time-series-plot\n  (def epoch 0)\n  (defn num-years-to-milliseconds [x]\n    (* 365 24 60 60 1000 x))\n  (def dates (map num-years-to-milliseconds (range 100)))\n  (def chart1 (time-series-plot dates (range 100)))\n  (def cw1 (view chart1))\n  (add-lines chart1 dates (mult 1/2 (range 100)))\n\n  (def chart2 (time-series-plot (take 10 dates) (mult 1/2 (range 10))))\n  (def cw2 (view chart2))",
+   :namespace "incanter.charts",
+   :wiki-url
+   "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-background-default"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
    :name "set-stroke",
@@ -750,19 +748,20 @@
    :namespace "incanter.charts",
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-theme"}
-  {:name "set-theme-bw",
-   :doc
-   "\n\nExamples:\n  (use '(incanter core stats charts datasets))\n\n  (doto (histogram (sample-normal 1000))\n    set-theme-bw\n    view)\n\n\n  (doto (histogram (sample-normal 1000))\n    set-theme-bw\n    (add-histogram (sample-normal 1000 :mean 1))\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (set-stroke :dash 5)\n    (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (set-stroke :dash 5)\n    (add-function sin 0 25)\n    view)\n\n\n  (doto (xy-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (add-lines :speed :dist :data (get-dataset :cars))\n    view)\n\n\n  (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                  :legend true)\n    view\n    (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n    (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))\n    set-theme-bw)\n\n\n  (doto (bar-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-theme-bw\n    (add-categories [:a :b :c] [5 25 40]))\n\n\n  (doto (line-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-theme-bw\n    (add-categories [:a :b :c] [5 25 40]))",
-   :var-type "multimethod",
-   :line 146,
-   :namespace "incanter.charts",
-   :wiki-url
-   "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-theme-bw",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
+   :name "set-theme-bw",
+   :file "modules/incanter-charts/src/incanter/charts.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj#L146",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
-   :file "modules/incanter-charts/src/incanter/charts.clj"}
+   :line 146,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "\n\nExamples:\n  (use '(incanter core stats charts datasets))\n\n  (doto (histogram (sample-normal 1000))\n    set-theme-bw\n    view)\n\n\n  (doto (histogram (sample-normal 1000))\n    set-theme-bw\n    (add-histogram (sample-normal 1000 :mean 1))\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (set-stroke :dash 5)\n    (add-points (plus ($ :speed (get-dataset :cars)) 5) (plus ($ :dist (get-dataset :cars)) 10))\n    view)\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (set-stroke :dash 5)\n    (add-function sin 0 25)\n    view)\n\n\n  (doto (xy-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    view)\n\n\n  (doto (scatter-plot :speed :dist :data (get-dataset :cars))\n    set-theme-bw\n    (add-lines :speed :dist :data (get-dataset :cars))\n    view)\n\n\n  (doto (box-plot (sample-gamma 1000 :shape 1 :rate 2)\n                  :legend true)\n    view\n    (add-box-plot (sample-gamma 1000 :shape 2 :rate 2))\n    (add-box-plot (sample-gamma 1000 :shape 3 :rate 2))\n    set-theme-bw)\n\n\n  (doto (bar-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-theme-bw\n    (add-categories [:a :b :c] [5 25 40]))\n\n\n  (doto (line-chart [:a :b :c] [10 20 30] :legend true)\n    view\n    set-theme-bw\n    (add-categories [:a :b :c] [5 25 40]))",
+   :namespace "incanter.charts",
+   :wiki-url
+   "http://incanter.github.com/incanter//charts-api.html#incanter.charts/set-theme-bw"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/0c2b437335388bd2868d7efb1fa1b3336031f18a/modules/incanter-charts/src/incanter/charts.clj",
    :name "set-title",
@@ -985,6 +984,7 @@
    :dynamic true,
    :line 55,
    :var-type "var",
+   :arglists nil,
    :doc
    "This variable is bound to a dataset when the with-data macro is used.\nfunctions like $ and $where can use $data as a default argument.",
    :namespace "incanter.core",
@@ -1796,7 +1796,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L60",
    :line 60,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.core.Dataset, taking a map of keywords to field values.",
    :namespace "incanter.core",
@@ -1995,32 +1995,34 @@
    :namespace "incanter.core",
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/regularized-beta"}
-  {:name "save",
-   :doc
-   " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
-   :var-type "multimethod",
-   :line 2575,
-   :namespace "incanter.core",
-   :wiki-url
-   "http://incanter.github.com/incanter//core-api.html#incanter.core/save",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
+   :name "save",
+   :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2575",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
-   :file "modules/incanter-core/src/incanter/core.clj"}
-  {:name "sel",
-   :doc
-   "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
+   :line 2575,
    :var-type "multimethod",
-   :line 213,
+   :arglists nil,
+   :doc
+   " Save is a multi-function that is used to write matrices, datasets and\ncharts (in png format) to a file.\n\nArguments:\n  obj -- is a matrix, dataset, or chart object\n  filename -- the filename to create.\n\nMatrix and dataset options:\n  :delim (default \\,) column delimiter\n  :header (default nil) an sequence of strings to be used as header line\n      for matrices the default value is nil, for datasets, the default is\n      the dataset's column-names array.\n  :append (default false) determines whether this given file should be\n      appended to. If true, a header will not be written to the file again.\n\nChart options:\n  :width (default 500)\n  :height (default 400)\n\n\nMatrix Examples:\n\n  (use '(incanter core io))\n  (def A (matrix (range 12) 3)) ; creates a 3x4 matrix\n  (save A \"A.dat\") ; writes A to the file A.dat, with no header and comma delimited\n  (save A \"A.dat\" :delim \\tab) ; writes A to the file A.dat, with no header and tab delimited\n\n  ;; writes A to the file A.dat, with a header and tab delimited\n  (save A \"A.dat\" :delim \\, :header [\"col1\" \"col2\" \"col3\"])\n\n\nDataset Example:\n\n  (use '(incanter core io datasets))\n  ;; read the iris sample dataset, and save it to a file.\n  (def iris (get-dataset :iris))\n  (save iris \"iris.dat\")\n\n\nChart Example:\n\n  (use '(incanter core io stats charts))\n  (save (histogram (sample-normal 1000)) \"hist.png\")\n\n  ;; chart example using java.io.OutputStream instead of filename\n  (use '(incanter core stats charts))\n  (import 'java.io.FileOutputStream)\n  (def fos (FileOutputStream. \"/tmp/hist.png\"))\n  (def hist (histogram (sample-normal 1000)))\n  (save hist fos)\n  (.close fos)\n\n  (view \"file:///tmp/hist.png\")",
    :namespace "incanter.core",
    :wiki-url
-   "http://incanter.github.com/incanter//core-api.html#incanter.core/sel",
+   "http://incanter.github.com/incanter//core-api.html#incanter.core/save"}
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
+   :name "sel",
+   :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L213",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
-   :file "modules/incanter-core/src/incanter/core.clj"}
+   :line 213,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "\nReturns an element or subset of the given matrix, or dataset.\n\nArgument:\n  a matrix object or dataset.\n\nOptions:\n  :rows (default true)\n    returns all rows by default, can pass a row index or sequence of row indices\n  :cols (default true)\n    returns all columns by default, can pass a column index or sequence of column indices\n  :except-rows (default nil) can pass a row index or sequence of row indices to exclude\n  :except-cols (default nil) can pass a column index or sequence of column indices to exclude\n  :filter (default nil)\n    a function can be provided to filter the rows of the matrix\n\nExamples:\n  (use 'incanter.datasets)\n  (def iris (to-matrix (get-dataset :iris)))\n  (sel iris 0 0) ; first element\n  (sel iris :rows 0 :cols 0) ; also first element\n  (sel iris :cols 0) ; first column of all rows\n  (sel iris :cols [0 2]) ; first and third column of all rows\n  (sel iris :rows (range 10) :cols (range 2)) ; first two columns of the first 10 rows\n  (sel iris :rows (range 10)) ; all columns of the first 10 rows\n\n  ;; exclude rows or columns\n  (sel iris :except-rows (range 10)) ; all columns of all but the first 10 rows\n  (sel iris :except-cols 1) ; all columns except the second\n\n  ;; return only the first 10 even rows\n  (sel iris :rows (range 10) :filter #(even? (int (nth % 0))))\n  ;; select rows where distance (third column) is greater than 50\n  (sel iris :filter #(> (nth % 2) 4))\n\n  ;; examples with datasets\n  (use 'incanter.datasets)\n  (def us-arrests (get-dataset :us-arrests))\n  (sel us-arrests :cols \"State\")\n  (sel us-arrests :cols :State)\n\n  (sel us-arrests :cols [\"State\" \"Murder\"])\n  (sel us-arrests :cols [:State :Murder])",
+   :namespace "incanter.core",
+   :wiki-url
+   "http://incanter.github.com/incanter//core-api.html#incanter.core/sel"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
    :name "separate-blocks",
@@ -2034,19 +2036,20 @@
    :namespace "incanter.core",
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/separate-blocks"}
-  {:name "set-data",
-   :doc
-   "\n\nExamples:\n\n  (use '(incanter core charts datasets))\n\n  (def data (get-dataset :iris))\n  (def table (data-table data))\n  (view table)\n  ;; now view only a subset of the data\n  (set-data table ($where {:Petal.Length {:gt 6}} data))\n\n\n  ;; use sliders to dynamically select the query values\n  (let [data (get-dataset :iris)\n        table (data-table data)]\n    (view table)\n    (sliders [species [\"setosa\" \"virginica\" \"versicolor\"]\n              min-petal-length (range 0 8 0.1)]\n      (set-data table ($where {:Species species\n                               :Petal.Length {:gt min-petal-length}}\n                              data))))",
-   :var-type "multimethod",
-   :line 2515,
-   :namespace "incanter.core",
-   :wiki-url
-   "http://incanter.github.com/incanter//core-api.html#incanter.core/set-data",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
+   :name "set-data",
+   :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2515",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
-   :file "modules/incanter-core/src/incanter/core.clj"}
+   :line 2515,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "\n\nExamples:\n\n  (use '(incanter core charts datasets))\n\n  (def data (get-dataset :iris))\n  (def table (data-table data))\n  (view table)\n  ;; now view only a subset of the data\n  (set-data table ($where {:Petal.Length {:gt 6}} data))\n\n\n  ;; use sliders to dynamically select the query values\n  (let [data (get-dataset :iris)\n        table (data-table data)]\n    (view table)\n    (sliders [species [\"setosa\" \"virginica\" \"versicolor\"]\n              min-petal-length (range 0 8 0.1)]\n      (set-data table ($where {:Species species\n                               :Petal.Length {:gt min-petal-length}}\n                              data))))",
+   :namespace "incanter.core",
+   :wiki-url
+   "http://incanter.github.com/incanter//core-api.html#incanter.core/set-data"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
    :name "sin",
@@ -2211,32 +2214,34 @@
    :namespace "incanter.core",
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/to-levels"}
-  {:name "to-list",
-   :doc
-   " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
-   :var-type "multimethod",
-   :line 618,
-   :namespace "incanter.core",
-   :wiki-url
-   "http://incanter.github.com/incanter//core-api.html#incanter.core/to-list",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
+   :name "to-list",
+   :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L618",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
-   :file "modules/incanter-core/src/incanter/core.clj"}
-  {:name "to-map",
-   :doc
-   "Takes a dataset or matrix and returns a hash-map where the keys are\n keyword versions of the column names, for datasets, or numbers, for\n matrices, and the values are sequence of the column values.\n\nExamples:\n  (use '(incanter core datasets))\n\n  (to-map (get-dataset :cars))\n\n  (to-map (matrix (range 9) 3))",
+   :line 618,
    :var-type "multimethod",
-   :line 2104,
+   :arglists nil,
+   :doc
+   " Returns a list-of-lists if the given matrix is two-dimensional\nand a flat list if the matrix is one-dimensional.",
    :namespace "incanter.core",
    :wiki-url
-   "http://incanter.github.com/incanter//core-api.html#incanter.core/to-map",
+   "http://incanter.github.com/incanter//core-api.html#incanter.core/to-list"}
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
+   :name "to-map",
+   :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2104",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
-   :file "modules/incanter-core/src/incanter/core.clj"}
+   :line 2104,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "Takes a dataset or matrix and returns a hash-map where the keys are\n keyword versions of the column names, for datasets, or numbers, for\n matrices, and the values are sequence of the column values.\n\nExamples:\n  (use '(incanter core datasets))\n\n  (to-map (get-dataset :cars))\n\n  (to-map (matrix (range 9) 3))",
+   :namespace "incanter.core",
+   :wiki-url
+   "http://incanter.github.com/incanter//core-api.html#incanter.core/to-map"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
    :name "to-matrix",
@@ -2321,19 +2326,20 @@
    :namespace "incanter.core",
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/vectorize"}
-  {:name "view",
-   :doc
-   " This is a general 'view' function. When given an Incanter matrix/dataset\nor a Clojure numeric collection, it will display it in a Java Swing\nJTable. When given an Incanter chart object, it will display it in a new\nwindow. When given a URL string, it will open the location with the\nplatform's default web browser.\n\nWhen viewing charts, a :width (default 500) and :height (default 400)\noption can be provided.\n\nWhen viewing an incanter.processing sketch, set the :exit-on-close option\nto true (default is false) to kill the animation processes when you\nclose the window (this will also kill your REPL or Swank server),\notherwise those processing will continue to run in the background.\n\n\n\nExamples:\n\n  (use '(incanter core stats datasets charts))\n\n  ;; view matrices\n  (def rand-mat (matrix (sample-normal 100) 4))\n  (view rand-mat)\n\n  ;; view numeric collections\n  (view [1 2 3 4 5])\n  (view (sample-normal 100))\n\n  ;; view Incanter datasets\n  (view (get-dataset :iris))\n\n  ;; convert dataset to matrix, changing Species names to numeric codes\n  (view (to-matrix (get-dataset :iris)))\n\n  ;; convert dataset to matrix, changing Species names to dummy variables\n  (view (to-matrix (get-dataset :iris) :dummies true))\n\n  ;; view a chart\n  (view (histogram (sample-normal 1000)) :width 700 :height 700)\n\n  ;; view a URL\n  (view \"http://incanter.org\")\n\n  ;; view a PNG file\n  (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")\n  (view \"file:///tmp/norm_hist.png\")",
-   :var-type "multimethod",
-   :line 2362,
-   :namespace "incanter.core",
-   :wiki-url
-   "http://incanter.github.com/incanter//core-api.html#incanter.core/view",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
+   :name "view",
+   :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj#L2362",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
-   :file "modules/incanter-core/src/incanter/core.clj"}
+   :line 2362,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   " This is a general 'view' function. When given an Incanter matrix/dataset\nor a Clojure numeric collection, it will display it in a Java Swing\nJTable. When given an Incanter chart object, it will display it in a new\nwindow. When given a URL string, it will open the location with the\nplatform's default web browser.\n\nWhen viewing charts, a :width (default 500) and :height (default 400)\noption can be provided.\n\nWhen viewing an incanter.processing sketch, set the :exit-on-close option\nto true (default is false) to kill the animation processes when you\nclose the window (this will also kill your REPL or Swank server),\notherwise those processing will continue to run in the background.\n\n\n\nExamples:\n\n  (use '(incanter core stats datasets charts))\n\n  ;; view matrices\n  (def rand-mat (matrix (sample-normal 100) 4))\n  (view rand-mat)\n\n  ;; view numeric collections\n  (view [1 2 3 4 5])\n  (view (sample-normal 100))\n\n  ;; view Incanter datasets\n  (view (get-dataset :iris))\n\n  ;; convert dataset to matrix, changing Species names to numeric codes\n  (view (to-matrix (get-dataset :iris)))\n\n  ;; convert dataset to matrix, changing Species names to dummy variables\n  (view (to-matrix (get-dataset :iris) :dummies true))\n\n  ;; view a chart\n  (view (histogram (sample-normal 1000)) :width 700 :height 700)\n\n  ;; view a URL\n  (view \"http://incanter.org\")\n\n  ;; view a PNG file\n  (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")\n  (view \"file:///tmp/norm_hist.png\")",
+   :namespace "incanter.core",
+   :wiki-url
+   "http://incanter.github.com/incanter//core-api.html#incanter.core/view"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/core.clj",
    :name "with-data",
@@ -2351,6 +2357,7 @@
   {:name "Dataset",
    :var-type "record",
    :namespace "incanter.core",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/Dataset",
    :source-url nil,
@@ -2370,9 +2377,7 @@
      {:keys [incanter-home from-repo],
       :or
       {incanter-home
-       (or
-        (System/getProperty "incanter.home")
-        (System/getenv "INCANTER_HOME")),
+       (or (getProperty "incanter.home") (getenv "INCANTER_HOME")),
        from-repo true}}]),
    :doc
    " Returns the sample dataset associated with the given key. Most datasets\nare from R's sample data sets, as are the descriptions below.\n\nOptions:\n\n  :incanter-home -- if the incanter.home property is not set when the JVM is\n                    started (using -Dincanter.home) or there is no INCANTER_HOME\n                    environment variable set, use the :incanter-home options to \n                    provide the parent directory of the sample data directory.\n\n  :from-repo (default false) -- If true, retrieves the dataset from the online repository \n                     instead of locally, it will do this by default if incanter-home is not set.\n\n\nDatasets:\n\n  :iris -- the Fisher's or Anderson's Iris data set gives the\n           measurements in centimeters of the variables sepal\n           length and width and petal length and width,\n           respectively, for 50 flowers from each of 3 species\n           of iris.\n\n  :cars -- The data give the speed of cars and the distances taken\n            to stop. Note that the data were recorded in the 1920s.\n\n  :survey -- survey data used in Scott Lynch's 'Introduction to Applied Bayesian Statistics\n             and Estimation for Social Scientists'\n\n  :us-arrests -- This data set contains statistics, in arrests per 100,000\n                 residents for assault, murder, and rape in each of the 50 US\n                 states in 1973. Also given is the percent of the population living\n                 in urban areas.\n\n  :flow-meter -- flow meter data used in Bland Altman Lancet paper.\n\n  :co2 -- has 84 rows and 5 columns of data from an experiment on the cold tolerance\n          of the grass species _Echinochloa crus-galli_.\n\n  :chick-weight -- has 578 rows and 4 columns from an experiment on the effect of diet\n                   on early growth of chicks.\n\n  :plant-growth -- Results from an experiment to compare yields (as measured by dried\n                   weight of plants) obtained under a control and two different\n                   treatment conditions.\n\n  :pontius -- These data are from a NIST study involving calibration of load cells.\n              The response variable (y) is the deflection and the predictor variable\n              (x) is load.\n              See http://www.itl.nist.gov/div898/strd/lls/data/Pontius.shtml\n\n  :filip -- NIST data set for linear regression certification,\n            see http://www.itl.nist.gov/div898/strd/lls/data/Filip.shtml\n\n  :longely -- This classic dataset of labor statistics was one of the first used to\n              test the accuracy of least squares computations. The response variable\n              (y) is the Total Derived Employment and the predictor variables are GNP\n              Implicit Price Deflator with Year 1954 = 100 (x1), Gross National Product\n              (x2), Unemployment (x3), Size of Armed Forces (x4), Non-Institutional\n              Population Age 14 & Over (x5), and Year (x6).\n              See http://www.itl.nist.gov/div898/strd/lls/data/Longley.shtml\n\n  :Chwirut -- These data are the result of a NIST study involving ultrasonic calibration.\n              The response variable is ultrasonic response, and the predictor variable is\n              metal distance.\n              See http://www.itl.nist.gov/div898/strd/nls/data/LINKS/DATA/Chwirut1.dat\n\n  :thurstone -- test data for non-linear least squares.\n\n  :austres -- Quarterly Time Series of the Number of Australian Residents\n\n  :hair-eye-color -- Hair and eye color of sample of students\n\n  :airline-passengers -- Monthly Airline Passenger Numbers 1949-1960\n\n  :math-prog -- Pass/fail results for a high school mathematics assessment test\n                and a freshmen college programming course.\n\n  :iran-election -- Vote counts for 30 provinces from the 2009 Iranian election.\n\n Examples:\n   (def data (get-dataset :cars))\n   (def data2 (get-dataset :cars :incanter.home \"/usr/local/packages/incanter\"))",
@@ -2681,7 +2686,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L497",
    :line 497,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Beta-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2695,7 +2700,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L528",
    :line 528,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Binomial-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2709,7 +2714,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L556",
    :line 556,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.ChiSquare-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2723,7 +2728,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L336",
    :line 336,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Combination, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2737,7 +2742,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L767",
    :line 767,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.DoubleUniform-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2751,7 +2756,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L583",
    :line 583,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Exponential-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2765,7 +2770,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L609",
    :line 609,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.F, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2779,7 +2784,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L650",
    :line 650,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Gamma-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2793,7 +2798,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L681",
    :line 681,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.NegativeBinomial-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2807,7 +2812,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L455",
    :line 455,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Normal-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2821,7 +2826,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L711",
    :line 711,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.Poisson-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2835,7 +2840,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L738",
    :line 738,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.StudentT-rec, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2849,7 +2854,7 @@
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L249",
    :line 249,
    :var-type "function",
-   :arglists ([m__5818__auto__]),
+   :arglists ([m#]),
    :doc
    "Factory function for class incanter.distributions.UniformInt, taking a map of keywords to field values.",
    :namespace "incanter.distributions",
@@ -2956,6 +2961,7 @@
   {:name "Beta-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Beta-rec",
    :source-url nil,
@@ -2964,6 +2970,7 @@
   {:name "Binomial-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Binomial-rec",
    :source-url nil,
@@ -2972,6 +2979,7 @@
   {:name "ChiSquare-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/ChiSquare-rec",
    :source-url nil,
@@ -2980,6 +2988,7 @@
   {:name "Combination",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Combination",
    :source-url nil,
@@ -2988,6 +2997,7 @@
   {:name "DoubleUniform-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/DoubleUniform-rec",
    :source-url nil,
@@ -2996,6 +3006,7 @@
   {:name "Exponential-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Exponential-rec",
    :source-url nil,
@@ -3004,6 +3015,7 @@
   {:name "F",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/F",
    :source-url nil,
@@ -3012,6 +3024,7 @@
   {:name "Gamma-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Gamma-rec",
    :source-url nil,
@@ -3020,6 +3033,7 @@
   {:name "NegativeBinomial-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/NegativeBinomial-rec",
    :source-url nil,
@@ -3028,6 +3042,7 @@
   {:name "Normal-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Normal-rec",
    :source-url nil,
@@ -3036,6 +3051,7 @@
   {:name "Poisson-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Poisson-rec",
    :source-url nil,
@@ -3044,6 +3060,7 @@
   {:name "StudentT-rec",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/StudentT-rec",
    :source-url nil,
@@ -3052,30 +3069,32 @@
   {:name "UniformInt",
    :var-type "record",
    :namespace "incanter.distributions",
+   :arglists nil,
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/UniformInt",
    :source-url nil,
    :raw-source-url nil,
    :file nil}
-  {:name "Distribution",
-   :doc
-   "\n  The distribution protocol defines operations on probability distributions.\n\tDistributions may be univariate (defined over scalars) or multivariate\n\t(defined over vectors). Distributions may be discrete or continuous.\n\n\tFor a list of types that implement the protocol run (extenders Distribution).\n\tImplementations are provided for the various Clojure collection datatypes.\n\tSee the example below for using the distribution methods on these types.\n\n\tSee also:\n\t\tpdf, cdf, draw, support\n\n\tReferences:\n\t\thttp://en.wikipedia.org/wiki/Probability_distribution\n\n\tExamples:\n\t  (support [1 3 4 2 1 3 4 2]) ; returns the set #{1 2 3 4}\n\t\t(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}\n\t\t(pdf [2 1 2] 1) ; returns the value 1/3\n\t\t(cdf [2 1 2 3] 2) ; returns the value 3/4 ",
-   :var-type "protocol",
-   :line 30,
-   :namespace "incanter.distributions",
-   :wiki-url
-   "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Distribution",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj",
+   :name "Distribution",
+   :file "modules/incanter-core/src/incanter/distributions.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj#L30",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/distributions.clj",
-   :file "modules/incanter-core/src/incanter/distributions.clj"}
+   :line 30,
+   :var-type "protocol",
+   :arglists nil,
+   :doc
+   "\n  The distribution protocol defines operations on probability distributions.\n\tDistributions may be univariate (defined over scalars) or multivariate\n\t(defined over vectors). Distributions may be discrete or continuous.\n\n\tFor a list of types that implement the protocol run (extenders Distribution).\n\tImplementations are provided for the various Clojure collection datatypes.\n\tSee the example below for using the distribution methods on these types.\n\n\tSee also:\n\t\tpdf, cdf, draw, support\n\n\tReferences:\n\t\thttp://en.wikipedia.org/wiki/Probability_distribution\n\n\tExamples:\n\t  (support [1 3 4 2 1 3 4 2]) ; returns the set #{1 2 3 4}\n\t\t(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}\n\t\t(pdf [2 1 2] 1) ; returns the value 1/3\n\t\t(cdf [2 1 2 3] 2) ; returns the value 3/4 ",
+   :namespace "incanter.distributions",
+   :wiki-url
+   "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/Distribution"}
   {:name "cdf",
    :doc
    "\n  A function of the incanter.distribution.Distribution protocol.\n\n  Returns the value of the cumulative density function for the\n  distribution d at support v.\n\n\tSee also:\n\t  Distribution, pdf, draw, support\n\n\tReferences:\n\t  http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\n\tExamples:\n\t\t(cdf [2 1 2 3] 2) ; returns the value 3/4 ",
-   :arglists ([d v]),
    :var-type "function",
    :namespace "incanter.distributions",
+   :arglists ([d v]),
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/cdf",
    :source-url nil,
@@ -3084,9 +3103,9 @@
   {:name "draw",
    :doc
    "\n  A function of the incanter.distribution.Distribution protocol.\n\n  Returns a randomly drawn value from the support of distribution d. \n\n\tSee also:\n\t  Distribution, pdf, cdf, support\n\n\tExamples:\n\t\t(draw [1 3 4 2 1 3 4 2]) ; returns a value from #{1 2 3 4}",
-   :arglists ([d]),
    :var-type "function",
    :namespace "incanter.distributions",
+   :arglists ([d]),
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/draw",
    :source-url nil,
@@ -3094,9 +3113,9 @@
    :file nil}
   {:name "mean",
    :doc "mean",
-   :arglists ([d]),
    :var-type "function",
    :namespace "incanter.distributions",
+   :arglists ([d]),
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/mean",
    :source-url nil,
@@ -3105,9 +3124,9 @@
   {:name "pdf",
    :doc
    "\n  A function of the incanter.distribution.Distribution protocol.\n\n  Returns the value of the probability density/mass function for the\n  distribution d at support v.\n\n\tSee also:\n\t  Distribution, cdf, draw, support\n\n\tReferences:\n\t  http://en.wikipedia.org/wiki/Probability_density_function\n\n\tExamples:\n\t\t(pdf [2 1 2] 1) ; returns the value 1/3",
-   :arglists ([d v]),
    :var-type "function",
    :namespace "incanter.distributions",
+   :arglists ([d v]),
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/pdf",
    :source-url nil,
@@ -3116,9 +3135,9 @@
   {:name "support",
    :doc
    "\n\t**** EXPERIMENTAL ****\n  A function of the incanter.distribution.Distribution protocol.\n\n  Returns the support of the probability distribution d.\n\tFor discrete distributions, the support is a set (i.e. #{1 2 3}).\n\tFor continuous distributions, the support is a 2 element vector\n\tdescribing the range. For example, the uniform distribution over\n\tthe unit interval would return the vector [0 1].\n\n\tThis function is marked as experimental to note that the output\n\tformat might need to adapt to more complex support structures.\n\tFor example, what would best describe a mixture of continuous\n\tdistributions?\n\n\tSee also:\n\t  Distribution, pdf, draw, support\n\n\tReferences:\n\t  http://en.wikipedia.org/wiki/Cumulative_distribution_function\n\n\tExamples:\n\t\t(cdf [2 1 2 3] 2) ; returns the value 3/4 ",
-   :arglists ([d]),
    :var-type "function",
    :namespace "incanter.distributions",
+   :arglists ([d]),
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/support",
    :source-url nil,
@@ -3126,40 +3145,42 @@
    :file nil}
   {:name "variance",
    :doc "variance",
-   :arglists ([d]),
    :var-type "function",
    :namespace "incanter.distributions",
+   :arglists ([d]),
    :wiki-url
    "http://incanter.github.com/incanter//distributions-api.html#incanter.distributions/variance",
    :source-url nil,
    :raw-source-url nil,
    :file nil}
-  {:name "read-xls",
-   :doc
-   "Read an Excel file into a dataset. Note: cells containing formulas will be\nempty upon import.  Can read both older and newer Excel file formats, uses the filename suffix\nor :override-format option.\n\nOptions are:\n:sheet either a String for the tab name or an int for the sheet index -- defaults to 0\n:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)\n:override-format If nil use the filename suffix to guess the Excel file format.  If :xls\nor :xlsx override the suffix check.\n:all-sheets? true to try to read in all sheets of data (false by default).\n\n Examples:\n   (use '(incanter core io excel))\n   (view (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\"))\n\n   (use '(incanter core charts excel))\n   ;; read .xls file of Australian airline passenger data from the 1950s.\n   (with-data (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\")\n   (view $data)\n   ;; time-series-plot needs time in millisecs\n   ;; create a function, to-millis, to convert a sequence of Date objects\n   ;; to a sequence of milliseconds\n   (let [to-millis (fn [dates] (map #(.getTime %) dates))] \n     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))",
-   :var-type "multimethod",
-   :line 97,
-   :namespace "incanter.excel",
-   :wiki-url
-   "http://incanter.github.com/incanter//excel-api.html#incanter.excel/read-xls",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj",
+   :name "read-xls",
+   :file "modules/incanter-excel/src/incanter/excel.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L97",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj",
-   :file "modules/incanter-excel/src/incanter/excel.clj"}
-  {:name "save-xls",
-   :doc
-   "Save a dataset to an Excel file.  Can save in both older and newer\nExcel formats, uses the filename suffix or :override-format option.\n\nBy passing in a collection of datasets and names it is possible to write more than\none sheet at a time: e.g.\n  (save-xls [\"first sheet\" dataset1 \"second\" dataset2] my-file)\n\nOptions are:\n:sheet defaults to \"dataset\" if not provided.\n:use-bold defaults to true.  Set the header line in bold.\n:override-format If nil use the filename suffix to guess the Excel file format.\nIf :xls or :xlsx override the suffix check.\n\nExamples:\n  (use '(incanter core datasets excel))\n  (save-xls (get-dataset :cars) \"/tmp/cars.xls\")",
+   :line 97,
    :var-type "multimethod",
-   :line 26,
+   :arglists nil,
+   :doc
+   "Read an Excel file into a dataset. Note: cells containing formulas will be\nempty upon import.  Can read both older and newer Excel file formats, uses the filename suffix\nor :override-format option.\n\nOptions are:\n:sheet either a String for the tab name or an int for the sheet index -- defaults to 0\n:header-keywords convert the incoming header line to keywords -- defaults to false (no conversion)\n:override-format If nil use the filename suffix to guess the Excel file format.  If :xls\nor :xlsx override the suffix check.\n:all-sheets? true to try to read in all sheets of data (false by default).\n\n Examples:\n   (use '(incanter core io excel))\n   (view (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\"))\n\n   (use '(incanter core charts excel))\n   ;; read .xls file of Australian airline passenger data from the 1950s.\n   (with-data (read-xls \"http://incanter.org/data/aus-airline-passengers.xls\")\n   (view $data)\n   ;; time-series-plot needs time in millisecs\n   ;; create a function, to-millis, to convert a sequence of Date objects\n   ;; to a sequence of milliseconds\n   (let [to-millis (fn [dates] (map #(.getTime %) dates))] \n     (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))",
    :namespace "incanter.excel",
    :wiki-url
-   "http://incanter.github.com/incanter//excel-api.html#incanter.excel/save-xls",
+   "http://incanter.github.com/incanter//excel-api.html#incanter.excel/read-xls"}
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj",
+   :name "save-xls",
+   :file "modules/incanter-excel/src/incanter/excel.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L26",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj",
-   :file "modules/incanter-excel/src/incanter/excel.clj"}
+   :line 26,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "Save a dataset to an Excel file.  Can save in both older and newer\nExcel formats, uses the filename suffix or :override-format option.\n\nBy passing in a collection of datasets and names it is possible to write more than\none sheet at a time: e.g.\n  (save-xls [\"first sheet\" dataset1 \"second\" dataset2] my-file)\n\nOptions are:\n:sheet defaults to \"dataset\" if not provided.\n:use-bold defaults to true.  Set the header line in bold.\n:override-format If nil use the filename suffix to guess the Excel file format.\nIf :xls or :xlsx override the suffix check.\n\nExamples:\n  (use '(incanter core datasets excel))\n  (save-xls (get-dataset :cars) \"/tmp/cars.xls\")",
+   :namespace "incanter.excel",
+   :wiki-url
+   "http://incanter.github.com/incanter//excel-api.html#incanter.excel/save-xls"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/077cde547363afe675fd8400de11dda0a4b47952/modules/incanter-core/src/incanter/infix.clj",
    :name "defop",
@@ -3258,12 +3279,7 @@
    :line 84,
    :var-type "function",
    :arglists
-   ([chart
-     x
-     y
-     latex-str
-     &
-     {:keys [color], :or {color java.awt.Color/darkGray}}]),
+   ([chart x y latex-str & {:keys [color], :or {color darkGray}}]),
    :doc
    " Adds an LaTeX equation annotation to the chart at the given x,y coordinates.\n\nArguments:\n  chart -- the chart to add the polygon to.\n  x, y -- the coordinates to place the image\n  latex-str -- a string of latex code\n\n\nOptions:\n  :color (default java.awt.Color/darkGray) -- the text color\n\n\nExamples:\n  (use '(incanter core charts stats latex))   \n\n    (doto (function-plot pdf-normal -3 3)\n      (add-latex 0 0.1 \"f(x)=\\\\frac{1}{\\\\sqrt{2\\\\pi \\\\sigma^2}} e^{\\\\frac{-(x - \\\\mu)^2}{2 \\\\sigma^2}}\")\n      view)",
    :namespace "incanter.latex",
@@ -3278,10 +3294,7 @@
    :line 61,
    :var-type "function",
    :arglists
-   ([chart
-     latex-str
-     &
-     {:keys [color], :or {color java.awt.Color/darkGray}}]),
+   ([chart latex-str & {:keys [color], :or {color darkGray}}]),
    :doc
    " Adds the given LaTeX equation as a subtitle to the chart.\n\n\nOptions:\n  :color (default java.awt.Color/darkGray) -- the text color\n\n\nExamples:\n  (use '(incanter core charts stats latex))\n\n  (doto (function-plot pdf-normal -3 3)\n    (add-latex-subtitle \"f(x)=\\\\frac{1}{\\\\sqrt{2\\\\pi \\\\sigma^2}} e^{\\\\frac{-(x - \\\\mu)^2}{2 \\\\sigma^2}}\")\n    view)",
    :namespace "incanter.latex",
@@ -3299,10 +3312,7 @@
    ([latex-txt
      &
      {:keys [color background border],
-      :or
-      {color java.awt.Color/black,
-       background java.awt.Color/white,
-       border [5 5 5 5]}}]),
+      :or {color black, background white, border [5 5 5 5]}}]),
    :doc
    " Returns the given LaTeX equation rendered as an java.awt.Image.\n\nOptions:\n  :color (default java.awt.Color/black) -- the text color\n  :background (default java.awt.Clolor/white) -- the background color\n  :border (default [5 5 5 5]) -- image border\n\nExamples:\n  (use '(incanter core charts stats latex))\n\n  (def latex-img (latex \"\\\\frac{(a+b)^2} {(a-b)^2}\"))\n  (save latex-img \"/tmp/latex-example1.png\")\n  (view \"file:///tmp/latex-example1.png\")\n\n  (view (latex \"f(x)=\\\\frac {1} {\\\\sqrt {2\\\\pi \\\\sigma ^2}} e^{\\\\frac {-(x - \\\\mu)^2}{2 \\\\sigma ^2}}\"))\n\n  (view (latex \"\\\\begin{pmatrix}\n                 a & b & c \\\\\\\\\n                 d & e & f \\\\\\\\\n                 g & h & i\n                 \\\\end{pmatrix}\"))",
    :namespace "incanter.latex",
@@ -4568,19 +4578,20 @@
    :namespace "incanter.stats",
    :wiki-url
    "http://incanter.github.com/incanter//stats-api.html#incanter.stats/rank-index"}
-  {:name "sample",
-   :doc
-   " Returns a sample of the given size from the given collection. If replacement\nis set to false it returns a set, otherwise it returns a list.\n\nArguments:\n  coll -- collection or dataset to be sampled from\n\nOptions:\n  :size -- (default (count x) sample size\n  :replacement (default true) -- sample with replacement\n\n\nExamples:\n  (sample (range 10)) ; permutation of numbers zero through ten\n  (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.\n  (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.",
-   :var-type "multimethod",
-   :line 1663,
-   :namespace "incanter.stats",
-   :wiki-url
-   "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/8faacac9079e7c79d79a06ec52a9a5e9e270f3b6/modules/incanter-core/src/incanter/stats.clj",
+   :name "sample",
+   :file "modules/incanter-core/src/incanter/stats.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/8faacac9079e7c79d79a06ec52a9a5e9e270f3b6/modules/incanter-core/src/incanter/stats.clj#L1663",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/8faacac9079e7c79d79a06ec52a9a5e9e270f3b6/modules/incanter-core/src/incanter/stats.clj",
-   :file "modules/incanter-core/src/incanter/stats.clj"}
+   :line 1663,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   " Returns a sample of the given size from the given collection. If replacement\nis set to false it returns a set, otherwise it returns a list.\n\nArguments:\n  coll -- collection or dataset to be sampled from\n\nOptions:\n  :size -- (default (count x) sample size\n  :replacement (default true) -- sample with replacement\n\n\nExamples:\n  (sample (range 10)) ; permutation of numbers zero through ten\n  (sample [:red :green :blue] :size 10) ; choose 10 items that are either :red, :green, or :blue.\n  (sample (seq \"abcdefghijklmnopqrstuvwxyz\")  :size 4 :replacement false) ; choose 4 random letters.",
+   :namespace "incanter.stats",
+   :wiki-url
+   "http://incanter.github.com/incanter//stats-api.html#incanter.stats/sample"}
   {:raw-source-url
    "https://github.com/incanter/incanter/raw/8faacac9079e7c79d79a06ec52a9a5e9e270f3b6/modules/incanter-core/src/incanter/stats.clj",
    :name "sample-beta",
@@ -5382,41 +5393,44 @@
    :namespace "incanter.zoo",
    :wiki-url
    "http://incanter.github.com/incanter//zoo-api.html#incanter.zoo/zoo-row-map-occupied"}
-  {:name "get-cell-formula-value",
-   :doc
-   "Get the value after the evaluating the formula.  See http://poi.apache.org/spreadsheet/eval.html#Evaluate",
-   :var-type "multimethod",
-   :line 14,
-   :namespace "incanter.excel.cells",
-   :wiki-url
-   "http://incanter.github.com/incanter//excel-api.html#incanter.excel.cells/get-cell-formula-value",
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj",
+   :name "get-cell-formula-value",
+   :file "modules/incanter-excel/src/incanter/excel/cells.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L14",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj",
-   :file "modules/incanter-excel/src/incanter/excel/cells.clj"}
-  {:name "get-cell-value",
-   :doc "Get the cell value depending on the cell type.",
+   :line 14,
    :var-type "multimethod",
-   :line 20,
+   :arglists nil,
+   :doc
+   "Get the value after the evaluating the formula.  See http://poi.apache.org/spreadsheet/eval.html#Evaluate",
    :namespace "incanter.excel.cells",
    :wiki-url
-   "http://incanter.github.com/incanter//excel-api.html#incanter.excel.cells/get-cell-value",
+   "http://incanter.github.com/incanter//excel-api.html#incanter.excel.cells/get-cell-formula-value"}
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj",
+   :name "get-cell-value",
+   :file "modules/incanter-excel/src/incanter/excel/cells.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L20",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj",
-   :file "modules/incanter-excel/src/incanter/excel/cells.clj"}
-  {:name "get-workbook-sheet",
-   :doc
-   "Retrieve the Excel workbook based on either the index or the sheet name.",
+   :line 20,
    :var-type "multimethod",
-   :line 8,
-   :namespace "incanter.excel.workbook",
+   :arglists nil,
+   :doc "Get the cell value depending on the cell type.",
+   :namespace "incanter.excel.cells",
    :wiki-url
-   "http://incanter.github.com/incanter//excel-api.html#incanter.excel.workbook/get-workbook-sheet",
+   "http://incanter.github.com/incanter//excel-api.html#incanter.excel.cells/get-cell-value"}
+  {:raw-source-url
+   "https://github.com/incanter/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj",
+   :name "get-workbook-sheet",
+   :file "modules/incanter-excel/src/incanter/excel/workbook.clj",
    :source-url
    "https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8",
-   :raw-source-url
-   "https://github.com/incanter/incanter/raw/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj",
-   :file "modules/incanter-excel/src/incanter/excel/workbook.clj"})}
+   :line 8,
+   :var-type "multimethod",
+   :arglists nil,
+   :doc
+   "Retrieve the Excel workbook based on either the index or the sheet name.",
+   :namespace "incanter.excel.workbook",
+   :wiki-url
+   "http://incanter.github.com/incanter//excel-api.html#incanter.excel.workbook/get-workbook-sheet"})}
