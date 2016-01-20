@@ -95,7 +95,10 @@ namespace.
     <hr />
     <h2 id="incanter.datasets/get-dataset">get-dataset</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (getProperty incanter.home) (getenv INCANTER_HOME)), from-repo false}})
+    <pre id="var-usage">Usage:
+      (get-dataset dataset-key &amp; {:keys [incanter-home from-repo],
+                                   :or {incanter-home (or (getProperty incanter.home) (getenv INCANTER_HOME)),
+                                    from-repo false}})
 </pre>
     <pre id="var-docstr">
 Returns the sample dataset associated with the given key. Most datasets
