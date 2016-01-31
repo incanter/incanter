@@ -8,7 +8,6 @@
         :dir "modules/incanter-mongodb"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.9.1-SNAPSHOT"]
-                 [org.clojure/clojure "1.6.0"]
                  [congomongo "0.3.3"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]]

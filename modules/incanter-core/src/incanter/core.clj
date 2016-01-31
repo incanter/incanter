@@ -1394,7 +1394,7 @@
                  :else :all)
            cols (cond
                  cols cols
-                 except-cols (ds/column-names (ds/except-columns data except-cols))
+                 except-cols (ds/column-names (ds/remove-columns data except-cols))
                  all all
                  :else :all)
            col-names (ds/column-names data)
@@ -2139,7 +2139,7 @@
   Deprecated. Please use `clojure.core.matrix.dataset/update-column` instead.
   "
   [dataset column f & args]
-  (apply ds/update-column dataset column f args))
+  (apply ds/emap-column dataset column f args))
 
 
 (defn deshape
