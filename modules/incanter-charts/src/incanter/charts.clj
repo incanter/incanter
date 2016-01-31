@@ -905,9 +905,9 @@
                (LogAxis. label)
                (LogAxis.))]
     (doto axis (.setBase base))
-    (if int-ticks?
+    (when int-ticks?
       (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
-    (if smallest-value
+    (when smallest-value
       (.setSmallestValue axis smallest-value)) ; TODO TEST THIS!
     axis))
 
