@@ -8,7 +8,6 @@
         :dir "modules/incanter-sql"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.9.1-SNAPSHOT"]
-                 [org.clojure/clojure "1.6.0"]
                  [clojureql "1.0.4" :exclusions [org.clojure/clojure]]
                  ]
   :profiles {:dev {:dependencies [[org.apache.derby/derby "10.10.1.1"]]}}

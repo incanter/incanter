@@ -140,10 +140,11 @@
 
 (defn- row-order
   "Orders a seq of rows by index"
-  [z]
-  (->> z
-      (apply sorted-set-by #(compare (:index %1) (:index %2)))
-      (into [])))
+  ([z] (row-order z :index))
+  ([z index-col]
+   (->> z
+        (apply sorted-set-by #(compare (index-col %1) (index-col %2)))
+        (into []))))
 
 (defn- order
   "Order a zoo so that the :index is increasing in time."
@@ -168,7 +169,7 @@
   ([x index-col]
      {:pre [(-> x (ds/column-names) (in? index-col))]}
      (let [rows (ds/row-maps x)]
-       (->> (row-order rows)
+       (->> (row-order rows index-col)
             (map (fn [{i index-col :as v}]
                    (-> v
                        (dissoc index-col)

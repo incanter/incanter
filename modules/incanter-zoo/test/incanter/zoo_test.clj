@@ -65,7 +65,11 @@
       (is (= ts
              (zoo (to-dataset [{:index "2012-01-03" :a 3}
                                {:index "2012-01-02" :a 2}
-                               {:index "2012-01-01" :a 1}])))))))
+                               {:index "2012-01-01" :a 1}]))))))
+  (testing "Preserve all rows"
+    (is (= (nrow ds1) (nrow (zoo ds1))))
+    (is (= (nrow ds2) (nrow (zoo ds2 :date))))
+    (is (= (nrow ds3) (nrow (zoo ds3 :date))))))
 
 (defn $$-test []
   ;; Time slicing
