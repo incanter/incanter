@@ -1068,12 +1068,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//charts-api.html#incanter.charts/xy-plot"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1562",
-   :line 1562,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1563",
+   :line 1563,
    :var-type "function",
    :arglists ([cols] [arg1 arg2] [rows cols data]),
    :doc
@@ -1082,12 +1082,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$=",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2849",
-   :line 2849,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2850",
+   :line 2850,
    :var-type "macro",
    :arglists ([& equation]),
    :doc
@@ -1096,13 +1096,13 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$="}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$data",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L47",
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L48",
    :dynamic true,
-   :line 47,
+   :line 48,
    :var-type "var",
    :arglists nil,
    :doc
@@ -1111,12 +1111,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$data"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$fn",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1838",
-   :line 1838,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1839",
+   :line 1839,
    :var-type "macro",
    :arglists ([col-bindings body]),
    :doc
@@ -1125,12 +1125,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$fn"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$group-by",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1890",
-   :line 1890,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1891",
+   :line 1891,
    :var-type "function",
    :arglists ([cols] [cols data]),
    :doc
@@ -1139,12 +1139,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$group-by"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$join",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1978",
-   :line 1978,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1979",
+   :line 1979,
    :var-type "function",
    :arglists
    ([[left-keys right-keys] left-data]
@@ -1155,12 +1155,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$join"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$map",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1943",
-   :line 1943,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1944",
+   :line 1944,
    :var-type "function",
    :arglists ([fun col-keys data] [fun col-keys]),
    :doc
@@ -1169,12 +1169,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$map"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$order",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1808",
-   :line 1808,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1809",
+   :line 1809,
    :var-type "function",
    :arglists ([cols order] [cols order data]),
    :doc
@@ -1183,12 +1183,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$order"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$rollup",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1720",
-   :line 1720,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1721",
+   :line 1721,
    :var-type "function",
    :arglists
    ([summary-fun col-name group-by]
@@ -1199,12 +1199,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$rollup"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "$where",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1689",
-   :line 1689,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1690",
+   :line 1690,
    :var-type "function",
    :arglists ([query-map] [query-map data]),
    :doc
@@ -1213,12 +1213,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/$where"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "->Dataset",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L52",
-   :line 52,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L53",
+   :line 53,
    :var-type "function",
    :arglists ([column-names rows]),
    :doc "Positional factory function for class incanter.core.Dataset.",
@@ -1226,12 +1226,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/->Dataset"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "abs",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L576",
-   :line 576,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L577",
+   :line 577,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1240,12 +1240,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/abs"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "acos",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L608",
-   :line 608,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L609",
+   :line 609,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1254,12 +1254,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/acos"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "add-column",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2099",
-   :line 2099,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2100",
+   :line 2100,
    :var-type "function",
    :arglists ([column-name values] [column-name values data]),
    :doc "Adds a column, with given values, to a dataset.",
@@ -1267,12 +1267,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/add-column"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "add-derived-column",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2111",
-   :line 2111,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2112",
+   :line 2112,
    :var-type "function",
    :arglists
    ([column-name from-columns f] [column-name from-columns f data]),
@@ -1282,12 +1282,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/add-derived-column"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "aggregate",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2042",
-   :line 2042,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2043",
+   :line 2043,
    :var-type "function",
    :arglists
    ([fields
@@ -1300,12 +1300,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/aggregate"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "asin",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L592",
-   :line 592,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L593",
+   :line 593,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1314,12 +1314,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/asin"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "atan",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L623",
-   :line 623,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L624",
+   :line 624,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1328,12 +1328,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/atan"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "atan2",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L519",
-   :line 519,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L520",
+   :line 520,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1342,12 +1342,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/atan2"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "beta",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2418",
-   :line 2418,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2419",
+   :line 2419,
    :var-type "function",
    :arglists ([a b]),
    :doc
@@ -1356,12 +1356,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/beta"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "bind-columns",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L369",
-   :line 369,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L370",
+   :line 370,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1370,12 +1370,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/bind-columns"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "bind-rows",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L330",
-   :line 330,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L331",
+   :line 331,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1384,12 +1384,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/bind-rows"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "categorical-var",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2306",
-   :line 2306,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2307",
+   :line 2307,
    :var-type "function",
    :arglists
    ([& {:keys [data ordered? labels levels], :or {ordered? false}}]),
@@ -1399,12 +1399,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/categorical-var"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "choose",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L648",
-   :line 648,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L649",
+   :line 649,
    :var-type "function",
    :arglists ([n k]),
    :doc
@@ -1413,12 +1413,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/choose"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "col-names",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1488",
-   :line 1488,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1489",
+   :line 1489,
    :var-type "function",
    :arglists ([data] [data colnames]),
    :doc
@@ -1427,12 +1427,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/col-names"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "condition",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1066",
-   :line 1066,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1067",
+   :line 1067,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1441,12 +1441,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/condition"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "conj-cols",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1508",
-   :line 1508,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1509",
+   :line 1509,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1455,12 +1455,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/conj-cols"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "conj-rows",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1537",
-   :line 1537,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1538",
+   :line 1538,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1469,12 +1469,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/conj-rows"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "copy",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L718",
-   :line 718,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L719",
+   :line 719,
    :var-type "function",
    :arglists ([mat]),
    :doc "Returns a copy of the given matrix.",
@@ -1482,12 +1482,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/copy"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "cos",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L600",
-   :line 600,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L601",
+   :line 601,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1496,12 +1496,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/cos"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "cumulative-sum",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L877",
-   :line 877,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L878",
+   :line 878,
    :var-type "function",
    :arglists ([coll]),
    :doc
@@ -1510,12 +1510,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/cumulative-sum"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "data-table",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2679",
-   :line 2679,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2680",
+   :line 2680,
    :var-type "function",
    :arglists ([data]),
    :doc "Creates a javax.swing.JTable given an Incanter dataset.",
@@ -1523,12 +1523,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/data-table"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "dataset",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1190",
-   :line 1190,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1191",
+   :line 1191,
    :var-type "function",
    :arglists ([column-names & data]),
    :doc
@@ -1537,12 +1537,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/dataset"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "dataset?",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L98",
-   :line 98,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L99",
+   :line 99,
    :var-type "function",
    :arglists ([obj]),
    :doc "Determines if obj is of type incanter.core.Dataset.",
@@ -1550,12 +1550,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/dataset?"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "decomp-cholesky",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L906",
-   :line 906,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L907",
+   :line 907,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1564,12 +1564,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/decomp-cholesky"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "decomp-eigenvalue",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L975",
-   :line 975,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L976",
+   :line 976,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1578,12 +1578,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/decomp-eigenvalue"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "decomp-lu",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L999",
-   :line 999,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1000",
+   :line 1000,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1592,12 +1592,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/decomp-lu"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "decomp-qr",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1035",
-   :line 1035,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1036",
+   :line 1036,
    :var-type "function",
    :arglists ([m & {:keys [type]}]),
    :doc
@@ -1606,12 +1606,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/decomp-qr"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "decomp-svd",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L934",
-   :line 934,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L935",
+   :line 935,
    :var-type "function",
    :arglists ([mat & {:keys [type], :or {type :full}}]),
    :doc
@@ -1620,12 +1620,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/decomp-svd"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "deshape",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2150",
-   :line 2150,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2151",
+   :line 2151,
    :var-type "function",
    :arglists
    ([& {:keys [data remove-na group-by merge], :or {remove-na true}}]),
@@ -1635,12 +1635,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/deshape"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "det",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L789",
-   :line 789,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L790",
+   :line 790,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1649,12 +1649,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/det"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "diag",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L137",
-   :line 137,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L138",
+   :line 138,
    :var-type "function",
    :arglists ([m]),
    :doc
@@ -1663,12 +1663,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/diag"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "dim",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L119",
-   :line 119,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L120",
+   :line 120,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1677,12 +1677,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/dim"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "div",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L454",
-   :line 454,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L455",
+   :line 455,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1691,12 +1691,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/div"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "exp",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L569",
-   :line 569,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L570",
+   :line 570,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1705,12 +1705,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/exp"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "factorial",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L631",
-   :line 631,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L632",
+   :line 632,
    :var-type "function",
    :arglists ([k]),
    :doc
@@ -1719,12 +1719,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/factorial"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "gamma",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2408",
-   :line 2408,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2409",
+   :line 2409,
    :var-type "function",
    :arglists ([x]),
    :doc
@@ -1733,12 +1733,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/gamma"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "get-categories",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2213",
-   :line 2213,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2214",
+   :line 2214,
    :var-type "function",
    :arglists ([cols data]),
    :doc
@@ -1747,12 +1747,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/get-categories"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "grid-apply",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2822",
-   :line 2822,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2823",
+   :line 2823,
    :var-type "function",
    :arglists ([f x-min x-max y-min y-max]),
    :doc
@@ -1761,12 +1761,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/grid-apply"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "group-on",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1125",
-   :line 1125,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1126",
+   :line 1126,
    :var-type "function",
    :arglists ([mat on-cols & {:keys [cols except-cols]}]),
    :doc
@@ -1775,12 +1775,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/group-on"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "half-vectorize",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L831",
-   :line 831,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L832",
+   :line 832,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -1789,12 +1789,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/half-vectorize"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "head",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1667",
-   :line 1667,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1668",
+   :line 1668,
    :var-type "function",
    :arglists ([len mat] [mat]),
    :doc
@@ -1803,12 +1803,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/head"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "identity-matrix",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L126",
-   :line 126,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L127",
+   :line 127,
    :var-type "function",
    :arglists ([n]),
    :doc
@@ -1817,12 +1817,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/identity-matrix"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "incomplete-beta",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2428",
-   :line 2428,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2429",
+   :line 2429,
    :var-type "function",
    :arglists ([x a b]),
    :doc
@@ -1831,12 +1831,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/incomplete-beta"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "kronecker",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L742",
-   :line 742,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L743",
+   :line 743,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1845,12 +1845,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/kronecker"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "length",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1107",
-   :line 1107,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1108",
+   :line 1108,
    :var-type "function",
    :arglists ([coll]),
    :doc
@@ -1859,12 +1859,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/length"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "log",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L543",
-   :line 543,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L544",
+   :line 544,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1873,12 +1873,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/log"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "log10",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L561",
-   :line 561,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L562",
+   :line 562,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1887,12 +1887,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/log10"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "log2",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L551",
-   :line 551,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L552",
+   :line 552,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -1901,12 +1901,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/log2"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "make-unique",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1466",
-   :line 1466,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1467",
+   :line 1467,
    :var-type "function",
    :arglists ([coll] [coll seen]),
    :doc
@@ -1915,12 +1915,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/make-unique"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "map->Dataset",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L52",
-   :line 52,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L53",
+   :line 53,
    :var-type "function",
    :arglists ([m#]),
    :doc
@@ -1929,12 +1929,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/map->Dataset"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "matrix",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L56",
-   :line 56,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L57",
+   :line 57,
    :var-type "function",
    :arglists ([data] [data ncol] [init-val rows cols]),
    :doc
@@ -1943,12 +1943,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/matrix"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "matrix-map",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1914",
-   :line 1914,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1915",
+   :line 1915,
    :var-type "function",
    :arglists ([f m] [f m & ms]),
    :doc
@@ -1957,12 +1957,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/matrix-map"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "matrix?",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L94",
-   :line 94,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L95",
+   :line 95,
    :var-type "function",
    :arglists ([obj]),
    :doc "Test if obj is 'derived' clatrix.core.Matrix",
@@ -1970,12 +1970,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/matrix?"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "melt",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2283",
-   :line 2283,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2284",
+   :line 2284,
    :var-type "function",
    :arglists ([dataset pivot-key]),
    :doc
@@ -1984,12 +1984,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/melt"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "minus",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L412",
-   :line 412,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L413",
+   :line 413,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -1998,12 +1998,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/minus"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "mmult",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L722",
-   :line 722,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L723",
+   :line 723,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -2012,12 +2012,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/mmult"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "mult",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L434",
-   :line 434,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L435",
+   :line 435,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -2026,12 +2026,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/mult"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "ncol",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L111",
-   :line 111,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L112",
+   :line 112,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -2040,12 +2040,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/ncol"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "nrow",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L102",
-   :line 102,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L103",
+   :line 103,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -2054,12 +2054,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/nrow"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "plus",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L392",
-   :line 392,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L393",
+   :line 393,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -2068,12 +2068,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/plus"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "pow",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L511",
-   :line 511,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L512",
+   :line 512,
    :var-type "function",
    :arglists ([& args]),
    :doc
@@ -2082,12 +2082,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/pow"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "prod",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L867",
-   :line 867,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L868",
+   :line 868,
    :var-type "function",
    :arglists ([x]),
    :doc "Returns the product of the given sequence.",
@@ -2095,12 +2095,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/prod"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "query-dataset",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1308",
-   :line 1308,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1309",
+   :line 1309,
    :var-type "function",
    :arglists ([data query-map]),
    :doc
@@ -2109,12 +2109,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/query-dataset"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "query-to-pred",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1257",
-   :line 1257,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1258",
+   :line 1258,
    :var-type "function",
    :arglists ([query-map]),
    :doc
@@ -2123,12 +2123,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/query-to-pred"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "quit",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2728",
-   :line 2728,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2729",
+   :line 2729,
    :var-type "function",
    :arglists ([]),
    :doc "Exits the Clojure shell.",
@@ -2136,12 +2136,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/quit"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "rank",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1084",
-   :line 1084,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1085",
+   :line 1085,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -2150,12 +2150,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/rank"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "regularized-beta",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2440",
-   :line 2440,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2441",
+   :line 2441,
    :var-type "function",
    :arglists ([x a b]),
    :doc
@@ -2164,12 +2164,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/regularized-beta"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "rename-cols",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2067",
-   :line 2067,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2068",
+   :line 2068,
    :var-type "function",
    :arglists ([col-map] [col-map data]),
    :doc
@@ -2178,12 +2178,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/rename-cols"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "reorder-columns",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2961",
-   :line 2961,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2962",
+   :line 2962,
    :var-type "function",
    :arglists ([dset cols]),
    :doc
@@ -2192,12 +2192,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/reorder-columns"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "replace-column",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2089",
-   :line 2089,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2090",
+   :line 2090,
    :var-type "function",
    :arglists ([column-name values] [column-name values data]),
    :doc "Replaces a column in a dataset with new values.",
@@ -2205,12 +2205,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/replace-column"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "safe-div",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L478",
-   :line 478,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L479",
+   :line 479,
    :var-type "function",
    :arglists ([x] [x y] [x y & more]),
    :doc
@@ -2219,12 +2219,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/safe-div"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "save",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2754",
-   :line 2754,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2755",
+   :line 2755,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2233,12 +2233,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/save"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "sel",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L184",
-   :line 184,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L185",
+   :line 185,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2247,12 +2247,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/sel"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "set-data",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2691",
-   :line 2691,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2692",
+   :line 2692,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2261,12 +2261,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/set-data"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "sin",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L584",
-   :line 584,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L585",
+   :line 585,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -2275,12 +2275,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/sin"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "solve",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L773",
-   :line 773,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L774",
+   :line 774,
    :var-type "function",
    :arglists ([A B] [A]),
    :doc
@@ -2289,12 +2289,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/solve"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "solve-quadratic",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2458",
-   :line 2458,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2459",
+   :line 2459,
    :var-type "function",
    :arglists ([a b c]),
    :doc
@@ -2303,12 +2303,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/solve-quadratic"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "sq",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L535",
-   :line 535,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L536",
+   :line 536,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -2317,12 +2317,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/sq"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "sqrt",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L527",
-   :line 527,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L528",
+   :line 528,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -2331,12 +2331,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/sqrt"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "sum",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L860",
-   :line 860,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L861",
+   :line 861,
    :var-type "function",
    :arglists ([x]),
    :doc "Returns the sum of the given sequence.",
@@ -2344,12 +2344,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/sum"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "sum-of-squares",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L853",
-   :line 853,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L854",
+   :line 854,
    :var-type "function",
    :arglists ([x]),
    :doc "Returns the sum-of-squares of the given sequence.",
@@ -2357,12 +2357,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/sum-of-squares"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "symmetric-matrix",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2485",
-   :line 2485,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2486",
+   :line 2486,
    :var-type "function",
    :arglists ([data & {:keys [lower], :or {lower true}}]),
    :doc
@@ -2371,12 +2371,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/symmetric-matrix"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "tail",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1678",
-   :line 1678,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1679",
+   :line 1679,
    :var-type "function",
    :arglists ([len mat] [mat]),
    :doc
@@ -2385,12 +2385,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/tail"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "tan",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L615",
-   :line 615,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L616",
+   :line 616,
    :var-type "function",
    :arglists ([A]),
    :doc
@@ -2399,12 +2399,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/tan"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "to-dataset",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L1409",
-   :line 1409,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L1410",
+   :line 1410,
    :var-type "function",
    :arglists ([obj & {:keys [transpose]}]),
    :doc
@@ -2413,12 +2413,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/to-dataset"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "to-list",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L672",
-   :line 672,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L673",
+   :line 673,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2427,12 +2427,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/to-list"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "to-map",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2254",
-   :line 2254,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2255",
+   :line 2255,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2441,12 +2441,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/to-map"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "to-matrix",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2382",
-   :line 2382,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2383",
+   :line 2383,
    :var-type "function",
    :arglists ([dataset & {:keys [dummies], :or {dummies false}}]),
    :doc
@@ -2455,12 +2455,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/to-matrix"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "to-vect",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L695",
-   :line 695,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L696",
+   :line 696,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2469,12 +2469,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/to-vect"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "toeplitz",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2526",
-   :line 2526,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2527",
+   :line 2527,
    :var-type "function",
    :arglists ([x]),
    :doc
@@ -2483,12 +2483,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/toeplitz"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "trace",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L800",
-   :line 800,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L801",
+   :line 801,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -2497,12 +2497,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/trace"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "trans",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L153",
-   :line 153,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L154",
+   :line 154,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -2511,12 +2511,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/trans"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "transform-col",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2139",
-   :line 2139,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2140",
+   :line 2140,
    :var-type "function",
    :arglists ([dataset column f & args]),
    :doc
@@ -2525,12 +2525,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/transform-col"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "vectorize",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L810",
-   :line 810,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L811",
+   :line 811,
    :var-type "function",
    :arglists ([mat]),
    :doc
@@ -2539,12 +2539,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/vectorize"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "view",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2541",
-   :line 2541,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2542",
+   :line 2542,
    :var-type "multimethod",
    :arglists nil,
    :doc
@@ -2553,12 +2553,12 @@
    :wiki-url
    "http://incanter.github.com/incanter//core-api.html#incanter.core/view"}
   {:raw-source-url
-   "https://github.com/incanter/incanter/raw/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj",
+   "https://github.com/incanter/incanter/raw/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj",
    :name "with-data",
    :file "modules/incanter-core/src/incanter/core.clj",
    :source-url
-   "https://github.com/incanter/incanter/blob/a28ac42ea996abdd6abb766954a2539884f712e0/modules/incanter-core/src/incanter/core.clj#L2230",
-   :line 2230,
+   "https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2231",
+   :line 2231,
    :var-type "macro",
    :arglists ([data-binding & body]),
    :doc
