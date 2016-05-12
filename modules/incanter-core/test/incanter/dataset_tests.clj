@@ -1,4 +1,5 @@
 (ns incanter.dataset-tests
+  (:require [clojure.core.matrix :as m])
   (:use clojure.test
         (incanter core)))
 
@@ -42,7 +43,7 @@
 (deftest test-sel-filter-fn
   (let [ds (dataset [[110 110]])
         test-ds (dataset [[105 100] [110 110] [111 120]])]
-    (is (= ds (sel test-ds :filter-fn (fn [row] (= (get row 0) (get row 1))))))))
+    (is (m/equals ds (sel test-ds :filter-fn (fn [row] (= (get row 0) (get row 1))))))))
 
 (testing "picks up data from scope"
   (with-data cars
@@ -93,10 +94,10 @@
 
 (deftest melt-test
   (testing "Melting the data")
-  (let [dset (dataset  [:id :time :x1 :x2 ]
+  (let [dset (dataset  [:id :time :x1 :x2]
                        [[1 1 5 6]
                         [2 2 7 8]])
-        expected (dataset [:id :variable :value ]
+        expected (dataset [:id :variable :value]
                           [[1 :time 1]
                            [2 :time 2]
                            [1 :x1 5]
