@@ -21,9 +21,9 @@
 
 (ns incanter.core-tests
   (:require [clojure.core.matrix :as m])
-  (:require [clojure.core.matrix.dataset :as ds])
   (:use  clojure.test
          (incanter core)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.core.clj
@@ -54,7 +54,7 @@
 (def map1 {0 [1.0 2.0 3.0] 1 [4.0 5.0 6.0]})
 
 (deftest dataset-construction
-  (is (= (to-dataset map1) (to-dataset [[1.0 4.0] [2.0 5.0] [3.0 6.0]]))))
+  (is (= (to-dataset map1) (to-dataset [[1.0 4.0][2.0 5.0][3.0 6.0]]))))
 
 (deftest dataset-transforms
   (is (= (transform-col dataset6 :b + 10) (dataset [:a :b :c] [[1 12 3]]))
@@ -73,14 +73,14 @@
                             [11 12 13]])]
 
     (are [group-cols n-groups]
-         (= n-groups (count ($group-by group-cols a-dataset)))
+      (= n-groups (count ($group-by group-cols a-dataset)))
       :c1 3
       [:c1 :c2] 5) ; 2 arity version
 
     (are [group-cols n-groups]
-         (= n-groups (count
-                      (with-data a-dataset
-                        ($group-by group-cols))))
+      (= n-groups (count
+                   (with-data a-dataset
+                     ($group-by group-cols))))
       :c1 3
       [:c1 :c2] 5) ; 3 arity version
 
@@ -111,8 +111,9 @@
            expected))))
 
 (deftest infix-test
-  (is (= ($= 10 - 1 + 10) 19))
-  (is (= ($= 1 / 2 * 3) 3/2)))
+ (is (= ($= 10 - 1 + 10) 19))
+ (is (= ($= 1 / 2 * 3) 3/2)))
+
 
 (deftest factorial-test
   (is (= (factorial 5) 120.0))
@@ -140,42 +141,45 @@
   (is (= Double/NEGATIVE_INFINITY (safe-div -10 0)))
   (is (= Double/NEGATIVE_INFINITY (safe-div -10 5 0))))
 
+
 (defn non-mutable-ops []
   (testing "non-mutable-ops"
     (let [MO (matrix [[-1 2 3]
-                      [4 -5 6]
-                      [7 8 -9]
-                      [10 11 -12]])
+                         [4 -5 6]
+                         [7 8 -9]
+                         [10 11 -12]])
           MC (matrix [[-1 2 3]
-                      [4 -5 6]
-                      [7 8 -9]
-                      [10 11 -12]])
+                         [4 -5 6]
+                         [7 8 -9]
+                         [10 11 -12]])
           MA (matrix [[1 2 3]
-                      [4 5 6]
-                      [7 8 9]
-                      [10 11 12]])
+                         [4 5 6]
+                         [7 8 9]
+                         [10 11 12]])
           res (abs MO)]
       (is (m/equals res MA))
       (is (m/equals MC MO))
       (is (not (m/equals MO MA))))))
 
+
 (defn matrix-from-arrays
   "constructing matrices from arrays"
   []
   (is (m/equals (matrix [1.0 2.0 3.0])
-                (matrix (double-array [1.0 2.0 3.0]))))
+         (matrix (double-array [1.0 2.0 3.0]))))
   (is (m/equals (matrix [1.0 2.0 3.0])
-                (matrix  (long-array [1 2 3]))))
+         (matrix  (long-array [1 2 3]))))
   (is (m/equals (matrix [[1 2] [3 4]])
-                (matrix (object-array [(double-array [1.0 2.0])
-                                       (double-array [3.0 4.0])])))))
+             (matrix (object-array [(double-array [1.0 2.0])
+                                    (double-array [3.0 4.0])])))))
+
 
 (defn matrix-trans-test
   "transposing matrices"
   [m]
   (is (m/equals (trans m) (matrix [[1 4 7 10]
-                                   [2 5 8 11]
-                                   [3 6 9 12]])))
+                            [2 5 8 11]
+                            [3 6 9 12]])))
   (is (m/equals (trans (trans m)) m)))
 
 (defn bind-rows-test
@@ -184,20 +188,20 @@
   (is (m/equals (bind-rows m m m) (bind-rows m (bind-rows m m))))
   (is (m/equals (bind-rows (matrix [1 2 3])
                            (matrix [4 5 6]))
-                (matrix [[1 2 3]
-                         [4 5 6]])))
+             (matrix [[1 2 3]
+                      [4 5 6]])))
   (is (m/equals (bind-rows m [13 14 15])
-                (matrix [[1 2 3]
-                         [4 5 6]
-                         [7 8 9]
-                         [10 11 12]
-                         [13 14 15]])))
+         (matrix [[1 2 3]
+                  [4 5 6]
+                  [7 8 9]
+                  [10 11 12]
+                  [13 14 15]])))
   (is (m/equals (bind-rows (matrix [13 14 15]) m)
-                [[13 14 15]
-                 [1 2 3]
-                 [4 5 6]
-                 [7 8 9]
-                 [10 11 12]])))
+             [[13 14 15]
+              [1 2 3]
+              [4 5 6]
+              [7 8 9]
+              [10 11 12]])))
 
 (def A (matrix [[1 2 3]
                 [4 5 6]
@@ -208,74 +212,74 @@
   "combining matrices/vectors by column"
   [m]
   (is (m/equals (bind-columns (m/get-column m 0)
-                              (m/get-column m 2))
-                (matrix [[1 3]
-                         [4 6]
-                         [7 9]
-                         [10 12]])))
+                           (m/get-column m 2))
+             (matrix [[1 3]
+                      [4 6]
+                      [7 9]
+                      [10 12]])))
   (is (m/equals (bind-columns
-                 (matrix [[1] [2] [3]])
-                 (matrix [[4] [5] [6]])
-                 (matrix [[7] [8] [9]]))
+          (matrix [[1] [2] [3]])
+          (matrix [[4] [5] [6]])
+          (matrix [[7] [8] [9]]))
                 (matrix [[1 4 7]
                          [2 5 8]
                          [3 6 9]])))
   (is (m/equals (bind-columns [13 14 15 16] m)
-                [[13 1 2 3]
-                 [14 4 5 6]
-                 [15 7 8 9]
-                 [16 10 11 12]]))
+         [[13 1 2 3]
+          [14 4 5 6]
+          [15 7 8 9]
+          [16 10 11 12]]))
   (is (m/equals (bind-columns m [13 14 15 16])
-                (matrix [[1 2 3 13]
-                         [4 5 6 14]
-                         [7 8 9 15]
-                         [10 11 12 16]]))))
+         (matrix [[1 2 3 13]
+                  [4 5 6 14]
+                  [7 8 9 15]
+                  [10 11 12 16]]))))
 
 (defn matrix-creation-test
   "creating matrices"
   [m]
   ;; create a 3x2 matrix with initial value 99
   (is (m/equals (matrix 99 3 2)
-                (matrix [[99 99]
-                         [99 99]
-                         [99 99]])))
+             (matrix [[99 99]
+                      [99 99]
+                      [99 99]])))
   ;; create a 3x2 matrix with initial value 0
   (is (m/equals (matrix 0 3 2)
-                (matrix [[0 0]
-                         [0 0]
-                         [0 0]])))
+             (matrix [[0 0]
+                      [0 0]
+                      [0 0]])))
   ;; create a matrix with the given data that has 3 columns
   (is (m/equals (matrix [1 2 3 4 5 6 7 8 9] 3)
-                (matrix [[1 2 3]
-                         [4 5 6]
-                         [7 8 9]])))
+             (matrix [[1 2 3]
+                      [4 5 6]
+                      [7 8 9]])))
   ;; take the diagonal elements of matrix A
   (is (m/equals (diag (matrix m))
-                (matrix [1.0 5.0 9.0])))
+             (matrix [1.0 5.0 9.0])))
   ;; create a diagonal matrix with the given data on the diagonal
   (is (m/equals (diag [1/2 1/2 1/2])
-                (matrix [[1/2 0 0]
-                         [0 1/2 0]
-                         [0 0 1/2]])))
+             (matrix [[1/2 0 0]
+                      [0 1/2 0]
+                      [0 0 1/2]])))
   ;; create a 3x3 identity matrix
   (is (m/equals (identity-matrix 3) (matrix [[1 0 0]
-                                             [0 1 0]
-                                             [0 0 1]])))
+                                          [0 1 0]
+                                          [0 0 1]])))
 
   ;; create a 3x3 toeplitz matrix
   (is (m/equals (toeplitz [1 2 3])
-                (matrix [[1 2 3]
-                         [2 1 2]
-                         [3 2 1]]))))
+             (matrix [[1 2 3]
+                      [2 1 2]
+                      [3 2 1]]))))
 
 (defn matrix-to-list-test
   "convert a matrix to clojure lists"
   [m]
   (is (m/equals (to-list m)
-                '((1.0 2.0 3.0)
-                  (4.0 5.0 6.0)
-                  (7.0 8.0 9.0)
-                  (10.0 11.0 12.0))))
+             '((1.0 2.0 3.0)
+               (4.0 5.0 6.0)
+               (7.0 8.0 9.0)
+               (10.0 11.0 12.0))))
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (m/equals (to-list (matrix [1 2 3 4 5 6])) '(1 2 3 4 5 6)))
   (is (m/equals (to-list (trans (matrix [1 2 3 4 5 6]))) '(1 2 3 4 5 6)))
@@ -288,10 +292,10 @@
   "convert a matrix to clojure vectors"
   [m]
   (is (m/equals (to-vect m)
-                [[1.0 2.0 3.0]
-                 [4.0 5.0 6.0]
-                 [7.0 8.0 9.0]
-                 [10.0 11.0 12.0]]))
+             [[1.0 2.0 3.0]
+              [4.0 5.0 6.0]
+              [7.0 8.0 9.0]
+              [10.0 11.0 12.0]]))
   ;; one-dimensional matrices are coverted to one-dimension vectors
   (is (m/equals (to-vect (matrix [1 2 3 4 5 6])) [1.0 2.0 3.0 4.0 5.0 6.0]))
   (is (m/equals (to-vect (trans (matrix [1 2 3 4 5 6]))) [1.0 2.0 3.0 4.0 5.0 6.0]))
@@ -309,9 +313,9 @@
     (is (= (sel m :cols 2) (matrix im [3 6 9 12])))
     (is (= (sel m :rows 1) (matrix im [4 5 6] 3)))
     (is (= (sel m :all [0 2]) (matrix im [[1 3]
-                                          [4 6]
-                                          [7 9]
-                                          [10 12]])))
+                                              [4 6]
+                                              [7 9]
+                                              [10 12]])))
     (is (= (sel m :all :all) m))
     (is (= (sel m :all 2) (matrix im [3 6 9 12])))
     (is (= (sel m true true) m))
@@ -330,79 +334,81 @@
   [im]
   (let [m (matrix im A)]
     (is (= (plus m m m) (matrix im [[3 6 9]
-                                    [12 15 18]
-                                    [21 24 27]
-                                    [30 33 36]])))
+                                        [12 15 18]
+                                        [21 24 27]
+                                        [30 33 36]])))
     (is (= (plus m 1) (matrix im  [[2 3 4]
-                                   [5 6 7]
-                                   [8 9 10]
-                                   [11 12 13]])))
+                                       [5 6 7]
+                                       [8 9 10]
+                                       [11 12 13]])))
     (is (= (plus 1 m) (matrix im [[2 3 4]
-                                  [5 6 7]
-                                  [8 9 10]
-                                  [11 12 13]])))
+                                      [5 6 7]
+                                      [8 9 10]
+                                      [11 12 13]])))
     (is (= (plus (matrix im [1.0 2.0 3.0])
-                 (matrix im [1.0 2.0 3.0]))
-           (matrix im [2 4 6])))
+                     (matrix im [1.0 2.0 3.0]))
+               (matrix im [2 4 6])))
     (is (= (plus (matrix im [1.0 2.0 3.0]) 1)
-           (matrix im [2 3 4])))
+               (matrix im [2 3 4])))
     (is (= (plus 1 (matrix im [1.0 2.0 3.0]))
-           (matrix im [2 3 4])))))
+               (matrix im [2 3 4])))))
+
 
 (defn matrix-minus-test
   "element by element subtraction on matrices"
   [m]
   (is (m/equals (minus m m m) (matrix [[-1 -2 -3]
-                                       [-4 -5 -6]
-                                       [-7 -8 -9]
-                                       [-10 -11 -12]])))
+                                [-4 -5 -6]
+                                [-7 -8 -9]
+                                [-10 -11 -12]])))
   (is (m/equals (minus m 1) (matrix [[0 1 2]
-                                     [3 4 5]
-                                     [6 7 8]
-                                     [9 10 11]])))
+                              [3 4 5]
+                              [6 7 8]
+                              [9 10 11]])))
   (is (m/equals (minus 1 m) (matrix [[0 -1 -2]
-                                     [-3 -4 -5]
-                                     [-6 -7 -8]
-                                     [-9 -10 -11]])))
+                              [-3 -4 -5]
+                              [-6 -7 -8]
+                              [-9 -10 -11]])))
   (is (m/equals (minus (matrix [1 2 3])
-                       (matrix [1 2 3]))
-                (matrix [0 0 0])))
+                (matrix [1 2 3]))
+         (matrix [0 0 0])))
   (is (m/equals (minus (matrix [1 2 3]) 1)
-                (matrix [0 1 2])))
+         (matrix [0 1 2])))
   (is (m/equals (minus 1 (matrix [1 2 3]))
-                (matrix [0 -1 -2])))
+         (matrix [0 -1 -2])))
   (is (m/equals (minus (matrix [1 2 3])
-                       (m/array [1 2 3]))
-                (matrix [0 0 0])))
+                (m/array [1 2 3]))
+         (matrix [0 0 0])))
   (is (m/equals (minus 1) -1))
   (is (m/equals (minus (matrix [1 2 3]))
-                (matrix [-1 -2 -3])))
+         (matrix [-1 -2 -3])))
   (is (m/equals (minus m) (matrix [[-1 -2 -3]
-                                   [-4 -5 -6]
-                                   [-7 -8 -9]
-                                   [-10 -11 -12]]))))
+                            [-4 -5 -6]
+                            [-7 -8 -9]
+                            [-10 -11 -12]]))))
+
 
 (defn matrix-mult-test
   "element by element multiplication on matrices"
   [m]
   (is (m/equals (mult m m m) (matrix [[1 8 27]
-                                      [64 125 216]
-                                      [343 512 729]
-                                      [1000 1331 1728]])))
+                                   [64 125 216]
+                                   [343 512 729]
+                                   [1000 1331 1728]])))
   (is (m/equals (mult m 2) (matrix [[2 4 6]
-                                    [8 10 12]
-                                    [14 16 18]
-                                    [20 22 24]])))
+                             [8 10 12]
+                             [14 16 18]
+                             [20 22 24]])))
   (is (m/equals (mult 2 m) (matrix [[2 4 6]
-                                    [8 10 12]
-                                    [14 16 18]
-                                    [20 22 24]])))
+                             [8 10 12]
+                             [14 16 18]
+                             [20 22 24]])))
   (is (m/equals (mult (matrix [1 2 3]) [1 2 3])
-                (matrix [1 4 9])))
+         (matrix [1 4 9])))
   (is (m/equals (mult (matrix [1 2 3]) 2.0)
-                (matrix [2 4 6])))
+         (matrix [2 4 6])))
   (is (m/equals (mult 2.0 (matrix [1 2 3]))
-                (matrix [2 4 6])))
+         (matrix [2 4 6])))
   (is (m/equals (mult (matrix [1 2 3])
                       (matrix [1 2 3]))
                 (matrix [1 4 9]))))
@@ -453,15 +459,15 @@
                          [4556 5188 5820]
                          [6248 7114 7980]]))))
 
-(def ^:private test-mat-source [[39      10]
-                                [51      20]
-                                [60      30]
-                                [64      40]
-                                [73      50]
-                                [83      60]
-                                [90      70]
-                                [93      80]
-                                [99      90]
+(def ^:private test-mat-source [[39      10 ]
+                                [51      20 ]
+                                [60      30 ]
+                                [64      40 ]
+                                [73      50 ]
+                                [83      60 ]
+                                [90      70 ]
+                                [93      80 ]
+                                [99      90 ]
                                 [105     100]
                                 [110     110]
                                 [111     120]
@@ -493,15 +499,17 @@
       (is (== (prod x) 1.8185668405921276E50)))))
 
 (defn det-test []
-  (is (== 6.0 (det (matrix [[-2 2 3] [-1 1 3] [2 0 -1]])))))
+   (is (== 6.0 (det (matrix [[-2 2 3] [-1 1 3] [2 0 -1]])))))
+
 
 (defn matrix-map-test []
   (let [mat (matrix (range 9) 3)]
     (are [x y] (m/equals x y)
-      '((0.0 1.0 0.0) (1.0 0.0 1.0) (0.0 1.0 0.0)) (matrix-map #(mod % 2) mat)
-      1.0 (matrix-map #(mod % 2) ($ 1 0 mat))
-      '(1 0 1 0) (matrix-map #(mod % 2) [1 2 3 4])
-      1 (matrix-map #(mod % 2) 9))))
+         '((0.0 1.0 0.0) (1.0 0.0 1.0) (0.0 1.0 0.0)) (matrix-map #(mod % 2) mat)
+         1.0 (matrix-map #(mod % 2) ($ 1 0 mat))
+         '(1 0 1 0) (matrix-map #(mod % 2) [1 2 3 4])
+         1 (matrix-map #(mod % 2) 9))))
+
 
 (defn pow-test []
   (is (= (pow 2 2) 4.0))
@@ -515,6 +523,7 @@
                 (matrix [1.0 4.0 9.0])))
   (is (= (pow (dataset [:a :b :c] [[1 2 3]]) 2)
          (dataset [:a :b :c] [[1.0 4.0 9.0]]))))
+
 
 (defn sel-filter-test []
   (let [m (matrix [[110 110]])
@@ -563,17 +572,17 @@
             table-cell-value (-> table (.getModel) (.getValueAt row col))]
         (is (= (type table) javax.swing.JTable))
         (is (= table-cell-value data-value)))
-      (testing "create table from core.matrix"
-        (let [table (data-table (m/matrix ds))
-              table-cell-value (-> table (.getModel) (.getValueAt row col))
-              table-column-names (map #(.getColumnName (.getModel table) %)
-                                      (range (length (:column-names ds))))]
-          (is (= (type table) javax.swing.JTable))
-          (is (= table-cell-value (double data-value)))
-          (is (= ["0" "1" "2"] table-column-names))
-          (testing "custom column names"
-            (let [column-names ["columnA" "columnB" "columnC"]
-                  table (data-table (m/matrix ds) :column-names column-names)
-                  table-column-names (map #(.getColumnName (.getModel table) %)
-                                          (range (length column-names)))]
-              (is (= column-names table-column-names)))))))))
+    (testing "create table from core.matrix"
+      (let [table (data-table (m/matrix ds))
+            table-cell-value (-> table (.getModel) (.getValueAt row col))
+            table-column-names (map #(.getColumnName (.getModel table) %)
+                                 (range (length (:column-names ds))))]
+        (is (= (type table) javax.swing.JTable))
+        (is (= table-cell-value (double data-value)))
+        (is (= ["0" "1" "2"] table-column-names))
+        (testing "custom column names"
+          (let [column-names ["columnA" "columnB" "columnC"]
+                table (data-table (m/matrix ds) :column-names column-names)
+                table-column-names (map #(.getColumnName (.getModel table) %)
+                                     (range (length column-names)))]
+            (is (= column-names table-column-names)))))))))
