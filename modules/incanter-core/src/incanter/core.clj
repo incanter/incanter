@@ -1421,9 +1421,9 @@
            res (-> (ds/select-rows data r)
                    (ds/select-columns c))
            res (if-not (nil? filter-fn)
-                 (->> (ds/row-maps res)
-                      (clojure.core/filter filter-fn)
-                      (dataset (ds/column-names res)))
+                 (->> (ds/row-maps res) 
+                      (mapv #(mapv % col-names))
+                      (clojure.core/filter filter-fn))
                  res)]
 
        (cond
