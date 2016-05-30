@@ -115,6 +115,7 @@ namespace.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (censored-mean-lower a mu sigma)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the mean of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a'
@@ -129,6 +130,7 @@ deviation sigma) with the lower tail censored at 'a'
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (censored-mean-two-sided a b mu sigma)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the mean of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a' and the upper
@@ -144,6 +146,7 @@ tail censored at 'b'
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (censored-mean-upper b mu sigma)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the mean of a normal distribution (with mean mu and standard
 deviation sigma) with the upper tail censored at 'b'
@@ -158,6 +161,7 @@ deviation sigma) with the upper tail censored at 'b'
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (censored-variance-lower a mu sigma)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the variance of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a'
@@ -172,6 +176,7 @@ deviation sigma) with the lower tail censored at 'a'
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (censored-variance-two-sided a b mu sigma)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the variance of a normal distribution (with mean mu and standard
 deviation sigma) with the lower tail censored at 'a' and the upper
@@ -187,6 +192,7 @@ tail censored at 'b'
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (censored-variance-upper b mu sigma)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the variance of a normal distribution (with mean mu and standard
 deviation sigma) with the upper tail censored at 'b'
@@ -201,6 +207,7 @@ deviation sigma) with the upper tail censored at 'b'
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (truncated-variance &amp; {:keys [mean sd a b], :or {mean 0, sd 1, a NEGATIVE_INFINITY, b POSITIVE_INFINITY}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the variance of a normal distribution truncated at a and b.
 
@@ -239,7 +246,6 @@ References:
     <a id="var-source" href="https://github.com/incanter/incanter/blob/ae5a82125e364e1a27314abb0856bc23f5473766/modules/incanter-core/src/incanter/censored.clj#L118">Source</a>
   </div>
 </div>
-
 
 </div>
               </div>

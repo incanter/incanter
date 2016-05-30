@@ -444,6 +444,7 @@ an extension of the Colt numerics library
     <pre id="var-usage">Usage: (auto-correlation x lag)
        (auto-correlation x lag mean variance)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the auto-correlation of x with given lag, mean, and variance.
 If no mean or variance is provided, the they are calculated from x.
@@ -460,6 +461,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (benford-test coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs Benford's Law test using chisq-test.
 
@@ -484,6 +486,7 @@ Reference:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (bootstrap data statistic &amp; {:keys [size replacement smooth? smooth-sd], :or {replacement true, smooth? false, smooth-sd (/ (sqrt (count data)))}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a bootstrap sample of the given statistic on the given data.
 
 Arguments:
@@ -587,6 +590,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (category-col-summarizer col ds)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns a summarizer function which takes a category column and returns a list of the top 5 columns by volume, and a 
 count of remaining rows</pre>
     
@@ -599,6 +603,7 @@ count of remaining rows</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-beta x &amp; {:keys [alpha beta lower-tail?], :or {alpha 1, beta 1, lower-tail? false}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Beta cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pbeta function.
 
@@ -628,6 +633,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-binomial x &amp; {:keys [size prob lower-tail?], :or {size 1, prob 1/2, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Binomial cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pbinom
 
@@ -656,6 +662,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-chisq x &amp; {:keys [df lower-tail?], :or {df 1, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Chi Square cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pchisq function.
 
@@ -684,6 +691,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-empirical x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a step-function representing the empirical cdf of the given data.
 Equivalent to R's ecdf function.
 
@@ -720,6 +728,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-exp x &amp; {:keys [rate], :or {rate 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Exponential cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pexp
 
@@ -746,6 +755,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-f x &amp; {:keys [df1 df2 lower-tail?], :or {df1 1, df2 1, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the F-distribution cdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pf function.
 
@@ -774,6 +784,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-gamma x &amp; {:keys [shape rate lower-tail?], :or {shape 1, rate 1, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Gamma cdf for the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pgamma function.
 
@@ -803,6 +814,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-neg-binomial x &amp; {:keys [size prob lower-tail?], :or {size 10, prob 1/2, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Negative Binomial cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dnbinom
 
@@ -831,6 +843,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-normal x &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Normal cdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's pnorm function.
 
@@ -858,6 +871,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-poisson x &amp; {:keys [lambda lower-tail?], :or {lambda 1, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Poisson cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's ppois
 
@@ -885,6 +899,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-t x &amp; {:keys [df lower-tail?], :or {df 1, lower-tail? true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Student's t cdf for the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's pt function.
 
@@ -911,6 +926,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-uniform x &amp; {:keys [min max], :or {min 0.0, max 1.0}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Uniform cdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's punif function.
 
@@ -939,6 +955,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cdf-weibull x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Weibull cdf for the given value of x. It will return a sequence
 of values, if x is a sequence.
 
@@ -966,6 +983,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (chebyshev-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">In the limiting case of Lp reaching infinity we obtain the Chebyshev distance.</pre>
     
     
@@ -977,6 +995,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (chisq-test &amp; {:keys [x y correct table probs freq], :or {correct true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs chi-squared contingency table tests and goodness-of-fit tests.
 
@@ -1068,6 +1087,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (choose-singletype-col-summarizer col-type)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Takes in a type, and returns a suitable column summarizer</pre>
     
     
@@ -1080,6 +1100,7 @@ References:
     <pre id="var-usage">Usage: (correlation x y)
        (correlation mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the sample correlation of x and y, or the correlation
 matrix of the given matrix.
@@ -1099,6 +1120,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (correlation-linearity-test a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Correlation_ratio">http://en.wikipedia.org/wiki/Correlation_ratio</a>
 
@@ -1113,6 +1135,7 @@ It is worth noting that if the relationship between values of  and values of ove
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (correlation-ratio &amp; xs)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Correlation_ratio">http://en.wikipedia.org/wiki/Correlation_ratio</a>
 
@@ -1151,6 +1174,7 @@ Observe that for η = 1 the overall sample dispersion is purely due to dispersio
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cosine-similarity a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Cosine_similarity">http://en.wikipedia.org/wiki/Cosine_similarity</a>
 <a href="http://www.appliedsoftwaredesign.com/cosineSimilarityCalculator.php">http://www.appliedsoftwaredesign.com/cosineSimilarityCalculator.php</a>
@@ -1182,6 +1206,7 @@ Cosine Similarity (d1, d2) = 61 / (8.12403840464) * (8)
     <pre id="var-usage">Usage: (covariance x y)
        (covariance mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the sample covariance of x and y.
 
@@ -1206,6 +1231,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cumulative-mean coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sequence of cumulative means for the given collection. For instance
   The first value equals the first value of the argument, the second value is
   the mean of the first two arguments, the third is the mean of the first three
@@ -1224,6 +1250,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (detabulate &amp; {:keys [table row-labels col-labels]})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Take a contingency table of counts and returns a matrix of observations.
 
 Examples:
@@ -1259,6 +1286,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (dice-coefficient a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Dice%27s_coefficient">http://en.wikipedia.org/wiki/Dice%27s_coefficient</a>
 Dice's coefficient (also known as the Dice coefficient) is a similarity measure related to the Jaccard index.</pre>
@@ -1272,6 +1300,7 @@ Dice's coefficient (also known as the Dice coefficient) is a similarity measure 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (dice-coefficient-str a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Dice%27s_coefficient">http://en.wikipedia.org/wiki/Dice%27s_coefficient</a>
 
@@ -1298,6 +1327,7 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (discordant-pairs a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Discordant_pairs">http://en.wikipedia.org/wiki/Discordant_pairs</a></pre>
     
     
@@ -1309,6 +1339,7 @@ Plugging this into the formula, we calculate, s = (2 · 1) / (4 + 4) = 0.25.</pr
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (euclidean-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Euclidean_distance">http://en.wikipedia.org/wiki/Euclidean_distance</a>
 
 the Euclidean distance or Euclidean metric is the ordinary distance between two points that one would measure with a ruler, and is given by the Pythagorean formula. By using this formula as distance, Euclidean space (or even any inner product space) becomes a metric space. The associated norm is called the Euclidean norm. Older literature refers to the metric as Pythagorean metric.</pre>
@@ -1322,6 +1353,7 @@ the Euclidean distance or Euclidean metric is the ordinary distance between two 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (f-test x y)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Test for different variances between 2 samples
 
@@ -1344,6 +1376,7 @@ Test for different variances between 2 samples
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (gamma-coefficient)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://www.statsdirect.com/help/nonparametric_methods/kend.htm">http://www.statsdirect.com/help/nonparametric_methods/kend.htm</a>
 
@@ -1358,6 +1391,7 @@ The gamma coefficient is given as a measure of association that is highly resist
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (hamming-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Hamming_distance">http://en.wikipedia.org/wiki/Hamming_distance</a>
 
 In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. Put another way, it measures the minimum number of substitutions required to change one string into the other, or the number of errors that transformed one string into the other.</pre>
@@ -1371,6 +1405,7 @@ In information theory, the Hamming distance between two strings of equal length 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (indicator pred coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a sequence of ones and zeros, where ones
 are returned when the given predicate is true for
@@ -1395,6 +1430,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (jaccard-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Jaccard_index">http://en.wikipedia.org/wiki/Jaccard_index</a>
 
@@ -1409,6 +1445,7 @@ The Jaccard distance, which measures dissimilarity between sample sets, is compl
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (jaccard-index a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Jaccard_index">http://en.wikipedia.org/wiki/Jaccard_index</a>
 
@@ -1425,6 +1462,7 @@ The Jaccard coefficient measures similarity between sample sets, and is defined 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (kendalls-tau a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient">http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient</a>
 <a href="http://www.statsdirect.com/help/nonparametric_methods/kend.htm">http://www.statsdirect.com/help/nonparametric_methods/kend.htm</a>
@@ -1441,6 +1479,7 @@ best explanation and example is in "cluster analysis for researchers" page 165.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (kendalls-w)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Kendall%27s_W">http://en.wikipedia.org/wiki/Kendall%27s_W</a>
 <a href="http://faculty.chass.ncsu.edu/garson/PA765/friedman.htm">http://faculty.chass.ncsu.edu/garson/PA765/friedman.htm</a>
@@ -1476,6 +1515,7 @@ Legendre[2] discusses a variant of the W statistic which accommodates ties in th
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (kurtosis x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the kurtosis of the data, x. "Kurtosis is a measure of the "peakedness"
 of the probability distribution of a real-valued random variable. Higher kurtosis
@@ -1500,6 +1540,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (lee-distance a b q)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Lee_distance">http://en.wikipedia.org/wiki/Lee_distance</a>
 
 In coding theory, the Lee distance is a distance between two strings x1x2...xn and y1y2...yn of equal length n over the q-ary alphabet {0,1,…,q-1} of size q &gt;= 2. It is metric.
@@ -1517,6 +1558,7 @@ The metric space induced by the Lee distance is a discrete analog of the ellipti
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (levenshtein-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">http://en.wikipedia.org/wiki/Levenshtein_distance</a>
 
@@ -1548,6 +1590,7 @@ The Levenshtein distance has several simple upper and lower bounds that are usef
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (linear-model y x &amp; {:keys [intercept], :or {intercept true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the results of performing a OLS linear regression of y on x.
 
@@ -1607,6 +1650,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (mahalanobis-distance x &amp; {:keys [y W centroid]})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the Mahalanobis distance between x, which is 
   either a vector or matrix of row vectors, and the 
   centroid of the observations in the matrix :y.
@@ -1673,6 +1717,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (manhattan-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Manhattan_distance">http://en.wikipedia.org/wiki/Manhattan_distance</a>
 
 usual metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the (absolute) differences of their coordinates. The taxicab metric is also known as rectilinear distance, L1 distance or l1 norm (see Lp space), city block distance, Manhattan distance, or Manhattan length</pre>
@@ -1686,6 +1731,7 @@ usual metric of Euclidean geometry is replaced by a new metric in which the dist
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (mean x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the mean of the data, x.
 
@@ -1705,6 +1751,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (median x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the median of the data, x.
 
@@ -1724,6 +1771,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (minkowski-distance a b p)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"><a href="http://en.wikipedia.org/wiki/Minkowski_distance">http://en.wikipedia.org/wiki/Minkowski_distance</a>
 <a href="http://en.wikipedia.org/wiki/Lp_space">http://en.wikipedia.org/wiki/Lp_space</a>
 
@@ -1742,6 +1790,7 @@ In the limiting case of p reaching infinity we obtain the Chebyshev distance.</p
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (n-grams n s)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">returns a set of the unique n-grams in a string.
 
 this is using actual sets here, discards duplicate n-grams?</pre>
@@ -1755,6 +1804,7 @@ this is using actual sets here, discards duplicate n-grams?</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (normalized-kendall-tau-distance a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Kendall_tau_distance">http://en.wikipedia.org/wiki/Kendall_tau_distance</a>
 
@@ -1769,6 +1819,7 @@ Kendall tau distance is the total number of discordant pairs.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (numeric-col-summarizer col ds)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns a summarizer function which takes a purely numeric column with no non-numeric values</pre>
     
     
@@ -1780,6 +1831,7 @@ Kendall tau distance is the total number of discordant pairs.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (odds-ratio p1 p2)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Odds_ratio">http://en.wikipedia.org/wiki/Odds_ratio</a>
 
@@ -1803,6 +1855,7 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pairings a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">confusing ass name.</pre>
     
     
@@ -1814,6 +1867,7 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pairs a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">returns unique pairs of a and b where members of a and b can not be paired with the corresponding slot in the other list.</pre>
     
     
@@ -1825,6 +1879,7 @@ If X and Y are independent, their joint probabilities can be expressed in terms 
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-beta x &amp; {:keys [alpha beta], :or {alpha 1, beta 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Beta pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dbeta function.
 
@@ -1852,6 +1907,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-binomial x &amp; {:keys [size prob], :or {size 1, prob 1/2}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Binomial pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dbinom
 
@@ -1879,6 +1935,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-chisq x &amp; {:keys [df], :or {df 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Chi Square pdf of the given value of x.  It will return a sequence
 of values, if x is a sequence. Same as R's dchisq function.
 
@@ -1905,6 +1962,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-exp x &amp; {:keys [rate], :or {rate 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Exponential pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dexp
 
@@ -1931,6 +1989,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-f x &amp; {:keys [df1 df2], :or {df1 1, df2 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the F pdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's df function.
 
@@ -1958,6 +2017,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-gamma x &amp; {:keys [shape rate], :or {shape 1, rate 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Gamma pdf for the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dgamma function.
 
@@ -1985,6 +2045,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-neg-binomial x &amp; {:keys [size prob], :or {size 10, prob 1/2}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Negative Binomial pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dnbinom
 
@@ -2012,6 +2073,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-normal x &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Normal pdf of the given value, x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dnorm function.
 
@@ -2039,6 +2101,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-poisson x &amp; {:keys [lambda], :or {lambda 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Poisson pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dpois
 
@@ -2065,6 +2128,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-t x &amp; {:keys [df], :or {df 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Student's t pdf for the given value of x. It will return a sequence
 of values, if x is a sequence. Same as R's dt function.
 
@@ -2091,6 +2155,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-uniform x &amp; {:keys [min max], :or {min 0.0, max 1.0}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Uniform pdf of the given value of x. It will return a sequence
 of values, if x is a sequence. This is equivalent to R's dunif function.
 
@@ -2119,6 +2184,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pdf-weibull x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the Weibull pdf for the given value of x. It will return a sequence
 of values, if x is a sequence.
 
@@ -2147,6 +2213,7 @@ Example:
     <pre id="var-usage">Usage: (permute x)
        (permute x y)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> If provided a single argument, returns a permuted version of the
 given collection. (permute x) is the same as (sample x).
 
@@ -2169,6 +2236,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (predict model x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Takes a linear-model and an x value (either a scalar or vector)
 and returns the predicted value based on the linear-model.</pre>
     
@@ -2181,6 +2249,7 @@ and returns the predicted value based on the linear-model.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (principal-components x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs a principal components analysis on the given data matrix.
 Equivalent to R's prcomp function.
@@ -2237,6 +2306,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (product-marginal-test j)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">the joint PMF of independent variables is equal to the product of their marginal PMFs.</pre>
     
     
@@ -2248,6 +2318,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (quantile x &amp; {:keys [probs], :or {probs (DoubleArrayList. (double-array [0.0 0.25 0.5 0.75 1.0]))}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the quantiles of the data, x. By default it returns the min,
 25th-percentile, 50th-percentile, 75th-percentile, and max value.
@@ -2273,6 +2344,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (quantile-normal probability &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the inverse of the Normal CDF for the given probability.
 It will return a sequence of values, if given a sequence of
 probabilities. This is equivalent to R's qnorm function.
@@ -2305,6 +2377,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (quantile-t probability &amp; {:keys [df], :or {df 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the inverse of the Student's t CDF for the given probability
 (i.e. the quantile).  It will return a sequence of values, if x is
 a sequence of probabilities. This is equivalent to R's qt function.
@@ -2338,6 +2411,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (rank-index x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 given a seq, returns a map where the keys are the values of the seq and the values are the positional rank of each member o the seq.</pre>
     
@@ -2349,6 +2423,7 @@ given a seq, returns a map where the keys are the values of the seq and the valu
     <h2 id="incanter.stats/sample">sample</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from the given collection. If replacement
 is set to false it returns a set, otherwise it returns a list.
 
@@ -2374,6 +2449,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-beta size &amp; {:keys [alpha beta], :or {alpha 1, beta 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Beta distribution.
 This is equivalent to R's rbeta function.
 
@@ -2401,6 +2477,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-binomial size &amp; {:keys [size prob], :or {size 1, prob 1/2}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Binomial distribution.
 Same as R's rbinom
 
@@ -2427,6 +2504,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-chisq size &amp; {:keys [df], :or {df 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Chi Square distribution
 Same as R's rchisq function.
 
@@ -2452,6 +2530,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-dirichlet size alpha)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Examples:
   (use '(incanter core stats charts))
@@ -2490,6 +2569,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-exp size &amp; {:keys [rate], :or {rate 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Exponential distribution.
 Same as R's rexp
 
@@ -2515,6 +2595,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-gamma size &amp; {:keys [shape rate], :or {shape 1, rate 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Gamma distribution.
 This is equivalent to R's rgamma function.
 
@@ -2541,6 +2622,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-inv-wishart &amp; {:keys [scale p df], :or {p 2}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a p-by-p symmetric distribution drawn from an inverse-Wishart distribution
 
@@ -2569,6 +2651,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-multinomial size &amp; {:keys [probs categories], :or {probs [0.5 0.5]}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sequence representing a sample from a multinomial distribution.
 
 Arguments: size -- number of values to return
@@ -2611,6 +2694,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-mvn size &amp; {:keys [mean sigma]})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Multivariate Normal
 distribution. This is equivalent to R's mvtnorm::rmvnorm function.
 
@@ -2654,6 +2738,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-neg-binomial nsize &amp; {:keys [size prob], :or {size 10, prob 1/2}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Negative Binomial distribution.
 Same as R's rnbinom
 
@@ -2680,6 +2765,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-normal size &amp; {:keys [mean sd], :or {mean 0, sd 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Normal distribution
 This is equivalent to R's rnorm function.
 
@@ -2707,6 +2793,7 @@ Example:
     <pre id="var-usage">Usage: (sample-permutations n x)
        (sample-permutations n x y)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> If provided a two arguments (n x), it returns a list of n permutations
 of x. If provided three (n x y) arguments, returns a list with two with n permutations of
 each arguments, where each permutation is drawn from the pooled arguments.
@@ -2796,6 +2883,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-poisson size &amp; {:keys [lambda], :or {lambda 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Poisson distribution.
 Same as R's rpois
 
@@ -2821,6 +2909,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-t size &amp; {:keys [df], :or {df 1}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Student's t distribution.
 Same as R's rt function.
 
@@ -2846,6 +2935,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-uniform size &amp; {:keys [min max integers], :or {min 0.0, max 1.0, integers false}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Uniform distribution.
 This is equivalent to R's runif function.
 
@@ -2874,6 +2964,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-weibull size &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a sample of the given size from a Weibull distribution
 
 Options:
@@ -2899,6 +2990,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-wishart &amp; {:keys [scale p df], :or {p 2}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a p-by-p symmetric distribution drawn from a Wishart distribution
 
@@ -2927,6 +3019,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (scalar-abs x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Fast absolute value function</pre>
     
     
@@ -2938,6 +3031,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sd x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the sample standard deviation of the data, x. Equivalent to
 R's sd function.
@@ -2958,6 +3052,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (simple-ci coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Get the confidence interval for the data.</pre>
     
     
@@ -2969,6 +3064,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (simple-p-value coll mu)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the p-value for the data contained in coll.</pre>
     
     
@@ -2980,6 +3076,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (simple-regression y x &amp; {:keys [intercept], :or {intercept true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">A stripped version of linear-model that returns a map containing only
 the coefficients.</pre>
     
@@ -2992,6 +3089,7 @@ the coefficients.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (simple-t-test coll mu)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Perform a simple t-test on the data contained in coll.</pre>
     
     
@@ -3003,6 +3101,7 @@ the coefficients.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (skewness x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the skewness of the data, x. "Skewness is a measure of the asymmetry
 of the probability distribution of a real-valued random variable." (Wikipedia)
@@ -3025,6 +3124,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sorensen-index a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/S%C3%B8rensen_similarity_index#cite_note-4">http://en.wikipedia.org/wiki/S%C3%B8rensen_similarity_index#cite_note-4</a>
 
@@ -3047,6 +3147,7 @@ The sorensen index extended to abundance instead of incidence of species is call
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (spearmans-rho a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 <a href="http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient">http://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient</a>
 
@@ -3062,6 +3163,7 @@ In statistics, Spearman's rank correlation coefficient or Spearman's rho, is a n
     <pre id="var-usage">Usage: (square-devs-from-mean x)
        (square-devs-from-mean x m)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">takes either a sample or a sample and a precalculated mean.
 
 returns the squares of the difference between each observation and the sample mean.</pre>
@@ -3076,6 +3178,7 @@ returns the squares of the difference between each observation and the sample me
     <pre id="var-usage">Usage: (sum-of-square-devs-from-mean x)
        (sum-of-square-devs-from-mean x m)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">takes either a sample or a sample and a precalculated mean.
 
 returns the sum of the squares of the difference between each observation and the sample mean.</pre>
@@ -3089,6 +3192,7 @@ returns the sum of the squares of the difference between each observation and th
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sum-variance-test vs)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">the variance of the sum of n independent variables is equal to the sum of their variances.
 
 (variance-independence-test [[1 2 3 4] [1 2 3 4]]) -&gt; 5/2</pre>
@@ -3102,6 +3206,7 @@ returns the sum of the squares of the difference between each observation and th
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (summarizable? col ds)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Takes in a column name (or number) and a dataset. Returns true if the column can be summarized, and false otherwise</pre>
     
     
@@ -3113,6 +3218,7 @@ returns the sum of the squares of the difference between each observation and th
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (summarizer-fn col ds)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Takes in a column (number or name) and a dataset. Returns a function to summarize the column if summarizable, and a 
 string describing why the column can't be summarized in the event that it can't</pre>
     
@@ -3125,6 +3231,7 @@ string describing why the column can't be summarized in the event that it can't<
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (summary ds)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Takes in a dataset. Returns a summary of that dataset (as a map of maps), having automatically figured out the relevant 
 datatypes of columns. Will be slightly forgiving of mangled data in columns.</pre>
     
@@ -3137,6 +3244,7 @@ datatypes of columns. Will be slightly forgiving of mangled data in columns.</pr
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sweep x &amp; {:keys [stat fun], :or {stat mean, fun minus}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Return an array obtained from an input array by sweeping out a
 summary statistic. Based to R's sweep function.
 
@@ -3165,6 +3273,7 @@ summary statistic. Based to R's sweep function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (t-test x &amp; {:keys [y mu paired conf-level alternative var-equal], :or {paired false, alternative :two-sided, conf-level 0.95, var-equal false}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Argument:
   x : sample to test
@@ -3201,6 +3310,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (tabulate x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Cross-tabulates the values of the given numeric matrix.
 
 Returns a hash-map with the following fields:
@@ -3261,6 +3371,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (tanimoto-coefficient a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 
 <a href="http://en.wikipedia.org/wiki/Jaccard_index">http://en.wikipedia.org/wiki/Jaccard_index</a>
@@ -3276,6 +3387,7 @@ The cosine similarity metric may be extended such that it yields the Jaccard coe
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (variance x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the sample variance of the data, x. Equivalent to R's var function.
 
@@ -3295,6 +3407,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (within z x y)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 y is within z of x in metric space.  </pre>
     
@@ -3302,7 +3415,6 @@ y is within z of x in metric space.  </pre>
     <a id="var-source" href="https://github.com/incanter/incanter/blob/8faacac9079e7c79d79a06ec52a9a5e9e270f3b6/modules/incanter-core/src/incanter/stats.clj#L2765">Source</a>
   </div>
 </div>
-
 
 </div>
               </div>

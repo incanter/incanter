@@ -109,6 +109,7 @@ namespace.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (derivative f &amp; {:keys [dx], :or {dx 1.0E-4}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a function that approximates the derivative of the given function.
 
@@ -152,6 +153,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (gradient f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a function that calculates a 5-point approximation to
 the gradient of the given function. The vector of start values are
@@ -187,6 +189,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (hessian f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
 of the given function. The vector of start values are used to determine
 the number of parameters required by the function, and to scale the
@@ -222,6 +225,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (integrate f a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Integrate a function f from a to b
 
 
@@ -259,6 +263,7 @@ Reference:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (non-linear-model f y x start &amp; {:keys [max-iter tol method], :or {max-iter 200, tol 1.0E-5, method :gauss-newton}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Determine the nonlinear least-squares estimates of the
 parameters of a nonlinear model.
@@ -345,7 +350,6 @@ Examples:
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/optimize.clj#L577">Source</a>
   </div>
 </div>
-
 
 </div>
               </div>

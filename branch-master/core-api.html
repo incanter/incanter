@@ -443,6 +443,7 @@ an extension of the Colt numerics library
        ($ arg1 arg2)
        ($ rows cols data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 An alias to (sel (second args) :cols (first args)). If given only a single argument,
 it will use the $data binding for the first argument, which is set with
@@ -531,6 +532,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: ($= &amp; equation)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Formula macro translates from infix to prefix
 
@@ -612,6 +614,7 @@ Examples:
     <h2 id="incanter.core/$data">$data</h2>
     <span id="var-type">dynamic var</span><br />
     <pre id="var-usage"></pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">This variable is bound to a dataset when the with-data macro is used.
 functions like $ and $where can use $data as a default argument.</pre>
     
@@ -624,6 +627,7 @@ functions like $ and $where can use $data as a default argument.</pre>
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: ($fn col-bindings body)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 A simple macro used as syntactic sugar for defining predicate functions to be used
 in the $where function. The supplied arguments should be column names of a dataset.
@@ -681,6 +685,7 @@ Examples:
     <pre id="var-usage">Usage: ($group-by cols)
        ($group-by cols data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a map of datasets keyed by a query-map corresponding the group.
 
@@ -705,6 +710,7 @@ Examples:
     <pre id="var-usage">Usage: ($join [left-keys right-keys] left-data)
        ($join [left-keys right-keys] left-data right-data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a dataset created by right-joining two datasets.
 The join is based on one or more columns in the datasets.
@@ -762,6 +768,7 @@ Examples:
     <pre id="var-usage">Usage: ($map fun col-keys data)
        ($map fun col-keys)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 This function returns a sequence resulting from mapping the given function over
 the value(s) for the given column key(s) of the given dataset.
@@ -797,6 +804,7 @@ Examples:
     <pre id="var-usage">Usage: ($order cols order)
        ($order cols order data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sorts a dataset by the given columns in either ascending (:asc)
 or descending (:desc) order. If used within a the body of
@@ -825,6 +833,7 @@ Examples:
     <pre id="var-usage">Usage: ($rollup summary-fun col-name group-by)
        ($rollup summary-fun col-name group-by data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a dataset that uses the given summary function (or function identifier keyword)
 to rollup the given column based on a set of group-by columns. The summary function
@@ -892,6 +901,7 @@ Examples:
     <pre id="var-usage">Usage: ($where query-map)
        ($where query-map data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 An alias to (query-dataset (second args) (first args)). If given only a single argument,
 it will use the $data binding for the first argument, which is set with
@@ -925,6 +935,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (-&gt;Dataset column-names rows)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Positional factory function for class incanter.core.Dataset.</pre>
     
     
@@ -936,6 +947,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (abs A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the absolute value of the elements in the given matrix, sequence or number.
 Equivalent to R's abs function.
@@ -950,6 +962,7 @@ Equivalent to R's abs function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (acos A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the arc cosine of the elements in the given matrix, sequence or number.
 Equivalent to R's acos function.</pre>
@@ -964,6 +977,7 @@ Equivalent to R's acos function.</pre>
     <pre id="var-usage">Usage: (add-column column-name values)
        (add-column column-name values data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Adds a column, with given values, to a dataset.</pre>
     
     
@@ -976,6 +990,7 @@ Equivalent to R's acos function.</pre>
     <pre id="var-usage">Usage: (add-derived-column column-name from-columns f)
        (add-derived-column column-name from-columns f data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 This function adds a column to a dataset that is a function of
 existing columns. If no dataset is provided, $data (bound by the
@@ -1000,6 +1015,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (aggregate fields group-by &amp; {:keys [dataset rollup-fun], :or {rollup-fun :sum}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs the aggregation of the data in given dataset using the specified rollup function.
 The fields parameter defines column(s) on which the rollup will happen, and group-by
@@ -1020,6 +1036,7 @@ if it's not provided, then the :sum is used.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (asin A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the arc sine of the elements in the given matrix, sequence or number.
 Equivalent to R's asin function.
@@ -1034,6 +1051,7 @@ Equivalent to R's asin function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (atan A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the arc tangent of the elements in the given matrix, sequence or number.
 Equivalent to R's atan function.
@@ -1048,6 +1066,7 @@ Equivalent to R's atan function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (atan2 &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the atan2 of the elements in the given matrices, sequences or numbers.
 Equivalent to R's atan2 function.
@@ -1062,6 +1081,7 @@ Equivalent to R's atan2 function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (beta a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Equivalent to R's beta function.
 
@@ -1078,6 +1098,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (bind-columns &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the matrix resulting from concatenating the given matrices
 and/or sequences by their columns. Equivalent to R's cbind.
@@ -1103,6 +1124,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (bind-rows &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the matrix resulting from concatenating the given matrices
 and/or sequences by their rows. Equivalent to R's rbind.
@@ -1129,6 +1151,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (categorical-var &amp; {:keys [data ordered? labels levels], :or {ordered? false}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a categorical variable based on the values in the given collection.
 Equivalent to R's factor function.
@@ -1156,6 +1179,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (choose n k)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns number of k-combinations (each of size k) from a set S with
 n elements (size n), which is the binomial coefficient (also known
@@ -1182,6 +1206,7 @@ References:
     <pre id="var-usage">Usage: (col-names data)
        (col-names data colnames)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 If given a dataset, it returns its column names. If given a dataset and a sequence
 of column names, it returns a dataset with the given column names.
@@ -1205,6 +1230,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (condition mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the two norm condition number, which is max(S) / min(S), where S is the diagonal matrix of singular values from an SVD decomposition.
 
@@ -1227,6 +1253,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (conj-cols &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a dataset created by merging the given datasets and/or collections.
 There must be the same number of rows in each dataset and/or
@@ -1253,6 +1280,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (conj-rows &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a dataset created by combining the rows of the given datasets and/or collections.
 
@@ -1277,6 +1305,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (copy mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns a copy of the given matrix.</pre>
     
     
@@ -1288,6 +1317,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cos A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the cosine of the elements in the given matrix, sequence or number.
 Equivalent to R's cos function.
@@ -1302,6 +1332,7 @@ Equivalent to R's cos function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (cumulative-sum coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a sequence of cumulative sum for the given collection. For instance
 The first value equals the first value of the argument, the second value is
@@ -1322,6 +1353,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (data-table data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Creates a javax.swing.JTable given an Incanter dataset.</pre>
     
     
@@ -1333,6 +1365,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (dataset column-names &amp; data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a map of type incanter.core.dataset constructed from the given column-names and
 data. The data is either a sequence of sequences or a sequence of hash-maps.
@@ -1347,6 +1380,7 @@ data. The data is either a sequence of sequences or a sequence of hash-maps.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (dataset? obj)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Determines if obj is of type incanter.core.Dataset.</pre>
     
     
@@ -1358,6 +1392,7 @@ data. The data is either a sequence of sequences or a sequence of hash-maps.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (decomp-cholesky mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the Cholesky decomposition of the given matrix. Equivalent to R's
 chol function.
@@ -1390,6 +1425,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (decomp-eigenvalue mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
 
@@ -1417,6 +1453,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (decomp-lu mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the LU decomposition of the given matrix.
 
@@ -1447,6 +1484,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (decomp-qr m &amp; {:keys [type]})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
 
@@ -1480,6 +1518,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (decomp-svd mat &amp; {:keys [type], :or {type :full}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
 R's svd function.
@@ -1519,6 +1558,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (deshape &amp; {:keys [data remove-na group-by merge], :or {remove-na true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a dataset where the columns identified by :merge are collapsed into
 two columns called :variable and :value. The values in these columns are grouped
@@ -1561,6 +1601,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (det mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the determinant of the given matrix. Equivalent
 to R's det function.
@@ -1578,6 +1619,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (diag m)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">If given a matrix, diag returns a sequence of its diagonal elements.
 If given a sequence, it returns a matrix with the sequence's elements
 on its diagonal. Equivalent to R's diag function.
@@ -1599,6 +1641,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (dim mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns a vector with the number of rows and columns of the given matrix.</pre>
     
     
@@ -1610,6 +1653,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (div &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs element-by-element division on multiple matrices, sequences
 and/or numbers. Equivalent to R's / operator.
@@ -1638,6 +1682,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (exp A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the exponential of the elements in the given matrix, sequence or number.
 Equivalent to R's exp function.</pre>
@@ -1651,6 +1696,7 @@ Equivalent to R's exp function.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (factorial k)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the factorial of k (k must be a positive integer). Equivalent to R's
 factorial function.
@@ -1673,6 +1719,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (gamma x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Equivalent to R's gamma function.
 
@@ -1689,6 +1736,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (get-categories cols data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Given a dataset and one or more column keys, returns the set of categories for them.
 
@@ -1708,6 +1756,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (grid-apply f x-min x-max y-min y-max)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Applies the given function f, that accepts two arguments, to a grid
 defined by rectangle bounded x-min, y-min, x-max, y-max and returns a
@@ -1724,6 +1773,7 @@ and z calculated by applying f to the combinations of x and y.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (group-on mat on-cols &amp; {:keys [cols except-cols]})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Groups the given matrix by the values in the columns indicated by the
 'on-cols' argument, returning a sequence of matrices. The returned
@@ -1767,6 +1817,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (half-vectorize mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the half-vectorization (i.e. vech) of the given matrix.
 The half-vectorization, vech(A), of a symmetric nxn matrix A
@@ -1794,6 +1845,7 @@ References:
     <pre id="var-usage">Usage: (head len mat)
        (head mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the head of the dataset. 10 or full dataset by default.</pre>
     
     
@@ -1805,6 +1857,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (identity-matrix n)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns an n-by-n identity matrix.
 
@@ -1821,6 +1874,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (incomplete-beta x a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the non-regularized incomplete beta value.
 
@@ -1837,6 +1891,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (kronecker &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the Kronecker product of the given arguments.
 
@@ -1858,6 +1913,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (length coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 A version of count that works on collections, matrices, and numbers.
 The length of a number is one, the length of a collection is its count
@@ -1874,6 +1930,7 @@ Equivalent to R's length function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (log A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the natural log of the elements in the given matrix, sequence or number.
 Equivalent to R's log function.
@@ -1888,6 +1945,7 @@ Equivalent to R's log function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (log10 A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the log base 10 of the elements in the given matrix, sequence or number.
 Equivalent to R's log10 function.
@@ -1902,6 +1960,7 @@ Equivalent to R's log10 function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (log2 A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the log base 2 of the elements in the given matrix, sequence or number.
 Equivalent to R's log2 function.
@@ -1917,6 +1976,7 @@ Equivalent to R's log2 function.
     <pre id="var-usage">Usage: (make-unique coll)
        (make-unique coll seen)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Take a sequence of keywords and make them unique by possibly
 altering later ones.
@@ -1931,6 +1991,7 @@ altering later ones.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (map-&gt;Dataset m#)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Factory function for class incanter.core.Dataset, taking a map of keywords to field values.</pre>
     
     
@@ -1944,6 +2005,7 @@ altering later ones.
        (matrix data ncol)
        (matrix init-val rows cols)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns an instance of an incanter.Matrix, which is an extension of
 Clatrix matrix that implements the Clojure interface
@@ -1982,6 +2044,7 @@ Examples:
     <pre id="var-usage">Usage: (matrix-map f m)
        (matrix-map f m &amp; ms)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Like clojure.core/map, but will work on matrices of any dimension:
 1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m
@@ -2005,6 +2068,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (matrix? obj)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Test if obj is 'derived' clatrix.core.Matrix</pre>
     
     
@@ -2016,6 +2080,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (melt dataset pivot-key)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Melt an object into a form suitable for easy casting, like a melt function in R.
 Only accepts one pivot key for now. e.g.
@@ -2035,6 +2100,7 @@ See <a href="http://www.statmethods.net/management/reshape.html">http://www.stat
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (minus &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs element-by-element subtraction on multiple matrices, sequences
 and/or numbers. If only a single argument is provided, returns the negative
@@ -2063,6 +2129,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (mmult &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the matrix resulting from the matrix multiplication of the
 the given arguments. Equivalent to R's %*% operator.
@@ -2088,6 +2155,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (mult &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs element-by-element multiplication on multiple matrices, sequences
 and/or numbers. Equivalent to R's * operator.
@@ -2114,6 +2182,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (ncol mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the number of columns in the given matrix. Equivalent to R's ncol function.</pre>
     
     
@@ -2125,6 +2194,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (nrow mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the number of rows in the given matrix. Equivalent to R's nrow function.</pre>
     
     
@@ -2136,6 +2206,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (plus &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Performs element-by-element addition on multiple matrices, sequences
 and/or numbers. Equivalent to R's + operator.
@@ -2162,6 +2233,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (pow &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 This is an element-by-element exponent function, raising the first argument
 by the exponents in the remaining arguments. Equivalent to R's ^ operator.
@@ -2176,6 +2248,7 @@ by the exponents in the remaining arguments. Equivalent to R's ^ operator.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (prod x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the product of the given sequence.</pre>
     
     
@@ -2187,6 +2260,7 @@ by the exponents in the remaining arguments. Equivalent to R's ^ operator.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (query-dataset data query-map)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Queries the given dataset using the query-map, returning a new dataset.
 The query-map uses the the dataset's column-names as keys and a
@@ -2231,6 +2305,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (query-to-pred query-map)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Given a query-map, it returns a function that accepts a hash-map and returns true if it
 satisfies the conditions specified in the provided query-map.
@@ -2257,6 +2332,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (quit)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Exits the Clojure shell.</pre>
     
     
@@ -2268,6 +2344,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (rank mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
 
@@ -2290,6 +2367,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (regularized-beta x a b)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the regularized incomplete beta value. Equivalent to R's pbeta function.
 
@@ -2309,6 +2387,7 @@ References:
     <pre id="var-usage">Usage: (rename-cols col-map)
        (rename-cols col-map data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Rename columns based on col-map of old-col new-col-name pairs.  If
 old-col is a number it is taken as a 0 based index for the column to
@@ -2328,6 +2407,7 @@ Example:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (reorder-columns dset cols)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Produce a new dataset with the columns in the specified order.
 Returns nil if no valid column names are given.</pre>
@@ -2342,6 +2422,7 @@ Returns nil if no valid column names are given.</pre>
     <pre id="var-usage">Usage: (replace-column column-name values)
        (replace-column column-name values data)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Replaces a column in a dataset with new values.</pre>
     
     
@@ -2355,6 +2436,7 @@ Returns nil if no valid column names are given.</pre>
        (safe-div x y)
        (safe-div x y &amp; more)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 DivideByZero safe alternative to clojures / function,
 detects divide by zero and returns Infinity, -Infinity or NaN as appropriate.
@@ -2369,6 +2451,7 @@ Note: Does not work on matrices, only primitive types
     <h2 id="incanter.core/save">save</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Save is a multi-function that is used to write matrices, datasets and
 charts (in png format) to a file.
@@ -2437,6 +2520,7 @@ Chart Example:
     <h2 id="incanter.core/sel">sel</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns an element or subset of the given matrix, dataset, or list.
 If the column or row is specified as an atomic object (index or name), then
@@ -2492,6 +2576,7 @@ Examples:
     <h2 id="incanter.core/set-data">set-data</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Examples:
 
@@ -2525,6 +2610,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sin A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the sine of the elements in the given matrix, sequence or number.
 Equivalent to R's sin function.
@@ -2540,6 +2626,7 @@ Equivalent to R's sin function.
     <pre id="var-usage">Usage: (solve A B)
        (solve A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a matrix solution if A is square, least squares solution otherwise.
 Equivalent to R's solve function.
@@ -2560,6 +2647,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (solve-quadratic a b c)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a vector with the solution to x from the quadratic
 equation, a*x^2 + b*x + c.
@@ -2587,6 +2675,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sq A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the square of the elements in the given matrix, sequence or number.
 Equivalent to R's sq function.
@@ -2601,6 +2690,7 @@ Equivalent to R's sq function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sqrt A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the square-root of the elements in the given matrix, sequence or number.
 Equivalent to R's sqrt function.
@@ -2615,6 +2705,7 @@ Equivalent to R's sqrt function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sum x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the sum of the given sequence.</pre>
     
     
@@ -2626,6 +2717,7 @@ Equivalent to R's sqrt function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sum-of-squares x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the sum-of-squares of the given sequence.</pre>
     
     
@@ -2637,6 +2729,7 @@ Equivalent to R's sqrt function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (symmetric-matrix data &amp; {:keys [lower], :or {lower true}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a symmetric matrix from the given data, which represents the lower triangular elements
 ordered by row. This is not the inverse of half-vectorize which returns a vector of the upper-triangular
@@ -2671,6 +2764,7 @@ Examples:
     <pre id="var-usage">Usage: (tail len mat)
        (tail mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns the tail of the dataset. 10 or full dataset by default.</pre>
     
     
@@ -2682,6 +2776,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (tan A)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the tangent of the elements in the given matrix, sequence or number.
 Equivalent to R's tan function.
@@ -2696,6 +2791,7 @@ Equivalent to R's tan function.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (to-dataset obj &amp; {:keys [transpose]})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a dataset containing the given values.
 
@@ -2722,6 +2818,7 @@ Examples:
     <h2 id="incanter.core/to-list">to-list</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a list-of-lists if the given matrix is two-dimensional
 and a flat list if the matrix is one-dimensional.
@@ -2735,6 +2832,7 @@ and a flat list if the matrix is one-dimensional.
     <h2 id="incanter.core/to-map">to-map</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Takes a dataset or matrix and returns a hash-map where the keys are
 keyword versions of the column names, for datasets, or numbers, for
@@ -2758,6 +2856,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (to-matrix dataset &amp; {:keys [dummies], :or {dummies false}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Converts a dataset into a matrix. Equivalent to R's as.matrix function
 for datasets.
@@ -2776,6 +2875,7 @@ Options:
     <h2 id="incanter.core/to-vect">to-vect</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a vector-of-vectors if the given matrix is two-dimensional
 and a flat vector if the matrix is one-dimensional. This is a bit
@@ -2791,6 +2891,7 @@ slower than the to-list function
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (toeplitz x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the Toeplitz matrix for the given vector, which form the first row of the matrix
 </pre>
@@ -2804,6 +2905,7 @@ Returns the Toeplitz matrix for the given vector, which form the first row of th
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (trace mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the trace of the given matrix.
 
@@ -2820,6 +2922,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (trans mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the transpose of the given matrix. Equivalent to R's t function
 
@@ -2839,6 +2942,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (transform-col dataset column f &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Apply function f &amp; args to the specified column of dataset and replace the column
 with the resulting new values.
@@ -2853,6 +2957,7 @@ with the resulting new values.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (vectorize mat)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the vectorization (i.e. vec) of the given matrix.
 The vectorization of an m-by-n matrix A, denoted by vec(A)
@@ -2878,6 +2983,7 @@ References:
     <h2 id="incanter.core/view">view</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 This is a general 'view' function. When given an Incanter matrix/dataset
 or a Clojure numeric collection, it will display it in a Java Swing
@@ -2936,6 +3042,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (with-data data-binding &amp; body)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Binds the given data to $data and executes the body.
 Typically used with the $ and $where functions.
@@ -2959,7 +3066,6 @@ Examples:
     <a id="var-source" href="https://github.com/incanter/incanter/blob/a8cab5ea7cb61b2a7bf600c7910c575ad7551934/modules/incanter-core/src/incanter/core.clj#L2231">Source</a>
   </div>
 </div>
-
 
 </div>
               </div>

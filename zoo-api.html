@@ -147,6 +147,7 @@ an extension of the Colt numerics library
        ($$ ind cols ts)
        ($$ ind-1 ind-2 cols ts)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 This is the equivalent of :: in xts. That is, it slices out
 the timeseries between ind-1 and ind-2. These are any values
@@ -162,6 +163,7 @@ that can be coerced into clj-time values.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (aligned? &amp; zs)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Is the :index column identical for all zs.</pre>
     
     
@@ -173,6 +175,7 @@ that can be coerced into clj-time values.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (coredata x)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Return the :rows of a dataset, with :index dissoc'd.
 Intended to be used internally time series function to get at data.
@@ -188,6 +191,7 @@ Intended to be used internally time series function to get at data.
     <pre id="var-usage">Usage: (lag z)
        (lag z n)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Return the timeseries lagged by n units or 1 if not specified.
 No time calculations are made in the index column. The output
@@ -203,6 +207,7 @@ timeseries is of the same length as the input.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (roll-apply f n coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 A generic function for applying a function to rolling window of a collection.
 
@@ -221,6 +226,7 @@ coll -- collection of data
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (roll-max n coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the rolling max of the previous n elements.
 </pre>
@@ -234,6 +240,7 @@ Returns the rolling max of the previous n elements.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (roll-mean n coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the unweighted mean of the previous n data points.
 
@@ -251,6 +258,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (roll-median n coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the rolling median of the previous n elements.
 </pre>
@@ -264,6 +272,7 @@ Returns the rolling median of the previous n elements.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (roll-min n coll)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the rolling min of the previous n elements.
 </pre>
@@ -277,6 +286,7 @@ Returns the rolling min of the previous n elements.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (within-zoo? t z)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Is t between the first and last indices.</pre>
     
     
@@ -289,6 +299,7 @@ Returns the rolling min of the previous n elements.
     <pre id="var-usage">Usage: (zoo x)
        (zoo x index-col)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Return the given dataset as a zoo value which is simply a dataset
 that contains an column of clj-time values specified by index-col,
@@ -305,6 +316,7 @@ into Jodas using the TimeCoercible Protocol.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (zoo-apply f n zoo column &amp; args)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Behave as for roll-apply but accept a zoo and a single column
 upon which to roll-apply f. Returns a zoo of the same length
@@ -320,6 +332,7 @@ as input zoo with pre-pended nils
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (zoo-row-map f &amp; zs)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Accept a number of aligned zoo object and pass them row-wise
 into f, return a zoo. f must accept and return maps. The :index
@@ -336,6 +349,7 @@ afterwards with the :index of the first.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (zoo-row-map- f &amp; zs)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Accept a number of aligned zoo object and pass them row-wise into f,
 return a seq of maps of the output of the output.
@@ -352,13 +366,13 @@ f is applied, and then replaced afterwards.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (zoo-row-map-occupied f &amp; s)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">zoo-row-map- and remove the empties. This returns a seq of maps</pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/62062b0f3353d34dfd8f08ce4d748be35e4ec6a4/modules/incanter-zoo/src/incanter/zoo.clj#L278">Source</a>
   </div>
 </div>
-
 
 </div>
               </div>

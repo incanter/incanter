@@ -261,6 +261,7 @@ This library is built on the JFreeChart library
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-box-plot chart x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds an additional box to an existing box-plot, returns the modified chart object.
 
@@ -299,6 +300,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-categories chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds an additional categories to an existing bar-chart or line-chart, returns the modified chart object.
 
@@ -350,6 +352,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-function chart function min-range max-range &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds a xy-plot of the given function to the given chart, returning
 a modified version of the chart.
@@ -404,6 +407,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-histogram chart x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds a histogram to an existing histogram plot, returns the modified
 chart object.
@@ -441,6 +445,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-image chart x y img &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds an image to the chart at the given coordinates.
 
@@ -468,6 +473,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-lines chart x y &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Plots lines on the given scatter or line plot (xy-plot) of the (x,y) points.
 Equivalent to R's lines function, returns the modified chart object.
@@ -525,6 +531,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-parametric chart function min-range max-range &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds a xy-plot of the given parametric function to the given chart, returning
 a modified version of the chart.
@@ -558,6 +565,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-pointer chart x y &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds an arrow annotation to the given chart.
 
@@ -607,6 +615,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (add-points chart x y &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Plots points on the given scatter-plot or xy-plot of the (x,y) points.
 Equivalent to R's lines function, returns the modified chart object.
@@ -659,6 +668,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-polygon chart coords &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds a polygon outline defined by a given coordinates. The last coordinate will
 close with the first. If only two points are given, it will plot a line.
@@ -722,6 +732,7 @@ Examples:
     <h2 id="incanter.charts/add-subtitle">add-subtitle</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds a JFreeChart title object to a chart as a subtitle.
 
@@ -744,6 +755,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-text chart x y text &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds a text annotation centered at the given coordinates.
 
@@ -791,6 +803,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (area-chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Returns a JFreeChart object representing an area-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
 to write it to a file.
@@ -876,6 +889,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (bar-chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a bar-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -963,6 +977,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (bland-altman-plot x1 x2 &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Options:
   :data (default nil) If the :data option is provided a dataset,
@@ -998,6 +1013,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (box-plot x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a box-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -1049,6 +1065,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (candle-stick-plot &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Produces a candle stick chart
 
@@ -1096,6 +1113,7 @@ Options:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (clear-background chart)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the alpha level (transparency) of the plot's background to zero
 removing the default grid, returns the modified chart object.
@@ -1115,6 +1133,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (dynamic-scatter-plot [&amp; slider-bindings] expression &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns an scatter-plot bound to sliders (which tend to appear behind the chart).
 See the sliders macro for more information.
@@ -1148,6 +1167,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (dynamic-xy-plot [&amp; slider-bindings] expression &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns an xy-plot bound to sliders (which tend to appear behind the chart).
 See the sliders macro for more information.
@@ -1181,6 +1201,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (function-plot function min-range max-range &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a xy-plot object of the given function over the range indicated
 by the min-range and max-range arguments. Use the 'view' function to
@@ -1220,6 +1241,7 @@ Examples:
     <pre id="var-usage">Usage: (get-series chart)
        (get-series chart series-idx)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">get-series</pre>
     
     
@@ -1231,6 +1253,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (heat-map function x-min x-max y-min y-max &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Usage: (heat-map function x-min x-max y-min y-max &amp; options)
 
@@ -1297,6 +1320,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (histogram x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing the histogram of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -1358,6 +1382,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (line-chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a line-chart of the given values and categories.
 Use the 'view' function to display the chart, or the 'save' function
@@ -1445,6 +1470,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (log-axis &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Create a logarithmic axis.
 
@@ -1476,6 +1502,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (parametric-plot function min-range max-range &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a xy-plot object of the given parametric function over the range indicated
 by the min-range and max-range arguments. Use the 'view' function to
@@ -1514,6 +1541,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (pie-chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a pie-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -1565,6 +1593,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (qq-plot x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a QQ-Plot object. Use the 'view' function to display it.
 
@@ -1598,6 +1627,7 @@ Examples:
     <pre id="var-usage">Usage: (scatter-plot)
        (scatter-plot x y &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a scatter-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -1667,6 +1697,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (scatter-plot-matrix &amp; opts)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object displaying a scatter plot matrix for the given data.
 Use the 'view' function to display the chart or 'save' to write it to a file.
@@ -1737,6 +1768,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-alpha chart alpha)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the alpha level (transparency) of the plot's foreground
 returns the modified chart object.
@@ -1755,6 +1787,7 @@ References:
     <h2 id="incanter.charts/set-axis">set-axis</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Set the selected axis of the chart, returning the chart.
 (Beware: the axis' label will replace axis label set previously on the chart.)
@@ -1794,6 +1827,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-background-alpha chart alpha)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the alpha level (transparency) of the plot's background
 returns the modified chart object.
@@ -1812,6 +1846,7 @@ References:
     <h2 id="incanter.charts/set-background-default">set-background-default</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Examples:
   (use '(incanter core stats charts datasets))
@@ -1894,6 +1929,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-point-size chart point-size &amp; {:keys [series dataset], :or {series :all, dataset 0}})
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">Set the point size of a scatter plot. Use series option to apply
 point-size to only one series.</pre>
     
@@ -1906,6 +1942,7 @@ point-size to only one series.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-stroke chart &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Examples:
   (use '(incanter core charts))
@@ -1940,6 +1977,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-stroke-color chart color &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Examples:
   (use '(incanter core charts))
@@ -1970,6 +2008,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-theme chart theme)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Changes the chart theme.
 
@@ -2029,6 +2068,7 @@ References:
     <h2 id="incanter.charts/set-theme-bw">set-theme-bw</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 
 Examples:
@@ -2104,6 +2144,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-title chart title)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the main title of the plot, returns the modified chart object.
 
@@ -2122,6 +2163,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-x-label chart label)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the label of the x-axis, returns the modified chart object.
 
@@ -2140,6 +2182,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-x-range chart lower upper)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the range of the x-axis on the given chart.
 
@@ -2162,6 +2205,7 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-y-label chart label)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the label of the y-axis, returns the modified chart object.
 
@@ -2180,6 +2224,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (set-y-range chart lower upper)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Sets the range of the y-axis on the given chart.
 
@@ -2203,6 +2248,7 @@ Examples:
     <pre id="var-usage">Usage: (slider updater-fn slider-values)
        (slider updater-fn slider-values slider-label)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Examples:
   (use '(incanter core stats charts))
@@ -2227,6 +2273,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (sliders [&amp; slider-bindings] body)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Creates one slider control for each of the given sequence bindings.
 Each slider calls the given expression when manipulated.
@@ -2289,6 +2336,7 @@ Examples:
     <pre id="var-usage">Usage: (sliders* f [&amp; slider-values])
        (sliders* f [&amp; slider-values] [&amp; slider-labels])
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">sliders*
 
 Examples:
@@ -2312,6 +2360,7 @@ Examples:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (stacked-area-chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing an stacked-area-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -2388,6 +2437,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (stacked-bar-chart categories values &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing an stacked-bar-chart of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -2474,6 +2524,7 @@ References:
     <span id="var-type">macro</span><br />
     <pre id="var-usage">Usage: (time-series-plot x y &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a time series plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -2522,6 +2573,7 @@ References:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (trace-plot x &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a trace-plot object, use the 'view' function to display it.
 
@@ -2556,6 +2608,7 @@ Options:
     <pre id="var-usage">Usage: (xy-plot)
        (xy-plot x y &amp; options)
 </pre>
+    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a JFreeChart object representing a xy-plot of the given data.
 Use the 'view' function to display the chart, or the 'save' function
@@ -2617,7 +2670,6 @@ References:
     <a id="var-source" href="https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-charts/src/incanter/charts.clj#L1154">Source</a>
   </div>
 </div>
-
 
 </div>
               </div>
