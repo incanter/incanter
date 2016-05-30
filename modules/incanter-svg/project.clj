@@ -8,9 +8,9 @@
         :dir "modules/incanter-svg"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-charts "1.9.1-SNAPSHOT"]
-                 [org.apache.xmlgraphics/batik-dom "1.7"]
-                  [org.apache.xmlgraphics/batik-svggen "1.7"]
-                  [org.apache.xmlgraphics/batik-awt-util "1.7"]
-                  [org.apache.xmlgraphics/batik-util "1.7"]
-                  [org.apache.xmlgraphics/batik-xml "1.7"]]
+                 [org.apache.xmlgraphics/batik-dom "1.8"]
+                  [org.apache.xmlgraphics/batik-svggen "1.8"]
+                  [org.apache.xmlgraphics/batik-awt-util "1.8"]
+                  [org.apache.xmlgraphics/batik-util "1.8"]
+                  [org.apache.xmlgraphics/batik-xml "1.8"]]
   )

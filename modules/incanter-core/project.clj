@@ -9,9 +9,9 @@
   :min-lein-version "2.0.0"
   :java-source-paths ["java"]
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/math.combinatorics "0.1.1" :exclusions [org.clojure/clojure]]
-                 [net.mikera/vectorz-clj "0.43.0" :exclusions [org.clojure/clojure]]
-                 [net.mikera/core.matrix "0.49.0" :exclusions [org.clojure/clojure]]
+                 [org.clojure/math.combinatorics "0.1.2" :exclusions [org.clojure/clojure]]
+                 [net.mikera/vectorz-clj "0.44.0" :exclusions [org.clojure/clojure]]
+                 [net.mikera/core.matrix "0.52.0" :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.1"]]
   :profiles {:dev {:dependencies [[clatrix "0.5.0" :exclusions [org.clojure/clojure net.mikera/core.matrix]]
                                   [org.jblas/jblas "1.2.3"]]}}
