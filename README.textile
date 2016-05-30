@@ -95,7 +95,7 @@ Let's play with some data now. We'll look at London weather for 2012:
 
 bc.. ; function that returns dataset containing weather in London for given month in 2012
 (defn weather-for-month [month]
-  (-> (format "http://www.wunderground.com/history/airport/EGLL/2012/%d/10/MonthlyHistory.html?format=1" month)
+  (-> (format "https://www.wunderground.com/history/airport/EGLL/2012/%d/10/MonthlyHistory.html?format=1" month)
       (read-dataset :header true)))
 
 ; get weather data for each month in 2012 and build single dataset
