@@ -1,4 +1,4 @@
-(defproject incanter "1.9.1-SNAPSHOT"
+(defproject incanter "1.9.1"
   :description "Incanter is a Clojure-based, R-like statistical programming and data visualization environment."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
