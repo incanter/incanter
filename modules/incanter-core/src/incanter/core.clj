@@ -1394,7 +1394,7 @@
                  :else :all)
            cols (cond
                  cols cols
-                 except-cols (ds/column-names (ds/except-columns data except-cols))
+                 except-cols (ds/column-names (ds/remove-columns data except-cols))
                  all all
                  :else :all)
            col-names (ds/column-names data)
@@ -1421,9 +1421,9 @@
            res (-> (ds/select-rows data r)
                    (ds/select-columns c))
            res (if-not (nil? filter-fn)
-                 (->> (ds/row-maps res)
-                      (clojure.core/filter filter-fn)
-                      (dataset (ds/column-names res)))
+                 (->> (ds/row-maps res) 
+                      (mapv #(mapv % col-names))
+                      (clojure.core/filter filter-fn))
                  res)]
 
        (cond
@@ -2139,7 +2139,7 @@
   Deprecated. Please use `clojure.core.matrix.dataset/update-column` instead.
   "
   [dataset column f & args]
-  (apply ds/update-column dataset column f args))
+  (apply ds/emap-column dataset column f args))
 
 
 (defn deshape

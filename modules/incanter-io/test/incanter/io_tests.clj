@@ -58,9 +58,15 @@
                            (str incanter-home "data/olsexamp.dat")
                            :delim \space
                            :header true)))
+;; read-write-read roundtrip to test write functionality, using cars data
+(def test-roundtrip-data
+  (let [ids (read-dataset (str incanter-home "data/cars.csv")
+                      :header true)
+        fpath (.getAbsolutePath (java.io.File/createTempFile "tmpcars" "csv"))]
+      (do (save ids fpath)
+              (read-dataset fpath :header true))))
 
-
-(defn io-validation [m1 m2 m3 m4 m5]
+(defn io-validation [m1 m2 m3 m4 m5 m6]
   ;; validate matrices read from files
   (is (m/equals (m/esum (sel m1 :cols 0)) 770))
   (is (m/equals (m/esum (sel m1 :cols 1)) 2149))
@@ -68,6 +74,8 @@
   (is (m/equals (m/esum (sel m2 :cols 1)) 2149))
   (is (m/equals (m/esum (sel m3 :cols 0)) 770))
   (is (m/equals (m/esum (sel m3 :cols 1)) 2149))
+  (is (m/equals (m/esum (sel m6 :cols 0)) 770))
+  (is (m/equals (m/esum (sel m6 :cols 1)) 2149))
   ;; confirm that iris species factor was converted to two dummy variables
   (is (m/equals (sel m4 :rows 0) (matrix [5.10 3.50 1.40 0.20 0])))
   (is (m/equals (m/get-row m5 0) (matrix [5.10 3.50 1.40 0.20 0 0]))))
@@ -77,6 +85,7 @@
   (doseq [[name cars-dataset]
 	  [["dat" test-data]
 	   ["csv" test-csv-data]
+           ["rtrip" test-roundtrip-data]
 	   ["tdd" test-tdd-data]]]
     (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
     (is (= 50 (count (m/rows cars-dataset))) (str "Reading rows for " name " failed")))) ;; end of read-dataset-validation tests
@@ -104,8 +113,9 @@
     (println (str "compliance test " impl))
     (let [test-mat (to-matrix test-data)
           test-csv-mat (to-matrix test-csv-data)
+          test-rtrip-mat (to-matrix test-roundtrip-data)
           test-tdd-mat (to-matrix test-tdd-data)
           iris-mat (to-matrix iris-data)
           iris-mat-dummies (to-matrix iris-data :dummies true)]
       (io-validation test-mat test-csv-mat test-tdd-mat
-                     iris-mat iris-mat-dummies))))
+                     iris-mat iris-mat-dummies test-rtrip-mat))))
