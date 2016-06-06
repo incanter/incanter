@@ -352,15 +352,6 @@
       (.removeSeries data-set series)
       chart)))
 
-(defn has-series?
-  "Test to see if a chart has a series name series-lab"
-  [chart series-label]
-  (try
-    (-> chart .getPlot .getDataset (.getSeries series-label))
-    true
-    (catch UnknownKeyException e
-      false)))
-
 (defn add-histogram*
   ([chart x & options]
     (let [opts (when options (apply assoc {} options))
@@ -575,6 +566,7 @@
         (.setRenderer n line-renderer))
       chart)))
 
+;; This one is not recommended, should use update-series instead.
 (defn extend-line
   " Add new data set to an exiting series if it already exists,
     otherwise, data set will be added to a newly created series. "
@@ -599,6 +591,57 @@
               (.add series (double x) (double y))))
           _x _y))
     chart))
+
+(defn get-series-by-label
+  "Return the series with name specified in series-label.
+   When supplied with a dataset index, this will only return the series
+   with given name in that particular dataset, this will make the search
+   faster."
+  ([chart series-label]
+   (let [plot (-> chart .getPlot)]
+     (loop [n (dec (.getDatasetCount plot))]
+       (let [series (try
+                      (-> plot (.getDataset n) (.getSeries series-label))
+                      (catch UnknownKeyException e
+                        nil))]
+         (if series
+           {:series series :index n}
+           (if (= n 0)
+             nil
+             (recur (dec n))))))))
+  ([chart series-label index]
+   (let [dataset (-> chart .getPlot (.getDataset index))]
+     (when dataset
+       (try (.getSeries dataset series-label)
+            (catch UnknownKeyException e
+              nil))))))
+
+(defn update-series
+  "Identify a series by series-label, then add new data to that series.
+   Optionally, old data can be removed.
+   If the series cannot be found, function returns nil, and nothing will
+   be changed."
+  [chart series-label x y & options]
+  (let [opts       (when options (apply assoc {} options))
+        data       (or (:data  opts) $data)
+        index      (or (:index opts) -1)
+        _x         (data-as-list x data)
+        _y         (data-as-list y data)
+        clean?     (or (:clean opts) false)
+        series     (if (>= index 0)
+                     (get-series-by-label chart series-label index)
+                     (:series (get-series-by-label chart series-label)))]
+    (if series
+      (do
+        (when clean? (.clear series))
+        (dorun
+         (map (fn [x y]
+                (if (and (not (nil? x))
+                         (not (nil? y)))
+                  (.add series (double x) (double y))))
+              _x _y))
+        chart)
+      nil)))
 
 ;; doesn't work
 (defmethod add-lines* org.jfree.data.statistics.HistogramDataset
@@ -3442,7 +3485,61 @@
                      (.getDataset series-idx)
                      .getSeries)))))
 
+(defn has-series?
+  "Examine if series-label is in any of the datasets of given chart."
+  [chart series-label]
+  (if (get-series-by-label chart series-label) true false))
 
+(defn list-series
+  "List all the series label and the index of the dataset they are in."
+  [chart]
+  (let [plot       (-> chart .getPlot)
+        count      (.getDatasetCount plot)
+        series-map (transient {})]
+    (doseq [n (range count)]
+      (let [dataset      (.getDataset plot n)
+            series-count (.getSeriesCount dataset)]
+        ;; (println series-count)
+        (assoc! series-map n (mapv (fn [i] (.getSeriesKey dataset i)) (range series-count)))))
+    (persistent! series-map)))
+
+(defn remove-series
+  "Remove an existing series speicified by series-label.
+   If the series does not exist it return nil.
+   Note: this will remove duplicated series labels"
+  ([chart series-label]
+   (let [plot (-> chart .getPlot)]
+     (loop [n     (dec (.getDatasetCount plot))
+            count 0]
+       (let [dataset (.getDataset plot n)
+             series  (try
+                       (.getSeries dataset series-label)
+                       (catch UnknownKeyException e
+                         nil))]
+         (if series
+           (do
+             (.removeSeries dataset series)
+             (if (= n 0)
+               (inc count)
+               (recur (dec n) (inc count))))
+           (if (= n 0)
+             count
+             (recur (dec n) count)))))))
+  ([chart series-label index]
+   ))
+
+(defn clear-chart
+  "Remove all series from all dataset."
+  [chart]
+  (let [plot       (-> chart .getPlot)
+        count      (.getDatasetCount plot)]
+    (doseq [n (range count)]
+      (let [dataset (.getDataset plot n)
+            series-count (.getSeriesCount dataset)]
+        ;; (println series-count)
+        (doseq [i (range series-count)]
+          (.removeSeries dataset i))))
+    chart))
 
 (defmethod set-data org.jfree.chart.JFreeChart
   ([chart data]

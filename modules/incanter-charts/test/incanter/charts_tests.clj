@@ -453,4 +453,27 @@
     (remove-series chart :series2)
     (is (= (has-series? chart :series2) false))))
 
+(deftest update-series-test
+  (let [x1 (range 10)
+        y1 (mapv (fn [_] (rand 10)) x1)
+        x2 (range 5)
+        y2 (mapv (fn [_] (rand 5)) x2)
+        x3 (range 10 20)
+        y3 (mapv (fn [_] (rand 10)) x1)
+        chart (xy-plot  x1 y1 :series-label :series_a_line :legend true)]
+    (testing "list-series"
+      (add-points chart x1 y1 :series-label :series_a_points)
+      (add-points chart x2 y2 :series-label :series_b)
+      (is (= (list-series chart)
+             {0 [:series_a_line], 1 [:series_a_points], 2 [:series_b]}))
+      (is (= (has-series? chart :series_b) true))
+      (is (= (has-series? chart :series_c) false))
+      (update-series chart :series_a_points x3 y3 :clean true)
+      (update-series chart :series_a_line   x3 y3 :clean true)
+      (is (= (remove-series chart :series_b) 1))
+      (is (= (remove-series chart :series_b) 0))
+      (is (= (has-series? chart :series_b) false))
+      (is (= (list-series chart)
+             {0 [:series_a_line], 1 [:series_a_points], 2 []})))))
+
 ; (run-tests)
