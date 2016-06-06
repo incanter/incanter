@@ -78,6 +78,9 @@ namespace.
       <a href="#incanter.latex/to-latex" class="toc-entry-anchor">to-latex</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -108,7 +111,6 @@ and subtitles.</pre>
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; {:keys [color], :or {color darkGray}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
 
@@ -129,6 +131,7 @@ Examples:
       (add-latex 0 0.1 "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
       view)
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L79">Source</a>
@@ -139,7 +142,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; {:keys [color], :or {color darkGray}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Adds the given LaTeX equation as a subtitle to the chart.
 
@@ -154,6 +156,7 @@ Examples:
     (add-latex-subtitle "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
     view)
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L59">Source</a>
@@ -164,7 +167,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color background border], :or {color black, background white, border [5 5 5 5]}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns the given LaTeX equation rendered as an java.awt.Image.
 
@@ -188,6 +190,7 @@ Examples:
                  g &amp; h &amp; i
                  \\end{pmatrix}"))
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L12">Source</a>
@@ -198,7 +201,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (to-latex mx &amp; {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline table-newline-suppress-last newline], :or {mxtype pmatrix, preamble , col-just [], row-names-tex-cmd [], hline false, table-newline \\, table-newline-suppress-last false, newline }})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Convert an Incanter Matrix into a string of LaTeX commands to render it.
 
@@ -208,11 +210,13 @@ Example:
   (use '(incanter core latex))
   (view (latex (to-latex (matrix [[1 0][0 1]]))))
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/7f7dc7cffabbdbfcdec3d6aa06631d24b0f05148/modules/incanter-latex/src/incanter/latex.clj#L106">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

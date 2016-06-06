@@ -78,6 +78,9 @@ namespace.
       <a href="#incanter.symbolic/deriv-fn*" class="toc-entry-anchor">deriv-fn*</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -107,7 +110,6 @@ namespace.
     <pre id="var-usage">Usage: (deriv exp v)
        (deriv exp v degree)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Macro for symbolic differentiation. with 2 args, takes 1st degree deriv.
 with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
 
@@ -145,6 +147,7 @@ Examples:
 
   (deriv (/ 1 x) x) ; =&gt; (* (deriv* (* (x)) x) (* -1 (pow (* (x)) -2)))
                                         ^-- need to fix</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/d187ba4a7cec9b8e311988abcb6130ba75f32305/modules/incanter-core/src/incanter/symbolic.clj#L141">Source</a>
@@ -156,7 +159,6 @@ Examples:
     <pre id="var-usage">Usage: (deriv* exp v)
        (deriv* exp vr degree)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">main sub-function for differentiation. with 2 args, takes 1st degree deriv.
 with 3, takes arbitrary degrees. contains all deriv rules for basic funcs.
 
@@ -175,6 +177,7 @@ Examples:
 
   (deriv* '(* x y (+ x 3)) 'x 2)
   (deriv* '(* x y (+ x 3)) 'x 3)</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/d187ba4a7cec9b8e311988abcb6130ba75f32305/modules/incanter-core/src/incanter/symbolic.clj#L75">Source</a>
@@ -186,7 +189,6 @@ Examples:
     <pre id="var-usage">Usage: (deriv-fn [&amp; args] expr v)
        (deriv-fn [&amp; args] expr v degree)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 
 Examples:
@@ -223,6 +225,7 @@ Examples:
     (doto (function-plot f 0.5 5)
       (add-function df 0.5 5)
       view))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/d187ba4a7cec9b8e311988abcb6130ba75f32305/modules/incanter-core/src/incanter/symbolic.clj#L264">Source</a>
@@ -234,7 +237,6 @@ Examples:
     <pre id="var-usage">Usage: (deriv-fn* [&amp; args] expr v)
        (deriv-fn* [&amp; args] expr v degree)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 
 Examples:
@@ -243,11 +245,13 @@ Examples:
   (deriv-fn* '[x y] '(+ (* x y) x) 'x)
 
   ((deriv-fn* '[x y] '(+ (* x y) x) 'x) 5 9)</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/d187ba4a7cec9b8e311988abcb6130ba75f32305/modules/incanter-core/src/incanter/symbolic.clj#L237">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

@@ -73,6 +73,9 @@ namespace.
       
     </div>
   </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
+  </div><div class="toc-section" style="margin-left: 1em;">
     <a style="margin-top: 3px;" href="#excel.cells">excel.cells</a>
     <div class="toc-entry" style="margin-left: 1em;">
       <a href="#incanter.excel.cells/get-cell-formula-value" class="toc-entry-anchor">get-cell-formula-value</a>
@@ -115,7 +118,6 @@ Excel file formats (.xls and .xlsx).</pre>
     <h2 id="incanter.excel/read-xls">read-xls</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Read an Excel file into a dataset. Note: cells containing formulas will be
 empty upon import.  Can read both older and newer Excel file formats, uses the filename suffix
 or :override-format option.
@@ -140,6 +142,7 @@ or :xlsx override the suffix check.
    ;; to a sequence of milliseconds
    (let [to-millis (fn [dates] (map #(.getTime %) dates))] 
      (view (time-series-plot (to-millis ($ :date)) ($ :passengers)))))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L97">Source</a>
@@ -149,7 +152,6 @@ or :xlsx override the suffix check.
     <h2 id="incanter.excel/save-xls">save-xls</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Save a dataset to an Excel file.  Can save in both older and newer
 Excel formats, uses the filename suffix or :override-format option.
 
@@ -166,11 +168,13 @@ If :xls or :xlsx override the suffix check.
 Examples:
   (use '(incanter core datasets excel))
   (save-xls (get-dataset :cars) "/tmp/cars.xls")</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-excel/src/incanter/excel.clj#L26">Source</a>
   </div>
 </div>
+
 <br />
 <h2 id="excel.cells">excel.cells</h2>
 <pre id="namespace-docstr">Functions for reading and writing to cells.</pre>
@@ -188,8 +192,8 @@ Examples:
     <h2 id="incanter.excel.cells/get-cell-formula-value">get-cell-formula-value</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Get the value after the evaluating the formula.  See <a href="http://poi.apache.org/spreadsheet/eval.html#Evaluate">http://poi.apache.org/spreadsheet/eval.html#Evaluate</a></pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L14">Source</a>
@@ -199,13 +203,14 @@ Examples:
     <h2 id="incanter.excel.cells/get-cell-value">get-cell-value</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Get the cell value depending on the cell type.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/cells.clj#L20">Source</a>
   </div>
 </div>
+
 <br />
 <h2 id="excel.workbook">excel.workbook</h2>
 <pre id="namespace-docstr"></pre>
@@ -223,13 +228,14 @@ Examples:
     <h2 id="incanter.excel.workbook/get-workbook-sheet">get-workbook-sheet</h2>
     <span id="var-type">multimethod</span><br />
     <pre id="var-usage">No usage documentation available</pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Retrieve the Excel workbook based on either the index or the sheet name.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/bccaf39c8258cedf1a6522a52aa6d9129b22e458/modules/incanter-excel/src/incanter/excel/workbook.clj#L8">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

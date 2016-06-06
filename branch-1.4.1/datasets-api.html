@@ -69,6 +69,9 @@ namespace.
       <a href="#incanter.datasets/get-dataset" class="toc-entry-anchor">get-dataset</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -97,7 +100,6 @@ namespace.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (get-dataset dataset-key &amp; {:keys [incanter-home from-repo], :or {incanter-home (or (getProperty incanter.home) (getenv INCANTER_HOME)), from-repo true}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the sample dataset associated with the given key. Most datasets
 are from R's sample data sets, as are the descriptions below.
 
@@ -180,11 +182,13 @@ Datasets:
  Examples:
    (def data (get-dataset :cars))
    (def data2 (get-dataset :cars :incanter.home "/usr/local/packages/incanter"))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/8d46e5b20b772aebe766f44bbeb6c052cb72e003/modules/incanter-io/src/incanter/datasets.clj#L91">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

@@ -81,6 +81,9 @@ namespace.
       <a href="#incanter.optimize/non-linear-model" class="toc-entry-anchor">non-linear-model</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -109,7 +112,6 @@ namespace.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (derivative f &amp; {:keys [dx], :or {dx 1.0E-4}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a function that approximates the derivative of the given function.
 
@@ -143,6 +145,7 @@ Examples:
   ;; plot the second derivative function
   (def pdf-deriv2 (derivative pdf-deriv))
   (add-lines plot x (pdf-deriv2 x))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/optimize.clj#L67">Source</a>
@@ -153,7 +156,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (gradient f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a function that calculates a 5-point approximation to
 the gradient of the given function. The vector of start values are
@@ -179,6 +181,7 @@ Examples:
 
   (def grad (gradient f start))
   (time (doall (grad start x)))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/optimize.clj#L243">Source</a>
@@ -189,7 +192,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (hessian f start &amp; {:keys [tol dx], :or {tol 1.0E-4}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns a function that calculates an approximation to the Hessian matrix
 of the given function. The vector of start values are used to determine
 the number of parameters required by the function, and to scale the
@@ -215,6 +217,7 @@ Examples:
 
   (time (def hess (hessian f start)))
   (time (doall (hess start x)))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/optimize.clj#L290">Source</a>
@@ -225,7 +228,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (integrate f a b)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Integrate a function f from a to b
 
 
@@ -253,6 +255,7 @@ Examples:
 Reference:
   <a href="http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html">http://jng.imagine27.com/articles/2009-04-09-161839_integral_calculus_in_lambda_calculus_lisp.html</a>
   <a href="http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/">http://iam.elbenshira.com/archives/151_integral-calculus-in-haskell/</a></pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/optimize.clj#L25">Source</a>
@@ -263,7 +266,6 @@ Reference:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (non-linear-model f y x start &amp; {:keys [max-iter tol method], :or {max-iter 200, tol 1.0E-5, method :gauss-newton}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Determine the nonlinear least-squares estimates of the
 parameters of a nonlinear model.
@@ -345,11 +347,13 @@ Examples:
   (add-lines plot x (f start2 x))
   (def nlm2 (non-linear-model f y x start2))
   (add-lines plot x (:fitted nlm2))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/47d21afb39a5e4075efd783a958c295990085d9d/modules/incanter-core/src/incanter/optimize.clj#L577">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

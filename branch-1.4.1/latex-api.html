@@ -78,6 +78,9 @@ namespace.
       <a href="#incanter.latex/to-latex" class="toc-entry-anchor">to-latex</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -109,7 +112,6 @@ and subtitles.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-latex chart x y latex-str &amp; {:keys [color], :or {color darkGray}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Adds an LaTeX equation annotation to the chart at the given x,y coordinates.
 
 Arguments:
@@ -128,6 +130,7 @@ Examples:
     (doto (function-plot pdf-normal -3 3)
       (add-latex 0 0.1 "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
       view)</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L84">Source</a>
@@ -138,7 +141,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (add-latex-subtitle chart latex-str &amp; {:keys [color], :or {color darkGray}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Adds the given LaTeX equation as a subtitle to the chart.
 
 
@@ -152,6 +154,7 @@ Examples:
   (doto (function-plot pdf-normal -3 3)
     (add-latex-subtitle "f(x)=\\frac{1}{\\sqrt{2\\pi \\sigma^2}} e^{\\frac{-(x - \\mu)^2}{2 \\sigma^2}}")
     view)</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L61">Source</a>
@@ -162,7 +165,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (latex latex-txt &amp; {:keys [color background border], :or {color black, background white, border [5 5 5 5]}})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr"> Returns the given LaTeX equation rendered as an java.awt.Image.
 
 Options:
@@ -184,6 +186,7 @@ Examples:
                  d &amp; e &amp; f \\\\
                  g &amp; h &amp; i
                  \\end{pmatrix}"))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L13">Source</a>
@@ -194,7 +197,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (to-latex mx &amp; {:keys [mxtype preamble col-just row-names-tex-cmd hline table-newline table-newline-suppress-last newline], :or {mxtype pmatrix, preamble , col-just [], row-names-tex-cmd [], hline false, table-newline \\, table-newline-suppress-last false, newline }})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">Convert an Incanter Matrix into a string of LaTeX commands to render it.
 
 Options:
@@ -202,11 +204,13 @@ Options:
 Example:
     (use '(incanter core latex))
     (view (latex (to-latex (matrix [[1 0][0 1]]))))</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/fdc0bfd15d1319048cc5d7d3f680b99d9fc39103/modules/incanter-latex/src/incanter/latex.clj#L111">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

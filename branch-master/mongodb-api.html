@@ -72,6 +72,9 @@ namespace.
       <a href="#incanter.mongodb/insert-dataset" class="toc-entry-anchor">insert-dataset</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -161,7 +164,6 @@ Here are Somnium's descriptions of Congomongo's functions:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (fetch-dataset &amp; args)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Queries a MongoDB database, accepting the same arguments as
 somnium.congomongo/fetch, but returning an Incanter dataset instead
@@ -187,6 +189,7 @@ Examples:
  (view (fetch-dataset :airline-data))
 
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/129dadf7b50f51175cb820c5f3b927e8b8095d91/modules/incanter-mongodb/src/incanter/mongodb.clj#L72">Source</a>
@@ -197,7 +200,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (insert-dataset mongodb-coll dataset)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Inserts the rows of the Incanter dataset into the given MongoDB collection.
 
@@ -218,11 +220,13 @@ Examples:
   ;; notice that the retrieved data set has two additional columns,  :_id :_ns
   (view (fetch-dataset :airline-data))
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/129dadf7b50f51175cb820c5f3b927e8b8095d91/modules/incanter-mongodb/src/incanter/mongodb.clj#L105">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>

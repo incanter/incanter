@@ -78,6 +78,9 @@ namespace.
       <a href="#incanter.bayes/sample-proportions" class="toc-entry-anchor">sample-proportions</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -108,7 +111,6 @@ basic Bayesian modeling and inference.
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-model-params size {:keys [x y coefs residuals]})
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a sample of the given size of the parameters (coefficients and
 error variance) of the given linear-model. The sample is generated using
@@ -142,6 +144,7 @@ Examples:
   ;; show the 95% bayesian confidence interval for the first coefficient
   (quantile (sel (:coefs param-samp) :cols 0) :probs [0.025 0.975])
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/bayes.clj#L35">Source</a>
@@ -152,7 +155,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-multinomial-params size counts)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns a sample of multinomial proportion parameters.
 The counts are assumed to have a multinomial distribution.
@@ -182,6 +184,7 @@ Examples:
   ;; two candidates
   (view (histogram (minus (sel samp-props :cols 0) (sel samp-props :cols 1))))
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/bayes.clj#L95">Source</a>
@@ -192,7 +195,6 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-mvn-params size y &amp; options)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">
 Returns samples of means (sampled from an mvn distribution) and vectorized covariance
 matrices (sampled from an inverse-wishart distribution) for the given mvn data.
@@ -234,6 +236,7 @@ Examples:
   (symmetric-matrix (map mean (trans (:sigmas samp))) :lower false)
   (map mean (trans (:means samp)))
 </pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/bayes.clj#L131">Source</a>
@@ -244,13 +247,14 @@ Examples:
     <span id="var-type">function</span><br />
     <pre id="var-usage">Usage: (sample-proportions size counts)
 </pre>
-    <pre id="var-specs"></pre>
     <pre id="var-docstr">sample-proportions has been renamed sample-multinomial-params</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/incanter/incanter/blob/f23547637a9ee1d901725f591cfc09a1a2dc46c1/modules/incanter-core/src/incanter/bayes.clj#L88">Source</a>
   </div>
 </div>
+
 
 </div>
               </div>
