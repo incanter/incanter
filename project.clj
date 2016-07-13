@@ -62,6 +62,9 @@
                          (set! *print-length* 500)
                          (use 'clojure.repl))
                  }
+  
+  :javac-options ["-target" "1.7" "-source" "1.7"]
+    
   :jvm-opts ["-Xmx1g" "-Djsse.enableSNIExtension=false"
              ~(str "-Dincanter.home=" (System/getProperty "user.dir"))]
   )

@@ -8,6 +8,7 @@
         :dir "modules/incanter-core"}
   :min-lein-version "2.0.0"
   :java-source-paths ["java"]
+  :javac-options ["-target" "1.7" "-source" "1.7"]
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/math.combinatorics "0.1.1" :exclusions [org.clojure/clojure]]
                  [net.mikera/vectorz-clj "0.43.0" :exclusions [org.clojure/clojure]]
