@@ -1,4 +1,4 @@
-(defproject incanter/incanter-zoo "1.9.1-SNAPSHOT"
+(defproject incanter/incanter-zoo "1.9.1"
   :description "Incanter Zoo is a port of Zoo from R."
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
@@ -7,8 +7,8 @@
         :url "https://github.com/incanter/incanter"
         :dir "modules/incanter-zoo"}
   :min-lein-version "2.0.0"
-  :dependencies [[incanter/incanter-io "1.9.1-SNAPSHOT"]
-                 [clj-time "0.6.0"
+  :dependencies [[incanter/incanter-io "1.9.1"]
+                 [clj-time "0.11.0"
                   :exclusions [org.clojure/clojure
                                org.clojure/clojure-contrib]]]
   :profiles {:dev {:dependencies [[clatrix "0.5.0" :exclusions [org.clojure/clojure net.mikera/core.matrix]]
