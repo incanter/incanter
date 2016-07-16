@@ -1788,7 +1788,7 @@
                      (into [] (map #(map-get row %) col-name)))
                    (fn [row]
                      (map-get row col-name)))
-          rows (:rows data)
+          rows (ds/row-maps data)
           rollup-fns {:max (fn [col-data] (apply max col-data))
                       :min (fn [col-data] (apply min col-data))
                       :sum (fn [col-data] (apply + col-data))
@@ -1800,9 +1800,11 @@
       (loop [cur rows reduced-rows {}]
         (if (empty? cur)
           (let [group-cols (to-dataset (keys reduced-rows))
-                res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
-            (col-names res (concat (col-names group-cols)
-                                   (if (coll? col-name) col-name [col-name]))))
+                res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))
+                new-col-names (concat (col-names group-cols)
+                                      (if (coll? col-name) col-name [col-name]))]
+            (ds/rename-columns res (zipmap (col-names res)
+                                           new-col-names)))
           (recur (next cur)
                  (let [row (first cur)
                        k (submap row group-by)
