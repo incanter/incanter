@@ -1837,7 +1837,8 @@
           comp-fn (if (= order :desc)
                     (comparator (fn [a b] (pos? (compare a b))))
                     compare)]
-      (dataset (col-names data) (sort-by key-fn comp-fn (m/rows data))))))
+      (ds/dataset (ds/column-names data)
+                  (sort-by key-fn comp-fn (ds/row-maps data))))))
 
 
 
