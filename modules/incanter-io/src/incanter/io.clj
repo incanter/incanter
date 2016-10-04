@@ -23,8 +23,9 @@
   incanter.io
   (:import (java.io FileReader FileWriter File)
            (au.com.bytecode.opencsv CSVReader))
-  (:use [incanter.core :only (dataset save)])
-  (:require [clojure.java.io :as io]))
+  (:use [incanter.core :only (dataset save to-list)])
+  (:require [clojure.java.io  :as io]
+            [clojure.data.csv :as csv]))
 
 (defn- parse-string [value & [empty-value]]
   (if (= value "")
@@ -122,30 +123,20 @@
         (when (= "-" filename)
             (.close file-writer))))))
 
-(defmethod save :incanter.core/dataset [dataset filename & {:keys [delim header append]
-                                                            :or {append false delim \,}}]
-  (let [header (or header (map #(if (keyword? %) (name %) %) (:column-names dataset)))
-        file-writer (if (= "-" filename)
-                      *out*
-                      (java.io.FileWriter. filename append))
-        rows (:rows dataset)
-        columns (:column-names dataset)]
-    (try
-      (when (and header (not append))
-        (.write file-writer (str (first header)))
-        (doseq [column-name (rest header)]
-          (.write file-writer (str delim column-name)))
-        (.write file-writer (str \newline)))
-      (doseq [row rows]
-        (do
-          (.write file-writer (str (row (first columns))))
-          (doseq [column-name (rest columns)]
-            (.write file-writer (str delim (row column-name))))
-          (.write file-writer (str \newline))))
-      (finally
-        (.flush file-writer)
-        (when (= "-" filename)
-          (.close file-writer))))))
+(defmethod save :incanter.core/dataset
+  [dataset filename & {:keys [delim header append]
+                       :or {append false delim \,}}]
+  (let [header (or header (map #(if (keyword? %) (name %) %)
+                               (:column-names dataset)))
+        rows (to-list dataset)
+        data (if append
+               rows
+               (conj rows header)) ]
+    (with-open [out-file (io/writer (if (= "-" filename)
+                                      *out*
+                                      filename)
+                                    :append append)]
+      (csv/write-csv out-file data :separator delim))))
 
 
 (defmethod save java.awt.image.BufferedImage

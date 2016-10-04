@@ -12,5 +12,8 @@
                   :exclusions [org.clojure/clojure]]
                  [net.sourceforge.parallelcolt/parallelcolt "0.10.1"]
                  [clatrix/clatrix "0.3.0"
-                  :exclusions [org.clojure/clojure]]]
+                  :exclusions [org.clojure/clojure]]
+                 [org.clojure/data.csv "0.1.3"
+                  :exclusions [org.clojure/clojure]]
+                 ]
   :java-source-paths ["java"])
