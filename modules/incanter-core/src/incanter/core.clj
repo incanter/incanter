@@ -76,7 +76,7 @@
   ([data]
      (m/matrix data))
 
-  ([data ncol &]
+  ([data ncol]
      (m/matrix (partition ncol (vectorize data))))
 
   ([init-val rows cols]
