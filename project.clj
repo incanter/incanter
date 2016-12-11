@@ -15,7 +15,8 @@
                  [incanter/incanter-excel "1.9.1"]
                  [incanter/incanter-sql "1.9.1"]
                  [incanter/incanter-zoo "1.9.1"]
-                 [swingrepl "1.3.0"]
+                 [swingrepl "1.3.0"
+                  :exclusions [org.clojure/clojure org.clojure/clojure-contrib]]
                  [org.clojure/clojure "1.8.0"]
                  ]
   
