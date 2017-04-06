@@ -20,7 +20,8 @@
 ;; (run-tests 'incanter.tests.core-test-cases)
 
 (ns incanter.core-tests
-  (:require [clojure.core.matrix :as m])
+  (:require [clojure.core.matrix :as m]
+            [clojure.core.matrix.dataset :as ds])
   (:use  clojure.test
          (incanter core)))
 
@@ -593,3 +594,24 @@
                             {:sex "Male" :height 1.7}])]
       (is (= (to-dataset [{:sex "Male" :height 1.6}])
              ($rollup :mean :height :sex data ))))))
+
+(deftest $order-test
+  (let [data (ds/dataset [:a :b :c]
+                         [{:a 1 :b 1 :c 4}
+                          {:a 2 :b 3 :c 3}
+                          {:a 2 :b 2 :c 2}
+                          {:a 3 :b 4 :c 1}])]
+    (testing "ascending order by single column"
+      (is (= (ds/dataset [:a :b :c]
+                         [{:a 3 :b 4 :c 1}
+                          {:a 2 :b 2 :c 2}
+                          {:a 2 :b 3 :c 3}
+                          {:a 1 :b 1 :c 4}])
+             ($order :c :asc data))))
+    (testing "descending order by multiple columns"
+      (is (= (ds/dataset [:a :b :c]
+                         [{:a 3 :b 4 :c 1}
+                          {:a 2 :b 3 :c 3}
+                          {:a 2 :b 2 :c 2}
+                          {:a 1 :b 1 :c 4}])
+             ($order [:a :b] :desc data))))))
