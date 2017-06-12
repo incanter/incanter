@@ -35,6 +35,7 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability)
+           (java.util Date)
            (incanter Weibull))
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
@@ -204,8 +205,8 @@
   Example:
       (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
   "
-  ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
-    (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
+  ([x & {:keys [mean sd seed] :or {mean 0 sd 1 seed (Date.)}}]
+    (let [dist (Normal. mean sd (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -232,8 +233,8 @@
   Example:
       (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
   "
-  ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
-    (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
+  ([x & {:keys [mean sd seed] :or {mean 0 sd 1 seed (Date.)}}]
+    (let [dist (Normal. mean sd (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -374,8 +375,8 @@
       (pdf-uniform 5)
       (pdf-uniform 5 :min 1 :max 10)
   "
-  ([x & {:keys [min max] :or {min 0.0 max 1.0}}]
-    (let [dist (DoubleUniform. min max (DoubleMersenneTwister.))]
+  ([x & {:keys [min max seed] :or {min 0.0 max 1.0 seed (Date.)}}]
+    (let [dist (DoubleUniform. min max (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -402,8 +403,8 @@
       (cdf-uniform 5)
       (cdf-uniform 5 :min 1 :max 10)
   "
-  ([x & {:keys [min max] :or {min 0.0 max 1.0}}]
-    (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister.))]
+  ([x & {:keys [min max seed] :or {min 0.0 max 1.0 seed (Date.)}}]
+    (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -430,15 +431,15 @@
       (sample-uniform 1000)
       (sample-uniform 1000 :min 1 :max 10)
   "
-  ([^Integer size & {:keys [min max integers]
-                     :or {min 0.0 max 1.0 integers false}}]
+  ([^Integer size & {:keys [min max integers seed]
+                     :or {min 0.0 max 1.0 integers false 
+                          seed (Date.)}}]
     (let [min-val (double min)
           max-val (double max)
-          dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
+          dist (DoubleUniform. min-val max-val (DoubleMersenneTwister. seed))]
       (if integers
-        (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
-        (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val))))))
-
+        (for [_ (range size)] (.nextIntFromTo dist min-val max-val))
+        (for [_ (range size)] (.nextDoubleFromTo dist min-val max-val))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BETA DISTRIBUTION FUNCTIONS
@@ -464,8 +465,8 @@
   Example:
       (pdf-beta 0.5 :alpha 1 :beta 2)
   "
-  ([x & {:keys [alpha beta] :or {alpha 1 beta 1}}]
-    (let [dist (Beta. alpha beta (DoubleMersenneTwister.))]
+  ([x & {:keys [alpha beta seed] :or {alpha 1 beta 1 seed (Date.)}}]
+    (let [dist (Beta. alpha beta (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -556,7 +557,8 @@
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
-          dist (Weibull. scale shape (DoubleMersenneTwister.))]
+          seed (or (:seed opts) (Date.))
+          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -585,7 +587,8 @@
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
-          dist (Weibull. scale shape (DoubleMersenneTwister.))]
+          seed (or (:seed opts) (Date.) )
+          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -642,9 +645,9 @@
   Example:
       (pdf-gamma 10 :shape 1 :scale 2)
   "
-  ([x & {:keys [shape scale rate] :or {shape 1}}]
+  ([x & {:keys [shape scale rate seed] :or {shape 1 seed (Date.)}}]
      (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))
-           dist (Gamma. shape tscale (DoubleMersenneTwister.))]
+           dist (Gamma. shape tscale (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -730,8 +733,8 @@
   Example:
       (pdf-chisq 5.0 :df 2)
   "
-  ([x & {:keys [df] :or {df 1}}]
-    (let [dist (ChiSquare. df (DoubleMersenneTwister.))]
+  ([x & {:keys [df seed] :or {df 1 seed (Date.)}}]
+    (let [dist (ChiSquare. df (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -817,8 +820,8 @@
   Example:
       (pdf-t 1.2 :df 10)
   "
-  ([x & {:keys [df] :or {df 1}}]
-    (let [dist (StudentT. df (DoubleMersenneTwister.))]
+  ([x & {:keys [df seed] :or {df 1 seed (Date.)}}]
+    (let [dist (StudentT. df (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -941,8 +944,8 @@
   Example:
       (pdf-exp 2.0 :rate 1/2)
   "
-  ([x & {:keys [rate] :or {rate 1}}]
-    (let [dist (Exponential. rate (DoubleMersenneTwister.))]
+  ([x & {:keys [rate seed] :or {rate 1 seed (Date.)}}]
+    (let [dist (Exponential. rate (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -967,8 +970,8 @@
   Example:
       (cdf-exp 2.0 :rate 1/2)
   "
-  ([x & {:keys [rate] :or {rate 1}}]
-    (let [dist (Exponential. rate (DoubleMersenneTwister.))]
+  ([x & {:keys [rate seed] :or {rate 1 seed (Date.)}}]
+    (let [dist (Exponential. rate (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -1139,8 +1142,8 @@
   Example:
       (pdf-binomial 10 :prob 1/4 :size 20)
   "
-  ([x & {:keys [size prob] :or {size 1 prob 1/2}}]
-    (let [dist (Binomial. size prob (DoubleMersenneTwister.))]
+  ([x & {:keys [size prob seed] :or {size 1 prob 1/2 seed (Date.)}}]
+    (let [dist (Binomial. size prob (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1276,8 +1279,8 @@
   Example:
       (pdf-poisson 5 :lambda 10)
   "
-  ([x & {:keys [lambda] :or {lambda 1}}]
-    (let [dist (Poisson. lambda (DoubleMersenneTwister.))]
+  ([x & {:keys [lambda seed] :or {lambda 1 seed (Date.)}}]
+    (let [dist (Poisson. lambda (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1363,8 +1366,8 @@
   Example:
       (pdf-neg-binomial 10 :prob 1/2 :size 20)
   "
-  ([x & {:keys [size prob] :or {size 10 prob 1/2}}]
-    (let [dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
+  ([x & {:keys [size prob seed] :or {size 10 prob 1/2 seed (Date.)}}]
+    (let [dist (NegativeBinomial. size prob (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
