@@ -407,6 +407,17 @@
             (abs rotation)
             1E-6)))))
 
+(deftest variable-seed-test 
+  (testing " different seeds give different results"
+  (let [ compare-fn (fn [samp-fn] 
+                      (every? (fn [[a b]] (= a b))  
+                     (partition 2 1 
+                                (repeatedly 100 samp-fn))))]
+    ;;with the same seed, should be equal
+      (is (compare-fn #(first (sample-uniform 1 :seed 29))))
+      ;;with different (no) seed, should be different
+      (is (not (compare-fn #(first (sample-uniform 1)))))))) 
+
 (deftest compliance-test
   (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
     (set-current-implementation impl)
