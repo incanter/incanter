@@ -90,6 +90,20 @@
     (is (= [:speed :dist] (:column-names cars-dataset)) (str "Reading column names for " name " failed"))
     (is (= 50 (count (m/rows cars-dataset))) (str "Reading rows for " name " failed")))) ;; end of read-dataset-validation tests
 
+(def types {Long ["foo" "bar"], Float "boo"})
+(def rtypes {"foo" Long, "bar" Long, "boo" Float})
+(def column-names ["foo" "bar" "boo" "baz"])
+(def row ["1" "2" "3" "4"])
+(deftest make-typed-parse-string-validation
+  (testing "Testing parsing to correct types"
+    (is (= [1 2 3.0 4] (let [parse-row (#'incanter.io/make-typed-parse-row column-names types Long nil)]
+                       (parse-row row))))
+    (is (= (#'incanter.io/reverse-type-mapping [Long "foo"]) {"foo" Long}))
+    (is (= (#'incanter.io/reverse-type-mapping [Long ["foo" "bar"]])
+           {"foo" Long, "bar" Long}))
+    (is (= (#'incanter.io/reverse-types types) rtypes))
+    ))
+
 (def parse-string (ns-resolve 'incanter.io 'parse-string))
 (deftest parse-string-validation
   

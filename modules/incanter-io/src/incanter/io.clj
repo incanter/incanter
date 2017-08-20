@@ -37,6 +37,34 @@
       (try (Double/parseDouble value)
            (catch NumberFormatException _ value)))))
 
+(def parsers {Integer #(Integer/parseInt %)
+              Long    #(Long/parseLong %)
+              Float   #(Float/parseFloat %)
+              Double  #(Double/parseDouble %)
+              String  identity })
+
+(defn reverse-type-mapping [type-mapping]
+  (let [typ (first type-mapping)
+        columns (second type-mapping)]
+    (if (instance? String columns)
+      {columns typ}
+      (reduce conj (map #(hash-map % typ) columns)))))
+
+(defn reverse-types [types]
+  (reduce conj (map reverse-type-mapping (seq types))))
+
+(defn make-typed-parse-row [column-names types default-type empty-field-value]
+  (let* [column-to-type (reverse-types types)
+         get-type (fn [name] (or (get column-to-type name) default-type))
+         column-types (map get-type column-names)
+         field-parsers (map #(get parsers %) column-types)]
+    (fn [row]
+      (vec (map (fn [[s parser]]
+                  (if (= s "")
+                    empty-field-value
+                    (parser s)))
+                (map vector row field-parsers))))))
+
 (defn- pad-vector [v new-len value]
   (into v (repeat (- new-len (count v)) value)))
 
@@ -53,10 +81,14 @@
                     compress multiple adjacent delimiters into a single delimiter.
     :empty-field-value (default nil) indicates the interpretation of an empty field.
     :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
+    :default-type (default Long) default type of columns
+    :types (default nil) dictionary mapping types to list of column names, e.g:
+                       {Long [\"foo\" \"bar\"] Float \"boo\"}
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char]
-               :or {delim \, quote \" skip 0 header false keyword-headers true}}]
+  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char
+                      default-type types]
+               :or {delim \, quote \" skip 0 header false keyword-headers true default-type Long types nil}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
@@ -69,22 +101,22 @@
                               line)
                             line))
         remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
-        parse-data-fn (fn [line]
-                        (vec (map #(parse-string % empty-field-value) line)))
-        [parsed-data column-count]
+        [dataset-body column-count header-row]
           (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
-            (loop [lines [] max-column 0]
-              (if-let [line (.readNext reader)]
-                (let [new-line (-> line
-                                   compress-delim-fn
-                                   comment-char-fn
-                                   remove-empty-fn
-                                   parse-data-fn)]
-                  (recur (if-not (empty? new-line) (conj lines new-line) lines)
-                         (max max-column (count new-line))))
-                [lines max-column])))
-        header-row (when header (first parsed-data))
-        dataset-body (if header (rest parsed-data) parsed-data)
+            (let* [header-row (when header (.readNext reader))
+                   parse-data-fn (if (and header types)
+                                   (make-typed-parse-row header-row types default-type empty-field-value)
+                                   (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
+              (loop [lines [] max-column 0]
+                (if-let [line (.readNext reader)]
+                  (let [new-line (-> line
+                                     compress-delim-fn
+                                     comment-char-fn
+                                     remove-empty-fn
+                                     parse-data-fn)]
+                    (recur (if-not (empty? new-line) (conj lines new-line) lines)
+                      (max max-column (count new-line))))
+                [lines max-column header-row]))))
         column-names-strs
           (map (fn [hr-entry idx]
                  (if hr-entry
