@@ -43,12 +43,10 @@
               Double  #(Double/parseDouble %)
               String  identity })
 
-(defn reverse-type-mapping [type-mapping]
-  (let [typ (first type-mapping)
-        columns (second type-mapping)]
-    (if (instance? String columns)
-      {columns typ}
-      (reduce conj (map #(hash-map % typ) columns)))))
+(defn reverse-type-mapping [[typ columns]]
+  (if (instance? String columns)
+    {columns typ}
+    (reduce conj (map #(hash-map % typ) columns))))
 
 (defn reverse-types [types]
   (reduce conj (map reverse-type-mapping (seq types))))
