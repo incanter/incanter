@@ -96,7 +96,7 @@
 (def row ["1" "2" "3" "4"])
 (deftest make-typed-parse-string-validation
   (testing "Testing parsing to correct types"
-    (is (= [1 2 3.0 4] (let [parse-row (#'incanter.io/make-typed-parse-row column-names types Long nil)]
+    (is (= [1 2 3.0 4] (let [parse-row (#'incanter.io/make-typed-parse-row column-names types Long nil {})]
                        (parse-row row))))
     (is (= (#'incanter.io/reverse-type-mapping [Long "foo"]) {"foo" Long}))
     (is (= (#'incanter.io/reverse-type-mapping [Long ["foo" "bar"]])

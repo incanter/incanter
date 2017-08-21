@@ -51,17 +51,32 @@
 (defn reverse-types [types]
   (reduce conj (map reverse-type-mapping (seq types))))
 
-(defn make-typed-parse-row [column-names types default-type empty-field-value]
+(defn make-typed-parse-row [column-names types default-type empty-field-value transformers]
   (let* [column-to-type (reverse-types types)
          get-type (fn [name] (or (get column-to-type name) default-type))
          column-types (map get-type column-names)
-         field-parsers (map #(get parsers %) column-types)]
+         field-transformers (map #(or (get transformers %) identity) column-names)
+         field-parsers (map #(get parsers %) column-types)
+         common-type (when (apply = column-types)
+                       (first column-types))
+         row-vector (if common-type
+                      ;(fn [row] (apply vector-of (conj common-type row)))
+                      ;;; TODO: handle other types than float
+                      (fn [row] (float-array (count row) row))
+                      (fn [row] (vec row)))
+         message (println "Reading typed columns: "
+                   (if common-type
+                     (str "all " common-type)
+                     (map vector column-names column-types)))]
     (fn [row]
-      (vec (map (fn [[s parser]]
-                  (if (= s "")
-                    empty-field-value
-                    (parser s)))
-                (map vector row field-parsers))))))
+      (row-vector (map (fn [[s parser column-name transformer]]
+                         (if (= s "")
+                           empty-field-value
+                           (try (parser (transformer s))
+                             (catch Exception e
+                             (throw (Exception.
+                               (str "Parsing column " column-name ": '" s "' " (.getMessage e))))))))
+                       (map vector row field-parsers column-names field-transformers))))))
 
 (defn- pad-vector [v new-len value]
   (into v (repeat (- new-len (count v)) value)))
@@ -79,14 +94,17 @@
                     compress multiple adjacent delimiters into a single delimiter.
     :empty-field-value (default nil) indicates the interpretation of an empty field.
     :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
-    :default-type (default Long) default type of columns
+    :default-type (default nil) default type of columns.
     :types (default nil) dictionary mapping types to list of column names, e.g:
                        {Long [\"foo\" \"bar\"] Float \"boo\"}
+    :transformers (default {}) dictionary mapping column names to function that will transform
+                               strings in a given column before they are converted to final types
   "
 
   [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char
-                      default-type types]
-               :or {delim \, quote \" skip 0 header false keyword-headers true default-type Long types nil}}]
+                      default-type types transformers]
+               :or {delim \, quote \" skip 0 header false keyword-headers true
+                    default-type nil types nil transformers {} }}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
@@ -99,12 +117,13 @@
                               line)
                             line))
         remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
-        [dataset-body column-count header-row]
+        [dataset-body column-count header-row row-number]
           (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
             (let* [header-row (when header (.readNext reader))
-                   parse-data-fn (if (and header types)
-                                   (make-typed-parse-row header-row types default-type empty-field-value)
+                   parse-data-fn (if (and header (or types default-type))
+                                   (make-typed-parse-row header-row types default-type empty-field-value transformers)
                                    (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
+              
               (loop [lines [] max-column 0]
                 (if-let [line (.readNext reader)]
                   (let [new-line (-> line
