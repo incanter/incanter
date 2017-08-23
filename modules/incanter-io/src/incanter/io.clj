@@ -73,10 +73,11 @@
         column-types (map get-type column-names)
         field-transformers (map #(or (get transformers %) identity) column-names)
         field-parsers (map #(get parsers %) column-types)
+        number-of-columns (count column-names)
         common-type (when (apply = column-types)
                       (first column-types))
         row-vector (if common-type
-                     (fn [row] (apply (get vector-constructors common-type) [(count row) row]))
+                     (fn [row] (apply (get vector-constructors common-type) [number-of-columns row]))
                      (fn [row] (vec row)))
         message (println "Reading typed columns: "
                   (if common-type
