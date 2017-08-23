@@ -37,6 +37,22 @@
       (try (Double/parseDouble value)
            (catch NumberFormatException _ value)))))
 
+
+; Type-specific array constructors:
+; boolean-array byte-array char-array double-array float-array int-array long-array object-array short-array
+
+(def vector-constructors {
+  Boolean boolean-array,
+  Byte byte-array,
+  ; Char char-array,
+  Double double-array,
+  Float float-array,
+  ; Int int-array,
+  Long long-array,
+  Object object-array,
+  Short short-array,
+})
+
 (def parsers {Integer #(Integer/parseInt %)
               Long    #(Long/parseLong %)
               Float   #(Float/parseFloat %)
@@ -60,9 +76,7 @@
          common-type (when (apply = column-types)
                        (first column-types))
          row-vector (if common-type
-                      ;(fn [row] (apply vector-of (conj common-type row)))
-                      ;;; TODO: handle other types than float
-                      (fn [row] (float-array (count row) row))
+                      (fn [row] (apply (get vector-constructors common-type) [(count row) row]))
                       (fn [row] (vec row)))
          message (println "Reading typed columns: "
                    (if common-type
@@ -97,14 +111,15 @@
     :default-type (default nil) default type of columns.
     :types (default nil) dictionary mapping types to list of column names, e.g:
                        {Long [\"foo\" \"bar\"] Float \"boo\"}
-    :transformers (default {}) dictionary mapping column names to function that will transform
+    :transformers (default {}) dictionary mapping column names to functions that will transform
                                strings in a given column before they are converted to final types
+    :max-rows (default nil) maximum rows to be read, nil means no limit
   "
 
   [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char
-                      default-type types transformers]
+                      default-type types transformers max-rows]
                :or {delim \, quote \" skip 0 header false keyword-headers true
-                    default-type nil types nil transformers {} }}]
+                    default-type nil types nil transformers {} max-rows nil}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
@@ -124,16 +139,19 @@
                                    (make-typed-parse-row header-row types default-type empty-field-value transformers)
                                    (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
               
-              (loop [lines [] max-column 0]
-                (if-let [line (.readNext reader)]
+              (loop [lines [] max-column 0 row-number 0]
+                (if-let [line (when (or (not max-rows) (< row-number max-rows))
+                                (.readNext reader))]
                   (let [new-line (-> line
                                      compress-delim-fn
                                      comment-char-fn
                                      remove-empty-fn
                                      parse-data-fn)]
-                    (recur (if-not (empty? new-line) (conj lines new-line) lines)
-                      (max max-column (count new-line))))
-                [lines max-column header-row]))))
+                    (recur
+                      (if-not (empty? new-line) (conj lines new-line) lines)
+                      (max max-column (count new-line))
+                      (inc row-number)))
+                [lines max-column header-row row-number]))))
         column-names-strs
           (map (fn [hr-entry idx]
                  (if hr-entry
