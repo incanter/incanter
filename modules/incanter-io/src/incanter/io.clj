@@ -68,20 +68,20 @@
   (reduce conj (map reverse-type-mapping (seq types))))
 
 (defn make-typed-parse-row [column-names types default-type empty-field-value transformers]
-  (let* [column-to-type (reverse-types types)
-         get-type (fn [name] (or (get column-to-type name) default-type))
-         column-types (map get-type column-names)
-         field-transformers (map #(or (get transformers %) identity) column-names)
-         field-parsers (map #(get parsers %) column-types)
-         common-type (when (apply = column-types)
-                       (first column-types))
-         row-vector (if common-type
-                      (fn [row] (apply (get vector-constructors common-type) [(count row) row]))
-                      (fn [row] (vec row)))
-         message (println "Reading typed columns: "
-                   (if common-type
-                     (str "all " common-type)
-                     (map vector column-names column-types)))]
+  (let [column-to-type (reverse-types types)
+        get-type (fn [name] (or (get column-to-type name) default-type))
+        column-types (map get-type column-names)
+        field-transformers (map #(or (get transformers %) identity) column-names)
+        field-parsers (map #(get parsers %) column-types)
+        common-type (when (apply = column-types)
+                      (first column-types))
+        row-vector (if common-type
+                     (fn [row] (apply (get vector-constructors common-type) [(count row) row]))
+                     (fn [row] (vec row)))
+        message (println "Reading typed columns: "
+                  (if common-type
+                    (str "all " common-type)
+                    (map vector column-names column-types)))]
     (fn [row]
       (row-vector (map (fn [[s parser column-name transformer]]
                          (if (= s "")
@@ -134,11 +134,10 @@
         remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
         [dataset-body column-count header-row row-number]
           (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
-            (let* [header-row (when header (.readNext reader))
-                   parse-data-fn (if (and header (or types default-type))
-                                   (make-typed-parse-row header-row types default-type empty-field-value transformers)
-                                   (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
-              
+            (let [header-row (when header (.readNext reader))
+                  parse-data-fn (if (and header (or types default-type))
+                                  (make-typed-parse-row header-row types default-type empty-field-value transformers)
+                                  (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
               (loop [lines [] max-column 0 row-number 0]
                 (if-let [line (when (or (not max-rows) (< row-number max-rows))
                                 (.readNext reader))]
