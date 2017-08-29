@@ -110,7 +110,7 @@
                            (str incanter-home "data/cars.csv")
                            :header true
                            :rename-columns {"dist" "distance"}
-                           :column-types {Float "distance"})]
+                           :types {Float ["speed" "distance"]})]
              [(:column-names dataset) (take 2 (sel dataset :cols :distance))] )
            ['(:speed :distance) '(2.0 10.0)]))
     )) 
