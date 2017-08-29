@@ -74,11 +74,7 @@
                       (first column-types))
         row-vector (if common-type
                      (fn [row] (apply (get vector-constructors common-type) [number-of-columns row]))
-                     (fn [row] (vec row)))
-        message (println "Reading typed columns: "
-                  (if common-type
-                    (str "all " common-type)
-                    (map vector column-names column-types)))]
+                     (fn [row] (vec row)))]
     (fn [row]
       (row-vector (mapv (fn [[s parser column-name transformer]]
                           (if (= s "")
