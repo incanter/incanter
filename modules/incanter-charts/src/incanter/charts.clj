@@ -1775,7 +1775,7 @@
     ;; Input dataset examples: Incanter data repo, local file, remote file (url)
     (def iris (get-dataset :iris))
     (def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home
-    (def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))
+    (def iris (read-dataset \"https://raw.githubusercontent.com/incanter/incanter/master/data/iris.dat\" :delim \\space :header true))
     ;; Filter dataset to specific columns only
     (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
     (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species]))
