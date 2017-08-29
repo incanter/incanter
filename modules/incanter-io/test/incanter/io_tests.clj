@@ -104,6 +104,17 @@
     (is (= (#'incanter.io/reverse-types types) rtypes))
     ))
 
+(deftest read-dataset-rename-column-specify-types-validation
+  (testing "Testing reading dataset renaming a column and specifying a type."
+    (is (= (let [dataset (read-dataset
+                           (str incanter-home "data/cars.csv")
+                           :header true
+                           :rename-columns {"dist" "distance"}
+                           :column-types {Float "distance"})]
+             [(:column-names dataset) (take 2 (sel dataset :cols :distance))] )
+           ['(:speed :distance) '(2.0 10.0)]))
+    )) 
+
 (def parse-string (ns-resolve 'incanter.io 'parse-string))
 (deftest parse-string-validation
   

@@ -37,10 +37,6 @@
       (try (Double/parseDouble value)
            (catch NumberFormatException _ value)))))
 
-
-; Type-specific array constructors:
-; boolean-array byte-array char-array double-array float-array int-array long-array object-array short-array
-
 (def vector-constructors {
   Boolean boolean-array,
   Byte byte-array,
@@ -84,14 +80,14 @@
                     (str "all " common-type)
                     (map vector column-names column-types)))]
     (fn [row]
-      (row-vector (map (fn [[s parser column-name transformer]]
-                         (if (= s "")
-                           empty-field-value
-                           (try (parser (transformer s))
-                             (catch Exception e
-                             (throw (Exception.
-                               (str "Parsing column " column-name ": '" s "' " (.getMessage e))))))))
-                       (map vector row field-parsers column-names field-transformers))))))
+      (row-vector (mapv (fn [[s parser column-name transformer]]
+                          (if (= s "")
+                            empty-field-value
+                            (try (parser (transformer s))  
+                              (catch Exception e
+                              (throw (Exception.
+                                (str "Parsing column " column-name ": '" s "' " (.getMessage e))))))))
+                        (map vector row field-parsers column-names field-transformers))))))
 
 (defn- pad-vector [v new-len value]
   (into v (repeat (- new-len (count v)) value)))
@@ -111,16 +107,18 @@
     :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
     :default-type (default nil) default type of columns.
     :types (default nil) dictionary mapping types to list of column names, e.g:
-                       {Long [\"foo\" \"bar\"] Float \"boo\"}
-    :transformers (default {}) dictionary mapping column names to functions that will transform
-                               strings in a given column before they are converted to final types
+           {Long [\"foo\" \"bar\"] Float \"boo\"}
+    :transformers (default nil) dictionary mapping column names to functions that will transform
+                  strings in a given column before they are converted to final types
     :max-rows (default nil) maximum rows to be read, nil means no limit
+    :rename-columns (default nil) dictionary mapping column names on file to their names
+                    after loading
   "
 
   [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char
-                      default-type types transformers max-rows]
+                      default-type types transformers max-rows rename-columns]
                :or {delim \, quote \" skip 0 header false keyword-headers true
-                    default-type nil types nil transformers {} max-rows nil}}]
+                    default-type nil types nil transformers nil max-rows nil rename-columns nil}}]
 
   (let [compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
@@ -135,7 +133,8 @@
         remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
         [dataset-body column-count header-row row-number]
           (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
-            (let [header-row (when header (.readNext reader))
+            (let [header-row (when header (map (fn [name] (or (get rename-columns name) name))
+                                               (.readNext reader)))
                   parse-data-fn (if (and header (or types default-type))
                                   (make-typed-parse-row header-row types default-type empty-field-value transformers)
                                   (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
