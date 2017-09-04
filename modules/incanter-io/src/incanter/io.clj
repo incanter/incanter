@@ -112,11 +112,17 @@
   "
 
   [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char
-                      default-type types transformers max-rows rename-columns]
-               :or {delim \, quote \" skip 0 header false keyword-headers true
-                    default-type nil types nil transformers nil max-rows nil rename-columns nil}}]
+                      options]
+               :or {delim \, quote \u0022 skip 0 header false keyword-headers true options nil}}]
 
-  (let [compress-delim? (or compress-delim (= delim \space))
+  (let [remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
+        default-type (:default-type options)
+        types (:types options)
+        transformers (:transformers options)
+        max-rows (:max-rows options)
+        rename-columns (:rename-columns options)
+
+        compress-delim? (or compress-delim (= delim \space))
         compress-delim-fn (if compress-delim?
                             (fn [line] (filter #(not= % "") line))
                             identity)
@@ -126,7 +132,6 @@
                               '()
                               line)
                             line))
-        remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
         [dataset-body column-count header-row row-number]
           (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
             (let [header-row (when header (map (fn [name] (or (get rename-columns name) name))

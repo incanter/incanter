@@ -109,11 +109,11 @@
     (is (= (let [dataset (read-dataset
                            (str incanter-home "data/cars.csv")
                            :header true
-                           :rename-columns {"dist" "distance"}
-                           :types {Float ["speed" "distance"]})]
+                           :options {:types {Float ["speed" "distance"]}
+                                     :rename-columns {"dist" "distance"}})]
              [(:column-names dataset) (take 2 (sel dataset :cols :distance))] )
            ['(:speed :distance) '(2.0 10.0)]))
-    )) 
+    ))
 
 (def parse-string (ns-resolve 'incanter.io 'parse-string))
 (deftest parse-string-validation
