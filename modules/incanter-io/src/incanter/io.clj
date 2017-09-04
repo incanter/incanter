@@ -160,8 +160,10 @@
                (concat header-row (repeat nil))
                (range column-count))
         column-names (map (if keyword-headers keyword identity) column-names-strs)
-        padded-body (map #(pad-vector % column-count empty-field-value)
-                         dataset-body)]
+        padded-body (if (or types default-type)
+                      dataset-body
+                      (map #(pad-vector % column-count empty-field-value)
+                         dataset-body))]
     (dataset column-names padded-body)))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
