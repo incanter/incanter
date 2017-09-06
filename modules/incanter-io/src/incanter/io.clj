@@ -64,26 +64,36 @@
   (reduce conj (map reverse-type-mapping (seq types))))
 
 (defn make-typed-parse-row [column-names types default-type empty-field-value transformers]
-  (let [column-to-type (reverse-types types)
+  (let [column-names (mapv str column-names) 
+        column-to-type (reverse-types types)
         get-type (fn [name] (or (get column-to-type name) default-type))
-        column-types (map get-type column-names)
-        field-transformers (map #(or (get transformers %) identity) column-names)
-        field-parsers (map #(get parsers %) column-types)
+        column-types (mapv get-type column-names)
+        field-transformers (mapv #(or (get transformers %) identity) column-names)
+        field-parsers (mapv #(get parsers %) column-types)
         number-of-columns (count column-names)
         common-type (when (apply = column-types)
                       (first column-types))
         row-vector (if common-type
                      (fn [row] (apply (get vector-constructors common-type) [number-of-columns row]))
-                     (fn [row] (vec row)))]
+                     (fn [row] (vec row)))
+        buffer (vector (repeatedly number-of-columns nil)) ]
     (fn [row]
-      (row-vector (mapv (fn [[s parser column-name transformer]]
-                          (if (= s "")
-                            empty-field-value
-                            (try (parser (transformer s))  
-                              (catch Exception e
-                              (throw (Exception.
-                                (str "Parsing column " column-name ": '" s "' " (.getMessage e))))))))
-                        (map vector row field-parsers column-names field-transformers))))))
+      (when (not (empty? row)) 
+        (let [parse-field (fn [i]
+                            (let [s           (clojure.string/trim (get row i))
+                                  parser      (get field-parsers i)
+                                  transformer (get field-transformers i)]
+                              (if (= s "")
+                                empty-field-value
+                                (try (parser (transformer s))  
+                                  (catch Exception e
+                                    (throw (Exception.
+                                      (str "Parsing column " (get column-names i) ": '" s "' "
+                                        (.getMessage e))))))))) ]
+          (row-vector (loop [i 0 v (transient buffer)]
+                        (if (< i number-of-columns)
+                          (recur (inc i) (assoc! v i (parse-field i)))
+                          (persistent! v)))) )))))
 
 (defn- pad-vector [v new-len value]
   (into v (repeat (- new-len (count v)) value)))
@@ -136,7 +146,7 @@
           (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
             (let [header-row (when header (map (fn [name] (or (get rename-columns name) name))
                                                (.readNext reader)))
-                  parse-data-fn (if (and header (or types default-type))
+                  parse-data-fn (if (and header (or types default-type)) ; TODO: should work without header
                                   (make-typed-parse-row header-row types default-type empty-field-value transformers)
                                   (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
               (loop [lines [] max-column 0 row-number 0]
