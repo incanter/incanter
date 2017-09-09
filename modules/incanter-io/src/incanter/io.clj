@@ -198,7 +198,7 @@
             (.write file-writer (str \newline)))))
       (finally
         (.flush file-writer)
-        (when (= "-" filename)
+        (when-not (= "-" filename)
             (.close file-writer))))))
 
 (defmethod save :incanter.core/dataset
