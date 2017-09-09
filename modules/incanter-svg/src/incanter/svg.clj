@@ -31,15 +31,15 @@
     (save-svg (function-plot sin -4 4) \"./svg-chart.svg\")
 
   "
-  ([chart filename & {:keys [width height ] :or {width 500 height 400}}]
+  ([chart filename-or-stream & {:keys [width height ] :or {width 500 height 400}}]
      (let [domImpl (GenericDOMImplementation/getDOMImplementation)
            document (.createDocument domImpl nil "svg" nil)
            svgGenerator (SVGGraphics2D. document)
            bounds (Rectangle. width height)
            ;; if filename is not a string, assume it's already a stream
-           outputStream (if (string? filename)
-                          (FileOutputStream. (File. filename))
-                          filename)
+           outputStream (if (string? filename-or-stream)
+                          (FileOutputStream. (File. filename-or-stream))
+                          filename-or-stream)
            out (OutputStreamWriter. outputStream "UTF-8")]
        (do
          (.draw chart svgGenerator bounds)
