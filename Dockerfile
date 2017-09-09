@@ -6,9 +6,7 @@ WORKDIR /usr/src/incanter
 
 COPY . /usr/src/incanter/
 
-
-RUN apt-get update
-RUN apt-get -y install libgfortran3 
+RUN apt-get update && apt-get -y install libgfortran3 && rm -rf /var/lib/apt/lists/*
 
 RUN lein modules install
 
