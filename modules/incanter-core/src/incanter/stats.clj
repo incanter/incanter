@@ -1201,9 +1201,11 @@
       (sample-binomial 1000 :prob 1/4 :size 20)
   "
   ([^Integer samplesize & {:keys [size prob] :or {size 1 prob 1/2}}]
-    (if (= samplesize 1)
-      (Binomial/staticNextInt size prob)
-      (repeatedly samplesize #(Binomial/staticNextInt size prob)))))
+   (cond
+     (and (= samplesize 1) (= prob 1.0)) size
+     (= prob 1.0) (repeat samplesize size)
+     (= samplesize 1) (Binomial/staticNextInt size prob)
+     :else (repeatedly samplesize #(Binomial/staticNextInt size prob)))))
 
 
 
