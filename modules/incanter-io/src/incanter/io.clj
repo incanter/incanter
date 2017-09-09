@@ -32,7 +32,7 @@
 (defn- parse-string [value & [empty-value]]
   (if (= value "")
     empty-value
-    (if (re-matches #"\d+" value)
+    (if (re-matches #"-?\d+" value)
       (try (Long/parseLong value)
            (catch NumberFormatException _ value))
       (try (Double/parseDouble value)

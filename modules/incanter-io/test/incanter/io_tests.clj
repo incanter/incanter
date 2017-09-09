@@ -120,8 +120,11 @@
   
   (testing "Parsing string values into numbers"
     (is (= 1234 (parse-string "1234")))
+    (is (= -1234 (parse-string "-1234")))
     (is (instance? java.lang.Long (parse-string "5678")))
+    (is (instance? java.lang.Long (parse-string "-5678")))
     (is (instance? java.lang.Long (parse-string "1330418008377")))
+    (is (instance? java.lang.Double (parse-string "5678.0")))
     ))
 
 (deftest missing-fields-validation 
