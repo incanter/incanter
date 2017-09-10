@@ -10,7 +10,7 @@
   :dependencies [[incanter/incanter-core "1.9.1"]
                  ;; TODO: switch to data.csv?
                  [net.sf.opencsv/opencsv "2.3"]
-                 [org.clojure/data.csv "0.1.3"
+                 [org.clojure/data.csv "0.1.4"
                   :exclusions [org.clojure/clojure]]
                  ;; TODO: switch to data.json?
                  [org.danlarkin/clojure-json "1.1"

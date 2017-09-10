@@ -10,6 +10,6 @@
   :dependencies [[incanter/incanter-core "1.9.1"]
                  [clojureql "1.0.4" :exclusions [org.clojure/clojure]]
                  ]
-  :profiles {:dev {:dependencies [[org.apache.derby/derby "10.10.1.1"]]}}
+  :profiles {:dev {:dependencies [[org.apache.derby/derby "10.13.1.1"]]}}
   )
 
