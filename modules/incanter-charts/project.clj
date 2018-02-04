@@ -8,6 +8,6 @@
         :dir "modules/incanter-charts"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-io "1.9.1"]
-                 [incanter/jfreechart "1.0.13-no-gnujaxp"]
+                 [org.jfree/jfreechart "1.0.19"]
                  [clj-time "0.14.0" :exclusions [org.clojure/clojure]]]
   )

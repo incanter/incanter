@@ -391,7 +391,7 @@
 (deftest log-axis-tests
   (let [a10 (log-axis)]
     (is (isa? (type a10) org.jfree.chart.axis.ValueAxis))
-    (is (= "1" (.. a10 (getStandardTickUnits) (get 0) (valueToString 1.0)))))
+    (is (= "1" (.. a10 (getStandardTickUnits) (getCeilingTickUnit 0.0) (valueToString 1.0)))))
   ;; TODO: FIX IT in locale-independent way
   (comment  (let [a2 (log-axis :base 2, :label "my precious", :int-ticks? false)]
               (is (= 2.0 (.getBase a2)))
