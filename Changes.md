@@ -1,5 +1,12 @@
 # What's new in Incanter #
 
+## Changes for 1.9.2 ##
+
+This release includes multiple bug fixes & improvements, together with update of
+dependencies to fresh versions.
+
+Please note that Clojure 1.9.0 isn't supported yet because of the problems with ClojureQL.
+
 ## Changes for 1.9.0 ##
 
 This is first preview of the Incanter 2.0.  This release incorporates the code implemented
