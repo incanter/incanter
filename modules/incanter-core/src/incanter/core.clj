@@ -2925,6 +2925,8 @@
   (binding [*out* w]
     (print-table (ds/column-names o) (ds/row-maps o))))
 
+;;Can we implement these in core.matrix and ditch
+;;incanter.Matrix class entirely?
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
     (.composeDiagonal DoubleFactory2D/dense block0 block1))

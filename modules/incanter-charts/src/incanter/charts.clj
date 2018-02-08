@@ -27,50 +27,51 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? dataset? vec? to-list plus minus div
-                                group-on bind-columns view save $group-by conj-cols
-                                grid-apply set-data col-names $data sel abs)]
-        [incanter.stats :only (quantile quantile-normal cumulative-mean
-                               sd correlation variance)]
-        [clj-time.coerce :only (to-date)])
-  (:import  (java.io File)
-            (javax.imageio ImageIO)
-            (javax.swing JSlider JFrame JLabel JPanel)
-            (java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font)
-            (org.jfree.data DomainOrder)
-            (org.jfree.data.statistics HistogramDataset
+  (:require [incanter.core :refer [$ matrix? dataset? vec? to-list plus minus div
+                                   group-on bind-columns view save $group-by conj-cols
+                                   grid-apply set-data col-names $data sel abs]
+             :as core]
+        [incanter.stats :refer [quantile quantile-normal cumulative-mean
+                               sd correlation variance]]
+        [clj-time.coerce :refer [to-date]])
+  (:import  [java.io File]
+            [javax.imageio ImageIO]
+            [javax.swing JSlider JFrame JLabel JPanel]
+            [java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font]
+            [org.jfree.data DomainOrder]
+            [org.jfree.data.statistics HistogramDataset
                                        HistogramType
-                                       DefaultBoxAndWhiskerCategoryDataset)
-            (org.jfree.chart ChartFactory
+                                       DefaultBoxAndWhiskerCategoryDataset]
+            [org.jfree.chart ChartFactory
                              ChartUtilities
                              ChartFrame
                              ChartTheme
                              StandardChartTheme
                              JFreeChart
                              LegendItem
-                             LegendItemCollection)
-            (org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis)
-            (org.jfree.chart.plot PlotOrientation
+                             LegendItemCollection]
+            [org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis]
+            [org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
                                   Plot
-                                  XYPlot)
-            (org.jfree.data.xy DefaultHighLowDataset
+                                  XYPlot]
+            [org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
                                XYSeriesCollection
-                               AbstractXYDataset)
-            (org.jfree.data.category DefaultCategoryDataset)
-            (org.jfree.data.general DefaultPieDataset)
-            (org.jfree.chart.renderer.xy XYLineAndShapeRenderer
+                               AbstractXYDataset]
+            [org.jfree.data.category DefaultCategoryDataset]
+            [org.jfree.data.general DefaultPieDataset]
+            [org.jfree.chart.renderer.xy XYLineAndShapeRenderer
                                          XYBarRenderer
                                          XYSplineRenderer
-                                         StandardXYBarPainter)
-            (org.jfree.ui TextAnchor RectangleInsets RectangleEdge)
-            (org.jfree.chart.title TextTitle)
-            (org.jfree.data UnknownKeyException)
-            (org.jfree.chart.annotations XYPointerAnnotation
+                                         StandardXYBarPainter]
+            [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
+            [org.jfree.chart.title TextTitle]
+            [org.jfree.data UnknownKeyException]
+            [org.jfree.chart.annotations XYPointerAnnotation
                                          XYTextAnnotation
-                                         XYPolygonAnnotation)))
+                                         XYPolygonAnnotation]))
 
 
 
@@ -1611,7 +1612,7 @@
                                           ( getDomainOrder [] (DomainOrder/ASCENDING))
                                           ( getXValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols x-name))
                                           ( getYValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols y-name))
-                                          ( getItemCount [series] (count (:rows (nth (vals data-grouped) series))))
+                                          ( getItemCount [series] (core/nrow (nth (vals data-grouped) series)))
                                           ( getSeriesKey [series] (str (nth (keys data-grouped) series)))
                                           ( getSeriesCount [] (count data-grouped))))
         histogram-dataset-impl (fn [name]
