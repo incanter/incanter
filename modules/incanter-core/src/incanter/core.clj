@@ -2683,6 +2683,8 @@
         url)
       (catch ClassNotFoundException e nil))))
 
+;;fixed, was erroneously returning the dispatch function
+;;instead of applying it to obj..
 (defmulti set-data
   "
   Examples:
@@ -2707,14 +2709,21 @@
                                 data))))
 
   "
-  (fn [obj & more] dispatch))
+  (fn [obj & more] (dispatch obj)))
 
-
+;;note: the clojure.core.matrix.impl.dataset.DataSetRow was tossing
+;;an error originally, "after" fixing the problems with set-data's
+;;dispatch function.  rows don't implement IFn, and were being invoked
+;;as if ds/row-maps.  datatable only cares about values, so mapping
+;;seq over the rows works fine.  seq is also the only way to
+;;coerce a row into a range of values, even though print method
+;;leads you to believe you have a :values an accessible key.
+;;DatasetRow doesn't implement ILookup...
 (defmethod set-data javax.swing.JTable
   ([table data]
-     (let [col-names (ds/column-names data)
-           column-vals (map (fn [row] (map #(row %) col-names)) (m/rows data))
-           table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+     (let [col-names   (ds/column-names data)
+           column-vals (m/rows data)
+           table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. (seq %)) column-vals))
                                                              (java.util.Vector. col-names))]
        (.setModel table table-model))))
 
