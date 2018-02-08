@@ -2905,10 +2905,15 @@
            x-label (or (:x-label opts) "")
            y-label (or (:y-label opts) "")
            z-label (or (:z-label opts) "z scale")
+           x-res   (or (:x-res opts) 100)
+           y-res   (or (:y-res opts) 100)
+           auto-scale? (if (false? (:auto-scale? opts)) false true)
+           block-width  (double (/ (- x-max x-min) x-res))
+           block-height (double (/ (- y-max y-min) y-res))
            theme (or (:theme opts) :default)
            xyz-dataset (org.jfree.data.xy.DefaultXYZDataset.)
            data (into-array (map double-array
-                                 (grid-apply function x-min x-max y-min y-max)))
+                                 (grid-apply function x-min x-max y-min y-max x-res y-res)))
            min-z (reduce min (last data))
            max-z (reduce max (last data))
            x-axis (doto (org.jfree.chart.axis.NumberAxis. x-label)
@@ -2940,7 +2945,10 @@
            scale-axis (org.jfree.chart.axis.NumberAxis. z-label)
            legend (org.jfree.chart.title.PaintScaleLegend. scale scale-axis)
            renderer (org.jfree.chart.renderer.xy.XYBlockRenderer.)
-
+           _       (when auto-scale?
+                     (doto renderer
+                       (.setBlockWidth block-width)
+                       (.setBlockHeight block-height)))
            plot (org.jfree.chart.plot.XYPlot. xyz-dataset x-axis y-axis renderer)
            chart (org.jfree.chart.JFreeChart. plot)]
        (do
@@ -2975,7 +2983,15 @@
 
   Returns a JFreeChart object representing a heat map of the function across
   the given x and y ranges. Use the 'view' function to display the chart, or
-  the 'save' function to write it to a file.
+  the 'save' function to write it to a file.  Callers may define the
+  number of samples in each direction, and select if they want a
+  sparser representation by disabling :auto-scale? .  By default,
+  the heat-map will try to scale the 'blocks' or sampled pixels
+  to cover the ranges specified.  Depending on the number of
+  samples, this may result in a pixelated but performant look.
+  Disabling auto-scale? will keep the 'blocks' a constant
+  size, leading to potentially sparsely sampled points on
+  the surface surrounded by blank regions.
 
   Arguments:
     function -- a function that takes two scalar arguments and returns a scalar
@@ -2992,6 +3008,10 @@
     :color? (default true) -- should the plot be in color or not?
     :include-zero? (default true) -- should the plot include the origin if it
                                      is not in the ranges specified?
+    :x-res   (default 100) -- amount of samples to take in the x range
+    :y-res   (default 100) -- amount of samples to take in the y range
+    :auto-scale? (default true) -- automatically scale the block
+                                   width/height to provide a continuous surface
 
   Examples:
     (use '(incanter core charts))
