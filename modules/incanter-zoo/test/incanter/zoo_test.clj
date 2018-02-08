@@ -1,7 +1,8 @@
 (ns incanter.zoo-test
-  (:use clojure.test 
+  (:use clojure.test
         (incanter zoo core stats))
-  (:require [clj-time.coerce :as c]))
+  (:require [clj-time.coerce :as c]
+            [clojure.core.matrix.dataset :as ds]))
 
 
 ;; --= Tests
@@ -49,7 +50,7 @@
                       {:date "2012-01-02" :press 98 :temp 32}
                       {:date "2012-01-06" :temp 33}]))
 
-(deftest zoo-test
+(defn zoo-test []
   (is (zoo ds1))
   (is (zoo ds2 :date))
   (is (zoo ds3 :date))
@@ -64,15 +65,22 @@
       (is (= ts
              (zoo (to-dataset [{:index "2012-01-03" :a 3}
                                {:index "2012-01-02" :a 2}
-                               {:index "2012-01-01" :a 1}])))))))
+                               {:index "2012-01-01" :a 1}]))))))
+  (testing "Preserve all rows"
+    (is (= (nrow ds1) (nrow (zoo ds1))))
+    (is (= (nrow ds2) (nrow (zoo ds2 :date))))
+    (is (= (nrow ds3) (nrow (zoo ds3 :date))))))
 
-(deftest $$-test
+(defn $$-test []
   ;; Time slicing
   (let [ts1 (zoo ds1)]
     (testing "Single date slice"
       (is (= ($$ "2012-01-01" :temp ts1) 32) "Single col")
-      (is (= ($$ "2012-01-01" :all ts1)
-             [100 32 (to-date-time "2012-01-01")]) "Whole row")
+      (is (= (dataset (ds/column-names ts1) [($$ "2012-01-01" :all ts1)])
+             (dataset (ds/column-names ts1)
+                      [{:index (to-date-time "2012-01-01")
+                        :press 100
+                        :temp 32}])) "Whole row")
       (is (= ($$ "2012-01-01" :all ts1)
              ($$ "2012-01-01" ts1)) "Single arity check")
       (is (= (nrow ($$ "2012-01-10" :all ts1)) 0) "Date out of range"))
@@ -85,14 +93,14 @@
 
     (testing "Native Joda as index"
       (is (= ($$ (c/from-string "2012-01-03") :temp ts1) 30)))
-    
+
     (testing "End point overlaps"
       (is (= ($$ "2012-01-01" "2012-01-06" :all ts1)
              ($$ "2012-01-01" "2012-06-10" :all ts1)) "RHS")
       (is (= ($$ "2012-01-01" "2012-01-06" :all ts1)
              ($$ "2011-01-01" "2012-06-10" :all ts1)) "LHS&RHS"))))
 
-(deftest aligned?-test
+(defn aligned?-test []
   (let [ts1 (zoo ds1)
         ts2 (zoo ds2 :date)]
     (aligned? ts1 ts2)
@@ -106,20 +114,20 @@
                                          {:index "2012-01-03" :a 2}]))))
         "Different indices")))
 
-(deftest within-zoo?-test
+(defn within-zoo?-test []
   (let [ts1 (zoo ds1)]
     (is (within-zoo? "2012-01-01" ts1))
     (is (within-zoo? "2012-01-04" ts1))
     (is (not (within-zoo? "2012-01-11" ts1)))
     (is (within-zoo? (c/from-string "2012-01-02T01:03:03") ts1) "Needn't be same frequency")))
 
-(deftest lag-test
+(defn lag-test []
   (let [ts1 (zoo ds1)
         ls1 (lag ts1)]
     (is (aligned? ts1 ls1) "Indices equal")
     (is (aligned? ts1 (lag ls1)) "Indices equal")
     (is (aligned? ts1 (lag ts1 3)) "Indices equal")
-    
+
     (is (= ($ 0 [:press :temp] ls1)
            [nil nil]) "Nil pad the front values")
     (is (= ($ 0 [:press :temp] ts1)
@@ -127,9 +135,12 @@
     (is (= ($ 0 [:press :temp] ts1)
            ($ 2 [:press :temp] (lag ts1 2))) "Multiperiod lag")
     (is (= ($ 2 [:press :temp] (-> ts1 lag lag))
-           ($ 2 [:press :temp] (lag ts1 2))) "Multiperiod lag")))
+           ($ 2 [:press :temp] (lag ts1 2))) "Multiperiod lag")
+    (is (= (ds/column-names ts1)
+           (ds/column-names ls1))
+        "Preserve order of columns")))
 
-(deftest zoo-apply-test
+(defn zoo-apply-test []
   (let [ts (zoo ds1)
         zs (zoo-apply #(apply min %) 2 ts :temp)]
     (aligned? ts zs)
@@ -146,11 +157,23 @@
                     {k2 nil}))
                 m1 m2)))
 
-(deftest zoo-row-map-test
+(defn zoo-row-map-test []
   (let [ts1 (zoo ds1)
         ms1 (zoo-row-map map-diff ts1 ts1)
         ms2 (zoo-row-map map-diff ts1 (lag ts1))]
     (is (every? (partial = 0) ($ :temp ms1)))
     ms2
     (is (= ($ :press ms2) [nil -2 4 1 1 1]))))
-    
+
+
+(deftest compliance-test
+  (doseq [impl [:clatrix :ndarray :persistent-vector :vectorz]]
+    (set-current-implementation impl)
+    (println (str "compliance test " impl))
+    (zoo-test)
+    ($$-test)
+    (aligned?-test)
+    (within-zoo?-test)
+    (lag-test)
+    (zoo-apply-test)
+    (zoo-row-map-test)))

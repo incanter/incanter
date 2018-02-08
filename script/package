@@ -1,9 +1,0 @@
-#!/bin/sh
-
-LEIN=lein
-if [ -n "$LEINCMD" ] ; then
-    LEIN=$LEINCMD
-fi
-
-[ -f incanter.jar ] && rm incanter.jar
-$LEIN uberjar && cp target/incanter-*-standalone.jar incanter.jar

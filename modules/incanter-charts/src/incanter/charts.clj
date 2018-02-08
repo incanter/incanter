@@ -27,8 +27,8 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                                bind-columns view save $group-by conj-cols
+  (:use [incanter.core :only ($ matrix? dataset? vec? to-list plus minus div
+                                group-on bind-columns view save $group-by conj-cols
                                 grid-apply set-data col-names $data sel abs)]
         [incanter.stats :only (quantile quantile-normal cumulative-mean
                                sd correlation variance)]
@@ -316,7 +316,10 @@
   If x is a single value, and data is defined, return ($ x data)
   "
   [x data]
-  (if (coll? x)
+  (if (or (coll? x)
+          (dataset? x)
+          (matrix? x)
+          (vec? x))
     (to-list x)
     (if data
       (let [selected ($ x data)]
@@ -902,9 +905,9 @@
                (LogAxis. label)
                (LogAxis.))]
     (doto axis (.setBase base))
-    (if int-ticks?
+    (when int-ticks?
       (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
-    (if smallest-value
+    (when smallest-value
       (.setSmallestValue axis smallest-value)) ; TODO TEST THIS!
     axis))
 
@@ -1130,7 +1133,7 @@
 
 (defn- create-xy-series-plot
   ([x y create-plot & options]
-    (let [opts (when options (apply assoc {} options))
+     (let [opts (when options (apply assoc {} options))
           data (or (:data opts) $data)
           _x (data-as-list x data)
           _y (data-as-list y data)
@@ -1138,38 +1141,38 @@
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (let [x-groupped (->> (conj-cols _x _group-by)
-                                           ($group-by :col-1))]
+                                           ($group-by 1))]
                        (->> (distinct _group-by)
                             (map #(->>
-                                   (get x-groupped {:col-1 %})
-                                   ($ :col-0))))))
-          y-groups (when _group-by
+                                   (get x-groupped {1 %})
+                                   ($ 0))))))
+           y-groups (when _group-by
                      (let [y-groupped (->> (conj-cols _y _group-by)
-                                           ($group-by :col-1))]
+                                           ($group-by 1))]
                        (->> (distinct _group-by)
                             (map #(->>
-                                   (get y-groupped {:col-1 %})
-                                   ($ :col-0))))))
-          __x (in-coll (if x-groups (first x-groups) _x))
-          __y (in-coll (if y-groups (first y-groups) _y))
-          title (or (:title opts) "")
-          x-lab (or (:x-label opts) (str 'x))
-          y-lab (or (:y-label opts) (str 'y))
-          series-lab (or (:series-label opts)
+                                   (get y-groupped {1 %})
+                                   ($ 0))))))
+           __x (in-coll (if x-groups (first x-groups) _x))
+           __y (in-coll (if y-groups (first y-groups) _y))
+           title (or (:title opts) "")
+           x-lab (or (:x-label opts) (str 'x))
+           y-lab (or (:y-label opts) (str 'y))
+           series-lab (or (:series-label opts)
                           (if x-groups
                             (format "%s, %s (0)" 'x 'y)
                             (format "%s, %s" 'x 'y)))
-          theme (or (:theme opts) :default)
-          legend? (true? (:legend opts))
-          points? (true? (:points opts))
-          data-series (XYSeries. (cond
+           theme (or (:theme opts) :default)
+           legend? (true? (:legend opts))
+           points? (true? (:points opts))
+           data-series (XYSeries. (cond
                                    _group-by
                                      (first _group-by)
                                    :else
                                      series-lab)
                                  (:auto-sort opts true))
-          dataset (XYSeriesCollection.)
-          chart (do
+           dataset (XYSeriesCollection.)
+           chart (do
                   (dorun
                    (map (fn [x y]
                         (if (and (not (nil? x))
@@ -1434,11 +1437,11 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _y _group-by)))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
@@ -1772,7 +1775,7 @@
     ;; Input dataset examples: Incanter data repo, local file, remote file (url)
     (def iris (get-dataset :iris))
     (def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home
-    (def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))
+    (def iris (read-dataset \"https://raw.githubusercontent.com/incanter/incanter/master/data/iris.dat\" :delim \\space :header true))
     ;; Filter dataset to specific columns only
     (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
     (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species]))
@@ -2669,9 +2672,9 @@
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (->> (conj-cols _x _group-by)
-                          ($group-by :col-1)
+                          ($group-by 1)
                           vals
-                          (map #($ :col-0 %))
+                          (map #($ 0 %))
                           (map in-coll)))
           __x (if x-groups (first x-groups) _x)
           title (or (:title opts) "")

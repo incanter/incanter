@@ -35,14 +35,15 @@
            (cern.jet.random.tdouble.engine DoubleMersenneTwister)
            (cern.jet.stat.tdouble DoubleDescriptive
                                   Probability)
+           (java.util Date)
            (incanter Weibull))
-  (:require [clatrix.core :as clx])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
-                              matrix length log10 sum sum-of-squares sel matrix?
-                              cumulative-sum solve vectorize bind-rows safe-div)]))
+                              matrix length log10 sum sum-of-squares sel matrix? vec?
+                              dataset? cumulative-sum solve vectorize bind-rows safe-div)])
+  (:require [clojure.core.matrix :as m]))
 
 (defn scalar-abs
   "Fast absolute value function"
@@ -204,8 +205,8 @@
   Example:
       (pdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
   "
-  ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
-    (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
+  ([x & {:keys [mean sd seed] :or {mean 0 sd 1 seed (Date.)}}]
+    (let [dist (Normal. mean sd (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -232,8 +233,8 @@
   Example:
       (cdf-normal 1.96 :mean -2 :sd (sqrt 0.5))
   "
-  ([x & {:keys [mean sd] :or {mean 0 sd 1}}]
-    (let [dist (Normal. mean sd (DoubleMersenneTwister.))]
+  ([x & {:keys [mean sd seed] :or {mean 0 sd 1 seed (Date.)}}]
+    (let [dist (Normal. mean sd (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -294,7 +295,7 @@
   ([^Integer size & {:keys [mean sd] :or {mean 0 sd 1}}]
     (if (= size 1)
       (Normal/staticNextDouble mean sd)
-      (for [_ (range size)] (Normal/staticNextDouble mean sd)))))
+      (matrix (for [_ (range size)] (Normal/staticNextDouble mean sd))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -342,13 +343,10 @@
     (let [mean (or mean (if sigma (repeat (ncol sigma) 0) [0]))
           sigma (or sigma (identity-matrix (count mean)))
           p (count mean)
-          chol (decomp-cholesky sigma)
-          norm-samp (mmult (matrix (sample-normal (* size p)) p) chol)]
-      (if (> (nrow norm-samp) 1)
-        (matrix (map #(plus % (trans mean)) norm-samp))
-        (matrix (plus norm-samp (trans mean)))))))
-
-
+          chol (or (decomp-cholesky sigma) (throw (Error. "sigma matrix cannot be decomposed - not positive definite")))
+          L* (:L* chol)
+          norm-samp (m/reshape (sample-normal (* size p)) [size p])]
+      (m/add (mmult norm-samp L*) mean))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -377,8 +375,8 @@
       (pdf-uniform 5)
       (pdf-uniform 5 :min 1 :max 10)
   "
-  ([x & {:keys [min max] :or {min 0.0 max 1.0}}]
-    (let [dist (DoubleUniform. min max (DoubleMersenneTwister.))]
+  ([x & {:keys [min max seed] :or {min 0.0 max 1.0 seed (Date.)}}]
+    (let [dist (DoubleUniform. min max (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -405,8 +403,8 @@
       (cdf-uniform 5)
       (cdf-uniform 5 :min 1 :max 10)
   "
-  ([x & {:keys [min max] :or {min 0.0 max 1.0}}]
-    (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister.))]
+  ([x & {:keys [min max seed] :or {min 0.0 max 1.0 seed (Date.)}}]
+    (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -433,15 +431,15 @@
       (sample-uniform 1000)
       (sample-uniform 1000 :min 1 :max 10)
   "
-  ([^Integer size & {:keys [min max integers]
-                     :or {min 0.0 max 1.0 integers false}}]
+  ([^Integer size & {:keys [min max integers seed]
+                     :or {min 0.0 max 1.0 integers false 
+                          seed (Date.)}}]
     (let [min-val (double min)
           max-val (double max)
-          dist (DoubleUniform. min-val max-val (DoubleMersenneTwister.))]
+          dist (DoubleUniform. min-val max-val (DoubleMersenneTwister. seed))]
       (if integers
-        (for [_ (range size)] (DoubleUniform/staticNextIntFromTo min-val max-val))
-        (for [_ (range size)] (DoubleUniform/staticNextDoubleFromTo min-val max-val))))))
-
+        (for [_ (range size)] (.nextIntFromTo dist min-val max-val))
+        (for [_ (range size)] (.nextDoubleFromTo dist min-val max-val))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BETA DISTRIBUTION FUNCTIONS
@@ -467,8 +465,8 @@
   Example:
       (pdf-beta 0.5 :alpha 1 :beta 2)
   "
-  ([x & {:keys [alpha beta] :or {alpha 1 beta 1}}]
-    (let [dist (Beta. alpha beta (DoubleMersenneTwister.))]
+  ([x & {:keys [alpha beta seed] :or {alpha 1 beta 1 seed (Date.)}}]
+    (let [dist (Beta. alpha beta (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -559,7 +557,8 @@
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
-          dist (Weibull. scale shape (DoubleMersenneTwister.))]
+          seed (or (:seed opts) (Date.))
+          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -588,7 +587,8 @@
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
-          dist (Weibull. scale shape (DoubleMersenneTwister.))]
+          seed (or (:seed opts) (Date.) )
+          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -645,9 +645,9 @@
   Example:
       (pdf-gamma 10 :shape 1 :scale 2)
   "
-  ([x & {:keys [shape scale rate] :or {shape 1}}]
+  ([x & {:keys [shape scale rate seed] :or {shape 1 seed (Date.)}}]
      (let [tscale (or scale (if (nil? rate) 1 (/ 1.0 rate)))
-           dist (Gamma. shape tscale (DoubleMersenneTwister.))]
+           dist (Gamma. shape tscale (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -733,8 +733,8 @@
   Example:
       (pdf-chisq 5.0 :df 2)
   "
-  ([x & {:keys [df] :or {df 1}}]
-    (let [dist (ChiSquare. df (DoubleMersenneTwister.))]
+  ([x & {:keys [df seed] :or {df 1 seed (Date.)}}]
+    (let [dist (ChiSquare. df (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -820,8 +820,8 @@
   Example:
       (pdf-t 1.2 :df 10)
   "
-  ([x & {:keys [df] :or {df 1}}]
-    (let [dist (StudentT. df (DoubleMersenneTwister.))]
+  ([x & {:keys [df seed] :or {df 1 seed (Date.)}}]
+    (let [dist (StudentT. df (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -944,8 +944,8 @@
   Example:
       (pdf-exp 2.0 :rate 1/2)
   "
-  ([x & {:keys [rate] :or {rate 1}}]
-    (let [dist (Exponential. rate (DoubleMersenneTwister.))]
+  ([x & {:keys [rate seed] :or {rate 1 seed (Date.)}}]
+    (let [dist (Exponential. rate (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -970,8 +970,8 @@
   Example:
       (cdf-exp 2.0 :rate 1/2)
   "
-  ([x & {:keys [rate] :or {rate 1}}]
-    (let [dist (Exponential. rate (DoubleMersenneTwister.))]
+  ([x & {:keys [rate seed] :or {rate 1 seed (Date.)}}]
+    (let [dist (Exponential. rate (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
@@ -1007,7 +1007,7 @@
 ;; WISHART DISTRIBUTION FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+;; TODO: fix it completely...
 (defn sample-wishart
   "
   Returns a p-by-p symmetric distribution drawn from a Wishart distribution
@@ -1029,17 +1029,19 @@
     http://en.wikipedia.org/wiki/Wishart_distribution
   "
   ([& {:keys [scale p df] :or {p 2}}]
-    (let [scale (or scale (when p (identity-matrix p)))
-          p (count scale)
-          df (or df p)
-          diagonal (for [i (range 1 (inc p))]
-                     (pow (sample-chisq 1 :df (inc (- df i))) 1/2))
-          mat (diag diagonal)
-          indices (for [i (range p) j (range p) :when (< j i)] [i j])
-          _ (doseq [indx indices] (clx/set mat (first indx) (second indx) (sample-normal 1)))
-          chol (decomp-cholesky scale)
-          x (mmult chol mat (trans mat) (trans chol))]
-      x)))
+   (let [scale (or scale (when p (identity-matrix p)))
+         p (m/row-count scale)
+         df (or df p)
+         mat (m/mutable (m/new-matrix p p))
+         _ (doseq [i (range 1 (inc p))]
+             (let [v (pow (sample-chisq 1 :df (inc (- df i))) 1/2)
+                   idx (dec i)]
+               (m/mset! mat idx idx v)))
+         indices (for [i (range p) j (range p) :when (< j i)] [i j])
+         _ (doseq [indx indices] (m/mset! mat (first indx) (second indx) (sample-normal 1)))
+         chol (decomp-cholesky scale)
+         x (m/mmul chol mat (trans mat) (trans chol))]
+     x)))
 
 
 
@@ -1064,8 +1066,8 @@
     http://en.wikipedia.org/wiki/Inverse-Wishart_distribution
   "
   ([& {:keys [scale p df] :or {p 2}}]
-    (let [scale (or scale (when p (identity-matrix p)))
-          p (count scale)
+    (let [scale (m/mutable (or scale (when p (identity-matrix p))))
+          p (m/row-count scale)
           df (or df p)]
       (solve (sample-wishart :p p :df df :scale scale)))))
 
@@ -1140,8 +1142,8 @@
   Example:
       (pdf-binomial 10 :prob 1/4 :size 20)
   "
-  ([x & {:keys [size prob] :or {size 1 prob 1/2}}]
-    (let [dist (Binomial. size prob (DoubleMersenneTwister.))]
+  ([x & {:keys [size prob seed] :or {size 1 prob 1/2 seed (Date.)}}]
+    (let [dist (Binomial. size prob (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1199,9 +1201,11 @@
       (sample-binomial 1000 :prob 1/4 :size 20)
   "
   ([^Integer samplesize & {:keys [size prob] :or {size 1 prob 1/2}}]
-    (if (= samplesize 1)
-      (Binomial/staticNextInt size prob)
-      (repeatedly samplesize #(Binomial/staticNextInt size prob)))))
+   (cond
+     (and (= samplesize 1) (= prob 1.0)) size
+     (= prob 1.0) (repeat samplesize size)
+     (= samplesize 1) (Binomial/staticNextInt size prob)
+     :else (repeatedly samplesize #(Binomial/staticNextInt size prob)))))
 
 
 
@@ -1277,8 +1281,8 @@
   Example:
       (pdf-poisson 5 :lambda 10)
   "
-  ([x & {:keys [lambda] :or {lambda 1}}]
-    (let [dist (Poisson. lambda (DoubleMersenneTwister.))]
+  ([x & {:keys [lambda seed] :or {lambda 1 seed (Date.)}}]
+    (let [dist (Poisson. lambda (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1364,8 +1368,8 @@
   Example:
       (pdf-neg-binomial 10 :prob 1/2 :size 20)
   "
-  ([x & {:keys [size prob] :or {size 10 prob 1/2}}]
-    (let [dist (NegativeBinomial. size prob (DoubleMersenneTwister.))]
+  ([x & {:keys [size prob seed] :or {size 10 prob 1/2 seed (Date.)}}]
+    (let [dist (NegativeBinomial. size prob (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
@@ -1531,10 +1535,10 @@
         (DoubleArrayList. (double-array xx))
         (DoubleArrayList. (double-array yy)))))
   ([mat]
-    (let [n (ncol mat)]
+   (let [n (ncol mat)]
       (matrix
         (for [i (range n) j (range n)]
-          (covariance (sel mat true i) (sel mat true j))) n))))
+          (covariance (sel mat :cols i) (sel mat :cols j))) n))))
 
 
 
@@ -1579,9 +1583,10 @@
           (DoubleArrayList. (double-array yy)) (sd y))
         0.0)))
   ([mat]
-   (div (covariance mat)
-        (sqrt (mmult (diag (covariance mat)) (trans (diag (covariance mat))))))))
-
+   (let [n (ncol mat)]
+      (matrix
+        (for [i (range n) j (range n)]
+          (correlation (sel mat :cols i) (sel mat :cols j))) n))))
 
 (defn auto-correlation
   "
@@ -1706,7 +1711,7 @@
   "
   (fn [coll & _]
     (cond
-      (instance? incanter.core.Dataset coll) ::dataset
+     (or (dataset? coll) (matrix? coll)) ::dataset
       :else ::coll)))
 
 (defmethod sample ::coll
@@ -2116,7 +2121,7 @@
           f-prob (cdf-f f-stat :df1 df1 :df2 df2 :lower-tail? false)
           coef-var (mult mse xtxi)
           std-errors (sqrt (diag coef-var))
-          t-tests (div coefs std-errors)
+          t-tests (safe-div coefs std-errors)
           t-probs (mult 2 (cdf-t (abs t-tests) :df df2 :lower-tail? false))
           t-95 (mult (quantile-t 0.975 :df df2) std-errors)
           coefs-ci (if (number? std-errors)
@@ -2351,10 +2356,14 @@
     (tabulate data)
   "
   ([x & options]
-    (let [_x (if (matrix? x) x (matrix x))
+    (let [_x (cond
+              (matrix? x) x
+              (vec? x) (matrix x 1)
+              (number? x) (matrix [[x]]))
           p (ncol _x)
           n (nrow _x)
-          levels (for [i (range p)] (sort (seq (into #{} (sel _x :cols i)))))
+          levels (for [i (range p)]
+                   (sort (seq (into #{} (vectorize (sel _x :cols i))))))
           margins (for [j (range p)]
                   (loop [marg {} i (int 0)]
                     (if (= i n)
@@ -2369,8 +2378,8 @@
                     (if (= i n)
                       tab
                       (recur (let [row (if (> p 1)
-                                         (to-list (nth _x i))
-                                         (nth _x i))
+                                         (to-list (m/get-row _x i))
+                                         (float (m/mget _x i 0)))
                                    cnt (get tab row)]
                               (if (nil? cnt)
                                 (assoc tab row 1)
@@ -2513,7 +2522,9 @@
                         0)
                       (second (:margins xtab)))
 
-          counts (if two-samp? (vectorize table) table)
+          counts (if two-samp?
+                   (apply m/join (m/slices table 1))
+                   table)
           N (if table?
               (sum counts)
               (:N xtab))
@@ -2717,12 +2728,11 @@
     http://en.wikipedia.org/wiki/Principal_component_analysis
   "
   ([x & options]
-    (let [svd (decomp-svd (correlation x))
-          rotation (:V svd)
-          std-dev (sqrt (:S svd))]
-      {:std-dev std-dev
-       :rotation rotation})))
-
+   (let [svd (decomp-svd (covariance x))
+         rotation        (:V* svd)
+         std-dev         (sqrt (:S svd))]
+     {:std-dev std-dev
+      :rotation rotation})))
 
 
 (defn detabulate
@@ -2843,7 +2853,7 @@
      (if (and (matrix? res)
               (= 1 (nrow res)) (= 1 (ncol res)))
        (sel res 0 0)
-       res))))
+       (m/mget res)))))
 
 
 (defn odds-ratio
@@ -2974,29 +2984,6 @@
             (* n (dec (pow n 2)))))))
 
 
-
-
-
-(defn- key-compare
-  [x y]
-    (cond
-      (and
-        (keyword? x)
-        (not (keyword? y))) 1
-      (and
-        (keyword? y)
-        (not (keyword? x))) -1
-      :otherwise (compare x y)))
-
-;;weird inversion makes us revers k1 and k2
-(defn- kv-compare [[k1 v1] [k2 v2]] (key-compare k2 k1))
-
-;;TDOO: doesn't seem to work? test and beat on it.
-;;use clojure sorting: sort-by, sorted-map-by, etc.
-(defn- sort-map [m] (into {} (sort kv-compare m)))
-
-
-
 (defn kendalls-tau
   "
   http://en.wikipedia.org/wiki/Kendall_tau_rank_correlation_coefficient
@@ -3008,7 +2995,7 @@
   [a b]
   {:pre [(= (count a) (count b))]}
     (let [n (count a)
-          ranked (reverse (sort-map (zipmap a b)))
+          ranked (reverse (apply sorted-map-by compare (interleave a b)))
           ;;dcd is the meat of the calculation, the difference between the doncordant and discordant pairs
           dcd (second
                 (reduce
