@@ -2824,20 +2824,28 @@
 
 
 (defn grid-apply
-  "
-  Applies the given function f, that accepts two arguments, to a grid
+  "Applies the given function f, that accepts two arguments, to a grid
   defined by rectangle bounded x-min, y-min, x-max, y-max and returns a
   sequence of three sequences representing the cartesian product of x and y
   and z calculated by applying f to the combinations of x and y.
+  
+  Defaults to a 100x100 'grid', where the x and y axes are sampled
+  evenly accorinding to the grid.  Callers may supply their own
+  horizontal and vertical sampling resolutions via x-res and
+  y-res.  In cases where the sampling resolution is lower
+  than the range of actual values, a sparse response
+  surface will result.
   "
-  ([f x-min x-max y-min y-max]
-    (let [x-vals (range x-min x-max (/ (- x-max x-min) 100))
-          y-vals (range y-min y-max (/ (- y-max y-min) 100))
+  ([f x-min x-max y-min y-max x-res y-res]
+    (let [x-vals (range x-min x-max (/ (- x-max x-min) x-res))
+          y-vals (range y-min y-max (/ (- y-max y-min) y-res))
           xyz (for [_x x-vals _y y-vals] [_x _y (f _x _y)])
           transpose #(list (conj (first %1) (first %2))
                            (conj (second %1) (second %2))
                            (conj (nth %1 2) (nth %2 2)))]
-      (reduce transpose [[] [] []] xyz))))
+      (reduce transpose [[] [] []] xyz)))
+  ([f x-min x-max y-min y-max]
+   (grid-apply f x-min x-max y-min y-max 100 100)))
 
 
 
