@@ -27,50 +27,51 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? dataset? vec? to-list plus minus div
-                                group-on bind-columns view save $group-by conj-cols
-                                grid-apply set-data col-names $data sel abs)]
-        [incanter.stats :only (quantile quantile-normal cumulative-mean
-                               sd correlation variance)]
-        [clj-time.coerce :only (to-date)])
-  (:import  (java.io File)
-            (javax.imageio ImageIO)
-            (javax.swing JSlider JFrame JLabel JPanel)
-            (java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font)
-            (org.jfree.data DomainOrder)
-            (org.jfree.data.statistics HistogramDataset
+  (:require [incanter.core :refer [$ matrix? dataset? vec? to-list plus minus div
+                                   group-on bind-columns view save $group-by conj-cols
+                                   grid-apply set-data col-names $data sel abs]
+             :as core]
+        [incanter.stats :refer [quantile quantile-normal cumulative-mean
+                               sd correlation variance]]
+        [clj-time.coerce :refer [to-date]])
+  (:import  [java.io File]
+            [javax.imageio ImageIO]
+            [javax.swing JSlider JFrame JLabel JPanel]
+            [java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font]
+            [org.jfree.data DomainOrder]
+            [org.jfree.data.statistics HistogramDataset
                                        HistogramType
-                                       DefaultBoxAndWhiskerCategoryDataset)
-            (org.jfree.chart ChartFactory
+                                       DefaultBoxAndWhiskerCategoryDataset]
+            [org.jfree.chart ChartFactory
                              ChartUtilities
                              ChartFrame
                              ChartTheme
                              StandardChartTheme
                              JFreeChart
                              LegendItem
-                             LegendItemCollection)
-            (org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis)
-            (org.jfree.chart.plot PlotOrientation
+                             LegendItemCollection]
+            [org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis]
+            [org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
                                   Plot
-                                  XYPlot)
-            (org.jfree.data.xy DefaultHighLowDataset
+                                  XYPlot]
+            [org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
                                XYSeriesCollection
-                               AbstractXYDataset)
-            (org.jfree.data.category DefaultCategoryDataset)
-            (org.jfree.data.general DefaultPieDataset)
-            (org.jfree.chart.renderer.xy XYLineAndShapeRenderer
+                               AbstractXYDataset]
+            [org.jfree.data.category DefaultCategoryDataset]
+            [org.jfree.data.general DefaultPieDataset]
+            [org.jfree.chart.renderer.xy XYLineAndShapeRenderer
                                          XYBarRenderer
                                          XYSplineRenderer
-                                         StandardXYBarPainter)
-            (org.jfree.ui TextAnchor RectangleInsets RectangleEdge)
-            (org.jfree.chart.title TextTitle)
-            (org.jfree.data UnknownKeyException)
-            (org.jfree.chart.annotations XYPointerAnnotation
+                                         StandardXYBarPainter]
+            [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
+            [org.jfree.chart.title TextTitle]
+            [org.jfree.data UnknownKeyException]
+            [org.jfree.chart.annotations XYPointerAnnotation
                                          XYTextAnnotation
-                                         XYPolygonAnnotation)))
+                                         XYPolygonAnnotation]))
 
 
 
@@ -1611,7 +1612,7 @@
                                           ( getDomainOrder [] (DomainOrder/ASCENDING))
                                           ( getXValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols x-name))
                                           ( getYValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols y-name))
-                                          ( getItemCount [series] (count (:rows (nth (vals data-grouped) series))))
+                                          ( getItemCount [series] (core/nrow (nth (vals data-grouped) series)))
                                           ( getSeriesKey [series] (str (nth (keys data-grouped) series)))
                                           ( getSeriesCount [] (count data-grouped))))
         histogram-dataset-impl (fn [name]
@@ -2904,10 +2905,15 @@
            x-label (or (:x-label opts) "")
            y-label (or (:y-label opts) "")
            z-label (or (:z-label opts) "z scale")
+           x-res   (or (:x-res opts) 100)
+           y-res   (or (:y-res opts) 100)
+           auto-scale? (if (false? (:auto-scale? opts)) false true)
+           block-width  (double (/ (- x-max x-min) x-res))
+           block-height (double (/ (- y-max y-min) y-res))
            theme (or (:theme opts) :default)
            xyz-dataset (org.jfree.data.xy.DefaultXYZDataset.)
            data (into-array (map double-array
-                                 (grid-apply function x-min x-max y-min y-max)))
+                                 (grid-apply function x-min x-max y-min y-max x-res y-res)))
            min-z (reduce min (last data))
            max-z (reduce max (last data))
            x-axis (doto (org.jfree.chart.axis.NumberAxis. x-label)
@@ -2939,7 +2945,10 @@
            scale-axis (org.jfree.chart.axis.NumberAxis. z-label)
            legend (org.jfree.chart.title.PaintScaleLegend. scale scale-axis)
            renderer (org.jfree.chart.renderer.xy.XYBlockRenderer.)
-
+           _       (when auto-scale?
+                     (doto renderer
+                       (.setBlockWidth block-width)
+                       (.setBlockHeight block-height)))
            plot (org.jfree.chart.plot.XYPlot. xyz-dataset x-axis y-axis renderer)
            chart (org.jfree.chart.JFreeChart. plot)]
        (do
@@ -2974,7 +2983,15 @@
 
   Returns a JFreeChart object representing a heat map of the function across
   the given x and y ranges. Use the 'view' function to display the chart, or
-  the 'save' function to write it to a file.
+  the 'save' function to write it to a file.  Callers may define the
+  number of samples in each direction, and select if they want a
+  sparser representation by disabling :auto-scale? .  By default,
+  the heat-map will try to scale the 'blocks' or sampled pixels
+  to cover the ranges specified.  Depending on the number of
+  samples, this may result in a pixelated but performant look.
+  Disabling auto-scale? will keep the 'blocks' a constant
+  size, leading to potentially sparsely sampled points on
+  the surface surrounded by blank regions.
 
   Arguments:
     function -- a function that takes two scalar arguments and returns a scalar
@@ -2991,6 +3008,10 @@
     :color? (default true) -- should the plot be in color or not?
     :include-zero? (default true) -- should the plot include the origin if it
                                      is not in the ranges specified?
+    :x-res   (default 100) -- amount of samples to take in the x range
+    :y-res   (default 100) -- amount of samples to take in the y range
+    :auto-scale? (default true) -- automatically scale the block
+                                   width/height to provide a continuous surface
 
   Examples:
     (use '(incanter core charts))

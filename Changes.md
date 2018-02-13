@@ -67,6 +67,16 @@ Please, note that this release includes only part of changes planned for Incante
  * For Clatrix-based implementations, it's not always possible to construct matrix from
    result of `map`/`filter`/...
 
+## Changes for 1.5.7 ##
+
+### Bugfixes ###
+
+ * Make compatible with Clojure 1.7.0 & higher by excluding the new `update` function
+   (Issue #321);
+ * Fix for Issue #294: xy-plot draws wrong legends when the number of lines > 8;
+ * PR ##302: Handle edge case in binary search where a single element vector would result
+   in it getting stuck in an infinite loop;
+
 ## Changes for 1.5.6 ##
 
 ### Bugfixes ###

@@ -48,7 +48,18 @@
                    "."]
             :subprocess false}
 	  
-  :profiles {:dev {:resource-paths ["data"]}
+  :profiles {:dev {:resource-paths ["data"]
+                   :source-paths ["modules/incanter-core/src"
+                                  "modules/incanter-io/src"
+                                  "modules/incanter-charts/src"
+                                  "modules/incanter-mongodb/src"
+                                  "modules/incanter-pdf/src"
+                                  "modules/incanter-svg/src"
+                                  "modules/incanter-latex/src"
+                                  "modules/incanter-excel/src"
+                                  "modules/incanter-sql/src"
+                                  "modules/incanter-zoo/src"
+                                  "src"]}
              :debug {:debug true}
              :uberjar {:dependencies [[reply "0.3.7" :exclusions [org.clojure/clojure]]
                                       [swingrepl "1.3.0"

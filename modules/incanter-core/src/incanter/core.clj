@@ -29,6 +29,7 @@
 
   incanter.core
 
+  (:refer-clojure :exclude [update])
   (:use [incanter internal]
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)]
@@ -2683,6 +2684,8 @@
         url)
       (catch ClassNotFoundException e nil))))
 
+;;fixed, was erroneously returning the dispatch function
+;;instead of applying it to obj..
 (defmulti set-data
   "
   Examples:
@@ -2707,14 +2710,21 @@
                                 data))))
 
   "
-  (fn [obj & more] dispatch))
+  (fn [obj & more] (dispatch obj)))
 
-
+;;note: the clojure.core.matrix.impl.dataset.DataSetRow was tossing
+;;an error originally, "after" fixing the problems with set-data's
+;;dispatch function.  rows don't implement IFn, and were being invoked
+;;as if ds/row-maps.  datatable only cares about values, so mapping
+;;seq over the rows works fine.  seq is also the only way to
+;;coerce a row into a range of values, even though print method
+;;leads you to believe you have a :values an accessible key.
+;;DatasetRow doesn't implement ILookup...
 (defmethod set-data javax.swing.JTable
   ([table data]
-     (let [col-names (ds/column-names data)
-           column-vals (map (fn [row] (map #(row %) col-names)) (m/rows data))
-           table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+     (let [col-names   (ds/column-names data)
+           column-vals (m/rows data)
+           table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. (seq %)) column-vals))
                                                              (java.util.Vector. col-names))]
        (.setModel table table-model))))
 
@@ -2815,20 +2825,28 @@
 
 
 (defn grid-apply
-  "
-  Applies the given function f, that accepts two arguments, to a grid
+  "Applies the given function f, that accepts two arguments, to a grid
   defined by rectangle bounded x-min, y-min, x-max, y-max and returns a
   sequence of three sequences representing the cartesian product of x and y
   and z calculated by applying f to the combinations of x and y.
+  
+  Defaults to a 100x100 'grid', where the x and y axes are sampled
+  evenly accorinding to the grid.  Callers may supply their own
+  horizontal and vertical sampling resolutions via x-res and
+  y-res.  In cases where the sampling resolution is lower
+  than the range of actual values, a sparse response
+  surface will result.
   "
-  ([f x-min x-max y-min y-max]
-    (let [x-vals (range x-min x-max (/ (- x-max x-min) 100))
-          y-vals (range y-min y-max (/ (- y-max y-min) 100))
+  ([f x-min x-max y-min y-max x-res y-res]
+    (let [x-vals (range x-min x-max (/ (- x-max x-min) x-res))
+          y-vals (range y-min y-max (/ (- y-max y-min) y-res))
           xyz (for [_x x-vals _y y-vals] [_x _y (f _x _y)])
           transpose #(list (conj (first %1) (first %2))
                            (conj (second %1) (second %2))
                            (conj (nth %1 2) (nth %2 2)))]
-      (reduce transpose [[] [] []] xyz))))
+      (reduce transpose [[] [] []] xyz)))
+  ([f x-min x-max y-min y-max]
+   (grid-apply f x-min x-max y-min y-max 100 100)))
 
 
 
@@ -2924,6 +2942,8 @@
   (binding [*out* w]
     (print-table (ds/column-names o) (ds/row-maps o))))
 
+;;Can we implement these in core.matrix and ditch
+;;incanter.Matrix class entirely?
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
     (.composeDiagonal DoubleFactory2D/dense block0 block1))
