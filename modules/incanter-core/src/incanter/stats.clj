@@ -570,7 +570,7 @@
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
           seed (or (:seed opts) (Date.))
-          d    (dist/weibull-distribution shape scale (DoubleMersenneTwister. seed))]
+          d    (dist/weibull-distribution scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(dist/pdf d %) x)
         (dist/pdf d x)))))
@@ -612,7 +612,7 @@
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
           seed (or (:seed opts) (Date.) )
-          d    (dist/weibull-distribution shape scale (DoubleMersenneTwister. seed))]
+          d    (dist/weibull-distribution  scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(dist/cdf d %) x)
         (dist/cdf d x)))))
