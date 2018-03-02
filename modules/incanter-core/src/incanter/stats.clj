@@ -28,22 +28,23 @@
             "
        :author "David Edgar Liebke and Bradford Cross"}
   incanter.stats
-  (:import (cern.colt.list.tdouble DoubleArrayList)
-           (cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
+  (:import [cern.colt.list.tdouble DoubleArrayList]
+           [cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
                                     Exponential NegativeBinomial Normal Poisson
-                                    StudentT)
-           (cern.jet.random.tdouble.engine DoubleMersenneTwister)
-           (cern.jet.stat.tdouble DoubleDescriptive
-                                  Probability)
-           (java.util Date)
-           (incanter Weibull))
+                                    StudentT]
+           [cern.jet.random.tdouble.engine DoubleMersenneTwister]
+           [cern.jet.stat.tdouble DoubleDescriptive
+                                  Probability]
+           [java.util Date]
+           [incanter Weibull])
   (:use [clojure.set :only [difference intersection union]])
-  (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
+  (:use [incanter.core :only [$ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix? vec?
-                              dataset? cumulative-sum solve vectorize bind-rows safe-div)])
-  (:require [clojure.core.matrix :as m]))
+                              dataset? cumulative-sum solve vectorize bind-rows safe-div]])
+  (:require [clojure.core.matrix :as m]
+            [incanter.distributions :as dist]))
 
 (defn scalar-abs
   "Fast absolute value function"
@@ -563,6 +564,17 @@
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
 
+(defn pdf-weibull-new
+  ([x & options]
+    (let [opts (when options (apply assoc {} options))
+          scale (or (:scale opts) 1)
+          shape (or (:shape opts) 1)
+          seed (or (:seed opts) (Date.))
+          d    (dist/weibull-distribution shape scale (DoubleMersenneTwister. seed))]
+      (if (coll? x)
+        (map #(dist/pdf d %) x)
+        (dist/pdf d x)))))
+
 (defn cdf-weibull
   "
   Returns the Weibull cdf for the given value of x. It will return a sequence
@@ -593,6 +605,18 @@
         (map #(.cdf dist %) x)
         (.cdf dist x)))))
 
+;;i don't think we need any of the rng stuff....
+(defn cdf-weibull-new
+  ([x & options]
+    (let [opts (when options (apply assoc {} options))
+          scale (or (:scale opts) 1)
+          shape (or (:shape opts) 1)
+          seed (or (:seed opts) (Date.) )
+          d    (dist/weibull-distribution shape scale (DoubleMersenneTwister. seed))]
+      (if (coll? x)
+        (map #(dist/cdf d %) x)
+        (dist/cdf d x)))))
+
 (defn sample-weibull
   "
   Returns a sample of the given size from a Weibull distribution
@@ -614,10 +638,28 @@
   ([size & options]
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
-          shape (or (:shape opts) 1)]
+          shape (or (:shape opts) 1)
+          draw! (if-let [seed  (:seed opts)]
+                  (let [d (Weibull. shape scale (DoubleMersenneTwister. seed))]
+                    #(.nextDouble d))
+                   #(Weibull/staticNextDouble scale shape))]
       (if (= size 1)
-        (Weibull/staticNextDouble scale shape)
-        (for [_ (range size)] (Weibull/staticNextDouble scale shape))))))
+        (draw!)
+        (for [_ (range size)]
+          (draw!) #_(Weibull/staticNextDouble scale shape))))))
+
+(defn sample-weibull-new
+  ([size & options]
+    (let [opts (when options (apply assoc {} options))
+          scale (or (:scale opts) 1)
+          shape (or (:shape opts) 1)
+          prng  (or (:rng opts)
+                    (when-let [seed (:seed opts)]
+                      (DoubleMersenneTwister. seed)))                  
+          d     (dist/weibull-distribution shape scale prng)]
+      (if (= size 1)
+        (dist/draw d)
+        (for [_ (range size)] (dist/draw d))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

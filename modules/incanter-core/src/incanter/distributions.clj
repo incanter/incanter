@@ -19,12 +19,22 @@
       :author "Mark M. Fredrickson and William Leung"}
   incanter.distributions
   (:import java.util.Random
-           (cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT)
-           (cern.jet.stat.tdouble Probability)
-           (cern.jet.random.tdouble.engine DoubleMersenneTwister))
-  (:use [clojure.set :only (intersection difference)]
-        [clojure.math.combinatorics :only (combinations)]
-        [incanter.core :only (gamma pow regularized-beta)]))
+           [cern.jet.random.tdouble Beta Binomial ChiSquare DoubleUniform Exponential Gamma NegativeBinomial Normal Poisson StudentT]
+           [cern.jet.stat.tdouble Probability]
+           [cern.jet.random.tdouble.engine DoubleRandomEngine DoubleMersenneTwister])
+  (:use [clojure.set :only [intersection difference]]
+        [clojure.math.combinatorics :only [combinations]]
+        [incanter.core :only [gamma pow regularized-beta]]))
+
+;;utils
+(defn  next-raw
+  "Wrapper fn to pull the next raw value from an
+   cern.jet.random.tdouble.engine.DoubleMersenneTwister
+   prng and other engines."
+  [^DoubleRandomEngine rng]
+  (.raw rng))
+
+;;protocols
 
 ;; NOTE: as of this writing, (doc pdf/cdf/...) do not show the doc strings.
 ;; including them for when this bug is fixed.
@@ -816,3 +826,119 @@
   "
   ([] (uniform-distribution 0.0 1.0)) ; since "0 1" not implicitly promoted, otherwise no matching ctor...
   ([min max] (DoubleUniform-rec. min max)))
+
+
+;;Weibull Distribution
+;;Ported to incanter.distributions by Tom aka joinr
+
+;;Original implentation ported from incanter.Weibull java
+;;class, with original attribution below:
+;; /**
+;;  * Weibull Distribution. See the 
+;;  * <A HREF="http://www.itl.nist.gov/div898/handbook/eda/section3/eda3668.htm"> math definition</A>.
+;;  * <p>
+;;  * <tt>p(x) = shape/scale*(x/scale)^(shape-1)*exp{-(x/scale)^shape}</tt> for <tt>x &gt;= scale</tt>, <tt>shape &gt; 0</tt>.
+;;  * <p>
+;;  * Note that mean is infinite if <tt>shape <= 1</tt> and variance is infinite if
+;;  * <tt>shape <= 2</tt>.
+;;  * <p>
+;;  * Instance methods operate on a user supplied uniform random number generator; they are unsynchronized.
+;;  * <dt>
+;;  * Static methods operate on a default uniform random number generator; they are synchronized.
+;;  * <p>
+;;  *
+;;  * @author Hongbo Liu hongbol@winlab.rutgers.edu
+;;  * @version 0.1
+;;  */
+
+ ;; public double cdf(double x) {
+ ;;    if (x < 0)
+ ;;      return 0.0;
+ ;;    return 1.0 - Math.exp(-Math.pow(x/scale,shape));
+ ;;  }
+
+
+;; /**
+;;  * Returns a random number from the distribution; bypasses the internal 
+;;  state.*/
+;; public double nextDouble(double a, double b) {
+;;   return a*Math.pow(-Math.log(1-randomGenerator.raw()), 1/b);
+;; }
+
+(defn- weibull-cdf [x scale shape]
+  (if (< x 0)
+    0.0
+    ;;return 1.0 - Math.exp(-Math.pow(x/scale,shape))
+    (- 1.0 (Math/exp
+            (- (Math/pow
+                (/ x scale)
+                shape))))))
+
+;; /**
+;;  * Returns the probability distribution function.
+;;  */
+;; public double pdf(double x) {
+;;   if (x < 0)
+;;     return 0.0;
+
+(defn- weibull-pdf [x scale shape]
+  (if (< x 0) 0.0
+;;   return shape/scale*Math.pow(x/scale, shape-1)
+;;     *Math.exp(-Math.pow(x/scale,shape));
+      (/ shape
+         (* (* scale (Math/pow (/ x scale) (- shape 1)))
+            (Math/exp (- (Math/pow (/  x scale)  shape)))))))
+
+;; /**
+;;   * Returns a random number from the distribution; bypasses the internal 
+;;   state.*/
+;;  public double nextDouble(double a, double b) {
+;;    return a*Math.pow(-Math.log(1-randomGenerator.raw()), 1/b);
+;;
+
+(defn- weibull-draw [scale shape  rng]
+  (* scale  (Math/pow
+             (- (Math/log (- 1.0 (next-raw rng))))
+             (/ 1.0 shape))))
+
+;;mean and variance derived from 
+;;https://en.wikipedia.org/wiki/Weibull_distribution
+;;l = scale, k = shape
+
+;;l*gamma(1 + 1/k)
+(defn- weibull-mean [scale shape]
+  (* scale (gamma (+ 1 (/ 1 shape)))))
+
+(defn- sq [x] (* x x))
+
+;;l^2 * [gamma(1 + 2/k) - gamma(1 + 1/k)^2]
+(defn- weibull-variance [scale shape]
+  (* (sq scale)
+     (- (gamma (+ 1 (/ 2 shape)))
+        (sq (gamma (+ 1 (/ 1 shape)))))))
+
+
+(defrecord Weibull-rec [scale shape rng]
+    Distribution
+    (pdf      [d v] (weibull-pdf v scale shape))
+    (cdf      [d v] (weibull-cdf v scale shape))
+    (draw     [d]   (weibull-draw  scale shape rng))
+    ;;https://en.wikipedia.org/wiki/Weibull_distribution
+    (support  [d]   [0 max]) 
+    (mean     [d]   (weibull-mean scale shape))
+    (variance [d]   (weibull-variance scale shape)))
+
+;;in lieu of the static prng defined in the java implementation,
+;;we'll just stick it in a binding....here.
+
+(let [default-weibull-rng (DoubleMersenneTwister.)]
+
+(defn weibull-distribution
+  ([shape scale rng]
+   (->Weibull-rec shape scale (or rng
+                                  default-weibull-rng)))
+  ([shape scale] (weibull-distribution shape scale default-weibull-rng)))
+)
+
+
+ 
