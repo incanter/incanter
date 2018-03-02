@@ -35,8 +35,7 @@
            [cern.jet.random.tdouble.engine DoubleMersenneTwister]
            [cern.jet.stat.tdouble DoubleDescriptive
                                   Probability]
-           [java.util Date]
-           [incanter Weibull])
+           [java.util Date])
   (:use [clojure.set :only [difference intersection union]])
   (:use [incanter.core :only [$ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
@@ -559,17 +558,6 @@
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
           seed (or (:seed opts) (Date.))
-          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
-      (if (coll? x)
-        (map #(.pdf dist %) x)
-        (.pdf dist x)))))
-
-(defn pdf-weibull-new
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          scale (or (:scale opts) 1)
-          shape (or (:shape opts) 1)
-          seed (or (:seed opts) (Date.))
           d    (dist/weibull-distribution scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(dist/pdf d %) x)
@@ -595,19 +583,7 @@
   Example:
       (cdf-weibull 10 :shape 1 :scale 0.2)
   "
-  ([x & options]
-    (let [opts (when options (apply assoc {} options))
-          scale (or (:scale opts) 1)
-          shape (or (:shape opts) 1)
-          seed (or (:seed opts) (Date.) )
-          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
-      (if (coll? x)
-        (map #(.cdf dist %) x)
-        (.cdf dist x)))))
-
-;;i don't think we need any of the rng stuff....
-(defn cdf-weibull-new
-  ([x & options]
+ ([x & options]
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
@@ -619,11 +595,15 @@
 
 (defn sample-weibull
   "
-  Returns a sample of the given size from a Weibull distribution
+  Returns a sample of the given size from a Weibull distribution.
+  Caller may supply a custom seed or a pre-existing random number
+  generator, otherwise a global default generator is used.
 
   Options:
     :shape (default 1)
     :scale (default 1)
+    :seed  (default nil), seed-value for new random number gen
+    :rng   (default nil), existing random number gen
 
   See also:
       pdf-weibull, cdf-weibull
@@ -639,20 +619,6 @@
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
-          draw! (if-let [seed  (:seed opts)]
-                  (let [d (Weibull. shape scale (DoubleMersenneTwister. seed))]
-                    #(.nextDouble d))
-                   #(Weibull/staticNextDouble scale shape))]
-      (if (= size 1)
-        (draw!)
-        (for [_ (range size)]
-          (draw!) #_(Weibull/staticNextDouble scale shape))))))
-
-(defn sample-weibull-new
-  ([size & options]
-    (let [opts (when options (apply assoc {} options))
-          scale (or (:scale opts) 1)
-          shape (or (:shape opts) 1)
           prng  (or (:rng opts)
                     (when-let [seed (:seed opts)]
                       (DoubleMersenneTwister. seed)))                  
@@ -660,7 +626,6 @@
       (if (= size 1)
         (dist/draw d)
         (for [_ (range size)] (dist/draw d))))))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GAMMA DISTRIBUTION FUNCTIONS
