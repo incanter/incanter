@@ -881,13 +881,18 @@
 ;;   if (x < 0)
 ;;     return 0.0;
 
+;;note the janky order of operation precedence in
+;;java, associates left-to-right, doesn't follow
+;;PEMDAS.  So, division actually happens before
+;;multiplication here!
 (defn- weibull-pdf [x scale shape]
   (if (< x 0) 0.0
 ;;   return shape/scale*Math.pow(x/scale, shape-1)
-;;     *Math.exp(-Math.pow(x/scale,shape));
-      (/ shape
-         (* (* scale (Math/pow (/ x scale) (- shape 1)))
-            (Math/exp (- (Math/pow (/  x scale)  shape)))))))
+      ;;     *Math.exp(-Math.pow(x/scale,shape));
+       
+      (*  (/ shape scale)
+           (Math/pow (/ x scale) (- shape 1))
+           (Math/exp (- (Math/pow (/  x scale)  shape))))))
 
 ;; /**
 ;;   * Returns a random number from the distribution; bypasses the internal 
@@ -934,10 +939,10 @@
 (let [default-weibull-rng (DoubleMersenneTwister.)]
 
 (defn weibull-distribution
-  ([shape scale rng]
-   (->Weibull-rec shape scale (or rng
+  ([scale shape rng]
+   (->Weibull-rec scale shape (or rng
                                   default-weibull-rng)))
-  ([shape scale] (weibull-distribution shape scale default-weibull-rng)))
+  ([scale shape] (weibull-distribution scale shape default-weibull-rng)))
 )
 
 
