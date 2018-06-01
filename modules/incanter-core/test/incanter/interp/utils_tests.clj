@@ -21,6 +21,9 @@
        3 7
        6 12))
 
+(deftest binary-search-single-element-list-test
+  (is (= 0 (binary-search [1] 2))))
+
 (deftest find-segment-test
   (let [xs [0 1 2 3 4 5]]
     (are [x expected] (= (find-segment xs x) expected)
