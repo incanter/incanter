@@ -28,22 +28,22 @@
             "
        :author "David Edgar Liebke and Bradford Cross"}
   incanter.stats
-  (:import (cern.colt.list.tdouble DoubleArrayList)
-           (cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
+  (:import [cern.colt.list.tdouble DoubleArrayList]
+           [cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
                                     Exponential NegativeBinomial Normal Poisson
-                                    StudentT)
-           (cern.jet.random.tdouble.engine DoubleMersenneTwister)
-           (cern.jet.stat.tdouble DoubleDescriptive
-                                  Probability)
-           (java.util Date)
-           (incanter Weibull))
+                                    StudentT]
+           [cern.jet.random.tdouble.engine DoubleMersenneTwister]
+           [cern.jet.stat.tdouble DoubleDescriptive
+                                  Probability]
+           [java.util Date])
   (:use [clojure.set :only [difference intersection union]])
-  (:use [incanter.core :only ($ abs plus minus div mult mmult to-list bind-columns
+  (:use [incanter.core :only [$ abs plus minus div mult mmult to-list bind-columns
                               gamma pow sqrt diag trans regularized-beta ncol
                               nrow identity-matrix decomp-cholesky decomp-svd
                               matrix length log10 sum sum-of-squares sel matrix? vec?
-                              dataset? cumulative-sum solve vectorize bind-rows safe-div)])
-  (:require [clojure.core.matrix :as m]))
+                              dataset? cumulative-sum solve vectorize bind-rows safe-div]])
+  (:require [clojure.core.matrix :as m]
+            [incanter.distributions :as dist]))
 
 (defn scalar-abs
   "Fast absolute value function"
@@ -558,10 +558,10 @@
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
           seed (or (:seed opts) (Date.))
-          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
+          d    (dist/weibull-distribution scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
-        (map #(.pdf dist %) x)
-        (.pdf dist x)))))
+        (map #(dist/pdf d %) x)
+        (dist/pdf d x)))))
 
 (defn cdf-weibull
   "
@@ -583,23 +583,27 @@
   Example:
       (cdf-weibull 10 :shape 1 :scale 0.2)
   "
-  ([x & options]
+ ([x & options]
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
           shape (or (:shape opts) 1)
           seed (or (:seed opts) (Date.) )
-          dist (Weibull. scale shape (DoubleMersenneTwister. seed))]
+          d    (dist/weibull-distribution  scale shape (DoubleMersenneTwister. seed))]
       (if (coll? x)
-        (map #(.cdf dist %) x)
-        (.cdf dist x)))))
+        (map #(dist/cdf d %) x)
+        (dist/cdf d x)))))
 
 (defn sample-weibull
   "
-  Returns a sample of the given size from a Weibull distribution
+  Returns a sample of the given size from a Weibull distribution.
+  Caller may supply a custom seed or a pre-existing random number
+  generator, otherwise a global default generator is used.
 
   Options:
     :shape (default 1)
     :scale (default 1)
+    :seed  (default nil), seed-value for new random number gen
+    :rng   (default nil), existing random number gen
 
   See also:
       pdf-weibull, cdf-weibull
@@ -614,11 +618,14 @@
   ([size & options]
     (let [opts (when options (apply assoc {} options))
           scale (or (:scale opts) 1)
-          shape (or (:shape opts) 1)]
+          shape (or (:shape opts) 1)
+          prng  (or (:rng opts)
+                    (when-let [seed (:seed opts)]
+                      (DoubleMersenneTwister. seed)))                  
+          d     (dist/weibull-distribution shape scale prng)]
       (if (= size 1)
-        (Weibull/staticNextDouble scale shape)
-        (for [_ (range size)] (Weibull/staticNextDouble scale shape))))))
-
+        (dist/draw d)
+        (for [_ (range size)] (dist/draw d))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GAMMA DISTRIBUTION FUNCTIONS

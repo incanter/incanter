@@ -29,6 +29,7 @@
 
   incanter.core
 
+  (:refer-clojure :exclude [update])
   (:use [incanter internal]
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)]
