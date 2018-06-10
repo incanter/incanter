@@ -1,6 +1,6 @@
 # What's new in Incanter #
 
-## Changes for 1.9.2 ##
+## Changes for 1.9.3 ##
 
 ### Main changes ###
 
