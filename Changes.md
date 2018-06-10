@@ -2,6 +2,23 @@
 
 ## Changes for 1.9.2 ##
 
+### Main changes ###
+
+* Added support for Clojure 1.9.0
+
+### Improvements ###
+
+ * Weibull distribution is now implemented directly in Clojure instead of using Java implementation.
+
+### Bugfixes ###
+
+ * #388 - the `itext` library was linked to broken version of Boncy Castle library;
+ * #377 - scatter-plot-matrix broken since 1.5.7
+ * #374 - heat-map produces wierd visual artifacts
+ * #364 - No method in multimethod `set-data`
+
+## Changes for 1.9.2 ##
+
 This release includes multiple bug fixes & improvements, together with update of
 dependencies to fresh versions.
 

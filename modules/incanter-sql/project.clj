@@ -1,4 +1,4 @@
-(defproject incanter/incanter-sql "1.9.3-SNAPSHOT"
+(defproject incanter/incanter-sql "1.9.3"
   :description "Database interaction via ClojureQL"
   :url "http://incanter.org/"
   :license {:name "Eclipse Public License"
@@ -7,7 +7,7 @@
         :url "https://github.com/incanter/incanter"
         :dir "modules/incanter-sql"}
   :min-lein-version "2.0.0"
-  :dependencies [[incanter/incanter-core "1.9.3-SNAPSHOT"]
+  :dependencies [[incanter/incanter-core "1.9.3"]
                  [clojureql "1.0.5" :exclusions [org.clojure/clojure]]
                  ]
   :profiles {:dev {:dependencies [[org.apache.derby/derby "10.13.1.1"]]}}
