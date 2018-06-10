@@ -14,14 +14,12 @@
 ;; CHANGE LOG
 ;; March 11, 2009: First version
 
-
-
 (ns ^{:doc "This is the core numerics library for Incanter.
             It provides functions for vector- and matrix-based
             mathematical operations and the core data manipulation
             functions for Incanter.
 
-            This library is built on Clatrix (https://github.com/tel/clatrix)
+            This library is built on core.matrix (https://github.com/mikera/core.matrix)
             and Parallel Colt
             (http://sites.google.com/site/piotrwendykier/software/parallelcolt)
             an extension of the Colt numerics library
@@ -36,42 +34,38 @@
         [incanter.infix :only (infix-to-prefix defop)]
         [clojure.set :only (difference)]
         [clojure.pprint :only (print-table)])
-  (:require [clatrix.core :as clx])
-  (:import (clatrix.core Matrix)
+  (:require [clojure.core.matrix :as m])
+  (:require [clojure.core.matrix.dataset :as ds])
+  (:require [clojure.core.matrix.linear :as l])
+  (:import (clojure.core.matrix.impl.dataset DataSet)
            (cern.jet.math.tdouble DoubleArithmetic)
-           (cern.colt.list.tdouble DoubleArrayList)
-           (cern.jet.stat.tdouble DoubleDescriptive Gamma)
+           (cern.jet.stat.tdouble Gamma)
            (javax.swing JTable JScrollPane JFrame)
            (java.util Vector)))
-
 
 (def ^{:dynamic true
        :doc "This variable is bound to a dataset when the with-data macro is used.
               functions like $ and $where can use $data as a default argument."}
      $data nil)
+(declare to-list to-vector vectorize dataset col-names to-matrix bind-rows)
 
-(defrecord Dataset [column-names rows])
-(derive incanter.core.Dataset ::dataset)
-(derive clatrix.core.Matrix ::matrix)
+(defn set-current-implementation [imp]
+  "Sets current matrix implementation"
+  (m/set-current-implementation imp))
+
+(set-current-implementation :vectorz)
 
 (defn matrix
-  "
-  Returns an instance of an incanter.Matrix, which is an extension of
-  Clatrix matrix that implements the Clojure interface
-  clojure.lang.ISeq. Therefore Clojure sequence operations can be
-  applied to matrices. A matrix consists of a sequence of rows, where
-  each row is a one-dimensional row matrix. One-dimensional matrices are
-  in turn, sequences of numbers. Equivalent to R's matrix function.
+"
+  Returns a matrix or vector, in a valid core.matrix format. You can use the slices function to
+  access the rows.
+
+  Equivalent to R's matrix function.
 
   Examples:
     (def A (matrix [[1 2 3] [4 5 6] [7 8 9]])) ; produces a 3x3 matrix
     (def A2 (matrix [1 2 3 4 5 6 7 8 9] 3)) ; produces the same 3x3 matrix
-    (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a 9x1 column vector
-
-    (first A) ; produces a row matrix [1 2 3]
-    (rest A) ; produces a sub matrix [[4 5 6] [7 8 9]]
-    (first (first A)) ; produces 1.0
-    (rest (first A)) ; produces a row matrix [2 3]
+    (def B (matrix [1 2 3 4 5 6 7 8 9])) ; produces a vector with 9 elements
 
     ; since (plus row1 row2) adds the two rows element-by-element
     (reduce plus A) ; produces the sums of the columns
@@ -79,79 +73,116 @@
     ; and since (sum row1) sums the elements of the row
     (map sum A) ; produces the sums of the rows
 
-    ; you can filter the rows using Clojure's filter function
-    (filter #(> (nth % 1) 4) A) ; returns the rows where the second column is greater than 4.
   "
   ([data]
-    (make-matrix data))
+     (m/matrix data))
 
-  ([data ^Integer ncol]
-    (make-matrix data ncol))
+  ([data ncol]
+     (m/matrix (partition ncol (vectorize data))))
 
-  ([init-val ^Integer rows ^Integer cols]
-    (make-matrix init-val rows cols)))
-
+  ([init-val rows cols]
+     (m/compute-matrix [rows cols] (constantly init-val))))
 
 (defn matrix?
-  "Test if obj is 'derived' clatrix.core.Matrix"
-  ([obj] (is-matrix obj)))
+  "Tests if obj is core.matrix matrix"
+  ([obj] (m/matrix? obj)))
 
-(defn dataset?
-  "Determines if obj is of type incanter.core.Dataset."
-  ([obj] (instance? Dataset obj)))
+(defn vec?
+  "Tests if obj is core.matrix vector"
+  ([obj] (m/vec? obj)))
 
-(defn ^Integer nrow
+(defn ^:deprecated dataset?
+  "Determines if obj is of type clojure.core.matrix.impl.dataset.Dataset.
+
+  Deprecated. Please use clojure.core.matrix.dataset/dataset? instead."
+  ([obj] (ds/dataset? obj)))
+
+(defn dispatch
+  "Dispatch function for multimethods"
+  ([obj]
+     (cond
+      (dataset? obj) ::dataset
+      (matrix? obj) ::matrix
+      (vec? obj) ::vector
+      (coll? obj) ::coll
+      (.contains (str (type obj)) "processing.core.PApplet") :sketch
+      :else (type obj))))
+
+(defmulti nrow
   "Returns the number of rows in the given matrix. Equivalent to R's nrow function."
-  ([mat]
-    (cond
-    (matrix? mat) (first (clx/size ^clatrix.core.Matrix mat))
-    (dataset? mat) (count (:rows mat))
-    (coll? mat) (count mat))))
+  dispatch)
 
+(defmethod nrow ::dataset
+  [ds] (m/row-count ds))
 
-(defn ^Integer ncol
+(defmethod nrow ::matrix
+  [m] (m/row-count m))
+
+(defmethod nrow ::vector
+  [v] (m/row-count v))
+
+(defmethod nrow ::coll
+  [c] (count c))
+
+(defmulti ncol
   "Returns the number of columns in the given matrix. Equivalent to R's ncol function."
+  dispatch)
+
+(defmethod ncol ::dataset
+  [ds] (m/column-count ds))
+
+(defmethod ncol ::matrix
+  [m] (m/column-count m))
+
+(defmethod ncol ::coll
+  [c] 1)
+
+(defmethod ncol ::vector
+  [v] 1)
+
+(defn ^:deprecated dim
+  "Returns a vector with the number of rows and columns of the given matrix.
+
+   Deprecated. Please use clojure.core.matrix/dimensionality instead.
+  "
   ([mat]
-   (cond
-    (matrix? mat) (last (clx/size ^clatrix.core.Matrix mat))
-    (dataset? mat) (count (:column-names mat))
-    (coll? mat) 1 )))
+     (m/shape mat)))
 
-(defn dim
-  "Returns a vector with the number of rows and columns of the given matrix."
-  ([mat]
-   [(nrow mat) (ncol mat)]))
-
-
-
-(defn identity-matrix
+(defn ^:deprecated identity-matrix
   "
   Returns an n-by-n identity matrix.
 
   Examples:
   (identity-matrix 4)
+
+  Deprecated. Please use clojure.core.matrix/identity-matrix instead.
   "
+  ([^Integer n] (m/identity-matrix n)))
 
-  ([^Integer n] (clx/eye n)))
 
-
-(defn diag
+(defn ^:deprecated diag
   "If given a matrix, diag returns a sequence of its diagonal elements.
   If given a sequence, it returns a matrix with the sequence's elements
   on its diagonal. Equivalent to R's diag function.
 
   Examples:
-  (diag [1 2 3 4])
+  (diag [1 2 3 4]) ; produces diagonal matrix
 
   (def A (matrix [[1 2 3]
   [4 5 6]
   [7 8 9]]))
-  (diag A)"
+  (diag A) ;; returns elements on main diagonal
+
+  Deprecated. Please use clojure.core.matrix/main-diagonal for getting elements on main diagonal
+  and clojure.core.matrix/diagonal-matrix for creating diagonal matrix instead.
+  "
   [m]
-  (clx/diag m))
+  (if (== 2 (m/dimensionality m))
+    (matrix (m/main-diagonal m))
+    (m/diagonal-matrix m)))
 
 
-(defn ^Matrix trans
+(defn ^:deprecated trans
   "
   Returns the transpose of the given matrix. Equivalent to R's t function
 
@@ -160,12 +191,11 @@
                     [4 5 6]
                     [7 8 9]]))
     (trans A)
+
+  Deprecated. Please use clojure.core.matrix/transpose instead.
   "
   ([mat]
-   (if (matrix? mat)
-     (clx/t mat)
-     (clx/t (matrix mat)))))
-
+   (m/transpose mat)))
 
 
 (defn- except-for
@@ -230,7 +260,7 @@
     (sel us-arrests :cols [:State :Murder])
   "
 
-  (fn [mat & options] [(type mat) (keyword? (first options))]))
+  (fn [mat & options] [(dispatch mat) (keyword? (first options))]))
 
 
 (defmethod sel [nil false] [])
@@ -276,57 +306,31 @@
         (and all-rows? all-cols?)
           lst))))
 
-(defmethod sel [clatrix.core.Matrix false]
-  ([^clatrix.core.Matrix mat rows columns]
-   (let [rws (if (number? rows) [rows] rows)
-         cols (if (number? columns) [columns] columns)
-         all-rows? (or (true? rws) (= rws :all))
-         all-cols? (or (true? cols) (= cols :all))]
-    (cond
-      (and (number? rows) (number? columns))
-        (clx/get mat rows columns)
-      (and all-rows? (coll? cols))
-        (clx/get mat (range (nrow mat)) cols)
-      (and (coll? rws) all-cols?)
-        (clx/get mat rws (range (ncol mat)))
-      (and (coll? rws) (coll? cols))
-        (clx/get mat rws cols)
-      (and all-rows? all-cols?)
-        mat))))
+(defmethod sel [::matrix false]
+  ([mat rows columns]
+     (matrix (m/select mat rows columns))))
 
-(defmethod sel [clatrix.core.Matrix true]
+(defmethod sel [::matrix true]
   ([mat & {:keys [rows cols except-rows except-cols filter-fn all]}]
    (let [rows (cond
                 rows rows
-                except-rows (except-for (nrow mat) except-rows)
-                :else true)
+                except-rows (except-for (m/row-count mat) except-rows)
+                all all
+                :else :all)
          cols (cond
                 cols cols
-                except-cols (except-for (ncol mat) except-cols)
+                except-cols (except-for (m/column-count mat) except-cols)
                 all all
-                :else true)
-         mat (if (nil? filter-fn) mat (matrix (filter filter-fn mat)))
-         all-rows? (or (true? rows) (= rows :all) all)
-         all-cols? (or (true? cols) (= cols :all) (= all :all))]
-     (cond
-       (and (number? rows) (number? cols))
-         (clx/get mat rows cols)
-       (and all-rows? (coll? cols))
-         (clx/get mat (range (nrow mat)) cols)
-       (and all-rows? (number? cols))
-         (clx/get mat (range (nrow mat)) [cols])
-       (and (coll? rows) (number? cols))
-         (clx/get mat rows [cols])
-       (and (coll? rows) all-cols?)
-         (clx/get mat rows (range (ncol mat)))
-       (and (number? rows) all-cols?)
-         (clx/get mat [rows] (range (ncol mat)))
-       (and (number? rows) (coll? cols))
-         (clx/get mat [rows] cols)
-       (and (coll? rows) (coll? cols))
-         (clx/get mat rows cols)
-       (and all-rows? all-cols?)
-         mat))))
+                :else :all)
+         mat (if (nil? filter-fn) mat (apply bind-rows (filter filter-fn mat)))]
+     (matrix (m/select mat rows cols)))))
+
+(prefer-method sel [::matrix true] [java.util.List true])
+(prefer-method sel [::matrix false] [java.util.List false])
+
+(defmethod sel :default
+  ([mat & more]
+    (apply sel (matrix mat) more)))
 
 (defn bind-rows
   "
@@ -345,27 +349,17 @@
 
   (bind-rows [1 2 3 4] [5 6 7 8])
   "
-
   ([& args]
-    (reduce
-      (fn [A B]
-        (cond
-          (nil? (seq A))
-            B
-          (nil? (seq B))
-            A
-          (or (coll? A) (coll? B))
-            (conj (if (or (matrix? A) (matrix? (first A)))
-                      A
-                      (matrix A (count A)))
-                  (if (or (matrix? B) (matrix? (first B)))
-                      B
-                      (matrix B (count B))))
-          :else
-            (throw (Exception. "Incompatible types"))))
-      args)))
-
-
+     (->>
+      args
+      (map
+       #(let [dm (m/dimensionality %)]
+          (case dm
+            1 (m/row-matrix %)
+            2 %
+            (throw (RuntimeException.
+                    (str "Can't bind rows to array of dimensionality " dm))))))
+      (apply m/join))))
 
 (defn bind-columns
   "
@@ -384,13 +378,26 @@
   (bind-columns [1 2 3 4] [5 6 7 8])
   "
   [& args]
-  (reduce clx/hstack (pass-to-matrix args)))
+  (->>
+   args
+   (map #(let [dm (m/dimensionality %)]
+           (case dm
+             1 (m/column-matrix %)
+             2 %
+             (throw (RuntimeException.
+                     (str "Can't bind columns to array of dimensionality " dm))))))
+   (apply m/join-along 1)))
+
+(defn inner-product [& args]
+  "Deprecated. Please use clojure.core.matrix/inner-product instead."
+  (apply m/inner-product args))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MATH FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn plus
+(defn ^:deprecated plus
   "
   Performs element-by-element addition on multiple matrices, sequences
   and/or numbers. Equivalent to R's + operator.
@@ -406,11 +413,14 @@
   (plus [1 2 3] [1 2 3])
   (plus [1 2 3] 2)
   (plus 2 [1 2 3])
+
+  Deprecated. Please use clojure.core.matrix/add or
+  clojure.core.matrix.operators/+ instead.
   "
-  [& args] (reduce clx/+ (pass-to-matrix args)))
+  [& args] (apply m/add args))
 
 
-(defn minus
+(defn ^:deprecated minus
   "
   Performs element-by-element subtraction on multiple matrices, sequences
   and/or numbers. If only a single argument is provided, returns the negative
@@ -428,11 +438,13 @@
     (minus [1 2 3] 2)
     (minus 2 [1 2 3])
     (minus [1 2 3])
+
+  Deprecated. Please use clojure.core.matrix/sub or
+  clojure.core.matrix.operators/- instead.
   "
-  [& args] (apply clx/- (pass-to-matrix args)))
+  [& args] (apply m/sub args))
 
-
-(defn mult
+(defn ^:deprecated mult
   "
   Performs element-by-element multiplication on multiple matrices, sequences
   and/or numbers. Equivalent to R's * operator.
@@ -448,15 +460,18 @@
   (mult [1 2 3] [1 2 3])
   (mult [1 2 3] 2)
   (mult 2 [1 2 3])
+
+  Deprecated. Please use clojure.core.matrix/emul or
+  clojure.core.matrix.operators/* instead.
   "
-  [& args] (reduce clx/mult (pass-to-matrix args))) ;; TODO: clean, special case for (reduce mult A)
+  [& args]
+  (apply m/emul args))
 
 
-(defn div
+(defn ^:deprecated div
   "
   Performs element-by-element division on multiple matrices, sequences
   and/or numbers. Equivalent to R's / operator.
-
   Examples:
 
   (def A (matrix [[1 2 3]
@@ -470,40 +485,38 @@
   (div 2 [1 2 3])
 
   (div [1 2 3]) ; returns [1 1/2 13]
-  "
-  ([& args]
-    (if (= (count args) 1)
-      (clx/div (double 1) (first args))
-      (reduce clx/div (pass-to-matrix args)))))
 
-(defn safe-div  ;; TODO modify to work with matrices ?
+  Deprecated. Please use clojure.core.matrix/div or
+  clojure.core.matrix.operators// instead.
   "
-  DivideByZero safe alternative to clojures / function,
+  ([& args] (apply m/div args)))
+
+
+(defn safe-div
+  "DivideByZero safe alternative to clojures / function,
   detects divide by zero and returns Infinity, -Infinity or NaN as appropriate.
-  Note: Does not work on matrices, only primitive types
   "
   ([x] (safe-div 1 x))
   ([x y]
-    (try (/ x y)
-         (catch ArithmeticException _
-         (cond (> x 0)   Double/POSITIVE_INFINITY
-               (zero? x) Double/NaN
-                  :else     Double/NEGATIVE_INFINITY))))
+     (m/emap
+      #(try (m/div %1 %2)
+            (catch ArithmeticException _
+              (cond (> %1 0) Double/POSITIVE_INFINITY
+                  (zero? %1) Double/NaN
+                  :else Double/NEGATIVE_INFINITY)))
+      x y))
   ([x y & more]
      (reduce safe-div (safe-div x y) more)))
 
-(declare to-list dataset col-names)
 
 (defn- mapping-helper [func args]
   (reduce (fn [A B]
             (cond
-              (number? A) (func A B)
-              (matrix? A) (let [m (matrix (mapping-helper func (list (to-list A) B)))]
-                            (if (clx/row? A)
-                              (trans m)
-                              m))
-              (dataset? A) (dataset (col-names A)
-                                    (mapping-helper func (list (to-list A) B)))
+             (number? A) (func A B)
+             (dataset? A) (dataset (col-names A)
+                                   (mapping-helper func (list (m/rows A) B)))
+              (or (matrix? A)
+                  (m/vec? A)) (m/emap #(func %1 B) A)
               (and (coll? A) (coll? (first A)))
               (map (fn [a] (map #(func %1 B) a)) A)
               (coll? A) (map #(func %1 B) A)))
@@ -530,7 +543,7 @@
   Returns the square-root of the elements in the given matrix, sequence or number.
   Equivalent to R's sqrt function.
   "
-  [A] (transform-with A #(Math/sqrt %) clx/sqrt!))
+  [A] (m/sqrt A))
 
 
 (defn sq
@@ -546,7 +559,7 @@
   Returns the natural log of the elements in the given matrix, sequence or number.
   Equivalent to R's log function.
   "
-  ([A] (transform-with A #(Math/log %) clx/log!)))
+  ([A] (m/log A)))
 
 
 (defn log2
@@ -554,9 +567,7 @@
   Returns the log base 2 of the elements in the given matrix, sequence or number.
   Equivalent to R's log2 function.
   "
-  ([A] (transform-with A #(/ (Math/log %) (Math/log 2))
-                       #(div (clx/log! %)
-                             (matrix (Math/log 2) (nrow %) (ncol %))))))
+  ([A] (transform-with A #(/ (Math/log %) (Math/log 2)))))
 
 
 (defn log10
@@ -564,14 +575,14 @@
   Returns the log base 10 of the elements in the given matrix, sequence or number.
   Equivalent to R's log10 function.
   "
-  ([A] (transform-with A #(Math/log10 %) clx/log10!)))
+  ([A] (m/log10 A)))
 
 
 (defn exp
   "
   Returns the exponential of the elements in the given matrix, sequence or number.
   Equivalent to R's exp function."
-  ([A] (transform-with A #(Math/exp %) clx/exp!)))
+  ([A] (m/exp A)))
 
 
 (defn abs
@@ -579,7 +590,7 @@
   Returns the absolute value of the elements in the given matrix, sequence or number.
   Equivalent to R's abs function.
   "
-  ([A] (transform-with A #(Math/abs (double %)) clx/abs!)))
+  ([A] (m/abs A)))
 
 
 (defn sin
@@ -587,7 +598,7 @@
   Returns the sine of the elements in the given matrix, sequence or number.
   Equivalent to R's sin function.
   "
-  ([A] (transform-with A #(Math/sin %) clx/sin!)))
+  ([A] (m/sin A)))
 
 
 (defn asin
@@ -595,7 +606,7 @@
   Returns the arc sine of the elements in the given matrix, sequence or number.
   Equivalent to R's asin function.
   "
-  ([A] (transform-with A #(Math/asin %) clx/asin!)))
+  ([A] (m/asin A)))
 
 
 (defn cos
@@ -603,14 +614,14 @@
   Returns the cosine of the elements in the given matrix, sequence or number.
   Equivalent to R's cos function.
   "
-  ([A] (transform-with A #(Math/cos %) clx/cos!)))
+  ([A] (m/cos A)))
 
 
 (defn acos
   "
   Returns the arc cosine of the elements in the given matrix, sequence or number.
   Equivalent to R's acos function."
-  ([A] (transform-with A #(Math/acos %) clx/acos!)))
+  ([A] (m/acos A)))
 
 
 (defn tan
@@ -618,7 +629,7 @@
   Returns the tangent of the elements in the given matrix, sequence or number.
   Equivalent to R's tan function.
   "
-  ([A] (transform-with A #(Math/tan %) clx/tan!)))
+  ([A] (m/tan A)))
 
 
 (defn atan
@@ -626,7 +637,7 @@
   Returns the arc tangent of the elements in the given matrix, sequence or number.
   Equivalent to R's atan function.
   "
-  ([A] (transform-with A #(Math/atan %) clx/atan!)))
+  ([A] (m/atan A)))
 
 
 (defn factorial
@@ -671,56 +682,50 @@
 
 
 (defmulti to-list
-  "
-  Returns a list-of-lists if the given matrix is two-dimensional
-  and a flat list if the matrix is one-dimensional.
-  "
-  type)
+  "Returns a list-of-vectors if the given matrix is two-dimensional
+   and a flat list if the matrix is one-dimensional."
+  dispatch)
 
 (defmethod to-list ::matrix
-  ([^clatrix.core.Matrix mat]
-    (clx/as-vec mat)))
-
+  ([mat]
+     (cond
+      (or (m/row-matrix? mat)
+          (m/column-matrix? mat)
+          (= (m/dimensionality mat) 1)) (apply list (m/to-vector mat))
+      (m/scalar? mat) mat
+      :default (apply list (map #(apply list %)
+                                (m/to-nested-vectors mat))))))
 
 (defmethod to-list ::dataset
   [data]
-  (map (fn [row] (map (fn [col] (row col))
-                      (:column-names data)))
-       (:rows data)))
+  (->> (m/rows data) (map #(apply list %)) (apply list)))
 
-
-(defmethod to-list :default [s] s)
+(defmethod to-list ::vector
+  [data]
+  (apply list data))
 
 (defmethod to-list nil [s] nil)
 
-(defmulti to-vect
+(defmethod to-list :default [s] s)
+
+(defn ^:deprecated copy
   "
+  Deprecated. Please use clojure.core.matrix/clone instead.
+  "
+  ([mat]
+     (m/clone mat)))
+
+(defn to-vect
+  "Converts an array into nested Clojure vectors. 
+
   Returns a vector-of-vectors if the given matrix is two-dimensional
   and a flat vector if the matrix is one-dimensional. This is a bit
   slower than the to-list function
   "
-  type)
+  [a]
+  (m/to-nested-vectors a))
 
-(defmethod to-vect ::matrix
-  ([^clatrix.core.Matrix mat]
-   (clx/as-vec mat)))
-
-(defmethod to-vect ::dataset
-  [data]
-  (into [] (map (fn [row]
-                  (into [] (map (fn [col] (row col))
-                                (:column-names data))))
-                (:rows data))))
-
-(defmethod to-vect nil [s] nil)
-
-(defmethod to-vect :default [s] s)
-
-(defn ^Matrix copy
-  "Returns a copy of the given matrix."
-  ([^Matrix mat] (clx/matrix (clx/dotom .copy mat) nil)))
-
-(defn mmult
+(defn ^:deprecated mmult
   "
   Returns the matrix resulting from the matrix multiplication of the
   the given arguments. Equivalent to R's %*% operator.
@@ -735,9 +740,11 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_multiplication
+
+  Deprecated. Please use clojure.core.matrix/mmul instead.
   "
   ([& args]
-    (reduce (fn [A B] (clx/* A B)) (pass-to-matrix args))))
+     (apply m/mmul args)))
 
 
 (defn kronecker
@@ -753,25 +760,26 @@
     (kronecker x y)
   "
   ([& args]
-    (reduce (fn [A B]
-              (let [a (cond
-                        (matrix? A) A
-                        (number? A) (matrix [A])
-                        :else (matrix A))
-                    b (cond
-                        (matrix? B) B
-                        (number? B) (matrix [B])
-                        :else (matrix B))
-                    rows (* (nrow a) (nrow b))
-                    cols (* (ncol a) (ncol b))]
-                (apply bind-rows
-                       (for [i (range (nrow a))]
-                         (apply bind-columns
-                                (for [j (range (ncol a))]
-                                  (mult (sel a i j) b)))))))
+     (reduce (fn [A B]
+               (let [adims (long (m/dimensionality A))
+                     bdims (long (m/dimensionality B))]
+                 (cond
+                  (and (== adims 0) (== bdims 0)) (* A B)
+                  (and (== adims 1) (== bdims 1))
+                  (-> (for [a B b B] (* a b))
+                      (matrix))
+                  (and (== adims 1) (== bdims 0)) (mult A B)
+                  (and (== adims 2) (== bdims 2))
+                  (apply bind-rows
+                         (for [i (range (nrow A))]
+                           (apply bind-columns
+                                  (for [j (range (ncol A))]
+                                    (mult (sel A i j) B)))))
+                  (and (== adims 2) (== bdims 0)) (recur A (matrix [[B]]))
+                  (and (== adims 2) (== bdims 1)) (recur A (m/column-matrix B)))))
             args)))
 
-(defn solve
+(defn ^:deprecated solve
   "
   Returns a matrix solution if A is square, least squares solution otherwise.
   Equivalent to R's solve function.
@@ -781,31 +789,42 @@
 
   References:
     http://en.wikipedia.org/wiki/Matrix_inverse
-  "
-([^Matrix A ^Matrix B]
-  (clx/solve A B))
-([^Matrix A]
-  (clx/i A)))
 
-(defn det
+  Deprecated. Please use clojure.core.matrix/inverse for matrix inverse,
+  clojure.core.matrix.linear/solve for solving system of linear equations and
+  clojure.core.matrix.linear/least-squares for least-squares solution.
+
+  "
+([A B]
+   (l/solve A B))
+([A]
+   (l/solve A)))
+
+(defn ^:deprecated det
   "
   Returns the determinant of the given matrix. Equivalent
   to R's det function.
 
-  References:
+   References:
     http://en.wikipedia.org/wiki/LU_decomposition
+
+  Deprecated. Please use clojure.core.matrix/det instead.
   "
-  ([mat] (clx/det mat)))
+  ([mat]
+     (m/det mat)))
 
 
-(defn trace
+(defn ^:deprecated trace
   "
   Returns the trace of the given matrix.
 
   References:
   http://en.wikipedia.org/wiki/Matrix_trace
+
+  Deprecated. Please use clojure.core.matrix/trace instead.
   "
-  [mat] (clx/trace mat))
+  [mat]
+  (m/trace mat))
 
 
 (defn vectorize
@@ -826,8 +845,7 @@
     http://en.wikipedia.org/wiki/Vectorization_(mathematics)
   "
   ([mat]
-    (mapcat identity (trans mat))))
-
+     (m/to-vector mat)))
 
 (defn half-vectorize
   "
@@ -851,27 +869,33 @@
 
 
 
-(defn sum-of-squares
-  "Returns the sum-of-squares of the given sequence."
+(defn ^:deprecated sum-of-squares
+  "
+  Returns the sum-of-squares of the given sequence.
+
+  Deprecated. Please use clojure.core.matrix/length-squared instead.
+  "
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
-      (DoubleDescriptive/sumOfSquares (DoubleArrayList. (double-array xx))))))
+     (if (or (m/row-matrix? x)
+             (m/column-matrix? x))
+       (m/length-squared (m/to-vector x))
+       (m/length-squared x))))
 
 
-(defn sum
-  "Returns the sum of the given sequence."
+(defn ^:deprecated sum
+  "
+  Returns the sum of the given sequence.
+
+  Deprecated. Please use clojure.core.matrix/esum instead.
+  "
   ([x]
-    (let [xx (if (or (nil? x) (empty? x)) [0] (to-vect x))]
-      (DoubleDescriptive/sum (DoubleArrayList. (double-array xx))))))
+     (m/esum x)))
 
 
 (defn prod
   "Returns the product of the given sequence."
   ([x]
-    (let [xx (if (or (nil? x) (empty? x))
-               [1]
-               (to-list x))]
-      (DoubleDescriptive/product (DoubleArrayList. (double-array xx))))))
+     (m/ereduce *' x)))
 
 
 
@@ -904,165 +928,166 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn ^Matrix decomp-cholesky
+(defn ^:deprecated decomp-cholesky
   "
   Returns the Cholesky decomposition of the given matrix. Equivalent to R's
   chol function.
 
   Returns:
-  a matrix of the triangular factor (note: the result from
-  cern.colt.matrix.linalg.DenseDoubleCholeskyDecomposition is transposed so
-  that it matches the result return from R's chol function.
+  a map containing two matrices with the keys [:L :L*] such that
 
+  Such that:
+      M = L.L*
 
+  Where
+     - M must be a hermitian, positive definite matrix
+     - L is a lower triangular matrix
+     - L* is the conjugate transpose of L
+
+  If :return parameter is specified in options map, it returns only specified keys.
 
   Examples:
-
   (use '(incanter core stats charts datasets))
   ;; load the iris dataset
   (def iris (to-matrix (get-dataset :iris)))
   ;; take the Cholesky decomposition of the correlation matrix of the iris data.
-  (decomp-cholesky (correlation iris))
+  (let [{:keys [L L*]} (decomp-cholesky (correlation iris))])
+  (let [{:keys [L*]} (decomp-cholesky (correlation iris {:return [:L*]}))])
 
   References:
     http://en.wikipedia.org/wiki/Cholesky_decomposition
+
+  Deprecated. Please use clojure.core.matrix.linear/cholesky instead.
   "
-  [^Matrix mat]
-  (clx/cholesky mat))
+  ([mat] (l/cholesky mat))
+  ([mat options] (l/cholesky mat options)))
 
-(def ^:private ^:const allowed-types #{:full :compact :values})
 
-(defn decomp-svd
+(defn ^:deprecated decomp-svd
   "
   Returns the Singular Value Decomposition (SVD) of the given matrix. Equivalent to
   R's svd function.
 
-  Optional parameters:
-  :type -- one of :full, :compact, or :values.  default is :full
-  if :full, returns the full SVD
-  if :compact, returns the compact SVD
-  if :values, only the singular values are calculated
-
-  Returns:
-  a map containing:
+  If :return parameter is specified in options map, it returns only specified keys.
+  By default returns a map containing:
   :S -- the diagonal matrix of singular values S (the diagonal in vector form)
   :U -- the left singular vectors U
-  :V -- the right singular vectors V
+  :V* -- the right singular vectors V
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-svd foo)
-  (decomp-svd foo :type :full)
-  (decomp-svd foo :type :compact)
-  (decomp-svd foo :type :values)
-
+  (let [{:keys [U S V*]} (decomp-svd foo)] ....)
+  (let [{:keys [S]} (decomp-svd foo {:return [:S]})] ....)
 
   References:
   http://en.wikipedia.org/wiki/Singular_value_decomposition
-  "
-  [mat & {:keys [type] :or {type :full}}]
-  (let [type (or (get allowed-types type) :full)
-        result (if (= type :full)
-                 (clx/svd mat :type :full)
-                 (clx/svd mat :type :sparse))]
-    (if (= type :values)
-      {:S (:values (clx/svd mat :type :values))}
-      {:S (:values result)
-       :U (if (= type :compact) mat (:left result))
-       :V (:right result)})))
 
-(defn decomp-eigenvalue
+  Deprecated. Please use clojure.core.matrix.linear/svd instead.
   "
-  Returns the Eigenvalue Decomposition of the given matrix. Equivalent to R's eig function.
+  ([mat]
+     (l/svd  mat))
+  ([mat options]
+     (l/svd mat options)))
 
-  Returns:
-  a map containing:
-  :values -- vector of eigenvalues
-  :vectors -- the matrix of eigenvectors
+(defn ^:deprecated decomp-eigenvalue
+  "
+  Returns a map containing matrices for each of the the keys [:Q :rA :iA] such that:
+
+      M = Q.A.Q-1
+
+   Where:
+     - Q is a matrix where each column is the ith normalised eigenvector of M
+     - rA is a vector whose elements are the real numbers of eigenvalues.
+     - iA is a vector whose elements are the imaginary units of eigenvalues.
+     - Q⁻-1 is the inverse of Q
+
+   If :return parameter is specified in options map, it returns only specified keys.
+   if :symmetric parameter is true in options map, symmetric eigenvalue decomposition will be performed.
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-eigenvalue foo)
+  (let [{:keys [Q rA iA]} (decomp-eigenvalue M)])
+  (let [{:keys [Q rA iA]} (decomp-eigenvalue M {:symmetric true})])
+  (let [{:keys [Q rA]} (decomp-eigenvalue M {:return [:Q :rA]})])
 
   References:
   http://en.wikipedia.org/wiki/Eigenvalue_decomposition
+
+  Deprecated. Please use clojure.core.matrix.linear/eigen instead.
   "
-  [mat]
-  (let [result (clx/eigen mat)]
-    {:values (or (:values result) (:ivalues result))
-     :vectors (or (:vectors result) (:ivectors result))}))
+  ([mat] (l/eigen mat))
+  ([mat options] (l/eigen mat options)))
 
 
-(defn decomp-lu
+(defn ^:deprecated decomp-lu
   "
-  Returns the LU decomposition of the given matrix.
+  Computes the LU(P) decomposition of a matrix with partial row pivoting.
+  Returns a map containing the keys [:L :U :P], such that:
+
+       P.A = L.U
+
+   Where
+     - L is a lower triangular matrix
+     - U is an upper triangular matrix
+     - P is a permutation matrix
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-lu foo)
-
-
-  Returns:
-    a map containing:
-      :L -- the lower triangular factor
-      :U -- the upper triangular factor
-      :P -- the permutation matrix
+  (let [{:keys [L U P]} (decomp-lu A)])
 
   References:
     http://en.wikipedia.org/wiki/LU_decomposition
     http://mikiobraun.github.io/jblas/javadoc/org/jblas/Decompose.LUDecomposition.html
+
+  Deprecated. Please use clojure.core.matrix.linear/lu instead.
   "
-  ([mat]
-    (let [result (clx/lu mat)]
-      {:L (:l result)
-       :U (:u result)
-       :P (:p result)})))
+  ([mat] (l/lu mat))
+  ([mat options] (l/lu mat options)))
 
-(defn vector-length [u]
-  (sqrt (reduce + (map (fn [c] (pow c 2)) u))))
+(defn ^:deprecated vector-length [u]
+  "Deprecated. Please use clojure.core.matrix/length instead."
+  (m/length u))
 
-(defn inner-product [u v]
-  (apply + (mult u (trans v))))
+(defn ^:deprecated inner-product [u v]
+  (m/inner-product u v))
 
 (defn proj [u v]
   (mult (div (inner-product v u) (inner-product u u)) u))
 
-(defn decomp-qr
+(defn ^:deprecated decomp-qr
   "
   Returns the QR decomposition of the given matrix. Equivalent to R's qr function.
+  Returns a map containing matrices with the keys [:Q :R] such that:
 
-  Optional parameters:
-  :type -- possible values: :full.  default is :full
-  if :full, returns the full QR decomposition
+        M = Q.R
 
-  Returns:
-  a map containing:
-  :Q -- orthogonal factors
-  :R -- the upper triangular factors
+  Where:
+        - Q is an orthogonal matrix
+        - R is an upper triangular matrix (= right triangular matrix)
+
+  If :return parameter is specified in options map, it returns only specified keys.
+  If :compact parameter is specified in options map, compact versions of matrices are returned.
 
   Examples:
 
   (use 'incanter.core)
   (def foo (matrix (range 9) 3))
-  (decomp-qr foo)
-  (decomp-qr foo :type :full)
+  (let [{:keys [Q R]} (qr M)])
+  (let [{:keys [R]} (qr M {:return [:R]})])
 
   References:
   http://en.wikipedia.org/wiki/QR_decomposition
 
+  Deprecated. Please use clojure.core.matrix.linear/qr instead.
   "
-  [m & {:keys [type]}]
-  (let [;type (or (#{:full :compact} type) :full)
-        qr (clx/qr m)]
-    {:Q (:q qr)
-     :R (:r qr)})
-  )
+  ([mat] (l/qr mat))
+  ([mat options] (l/qr mat options)))
 
 (defn condition
   "
@@ -1079,10 +1104,10 @@
   "
   ([mat]
     (let [s (:S (decomp-svd mat))]
-      (/ (apply max s) (apply min s)))))
+      (/ (m/emax s) (m/emin s)))))
 
 
-(defn rank
+(defn ^:deprecated rank
   "
   Returns the effective numerical matrix rank, which is the number of nonnegligible singular values.
 
@@ -1094,9 +1119,11 @@
 
   References:
   http://en.wikipedia.org/wiki/Matrix_rank
+
+  Deprecated. Please use clojure.core.matrix.linear/rank instead.
   "
   [mat]
-  (clx/rank mat))
+  (l/rank mat))
 
 
 
@@ -1105,23 +1132,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn length
+(defn ^:deprecated length
   "
   A version of count that works on collections, matrices, and numbers.
   The length of a number is one, the length of a collection is its count
   and the length of a matrix is the number of elements it contains (nrow*ncol).
   Equivalent to R's length function.
+
+  Deprecated. Please use clojure.core.matrix/ecount instead.
   "
   ([coll]
-    (cond
-      (number? coll)
-        1
-      (matrix? coll)
-        (* (nrow coll) (ncol coll))
-      (coll? coll)
-        (count coll)
-      :else
-        1)))
+   (m/ecount coll)))
 
 (defn group-on
   "
@@ -1166,13 +1187,13 @@
                         (and (coll? on-cols) (> (count on-cols) 1))
                           (fn [row]
                             (reduce #(and %1 %2)
-                                    (map (fn [i g] (= (nth row i) g)) on-cols group)))
+                                    (map (fn [i g] (= (m/mget row i) g)) on-cols group)))
                         (and (coll? on-cols) (= (count on-cols) 1))
                           (fn [row]
-                            (= (nth row (first on-cols)) group))
+                            (= (m/mget row (first on-cols)) group))
                         :else
                           (fn [row]
-                            (= (nth row on-cols) group))))
+                            (= (m/mget row on-cols) group))))
          ]
       (cond
         cols
@@ -1187,52 +1208,49 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DATASET FUNCTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defn dataset
-  "
-  Returns a map of type incanter.core.dataset constructed from the given column-names and
-  data. The data is either a sequence of sequences or a sequence of hash-maps.
-  "
-  ([column-names & data]
-    (let [dat (cond
-                (or (map? (ffirst data)) (coll? (ffirst data)))
-                  (first data)
-                (map? (first data))
-                  data
-                :else
-                  (map vector (first data)))
-          rows (cond
-                 (map? dat)
-                   [dat]
-                 (map? (first dat))
-                   dat
-                 :else
-                   (map #(apply assoc {} (interleave column-names %)) dat))]
-      (Dataset. (into [] column-names) rows))))
+  "Returns a record of type clojure.core.matrix.impl.dataset.DataSet.
+   Creates dataset from:
+    column names and seq of rows
+    column names and seq of row maps
+    map of columns with associated list of values.
+    matrix - its columns will be used as dataset columns and incrementing Long values starting from 0, i.e. 0, 1, 2, etc will be used as column names.
+    seq of maps
 
+  Deprecated. Please use clojure.core.matrix.dataset/dataset instead.
+  "
+  ([m]
+     (ds/dataset m))
+  ([column-names m]
+     (ds/dataset column-names m)))
 
 (defn- get-column-id [dataset column-key]
-  (let [headers (:column-names dataset)]
+  (let [headers (ds/column-names dataset)
+        error "Column not found."]
     (cond
-     (and (keyword? column-key) ;; if the given column name is a keyword, and
-          ;; a keyword column name wasn't used in the dataset
-          (not (some #{column-key} headers)))
-     (name column-key) ;; convert the keyword to a string
-
-     (and (string? column-key) ;; if the given column is a string, and
-          ;; this column was't used in the dataset, and
-          (not (some #{column-key} headers))
-          ;; a keyword column name was used in the dataset
-          (some #{(keyword column-key)} headers))
-     ;; convert string to keyword
-     (keyword column-key)
+     (some #{column-key} headers)
+     column-key
 
      (and (number? column-key) ;; if the given column name is a number
           ;; and this number is not in headers
           (not (some #(= column-key %) headers)))
      (nth headers column-key) ;; get nth column from headers
 
-     :else column-key)))
+     (and (keyword? column-key) ;; if the given column name is a keyword, and
+          ;; a keyword column name wasn't used in the dataset, and
+          (not (some #{column-key} headers))
+          ;; a string version was used in the dataset
+          (some #{(name column-key)} headers))
+     (throw (RuntimeException. (str error " Typo? There is a column with the same name of string type.")))
+
+     (and (string? column-key) ;; if the given column is a string, and
+          ;; this column was't used in the dataset, and
+          (not (some #{column-key} headers))
+          ;; a keyword column name was used in the dataset
+          (some #{(keyword column-key)} headers))
+     (throw (RuntimeException. (str error " Typo? There is a column with the same name of keyword type.")))
+
+     :else (throw (RuntimeException. error)))))
 
 (defn- map-get
   ([m k]
@@ -1340,27 +1358,21 @@
 
     ;; use a row predicate function instead of a query map.
     (view (query-dataset cars (fn [row] (> (/ (row \"speed\") (row \"dist\")) 1/2))))
+     (assoc data :rows
+             (for [row (:rows data) :when (query-map row)] row))
   "
   ([data query-map]
-    (if (fn? query-map)
-      (assoc data :rows
-             (for [row (:rows data) :when (query-map row)] row))
-      (let [qmap (into {}
-                       (for [k (keys query-map)]
-                         (if (keyword? k)
-                           (if (some #{k} (:column-names data))
-                             [k (query-map k)]
-                             [(name k) (query-map k)])
-                           [k (query-map k)])))
-            pred (query-to-pred qmap)
-            rows (:rows data)]
-        (assoc data :rows
-               (for [row rows :when (pred row)] row))))))
+     (if (fn? query-map)
+       (->> (ds/row-maps data)
+            (filter query-map)
+            (dataset (ds/column-names data)))
+       (query-dataset data (query-to-pred query-map)))))
+
 
 
 (defn- except-for-cols
   ([data except-cols]
-     (let [colnames (:column-names data)
+     (let [colnames (ds/column-names data)
            _except-cols (if (coll? except-cols)
                           (map #(get-column-id data %) except-cols)
                           [(get-column-id data except-cols)])
@@ -1372,40 +1384,67 @@
 
 
 (defmethod sel [::dataset true]
-  ([data & {:keys [rows cols except-rows except-cols filter all]}]
-    (let [rows (cond
+  ([data & {:keys [rows cols except-rows except-cols filter-fn all]}]
+     (let [except-cols (cond
+                        (nil? except-cols) except-cols
+                        (coll? except-cols) except-cols
+                        :else [except-cols])
+           rows (cond
                  rows rows
                  except-rows (except-for (nrow data) except-rows)
-                 :else true)
-          cols (cond
+                 :else :all)
+           cols (cond
                  cols cols
-                 except-cols (except-for-cols data except-cols)
+                 except-cols (ds/column-names (ds/remove-columns data except-cols))
                  all all
-                 :else true)
-          all-rows? (or (true? rows) (= rows :all) all)
-          colnames (:column-names data)
-          selected-cols (cond
-                          (or (= cols :all) (true? cols)) colnames
-                          (coll? cols) (map #(get-column-id data %) cols)
-                          :else [cols])
-          selected-rows (cond
-                          all-rows?
-                            (:rows data)
-                          (number? rows)
-                            (list (nth (:rows data) rows))
-                          (coll? rows)
-                            (map #(nth (:rows data) %) rows))
-          _data (map (fn [row] (map #(row (get-column-id data %)) selected-cols)) selected-rows)
-          result (if (nil? filter) _data (clojure.core/filter filter _data))]
-      (cond
-        (and (= (count selected-cols) 1) (not (or (coll? cols) (true? cols))))
-          (if (= (count result) 1)
-            (ffirst result)
-            (mapcat identity result))
-        (and (= (count result) 1) (not (or (coll? rows) all-rows?)))
-          (first result)
-        :else
-          (dataset selected-cols (map #(apply assoc {} (interleave selected-cols %)) result))))))
+                 :else :all)
+           col-names (ds/column-names data)
+           col-set (into #{} col-names)
+           r (cond
+              (= rows :all) (range (m/row-count data))
+              (number? rows) [rows]
+              :else rows)
+           c (cond
+              (= cols :all) (ds/column-names data)
+
+              (and (number? cols)
+                   (not (contains? col-set cols)))
+              [(nth col-names cols)]
+
+              (and (coll? cols)
+                   (every? number? cols)
+                   (not (every? #(contains? col-set %) cols)))
+              (map #(nth col-names %) cols)
+
+              (not (coll? cols)) [cols]
+
+              :else cols)
+           res (-> (ds/select-rows data r)
+                   (ds/select-columns c))
+           res (if-not (nil? filter-fn)
+                 (->> (ds/row-maps res) 
+                      (mapv #(mapv % col-names))
+                      (clojure.core/filter filter-fn))
+                 res)]
+
+       (cond
+        (and (= (count c) 1) (not (or (coll? cols) (= cols :all))))
+        (if (= (m/row-count res) 1)
+          (m/mget res 0 0)
+          (mapcat identity (m/rows res)))
+
+        (and (= (m/row-count res) 1)
+             (not (or (coll? rows) (= rows :all))))
+        (into [] (m/get-row res 0))
+        :else res))))
+
+(defn fill-missing [maps]
+  (let [ks (into #{} (mapcat keys maps))
+        diff-m (zipmap ks (repeat nil))]
+    (reduce
+     (fn [acc m]
+       (conj acc (merge diff-m m)))
+     [] maps)))
 
 (defn to-dataset
   "
@@ -1424,69 +1463,23 @@
     (to-dataset {\"a\" 1 \"b\" 2 \"c\" 3})
     (to-dataset [{:a 1 :b 2} {:a 1 :b 2}])
     (to-dataset [{\"a\" 1 \"b\" 2 \"c\" 3} {\"a\" 1 \"b\" 2 \"c\" 3}])
-  "
+    "
   ([obj & {:keys [transpose]}]
-    (let [transpose? (true? transpose)
-          colnames (cond
-                     (dataset? obj)
-                       (:column-names obj)
-                     (map? obj)
-                       (keys obj)
-                     (coll? obj)
-                       (cond
-                         (map? (first obj))
-                           (keys (first obj))
-                         (coll? (first obj))
-                           (map #(keyword (str "col-" %)) (range (length (first obj))))
-                         transpose?
-                           (map #(keyword (str "col-" %)) (range (length obj)))
-                         :else
-                           [:col-0])
-                      :else
-                        [:col-0])
-          rows (cond
-                 (dataset? obj)
-                   (:rows obj)
-                 (map? obj)
-                   ;; see if any of the values are collections
-                   (if (reduce #(or %1 %2) (map coll? (vals obj)))
-                     (trans (vals obj))
-                     [(vals obj)])
-                   (coll? obj)
-                     (cond
-                       (coll? (first obj))
-                         obj
-                       transpose?
-                         [obj]
-                       :else
-                         obj)
-                   :else
-                     [obj])]
-         (dataset colnames rows))))
-
-(defn make-unique
-  "
-  Take a sequence of keywords and make them unique by possibly
-  altering later ones.
-  "
-  ([coll] (make-unique coll #{}))
-  ([coll seen]
-    (let [new-name (fn new-name [x]
-                     (if (not (contains? seen x))
-                         x
-                         (let [match (re-matches #"(.*\-)([0-9]+)" (.getName x))]
-                           (if match
-                             (new-name (keyword (str (second match) (inc (Integer/parseInt (nth match 2))))))
-                             (new-name (keyword (str (.getName x) "-1")))))))]
-
-      (if (empty? coll)
-          ()
-          (let [name (new-name (first coll))]
-            (cons name
-                  (make-unique (rest coll) (conj seen name))))))))
+     (let [obj (cond
+                (map? obj) obj
+                (dataset? obj) obj
+                (= (m/dimensionality obj) 0) [[obj]]
+                (and (= (m/dimensionality obj) 1) (map? (first obj))) (fill-missing obj)
+                (= (m/dimensionality obj) 1) (mapv (fn [k] [k]) obj)
+                :else obj)]
+       (if transpose
+         (dataset (m/transpose obj))
+         (dataset obj)))))
 
 
-(defn col-names
+
+
+(defn ^:deprecated col-names
   "
   If given a dataset, it returns its column names. If given a dataset and a sequence
   of column names, it returns a dataset with the given column names.
@@ -1496,13 +1489,9 @@
     (def data (get-dataset :cars))
     (col-names data)
 
-    (def renamed-data (col-names data [:x1 :x2]))
-    (col-names renamed-data)
-
+  Deprecated. Please use clojure.core.matrix.dataset/column-names instead.
   "
-  ([data] (:column-names data))
-  ([data colnames]
-    (dataset colnames (to-list data))))
+  ([data] (ds/column-names data)))
 
 
 
@@ -1524,18 +1513,35 @@
     (view (conj-cols {:a 1 :b 2} {:c 1 :d 2}))
   "
   ([& args]
-    (reduce (fn [A B]
-              (let [a (to-dataset A)
-                    b (to-dataset B)
-                    ncol-a (ncol a)
-                    ncol-b (ncol b)
-                    colnames (make-unique (concat (col-names a) (col-names b)))]
-                (dataset colnames
-                         (map concat (to-list a) (to-list b)))))
-            args)))
+     (if (= (count args) 1)
+       (first args)
+       (let [all-colnames (->> (filter #(ds/dataset? %) args)
+                               (mapcat #(m/columns %))
+                               (into #{}))
+             name-f (filter #(not (contains? all-colnames %)) (range))
+             args (loop [x (first args)
+                         xs (next args)
+                         i 0
+                         acc []]
+                    (if (nil? x)
+                      acc
+                      (recur
+                       (first xs)
+                       (next xs)
+                       (+ i (ncol x))
+                       (conj acc
+                             (case (dispatch x)
+                               ::dataset x
+                               ::matrix (-> (take (ncol x) (drop i name-f))
+                                            (dataset x))
+                               (dataset (-> (take 1 (drop i name-f))
+                                            (first)
+                                            (hash-map x))))))))]
+
+         (apply ds/merge-datasets args)))))
 
 
-(defn conj-rows
+(defn ^:deprecated conj-rows
   "
   Returns a dataset created by combining the rows of the given datasets and/or collections.
 
@@ -1549,15 +1555,15 @@
     (view (conj-rows [{:a 1 :b 2} {:a 3 :b 4}] [[5 6] [7 8]]))
     (view (conj-rows (to-dataset [{:a 1 :b 2} {:a 3 :b 4}]) [[5 6] [7 8]]))
     (conj-rows (range 5) (range 5 10))
+
+  Deprecated. Please use clojure.core.matrix/conj-rows instead.
   "
   ([& args]
-    (reduce (fn [A B]
-              (let [a (to-dataset A :transpose true)
-                    b (to-dataset B :transpose true)]
-                (dataset (:column-names a)
-                         (concat (to-list a) (to-list b)))))
-            args)))
-
+     (let [args (map
+                 (fn [x]
+                   (if (dataset? x) x
+                       (dataset x))) args)]
+       (apply ds/join-rows args))))
 
 
 (defn $
@@ -1783,7 +1789,7 @@
                      (into [] (map #(map-get row %) col-name)))
                    (fn [row]
                      (map-get row col-name)))
-          rows (:rows data)
+          rows (ds/row-maps data)
           rollup-fns {:max (fn [col-data] (apply max col-data))
                       :min (fn [col-data] (apply min col-data))
                       :sum (fn [col-data] (apply + col-data))
@@ -1795,9 +1801,11 @@
       (loop [cur rows reduced-rows {}]
         (if (empty? cur)
           (let [group-cols (to-dataset (keys reduced-rows))
-                res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))]
-            (col-names res (concat (col-names group-cols)
-                                   (if (coll? col-name) col-name [col-name]))))
+                res (conj-cols group-cols (map rollup-fn (vals reduced-rows)))
+                new-col-names (concat (col-names group-cols)
+                                      (if (coll? col-name) col-name [col-name]))]
+            (ds/rename-columns res (zipmap (col-names res)
+                                           new-col-names)))
           (recur (next cur)
                  (let [row (first cur)
                        k (submap row group-by)
@@ -1832,7 +1840,8 @@
           comp-fn (if (= order :desc)
                     (comparator (fn [a b] (pos? (compare a b))))
                     compare)]
-      (dataset (col-names data) (sort-by key-fn comp-fn (:rows data))))))
+      (ds/dataset (ds/column-names data)
+                  (sort-by key-fn comp-fn (ds/row-maps data))))))
 
 
 
@@ -1905,14 +1914,19 @@
   ([cols]
     ($group-by cols $data))
   ([cols data]
-    (let [orig-col-names (:column-names data);save to preserve order below
-          groups (group-by #(submap % cols) (:rows data))]
+     (let [cols (if (coll? cols)
+                  cols
+                  [cols])
+           orig-col-names (ds/column-names data);save to preserve order below
+           groups (group-by #(select-keys % cols) (ds/row-maps data))]
       (into {}
             (for [[group-value group-rows] groups]
-              {group-value (dataset orig-col-names group-rows)})))))
+              {group-value (ds/select-columns
+                            (dataset group-rows)
+                            orig-col-names)})))))
 
 
-(defn matrix-map
+(defn ^:deprecated matrix-map
   "
   Like clojure.core/map, but will work on matrices of any dimension:
   1 x 1 (like e.g. a Double), 1 x n, n x 1, and n x m
@@ -1925,21 +1939,14 @@
     (matrix-map #(mod % 2) ($ 1 0 mat))
     (matrix-map #(mod % 2) [1 2 3 4])
     (matrix-map #(mod % 2) 9)
+
+  Deprecated. Please use clojure.core.matrix/emap instead.
   "
   ([f m]
-    (let [m (if (and (matrix? m) (clx/row? m)) (to-list m) m)]
-      (if (sequential? m)
-        (if (sequential? (first m))
-          (map (fn [& a] (apply map f a)) m)
-          (map f m))
-        (f m))))
+     (m/emap f m))
   ([f m & ms]
-    (let [m (if (and (matrix? m) (clx/row? m)) (to-list m) m)]
-      (if (sequential? m)
-        (if (sequential? (first m))
-          (apply map (fn [& a] (apply map f a)) m ms)
-          (apply map f m ms))
-        (apply f m ms)))))
+     (apply m/emap f m ms)))
+
 
 (defn $map
   "
@@ -1956,8 +1963,6 @@
     ($map (fn [s] (/ s)) :speed cars)
     ($map (fn [s d] (/ s d)) [:speed :dist] cars)
 
-    (map (fn [s d] (/ s d)) ($ :speed cars) ($ :speed cars))
-
     (with-data (get-dataset :cars)
       (view ($map (fn [s] (/ s)) :speed))
       (view ($map (fn [s d] (/ s d)) [:speed :dist])))
@@ -1967,10 +1972,10 @@
       (conj-cols $data ($map (fn [s d] (/ s d)) [:speed :dist])))
   "
   ([fun col-keys data]
-    (let [rows (:rows data)]
+     (let [rms (ds/row-maps data)]
       (if (coll? col-keys)
-        (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) (:rows data))
-        (map (fn [row] (fun (map-get row col-keys))) (:rows data)))))
+        (map (fn [row] (apply fun (map (fn [k] (map-get row k)) col-keys))) rms)
+        (map (fn [row] (fun (map-get row col-keys))) rms))))
   ([fun col-keys]
     ($map fun col-keys $data)))
 
@@ -2035,9 +2040,9 @@
                                       (interleave right-keys
                                                   (map #(map-get (submap row left-keys) %)
                                                        left-keys))))
-                             (:rows left-data))
-                        (map #(reduce dissoc % left-keys) (:rows left-data))))
-          rows (map #(merge (index (submap % right-keys)) %) (:rows right-data))]
+                             (ds/row-maps left-data))
+                        (map #(reduce dissoc % left-keys) (ds/row-maps left-data))))
+          rows (map #(merge (index (submap % right-keys)) %) (ds/row-maps right-data))]
       (to-dataset rows))))
 
 (defn aggregate
@@ -2078,36 +2083,32 @@
   ([col-map]
     (rename-cols col-map $data))
   ([col-map data]
-    (let [old-col-names (col-names data)
-          new-col-names (reduce
-                         replace-by-number-or-value old-col-names col-map)]
-      (col-names data new-col-names))))
-
-(defn- update
-  ([m key f] (update-in m [key] f))
-  ([m key f & kfs] (apply update (update-in m [key] f) kfs)))
+     (let [col-names (ds/column-names data)
+           col-set (into #{} col-names)
+           col-map (reduce
+                    (fn [acc [k v]]
+                      (if (and (not (contains? col-set k))
+                               (number? k))
+                        (assoc acc (nth col-names k) v)
+                        (assoc acc k v)))
+                    {} col-map)]
+       (ds/rename-columns data col-map))))
 
 (defn replace-column
   "Replaces a column in a dataset with new values."
   ([column-name values]
     (replace-column column-name values $data))
   ([column-name values data]
-    (update data :rows
-            (fn [rows]
-              (map #(assoc %1 column-name %2)
-                   rows values)))))
+     (ds/replace-column data column-name values)))
 
 (defn add-column
   "Adds a column, with given values, to a dataset."
   ([column-name values]
     (add-column column-name values $data))
   ([column-name values data]
-    (if (some #{column-name} (:column-names data))
-      (replace-column column-name values data)
-      (update data :column-names #(conj % column-name)
-              :rows #(mapv (fn [r v]
-                             (assoc r column-name v))
-                           % (concat values (repeat nil)))))))
+     (if (contains? (into #{} (ds/column-names data)) column-name)
+       (ds/replace-column data column-name values)
+       (ds/add-column data column-name values))))
 
 (defn add-derived-column
   "
@@ -2128,24 +2129,21 @@
   ([column-name from-columns f]
     (add-derived-column column-name from-columns f $data))
   ([column-name from-columns f data]
-    (update data :column-names #(conj % column-name)
-            :rows (fn [rows]
-                    (mapv (fn [row]
-                            (assoc row column-name
-                                   (apply f (map #(map-get row %)
-                                                 from-columns))))
-                          rows)))))
+     (let [d (ds/select-columns data from-columns)
+           cols (m/columns d)
+           derived-col (apply map f cols)]
+       (ds/add-column data column-name derived-col))))
 
 ;; credit to M.Brandmeyer
-(defn transform-col
+(defn ^:deprecated transform-col
   "
   Apply function f & args to the specified column of dataset and replace the column
   with the resulting new values.
+
+  Deprecated. Please use `clojure.core.matrix.dataset/update-column` instead.
   "
   [dataset column f & args]
-  (->> (map #(apply update-in % [column] f args) (:rows dataset))
-    vec
-    (assoc dataset :rows)))
+  (apply ds/emap-column dataset column f args))
 
 
 (defn deshape
@@ -2207,7 +2205,7 @@
                                                      nil
                                                      (assoc base-map :variable k :value (map-get row k colnames))))
                                                  __merge))))
-                                (:rows data))]
+                                (m/rows data))]
       (to-dataset deshaped-data))))
 
 
@@ -2266,20 +2264,27 @@
     (to-map (matrix (range 9) 3))
 
   "
-  type)
+  dispatch)
 
-(defmethod to-map :incanter.core/dataset
+(defmethod to-map ::dataset
   ([data]
-    (let [cols (map (partial sel data :cols) (col-names data))
-          col-keys (map keyword (col-names data))]
-      (zipmap col-keys cols))))
+     (ds/to-map data)))
 
-(defmethod to-map incanter.Matrix
+(defmethod to-map ::matrix
   ([mat]
     (let [cols (to-list (trans mat))
           col-keys (range (ncol mat))]
       (zipmap col-keys cols))))
 
+
+;; default tests for a core.matrix matrix
+(defmethod to-map :default
+  ([mat]
+    (cond
+      (m/matrix? mat)
+        (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat))))
+      :else
+      (throw (RuntimeException. (str "to-map multimethods not implemented for " (class mat)))))))
 
 (defn melt
   "
@@ -2295,10 +2300,12 @@
   (let [in-m (to-map dataset)
         nrows (nrow dataset)
         ks (keys in-m)]
-    (to-dataset
-     (for [k ks i (range nrows) :when (not (= pivot-key k))]
-       (zipmap [pivot-key :variable :value]
-               [(nth (pivot-key in-m) i) k (nth (k in-m) i)])))))
+    (ds/dataset
+      ;; column names
+      [pivot-key :variable :value]
+      ;; seq of rows
+      (for [k ks i (range nrows) :when (not (= pivot-key k))]
+        [(nth (pivot-key in-m) i) k (nth (k in-m) i)]))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CATEGORICAL VARIABLES
@@ -2366,14 +2373,16 @@
 
 
 (defn- get-columns [dataset column-keys]
-  (map (fn [col-key] (map #(% (get-column-id dataset col-key)) (:rows dataset))) column-keys))
+  (map (fn [col-key]
+         (map #(% (get-column-id dataset col-key))
+              (m/rows dataset)))
+       column-keys))
 
 
 
-(defn- string-to-categorical [dataset column-key dummies?]
-  (let [col (first (get-columns dataset [column-key]))]
-
-    (if (some string? col)
+(defn string-to-categorical [dataset column-idx dummies?]
+  (let [col (m/get-column dataset column-idx)]
+    (if (some #(or (string? %) (keyword? %)) col)
       (if dummies? (matrix (to-dummies col)) (matrix (to-levels col)))
       (matrix col))))
 
@@ -2391,10 +2400,9 @@
                                 them into numeric codes.
   "
   ([dataset & {:keys [dummies] :or {dummies false}}]
-    (reduce bind-columns
-            (map #(string-to-categorical dataset % dummies)
-                 (range (count (keys (:column-names dataset))))))))
-
+     (reduce bind-columns
+             (map #(string-to-categorical dataset % dummies)
+                (range (count (ds/column-names dataset)))))))
 
 ;(defn- transpose-seq [coll]
 ;  (map (fn [idx] (map #(nth % idx) coll)) (range (count (first coll)))))
@@ -2508,32 +2516,71 @@
                          7 8 9 10] :lower false))
   "
   ([data & {:keys [lower] :or {lower true}}]
-    (let [n (count data)
-          p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
-          mat (matrix 0 p p)
-          indices (if lower
-                    (for [i (range p) j (range p) :when (<= j i)] [i j])
-                    (for [i (range p) j (range p) :when (<= i j)] [j i]))]
-      (doseq [idx (range n)]
-        (let [[i j] (nth indices idx)
-              res (nth data idx)
-              d (if (and (matrix? res) (= 1 (nrow res)) (= 1 (ncol res)))
-                (sel res 0 0)
-                res)]
-          (clx/set mat i j d)
-          (clx/set mat j i d)))
-      mat)))
+   (let [n (count data)
+         p (int (second (solve-quadratic 1/2 1/2 (- 0 n))))
+         mat (matrix 0 p p)
+         indices (if lower
+                   (for [i (range p) j (range p) :when (<= j i)] [i j])
+                   (for [i (range p) j (range p) :when (<= i j)] [j i]))]
+     (reduce (fn [acc idx]
+               (let [[i j] (nth indices idx)]
+                 (-> (m/mset acc i j (nth data idx))
+                     (m/mset j i (nth data idx)))))
+             (matrix 0 p p) (range n)))))
 
 (defn toeplitz
   "
   Returns the Toeplitz matrix for the given vector, which form the first row of the matrix
   "
   ([x]
-    (symmetric-matrix
-      (loop [v (rseq x)
-             d []]
-        (if (nil? v) d
-            (recur (next v) (concat v d)))))))
+     (let [c (m/row-count x)]
+       (m/compute-matrix
+        [c c]
+        (fn [i j] (m/mget x (abs (- i j))))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; DATA TABLE CONVERSION METHODS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmulti data-table
+  "
+  Creates javax.swing.JTable from dataset or matrix.
+
+  JTable column names for datasets will be the datset's column names. For
+  matrices, an optional argument :column-names can be used to set the resulting
+  column names. Otherweise incrementing indices are used (0,1,2,..).
+
+  Example:
+
+  (data-table (clojure.core.matrix/matrix [[1 2 3][4 5 6]])
+    :column-names [\"first col\" \"second col\" \"third col\"])
+  "
+  (fn [obj & options]
+    (dispatch obj)))
+
+(defmethod data-table ::matrix
+  [obj & {:keys [column-names]}]
+    (let [col-names (or column-names (range (ncol obj)))
+          m (ncol obj)
+          n (nrow obj)]
+      (JTable.
+        (cond
+          (and (> m 1) (> n 1))
+          (Vector. (map #(Vector. %) (to-list obj)))
+          (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
+          (Vector. (map #(Vector. %) [(to-list obj) []]))
+          (and (= m 1) (> n 1))
+          (Vector. (map #(Vector. [%]) (to-list obj))))
+        (Vector. col-names))))
+
+(defmethod data-table ::dataset
+  [obj & options]
+   (let [col-names (ds/column-names obj)
+         column-vals (map (fn [row] (map #(row %) col-names)) (ds/row-maps obj))
+         table-model (javax.swing.table.DefaultTableModel.
+                       (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+                       (java.util.Vector. col-names))]
+    (JTable. table-model)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VIEW METHODS
@@ -2588,70 +2635,34 @@
     (save (histogram (sample-normal 1000)) \"/tmp/norm_hist.png\")
     (view \"file:///tmp/norm_hist.png\")
   "
-  (fn [obj & options] (cond
-                        (and (not (matrix? obj))
-                             (not (dataset? obj))
-                             (not (map? obj))
-                             (coll? obj))
-                        ::coll
-                        (.contains (str (type obj)) "processing.core.PApplet")
-                          :sketch
-                        :else
-                          (type obj))))
-
-
-;;(defmethod view ::coll ([obj & options] (view (matrix obj))))
+  (fn [obj & options]
+    (dispatch obj)))
 
 (defmethod view ::coll
-  ([obj & options]
-    (let [rows (if (coll? (first obj))
-                 obj
-                 (map vector obj))
-          colnames (range (count (first rows)))]
-      (view (dataset colnames rows)))))
+  [obj & options]
+  (apply view (m/transpose (matrix [obj])) options))
 
-(defmethod view :incanter.core/matrix
-  ([obj & {:keys [column-names]}]
-    (let [col-names (or column-names (range (ncol obj)))
-          m (ncol obj)
-          n (nrow obj)]
-     (doto (JFrame. "Incanter Matrix")
-       (.add (JScrollPane.
-               (JTable.
-                 (cond
-                   (and (> m 1) (> n 1))
-                     (Vector. (map #(Vector. %) (to-list obj)))
-                   (or (and (> m 1) (= n 1)) (and (= m 1) (= n 1)))
-                     (Vector. (map #(Vector. %) [(to-list obj) []]))
-                   (and (= m 1) (> n 1))
-                     (Vector. (map #(Vector. [%]) (to-list obj))))
-                                    (Vector. col-names))))
-       (.setSize 400 600)
-       (.setVisible true)))))
+(defmethod view ::vector
+  [obj & options]
+  (apply view (m/transpose (matrix [obj])) options))
 
+(defmethod view ::matrix
+  [obj & options]
+  (apply view (apply data-table obj options) options))
 
-(defmethod view :incanter.core/dataset
-  ([obj & options]
-    (let [col-names (:column-names obj)
-          column-vals (map (fn [row] (map #(row %) col-names)) (:rows obj))]
-      (doto (JFrame. "Incanter Dataset")
-        (.add (JScrollPane. (JTable. (Vector. (map #(Vector. %) column-vals))
-                                     (Vector. col-names))))
-        (.setSize 400 600)
-        (.setVisible true)))))
-
-
+(defmethod view ::dataset
+  [obj & options]
+  (apply view (apply data-table obj options) options))
 
 (defmethod view javax.swing.JTable
-  ([obj & options]
-    (doto (javax.swing.JFrame. "Incanter Dataset")
-      (.add (javax.swing.JScrollPane. obj))
-      (.setSize 500 600)
-      (.setVisible true))))
-
+  [obj & {:keys [title] :or {title "Incanter Table"}}]
+  (doto (javax.swing.JFrame. title)
+    (.add (javax.swing.JScrollPane. obj))
+    (.setSize 500 600)
+    (.setVisible true)))
 
 (defmethod view java.awt.Image
-  ([obj & options]
+  [obj & options]
     (let [icon (javax.swing.ImageIcon. obj)
           label (javax.swing.JLabel. icon)
           height (+ 15 (.getIconHeight icon))
@@ -2660,8 +2671,7 @@
         (.add (javax.swing.JScrollPane. label))
         (.setSize height width)
         .pack
-        (.setVisible true)))))
-
+        (.setVisible true))))
 
 
 ;; URL view method code lifted from clojure.contrib.javadoc.browse/open-url-in-browser
@@ -2674,21 +2684,8 @@
         url)
       (catch ClassNotFoundException e nil))))
 
-
-
-
-(defn data-table
-"Creates a javax.swing.JTable given an Incanter dataset."
-  ([data]
-   (let [col-names (:column-names data)
-         column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-         table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
-                                                           (java.util.Vector. col-names))]
-
-     (javax.swing.JTable. table-model))))
-
-
-
+;;fixed, was erroneously returning the dispatch function
+;;instead of applying it to obj..
 (defmulti set-data
   "
   Examples:
@@ -2713,14 +2710,21 @@
                                 data))))
 
   "
-  (fn [obj & more] (type obj)))
+  (fn [obj & more] (dispatch obj)))
 
-
+;;note: the clojure.core.matrix.impl.dataset.DataSetRow was tossing
+;;an error originally, "after" fixing the problems with set-data's
+;;dispatch function.  rows don't implement IFn, and were being invoked
+;;as if ds/row-maps.  datatable only cares about values, so mapping
+;;seq over the rows works fine.  seq is also the only way to
+;;coerce a row into a range of values, even though print method
+;;leads you to believe you have a :values an accessible key.
+;;DatasetRow doesn't implement ILookup...
 (defmethod set-data javax.swing.JTable
   ([table data]
-     (let [col-names (:column-names data)
-           column-vals (map (fn [row] (map #(row %) col-names)) (:rows data))
-           table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. %) column-vals))
+     (let [col-names   (ds/column-names data)
+           column-vals (m/rows data)
+           table-model (javax.swing.table.DefaultTableModel. (java.util.Vector. (map #(java.util.Vector. (seq %)) column-vals))
                                                              (java.util.Vector. col-names))]
        (.setModel table table-model))))
 
@@ -2815,26 +2819,34 @@
   (fn [obj filename & options]
     (if (.contains (str (type obj)) "processing.core.PApplet")
       :sketch
-      (type obj))))
+      (dispatch obj))))
 
 
 
 
 (defn grid-apply
-  "
-  Applies the given function f, that accepts two arguments, to a grid
+  "Applies the given function f, that accepts two arguments, to a grid
   defined by rectangle bounded x-min, y-min, x-max, y-max and returns a
   sequence of three sequences representing the cartesian product of x and y
   and z calculated by applying f to the combinations of x and y.
+  
+  Defaults to a 100x100 'grid', where the x and y axes are sampled
+  evenly accorinding to the grid.  Callers may supply their own
+  horizontal and vertical sampling resolutions via x-res and
+  y-res.  In cases where the sampling resolution is lower
+  than the range of actual values, a sparse response
+  surface will result.
   "
-  ([f x-min x-max y-min y-max]
-    (let [x-vals (range x-min x-max (/ (- x-max x-min) 100))
-          y-vals (range y-min y-max (/ (- y-max y-min) 100))
+  ([f x-min x-max y-min y-max x-res y-res]
+    (let [x-vals (range x-min x-max (/ (- x-max x-min) x-res))
+          y-vals (range y-min y-max (/ (- y-max y-min) y-res))
           xyz (for [_x x-vals _y y-vals] [_x _y (f _x _y)])
           transpose #(list (conj (first %1) (first %2))
                            (conj (second %1) (second %2))
                            (conj (nth %1 2) (nth %2 2)))]
-      (reduce transpose [[] [] []] xyz))))
+      (reduce transpose [[] [] []] xyz)))
+  ([f x-min x-max y-min y-max]
+   (grid-apply f x-min x-max y-min y-max 100 100)))
 
 
 
@@ -2925,10 +2937,13 @@
 
 
 ;; PRINT METHOD FOR INCANTER DATASETS
-(defmethod print-method incanter.core.Dataset [o, ^java.io.Writer w]
+(defmethod print-method clojure.core.matrix.impl.dataset.DataSet
+  [o, ^java.io.Writer w]
   (binding [*out* w]
-    (print-table (:column-names o) (:rows o))))
+    (print-table (ds/column-names o) (ds/row-maps o))))
 
+;;Can we implement these in core.matrix and ditch
+;;incanter.Matrix class entirely?
 (comment ;; TODO
   (defn- block-diag2 [block0 block1]
     (.composeDiagonal DoubleFactory2D/dense block0 block1))
@@ -2956,16 +2971,16 @@
     "Partitions should be a sequence of [start,size] pairs."
     [matrix partitions]
     (for [p partitions]
-      (.viewPart matrix (first p) (first p) (second p) (second p))))
-  )
+      (.viewPart matrix (first p) (first p) (second p) (second p)))))
 
-(defn reorder-columns
+(defn ^:deprecated reorder-columns
   "
   Produce a new dataset with the columns in the specified order.
-  Returns nil if no valid column names are given."
-  [dset cols]
-  (let [cols (filter (partial contains? (set (:column-names dset))) cols)]
-    (cond
-     (empty? cols) nil
-     (= (count cols) 1) (dataset cols (sel dset :cols (first cols)))
-     :else (sel dset :cols cols))))
+  Returns nil if no valid column names are given.
+
+  Deprecated. Please use clojure.core.matrix.dataset/select-columns instead"
+  [ds cols]
+  (let [col-set (into #{} (ds/column-names ds))]
+    (if (clojure.set/subset? col-set (into #{} cols))
+      (ds/select-columns ds cols)
+      nil)))

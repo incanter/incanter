@@ -1,5 +1,89 @@
 # What's new in Incanter #
 
+## Changes for 1.9.3 ##
+
+### Main changes ###
+
+* Added support for Clojure 1.9.0
+
+### Improvements ###
+
+ * Weibull distribution is now implemented directly in Clojure instead of using Java implementation.
+
+### Bugfixes ###
+
+ * #388 - the `itext` library was linked to broken version of Boncy Castle library;
+ * #377 - scatter-plot-matrix broken since 1.5.7
+ * #374 - heat-map produces wierd visual artifacts
+ * #364 - No method in multimethod `set-data`
+
+## Changes for 1.9.2 ##
+
+This release includes multiple bug fixes & improvements, together with update of
+dependencies to fresh versions.
+
+Please note that Clojure 1.9.0 isn't supported yet because of the problems with ClojureQL.
+
+## Changes for 1.9.0 ##
+
+This is first preview of the Incanter 2.0.  This release incorporates the code implemented
+as part of the GSoC 2014 project "Incanter and core.matrix integration" done by Aleksandr
+Sorokoumov, aka Gerrrr. (For full list of changes made during GSoC, please look to
+[wiki](https://github.com/incanter/incanter/wiki/Incanter-2.0-change-log)).
+
+Please, note that this release includes only part of changes planned for Incanter 2.0
+
+### Main changes ###
+
+ * Incanter now uses only core.matrix functions with `:vectorz` as default
+   implementations.  You can use another implementation by adding corresponding dependency
+   to your project file & selecting implementation using the `set-current-implementation`
+   function.
+ * Incanter's dataset is now based on the Dataset from core.matrix that supports both
+   labeled columns & rows.  Dataset is also a matrix now. Matrix functions work on
+   datasets;
+ * Many functions are now deprecated in favor of corresponding functions from
+   core.matrix. These functions have `:deprecated` flag in meta-information, for full list
+   please look to
+   [wiki](https://github.com/incanter/incanter/wiki/Incanter-2.0-change-log).
+
+### Breaking changes ###
+
+ * `incanter.core/matrix` called on seq will produce vector object instead of row-matrix;
+ * Matrices are not treated as sequences anymore, so calling `first`, `rest`, `map`,
+   `reduce`, `filter`, etc on matrices is not generally supported (although might still
+   work on some implementations, e.g. clatrix). It's recommended to use corresponding
+   functions from core.matrix;
+ * API of the functions `decomp-cholesky`, `decomp-svd`, `decomp-eigenvalue`, `decomp-lu`,
+   `decomp-qr` is changed to match core.matrix's implementation. See
+   [core.matrix wiki](https://github.com/mikera/core.matrix/wiki/Linear-algebra-API-proposal)
+   for more details;
+ * `incanter.core/dataset` API is changed. Now it accepts column names and seq of rows,
+   matrix, map of columns or seq of row maps as arguments;
+ * For datasets, the consecutive integers (.e.g 0, 1, 2, ...) are now used as default
+   column names;
+ * `incanter.core/sel` does not support automatic cast between strings and keywords
+   anymore;
+ * 2 arguments version of `incanter.core/col-names` removed. Please use
+   `clojure.core.matrix.dataset/select-columns` instead.
+
+### Improvements ###
+
+ * Instead of using scripts to perform task in every subdirectory, you can now use
+   `lein-sub` & `lein-modules` plugins to do the same.  Just execute `lein sub test` or
+   `lein modules install` to perform testing, or installing of every Incanter's module;
+ * Clojure 1.6.0 is used.
+
+### Bugfixes ###
+
+ * `kendalls-tau` now returns correct value.
+
+### Known issues
+
+ * `incanter.stats/sample-wishart` throws error during execution;
+ * For Clatrix-based implementations, it's not always possible to construct matrix from
+   result of `map`/`filter`/...
+
 ## Changes for 1.5.7 ##
 
 ### Bugfixes ###

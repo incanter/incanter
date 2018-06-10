@@ -15,8 +15,9 @@
 
 (ns ^{:doc "Self-Organizing-Map Neural Network Library."}
     incanter.som
-  (:use [incanter.core :only (sel ncol nrow mult div plus minus trans to-vect sqrt sum pow)]
-        [incanter.stats :only (mean principal-components covariance)]))
+  (:require [clojure.core.matrix :as mat :refer [get-row]]
+            [incanter.core :refer (sel ncol nrow mult div plus minus trans to-vect sqrt sum pow)]
+            [incanter.stats :refer (mean principal-components covariance)]))
 
 
 
@@ -30,8 +31,8 @@
 (defn- som-initialize-linear
   ([data]
     (let [pc (principal-components (covariance data))
-          pc1-sd (nth (:std-dev pc) 0)
-          pc2-sd (nth (:std-dev pc) 1)
+          pc1-sd (first (:std-dev pc))
+          pc2-sd (second (:std-dev pc))
           pc1 (sel (:rotation pc) :cols 0)
           pc2 (sel (:rotation pc) :cols 1)
           [dim-1 dim-2] (map #(Math/ceil %) (som-dimensions pc1-sd pc2-sd))
@@ -77,7 +78,7 @@
     (let [sets (loop [i 0 sets {}]
                  (if (= i (nrow data))
                    sets
-                   (let [{idx :index min-dist :dist} (get-min-dist (trans (nth data i)) som)]
+                   (let [{idx :index min-dist :dist} (get-min-dist (trans (get-row data i)) som)]
                      (recur (inc i) (assoc sets idx (conj (sets idx) i))))))]
       (assoc som :sets sets))))
 
@@ -127,7 +128,7 @@
 (defn- som-fitness
   ([data som]
     (/ (sum (for [indx (keys (:weights som))]
-            (sum (map #(dist-euclidean ((:weights som) indx) (trans (nth data %)))
+            (sum (map #(dist-euclidean ((:weights som) indx) (trans (get-row data %)))
                       ((:sets som) indx)))))
        (nrow data))))
 

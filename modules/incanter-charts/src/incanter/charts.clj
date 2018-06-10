@@ -27,50 +27,51 @@
             "
        :author "David Edgar Liebke"}
   incanter.charts
-  (:use [incanter.core :only ($ matrix? to-list plus minus div group-on
-                                bind-columns view save $group-by conj-cols
-                                grid-apply set-data col-names $data sel abs)]
-        [incanter.stats :only (quantile quantile-normal cumulative-mean
-                               sd correlation variance)]
-        [clj-time.coerce :only (to-date)])
-  (:import  (java.io File)
-            (javax.imageio ImageIO)
-            (javax.swing JSlider JFrame JLabel JPanel)
-            (java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font)
-            (org.jfree.data DomainOrder)
-            (org.jfree.data.statistics HistogramDataset
+  (:require [incanter.core :refer [$ matrix? dataset? vec? to-list plus minus div
+                                   group-on bind-columns view save $group-by conj-cols
+                                   grid-apply set-data col-names $data sel abs]
+             :as core]
+        [incanter.stats :refer [quantile quantile-normal cumulative-mean
+                               sd correlation variance]]
+        [clj-time.coerce :refer [to-date]])
+  (:import  [java.io File]
+            [javax.imageio ImageIO]
+            [javax.swing JSlider JFrame JLabel JPanel]
+            [java.awt BorderLayout Color Shape Rectangle Graphics2D BasicStroke Font]
+            [org.jfree.data DomainOrder]
+            [org.jfree.data.statistics HistogramDataset
                                        HistogramType
-                                       DefaultBoxAndWhiskerCategoryDataset)
-            (org.jfree.chart ChartFactory
+                                       DefaultBoxAndWhiskerCategoryDataset]
+            [org.jfree.chart ChartFactory
                              ChartUtilities
                              ChartFrame
                              ChartTheme
                              StandardChartTheme
                              JFreeChart
                              LegendItem
-                             LegendItemCollection)
-            (org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis)
-            (org.jfree.chart.plot PlotOrientation
+                             LegendItemCollection]
+            [org.jfree.chart.axis AxisSpace NumberAxis AxisLocation LogAxis]
+            [org.jfree.chart.plot PlotOrientation
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
                                   Plot
-                                  XYPlot)
-            (org.jfree.data.xy DefaultHighLowDataset
+                                  XYPlot]
+            [org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
                                XYSeriesCollection
-                               AbstractXYDataset)
-            (org.jfree.data.category DefaultCategoryDataset)
-            (org.jfree.data.general DefaultPieDataset)
-            (org.jfree.chart.renderer.xy XYLineAndShapeRenderer
+                               AbstractXYDataset]
+            [org.jfree.data.category DefaultCategoryDataset]
+            [org.jfree.data.general DefaultPieDataset]
+            [org.jfree.chart.renderer.xy XYLineAndShapeRenderer
                                          XYBarRenderer
                                          XYSplineRenderer
-                                         StandardXYBarPainter)
-            (org.jfree.ui TextAnchor RectangleInsets RectangleEdge)
-            (org.jfree.chart.title TextTitle)
-            (org.jfree.data UnknownKeyException)
-            (org.jfree.chart.annotations XYPointerAnnotation
+                                         StandardXYBarPainter]
+            [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
+            [org.jfree.chart.title TextTitle]
+            [org.jfree.data UnknownKeyException]
+            [org.jfree.chart.annotations XYPointerAnnotation
                                          XYTextAnnotation
-                                         XYPolygonAnnotation)))
+                                         XYPolygonAnnotation]))
 
 
 
@@ -316,7 +317,10 @@
   If x is a single value, and data is defined, return ($ x data)
   "
   [x data]
-  (if (coll? x)
+  (if (or (coll? x)
+          (dataset? x)
+          (matrix? x)
+          (vec? x))
     (to-list x)
     (if data
       (let [selected ($ x data)]
@@ -902,9 +906,9 @@
                (LogAxis. label)
                (LogAxis.))]
     (doto axis (.setBase base))
-    (if int-ticks?
+    (when int-ticks?
       (.setStandardTickUnits axis (NumberAxis/createIntegerTickUnits))) ;; must be after setting the base
-    (if smallest-value
+    (when smallest-value
       (.setSmallestValue axis smallest-value)) ; TODO TEST THIS!
     axis))
 
@@ -1130,7 +1134,7 @@
 
 (defn- create-xy-series-plot
   ([x y create-plot & options]
-    (let [opts (when options (apply assoc {} options))
+     (let [opts (when options (apply assoc {} options))
           data (or (:data opts) $data)
           _x (data-as-list x data)
           _y (data-as-list y data)
@@ -1138,38 +1142,38 @@
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (let [x-groupped (->> (conj-cols _x _group-by)
-                                           ($group-by :col-1))]
+                                           ($group-by 1))]
                        (->> (distinct _group-by)
                             (map #(->>
-                                   (get x-groupped {:col-1 %})
-                                   ($ :col-0))))))
-          y-groups (when _group-by
+                                   (get x-groupped {1 %})
+                                   ($ 0))))))
+           y-groups (when _group-by
                      (let [y-groupped (->> (conj-cols _y _group-by)
-                                           ($group-by :col-1))]
+                                           ($group-by 1))]
                        (->> (distinct _group-by)
                             (map #(->>
-                                   (get y-groupped {:col-1 %})
-                                   ($ :col-0))))))
-          __x (in-coll (if x-groups (first x-groups) _x))
-          __y (in-coll (if y-groups (first y-groups) _y))
-          title (or (:title opts) "")
-          x-lab (or (:x-label opts) (str 'x))
-          y-lab (or (:y-label opts) (str 'y))
-          series-lab (or (:series-label opts)
+                                   (get y-groupped {1 %})
+                                   ($ 0))))))
+           __x (in-coll (if x-groups (first x-groups) _x))
+           __y (in-coll (if y-groups (first y-groups) _y))
+           title (or (:title opts) "")
+           x-lab (or (:x-label opts) (str 'x))
+           y-lab (or (:y-label opts) (str 'y))
+           series-lab (or (:series-label opts)
                           (if x-groups
                             (format "%s, %s (0)" 'x 'y)
                             (format "%s, %s" 'x 'y)))
-          theme (or (:theme opts) :default)
-          legend? (true? (:legend opts))
-          points? (true? (:points opts))
-          data-series (XYSeries. (cond
+           theme (or (:theme opts) :default)
+           legend? (true? (:legend opts))
+           points? (true? (:points opts))
+           data-series (XYSeries. (cond
                                    _group-by
                                      (first _group-by)
                                    :else
                                      series-lab)
                                  (:auto-sort opts true))
-          dataset (XYSeriesCollection.)
-          chart (do
+           dataset (XYSeriesCollection.)
+           chart (do
                   (dorun
                    (map (fn [x y]
                         (if (and (not (nil? x))
@@ -1434,11 +1438,11 @@
           _group-by (when (:group-by opts)
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _x _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _x _group-by)))))
           y-groups (when _group-by
-                     (map #($ :col-0 %)
-                          (vals ($group-by :col-1 (conj-cols _y _group-by)))))
+                     (map #($ 0 %)
+                          (vals ($group-by 1 (conj-cols _y _group-by)))))
           __x (in-coll (if x-groups (first x-groups) _x))
           __y (in-coll (if y-groups (first y-groups) _y))
           title (or (:title opts) "")
@@ -1608,7 +1612,7 @@
                                           ( getDomainOrder [] (DomainOrder/ASCENDING))
                                           ( getXValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols x-name))
                                           ( getYValue [series item] (sel (nth (vals data-grouped) series) :rows item :cols y-name))
-                                          ( getItemCount [series] (count (:rows (nth (vals data-grouped) series))))
+                                          ( getItemCount [series] (core/nrow (nth (vals data-grouped) series)))
                                           ( getSeriesKey [series] (str (nth (keys data-grouped) series)))
                                           ( getSeriesCount [] (count data-grouped))))
         histogram-dataset-impl (fn [name]
@@ -1772,7 +1776,7 @@
     ;; Input dataset examples: Incanter data repo, local file, remote file (url)
     (def iris (get-dataset :iris))
     (def iris (read-dataset \"data/iris.dat\" :delim \\space :header true)) ; relative to project home
-    (def iris (read-dataset \"https://raw.github.com/liebke/incanter/master/data/iris.dat\" :delim \\space :header true))
+    (def iris (read-dataset \"https://raw.githubusercontent.com/incanter/incanter/master/data/iris.dat\" :delim \\space :header true))
     ;; Filter dataset to specific columns only
     (def iris ($ [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species] (get-dataset :iris)))
     (def iris (sel (get-dataset :iris) :cols [:Sepal.Length :Sepal.Width :Petal.Length :Petal.Width :Species]))
@@ -2669,9 +2673,9 @@
                       (data-as-list (:group-by opts) data))
           x-groups (when _group-by
                      (->> (conj-cols _x _group-by)
-                          ($group-by :col-1)
+                          ($group-by 1)
                           vals
-                          (map #($ :col-0 %))
+                          (map #($ 0 %))
                           (map in-coll)))
           __x (if x-groups (first x-groups) _x)
           title (or (:title opts) "")
@@ -2901,10 +2905,15 @@
            x-label (or (:x-label opts) "")
            y-label (or (:y-label opts) "")
            z-label (or (:z-label opts) "z scale")
+           x-res   (or (:x-res opts) 100)
+           y-res   (or (:y-res opts) 100)
+           auto-scale? (if (false? (:auto-scale? opts)) false true)
+           block-width  (double (/ (- x-max x-min) x-res))
+           block-height (double (/ (- y-max y-min) y-res))
            theme (or (:theme opts) :default)
            xyz-dataset (org.jfree.data.xy.DefaultXYZDataset.)
            data (into-array (map double-array
-                                 (grid-apply function x-min x-max y-min y-max)))
+                                 (grid-apply function x-min x-max y-min y-max x-res y-res)))
            min-z (reduce min (last data))
            max-z (reduce max (last data))
            x-axis (doto (org.jfree.chart.axis.NumberAxis. x-label)
@@ -2936,7 +2945,10 @@
            scale-axis (org.jfree.chart.axis.NumberAxis. z-label)
            legend (org.jfree.chart.title.PaintScaleLegend. scale scale-axis)
            renderer (org.jfree.chart.renderer.xy.XYBlockRenderer.)
-
+           _       (when auto-scale?
+                     (doto renderer
+                       (.setBlockWidth block-width)
+                       (.setBlockHeight block-height)))
            plot (org.jfree.chart.plot.XYPlot. xyz-dataset x-axis y-axis renderer)
            chart (org.jfree.chart.JFreeChart. plot)]
        (do
@@ -2971,7 +2983,15 @@
 
   Returns a JFreeChart object representing a heat map of the function across
   the given x and y ranges. Use the 'view' function to display the chart, or
-  the 'save' function to write it to a file.
+  the 'save' function to write it to a file.  Callers may define the
+  number of samples in each direction, and select if they want a
+  sparser representation by disabling :auto-scale? .  By default,
+  the heat-map will try to scale the 'blocks' or sampled pixels
+  to cover the ranges specified.  Depending on the number of
+  samples, this may result in a pixelated but performant look.
+  Disabling auto-scale? will keep the 'blocks' a constant
+  size, leading to potentially sparsely sampled points on
+  the surface surrounded by blank regions.
 
   Arguments:
     function -- a function that takes two scalar arguments and returns a scalar
@@ -2988,6 +3008,10 @@
     :color? (default true) -- should the plot be in color or not?
     :include-zero? (default true) -- should the plot include the origin if it
                                      is not in the ranges specified?
+    :x-res   (default 100) -- amount of samples to take in the x range
+    :y-res   (default 100) -- amount of samples to take in the y range
+    :auto-scale? (default true) -- automatically scale the block
+                                   width/height to provide a continuous surface
 
   Examples:
     (use '(incanter core charts))
