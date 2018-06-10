@@ -1,10 +1,22 @@
 # What's new in Incanter #
 
+## Changes for 1.9.4 ##
+
+### Main changes ###
+
+ * Switch to Clojure 1.9.0
+
+### Improvements ###
+
+
+### Bugfixes ###
+
+
 ## Changes for 1.9.3 ##
 
 ### Main changes ###
 
-* Added support for Clojure 1.9.0
+ * Added support for Clojure 1.9.0
 
 ### Improvements ###
 
