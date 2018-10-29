@@ -26,7 +26,7 @@
             an extension of the Colt numerics library
             (http://acs.lbl.gov/~hoschek/colt/).
             "
-       :author "David Edgar Liebke and Bradford Cross"}
+       :author "David Edgar Liebke, Bradford Cross and Joaquin Iglesias Turina"}
   incanter.stats
   (:import [cern.colt.list.tdouble DoubleArrayList]
            [cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
