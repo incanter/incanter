@@ -79,7 +79,7 @@ Try an example: sample 1,000 values from a standard-normal distribution and view
 <pre><code>user=> (view (histogram (sample-normal 1000)))</code></pre>
 <img src="http://incanter.org/images/examples/newtheme/hist-norm.png" />
 
-Try another simple example, a plot of the sine function over the range -4 to 4:
+Try another simple example, a plot of the sine function over the range -10 to 10:
 
 bc. user=> (def my-plot (function-plot sin -10 10))
 user=> (view my-plot)
