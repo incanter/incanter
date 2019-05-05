@@ -429,6 +429,18 @@
     (remove-series chart :series2)
     (is (= (has-series? chart :series2) false))))
 
+(deftest multi-chart-tests
+  (let [chart1 (xy-plot [1 2 3 4] [1 2 3 4] :series-label :series1)
+        chart2 (histogram (sample-normal 1000))
+        x (range (* -2 Math/PI) (* 2 Math/PI) 0.01)
+        chart3 (xy-plot x (sin x))
+        x1 (range -10 10 0.01)
+        chart4 (xy-plot x1 (pow x1 2))
+        mc (multi-chart chart1 chart2 chart3 chart4)
+        hw1 (view mc)]
+    (Thread/sleep wait-timeout)
+    (.dispose hw1)))
+
 ;; (run-tests)
 
 (deftest comliance-test

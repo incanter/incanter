@@ -919,13 +919,13 @@
 
   This multi-chart is actually a map that contains a vector that contains multiple charts.
 "
-  []
-  {:charts []})
+  [& charts]
+  {:charts (into [] charts)})
 
 (defn multi-chart-add
+  "Appends a chart to multi-chart object."
   [mchart ^JFreeChart chart]
-  (assoc mchart
-         :charts (conj (:charts mchart) chart)))
+  (update-in mchart [:charts] conj chart))
 
 (defmulti set-axis
   "
@@ -3452,7 +3452,7 @@
         (.setSize width height)
         (.setVisible true)))))
 
-(defmethod view ::multi-chart
+(defmethod view :incanter.core/multi-chart
   ;; By default, we'll render a list of charts in a grid layout. Each component chart will be
   ;; 125px by 100px by default. The charts will be ordered in a square format by default.
   ([chart & options]
@@ -3462,16 +3462,18 @@
           height (or (:height opts) 400)
           charts (:charts chart)
           ncharts (count charts)
-          nrows (->> ncharts Math/sqrt int)
+          nrows (->> ncharts Math/sqrt Math/round)
           ncols (->> nrows (/ ncharts) Math/ceil int)
+          cwidth (int (/ width ncols))
+          cheight (int (/ height nrows))
           frame (JFrame. window-title)]
       (.setLayout frame (GridLayout. nrows ncols))
       (doseq [one-chart charts]
         (let [chart-panel (ChartPanel.
                             one-chart
-                            125 100
+                            cwidth cheight
                             50 40
-                            200 160
+                            (* cwidth 2) (* cheight 2)
                             false false false false false false)]
           (.add frame chart-panel)))
       (doto frame
