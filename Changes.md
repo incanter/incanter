@@ -4,10 +4,12 @@
 
 ### Main changes ###
 
- * Switch to Clojure 1.9.0
+ * Switch to Clojure 1.10.0
 
 ### Improvements ###
 
+ * Add support for drawing multiple charts in single window. See the `multi-chart`
+   function. (#196)
 
 ### Bugfixes ###
 
