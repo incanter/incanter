@@ -101,6 +101,7 @@
   "Dispatch function for multimethods"
   ([obj]
      (cond
+      (and (map? obj) (:charts obj)) ::multi-chart
       (dataset? obj) ::dataset
       (matrix? obj) ::matrix
       (vec? obj) ::vector
