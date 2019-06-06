@@ -66,7 +66,8 @@
             [org.jfree.chart.renderer.xy XYLineAndShapeRenderer
                                          XYBarRenderer
                                          XYSplineRenderer
-                                         StandardXYBarPainter]
+                                         StandardXYBarPainter
+                                         XYDifferenceRenderer]
             [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
             [org.jfree.chart.title TextTitle]
             [org.jfree.data UnknownKeyException]
@@ -3830,6 +3831,37 @@
     (doseq [a-series series-list]
       (doto renderer (.setSeriesShape a-series new-point)))
     chart))
+
+(defn set-fill-between
+  "
+  Sets fill between by using the last two lines added.
+  If the y value of first line is greater than the second line, the enclosed area is filled with positive-paint.
+  If the y value of second line is greater than the first line, the enclosed area is filled with negative-paint.
+
+  Examples:
+    (use '(incanter charts core))
+    (view (doto (xy-plot [1 2 3 4 5]
+                         [11 12 13 14 15])
+                (add-lines [1 2 3 4 5]
+                           [1 2 3 4 5])
+                (set-fill-between :positive-paint (java.awt.Color/GRAY)
+                                  :negative-paint (java.awt.Color/PINK))))
+"
+  ([chart & options]
+   (let [opts (apply hash-map options)
+         data-plot (.getPlot chart)
+         n-dataset (.getDatasetCount data-plot)
+         render-dataset (XYSeriesCollection.)
+         _ (dorun (->> [(.getDataset data-plot (- n-dataset 2))
+                        (.getDataset data-plot (- n-dataset 1))]
+                       (map #(.addSeries render-dataset (first (.getSeries %1))))))
+         difference-renderer (XYDifferenceRenderer. (get opts :positive-paint (Color. 0 0 0 125))
+                                                    (get opts :negative-paint (Color. 128 128 128 125))
+                                                    false)]
+     (.setDataset data-plot (- n-dataset 1) nil)
+     (.setDataset data-plot (- n-dataset 2) render-dataset)
+     (.setRenderer data-plot (- n-dataset 2) difference-renderer)
+     chart)))
 
 ;;;; DEFAULT THEME METHODS
 
