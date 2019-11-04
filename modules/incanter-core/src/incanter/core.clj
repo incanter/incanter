@@ -141,6 +141,7 @@
 (defmethod ncol ::vector
   [v] 1)
 
+; seen
 (defn ^:deprecated dim
   "Returns a vector with the number of rows and columns of the given matrix.
 
