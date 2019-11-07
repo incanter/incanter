@@ -3743,7 +3743,22 @@
 ;;; CHART CUSTOMIZATION
 
 (defn set-stroke
-  "
+  "Styles individual points in a chart.
+  Options:
+      :width (default 1.0) The width of points.
+      :dash (default 1.0) A number from which an array of floats is made and used as the dashing
+          pattern by BasicStroke class.
+      :series (default :all) A number representing the series to change stroke of. In case the
+          series is set to :all, the stroke is applied to all series, else to only the specified
+          series.
+      :dataset (default 0) A number representing the renderer to which the basic stroke is set.
+      :cap (default java.awt.BasicStroke/CAP_ROUND) The decoration of the ends of a BasicStroke,
+          either java.awt.BasicStroke/CAP_ROUND, java.awt.BasicStroke/CAP_BUTT or
+          java.awt.BasicStroke/CAP_SQUARE.
+      :join (default java.awt.BasicStroke/JOIN_ROUND) The decoration applied where paths segments
+          meet, either java.awt.BasicStroke/JOIN_ROUND, java.awt.BasicStroke/JOIN_MITER or
+          java.awt.BasicStroke/JOIN_BEVEL.
+          
   Examples:
     (use '(incanter core charts))
 
