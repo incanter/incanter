@@ -3758,7 +3758,7 @@
       :join (default java.awt.BasicStroke/JOIN_ROUND) The decoration applied where paths segments
           meet, either java.awt.BasicStroke/JOIN_ROUND, java.awt.BasicStroke/JOIN_MITER or
           java.awt.BasicStroke/JOIN_BEVEL.
-          
+
   Examples:
     (use '(incanter core charts))
 
@@ -3803,7 +3803,12 @@
 
 
 (defn set-stroke-color
-  "
+  "Changes the color of a series in a chart.
+    Options:
+          :series (default 0) A number representing the series to change the color of.
+          :dataset (default 0) A number representing the renderer to which
+              the basic stroke is set.
+              
   Examples:
     (use '(incanter core charts))
 
