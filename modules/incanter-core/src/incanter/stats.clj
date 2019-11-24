@@ -362,6 +362,7 @@
   Options:
     :min (default 0)
     :max (default 1)
+    :seed (default (Date.))
 
   See also:
       cdf-uniform and sample-uniform
@@ -390,6 +391,7 @@
   Options:
     :min (default 0)
     :max (default 1)
+    :seed (default (Date.))
 
   See also:
       pdf-uniform and sample-uniform
@@ -419,6 +421,7 @@
     :min (default 0)
     :max (default 1)
     :integers (default false)
+    :seed (default (Date.))
 
   See also:
       pdf-uniform and cdf-uniform
@@ -453,6 +456,7 @@
   Options:
     :alpha (default 1)
     :beta (default 1)
+    :seed (default (Date.))
 
   See also:
       cdf-beta and sample-beta
