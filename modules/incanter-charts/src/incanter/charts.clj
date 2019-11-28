@@ -875,6 +875,32 @@
                                                            [:series-label series-lab#]))))]
         (apply add-points* args#))))
 
+(defn add-polar*
+  ([chart x-values y-values & options]
+   (let [opts (when options (apply assoc {} options))
+         data-plot (.getPlot chart)
+         data-set (.getDataset data-plot)]
+     (doto data-plot
+       (.setDataset
+         (doto data-set
+           (.addSeries
+             (let [xy-series (XYSeries. (:series-label opts))
+                   dt (zipmap x-values y-values)]
+               (reduce (fn [acc [param-1 param-2]]
+                         (doto acc
+                           (.add (double param-1)
+                                 (double param-2)))) xy-series dt))))))
+     chart)))
+
+(defmacro add-polar
+  ([chart x y & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          series-label# (or (:series-label opts#) (format "%s %s" ~x ~y))
+          args# (concat [~chart ~x ~y]
+                        (apply concat (seq (apply assoc opts#
+                                                  [:series-label series-label#]))))]
+      (apply add-polar* args#))))
+
 (defn log-axis
   "
   Create a logarithmic axis.
