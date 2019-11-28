@@ -3074,6 +3074,38 @@
        (apply heat-map* args#))))
 
 
+(defn polar-chart*
+  ([x y & options]
+   (let [opts (when options (apply assoc {} options))
+         title (or (:title opts) "")
+         theme (or (:theme opts) :default)
+         series-label (or (:series-label opts) "")
+         legend? (true? (:legend opts))
+         dataset (doto (XYSeriesCollection.)
+                   (.addSeries
+                     (let [xy-series (XYSeries. series-label)
+                           dt (zipmap x y)]
+                       (reduce (fn [acc [param-1 param-2]]
+                                 (doto acc
+                                   (.add (double param-1)
+                                         (double param-2)))) xy-series dt))))
+         chart (ChartFactory/createPolarChart title dataset legend? true false)]
+     (do
+       (set-theme chart theme)
+       chart))))
+
+
+(defmacro polar-chart
+  ([x y & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          legend# (or (:legend opts#) false)
+          title# (or (:title opts#) "")
+          args# (concat [~x ~y] (apply concat
+                                       (seq (apply assoc opts# [:legend legend#
+                                                                :title title#]))))]
+      (apply polar-chart* args#))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  ANNOTATIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3808,7 +3840,7 @@
           :series (default 0) A number representing the series to change the color of.
           :dataset (default 0) A number representing the renderer to which
               the basic stroke is set.
-              
+
   Examples:
     (use '(incanter core charts))
 
