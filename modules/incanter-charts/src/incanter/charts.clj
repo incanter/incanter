@@ -56,7 +56,8 @@
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
                                   Plot
-                                  XYPlot]
+                                  XYPlot
+                                  PolarPlot]
             [org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
                                XYSeriesCollection
@@ -875,8 +876,9 @@
                                                            [:series-label series-lab#]))))]
         (apply add-points* args#))))
 
+
 (defn add-polar*
-  ([chart x-values y-values & options]
+  ([chart points & options]
    (let [opts (when options (apply assoc {} options))
          data-plot (.getPlot chart)
          data-set (.getDataset data-plot)]
@@ -885,21 +887,45 @@
          (doto data-set
            (.addSeries
              (let [xy-series (XYSeries. (:series-label opts))
-                   dt (zipmap x-values y-values)]
+                   dt (seq points)]
                (reduce (fn [acc [param-1 param-2]]
                          (doto acc
                            (.add (double param-1)
                                  (double param-2)))) xy-series dt))))))
      chart)))
 
+
 (defmacro add-polar
-  ([chart x y & options]
+  "Adds additional shape/line/point to a polar chart. Returns the modified chart.
+
+  Options:
+    :series-label (default '') Series label
+
+  Example:
+
+    (use '(incanter core charts stats datasets))
+
+    (def sample-point (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (add-polar sample-point [[90 150] [130 225]] :series-label \"A line\")
+
+    (def sample-point-2 (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (add-polar sample-point-2 [[90 150] [130 225]] :series-label \"A line\")
+    (add-polar sample-point-2 [[20 45] [145 120] [90 150]] :series-label \"A triangle\")
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+  "
+  ([chart points & options]
    `(let [opts# ~(when options (apply assoc {} options))
-          series-label# (or (:series-label opts#) (format "%s %s" ~x ~y))
-          args# (concat [~chart ~x ~y]
+          series-label# (or (:series-label opts#) "")
+          args# (concat [~chart ~points]
                         (apply concat (seq (apply assoc opts#
                                                   [:series-label series-label#]))))]
       (apply add-polar* args#))))
+
 
 (defn log-axis
   "
@@ -3101,7 +3127,7 @@
 
 
 (defn polar-chart*
-  ([x y & options]
+  ([_ points & options]
    (let [opts (when options (apply assoc {} options))
          title (or (:title opts) "")
          theme (or (:theme opts) :default)
@@ -3110,7 +3136,7 @@
          dataset (doto (XYSeriesCollection.)
                    (.addSeries
                      (let [xy-series (XYSeries. series-label)
-                           dt (zipmap x y)]
+                           dt (seq points)]
                        (reduce (fn [acc [param-1 param-2]]
                                  (doto acc
                                    (.add (double param-1)
@@ -3122,13 +3148,57 @@
 
 
 (defmacro polar-chart
-  ([x y & options]
+  "
+  Returns a JFreeChart object representing a polar-chart of the given data.
+  Draws shapes, points or lines on a Polar Chart. A Polar point is in the
+  form - [x y] - where x is the degree and y is the distance the center.
+  A line or shape is the combination or points in a sequence.
+  E.g - [[x y] [k v] [l s]] - is a triangle.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments
+    points -- a sequence of points to draw.
+
+  Options:
+    :title (default '') main title
+    :legend (default false) boolean whether or not the legend should be
+      shown
+    :series-label (default '') Series label
+
+
+  See also:
+    add-polar, view and save
+
+  Examples:
+
+    (use '(incanter core stats charts datasets))
+
+    (def sample-plot (polar-chart [[20 45] [145 120] [90 150]] :legend true :series-label \"A triangle\"))
+    (view sample-plot)
+    (save sample-plot \"polar-p.png\" :width 1000)
+
+    (def sample-plot-2 (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (view sample-plot-2)
+    (save sample-plot-2 \"polar-p2.png\" :width 1000)
+
+    (def sample-plot-3 (polar-chart [[90 150] [130 225]] :legend true :series-label \"A line\")
+    (view sample-plot-3)
+    (save sample-plot-3 \"polar-p3.png\" :width 1000)
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+  "
+  ([points & options]
    `(let [opts# ~(when options (apply assoc {} options))
           legend# (or (:legend opts#) false)
           title# (or (:title opts#) "")
-          args# (concat [~x ~y] (apply concat
-                                       (seq (apply assoc opts# [:legend legend#
-                                                                :title title#]))))]
+          args# (concat [:data ~points] (apply concat
+                                               (seq (apply assoc opts# [:legend legend#
+                                                                        :title title#]))))]
       (apply polar-chart* args#))))
 
 
