@@ -3909,6 +3909,11 @@
       (add-categories [:a :b :c :d] [20 5 30 15])
       (set-stroke :series 0 :width 4 :dash 5)
       (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))
+
+    (def sample-plot (polar-chart [[90 150] [130 225]] :legend true :series-label \"A data\"))
+    (doto sample-plot
+      (set-stroke :width 10 :series 0)
+      view)
   "
   ([chart & options]
     (let [{:keys [width dash series dataset cap join]
@@ -3953,6 +3958,12 @@
     (doto (function-plot sin -10 10 :step-size 0.1)
       (set-stroke :width 3 :dash 5)
       (set-stroke-color java.awt.Color/gray)
+      view)
+
+    (def sample-plot (polar-chart [[90 150] [130 225]] :legend true :series-label \"A data\"))
+    (doto sample-plot
+      (set-stroke :width 10 :series 0)
+      (set-stroke-color java.awt.Color/green)
       view)
 
   "
