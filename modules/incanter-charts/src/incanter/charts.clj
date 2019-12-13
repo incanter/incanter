@@ -3202,6 +3202,37 @@
       (apply polar-chart* args#))))
 
 
+(defn ring-chart*
+  ([categories values & options]
+   (let [opts (when options (apply assoc {} options))
+         data (or (:data opts) $data)
+         _values (data-as-list values data)
+         _categories (data-as-list categories data)
+         title (or (:title opts) "")
+         theme (or (:theme opts) :default)
+         legend? (true? (:legend opts))
+         dataset (DefaultPieDataset.)
+         chart (org.jfree.chart.ChartFactory/createRingChart
+                 title
+                 dataset
+                 legend?
+                 true
+                 false)]
+     (do
+       (doseq [i (range 0 (count _values))]
+         (.setValue dataset (nth _categories i) (nth _values i)))
+       (set-theme chart theme)
+       chart))))
+
+(defmacro ring-chart
+  ([categories values & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          title# (or (:title opts#) "")
+          args# (concat [~categories ~values]
+                        (apply concat (seq (apply assoc opts#
+                                                  [:title title#]))))]
+      (apply ring-chart* args#))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  ANNOTATIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
