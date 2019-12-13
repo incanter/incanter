@@ -3225,6 +3225,48 @@
        chart))))
 
 (defmacro ring-chart
+  "
+  Returns a JFreeChart object representing a ring-chart of the given data.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments:
+    categories -- a sequence of categories
+    values -- a sequence of numeric values
+
+  Options:
+    :title (default '') main title
+    :legend (default false) prints legend
+
+
+  See also:
+    view and save
+
+  Examples:
+
+
+    (use '(incanter core stats charts datasets))
+
+    (view (ring-chart [\"a\" \"b\" \"c\"] [10 20 30]))
+
+     (view (ring-chart (sample \"abcdefghij\" :size 10 :replacement true)
+                     (sample-uniform 10 :max 50) :legend true))
+
+
+     (with-data (->> (get-dataset :hair-eye-color)
+                     ($rollup :sum :count [:hair :eye]))
+       (view $data)
+       (view (ring-chart :hair :count :title \"Hair Color\"))
+       (view (ring-chart :eye :count :title \"Eye Color\")))
+
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc/
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/plot/RingPlot.html
+
+  "
   ([categories values & options]
    `(let [opts# ~(when options (apply assoc {} options))
           title# (or (:title opts#) "")
