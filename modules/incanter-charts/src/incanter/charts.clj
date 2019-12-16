@@ -67,7 +67,7 @@
                                          XYBarRenderer
                                          XYSplineRenderer
                                          StandardXYBarPainter]
-            [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
+            [org.jfree.chart.ui TextAnchor RectangleInsets RectangleEdge]
             [org.jfree.chart.title TextTitle]
             [org.jfree.data UnknownKeyException]
             [org.jfree.chart.annotations XYPointerAnnotation
@@ -2974,17 +2974,17 @@
          (.setBackgroundPaint plot java.awt.Color/lightGray)
          (.setDomainGridlinesVisible plot false)
          (.setRangeGridlinePaint plot java.awt.Color/white)
-         (.setAxisOffset plot (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setAxisOffset plot (org.jfree.chart.ui.RectangleInsets. 5 5 5 5))
          (.setOutlinePaint plot java.awt.Color/blue)
          (.removeLegend chart)
          (.setSubdivisionCount legend 20)
          (.setAxisLocation legend org.jfree.chart.axis.AxisLocation/BOTTOM_OR_LEFT)
          (.setAxisOffset legend 5.0)
-         (.setMargin legend (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setMargin legend (org.jfree.chart.ui.RectangleInsets. 5 5 5 5))
          (.setFrame legend (org.jfree.chart.block.BlockBorder. java.awt.Color/red))
-         (.setPadding legend (org.jfree.ui.RectangleInsets. 10 10 10 10))
+         (.setPadding legend (org.jfree.chart.ui.RectangleInsets. 10 10 10 10))
          (.setStripWidth legend 10)
-         (.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
+         (.setPosition legend org.jfree.chart.ui.RectangleEdge/RIGHT)
          (.setTitle chart title)
          (.addSubtitle chart legend)
          (org.jfree.chart.ChartUtils/applyCurrentTheme chart)
