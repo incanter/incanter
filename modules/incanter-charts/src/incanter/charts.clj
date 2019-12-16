@@ -1598,7 +1598,7 @@
         xyplot (doto (XYPlot.)
                  (.setRenderer (doto (XYLineAndShapeRenderer. false true)
                                  (.setDrawOutlines true)
-                                 (.setBaseFillPaint (Color. 0 0 0 0))
+                                 (.setDefaultFillPaint (Color. 0 0 0 0))
                                  (.setUseFillPaint true)
                                  (.setSeriesPaint 0 (Color/BLUE))
                                  (.setSeriesPaint 1 (Color/RED))
@@ -3797,7 +3797,7 @@
       (if (= :all series)
         (doto renderer
           (.setAutoPopulateSeriesStroke false)
-          (.setBaseStroke stroke))
+          (.setDefaultStroke stroke))
         (.setSeriesStroke renderer series stroke))
       chart)))
 
