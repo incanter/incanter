@@ -43,7 +43,7 @@
                                        HistogramType
                                        DefaultBoxAndWhiskerCategoryDataset]
             [org.jfree.chart ChartFactory
-                             ChartUtilities
+                             ChartUtils
                              ChartFrame
                              ChartPanel
                              ChartTheme
@@ -2987,7 +2987,7 @@
          (.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
          (.setTitle chart title)
          (.addSubtitle chart legend)
-         (org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
+         (org.jfree.chart.ChartUtils/applyCurrentTheme chart)
          (set-theme chart theme))
        chart)))
 
@@ -3487,7 +3487,7 @@
           height (or (:height opts) 400)]
       ;; if filename is not a string, treat it as java.io.OutputStream
       (if (string? filename)
-        (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
+        (ChartUtils/saveChartAsPNG (File. filename) chart width height)
         (ImageIO/write (.createBufferedImage chart width height) "png" filename))
       nil)))
 
