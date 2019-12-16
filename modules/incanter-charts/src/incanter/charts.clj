@@ -1635,7 +1635,7 @@
                                    (.addSeries (str name) (double-array ($ name data)) (int nbins))))
         color-for (fn [k] (-> xyplot .getRenderer (.lookupSeriesPaint k)))
         shape-for (fn [k] (-> xyplot .getRenderer (.lookupLegendShape k)))
-        font-normal (.getBaseItemLabelFont (.getRenderer xyplot))
+        font-normal (.getDefaultItemLabelFont (.getRenderer xyplot))
         font-bold (.deriveFont font-normal (Font/BOLD))
         legend (let [coll (LegendItemCollection.)]
                  (do
