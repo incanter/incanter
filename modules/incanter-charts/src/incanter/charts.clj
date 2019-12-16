@@ -1618,7 +1618,7 @@
                                       (.setSeriesPaint 0 (Color. 210 210 210))
                                       (.setBarPainter (StandardXYBarPainter.))))
                     (.setRenderer 0 (doto (XYSplineRenderer.)
-                                      (.setShapesVisible false)
+                                      (.setDefaultShapesVisible false)
                                       (.setSeriesPaint 0 (Color. 170 170 170))
                                       (.setSeriesStroke 0 (BasicStroke. 3))))
                     (.setRangeGridlinesVisible false) ;; these lines do not fit to other range lines
