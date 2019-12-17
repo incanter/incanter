@@ -968,7 +968,7 @@
      {:pre [(#{:x :y} dimension)]}
 
      (let [plot (.getPlot chart)
-           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.ContourPlot org.jfree.chart.plot.FastScatterPlot}]
+           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.FastScatterPlot}]
        (assert (allowed-types (type plot))
                (str "The default set-axis method only works for " allowed-types))
        (if (= :x dimension)
