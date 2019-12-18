@@ -3955,14 +3955,16 @@
 ;;;;; DEFAULT PLOT BACKGROUND SETTINGS
 
 (defmethod set-background-default org.jfree.chart.plot.XYPlot
-  ([chart]
+  ([chart & options]
      (let [grid-stroke (java.awt.BasicStroke. 1
                                               java.awt.BasicStroke/CAP_ROUND
                                               java.awt.BasicStroke/JOIN_ROUND
                                               1.0
                                               (float-array 2.0 1.0)
                                               0.0)
-           plot (.getPlot chart)]
+           plot (.getPlot chart)
+           opts (when options (apply {} options))
+           series (or (:series opts) 0)]
        (doto plot
          (.setRangeGridlineStroke grid-stroke)
          (.setDomainGridlineStroke grid-stroke)
@@ -3983,7 +3985,7 @@
          )
        (if (= (-> plot .getDataset type)
               org.jfree.data.statistics.HistogramDataset)
-         (-> plot .getRenderer (.setPaint java.awt.Color/gray)))
+         (-> plot .getRenderer (.setSeriesPaint series java.awt.Color/gray)))
        (-> chart .getTitle (.setPaint java.awt.Color/gray))
        chart)))
 
