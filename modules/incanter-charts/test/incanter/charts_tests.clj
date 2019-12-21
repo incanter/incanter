@@ -164,6 +164,10 @@
   (let [plot (polar-chart [[34 93] [83 03] [78 138]] :series-label "Polar one")]
     (is (not (nil? (add-polar plot [[34 93] [83 03] [78 138] [101 145] [23 144]] :series-label "Polar two"))))))
 
+(deftest ring-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (ring-chart 0 1 :data (to-dataset [[1 2 3]]))))))
+
 (deftest histogram-tests
   (def hw1 (view (histogram (sample-normal 1000))))
   (def hw2 (view (histogram (sample-gamma 1000))))
@@ -386,6 +390,10 @@
     (.dispose sw2)))
 
 
+(deftest ring-chart-tests
+  (def pw1 (view (ring-chart ["a" "b" "c"] [10 20 30])))
+  (Thread/sleep wait-timeout)
+  (.dispose pw1))
 
 (deftest annotations-tests
   (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))
