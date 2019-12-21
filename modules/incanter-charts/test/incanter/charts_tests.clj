@@ -155,6 +155,10 @@
          plot (scatter-plot 0 1 :data data)]
   (is (not (nil? (add-points plot 2 1 :data data))))))
 
+(deftest ring-chart-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (ring-chart 0 1 :data (to-dataset [[1 2 3]]))))))
+
 (deftest histogram-tests
   (def hw1 (view (histogram (sample-normal 1000))))
   (def hw2 (view (histogram (sample-gamma 1000))))
@@ -359,7 +363,10 @@
     (.dispose fw1)
     (.dispose fw2)))
 
-
+(deftest ring-chart-tests
+  (def pw1 (view (ring-chart ["a" "b" "c"] [10 20 30])))
+  (Thread/sleep wait-timeout)
+  (.dispose pw1))
 
 (deftest annotations-tests
   (def x (range (* -2 Math/PI) (* 2 Math/PI) 0.01))
