@@ -368,7 +368,7 @@
     (.dispose fw1)
     (.dispose fw2)))
 
-(deftest polar-tests
+(deftest polar-chart-tests
   (let [sw1 (view (polar-chart [[13 15] [34 23] [23 45]] :series-label "A"))
         plot1 (polar-chart [[130 150] [340 230] [230 450]] :series-label "A"
                            :title "Relation between A, B and C")
@@ -469,7 +469,7 @@
 
 ;; (run-tests)
 
-(deftest comliance-test
+(deftest compliance-test
   (doseq [impl [:vectorz :ndarray :persistent-vector]]
     (set-current-implementation impl)
     (println (str "compliance test " impl))
@@ -500,4 +500,5 @@
                      [148     250]])]
       (scatter-tests m)
       (bar-chart-tests)
-      (line-chart-tests))))
+      (line-chart-tests)
+      (polar-chart-tests))))
