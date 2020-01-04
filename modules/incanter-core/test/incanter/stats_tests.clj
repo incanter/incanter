@@ -22,7 +22,8 @@
 (ns incanter.stats-tests
   (:use clojure.test
         (incanter core stats))
-  (:require [clojure.core.matrix :as m]))
+  (:require [clojure.core.matrix :as m]
+            [clojure.core.matrix.linear :as l]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UNIT TESTS FOR incanter.stats.clj
@@ -489,3 +490,68 @@
       (linear-model-r2-test)
       (simple-regresssion-test)
       (chisq-test-test))))
+
+;;;;;; TESTS FOR ROBUST REGRESSION AND IRWLS ;;;;;;
+(defn simulation []
+  ;; number of obvservations
+  (def n-obs 100)
+  ;; independent variable
+  (def x (sample-mvn n-obs :sigma (diag [1 1])))
+  ;; parameters
+  (def beta-irwls (matrix [0.5 -0.3] 1))
+  ;; unbiased dependent variable
+  (def y (m/get-column
+          (plus (mmult x beta-irwls)
+                (sample-mvn (nrow x)
+                            :sigma (diag [1]))) 0))
+  ;; sample from random uniform. this probability determines
+  ;; whether an obvervation is an outlier
+  (def probs (sample-uniform n-obs))
+  ;; this function test the above probs and samples from either
+  ;; a normal(0, 1), so not an outlier or a normal(0, 25), an outlier
+  (defn test-and-sample [p]
+    (if (>= 0.85 p)
+      (sample-normal 1 :mean 0 :sd 1)
+      (sample-normal 1 :mean 0 :sd 25)))
+  ;; compute the errors of the model. some are sampled from normal(0,1)
+  ;; so they allow for the standard linear regression theory, but some
+  ;; are sampled from a normal(0, 25), these are outlier that will poison
+  ;; our regression
+  (def epsilon (matrix (map test-and-sample probs) 1))
+  ;; compute the biased dependent variables
+  (def y-star (m/get-column (plus (mmult x beta-irwls)
+                                  epsilon) 0))
+  {:beta-irwls (first (m/columns beta-irwls))
+   :beta-irwls-ls (:coefs (weighted-ls x y))
+   :beta-irwls-biased (:coefs (weighted-ls x y-star))
+   :beta-irwls-rls (:coefs
+              (robust-linear-model x y-star :max-iter 100 :tol 0.001))})
+
+(defn monte-carlo-test [n-sims]
+  (pmap eval (repeat n-sims '(simulation))))
+
+(defn analysis-test [n-sims]
+
+  (defn compute-bias [parameters-map coefficients]
+    {coefficients
+     (minus (coefficients parameters-map)
+              (:beta-irwls parameters-map))})
+  
+  (let [coefficient-types '(:beta-irwls-ls :beta-irwls-rls :beta-irwls-biased)
+        simulations (monte-carlo-test n-sims)
+        bias (mapcat #(map
+                       (fn [x] (compute-bias % x))
+                       coefficient-types)
+                     simulations)
+        mean-bias (map
+                   #(div
+                     (->> (filter % bias) 
+	                  (mapcat vals)
+                          (reduce plus))
+                     n-sims)
+                   coefficient-types)]
+    mean-bias))
+
+(def results (doall (map l/norm (analysis-test 1000))))
+(deftest coefficient-behavior
+  (is (apply <= results)))
