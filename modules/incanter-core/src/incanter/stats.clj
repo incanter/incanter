@@ -2224,9 +2224,9 @@
           lower-tail? (cond
                         (= alternative :two-sided)
                           (if (neg? t-stat) true false)
-                        (= alternative :lower)
+                        (= alternative :less)
                           (if (neg? t-stat) false true)
-                        (= alternative :greater)
+                        (= alternative :less)
                           (if one-sample?
                             (if (neg? t-stat) true false)
                             (if (neg? t-stat) false true)))
