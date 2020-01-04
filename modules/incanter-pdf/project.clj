@@ -9,7 +9,6 @@
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-charts "1.9.4-SNAPSHOT"]
                  [com.lowagie/itext "2.1.7"
-                  :exclusions [org.bouncycastle/bctsp-jdk14 bouncycastle/bcprov-jdk14
-                               bouncycastle/bcmail-jdk14]]
-                 [org.bouncycastle/bctsp-jdk14 "1.46"]]
+                  :exclusions [bouncycastle/bctsp-jdk14]]
+                 [org.bouncycastle/bctsp-jdk14 "1.38"]]
   )

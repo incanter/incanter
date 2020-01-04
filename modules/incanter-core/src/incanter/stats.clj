@@ -26,7 +26,7 @@
             an extension of the Colt numerics library
             (http://acs.lbl.gov/~hoschek/colt/).
             "
-       :author "David Edgar Liebke and Bradford Cross"}
+       :author "David Edgar Liebke, Bradford Cross and Joaquin Iglesias Turina"}
   incanter.stats
   (:import [cern.colt.list.tdouble DoubleArrayList]
            [cern.jet.random.tdouble Gamma Beta Binomial ChiSquare DoubleUniform
@@ -43,6 +43,7 @@
                               matrix length log10 sum sum-of-squares sel matrix? vec?
                               dataset? cumulative-sum solve vectorize bind-rows safe-div]])
   (:require [clojure.core.matrix :as m]
+            [clojure.core.matrix.linear :as l]
             [incanter.distributions :as dist]))
 
 (defn scalar-abs
@@ -362,6 +363,7 @@
   Options:
     :min (default 0)
     :max (default 1)
+    :seed (default (Date.))
 
   See also:
       cdf-uniform and sample-uniform
@@ -390,6 +392,7 @@
   Options:
     :min (default 0)
     :max (default 1)
+    :seed (default (Date.))
 
   See also:
       pdf-uniform and sample-uniform
@@ -419,6 +422,7 @@
     :min (default 0)
     :max (default 1)
     :integers (default false)
+    :seed (default (Date.))
 
   See also:
       pdf-uniform and cdf-uniform
@@ -453,6 +457,7 @@
   Options:
     :alpha (default 1)
     :beta (default 1)
+    :seed (default (Date.))
 
   See also:
       cdf-beta and sample-beta
@@ -622,7 +627,7 @@
           prng  (or (:rng opts)
                     (when-let [seed (:seed opts)]
                       (DoubleMersenneTwister. seed)))                  
-          d     (dist/weibull-distribution shape scale prng)]
+          d     (dist/weibull-distribution scale shape prng)]
       (if (= size 1)
         (dist/draw d)
         (for [_ (range size)] (dist/draw d))))))
@@ -2220,9 +2225,9 @@
           lower-tail? (cond
                         (= alternative :two-sided)
                           (if (neg? t-stat) true false)
-                        (= alternative :lower)
+                        (= alternative :less)
                           (if (neg? t-stat) false true)
-                        (= alternative :greater)
+                        (= alternative :less)
                           (if one-sample?
                             (if (neg? t-stat) true false)
                             (if (neg? t-stat) false true)))
@@ -2407,6 +2412,166 @@
        :n-levels n-levels
        :levels levels})))
 
+;;;;;;;;;;;;;;; ROBUST REGRESSION FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn huber
+  "
+  computes the huber WEIGHT function. For details, see 
+  Holland, P. W, Welsch R. E. (1977) Robust regression usingiteratively 
+  reweighted least squares. Communications in Statistics - Theory and
+  methods."
+  [e & {:keys [k] :or {k 1.345}}]
+  (let [ae (abs e)]
+    (if (> ae k)
+      (/ k ae)
+      1)))
+
+(defn hampel
+  "
+  computes hampel WEIGHT function. For details, see 
+  https://en.wikipedia.org/wikRedescending_M-estimator (August 2018)"
+  [e & {:keys [a b c] :or {a 2 b 4 c 8}}]
+  (let [ae (abs e)
+        sign-e (if (> 0 e)
+                 1
+                 -1)]
+    (cond (<= 0 ae a) e
+          (<= a ae b) (if (> 0 e)
+                        a
+                        (* sign-e a))
+          (<= b ae c) (* sign-e (/ (* a (- c ae)) (- c b)))
+          :else 0)))
+
+(defn bisquare
+  "
+  computes the Tukey's bisquare WEIGHT function. For details, see 
+  Holland, P. W, Welsch R. E. (1977) Robust regression usingiteratively 
+  reweighted least squares. Communications in Statistics - Theory and
+  methods."
+  [e & {:keys [c] :or {c 4.685}}]
+  (defn square [x] (* x x)) 
+  (let [ae (abs e)]
+    (if (> ae c)
+      0
+      (square (- 1 (square (/ e c)))))))
+
+(defn weighted-ls
+  "
+  computes the weighted least squares solution of linear equations using
+  the qr decomposition algorithm for numeric efficiency. if no weights are 
+  given, the function defaults to ordinary least squares solution.
+  x: independent variables
+  y: dependent variable
+  w: (optional) weights
+
+  references:
+     see https://web.stanford.edu/~hastie/ElemStatLearn/ for qr decomposition
+     ls algorithm.
+     see Cameron A. C, Trivedi P. K (2009) Microeconometrics: Methods 
+     and Applications for weighted least squares"
+  ([x y]
+   (let [n (ncol x)
+         qr-map (l/qr x {:compact true})
+         qnt (->> (m/columns (:Q qr-map))
+                  (take n)
+                  m/matrix)
+         beta-hat (mmult (l/solve (:R qr-map)) qnt y)
+         fitted (mmult (m/transpose qnt) qnt y)
+         residuals (minus y fitted)]
+     {:coefs beta-hat :fitted fitted :residuals residuals}))
+  ([x y w]
+   (let [dw (matrix (diag w))
+         x' (mmult dw x)
+         y' (mmult dw y)]
+     (weighted-ls x' y'))))
+
+
+(defn irwls
+  "
+  implements iteratively re-weighted least squares.
+
+  options:
+    :weight-fn. the function used to compute the weight of each obvservation.
+     defaults to huber function. hampel and bisquare are also provided. 
+     other functions should be implemented by the user
+    :max-iter. maximum number of iterations to run the algorithm
+    :tol. tolerance to compute convergence of solution
+
+  references:
+    Holland, P. W, Welsch R. E. (1977) Robust regression usingiteratively 
+    reweighted least squares. Communications in Statistics - Theory and
+    methods.
+    
+    Green, P. J. (1984) Iteratively Reweighted Least Squares for Maximum
+    Likelihood Estimation and some Robust and Resistant Alternatives. 
+    Journal of the Royal Statistical Society. Series B (Methodological).
+    "
+  [x y & {:keys [weight-fn max-iter tol]
+          :or {weight-fn huber max-iter 25 tol 0.0001}}]
+  (let [start (weighted-ls x y)
+        beta0 (:coefs start)
+        residuals0 (:residuals start)]
+    (loop [beta beta0
+           w (m/emap weight-fn residuals0)
+           iter 0]
+      (let [wls (weighted-ls x y w)]
+        (if (or
+             (<= (l/norm (minus beta (:coefs wls))) tol)
+             (= iter max-iter))
+          (assoc wls :iterations iter)
+          (recur
+           (:coefs wls)
+           (m/emap weight-fn (:residuals wls))
+           (+ 1 iter)))))))
+
+(defn robust-linear-model
+  "
+  Similar to R's rlm. Computes a linear model robust to outliers.
+  x: independent variables
+  y: dependent variables
+  weight-fn: (optional, defaults to huber) the function used to compute the
+    weights for the fitting process. huber, bisquare and hampel are 
+    provided, other options are left to the user to implement. Huber 
+    acives global minimum easily, while for the other two, a good starting
+    point is necessary to avoid local minima. See Holland and Welsch (1977)
+    for description and performance of more weight functions.
+  max-iter: maximum number of times to iterate the algorithm.
+  tol: numeric tolerance, used both to test for convergence in each 
+    iteration as well as to numerically compute the derivatives 
+    of the psi function.
+
+  references:
+    Green, P. J. (1984) Iteratively Reweighted Least Squares for Maximum
+    Likelihood Estimation and some Robust and Resistant Alternatives. 
+    Journal of the Royal Statistical Society. Series B (Methodological)
+   
+    Huber P. J. & Ronchetti  E. M. (2009) Robust Statistics. Willey.
+  "
+  [x y & {:keys [weight-fn max-iter tol]
+          :or {weight-fn huber max-iter 25 tol 0.0001}}]
+  (defn square [x] (* x x))
+  (defn psi [e] (* e (weight-fn e)))
+  (defn psi-prime [e]
+    (/ (- (psi (+ e tol)) (psi e)) tol))
+  (let [wls (irwls x y :weight-fn weight-fn
+                   :max-iter max-iter :tol tol)
+        residuals (:residuals wls)
+        weights (m/emap weight-fn residuals)
+        psis (m/emap psi residuals)
+        psi-primes (m/emap psi-prime residuals)
+        r' (/
+            (m/ereduce + (m/emap square psis))
+            (/
+             (square (m/ereduce + psi-primes))
+             (nrow x)))
+        xtx (l/solve (mmult (m/transpose x) (diag weights) x))
+        vcov-beta (m/emap #(* r' %) xtx)
+        std-errors (sqrt (diag vcov-beta))]
+    (assoc wls
+           :vcov-beta vcov-beta
+           :std-errors std-errors
+           :weights weights
+           :psi psis)))
 
 
 

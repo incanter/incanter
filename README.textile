@@ -29,12 +29,12 @@ Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.o
 
 h2. Getting started with Clojure
 
-For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure, 2ed":http://pragprog.com/book/shcloj2/programming-clojure by Stuart Halloway and Aaron Bedra, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="http://apress.com/book/view/1430272317">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
+For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure, 2ed":http://pragprog.com/book/shcloj2/programming-clojure by Stuart Halloway and Aaron Bedra, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="https://www.apress.com/gp/book/9781430272311">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
 
 *Other Clojure resources*
 
 * "Clojure website":http://clojure.org
-* "Getting Started with Clojure":http://dev.clojure.org/display/doc/Getting+Started
+* "Getting Started with Clojure":https://clojure.org/guides/getting_started
 * "Clojure Google group":http://groups.google.com/group/ClojureTV
 * "clojure":https://www.youtube.com/user/ClojureTV
 * "Disclojure blog":http://disclojure.org/
@@ -193,6 +193,6 @@ h2. Incanter dependencies
 * "JLaTeXMath":http://forge.scilab.org/index.php/p/jlatexmath/
 * "Apache POI":http://poi.apache.org/
 * "JLine":http://jline.sourceforge.net/
-* "ClojureQL":http://clojureql.org/
+* "ClojureQL":https://clojureql.sabrecms.com/
 * "Batik SVG Toolkit":https://xmlgraphics.apache.org/batik/
 

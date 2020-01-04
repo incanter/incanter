@@ -43,7 +43,7 @@
                                        HistogramType
                                        DefaultBoxAndWhiskerCategoryDataset]
             [org.jfree.chart ChartFactory
-                             ChartUtilities
+                             ChartUtils
                              ChartFrame
                              ChartPanel
                              ChartTheme
@@ -56,7 +56,8 @@
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
                                   Plot
-                                  XYPlot]
+                                  XYPlot
+                                  PolarPlot]
             [org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
                                XYSeriesCollection
@@ -67,7 +68,7 @@
                                          XYBarRenderer
                                          XYSplineRenderer
                                          StandardXYBarPainter]
-            [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
+            [org.jfree.chart.ui TextAnchor RectangleInsets RectangleEdge]
             [org.jfree.chart.title TextTitle]
             [org.jfree.data UnknownKeyException]
             [org.jfree.chart.annotations XYPointerAnnotation
@@ -875,6 +876,57 @@
                                                            [:series-label series-lab#]))))]
         (apply add-points* args#))))
 
+
+(defn add-polar*
+  ([chart points & options]
+   (let [opts (when options (apply assoc {} options))
+         data-plot (.getPlot chart)
+         data-set (.getDataset data-plot)]
+     (doto data-plot
+       (.setDataset
+         (doto data-set
+           (.addSeries
+             (let [xy-series (XYSeries. (:series-label opts))
+                   dt (seq points)]
+               (reduce (fn [acc [param-1 param-2]]
+                         (doto acc
+                           (.add (double param-1)
+                                 (double param-2)))) xy-series dt))))))
+     chart)))
+
+
+(defmacro add-polar
+  "Adds additional shape/line/point to a polar chart. Returns the modified chart.
+
+  Options:
+    :series-label (default '') Series label
+
+  Example:
+
+    (use '(incanter core charts stats datasets))
+
+    (def sample-point (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (add-polar sample-point [[90 150] [130 225]] :series-label \"A line\")
+
+    (def sample-point-2 (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (add-polar sample-point-2 [[90 150] [130 225]] :series-label \"A line\")
+    (add-polar sample-point-2 [[20 45] [145 120] [90 150]] :series-label \"A triangle\")
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+  "
+  ([chart points & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          series-label# (or (:series-label opts#) "")
+          args# (concat [~chart ~points]
+                        (apply concat (seq (apply assoc opts#
+                                                  [:series-label series-label#]))))]
+      (apply add-polar* args#))))
+
+
 (defn log-axis
   "
   Create a logarithmic axis.
@@ -968,7 +1020,7 @@
      {:pre [(#{:x :y} dimension)]}
 
      (let [plot (.getPlot chart)
-           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.ContourPlot org.jfree.chart.plot.FastScatterPlot}]
+           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.FastScatterPlot}]
        (assert (allowed-types (type plot))
                (str "The default set-axis method only works for " allowed-types))
        (if (= :x dimension)
@@ -1598,7 +1650,7 @@
         xyplot (doto (XYPlot.)
                  (.setRenderer (doto (XYLineAndShapeRenderer. false true)
                                  (.setDrawOutlines true)
-                                 (.setBaseFillPaint (Color. 0 0 0 0))
+                                 (.setDefaultFillPaint (Color. 0 0 0 0))
                                  (.setUseFillPaint true)
                                  (.setSeriesPaint 0 (Color/BLUE))
                                  (.setSeriesPaint 1 (Color/RED))
@@ -1618,7 +1670,7 @@
                                       (.setSeriesPaint 0 (Color. 210 210 210))
                                       (.setBarPainter (StandardXYBarPainter.))))
                     (.setRenderer 0 (doto (XYSplineRenderer.)
-                                      (.setShapesVisible false)
+                                      (.setDefaultShapesVisible false)
                                       (.setSeriesPaint 0 (Color. 170 170 170))
                                       (.setSeriesStroke 0 (BasicStroke. 3))))
                     (.setRangeGridlinesVisible false) ;; these lines do not fit to other range lines
@@ -1635,7 +1687,7 @@
                                    (.addSeries (str name) (double-array ($ name data)) (int nbins))))
         color-for (fn [k] (-> xyplot .getRenderer (.lookupSeriesPaint k)))
         shape-for (fn [k] (-> xyplot .getRenderer (.lookupLegendShape k)))
-        font-normal (.getBaseItemLabelFont (.getRenderer xyplot))
+        font-normal (.getDefaultItemLabelFont (.getRenderer xyplot))
         font-bold (.deriveFont font-normal (Font/BOLD))
         legend (let [coll (LegendItemCollection.)]
                  (do
@@ -2974,20 +3026,20 @@
          (.setBackgroundPaint plot java.awt.Color/lightGray)
          (.setDomainGridlinesVisible plot false)
          (.setRangeGridlinePaint plot java.awt.Color/white)
-         (.setAxisOffset plot (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setAxisOffset plot (org.jfree.chart.ui.RectangleInsets. 5 5 5 5))
          (.setOutlinePaint plot java.awt.Color/blue)
          (.removeLegend chart)
          (.setSubdivisionCount legend 20)
          (.setAxisLocation legend org.jfree.chart.axis.AxisLocation/BOTTOM_OR_LEFT)
          (.setAxisOffset legend 5.0)
-         (.setMargin legend (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setMargin legend (org.jfree.chart.ui.RectangleInsets. 5 5 5 5))
          (.setFrame legend (org.jfree.chart.block.BlockBorder. java.awt.Color/red))
-         (.setPadding legend (org.jfree.ui.RectangleInsets. 10 10 10 10))
+         (.setPadding legend (org.jfree.chart.ui.RectangleInsets. 10 10 10 10))
          (.setStripWidth legend 10)
-         (.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
+         (.setPosition legend org.jfree.chart.ui.RectangleEdge/RIGHT)
          (.setTitle chart title)
          (.addSubtitle chart legend)
-         (org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
+         (org.jfree.chart.ChartUtils/applyCurrentTheme chart)
          (set-theme chart theme))
        chart)))
 
@@ -3072,6 +3124,82 @@
                                                     :x-label x-lab#
                                                     :y-label y-lab#]))))]
        (apply heat-map* args#))))
+
+
+(defn polar-chart*
+  ([_ points & options]
+   (let [opts (when options (apply assoc {} options))
+         title (or (:title opts) "")
+         theme (or (:theme opts) :default)
+         series-label (or (:series-label opts) "")
+         legend? (true? (:legend opts))
+         dataset (doto (XYSeriesCollection.)
+                   (.addSeries
+                     (let [xy-series (XYSeries. series-label)
+                           dt (seq points)]
+                       (reduce (fn [acc [param-1 param-2]]
+                                 (doto acc
+                                   (.add (double param-1)
+                                         (double param-2)))) xy-series dt))))
+         chart (ChartFactory/createPolarChart title dataset legend? true false)]
+     (do
+       (set-theme chart theme)
+       chart))))
+
+
+(defmacro polar-chart
+  "
+  Returns a JFreeChart object representing a polar-chart of the given data.
+  Draws shapes, points or lines on a Polar Chart. A Polar point is in the
+  form - [x y] - where x is the degree and y is the distance the center.
+  A line or shape is the combination or points in a sequence.
+  E.g - [[x y] [k v] [l s]] - is a triangle.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments
+    points -- a sequence of points to draw.
+
+  Options:
+    :title (default '') main title
+    :legend (default false) boolean whether or not the legend should be
+      shown
+    :series-label (default '') Series label
+
+
+  See also:
+    add-polar, view and save
+
+  Examples:
+
+    (use '(incanter core stats charts datasets))
+
+    (def sample-plot (polar-chart [[20 45] [145 120] [90 150]] :legend true :series-label \"A triangle\"))
+    (view sample-plot)
+    (save sample-plot \"polar-p.png\" :width 1000)
+
+    (def sample-plot-2 (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (view sample-plot-2)
+    (save sample-plot-2 \"polar-p2.png\" :width 1000)
+
+    (def sample-plot-3 (polar-chart [[90 150] [130 225]] :legend true :series-label \"A line\")
+    (view sample-plot-3)
+    (save sample-plot-3 \"polar-p3.png\" :width 1000)
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+  "
+  ([points & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          legend# (or (:legend opts#) false)
+          title# (or (:title opts#) "")
+          args# (concat [:data ~points] (apply concat
+                                               (seq (apply assoc opts# [:legend legend#
+                                                                        :title title#]))))]
+      (apply polar-chart* args#))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3487,7 +3615,7 @@
           height (or (:height opts) 400)]
       ;; if filename is not a string, treat it as java.io.OutputStream
       (if (string? filename)
-        (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
+        (ChartUtils/saveChartAsPNG (File. filename) chart width height)
         (ImageIO/write (.createBufferedImage chart width height) "png" filename))
       nil)))
 
@@ -3781,6 +3909,11 @@
       (add-categories [:a :b :c :d] [20 5 30 15])
       (set-stroke :series 0 :width 4 :dash 5)
       (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))
+
+    (def sample-plot (polar-chart [[90 150] [130 225]] :legend true :series-label \"A data\"))
+    (doto sample-plot
+      (set-stroke :width 10 :series 0)
+      view)
   "
   ([chart & options]
     (let [{:keys [width dash series dataset cap join]
@@ -3797,7 +3930,7 @@
       (if (= :all series)
         (doto renderer
           (.setAutoPopulateSeriesStroke false)
-          (.setBaseStroke stroke))
+          (.setDefaultStroke stroke))
         (.setSeriesStroke renderer series stroke))
       chart)))
 
@@ -3808,7 +3941,7 @@
           :series (default 0) A number representing the series to change the color of.
           :dataset (default 0) A number representing the renderer to which
               the basic stroke is set.
-              
+
   Examples:
     (use '(incanter core charts))
 
@@ -3827,6 +3960,12 @@
       (set-stroke-color java.awt.Color/gray)
       view)
 
+    (def sample-plot (polar-chart [[90 150] [130 225]] :legend true :series-label \"A data\"))
+    (doto sample-plot
+      (set-stroke :width 10 :series 0)
+      (set-stroke-color java.awt.Color/green)
+      view)
+
   "
 ([chart color & options]
    (let [{:keys [series dataset]
@@ -3842,7 +3981,7 @@
   (let [xy (- (/ point-size 2))
         new-point (java.awt.geom.Ellipse2D$Double. xy xy point-size point-size)
         plot (.getPlot chart)
-        series-count (.getSeriesCount plot)
+        series-count (.getDatasetCount plot)
         series-list (if (= :all series)
                       (range 0 series-count)
                       (list series))
@@ -3955,14 +4094,16 @@
 ;;;;; DEFAULT PLOT BACKGROUND SETTINGS
 
 (defmethod set-background-default org.jfree.chart.plot.XYPlot
-  ([chart]
+  ([chart & options]
      (let [grid-stroke (java.awt.BasicStroke. 1
                                               java.awt.BasicStroke/CAP_ROUND
                                               java.awt.BasicStroke/JOIN_ROUND
                                               1.0
                                               (float-array 2.0 1.0)
                                               0.0)
-           plot (.getPlot chart)]
+           plot (.getPlot chart)
+           opts (when options (apply {} options))
+           series (or (:series opts) 0)]
        (doto plot
          (.setRangeGridlineStroke grid-stroke)
          (.setDomainGridlineStroke grid-stroke)
@@ -3983,7 +4124,7 @@
          )
        (if (= (-> plot .getDataset type)
               org.jfree.data.statistics.HistogramDataset)
-         (-> plot .getRenderer (.setPaint java.awt.Color/gray)))
+         (-> plot .getRenderer (.setSeriesPaint series java.awt.Color/gray)))
        (-> chart .getTitle (.setPaint java.awt.Color/gray))
        chart)))
 
