@@ -552,6 +552,6 @@
                    coefficient-types)]
     mean-bias))
 
-(def results (doall (map l/norm (analysis-test 1000))))
-(deftest coefficient-behavior
-  (is (apply <= results)))
+;; (def results (doall (map l/norm (analysis-test 1000))))
+;; (deftest coefficient-behavior
+;;   (is (apply <= results)))
