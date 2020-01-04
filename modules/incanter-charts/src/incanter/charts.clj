@@ -56,7 +56,8 @@
                                   DatasetRenderingOrder
                                   SeriesRenderingOrder
                                   Plot
-                                  XYPlot]
+                                  XYPlot
+                                  PolarPlot]
             [org.jfree.data.xy DefaultHighLowDataset
                                XYSeries
                                XYSeriesCollection
@@ -874,6 +875,57 @@
            args# (concat [~chart ~x ~y] (apply concat (seq (apply assoc opts#
                                                            [:series-label series-lab#]))))]
         (apply add-points* args#))))
+
+
+(defn add-polar*
+  ([chart points & options]
+   (let [opts (when options (apply assoc {} options))
+         data-plot (.getPlot chart)
+         data-set (.getDataset data-plot)]
+     (doto data-plot
+       (.setDataset
+         (doto data-set
+           (.addSeries
+             (let [xy-series (XYSeries. (:series-label opts))
+                   dt (seq points)]
+               (reduce (fn [acc [param-1 param-2]]
+                         (doto acc
+                           (.add (double param-1)
+                                 (double param-2)))) xy-series dt))))))
+     chart)))
+
+
+(defmacro add-polar
+  "Adds additional shape/line/point to a polar chart. Returns the modified chart.
+
+  Options:
+    :series-label (default '') Series label
+
+  Example:
+
+    (use '(incanter core charts stats datasets))
+
+    (def sample-point (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (add-polar sample-point [[90 150] [130 225]] :series-label \"A line\")
+
+    (def sample-point-2 (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (add-polar sample-point-2 [[90 150] [130 225]] :series-label \"A line\")
+    (add-polar sample-point-2 [[20 45] [145 120] [90 150]] :series-label \"A triangle\")
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+  "
+  ([chart points & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          series-label# (or (:series-label opts#) "")
+          args# (concat [~chart ~points]
+                        (apply concat (seq (apply assoc opts#
+                                                  [:series-label series-label#]))))]
+      (apply add-polar* args#))))
+
 
 (defn log-axis
   "
@@ -3074,6 +3126,82 @@
        (apply heat-map* args#))))
 
 
+(defn polar-chart*
+  ([_ points & options]
+   (let [opts (when options (apply assoc {} options))
+         title (or (:title opts) "")
+         theme (or (:theme opts) :default)
+         series-label (or (:series-label opts) "")
+         legend? (true? (:legend opts))
+         dataset (doto (XYSeriesCollection.)
+                   (.addSeries
+                     (let [xy-series (XYSeries. series-label)
+                           dt (seq points)]
+                       (reduce (fn [acc [param-1 param-2]]
+                                 (doto acc
+                                   (.add (double param-1)
+                                         (double param-2)))) xy-series dt))))
+         chart (ChartFactory/createPolarChart title dataset legend? true false)]
+     (do
+       (set-theme chart theme)
+       chart))))
+
+
+(defmacro polar-chart
+  "
+  Returns a JFreeChart object representing a polar-chart of the given data.
+  Draws shapes, points or lines on a Polar Chart. A Polar point is in the
+  form - [x y] - where x is the degree and y is the distance the center.
+  A line or shape is the combination or points in a sequence.
+  E.g - [[x y] [k v] [l s]] - is a triangle.
+  Use the 'view' function to display the chart, or the 'save' function
+  to write it to a file.
+
+  Arguments
+    points -- a sequence of points to draw.
+
+  Options:
+    :title (default '') main title
+    :legend (default false) boolean whether or not the legend should be
+      shown
+    :series-label (default '') Series label
+
+
+  See also:
+    add-polar, view and save
+
+  Examples:
+
+    (use '(incanter core stats charts datasets))
+
+    (def sample-plot (polar-chart [[20 45] [145 120] [90 150]] :legend true :series-label \"A triangle\"))
+    (view sample-plot)
+    (save sample-plot \"polar-p.png\" :width 1000)
+
+    (def sample-plot-2 (polar-chart [[90 150]] :legend true :series-label \"A point\")
+    (view sample-plot-2)
+    (save sample-plot-2 \"polar-p2.png\" :width 1000)
+
+    (def sample-plot-3 (polar-chart [[90 150] [130 225]] :legend true :series-label \"A line\")
+    (view sample-plot-3)
+    (save sample-plot-3 \"polar-p3.png\" :width 1000)
+
+
+  References:
+    http://www.jfree.org/jfreechart/api/javadoc
+    http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/JFreeChart.html
+
+  "
+  ([points & options]
+   `(let [opts# ~(when options (apply assoc {} options))
+          legend# (or (:legend opts#) false)
+          title# (or (:title opts#) "")
+          args# (concat [:data ~points] (apply concat
+                                               (seq (apply assoc opts# [:legend legend#
+                                                                        :title title#]))))]
+      (apply polar-chart* args#))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  ANNOTATIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3781,6 +3909,11 @@
       (add-categories [:a :b :c :d] [20 5 30 15])
       (set-stroke :series 0 :width 4 :dash 5)
       (set-stroke :series 1 :width 4 :dash 5 :cap java.awt.BasicStroke/CAP_SQUARE))
+
+    (def sample-plot (polar-chart [[90 150] [130 225]] :legend true :series-label \"A data\"))
+    (doto sample-plot
+      (set-stroke :width 10 :series 0)
+      view)
   "
   ([chart & options]
     (let [{:keys [width dash series dataset cap join]
@@ -3808,7 +3941,7 @@
           :series (default 0) A number representing the series to change the color of.
           :dataset (default 0) A number representing the renderer to which
               the basic stroke is set.
-              
+
   Examples:
     (use '(incanter core charts))
 
@@ -3825,6 +3958,12 @@
     (doto (function-plot sin -10 10 :step-size 0.1)
       (set-stroke :width 3 :dash 5)
       (set-stroke-color java.awt.Color/gray)
+      view)
+
+    (def sample-plot (polar-chart [[90 150] [130 225]] :legend true :series-label \"A data\"))
+    (doto sample-plot
+      (set-stroke :width 10 :series 0)
+      (set-stroke-color java.awt.Color/green)
       view)
 
   "

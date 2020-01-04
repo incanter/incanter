@@ -119,6 +119,10 @@
   "Asserting that no error is thrown, for a single item dataset"
   (is (not (nil? (xy-plot 0 1 :data (to-dataset [[1 2 3]]))))))
 
+(deftest polar-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (is (not (nil? (polar-chart [[34 93] [83 03] [78 138]])))))            ;
+
 (deftest add-histogram-single-row
   "Asserting that no error is thrown, for a single item dataset"
   (let [data (to-dataset [[1 2 3]])
@@ -154,6 +158,11 @@
    (let [data (to-dataset [[1 2 3]])
          plot (scatter-plot 0 1 :data data)]
   (is (not (nil? (add-points plot 2 1 :data data))))))
+
+(deftest add-polar-single-row
+  "Asserting that no error is thrown, for a single item dataset"
+  (let [plot (polar-chart [[34 93] [83 03] [78 138]] :series-label "Polar one")]
+    (is (not (nil? (add-polar plot [[34 93] [83 03] [78 138] [101 145] [23 144]] :series-label "Polar two"))))))
 
 (deftest histogram-tests
   (def hw1 (view (histogram (sample-normal 1000))))
@@ -359,6 +368,23 @@
     (.dispose fw1)
     (.dispose fw2)))
 
+(deftest polar-chart-tests
+  (let [sw1 (view (polar-chart [[13 15] [34 23] [23 45]] :series-label "A"))
+        plot1 (polar-chart [[130 150] [340 230] [230 450]] :series-label "A"
+                           :title "Relation between A, B and C")
+        sw2 (view plot1)]
+    (add-polar plot1 [[130 180] [380 290] [240 460]] :series-label "B")
+    (add-polar plot1 [[150 120] [190 200] [390 300] [260 500]] :series-label "C")
+
+    (set-title plot1 "new title")
+    (set-point-size plot1 1 :series 0)
+    (set-point-size plot1 10 :series 1)
+    (set-point-size plot1 5 :series 2)
+    (set-point-size plot1 5)
+    (Thread/sleep wait-timeout)
+    (.dispose sw1)
+    (.dispose sw2)))
+
 
 
 (deftest annotations-tests
@@ -443,7 +469,7 @@
 
 ;; (run-tests)
 
-(deftest comliance-test
+(deftest compliance-test
   (doseq [impl [:vectorz :ndarray :persistent-vector]]
     (set-current-implementation impl)
     (println (str "compliance test " impl))
@@ -474,4 +500,5 @@
                      [148     250]])]
       (scatter-tests m)
       (bar-chart-tests)
-      (line-chart-tests))))
+      (line-chart-tests)
+      (polar-chart-tests))))
