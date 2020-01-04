@@ -376,7 +376,7 @@
       (pdf-uniform 5 :min 1 :max 10)
   "
   ([x & {:keys [min max seed] :or {min 0.0 max 1.0 seed (Date.)}}]
-    (let [dist (DoubleUniform. min max (DoubleMersenneTwister. seed))]
+    (let [dist (DoubleUniform. (double min) (double max) (DoubleMersenneTwister. seed))]
       (if (coll? x)
         (map #(.pdf dist %) x)
         (.pdf dist x)))))
