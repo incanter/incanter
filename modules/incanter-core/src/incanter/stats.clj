@@ -626,7 +626,7 @@
           prng  (or (:rng opts)
                     (when-let [seed (:seed opts)]
                       (DoubleMersenneTwister. seed)))                  
-          d     (dist/weibull-distribution shape scale prng)]
+          d     (dist/weibull-distribution scale shape prng)]
       (if (= size 1)
         (dist/draw d)
         (for [_ (range size)] (dist/draw d))))))
