@@ -43,7 +43,7 @@
                                        HistogramType
                                        DefaultBoxAndWhiskerCategoryDataset]
             [org.jfree.chart ChartFactory
-                             ChartUtilities
+                             ChartUtils
                              ChartFrame
                              ChartPanel
                              ChartTheme
@@ -68,7 +68,7 @@
                                          XYBarRenderer
                                          XYSplineRenderer
                                          StandardXYBarPainter]
-            [org.jfree.ui TextAnchor RectangleInsets RectangleEdge]
+            [org.jfree.chart.ui TextAnchor RectangleInsets RectangleEdge]
             [org.jfree.chart.title TextTitle]
             [org.jfree.data UnknownKeyException]
             [org.jfree.chart.annotations XYPointerAnnotation
@@ -1020,7 +1020,7 @@
      {:pre [(#{:x :y} dimension)]}
 
      (let [plot (.getPlot chart)
-           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.ContourPlot org.jfree.chart.plot.FastScatterPlot}]
+           allowed-types #{org.jfree.chart.plot.XYPlot org.jfree.chart.plot.CategoryPlot org.jfree.chart.plot.FastScatterPlot}]
        (assert (allowed-types (type plot))
                (str "The default set-axis method only works for " allowed-types))
        (if (= :x dimension)
@@ -1650,7 +1650,7 @@
         xyplot (doto (XYPlot.)
                  (.setRenderer (doto (XYLineAndShapeRenderer. false true)
                                  (.setDrawOutlines true)
-                                 (.setBaseFillPaint (Color. 0 0 0 0))
+                                 (.setDefaultFillPaint (Color. 0 0 0 0))
                                  (.setUseFillPaint true)
                                  (.setSeriesPaint 0 (Color/BLUE))
                                  (.setSeriesPaint 1 (Color/RED))
@@ -1670,7 +1670,7 @@
                                       (.setSeriesPaint 0 (Color. 210 210 210))
                                       (.setBarPainter (StandardXYBarPainter.))))
                     (.setRenderer 0 (doto (XYSplineRenderer.)
-                                      (.setShapesVisible false)
+                                      (.setDefaultShapesVisible false)
                                       (.setSeriesPaint 0 (Color. 170 170 170))
                                       (.setSeriesStroke 0 (BasicStroke. 3))))
                     (.setRangeGridlinesVisible false) ;; these lines do not fit to other range lines
@@ -1687,7 +1687,7 @@
                                    (.addSeries (str name) (double-array ($ name data)) (int nbins))))
         color-for (fn [k] (-> xyplot .getRenderer (.lookupSeriesPaint k)))
         shape-for (fn [k] (-> xyplot .getRenderer (.lookupLegendShape k)))
-        font-normal (.getBaseItemLabelFont (.getRenderer xyplot))
+        font-normal (.getDefaultItemLabelFont (.getRenderer xyplot))
         font-bold (.deriveFont font-normal (Font/BOLD))
         legend (let [coll (LegendItemCollection.)]
                  (do
@@ -3026,20 +3026,20 @@
          (.setBackgroundPaint plot java.awt.Color/lightGray)
          (.setDomainGridlinesVisible plot false)
          (.setRangeGridlinePaint plot java.awt.Color/white)
-         (.setAxisOffset plot (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setAxisOffset plot (org.jfree.chart.ui.RectangleInsets. 5 5 5 5))
          (.setOutlinePaint plot java.awt.Color/blue)
          (.removeLegend chart)
          (.setSubdivisionCount legend 20)
          (.setAxisLocation legend org.jfree.chart.axis.AxisLocation/BOTTOM_OR_LEFT)
          (.setAxisOffset legend 5.0)
-         (.setMargin legend (org.jfree.ui.RectangleInsets. 5 5 5 5))
+         (.setMargin legend (org.jfree.chart.ui.RectangleInsets. 5 5 5 5))
          (.setFrame legend (org.jfree.chart.block.BlockBorder. java.awt.Color/red))
-         (.setPadding legend (org.jfree.ui.RectangleInsets. 10 10 10 10))
+         (.setPadding legend (org.jfree.chart.ui.RectangleInsets. 10 10 10 10))
          (.setStripWidth legend 10)
-         (.setPosition legend org.jfree.ui.RectangleEdge/RIGHT)
+         (.setPosition legend org.jfree.chart.ui.RectangleEdge/RIGHT)
          (.setTitle chart title)
          (.addSubtitle chart legend)
-         (org.jfree.chart.ChartUtilities/applyCurrentTheme chart)
+         (org.jfree.chart.ChartUtils/applyCurrentTheme chart)
          (set-theme chart theme))
        chart)))
 
@@ -3615,7 +3615,7 @@
           height (or (:height opts) 400)]
       ;; if filename is not a string, treat it as java.io.OutputStream
       (if (string? filename)
-        (ChartUtilities/saveChartAsPNG (File. filename) chart width height)
+        (ChartUtils/saveChartAsPNG (File. filename) chart width height)
         (ImageIO/write (.createBufferedImage chart width height) "png" filename))
       nil)))
 
@@ -3930,7 +3930,7 @@
       (if (= :all series)
         (doto renderer
           (.setAutoPopulateSeriesStroke false)
-          (.setBaseStroke stroke))
+          (.setDefaultStroke stroke))
         (.setSeriesStroke renderer series stroke))
       chart)))
 
@@ -4094,14 +4094,16 @@
 ;;;;; DEFAULT PLOT BACKGROUND SETTINGS
 
 (defmethod set-background-default org.jfree.chart.plot.XYPlot
-  ([chart]
+  ([chart & options]
      (let [grid-stroke (java.awt.BasicStroke. 1
                                               java.awt.BasicStroke/CAP_ROUND
                                               java.awt.BasicStroke/JOIN_ROUND
                                               1.0
                                               (float-array 2.0 1.0)
                                               0.0)
-           plot (.getPlot chart)]
+           plot (.getPlot chart)
+           opts (when options (apply {} options))
+           series (or (:series opts) 0)]
        (doto plot
          (.setRangeGridlineStroke grid-stroke)
          (.setDomainGridlineStroke grid-stroke)
@@ -4122,7 +4124,7 @@
          )
        (if (= (-> plot .getDataset type)
               org.jfree.data.statistics.HistogramDataset)
-         (-> plot .getRenderer (.setPaint java.awt.Color/gray)))
+         (-> plot .getRenderer (.setSeriesPaint series java.awt.Color/gray)))
        (-> chart .getTitle (.setPaint java.awt.Color/gray))
        chart)))
 
