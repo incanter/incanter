@@ -3981,7 +3981,7 @@
   (let [xy (- (/ point-size 2))
         new-point (java.awt.geom.Ellipse2D$Double. xy xy point-size point-size)
         plot (.getPlot chart)
-        series-count (.getSeriesCount plot)
+        series-count (.getDatasetCount plot)
         series-list (if (= :all series)
                       (range 0 series-count)
                       (list series))
