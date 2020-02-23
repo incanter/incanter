@@ -2216,10 +2216,10 @@
                    (/ (- x-mean mu) (/ (sqrt x-var) (sqrt n1)))
                    (if paired
                      ;; use the dependent ttest for paired samples
-                     (let [sumD (map (fn [n m] (- m n)) x y)
-                           sum-mean (/ (reduce + sumD) n1)]
-                       (/ (- sum-mean 0)
-                          (/ (sd sumD)
+                     (let [seq-of-differences (map (fn [n m] (- m n)) x y)
+                           sum-of-differences (/ (reduce + seq-of-differences) n1)]
+                       (/ (- sum-of-differences 0)
+                          (/ (sd seq-of-differences)
                              (sqrt n1))))
                      ;; calculate Welch's t test
                      (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2))))))
