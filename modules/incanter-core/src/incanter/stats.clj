@@ -2214,8 +2214,15 @@
           n2 (when-not one-sample? (count y))
           t-stat (if one-sample?
                    (/ (- x-mean mu) (/ (sqrt x-var) (sqrt n1)))
-                   ;; calculate Welch's t test
-                   (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2)))))
+                   (if paired
+                     ;; use the dependent ttest for paired samples
+                     (let [sumD (map (fn [n m] (- m n)) x y)
+                           sum-mean (/ (reduce + sumD) n1)]
+                       (/ (- sum-mean 0)
+                          (/ (sd sumD)
+                             (sqrt n1))))
+                     ;; calculate Welch's t test
+                     (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2))))))
           df (if one-sample?
                (dec n1)
                ;; calculate Welch-Satterthwaite equation
