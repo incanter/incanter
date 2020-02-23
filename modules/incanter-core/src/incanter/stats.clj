@@ -2223,7 +2223,7 @@
                              (sqrt n1))))
                      ;; calculate Welch's t test
                      (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2))))))
-          df (if one-sample?
+          df (if (or one-sample? paired)
                (dec n1)
                ;; calculate Welch-Satterthwaite equation
                (/ (pow (+ (/ x-var n1) (/ y-var n2)) 2)
