@@ -2218,11 +2218,11 @@
 
                    ;; use the dependent ttest for paired samples
                    paired
-                   (let [seq-of-differences (map (fn [n m] (- m n)) x y)
+                   (let [seq-of-differences (map (fn [n m] (- n m)) x y)
                          sum-of-differences (/ (reduce + seq-of-differences) n1)]
                      (if (zero? sum-of-differences)
                        0.0
-                       (/ (- sum-of-differences 0)
+                       (/ sum-of-differences
                           (/ (sd seq-of-differences)
                              (sqrt n1)))))
 
