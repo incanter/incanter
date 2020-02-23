@@ -2212,17 +2212,23 @@
           y-mean (when-not one-sample? (mean y))
           y-var (when-not one-sample? (variance y))
           n2 (when-not one-sample? (count y))
-          t-stat (if one-sample?
+          t-stat (cond
+                   one-sample?
                    (/ (- x-mean mu) (/ (sqrt x-var) (sqrt n1)))
-                   (if paired
-                     ;; use the dependent ttest for paired samples
-                     (let [seq-of-differences (map (fn [n m] (- m n)) x y)
-                           sum-of-differences (/ (reduce + seq-of-differences) n1)]
+
+                   ;; use the dependent ttest for paired samples
+                   paired
+                   (let [seq-of-differences (map (fn [n m] (- m n)) x y)
+                         sum-of-differences (/ (reduce + seq-of-differences) n1)]
+                     (if (zero? sum-of-differences)
+                       0.0
                        (/ (- sum-of-differences 0)
                           (/ (sd seq-of-differences)
-                             (sqrt n1))))
-                     ;; calculate Welch's t test
-                     (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2))))))
+                             (sqrt n1)))))
+
+                   ;; calculate Welch's t test
+                   :else
+                   (/ (- x-mean y-mean) (sqrt (+ (/ x-var n1) (/ y-var n2)))))
           df (if (or one-sample? paired)
                (dec n1)
                ;; calculate Welch-Satterthwaite equation
