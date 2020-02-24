@@ -2219,11 +2219,12 @@
                    ;; use the dependent ttest for paired samples
                    paired
                    (let [seq-of-differences (map (fn [n m] (- n m)) x y)
-                         sum-of-differences (/ (reduce + seq-of-differences) n1)]
-                     (if (zero? sum-of-differences)
+                         sum-of-differences (/ (reduce + seq-of-differences) n1)
+                         sd (sd seq-of-differences)]
+                     (if (or (zero? sum-of-differences) (zero? sd))
                        0.0
                        (/ sum-of-differences
-                          (/ (sd seq-of-differences)
+                          (/ sd
                              (sqrt n1)))))
 
                    ;; calculate Welch's t test
