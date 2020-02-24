@@ -348,7 +348,14 @@
           (t-test
            [1,1,1,1,2,2,2,4,4,4,4]
            :y [1,1,2,2,2,4,4])]
-      (is (> 1 (:p-value t-test-result))))))
+      (is (> 1 (:p-value t-test-result))))
+    (let [x [8.44 7.16 16.94 9.59 13.25 12.94 11 5.61 10.6 12.81]
+          y [32.66 31.66 33.28 39.81 30.29 25.95 30.74 38.4 26.67 41.49]
+          paired-t-test-result (t-test x :y y :paired true)
+          unpaired-t-test-result (t-test x :y y)]
+
+      (is (:df paired-t-test-result) 9)
+      (is (not= (:df paired-t-test-result) (:df unpaired-t-test-result))))))
 
 (defn benford-law-test []
   (let [coll (matrix [1131111 623946 325911 1799255 199654 299357 3819495 359578 285984 2214801 341104 1303129 444480 295177 450269 1758026 498061 422457 315689 1160446 573568 253962 515211 998573 677829 1289257 572988 482990 765723 337178])]
