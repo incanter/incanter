@@ -8,8 +8,6 @@
         :dir "modules/incanter-io"}
   :min-lein-version "2.0.0"
   :dependencies [[incanter/incanter-core "1.9.4-SNAPSHOT"]
-                 ;; TODO: switch to data.csv?
-                 [net.sf.opencsv/opencsv "2.3"]
                  [org.clojure/data.csv "0.1.4"
                   :exclusions [org.clojure/clojure]]
                  ;; TODO: switch to data.json?

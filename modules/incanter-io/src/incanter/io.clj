@@ -21,8 +21,7 @@
 
 (ns ^{:doc "Library for reading and writing Incanter datasets and matrices."}
   incanter.io
-  (:import (java.io FileReader FileWriter File)
-           (au.com.bytecode.opencsv CSVReader))
+  (:import (java.io FileReader FileWriter File))
 (:use [incanter.core :only (dataset save to-list)])
   (:require [clojure.java.io :as io]
             [clojure.core.matrix :as m]
@@ -122,60 +121,56 @@
                     after loading
   "
 
-  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char
-                      options]
-               :or {delim \, quote \u0022 skip 0 header false keyword-headers true options nil}}]
-
-  (let [remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
-        default-type (:default-type options)
-        types (:types options)
-        transformers (:transformers options)
-        max-rows (:max-rows options)
-        rename-columns (:rename-columns options)
-
-        compress-delim? (or compress-delim (= delim \space))
-        compress-delim-fn (if compress-delim?
-                            (fn [line] (filter #(not= % "") line))
-                            identity)
-        comment-char-fn (fn [line]
-                          (if (and (boolean (seq line)) comment-char)
-                            (if (.startsWith (first line) comment-char)
-                              '()
-                              line)
-                            line))
-        [dataset-body column-count header-row row-number]
-          (with-open [reader ^CSVReader (CSVReader. (io/reader filename) delim quote skip)]
-            (let [header-row (when header (map (fn [name] (or (get rename-columns name) name))
-                                               (.readNext reader)))
-                  parse-data-fn (if (and header (or types default-type)) ; TODO: should work without header
-                                  (make-typed-parse-row header-row types default-type empty-field-value transformers)
-                                  (fn [line] (vec (map #(parse-string % empty-field-value) line))))]
-              (loop [lines [] max-column 0 row-number 0]
-                (if-let [line (when (or (not max-rows) (< row-number max-rows))
-                                (.readNext reader))]
-                  (let [new-line (-> line
-                                     compress-delim-fn
-                                     comment-char-fn
-                                     remove-empty-fn
-                                     parse-data-fn)]
-                    (recur
-                      (if-not (empty? new-line) (conj lines new-line) lines)
-                      (max max-column (count new-line))
-                      (inc row-number)))
-                [lines max-column header-row row-number]))))
-        column-names-strs
+  [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char options]
+               :or   {delim           \,
+                      quote           \u0022
+                      header          false
+                      keyword-headers true
+                      skip            0
+                      options         nil}}]
+  (with-open [reader (io/reader filename)]
+    (let [rename-columns (:rename-columns options)
+          max-rows (:max-rows options)
+          default-type (:default-type options)
+          types (:types options)
+          transformers (:transformers options)
+          lines (doall (csv/read-csv reader :separator delim :quote quote))
+          compress-delim? (or compress-delim (= delim \space))
+          header-row (when header (map #(or (get rename-columns %) %) (first lines)))
+          skipped-body (drop (+ (if (not= skip 0) (dec skip) 0) (if header 1 0)) lines)
+          trim-body (if max-rows (take (if header (inc max-rows) max-rows) skipped-body) skipped-body)
+          compress-delim-fn #(if compress-delim? (filter (fn [field] (not= field "")) %) %)
+          comment-char-fn #(if (and comment-char (boolean (seq %)) (.startsWith (first %) comment-char))
+                             '()
+                             %)
+          remove-empty-fn #(when (some (fn [field] (not= field "")) %) %)
+          parse-data-fn (if (and header (or types default-type)) ;TODO: should work without header
+                          (make-typed-parse-row header-row types default-type empty-field-value transformers)
+                          (fn [line] (vec (map #(parse-string % empty-field-value) line))))
+          [dataset-body column-count]
+          (loop [dataset-body [] row-number 0 column-count 0]
+            (if-let [line (nth trim-body row-number nil)]
+              (let [new-line (-> line
+                                 compress-delim-fn
+                                 comment-char-fn
+                                 remove-empty-fn
+                                 parse-data-fn)]
+                (if (or (not max-rows) (< row-number (if header (inc max-rows) max-rows)))
+                  (recur (if-not (empty? new-line) (conj dataset-body new-line) dataset-body)
+                         (inc row-number)
+                         (max column-count (count new-line)))
+                  [dataset-body column-count]))
+              [dataset-body column-count]))
+          column-names-strs
           (map (fn [hr-entry idx]
-                 (if hr-entry
-                   (str hr-entry)
-                   (str "col" idx)))
+                 (let [text (if hr-entry (str hr-entry) (str "col" idx))]
+                   (if keyword-headers (keyword text) text)))
                (concat header-row (repeat nil))
                (range column-count))
-        column-names (map (if keyword-headers keyword identity) column-names-strs)
-        padded-body (if (or types default-type)
-                      dataset-body
-                      (map #(pad-vector % column-count empty-field-value)
-                         dataset-body))]
-    (dataset column-names padded-body)))
+          padded-body (if (or types default-type)
+                        dataset-body
+                        (map #(pad-vector % column-count empty-field-value) dataset-body))]
+      (clojure.core.matrix.dataset/dataset column-names-strs padded-body))))
 
 (defmethod save :incanter.core/matrix [mat filename & {:keys [delim header append]
                                                        :or {append false delim \,}}]
