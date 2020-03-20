@@ -99,6 +99,28 @@
   (into v (repeat (- new-len (count v)) value)))
 
 (defn read-dataset
+  "
+  Returns a dataset read from a file or a URL.
+
+  Options:
+    :delim (default \\,), other options (\\tab \\space \\|  etc)
+    :quote (default \\\") character used for quoting strings
+    :skip (default 0) the number of lines to skip at the top of the file.
+    :header (default false) indicates the file has a header line
+    :compress-delim (default true if delim = \\space, false otherwise) means
+                    compress multiple adjacent delimiters into a single delimiter.
+    :empty-field-value (default nil) indicates the interpretation of an empty field.
+    :comment-char (default nil) skip commented lines (\"#\", \"%\", \";\", etc)
+    :default-type (default nil) default type of columns.
+    :types (default nil) dictionary mapping types to list of column names, e.g:
+           {Long [\"foo\" \"bar\"] Float \"boo\"}
+    :transformers (default nil) dictionary mapping column names to functions that will transform
+                  strings in a given column before they are converted to final types
+    :max-rows (default nil) maximum rows to be read, nil means no limit
+    :rename-columns (default nil) dictionary mapping column names on file to their names
+                    after loading
+  "
+
   [filename & {:keys [delim keyword-headers quote skip header compress-delim empty-field-value comment-char options]
                :or   {delim           \,
                       quote           \u0022
