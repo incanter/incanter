@@ -21,8 +21,7 @@
 
 (ns ^{:doc "Library for reading and writing Incanter datasets and matrices."}
   incanter.io
-  (:import (java.io FileReader FileWriter File)
-           (au.com.bytecode.opencsv CSVReader))
+  (:import (java.io FileReader FileWriter File))
 (:use [incanter.core :only (dataset save to-list)])
   (:require [clojure.java.io :as io]
             [clojure.core.matrix :as m]
@@ -127,7 +126,7 @@
                           (make-typed-parse-row header-row types default-type empty-field-value transformers)
                           (fn [line] (vec (map #(parse-string % empty-field-value) line))))
           [dataset-body column-count]
-          (loop [dataset-body [] row-number (if header 1 0) column-count 0]
+          (loop [dataset-body [] row-number 0 column-count 0]
             (if-let [line (nth trim-body row-number nil)]
               (let [new-line (-> line
                                  compress-delim-fn
