@@ -1,9 +1,9 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
         incanter/incanter-io {:local/root "../incanter-io"} 
-        clj-time {:mvn/version "0.14.0"
-                  :exclusions [org.clojure/clojure
-                               org.clojure/clojure-contrib]}
+        clj-time/clj-time {:mvn/version "0.14.0"
+                           :exclusions [org.clojure/clojure
+                                        org.clojure/clojure-contrib]}
         clatrix/clatrix {:mvn/version "0.5.0" 
                          :exclusions [org.clojure/clojure net.mikera/core.matrix]}
         org.jblas/jblas {:mvn/version "1.2.3"}
