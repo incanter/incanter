@@ -6,7 +6,7 @@
         org.danlarkin/clojure-json {:mvn/version "1.1" 
                                     :exclusions 
                                     [org.clojure/clojure org.clojure/clojure-contrib]}
-        clatrix {:mvn/version "0.5.0" 
+        clatrix/clatrix {:mvn/version "0.5.0" 
                  :exclusions [org.clojure/clojure net.mikera/core.matrix]}}}
 
 

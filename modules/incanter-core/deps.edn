@@ -4,7 +4,7 @@
         net.mikera/vectorz-clj {:mvn/version "0.44.1" :exclusions [org.clojure/clojure]}
         net.mikera/core.matrix {:mvn/version "0.52.0" :exclusions [org.clojure/clojure]}
         net.sourceforge.parallelcolt/parallelcolt {:mvn/version "0.10.1"}
-        clatrix {:mvn/version "0.5.0" :exclusions [org.clojure/clojure net.mikera/core.matrix]}
+        clatrix/clatrix {:mvn/version "0.5.0" :exclusions [org.clojure/clojure net.mikera/core.matrix]}
         org.jblas/jblas {:mvn/version "1.2.3"}}}
 
 
