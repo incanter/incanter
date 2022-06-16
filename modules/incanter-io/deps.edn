@@ -1,0 +1,12 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-core {:local/root "../incanter-core"}
+        net.sf.opencsv/opencsv {:mvn/version "2.3"}
+        org.clojure/data.csv {:mvn/version "0.1.4" :exclusions [org.clojure/clojure]}
+        org.danlarkin/clojure-json {:mvn/version "1.1" 
+                                    :exclusions 
+                                    [org.clojure/clojure org.clojure/clojure-contrib]}
+        clatrix {:mvn/version "0.5.0" 
+                 :exclusions [org.clojure/clojure net.mikera/core.matrix]}}}
+
+

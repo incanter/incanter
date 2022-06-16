@@ -1,0 +1,10 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-charts {:local/root "../incanter-charts"} 
+        org.apache.xmlgraphics/batik-dom {:mvn/version "1.9.1"} 
+        org.apache.xmlgraphics/batik-svggen {:mvn/version "1.9.1"} 
+        org.apache.xmlgraphics/batik-awt-util {:mvn/version "1.9.1"} 
+        org.apache.xmlgraphics/batik-util {:mvn/version "1.9.1"} 
+        org.apache.xmlgraphics/batik-xml {:mvn/version "1.9.1"}
+        }}
+
