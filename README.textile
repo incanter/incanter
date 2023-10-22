@@ -29,7 +29,7 @@ Motivation for a JVM-based Lisp can be found at the <i><a href="http://clojure.o
 
 h2. Getting started with Clojure
 
-For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":http://ociweb.com/mark/clojure/article.html by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure, 2ed":http://pragprog.com/book/shcloj2/programming-clojure by Stuart Halloway and Aaron Bedra, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="https://www.apress.com/gp/book/9781430272311">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
+For a great introduction to programming in Clojure, read "Clojure - Functional Programming for the JVM.":https://objectcomputing.com/resources/publications/sett/march-2009-clojure-functional-programming-for-the-jvm by R. Mark Volkmann. For an even more extensive introduction, get one of the books on Clojure "Programming Clojure, 2ed":http://pragprog.com/book/shcloj2/programming-clojure by Stuart Halloway and Aaron Bedra, <a href="http://www.manning.com/fogus/">"The Joy of Clojure"</a> by Michael Fogus and Chris Houser, <a href="http://www.manning.com/rathore/">"Clojure in Action"</a> by Amit Rathore, <a href="https://www.apress.com/gp/book/9781430272311">"Practical Clojure"</a> by Luke VanderHart and Stuart Sierra.
 
 *Other Clojure resources*
 
