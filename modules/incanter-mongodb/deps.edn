@@ -1,0 +1,9 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-core {:local/root "../incanter-core"}
+        congomongo/congomongo {:mvn/version "0.5.0" 
+                               :exclusions [org.clojure/clojure 
+                                            org.clojure/clojure-contrib]}
+        org.scilab.forge/jlatexmath {:mvn/version "1.0.6"}
+        }}
+

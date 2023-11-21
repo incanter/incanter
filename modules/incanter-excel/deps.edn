@@ -1,0 +1,7 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-core {:local/root "../incanter-core"}
+        org.apache.poi/poi-ooxml {:mvn/version "4.1.1"}
+        }}
+
+

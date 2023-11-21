@@ -1,0 +1,7 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-charts {:local/root "../incanter-charts"} 
+        org.scilab.forge/jlatexmath {:mvn/version "1.0.6"}
+        }}
+
+

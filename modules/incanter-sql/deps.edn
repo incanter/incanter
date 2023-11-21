@@ -1,0 +1,8 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-core {:local/root "../incanter-core"}
+        clojureql/clojureql  {:mvn/version  "1.0.5" 
+                              :exclusions [org.clojure/clojure]} 
+        org.apache.derby/derby  {:mvn/version "10.13.1.1"}
+        }}
+

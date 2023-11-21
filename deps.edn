@@ -1,0 +1,31 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        swingrepl/swingrepl {:mvn/version "1.3.0"}
+        incanter/incanter-core {:local/root "modules/incanter-core"}
+        incanter/incanter-io {:local/root "modules/incanter-io"}
+        incanter/incanter-charts {:local/root "modules/incanter-charts"}
+        incanter/incanter-mongodb {:local/root "modules/incanter-mongodb"}
+        incanter/incanter-pdf {:local/root "modules/incanter-pdf"}
+        incanter/incanter-svg {:local/root "modules/incanter-svg"}
+        incanter/incanter-latex {:local/root "modules/incanter-latex"}
+        incanter/incanter-excel {:local/root "modules/incanter-excel"}
+        incanter/incanter-sql {:local/root "modules/incanter-sql"}
+        incanter/incanter-zoo {:local/root "modules/incanter-zoo"}}
+ :aliases
+ {:dev {:main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
+  :run-m {:main-opts ["-m" "incanter.main"]}
+  :run-x {:ns-default incanter
+          :exec-fn -main
+          :exec-args {:name "Clojure"}}
+  :build {:deps {io.github.seancorfield/build-clj
+                 {:git/tag "v0.6.3" :git/sha "9b8e09b"
+                  ;; since we're building an app uberjar, we do not
+                  ;; need deps-deploy for clojars.org deployment:
+                  :deps/root "slim"}}
+          :ns-default build}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                      io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.0" :git/sha "48c3c67"}}}}}
+
+ 

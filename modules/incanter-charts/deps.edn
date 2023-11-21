@@ -1,0 +1,8 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"} 
+        incanter/incanter-io {:local/root "../incanter-io"} 
+        org.jfree/jfreechart {:mvn/version"1.5.0"}
+        clj-time/clj-time {:mvn/version "0.14.0" :exclusions [org.clojure/clojure]}
+        }}
+
+

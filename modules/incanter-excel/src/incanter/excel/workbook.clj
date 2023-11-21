@@ -18,7 +18,7 @@
 (defn make-font [normal? ^Workbook w]
   (let [f (. w createFont)
         c (. w createCellStyle)]
-    (. f setBoldweight (if normal? Font/BOLDWEIGHT_NORMAL Font/BOLDWEIGHT_BOLD))
+    (. f setBold (not normal?))
     (. c setFont f)
     c))
 

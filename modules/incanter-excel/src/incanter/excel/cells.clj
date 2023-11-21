@@ -1,7 +1,7 @@
 (ns
     ^{:doc "Functions for reading and writing to cells."}
   incanter.excel.cells
-  (:import [org.apache.poi.ss.usermodel Cell CellStyle DateUtil]
+  (:import [org.apache.poi.ss.usermodel Cell CellStyle DateUtil CellType]
            [org.apache.poi.ss.usermodel Row Sheet]))
 
 (defmulti
@@ -22,7 +22,7 @@
   "Get the cell value depending on the cell type."
   (fn [cell]
     (let [ct (. cell getCellType)]
-      (if (not (= Cell/CELL_TYPE_NUMERIC ct))
+      (if (not (= CellType/NUMERIC ct))
         ct
         (if (DateUtil/isCellDateFormatted cell)
           :date
@@ -44,7 +44,7 @@
     (for [idx (range (.getFirstCellNum row) (.getLastCellNum row))]
       (if-let [cell (.getCell row idx)]
         cell
-        (.createCell row idx Cell/CELL_TYPE_BLANK)))
+        (.createCell row idx CellType/BLANK)))
     ()))
 
 (defn read-line-values [row-iterator-item]
@@ -57,11 +57,11 @@
 (defmethod write-cell :numeric [n] (. n doubleValue))
 
 (defmethod get-cell-formula-value
-  Cell/CELL_TYPE_BOOLEAN [evaled-cell evaled-type]
+  CellType/BOOLEAN [evaled-cell evaled-type]
   (. evaled-cell getBooleanValue))
 
 (defmethod get-cell-formula-value
-  Cell/CELL_TYPE_STRING  [evaled-cell evaled-type]
+  CellType/STRING  [evaled-cell evaled-type]
   (. evaled-cell getStringValue))
 
 (defmethod get-cell-formula-value
@@ -76,8 +76,8 @@
   :default               [evaled-cell evaled-type]
   (str "Unknown cell type " (. evaled-cell getCellType)))
 
-(defmethod get-cell-value Cell/CELL_TYPE_BLANK   [cell])
-(defmethod get-cell-value Cell/CELL_TYPE_FORMULA [cell]
+(defmethod get-cell-value CellType/BLANK   [cell])
+(defmethod get-cell-value CellType/FORMULA [cell]
   (let [val (.
              (.. cell
                  getSheet
@@ -88,18 +88,18 @@
         evaluated-type (. val getCellType)]
     (get-cell-formula-value
      val
-     (if (= Cell/CELL_TYPE_NUMERIC evaluated-type)
+     (if (= CellType/NUMERIC evaluated-type)
        (if (DateUtil/isCellInternalDateFormatted cell)
          ;; Check the original for date formatting hints
          :date
          :number)
        evaluated-type))))
 
-(defmethod get-cell-value Cell/CELL_TYPE_BOOLEAN [cell]
+(defmethod get-cell-value CellType/BOOLEAN [cell]
   (. cell getBooleanCellValue))
-(defmethod get-cell-value Cell/CELL_TYPE_STRING  [cell]
+(defmethod get-cell-value CellType/STRING  [cell]
   (. cell getStringCellValue))
-(defmethod get-cell-value Cell/CELL_TYPE_NUMERIC [cell]
+(defmethod get-cell-value CellType/NUMERIC [cell]
   (. cell getNumericCellValue))
 (defmethod get-cell-value :date [cell]
   (. cell getDateCellValue))
